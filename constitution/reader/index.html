@@ -15,27 +15,27 @@
    (Rule 105). No external requests: everything lives here.
    ========================================================================== */
 :root {
-  --paper: #f7f3e8; --ink: #142f31; --muted: #3f4e4a; --line: #ddd4bd;
-  --card: #fffdf6; --accent: #ad3f17; --accent-soft: #f9e7dd;
+  --paper: #f4f3f9; --ink: #211d33; --muted: #4a4661; --line: #d8d4e6;
+  --card: #fdfcff; --accent: #8f1d3d; --accent-soft: #f7dde4;
   --amend: #6b5416; --amend-soft: #f7f0dc;
   --avoid: #8c3b32; --avoid-soft: #f5dcd2;
-  --code: #efe9d9; --focus: #ad3f17;
+  --code: #e9e6f2; --focus: #8f1d3d;
   --measure: 48rem; --pad: 1.25rem; --gap: 2.5rem; --fs: 1.125rem;
 }
 [data-theme="dark"] {
-  --paper: #0a0e0c; --ink: #d8e0d8; --muted: #93a69c; --line: #24312a;
-  --card: #101613; --accent: #ffb454; --accent-soft: #2a2013;
+  --paper: #060b07; --ink: #cfe0cf; --muted: #8fa992; --line: #1e2f22;
+  --card: #0b120d; --accent: #46e07f; --accent-soft: #12271a;
   --amend: #d9b45c; --amend-soft: #2c2717;
   --avoid: #d98b80; --avoid-soft: #34211b;
-  --code: #1a201a; --focus: #ffb454;
+  --code: #101a12; --focus: #46e07f;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --paper: #0a0e0c; --ink: #d8e0d8; --muted: #93a69c; --line: #24312a;
-    --card: #101613; --accent: #ffb454; --accent-soft: #2a2013;
+    --paper: #060b07; --ink: #cfe0cf; --muted: #8fa992; --line: #1e2f22;
+    --card: #0b120d; --accent: #46e07f; --accent-soft: #12271a;
     --amend: #d9b45c; --amend-soft: #2c2717;
     --avoid: #d98b80; --avoid-soft: #34211b;
-    --code: #1a201a; --focus: #ffb454;
+    --code: #101a12; --focus: #46e07f;
   }
 }
 * { box-sizing: border-box; }
@@ -59,13 +59,13 @@ a { color: var(--accent); }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
 
 /* ---- site nav ---- */
-.topnav { background: #0d3b40; display: flex; flex-wrap: wrap; gap: 1.1rem;
+.topnav { background: #241d49; display: flex; flex-wrap: wrap; gap: 1.1rem;
   align-items: center; padding: .7rem 1.25rem; }
-.topnav a { color: #f2ead8; text-decoration: none; font-size: 1rem; opacity: .9; }
-.topnav a:hover { opacity: 1; color: #ff8c5c; }
+.topnav a { color: #eae7f6; text-decoration: none; font-size: 1rem; opacity: .9; }
+.topnav a:hover { opacity: 1; color: #ff8fa8; }
 .topnav .brand { font-weight: 900; text-transform: uppercase; letter-spacing: .04em;
-  color: #ff8c5c; font-size: 1.05rem; }
-.topnav .here { color: #ff8c5c; opacity: 1; border-bottom: 2px solid #e35b2f; }
+  color: #ff8fa8; font-size: 1.05rem; }
+.topnav .here { color: #ff8fa8; opacity: 1; border-bottom: 2px solid #e04a6e; }
 .topnav a.leaves { opacity: .8; }
 
 /* ---- breadcrumbs: a visible trail back (Rule 25) ---- */
@@ -76,27 +76,27 @@ a { color: var(--accent); }
 .crumbs a, .crumbs .here-crumb {
   display: inline-flex; align-items: center; padding: .3rem .9rem;
   border-radius: 99px; text-decoration: none; white-space: nowrap;
-  background: rgba(242, 234, 216, .08);
-  border: 1px solid rgba(242, 234, 216, .28); color: #f2ead8;
+  background: rgba(234, 231, 246, .08);
+  border: 1px solid rgba(234, 231, 246, .28); color: #eae7f6;
 }
-/* no hover repaint: the pointer is the hand, and orange means "here" (Rule 115) */
+/* no hover repaint: the pointer is the hand, and rose means "here" (Rule 115) */
 .crumbs a { cursor: pointer; }
 .crumbs .level { display: inline-flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
-.crumbs .here-crumb { color: #ff8c5c; border-color: #ff8c5c; background: rgba(227, 91, 47, .16); }
-.crumbs .sep { color: #f2ead8; opacity: .5; padding: 0 .1rem; }
+.crumbs .here-crumb { color: #ff8fa8; border-color: #ff8fa8; background: rgba(224, 74, 110, .16); }
+.crumbs .sep { color: #eae7f6; opacity: .5; padding: 0 .1rem; }
 
 /* ---- header: the site hero, full bleed ---- */
-header { background: #0d3b40; color: #f2ead8; padding: 2.6rem 0 2.2rem; }
+header { background: #241d49; color: #eae7f6; padding: 2.6rem 0 2.2rem; }
 header .hero-inner { max-width: 74rem; margin: 0 auto; padding: 0 var(--pad); }
 header .kicker { font: 1rem ui-monospace, monospace; text-transform: uppercase;
   letter-spacing: .12em; opacity: .75; margin: 0 0 .7rem; display: block; }
 header h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); margin: 0; font-weight: 900;
   text-transform: uppercase; letter-spacing: -.01em; line-height: 1; }
-header h1 a { color: #e35b2f !important; }
-header .sub { color: #f2ead8; display: block; max-width: 44rem; margin: .9rem 0 0; }
-header .sub code { background: rgba(0,0,0,.25); border: none; color: #f2ead8; }
-header .axioms { color: #e9a17c; letter-spacing: .02em; display: block; margin-top: .7rem; }
-.pill { font-size: 1rem; color: #f2ead8; border: 1px solid rgba(242,234,216,.5);
+header h1 a { color: #e04a6e !important; }
+header .sub { color: #eae7f6; display: block; max-width: 44rem; margin: .9rem 0 0; }
+header .sub code { background: rgba(0,0,0,.25); border: none; color: #eae7f6; }
+header .axioms { color: #f0a9bc; letter-spacing: .02em; display: block; margin-top: .7rem; }
+.pill { font-size: 1rem; color: #eae7f6; border: 1px solid rgba(234,231,246,.5);
   border-radius: 99px; padding: .12rem .65rem; white-space: nowrap;
   display: inline-block; margin-top: .9rem; }
 
@@ -277,13 +277,13 @@ footer ul { padding-left: 1.2rem; }
 <nav class="topnav" aria-label="Site">
   <a class="brand" href="../../index.html">StzZui</a>
   <a class="here" href="./">Reader</a>
-  <a href="../../tools/site-audit.html">Site audit</a>
+  <a href="../../tools/ui-audit.html">UI audit</a>
   <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb ↗</a>
 </nav>
 
 <header>
   <div class="hero-inner">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><span class="level"><span class="here-crumb" aria-current="page">Reader</span><a href="../../tools/site-audit.html">Site audit</a></span></nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><span class="level"><span class="here-crumb" aria-current="page">Reader</span><a href="../../tools/ui-audit.html">UI audit</a></span></nav>
   <span class="kicker">The law · the whole text, interactive</span>
   <h1>The Zui Constitution</h1>
   <span class="sub">Rules for business interfaces that protect attention, reasoning,
@@ -393,7 +393,7 @@ function ruleCard(rule, articles) {
   if (rule.enforcement === 'machine')
     badges.push(`<a class="badge machine" href="#${anchor}" title="${esc(rule.lint || '')}">enforced by stzw check</a>`);
   else if (rule.enforcement === 'tool')
-    badges.push(`<a class="badge machine" href="../../tools/legibility-audit.html" title="${esc(rule.lint || '')}">checked by the site audit</a>`);
+    badges.push(`<a class="badge machine" href="../../tools/ui-audit.html" title="${esc(rule.lint || '')}">checked by the UI audit</a>`);
   else if (rule.enforcement === 'machine-later')
     badges.push(`<span class="badge" title="Lintable, not yet linted — Article VII governs promotion.">on the enforcement ladder</span>`);
   if (rule.invariant)

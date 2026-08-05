@@ -29,7 +29,7 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 ## What is in this repository today
 
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
-- **[The Site Audit](tools/site-audit.html)** — a browser tool that *measures* six of the rules on any same-origin site: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
+- **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the ZinBank, Zin i18n, and Refine evidence trails.
 - **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zui` language and compiler out of Zin.
 - **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zui` verifier to the educational showcase.

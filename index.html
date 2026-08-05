@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>StzZui — the law of user interfaces</title>
-<meta name="description" content="StzZui: a machine-verifiable constitution for user interfaces — 117 rules as data, an intent grammar instead of widgets, verified by tooling, independent of any framework. Opinionated toward business applications.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d3b40'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e35b2f' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<meta name="description" content="StzZui: a machine-verifiable constitution for user interfaces — 117 rules as data, an intent grammar instead of widgets, verified by tooling, independent of any framework. Extracted defect by defect from a year of building real applications with AI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="site/stz.css">
 </head>
 <body>
@@ -14,70 +14,126 @@
   <div class="wrap">
     <a class="brand" href="index.html">StzZui</a>
     <a href="constitution/reader/">Reader</a>
-    <a href="tools/site-audit.html">Site audit</a>
+    <a href="tools/ui-audit.html">UI audit</a>
     <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
   </div>
 </nav>
 
 <header class="page">
   <div class="narrow">
-    <p class="kicker">A Softanza project · the law, at home</p>
+    <p class="kicker">A Softanza project · Tunis · Niamey · Paris</p>
     <h1>The law of user interfaces</h1>
-    <p class="sub">A machine-verifiable constitution for interfaces — <b>117 rules as
-    data</b>, derived from seven articles, each carrying its <em>why</em> and the
-    real-world failure that earned it a number. Independent of any framework, any
-    language, any platform. Opinionated toward business applications: operators,
-    not explorers.</p>
+    <p class="sub">Most UI frameworks begin with a physical assumption — screens,
+    widgets, layouts — and try to infer what the user intends. Zui inverts the
+    order: <b>it starts from human intent and treats rendering as a
+    consequence.</b> A human does not come to an interface to click a button;
+    they come to discover, focus, read, compare, select, act, confirm, and
+    understand consequences. Once intent is explicit, interface correctness
+    becomes <em>compilable</em> — violations are detectable before the interface
+    ships, not after users complain.</p>
   </div>
 </header>
 
 <section>
   <div class="narrow">
-    <h2>The problem</h2>
-    <p>Interfaces are decaying in the AI era — and the generators are the amplifier,
-    reproducing at machine speed every inherited assumption of the corpus they
-    learned from. The evidence is recorded, not rhetorical: <b>every rule numbered
-    above 104 in this constitution was canonized from a defect an AI produced while
-    building a real site</b> — under explicit instruction to be careful. Small faint
-    text. Verbless buttons. Controls floating over the reading. Paths that only look
-    backwards. A menu contradicting the tree it claims to describe.</p>
-    <p>Without a law a machine can refuse to violate, the defects regenerate
-    endlessly — and the discipline that once policed them has gone quiet.</p>
+    <h2>The decay</h2>
+    <p>Open a mainstream business application and count the offenses: small
+    faint text, verbless buttons, controls floating over the reading, a
+    breadcrumb that only looks backwards, a scrollbar beside empty space,
+    twenty sections where twelve would hold, a menu contradicting the tree it
+    claims to describe. None of this is an accident of taste. These are
+    inherited conventions — copied for decades because they are everywhere,
+    kept because nobody is required to refuse them.</p>
+    <p>Then came the generators, and the problem found its amplifier. An AI
+    trained on that corpus reproduces its every inherited assumption <em>at
+    machine speed</em> — politely, confidently, and under explicit instruction
+    to be careful. The evidence in this repository is recorded, not
+    rhetorical: <b>every rule numbered above 104 in this constitution was
+    canonized from a defect an AI produced while building a real
+    application.</b></p>
+    <p>Meanwhile the discipline that once policed these things has gone
+    quiet, riding the "AI will replace us" wave instead of restating first
+    principles. Someone has to write the principles down in a form a machine
+    can refuse to violate. That is what this site holds.</p>
+  </div>
+</section>
 
+<section class="alt">
+  <div class="narrow">
+    <h2>The story</h2>
+    <p class="lead">This law was not written in a seminar room. It was
+    extracted, defect by defect, from a year of building real applications
+    with AI assistance — every correction recorded at the moment it was made.</p>
+    <p><b>ZinBank</b> (April 2026) — a full agentic banking platform, built and
+    corrected screen by screen. It yielded the colour laws (one column carries
+    the colour; two families of colour), the widget-honesty law (a card is not
+    a button), the navigation law (the second level turns), and the first law
+    of assistant surfaces (the assistant never masks the work) — Rules 117–121.</p>
+    <p><b>Zin i18n</b> (May 2026) — languages added by forking templates left
+    French screens full of untranslated jargon, until language became data:
+    Rule 122. <b>The Refine rebuild</b> (June 2026) — a product site judged
+    unreadable by its own author became the reading-arc law: Rule 123.</p>
+    <p><b>The StzWeb site</b> (August 2026) — Rules 105–116, each canonized
+    live from a defect the generator produced while building the site that
+    documents the law. The audit tool caught its own depth-calculation defect
+    on its first run here; that discipline is the point.</p>
+    <p>The full evidence trail is in <a href="doc/HARVEST-2026-08.md">the
+    harvest record</a>. Amendment requires exactly this: real usage, operator
+    feedback, documented failure — never fashion (Article VII).</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
     <h2>The answer, in three layers</h2>
     <p><b>An intent grammar</b> — 24 closed, medium-agnostic verbs (DISCOVER …
-    EXIT). A human never comes to click a button; they come to discover, compare,
-    act, confirm, undo. Widgets are consequences of intent, never primitives.</p>
-    <p><b>The constitution</b> — <a href="constitution/rules.json">one JSON file</a>,
-    the single source of truth. Linters load it, findings cite rule numbers,
-    amendment requires evidence (never fashion), retired numbers are never
-    reused.</p>
-    <p><b>Rendering projections</b> — business web, CLI, voice, game worlds, and
-    the AI-agent surface itself. A projection decides <em>how</em> to render; it has
-    zero freedom over <em>what</em>: it cannot drop an UNDO, hide an available
-    action, or strip EXIT from a flow.</p>
+    EXIT). Widgets are consequences of intent, never primitives; no projection
+    may invent a verb, and a SELECT that mutates is a structural error.</p>
+    <p><b>The constitution</b> — <a href="constitution/rules.json">one JSON
+    file</a>, the single source of truth: 117 rules under 7 articles, each
+    carrying its <em>why</em>, its derivation, its enforcement tier, and the
+    real-world failure that earned it a number. Linters load it, findings cite
+    rule numbers, retired numbers are never reused.</p>
+    <p><b>Rendering projections</b> — business web, CLI, voice, game worlds,
+    and the AI-agent surface itself. A projection decides <em>how</em> to
+    render; it has zero freedom over <em>what</em>: it cannot drop an UNDO,
+    hide an available action, or strip EXIT from a flow.</p>
+  </div>
+</section>
 
+<section class="alt">
+  <div class="narrow">
     <h2>Enter</h2>
-    <p><a href="constitution/reader/"><b>The Reader</b></a> — the whole law,
-    interactive: search, keyboard navigation, enforcement badges, operator rights,
-    forbidden patterns.</p>
-    <p><a href="tools/site-audit.html"><b>The Site Audit</b></a> — measure six of
-    the rules on any same-origin site, in your browser: computed size, true
-    contrast, the full path, scrolling with room to spare, menu/tree coherence.</p>
-    <p><a href="doc/HARVEST-2026-08.md"><b>The harvest record</b></a> — how eight
-    rules were extracted from the ZinBank, Zin and Refine evidence trails.
-    <a href="doc/ARCHITECTURE.md"><b>The architecture</b></a> — the three layers
-    and the consumer contract. <a href="ROADMAP.md"><b>The roadmap</b></a> — from
-    law-at-home to a standalone <code>zui</code> verifier to the educational
-    showcase.</p>
+    <p><a href="constitution/reader/"><b>Read the law</b></a> — the whole
+    constitution, interactive: search, keyboard navigation, enforcement badges,
+    operator rights, forbidden patterns.</p>
+    <p><a href="tools/ui-audit.html"><b>Audit a UI</b></a> — measure six of the
+    rules on any application UI you can serve same-origin: computed text size,
+    true composited contrast, the full navigation path, sideways scrolling with
+    room to spare, menu/tree coherence. Nothing leaves your browser.</p>
+    <p><a href="doc/ARCHITECTURE.md"><b>Study the architecture</b></a> — the
+    three layers and the consumer contract. <a href="ROADMAP.md"><b>Follow the
+    roadmap</b></a> — next up: the Gotchas, one playable page per rule family
+    where you trigger each offense yourself, then feel the law fix it.</p>
+  </div>
+</section>
 
+<section>
+  <div class="narrow">
     <h2>Who consumes it</h2>
-    <p><a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank"
-    rel="noopener">StzWeb</a> — the first conforming consumer: its linter cites
-    rule numbers, its site scores zero violations under the audit. The <b>Zin</b>
-    platform's Zui pillar shares the same articles and already compiles the intent
-    grammar. Any project can join by pinning a version of the law and checking
-    against it.</p>
+    <p>A project consumes the constitution by <b>pinning a version</b> of the
+    law, exactly as a runtime pins a conformance-fixtures file.
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank"
+    rel="noopener">StzWeb</a> is the first conforming consumer: its linter
+    cites rule numbers, its site scores zero violations under the audit. The
+    <b>Zin</b> platform's Zui pillar shares the same articles and already
+    compiles the intent grammar. Any project can join: the law is one JSON
+    file with a stable schema — load it, check against it, cite it.</p>
+    <p>The stance is opinionated, and openly so: <b>business applications
+    first</b>. Operators, not explorers — people who use the same screens
+    eight hours a day under pressure, responsibility, and fatigue. Calm over
+    power. Intent over mechanics. Visible over hidden. Consumer-site delight
+    is out of jurisdiction; operator dignity is the whole of it.</p>
   </div>
 </section>
 
@@ -86,7 +142,7 @@
     <div class="bar">
       <div class="row">
         <a href="constitution/reader/">Reader</a>
-        <a href="tools/site-audit.html">Site audit</a>
+        <a href="tools/ui-audit.html">UI audit</a>
       </div>
       <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
         <label for="vibe-select">Style</label>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Site audit — Rules 105, 107, 108, 114–116, measured</title>
-<meta name="description" content="Measures every rendered text node on every page: computed size and true contrast against the composited background. The enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e35b2f'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%230d3b40' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<title>UI audit — Rules 105, 107, 108, 114–116, measured</title>
+<meta name="description" content="Measures every rendered text node of any application UI: computed size and true contrast against the composited background. The enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../site/stz.css">
 <style>
 textarea {
@@ -28,7 +28,7 @@ td.issue { color: #a33422; font-weight: 700; }
 [data-vibe="guardian"] td.issue { color: #ff9d8a; }
 .controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1rem; }
 .run { font: 700 1rem var(--sans); cursor: pointer; border-radius: 8px;
-  border: 2px solid var(--orange); background: var(--orange); color: var(--on-orange);
+  border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent);
   padding: .6rem 1.3rem; }
 .run:hover { filter: brightness(1.06); }
 .opt { font: 1rem var(--sans); color: var(--ink); display: inline-flex;
@@ -43,7 +43,7 @@ td.issue { color: #a33422; font-weight: 700; }
   <div class="wrap">
     <a class="brand" href="../index.html">StzZui</a>
     <a href="../constitution/reader/">Reader</a>
-    <a class="here" href="site-audit.html">Site audit</a>
+    <a class="here" href="ui-audit.html">UI audit</a>
     <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
   </div>
 </nav>
@@ -51,14 +51,16 @@ td.issue { color: #a33422; font-weight: 700; }
 
 <header class="page">
   <div class="narrow">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><a href="../constitution/reader/">Reader</a><span class="here-crumb" aria-current="page">Site audit</span></span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><a href="../constitution/reader/">Reader</a><span class="here-crumb" aria-current="page">UI audit</span></span></nav>
     <p class="kicker">The tool · Rules 105, 107, 108, 114–116, measured not guessed</p>
-    <h1>Site audit</h1>
-    <p class="sub">It opens each page and measures what the eye argues about and
-    arithmetic does not: the <b>computed size</b> of every text node, its <b>true
-    contrast</b> against the background actually painted behind it, whether the page shows
-    the <b>whole path</b> it sits on, and whether any block <b>scrolls sideways</b> while the
-    page still has room. Same-origin pages only; nothing leaves your browser.</p>
+    <h1>UI audit</h1>
+    <p class="sub">Point it at any application UI you can serve same-origin — this
+    site, your project, a generated prototype. It opens each page and measures what
+    the eye argues about and arithmetic does not: the <b>computed size</b> of every
+    text node, its <b>true contrast</b> against the background actually painted
+    behind it, whether the page shows the <b>whole path</b> it sits on, and whether
+    any block <b>scrolls sideways</b> while the page still has room. Nothing leaves
+    your browser.</p>
   </div>
 </header>
 
@@ -110,7 +112,7 @@ td.issue { color: #a33422; font-weight: 700; }
     screens the same way.</p>
     <textarea id="pages" spellcheck="false">/index.html
 /constitution/reader/index.html
-/tools/site-audit.html</textarea>
+/tools/ui-audit.html</textarea>
     <div class="controls">
       <button class="run" id="run">Run the audit</button>
       <label class="opt"><input type="checkbox" id="strict">
@@ -137,16 +139,17 @@ td.issue { color: #a33422; font-weight: 700; }
     </div>
 
     <p class="caption" style="margin-top:2rem">Serve the repository over HTTP for this to
-    work (<code>stzw dev</code> at the root, or any static server); the audit reads pages
-    through same-origin frames, which the <code>file://</code> protocol forbids. The
-    static half of these rules is also enforced in the terminal: <code>stzw check</code>
-    flags sub-floor font sizes in a project's HTML, citing Rule 107.</p>
+    work (<code>python -m http.server</code> at the root, or any static server); the audit
+    reads pages through same-origin frames, which the <code>file://</code> protocol forbids.
+    The static half of these rules is also enforceable before rendering: StzWeb's
+    <code>stzw check</code>, the first conforming linter, flags sub-floor font sizes in a
+    project's declarations, citing Rule 107.</p>
   </div>
 </section>
 
 <div class="narrow">
   <div class="next">
-    <a href="../constitution/"><span class="label">Back</span>← Constitution</a>
+    <a href="../index.html"><span class="label">Back</span>← StzZui</a>
     <a href="../constitution/reader/#rule-105"><span class="label">The law it measures</span>Rules 105, 107, 108, 114–116 →</a>
   </div>
 </div>
@@ -155,9 +158,8 @@ td.issue { color: #a33422; font-weight: 700; }
   <div class="wrap">
     <div class="bar">
     <div class="row">
-      <a href="../constitution/">Constitution</a>
       <a href="../constitution/reader/">Reader</a>
-      <a class="leaves" href="https://github.com/mayouni/stzweb" target="_blank" rel="noopener">GitHub</a>
+      <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
     </div>
       <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
         <label for="vibe-select">Style</label>
@@ -167,7 +169,7 @@ td.issue { color: #a33422; font-weight: 700; }
         </select>
       </div>
     </div>
-    <p class="fine">© 2026 StzWeb — a Softanza project · A law that cannot be measured
+    <p class="fine">© 2026 StzZui — a Softanza project · A law that cannot be measured
     will be negotiated in the hallway.</p>
   </div>
 </footer>
@@ -484,9 +486,9 @@ function buildMarkdown(findings, pages, vibe) {
   const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
   const esc = t => String(t).replace(/\|/g, '\\|').replace(/\n/g, ' ').trim();
   const lines = [
-    '# Site audit — Rules 105, 107, 108, 114-116',
+    '# UI audit — Rules 105, 107, 108, 114-116',
     '',
-    '- **site**: ' + SITE_ROOT,
+    '- **root**: ' + SITE_ROOT,
     '- **style**: ' + vibe,
     '- **pages audited**: ' + pages.length,
     '- **violations**: ' + findings.length,
@@ -543,7 +545,7 @@ $('#run').addEventListener('click', async () => {
   $('#run').disabled = false;
 
   const vibe = (document.documentElement.dataset.vibe || 'curator') === 'guardian'
-    ? 'terminal' : 'modern';
+    ? 'retro' : 'modern';
   buildMarkdown(all, pages, vibe);
   if (!all.length) {
     verdict.className = 'verdict clean';

@@ -7,7 +7,7 @@ Milestones are cumulative; each ships complete or not at all (Rule 124 applies t
 - `constitution/rules.json` canonical here: v3.7, 117 rules, 31 sets, 7 articles.
 - Rules 117–124 canonized from the ZinBank / Zin / Refine harvest ([doc/HARVEST-2026-08.md](doc/HARVEST-2026-08.md)).
 - The Reader ported and rebranded — the whole law, interactive.
-- The Site Audit ported — six rules measured on any same-origin site.
+- The UI Audit ported (as "site audit"; renamed 2026-08-05) — six rules measured on any same-origin UI.
 - Founding documents: README, ARCHITECTURE, this roadmap.
 - Consumer contract stated; StzWeb pinned at v3.6.
 

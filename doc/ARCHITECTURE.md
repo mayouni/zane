@@ -38,7 +38,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 | The Constitution (Layer 2) | **Canonical here** — `constitution/rules.json` v3.7 | Stays; consumers pin versions |
 | `.zui` declarations | Live in Zin projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — Zin consumes the spec from here |
 | Compile-time violation checks | Zin `semantic.zig` (zui pillar checks); named violations: `INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION` | Standalone `zui` verifier CLI lifted from the Zin implementation (Roadmap M3) |
-| Rendered-page measurement | `tools/site-audit.html` (ported from StzWeb) — measures Rules 105, 107, 108, 114–116 on any same-origin site | Grows one measurement per machine-checkable rule |
+| Rendered-page measurement | `tools/ui-audit.html` (ported from StzWeb) — measures Rules 105, 107, 108, 114–116 on any same-origin application UI | Grows one measurement per machine-checkable rule |
 | Runtime enforcement | StzWeb's `stzw check` (Zig) lints declarations and cites rule numbers | Remains in StzWeb; other consumers implement their own against the pinned law |
 
 ## 4. The two enforcement instruments
@@ -46,7 +46,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 The constitution is enforced twice, at two different moments:
 
 1. **Before rendering** — the *declaration* checker (the zui compiler). Works on intent flows and surface declarations; catches structural violations (a flow with no EXIT, an ACT with no UNDO, a SELECT that mutates). This is what Zin's compiler does today and what the standalone `zui` CLI will do.
-2. **After rendering** — the *measurement* tool (the site audit). Works on the actual painted page; catches what static analysis cannot see (computed size, composited contrast, real layout at a real width). This is what `tools/site-audit.html` does today.
+2. **After rendering** — the *measurement* tool (the UI audit). Works on the actual painted page of any application served same-origin; catches what static analysis cannot see (computed size, composited contrast, real layout at a real width). This is what `tools/ui-audit.html` does today.
 
 A rule's `enforcement` field says which instrument owns it: `machine` (declaration checker), `tool` (measurement), `judgment` (human, until an instrument is invented — the enforcement ladder).
 
