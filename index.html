@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StzZui — the law of user interfaces</title>
+<meta name="description" content="StzZui: a machine-verifiable constitution for user interfaces — 117 rules as data, an intent grammar instead of widgets, verified by tooling, independent of any framework. Opinionated toward business applications.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d3b40'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e35b2f' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="site/stz.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="index.html">StzZui</a>
+    <a href="constitution/reader/">Reader</a>
+    <a href="tools/site-audit.html">Site audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <p class="kicker">A Softanza project · the law, at home</p>
+    <h1>The law of user interfaces</h1>
+    <p class="sub">A machine-verifiable constitution for interfaces — <b>117 rules as
+    data</b>, derived from seven articles, each carrying its <em>why</em> and the
+    real-world failure that earned it a number. Independent of any framework, any
+    language, any platform. Opinionated toward business applications: operators,
+    not explorers.</p>
+  </div>
+</header>
+
+<section>
+  <div class="narrow">
+    <h2>The problem</h2>
+    <p>Interfaces are decaying in the AI era — and the generators are the amplifier,
+    reproducing at machine speed every inherited assumption of the corpus they
+    learned from. The evidence is recorded, not rhetorical: <b>every rule numbered
+    above 104 in this constitution was canonized from a defect an AI produced while
+    building a real site</b> — under explicit instruction to be careful. Small faint
+    text. Verbless buttons. Controls floating over the reading. Paths that only look
+    backwards. A menu contradicting the tree it claims to describe.</p>
+    <p>Without a law a machine can refuse to violate, the defects regenerate
+    endlessly — and the discipline that once policed them has gone quiet.</p>
+
+    <h2>The answer, in three layers</h2>
+    <p><b>An intent grammar</b> — 24 closed, medium-agnostic verbs (DISCOVER …
+    EXIT). A human never comes to click a button; they come to discover, compare,
+    act, confirm, undo. Widgets are consequences of intent, never primitives.</p>
+    <p><b>The constitution</b> — <a href="constitution/rules.json">one JSON file</a>,
+    the single source of truth. Linters load it, findings cite rule numbers,
+    amendment requires evidence (never fashion), retired numbers are never
+    reused.</p>
+    <p><b>Rendering projections</b> — business web, CLI, voice, game worlds, and
+    the AI-agent surface itself. A projection decides <em>how</em> to render; it has
+    zero freedom over <em>what</em>: it cannot drop an UNDO, hide an available
+    action, or strip EXIT from a flow.</p>
+
+    <h2>Enter</h2>
+    <p><a href="constitution/reader/"><b>The Reader</b></a> — the whole law,
+    interactive: search, keyboard navigation, enforcement badges, operator rights,
+    forbidden patterns.</p>
+    <p><a href="tools/site-audit.html"><b>The Site Audit</b></a> — measure six of
+    the rules on any same-origin site, in your browser: computed size, true
+    contrast, the full path, scrolling with room to spare, menu/tree coherence.</p>
+    <p><a href="doc/HARVEST-2026-08.md"><b>The harvest record</b></a> — how eight
+    rules were extracted from the ZinBank, Zin and Refine evidence trails.
+    <a href="doc/ARCHITECTURE.md"><b>The architecture</b></a> — the three layers
+    and the consumer contract. <a href="ROADMAP.md"><b>The roadmap</b></a> — from
+    law-at-home to a standalone <code>zui</code> verifier to the educational
+    showcase.</p>
+
+    <h2>Who consumes it</h2>
+    <p><a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank"
+    rel="noopener">StzWeb</a> — the first conforming consumer: its linter cites
+    rule numbers, its site scores zero violations under the audit. The <b>Zin</b>
+    platform's Zui pillar shares the same articles and already compiles the intent
+    grammar. Any project can join by pinning a version of the law and checking
+    against it.</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="constitution/reader/">Reader</a>
+        <a href="tools/site-audit.html">Site audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The law and its tools read
+    the same file; they cannot drift apart silently.</p>
+  </div>
+</footer>
+
+<script src="site/stz.js"></script>
+</body>
+</html>

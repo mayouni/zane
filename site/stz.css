@@ -1,0 +1,247 @@
+/* ==========================================================================
+   stz.css — the StzWeb site design system.
+   Two lawful vibes (Article VI): curator (poster — deep teal, burnt
+   orange, cream) and guardian (terminal — amber on black, monospace).
+   The pages that link this file obey the constitution they describe:
+   no external requests, no animation, stable layout, keyboard-sovereign.
+   ========================================================================== */
+:root {
+  --teal: #0d3b40; --teal-deep: #092e33; --orange: #e35b2f;
+  --cream: #f2ead8; --paper: #f7f3e8; --ink: #142f31;
+  --muted: #3f4e4a; --line: #ddd4bd; --card: #fffdf6;
+  --accent: #e35b2f; --accent-ink: #ad3f17; --orange-lite: #ff8c5c;
+  --on-orange: #071a1c; --ok: #1d6b4f;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --black: 900;
+}
+[data-vibe="guardian"] {
+  --teal: #0a0e0c; --teal-deep: #050807; --orange: #ffb454;
+  --cream: #ffb454; --paper: #0a0e0c; --ink: #d8e0d8;
+  --muted: #93a69c; --line: #24312a; --card: #101613;
+  --accent: #ffb454; --accent-ink: #ffb454; --orange-lite: #ffb454;
+  --on-orange: #0a0e0c; --ok: #5cc296;
+}
+[data-vibe="guardian"] body { font-family: var(--mono); }
+[data-vibe="guardian"] h1, [data-vibe="guardian"] h2 { letter-spacing: 0; }
+[data-vibe="guardian"] .stamp { background: transparent; border: 2px solid var(--orange); }
+[data-vibe="guardian"] .stamp * { color: var(--orange) !important; }
+[data-vibe="guardian"] .card, [data-vibe="guardian"] .shot { box-shadow: none; }
+
+* { box-sizing: border-box; }
+/* scrollbars belong to the page, not to the operating system */
+* { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--line); border-radius: 99px;
+  border: 3px solid var(--paper);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+/* navigation arrives at once: motion is never decoration (Rule 112) */
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 1.125rem/1.7 var(--sans); -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code, pre, kbd { font-family: var(--mono); }
+code { background: var(--card); border: 1px solid var(--line); border-radius: 4px;
+  padding: 0 .3em; font-size: 1em; }
+kbd { border: 1px solid var(--muted); border-radius: 4px; padding: 0 .35em; font-size: 1em; }
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.4rem; }
+.narrow { max-width: 48rem; margin: 0 auto; padding: 0 1.4rem; }
+
+/* ---- nav ---- */
+nav.site {
+  background: var(--teal); color: var(--cream);
+  position: sticky; top: 0; z-index: 10;
+}
+nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: wrap; }
+nav.site .brand { font-weight: var(--black); font-size: 1.1rem; letter-spacing: .04em;
+  color: var(--orange-lite); text-decoration: none; text-transform: uppercase; }
+nav.site a:not(.brand) { color: var(--cream); text-decoration: none; font-size: 1rem; opacity: .9; }
+nav.site a:not(.brand):hover { opacity: 1; color: var(--orange-lite); }
+nav.site a.here { color: var(--orange-lite); opacity: 1; border-bottom: 2px solid var(--orange); }
+/* the style picker lives in the bottom bar -- nothing floats over the
+   reading (Rule 110) */
+.vibe-picker {
+  display: flex; align-items: center; gap: .5rem; margin-left: auto;
+}
+.vibe-picker label { color: var(--cream); opacity: .85; }
+.vibe-picker select {
+  font: 1rem var(--sans); color: var(--cream); background: rgba(0,0,0,.28);
+  border: 1.5px solid rgba(242,234,216,.4); border-radius: 99px;
+  padding: .3rem 1.6rem .3rem .8rem; cursor: pointer; min-height: 34px;
+}
+.vibe-picker select:hover { border-color: var(--orange-lite); }
+.vibe-picker option { font-size: 1rem; color: var(--ink); background: var(--card); }
+footer.site .bar, footer .bar { display: flex; align-items: center; gap: 1.4rem;
+  flex-wrap: wrap; justify-content: space-between; }
+
+/* links that leave for another environment say so */
+a.leaves::after {
+  content: " ↗"; font-size: .9em; opacity: .8;
+}
+
+/* ---- breadcrumbs: a visible trail back (Rule 25) ---- */
+.crumbs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .15rem;
+  font: 1rem var(--mono); margin: 0 0 1.8rem; padding: 0;
+}
+.crumbs a, .crumbs .here-crumb {
+  display: inline-flex; align-items: center; padding: .3rem .9rem;
+  border-radius: 99px; text-decoration: none; white-space: nowrap;
+  background: rgba(242, 234, 216, .08);
+  border: 1px solid rgba(242, 234, 216, .28); color: var(--cream);
+}
+/* No hover repaint (Rule 115). The pointer already becomes a hand; repainting
+   a step in the current-position colour would say "you are here" about a place
+   you are not. */
+.crumbs a { cursor: pointer; }
+/* one depth of the path, holding every page that lives at it */
+.crumbs .level { display: inline-flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+.crumbs .here-crumb {
+  color: var(--orange-lite); border-color: var(--orange-lite);
+  background: rgba(227, 91, 47, .16);
+}
+.crumbs .sep { color: var(--cream); opacity: .5; padding: 0 .1rem; }
+
+/* ---- page hero (smaller than the front-door poster) ---- */
+header.page {
+  background: var(--teal); color: var(--cream); padding: 3.2rem 0 2.8rem;
+}
+header.page .kicker { font: 1rem var(--mono); text-transform: uppercase;
+  letter-spacing: .12em; color: var(--cream); opacity: .75; margin: 0 0 .7rem; }
+header.page h1 {
+  margin: 0; font-weight: var(--black); text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 3.4rem); line-height: .98; letter-spacing: -.01em;
+  color: var(--orange);
+}
+header.page .sub { color: var(--cream); font-size: 1.125rem; max-width: 42rem; margin: 1.2rem 0 0; }
+header.page code, footer.site code {
+  background: rgba(0, 0, 0, .25); border-color: transparent; color: var(--cream);
+}
+
+/* ---- sections & prose ---- */
+section { padding: 2.8rem 0; }
+section.alt { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+h2 {
+  font-weight: var(--black); text-transform: uppercase; letter-spacing: -.01em;
+  font-size: clamp(1.3rem, 3vw, 1.9rem); margin: 0 0 .5rem; color: var(--ink);
+}
+h2 .num { color: var(--accent-ink); }
+h3 { font-size: 1.125rem; font-weight: 800; margin: 1.8rem 0 .4rem; color: var(--ink); }
+.lead { color: var(--muted); max-width: 46rem; margin: 0 0 1.6rem; }
+p { max-width: 46rem; }
+ul, ol { max-width: 44rem; }
+li { margin: .3rem 0; }
+
+/* ---- code shots & terminals ---- */
+.shot {
+  background: var(--teal-deep); color: #e9e4d2; border-radius: 10px;
+  padding: 1.2rem 1.4rem; overflow-x: auto; box-shadow: 0 10px 30px rgba(9,46,51,.18);
+  font-size: 1rem; line-height: 1.55; font-family: var(--mono);
+}
+.shot .c { color: #7fa39b; }
+.shot .k { color: #ff8c5c; font-weight: 700; }
+.shot .s { color: #efc987; }
+.shot .n { color: #9fd8c0; }
+.term {
+  background: #0a0e0c; color: #d8e0d8; border-radius: 10px; padding: 1.1rem 1.3rem;
+  font: 1rem/1.6 var(--mono); overflow-x: auto;
+}
+/* Room before scrollbars (Rule 114). A code block is bound by the prose
+   column only while that column is enough. When the page has width to spare,
+   the block takes it -- centred on the same axis as the text, so the reading
+   line never moves -- and only scrolls when even the page has run out. */
+.narrow .shot, .narrow .term {
+  --room: min(72rem, calc(100vw - 2.8rem));   /* the page's own measure */
+  width: var(--room);
+  max-width: none;
+  margin-left: calc((100% - var(--room)) / 2);
+}
+.term .p { color: #5cc296; }
+.term .cmd { color: #ffb454; }
+.term .dim { color: #7d8f85; }
+.term .bad { color: #ff9d8a; }
+.term .good { color: #7ee2ae; }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.4rem; }
+.caption { color: var(--muted); margin-top: .8rem; max-width: 46rem; }
+
+/* ---- cards & grids ---- */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1.1rem 1.3rem; box-shadow: 0 3px 10px rgba(9,46,51,.05);
+  min-width: 0;                      /* a grid child may shrink */
+  overflow-wrap: anywhere;           /* nothing leaves its frame */
+}
+.card h3 { margin: 0 0 .4rem; font-size: 1rem; letter-spacing: .02em; text-transform: uppercase;
+  letter-spacing: .02em; color: var(--accent-ink); }
+.card p { margin: 0; color: var(--muted); }
+.card .proof { display: block; margin-top: .6rem; font: 1rem var(--mono);
+  overflow-wrap: anywhere; word-break: break-word; }
+
+/* ---- stamp ---- */
+.stamp {
+  background: var(--orange); color: var(--on-orange); padding: 1.3rem 1.5rem;
+  text-decoration: none; display: block; max-width: 22rem;
+}
+.stamp .big { font-weight: var(--black); text-transform: uppercase;
+  font-size: 1.6rem; line-height: 1.05; color: var(--on-orange); display: block; }
+.stamp .small { font: 1rem var(--mono); color: var(--on-orange); margin-top: .7rem; display: block; }
+.stamp:hover { filter: brightness(1.05); }
+
+/* ---- steps (tutorial) ---- */
+.step { margin: 2.6rem 0; }
+.step .step-head { display: flex; align-items: baseline; gap: .8rem; margin-bottom: .6rem; }
+.step .step-num {
+  font: 700 1rem var(--mono); color: var(--accent-ink); background: var(--card);
+  border: 2px solid var(--orange); border-radius: 8px; padding: .15rem .6rem; white-space: nowrap;
+}
+.step h2 { margin: 0; font-size: 1.25rem; }
+.law-note {
+  border-left: 3px solid var(--orange); background: var(--card);
+  border-radius: 0 8px 8px 0; padding: .8rem 1.1rem;
+  color: var(--muted); margin: 1rem 0; max-width: 46rem;
+}
+.law-note b { color: var(--accent-ink); }
+.law-note, .caption, .lead { overflow-wrap: anywhere; }
+
+/* ---- q&a ---- */
+details.qa { border: 1px solid var(--line); border-radius: 10px; background: var(--card);
+  margin: .7rem 0; max-width: 48rem; }
+details.qa summary { cursor: pointer; font-weight: 700; padding: .8rem 1.1rem; }
+details.qa summary:hover { color: var(--accent); }
+details.qa .a { padding: 0 1.1rem .9rem; color: var(--ink); }
+details.qa .a p { margin: .4rem 0; }
+
+/* ---- buttons & next pointer ---- */
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 700;
+  padding: .65rem 1.2rem; border-radius: 8px; border: 2px solid var(--orange);
+}
+.btn.primary { background: var(--orange); color: var(--on-orange); }
+.btn.ghost { color: var(--orange); }
+.btn.primary:hover { filter: brightness(1.08); }
+.next {
+  margin: 3rem 0 0; padding: 1.4rem 0 0; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.next .label { font: 1rem var(--mono); text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted); display: block; }
+.next a { font-weight: 700; text-decoration: none; }
+
+/* ---- footer ---- */
+footer.site { background: var(--teal); color: var(--cream); padding: 2.2rem 0; margin-top: 3rem; }
+footer.site a { color: var(--cream); }
+footer.site a:hover { color: var(--orange-lite); }
+footer.site .fine { font: 1rem var(--mono); opacity: .75; margin-top: 1rem; }
+footer.site .row { display: flex; flex-wrap: wrap; gap: 1.6rem; }
+footer.site .bar { display: flex; align-items: center; gap: 1.4rem;
+  flex-wrap: wrap; justify-content: space-between; }
+
+@media (max-width: 720px) {
+  nav.site .wrap { gap: .8rem; }
+}

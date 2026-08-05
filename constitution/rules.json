@@ -1,0 +1,2451 @@
+{
+  "metadata": {
+    "title": "The Zui Constitution",
+    "version": "3.7",
+    "philosophy": "Calm Over Power • Intent Over Mechanics • Visible Over Hidden • Business Over Technology",
+    "totalArticles": 7,
+    "totalSets": 31,
+    "totalRules": 117,
+    "lastUpdated": "2026-08-05",
+    "lineage": "v2.0 (2026-08-03): the REVIEW-2026-08 reform. Articles, derivation, rights, forbidden patterns, and the intent grammar added; 5 duplicate rules retired into their survivors (7→6, 30→40, 33→79, 35→27, 61→80); 19 rules canonized (85-104, skipping the burned numbers 84 and 88); the amendments appendix dissolved into the rules it governed. Retired and burned numbers are never reused. v2.1 (2026-08-03): Rule 105, The Legibility Floor, canonized from the site’s own documented failure. v2.2 (2026-08-03): Rule 106, The Verb on the Button -- again from the site’s own documented failure. v2.3 (2026-08-03): Rule 107, Hierarchy Is Not Miniaturization -- the three-sizes doctrine; the law reaches one hundred rules. v2.4 (2026-08-03): Rule 107 promoted from the enforcement ladder to machine enforcement (stzw check), with tools/legibility-audit.html measuring what static analysis cannot. v2.5 (2026-08-03): Rule 108, The Trail Is Always Shown -- breadcrumbs on every screen, ancestors always clickable. v2.6 (2026-08-03): Rule 108 gains a checker (the site audit verifies every page’s trail) and a third enforcement tier appears -- \"tool\": checked by a runnable tool in the repository, where static analysis cannot reach. v2.7 (2026-08-03): Rule 109, Zeros Align, They Do Not Decorate. v2.8 (2026-08-03): Rule 110, Nothing Floats Over the Reading. v2.9 (2026-08-03): Rule 111, The Stranger's First Screen. v3.0 (2026-08-05): the author's own word restored -- the interaction cultures are vibes again, not registers; Article VI and every rule that names them follow. v3.1 (2026-08-05): Rule 112, Motion Reports, It Never Decorates -- and animated scrolling leaves the site. v3.2 (2026-08-05): Rule 113, Labels Follow Their Subject. v3.3 (2026-08-05): Rule 114, Room Before Scrollbars -- and the site audit gains a fourth measurement. v3.4 (2026-08-05): Rule 115, The Path Shows Every Depth -- the trail becomes a map of the branch, and hover stops imitating the current position. v3.5 (2026-08-05): Rule 116, The Menu Tells the Truth About the Tree -- the Gotchas leaves the main menu for the Constitution it belongs to, and the reading path is renumbered to eight stops. v3.6 (2026-08-05): Rule 116 amended -- a menu entry must also call a page what the page's own path calls it; the site audit checks the label, not only the level. No new number: the same rule, stated whole. v3.7 (2026-08-05): the law moves home -- canonical residence becomes the StzZui repository, with StzWeb pinned at v3.6 as the first conforming consumer until it re-pins. Rules 117-124 canonized from the Zin/ZinBank and Refine evidence records: colour economy (117, 118), widget roles (119), nested navigation (120), the agent surface (121), language as data (122), the reading arc (123), and the generator's duty to ship working artifacts (124)."
+  },
+  "preamble": {
+    "text": "Business software is not entertainment. Business users operate under pressure, responsibility, fatigue, and risk; their tools must reduce anxiety, preserve orientation, and protect intent. This constitution establishes non-negotiable principles for business interfaces -- framework-agnostic, trend-resistant, and machine-checkable. Zui does not seek novelty. Zui seeks calm, clarity, and cognitive continuity. A Zui-compliant interface does not impress. It serves.",
+    "closing": "Calm is productive. Stability is humane. Clarity is respectful. Undo is dignity."
+  },
+  "articles": {
+    "calm": {
+      "numeral": "I",
+      "title": "Calm",
+      "axiom": "Calm Over Power",
+      "statement": "The interface must never compete with the operator’s thinking. Calm is a functional requirement, not an aesthetic choice — anything that draws attention without serving intent does not belong, whether it is drawn by a designer or spoken by a machine."
+    },
+    "intent": {
+      "numeral": "II",
+      "title": "Intent Over Mechanics",
+      "axiom": "Intent Over Mechanics",
+      "statement": "Interaction starts from what the human is trying to do — discover, focus, read, select, act, recover — and widgets are consequences of intent, never primitives. Selection never implies execution; a flow that traps is unconstitutional."
+    },
+    "visible": {
+      "numeral": "III",
+      "title": "Visible State",
+      "axiom": "Visible Over Hidden",
+      "statement": "If the system knows something important, the user must see it: active filters, pending drafts, norms, background work, and machine provenance alike. Invisible state is a violation."
+    },
+    "reversibility": {
+      "numeral": "IV",
+      "title": "Reversibility",
+      "statement": "Undo is dignity. Every act is reversible, or explicitly and visibly irreversible — staged, named, and reviewed. Configuration never commits itself, and the way back is never broken."
+    },
+    "authority": {
+      "numeral": "V",
+      "title": "Predictable Authority",
+      "statement": "Every consequential act names its actor, every claimed role is declared, and the same control always means the same thing. An intelligent agent is an actor under this law — never an authority above it."
+    },
+    "operator": {
+      "numeral": "VI",
+      "title": "Operator Primacy and Vibes",
+      "axiom": "Business Over Technology",
+      "statement": "Business users are operators, not explorers, and their culture deserves architectural respect: vibes, densities, dialects, and surfaces are equivalent vibes of one truth. Vibe-invariant rights never flex."
+    },
+    "amendment": {
+      "numeral": "VII",
+      "title": "Amendment",
+      "statement": "The law grows only from evidence: real usage, operator feedback, documented failure analysis. Removing a protection requires proof the harm is gone; adding one requires proof the harm is real and recurring. Trends, fashion, and developer convenience are not grounds. Retired numbers are never reused."
+    }
+  },
+  "intents": {
+    "note": "The closed intent grammar (from the Zui pillar): rules quantify over these verbs. A new medium adds renderings, never verbs.",
+    "families": {
+      "orienting": {
+        "verbs": [
+          "DISCOVER",
+          "UNDERSTAND",
+          "LOCATE"
+        ],
+        "invariant": "Discovery must be satisfiable at every entry point."
+      },
+      "attention": {
+        "verbs": [
+          "FOCUS",
+          "FILTER",
+          "COMPARE"
+        ],
+        "invariant": "An active filter is visible state; focus and discovery cannot both be at maximum."
+      },
+      "information": {
+        "verbs": [
+          "READ",
+          "SCAN",
+          "SCROLL",
+          "ZOOM"
+        ],
+        "invariant": "A read surface that silently acts is an intent violation."
+      },
+      "selection": {
+        "verbs": [
+          "SELECT",
+          "HIGHLIGHT",
+          "PREVIEW",
+          "MARK"
+        ],
+        "invariant": "Selection expresses interest, never commitment."
+      },
+      "action": {
+        "verbs": [
+          "ACT",
+          "CONFIRM",
+          "CANCEL",
+          "UNDO"
+        ],
+        "invariant": "Every act has a reachable undo, or declares why it cannot."
+      },
+      "continuity": {
+        "verbs": [
+          "PAUSE",
+          "RESUME",
+          "RETRY",
+          "EXIT"
+        ],
+        "invariant": "Pause, resume, and exit are always reachable; a trapped flow is unconstitutional."
+      }
+    }
+  },
+  "rights": [
+    {
+      "id": "understand",
+      "title": "The Right to Understand",
+      "statement": "Every element, denial, and setting can explain itself in the operator’s language.",
+      "enforced_by": [
+        "40",
+        "42",
+        "71",
+        "86",
+        "99"
+      ]
+    },
+    {
+      "id": "reverse",
+      "title": "The Right to Reverse",
+      "statement": "What was done can be undone, and what cannot says so before, not after.",
+      "enforced_by": [
+        "26",
+        "70",
+        "79",
+        "93"
+      ]
+    },
+    {
+      "id": "know",
+      "title": "The Right to Know",
+      "statement": "The state of the system — filters, drafts, progress, provenance — is always visible.",
+      "enforced_by": [
+        "13",
+        "24",
+        "25",
+        "29",
+        "37",
+        "57",
+        "58",
+        "59",
+        "81",
+        "82",
+        "99"
+      ]
+    },
+    {
+      "id": "leave",
+      "title": "The Right to Leave",
+      "statement": "Every flow, focus, and overlay has a reachable exit that returns the user to where they stood.",
+      "enforced_by": [
+        "26",
+        "51",
+        "53",
+        "92",
+        "93"
+      ]
+    },
+    {
+      "id": "act-without-fear",
+      "title": "The Right to Act Without Fear",
+      "statement": "No element creates anxiety through unpredictability, irreversibility by default, or hidden consequences.",
+      "enforced_by": [
+        "15",
+        "18",
+        "19",
+        "38",
+        "79",
+        "83",
+        "89",
+        "91"
+      ]
+    },
+    {
+      "id": "human",
+      "title": "The Right to a Human",
+      "statement": "Wherever a machine serves, a person is reachable — clearly, and without penalty.",
+      "enforced_by": [
+        "102"
+      ]
+    }
+  ],
+  "forbidden": [
+    {
+      "id": "modal-storms",
+      "title": "Modal storms",
+      "violates": [
+        "19",
+        "51"
+      ]
+    },
+    {
+      "id": "invisible-active-filters",
+      "title": "Invisible active filters",
+      "violates": [
+        "82",
+        "96"
+      ]
+    },
+    {
+      "id": "hidden-destructive-actions",
+      "title": "Hidden destructive actions",
+      "violates": [
+        "79",
+        "83"
+      ]
+    },
+    {
+      "id": "select-silently-acts",
+      "title": "Selection that silently executes",
+      "violates": [
+        "16",
+        "18"
+      ]
+    },
+    {
+      "id": "confirm-shaming",
+      "title": "Confirm-shaming",
+      "violates": [
+        "89",
+        "40"
+      ]
+    },
+    {
+      "id": "pre-checked-consent",
+      "title": "Pre-checked consent",
+      "violates": [
+        "89",
+        "70"
+      ]
+    },
+    {
+      "id": "mouse-only-critical-path",
+      "title": "Mouse-only critical workflows",
+      "violates": [
+        "80"
+      ]
+    },
+    {
+      "id": "decorative-animation",
+      "title": "Decorative animation without information",
+      "violates": [
+        "1",
+        "17"
+      ]
+    },
+    {
+      "id": "layout-shift",
+      "title": "Layout shifts during interaction",
+      "violates": [
+        "15",
+        "38"
+      ]
+    },
+    {
+      "id": "auto-committed-configuration",
+      "title": "Auto-committed configuration",
+      "violates": [
+        "70"
+      ]
+    },
+    {
+      "id": "accusatory-error",
+      "title": "Accusatory errors",
+      "violates": [
+        "40",
+        "101"
+      ]
+    },
+    {
+      "id": "unmarked-machine-content",
+      "title": "Unmarked machine-made content",
+      "violates": [
+        "99"
+      ]
+    },
+    {
+      "id": "instant-reset",
+      "title": "Instant reset after a critical action",
+      "violates": [
+        "91"
+      ]
+    },
+    {
+      "id": "everything-view",
+      "title": "\"Everything\" as the default view",
+      "violates": [
+        "96"
+      ]
+    },
+    {
+      "id": "surprise-exit",
+      "title": "The app closing by surprise",
+      "violates": [
+        "93"
+      ]
+    }
+  ],
+  "philosophy": {
+    "title": "Philosophy",
+    "description": "Foundational principles that define Zui's purpose and worldview",
+    "rules": [
+      {
+        "id": "philosophy-rule1",
+        "number": "P1",
+        "title": "The Philosophy of Aponia",
+        "avoid": [],
+        "solution": "Aponia is the ancient Greek term for the absence of pain. In UI, pain is friction. The UI is a tool, not a destination. A business app is a hammer. No one admires a hammer while they are trying to drive a nail. Zui removes the splinters, the awkward weight, the unpredictable bounce."
+      },
+      {
+        "id": "philosophy-rule2",
+        "number": "P2",
+        "title": "Respect the Ma",
+        "avoid": [],
+        "solution": "Ma is the Japanese concept of negative space as a functional element. White space is not \"empty\"; it is a buffer that protects the user's focus from being crushed by surrounding data. It provides breathing room for the mind to process information without panic."
+      },
+      {
+        "id": "philosophy-rule3",
+        "number": "P3",
+        "title": "Ground in Timeless Principles",
+        "avoid": [
+          "Trend-driven design decisions",
+          "Framework-specific patterns that don't translate",
+          "Solutions optimized for consumer apps, not business logic"
+        ],
+        "solution": "Ground your work in timeless principles, not trendy frameworks. Business applications require stability, predictability, and longevity—qualities found in ancient wisdom (Stoicism, Vitruvian principles) rather than fleeting UI trends."
+      }
+    ]
+  },
+  "retired": {
+    "7": {
+      "title": "Vertical Rhythm",
+      "into": "6"
+    },
+    "30": {
+      "title": "Non-Accusatory Errors",
+      "into": "40"
+    },
+    "33": {
+      "title": "Undo over Confirm",
+      "into": "79"
+    },
+    "35": {
+      "title": "Horizontal Menu Principles",
+      "into": "27"
+    },
+    "61": {
+      "title": "Keyboard Sovereignty (accessibility set)",
+      "into": "80"
+    }
+  },
+  "burned": {
+    "84": "Reserved, never to be assigned: pre-canonical numbering cited \"Rule 84, Visible State\" — see Rule 82.",
+    "88": "Reserved, never to be assigned: pre-canonical numbering cited \"Rule 88, Predictable Authority\" — see Rule 83."
+  },
+  "set1": {
+    "title": "Set 1: Prime Directive",
+    "description": "Core mandate that defines Zui's purpose and non-negotiable boundaries",
+    "rules": [
+      {
+        "id": "cognitive-mercy",
+        "number": "1",
+        "title": "Cognitive Mercy",
+        "avoid": [
+          "Auto-playing videos and animated backgrounds",
+          "Notification badges that demand attention",
+          "Hover animations for decorative purposes",
+          "\"Delightful\" micro-interactions that interrupt flow"
+        ],
+        "solution": "The interface must never compete with the user's thinking. If a UI element draws attention without serving intent, it does not belong. White space is structural, not decorative. Color is a signal, not an identity.",
+        "why": "Attention is the operator's scarcest resource; an interface that spends it on itself steals it from the work.",
+        "derived_from": "calm",
+        "enforcement": "machine",
+        "lint": "html lint: <video>/<audio> with autoplay -- attention is never taken uninvited",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set2": {
+    "title": "Set 2: Visual Principles",
+    "description": "How Zui uses typography, spacing, and minimal color to create clarity without noise",
+    "rules": [
+      {
+        "id": "white-space-is-structural",
+        "number": "2",
+        "title": "White Space Is Structural",
+        "avoid": [
+          "\"Tightening up\" layouts to fit more content",
+          "Removing margins to \"maximize screen real estate\"",
+          "Treating white space as wasted space"
+        ],
+        "solution": "White space is mandatory, not optional. Spacing conveys hierarchy more reliably than color or borders. Dense interfaces are considered errors, not styles. If you feel tempted to \"tighten things up,\" stop.",
+        "why": "Spacing is the only hierarchy signal that survives color-blindness, translation, and theming.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "color-is-a-signal",
+        "number": "3",
+        "title": "Color Is a Signal",
+        "avoid": [
+          "Multiple brand colors competing for attention",
+          "Gradients and shadows used as emphasis",
+          "Red/green color coding without text labels",
+          "\"Success fireworks\" and celebratory animations"
+        ],
+        "solution": "Default UI is neutral (slight off-whites like #fdfdfc or deep charcoals like #1a1a1a) rather than pure #000000 or #ffffff. One primary accent color per application. No gradients, no shadows used as emphasis. Color usage: Neutral → default state, Accent → intent (action, selection), Warning → user-correctable issue, Error → system failure only.",
+        "why": "A color that means something must not also decorate; meaning dilutes with every extra use.",
+        "derived_from": "calm",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "typography-read-don-t-impress",
+        "number": "4",
+        "title": "Typography: Read, Don't Impress",
+        "avoid": [
+          "Display fonts for body text",
+          "Font-weight gymnastics (too many weights)",
+          "Tiny font sizes for \"dense\" information",
+          "Justified text that creates rivers"
+        ],
+        "solution": "Prefer serif typefaces designed for long-form reading (e.g., Libertinus, STIX Two Text). Avoid display fonts. Avoid font-weight gymnastics. Body: regular weight. Headings: same font family, slightly larger size with increased leading. Line height: generous (1.6–1.8). If text looks \"designed,\" it's probably too much.",
+        "why": "Eight-hour reading punishes decorative type; legibility is an endurance property.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-monastic-palette",
+        "number": "5",
+        "title": "The Monastic Palette",
+        "avoid": [],
+        "solution": "Backgrounds use \"paper\" tones (#fdfdfc or #1a1a1a) rather than pure #000000 or #ffffff to reduce ocular strain over 8-hour workdays. Semantic consistency: If blue means \"action\" on page one, blue never means \"information\" on page two.",
+        "why": "Pure black on pure white vibrates; paper tones spare the eyes across a shift.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-golden-ratio-of-information",
+        "number": "6",
+        "title": "The Golden Ratio of Information",
+        "avoid": [
+          "Showing all information at once",
+          "Competing focal points on a single screen",
+          "Ignoring visual hierarchy in dense data"
+        ],
+        "solution": "The 70/30 Rule: 70% of the screen should be dedicated to the primary task. 30% is for supporting context (navigation, meta-data). Vertical rhythm: Use a consistent base unit (e.g., 8px). All margins, paddings, and line heights must be multiples of this unit to create a subconscious sense of \"ordered reality.\" (Absorbs retired Rule 7: the shared spacing unit IS the rhythm.)",
+        "why": "A stable task-to-context ratio and a shared spacing unit make order perceptible without being announced.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "absorbs": [
+          "7"
+        ],
+        "vibes": {
+          "curator": "70/30",
+          "guardian": "90/10 for trained eyes"
+        }
+      },
+      {
+        "id": "color-economy",
+        "number": "87",
+        "title": "Color Economy",
+        "avoid": [
+          "Multiple colored columns in one table",
+          "Color used because it is available",
+          "Legends longer than the data"
+        ],
+        "solution": "Color is a scarce signaling resource. One color column per table; one accent per screen doing semantic work. When everything is highlighted, nothing is.",
+        "why": "Color is a scarce signaling resource; one color column per table keeps it solvent.",
+        "derived_from": "calm",
+        "enforcement": "machine-later",
+        "evidence": "Zin agentic platform: promoted after a real product’s tables kept failing."
+      },
+      {
+        "id": "calm-density",
+        "number": "94",
+        "title": "Calm Density",
+        "avoid": [
+          "Artificial minimalism",
+          "Whitespace inflation",
+          "Mobile-first dogma in desktop business tools"
+        ],
+        "solution": "High information density is lawful when visual noise is minimized -- the metric is cognitive clarity, not whitespace quantity. Clarity beats emptiness; the guardian vibe is proof, not exception.",
+        "why": "The metric is cognitive clarity, not whitespace quantity; emptiness can be as loud as clutter.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Narrative constitution Art. VI; Zin ZUI specification v3.0."
+      },
+      {
+        "id": "hierarchy-is-not-miniaturization",
+        "number": "107",
+        "title": "Hierarchy Is Not Miniaturization",
+        "avoid": [
+          "Type scales that shrink with every heading level",
+          "Captions, notes, and labels set below the reading size",
+          "Emphasis by smaller-and-lighter -- two diminishments stacked",
+          "Size hierarchies calibrated on Latin and exported to every script"
+        ],
+        "solution": "Three sizes suffice: a hero voice, a title voice, and ONE reading size -- comfortable for any age, any eyes, any script. Below the first level, structure is shown by weight, color, shape, and space (a border, a card, a background), never by shrinking the text. Two deviations only: optical parity (all-caps and monospace may adjust metrically so they LOOK the same size as the reading text) and dense vibes chosen explicitly by a trained operator (Rules 6, 94) -- never as a default. If a hierarchy seems to need a fourth size, it needs a better shape.",
+        "why": "Every size step down taxes someone's eyes, and in connected scripts like Arabic small text is not inconvenient -- it is illegible; one generous reading size is the only scale that serves every reader and every language.",
+        "derived_from": "operator",
+        "enforcement": "machine",
+        "invariant": true,
+        "evidence": "Author doctrine, stated after this site's own emphasis boxes shrank their text inside a colored frame -- the frame already did the work; the shrinking only taxed the reader. Third same-day amendment by documented failure (Article VII); composes with Rule 105's floor. Promoted from the enforcement ladder to machine-enforced the same week, once the audit tool proved the violations were real and recurring.",
+        "lint": "html lint: any declared font-size below the reading floor (<1rem/em, <16px)"
+      },
+      {
+        "id": "zeros-align-they-do-not-decorate",
+        "number": "109",
+        "title": "Zeros Align, They Do Not Decorate",
+        "avoid": [
+          "Section headings numbered 01, 02, 03",
+          "Padded numbers where nothing is stacked beneath them",
+          "Digits used as ornament in prose or titles",
+          "Padding that changes as a list grows past nine"
+        ],
+        "solution": "Write numbers as they are said: 1, 2, 3. A leading zero is a typesetting tool, not a style -- it is lawful only where numbers are stacked vertically and the padding makes every following character start in the same column: a table of contents, an index, a ledger, a numbered list. Nothing stacked, no zero. And when padding is used, it is sized for the largest number in the set, so the column never shifts as the set grows.",
+        "why": "A zero that aligns nothing is decoration wearing the costume of precision -- and it makes the reader parse two characters to learn one digit.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Author correction on this site: the front page numbered its sections 01-08 with nothing stacked beneath them; the zeros aligned no column and were pure ornament."
+      },
+      {
+        "id": "one-column-carries-the-colour",
+        "number": "117",
+        "title": "One Column Carries the Colour",
+        "avoid": [
+          "Several coloured columns competing in one table row",
+          "The same green meaning two different things two columns apart",
+          "Colour applied because a value merely has states, not because the operator must act",
+          "A table where the eye cannot tell which column answers 'do I need to act?'"
+        ],
+        "solution": "Colour is a scarce signalling resource, and a table spends it in exactly one place: the actionable-status column -- the one that answers 'must I act on this row?'. Every other column is plain text, however stateful its values. When two columns are both coloured, the eye no longer knows where to look first, and worse, one colour acquires two meanings the operator must memorise apart.",
+        "why": "A signal that appears everywhere is a signal that means nothing. The operator scanning two hundred rows at hour seven deserves one place to look.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "ZinBank supervision tables (April 2026): agent status and drift level were both coloured, so green meant 'agent healthy' in column one and 'low drift' in column eight -- two semantics one hue apart. Reduced to one coloured column per table, promoted to a ZinBank constitutional principle."
+      },
+      {
+        "id": "two-families-of-colour",
+        "number": "118",
+        "title": "Two Families of Colour",
+        "avoid": [
+          "One colour per agent, per channel, per category -- a palette that grows with the data",
+          "Decorative colour on metadata that carries no urgency",
+          "A status palette with more values than an operator can keep apart",
+          "The same hue used for a status in one screen and a category in another"
+        ],
+        "solution": "An interface's colours split into exactly two families and no more. Family one is semantic status, five values with strict meanings: success (OK, valid, under control), warning (watch this), danger (critical, exceeded, incident), info (in progress, neutral), muted (waiting, inactive). Family two is neutral metadata: channels, types, categories -- one quiet style for all of them. A colour-per-entity scheme is noise wearing a system's clothes: it grows without bound and teaches the operator nothing.",
+        "why": "A palette the operator can hold in their head is a language; a palette that grows with the data is confetti.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "ZinBank (April 2026): one-colour-per-agent and one-colour-per-channel schemes were removed in favour of the five semantic values plus one neutral metadata style, and the rule was extended to every domain pack of the agentic platform."
+      }
+    ]
+  },
+  "set3": {
+    "title": "Set 3: Layout & Information Architecture",
+    "description": "How Zui structures information for maximum clarity and minimum cognitive load",
+    "rules": [
+      {
+        "id": "one-primary-axis",
+        "number": "8",
+        "title": "One Primary Axis",
+        "avoid": [
+          "Three-column layouts for primary content",
+          "Sidebars that take up 25% of screen width",
+          "Grid layouts where it's unclear where to look first"
+        ],
+        "solution": "Layouts should flow top → bottom. Avoid competing columns unless strictly necessary. Sidebars must be quiet, not dominant. If users don't know where to look first, the layout failed.",
+        "why": "Two competing columns split attention; a single river needs no map.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "progressive-disclosure",
+        "number": "9",
+        "title": "Progressive Disclosure",
+        "avoid": [
+          "Advanced options always visible",
+          "Settings panels with dozens of toggles",
+          "Preloading complexity \"just in case\""
+        ],
+        "solution": "Show what's needed now. Reveal more when intent is clear. Never preload complexity \"just in case.\" Advanced options should be revealed after a clear action, not visible from the start.",
+        "why": "Complexity paid before it is needed is a tax on every user for the sake of a few.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-z-axis-of-importance",
+        "number": "10",
+        "title": "The Z-Axis of Importance",
+        "avoid": [
+          "Blurry drop-shadows for depth",
+          "Multiple competing focal points",
+          "Unclear visual hierarchy"
+        ],
+        "solution": "Elevation without shadows. In Zui, we indicate depth through shades, not blurry drop-shadows. A modal shouldn't \"float\" in a void; it should appear as a focused layer that dims the world behind it. The Single Source of Truth: Every screen must have one clear H1. If a user has to choose between two equally large buttons or headers, the UI is shouting.",
+        "why": "Depth by dimming keeps focus without inventing a floating world; two equal heads mean nobody leads.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-ledger-principle",
+        "number": "11",
+        "title": "The Ledger Principle",
+        "avoid": [
+          "Card-based layouts for tabular data",
+          "Variable-width fonts for numbers",
+          "Center-aligned numeric columns",
+          "Decorative borders that create \"jail-cell\" effect"
+        ],
+        "solution": "For business, the table is the primary tool. Alignment is logic: Numbers are right-aligned (to compare decimals). Text is left-aligned. Headers must match their data's alignment. Use monospaced fonts (tabular nums) for currency. Every row must have enough height to be clicked without precision.",
+        "why": "Business truth is tabular; alignment is how numbers become comparable at a glance.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "semantic-anchoring",
+        "number": "85",
+        "title": "Semantic Anchoring",
+        "avoid": [
+          "Notes anchored to viewport coordinates",
+          "Annotations that detach on sort or filter",
+          "Anchors on transient indices or DOM order"
+        ],
+        "solution": "Annotations, notes, and overlays bind to durable business identifiers -- a named entity, a declared element -- never to position. When the element moves, its meaning moves with it.",
+        "why": "Meaning outlives position; an anchor to DOM order dies on the first sort.",
+        "derived_from": "intent",
+        "enforcement": "machine-later",
+        "evidence": "Corpus Rule 39 (Semantic Anchoring) + the Organizium annotations amendment."
+      },
+      {
+        "id": "the-strangers-first-screen",
+        "number": "111",
+        "title": "The Stranger's First Screen",
+        "avoid": [
+          "Entry screens whose loudest element is internal pride: versions, rule counts, awards, governance",
+          "Calls to action that only make sense to someone who already uses the product",
+          "Jargon in the first thing the eye lands on",
+          "Emphasis ordered by what the author is proudest of"
+        ],
+        "solution": "The most prominent thing on an entry screen answers the stranger's first questions -- what is this, is it for me, what do I do next -- in the stranger's words. Emphasis follows the reader's need, not the author's pride: version numbers, counts, internal governance, and craftsmanship belong deeper, where they reward the reader who asked. Anything on a first screen that cannot be understood without prior knowledge of the product is either explained where it stands or moved further in.",
+        "why": "A first screen is read by someone who owes you nothing: they will not decode your vocabulary to discover whether they need you.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Author correction on this site: the front page's loudest block announced the constitution's version and rule count, and the second call to action read 'Watch three runtimes agree' -- both legible only to someone who already knew the framework."
+      },
+      {
+        "id": "labels-follow-their-subject",
+        "number": "113",
+        "title": "Labels Follow Their Subject",
+        "avoid": [
+          "Badges floated beside a title, landing wherever the width leaves room",
+          "A classifier that sits right of the heading on a wide screen and under it on a narrow one",
+          "Status markers placed before the name they qualify",
+          "Position that changes with the viewport"
+        ],
+        "solution": "A label that classifies something sits beneath what it classifies, in the same place at every width -- and after it in the document, so assistive technology hears the name before the verdict. Floating a badge beside a title hands its position to the layout engine: right of the heading on a wide screen, tucked into it on a medium one, under it on a phone -- the same screen never looks the same twice, and the eye must hunt for what it read a moment ago. Fix the label in the flow; let the title be announced first.",
+        "why": "A label that moves with the window teaches the eye to search instead of read -- and a classifier met before its subject is a verdict before a name.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Author observation on this site: the Platforms page floated its status pills (shipping / field-proven / horizon), so each one landed in a different place as the window changed size."
+      },
+      {
+        "id": "room-before-scrollbars",
+        "number": "114",
+        "title": "Room Before Scrollbars",
+        "avoid": [
+          "A block scrolling sideways while empty margin sits beside it",
+          "A prose measure imposed on content it was never sized to hold",
+          "A scrollbar chosen to keep the grid tidy",
+          "Lines authored with no column in mind, left for the scrollbar to absorb"
+        ],
+        "solution": "A measure that fits prose does not automatically fit a diagram, a table, or a terminal transcript. When such a block would overflow its column and the page still has width to spare, the block takes that width -- widening about the same axis as the text, so the reading line never moves -- and it scrolls only once the page itself has run out. Two duties follow and both are owed: the layout must let these blocks breathe while the width exists, and the author must size the lines to the column, so the widening stays exceptional rather than routine. Never prefer a tidy layout to a usable one.",
+        "why": "A reader can see the empty space beside a scrollbar. Making them drag through content that would have fitted says plainly that the layout matters more than what it carries.",
+        "derived_from": "operator",
+        "enforcement": "tool",
+        "invariant": true,
+        "evidence": "Author observation on this site: the tutorial's terminal transcript scrolled horizontally inside the 48rem prose column on a 1490px window -- with roughly 700px of page sitting unused on either side. tools/legibility-audit.html now flags any block that scrolls while the page has room."
+      },
+      {
+        "id": "the-reading-arc",
+        "number": "123",
+        "title": "The Reading Arc",
+        "avoid": [
+          "A page of twenty sections where the reader forgets the first by the tenth",
+          "Walls of text past a thousand characters without a break",
+          "Depth placed before orientation -- specifics ahead of the general picture",
+          "Two messages fighting for one section"
+        ],
+        "solution": "A reading surface has a budget: roughly ten to twelve sections, ordered general to specific and quick to dense -- skimmable value on top, depth below, links out for the rest. Each section carries one message. A paragraph that passes roughly eight hundred characters unbroken has become a wall: cut it to a lead plus a link. The budget is not a limit on content; it is a limit on what one page may demand of one sitting.",
+        "why": "A reader who has met twenty sections remembers none of them. Arriving cold, they owe you nothing -- the arc must earn the next section each time.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Refine site (June 2026): the homepage carried ~22 subsections and was judged 'text-heavy, dense, poor for onboarding' by its own author; rebuilt to a tight ~7-beat arc, general to specific, with depth moved to explainer pages."
+      }
+    ]
+  },
+  "set4": {
+    "title": "Set 4: The Eternal Scroll",
+    "description": "Embracing the web's native behavior instead of fighting it with desktop emulation",
+    "rules": [
+      {
+        "id": "the-law-of-the-eternal-scroll",
+        "number": "12",
+        "title": "The Law of the Eternal Scroll",
+        "avoid": [
+          "Fixed-height containers with internal scrollbars",
+          "Tabbed interfaces that hide content",
+          "Modal dialogs for multi-step processes",
+          "Pagination for data that should be continuous"
+        ],
+        "solution": "The browser is not a monitor; it is a viewport into a continuous canvas. The scroll is the navigator. Do not fight the scroll bar. Let content breathe vertically. Users would rather scroll for 2 seconds than click a tab and wait 500ms for a layout shift.",
+        "why": "The scroll is the web's native, undo-free navigation; fighting it buys jank with complexity.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "curator": "a single river",
+          "guardian": "multi-column telemetry is lawful"
+        }
+      },
+      {
+        "id": "sticky-context-not-sticky-chrome",
+        "number": "13",
+        "title": "Sticky Context, Not Sticky Chrome",
+        "avoid": [
+          "Sticky sidebars that consume screen space",
+          "Persistent toolbars that never scroll away",
+          "Fixed headers that obscure content"
+        ],
+        "solution": "Only navigation and action bars should stick; everything else moves with the user's focus. The North Star (primary navigation) and Action Bar (Save/Submit) remain visible while scrolling, but content flows naturally.",
+        "why": "What follows the user should be orientation and exits, not furniture.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "no-app-squeezing",
+        "number": "14",
+        "title": "No App-Squeezing",
+        "avoid": [
+          "overflow: auto on table containers",
+          "height: 400px on data grids",
+          "Any pattern that creates nested scrollbars"
+        ],
+        "solution": "Never force a complex business table into a fixed-height container. If a table has 500 rows, let the whole page grow. The Eternal Scroll is the primary navigation mechanism. Internal scrollbars are a failure of information architecture.",
+        "why": "Nested scrollbars hide data and steal the wheel; the page already knows how to grow.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set5": {
+    "title": "Set 5: Interaction Principles",
+    "description": "How Zui ensures every interaction feels intentional and predictable",
+    "rules": [
+      {
+        "id": "no-surprises",
+        "number": "15",
+        "title": "No Surprises",
+        "avoid": [
+          "Unexpected popups",
+          "Sudden layout shifts",
+          "Automatic navigation without explicit user intent"
+        ],
+        "solution": "No unexpected popups. No sudden layout shifts. No automatic navigation without explicit intent. If something moves, the user must have caused it. Reserve space for dynamic content to prevent displacement.",
+        "why": "Motion the user did not cause is motion the user must now explain.",
+        "derived_from": "calm",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "intentional-clicks",
+        "number": "16",
+        "title": "Intentional Clicks",
+        "avoid": [
+          "\"Mystery meat\" navigation (unclear clickable areas)",
+          "Buttons that look like links and vice versa",
+          "Inconsistent interaction patterns"
+        ],
+        "solution": "Buttons look like buttons. Links look like links. Nothing else behaves like either. Every interactive element must have clear visual affordance. Users should never wonder \"Is this clickable?\"",
+        "why": "Affordance is a promise; a control that lies about being one breaks trust cheaply.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "disable-loud-interactions",
+        "number": "17",
+        "title": "Disable Loud Interactions",
+        "avoid": [
+          "Hover animations for decoration",
+          "Bouncing, shaking, or pulsing elements",
+          "Transitions that draw attention to themselves"
+        ],
+        "solution": "No hover animations for decoration. No bouncing, shaking, pulsing. Transitions (if any) must be subtle and fast. If animation draws attention to itself, remove it.",
+        "why": "Animation that celebrates itself interrupts the thought it decorated.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-speed-of-thought",
+        "number": "18",
+        "title": "The Speed of Thought",
+        "avoid": [
+          "Fake progress indicators",
+          "Delayed feedback on user actions",
+          "Optimistic UI that lies about success"
+        ],
+        "solution": "Optimistic UI vs. Truth: Never show \"Success\" until the stzWeb execution is confirmed. Calm is built on Trust. A fake progress bar is a lie. The 100ms Rule: Actions must acknowledge the user within 100ms (a highlight or state change), even if the backend takes longer.",
+        "why": "Feedback within 100ms keeps causality felt; a fake success is a debt the truth collects later.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "physicality-of-elements",
+        "number": "19",
+        "title": "Physicality of Elements",
+        "avoid": [
+          "Tiny clickable targets",
+          "Nested modals that feel like traps",
+          "Unclear boundaries between interactive zones"
+        ],
+        "solution": "Predictable Targets: Buttons in business apps should have a minimum hit area of 44x44 pixels. The \"Gravity\" of Modals: Modals should be rare. If a task takes more than 3 steps, it deserves its own page, not a \"nested box\" that feels like a trap.",
+        "why": "Targets sized for fingers, and pages instead of trap-modals, respect motor reality.",
+        "derived_from": "operator",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "no-dark-pattern",
+        "number": "89",
+        "title": "No Dark Pattern",
+        "avoid": [
+          "Pre-checked consent",
+          "Confirm-shaming (\"No, I hate saving money\")",
+          "Guilt-wording on decline paths",
+          "Disguised advertisements"
+        ],
+        "solution": "Manipulation is structurally impossible, not merely discouraged: confirmation texts are declared fields, consent defaults to no, and the decline path is as calm and reachable as the accept path.",
+        "why": "Declared confirmation text makes manipulation unparseable, not just discouraged.",
+        "derived_from": "authority",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Zin zui-book, Law 9 (No Dark Pattern)."
+      },
+      {
+        "id": "the-verb-on-the-button",
+        "number": "106",
+        "title": "The Verb on the Button",
+        "avoid": [
+          "Toggles labeled with the current state",
+          "Toggles labeled with a target state and no verb",
+          "Bare nouns as action labels",
+          "Controls whose click outcome must be guessed"
+        ],
+        "solution": "Every action control states the action it performs, led by a verb: 'Apply dark mode', 'Record a deposit', 'Delete invoice'. A toggle labeled with a state -- 'Dense view', 'Dark' -- is a quiz: the user cannot tell whether it describes what is or promises what will be. Errors already carry a fixing verb (Rule 40); controls carry an acting verb.",
+        "why": "A label without a verb makes the user guess whether it describes the present or promises a future; a verb collapses the ambiguity in one word.",
+        "derived_from": "intent",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "Amended in v2.2 after the reader's own mode pills were labeled with states ('Dense view') and the author could not tell what a click would do. Same-day failure analysis, per Article VII."
+      },
+      {
+        "id": "nothing-floats-over-the-reading",
+        "number": "110",
+        "title": "Nothing Floats Over the Reading",
+        "avoid": [
+          "Floating action buttons parked over the content",
+          "Fixed pickers, toggles, or badges that cover text",
+          "Cookie bars and chat bubbles anchored to the viewport",
+          "Sticky panels that hide what the reader was reading"
+        ],
+        "solution": "Persistent controls never float above the content. Anything that stays on screen -- pickers, toggles, actions, notices -- belongs in the page's own structure: a bar at the top or the bottom, where it occupies its own space and hides nothing. Such a bar may stick when it is navigation or action (Rule 13); it still holds a place in the layout rather than hovering over the column. The only lawful overlays are transient and asked for: an undo toast that expires (Rule 79), and a focus layer the operator opened and can close with Esc (Rules 51-53). A bar costs a strip of space once; a floating object costs a piece of the content forever.",
+        "why": "Whatever floats is covering something -- and it covers the one thing the reader cannot know they are missing.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Author correction on this site: the style picker floated bottom-right over the text of every page; it now sits at the far right of the bottom bar."
+      },
+      {
+        "id": "motion-reports-it-never-decorates",
+        "number": "112",
+        "title": "Motion Reports, It Never Decorates",
+        "avoid": [
+          "Smooth-scrolling to an anchor or a menu selection",
+          "Fades, slides, and reveals when content arrives",
+          "Transitions that delay a state the operator already asked for",
+          "Any movement that would look the same if nothing had changed"
+        ],
+        "solution": "Movement is allowed only when it reports a change the operator caused and might otherwise miss -- a value updating, a step becoming active, a toast arriving with its undo. Everything else is instant: selecting a menu item, following a link or an anchor, opening a panel, switching a vibe. Animated scrolling is the clearest case -- the operator asked to be somewhere, and the interface makes them watch a journey they did not request. If motion would look the same whether or not anything changed, it is decoration; remove it.",
+        "why": "Decorative motion spends the operator's attention on the interface itself -- and every frame of it is time between asking and arriving.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Author correction on this site: the reader scrolled smoothly when a set was chosen from its menu -- an animation nobody asked for, between a click and its answer."
+      }
+    ]
+  },
+  "set6": {
+    "title": "Set 6: Conversational Momentum",
+    "description": "Treating workflows as conversations between user intent and system response",
+    "rules": [
+      {
+        "id": "linear-chronology",
+        "number": "20",
+        "title": "Linear Chronology",
+        "avoid": [
+          "Disconnected screens with no history",
+          "Workflows that hide previous steps",
+          "Dead ends with no suggested next action"
+        ],
+        "solution": "Arrange complex workflows like a chat thread. The history of the current task should be visible \"above\" the current action. The UI should always suggest the most logical next step at the bottom of the current view. Never leave the user at a dead end.",
+        "why": "Work is a conversation; hiding its history forces the user to hold it in their head.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "streaming-states",
+        "number": "21",
+        "title": "Streaming States",
+        "avoid": [
+          "Blank loading screens",
+          "Static placeholders that don't indicate progress",
+          "Hidden processing states"
+        ],
+        "solution": "If a process takes time, render the structure immediately. Use \"Pulse\" states or incremental loading to show that the system is \"listening\" or \"thinking.\" Users should always know the system is working.",
+        "why": "A structure that appears instantly and fills honestly tells the user the system heard them.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-last-word-rule",
+        "number": "22",
+        "title": "The Last Word Rule",
+        "avoid": [
+          "Workflows that end abruptly",
+          "No indication of completion status",
+          "Missing next-step guidance"
+        ],
+        "solution": "In any workflow, the UI should always suggest the most logical next step at the bottom of the current view. Never leave the user at a dead end. Completion should feel like a natural conclusion, not an abrupt stop.",
+        "why": "Every ending is a beginning the UI already knows; dead ends transfer the routing job to the human.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set7": {
+    "title": "Set 7: Input-Centricity & Navigation",
+    "description": "Prioritizing command over exploration, intent over location",
+    "rules": [
+      {
+        "id": "the-omnibar",
+        "number": "23",
+        "title": "The Omnibar",
+        "avoid": [
+          "Deep menu hierarchies",
+          "Sidebar navigation that wastes screen space",
+          "Click-heavy workflows for common actions"
+        ],
+        "solution": "Navigation is on-demand, not persistent. The Omnibar (Ctrl+K) is the primary interface for navigation and actions. Search over click. Action over location. Typing \"Inv\" to find \"Invoices\" is faster than clicking Accounting > Sales > Invoices.",
+        "why": "Typing intent beats navigating taxonomy; experts must have the faster path.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "navigation-as-orientation",
+        "number": "24",
+        "title": "Navigation as Orientation",
+        "avoid": [
+          "Mega-menus with dozens of options",
+          "Navigation items without clear visual hierarchy",
+          "Unclear indication of current location"
+        ],
+        "solution": "Navigation should answer: \"Where am I?\" Not: \"What else can I click?\" Avoid mega-menus. Prefer clear sections with semantic grouping. Current section should be highlighted with the primary color and background.",
+        "why": "Navigation answers where am I before what else exists.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-breadcrumb-trail",
+        "number": "25",
+        "title": "The Breadcrumb Trail",
+        "avoid": [
+          "Hidden navigation paths",
+          "No way to backtrack in complex workflows",
+          "Breadcrumb trails that aren't clickable"
+        ],
+        "solution": "In complex business logic, users often get \"lost in the stacks.\" The North Star: The top-left of the app should always indicate the \"Root\" and the \"Path.\" Every segment should be a clickable link that resets the \"Context\" of the page. This prevents the user from feeling \"trapped\" in a deep logic branch.",
+        "why": "Deep logic needs a visible way back, or depth becomes fear.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-back-button-is-holy",
+        "number": "26",
+        "title": "The Back Button is Holy",
+        "avoid": [
+          "Breaking browser back button functionality",
+          "No hash-based navigation for deep links",
+          "Dead ends with no escape path"
+        ],
+        "solution": "Never break the browser's back button. If you change the view significantly, update the window.location.hash so the user can \"return\" in time. Every sub-page or focus view must have a clear \"Exit\" path in the top-left or bottom-center.",
+        "why": "The back button is the user's oldest contract with the web; breaking it breaks the web.",
+        "derived_from": "reversibility",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "horizontal-menu-discipline",
+        "number": "27",
+        "title": "Horizontal Menu Discipline",
+        "avoid": [
+          "Overcrowded top navigation bars",
+          "Dropdown menus with multiple levels",
+          "Navigation items without clear visual hierarchy",
+          "Horizontal menus that wrap to multiple lines",
+          "Missing keyboard navigation support"
+        ],
+        "solution": "Horizontal menus should be limited to 6-8 primary items maximum. Use semantic grouping with clear visual separation. Current section should be highlighted with the primary color. Avoid dropdowns; if needed, use the Omnibar instead. The horizontal menu serves as orientation (\"Where am I?\"), not exploration (\"What else can I do?\"). Menus must never wrap to multiple lines and must support full keyboard navigation (Tab, Enter, arrows); on small viewports they collapse into the Omnibar or a scrollable row.",
+        "why": "A menu that wraps, hides levels, or forgets the keyboard stops orienting and starts testing.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "absorbs": [
+          "35"
+        ]
+      },
+      {
+        "id": "the-trail-is-always-shown",
+        "number": "108",
+        "title": "The Trail Is Always Shown",
+        "avoid": [
+          "Breadcrumbs that appear only on deep pages",
+          "Section landings with no path of their own",
+          "Trails whose ancestors are not clickable",
+          "Position shown by highlight alone, with no way back"
+        ],
+        "solution": "Every screen shows its full path from the root, including top-level pages and section landings -- and every ancestor in it is a link. The site root is the single exception, and only because it has no ancestors. A trail that appears only when the user is already lost is furniture, not navigation; shown always, it lets them move back and forth freely and never wonder where they are. Mark it as a trail, not as a sentence: nav[aria-label=\"Breadcrumb\"].",
+        "why": "A path shown only in the depths teaches the user to fear depth; shown always, it makes the whole structure walkable in both directions.",
+        "derived_from": "visible",
+        "enforcement": "tool",
+        "invariant": true,
+        "evidence": "Author observation on this site: the constitution's pages carried a trail while the top-level pages did not, so orientation depended on how deep you happened to be.",
+        "lint": "checked by tools/legibility-audit.html: every page must carry a breadcrumb whose first step returns to the root"
+      },
+      {
+        "id": "the-path-shows-every-depth",
+        "number": "115",
+        "title": "The Path Shows Every Depth",
+        "avoid": [
+          "A path that stops at the page you are on, hiding everything beneath it",
+          "A branch whose lower levels are visible only after you guess and click",
+          "A path that changes shape as you move along it",
+          "Hover styled like the current position -- a place you are not, painted as though you were"
+        ],
+        "solution": "A path is a map of the branch, not a record of the walk. It names every depth of that branch -- the levels above the page and the levels below it -- so a reader standing anywhere sees the whole picture, including where they have not yet been. Where a depth holds several pages, it shows them all; they are the alternatives at that level, and hiding them makes the reader guess. The path therefore reads the same at every point along it: only the highlight moves. The top depth belongs to the main menu, which already spells it out; everything under it belongs to the path, which is the only surface that shows it. Mark the current position by colour alone, and leave hover unstyled -- the pointer already becomes a hand, and repainting a step in the current-position colour claims 'you are here' about a place the reader is not.",
+        "why": "A path that only looks backwards tells the reader where they have been, which they already know. What they do not know is what lies below -- and a branch whose depths appear one click at a time can only be learned by wandering.",
+        "derived_from": "visible",
+        "enforcement": "tool",
+        "invariant": true,
+        "evidence": "Author observation on this site: the Constitution index showed 'StzWeb > The Constitution' and stopped, so the Reader, the Gotchas and the Site Audit -- the three pages that live beneath it -- were invisible to anyone standing on their parent. The site audit now compares the path of every page that names another; they must read the same."
+      }
+    ]
+  },
+  "set8": {
+    "title": "Set 8: Forms (Critical Zui Zone)",
+    "description": "Treating forms as conversations, not traps",
+    "rules": [
+      {
+        "id": "forms-as-conversations",
+        "number": "28",
+        "title": "Forms as Conversations",
+        "avoid": [
+          "Showing all fields at once",
+          "Hiding validation until submit",
+          "Using accusatory language for errors"
+        ],
+        "solution": "One question at a time when possible. Labels always visible (never placeholder-only). Errors shown near the field with clear pathfinding language. Validation happens early and locally. The form guides the user forward like a conversation, not an interrogation.",
+        "why": "A form is the system asking; interrogation posture produces errors and dread.",
+        "derived_from": "intent",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "honest-validation",
+        "number": "29",
+        "title": "Honest Validation",
+        "avoid": [
+          "Validating only on submit",
+          "Generic error messages like \"Invalid input\"",
+          "No indication of required fields"
+        ],
+        "solution": "Validate as early as possible. Never wait until \"Submit\" to reveal obvious issues. Error messages explain what to do, not what went wrong. Bad: \"Invalid input\". Good: \"This field cannot be empty\" or \"We require a 10-digit phone number to proceed.\"",
+        "why": "The earliest honest no is the kindest one.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-socratic-method",
+        "number": "31",
+        "title": "The Socratic Method",
+        "avoid": [
+          "Impersonal field labels (\"Name\")",
+          "No context for complex inputs",
+          "Assuming user knows business terminology"
+        ],
+        "solution": "Ask, Don't Command: Instead of a label saying \"Name,\" consider \"What is the client's name?\" for complex onboarding. Provide contextual help that explains why the information is needed.",
+        "why": "Questions carry context that labels drop.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "smart-defaults",
+        "number": "32",
+        "title": "Smart Defaults",
+        "avoid": [
+          "Forcing users to re-enter known information",
+          "Ignoring previous selections",
+          "No memory of user preferences"
+        ],
+        "solution": "A Calm UI remembers. If a user always selects \"USD,\" don't make them select it again. Defaults are an act of service. Pre-fill known values and remember user preferences across sessions.",
+        "why": "Re-asking what the system knows tells the operator their time is worthless.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set9": {
+    "title": "Set 9: Menu Ergonomics",
+    "description": "Principles for designing navigational menus that respect cognitive load and screen real estate",
+    "rules": [
+      {
+        "id": "the-25-rule",
+        "number": "34",
+        "title": "The 25% Rule",
+        "avoid": [
+          "Narrow sidebars that truncate long menu items",
+          "Wide sidebars that waste valuable screen real estate",
+          "Fixed-width menus that don't adapt to content",
+          "Non-resizable navigation panels"
+        ],
+        "solution": "Navigation sidebars should occupy exactly 25% of the viewport width by default. This provides sufficient space for hierarchical navigation while preserving 75% of the screen for primary content. The boundary must be resizable via mouse drag, allowing users to adjust based on their current task. When collapsed, the menu should retain its structural hierarchy and expand on hover or click without losing context.",
+        "why": "A sidebar that cannot resize serves the designer's monitor, not the operator's task.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "curator": "resizable sidebar",
+          "keyboard-first": "may collapse behind the Omnibar"
+        }
+      },
+      {
+        "id": "ephemeral-controls",
+        "number": "36",
+        "title": "Ephemeral Controls",
+        "avoid": [
+          "Persistent action buttons for every row",
+          "Cluttered interfaces with too many visible controls",
+          "Controls that compete with primary content"
+        ],
+        "solution": "Don't show \"Edit/Delete/Export\" buttons for every row in a table. Show them only when a row is selected or hovered. This reduces the \"Visual Noise Floor\" and keeps attention on the data, not the controls.",
+        "why": "Controls for every row shout; controls on demand whisper.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-menu-tells-the-truth-about-the-tree",
+        "number": "116",
+        "title": "The Menu Tells the Truth About the Tree",
+        "avoid": [
+          "A child standing in the main menu beside its own parent, as an equal",
+          "A menu order that puts a page before the section it belongs to",
+          "Two entries at the same level that are not at the same level in the application",
+          "A menu grown by addition -- every page someone wanted promoted, promoted",
+          "The same page called one thing in the menu and another in its path"
+        ],
+        "solution": "A menu is not a list of favourites; it is a claim about how the thing is built. Every entry must sit at the level the menu puts it at, and in the order the structure implies -- a child never stands beside its parent, and a page never precedes the section that contains it. When a page matters but belongs inside a section, the answer is to make the section's path show it (Rule 115), not to promote the page. That is what keeps the menu short: the top level names the whole of the application once, and the path opens each part. A menu that grows by promotion teaches the operator a structure the software does not have, and every wrong model they build from it costs them later. And the entry must call the page what the page calls itself: a menu label and a path label that disagree are one page wearing two names, which the operator must learn twice and match by guesswork.",
+        "why": "People navigate from the model the interface hands them. A menu that contradicts the real structure does not merely mislead once -- it installs a wrong map, and the operator keeps paying for it at every turn.",
+        "derived_from": "visible",
+        "enforcement": "tool",
+        "invariant": true,
+        "evidence": "Author observation on this site: 'Gotchas' stood in the main menu beside 'Constitution', though it is a page inside the Constitution -- and the reading path numbered it step 6, one before its own parent at step 7. The menu is now eight top-level stops; the Gotchas is reached from the Constitution's path, and the reading path renumbered to match the tree. A later pass found the second half of the same defect: the menu said Why, Story, Constitution while the path said Why StzWeb, The Story, The Constitution. One name each now, checked by the same tool."
+      },
+      {
+        "id": "the-second-level-turns",
+        "number": "120",
+        "title": "The Second Level Turns",
+        "avoid": [
+          "Two horizontal tab rows stacked one over the other",
+          "Sub-navigation styled identically to its parent navigation",
+          "An operator who cannot tell which row owns the page they are on"
+        ],
+        "solution": "When navigation nests, the second level changes axis: the first level runs horizontal, the second runs vertical. Two stacked horizontal rows of tabs are indistinguishable at a glance -- the operator must read both rows and reconstruct the hierarchy in their head. The turn of axis is the hierarchy, made visible without a single label.",
+        "why": "Orientation should be carried by the geometry, not reconstructed from it.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "ZinBank Studio (April 2026): an agent sheet's surfaces (form / .zin / test bench) and the Settings sub-sections were second-level tabs drawn horizontally under horizontal main tabs; both were turned vertical and the confusion ended."
+      }
+    ]
+  },
+  "set10": {
+    "title": "Set 10: stzErrors Philosophy",
+    "description": "Treating errors as navigation corrections, not catastrophic interruptions",
+    "rules": [
+      {
+        "id": "errors-as-events",
+        "number": "37",
+        "title": "Errors as Events",
+        "avoid": [
+          "Error messages that blame users",
+          "Layout shifts when errors appear",
+          "Modal dialogs for validation errors"
+        ],
+        "solution": "An error is not a stop sign; it is a navigation correction. Reserve space for errors to prevent layout shifts. Classify by weight: Hint (neutral), Warning (ochre), Error (oxblood). Use non-accusatory \"pathfinding\": \"We require a 10-digit phone number to proceed\" instead of \"Invalid Input.\"",
+        "why": "An error is a course correction; treating it as catastrophe teaches fear of the tool.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "zero-displacement",
+        "number": "38",
+        "title": "Zero Displacement",
+        "avoid": [
+          "Errors that push content down",
+          "Dynamic layout shifts on validation",
+          "Missing reserved space for error messages"
+        ],
+        "solution": "An error must never \"shove\" the UI. Layout shifts cause micro-frustration and break the user's ocular \"groove.\" Reserved Space: Always reserve a 1.2rem space below inputs for potential messages. Use visibility: hidden rather than display: none. The \"Ghost\" Message: If no error exists, the space is empty but present. When an error arrives, it fades in.",
+        "why": "Layout shifts break the ocular groove; reserved space keeps the world still.",
+        "derived_from": "calm",
+        "enforcement": "machine",
+        "lint": "html lint: an <img> without width+height reserves no space -- the layout will shift",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "classification-by-weight",
+        "number": "39",
+        "title": "Classification by Weight",
+        "avoid": [
+          "Using red for all errors",
+          "No distinction between warnings and critical errors",
+          "Over-alarming for minor issues"
+        ],
+        "solution": "Errors are classified to manage the user's adrenaline: Hint (Neutral): \"Did you mean 'Street' instead of 'St'?\" (Subtle gray). Warning (Ochre): \"This client already has an open invoice. Proceed anyway?\" (Cautionary, not blocking). Error (Oxblood): \"The database rejected this date format.\" (System failure, needs fix).",
+        "why": "Adrenaline should scale with stakes; one red for everything cries wolf.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "non-accusatory-pathfinding",
+        "number": "40",
+        "title": "Non-Accusatory Pathfinding",
+        "avoid": [
+          "\"Invalid Input\" messages",
+          "Technical jargon in error messages",
+          "No clear resolution path",
+          "Blaming language (\"You entered invalid data\")",
+          "Red text that \"screams\" at the user"
+        ],
+        "solution": "Bad: \"Invalid Input.\" (Blames the user). stzWeb: \"We require a 10-digit phone number to proceed.\" (Explains the system's requirement). The Rule: Every error message must contain a verb that tells the user how to fix it.",
+        "why": "The system failed to understand -- saying so, with a verb that fixes it, keeps dignity and momentum.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "absorbs": [
+          "30"
+        ]
+      },
+      {
+        "id": "validation-on-blur",
+        "number": "41",
+        "title": "Validation on Blur",
+        "avoid": [
+          "Validating while user is still typing",
+          "Errors appearing before field loses focus",
+          "Interrupting user flow with premature validation"
+        ],
+        "solution": "Validation should happen when the field loses focus (blur), not while typing. As soon as the user starts typing in a field with an error, the error message should fade out. Give them the benefit of the doubt that they are fixing it.",
+        "why": "Correcting mid-keystroke is interruption; blur is the polite moment to speak.",
+        "derived_from": "calm",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "error-proximity",
+        "number": "86",
+        "title": "Error Proximity",
+        "avoid": [
+          "Error summaries far from their fields",
+          "Toasts for field-level validation",
+          "Global banners for local mistakes"
+        ],
+        "solution": "An error appears beside the element that caused it, in the reserved space that keeps the layout still. Summaries may aggregate, but the correction happens where the mistake lives.",
+        "why": "An error far from its cause is a scavenger hunt.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "evidence": "Zin zui-book, Law 6 (Error Proximity)."
+      }
+    ]
+  },
+  "set11": {
+    "title": "Set 11: Icons & Illustrations",
+    "description": "Guidelines for using visual elements without creating noise or confusion",
+    "rules": [
+      {
+        "id": "icons-are-optional",
+        "number": "42",
+        "title": "Icons Are Optional",
+        "avoid": [
+          "Icons without text labels",
+          "Metaphor-heavy icons that require guessing",
+          "Inconsistent icon styles across the application"
+        ],
+        "solution": "Use icons only when they reduce reading. Never use icons instead of text. Avoid metaphor-heavy icons. Text is calmer than guessing. If an icon doesn't immediately communicate its purpose, add a text label.",
+        "why": "An icon without a label is a quiz.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "illustrations-must-be-structural",
+        "number": "43",
+        "title": "Illustrations Must Be Structural",
+        "avoid": [
+          "Decorative mascots or characters",
+          "Animated illustrations that distract",
+          "Illustrations that don't explain concepts"
+        ],
+        "solution": "Diagrams > mascots. Explanatory > decorative. Static > animated. If it doesn't explain, it doesn't belong. Illustrations should clarify complex concepts, not decorate the interface.",
+        "why": "If it does not explain, it competes.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set12": {
+    "title": "Set 12: Defaults Matter",
+    "description": "Why strong defaults create better experiences than excessive customization",
+    "rules": [
+      {
+        "id": "strong-defaults-over-customization",
+        "number": "44",
+        "title": "Strong Defaults Over Customization",
+        "avoid": [
+          "Too many configuration options",
+          "Forcing users to make trivial decisions",
+          "Customization before clarity"
+        ],
+        "solution": "Calm UI prefers: strong defaults, minimal theming, fewer knobs. Customization is allowed after clarity. Most users should never need to change defaults. The system should work perfectly out of the box for 95% of use cases.",
+        "why": "Every knob transfers a design decision to someone hired to do other work.",
+        "derived_from": "operator",
+        "enforcement": "machine",
+        "lint": "manifest lint: a target using an unknown zui profile (curator | guardian | touch)",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set13": {
+    "title": "Set 13: Widget Selection",
+    "description": "Opinionated selection of business-focused widgets with clear use cases",
+    "rules": [
+      {
+        "id": "text-editing-auto-expanding-plaintext",
+        "number": "45",
+        "title": "Text Editing: Auto-expanding Plaintext",
+        "avoid": [
+          "WYSIWYG editors with 20+ icons",
+          "Modal dialogs for text editing",
+          "Separate \"Save\" buttons for text fields"
+        ],
+        "solution": "For business notes and descriptions: Auto-expanding plaintext or Markdown fields. Editing happens in-place. No \"Save\" button for text; we use \"Blur-to-Save.\" Assumes trust in the user's intent. Markdown separates structure of thought from decoration.",
+        "why": "In-place plaintext with blur-to-save keeps writing where thinking is.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "date-selection-semantic-text-input",
+        "number": "46",
+        "title": "Date Selection: Semantic Text Input",
+        "avoid": [
+          "Calendar pickers requiring 4+ clicks",
+          "Forcing date format compliance without guidance",
+          "No support for natural language dates"
+        ],
+        "solution": "A text field that accepts ISO (YYYY-MM-DD) or semantic shortcuts (\"today\", \"+7d\"). A small calendar icon exists only as a fallback. Tip text: \"Type '+30' for thirty days from now.\" Sequence over grid: Typing is faster than clicking for power users.",
+        "why": "Typing 'today' beats four clicks in a grid; dates are language before they are calendars.",
+        "derived_from": "operator",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "numbers-monospaced-input",
+        "number": "47",
+        "title": "Numbers: Monospaced Input",
+        "avoid": [
+          "Variable-width fonts for currency",
+          "Left-aligned numeric columns",
+          "No unit suffixes for context"
+        ],
+        "solution": "Use monospaced fonts with tabular-nums (tnum) feature for all numbers and currency. Always right-align numeric columns. Include unit suffixes (\"USD\", \"%\") for immediate context. The Alignment Law: Numbers must use tabular-nums for vertical comparison.",
+        "why": "Tabular digits are how columns admit comparison.",
+        "derived_from": "operator",
+        "enforcement": "machine-later",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "tables-high-density-ledger",
+        "number": "48",
+        "title": "Tables: High-Density Ledger",
+        "avoid": [
+          "Card-based layouts for tabular data",
+          "Excessive padding that wastes space",
+          "Zebra striping on small tables"
+        ],
+        "solution": "The Ledger: High-density row-striped grid for transaction logs and client lists. Low-contrast borders prevent the \"jail-cell\" effect. Action buttons remain hidden until row hover. The 8-Hour Test: Designed for extended viewing without eye strain.",
+        "why": "Operators read tables for eight hours; density with low noise is mercy, not clutter.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "guardian": "the home vibe of the high-density ledger"
+        }
+      },
+      {
+        "id": "calendar-vertical-agenda-view",
+        "number": "49",
+        "title": "Calendar: Vertical Agenda View",
+        "avoid": [
+          "Monthly grid views for task management",
+          "Cluttered date cells with too much information",
+          "No focus on current tasks"
+        ],
+        "solution": "Vertical Agenda View for scheduling and audit trails. Linearity: Business is a sequence of events. Monthly grids are for \"planning\"; Agendas are for \"doing.\" Show only relevant events with clear time indicators.",
+        "why": "Business time is a sequence; grids are for planning, agendas for doing.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "charts-tufte-style-sparklines",
+        "number": "50",
+        "title": "Charts: Tufte-style Sparklines",
+        "avoid": [
+          "3D pie charts",
+          "Excessive legends and axes",
+          "Bright colors that compete for attention"
+        ],
+        "solution": "Tufte-style Sparklines for trend analysis and KPIs. Data-to-Ink Ratio: No 3D, no legends, no axes unless strictly required for truth. Monochrome with single accent color for emphasis. No pie charts—bar charts enable direct comparison. If a user needs exact numbers, they hover.",
+        "why": "Ink that is not data is noise; comparison beats decoration.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "a-card-is-not-a-button",
+        "number": "119",
+        "title": "A Card Is Not a Button",
+        "avoid": [
+          "Clickable tiles styled like information cards",
+          "A KPI card with a chevron pretending to be read-only",
+          "Repetitive rows with identical attributes laid out as a grid of cards",
+          "A decorative pipeline strip that looks pressable"
+        ],
+        "solution": "Form follows role, and each widget plays exactly one. A card is a read-only indicator -- KPI, summary, state -- with no call to action inside it. An action takes the shape of a button or a link: distinct background, honest affordance. And repetitive data with coherent attributes is a table, never a card grid -- five records with the same five fields are rows, whatever the fashion says. A surface that blurs these roles makes the operator test every element to learn what it does.",
+        "why": "When everything might be pressable, the operator must poke the interface to learn it -- and an interface learned by poking is an interface that was never read.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "ZinBank (April 2026): the L0-L4 asset ladder was drawn as five aligned cards and was unreadable as the scale it is; redrawn as a table (level / name / description / assets). Card-styled buttons were rebuilt as buttons. Promoted to a generalisable ZinBank UX rule."
+      }
+    ]
+  },
+  "set14": {
+    "title": "Set 14: Focus Mode",
+    "description": "Visual isolation for deep concentration on critical tasks",
+    "rules": [
+      {
+        "id": "the-cognitive-tunnel",
+        "number": "51",
+        "title": "The Cognitive Tunnel",
+        "avoid": [
+          "Modal dialogs that don't dim the background",
+          "Side panels that remain visible during focus tasks",
+          "Notifications that appear during intensive work"
+        ],
+        "solution": "Focus Mode is visual isolation. When engaged, a high-opacity scrim covers the rest of the interface. Only the active container remains at 100% opacity. Everything else is blurred and desaturated. Pointer events for the background are disabled. Esc key always exits.",
+        "why": "Focus is spatial; the world must visibly wait, not vanish.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-scrim",
+        "number": "52",
+        "title": "The Scrim",
+        "avoid": [
+          "Transparent overlays that don't obscure background",
+          "Blur effects that cause motion sickness",
+          "Inconsistent scrim opacity across the application"
+        ],
+        "solution": "The scrim should have 40% opacity with backdrop-filter: blur(8px). This creates sufficient visual separation without causing nausea. The active container should have a subtle border (2px solid primary color) and box-shadow to enhance the spotlight effect.",
+        "why": "A consistent scrim isolates without nausea and without pretending the world is gone.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "interaction-lockdown",
+        "number": "53",
+        "title": "Interaction Lockdown",
+        "avoid": [
+          "Clickable background elements during focus mode",
+          "Keyboard shortcuts that exit focus unexpectedly",
+          "No clear exit path from focus mode"
+        ],
+        "solution": "Pointer events for the background are disabled during Focus Mode. Only the focused container and its children are interactive. The Esc key is the universal exit path. A subtle \"Exit Focus (Esc)\" hint should be visible in the container header.",
+        "why": "A focus that can be escaped only by luck is a trap; Esc is the covenant.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set15": {
+    "title": "Set 15: Circadian Theming",
+    "description": "Ocular preservation through thoughtful day/night mode implementation",
+    "rules": [
+      {
+        "id": "night-mode-ocular-preservation",
+        "number": "54",
+        "title": "Night Mode Ocular Preservation",
+        "avoid": [
+          "Pure black (#000000) backgrounds",
+          "Pure white (#FFFFFF) text on dark backgrounds",
+          "High-contrast \"glowing\" colors in night mode"
+        ],
+        "solution": "Night Mode is ocular preservation, not color inversion. Use deep charcoals (#1a1a1a) instead of pure black. Use soft grays (#e0e0e0) instead of pure white. Reduce contrast ratios slightly. Desaturate warning/error colors so they don't \"glow\" painfully. Respect prefers-color-scheme but allow manual override.",
+        "why": "Night work is real work; inverted glare is not preservation.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "low-blue-law",
+        "number": "55",
+        "title": "Low-Blue Law",
+        "avoid": [
+          "Bright blue accents in night mode",
+          "Cool color temperatures that disrupt circadian rhythm",
+          "No reduction in blue light emission"
+        ],
+        "solution": "In Night Mode, shift color temperature toward warmer tones. Reduce blue light emission in accent colors. Primary color should be softer (e.g., #60a5fa instead of #3b82f6). This reduces eye strain during extended night sessions.",
+        "why": "Blue at midnight taxes the body that must return at eight.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "semantic-preservation",
+        "number": "56",
+        "title": "Semantic Preservation",
+        "avoid": [
+          "Colors that lose meaning in night mode",
+          "Inconsistent semantic mapping between themes",
+          "Accessibility contrast violations in night mode"
+        ],
+        "solution": "Warning (Gold) and Error (Oxblood) must remain recognizable but should be desaturated so they don't \"glow\" painfully. Ensure all text maintains minimum 4.5:1 contrast ratio even in night mode. Semantic meaning must be preserved across themes.",
+        "why": "Meaning must survive theming, or color was never a signal.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set16": {
+    "title": "Set 16: Visual Business Flows",
+    "description": "Representing business logic visually without cluttering the mind",
+    "rules": [
+      {
+        "id": "the-wayline",
+        "number": "57",
+        "title": "The Wayline",
+        "avoid": [
+          "Linear progress bars that hide complexity",
+          "Static flow diagrams that don't reflect current state",
+          "No interaction with flow visualization"
+        ],
+        "solution": "Business flows should be visible at the top of the \"River,\" showing where the current document sits in the grander lifecycle. Non-Blocking Logic: The flow should be visible but not obstructive. Interactive Nodes: Clicking a previous node should scroll the user back to that historical data—treating the flow as a Time-Travel Navigation tool.",
+        "why": "A document that shows its place in the lifecycle answers the meeting's first question.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "living-diagram-principle",
+        "number": "58",
+        "title": "Living Diagram Principle",
+        "avoid": [
+          "Static images of business processes",
+          "Diagrams that don't update with state changes",
+          "No connection between diagram and actual data"
+        ],
+        "solution": "Flows are \"Living Diagrams\" that reflect real-time state. Completed steps show solid lines with checkmarks. Active steps have subtle pulsing or bold borders. Future steps use dashed lines and semi-transparent text. The diagram updates automatically as the workflow progresses.",
+        "why": "A diagram that lies about state is worse than none.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "state-visualization",
+        "number": "59",
+        "title": "State Visualization",
+        "avoid": [
+          "Unclear indication of current workflow step",
+          "No visual distinction between completed and pending steps",
+          "Missing impact statements for each step"
+        ],
+        "solution": "Completed: Solid line, quiet checkmark. Active: Pulsing (subtle) or bold border—the only \"moving\" part of a Calm UI. Future: Dashed line, semi-transparent text. Impact Statement: Button shows downstream consequence (\"Approving unlocks $2M procurement budget\").",
+        "why": "The one moving element should be the one thing actually in motion -- and every button should admit its consequences.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set17": {
+    "title": "Set 17: Accessibility",
+    "description": "Accessibility as an extension of cognitive mercy",
+    "rules": [
+      {
+        "id": "screen-reader-harmony",
+        "number": "60",
+        "title": "Screen Reader Harmony",
+        "avoid": [
+          "Non-semantic HTML structure",
+          "Missing ARIA labels for interactive elements",
+          "aria-live regions that interrupt user flow"
+        ],
+        "solution": "Use proper semantic landmarks (<main>, <nav>, <section>) for screen reader navigation. Provide descriptive labels for icons and complex widgets using aria-label and aria-describedby. Use aria-live=\"polite\" for non-interrupting updates like stzErrors.",
+        "why": "The interface must speak to those who cannot see it; semantics is how.",
+        "derived_from": "operator",
+        "enforcement": "machine",
+        "lint": "html lint: <img> without alt text; inputs unnamable to assistive tech",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "contrast-legibility",
+        "number": "62",
+        "title": "Contrast & Legibility",
+        "avoid": [
+          "Insufficient color contrast ratios",
+          "Fixed font sizes (px instead of rem/em)",
+          "Text that doesn't scale with browser settings"
+        ],
+        "solution": "Maintain minimum 4.5:1 contrast ratio for text, even in night mode. Use rem and em units to respect user's browser font settings. Test with grayscale mode to ensure information hierarchy remains clear without color.",
+        "why": "Text that ignores user settings excludes the users who set them.",
+        "derived_from": "operator",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-legibility-floor",
+        "number": "105",
+        "title": "The Legibility Floor",
+        "avoid": [
+          "Body text below 1rem",
+          "Muted grays that fail 4.5:1 contrast against their background",
+          "Accent-colored text that fails contrast on light backgrounds",
+          "Meaning conveyed by faintness"
+        ],
+        "solution": "Main reading text is at least 1rem with generous line height, and never lighter than 4.5:1 against its background; long-form prose aims for 7:1. Secondary text may be quieter in size or weight -- never in legibility. If a color carries meaning, it must also carry contrast.",
+        "why": "Text you must lean into is text you will misread -- faintness is not a design language, it is a tax on every reader.",
+        "derived_from": "operator",
+        "enforcement": "tool",
+        "invariant": true,
+        "evidence": "Amended in v2.1 after the framework's own site shipped small, low-contrast muted text -- observed by the author, fixed the same day. Amendment by documented failure analysis, exactly as Article VII demands.",
+        "lint": "measured by tools/legibility-audit.html: computed size and true contrast, every text node, both vibes"
+      }
+    ]
+  },
+  "set18": {
+    "title": "Set 18: Multilingualism & Dialects",
+    "description": "Supporting linguistic and business context diversity",
+    "rules": [
+      {
+        "id": "business-dialect-switching",
+        "number": "63",
+        "title": "Business Dialect Switching",
+        "avoid": [
+          "Fixed terminology that doesn't adapt to context",
+          "No support for domain-specific language",
+          "Forcing users to learn system terminology"
+        ],
+        "solution": "A \"User\" may be a \"Client\" in a CRM module but a \"Debtor\" in a Finance module. Dynamic Aliasing: The UI should support a dictionary where labels change based on the active Business Context. Omnibar Integration: Use Ctrl+K > \"Dialect: Logistics\" to instantly rename headers across the app (e.g., \"Amount\" becomes \"Freight Cost\").",
+        "why": "Operators think in their domain's words; the UI should learn them, not teach its own.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "right-to-left-logic",
+        "number": "64",
+        "title": "Right-to-Left Logic",
+        "avoid": [
+          "Hard-coded left/right margins",
+          "Icons that don't flip in RTL mode",
+          "Text alignment that doesn't adapt"
+        ],
+        "solution": "True multilinguism requires Bi-Directional Calm. Mirroring the River: For RTL languages (Arabic, Hebrew), the 70/30 axis mirrors. The \"Ma\" (negative space) flows from the left. Logical Spacing: Use CSS Logical Properties (e.g., margin-inline-start instead of margin-left) so the \"Calm\" spacing persists regardless of direction.",
+        "why": "Calm that only flows left-to-right is not calm; it is locale bias.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "language-is-data",
+        "number": "122",
+        "title": "Language Is Data",
+        "avoid": [
+          "Strings hard-coded in markup or logic",
+          "A second language added by forking templates",
+          "Localized UI that keeps the source language's technical jargon",
+          "Strings duplicated between code and dictionary"
+        ],
+        "solution": "Every human-readable string lives in a per-language dictionary file; the code references keys, and the dictionary is the single source of truth. Adding a language -- Wolof, Hausa, Bambara, Zarma, Arabic -- means adding a file and registering a locale, never touching code. And a localized interface speaks its language whole: when the UI is French, 'workflow' is 'parcours', 'monitoring' is 'supervision', 'legacy' is 'patrimoine' -- jargon imported untranslated reserves the interface for developers and shuts out the operators it was written for.",
+        "why": "The constitution is data so the law cannot drift from the linter; language is data for the same reason -- and because the next operator's mother tongue should cost a file, not a fork.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Zin i18n decision (May 2026): English default, French first-class, any further language as a JSON dictionary -- adopted for ZinFoundry, all DRMs and all Zin products, with the French-jargon discipline (affordance, headless, drift and their kin translated) recorded alongside."
+      }
+    ]
+  },
+  "set19": {
+    "title": "Set 19: Boardroom Mode",
+    "description": "Presentation-ready views for management meetings and stakeholder reviews",
+    "rules": [
+      {
+        "id": "structural-slicing",
+        "number": "65",
+        "title": "Structural Slicing",
+        "avoid": [
+          "Projecting full application UI in meetings",
+          "Cluttered screens with navigation chrome",
+          "Tiny text unreadable from distance"
+        ],
+        "solution": "The h2 Breakpoint: Every h2 or section tag is treated as the start of a new \"Slide.\" UI Stripping: All navigation, sidebars, and \"Noise\" (buttons/inputs) are hidden. Only the Artifacts (Charts, Tables, Text) remain. Scaling for Distance: Fonts automatically scale by 150% to ensure legibility from the back of a meeting room.",
+        "why": "A meeting deserves artifacts, not chrome.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "boardroom": "this rule defines the vibe"
+        }
+      },
+      {
+        "id": "interactive-projection",
+        "number": "66",
+        "title": "Interactive Projection",
+        "avoid": [
+          "Static screenshots that can't be updated",
+          "No presenter controls during projection",
+          "Inability to highlight specific data points"
+        ],
+        "solution": "The Laser Pointer: A custom cursor (large, high-contrast) for the presenter. Live-Data Refresh: Unlike static PowerPoint, the \"Slides\" are live stzWeb widgets. You can update a value in a table, and the chart reflects it instantly during the meeting. Navigation: Arrow keys move between slides; Esc exits presentation mode.",
+        "why": "Live slides end the screenshot lie.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "boardroom": "this rule defines the vibe"
+        }
+      }
+    ]
+  },
+  "set20": {
+    "title": "Set 20: Mobile Adaptation",
+    "description": "Thumb-driven interface design for mobile business applications",
+    "rules": [
+      {
+        "id": "the-law-of-the-thumb",
+        "number": "67",
+        "title": "The Law of the Thumb",
+        "avoid": [
+          "Top navigation bars on mobile",
+          "Tiny targets requiring precision tapping",
+          "Ignoring thumb reach zones"
+        ],
+        "solution": "On mobile, the top 30% of the screen is a \"dead zone\" for the thumb. The Bottom Command Bar: The Omnibar and primary actions move to the bottom of the viewport. The Header as a Label: The top of the screen is strictly for Orientation (the Breadcrumb). It is for the eyes, not the fingers.",
+        "why": "On a phone the thumb is the pointer; the top of the screen is for eyes only.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "touch": "this rule defines the vibe"
+        }
+      },
+      {
+        "id": "bottom-sheet-focus",
+        "number": "68",
+        "title": "Bottom Sheet Focus",
+        "avoid": [
+          "Centered modals requiring reach",
+          "No gesture support for mobile interactions",
+          "Desktop patterns forced onto mobile screens"
+        ],
+        "solution": "Instead of centering a \"Modal\" in the middle of the screen (forcing a reach), we use Bottom Sheets. Gesture-Native: These are invoked from the bottom and dismissed by swiping down—mimicking the natural physics of a scroll. Include a drag handle at the top for affordance.",
+        "why": "Reaching to the center is a stretch; sheets rise to meet the thumb.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "touch": "this rule defines the vibe"
+        }
+      },
+      {
+        "id": "haptic-rhythm",
+        "number": "69",
+        "title": "Haptic Rhythm",
+        "avoid": [
+          "Overscroll bounce on internal containers",
+          "No visual feedback on touch interactions",
+          "Inconsistent tap targets across the application"
+        ],
+        "solution": "No Tiny Targets: Every interactive element has a minimum height of 48px to prevent \"fat-finger\" errors. The \"Bounce\" Limit: While we allow natural scrolling, we disable \"Overscroll-Bounce\" on internal containers to prevent the UI from feeling like it's \"shaking.\" Swipe Actions: For the Ledger (Table), implement Swipe-to-Action (e.g., swipe right to archive).",
+        "why": "Fat fingers are physiology, not user error.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "vibes": {
+          "touch": "this rule defines the vibe"
+        }
+      }
+    ]
+  },
+  "set21": {
+    "title": "Set 21: Settings",
+    "description": "Configuration interfaces that minimize cognitive overhead",
+    "rules": [
+      {
+        "id": "the-monastery-of-configuration",
+        "number": "70",
+        "title": "The Monastery of Configuration",
+        "avoid": [
+          "Deep menu hierarchies in settings",
+          "Hundreds of toggles on a single page",
+          "No search functionality for settings"
+        ],
+        "solution": "Treat settings as a Searchable Library. The Flat Hierarchy: Avoid 4-level deep menus. Use broad categories (General, Security, Billing) and let the Omnibar handle the rest. The \"Contextual Save\": For critical business settings, use a \"Pending Changes\" bar at the bottom. This prevents the micro-anxiety of wondering if a toggle was saved instantly or if it needs a \"Confirm\" click.",
+        "why": "Configuration that commits itself removes consent from change.",
+        "derived_from": "reversibility",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "the-explainer-rule",
+        "number": "71",
+        "title": "The Explainer Rule",
+        "avoid": [
+          "Toggle labels without context",
+          "Technical jargon in setting descriptions",
+          "No indication of setting impact"
+        ],
+        "solution": "Every setting must have a one-sentence \"Why.\" Bad: Enable Log Rotation [Toggle]. Calm: Log Rotation: Automatically clears history every 30 days to keep the system fast. [Toggle]. Explain the business impact, not just the technical function.",
+        "why": "A setting without a why is a dare.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set22": {
+    "title": "Set 22: Document Sanctuary",
+    "description": "Specialized views for business documents and visual artifacts",
+    "rules": [
+      {
+        "id": "the-canvas-logic",
+        "number": "72",
+        "title": "The Canvas Logic",
+        "avoid": [
+          "Cluttered document views with full navigation chrome",
+          "Inconsistent rendering between screen and print",
+          "No focus mode for document review"
+        ],
+        "solution": "When viewing a document or diagram, the UI chrome (sidebar, top-nav) should recede by 50% opacity or slide away entirely. The \"Print-First\" Design: A Purchase Order in stzWeb should look exactly the same on the screen as it does on a PDF printout. Mermaid Diagrams: Render within the \"River of Content\" but offer a \"Full Screen\" button that triggers Focus Mode.",
+        "why": "A document is a destination; chrome should bow out.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "multimedia-handling",
+        "number": "73",
+        "title": "Multimedia Handling",
+        "avoid": [
+          "Autoplaying videos or audio",
+          "Custom controls that don't match UI theme",
+          "No captions or transcripts for accessibility"
+        ],
+        "solution": "Videos or audio logs should be \"Subdued.\" No autoplay. Use custom, minimal controls that match the Monastic Palette. Always provide captions or transcripts for accessibility. Multimedia should support the business context, not distract from it.",
+        "why": "Media serves the record; autoplay serves nobody.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set23": {
+    "title": "Set 23: User Management",
+    "description": "Interfaces for managing people and permissions with dignity",
+    "rules": [
+      {
+        "id": "the-face-role-trinity",
+        "number": "74",
+        "title": "The Face & Role Trinity",
+        "avoid": [
+          "Generic user lists with only names",
+          "No visual indication of user status",
+          "Unclear role assignments"
+        ],
+        "solution": "People are not \"Records\"; they are actors in the system. The \"Face & Role\" Trinity: A user list should always show: Who (Avatar/Name), What (Role/Permissions), and Status (Active/Away/Inactive). Use status dots (green for active, gray for away) for quick scanning.",
+        "why": "People are actors, not rows; who, what, and status is the minimum dignity of representation.",
+        "derived_from": "authority",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "permission-sliders",
+        "number": "75",
+        "title": "Permission Sliders",
+        "avoid": [
+          "Grids of 50+ checkboxes for permissions",
+          "Unclear permission hierarchies",
+          "No visual indication of permission levels"
+        ],
+        "solution": "For complex business roles, use \"Access Levels\" (None → Read → Write → Admin) rather than a confusing grid of checkboxes. Visual sliders or segmented controls make permission assignment intuitive and reduce cognitive load.",
+        "why": "Fifty checkboxes hide authority; a ladder shows it.",
+        "derived_from": "authority",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      },
+      {
+        "id": "batch-action-silence",
+        "number": "76",
+        "title": "Batch Action Silence",
+        "avoid": [
+          "50 individual success notifications",
+          "No progress indication for bulk operations",
+          "Blocking UI during batch processing"
+        ],
+        "solution": "When changing roles for 50 users, show one quiet progress bar. Do not send 50 individual \"Success\" notifications. Batch operations should be efficient and unobtrusive, respecting the user's focus.",
+        "why": "Fifty successes are one event; announcing each is noise wearing a success mask.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set24": {
+    "title": "Set 24: Business Document Anatomy",
+    "description": "Standardized structure for business documents like bills and purchase orders",
+    "rules": [
+      {
+        "id": "the-trinity-structure",
+        "number": "77",
+        "title": "The Trinity Structure",
+        "avoid": [
+          "Inconsistent document layouts across the application",
+          "Missing critical document elements",
+          "Poor print formatting"
+        ],
+        "solution": "Whether it's a Bill, a Quote, or a PO, every document follows the stzWeb Trinity: The Header (Identity): Logo, Date, Document Number (Top-Left/Right). The Body (The Meat): The Table/Ledger of items. (Rule 11, The Ledger Principle, applies here). The Footer (Conclusion): Totals, Terms, and the \"Call to Action\" (Signature/Approve). This ensures consistency and professionalism across all business documents.",
+        "why": "A business document is a genre; readers navigate it by its anatomy.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set25": {
+    "title": "Set 25: The Zui Litmus Test",
+    "description": "Final validation checklist before shipping any screen or feature",
+    "rules": [
+      {
+        "id": "the-grand-unified-test",
+        "number": "78",
+        "title": "The Grand Unified Test",
+        "avoid": [
+          "Shipping interfaces without user validation",
+          "Ignoring accessibility requirements",
+          "Focusing on aesthetics over usability"
+        ],
+        "solution": "Before shipping an stzWeb module, it must pass: Context: Does terminology match the user's role (Dialect)? Continuity: Does the page flow logically from top-to-bottom (The River)? Resilience: Does it handle errors without jumping (stzErrors)? Inclusivity: Is it accessible and RTL-ready? Scale: Can it be projected in a boardroom with one button press? Additionally, ask these questions: • Can I understand this without instructions? • Is anything trying to attract attention unnecessarily? • Is the most important thing obvious in 3 seconds? • Would removing something make it calmer? • Would I enjoy maintaining this UI in 2 years? • Can a user look at this for 8 hours without a headache? • If printed in black and white, would it still be functional? • Can a new employee perform basic tasks without a manual?",
+        "why": "A law that cannot be tested at the door will be negotiated in the hallway.",
+        "derived_from": "amendment",
+        "enforcement": "judgment",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+      }
+    ]
+  },
+  "set26": {
+    "title": "Set 26: Action Reversibility",
+    "description": "Trust-based undo system that respects user flow",
+    "rules": [
+      {
+        "id": "the-undo-covenant",
+        "number": "79",
+        "title": "The Undo Covenant",
+        "avoid": [
+          "Confirmation dialogs for every deletion",
+          "No way to reverse common destructive actions",
+          "Undo buried in menus or requiring multiple steps",
+          "Breaking workflow with confirmation dialogs"
+        ],
+        "solution": "Every destructive action (delete, archive, clear) must have instant, one-click undo for 10 seconds via a toast notification. No confirmation dialogs for common operations—just immediate reversal. Show 'Deleted 3 items. [Undo]' at bottom of screen. Trust users, respect their flow. Confirmation dialogs reserved only for irreversible system-level operations (purge database, revoke credentials).",
+        "why": "Undo trusts first and interrupts never; confirmation interrupts always and trusts nothing.",
+        "derived_from": "reversibility",
+        "enforcement": "machine",
+        "lint": "declaration lint: a flow that commits to Bedrock at its FIRST step -- no review before the irreversible",
+        "invariant": true,
+        "evidence": "v1.3 practice addition; narrative constitution Art. IV.",
+        "absorbs": [
+          "33"
+        ]
+      }
+    ]
+  },
+  "set27": {
+    "title": "Set 27: Keyboard Primacy",
+    "description": "Power users should never be forced to reach for the mouse",
+    "rules": [
+      {
+        "id": "keyboard-sovereignty",
+        "number": "80",
+        "title": "Keyboard Sovereignty",
+        "avoid": [
+          "Hidden keyboard shortcuts",
+          "Illogical tab order",
+          "Critical actions only accessible via mouse",
+          "Tooltip-only shortcut documentation",
+          "outline: none on focusable elements",
+          "Missing skip links for keyboard users"
+        ],
+        "solution": "Every primary action must have a visible keyboard shortcut displayed next to it. Tab order must follow visual hierarchy (left-to-right, top-to-bottom). Arrow keys navigate tables/lists. Enter confirms, Escape cancels universally. Function keys (F1-F12) for mode switching. Shortcuts should be mnemonic where possible (Ctrl+S = Save, not Ctrl+Q). A global '?' key reveals all shortcuts in context. Focus is always visible (a clear ring, never outline: none), tab order follows the visual river, and a \"Skip to Content\" link appears on focus.",
+        "why": "The keyboard is the operator's instrument; any critical act that requires the mouse demotes the expert.",
+        "derived_from": "operator",
+        "enforcement": "machine",
+        "lint": "html lint: mouse-only clickable div/span; outline:none on focusables; positive tabindex",
+        "invariant": true,
+        "evidence": "v1.3 practice addition; Zin generalizes it to input sovereignty.",
+        "absorbs": [
+          "61"
+        ]
+      }
+    ]
+  },
+  "set28": {
+    "title": "Set 28: Time & Async Clarity",
+    "description": "Time as the operator lives it: loading states that inform, and interfaces that respect business time, not machine time",
+    "rules": [
+      {
+        "id": "loading-state-dignity",
+        "number": "81",
+        "title": "Loading State Dignity",
+        "avoid": [
+          "Generic 'Please wait...' or 'Loading...' messages",
+          "Spinners for operations under 300ms",
+          "No indication of progress for long operations",
+          "Blocking entire UI for background tasks"
+        ],
+        "solution": "Never show spinners for <300ms operations—use optimistic UI instead. For operations 300ms-3s, show subtle progress indicator with no text. For >3s operations, show progress with context: 'Processing 47 of 200 records' or 'Encrypting document (12%)'. For background tasks, use minimized progress bar at top. Always allow user to continue working—never block entire interface unless absolutely necessary. Failed operations follow Rule 38 (Zero Displacement) for error display.",
+        "why": "Waiting with information is patience; waiting without it is anxiety.",
+        "derived_from": "visible",
+        "enforcement": "judgment",
+        "evidence": "v1.3 practice addition."
+      },
+      {
+        "id": "business-time",
+        "number": "91",
+        "title": "Business Time",
+        "avoid": [
+          "Instant resets after critical actions",
+          "Machine-speed transitions the eye cannot follow",
+          "Timeouts that ignore operational reality"
+        ],
+        "solution": "Interfaces respect business time, not machine time. After a critical action, the result stays long enough to be registered; periods, cutoffs, and deadlines are shown in operational terms; long operations acknowledge the wait.",
+        "why": "Machines reset instantly; humans need a moment to vibe what just happened.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "evidence": "Narrative constitution Art. VI; Zin ZUI specification v3.0."
+      }
+    ]
+  },
+  "set29": {
+    "title": "Set 29: Declaration Governance",
+    "description": "The law reaches the declaration layer: what stzw check enforces about norms, flows, and authority. These articles existed in the corpus (as Rules 84 and 88 of an earlier numbering) and were already cited by the linter; this set canonizes them into the constitution of record.",
+    "rules": [
+      {
+        "id": "visible-state",
+        "number": "82",
+        "title": "Visible State",
+        "avoid": [
+          "Norms that fail without telling the operator why",
+          "Error codes where human language belongs",
+          "Active filters, pending drafts, or permission constraints the user cannot see",
+          "Background operations with no visible trace"
+        ],
+        "solution": "If the system knows something important, the user must see it. Every norm carries a MESSAGE a human operator can read; every validation that refuses says why in plain words. Invisible state is a violation — in the UI and in the declaration alike.",
+        "why": "A user who reasons from state they cannot see has been harmed by the interface.",
+        "derived_from": "visible",
+        "enforcement": "machine",
+        "lint": "declaration lint: a norm with an empty MESSAGE -- the operator must see why",
+        "invariant": true,
+        "evidence": "Canonized v1.4 from linter case-law; independently rediscovered in the field (REGLES-UX rule 13)."
+      },
+      {
+        "id": "predictable-authority",
+        "number": "83",
+        "title": "Predictable Authority",
+        "avoid": [
+          "Irreversible commits with no declared actor",
+          "Targets claiming roles that governance never declared",
+          "Controls that change meaning based on hidden context",
+          "Role differences left implicit"
+        ],
+        "solution": "No control may change meaning based on hidden context: same action, same consequence; same icon, same intent. In declarations, every step that commits to Bedrock names its ACTOR, and every role a target claims is declared in governance. Ambiguity is operational risk.",
+        "why": "Ambiguous authority is operational risk; sameness of meaning is how trust scales.",
+        "derived_from": "authority",
+        "enforcement": "machine",
+        "lint": "declaration lint: a commit with no declared ACTOR; a role claimed but never declared",
+        "invariant": true,
+        "evidence": "Canonized v1.4 from linter case-law; independently rediscovered in the field (REGLES-UX rule 13)."
+      }
+    ]
+  },
+  "set30": {
+    "title": "Set 30: The Field Vibe",
+    "description": "Law forged at 375 pixels: the Restolean kitchen campaign distilled. These rules govern the field/touch vibe — each was paid for by a real failure before it was written.",
+    "rules": [
+      {
+        "id": "one-action-per-screen",
+        "number": "90",
+        "title": "One Action Per Screen",
+        "avoid": [
+          "Screens requiring study before use",
+          "Dashboards that answer questions nobody asked",
+          "All data visible because it exists"
+        ],
+        "solution": "Every screen proposes one clear next action -- a \"what now?\" the operator can seize in three seconds. Details exist behind intent, not in front of it. If the primary action is not obvious at a glance, the screen failed.",
+        "why": "A screen with one clear action can be used at a glance, under pressure, in a kitchen.",
+        "derived_from": "operator",
+        "enforcement": "machine-later",
+        "evidence": "Restolean field campaign: 11 live iterations with a working restaurateur, 22 simulated tests.",
+        "vibes": {
+          "field": "forged at 375px"
+        }
+      },
+      {
+        "id": "a-sheet-is-a-hover-not-a-navigation",
+        "number": "92",
+        "title": "A Sheet Is a Hover, Not a Navigation",
+        "avoid": [
+          "Overlays that navigate away from the page",
+          "Sheets that lose the scroll position on close",
+          "Backdrops that scroll the page beneath"
+        ],
+        "solution": "A sheet or popup hovers over the place the user stands; it never navigates. Closing returns exactly where they were -- same scroll, same context. The backdrop freezes the world; the sheet rises from the bottom, within thumb reach.",
+        "why": "An overlay that navigates steals the place the user trusted it to keep.",
+        "derived_from": "intent",
+        "enforcement": "machine-later",
+        "evidence": "Restolean field campaign: 11 live iterations with a working restaurateur, 22 simulated tests.",
+        "vibes": {
+          "field": "forged at 375px"
+        }
+      },
+      {
+        "id": "navigation-invariance-and-the-sacred-back",
+        "number": "93",
+        "title": "Navigation Invariance and the Sacred Back",
+        "avoid": [
+          "Navigation that moves or reflows across screens",
+          "Hardware back closing the app mid-task",
+          "Back paths that skip or reorder history"
+        ],
+        "solution": "Primary navigation keeps its position on every screen of a vibe. The hardware or browser back is an intent: intercept it, honor it, and never let the app close by surprise. Every screen opens from the top.",
+        "why": "The app must never close by surprise; the hardware back is an intent, not an accident.",
+        "derived_from": "reversibility",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "Restolean field campaign: 11 live iterations with a working restaurateur, 22 simulated tests.",
+        "vibes": {
+          "field": "forged at 375px"
+        }
+      },
+      {
+        "id": "zero-horizontal-scroll",
+        "number": "95",
+        "title": "Zero Horizontal Scroll",
+        "avoid": [
+          "Tables forced into phone lists",
+          "Content wider than the viewport",
+          "Charts that overflow their canvas"
+        ],
+        "solution": "The horizontal axis is forbidden to hide data in the field vibe. Lists are flex rows: amounts and dates unbreakable, names truncate with ellipsis. If a table cannot fit, it is not a table here -- it is a list wearing the wrong clothes.",
+        "why": "The second axis hides data on exactly the devices that can least afford it.",
+        "derived_from": "calm",
+        "enforcement": "machine-later",
+        "evidence": "Restolean field campaign: 11 live iterations with a working restaurateur, 22 simulated tests.",
+        "vibes": {
+          "field": "forged at 375px"
+        }
+      },
+      {
+        "id": "contextual-defaults",
+        "number": "96",
+        "title": "Contextual Defaults",
+        "avoid": [
+          "Opening on 'all records'",
+          "Filters reset on every visit",
+          "Entry links that dump into unfiltered lists"
+        ],
+        "solution": "No view opens on 'everything.' Every list opens pre-filtered to the task's slice -- this week, the pending ones, this supplier -- and a contextual entry opens the exact item, not the list that contains it.",
+        "why": "'Everything' is not a view; the task's slice is.",
+        "derived_from": "operator",
+        "enforcement": "machine-later",
+        "evidence": "Restolean field campaign: 11 live iterations with a working restaurateur, 22 simulated tests.",
+        "vibes": {
+          "field": "forged at 375px"
+        }
+      }
+    ]
+  },
+  "set31": {
+    "title": "Set 31: Intelligence Under Law",
+    "description": "The agentic era governed: an AI is an actor under the constitution, never an authority above it. Same norms, same audit, same dignity.",
+    "rules": [
+      {
+        "id": "the-agent-is-an-actor",
+        "number": "97",
+        "title": "The Agent Is an Actor",
+        "avoid": [
+          "Agent actions outside the audit trail",
+          "Model calls that bypass norms",
+          "AI features exempted from the constitution"
+        ],
+        "solution": "An intelligent agent participating in a flow is an ACTOR: named in the step, subject to the same validations, norms, signatures, and audit trail as any human. The agent is not a ghost in the machine -- it is a citizen of the same law.",
+        "why": "An agent outside the law is a ghost; inside it, it is accountable like everyone else.",
+        "derived_from": "authority",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "proposals-not-commits",
+        "number": "98",
+        "title": "Proposals, Not Commits",
+        "avoid": [
+          "LLM output written directly to records",
+          "Auto-applied AI corrections",
+          "Agent-triggered irreversible operations"
+        ],
+        "solution": "Intelligence advises; execution decides. A model's output is a proposal -- rendered as such, reviewable, dismissible -- and becomes a commit only through an authority the declaration names. No prompt reaches Bedrock.",
+        "why": "Intelligence advises; execution decides -- the commit belongs to a named authority.",
+        "derived_from": "authority",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "visible-provenance",
+        "number": "99",
+        "title": "Visible Provenance",
+        "avoid": [
+          "AI-generated text indistinguishable from records",
+          "Suggestions styled as facts",
+          "Machine edits without attribution"
+        ],
+        "solution": "Content produced by a model is marked as machine-made wherever it appears, and the mark travels with it. Provenance is visible state; an unmarked machine sentence is a forged signature.",
+        "why": "Machine-made content unmarked is invisible state of the most corrosive kind.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "deterministic-islands",
+        "number": "100",
+        "title": "Deterministic Islands",
+        "avoid": [
+          "AI summaries that restate figures",
+          "Rounded or paraphrased amounts in explanations",
+          "Charts drawn from model output instead of records"
+        ],
+        "solution": "Business numbers are quoted from the record, never regenerated by a model. An assistant may explain a figure, link it, or put it in context -- the digits themselves come from the deterministic island, verbatim.",
+        "why": "A paraphrased number is a different number; business figures are quoted, never improvised.",
+        "derived_from": "visible",
+        "enforcement": "machine-later",
+        "invariant": true,
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "the-dignity-contract",
+        "number": "101",
+        "title": "The Dignity Contract",
+        "avoid": [
+          "Messages implying user incompetence",
+          "Comparisons to other users",
+          "Service withheld as pressure"
+        ],
+        "solution": "Machine-facing language never blames, shames, or compares. A refusal states the circumstance, not the failure: \"current criteria were not met\" carries the same fact as \"you failed\" -- without the insult. Every rejection offers a next step.",
+        "why": "Software that blames diminishes; the fact can always be stated without the insult.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "the-right-to-a-human",
+        "number": "102",
+        "title": "The Right to a Human",
+        "avoid": [
+          "Support mazes that end at a bot",
+          "Human contact hidden or penalized",
+          "Escalation that loses the context"
+        ],
+        "solution": "Wherever an intelligent system serves an operator or a customer, a human path is always available, clearly labeled, and free of penalty. Escalation carries the context along; nobody restarts their story.",
+        "why": "No machine may be the last resort; a person must be reachable without penalty.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "grounded-proactivity",
+        "number": "103",
+        "title": "Grounded Proactivity",
+        "avoid": [
+          "Assistants that interrupt on model whim",
+          "Unsolicited suggestions during focused work",
+          "Proactive notifications without declared triggers"
+        ],
+        "solution": "A proactive intervention fires only from a declared trigger -- a norm, a threshold, a schedule -- never from an undeclared hunch. Calm governs what the machine says, not just what it shows; silence is the assistant's default vibe.",
+        "why": "An assistant that interrupts on a hunch spends attention it did not earn.",
+        "derived_from": "calm",
+        "enforcement": "judgment",
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "machine-legibility",
+        "number": "104",
+        "title": "Machine Legibility",
+        "avoid": [
+          "Meaning conveyed only by pixels",
+          "Anchors on DOM order or coordinates",
+          "Interfaces agents must scrape to read"
+        ],
+        "solution": "The interface is legible to machines for the same reason it is legible to screen readers: semantic structure, durable named anchors, declared intents. Accessibility law and agent-interop law are one body of law with two beneficiaries.",
+        "why": "What a screen reader can operate, an agent can operate; legibility is one law with two beneficiaries.",
+        "derived_from": "intent",
+        "enforcement": "machine-later",
+        "evidence": "The agent flower (stzw mcp), the Zai containment doctrine, and Zin’s human-experience trust design."
+      },
+      {
+        "id": "the-assistant-never-masks-the-work",
+        "number": "121",
+        "title": "The Assistant Never Masks the Work",
+        "avoid": [
+          "A floating agent widget with a permanent label eating screen width",
+          "An assistant panel that covers the content the operator is acting on",
+          "An agent affordance that cannot be dismissed or moved off the work"
+        ],
+        "solution": "The agent's calling surface is the one floating affordance an interface may carry, and it earns that exception by being minimal: a small circle with a mark, its name appearing only on hover, its expanded surface never covering the work the operator is deciding about. The assistant is a colleague at the elbow, not a billboard over the desk. Rule 110 keeps everything else out of the air; this rule disciplines the one thing allowed to float.",
+        "why": "An assistant that hides the work it is meant to help with has inverted its own purpose.",
+        "derived_from": "operator",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "ZinBank (April 2026): the floating agent shipped as a circle with a permanent 'Assistant ZinBank' label masking the interface; reduced to the circle-Z with the label on hover only."
+      },
+      {
+        "id": "the-generator-ships-a-working-thing",
+        "number": "124",
+        "title": "The Generator Ships a Working Thing",
+        "avoid": [
+          "Scaffolding presented as a result",
+          "Empty tables and placeholder fields where sample data belongs",
+          "A generated app the user must finish before they can judge it",
+          "Output with no account of what was generated, why, and how to change it"
+        ],
+        "solution": "A generator -- human-driven or AI -- ships artifacts that work the moment they are opened: real sample data derived from the declarations, typed inputs introspected from the entities, a simulator when the target cannot run in place, and an embedded, didactic account of what was generated, why, and how to regenerate it differently. Scaffolding is a promise, not a deliverable; the operator should never have to finish the machine's work to evaluate it.",
+        "why": "An empty shell teaches nothing and proves less. The generated thing is the argument for the generator -- it must stand up on its own.",
+        "derived_from": "intent",
+        "enforcement": "judgment",
+        "invariant": true,
+        "evidence": "Zin build-target culture: every target ships complete or not at all -- webapp targets open working with data, mobile targets include an HTML phone simulator, CLI targets produce an executable, and each output embeds its own guide. Canonized here as law for every UI generator."
+      }
+    ]
+  }
+}

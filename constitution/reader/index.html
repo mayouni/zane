@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zui Constitution — the law of user interfaces</title>
+<meta name="description" content="The Zui Constitution: seven articles, operator rights, forbidden patterns, the intent grammar, and the rules — one data file that every conforming linter loads as law.">
+<style>
+/* ==========================================================================
+   The reader obeys the law it displays.
+   Calm Over Power - no animation competes with reading (Rule 1).
+   Single river of content (Rule 12), stable layout (Rule 38),
+   keyboard-first (Rule 80), visible state everywhere (Rule 82),
+   circadian theming (Set 15), one comfortable reading density
+   (Rule 105). No external requests: everything lives here.
+   ========================================================================== */
+:root {
+  --paper: #f7f3e8; --ink: #142f31; --muted: #3f4e4a; --line: #ddd4bd;
+  --card: #fffdf6; --accent: #ad3f17; --accent-soft: #f9e7dd;
+  --amend: #6b5416; --amend-soft: #f7f0dc;
+  --avoid: #8c3b32; --avoid-soft: #f5dcd2;
+  --code: #efe9d9; --focus: #ad3f17;
+  --measure: 48rem; --pad: 1.25rem; --gap: 2.5rem; --fs: 1.125rem;
+}
+[data-theme="dark"] {
+  --paper: #0a0e0c; --ink: #d8e0d8; --muted: #93a69c; --line: #24312a;
+  --card: #101613; --accent: #ffb454; --accent-soft: #2a2013;
+  --amend: #d9b45c; --amend-soft: #2c2717;
+  --avoid: #d98b80; --avoid-soft: #34211b;
+  --code: #1a201a; --focus: #ffb454;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --paper: #0a0e0c; --ink: #d8e0d8; --muted: #93a69c; --line: #24312a;
+    --card: #101613; --accent: #ffb454; --accent-soft: #2a2013;
+    --amend: #d9b45c; --amend-soft: #2c2717;
+    --avoid: #d98b80; --avoid-soft: #34211b;
+    --code: #1a201a; --focus: #ffb454;
+  }
+}
+* { box-sizing: border-box; }
+/* scrollbars belong to the page, not to the operating system */
+* { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px;
+  border: 3px solid var(--paper); }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+/* navigation arrives at once: motion is never decoration (Rule 112) */
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: var(--fs)/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); }
+.skip { position: absolute; left: -999px; top: 0; background: var(--accent);
+  color: var(--paper); padding: .5rem 1rem; z-index: 10; }
+.skip:focus { left: 0; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+
+/* ---- site nav ---- */
+.topnav { background: #0d3b40; display: flex; flex-wrap: wrap; gap: 1.1rem;
+  align-items: center; padding: .7rem 1.25rem; }
+.topnav a { color: #f2ead8; text-decoration: none; font-size: 1rem; opacity: .9; }
+.topnav a:hover { opacity: 1; color: #ff8c5c; }
+.topnav .brand { font-weight: 900; text-transform: uppercase; letter-spacing: .04em;
+  color: #ff8c5c; font-size: 1.05rem; }
+.topnav .here { color: #ff8c5c; opacity: 1; border-bottom: 2px solid #e35b2f; }
+.topnav a.leaves { opacity: .8; }
+
+/* ---- breadcrumbs: a visible trail back (Rule 25) ---- */
+.crumbs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .15rem;
+  font: 1rem ui-monospace, monospace; margin: 0 0 1.8rem; padding: 0;
+}
+.crumbs a, .crumbs .here-crumb {
+  display: inline-flex; align-items: center; padding: .3rem .9rem;
+  border-radius: 99px; text-decoration: none; white-space: nowrap;
+  background: rgba(242, 234, 216, .08);
+  border: 1px solid rgba(242, 234, 216, .28); color: #f2ead8;
+}
+/* no hover repaint: the pointer is the hand, and orange means "here" (Rule 115) */
+.crumbs a { cursor: pointer; }
+.crumbs .level { display: inline-flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+.crumbs .here-crumb { color: #ff8c5c; border-color: #ff8c5c; background: rgba(227, 91, 47, .16); }
+.crumbs .sep { color: #f2ead8; opacity: .5; padding: 0 .1rem; }
+
+/* ---- header: the site hero, full bleed ---- */
+header { background: #0d3b40; color: #f2ead8; padding: 2.6rem 0 2.2rem; }
+header .hero-inner { max-width: 74rem; margin: 0 auto; padding: 0 var(--pad); }
+header .kicker { font: 1rem ui-monospace, monospace; text-transform: uppercase;
+  letter-spacing: .12em; opacity: .75; margin: 0 0 .7rem; display: block; }
+header h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); margin: 0; font-weight: 900;
+  text-transform: uppercase; letter-spacing: -.01em; line-height: 1; }
+header h1 a { color: #e35b2f !important; }
+header .sub { color: #f2ead8; display: block; max-width: 44rem; margin: .9rem 0 0; }
+header .sub code { background: rgba(0,0,0,.25); border: none; color: #f2ead8; }
+header .axioms { color: #e9a17c; letter-spacing: .02em; display: block; margin-top: .7rem; }
+.pill { font-size: 1rem; color: #f2ead8; border: 1px solid rgba(242,234,216,.5);
+  border-radius: 99px; padding: .12rem .65rem; white-space: nowrap;
+  display: inline-block; margin-top: .9rem; }
+
+/* ---- toolbar ---- */
+.toolbar {
+  position: sticky; top: 0; z-index: 5; background: var(--paper);
+  border-bottom: 1px solid var(--line); padding: .6rem 0;
+}
+.toolbar .wrap { display: flex; gap: .7rem; align-items: center; }
+.toolbar input[type="search"] {
+  flex: 1 1 14rem; max-width: 30rem; font: inherit; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  padding: .45rem .8rem;
+}
+.toolbar input::placeholder { color: var(--muted); }
+#match-count { color: var(--muted); min-width: 11rem; }
+/* ---- bottom-right mode buttons: the usual place, the usual icons ---- */
+/* the theme control sits in the footer bar -- nothing floats over the
+   reading (Rule 110) */
+footer .bar { display: flex; align-items: center; justify-content: space-between;
+  gap: 1.2rem; flex-wrap: wrap; margin-top: 1.2rem; padding-top: 1rem;
+  border-top: 1px solid var(--line); }
+.fab {
+  min-height: 44px; border-radius: 99px; cursor: pointer; padding: .5rem 1rem .5rem .8rem;
+  background: var(--card); color: var(--ink); border: 1.5px solid var(--line);
+  display: flex; align-items: center; gap: .5rem;
+  box-shadow: 0 3px 12px rgba(9,46,51,.18);
+  font: 700 1rem system-ui, sans-serif;
+}
+.fab:hover { border-color: var(--accent); color: var(--accent); }
+.fab svg { width: 19px; height: 19px; display: block; flex: none; }
+kbd {
+  font: 1em ui-monospace, monospace; border: 1px solid var(--line);
+  border-bottom-width: 2px; border-radius: 4px; padding: 0 .35em;
+  background: var(--code); color: var(--muted);
+}
+
+/* ---- layout ---- */
+.wrap { display: flex; gap: 2rem; max-width: 74rem; margin: 0 auto; padding: 0 var(--pad); }
+nav.sets {
+  flex: 0 0 16rem; position: sticky; top: 3.4rem; align-self: flex-start;
+  max-height: calc(100vh - 4rem); overflow-y: auto; padding: 1.2rem 0 2rem;
+  font-size: 1rem;
+}
+nav.sets h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted); margin: 1rem 0 .4rem; }
+nav.sets h2:first-child { margin-top: 0; }
+nav.sets a {
+  display: block; color: var(--muted); text-decoration: none;
+  padding: .22rem .7rem; border-left: 2px solid transparent; border-radius: 0 8px 8px 0;
+}
+nav.sets a:hover { color: var(--ink); background: var(--card); }
+nav.sets a.current { color: var(--accent); border-left-color: var(--accent); background: var(--accent-soft); }
+nav.sets a .n { color: var(--muted); font-size: 1em; }
+main { flex: 1 1 auto; max-width: var(--measure); padding: 1.5rem 0 4rem; min-width: 0; }
+
+/* ---- preamble & philosophy ---- */
+.preamble { border-left: 3px solid var(--accent); background: var(--card);
+  border-radius: 0 10px 10px 0; padding: var(--pad) 1.4rem; margin-bottom: var(--gap); }
+.preamble p { margin: 0 0 .6rem; }
+.preamble .closing { color: var(--accent); font-weight: 600; margin: 0; }
+.philosophy blockquote {
+  margin: 0 0 1.2rem; padding: .9rem 1.4rem; border-left: 3px solid var(--line);
+  background: var(--card); border-radius: 0 10px 10px 0;
+}
+.philosophy blockquote h3 { margin: 0 0 .3rem; font-size: 1rem; }
+.philosophy blockquote p { margin: 0; color: var(--muted); }
+
+/* ---- articles ---- */
+.articles { display: grid; gap: .9rem; margin-bottom: var(--gap); }
+.article-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: .9rem 1.2rem; }
+.article-card h3 { margin: 0 0 .3rem; font-size: 1rem; display: flex; gap: .6rem; align-items: baseline; }
+.article-card .numeral { font: 700 1rem ui-monospace, monospace; color: var(--accent);
+  background: var(--accent-soft); border-radius: 6px; padding: .1rem .5rem; }
+.article-card .axiom { margin-left: auto; font-size: 1rem; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 99px; padding: .05rem .5rem; }
+.article-card p { margin: 0; color: var(--muted); }
+.article-card .kids { color: var(--accent); margin-top: .35rem; display: block; }
+
+/* ---- rights & forbidden ---- */
+.rights, .forbidden-list { display: grid; gap: .6rem; margin: 0 0 var(--gap); padding: 0; list-style: none; }
+.rights li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: .7rem 1.1rem; }
+.rights b { color: var(--accent); }
+.rights .by { color: var(--muted); }
+.forbidden-list li { background: var(--avoid-soft); border-left: 3px solid var(--avoid);
+  border-radius: 0 8px 8px 0; padding: .65rem 1rem; }
+.forbidden-list b { color: var(--avoid); }
+.forbidden-list .by { color: var(--muted); }
+
+/* ---- intent grammar ---- */
+.intents { display: grid; gap: .6rem; margin-bottom: var(--gap); }
+.intent-family { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: .6rem 1rem; }
+.intent-family .verbs { font: 1rem ui-monospace, monospace; color: var(--accent); }
+.intent-family .inv { color: var(--muted); }
+
+/* ---- sets & rules ---- */
+h2.section { font-size: 1.25rem; margin: 0 0 .8rem; padding-top: 1rem; border-top: 1px solid var(--line);
+  font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; }
+section.set { margin-bottom: var(--gap); }
+section.set > h2 {
+  font-size: 1.15rem; margin: 0 0 .25rem; padding-top: .5rem;
+  border-top: 1px solid var(--line);
+  font-weight: 900; text-transform: uppercase; letter-spacing: -.01em;
+}
+.set-desc { color: var(--muted); margin: 0 0 1.2rem; }
+article.rule {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: var(--pad) 1.4rem; margin-bottom: 1.5rem;
+}
+article.rule:target, article.rule.focused { border-color: var(--accent); }
+.rule-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
+.rule-num {
+  font: 700 1rem ui-monospace, monospace; color: var(--accent);
+  background: var(--accent-soft); border-radius: 6px; padding: .12rem .5rem;
+}
+.rule-head h3 { margin: 0; font-size: 1.05rem; flex: 1 1 auto; }
+.badge {
+  font-size: 1rem; border-radius: 99px; padding: .08rem .55rem;
+  white-space: nowrap; text-decoration: none; border: 1px solid var(--line); color: var(--muted);
+}
+.badge.machine { color: var(--accent); border-color: var(--accent); cursor: help; }
+.badge.invariant { color: var(--amend); border-color: var(--amend); }
+.copy-btn {
+  font-size: 1rem; font-family: inherit; color: var(--muted); background: none; border: 1px solid var(--line);
+  border-radius: 6px; padding: .15rem .5rem; cursor: pointer;
+}
+.copy-btn:hover { color: var(--ink); border-color: var(--muted); }
+.rule .derive { font-size: 1rem; color: var(--muted); margin: .3rem 0 0; }
+.rule .derive a { color: var(--muted); }
+.rule .avoid { margin: .9rem 0 0; padding: .7rem 1rem .7rem 2.2rem;
+  background: var(--avoid-soft); border-radius: 8px; }
+.rule .avoid li { color: var(--avoid); margin: .15rem 0; }
+.rule .avoid-label, .rule .sol-label, .rule .why-label {
+  font-size: 1rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted); display: block; margin: .9rem 0 .2rem;
+}
+.rule .solution { margin: .2rem 0 0; }
+.rule .why { margin: .2rem 0 0; color: var(--muted); font-style: italic; }
+.rule .lints { font-size: 1rem; color: var(--muted); margin: .7rem 0 0;
+  padding-top: .6rem; border-top: 1px dashed var(--line); }
+.rule .lints code { background: var(--code); border-radius: 4px; padding: 0 .3em; }
+.rule .vibes { margin: .7rem 0 0; padding: .65rem 1rem; background: var(--amend-soft);
+  border-left: 3px solid var(--amend); border-radius: 0 8px 8px 0; }
+.rule .vibes b { color: var(--amend); }
+.rule .evidence { font-size: 1rem; color: var(--muted); margin: .7rem 0 0; }
+
+/* ---- footer ---- */
+footer {
+  border-top: 1px solid var(--line); margin-top: 2rem; padding: 1.5rem var(--pad) 3rem;
+  max-width: var(--measure); color: var(--muted);
+}
+footer h2 { font-size: 1rem; color: var(--ink); }
+footer ul { padding-left: 1.2rem; }
+.keys span { display: inline-block; margin-right: 1.2rem; white-space: nowrap; }
+
+.loading, .error { color: var(--muted); padding: 3rem var(--pad); }
+.error { color: var(--avoid); }
+.hidden { display: none !important; }
+
+@media (max-width: 900px) {
+  .wrap { flex-direction: column; gap: 0; }
+  nav.sets { position: static; max-height: none; flex-basis: auto;
+    display: flex; flex-wrap: wrap; gap: .2rem .4rem; padding: .8rem 0; }
+  nav.sets h2 { flex-basis: 100%; }
+  nav.sets a { border-left: none; border: 1px solid var(--line); border-radius: 99px;
+    padding: .15rem .7rem; }
+  nav.sets a.current { border-color: var(--accent); }
+  #match-count { min-width: 0; }
+  .article-card .axiom { display: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to the law</a>
+
+<nav class="topnav" aria-label="Site">
+  <a class="brand" href="../../index.html">StzZui</a>
+  <a class="here" href="./">Reader</a>
+  <a href="../../tools/site-audit.html">Site audit</a>
+  <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb ↗</a>
+</nav>
+
+<header>
+  <div class="hero-inner">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><span class="level"><span class="here-crumb" aria-current="page">Reader</span><a href="../../tools/site-audit.html">Site audit</a></span></nav>
+  <span class="kicker">The law · the whole text, interactive</span>
+  <h1>The Zui Constitution</h1>
+  <span class="sub">Rules for business interfaces that protect attention, reasoning,
+  and trust — one data file that every conforming linter loads as law.</span>
+  <span class="axioms" id="axioms"></span>
+  <span class="pill" id="version-pill">loading…</span>
+  </div>
+</header>
+
+<div class="toolbar" role="search">
+  <div class="wrap">
+  <input type="search" id="q" placeholder="Search the law…  ( / )"
+         aria-label="Search rules by number, title, or text">
+  <span id="match-count" aria-live="polite"></span>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="sets" aria-label="The constitution's structure">
+    <h2>The Constitution</h2>
+    <div id="constnav"></div>
+    <h2>The Sets</h2>
+    <div id="setnav"></div>
+  </nav>
+  <main id="content">
+    <div class="loading" id="loading">Reading the law…</div>
+    <div id="preamble"></div>
+    <div class="philosophy" id="philosophy"></div>
+    <div id="articles-block"></div>
+    <div id="rights-block"></div>
+    <div id="forbidden-block"></div>
+    <div id="intents-block"></div>
+    <div id="sets"></div>
+  </main>
+</div>
+
+<footer>
+  <h2>This page obeys the law it displays</h2>
+  <ul>
+    <li><b>Calm Over Power</b> — nothing moves unless you move it; no external
+        requests, no fonts fetched, no trackers. The page works offline once loaded.</li>
+    <li><b>Keyboard Sovereignty (Rule 80)</b> — everything reachable without a mouse.</li>
+    <li><b>Visible State (Rule 82)</b> — search matches, active modes, and enforcement
+        status are always shown, never implied.</li>
+    <li><b>Zero Displacement (Rule 38)</b> — filtering never shifts what you are reading sideways.</li>
+  </ul>
+  <div class="bar">
+  <p class="keys" aria-label="Keyboard shortcuts" style="margin:0">
+    <span><kbd>/</kbd> search</span>
+    <span><kbd>Esc</kbd> clear</span>
+    <span><kbd>j</kbd>/<kbd>k</kbd> next / previous rule</span>
+    <span><kbd>c</kbd> copy citation</span>
+    <span><kbd>t</kbd> theme</span>
+  </p>
+  <button class="fab" id="theme-btn"
+          title="Circadian theming, Set 15 — keyboard: t">
+    <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8z"/>
+    </svg>
+    <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" style="display:none">
+      <circle cx="12" cy="12" r="4.4" fill="currentColor" stroke="none"/>
+      <line x1="12" y1="2.2" x2="12" y2="4.6"/><line x1="12" y1="19.4" x2="12" y2="21.8"/>
+      <line x1="2.2" y1="12" x2="4.6" y2="12"/><line x1="19.4" y1="12" x2="21.8" y2="12"/>
+      <line x1="5.1" y1="5.1" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="18.9" y2="18.9"/>
+      <line x1="5.1" y1="18.9" x2="6.8" y2="17.2"/><line x1="17.2" y1="6.8" x2="18.9" y2="5.1"/>
+    </svg><span id="theme-label">Apply dark mode</span>
+  </button>
+  </div>
+  <p id="retired-note"></p>
+  <p>Rules badged as machine-enforced are machine law: a conforming linter (StzWeb’s <code>stzw check</code> is the first) loads this
+  very file and cites article numbers in its verdicts. Rules marked <em>on the
+  enforcement ladder</em> are lintable and queued (Article VII: recurring violations
+  are candidates for promotion). The law and the linter cannot drift apart silently.</p>
+</footer>
+
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let META = null;
+
+/* ---- modes ---- */
+function applyTheme(mode) {
+  if (mode === 'auto') delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = mode;
+  const dark = mode === 'dark' || (mode === 'auto' &&
+    matchMedia('(prefers-color-scheme: dark)').matches);
+  $('#icon-moon').style.display = dark ? 'none' : 'block';
+  $('#icon-sun').style.display = dark ? 'block' : 'none';
+  $('#theme-label').textContent = dark ? 'Apply light mode' : 'Apply dark mode';
+  localStorage.setItem('zui-theme', mode);
+}
+function toggleTheme() {
+  const cur = localStorage.getItem('zui-theme') || 'auto';
+  const dark = document.documentElement.dataset.theme === 'dark' ||
+    (cur === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+  applyTheme(dark ? 'light' : 'dark');
+}
+
+/* ---- render ---- */
+function ruleCard(rule, articles) {
+  const n = rule.number;
+  const anchor = 'rule-' + n;
+  const badges = [];
+  if (rule.enforcement === 'machine')
+    badges.push(`<a class="badge machine" href="#${anchor}" title="${esc(rule.lint || '')}">enforced by stzw check</a>`);
+  else if (rule.enforcement === 'tool')
+    badges.push(`<a class="badge machine" href="../../tools/legibility-audit.html" title="${esc(rule.lint || '')}">checked by the site audit</a>`);
+  else if (rule.enforcement === 'machine-later')
+    badges.push(`<span class="badge" title="Lintable, not yet linted — Article VII governs promotion.">on the enforcement ladder</span>`);
+  if (rule.invariant)
+    badges.push(`<span class="badge invariant" title="This rule never flexes across vibes.">vibe-invariant</span>`);
+  const art = articles[rule.derived_from];
+  const derive = art
+    ? `<span class="derive">derives from <a href="#article-${esc(rule.derived_from)}">Article ${esc(art.numeral)} — ${esc(art.title)}</a>` +
+      (rule.absorbs ? ` · absorbs retired Rule${rule.absorbs.length > 1 ? 's' : ''} ${rule.absorbs.join(', ')}` : '') + `</span>`
+    : '';
+  const avoid = (rule.avoid && rule.avoid.length)
+    ? `<span class="avoid-label">Avoid</span>
+       <ul class="avoid">${rule.avoid.map(a => `<li>${esc(a)}</li>`).join('')}</ul>`
+    : '';
+  const lints = rule.enforcement === 'machine' && rule.lint
+    ? `<p class="lints">The machine watches this one — ${esc(rule.lint)}.</p>`
+    : '';
+  const vibes = rule.vibes
+    ? `<div class="vibes"><b>Vibes</b> — ` +
+      Object.entries(rule.vibes).map(([k, v]) => `<b>${esc(k)}</b>: ${esc(v)}`).join(' · ') + `</div>`
+    : '';
+  const why = rule.why
+    ? `<span class="why-label">Why</span><p class="why">${esc(rule.why)}</p>` : '';
+  const evidence = rule.evidence
+    ? `<p class="evidence">Evidence: ${esc(rule.evidence)}</p>` : '';
+  const searchable = (n + ' ' + rule.title + ' ' + (rule.avoid || []).join(' ') + ' '
+    + rule.solution + ' ' + (rule.why || '') + ' ' + (rule.evidence || '')).toLowerCase();
+  return `
+  <article class="rule" id="${anchor}" data-num="${esc(n)}" tabindex="-1"
+           data-text="${esc(searchable)}">
+    <div class="rule-head">
+      <span class="rule-num">Rule ${esc(n)}</span>
+      <h3>${esc(rule.title)}</h3>
+      ${badges.join('\n')}
+      <button class="copy-btn" data-cite="Rule ${esc(n)}, ${esc(rule.title)} — Zui Constitution"
+              title="Copy citation">cite</button>
+    </div>
+    ${derive}
+    ${avoid}
+    <span class="sol-label">The rule</span>
+    <p class="solution">${esc(rule.solution)}</p>
+    ${why}
+    ${lints}
+    ${vibes}
+    ${evidence}
+  </article>`;
+}
+
+function render(data) {
+  META = data.metadata || {};
+  $('#version-pill').textContent =
+    `v${META.version || '?'} · ${META.totalRules || '?'} rules · ${META.totalArticles || 7} articles · ${META.lastUpdated || ''}`;
+  $('#axioms').textContent = META.philosophy || '';
+
+  /* preamble */
+  if (data.preamble) {
+    $('#preamble').innerHTML = `
+      <div class="preamble">
+        <p>${esc(data.preamble.text)}</p>
+        <p class="closing">${esc(data.preamble.closing)}</p>
+      </div>`;
+  }
+
+  /* philosophy */
+  const phil = data.philosophy;
+  if (phil && Array.isArray(phil.rules)) {
+    $('#philosophy').innerHTML = phil.rules.map(r => `
+      <blockquote id="rule-${esc(r.number)}">
+        <h3>${esc(r.title)}</h3>
+        <p>${esc(r.solution)}</p>
+      </blockquote>`).join('');
+  }
+
+  const articles = data.articles || {};
+  const setKeys = Object.keys(data)
+    .filter(k => /^set\d+$/.test(k) && Array.isArray(data[k].rules))
+    .sort((a, b) => parseInt(a.slice(3)) - parseInt(b.slice(3)));
+
+  /* count children per article */
+  const kids = {};
+  for (const key of setKeys)
+    for (const r of data[key].rules)
+      if (r.derived_from) (kids[r.derived_from] = kids[r.derived_from] || []).push(r.number);
+
+  /* articles overview */
+  $('#articles-block').innerHTML =
+    `<h2 class="section" id="articles" data-set="articles">The Seven Articles</h2>
+     <div class="articles">` +
+    Object.entries(articles).map(([id, a]) => `
+      <div class="article-card" id="article-${esc(id)}">
+        <h3><span class="numeral">${esc(a.numeral)}</span> ${esc(a.title)}
+            ${a.axiom ? `<span class="axiom">${esc(a.axiom)}</span>` : ''}</h3>
+        <p>${esc(a.statement)}</p>
+        <span class="kids">${(kids[id] || []).length} rules derive from this article</span>
+      </div>`).join('') + `</div>`;
+
+  /* rights */
+  if (Array.isArray(data.rights)) {
+    $('#rights-block').innerHTML =
+      `<h2 class="section" id="rights" data-set="rights">Operator Rights</h2>
+       <ul class="rights">` +
+      data.rights.map(r => `
+        <li><b>${esc(r.title)}.</b> ${esc(r.statement)}
+            <span class="by">Enforced by ${r.enforced_by.map(n => `<a href="#rule-${n}">Rule ${n}</a>`).join(', ')}</span></li>`).join('') +
+      `</ul>`;
+  }
+
+  /* forbidden patterns */
+  if (Array.isArray(data.forbidden)) {
+    $('#forbidden-block').innerHTML =
+      `<h2 class="section" id="forbidden" data-set="forbidden">Forbidden Patterns</h2>
+       <ul class="forbidden-list">` +
+      data.forbidden.map(f => `
+        <li><b>${esc(f.title)}</b> — <span class="by">violates ${f.violates.map(n => `<a href="#rule-${n}">Rule ${n}</a>`).join(', ')}</span></li>`).join('') +
+      `</ul>`;
+  }
+
+  /* intent grammar */
+  if (data.intents && data.intents.families) {
+    $('#intents-block').innerHTML =
+      `<h2 class="section" id="intents" data-set="intents">The Intent Grammar</h2>
+       <p class="set-desc">${esc(data.intents.note || '')}</p>
+       <div class="intents">` +
+      Object.entries(data.intents.families).map(([name, f]) => `
+        <div class="intent-family">
+          <b>${esc(name)}</b> · <span class="verbs">${f.verbs.map(esc).join(' ')}</span><br>
+          <span class="inv">${esc(f.invariant)}</span>
+        </div>`).join('') + `</div>`;
+  }
+
+  /* sets */
+  let navHTML = '', bodyHTML = '';
+  for (const key of setKeys) {
+    const set = data[key];
+    const nums = set.rules.map(r => r.number);
+    const label = esc(set.title.replace(/^Set \d+:\s*/, ''));
+    const range = nums.length > 1 ? `${nums[0]}–${nums[nums.length - 1]}` : (nums[0] || '');
+    navHTML += `<a href="#${key}" data-set="${key}">${label} <span class="n">${range}</span></a>`;
+    bodyHTML += `
+      <section class="set" id="${key}" data-set="${key}">
+        <h2>${esc(set.title)}</h2>
+        <p class="set-desc">${esc(set.description || '')}</p>
+        ${set.rules.map(r => ruleCard(r, articles)).join('')}
+      </section>`;
+  }
+  $('#setnav').innerHTML = navHTML;
+  $('#constnav').innerHTML = `
+    <a href="#articles" data-set="articles">The Seven Articles</a>
+    <a href="#rights" data-set="rights">Operator Rights</a>
+    <a href="#forbidden" data-set="forbidden">Forbidden Patterns</a>
+    <a href="#intents" data-set="intents">The Intent Grammar</a>`;
+  $('#sets').innerHTML = bodyHTML;
+  $('#loading').remove();
+
+  /* retired & burned note */
+  const retired = data.retired ? Object.entries(data.retired)
+    .map(([n, r]) => `${n}→${r.into}`).join(', ') : '';
+  const burned = data.burned ? Object.keys(data.burned).join(', ') : '';
+  $('#retired-note').textContent =
+    (retired ? `Retired numbers (never reused): ${retired}. ` : '') +
+    (burned ? `Burned numbers (never assigned): ${burned} — they belong to the pre-canonical citation history.` : '');
+
+  updateCount();
+  if (location.hash) {
+    const el = document.getElementById(location.hash.slice(1));
+    if (el) { el.scrollIntoView(); if (el.classList.contains('rule')) el.focus(); }
+  }
+}
+
+/* ---- search: filter, never rearrange ---- */
+function updateCount(matches, total) {
+  const el = $('#match-count');
+  if (matches === undefined) {
+    const all = document.querySelectorAll('article.rule').length;
+    el.textContent = `${all} rules — the whole law`;
+  } else {
+    el.textContent = `${matches} of ${total} rules match`;
+  }
+}
+const CONST_BLOCKS = ['#preamble', '#philosophy', '#articles-block', '#rights-block', '#forbidden-block', '#intents-block'];
+function filter(q) {
+  q = q.trim().toLowerCase();
+  const rules = document.querySelectorAll('article.rule');
+  if (!q) {
+    rules.forEach(r => r.classList.remove('hidden'));
+    document.querySelectorAll('section.set').forEach(s => s.classList.remove('hidden'));
+    CONST_BLOCKS.forEach(sel => $(sel).classList.remove('hidden'));
+    updateCount();
+    return;
+  }
+  CONST_BLOCKS.forEach(sel => $(sel).classList.add('hidden'));
+  let matches = 0;
+  rules.forEach(r => {
+    const hit = r.dataset.text.includes(q) || r.dataset.num === q;
+    r.classList.toggle('hidden', !hit);
+    if (hit) matches++;
+  });
+  document.querySelectorAll('section.set').forEach(s => {
+    const any = s.querySelector('article.rule:not(.hidden)');
+    s.classList.toggle('hidden', !any);
+  });
+  updateCount(matches, rules.length);
+}
+
+/* ---- keyboard ---- */
+function visibleRules() { return [...document.querySelectorAll('article.rule:not(.hidden)')]; }
+function focusedRule() {
+  return document.activeElement && document.activeElement.closest
+    ? document.activeElement.closest('article.rule') : null;
+}
+function walk(dir) {
+  const rules = visibleRules();
+  if (!rules.length) return;
+  const cur = focusedRule();
+  let i = cur ? rules.indexOf(cur) + dir : (dir > 0 ? 0 : rules.length - 1);
+  i = Math.max(0, Math.min(rules.length - 1, i));
+  rules.forEach(r => r.classList.remove('focused'));
+  rules[i].classList.add('focused');
+  rules[i].focus({ preventScroll: true });
+  rules[i].scrollIntoView({ block: 'center' });
+}
+async function copyCitation(card) {
+  if (!card) return;
+  const btn = card.querySelector('.copy-btn');
+  const cite = btn.dataset.cite + ` v${META && META.version || ''}`.trimEnd();
+  try {
+    await navigator.clipboard.writeText(cite);
+    const was = btn.textContent; btn.textContent = 'copied';
+    setTimeout(() => { btn.textContent = was; }, 1200);
+  } catch { btn.textContent = 'copy failed'; }
+}
+
+document.addEventListener('keydown', e => {
+  const typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName);
+  if (e.key === '/' && !typing) { e.preventDefault(); $('#q').focus(); $('#q').select(); }
+  else if (e.key === 'Escape') {
+    if ($('#q').value) { $('#q').value = ''; filter(''); }
+    if (typing) document.activeElement.blur();
+  }
+  else if (!typing && e.key === 'j') walk(1);
+  else if (!typing && e.key === 'k') walk(-1);
+  else if (!typing && e.key === 'c') copyCitation(focusedRule());
+  else if (!typing && e.key === 't') toggleTheme();
+});
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.copy-btn');
+  if (btn) copyCitation(btn.closest('article.rule'));
+});
+
+$('#q').addEventListener('input', e => filter(e.target.value));
+$('#theme-btn').addEventListener('click', toggleTheme);
+
+/* ---- scrollspy ---- */
+const spy = new IntersectionObserver(entries => {
+  for (const en of entries) {
+    if (!en.isIntersecting) continue;
+    const key = en.target.dataset.set;
+    document.querySelectorAll('#setnav a, #constnav a').forEach(a =>
+      a.classList.toggle('current', a.dataset.set === key));
+  }
+}, { rootMargin: '-15% 0px -75% 0px' });
+
+/* ---- boot ---- */
+applyTheme(localStorage.getItem('zui-theme') || 'auto');
+localStorage.removeItem('zui-density');
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () =>
+  applyTheme(localStorage.getItem('zui-theme') || 'auto'));
+
+fetch('../rules.json', { cache: 'no-cache' })   /* revalidate: never show a stale law */
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(data => {
+    render(data);
+    document.querySelectorAll('section.set, h2.section').forEach(s => spy.observe(s));
+  })
+  .catch(err => {
+    $('#loading').outerHTML =
+      `<div class="error">The law could not be read (${esc(err.message)}).
+       The reader needs <code>constitution/rules.json</code> served next to it —
+       <code>python -m http.server</code> at the repo root, or GitHub Pages, both work.</div>`;
+  });
+</script>
+</body>
+</html>

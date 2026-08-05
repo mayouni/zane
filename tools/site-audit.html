@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site audit — Rules 105, 107, 108, 114–116, measured</title>
+<meta name="description" content="Measures every rendered text node on every page: computed size and true contrast against the composited background. The enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e35b2f'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%230d3b40' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../site/stz.css">
+<style>
+textarea {
+  width: 100%; min-height: 8.5rem; font: 1rem var(--mono); color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: .8rem 1rem; resize: vertical;
+}
+.verdict { border-radius: 10px; padding: 1rem 1.2rem; margin: 1.4rem 0; font-weight: 700; }
+.verdict.clean { background: #dcefe2; color: #14503a; border: 2px solid #1d6b4f; }
+.verdict.dirty { background: #f5dcd2; color: #7c2d1e; border: 2px solid #a33422; }
+.verdict.idle { background: var(--card); color: var(--muted); border: 1px solid var(--line); }
+[data-vibe="guardian"] .verdict.clean { background: #14261c; color: #7ee2ae; }
+[data-vibe="guardian"] .verdict.dirty { background: #2e1f1c; color: #ff9d8a; }
+table { border-collapse: collapse; width: 100%; margin-top: 1rem; background: var(--card); }
+th, td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--line);
+  vertical-align: top; overflow-wrap: anywhere; }
+th { color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-size: 1rem; }
+td.where { font-family: var(--mono); overflow-wrap: anywhere; word-break: break-word; }
+td.issue { color: #a33422; font-weight: 700; }
+[data-vibe="guardian"] td.issue { color: #ff9d8a; }
+.controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1rem; }
+.run { font: 700 1rem var(--sans); cursor: pointer; border-radius: 8px;
+  border: 2px solid var(--orange); background: var(--orange); color: var(--on-orange);
+  padding: .6rem 1.3rem; }
+.run:hover { filter: brightness(1.06); }
+.opt { font: 1rem var(--sans); color: var(--ink); display: inline-flex;
+  align-items: flex-start; gap: .5rem; max-width: 34rem; cursor: pointer; }
+.opt input { margin-top: .35rem; width: 18px; height: 18px; flex: none; cursor: pointer; }
+#progress { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html">StzZui</a>
+    <a href="../constitution/reader/">Reader</a>
+    <a class="here" href="site-audit.html">Site audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><a href="../constitution/reader/">Reader</a><span class="here-crumb" aria-current="page">Site audit</span></span></nav>
+    <p class="kicker">The tool · Rules 105, 107, 108, 114–116, measured not guessed</p>
+    <h1>Site audit</h1>
+    <p class="sub">It opens each page and measures what the eye argues about and
+    arithmetic does not: the <b>computed size</b> of every text node, its <b>true
+    contrast</b> against the background actually painted behind it, whether the page shows
+    the <b>whole path</b> it sits on, and whether any block <b>scrolls sideways</b> while the
+    page still has room. Same-origin pages only; nothing leaves your browser.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>What it enforces</h2>
+    <div class="grid">
+      <div class="card"><h3>Rule 105 · The Legibility Floor</h3>
+        <p>Main reading text at least 1rem, never lighter than 4.5:1 against its
+        background (3:1 is allowed only for genuinely large text: ≥24px, or ≥18.66px
+        bold). A color that carries meaning must also carry contrast.</p>
+        <span class="proof"><a href="../constitution/reader/#rule-105">read the rule</a></span></div>
+      <div class="card"><h3>Rule 107 · Hierarchy Is Not Miniaturization</h3>
+        <p>Three sizes suffice — hero, title, and one reading size. Anything below the
+        floor is flagged, whatever its role: captions, labels, badges, footers, and
+        SVG text (whose rendered size is computed from the viewBox scale).</p>
+        <span class="proof"><a href="../constitution/reader/#rule-107">read the rule</a></span></div>
+      <div class="card"><h3>Rule 108 · The Trail Is Always Shown</h3>
+        <p>Every page must carry a breadcrumb — marked as one
+        (<code>nav[aria-label="Breadcrumb"]</code>) — whose first step returns to the
+        root, with every step reachable but the one you are standing on. The site root
+        is the only page exempt, and the audit says so rather than staying silent.</p>
+        <span class="proof"><a href="../constitution/reader/#rule-108">read the rule</a></span></div>
+      <div class="card"><h3>Rule 114 · Room Before Scrollbars</h3>
+        <p>A block that scrolls sideways is flagged whenever it would have fitted had
+        the layout given it the page's spare width. Scrolling is lawful only when the
+        page itself has run out — measured at 1280px, the width the audit renders at.</p>
+        <span class="proof"><a href="../constitution/reader/#rule-114">read the rule</a></span></div>
+      <div class="card"><h3>Rule 115 · The Path Shows Every Depth</h3>
+        <p>A path names every level of the branch it sits on — the ones above and the
+        ones below — so the whole picture is visible from anywhere in it. The audit
+        compares the paths of every page that names another: they must read the same,
+        with only the highlight moving.</p>
+        <span class="proof"><a href="../constitution/reader/#rule-115">read the rule</a></span></div>
+      <div class="card"><h3>Rule 116 · The Menu Tells the Truth About the Tree</h3>
+        <p>Every main-menu entry must be a top-level page, and must call that page what
+        the page's own path calls it. The audit reads each page's path: a page the path
+        puts under a parent may not stand beside that parent as an equal, and a page the
+        menu names differently from its path is one page with two names.</p>
+        <span class="proof"><a href="../constitution/reader/#rule-116">read the rule</a></span></div>
+      <div class="card"><h3>Both vibes</h3>
+        <p>Modern and Retro have different palettes, so a page can be lawful in one
+        and unlawful in the other. Run it twice — the audit reports whichever vibe
+        the site is currently in (press <kbd>F2</kbd>, or use the Style picker).</p></div>
+    </div>
+
+    <h2 style="margin-top:2.5rem">Pages to audit</h2>
+    <p class="lead">One path per line, relative to the site root. Add your own project's
+    screens the same way.</p>
+    <textarea id="pages" spellcheck="false">/index.html
+/constitution/reader/index.html
+/tools/site-audit.html</textarea>
+    <div class="controls">
+      <button class="run" id="run">Run the audit</button>
+      <label class="opt"><input type="checkbox" id="strict">
+        <span>Strict: also report text that clears the floor but still reads small (16–17px)</span></label>
+      <span id="progress"></span>
+    </div>
+    <p class="caption">The floor is <b>16px</b> (Rule 105) and this site reads at
+    <b>18px</b>. Left unchecked, the audit reports only text that breaks the floor;
+    checked, it also lists the 16–17px text — lawful, but smaller than the reading
+    size, which is worth knowing before it spreads.</p>
+    <p class="caption" id="root-note"></p>
+
+    <div class="verdict idle" id="verdict">Not run yet — press <b>Run the audit</b>.</div>
+    <div id="results"></div>
+
+    <div id="export" hidden>
+      <div class="controls">
+        <button class="run" id="copy-md">Copy the report as Markdown</button>
+        <span id="copied"></span>
+      </div>
+      <p class="caption">Paste it into a file, an issue, or an AI — it carries the
+      vibe, the page count, and every finding as a table.</p>
+      <textarea id="markdown" spellcheck="false" readonly></textarea>
+    </div>
+
+    <p class="caption" style="margin-top:2rem">Serve the repository over HTTP for this to
+    work (<code>stzw dev</code> at the root, or any static server); the audit reads pages
+    through same-origin frames, which the <code>file://</code> protocol forbids. The
+    static half of these rules is also enforced in the terminal: <code>stzw check</code>
+    flags sub-floor font sizes in a project's HTML, citing Rule 107.</p>
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="../constitution/"><span class="label">Back</span>← Constitution</a>
+    <a href="../constitution/reader/#rule-105"><span class="label">The law it measures</span>Rules 105, 107, 108, 114–116 →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="bar">
+    <div class="row">
+      <a href="../constitution/">Constitution</a>
+      <a href="../constitution/reader/">Reader</a>
+      <a class="leaves" href="https://github.com/mayouni/stzweb" target="_blank" rel="noopener">GitHub</a>
+    </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzWeb — a Softanza project · A law that cannot be measured
+    will be negotiated in the hallway.</p>
+  </div>
+</footer>
+
+<script src="../site/stz.js"></script>
+<script>
+'use strict';
+/* ==========================================================================
+   The measurement. No dependencies, no network: same-origin frames only.
+   ========================================================================== */
+const FLOOR = 16;              // Rule 105's reading floor, in px
+const LARGE = 24;              // WCAG large-text threshold
+const LARGE_BOLD = 18.66;
+
+function parseColor(c) {
+  const m = String(c).match(/[\d.]+/g);
+  if (!m) return null;
+  return { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] };
+}
+function composite(fg, bg) {
+  return { r: fg.r * fg.a + bg.r * (1 - fg.a),
+           g: fg.g * fg.a + bg.g * (1 - fg.a),
+           b: fg.b * fg.a + bg.b * (1 - fg.a), a: 1 };
+}
+function luminance(c) {
+  const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+}
+function contrast(a, b) {
+  const l1 = luminance(a), l2 = luminance(b);
+  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+}
+/* the background actually painted behind the text, composited up the tree */
+function backgroundOf(el, win) {
+  let node = el, acc = null;
+  while (node && node.nodeType === 1) {
+    const c = parseColor(win.getComputedStyle(node).backgroundColor);
+    if (c && c.a > 0) {
+      acc = acc ? composite(acc, c) : c;
+      if (acc.a >= 0.999) return acc;
+    }
+    node = node.parentElement;
+  }
+  return acc && acc.a >= 0.999 ? acc : { r: 255, g: 255, b: 255, a: 1 };
+}
+
+/* Rule 108: the trail. Marked as a trail, rooted at the site root,
+   ending on the page you are actually on. */
+function auditTrail(doc, label) {
+  const isRoot = new URL(resolvePath(label)).href.replace(/index\.html$/, '')
+               === SITE_ROOT.replace(/index\.html$/, '');
+  if (isRoot) return [];                       /* the root has no ancestors */
+  const trail = doc.querySelector('nav[aria-label="Breadcrumb"], .crumbs');
+  if (!trail) {
+    return [{ page: label, where: 'nav[aria-label="Breadcrumb"]', text: '(none)',
+              issues: 'no trail home — the page cannot say where it sits [Rule 108]' }];
+  }
+  const out = [];
+  if (!trail.matches('nav[aria-label="Breadcrumb"]')) {
+    out.push({ page: label, where: trail.tagName.toLowerCase() + '.crumbs', text: '(unmarked)',
+               issues: 'the trail is not marked as one — use nav[aria-label="Breadcrumb"] [Rule 108]' });
+  }
+  const steps = [...trail.querySelectorAll('a, .here-crumb')];
+  if (steps.length < 2) {
+    out.push({ page: label, where: 'trail', text: steps.map(s => s.textContent.trim()).join(' > '),
+               issues: 'the trail has no depth — it must start at the root [Rule 108]' });
+    return out;
+  }
+  const first = steps[0];
+  if (first.tagName !== 'A') {
+    out.push({ page: label, where: 'trail', text: first.textContent.trim(),
+               issues: 'the first step is not a link — ancestors must be reachable [Rule 108]' });
+  } else {
+    const target = new URL(first.getAttribute('href'), resolvePath(label)).href.replace(/index\.html$/, '');
+    if (target !== SITE_ROOT.replace(/index\.html$/, '')) {
+      out.push({ page: label, where: 'trail', text: first.textContent.trim() + ' → ' + first.getAttribute('href'),
+                 issues: 'the trail does not start at the site root [Rule 108]' });
+    }
+  }
+  /* The page you are on is marked once, and it is never a link. Every other
+     step -- ancestor or deeper destination -- must be reachable. (Rule 115) */
+  const here = steps.filter(s => s.classList.contains('here-crumb'));
+  if (here.length !== 1) {
+    out.push({ page: label, where: 'trail', text: steps.map(s => s.textContent.trim()).join(' > '),
+               issues: here.length + ' steps marked as the current position — exactly one is owed [Rule 115]' });
+  }
+  here.forEach(h => { if (h.tagName === 'A')
+    out.push({ page: label, where: 'trail', text: h.textContent.trim(),
+               issues: 'the current position is a link to itself [Rule 115]' }); });
+  steps.forEach(s => {
+    if (s.tagName !== 'A' && !s.classList.contains('here-crumb'))
+      out.push({ page: label, where: 'trail', text: s.textContent.trim(),
+                 issues: 'a step in the trail is not reachable — every step but the current one is a link [Rule 108]' });
+  });
+  return out;
+}
+
+/* Rule 115: a path is the same everywhere along it. If one page's trail names
+   another, that page must show the same steps in the same order -- only the
+   highlight moves. This is what lets the reader see the whole branch from
+   any point in it. */
+function auditTrailConsistency(trails) {
+  const out = [];
+  const key = t => t.steps.map(s => s.label).join(' > ');
+  trails.forEach(t => {
+    t.steps.forEach(s => {
+      if (!s.href) return;
+      const other = trails.find(x => x !== t && x.href === s.href);
+      if (!other) return;                        /* not audited: nothing to compare */
+      if (key(other) !== key(t)) {
+        out.push({ page: other.label, where: 'trail', text: key(other),
+                   issues: 'the path differs from the one shown on ' + t.label
+                         + ' (' + key(t) + ') — a path must read the same at every step [Rule 115]' });
+      }
+    });
+  });
+  /* one finding per page, however many neighbours disagree */
+  return out.filter((f, i, a) => a.findIndex(x => x.page === f.page) === i);
+}
+
+/* Rule 116: the menu is a claim about the structure. Every entry in the main
+   menu must be a top-level page -- if a page's own path puts it under a
+   parent, the menu cannot stand it beside that parent as an equal. */
+function auditMenuDepth(menus, trails) {
+  const out = [];
+  const depthOf = href => {
+    const t = trails.find(x => x.href === href);
+    if (!t) return null;
+    const h = t.steps.find(s => s.here);
+    return h ? h.depth : null;                /* 0 = root, 1 = top level */
+  };
+  const nameOf = href => {
+    const t = trails.find(x => x.href === href);
+    const h = t && t.steps.find(s => s.here);
+    return h ? h.label : null;
+  };
+  menus.forEach(m => {
+    m.items.forEach(it => {
+      const d = depthOf(it.href);
+      if (d !== null && d > 1) {
+        out.push({ page: m.label, where: 'nav[aria-label="Main"]', text: it.label,
+                   issues: 'the menu offers "' + it.label + '" as a top-level page, but its own '
+                         + 'path puts it ' + d + ' levels deep — a menu may not flatten the '
+                         + 'hierarchy it describes [Rule 116]' });
+        return;
+      }
+      /* the same page, called two things */
+      const n = nameOf(it.href);
+      if (n && n !== it.label) {
+        out.push({ page: m.label, where: 'nav[aria-label="Main"]', text: it.label,
+                   issues: 'the menu calls this page "' + it.label + '" and its own path calls it "'
+                         + n + '" — one page, one name [Rule 116]' });
+      }
+    });
+  });
+  return out.filter((f, i, a) => a.findIndex(x => x.text === f.text && x.issues === f.issues) === i);
+}
+
+const MENUS = [];
+/* the main menu as data, for the comparison above */
+function menuOf(doc, label) {
+  const nav = doc.querySelector('nav[aria-label="Main"], nav[aria-label="Site"], nav.site, .topnav');
+  if (!nav) return null;
+  const base = resolvePath(label);
+  const items = [...nav.querySelectorAll('a')]
+    .filter(a => !a.classList.contains('brand') && !/^https?:/.test(a.getAttribute('href') || ''))
+    .map(a => ({ label: a.textContent.trim(),
+                 href: new URL(a.getAttribute('href'), base).href.replace(/index\.html$/, '') }));
+  return { label, items };
+}
+
+const TRAILS = [];
+/* the trail as data, for the cross-page comparison above */
+function trailOf(doc, label) {
+  const trail = doc.querySelector('nav[aria-label="Breadcrumb"], .crumbs');
+  if (!trail) return null;
+  const base = resolvePath(label);
+  /* Depth counts levels, not steps: siblings grouped at one level share a
+     depth, so a page's depth cannot change because a sibling precedes it. */
+  let depth = 0;
+  const steps = [];
+  trail.querySelectorAll('a, .here-crumb, .sep').forEach(s => {
+    if (s.classList.contains('sep')) { depth++; return; }
+    steps.push({
+      label: s.textContent.trim(),
+      href: s.tagName === 'A' ? new URL(s.getAttribute('href'), base).href.replace(/index\.html$/, '') : null,
+      here: s.classList.contains('here-crumb'),
+      depth: depth
+    });
+  });
+  return { label, href: new URL(base).href.replace(/index\.html$/, ''), steps };
+}
+
+/* Rule 114: a block may scroll sideways only when the page itself has run
+   out of width. Scrolling while empty margin sits beside it is the layout
+   preferring its own tidiness to the reader. */
+function auditRoom(doc, win, label) {
+  const out = [];
+  const spare = win.innerWidth - 44;            /* page gutters, both sides */
+  doc.querySelectorAll('body *').forEach(el => {
+    const cs = win.getComputedStyle(el);
+    if (!/auto|scroll/.test(cs.overflowX)) return;
+    if (cs.display === 'none' || cs.visibility === 'hidden') return;
+    const over = el.scrollWidth - el.clientWidth;
+    if (over <= 2) return;
+    if (el.scrollWidth > spare) return;         /* the page really is full */
+    const cls = (typeof el.className === 'string' && el.className.trim())
+      ? '.' + el.className.trim().split(/\s+/).join('.') : '';
+    out.push({ page: label, where: el.tagName.toLowerCase() + cls,
+               text: (el.textContent || '').trim().slice(0, 44),
+               issues: 'scrolls sideways by ' + over + 'px with '
+                     + (spare - el.scrollWidth) + 'px of page still free [Rule 114]' });
+  });
+  return out;
+}
+
+function auditDocument(doc, win, label, strict) {
+  const findings = auditTrail(doc, label).concat(auditRoom(doc, win, label));
+  const t = trailOf(doc, label);
+  if (t) TRAILS.push(t);
+  const mn = menuOf(doc, label);
+  if (mn) MENUS.push(mn);
+  doc.querySelectorAll('body *').forEach(el => {
+    const own = [...el.childNodes].filter(n => n.nodeType === 3)
+      .map(n => n.textContent.trim()).join('').trim();
+    if (own.length < 3) return;                        // ignore fragments
+    const cs = win.getComputedStyle(el);
+    if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity === 0) return;
+
+    let size = parseFloat(cs.fontSize);
+    const weight = +cs.fontWeight || 400;
+    /* SVG text is specified in viewBox units: rescale to rendered pixels */
+    const svg = el.ownerSVGElement;
+    if (svg) {
+      const box = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+      if (vb && vb.width && box.width) size = size * (box.width / vb.width);
+    }
+
+    const bg = backgroundOf(el, win);
+    let fg = parseColor(cs.color);
+    if (!fg) return;
+    if (fg.a < 1) fg = composite(fg, bg);
+    const op = parseFloat(cs.opacity);
+    if (op < 1) fg = composite({ ...fg, a: op }, bg);
+
+    const ratio = contrast(fg, bg);
+    const isLarge = size >= LARGE || (size >= LARGE_BOLD && weight >= 700);
+    const needed = isLarge ? 3 : 4.5;
+
+    const issues = [];
+    if (size < FLOOR) issues.push('size ' + size.toFixed(1) + 'px (floor ' + FLOOR + ')');
+    else if (strict && size < 18) issues.push('size ' + size.toFixed(1) + 'px (below comfort)');
+    if (ratio < needed) issues.push('contrast ' + ratio.toFixed(2) + ':1 (needs ' + needed + ')');
+    if (!issues.length) return;
+
+    const cls = (typeof el.className === 'string' && el.className.trim())
+      ? '.' + el.className.trim().split(/\s+/).join('.') : '';
+    findings.push({ page: label, where: el.tagName.toLowerCase() + cls,
+                    text: own.slice(0, 44), issues: issues.join(' + ') });
+  });
+  return findings;
+}
+
+/* Where the site actually lives. On GitHub project pages the repository is
+   served under /<repo>/, so a leading-slash path would leave the site
+   entirely -- and audit someone else’s 404 page. Paths are resolved
+   against the tool’s own location instead. */
+const SITE_ROOT = new URL('../', location.href).href;
+function resolvePath(entry) {
+  const clean = entry.trim().replace(/^\/+/, '');
+  return new URL(clean, SITE_ROOT).href;
+}
+
+function loadAndAudit(entry, strict) {
+  const path = resolvePath(entry);
+  return new Promise(async resolve => {
+    /* a page that is not there must say so, never be measured */
+    try {
+      const head = await fetch(path, { method: 'GET', cache: 'no-cache' });
+      if (!head.ok) {
+        resolve([{ page: entry, where: '(not found)', text: new URL(path).pathname,
+                   issues: 'HTTP ' + head.status + ' — nothing audited; check the path' }]);
+        return;
+      }
+    } catch (e) {
+      resolve([{ page: entry, where: '(unreachable)', text: e.message,
+                 issues: 'serve the repository over HTTP — file:// forbids this' }]);
+      return;
+    }
+    const frame = document.createElement('iframe');
+    frame.style.cssText = 'width:1280px;height:900px;position:fixed;left:-9999px;top:0;border:0';
+    frame.src = path + (path.includes('?') ? '&' : '?') + 'audit=' + Date.now();
+    let done = false;
+    const finish = () => {
+      if (done) return; done = true;
+      setTimeout(() => {
+        let out;
+        try { out = auditDocument(frame.contentDocument, frame.contentWindow, entry, strict); }
+        catch (e) { out = [{ page: entry, where: '(unreadable)', text: e.message,
+                             issues: 'the audit needs same-origin HTTP — see the note below' }]; }
+        frame.remove();
+        resolve(out);
+      }, 700);                       /* let fonts settle; nothing animates here */
+    };
+    frame.onload = finish;
+    setTimeout(finish, 6000);
+    document.body.appendChild(frame);
+  });
+}
+
+const $ = s => document.querySelector(s);
+
+function buildMarkdown(findings, pages, vibe) {
+  const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
+  const esc = t => String(t).replace(/\|/g, '\\|').replace(/\n/g, ' ').trim();
+  const lines = [
+    '# Site audit — Rules 105, 107, 108, 114-116',
+    '',
+    '- **site**: ' + SITE_ROOT,
+    '- **style**: ' + vibe,
+    '- **pages audited**: ' + pages.length,
+    '- **violations**: ' + findings.length,
+    '- **run**: ' + stamp + ' UTC',
+    ''
+  ];
+  if (!findings.length) {
+    lines.push('**Clean** — every text node meets the reading floor and the contrast it owes, every page shows the whole path it sits on, nothing scrolls sideways with room to spare, and no menu flattens or renames what the tree already says.');
+  } else {
+    lines.push('| page | element | text | violation |', '|---|---|---|---|');
+    findings.forEach(f => lines.push('| `' + esc(f.page) + '` | `' + esc(f.where) + '` | '
+      + esc(f.text) + ' | ' + esc(f.issues) + ' |'));
+  }
+  lines.push('', '_Measured in the browser: computed size and true contrast against the '
+    + 'composited background, SVG text rescaled by its viewBox._');
+  const md = lines.join('\n');
+  $('#markdown').value = md;
+  $('#export').hidden = false;
+  return md;
+}
+
+$('#copy-md').addEventListener('click', async () => {
+  const box = $('#markdown'), note = $('#copied');
+  try {
+    await navigator.clipboard.writeText(box.value);
+    note.textContent = 'copied — paste it anywhere';
+  } catch (e) {
+    box.select();
+    note.textContent = 'select-all done — press Ctrl+C';
+  }
+  setTimeout(() => { note.textContent = ''; }, 4000);
+});
+
+$('#root-note').textContent = 'Paths resolve against this site root: ' + SITE_ROOT;
+
+$('#run').addEventListener('click', async () => {
+  const pages = $('#pages').value.split('\n').map(s => s.trim()).filter(Boolean);
+  const strict = $('#strict').checked;
+  const verdict = $('#verdict'), results = $('#results'), progress = $('#progress');
+  $('#run').disabled = true;
+  results.innerHTML = '';
+  verdict.className = 'verdict idle';
+  verdict.textContent = 'Measuring…';
+
+  const all = [];
+  TRAILS.length = 0; MENUS.length = 0;
+  for (let i = 0; i < pages.length; i++) {
+    progress.textContent = 'page ' + (i + 1) + ' of ' + pages.length + ' — ' + pages[i];
+    all.push(...await loadAndAudit(pages[i], strict));
+  }
+  all.push(...auditTrailConsistency(TRAILS));   /* Rule 115, once every trail is known */
+  all.push(...auditMenuDepth(MENUS, TRAILS));   /* Rule 116, the menu against the tree */
+  progress.textContent = '';
+  $('#run').disabled = false;
+
+  const vibe = (document.documentElement.dataset.vibe || 'curator') === 'guardian'
+    ? 'terminal' : 'modern';
+  buildMarkdown(all, pages, vibe);
+  if (!all.length) {
+    verdict.className = 'verdict clean';
+    verdict.textContent = 'Clean — ' + pages.length + ' page(s), 0 violations in the '
+      + vibe + ' vibe. Every text node meets the floor and the contrast it owes, every page shows the whole path it sits on, nothing scrolls sideways with room to spare, and no menu flattens or renames what the tree already says.';
+    return;
+  }
+  verdict.className = 'verdict dirty';
+  verdict.textContent = all.length + ' violation(s) across ' + pages.length
+    + ' page(s) in the ' + vibe + ' vibe — each one is a reader you would have taxed.';
+
+  const rows = all.map(f => '<tr><td class="where">' + f.page + '</td>'
+    + '<td class="where">' + f.where + '</td>'
+    + '<td>' + f.text.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + '</td>'
+    + '<td class="issue">' + f.issues + '</td></tr>').join('');
+  results.innerHTML = '<table><thead><tr><th>page</th><th>element</th><th>text</th>'
+    + '<th>violation</th></tr></thead><tbody>' + rows + '</tbody></table>';
+});
+</script>
+</body>
+</html>
