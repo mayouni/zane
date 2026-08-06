@@ -28,7 +28,7 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 
 ## What is in this repository today
 
-- **[The site](index.html)** — built for two readers, the developer and the UI community: [the case for a law](site/why.html), [the architecture in full](site/how.html) (including instruments still in design, honestly labeled), [the Gotchas](site/gotchas/index.html) — twelve interactive offenses beside their lawful twins, split into seven rule families — and [the adoption contract](site/adopt.html).
+- **[The site](index.html)** — built for two readers, the developer and the UI community: [the case for a law](site/why.html), [the architecture in full](site/how.html) (including instruments still in design, honestly labeled), [the Gotchas](site/gotchas/index.html) — twelve interactive offenses beside their lawful twins, split into seven rule families — [the vibes exhibit](site/vibes.html) — one operator screen, one shared state, both cultures at once (Article VI) — and [the adoption contract](site/adopt.html).
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
 - **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the ZinBank, Zin i18n, and Refine evidence trails.

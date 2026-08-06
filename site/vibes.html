@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vibes — two cultures, one truth (the Article VI exhibit)</title>
+<meta name="description" content="The Article VI exhibit: the same operator screen rendered in both vibes at once, driven by one shared state. Act in either pane and the other follows — the truth is shared; only the projection differs. What may flex, and what never does.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css">
+<style>
+/* Scoped curator variables: a pane forces its vibe whatever the page wears.
+   (Guardian's scoped block already lives in stz.css; curator is the :root
+   default, so it needs restating for the pane that must not flip.) */
+[data-vibe="curator"] {
+  --deep: #241d49; --deep-2: #181239; --accent: #e04a6e;
+  --halo: #eae7f6; --paper: #f4f3f9; --ink: #211d33;
+  --muted: #4a4661; --line: #d8d4e6; --card: #fdfcff;
+  --accent-ink: #8f1d3d; --accent-lite: #ff8fa8;
+  --on-accent: #1c0710; --ok: #1d6b4f;
+}
+.exhibit { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.2rem; margin-top: 1rem; align-items: start; }
+.vibe-pane { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.vibe-pane .pane-head { background: var(--deep); color: var(--halo);
+  font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .08em;
+  padding: .4rem .9rem; }
+.vibe-pane .screen { background: var(--paper); color: var(--ink);
+  font: 1.125rem/1.7 var(--sans); padding: 1rem 1.2rem; }
+.vibe-pane[data-vibe="guardian"] .screen { font-family: var(--mono); }
+.scr-title { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap; font-weight: 800; margin-bottom: .4rem; }
+.rowline { display: flex; justify-content: space-between; gap: 1rem; align-items: center;
+  border-bottom: 1px solid var(--line); padding: .35rem 0; }
+.chip { font: 1rem var(--mono); background: none; border: 1px solid var(--accent-ink);
+  color: var(--accent-ink); border-radius: 99px; padding: .05rem .55rem; cursor: pointer; }
+.demo-btn { font: 700 1rem var(--sans); cursor: pointer; border-radius: 7px;
+  border: 1.5px solid var(--muted); background: var(--paper); color: var(--ink);
+  padding: .3rem .8rem; }
+.vibe-pane[data-vibe="guardian"] .demo-btn, .vibe-pane[data-vibe="guardian"] .chip { font-family: var(--mono); }
+.demo-btn:hover { filter: brightness(1.05); }
+.slot-toast { min-height: 3.6rem; padding-top: .7rem; }   /* reserved — Rule 38 */
+.toast { background: var(--deep); color: var(--halo); border: 1px solid var(--line);
+  border-radius: 8px; padding: .55rem 1rem; display: flex; align-items: center; gap: .9rem; }
+.toast button { font: 700 1rem var(--sans); background: var(--accent); color: var(--on-accent);
+  border: none; border-radius: 6px; padding: .25rem .7rem; cursor: pointer; }
+.toast .bar { flex: 1 1 3rem; height: 4px; background: rgba(255,255,255,.25);
+  border-radius: 2px; overflow: hidden; }
+.toast .bar i { display: block; height: 100%; background: var(--accent); }
+.quiet { color: var(--muted); }
+.flexgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.2rem; }
+.flexgrid .card ul { margin: .4rem 0 0; padding-left: 1.2rem; }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html">StzZui</a>
+    <a href="why.html">Why</a>
+    <a href="how.html">How it works</a>
+    <a href="gotchas/">Gotchas</a>
+    <a class="here" href="vibes.html">Vibes</a>
+    <a href="adopt.html">Adopt</a>
+    <a href="../constitution/reader/">Reader</a>
+    <a href="../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Vibes</span></nav>
+    <p class="kicker">The exhibit · Article VI — Operator Primacy and Vibes</p>
+    <h1>Two cultures, one truth</h1>
+    <p class="sub">A vibe is not a theme. It is an interaction culture — and
+    operators' cultures deserve architectural respect. Below, the same
+    operator screen is rendered in both of this site's vibes <em>at once</em>,
+    driven by one shared state: act in either pane and the other follows,
+    because the truth is shared and only the projection differs. That is
+    Article VI, running.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The exhibit</h2>
+    <p class="lead">Clear the filter, delete an invoice, undo it — in either
+    pane. The other pane follows instantly. Meanwhile, press <kbd>F2</kbd>:
+    the page around this exhibit flips culture, but the exhibit itself refuses
+    to — it is showing you both at once.</p>
+    <div class="exhibit">
+      <div class="vibe-pane" data-vibe="curator">
+        <div class="pane-head">Modern · the curator vibe</div>
+        <div class="screen">
+          <div class="scr-title"><span>Invoices — August</span><span class="scr-chip"></span></div>
+          <div class="scr-rows"></div>
+          <div class="scr-total rowline"></div>
+          <div class="slot-toast scr-toast"></div>
+        </div>
+      </div>
+      <div class="vibe-pane" data-vibe="guardian">
+        <div class="pane-head">Retro · the guardian vibe</div>
+        <div class="screen">
+          <div class="scr-title"><span>Invoices — August</span><span class="scr-chip"></span></div>
+          <div class="scr-rows"></div>
+          <div class="scr-total rowline"></div>
+          <div class="slot-toast scr-toast"></div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">One state object renders both panes — there is no
+    synchronization code to get wrong, because there is nothing to
+    synchronize. This is the projection discipline in miniature: the vibe owns
+    <em>how</em>; it has zero freedom over <em>what</em>.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>What may flex, and what never does</h2>
+    <div class="flexgrid">
+      <div class="card"><h3>The vibe owns</h3>
+        <ul>
+          <li>Palette — indigo and rose, or phosphor on black</li>
+          <li>Typeface — proportional prose, or the terminal's mono</li>
+          <li>Density, texture, ornament</li>
+          <li>The medium itself — a screen, a terminal, a voice</li>
+        </ul></div>
+      <div class="card"><h3>The vibe cannot touch</h3>
+        <ul>
+          <li>The six operator rights — understand, reverse, know, leave, act without fear, reach a human</li>
+          <li>The undo window and every declared way back (Article IV)</li>
+          <li>Visible state — the filter chip exists in both cultures (Article III)</li>
+          <li>The keyboard — every act above is a real, reachable button (Rule 80)</li>
+          <li>The same actions, the same labels, the same consequences</li>
+        </ul></div>
+    </div>
+    <p style="margin-top:1.4rem">This is why vibes are law, not skinning:
+    a theme flexes pixels, and nobody audits what it flexed. A vibe is bound
+    by Article VI — <em>vibe-invariant rights never flex</em> — and the
+    <a href="../tools/ui-audit.html">UI audit</a> measures every page of this
+    site in both cultures before it ships, because a page can be lawful in one
+    palette and unlawful in the other.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Vibes in the wild</h2>
+    <p>Every page of this site carries the picker in its footer, and
+    <kbd>F2</kbd> flips culture from the keyboard — sovereignty for the
+    operators who never touch the mouse.
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank"
+    rel="noopener">StzWeb</a> ships the same two cultures in its own livery
+    (teal and orange, amber terminal) — two projects, two liveries, one law.
+    And in the language, the culture is a declaration like any other:
+    <code>DEFINE VIBE</code> is one of the ten declaration types, which is
+    what lets a compiler check that no culture quietly dropped a right.</p>
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="gotchas/"><span class="label">Back</span>← Gotchas</a>
+    <a href="adopt.html"><span class="label">Next</span>Deploy the law →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · One truth, as many
+    cultures as its operators deserve.</p>
+  </div>
+</footer>
+
+<script src="stz.js"></script>
+<script>
+'use strict';
+/* One truth. Two projections. No synchronization — there is nothing to sync. */
+const INV = [
+  { id: 201, who: 'Aminata — cash', amount: 45000 },
+  { id: 202, who: 'Sanda — mobile money', amount: 30000 },
+  { id: 203, who: 'Ibrahim — cash', amount: 12000 }
+];
+const truth = { filter: true, deleted: null, left: 0, committed: [] };
+let undoTimer = null;
+const money = n => n.toLocaleString('en-US') + ' XOF';
+
+function render() {
+  const visible = INV.filter(v => !truth.committed.includes(v.id))
+                     .filter(v => !truth.filter || v.who.includes('cash'));
+  const shown = visible.filter(v => v.id !== truth.deleted);
+  document.querySelectorAll('.vibe-pane').forEach(pane => {
+    pane.querySelector('.scr-chip').innerHTML = truth.filter
+      ? '<button class="chip" data-act="filter-off" title="Clear the filter">filter: cash only ✕</button>'
+      : '<button class="chip" data-act="filter-on">apply cash-only filter</button>';
+    pane.querySelector('.scr-rows').innerHTML = shown.map(v =>
+      '<div class="rowline"><span>#' + v.id + ' — ' + v.who + '</span>' +
+      '<span>' + money(v.amount) + ' <button class="demo-btn" data-act="del" data-id="'
+      + v.id + '">Delete</button></span></div>').join('');
+    pane.querySelector('.scr-total').innerHTML =
+      '<b>Total <span class="quiet">(' + shown.length + ' of ' + INV.length + ')</span></b><b>'
+      + money(shown.reduce((a, v) => a + v.amount, 0)) + '</b>';
+    const t = pane.querySelector('.scr-toast');
+    if (truth.deleted !== null) {
+      t.innerHTML = '<div class="toast"><span>Deleted #' + truth.deleted + '.</span>'
+        + '<span class="bar"><i class="undo-i" style="width:' + truth.left + '%"></i></span>'
+        + '<button data-act="undo">Undo</button></div>';
+    } else if (truth.committed.length) {
+      t.innerHTML = '<p class="quiet" style="margin:0">Committed — after its window, not by ambush. '
+        + '<button class="demo-btn" data-act="reset">reset demo</button></p>';
+    } else { t.innerHTML = ''; }
+  });
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  const act = el.dataset.act;
+  if (act === 'filter-off') truth.filter = false;
+  if (act === 'filter-on') truth.filter = true;
+  if (act === 'del') {
+    truth.deleted = +el.dataset.id; truth.left = 100;
+    clearInterval(undoTimer);
+    undoTimer = setInterval(() => {
+      truth.left -= 1;
+      if (truth.left <= 0) { clearInterval(undoTimer);
+        truth.committed.push(truth.deleted); truth.deleted = null; render(); return; }
+      document.querySelectorAll('.undo-i').forEach(i => { i.style.width = truth.left + '%'; });
+    }, 100);
+  }
+  if (act === 'undo') { clearInterval(undoTimer); truth.deleted = null; }
+  if (act === 'reset') { truth.committed.length = 0; truth.deleted = null; truth.filter = true; }
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
