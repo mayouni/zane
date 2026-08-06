@@ -283,7 +283,7 @@ footer ul { padding-left: 1.2rem; }
   <a href="../../site/adopt.html">Adopt</a>
   <a class="here" href="./">Reader</a>
   <a href="../../tools/ui-audit.html">UI audit</a>
-  <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb ↗</a>
+  <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing ↗</a>
 </nav>
 
 <header>
@@ -359,7 +359,7 @@ footer ul { padding-left: 1.2rem; }
   </button>
   </div>
   <p id="retired-note"></p>
-  <p>Rules badged as machine-enforced are machine law: a conforming linter (StzWeb’s <code>stzw check</code> is the first) loads this
+  <p>Rules badged as machine-enforced are machine law: a conforming linter (Zing’s <code>zing check</code> is the first) loads this
   very file and cites article numbers in its verdicts. Rules marked <em>on the
   enforcement ladder</em> are lintable and queued (Article VII: recurring violations
   are candidates for promotion). The law and the linter cannot drift apart silently.</p>
@@ -396,7 +396,7 @@ function ruleCard(rule, articles) {
   const anchor = 'rule-' + n;
   const badges = [];
   if (rule.enforcement === 'machine')
-    badges.push(`<a class="badge machine" href="#${anchor}" title="${esc(rule.lint || '')}">enforced by stzw check</a>`);
+    badges.push(`<a class="badge machine" href="#${anchor}" title="${esc(rule.lint || '')}">enforced by zing check</a>`);
   else if (rule.enforcement === 'tool')
     badges.push(`<a class="badge machine" href="../../tools/ui-audit.html" title="${esc(rule.lint || '')}">checked by the UI audit</a>`);
   else if (rule.enforcement === 'machine-later')

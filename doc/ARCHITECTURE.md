@@ -41,7 +41,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 | `.zui` declarations | Live in Zin projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — Zin consumes the spec from here |
 | Compile-time violation checks | **[`tools/zui/`](../tools/zui/README.md)** enforces 19 of the 20 contract diagnostics and passes all 30 fixtures — nine of the ten named violations, six of them from a single declaration. Zin `semantic.zig` independently implements four (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) | Cross-pillar symbol *computation* (the verifier accepts a table today); `LAYOUT_DISPLACEMENT` stays with the UI audit, being a fact about a painted page. Whether Zin implements the ten in its own compiler is Zin's call ([decision doc](decisions/M3-the-zui-verifier.md) §7) |
 | Rendered-page measurement | `tools/ui-audit.html` (ported from StzWeb) — measures Rules 105, 107, 108, 114–116 on any same-origin application UI | Grows one measurement per machine-checkable rule |
-| Runtime enforcement | StzWeb's `stzw check` (Zig) lints declarations and cites rule numbers | Remains in StzWeb; other consumers implement their own against the pinned law |
+| Runtime enforcement | Zing's (formerly StzWeb) `zing check` (Zig) lints declarations and cites rule numbers | Remains in Zing; other consumers implement their own against the pinned law |
 
 ## 4. The two enforcement instruments
 
@@ -54,7 +54,7 @@ A rule's `enforcement` field says which instrument owns it: `machine` (declarati
 
 ## 5. The consumer contract
 
-- A consumer **pins a version** of `rules.json` and records it (StzWeb pins v3.6 as of this founding).
+- A consumer **pins a version** of `rules.json` and records it (Zing, formerly StzWeb, pins v3.6 as of this founding).
 - **A version denotes exactly one file.** `MAJOR.MINOR` moves when the law's substance moves — a rule canonized, amended, retired, or promoted up the enforcement ladder. A third component, `MAJOR.MINOR.PATCH`, marks a correction that changes no rule's substance: a stale pointer in a `lint` field, a broken path, a brand name left in normative prose by the law's first home. A consumer pinned at `x.y` loses no protection by staying there when `x.y.z` appears — that is the whole meaning of the patch component. First used at v3.7.1 (2026-08-06).
 - **The substance test**, which decides which component moves: *does any interface that was lawful before become unlawful after — or must any conforming implementation change anything it does?* If no, it is a correction, however much prose changed. Editing a rule's wording is not by itself an amendment; changing what the rule requires is. Applied at v3.7.2, where seven passages were de-branded and not one requirement moved.
 - **Evidence is never corrected.** An `evidence` field records what happened, under the names things had when it happened; so does the `lineage`. A tool renamed later does not falsify the record, and rewriting it to match today's vocabulary would destroy the trail Article VII depends on. Pointers are corrected; history is not.
