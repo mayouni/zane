@@ -1,0 +1,9 @@
+// SATISFIES appears twice. An implementation must not silently merge the
+// lists or take the last one: the declaration is ambiguous and says so.
+// Expected: DUPLICATE_FIELD
+
+DEFINE INTENT_FLOW ambiguous_flow (
+  SATISFIES [READ],
+  ALWAYS_REACHABLE [EXIT],
+  SATISFIES [SCAN]
+)

@@ -1,0 +1,9 @@
+// The lawful twin of trapped-flow.zui: the same wizard, with the way out.
+// Expected: no diagnostics.
+
+DEFINE WIZARD account_opening (
+  SATISFIES [UNDERSTAND, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  STEPS [identity, funding, review],
+  ACTOR applicant
+)

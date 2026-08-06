@@ -1,0 +1,17 @@
+// A realistic bad declaration: several independent failures in one file.
+// An implementation must report all of them, not stop at the first. The
+// wizard collapses selection into action, offers no way back, and cannot be
+// left; the feedback celebrates nothing in particular.
+// Expected: SELECT_ACT_COLLAPSE, MISSING_UNDO, TRAPPED_FLOW,
+//           DECORATIVE_ANIMATION
+
+DEFINE WIZARD bulk_delete (
+  SATISFIES [SELECT, ACT],
+  ALWAYS_REACHABLE [CANCEL],
+  STEPS [choose, apply],
+  ACTOR operator
+)
+
+DEFINE FEEDBACK delete_flourish (
+  TONE celebratory
+)

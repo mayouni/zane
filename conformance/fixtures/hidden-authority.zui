@@ -1,0 +1,10 @@
+// A consequential act -- posting to a ledger -- that names no actor, while
+// the actor model knows of several. Every other obligation is met, so this
+// isolates the authority failure.
+// Level 3: requires symbols.actors.
+// Expected: HIDDEN_AUTHORITY
+
+DEFINE INTENT_FLOW post_ledger_entry (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]
+)

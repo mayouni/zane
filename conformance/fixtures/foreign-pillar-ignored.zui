@@ -1,0 +1,20 @@
+// A file from a multi-pillar host language. DEFINE ENTITY and DEFINE FLOW
+// belong to other pillars; a Zui verifier has no standing to judge them and
+// must ignore them silently -- not warn, not error. The Zui declaration in
+// the same file is checked normally and is lawful.
+// Expected: no diagnostics.
+
+DEFINE ENTITY invoice (
+  FIELD number TEXT,
+  FIELD total DECIMAL
+)
+
+DEFINE FLOW settle_invoice (
+  STEP validate,
+  STEP post
+)
+
+DEFINE INTENT_FLOW review_invoice (
+  SATISFIES [READ, SCAN],
+  ALWAYS_REACHABLE [EXIT]
+)

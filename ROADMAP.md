@@ -26,10 +26,12 @@ A CLI that checks declarations against the law. **The premise changed on contact
 
 - ✅ Decision document opened (2026-08-06): the audit of Zin's compiler, the three options (extract · embed · pillar-filter-first), the recommended sequence, and the open questions Zin must answer.
 - The sequence it recommends: **fixtures and spec first** (StzZui's own work, no dependency on the answer, and what makes the A-vs-B choice reversible) → **Zin's pillar filter** (~10 lines, answers the cross-pillar question empirically) → **then decide** extract vs embed against evidence.
-- The named violations become the contract: `INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION` — six decidable from a single declaration, four needing a symbol table from other pillars.
-- Each violation bound to the constitutional rule it enforces, so the verifier's output cites the law.
-- Conformance fixtures: declarations with known verdicts, so any future implementation (any language) can prove agreement — the StzWeb three-runtimes discipline applied to the verifier itself.
-- Language spec published at `doc/language/`, separating what the language *is* from what any implementation has reached, with Zin credited as reference implementation.
+- ✅ **The language spec published** (2026-08-06) at **[`doc/language/`](doc/language/README.md)** — four documents: the specification and its conformance levels, [the grammar in EBNF](doc/language/GRAMMAR.md) (stated formally for the first time; Zin's spec has none), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the rule it enforces](doc/language/VIOLATIONS.md). It separates what the language *is* from what any implementation has reached, and credits Zin as the reference implementation.
+- ✅ **The conformance fixtures published** (2026-08-06) at **[`conformance/`](conformance/README.md)** — 30 `.zui` declarations with known verdicts, a machine-readable [diagnostic contract](conformance/violations.json) and [suite manifest](conformance/manifest.json). Every violation fixture has a lawful twin, the way the Gotchas do. Comparison is by diagnostic id only — never line numbers, wording or order — so implementations agree about the law and not about presentation.
+- ✅ Each violation bound to the constitutional rule it enforces, in data (`violations.json`), so a verifier's output cites the law rather than expressing opinions.
+- ✅ **Four conformance levels** defined, which is what makes an implementation's claim honest: 1 syntax · 2 local semantics (**the standalone verifier's real target** — six of the ten violations live here) · 3 cross-pillar, given a symbol table the manifest supplies · 4 projection. A fixture above your level is *skipped, not failed*.
+- Next, and Zin's call: **the pillar filter** (~10 lines, answers the cross-pillar question empirically) → **then decide** extract vs embed against evidence. Open questions are in the decision document §7.
+- Still unbuilt, and stated plainly: **no implementation passes the suite today.** Zin enforces four diagnostics — a subset of Level 2 and none of the ten named violations.
 
 ## M4 — Rendering projections
 

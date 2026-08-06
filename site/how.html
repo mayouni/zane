@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How it works — declare, check, project, measure</title>
-<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 24 verbs, 117 rules as data, and a refusal contract of ten named violations.">
+<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 117 rules as data, and a refusal contract of ten named violations.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css">
 <style>
@@ -104,7 +104,7 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   <span class="k">VISIBLE_ENTITIES</span> [<span class="s">order, dish, ingredient</span>],
   <span class="k">SATISFIES</span> [<span class="s">NAVIGATE</span>]
 )</pre>
-    <p>Declarations quantify over a <b>closed grammar of 24 verbs</b> — a new
+    <p>Declarations quantify over a <b>closed grammar of 22 verbs</b> — a new
     medium adds renderings, never verbs. Every UI element must trace to at
     least one intent; an orphan element is a compile error.</p>
     <div class="grid">
@@ -253,8 +253,9 @@ table.plain th { color: var(--muted); text-transform: uppercase;
         <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
         <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
         <tr><td>StzWeb's <code>stzw check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in StzWeb</td></tr>
-        <tr><td>The <code>zui</code> verifier CLI</td><td>the named violations, plus conformance fixtures so any implementation can prove agreement — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc open</a></td><td class="status design">in design — M3</td></tr>
-        <tr><td>Language spec, <code>doc/language/</code></td><td>the grammar and declaration types specified here, where the law lives</td><td class="status design">in design — M3</td></tr>
+        <tr><td><a href="../doc/language/README.md">The language specification</a></td><td>Zui v1.0 — the grammar in EBNF, the ten declaration types, every diagnostic bound to the rule it enforces</td><td class="status live">published</td></tr>
+        <tr><td><a href="../conformance/README.md">The conformance suite</a></td><td>30 declarations with known verdicts and four conformance levels, so any implementation can prove agreement rather than assert it</td><td class="status live">published</td></tr>
+        <tr><td>The <code>zui</code> verifier CLI</td><td>an implementation of the named violations, to be measured against the suite — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc open</a></td><td class="status design">in design — M3</td></tr>
         <tr><td>Projection tables as data</td><td>intent→widget maps per medium, checkable like rules</td><td class="status design">in design — M4</td></tr>
         <tr><td>The AI-interaction jurisdiction</td><td>chat-stream rules; an MCP surface serving the law to generators while they generate</td><td class="status design">in design — M5</td></tr>
       </tbody>

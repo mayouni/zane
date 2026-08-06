@@ -20,7 +20,7 @@ Three things, strictly layered — the architecture inherited from the Zui pilla
 
 | Layer | Artifact | Status |
 |---|---|---|
-| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 24 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: Zin's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
+| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: Zin's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
 | **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.7.2, 117 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
 | **3 · Rendering projections** | Per-medium consumers: business web (StzWeb), Zin's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
@@ -31,6 +31,8 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 - **[The site](index.html)** — built for two readers, the developer and the UI community: [the case for a law](site/why.html), [the architecture in full](site/how.html) (including instruments still in design, honestly labeled), [the Gotchas](site/gotchas/index.html) — twelve interactive offenses beside their lawful twins, split into seven rule families — [the vibes exhibit](site/vibes.html) — one operator screen, one shared state, both cultures at once (Article VI) — and [the adoption contract](site/adopt.html).
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
 - **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
+- **[The language specification](doc/language/README.md)** — Zui v1.0: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). Honest throughout about what is specified versus what any implementation has reached.
+- **[The conformance suite](conformance/README.md)** — 30 `.zui` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; every violation fixture has a lawful twin.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the ZinBank, Zin i18n, and Refine evidence trails.
 - **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zui` language and compiler out of Zin.
 - **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zui` verifier to the educational showcase.

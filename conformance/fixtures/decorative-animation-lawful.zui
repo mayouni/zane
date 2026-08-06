@@ -1,0 +1,8 @@
+// The lawful twin of decorative-animation.zui: the feedback reports the
+// state it is feedback about.
+// Expected: no diagnostics.
+
+DEFINE FEEDBACK saved_confirmation (
+  TONE informational,
+  REPORTS [save_state]
+)

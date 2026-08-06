@@ -1,0 +1,8 @@
+// Feedback that reports nothing. The TONE is valid, so this is not
+// INVALID_TONE -- the defect is that the surface celebrates without saying
+// what happened.
+// Expected: DECORATIVE_ANIMATION
+
+DEFINE FEEDBACK saved_pulse (
+  TONE celebratory
+)

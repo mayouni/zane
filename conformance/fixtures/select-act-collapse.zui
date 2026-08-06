@@ -1,0 +1,10 @@
+// Choosing a row executes it. No CONFIRM stands between interest and
+// commitment. Every other obligation is met, so this fixture isolates
+// SELECT_ACT_COLLAPSE.
+// Expected: SELECT_ACT_COLLAPSE
+
+DEFINE INTENT_FLOW pick_and_pay (
+  SATISFIES [SELECT, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR operator
+)

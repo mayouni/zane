@@ -1,0 +1,9 @@
+// PERSPECTIVE admits exactly four values: top_down, isometric, first_person,
+// side_scroll. "birds_eye" is not among them, however reasonable it sounds.
+// The reference implementation ships this as ZUI-E001.
+// Expected: INVALID_PERSPECTIVE
+
+DEFINE WORLD_VIEW floor_map (
+  PERSPECTIVE birds_eye,
+  SATISFIES [DISCOVER, LOCATE]
+)

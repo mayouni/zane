@@ -1,0 +1,8 @@
+// The smallest lawful declaration: one flow that acts, and every way back.
+// Expected: no diagnostics, at any level.
+
+DEFINE INTENT_FLOW approve_payment (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR approver
+)

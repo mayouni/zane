@@ -1,0 +1,10 @@
+// The manifest supplies an element inventory of [balance_card,
+// export_button]. balance_card traces to READ; export_button traces to
+// nothing. An element that exists and serves no intent is the foundational
+// error of the language.
+// Level 3: requires symbols.elements.
+// Expected: INTENT_ORPHAN
+
+DEFINE COMPONENT balance_card (
+  SATISFIES [READ]
+)

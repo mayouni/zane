@@ -1,0 +1,13 @@
+// The lawful twin of read-act-collapse.zui: the reading surface reads, and
+// the act lives on its own flow.
+// Expected: no diagnostics.
+
+DEFINE SCREEN invoice_reader (
+  SATISFIES [READ, SCAN]
+)
+
+DEFINE INTENT_FLOW void_invoice (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR clerk
+)

@@ -1,0 +1,12 @@
+// The manifest's entity model holds [table, order, server]. The view claims
+// to show "ghost_entity", which the model has never heard of. This is the
+// check the reference implementation does not perform today:
+// VISIBLE_ENTITIES is parsed and emitted to IR but never resolved.
+// Level 3: requires symbols.entities.
+// Expected: UNRESOLVED_ENTITY
+
+DEFINE WORLD_VIEW floor_map (
+  PERSPECTIVE top_down,
+  VISIBLE_ENTITIES [table, order, ghost_entity],
+  SATISFIES [DISCOVER, LOCATE, SCAN]
+)

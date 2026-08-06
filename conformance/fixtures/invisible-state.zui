@@ -1,0 +1,11 @@
+// The manifest supplies a state model holding [active_filter,
+// pending_drafts]. The navigation shows pending_drafts and says nothing
+// about active_filter -- the operator draws conclusions from a filtered
+// view without being told it is filtered.
+// Level 3: requires symbols.state.
+// Expected: INVISIBLE_STATE
+
+DEFINE NAV_GRAPH orders_nav (
+  SATISFIES [LOCATE],
+  VISIBLE_STATE [pending_drafts]
+)

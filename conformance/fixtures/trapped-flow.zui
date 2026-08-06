@@ -1,0 +1,12 @@
+// A three-step wizard with no reachable EXIT. UNDO and CANCEL are present:
+// the human can reverse a step and abandon the step, but cannot leave the
+// flow. Scope matters here -- a single-surface INTENT_FLOW omitting EXIT is
+// not trapped; a multi-step one is.
+// Expected: TRAPPED_FLOW
+
+DEFINE WIZARD account_opening (
+  SATISFIES [UNDERSTAND, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  STEPS [identity, funding, review],
+  ACTOR applicant
+)

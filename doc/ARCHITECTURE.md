@@ -21,7 +21,7 @@ LAYER 3 — RENDERING PROJECTIONS      per-medium, replaceable, evolvable
 LAYER 2 — THE CONSTITUTION           non-negotiable, machine-checkable, trend-resistant
           constitution/rules.json — 117 rules under 7 articles
 LAYER 1 — THE INTENT GRAMMAR         closed, finite, medium-agnostic
-          24 verbs: DISCOVER UNDERSTAND LOCATE · FOCUS FILTER COMPARE ·
+          22 verbs: DISCOVER UNDERSTAND LOCATE · FOCUS FILTER COMPARE ·
           READ SCAN SCROLL ZOOM · SELECT HIGHLIGHT PREVIEW MARK ·
           ACT CONFIRM CANCEL UNDO · PAUSE RESUME RETRY EXIT
 ```
@@ -36,7 +36,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 
 | Piece | Today | Destination |
 |---|---|---|
-| The language (Layer 1) | **Owned by this project.** Historically specified in Zin's ZUI_SPECIFICATION_v3_0; parsed today by Zin's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) — a consumer serving as reference implementation | Language spec published here (`doc/language/`, M3); conformance fixtures so any implementation can prove agreement |
+| The language (Layer 1) | **Owned by this project and specified here** — [`doc/language/`](language/README.md) v1.0: the grammar in EBNF, the ten declaration types, the diagnostic contract. Parsed today by Zin's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) — a consumer serving as reference implementation | Implementations prove agreement against [`conformance/`](../conformance/README.md) — 30 fixtures with known verdicts, four conformance levels |
 | The Constitution (Layer 2) | **Canonical here** — `constitution/rules.json` v3.7.2 | Stays; consumers pin versions |
 | `.zui` declarations | Live in Zin projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — Zin consumes the spec from here |
 | Compile-time violation checks | Zin `semantic.zig` implements **four** Zui diagnostics today: `ZUI-W001` (INTENT_FLOW without SATISFIES), `ZUI-E001` (invalid PERSPECTIVE), `ZUI-E002` (invalid TONE), `ZUI-W010` (unresolved INTENT_FLOWS ref) | The ten named violations (`INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION`) are the **specified contract, not yet implemented anywhere** — M3 builds them against a published spec and conformance fixtures ([decision doc](decisions/M3-the-zui-verifier.md)) |

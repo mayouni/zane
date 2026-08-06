@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "title": "The Zui Conformance Suite",
+    "version": "1.0",
+    "lastUpdated": "2026-08-06",
+    "specification": "doc/language/README.md",
+    "diagnostics": "conformance/violations.json",
+    "constitution": "3.7.2",
+    "comparison": "A run passes a fixture when the set of diagnostic ids it reports, filtered to the levels the implementation claims, equals expect_ids exactly. Line numbers, message wording, ordering and severity phrasing are NOT compared -- an implementation may phrase its prose in any language its operator reads.",
+    "levels_note": "A fixture whose level exceeds the implementation's claimed level is SKIPPED, not failed. An implementation reports the level it satisfies; the suite records it."
+  },
+  "symbols_note": "Level 3 fixtures carry the symbol table they need, so a standalone verifier can be tested without a host language. An implementation that computes symbols itself may ignore this field; one that accepts symbols as input should load it.",
+  "fixtures": [
+    {
+      "file": "clean-minimal.zui",
+      "level": 1,
+      "expect_ids": [],
+      "note": "The smallest lawful declaration. Any diagnostic here is a false positive."
+    },
+    {
+      "file": "clean-full.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Every construct of the grammar, lawfully. Quoted verbatim in GRAMMAR.md section 6."
+    },
+    {
+      "file": "select-act-collapse.zui",
+      "level": 2,
+      "expect_ids": ["SELECT_ACT_COLLAPSE"]
+    },
+    {
+      "file": "select-act-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin: CONFIRM stands between selection and execution."
+    },
+    {
+      "file": "read-act-collapse.zui",
+      "level": 2,
+      "expect_ids": ["READ_ACT_COLLAPSE"]
+    },
+    {
+      "file": "read-act-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin: the act moved to its own flow."
+    },
+    {
+      "file": "missing-undo.zui",
+      "level": 2,
+      "expect_ids": ["MISSING_UNDO"]
+    },
+    {
+      "file": "missing-undo-lawful.zui",
+      "level": 2,
+      "expect_ids": []
+    },
+    {
+      "file": "missing-cancel.zui",
+      "level": 2,
+      "expect_ids": ["MISSING_CANCEL"]
+    },
+    {
+      "file": "missing-cancel-lawful.zui",
+      "level": 2,
+      "expect_ids": []
+    },
+    {
+      "file": "trapped-flow.zui",
+      "level": 2,
+      "expect_ids": ["TRAPPED_FLOW"],
+      "note": "Scope test: the same omission on a single-surface INTENT_FLOW is not a violation."
+    },
+    {
+      "file": "trapped-flow-lawful.zui",
+      "level": 2,
+      "expect_ids": []
+    },
+    {
+      "file": "decorative-animation.zui",
+      "level": 2,
+      "expect_ids": ["DECORATIVE_ANIMATION"]
+    },
+    {
+      "file": "decorative-animation-lawful.zui",
+      "level": 2,
+      "expect_ids": []
+    },
+    {
+      "file": "unknown-intent.zui",
+      "level": 1,
+      "expect_ids": ["UNKNOWN_INTENT"],
+      "note": "NAVIGATE. The defect Zin's own reference declaration commits today."
+    },
+    {
+      "file": "unspecified-declaration.zui",
+      "level": 1,
+      "expect_ids": ["UNSPECIFIED_DECLARATION"],
+      "note": "WIDGET. An implementation that defines WIDGET reports nothing here and is an extension, not a failure -- see conformance/README.md."
+    },
+    {
+      "file": "duplicate-field.zui",
+      "level": 1,
+      "expect_ids": ["DUPLICATE_FIELD"]
+    },
+    {
+      "file": "duplicate-declaration.zui",
+      "level": 1,
+      "expect_ids": ["DUPLICATE_DECLARATION"]
+    },
+    {
+      "file": "comments-and-formatting.zui",
+      "level": 1,
+      "expect_ids": [],
+      "note": "Lexical robustness: irregular whitespace, trailing commas, empty body, no trailing newline."
+    },
+    {
+      "file": "intent-flow-no-satisfies.zui",
+      "level": 2,
+      "expect_ids": ["INTENT_FLOW_NO_SATISFIES"]
+    },
+    {
+      "file": "invalid-perspective.zui",
+      "level": 2,
+      "expect_ids": ["INVALID_PERSPECTIVE"]
+    },
+    {
+      "file": "invalid-tone.zui",
+      "level": 2,
+      "expect_ids": ["INVALID_TONE"]
+    },
+    {
+      "file": "unresolved-intent-flow.zui",
+      "level": 2,
+      "expect_ids": ["UNRESOLVED_INTENT_FLOW"]
+    },
+    {
+      "file": "vibe-strips-right.zui",
+      "level": 2,
+      "expect_ids": ["VIBE_STRIPS_RIGHT"]
+    },
+    {
+      "file": "multiple-violations.zui",
+      "level": 2,
+      "expect_ids": ["SELECT_ACT_COLLAPSE", "MISSING_UNDO", "TRAPPED_FLOW", "DECORATIVE_ANIMATION"],
+      "note": "An implementation must report every independent failure, not stop at the first."
+    },
+    {
+      "file": "foreign-pillar-ignored.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Non-Zui declarations must be ignored silently. A warning here is a failure."
+    },
+    {
+      "file": "intent-orphan.zui",
+      "level": 3,
+      "expect_ids": ["INTENT_ORPHAN"],
+      "symbols": {
+        "elements": ["balance_card", "export_button"]
+      }
+    },
+    {
+      "file": "invisible-state.zui",
+      "level": 3,
+      "expect_ids": ["INVISIBLE_STATE"],
+      "symbols": {
+        "state": ["active_filter", "pending_drafts"]
+      }
+    },
+    {
+      "file": "hidden-authority.zui",
+      "level": 3,
+      "expect_ids": ["HIDDEN_AUTHORITY"],
+      "symbols": {
+        "actors": ["accountant", "auditor"]
+      }
+    },
+    {
+      "file": "unresolved-entity.zui",
+      "level": 3,
+      "expect_ids": ["UNRESOLVED_ENTITY"],
+      "symbols": {
+        "entities": ["table", "order", "server"]
+      }
+    }
+  ],
+  "unfixtured": [
+    {
+      "id": "LAYOUT_DISPLACEMENT",
+      "level": 4,
+      "reason": "Undecidable from a declaration: it is a fact about a painted page. Measured today by tools/ui-audit.html. A fixture here would be theatre -- the suite says so rather than pretending coverage."
+    }
+  ]
+}

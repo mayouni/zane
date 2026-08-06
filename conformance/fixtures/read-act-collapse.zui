@@ -1,0 +1,9 @@
+// A reading surface that mutates. Unlike SELECT_ACT_COLLAPSE there is no
+// CONFIRM that repairs this: reading and acting belong on different surfaces.
+// Expected: READ_ACT_COLLAPSE
+
+DEFINE SCREEN invoice_reader (
+  SATISFIES [READ, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR clerk
+)

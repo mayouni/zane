@@ -1,0 +1,10 @@
+// NAVIGATE is not one of the 22 verbs. It reads like one, which is exactly
+// why the grammar is closed -- and why Zin's own reference declaration
+// (projects/restolean/src/model/restaurant.zui) commits this defect today.
+// Navigation is LOCATE (going to a known place) or DISCOVER (finding what
+// places exist).
+// Expected: UNKNOWN_INTENT
+
+DEFINE SCREEN orders_home (
+  SATISFIES [NAVIGATE]
+)

@@ -1,0 +1,9 @@
+// The human may begin but not stop. UNDO reverses what was done; CANCEL
+// abandons what is being done, and it is absent.
+// Expected: MISSING_CANCEL
+
+DEFINE INTENT_FLOW submit_claim (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, EXIT],
+  ACTOR claimant
+)

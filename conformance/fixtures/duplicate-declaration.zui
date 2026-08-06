@@ -1,0 +1,11 @@
+// Two declarations share a kind and a name. Which one binds is not a
+// question the language leaves open.
+// Expected: DUPLICATE_DECLARATION
+
+DEFINE SCREEN home (
+  SATISFIES [DISCOVER]
+)
+
+DEFINE SCREEN home (
+  SATISFIES [SCAN]
+)

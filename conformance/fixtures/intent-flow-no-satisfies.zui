@@ -1,0 +1,7 @@
+// A flow that declares no intents is a name, not a flow. This is the
+// diagnostic the reference implementation ships as ZUI-W001.
+// Expected: INTENT_FLOW_NO_SATISFIES
+
+DEFINE INTENT_FLOW nameless_purpose (
+  ALWAYS_REACHABLE [EXIT]
+)

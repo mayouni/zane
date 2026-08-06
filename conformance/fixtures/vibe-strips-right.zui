@@ -1,0 +1,17 @@
+// A vibe may change density, typeface, medium and motion. It may not remove
+// an intent another declaration guarantees as ALWAYS_REACHABLE. This kiosk
+// culture suppresses UNDO, which approve_payment promises -- Article VI's
+// vibe-invariant rights, made checkable.
+// Expected: VIBE_STRIPS_RIGHT
+
+DEFINE INTENT_FLOW approve_payment (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR approver
+)
+
+DEFINE VIBE kiosk_minimal (
+  SURFACE_AS kiosk,
+  DENSITY compact,
+  SUPPRESSES [UNDO]
+)

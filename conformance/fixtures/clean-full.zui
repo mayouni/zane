@@ -1,0 +1,56 @@
+// Every construct of the grammar, lawfully. This file is quoted verbatim as
+// the worked example in doc/language/GRAMMAR.md section 6 -- if one changes,
+// both change.
+// Expected: no diagnostics, at any level.
+
+DEFINE INTENT_FLOW approve_payment (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR approver
+)
+
+DEFINE FORM payment_form (
+  INTENT_FLOW approve_payment
+)
+
+DEFINE WIZARD onboarding (
+  SATISFIES [UNDERSTAND, ACT, CONFIRM],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  STEPS [identity, contact, review],
+  ACTOR applicant
+)
+
+DEFINE SCREEN payments_home (
+  SATISFIES [DISCOVER, LOCATE, SCAN]
+)
+
+DEFINE COMPONENT balance_card (
+  SATISFIES [READ]
+)
+
+DEFINE NAV_GRAPH payments_nav (
+  SATISFIES [LOCATE],
+  VISIBLE_STATE [active_filter, pending_count]
+)
+
+DEFINE WORLD_VIEW floor_map (
+  PERSPECTIVE top_down,
+  VISIBLE_ENTITIES [table, order, server],
+  SATISFIES [DISCOVER, LOCATE, SCAN]
+)
+
+DEFINE INTERACTION confirm_gesture (
+  SATISFIES [CONFIRM],
+  ALWAYS_REACHABLE [CANCEL]
+)
+
+DEFINE FEEDBACK payment_sent (
+  TONE informational,
+  REPORTS [transfer_state]
+)
+
+DEFINE VIBE operator_dense (
+  DENSITY compact,
+  SURFACE_AS terminal,
+  MOTION none
+)

@@ -1,0 +1,14 @@
+// Lexical robustness: comments in odd places, irregular whitespace, a
+// trailing comma in a field list and in a bracket list, and an empty body.
+// None of this is a diagnostic.
+// Expected: no diagnostics.
+
+    // an indented comment before a declaration
+
+DEFINE   SCREEN    spaced_out   (
+      SATISFIES [ DISCOVER , LOCATE , ],   // trailing comma in the list
+)                                          // trailing comma in the fields
+
+DEFINE COMPONENT empty_but_legal ( )
+
+// a comment at end of file, with no trailing newline after it

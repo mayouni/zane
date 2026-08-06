@@ -1,0 +1,10 @@
+// TONE admits exactly five values: celebratory, cautionary, critical,
+// neutral, informational. The reference implementation ships this as
+// ZUI-E002. REPORTS is present so the fixture isolates the enumeration
+// failure rather than also raising DECORATIVE_ANIMATION.
+// Expected: INVALID_TONE
+
+DEFINE FEEDBACK deploy_result (
+  TONE triumphant,
+  REPORTS [deploy_state]
+)

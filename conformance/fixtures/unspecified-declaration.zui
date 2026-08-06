@@ -1,0 +1,10 @@
+// WIDGET is recognized by the reference implementation but is not a
+// declaration type of this language: a widget is a consequence of intent,
+// never a declared primitive. A warning, not an error -- the difference
+// between the language and its reference implementation should be visible
+// rather than silent.
+// Expected: UNSPECIFIED_DECLARATION
+
+DEFINE WIDGET revenue_card (
+  SATISFIES [READ]
+)

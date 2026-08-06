@@ -1,0 +1,9 @@
+// An act with no way back. CONFIRM is present, so this is not a collapse;
+// CANCEL and EXIT are present, so it is not trapped. Only UNDO is missing.
+// Expected: MISSING_UNDO
+
+DEFINE INTENT_FLOW post_entry (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [CANCEL, EXIT],
+  ACTOR accountant
+)
