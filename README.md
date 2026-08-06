@@ -1,6 +1,6 @@
 # StzZui
 
-**The Zui Constitution, at home. A machine-verifiable law for user interfaces — abstract, data-oriented, platform-independent, opinionated toward business applications.**
+**Zui is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 117 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
 
 A Softanza project · Tunis · Niamey · Paris
 
@@ -20,11 +20,11 @@ Three things, strictly layered — the architecture inherited from the Zui pilla
 
 | Layer | Artifact | Status |
 |---|---|---|
-| **1 · Intent Grammar** | 24 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | Specified in Zin; residence moving here ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
+| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 24 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: Zin's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
 | **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.7, 117 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
 | **3 · Rendering projections** | Per-medium consumers: business web (StzWeb), Zin's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
-The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces.
+The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces. And the law has a native habitat: the language. One declaration holds at three moments — checked at design time, linted in development, measured at runtime — with no framework to swap and no dependency to take.
 
 ## What is in this repository today
 

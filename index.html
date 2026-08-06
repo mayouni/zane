@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StzZui — the law of user interfaces</title>
-<meta name="description" content="StzZui: a machine-verifiable constitution for user interfaces — 117 rules as data, a closed intent grammar, measured by tooling, independent of any framework. Extracted defect by defect from a year of building real applications with AI.">
+<title>StzZui — the compilable language for user interfaces</title>
+<meta name="description" content="StzZui: a declarative, compilable language for intent-driven user interfaces, governed by a machine-verifiable constitution of 117 rules. Declare what the human is doing; the compiler refuses what the law forbids; projections render to any medium; the audit measures what runtime paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="site/stz.css">
 <style>
@@ -33,90 +33,120 @@
 
 <header class="page">
   <div class="narrow">
-    <p class="kicker">A Softanza project · Tunis · Niamey · Paris</p>
-    <h1>The law of user interfaces</h1>
-    <p class="sub">A machine-verifiable constitution for interfaces: <b>117
-    rules as data</b>, derived from seven articles, quantified over a closed
-    grammar of 24 human intents. Independent of any framework, any language,
-    any platform. Written because the AI era needed it: <b>every rule above
-    104 was canonized from a defect an AI produced while building a real
-    application</b> — and without a law a machine can refuse to violate, the
-    defects regenerate at machine speed.</p>
+    <p class="kicker">A Softanza project · a language with a court</p>
+    <h1>The compilable language for user interfaces</h1>
+    <p class="sub">Zui is a <b>declarative language for intent-driven UIs</b>.
+    You declare what the human is trying to do — discover, select, confirm,
+    undo — and the compiler refuses what its constitution forbids,
+    <em>before anything is rendered</em>. Behind the language: a
+    machine-verifiable law of 117 rules as data. In front of it: projections
+    to any medium — web, CLI, voice, game worlds, AI-agent surfaces. It
+    deploys inside any software project and holds at every phase: design,
+    development, runtime.</p>
   </div>
 </header>
 
 <section>
   <div class="narrow">
-    <h2>The law, in numbers</h2>
-    <div class="stats">
-      <div class="card"><b>117</b><p>rules in force, v3.7, each with its why and its evidence</p></div>
-      <div class="card"><b>7</b><p>articles — the axioms the rules derive from</p></div>
-      <div class="card"><b>24</b><p>closed intent verbs, DISCOVER … EXIT</p></div>
-      <div class="card"><b>6</b><p>operator rights, traceable to enforcing rules</p></div>
-      <div class="card"><b>15</b><p>forbidden patterns, named outright</p></div>
-      <div class="card"><b>14</b><p>rules already refused by machine or measured by tool</p></div>
-    </div>
+    <h2>Ninety seconds of Zui</h2>
+    <p class="lead">A payment approval, declared before a single pixel exists.
+    Note what is <em>absent</em>: no widgets, no layout, no framework.</p>
+<pre class="shot"><span class="c">// payments.zui — design phase, day one</span>
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>]      <span class="c">// interest → review → commitment</span>
+)</pre>
+<pre class="term"><span class="dim">$ zui check payments.zui</span>
+<span class="bad">MISSING_UNDO</span>  approve_payment: an act declares no way back  <span class="dim">[Rule 79 · The Undo Covenant]</span></pre>
+    <p>The interface you were about to build has just been refused — at design
+    time, by structure, citing the law. Declare the way back and it stands:</p>
+<pre class="shot"><span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
+)</pre>
+<pre class="term"><span class="dim">$ zui check payments.zui</span>
+<span class="good">clean</span> — 1 flow, 0 violations against Zui v3.7</pre>
+    <p class="caption">The grammar and these structural checks compile today in
+    the reference implementation, inside the Zin platform — a consumer of this
+    language like any other. The standalone <code>zui</code> CLI is in design
+    (M3); every other instrument on this page runs now. The
+    <a href="site/how.html">status board</a> keeps the whole account honest.</p>
   </div>
 </section>
 
 <section class="alt">
+  <div class="narrow">
+    <h2>The language, in numbers</h2>
+    <div class="stats">
+      <div class="card"><b>24</b><p>closed intent verbs, DISCOVER … EXIT — widgets are consequences</p></div>
+      <div class="card"><b>10</b><p>declaration types, INTENT_FLOW to VIBE</p></div>
+      <div class="card"><b>117</b><p>constitutional rules as data, v3.7 — the semantic layer</p></div>
+      <div class="card"><b>10</b><p>violations refused by name at compile time</p></div>
+      <div class="card"><b>15</b><p>forbidden patterns, named outright</p></div>
+      <div class="card"><b>3</b><p>phases held: design, development, runtime</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
   <div class="narrow readers">
     <h2>Three ways in</h2>
     <div class="grid">
       <div class="card"><h3>You build business software</h3>
-        <p>Pin one JSON file, lint against it, cite rule numbers instead of
-        arguing taste. Audit the painted page in your browser. No framework,
-        no dependency.</p>
-        <span class="proof"><a href="site/adopt.html">Adopt the law →</a></span></div>
+        <p>Declare intent before you render, gate your CI on the law, measure
+        the painted page in your browser. Framework-independent by
+        construction — the declaration outlives your stack.</p>
+        <span class="proof"><a href="site/adopt.html">Deploy it in your project →</a></span></div>
       <div class="card"><h3>You design, or you care about UX</h3>
         <p>The full argument: what is decaying, why guidelines failed, and the
         recorded evidence — a year of AI-built applications, defect by defect,
         correction by correction.</p>
         <span class="proof"><a href="site/why.html">Read the case →</a></span></div>
       <div class="card"><h3>You generate UIs with AI</h3>
-        <p>The defects your generator reproduces have numbers here. Put the law
-        in its context, make it cite what it obeyed, measure the result — the
-        loop works today.</p>
+        <p>Make the generator declare intent before it draws, and hold it to a
+        law it can be measured against. The defects it reproduces have numbers
+        here — feel them first.</p>
         <span class="proof"><a href="site/gotchas.html">Feel the offenses →</a></span></div>
     </div>
   </div>
 </section>
 
-<section>
+<section class="alt">
   <div class="narrow">
     <h2>What makes it different</h2>
-    <p><b>It starts from intent, not widgets.</b> A human never comes to click
-    a button; they come to discover, compare, act, confirm, undo. Zui declares
-    the intent and treats rendering as a consequence — which is what makes
-    correctness <em>compilable</em>: a selection that executes, a flow with no
-    exit, an act with no undo are structural errors, refused by name.</p>
-    <p><b>The law is data.</b> One versioned JSON file is the single source of
-    truth: the reader renders it, linters load it, findings cite it, and no
-    prose copy can drift from what the machine enforces. Amendment requires
-    documented evidence — never fashion — and retired numbers are never
-    reused.</p>
-    <p><b>It is enforced twice.</b> Before rendering, a declaration checker
-    refuses unlawful structure; after rendering, <a href="tools/ui-audit.html">the
-    UI audit</a> measures the painted page — sizes, true contrast, the trail,
-    the room, the menu against the tree. <a href="site/how.html">The full
-    architecture</a> shows every facet, including the instruments still in
-    design.</p>
+    <p><b>It is a language, not a library.</b> A human never comes to click a
+    button; they come to discover, compare, act, confirm, undo. Zui makes that
+    declarable — ten declaration types over a closed grammar of 24 verbs — and
+    therefore <em>compilable</em>: a selection that executes, a flow with no
+    exit, an act with no undo are structural errors, refused by name before
+    the interface exists.</p>
+    <p><b>Its semantics are a law, and the law is data.</b> One versioned JSON
+    file — 117 rules, each with its why, its evidence, its enforcement tier —
+    is the single source of truth. The compiler checks against it, linters
+    load it, findings cite it, and no prose can drift from what the machine
+    enforces. Amendment requires documented evidence, never fashion.</p>
+    <p><b>It holds at three moments.</b> At design time the declaration is
+    checked before a pixel exists. In development every build is linted and
+    every finding carries a rule number. At runtime
+    <a href="tools/ui-audit.html">the UI audit</a> measures the painted page —
+    sizes, true contrast, the trail, the room, the menu against the tree.
+    <a href="site/how.html">The full pipeline</a>, including the instruments
+    still in design, is documented facet by facet.</p>
   </div>
 </section>
 
-<section class="alt">
+<section>
   <div class="narrow">
     <h2>Proof, not promises</h2>
     <p>This site obeys the law it publishes: it audits itself, in both of its
     vibes, before any page ships — press <kbd>F2</kbd> to switch culture and
     notice that your rights don't flex (Article VI). The
     <a href="site/gotchas.html">Gotchas</a> let you commit twelve offenses
-    yourself, safely fenced, each beside its lawful twin.
-    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank"
-    rel="noopener">StzWeb</a>, the first conforming consumer, lints its
-    declarations against the law and scores zero violations under the audit;
-    the <b>Zin</b> platform's compiler parses the intent grammar and refuses
-    the named violations today.</p>
+    yourself, safely fenced, each beside its lawful twin. The consumers are
+    real: the <b>Zin</b> platform compiles the grammar and refuses the named
+    violations today, and <a class="leaves"
+    href="https://mayouni.github.io/stzweb/" target="_blank"
+    rel="noopener">StzWeb</a> lints its declarations against the pinned law
+    and scores zero violations under the audit.</p>
     <p>The stance is opinionated, openly: <b>business applications first</b> —
     operators, not explorers. Calm over power. Intent over mechanics. Visible
     over hidden. Undo is dignity.</p>
@@ -142,7 +172,7 @@
         </select>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · The law and its tools read
+    <p class="fine">© 2026 StzZui — a Softanza project · The language and its law read
     the same file; they cannot drift apart silently.</p>
   </div>
 </footer>

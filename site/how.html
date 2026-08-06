@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How it works — three layers, two instruments, one data file</title>
-<meta name="description" content="The architecture of the Zui Constitution: a closed intent grammar of 24 verbs, a machine-checkable law of 117 rules as data, rendering projections that own how but never what — and the instruments that enforce it before and after rendering.">
+<title>How it works — declare, check, project, measure</title>
+<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 24 verbs, 117 rules as data, ten violations refused by name.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css">
 <style>
@@ -21,6 +21,8 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   overflow-wrap: anywhere; }
 .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1.2rem; }
 .tiers .card b { font-size: 1.6rem; color: var(--accent-ink); display: block; }
+.pipe .card h3 .stepnum { color: var(--accent-ink); font-family: var(--mono); }
+.decls { font: 700 1rem var(--mono); color: var(--accent-ink); overflow-wrap: anywhere; }
 </style>
 </head>
 <body>
@@ -41,53 +43,51 @@ table.plain th { color: var(--muted); text-transform: uppercase;
 <header class="page">
   <div class="narrow">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><a href="why.html">Why</a><span class="here-crumb" aria-current="page">How it works</span><a href="gotchas.html">Gotchas</a><a href="adopt.html">Adopt</a><a href="../constitution/reader/">Reader</a><a href="../tools/ui-audit.html">UI audit</a></span></nav>
-    <p class="kicker">The architecture · three layers, strictly ordered</p>
-    <h1>How the law works</h1>
+    <p class="kicker">The pipeline · declare → check → project → measure</p>
+    <h1>How the language works</h1>
     <p class="sub">Most UI frameworks begin with a physical assumption — screens,
     widgets, layouts — and try to infer what the user intends. Zui inverts the
-    order: it starts from human intent and treats rendering as a consequence.
-    Once intent is explicit, interface correctness becomes <em>compilable</em>:
-    violations are detectable before the interface ships, not after users
-    complain. Lower layers constrain upper layers; upper layers never redefine
-    lower ones.</p>
+    order: <b>you declare human intent, and rendering is a consequence.</b>
+    Once intent is source code, interface correctness is compilable: violations
+    are refused before the interface exists, cited while it is built, and
+    measured after it is painted. One declaration, one law, every phase of the
+    project.</p>
   </div>
 </header>
 
 <section>
-  <div class="narrow">
-    <h2><span class="num">Layer 1</span> · The intent grammar</h2>
-    <p>Twenty-four verbs, closed and medium-agnostic. A human never comes to an
-    interface to click a button; they come to do one of these. A new medium adds
-    <em>renderings</em>, never verbs — exactly as a query language's verb set is
-    closed. Every UI element must trace to at least one intent; an orphan
-    element is a compile error.</p>
+  <div class="narrow pipe">
+    <h2>The pipeline</h2>
     <div class="grid">
-      <div class="card"><h3>Orienting</h3><p class="verbs">DISCOVER · UNDERSTAND · LOCATE</p>
-        <p>Discovery must be satisfiable at every entry point.</p></div>
-      <div class="card"><h3>Attention</h3><p class="verbs">FOCUS · FILTER · COMPARE</p>
-        <p>An active filter is visible state; focus and discovery cannot both be at maximum.</p></div>
-      <div class="card"><h3>Information</h3><p class="verbs">READ · SCAN · SCROLL · ZOOM</p>
-        <p>A read surface that silently acts is an intent violation.</p></div>
-      <div class="card"><h3>Selection</h3><p class="verbs">SELECT · HIGHLIGHT · PREVIEW · MARK</p>
-        <p>Selection expresses interest, never commitment.</p></div>
-      <div class="card"><h3>Action</h3><p class="verbs">ACT · CONFIRM · CANCEL · UNDO</p>
-        <p>Every act has a reachable undo, or declares why it cannot.</p></div>
-      <div class="card"><h3>Continuity</h3><p class="verbs">PAUSE · RESUME · RETRY · EXIT</p>
-        <p>Pause, resume, and exit are always reachable; a trapped flow is unconstitutional.</p></div>
+      <div class="card"><h3><span class="stepnum">1 ·</span> Declare</h3>
+        <p>In design, before a pixel: <code>.zui</code> files state what the
+        human is doing on each surface — flows, forms, screens, worlds. The
+        declaration is the design document, and it compiles.</p></div>
+      <div class="card"><h3><span class="stepnum">2 ·</span> Check</h3>
+        <p>The compiler refuses unlawful structure by name — ten named
+        violations — and checks the declaration against the constitution.
+        Findings cite rule numbers, not opinions.</p></div>
+      <div class="card"><h3><span class="stepnum">3 ·</span> Project</h3>
+        <p>A projection renders the checked declaration to its medium —
+        business web, CLI, voice, game world, agent surface. It owns
+        <em>how</em>; it has zero freedom over <em>what</em>.</p></div>
+      <div class="card"><h3><span class="stepnum">4 ·</span> Measure</h3>
+        <p>At runtime, the <a href="../tools/ui-audit.html">UI audit</a>
+        measures the painted page — computed sizes, true contrast, the trail,
+        the room, the menu against the tree — what static analysis cannot
+        see.</p></div>
     </div>
-    <p style="margin-top:1.4rem">Two intent collapses are <b>structural
-    errors</b>, not style choices: <code>SELECT → ACT</code> without
-    <code>CONFIRM</code> (selection that executes), and <code>READ → ACT</code>
-    in any form (a reading surface that mutates).</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>Declarations: intent as source code</h2>
-    <p>Interfaces are declared against the grammar before anything is drawn.
-    This is a real declaration, compiling today in the Zin platform's
-    reference implementation:</p>
+    <h2>The language</h2>
+    <p>Ten declaration types cover the interface's whole life:
+    <span class="decls">INTENT_FLOW · FORM · WIZARD · SCREEN · COMPONENT ·
+    NAV_GRAPH · WORLD_VIEW · INTERACTION · FEEDBACK · VIBE</span>.
+    This is a real declaration, compiling today in the reference
+    implementation:</p>
 <pre class="shot"><span class="c">// Restolean — Human Interface Layer (Zui)</span>
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">order_flow_intent</span> (
   <span class="k">SATISFIES</span> [<span class="s">ACT, CONFIRM, SELECT</span>],
@@ -103,8 +103,34 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   <span class="k">VISIBLE_ENTITIES</span> [<span class="s">order, dish, ingredient</span>],
   <span class="k">SATISFIES</span> [<span class="s">NAVIGATE</span>]
 )</pre>
-    <p>The checker refuses unlawful structure by name. These violations are the
-    contract — any conforming implementation must detect them:</p>
+    <p>Declarations quantify over a <b>closed grammar of 24 verbs</b> — a new
+    medium adds renderings, never verbs. Every UI element must trace to at
+    least one intent; an orphan element is a compile error.</p>
+    <div class="grid">
+      <div class="card"><h3>Orienting</h3><p class="verbs">DISCOVER · UNDERSTAND · LOCATE</p>
+        <p>Discovery must be satisfiable at every entry point.</p></div>
+      <div class="card"><h3>Attention</h3><p class="verbs">FOCUS · FILTER · COMPARE</p>
+        <p>An active filter is visible state; focus and discovery cannot both be at maximum.</p></div>
+      <div class="card"><h3>Information</h3><p class="verbs">READ · SCAN · SCROLL · ZOOM</p>
+        <p>A read surface that silently acts is an intent violation.</p></div>
+      <div class="card"><h3>Selection</h3><p class="verbs">SELECT · HIGHLIGHT · PREVIEW · MARK</p>
+        <p>Selection expresses interest, never commitment.</p></div>
+      <div class="card"><h3>Action</h3><p class="verbs">ACT · CONFIRM · CANCEL · UNDO</p>
+        <p>Every act has a reachable undo, or declares why it cannot.</p></div>
+      <div class="card"><h3>Continuity</h3><p class="verbs">PAUSE · RESUME · RETRY · EXIT</p>
+        <p>Pause, resume, and exit are always reachable; a trapped flow is unconstitutional.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Compilation: refusal by name</h2>
+    <p>Two intent collapses are structural errors, not style choices:
+    <code>SELECT → ACT</code> without <code>CONFIRM</code> (selection that
+    executes), and <code>READ → ACT</code> in any form (a reading surface that
+    mutates). They belong to a contract of ten named violations that any
+    conforming implementation must detect:</p>
 <pre class="term"><span class="dim">$ zui check src/model/restaurant.zui</span>
 <span class="bad">INTENT_ORPHAN</span>        an element traces to no intent
 <span class="bad">SELECT_ACT_COLLAPSE</span>  selection executes without CONFIRM
@@ -116,21 +142,23 @@ table.plain th { color: var(--muted); text-transform: uppercase;
 <span class="bad">HIDDEN_AUTHORITY</span>     a consequential act names no actor
 <span class="bad">LAYOUT_DISPLACEMENT</span>  arriving content shoves the reading
 <span class="bad">DECORATIVE_ANIMATION</span> motion that reports nothing</pre>
-    <p class="caption">The grammar and checks run today inside Zin's compiler
-    (<code>parser.zig</code>, <code>semantic.zig</code>). The standalone
-    <code>zui</code> CLI is being lifted from that implementation — see the
-    status board below.</p>
+    <p class="caption">These checks run today in the reference implementation's
+    compiler (<code>parser.zig</code>, <code>semantic.zig</code>, inside the
+    Zin platform — a consumer of this language). The standalone
+    <code>zui</code> CLI, with conformance fixtures so any implementation in
+    any language can prove agreement, is in design — see the status board.</p>
   </div>
 </section>
 
-<section>
+<section class="alt">
   <div class="narrow">
-    <h2><span class="num">Layer 2</span> · The constitution as data</h2>
-    <p>The law itself is <a href="../constitution/rules.json">one JSON file</a>:
-    v3.7 — 117 rules in 31 sets under 7 articles. Every rule carries the same
-    anatomy: what to avoid, the lawful solution, the <em>why</em>, the article
-    it derives from, its enforcement tier, and the real-world evidence that
-    earned it a number. Here is Rule 117, exactly as a linter loads it:</p>
+    <h2>The semantic layer: a constitution as data</h2>
+    <p>What makes the language refuse is not taste — it is
+    <a href="../constitution/rules.json">one JSON file</a>: v3.7, 117 rules in
+    31 sets under 7 articles. Every rule carries the same anatomy: what to
+    avoid, the lawful solution, the <em>why</em>, the article it derives from,
+    its enforcement tier, and the real-world evidence that earned it a number.
+    Here is Rule 117, exactly as the tooling loads it:</p>
 <pre class="shot">{
   <span class="k">"number"</span>: <span class="s">"117"</span>,
   <span class="k">"title"</span>: <span class="s">"One Column Carries the Colour"</span>,
@@ -145,18 +173,19 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   <span class="k">"enforcement"</span>: <span class="s">"judgment"</span>,
   <span class="k">"evidence"</span>: <span class="s">"ZinBank supervision tables (April 2026): …"</span>
 }</pre>
-    <p>Rules quantify over the grammar's verbs and derive from seven articles —
-    Calm, Intent Over Mechanics, Visible State, Reversibility, Predictable
-    Authority, Operator Primacy &amp; Vibes, Amendment. The articles are the
-    axioms; the rules are their case law.</p>
+    <p>The articles are the axioms — Calm, Intent Over Mechanics, Visible
+    State, Reversibility, Predictable Authority, Operator Primacy &amp; Vibes,
+    Amendment — and the rules are their case law. Because the law is data,
+    the reader renders it, the compiler checks it, findings cite it, and no
+    prose can drift from what the machine enforces.</p>
 
     <h3>The enforcement ladder</h3>
-    <p>Every rule declares who can currently catch its violation. Rules climb
-    the ladder as instruments are invented — Rule 107 began as judgment and is
-    now machine-checked; 117 and 118 are next (colour-column counting is
-    measurable). The censuses below come from the data file itself:</p>
+    <p>Every rule declares who can currently catch its violation, and rules
+    climb as instruments are invented — Rule 107 began as judgment and is now
+    machine-checked; 117 and 118 are next (colour-column counting is
+    measurable). The census, computed from the file:</p>
     <div class="tiers">
-      <div class="card"><b>9</b><h3>machine</h3><p>refused by a conforming linter, today</p></div>
+      <div class="card"><b>9</b><h3>machine</h3><p>refused by a conforming compiler or linter, today</p></div>
       <div class="card"><b>5</b><h3>tool</h3><p>measured on the painted page by the UI audit</p></div>
       <div class="card"><b>25</b><h3>machine-later</h3><p>decidable; awaiting their instrument</p></div>
       <div class="card"><b>78</b><h3>judgment</h3><p>a reviewer decides yes or no, citing the number</p></div>
@@ -178,45 +207,43 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   </div>
 </section>
 
-<section class="alt">
+<section>
   <div class="narrow">
-    <h2><span class="num">Layer 3</span> · Rendering projections</h2>
-    <p>A projection maps intent to a concrete medium: business web, CLI/TUI,
-    voice, game worlds — and, for the first time, the AI-agent surface itself:
-    the chat stream, the tool-approval prompt, the generated artifact. Rule 121
-    (the assistant never masks the work) and Rule 124 (the generator ships a
-    working thing) are the first laws written for that medium; a full
-    chat-stream jurisdiction is in design.</p>
+    <h2>Projections: any medium, zero discretion over rights</h2>
+    <p>A projection maps a checked declaration to a concrete medium: business
+    web, CLI/TUI, voice, game worlds — and, for the first time, the AI-agent
+    surface itself: the chat stream, the tool-approval prompt, the generated
+    artifact. Rule 121 (the assistant never masks the work) and Rule 124 (the
+    generator ships a working thing) are the first laws written for that
+    medium; a full chat-stream jurisdiction is in design.</p>
     <p>The discipline is one sentence: <b>a projection owns <em>how</em>, never
     <em>what</em>.</b> It may choose typography, widgets, pacing, even whether
-    the medium has a screen at all. It may not define a new intent, hide an
+    the medium has a screen at all. It may not define a new verb, hide an
     available action, drop a declared UNDO, or strip EXIT from a flow. Two
     projections of one declaration are two cultures of one truth — press
     <kbd>F2</kbd> on this site to feel it.</p>
   </div>
 </section>
 
-<section>
+<section class="alt">
   <div class="narrow">
-    <h2>Two instruments, and the status board</h2>
-    <p>The constitution is enforced at two moments. <b>Before rendering</b>,
-    the declaration checker refuses unlawful structure — flows with no exit,
-    acts with no undo, selections that mutate. <b>After rendering</b>, the
-    <a href="../tools/ui-audit.html">UI audit</a> measures the painted page —
-    computed sizes, true composited contrast, the trail, the room, the menu
-    against the tree — things static analysis cannot see.</p>
-    <p>What exists today, and what is designed but not yet built — stated
-    plainly, because a site about honest interfaces does not get to blur its
-    own status:</p>
+    <h2>One law, three moments — and the status board</h2>
+    <p>The same law holds at <b>design time</b> (the declaration is checked
+    before a pixel exists), in <b>development</b> (every build is linted,
+    every finding cites a number, generators are held to the file), and at
+    <b>runtime</b> (the audit measures what was actually painted). What exists
+    today and what is designed but not yet built — stated plainly, because a
+    site about honest interfaces does not get to blur its own status:</p>
     <table class="plain">
       <thead><tr><th>Instrument</th><th>What it does</th><th>Status</th></tr></thead>
       <tbody>
         <tr><td>The law, <code>rules.json</code> v3.7</td><td>117 rules as data; the single source of truth</td><td class="status live">in force</td></tr>
+        <tr><td>The Zui grammar &amp; compile checks</td><td>parses the ten declaration types; refuses the named violations</td><td class="status live">live — reference impl. in Zin</td></tr>
         <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
         <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
         <tr><td>StzWeb's <code>stzw check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in StzWeb</td></tr>
-        <tr><td>Zui grammar &amp; checks in Zin</td><td>parses declarations; refuses the named violations</td><td class="status live">live, in Zin</td></tr>
-        <tr><td>Standalone <code>zui</code> verifier CLI</td><td>the Zin checks, lifted out; conformance fixtures</td><td class="status design">in design — M3</td></tr>
+        <tr><td>Standalone <code>zui</code> verifier CLI</td><td>the reference checks, lifted out; conformance fixtures for any implementation</td><td class="status design">in design — M3</td></tr>
+        <tr><td>Language spec, <code>doc/language/</code></td><td>the grammar and declaration types specified here, where the law lives</td><td class="status design">in design — M3</td></tr>
         <tr><td>Projection tables as data</td><td>intent→widget maps per medium, checkable like rules</td><td class="status design">in design — M4</td></tr>
         <tr><td>The AI-interaction jurisdiction</td><td>chat-stream rules; an MCP surface serving the law to generators while they generate</td><td class="status design">in design — M5</td></tr>
       </tbody>

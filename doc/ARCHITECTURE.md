@@ -9,6 +9,8 @@
 
 Most UI frameworks begin with a physical assumption — screens, widgets, layouts — and try to infer what the user intends. Zui inverts the order: **it starts from human intent and treats rendering as a consequence.** A human does not come to an interface to click a button; they come to discover, focus, read, compare, select, act, confirm, and understand consequences. This inversion is what makes interface correctness *compilable*: once intent is explicit, violations are detectable before the interface ships, not after users complain.
 
+Stated as identity: **StzZui is a declarative, compilable language for intent-driven UIs.** The constitution is the language's semantic layer — the reason the compiler refuses — and the projections are its back ends. Zin and every other project are consumers of the language; Zin's compiler is today's reference implementation, not the owner. The whole assembly deploys inside any software project and holds at three moments: design (declarations checked before a pixel), development (builds linted, findings cite numbers), runtime (the painted page measured).
+
 ## 2. Three layers, strictly ordered
 
 Lower layers constrain upper layers. Upper layers never redefine lower layers.
@@ -34,7 +36,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 
 | Piece | Today | Destination |
 |---|---|---|
-| Intent grammar (Layer 1) | Specified in Zin's ZUI_SPECIFICATION_v3_0; parsed by Zin's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) | Language spec extracted to this repo (`doc/language/`); Zin remains the reference implementation |
+| The language (Layer 1) | **Owned by this project.** Historically specified in Zin's ZUI_SPECIFICATION_v3_0; parsed today by Zin's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) — a consumer serving as reference implementation | Language spec published here (`doc/language/`, M3); conformance fixtures so any implementation can prove agreement |
 | The Constitution (Layer 2) | **Canonical here** — `constitution/rules.json` v3.7 | Stays; consumers pin versions |
 | `.zui` declarations | Live in Zin projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — Zin consumes the spec from here |
 | Compile-time violation checks | Zin `semantic.zig` (zui pillar checks); named violations: `INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION` | Standalone `zui` verifier CLI lifted from the Zin implementation (Roadmap M3) |
