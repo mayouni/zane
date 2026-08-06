@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas — feel what the law forbids</title>
+<meta name="description" content="Twelve interactive violations of the Zui Constitution, each beside its lawful twin: layout shifts, confirm dialogs, invisible filters, two-meaning colours, lying cards, stacked tab rows, masking assistants, walls of text. Trigger each offense yourself — then feel the law fix it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css">
+<style>
+/* The only page on this site allowed to misbehave — inside red frames,
+   deliberately, so you can feel what the law prevents. */
+.gotcha { margin: 3rem 0; }
+.gotcha > h2 { font-size: 1.35rem; overflow-wrap: anywhere; }
+.rule-chip { font: 700 1rem var(--mono); color: var(--accent-ink);
+  border: 1.5px solid var(--accent-ink); border-radius: 99px; padding: .12rem .6rem;
+  text-decoration: none; vertical-align: middle; display: inline-block;
+  max-width: 100%; overflow-wrap: anywhere; }
+.duel { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.2rem; margin-top: 1rem; align-items: start; }
+.pane { border-radius: 10px; overflow: hidden; border: 2px solid; }
+.pane .head { font: 700 1rem var(--mono); text-transform: uppercase;
+  letter-spacing: .08em; padding: .4rem .9rem; }
+.pane.offense { border-color: #b3402e; }
+.pane.offense .head { background: #b3402e; color: #fff; }
+.pane.law { border-color: var(--ok); }
+.pane.law .head { background: #1d6b4f; color: #fff; }
+.pane .body { background: var(--card); padding: 1.1rem 1.2rem; min-height: 9.5rem; }
+.pane .body p { margin: .3rem 0; }
+.demo-btn { font: 700 1rem var(--sans); cursor: pointer; border-radius: 7px;
+  border: 1.5px solid var(--muted); background: var(--paper); color: var(--ink);
+  padding: .4rem .9rem; }
+.demo-btn.primary { background: var(--accent); border-color: var(--accent);
+  color: var(--on-accent); }
+.demo-btn:hover { filter: brightness(1.05); }
+.why-line { color: var(--muted); margin-top: .8rem; max-width: 46rem; }
+.why-line b { color: var(--accent-ink); }
+
+/* demo plumbing */
+.slot { min-height: 1.6rem; }                    /* reserved space — Rule 38 */
+.slot.tall { min-height: 3.4rem; }
+.err { color: #a33422; }
+[data-vibe="guardian"] .err { color: #ff9d8a; }
+.err-ghost { visibility: hidden; }
+.fake-field { display: block; width: 100%; max-width: 18rem; font: 1rem var(--sans);
+  padding: .45rem .7rem; border: 1.5px solid var(--line); border-radius: 7px;
+  background: var(--paper); color: var(--ink); }
+.fldlabel { display: block; color: var(--muted); margin-bottom: .2rem; }
+.rowline { display: flex; justify-content: space-between; gap: 1rem;
+  border-bottom: 1px solid var(--line); padding: .35rem 0; }
+.chip { font: 1rem var(--mono); background: var(--paper); border: 1px solid var(--accent-ink);
+  color: var(--accent-ink); border-radius: 99px; padding: .05rem .55rem; }
+.toast { margin-top: .7rem; background: var(--deep); color: var(--halo);
+  border-radius: 8px; padding: .55rem 1rem;
+  display: flex; align-items: center; gap: .9rem; }
+.toast button { font: 700 1rem var(--sans); background: var(--accent); color: var(--on-accent);
+  border: none; border-radius: 6px; padding: .25rem .7rem; cursor: pointer; }
+.toast .bar { flex: 1 1 4rem; height: 4px; background: rgba(255,255,255,.25); border-radius: 2px; overflow: hidden; }
+.toast .bar i { display: block; height: 100%; background: var(--accent); }
+.fakebtn-div { display: inline-block; background: #ad3f17; color: #fff; font-weight: 700;
+  border-radius: 7px; padding: .4rem .9rem; cursor: pointer; user-select: none; }
+.hint-ok { color: var(--ok); font-weight: 700; }
+.pane .quiet { color: var(--muted); }
+
+/* 8 · the two greens */
+table.mini { border-collapse: collapse; width: 100%; }
+table.mini th, table.mini td { text-align: left; padding: .4rem .5rem;
+  border-bottom: 1px solid var(--line); font-size: 1rem; }
+table.mini th { color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.st { font: 700 1rem var(--mono); border-radius: 99px; padding: .05rem .55rem;
+  white-space: nowrap; display: inline-block; }
+.st-ok   { background: #dcefe2; color: #14503a; }
+.st-warn { background: #f5ecd2; color: #6b5416; }
+.st-bad  { background: #f5dcd2; color: #7c2d1e; }
+[data-vibe="guardian"] .st-ok   { background: #14261c; color: #7ee2ae; }
+[data-vibe="guardian"] .st-warn { background: #2c2717; color: #d9b45c; }
+[data-vibe="guardian"] .st-bad  { background: #2e1f1c; color: #ff9d8a; }
+.rowbtn { font: 1rem var(--sans); color: var(--ink); background: none; border: none;
+  padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+/* 9 · the card that lies */
+.tilegrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .7rem; }
+.tile { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+  padding: .7rem .9rem; cursor: pointer; user-select: none; }
+.tile .tval { font-weight: 800; font-size: 1.25rem; }
+.tile .tlab { color: var(--muted); font-size: 1rem; }
+.tile.honest { cursor: default; }
+
+/* 10 · the second level turns */
+.tabrow { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .5rem; }
+.tab { font: 700 1rem var(--sans); border: 1.5px solid var(--line); background: var(--paper);
+  color: var(--ink); border-radius: 7px 7px 0 0; padding: .3rem .8rem; cursor: pointer; }
+.tab.on { border-color: var(--accent-ink); color: var(--accent-ink);
+  border-bottom: 3px solid var(--accent-ink); }
+.split { display: flex; gap: .9rem; }
+.sidenav { display: flex; flex-direction: column; gap: .3rem; min-width: 7rem; }
+.sidenav .tab { border-radius: 7px; text-align: left; }
+.stagebox { flex: 1; border: 1px dashed var(--line); border-radius: 8px;
+  padding: .7rem .9rem; color: var(--muted); min-height: 5.5rem; }
+
+/* 11 · the masking assistant */
+.stage { position: relative; border: 1px dashed var(--line); border-radius: 8px;
+  padding: .8rem .9rem 1rem; overflow: hidden; min-height: 13rem; }
+.assist-pill { position: absolute; right: .5rem; bottom: .5rem; max-width: 85%;
+  background: var(--deep); color: var(--halo); border: none; border-radius: 99px;
+  padding: .5rem 1rem; font: 700 1rem var(--sans); cursor: pointer; }
+.assist-overlay { position: absolute; inset: 0; background: var(--deep);
+  color: var(--halo); padding: 1rem 1.2rem; display: none; }
+.assist-overlay.open { display: block; }
+.assist-overlay button { font: 700 1rem var(--sans); background: var(--accent);
+  color: var(--on-accent); border: none; border-radius: 6px; padding: .25rem .7rem;
+  cursor: pointer; }
+.lawsplit { display: flex; gap: .9rem; align-items: stretch; }
+.lawsplit .work { flex: 1 1 55%; min-width: 0; }
+.assist-panel { flex: 1 1 45%; background: var(--paper); border: 1px solid var(--line);
+  border-radius: 8px; padding: .7rem .9rem; display: none; min-width: 0; }
+.assist-panel.open { display: block; }
+.assist-dot { width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 1.5px solid var(--accent-ink);
+  background: var(--card); color: var(--accent-ink); font: 700 1.05rem var(--sans);
+  cursor: pointer; }
+
+/* 12 · the wall of text */
+.wallbox { max-height: 15rem; overflow-y: auto; border: 1px solid var(--line);
+  border-radius: 8px; padding: .2rem .9rem; background: var(--paper); }
+.wallbox h4 { margin: .8rem 0 .1rem; font-size: 1rem; }
+.wallbox p { margin: .5rem 0; }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html">StzZui</a>
+    <a href="why.html">Why</a>
+    <a href="how.html">How it works</a>
+    <a class="here" href="gotchas.html">Gotchas</a>
+    <a href="adopt.html">Adopt</a>
+    <a href="../constitution/reader/">Reader</a>
+    <a href="../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><a href="why.html">Why</a><a href="how.html">How it works</a><span class="here-crumb" aria-current="page">Gotchas</span><a href="adopt.html">Adopt</a><a href="../constitution/reader/">Reader</a><a href="../tools/ui-audit.html">UI audit</a></span></nav>
+    <p class="kicker">The experience · the argument, made playable</p>
+    <h1>Feel what the law forbids</h1>
+    <p class="sub">Every red frame below misbehaves on purpose — the way business
+    software misbehaves every day. Trigger each offense yourself, feel the small
+    violence of it, then do the same thing under the law. Each pair cites the rule
+    that makes the difference enforceable. Offenses 8–12 are the 2026 harvest:
+    each was committed by an AI, on a real application, before it was law.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- 1 · THE SHOVE -->
+    <div class="gotcha" id="shove">
+      <h2>1 · The Shove <a class="rule-chip" href="../constitution/reader/#rule-38">Rule 38 · Zero Displacement</a></h2>
+      <p class="lead">You are reading. An error appears. Everything you were
+      reading jumps.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="shoveBad()">Submit the form</button>
+            <div id="shove-bad-err"></div>
+            <p>The paragraph you were reading — watch it get shoved when the
+            error barges in above it.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="shoveGood()">Submit the form</button>
+            <div class="slot"><span class="err err-ghost" id="shove-good-err">We need an amount before saving — add one above.</span></div>
+            <p>The same paragraph. The error's space was <em>reserved</em>; when
+            it arrives, nothing you were reading moves.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> layout shifts break the ocular
+      groove — the eye loses its place and the mind pays to find it again.
+      Reserved space keeps the world still. The declaration checker names this
+      violation <code>LAYOUT_DISPLACEMENT</code>.</p>
+    </div>
+
+    <!-- 2 · ARE YOU SURE? -->
+    <div class="gotcha" id="sure">
+      <h2>2 · "Are you sure?" <a class="rule-chip" href="../constitution/reader/#rule-79">Rule 79 · The Undo Covenant</a></h2>
+      <p class="lead">One version interrogates you before trusting you. The other
+      trusts you first — and keeps a ten-second door open.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body" id="sure-bad-body">
+            <div class="rowline"><span>Invoice #204 — 45,000 XOF</span>
+              <button class="demo-btn" onclick="sureBad()">Delete</button></div>
+            <p class="quiet">A real dialog will interrupt you. Twice.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body" id="sure-good-body">
+            <div class="rowline" id="sure-good-row"><span>Invoice #204 — 45,000 XOF</span>
+              <button class="demo-btn" onclick="sureGood()">Delete</button></div>
+            <div id="sure-good-toast"></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> confirmation dialogs interrupt
+      always and trust never; undo trusts first and interrupts never. Deletion
+      happens instantly, visibly, and reversibly — dignity is a ten-second
+      window. The checker's cousin, <code>MISSING_UNDO</code>, refuses flows
+      that cannot say the way back.</p>
+    </div>
+
+    <!-- 3 · THE INVISIBLE FILTER -->
+    <div class="gotcha" id="filter">
+      <h2>3 · The Invisible Filter <a class="rule-chip" href="../constitution/reader/#rule-82">Rule 82 · Visible State</a></h2>
+      <p class="lead">The boss asks: "why is revenue down?" It isn't. A filter
+      someone left on is hiding half the rows.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="rowline"><b>Sales — August</b><span></span></div>
+            <div id="filt-bad-rows"></div>
+            <div class="rowline"><b>Total</b><b id="filt-bad-total"></b></div>
+            <p class="quiet">Looks complete, doesn't it? <button class="demo-btn" onclick="filtReveal()">Reveal the truth</button></p>
+            <div class="slot"><span id="filt-bad-reveal"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="rowline"><b>Sales — August</b>
+              <span><span class="chip" id="filt-good-chip">filter: cash only ✕</span></span></div>
+            <div id="filt-good-rows"></div>
+            <div class="rowline"><b>Total <span class="quiet" id="filt-good-count"></span></b><b id="filt-good-total"></b></div>
+            <p class="quiet">Click the chip to clear the filter — state is always
+            visible, always dismissible.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a user who draws conclusions from
+      state they cannot see has been harmed by the interface. The checker names
+      it <code>INVISIBLE_STATE</code>; the same article obliges every norm to
+      carry a human-readable message.</p>
+    </div>
+
+    <!-- 4 · THE DIV THAT PRETENDS -->
+    <div class="gotcha" id="divbtn">
+      <h2>4 · The Div That Pretends <a class="rule-chip" href="../constitution/reader/#rule-80">Rule 80 · Keyboard Sovereignty</a></h2>
+      <p class="lead">Two "buttons". Put your mouse away and try to reach them
+      with <kbd>Tab</kbd>, then press <kbd>Enter</kbd>.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <span class="fakebtn-div" onclick="divCount('bad')">Approve payment</span>
+            <div class="slot"><span id="div-bad-out" class="quiet"></span></div>
+            <p class="quiet">It's a styled <code>&lt;div onclick&gt;</code>. Tab
+            skips straight past it — a keyboard operator simply cannot approve.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="divCount('good')">Approve payment</button>
+            <div class="slot"><span id="div-good-out" class="quiet"></span></div>
+            <p class="quiet">A real <code>&lt;button&gt;</code>: focusable,
+            visible focus ring, <kbd>Enter</kbd> and <kbd>Space</kbd> just work.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> the keyboard is the operator's
+      instrument; any critical act that requires the mouse demotes the expert —
+      and excludes some users entirely. Conforming linters flag mouse-only
+      clickables, <code>outline:none</code>, and positive tabindex.</p>
+    </div>
+
+    <!-- 5 · "INVALID INPUT!" -->
+    <div class="gotcha" id="accuse">
+      <h2>5 · "Invalid input!" <a class="rule-chip" href="../constitution/reader/#rule-40">Rule 40 · Non-Accusatory Pathfinding</a></h2>
+      <p class="lead">Type an incomplete email — say, <code>aminata@</code> — in
+      each and leave the field (<kbd>Tab</kbd> or click away).</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <label class="fldlabel" for="acc-bad">Email</label>
+            <input class="fake-field" id="acc-bad" inputmode="email">
+            <div class="slot"><span class="err" id="acc-bad-err" style="font-weight:800"></span></div>
+            <p class="quiet">Blames you, explains nothing, shouts in red.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <label class="fldlabel" for="acc-good">Email</label>
+            <input class="fake-field" id="acc-good" inputmode="email">
+            <div class="slot"><span class="err" id="acc-good-err"></span></div>
+            <p class="quiet">States the system's requirement, with a verb that
+            fixes it. The error fades the moment you start correcting.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> the system failed to understand —
+      saying so, calmly, keeps dignity and momentum. Every error message must
+      contain a verb that tells the user how to move.</p>
+    </div>
+
+    <!-- 6 · THE VANISHING LABEL -->
+    <div class="gotcha" id="label">
+      <h2>6 · The Vanishing Label <a class="rule-chip" href="../constitution/reader/#rule-28">Rule 28 · Forms as Conversations</a></h2>
+      <p class="lead">Start typing in both fields. Now pretend the phone rang and
+      you came back two minutes later — what was the first field asking?</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <input class="fake-field" placeholder="Beneficiary account (IBAN)" aria-label="Beneficiary account (IBAN)">
+            <div class="slot"></div>
+            <p class="quiet">The placeholder was the label. You typed; it
+            vanished; the question is gone.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <label class="fldlabel" for="lbl-good">Beneficiary account (IBAN)</label>
+            <input class="fake-field" id="lbl-good">
+            <div class="slot"></div>
+            <p class="quiet">The label lives above the field, always visible —
+            the conversation keeps its question on the table.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a form is the system asking;
+      hiding the question mid-answer turns conversation into interrogation.</p>
+    </div>
+
+    <!-- 7 · THE LYING SUCCESS -->
+    <div class="gotcha" id="liar">
+      <h2>7 · The Lying Success <a class="rule-chip" href="../constitution/reader/#rule-18">Rule 18 · The Speed of Thought</a></h2>
+      <p class="lead">Click both save buttons. One tells you what you want to
+      hear. Watch what it does four seconds later.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="liarBad(this)">Save</button>
+            <div class="slot"><span id="liar-bad-out"></span></div>
+            <p class="quiet">"Success" before the system knew. Calm built on a
+            lie collects its debt with interest.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="liarGood(this)">Save</button>
+            <div class="slot"><span id="liar-good-out"></span></div>
+            <p class="quiet">Acknowledged within 100ms — honestly: <em>saving</em>
+            is not <em>saved</em>. Success is announced when it is true.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> never show "Success" until the
+      execution is confirmed — a fake progress bar is a lie, and trust is the
+      only currency a business tool has.</p>
+    </div>
+
+    <!-- 8 · THE TWO GREENS -->
+    <div class="gotcha" id="greens">
+      <h2>8 · The Two Greens <a class="rule-chip" href="../constitution/reader/#rule-117">Rule 117 · One Column Carries the Colour</a></h2>
+      <p class="lead">A supervision table, hour seven of the shift. One agent
+      needs you <em>this minute</em>. Click it — in both tables.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <table class="mini">
+              <thead><tr><th>Agent</th><th>Health</th><th>Compliance</th></tr></thead>
+              <tbody>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Nadia</button></td><td><span class="st st-ok">up</span></td><td><span class="st st-bad">overdue</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Kofi</button></td><td><span class="st st-warn">degraded</span></td><td><span class="st st-ok">audited</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Lena</button></td><td><span class="st st-ok">up</span></td><td><span class="st st-ok">audited</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Omar</button></td><td><span class="st st-ok">up</span></td><td><span class="st st-warn">pending</span></td></tr>
+              </tbody>
+            </table>
+            <div class="slot tall"><span id="greens-bad-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <table class="mini">
+              <thead><tr><th>Agent</th><th>Health</th><th>Compliance</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><button class="rowbtn" onclick="greensGood(true)">Nadia</button></td><td>up</td><td>overdue</td><td><span class="st st-bad">act now</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensGood(false)">Kofi</button></td><td>degraded</td><td>audited</td><td><span class="st st-warn">review</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensGood(false)">Lena</button></td><td>up</td><td>audited</td><td>—</td></tr>
+                <tr><td><button class="rowbtn" onclick="greensGood(false)">Omar</button></td><td>up</td><td>pending</td><td>—</td></tr>
+              </tbody>
+            </table>
+            <div class="slot tall"><span id="greens-good-out" class="quiet"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a signal that appears everywhere
+      is a signal that means nothing. Colour is spent in exactly one place — the
+      column that answers "must I act?" — and every other column is plain text,
+      however stateful its values. Born in ZinBank, April 2026, where green
+      meant "healthy" in column 1 and "low drift" in column 8.</p>
+    </div>
+
+    <!-- 9 · THE CARD THAT LIES -->
+    <div class="gotcha" id="cardlie">
+      <h2>9 · The Card That Lies <a class="rule-chip" href="../constitution/reader/#rule-119">Rule 119 · A Card Is Not a Button</a></h2>
+      <p class="lead">Three tiles, identically dressed. One navigates, two are
+      information. Find out which — the only way this screen allows: poke them.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="tilegrid">
+              <div class="tile" onclick="tilePoke('kpi')"><span class="tval">12 ›</span><span class="tlab">Active agents</span></div>
+              <div class="tile" onclick="tilePoke('nav')"><span class="tval">Billing ›</span><span class="tlab">3 invoices due</span></div>
+              <div class="tile" onclick="tilePoke('info')"><span class="tval">low ›</span><span class="tlab">Drift</span></div>
+            </div>
+            <div class="slot tall"><span id="tile-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="tilegrid">
+              <div class="tile honest"><span class="tval">12</span><span class="tlab">Active agents</span></div>
+              <div class="tile honest"><span class="tval">low</span><span class="tlab">Drift</span></div>
+            </div>
+            <p style="margin-top:.6rem"><button class="demo-btn primary" onclick="tileHonest()">Open billing — 3 due</button></p>
+            <div class="slot"><span id="tile-good-out" class="quiet"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> form follows role, and each widget
+      plays exactly one. A card is a read-only indicator; an action takes the
+      shape of a button. When everything might be pressable, the operator must
+      poke the interface to learn it — and an interface learned by poking was
+      never read. Born in ZinBank: an autonomy ladder drawn as five clickable-looking
+      cards.</p>
+    </div>
+
+    <!-- 10 · THE SECOND ROW -->
+    <div class="gotcha" id="stacked">
+      <h2>10 · The Second Row <a class="rule-chip" href="../constitution/reader/#rule-120">Rule 120 · The Second Level Turns</a></h2>
+      <p class="lead">Two rows of tabs, one over the other, dressed alike. Click
+      around, then answer without reading twice: which row owns the page you are
+      on?</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="tabrow" id="stk-row1"></div>
+            <div class="tabrow" id="stk-row2"></div>
+            <div class="stagebox" id="stk-bad-stage">…and which of the six is this page?</div>
+            <div class="slot"><span id="stk-bad-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="tabrow" id="turn-row1"></div>
+            <div class="split">
+              <div class="sidenav" id="turn-side"></div>
+              <div class="stagebox" id="turn-stage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> when navigation nests, the second
+      level changes axis — first level horizontal, second vertical. The turn of
+      axis <em>is</em> the hierarchy, made visible without a single label.
+      Orientation is carried by the geometry, not reconstructed from it. Born in
+      ZinBank Studio, April 2026.</p>
+    </div>
+
+    <!-- 11 · THE MASKING ASSISTANT -->
+    <div class="gotcha" id="masker">
+      <h2>11 · The Masking Assistant <a class="rule-chip" href="../constitution/reader/#rule-121">Rule 121 · The Assistant Never Masks the Work</a></h2>
+      <p class="lead">You are approving a payment. Both screens have an AI
+      assistant. Open each one and watch what happens to your work.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="stage">
+              <label class="fldlabel" for="msk-bad-a">Beneficiary</label>
+              <input class="fake-field" id="msk-bad-a" value="Aminata D.">
+              <label class="fldlabel" for="msk-bad-b" style="margin-top:.5rem">Amount</label>
+              <input class="fake-field" id="msk-bad-b" value="45,000 XOF">
+              <p style="margin:.7rem 0 0"><button class="demo-btn primary">Approve</button></p>
+              <button class="assist-pill" onclick="maskOpen()">🤖 ZinAssistant — ask me anything</button>
+              <div class="assist-overlay" id="msk-overlay">
+                <p style="margin:0 0 .6rem"><b>How can I help?</b></p>
+                <p style="margin:0 0 .8rem">I can explain this payment, check the
+                beneficiary, or draft a note.</p>
+                <button onclick="maskClose()">Close</button>
+              </div>
+            </div>
+            <div class="slot tall"><span id="msk-bad-out" class="quiet">Even closed, its label sits over your Approve button.</span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="stage" style="overflow:visible">
+              <div class="lawsplit">
+                <div class="work">
+                  <label class="fldlabel" for="msk-good-a">Beneficiary</label>
+                  <input class="fake-field" id="msk-good-a" value="Aminata D.">
+                  <label class="fldlabel" for="msk-good-b" style="margin-top:.5rem">Amount</label>
+                  <input class="fake-field" id="msk-good-b" value="45,000 XOF">
+                  <p style="margin:.7rem 0 0"><button class="demo-btn primary">Approve</button>
+                  <button class="assist-dot" id="msk-dot" title="Assistant — opens beside your work"
+                    aria-label="Open the assistant" onclick="maskGood()">✦</button></p>
+                </div>
+                <div class="assist-panel" id="msk-panel">
+                  <p style="margin:0 0 .5rem"><b>Assistant</b></p>
+                  <p style="margin:0 0 .7rem" class="quiet">Beside the work,
+                  never over it. Your form is still there.</p>
+                  <button class="demo-btn" onclick="maskGoodClose()">Dismiss</button>
+                </div>
+              </div>
+            </div>
+            <div class="slot tall"><span id="msk-good-out" class="quiet">A small mark, its name on approach.</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> the agent's calling surface is
+      the one floating affordance an interface may carry, and it earns the
+      exception by being minimal: a small circle, its name on hover, its panel
+      never covering the work the operator is deciding about. A colleague at
+      the elbow, not a billboard over the desk. Born in ZinBank, April 2026 —
+      the first law written for the AI-agent surface itself.</p>
+    </div>
+
+    <!-- 12 · THE WALL OF TEXT -->
+    <div class="gotcha" id="wall">
+      <h2>12 · The Wall of Text <a class="rule-chip" href="../constitution/reader/#rule-123">Rule 123 · The Reading Arc</a></h2>
+      <p class="lead">Two versions of the same product page. Scroll each to the
+      bottom — then take the one-question quiz.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="wallbox" tabindex="0" aria-label="A dense page, scrollable">
+              <p>Our platform delivers a comprehensive, fully integrated solution
+              for the modern enterprise, leveraging best-in-class architecture to
+              enable seamless digital transformation across your organization's
+              entire value chain, while our proprietary methodology ensures that
+              every stakeholder touchpoint is optimized for maximal operational
+              synergy, and furthermore the modular design of our components
+              guarantees future-proof extensibility for requirements that have
+              not yet been articulated by your teams, which is why industry
+              analysts consistently recognize our approach as transformative,
+              disruptive, and paradigm-shifting in equal measure.</p>
+              <p>In addition, our pricing model has been carefully engineered to
+              align with the value realization curve of each deployment phase,
+              beginning with an initial discovery engagement in which our
+              consultants map your existing processes against our capability
+              matrix, followed by a phased rollout calibrated to your
+              organization's change-absorption capacity, and culminating in a
+              continuous-improvement partnership whose quarterly business
+              reviews ensure that the solution keeps pace with your evolving
+              strategic priorities and regulatory obligations.</p>
+              <p>Our security posture, meanwhile, reflects a defense-in-depth
+              philosophy encompassing encryption at rest and in transit,
+              role-based access control with fine-grained permission scoping,
+              comprehensive audit logging, and a shared-responsibility model
+              documented across more than forty pages of compliance collateral
+              available upon request from your account representative, who will
+              also be pleased to walk you through our certification portfolio
+              and our incident-response commitments.</p>
+              <p>Finally, our customer success organization stands ready to
+              accompany you at every step of the journey, from onboarding
+              through adoption to expansion, with a tiered support offering
+              whose response-time guarantees are among the most competitive in
+              the industry, complemented by a vibrant community forum, a
+              certification academy, and an annual user conference at which our
+              product roadmap is unveiled to our valued ecosystem of partners
+              and practitioners.</p>
+            </div>
+            <p style="margin-top:.6rem"><button class="demo-btn" onclick="wallQuiz('bad')">Quiz: what did paragraph two offer?</button></p>
+            <div class="slot tall"><span id="wall-bad-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="wallbox" tabindex="0" aria-label="The same page under a reading budget">
+              <h4>What it is</h4>
+              <p>One platform for your operations. <a href="how.html">How it works →</a></p>
+              <h4>What it costs</h4>
+              <p>Three phases, priced per phase — discovery, rollout, partnership.</p>
+              <h4>How it is secured</h4>
+              <p>Encrypted, role-scoped, audit-logged. The full posture is one
+              document, linked, not pasted.</p>
+              <h4>Who helps you</h4>
+              <p>A named team from onboarding onward. Support tiers on one page.</p>
+              <h4>Where to go deeper</h4>
+              <p>Each section above links out. Depth is below the fold, not in
+              your way.</p>
+            </div>
+            <p style="margin-top:.6rem"><button class="demo-btn" onclick="wallQuiz('good')">Quiz: what does it cost?</button></p>
+            <div class="slot tall"><span id="wall-good-out" class="quiet"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a reading surface has a budget —
+      roughly ten to twelve sections, general to specific, skimmable value on
+      top, depth below, links out for the rest. A paragraph past eight hundred
+      characters unbroken has become a wall: a lead plus a link. A reader who
+      has met twenty sections remembers none of them. Born in the Refine
+      rebuild, June 2026.</p>
+    </div>
+
+    <div class="law-note" style="margin-top:3rem"><b>None of this is advice.</b>
+    Each chip above links into the law of record — 7 articles, 117 rules, each
+    with its why, its evidence, and its enforcement tier. Some of these offenses
+    are already refused by machines; the rest are waiting for their instrument.
+    <a href="../constitution/reader/">Enter the Constitution →</a></div>
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="how.html"><span class="label">Back</span>← How it works</a>
+    <a href="adopt.html"><span class="label">Next</span>Put your UI under law →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="stz.js"></script>
+<script>
+'use strict';
+/* 1 · the shove */
+function shoveBad() {
+  const el = document.getElementById('shove-bad-err');
+  el.innerHTML = el.innerHTML ? '' :
+    '<p class="err" style="font-weight:800">Error: amount is required!</p>';
+}
+function shoveGood() {
+  document.getElementById('shove-good-err').classList.toggle('err-ghost');
+}
+
+/* 2 · are you sure? */
+function sureBad() {
+  if (!confirm('Are you sure you want to delete Invoice #204?')) return;
+  if (!confirm('This action cannot be undone. Really delete?')) return;
+  const b = document.getElementById('sure-bad-body');
+  b.innerHTML = '<p>Gone. Forever. Hope it was the right one.</p>' +
+    '<p class="quiet"><button class="demo-btn" onclick="sureReset()">reset demo</button></p>';
+}
+function sureReset() {
+  document.getElementById('sure-bad-body').innerHTML =
+    '<div class="rowline"><span>Invoice #204 — 45,000 XOF</span>' +
+    '<button class="demo-btn" onclick="sureBad()">Delete</button></div>' +
+    '<p class="quiet">A real dialog will interrupt you. Twice.</p>';
+}
+let undoTimer = null;
+function sureGood() {
+  const row = document.getElementById('sure-good-row');
+  const toast = document.getElementById('sure-good-toast');
+  row.style.display = 'none';
+  toast.innerHTML = '<div class="toast"><span>Deleted Invoice #204.</span>' +
+    '<span class="bar"><i id="undo-bar" style="width:100%"></i></span>' +
+    '<button onclick="sureUndo()">Undo</button></div>';
+  const bar = document.getElementById('undo-bar');
+  let left = 100;
+  clearInterval(undoTimer);
+  undoTimer = setInterval(() => {
+    left -= 1; bar.style.width = left + '%';
+    if (left <= 0) { clearInterval(undoTimer);
+      toast.innerHTML = '<p class="quiet">Committed — after its window, not by ambush. ' +
+        '<button class="demo-btn" onclick="sureUndo()">reset demo</button></p>'; }
+  }, 100);
+}
+function sureUndo() {
+  clearInterval(undoTimer);
+  document.getElementById('sure-good-row').style.display = '';
+  document.getElementById('sure-good-toast').innerHTML = '';
+}
+
+/* 3 · the invisible filter */
+const SALES = [['Aminata — cash', 5000], ['Sanda — mobile money', 7500],
+               ['Ibrahim — cash', 12000], ['Fatou — mobile money', 9000]];
+function money(n) { return n.toLocaleString('en-US') + ' XOF'; }
+function filtRender() {
+  const cashOnly = s => s[0].includes('cash');
+  document.getElementById('filt-bad-rows').innerHTML = SALES.filter(cashOnly)
+    .map(s => `<div class="rowline"><span>${s[0].replace(' — cash','').replace(' — mobile money','')}</span><span>${money(s[1])}</span></div>`).join('');
+  document.getElementById('filt-bad-total').textContent = money(SALES.filter(cashOnly).reduce((a, s) => a + s[1], 0));
+  filtGood(true);
+}
+function filtGood(f) {
+  const rows = f ? SALES.filter(s => s[0].includes('cash')) : SALES;
+  document.getElementById('filt-good-rows').innerHTML = rows
+    .map(s => `<div class="rowline"><span>${s[0]}</span><span>${money(s[1])}</span></div>`).join('');
+  document.getElementById('filt-good-total').textContent = money(rows.reduce((a, s) => a + s[1], 0));
+  document.getElementById('filt-good-count').textContent = `(${rows.length} of ${SALES.length})`;
+  document.getElementById('filt-good-chip').style.display = f ? '' : 'none';
+}
+document.addEventListener('click', e => {
+  if (e.target.id === 'filt-good-chip') filtGood(false);
+});
+function filtReveal() {
+  document.getElementById('filt-bad-reveal').innerHTML =
+    '<span class="err">A "cash only" filter was active. Real total: <b>' +
+    money(SALES.reduce((a, s) => a + s[1], 0)) + '</b>. Nothing on screen said so.</span>';
+}
+
+/* 4 · the div that pretends */
+const divCounts = { bad: 0, good: 0 };
+function divCount(which) {
+  divCounts[which]++;
+  document.getElementById('div-' + which + '-out').innerHTML =
+    which === 'good'
+      ? '<span class="hint-ok">Approved (' + divCounts.good + ') — mouse or keyboard, same right.</span>'
+      : 'Approved (' + divCounts.bad + ') — but only if you own a mouse.';
+}
+
+/* 5 · accusatory vs pathfinding */
+function wireEmail(id, errId, accusatory) {
+  const f = document.getElementById(id), e = document.getElementById(errId);
+  f.addEventListener('blur', () => {
+    const v = f.value.trim();
+    if (!v) return;
+    const at = v.indexOf('@');
+    let path = '';
+    if (at < 0) path = 'We need an @ in the address — add it after the name.';
+    else if (at === 0) path = 'We need a name before the @ — add it, like aminata@…';
+    else if (!v.slice(at + 1).includes('.') || v.endsWith('.') || at === v.length - 1)
+      path = 'We need a domain after the @ — finish it, like ' + v.slice(0, at) + '@company.com';
+    if (path) e.textContent = accusatory ? 'INVALID INPUT!' : path;
+  });
+  f.addEventListener('input', () => { if (!accusatory) e.textContent = ''; });
+}
+wireEmail('acc-bad', 'acc-bad-err', true);
+wireEmail('acc-good', 'acc-good-err', false);
+
+/* 7 · the lying success */
+function liarBad(btn) {
+  const out = document.getElementById('liar-bad-out');
+  out.innerHTML = '<span class="hint-ok">Saved ✓</span>';
+  btn.disabled = true;
+  setTimeout(() => {
+    out.innerHTML = '<span class="err">…actually, the save failed 4 seconds ago. Your edits are gone.</span>';
+    btn.disabled = false;
+  }, 4000);
+}
+function liarGood(btn) {
+  const out = document.getElementById('liar-good-out');
+  out.textContent = 'Saving…';                    /* acknowledged < 100ms */
+  btn.disabled = true;
+  setTimeout(() => {
+    out.innerHTML = '<span class="hint-ok">Saved — confirmed by the system, not assumed.</span>';
+    btn.disabled = false;
+  }, 900);
+}
+
+/* 8 · the two greens */
+function greensBad() {
+  document.getElementById('greens-bad-out').innerHTML =
+    '<span class="err">You hesitated — is "overdue" worse than "degraded"? To decide, ' +
+    'you re-read two colour systems: green meant <b>up</b> in one column and ' +
+    '<b>audited</b> in the other.</span>';
+}
+function greensGood(right) {
+  document.getElementById('greens-good-out').innerHTML = right
+    ? '<span class="hint-ok">Instant. One column answers "must I act?" — everything else is plain data.</span>'
+    : 'The Action column had already answered: nothing owed on this row.';
+}
+
+/* 9 · the card that lies */
+function tilePoke(kind) {
+  const out = document.getElementById('tile-out');
+  if (kind === 'kpi')  out.innerHTML = 'Nothing happened. Information in a button’s costume.';
+  else if (kind === 'nav') out.innerHTML = '<span class="err">It navigated. How would you have known before pressing?</span>';
+  else out.innerHTML = 'Nothing again. You are learning this screen by poking it.';
+}
+function tileHonest() {
+  document.getElementById('tile-good-out').innerHTML =
+    '<span class="hint-ok">It navigated — and it said so before you pressed.</span>';
+}
+
+/* 10 · the second row */
+const STK1 = ['Studio', 'Agents', 'Flows'], STK2 = ['Design', 'Test', 'Deploy'];
+let stkSel = [1, 1];
+function stkRender() {
+  const mk = (arr, row) => arr.map((t, i) =>
+    `<button class="tab${stkSel[row] === i ? ' on' : ''}" onclick="stkClick(${row},${i})">${t}</button>`).join('');
+  document.getElementById('stk-row1').innerHTML = mk(STK1, 0);
+  document.getElementById('stk-row2').innerHTML = mk(STK2, 1);
+}
+function stkClick(row, i) {
+  stkSel[row] = i; stkRender();
+  document.getElementById('stk-bad-out').innerHTML =
+    '<span class="err">' + STK2[stkSel[1]] + ' is lit — but is it <em>inside</em> ' +
+    STK1[stkSel[0]] + ', or beside it? Both rows claim the same rank.</span>';
+}
+let turnSel = [1, 1];
+function turnRender() {
+  document.getElementById('turn-row1').innerHTML = STK1.map((t, i) =>
+    `<button class="tab${turnSel[0] === i ? ' on' : ''}" onclick="turnClick(0,${i})">${t}</button>`).join('');
+  document.getElementById('turn-side').innerHTML = STK2.map((t, i) =>
+    `<button class="tab${turnSel[1] === i ? ' on' : ''}" onclick="turnClick(1,${i})">${t}</button>`).join('');
+  document.getElementById('turn-stage').textContent =
+    'You are in: ' + STK1[turnSel[0]] + ' › ' + STK2[turnSel[1]] +
+    ' — the vertical rail belongs to ' + STK1[turnSel[0]] + '; the geometry says so.';
+}
+function turnClick(row, i) { turnSel[row] = i; turnRender(); }
+
+/* 11 · the masking assistant */
+function maskOpen() {
+  document.getElementById('msk-overlay').classList.add('open');
+  document.getElementById('msk-bad-out').innerHTML =
+    '<span class="err">The form you were filling is gone. The helper became a billboard.</span>';
+}
+function maskClose() {
+  document.getElementById('msk-overlay').classList.remove('open');
+}
+function maskGood() {
+  document.getElementById('msk-panel').classList.add('open');
+  document.getElementById('msk-good-out').innerHTML =
+    '<span class="hint-ok">Opened beside the work — your form never left.</span>';
+}
+function maskGoodClose() {
+  document.getElementById('msk-panel').classList.remove('open');
+  document.getElementById('msk-good-out').innerHTML =
+    '<span class="quiet">Dismissed. The mark stays small until you need it.</span>';
+}
+
+/* 12 · the wall of text */
+function wallQuiz(which) {
+  if (which === 'bad') {
+    document.getElementById('wall-bad-out').innerHTML =
+      '<span class="err">You scrolled past it seconds ago and it is already gone. ' +
+      'That is not your memory failing — it is the page overspending it. ' +
+      '(Paragraph one ran 600+ characters unbroken.)</span>';
+  } else {
+    document.getElementById('wall-good-out').innerHTML =
+      '<span class="hint-ok">"Three phases, priced per phase." You can answer without ' +
+      'scrolling back — the heads carry the messages. One message per section.</span>';
+  }
+}
+
+filtRender(); stkRender(); turnRender();
+</script>
+</body>
+</html>

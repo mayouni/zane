@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adopt — put your UI under law</title>
+<meta name="description" content="How to consume the Zui Constitution today: pin a version of rules.json, audit what you render, feed the law to your AI generator, and amend it with evidence. The consumer contract, and the road ahead.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html">StzZui</a>
+    <a href="why.html">Why</a>
+    <a href="how.html">How it works</a>
+    <a href="gotchas.html">Gotchas</a>
+    <a class="here" href="adopt.html">Adopt</a>
+    <a href="../constitution/reader/">Reader</a>
+    <a href="../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><a href="why.html">Why</a><a href="how.html">How it works</a><a href="gotchas.html">Gotchas</a><span class="here-crumb" aria-current="page">Adopt</span><a href="../constitution/reader/">Reader</a><a href="../tools/ui-audit.html">UI audit</a></span></nav>
+    <p class="kicker">The contract · consume the law, today</p>
+    <h1>Put your UI under law</h1>
+    <p class="sub">The law is one JSON file with a stable schema. You do not need
+    a framework, a plugin, or permission — you need to pin a version, check
+    against it, and cite rule numbers. Here is the whole contract, and what you
+    can do with it this afternoon.</p>
+  </div>
+</header>
+
+<section>
+  <div class="narrow">
+    <h2>1 · Pin a version</h2>
+    <p>Vendor <a href="../constitution/rules.json"><code>rules.json</code></a>
+    into your repository and record the version you pinned — exactly as a
+    runtime pins a conformance-fixtures file. Your build now has a fact, not an
+    opinion: <em>conforms to Zui v3.7</em>. StzWeb, the first conforming
+    consumer, pins v3.6 until it re-pins on its own verification.</p>
+<pre class="term"><span class="dim">$ curl -O https://…/constitution/rules.json</span>
+<span class="dim">$ git add vendor/zui/rules.json</span>
+<span class="dim">$ git commit -m</span> <span class="cmd">"pin Zui v3.7"</span></pre>
+    <p>Numbers are stable forever — retired numbers are never reused, burned
+    numbers stay burned. A finding that cites Rule 79 will mean the same thing
+    in ten years.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>2 · Audit what you render</h2>
+    <p>Serve your application and point <a href="../tools/ui-audit.html">the UI
+    audit</a> at it — one path per line, any same-origin pages. It measures the
+    painted page: computed text sizes, true composited contrast, the trail, the
+    room before scrollbars, the menu against the tree. It exports the findings
+    as a Markdown report, each violation citing its rule number. Nothing leaves
+    your browser.</p>
+    <p>Run it in both of your themes if you have them — a page can be lawful in
+    one palette and unlawful in the other. This site audits itself, in both
+    vibes, before every page ships; the audit once caught its own defect doing
+    so.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>3 · Feed it to your generator</h2>
+    <p>This works <em>today</em>, with any capable AI assistant: put
+    <code>rules.json</code> in its context and instruct it to obey the law and
+    cite rule numbers in its output. Then close the loop: run the UI audit on
+    what it built, and paste the Markdown report back. The generator now has
+    what it never had before — a written law it can be held to, and a
+    measurement it cannot argue with.</p>
+<pre class="term"><span class="p">You are building under the Zui Constitution (rules.json attached).</span>
+<span class="p">Every screen you produce must conform. Cite the rule numbers you</span>
+<span class="p">obeyed. Here is the audit report of your last attempt — fix every</span>
+<span class="p">finding, by number:</span> <span class="bad">2 violations [Rule 105, Rule 114]</span></pre>
+    <p>The designed endgame (M5) is an MCP surface serving the law to AI tools
+    natively, so generators consult the constitution <em>while generating</em>
+    and declare what they obeyed. Until it ships, the context-window contract
+    above is the honest workaround — and it already changes what generators
+    produce.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>4 · Amend with evidence</h2>
+    <p>The law grows one way only (Article VII): real usage, operator feedback,
+    documented failure. If your project hits a recurring defect the law does
+    not name, record it the way the harvest records were kept — what happened,
+    where, how it was corrected, why it generalizes, and whether a reviewer
+    could decide it yes-or-no. That record is an amendment candidate. Fashion,
+    trends, and developer convenience are not admissible; every rule above 104
+    entered exactly this way.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The road</h2>
+    <p>What adoption will look like as the instruments land — stated as design,
+    not as promise: <b>M3</b>, a standalone <code>zui</code> verifier CLI lifted
+    from Zin's reference implementation, with conformance fixtures so any
+    implementation in any language can prove agreement. <b>M4</b>, the
+    intent→widget projection tables as data, checkable like the rules
+    themselves. <b>M5</b>, the AI-interaction jurisdiction: laws for the chat
+    stream, consent surfaces, and the MCP endpoint that serves all of it to
+    generators. The details live in <a href="../ROADMAP.md">the roadmap</a>.</p>
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="gotchas.html"><span class="label">Back</span>← Gotchas</a>
+    <a href="../constitution/reader/"><span class="label">Next</span>Read the law itself →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Pin it, measure it,
+    cite it — conformance is a fact about a build.</p>
+  </div>
+</footer>
+
+<script src="stz.js"></script>
+</body>
+</html>

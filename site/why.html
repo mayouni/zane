@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why — the case for a law of user interfaces</title>
+<meta name="description" content="Why the Zui Constitution exists: interfaces are decaying, AI generators amplify the decay at machine speed, and guidelines have failed. The case for a machine-verifiable law, with the recorded evidence.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css">
+<style>
+table.evidence { border-collapse: collapse; width: 100%; background: var(--card); }
+table.evidence th, table.evidence td { text-align: left; padding: .55rem .8rem;
+  border-bottom: 1px solid var(--line); vertical-align: top; }
+table.evidence th { color: var(--muted); text-transform: uppercase;
+  letter-spacing: .04em; font-size: 1rem; }
+table.evidence td.num { font: 700 1rem var(--mono); color: var(--accent-ink); white-space: nowrap; }
+blockquote.preamble {
+  margin: 2rem 0 0; padding: 1.2rem 1.5rem; border-left: 3px solid var(--accent);
+  background: var(--card); max-width: 46rem; font-size: 1.25rem; line-height: 1.6;
+}
+blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin-top: .6rem; }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html">StzZui</a>
+    <a class="here" href="why.html">Why</a>
+    <a href="how.html">How it works</a>
+    <a href="gotchas.html">Gotchas</a>
+    <a href="adopt.html">Adopt</a>
+    <a href="../constitution/reader/">Reader</a>
+    <a href="../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="level"><span class="here-crumb" aria-current="page">Why</span><a href="how.html">How it works</a><a href="gotchas.html">Gotchas</a><a href="adopt.html">Adopt</a><a href="../constitution/reader/">Reader</a><a href="../tools/ui-audit.html">UI audit</a></span></nav>
+    <p class="kicker">The case · why a law, not another guideline</p>
+    <h1>Interfaces are decaying. Guidelines didn't stop it. A law can.</h1>
+    <p class="sub">This page makes the argument in full: what is decaying, why the
+    AI era turned a chronic problem into an acute one, why forty years of
+    guidelines failed to hold the line — and what is structurally different
+    about a constitution written as data.</p>
+  </div>
+</header>
+
+<section>
+  <div class="narrow">
+    <h2>The decay you already know</h2>
+    <p>You have used this software. Small faint text you lean into. Buttons
+    labeled "OK" that do not say what they will do. A chat launcher floating
+    over the paragraph you were reading. A breadcrumb that shows where you came
+    from but not where you could go. A table that scrolls sideways next to
+    twenty centimetres of empty page. A menu that lists a page as top-level
+    while the page's own path says it lives two levels deep.</p>
+    <p>None of this is an accident of taste, and none of it is new. These are
+    <em>inherited conventions</em> — patterns copied for decades because they
+    are everywhere, kept because nothing is required to refuse them. Each one
+    taxes the person using the screen: a little attention here, a little
+    confidence there, eight hours a day.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The amplifier</h2>
+    <p>Then generators arrived, trained on that corpus. An AI asked to build a
+    business interface reproduces the corpus's every inherited assumption —
+    politely, confidently, <em>at machine speed</em>. It does not do this
+    because it is careless. It does it because nothing it was given has the
+    standing to refuse.</p>
+    <p>The claim is recorded, not rhetorical: <b>every rule numbered above 104
+    in this constitution was canonized from a defect an AI produced while
+    building a real application — under explicit instruction to be
+    careful.</b> The evidence table below names each defect and the project it
+    was committed in.</p>
+    <p>This is the thesis of StzZui: in the AI era, UX is the first casualty —
+    and the only correction that scales at the generator's speed is a law the
+    generator can be made to check.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The abdication</h2>
+    <p>The discipline that once policed these things has largely gone quiet.
+    Much of the HCI and UI/UX community is riding the "AI will replace us"
+    wave — producing commentary about tools rather than restating first
+    principles. The principles did not stop being true. They stopped being
+    written down in a form anything could enforce.</p>
+    <p>Someone has to write them down in a form a machine can refuse to
+    violate. That is the whole project.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>Why guidelines fail, and law doesn't</h2>
+    <p>Guidelines are prose. Prose advises; a reviewer negotiates; a deadline
+    wins. A guideline drifts silently from what anyone actually checks, and no
+    two teams inherit the same reading of it.</p>
+    <p>The Zui Constitution is <b>data</b> — one versioned JSON file. What
+    follows structurally is what prose can never guarantee: linters load the
+    same file the reader renders, so documentation and enforcement cannot
+    drift apart. Findings cite rule numbers, so a review is an audit, not an
+    argument. Consumers pin a version, so conformance is a fact about a
+    build. Amendment requires documented evidence — real usage, operator
+    feedback, recorded failure — never fashion (Article VII). And retired
+    numbers are never reused, so a citation means the same thing forever.</p>
+    <p>A law that cannot be measured will be negotiated in the hallway. This
+    one is measured: <a href="../tools/ui-audit.html">a browser tool</a>
+    measures rendered pages, and a declaration checker refuses unlawful
+    structure before rendering. <a href="how.html">How it works</a> covers
+    both instruments.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The story: a year of building with AI</h2>
+    <p class="lead">This law was not written in a seminar room. It was
+    extracted, defect by defect, from real applications built with AI
+    assistance through 2026 — every correction recorded at the moment it was
+    made, then canonized only if it generalized and could be decided
+    yes-or-no by a reviewer.</p>
+    <p><b>ZinBank</b> (April 2026) — a full agentic banking platform, built
+    and corrected screen by screen. Supervision tables where the same green
+    meant two different things two columns apart. Card-styled tiles you had
+    to poke to learn. Two stacked rows of identical tabs. A floating
+    assistant masking the very work it offered to help with.</p>
+    <p><b>Zin i18n</b> (May 2026) — languages added by forking templates,
+    leaving French screens full of untranslated jargon, until language became
+    data. <b>The Refine rebuild</b> (June 2026) — a 22-section homepage the
+    author judged unreadable, rebuilt under a reading budget.</p>
+    <p><b>The StzWeb site</b> (August 2026) — twelve rules, 105 through 116,
+    each canonized live from a defect the generator produced <em>while
+    building the site that documents the law</em>. The audit tool then caught
+    its own depth-calculation defect on its first run in this repository.
+    Nothing here is exempt, including the tooling.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The evidence</h2>
+    <p class="lead">Each of the eight newest rules, the defect that earned it
+    a number, and where it was committed. The full trail, including what was
+    deliberately <em>not</em> harvested, is in
+    <a href="../doc/HARVEST-2026-08.md">the harvest record</a>.</p>
+    <table class="evidence">
+      <thead><tr><th>Rule</th><th>The law</th><th>The defect that earned it</th></tr></thead>
+      <tbody>
+        <tr><td class="num"><a href="../constitution/reader/#rule-117">117</a></td><td>One Column Carries the Colour</td><td>ZinBank supervision tables: green meant "agent healthy" in column 1 and "low drift" in column 8</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-118">118</a></td><td>Two Families of Colour</td><td>ZinBank: per-agent and per-channel palettes grew without bound and signified nothing</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-119">119</a></td><td>A Card Is Not a Button</td><td>ZinBank: an autonomy ladder drawn as five clickable-looking cards instead of a table</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-120">120</a></td><td>The Second Level Turns</td><td>ZinBank Studio: two stacked horizontal tab rows, hierarchy indistinguishable at a glance</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-121">121</a></td><td>The Assistant Never Masks the Work</td><td>ZinBank: a floating agent with a permanent label covering the interface it served</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-122">122</a></td><td>Language Is Data</td><td>Zin: languages added by forking templates; French UIs full of untranslated jargon</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-123">123</a></td><td>The Reading Arc</td><td>Refine: a 22-subsection homepage judged "text-heavy, dense, poor for onboarding"</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-124">124</a></td><td>The Generator Ships a Working Thing</td><td>Zin build culture: scaffolding presented as a deliverable — a target must open working</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Rules 105–116 have the same pedigree, one by one, from
+    the StzWeb corrections. Two unrelated projects independently produced the
+    small-faint-text defect — that convergence is itself evidence the rules
+    carry weight.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The stance</h2>
+    <p>Opinionated, and openly so: <b>business applications first</b>.
+    Operators, not explorers — people who use the same screens eight hours a
+    day under pressure, responsibility, and fatigue. Consumer-site delight is
+    out of jurisdiction; operator dignity is the whole of it. The law's own
+    preamble says it best:</p>
+    <blockquote class="preamble">
+      Calm is productive. Stability is humane. Clarity is respectful.
+      Undo is dignity.
+      <footer>— The Zui Constitution, preamble</footer>
+    </blockquote>
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="../index.html"><span class="label">Back</span>← StzZui</a>
+    <a href="how.html"><span class="label">Next</span>How the law works →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page
+    is either measured by the tooling or recorded in the harvest.</p>
+  </div>
+</footer>
+
+<script src="stz.js"></script>
+</body>
+</html>

@@ -11,13 +11,13 @@ Milestones are cumulative; each ships complete or not at all (Rule 124 applies t
 - Founding documents: README, ARCHITECTURE, this roadmap.
 - Consumer contract stated; StzWeb pinned at v3.6.
 
-## M2 — The educational showcase
+## M2 — The educational showcase (in progress, 2026-08-06)
 
-One interactive page per rule *family*: feel the offense, then feel the law — generalizing StzWeb's Gotchas page (7 offenses) toward full coverage. Each page is self-contained, obeys the law it teaches, and cites the rule numbers it demonstrates. This is the platform's public face: the argument that best practices are not nostalgia, made playable.
+Feel the offense, then feel the law — generalizing StzWeb's Gotchas page (7 offenses) toward full coverage. Each page is self-contained, obeys the law it teaches, and cites the rule numbers it demonstrates. This is the platform's public face: the argument that best practices are not nostalgia, made playable.
 
-- Port and generalize the Gotchas engine.
-- New gotchas for the harvested rules: the two-greens table (117), the card that lies (119), the stacked tab rows (120), the masking assistant (121), the wall of text (123).
-- A vibes demonstration (Modern/Retro, F2) as the Article VI exhibit.
+- ✅ The site rebuilt around its two readers: Why (the case), How it works (the full architecture, designed instruments honestly labeled), Gotchas, Adopt (the consumer contract).
+- ✅ The Gotchas engine ported and extended: 12 offenses on one page — the 7 StzWeb classics plus the five harvested ones: the two greens (117), the card that lies (119), the second row (120), the masking assistant (121), the wall of text (123).
+- Remaining: split gotchas per rule family as coverage grows; a dedicated vibes exhibit (Modern/Retro, F2) as the Article VI page — today the whole site demonstrates it via F2.
 
 ## M3 — The `zui` verifier
 
