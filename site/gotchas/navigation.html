@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · Navigation — orientation carried by geometry</title>
+<meta name="description" content="An interactive offense against navigation: two stacked rows of identical tabs (Rule 120), beside the lawful twin where the second level turns vertical. Born from an AI-built application in 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><a href="forms.html">Forms</a><a href="state.html">State</a><a href="widgets.html">Widgets</a><a href="reading.html">Reading</a><span class="here-crumb" aria-current="page">Navigation</span><a href="intelligence.html">Intelligence</a></span></nav>
+    <p class="kicker">Gotchas · the navigation family — born in the 2026 harvest</p>
+    <h1>The geometry of where</h1>
+    <p class="sub">Orientation should be carried by the geometry of the
+    interface, not reconstructed from it in the operator's head. One offense
+    holds this family today; it grows as the harvest grows — the menu that
+    lies about its tree (Rule 116) is already measured by the
+    <a href="../../tools/ui-audit.html">UI audit</a> and awaits its duel.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- THE SECOND ROW -->
+    <div class="gotcha" id="stacked">
+      <h2>1 · The Second Row <a class="rule-chip" href="../../constitution/reader/#rule-120">Rule 120 · The Second Level Turns</a></h2>
+      <p class="lead">Two rows of tabs, one over the other, dressed alike. Click
+      around, then answer without reading twice: which row owns the page you are
+      on?</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="tabrow" id="stk-row1"></div>
+            <div class="tabrow" id="stk-row2"></div>
+            <div class="stagebox" id="stk-bad-stage">…and which of the six is this page?</div>
+            <div class="slot"><span id="stk-bad-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="tabrow" id="turn-row1"></div>
+            <div class="split">
+              <div class="sidenav" id="turn-side"></div>
+              <div class="stagebox" id="turn-stage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> when navigation nests, the second
+      level changes axis — first level horizontal, second vertical. The turn of
+      axis <em>is</em> the hierarchy, made visible without a single label.
+      Born in ZinBank Studio, April 2026: two stacked rows of identical tabs,
+      indistinguishable at a glance.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="reading.html"><span class="label">Back</span>← Reading</a>
+    <a href="intelligence.html"><span class="label">Next family</span>Intelligence →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+const STK1 = ['Studio', 'Agents', 'Flows'], STK2 = ['Design', 'Test', 'Deploy'];
+let stkSel = [1, 1];
+function stkRender() {
+  const mk = (arr, row) => arr.map((t, i) =>
+    `<button class="tab${stkSel[row] === i ? ' on' : ''}" onclick="stkClick(${row},${i})">${t}</button>`).join('');
+  document.getElementById('stk-row1').innerHTML = mk(STK1, 0);
+  document.getElementById('stk-row2').innerHTML = mk(STK2, 1);
+}
+function stkClick(row, i) {
+  stkSel[row] = i; stkRender();
+  document.getElementById('stk-bad-out').innerHTML =
+    '<span class="err">' + STK2[stkSel[1]] + ' is lit — but is it <em>inside</em> ' +
+    STK1[stkSel[0]] + ', or beside it? Both rows claim the same rank.</span>';
+}
+let turnSel = [1, 1];
+function turnRender() {
+  document.getElementById('turn-row1').innerHTML = STK1.map((t, i) =>
+    `<button class="tab${turnSel[0] === i ? ' on' : ''}" onclick="turnClick(0,${i})">${t}</button>`).join('');
+  document.getElementById('turn-side').innerHTML = STK2.map((t, i) =>
+    `<button class="tab${turnSel[1] === i ? ' on' : ''}" onclick="turnClick(1,${i})">${t}</button>`).join('');
+  document.getElementById('turn-stage').textContent =
+    'You are in: ' + STK1[turnSel[0]] + ' › ' + STK2[turnSel[1]] +
+    ' — the vertical rail belongs to ' + STK1[turnSel[0]] + '; the geometry says so.';
+}
+function turnClick(row, i) { turnSel[row] = i; turnRender(); }
+stkRender(); turnRender();
+</script>
+</body>
+</html>

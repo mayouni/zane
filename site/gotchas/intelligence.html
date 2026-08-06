@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · Intelligence — the colleague, not the billboard</title>
+<meta name="description" content="An interactive offense against the AI-agent surface: the floating assistant that masks the work it serves (Rule 121), beside the lawful twin — a small mark that opens beside the work, never over it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><a href="forms.html">Forms</a><a href="state.html">State</a><a href="widgets.html">Widgets</a><a href="reading.html">Reading</a><a href="navigation.html">Navigation</a><span class="here-crumb" aria-current="page">Intelligence</span></span></nav>
+    <p class="kicker">Gotchas · the intelligence family — born in the 2026 harvest</p>
+    <h1>The colleague, not the billboard</h1>
+    <p class="sub">The newest jurisdiction of the law: the AI-agent surface
+    itself. One offense holds this family today; it grows with the
+    AI-interaction jurisdiction (M5) — the chat stream's déluge, the consent
+    surface, the generator that ships scaffolding as a deliverable (Rule 124)
+    all have duels coming.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- THE MASKING ASSISTANT -->
+    <div class="gotcha" id="masker">
+      <h2>1 · The Masking Assistant <a class="rule-chip" href="../../constitution/reader/#rule-121">Rule 121 · The Assistant Never Masks the Work</a></h2>
+      <p class="lead">You are approving a payment. Both screens have an AI
+      assistant. Open each one and watch what happens to your work.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="stage">
+              <label class="fldlabel" for="msk-bad-a">Beneficiary</label>
+              <input class="fake-field" id="msk-bad-a" value="Aminata D.">
+              <label class="fldlabel" for="msk-bad-b" style="margin-top:.5rem">Amount</label>
+              <input class="fake-field" id="msk-bad-b" value="45,000 XOF">
+              <p style="margin:.7rem 0 0"><button class="demo-btn primary">Approve</button></p>
+              <button class="assist-pill" onclick="maskOpen()">🤖 ZinAssistant — ask me anything</button>
+              <div class="assist-overlay" id="msk-overlay">
+                <p style="margin:0 0 .6rem"><b>How can I help?</b></p>
+                <p style="margin:0 0 .8rem">I can explain this payment, check the
+                beneficiary, or draft a note.</p>
+                <button onclick="maskClose()">Close</button>
+              </div>
+            </div>
+            <div class="slot tall"><span id="msk-bad-out" class="quiet">Even closed, its label sits over your Approve button.</span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="stage" style="overflow:visible">
+              <div class="lawsplit">
+                <div class="work">
+                  <label class="fldlabel" for="msk-good-a">Beneficiary</label>
+                  <input class="fake-field" id="msk-good-a" value="Aminata D.">
+                  <label class="fldlabel" for="msk-good-b" style="margin-top:.5rem">Amount</label>
+                  <input class="fake-field" id="msk-good-b" value="45,000 XOF">
+                  <p style="margin:.7rem 0 0"><button class="demo-btn primary">Approve</button>
+                  <button class="assist-dot" id="msk-dot" title="Assistant — opens beside your work"
+                    aria-label="Open the assistant" onclick="maskGood()">✦</button></p>
+                </div>
+                <div class="assist-panel" id="msk-panel">
+                  <p style="margin:0 0 .5rem"><b>Assistant</b></p>
+                  <p style="margin:0 0 .7rem" class="quiet">Beside the work,
+                  never over it. Your form is still there.</p>
+                  <button class="demo-btn" onclick="maskGoodClose()">Dismiss</button>
+                </div>
+              </div>
+            </div>
+            <div class="slot tall"><span id="msk-good-out" class="quiet">A small mark, its name on approach.</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> the agent's calling surface is
+      the one floating affordance an interface may carry, and it earns the
+      exception by being minimal: a small circle, its name on hover, its panel
+      never covering the work the operator is deciding about. A colleague at
+      the elbow, not a billboard over the desk. Born in ZinBank, April 2026 —
+      the first law written for the AI-agent surface itself.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="navigation.html"><span class="label">Back</span>← Navigation</a>
+    <a href="../adopt.html"><span class="label">Next</span>Put your UI under law →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+function maskOpen() {
+  document.getElementById('msk-overlay').classList.add('open');
+  document.getElementById('msk-bad-out').innerHTML =
+    '<span class="err">The form you were filling is gone. The helper became a billboard.</span>';
+}
+function maskClose() {
+  document.getElementById('msk-overlay').classList.remove('open');
+}
+function maskGood() {
+  document.getElementById('msk-panel').classList.add('open');
+  document.getElementById('msk-good-out').innerHTML =
+    '<span class="hint-ok">Opened beside the work — your form never left.</span>';
+}
+function maskGoodClose() {
+  document.getElementById('msk-panel').classList.remove('open');
+  document.getElementById('msk-good-out').innerHTML =
+    '<span class="quiet">Dismissed. The mark stays small until you need it.</span>';
+}
+</script>
+</body>
+</html>

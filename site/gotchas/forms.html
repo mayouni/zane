@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · Forms — the conversation keeps its question on the table</title>
+<meta name="description" content="Two interactive offenses against forms as conversations: the accusatory error that blames you (Rule 40) and the placeholder label that vanishes mid-answer (Rule 28) — each beside its lawful twin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><span class="here-crumb" aria-current="page">Forms</span><a href="state.html">State</a><a href="widgets.html">Widgets</a><a href="reading.html">Reading</a><a href="navigation.html">Navigation</a><a href="intelligence.html">Intelligence</a></span></nav>
+    <p class="kicker">Gotchas · the forms family</p>
+    <h1>The conversation</h1>
+    <p class="sub">A form is the system asking questions of a person. The two
+    offenses here poison the conversation from both sides: an error that
+    blames the person for the system's confusion, and a question that vanishes
+    the moment you start answering it.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- INVALID INPUT -->
+    <div class="gotcha" id="accuse">
+      <h2>1 · "Invalid input!" <a class="rule-chip" href="../../constitution/reader/#rule-40">Rule 40 · Non-Accusatory Pathfinding</a></h2>
+      <p class="lead">Type an incomplete email — say, <code>aminata@</code> — in
+      each and leave the field (<kbd>Tab</kbd> or click away).</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <label class="fldlabel" for="acc-bad">Email</label>
+            <input class="fake-field" id="acc-bad" inputmode="email">
+            <div class="slot"><span class="err" id="acc-bad-err" style="font-weight:800"></span></div>
+            <p class="quiet">Blames you, explains nothing, shouts in red.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <label class="fldlabel" for="acc-good">Email</label>
+            <input class="fake-field" id="acc-good" inputmode="email">
+            <div class="slot"><span class="err" id="acc-good-err"></span></div>
+            <p class="quiet">States the system's requirement, with a verb that
+            fixes it. The error fades the moment you start correcting.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> the system failed to understand —
+      saying so, calmly, keeps dignity and momentum. Every error message must
+      contain a verb that tells the user how to move.</p>
+    </div>
+
+    <!-- THE VANISHING LABEL -->
+    <div class="gotcha" id="label">
+      <h2>2 · The Vanishing Label <a class="rule-chip" href="../../constitution/reader/#rule-28">Rule 28 · Forms as Conversations</a></h2>
+      <p class="lead">Start typing in both fields. Now pretend the phone rang and
+      you came back two minutes later — what was the first field asking?</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <input class="fake-field" placeholder="Beneficiary account (IBAN)" aria-label="Beneficiary account (IBAN)">
+            <div class="slot"></div>
+            <p class="quiet">The placeholder was the label. You typed; it
+            vanished; the question is gone.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <label class="fldlabel" for="lbl-good">Beneficiary account (IBAN)</label>
+            <input class="fake-field" id="lbl-good">
+            <div class="slot"></div>
+            <p class="quiet">The label lives above the field, always visible —
+            the conversation keeps its question on the table.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a form is the system asking;
+      hiding the question mid-answer turns conversation into interrogation.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="stillness.html"><span class="label">Back</span>← Stillness</a>
+    <a href="state.html"><span class="label">Next family</span>State →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+function wireEmail(id, errId, accusatory) {
+  const f = document.getElementById(id), e = document.getElementById(errId);
+  f.addEventListener('blur', () => {
+    const v = f.value.trim();
+    if (!v) return;
+    const at = v.indexOf('@');
+    let path = '';
+    if (at < 0) path = 'We need an @ in the address — add it after the name.';
+    else if (at === 0) path = 'We need a name before the @ — add it, like aminata@…';
+    else if (!v.slice(at + 1).includes('.') || v.endsWith('.') || at === v.length - 1)
+      path = 'We need a domain after the @ — finish it, like ' + v.slice(0, at) + '@company.com';
+    if (path) e.textContent = accusatory ? 'INVALID INPUT!' : path;
+  });
+  f.addEventListener('input', () => { if (!accusatory) e.textContent = ''; });
+}
+wireEmail('acc-bad', 'acc-bad-err', true);
+wireEmail('acc-good', 'acc-good-err', false);
+</script>
+</body>
+</html>

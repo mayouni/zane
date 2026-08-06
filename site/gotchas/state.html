@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · State — nothing invisible, nothing final by ambush</title>
+<meta name="description" content="Two interactive offenses against visible state and reversibility: the filter nobody can see (Rule 82) and the double confirmation that trusts nobody (Rule 79) — each beside its lawful twin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><a href="forms.html">Forms</a><span class="here-crumb" aria-current="page">State</span><a href="widgets.html">Widgets</a><a href="reading.html">Reading</a><a href="navigation.html">Navigation</a><a href="intelligence.html">Intelligence</a></span></nav>
+    <p class="kicker">Gotchas · the state family</p>
+    <h1>Nothing invisible, nothing final</h1>
+    <p class="sub">If the system knows something important, you must see it —
+    and what you did, you can undo. The two offenses here break each promise:
+    a filter that silently rewrites reality, and a deletion that interrogates
+    you twice instead of trusting you once.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- THE INVISIBLE FILTER -->
+    <div class="gotcha" id="filter">
+      <h2>1 · The Invisible Filter <a class="rule-chip" href="../../constitution/reader/#rule-82">Rule 82 · Visible State</a></h2>
+      <p class="lead">The boss asks: "why is revenue down?" It isn't. A filter
+      someone left on is hiding half the rows.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="rowline"><b>Sales — August</b><span></span></div>
+            <div id="filt-bad-rows"></div>
+            <div class="rowline"><b>Total</b><b id="filt-bad-total"></b></div>
+            <p class="quiet">Looks complete, doesn't it? <button class="demo-btn" onclick="filtReveal()">Reveal the truth</button></p>
+            <div class="slot"><span id="filt-bad-reveal"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="rowline"><b>Sales — August</b>
+              <span><span class="chip" id="filt-good-chip">filter: cash only ✕</span></span></div>
+            <div id="filt-good-rows"></div>
+            <div class="rowline"><b>Total <span class="quiet" id="filt-good-count"></span></b><b id="filt-good-total"></b></div>
+            <p class="quiet">Click the chip to clear the filter — state is always
+            visible, always dismissible.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a user who draws conclusions from
+      state they cannot see has been harmed by the interface. The checker names
+      it <code>INVISIBLE_STATE</code>; the same article obliges every norm to
+      carry a human-readable message.</p>
+    </div>
+
+    <!-- ARE YOU SURE? -->
+    <div class="gotcha" id="sure">
+      <h2>2 · "Are you sure?" <a class="rule-chip" href="../../constitution/reader/#rule-79">Rule 79 · The Undo Covenant</a></h2>
+      <p class="lead">One version interrogates you before trusting you. The other
+      trusts you first — and keeps a ten-second door open.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body" id="sure-bad-body">
+            <div class="rowline"><span>Invoice #204 — 45,000 XOF</span>
+              <button class="demo-btn" onclick="sureBad()">Delete</button></div>
+            <p class="quiet">A real dialog will interrupt you. Twice.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body" id="sure-good-body">
+            <div class="rowline" id="sure-good-row"><span>Invoice #204 — 45,000 XOF</span>
+              <button class="demo-btn" onclick="sureGood()">Delete</button></div>
+            <div id="sure-good-toast"></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> confirmation dialogs interrupt
+      always and trust never; undo trusts first and interrupts never. Deletion
+      happens instantly, visibly, and reversibly — dignity is a ten-second
+      window. The checker's cousin, <code>MISSING_UNDO</code>, refuses flows
+      that cannot say the way back.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="forms.html"><span class="label">Back</span>← Forms</a>
+    <a href="widgets.html"><span class="label">Next family</span>Widgets →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+/* the invisible filter */
+const SALES = [['Aminata — cash', 5000], ['Sanda — mobile money', 7500],
+               ['Ibrahim — cash', 12000], ['Fatou — mobile money', 9000]];
+function money(n) { return n.toLocaleString('en-US') + ' XOF'; }
+function filtRender() {
+  const cashOnly = s => s[0].includes('cash');
+  document.getElementById('filt-bad-rows').innerHTML = SALES.filter(cashOnly)
+    .map(s => `<div class="rowline"><span>${s[0].replace(' — cash','').replace(' — mobile money','')}</span><span>${money(s[1])}</span></div>`).join('');
+  document.getElementById('filt-bad-total').textContent = money(SALES.filter(cashOnly).reduce((a, s) => a + s[1], 0));
+  filtGood(true);
+}
+function filtGood(f) {
+  const rows = f ? SALES.filter(s => s[0].includes('cash')) : SALES;
+  document.getElementById('filt-good-rows').innerHTML = rows
+    .map(s => `<div class="rowline"><span>${s[0]}</span><span>${money(s[1])}</span></div>`).join('');
+  document.getElementById('filt-good-total').textContent = money(rows.reduce((a, s) => a + s[1], 0));
+  document.getElementById('filt-good-count').textContent = `(${rows.length} of ${SALES.length})`;
+  document.getElementById('filt-good-chip').style.display = f ? '' : 'none';
+}
+document.addEventListener('click', e => {
+  if (e.target.id === 'filt-good-chip') filtGood(false);
+});
+function filtReveal() {
+  document.getElementById('filt-bad-reveal').innerHTML =
+    '<span class="err">A "cash only" filter was active. Real total: <b>' +
+    money(SALES.reduce((a, s) => a + s[1], 0)) + '</b>. Nothing on screen said so.</span>';
+}
+
+/* are you sure? */
+function sureBad() {
+  if (!confirm('Are you sure you want to delete Invoice #204?')) return;
+  if (!confirm('This action cannot be undone. Really delete?')) return;
+  const b = document.getElementById('sure-bad-body');
+  b.innerHTML = '<p>Gone. Forever. Hope it was the right one.</p>' +
+    '<p class="quiet"><button class="demo-btn" onclick="sureReset()">reset demo</button></p>';
+}
+function sureReset() {
+  document.getElementById('sure-bad-body').innerHTML =
+    '<div class="rowline"><span>Invoice #204 — 45,000 XOF</span>' +
+    '<button class="demo-btn" onclick="sureBad()">Delete</button></div>' +
+    '<p class="quiet">A real dialog will interrupt you. Twice.</p>';
+}
+let undoTimer = null;
+function sureGood() {
+  const row = document.getElementById('sure-good-row');
+  const toast = document.getElementById('sure-good-toast');
+  row.style.display = 'none';
+  toast.innerHTML = '<div class="toast"><span>Deleted Invoice #204.</span>' +
+    '<span class="bar"><i id="undo-bar" style="width:100%"></i></span>' +
+    '<button onclick="sureUndo()">Undo</button></div>';
+  const bar = document.getElementById('undo-bar');
+  let left = 100;
+  clearInterval(undoTimer);
+  undoTimer = setInterval(() => {
+    left -= 1; bar.style.width = left + '%';
+    if (left <= 0) { clearInterval(undoTimer);
+      toast.innerHTML = '<p class="quiet">Committed — after its window, not by ambush. ' +
+        '<button class="demo-btn" onclick="sureUndo()">reset demo</button></p>'; }
+  }, 100);
+}
+function sureUndo() {
+  clearInterval(undoTimer);
+  document.getElementById('sure-good-row').style.display = '';
+  document.getElementById('sure-good-toast').innerHTML = '';
+}
+
+filtRender();
+</script>
+</body>
+</html>

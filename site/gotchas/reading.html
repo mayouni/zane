@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · Reading — one place to look, a page that earns each section</title>
+<meta name="description" content="Two interactive offenses against the reading eye: the table where green means two things (Rule 117) and the twenty-section wall of text (Rule 123) — each beside its lawful twin. Both born from AI-built applications in 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><a href="forms.html">Forms</a><a href="state.html">State</a><a href="widgets.html">Widgets</a><span class="here-crumb" aria-current="page">Reading</span><a href="navigation.html">Navigation</a><a href="intelligence.html">Intelligence</a></span></nav>
+    <p class="kicker">Gotchas · the reading family — both born in the 2026 harvest</p>
+    <h1>What the eye is owed</h1>
+    <p class="sub">Scanning a table and reading a page are the same act at two
+    speeds, and both run on a budget the interface must respect. The two
+    offenses here overspend it: a table where one colour means two things, and
+    a page that spends your memory faster than it earns your attention. Both
+    were committed by an AI on a real application before they were law.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- THE TWO GREENS -->
+    <div class="gotcha" id="greens">
+      <h2>1 · The Two Greens <a class="rule-chip" href="../../constitution/reader/#rule-117">Rule 117 · One Column Carries the Colour</a></h2>
+      <p class="lead">A supervision table, hour seven of the shift. One agent
+      needs you <em>this minute</em>. Click it — in both tables.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <table class="mini">
+              <thead><tr><th>Agent</th><th>Health</th><th>Compliance</th></tr></thead>
+              <tbody>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Nadia</button></td><td><span class="st st-ok">up</span></td><td><span class="st st-bad">overdue</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Kofi</button></td><td><span class="st st-warn">degraded</span></td><td><span class="st st-ok">audited</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Lena</button></td><td><span class="st st-ok">up</span></td><td><span class="st st-ok">audited</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensBad()">Omar</button></td><td><span class="st st-ok">up</span></td><td><span class="st st-warn">pending</span></td></tr>
+              </tbody>
+            </table>
+            <div class="slot tall"><span id="greens-bad-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <table class="mini">
+              <thead><tr><th>Agent</th><th>Health</th><th>Compliance</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><button class="rowbtn" onclick="greensGood(true)">Nadia</button></td><td>up</td><td>overdue</td><td><span class="st st-bad">act now</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensGood(false)">Kofi</button></td><td>degraded</td><td>audited</td><td><span class="st st-warn">review</span></td></tr>
+                <tr><td><button class="rowbtn" onclick="greensGood(false)">Lena</button></td><td>up</td><td>audited</td><td>—</td></tr>
+                <tr><td><button class="rowbtn" onclick="greensGood(false)">Omar</button></td><td>up</td><td>pending</td><td>—</td></tr>
+              </tbody>
+            </table>
+            <div class="slot tall"><span id="greens-good-out" class="quiet"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a signal that appears everywhere
+      is a signal that means nothing. Colour is spent in exactly one place — the
+      column that answers "must I act?" — and every other column is plain text,
+      however stateful its values. Born in ZinBank, April 2026, where green
+      meant "healthy" in column 1 and "low drift" in column 8.</p>
+    </div>
+
+    <!-- THE WALL OF TEXT -->
+    <div class="gotcha" id="wall">
+      <h2>2 · The Wall of Text <a class="rule-chip" href="../../constitution/reader/#rule-123">Rule 123 · The Reading Arc</a></h2>
+      <p class="lead">Two versions of the same product page. Scroll each to the
+      bottom — then take the one-question quiz.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="wallbox" tabindex="0" aria-label="A dense page, scrollable">
+              <p>Our platform delivers a comprehensive, fully integrated solution
+              for the modern enterprise, leveraging best-in-class architecture to
+              enable seamless digital transformation across your organization's
+              entire value chain, while our proprietary methodology ensures that
+              every stakeholder touchpoint is optimized for maximal operational
+              synergy, and furthermore the modular design of our components
+              guarantees future-proof extensibility for requirements that have
+              not yet been articulated by your teams, which is why industry
+              analysts consistently recognize our approach as transformative,
+              disruptive, and paradigm-shifting in equal measure.</p>
+              <p>In addition, our pricing model has been carefully engineered to
+              align with the value realization curve of each deployment phase,
+              beginning with an initial discovery engagement in which our
+              consultants map your existing processes against our capability
+              matrix, followed by a phased rollout calibrated to your
+              organization's change-absorption capacity, and culminating in a
+              continuous-improvement partnership whose quarterly business
+              reviews ensure that the solution keeps pace with your evolving
+              strategic priorities and regulatory obligations.</p>
+              <p>Our security posture, meanwhile, reflects a defense-in-depth
+              philosophy encompassing encryption at rest and in transit,
+              role-based access control with fine-grained permission scoping,
+              comprehensive audit logging, and a shared-responsibility model
+              documented across more than forty pages of compliance collateral
+              available upon request from your account representative, who will
+              also be pleased to walk you through our certification portfolio
+              and our incident-response commitments.</p>
+              <p>Finally, our customer success organization stands ready to
+              accompany you at every step of the journey, from onboarding
+              through adoption to expansion, with a tiered support offering
+              whose response-time guarantees are among the most competitive in
+              the industry, complemented by a vibrant community forum, a
+              certification academy, and an annual user conference at which our
+              product roadmap is unveiled to our valued ecosystem of partners
+              and practitioners.</p>
+            </div>
+            <p style="margin-top:.6rem"><button class="demo-btn" onclick="wallQuiz('bad')">Quiz: what did paragraph two offer?</button></p>
+            <div class="slot tall"><span id="wall-bad-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="wallbox" tabindex="0" aria-label="The same page under a reading budget">
+              <h4>What it is</h4>
+              <p>One platform for your operations. <a href="../how.html">How it works →</a></p>
+              <h4>What it costs</h4>
+              <p>Three phases, priced per phase — discovery, rollout, partnership.</p>
+              <h4>How it is secured</h4>
+              <p>Encrypted, role-scoped, audit-logged. The full posture is one
+              document, linked, not pasted.</p>
+              <h4>Who helps you</h4>
+              <p>A named team from onboarding onward. Support tiers on one page.</p>
+              <h4>Where to go deeper</h4>
+              <p>Each section above links out. Depth is below the fold, not in
+              your way.</p>
+            </div>
+            <p style="margin-top:.6rem"><button class="demo-btn" onclick="wallQuiz('good')">Quiz: what does it cost?</button></p>
+            <div class="slot tall"><span id="wall-good-out" class="quiet"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> a reading surface has a budget —
+      roughly ten to twelve sections, general to specific, skimmable value on
+      top, depth below, links out for the rest. A paragraph past eight hundred
+      characters unbroken has become a wall: a lead plus a link. A reader who
+      has met twenty sections remembers none of them. Born in the Refine
+      rebuild, June 2026.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="widgets.html"><span class="label">Back</span>← Widgets</a>
+    <a href="navigation.html"><span class="label">Next family</span>Navigation →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+function greensBad() {
+  document.getElementById('greens-bad-out').innerHTML =
+    '<span class="err">You hesitated — is "overdue" worse than "degraded"? To decide, ' +
+    'you re-read two colour systems: green meant <b>up</b> in one column and ' +
+    '<b>audited</b> in the other.</span>';
+}
+function greensGood(right) {
+  document.getElementById('greens-good-out').innerHTML = right
+    ? '<span class="hint-ok">Instant. One column answers "must I act?" — everything else is plain data.</span>'
+    : 'The Action column had already answered: nothing owed on this row.';
+}
+function wallQuiz(which) {
+  if (which === 'bad') {
+    document.getElementById('wall-bad-out').innerHTML =
+      '<span class="err">You scrolled past it seconds ago and it is already gone. ' +
+      'That is not your memory failing — it is the page overspending it. ' +
+      '(Paragraph one ran 600+ characters unbroken.)</span>';
+  } else {
+    document.getElementById('wall-good-out').innerHTML =
+      '<span class="hint-ok">"Three phases, priced per phase." You can answer without ' +
+      'scrolling back — the heads carry the messages. One message per section.</span>';
+  }
+}
+</script>
+</body>
+</html>

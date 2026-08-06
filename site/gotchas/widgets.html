@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · Widgets — honest affordances, sovereign keyboard</title>
+<meta name="description" content="Two interactive offenses against widget honesty: the card dressed as a button (Rule 119) and the div pretending to be one (Rule 80) — each beside its lawful twin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><a href="forms.html">Forms</a><a href="state.html">State</a><span class="here-crumb" aria-current="page">Widgets</span><a href="reading.html">Reading</a><a href="navigation.html">Navigation</a><a href="intelligence.html">Intelligence</a></span></nav>
+    <p class="kicker">Gotchas · the widgets family</p>
+    <h1>Honest affordances</h1>
+    <p class="sub">Form follows role, and each widget plays exactly one: a card
+    informs, a button acts, and both answer to the keyboard. The two offenses
+    here dress widgets in each other's clothes — information wearing a
+    button's costume, and a "button" the keyboard cannot even reach.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- THE CARD THAT LIES -->
+    <div class="gotcha" id="cardlie">
+      <h2>1 · The Card That Lies <a class="rule-chip" href="../../constitution/reader/#rule-119">Rule 119 · A Card Is Not a Button</a></h2>
+      <p class="lead">Three tiles, identically dressed. One navigates, two are
+      information. Find out which — the only way this screen allows: poke them.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <div class="tilegrid">
+              <div class="tile" onclick="tilePoke('kpi')"><span class="tval">12 ›</span><span class="tlab">Active agents</span></div>
+              <div class="tile" onclick="tilePoke('nav')"><span class="tval">Billing ›</span><span class="tlab">3 invoices due</span></div>
+              <div class="tile" onclick="tilePoke('info')"><span class="tval">low ›</span><span class="tlab">Drift</span></div>
+            </div>
+            <div class="slot tall"><span id="tile-out" class="quiet"></span></div>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <div class="tilegrid">
+              <div class="tile honest"><span class="tval">12</span><span class="tlab">Active agents</span></div>
+              <div class="tile honest"><span class="tval">low</span><span class="tlab">Drift</span></div>
+            </div>
+            <p style="margin-top:.6rem"><button class="demo-btn primary" onclick="tileHonest()">Open billing — 3 due</button></p>
+            <div class="slot"><span id="tile-good-out" class="quiet"></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> when everything might be
+      pressable, the operator must poke the interface to learn it — and an
+      interface learned by poking was never read. Born in ZinBank, April 2026:
+      an autonomy ladder drawn as five clickable-looking cards.</p>
+    </div>
+
+    <!-- THE DIV THAT PRETENDS -->
+    <div class="gotcha" id="divbtn">
+      <h2>2 · The Div That Pretends <a class="rule-chip" href="../../constitution/reader/#rule-80">Rule 80 · Keyboard Sovereignty</a></h2>
+      <p class="lead">Two "buttons". Put your mouse away and try to reach them
+      with <kbd>Tab</kbd>, then press <kbd>Enter</kbd>.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <span class="fakebtn-div" onclick="divCount('bad')">Approve payment</span>
+            <div class="slot"><span id="div-bad-out" class="quiet"></span></div>
+            <p class="quiet">It's a styled <code>&lt;div onclick&gt;</code>. Tab
+            skips straight past it — a keyboard operator simply cannot approve.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="divCount('good')">Approve payment</button>
+            <div class="slot"><span id="div-good-out" class="quiet"></span></div>
+            <p class="quiet">A real <code>&lt;button&gt;</code>: focusable,
+            visible focus ring, <kbd>Enter</kbd> and <kbd>Space</kbd> just work.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> the keyboard is the operator's
+      instrument; any critical act that requires the mouse demotes the expert —
+      and excludes some users entirely. Conforming linters flag mouse-only
+      clickables, <code>outline:none</code>, and positive tabindex.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="state.html"><span class="label">Back</span>← State</a>
+    <a href="reading.html"><span class="label">Next family</span>Reading →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+function tilePoke(kind) {
+  const out = document.getElementById('tile-out');
+  if (kind === 'kpi')  out.innerHTML = 'Nothing happened. Information in a button’s costume.';
+  else if (kind === 'nav') out.innerHTML = '<span class="err">It navigated. How would you have known before pressing?</span>';
+  else out.innerHTML = 'Nothing again. You are learning this screen by poking it.';
+}
+function tileHonest() {
+  document.getElementById('tile-good-out').innerHTML =
+    '<span class="hint-ok">It navigated — and it said so before you pressed.</span>';
+}
+const divCounts = { bad: 0, good: 0 };
+function divCount(which) {
+  divCounts[which]++;
+  document.getElementById('div-' + which + '-out').innerHTML =
+    which === 'good'
+      ? '<span class="hint-ok">Approved (' + divCounts.good + ') — mouse or keyboard, same right.</span>'
+      : 'Approved (' + divCounts.bad + ') — but only if you own a mouse.';
+}
+</script>
+</body>
+</html>

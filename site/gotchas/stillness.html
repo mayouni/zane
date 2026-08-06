@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gotchas · Stillness — the frame holds still and tells the truth in time</title>
+<meta name="description" content="Two interactive offenses against stillness and honest time: the layout that shoves the reading (Rule 38) and the success message that lies (Rule 18) — each beside its lawful twin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../stz.css">
+<link rel="stylesheet" href="../gotchas.css">
+</head>
+<body>
+
+<nav class="site" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">StzZui</a>
+    <a href="../why.html">Why</a>
+    <a href="../how.html">How it works</a>
+    <a class="here" href="./">Gotchas</a>
+    <a href="../adopt.html">Adopt</a>
+    <a href="../../constitution/reader/">Reader</a>
+    <a href="../../tools/ui-audit.html">UI audit</a>
+    <a class="leaves" href="https://mayouni.github.io/stzweb/" target="_blank" rel="noopener">StzWeb</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><span class="here-crumb" aria-current="page">Stillness</span><a href="forms.html">Forms</a><a href="state.html">State</a><a href="widgets.html">Widgets</a><a href="reading.html">Reading</a><a href="navigation.html">Navigation</a><a href="intelligence.html">Intelligence</a></span></nav>
+    <p class="kicker">Gotchas · the stillness family</p>
+    <h1>The frame holds still</h1>
+    <p class="sub">Calm is a functional requirement, not an aesthetic. The two
+    offenses here attack it from both ends of time: content that shoves the
+    reading when it arrives, and feedback that announces success before the
+    system knew. Trigger both — then feel the lawful twins keep the world
+    still and honest.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- THE SHOVE -->
+    <div class="gotcha" id="shove">
+      <h2>1 · The Shove <a class="rule-chip" href="../../constitution/reader/#rule-38">Rule 38 · Zero Displacement</a></h2>
+      <p class="lead">You are reading. An error appears. Everything you were
+      reading jumps.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="shoveBad()">Submit the form</button>
+            <div id="shove-bad-err"></div>
+            <p>The paragraph you were reading — watch it get shoved when the
+            error barges in above it.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="shoveGood()">Submit the form</button>
+            <div class="slot"><span class="err err-ghost" id="shove-good-err">We need an amount before saving — add one above.</span></div>
+            <p>The same paragraph. The error's space was <em>reserved</em>; when
+            it arrives, nothing you were reading moves.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> layout shifts break the ocular
+      groove — the eye loses its place and the mind pays to find it again.
+      Reserved space keeps the world still. The declaration checker names this
+      violation <code>LAYOUT_DISPLACEMENT</code>.</p>
+    </div>
+
+    <!-- THE LYING SUCCESS -->
+    <div class="gotcha" id="liar">
+      <h2>2 · The Lying Success <a class="rule-chip" href="../../constitution/reader/#rule-18">Rule 18 · The Speed of Thought</a></h2>
+      <p class="lead">Click both save buttons. One tells you what you want to
+      hear. Watch what it does four seconds later.</p>
+      <div class="duel">
+        <div class="pane offense"><div class="head">The offense</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="liarBad(this)">Save</button>
+            <div class="slot"><span id="liar-bad-out"></span></div>
+            <p class="quiet">"Success" before the system knew. Calm built on a
+            lie collects its debt with interest.</p>
+          </div>
+        </div>
+        <div class="pane law"><div class="head">Under the law</div>
+          <div class="body">
+            <button class="demo-btn primary" onclick="liarGood(this)">Save</button>
+            <div class="slot"><span id="liar-good-out"></span></div>
+            <p class="quiet">Acknowledged within 100ms — honestly: <em>saving</em>
+            is not <em>saved</em>. Success is announced when it is true.</p>
+          </div>
+        </div>
+      </div>
+      <p class="why-line"><b>Why it is law:</b> never show "Success" until the
+      execution is confirmed — a fake progress bar is a lie, and trust is the
+      only currency a business tool has.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="narrow">
+  <div class="next">
+    <a href="./"><span class="label">Back</span>← All gotchas</a>
+    <a href="forms.html"><span class="label">Next family</span>Forms →</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../tools/ui-audit.html">UI audit</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
+    only lawless pixels on this site, and they are fenced.</p>
+  </div>
+</footer>
+
+<script src="../stz.js"></script>
+<script>
+'use strict';
+function shoveBad() {
+  const el = document.getElementById('shove-bad-err');
+  el.innerHTML = el.innerHTML ? '' :
+    '<p class="err" style="font-weight:800">Error: amount is required!</p>';
+}
+function shoveGood() {
+  document.getElementById('shove-good-err').classList.toggle('err-ghost');
+}
+function liarBad(btn) {
+  const out = document.getElementById('liar-bad-out');
+  out.innerHTML = '<span class="hint-ok">Saved ✓</span>';
+  btn.disabled = true;
+  setTimeout(() => {
+    out.innerHTML = '<span class="err">…actually, the save failed 4 seconds ago. Your edits are gone.</span>';
+    btn.disabled = false;
+  }, 4000);
+}
+function liarGood(btn) {
+  const out = document.getElementById('liar-good-out');
+  out.textContent = 'Saving…';                    /* acknowledged < 100ms */
+  btn.disabled = true;
+  setTimeout(() => {
+    out.innerHTML = '<span class="hint-ok">Saved — confirmed by the system, not assumed.</span>';
+    btn.disabled = false;
+  }, 900);
+}
+</script>
+</body>
+</html>

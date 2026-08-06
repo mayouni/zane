@@ -121,6 +121,7 @@ header.page h1 {
   color: var(--accent);
 }
 header.page .sub { color: var(--halo); font-size: 1.125rem; max-width: 42rem; margin: 1.2rem 0 0; }
+header.page a:not(.brand) { color: var(--accent-lite); }
 header.page code, footer.site code {
   background: rgba(0, 0, 0, .25); border-color: transparent; color: var(--halo);
 }
