@@ -69,12 +69,12 @@
     <h2>In development — pin, lint, gate</h2>
     <p>Vendor <a href="../constitution/rules.json"><code>rules.json</code></a>
     into your repository and record the version. Your build now has a fact,
-    not an opinion: <em>conforms to Zui v3.7</em>. Numbers are stable forever —
+    not an opinion: <em>conforms to Zui v3.7.1</em>. Numbers are stable forever —
     retired numbers are never reused — so a finding that cites Rule 79 means
     the same thing in ten years.</p>
 <pre class="term"><span class="dim">$ curl -O https://…/constitution/rules.json</span>
 <span class="dim">$ git add vendor/zui/rules.json</span>
-<span class="dim">$ git commit -m</span> <span class="cmd">"pin Zui v3.7"</span></pre>
+<span class="dim">$ git commit -m</span> <span class="cmd">"pin Zui v3.7.1"</span></pre>
     <p>Then make the law a gate, not a poster: lint declarations and markup
     against the pinned file in CI, and fail the build on machine-tier
     violations. StzWeb's <code>stzw check</code> is the first conforming
