@@ -1,4 +1,4 @@
-# StzZui — Architecture
+﻿# StzZui — Architecture
 
 **Status**: founding document, 2026-08-05
 **Inherits from**: Zin `doc/spec/dsl/ZUI_SPECIFICATION_v3_0.md` (Session 27) and the StzWeb Zui Constitution (v1.0 → v3.6 lineage)
@@ -37,7 +37,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 | Piece | Today | Destination |
 |---|---|---|
 | The language (Layer 1) | **Owned by this project.** Historically specified in Zin's ZUI_SPECIFICATION_v3_0; parsed today by Zin's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) — a consumer serving as reference implementation | Language spec published here (`doc/language/`, M3); conformance fixtures so any implementation can prove agreement |
-| The Constitution (Layer 2) | **Canonical here** — `constitution/rules.json` v3.7.1 | Stays; consumers pin versions |
+| The Constitution (Layer 2) | **Canonical here** — `constitution/rules.json` v3.7.2 | Stays; consumers pin versions |
 | `.zui` declarations | Live in Zin projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — Zin consumes the spec from here |
 | Compile-time violation checks | Zin `semantic.zig` implements **four** Zui diagnostics today: `ZUI-W001` (INTENT_FLOW without SATISFIES), `ZUI-E001` (invalid PERSPECTIVE), `ZUI-E002` (invalid TONE), `ZUI-W010` (unresolved INTENT_FLOWS ref) | The ten named violations (`INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION`) are the **specified contract, not yet implemented anywhere** — M3 builds them against a published spec and conformance fixtures ([decision doc](decisions/M3-the-zui-verifier.md)) |
 | Rendered-page measurement | `tools/ui-audit.html` (ported from StzWeb) — measures Rules 105, 107, 108, 114–116 on any same-origin application UI | Grows one measurement per machine-checkable rule |
@@ -55,7 +55,8 @@ A rule's `enforcement` field says which instrument owns it: `machine` (declarati
 ## 5. The consumer contract
 
 - A consumer **pins a version** of `rules.json` and records it (StzWeb pins v3.6 as of this founding).
-- **A version denotes exactly one file.** `MAJOR.MINOR` moves when the law's substance moves — a rule canonized, amended, retired, or promoted up the enforcement ladder. A third component, `MAJOR.MINOR.PATCH`, marks a correction that changes no rule's substance: a stale pointer in a `lint` field, a broken path, a typo in non-normative metadata. A consumer pinned at `x.y` loses no protection by staying there when `x.y.z` appears — that is the whole meaning of the patch component. First used at v3.7.1 (2026-08-06).
+- **A version denotes exactly one file.** `MAJOR.MINOR` moves when the law's substance moves — a rule canonized, amended, retired, or promoted up the enforcement ladder. A third component, `MAJOR.MINOR.PATCH`, marks a correction that changes no rule's substance: a stale pointer in a `lint` field, a broken path, a brand name left in normative prose by the law's first home. A consumer pinned at `x.y` loses no protection by staying there when `x.y.z` appears — that is the whole meaning of the patch component. First used at v3.7.1 (2026-08-06).
+- **The substance test**, which decides which component moves: *does any interface that was lawful before become unlawful after — or must any conforming implementation change anything it does?* If no, it is a correction, however much prose changed. Editing a rule's wording is not by itself an amendment; changing what the rule requires is. Applied at v3.7.2, where seven passages were de-branded and not one requirement moved.
 - **Evidence is never corrected.** An `evidence` field records what happened, under the names things had when it happened; so does the `lineage`. A tool renamed later does not falsify the record, and rewriting it to match today's vocabulary would destroy the trail Article VII depends on. Pointers are corrected; history is not.
 - Findings **cite rule numbers**; numbers are stable forever — retired numbers are never reused, burned numbers stay burned (84, 88).
 - Amendment happens **here**, by Article VII: evidence, operator feedback, documented failure. A consumer needing a new rule submits the evidence; fashion is not admissible.
