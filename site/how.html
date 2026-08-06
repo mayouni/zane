@@ -249,13 +249,14 @@ table.plain th { color: var(--muted); text-transform: uppercase;
         <tr><td>The law, <code>rules.json</code> v3.7.2</td><td>117 rules as data; the single source of truth</td><td class="status live">in force</td></tr>
         <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — reference impl. in Zin</td></tr>
         <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — reference impl. in Zin</td></tr>
-        <tr><td>The ten named violations</td><td>the refusal contract every conforming implementation must detect</td><td class="status design">specified, unimplemented — M3</td></tr>
+        <tr><td>The ten named violations</td><td>the refusal contract every conforming implementation must detect</td><td class="status live">9 of 10 enforced by the verifier; the 10th is the UI audit's</td></tr>
         <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
         <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
         <tr><td>StzWeb's <code>stzw check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in StzWeb</td></tr>
         <tr><td><a href="../doc/language/README.md">The language specification</a></td><td>Zui v1.0 — the grammar in EBNF, the ten declaration types, every diagnostic bound to the rule it enforces</td><td class="status live">published</td></tr>
         <tr><td><a href="../conformance/README.md">The conformance suite</a></td><td>30 declarations with known verdicts and four conformance levels, so any implementation can prove agreement rather than assert it</td><td class="status live">published</td></tr>
-        <tr><td>The <code>zui</code> verifier CLI</td><td>an implementation of the named violations, to be measured against the suite — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc open</a></td><td class="status design">in design — M3</td></tr>
+        <tr><td><a href="../tools/zui/README.md">The <code>zui</code> verifier</a></td><td>parses the grammar and enforces 19 of the 20 diagnostics; passes all 30 fixtures at every level. Zero dependencies, runs on Node or in a browser</td><td class="status live">live — level 3</td></tr>
+        <tr><td>Cross-pillar symbols, computed</td><td>the verifier accepts a symbol table today; computing one from a host project's other pillars is the open half of Level 3 — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc</a></td><td class="status design">in design — M3</td></tr>
         <tr><td>Projection tables as data</td><td>intent→widget maps per medium, checkable like rules</td><td class="status design">in design — M4</td></tr>
         <tr><td>The AI-interaction jurisdiction</td><td>chat-stream rules; an MCP surface serving the law to generators while they generate</td><td class="status design">in design — M5</td></tr>
       </tbody>

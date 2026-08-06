@@ -1,0 +1,415 @@
+'use strict';
+/* ==========================================================================
+   zui.js — the Zui verifier core.
+
+   Lexer, parser and checks for the Zui language, implemented against
+   doc/language/ v1.0 and proved against conformance/.
+
+   No dependencies. No I/O. Pure functions over a source string, so the same
+   file runs as a Node CLI, in a browser page, or inside any build step —
+   which is the product promise: deployable inside any software project.
+
+   The diagnostic CONTRACT (severity, level, rule bindings) is NOT hardcoded
+   here. It lives in conformance/violations.json and is loaded by the caller.
+   This file knows how to detect; the law says what a detection means.
+   ========================================================================== */
+
+/* ---- the language, from doc/language/GRAMMAR.md ---- */
+
+const INTENT_VERBS = new Set([
+  'DISCOVER', 'UNDERSTAND', 'LOCATE',
+  'FOCUS', 'FILTER', 'COMPARE',
+  'READ', 'SCAN', 'SCROLL', 'ZOOM',
+  'SELECT', 'HIGHLIGHT', 'PREVIEW', 'MARK',
+  'ACT', 'CONFIRM', 'CANCEL', 'UNDO',
+  'PAUSE', 'RESUME', 'RETRY', 'EXIT'
+]);                                             /* 22, closed */
+
+const ZUI_KINDS = new Set([
+  'INTENT_FLOW', 'FORM', 'WIZARD', 'SCREEN', 'COMPONENT',
+  'NAV_GRAPH', 'WORLD_VIEW', 'INTERACTION', 'FEEDBACK', 'VIBE'
+]);                                             /* the ten this language defines */
+
+/* Recognized by the reference implementation, not defined here. Reported as
+   UNSPECIFIED_DECLARATION so the difference is visible, never silent. */
+const UNSPECIFIED_KINDS = new Set(['WIDGET', 'USER']);
+
+const REF_LIST_KEYS = new Set([
+  'SATISFIES', 'ALWAYS_REACHABLE', 'VISIBLE_ENTITIES', 'VISIBLE_STATE',
+  'INTENT_FLOWS', 'STEPS', 'REPORTS', 'SUPPRESSES'
+]);
+const KV_KEYS = new Set([
+  'INTENT_FLOW', 'PERSPECTIVE', 'TONE', 'SURFACE_AS', 'DENSITY', 'MOTION', 'ACTOR'
+]);
+
+const PERSPECTIVES = new Set(['top_down', 'isometric', 'first_person', 'side_scroll']);
+const TONES = new Set(['celebratory', 'cautionary', 'critical', 'neutral', 'informational']);
+
+/* Declarations that are flows: multi-step reachability applies to them. */
+const FLOW_KINDS = new Set(['INTENT_FLOW', 'WIZARD']);
+
+/* ==========================================================================
+   Lexer
+   ========================================================================== */
+
+const T = { IDENT: 'ident', STRING: 'string', NUMBER: 'number', PUNCT: 'punct', EOF: 'eof' };
+
+function lex(src) {
+  const tokens = [];
+  const diagnostics = [];
+  let i = 0, line = 1;
+  const isIdentStart = c => /[A-Za-z_]/.test(c);
+  const isIdentPart = c => /[A-Za-z0-9_]/.test(c);
+
+  /* A UTF-8 BOM is a byte-order mark, not content. Editors on Windows add
+     one routinely; a verifier that choked on it would be unusable there. */
+  if (src.charCodeAt(0) === 0xFEFF) i = 1;
+
+  while (i < src.length) {
+    const c = src[i];
+
+    if (c === '\n') { line++; i++; continue; }
+    if (c === ' ' || c === '\t' || c === '\r') { i++; continue; }
+
+    /* comments run to end of line; there is no block comment */
+    if (c === '/' && src[i + 1] === '/') {
+      while (i < src.length && src[i] !== '\n') i++;
+      continue;
+    }
+
+    if ('()[],'.includes(c)) { tokens.push({ t: T.PUNCT, v: c, line }); i++; continue; }
+
+    if (c === '"') {
+      const start = i, startLine = line;
+      i++;
+      while (i < src.length && src[i] !== '"') { if (src[i] === '\n') line++; i++; }
+      if (i >= src.length) {
+        diagnostics.push({ id: 'UNTERMINATED_STRING', line: startLine, subject: null });
+        break;
+      }
+      tokens.push({ t: T.STRING, v: src.slice(start + 1, i), line: startLine });
+      i++;
+      continue;
+    }
+
+    if (/[0-9]/.test(c) || (c === '-' && /[0-9]/.test(src[i + 1] || ''))) {
+      const start = i;
+      if (c === '-') i++;
+      while (i < src.length && /[0-9.]/.test(src[i])) i++;
+      tokens.push({ t: T.NUMBER, v: src.slice(start, i), line });
+      continue;
+    }
+
+    if (isIdentStart(c)) {
+      const start = i;
+      while (i < src.length && isIdentPart(src[i])) i++;
+      tokens.push({ t: T.IDENT, v: src.slice(start, i), line });
+      continue;
+    }
+
+    diagnostics.push({ id: 'UNEXPECTED_CHARACTER', line, subject: c });
+    i++;
+  }
+
+  tokens.push({ t: T.EOF, v: null, line });
+  return { tokens, diagnostics };
+}
+
+/* ==========================================================================
+   Parser
+
+   A declaration is DEFINE <KIND> <name> ( field, … ). Fields are flat: a
+   scalar value or a bracketed identifier list. There is no nesting -- nesting
+   is where widget trees creep back into an intent language.
+   ========================================================================== */
+
+function parse(src) {
+  const { tokens, diagnostics } = lex(src);
+  const decls = [];
+  let p = 0;
+
+  const peek = (n = 0) => tokens[Math.min(p + n, tokens.length - 1)];
+  const isPunct = (tok, v) => tok.t === T.PUNCT && tok.v === v;
+
+  /* A declaration of another pillar: skip its body without judging it. A Zui
+     verifier has no standing over DEFINE ENTITY or DEFINE FLOW. */
+  function skipBalanced() {
+    let depth = 0;
+    while (peek().t !== T.EOF) {
+      const tok = peek();
+      if (isPunct(tok, '(')) depth++;
+      else if (isPunct(tok, ')')) { depth--; p++; if (depth === 0) return; continue; }
+      p++;
+    }
+  }
+
+  while (peek().t !== T.EOF) {
+    const tok = peek();
+
+    if (tok.t === T.IDENT && tok.v === 'DEFINE') {
+      const defLine = tok.line;
+      p++;
+      const kindTok = peek();
+      if (kindTok.t !== T.IDENT) {
+        diagnostics.push({ id: 'SYNTAX_ERROR', line: kindTok.line, subject: 'expected a declaration kind after DEFINE' });
+        p++;
+        continue;
+      }
+      const kind = kindTok.v;
+      p++;
+
+      const nameTok = peek();
+      const name = nameTok.t === T.IDENT ? nameTok.v : null;
+      if (name === null) {
+        diagnostics.push({ id: 'SYNTAX_ERROR', line: nameTok.line, subject: `expected a name after DEFINE ${kind}` });
+      } else {
+        p++;
+      }
+
+      /* Not ours, and not a near-miss we owe a warning for: skip it whole. */
+      if (!ZUI_KINDS.has(kind) && !UNSPECIFIED_KINDS.has(kind)) {
+        if (isPunct(peek(), '(')) skipBalanced();
+        continue;
+      }
+
+      const decl = { kind, name, line: defLine, fields: [], fieldIndex: new Map() };
+
+      if (!isPunct(peek(), '(')) {
+        diagnostics.push({ id: 'SYNTAX_ERROR', line: peek().line, subject: `expected ( after ${kind} ${name || ''}`.trim() });
+        decls.push(decl);
+        continue;
+      }
+      p++;                                                   /* consume ( */
+
+      while (peek().t !== T.EOF && !isPunct(peek(), ')')) {
+        const keyTok = peek();
+        if (keyTok.t !== T.IDENT) {
+          diagnostics.push({ id: 'SYNTAX_ERROR', line: keyTok.line, subject: 'expected a field name' });
+          p++;
+          continue;
+        }
+        const key = keyTok.v;
+        p++;
+
+        let field;
+        if (isPunct(peek(), '[')) {
+          p++;
+          const items = [];
+          while (peek().t !== T.EOF && !isPunct(peek(), ']')) {
+            const itemTok = peek();
+            if (itemTok.t === T.IDENT) items.push({ v: itemTok.v, line: itemTok.line });
+            else if (!isPunct(itemTok, ',')) {
+              diagnostics.push({ id: 'SYNTAX_ERROR', line: itemTok.line, subject: `unexpected value in ${key} list` });
+            }
+            p++;
+          }
+          if (isPunct(peek(), ']')) p++;
+          field = { key, kind: 'list', items, line: keyTok.line };
+          if (!REF_LIST_KEYS.has(key)) {
+            diagnostics.push({ id: 'UNKNOWN_FIELD', line: keyTok.line, subject: key });
+          }
+        } else {
+          const valTok = peek();
+          let value = null;
+          if (valTok.t === T.IDENT || valTok.t === T.STRING || valTok.t === T.NUMBER) {
+            value = valTok.v;
+            p++;
+          } else {
+            diagnostics.push({ id: 'SYNTAX_ERROR', line: valTok.line, subject: `expected a value for ${key}` });
+          }
+          field = { key, kind: 'value', value, line: keyTok.line };
+          if (!KV_KEYS.has(key)) {
+            diagnostics.push({ id: 'UNKNOWN_FIELD', line: keyTok.line, subject: key });
+          }
+        }
+
+        decl.fields.push(field);
+        if (decl.fieldIndex.has(key)) {
+          diagnostics.push({ id: 'DUPLICATE_FIELD', line: keyTok.line, subject: `${key} in ${kind} ${name || ''}`.trim() });
+        } else {
+          decl.fieldIndex.set(key, field);
+        }
+
+        if (isPunct(peek(), ',')) p++;                       /* trailing comma is legal */
+      }
+
+      if (isPunct(peek(), ')')) p++;
+      else diagnostics.push({ id: 'SYNTAX_ERROR', line: peek().line, subject: `unclosed declaration ${kind} ${name || ''}`.trim() });
+
+      decls.push(decl);
+      continue;
+    }
+
+    /* Anything outside a declaration is noise we cannot interpret. */
+    diagnostics.push({ id: 'SYNTAX_ERROR', line: tok.line, subject: `unexpected ${tok.v}` });
+    p++;
+  }
+
+  return { decls, diagnostics };
+}
+
+/* ==========================================================================
+   Checks
+   ========================================================================== */
+
+const listOf = (decl, key) => {
+  const f = decl.fieldIndex.get(key);
+  return f && f.kind === 'list' ? f.items.map(x => x.v) : null;
+};
+const valueOf = (decl, key) => {
+  const f = decl.fieldIndex.get(key);
+  return f && f.kind === 'value' ? f.value : null;
+};
+
+function check(decls, symbols) {
+  const out = [];
+  const add = (id, line, subject) => out.push({ id, line, subject });
+  const seenNames = new Set();
+
+  /* every ALWAYS_REACHABLE promise made anywhere in the file */
+  const guaranteed = new Set();
+  for (const d of decls) (listOf(d, 'ALWAYS_REACHABLE') || []).forEach(v => guaranteed.add(v));
+  const declaredFlows = new Set(decls.filter(d => d.kind === 'INTENT_FLOW').map(d => d.name));
+
+  for (const decl of decls) {
+    const { kind, name, line } = decl;
+    const label = name || '(unnamed)';
+
+    /* -- Level 1 -------------------------------------------------------- */
+
+    if (UNSPECIFIED_KINDS.has(kind)) {
+      add('UNSPECIFIED_DECLARATION', line, `${kind} ${label}`);
+      continue;                        /* not ours to check further */
+    }
+
+    const nameKey = `${kind} ${name}`;
+    if (name !== null) {
+      if (seenNames.has(nameKey)) add('DUPLICATE_DECLARATION', line, nameKey);
+      else seenNames.add(nameKey);
+    }
+
+    for (const key of ['SATISFIES', 'ALWAYS_REACHABLE', 'SUPPRESSES']) {
+      const f = decl.fieldIndex.get(key);
+      if (!f || f.kind !== 'list') continue;
+      for (const item of f.items) {
+        if (!INTENT_VERBS.has(item.v)) add('UNKNOWN_INTENT', item.line, `${item.v} in ${key} of ${label}`);
+      }
+    }
+
+    /* -- Level 2 -------------------------------------------------------- */
+
+    const satisfies = new Set(listOf(decl, 'SATISFIES') || []);
+    const reachable = new Set(listOf(decl, 'ALWAYS_REACHABLE') || []);
+    const acts = satisfies.has('ACT');
+
+    if (kind === 'INTENT_FLOW' && !decl.fieldIndex.has('SATISFIES')) {
+      add('INTENT_FLOW_NO_SATISFIES', line, label);
+    }
+
+    if (satisfies.has('SELECT') && acts && !satisfies.has('CONFIRM')) {
+      add('SELECT_ACT_COLLAPSE', line, label);
+    }
+    if (satisfies.has('READ') && acts) {
+      add('READ_ACT_COLLAPSE', line, label);
+    }
+    if (acts && !reachable.has('UNDO')) {
+      add('MISSING_UNDO', line, label);
+    }
+    if (FLOW_KINDS.has(kind) && acts && !reachable.has('CANCEL')) {
+      add('MISSING_CANCEL', line, label);
+    }
+
+    const multiStep = kind === 'WIZARD' || decl.fieldIndex.has('STEPS');
+    if (multiStep && !reachable.has('EXIT')) {
+      add('TRAPPED_FLOW', line, label);
+    }
+
+    if (kind === 'WORLD_VIEW') {
+      const persp = valueOf(decl, 'PERSPECTIVE');
+      if (persp !== null && !PERSPECTIVES.has(persp)) add('INVALID_PERSPECTIVE', line, `${persp} on ${label}`);
+    }
+
+    if (kind === 'FEEDBACK') {
+      const tone = valueOf(decl, 'TONE');
+      if (tone !== null && !TONES.has(tone)) add('INVALID_TONE', line, `${tone} on ${label}`);
+      const reports = listOf(decl, 'REPORTS');
+      const saysSomething = tone !== null || valueOf(decl, 'MOTION') !== null;
+      if (saysSomething && (!reports || reports.length === 0)) {
+        add('DECORATIVE_ANIMATION', line, label);
+      }
+    }
+
+    if (kind === 'VIBE') {
+      const motion = valueOf(decl, 'MOTION');
+      const reports = listOf(decl, 'REPORTS');
+      /* MOTION none is lawful and common; motion that moves must report */
+      if (motion !== null && motion !== 'none' && (!reports || reports.length === 0)) {
+        add('DECORATIVE_ANIMATION', line, label);
+      }
+      for (const v of listOf(decl, 'SUPPRESSES') || []) {
+        if (guaranteed.has(v)) add('VIBE_STRIPS_RIGHT', line, `${v} suppressed by ${label}`);
+      }
+    }
+
+    const flowRef = valueOf(decl, 'INTENT_FLOW');
+    if (flowRef !== null && !declaredFlows.has(flowRef)) {
+      add('UNRESOLVED_INTENT_FLOW', line, `${flowRef} referenced by ${label}`);
+    }
+
+    /* -- Level 3: only when the symbol table supplies what the check needs.
+          Absent input means UNDECIDABLE, which is silence -- never a pass. -- */
+
+    if (symbols && Array.isArray(symbols.actors) && acts && valueOf(decl, 'ACTOR') === null) {
+      add('HIDDEN_AUTHORITY', line, label);
+    }
+
+    if (symbols && Array.isArray(symbols.entities)) {
+      for (const item of (decl.fieldIndex.get('VISIBLE_ENTITIES') || { items: [] }).items || []) {
+        if (!symbols.entities.includes(item.v)) add('UNRESOLVED_ENTITY', item.line, `${item.v} in ${label}`);
+      }
+    }
+  }
+
+  /* -- Level 3, file-wide ---------------------------------------------- */
+
+  if (symbols && Array.isArray(symbols.elements)) {
+    const traced = new Set(
+      decls.filter(d => (listOf(d, 'SATISFIES') || []).length > 0).map(d => d.name)
+    );
+    for (const el of symbols.elements) {
+      if (!traced.has(el)) out.push({ id: 'INTENT_ORPHAN', line: 0, subject: el });
+    }
+  }
+
+  if (symbols && Array.isArray(symbols.state)) {
+    const shown = new Set();
+    for (const d of decls) (listOf(d, 'VISIBLE_STATE') || []).forEach(s => shown.add(s));
+    for (const s of symbols.state) {
+      if (!shown.has(s)) out.push({ id: 'INVISIBLE_STATE', line: 0, subject: s });
+    }
+  }
+
+  return out;
+}
+
+/* ==========================================================================
+   Public surface
+   ========================================================================== */
+
+/**
+ * Verify one Zui source string.
+ * @param {string} source        the .zui text
+ * @param {object} [opts]
+ * @param {object} [opts.symbols] {entities, actors, state, elements} — Level 3
+ * @returns {Array<{id, line, subject}>} diagnostics, in source order
+ */
+function verify(source, opts) {
+  const options = opts || {};
+  const { decls, diagnostics } = parse(source);
+  return diagnostics.concat(check(decls, options.symbols || null));
+}
+
+const API = { verify, parse, lex, INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES };
+
+if (typeof module !== 'undefined' && module.exports) module.exports = API;
+if (typeof window !== 'undefined') window.Zui = API;

@@ -56,24 +56,36 @@
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>]      <span class="c">// interest → review → commitment</span>
 )</pre>
-<pre class="term"><span class="dim">$ zui check payments.zui</span>
-<span class="bad">MISSING_UNDO</span>  approve_payment: an act declares no way back  <span class="dim">[Rule 79 · The Undo Covenant]</span></pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
+payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  approve_payment
+    <span class="dim">An act declares no way back: ALWAYS_REACHABLE lacks UNDO.</span>
+    <span class="dim">Rule 79 · The Undo Covenant · Article IV</span>
+payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  approve_payment
+    <span class="dim">A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.</span>
+    <span class="dim">Rule 26 · The Back Button is Holy · Article IV</span>
+
+2 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     <p>The interface you were about to build has just been refused — at design
-    time, by structure, citing the law. Declare the way back and it stands:</p>
+    time, by structure, citing the law by number and title. Declare the way
+    back and it stands:</p>
 <pre class="shot"><span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
-<pre class="term"><span class="dim">$ zui check payments.zui</span>
-<span class="good">clean</span> — 1 flow, 0 violations against Zui v3.7.2</pre>
-    <p class="caption"><b>Status, plainly:</b> this grammar parses today in the
-    reference implementation, inside the Zin platform — a consumer of this
-    language like any other — which enforces four Zui diagnostics. The refusal
-    shown above is <em>specified, not yet implemented</em>: the ten named
-    violations are M3's work, now open with a
-    <a href="doc/decisions/M3-the-zui-verifier.md">decision document</a>. Every
-    other instrument on this page runs now; the
-    <a href="site/how.html">status board</a> keeps the whole account honest.</p>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.7.2</pre>
+    <p class="caption"><b>Status, plainly:</b> that is real output, copied from
+    a real run — <a href="tools/zui/README.md">the verifier</a> ships in this
+    repository, passes all 30 fixtures of
+    <a href="conformance/README.md">the conformance suite</a>, and needs no
+    toolchain beyond Node. It reads its diagnostic contract and its citations
+    from <a href="constitution/rules.json">the law itself</a> rather than
+    hardcoding them. What it does <em>not</em> yet do: the four cross-pillar
+    checks need a symbol table you supply, and one violation
+    (<code>LAYOUT_DISPLACEMENT</code>) belongs to
+    <a href="tools/ui-audit.html">the UI audit</a> because it is a fact about a
+    painted page. The <a href="site/how.html">status board</a> keeps the whole
+    account honest.</p>
   </div>
 </section>
 

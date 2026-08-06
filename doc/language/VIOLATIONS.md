@@ -74,7 +74,8 @@ to Reverse.
 ---
 
 **`MISSING_CANCEL`** · error · Level 2
-> A flow whose `ALWAYS_REACHABLE` does not hold `CANCEL`.
+> A flow **that acts** — an `INTENT_FLOW` or `WIZARD` whose `SATISFIES` holds
+> `ACT` — whose `ALWAYS_REACHABLE` does not hold `CANCEL`.
 
 The human may begin but not stop. Distinct from `MISSING_UNDO`: undo reverses what
 was done, cancel abandons what is being done.
@@ -191,9 +192,16 @@ Not normative, but conformance is easier to prove when implementations agree.
 Recommended: one finding per line, machine-parseable first, prose after.
 
 ```
-payments.zui:4  error  MISSING_UNDO  approve_payment  [Rule 79 · Article IV]
-    an act declares no way back — ALWAYS_REACHABLE lacks UNDO
+payments.zui:2  error  MISSING_UNDO  approve_payment
+    An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.
+    Rule 79 · The Undo Covenant · Article IV · the right to reverse
 ```
+
+One scannable line per finding — location, severity, id, subject — with the
+detail and the citation indented beneath it. The citation earns its own line:
+rich enough to be useful, it would otherwise push the header past any sane
+terminal width. (The [UI audit](../../tools/ui-audit.html) caught exactly that
+overflow on this project's own front page, under Rule 114.)
 
 The suite compares **`(fixture, code)` pairs only** — never line numbers, message
 wording, or ordering. An implementation is free to phrase its prose however it

@@ -64,9 +64,13 @@ Level 4 has no fixtures, and the manifest says why in its `unfixtured` section:
 
 ## Running the suite
 
-There is no runner in this repository yet, because there is no verifier yet —
-and shipping a runner with nothing to run would violate Rule 124. The suite is
-data; a runner is ten lines in any language. In outline:
+```bash
+node tools/zui/conformance.js --level 4
+```
+
+That runs [the verifier in this repository](../tools/zui/README.md) against
+every fixture. For an implementation of your own, a runner is ten lines in any
+language:
 
 ```
 for each fixture in manifest.fixtures:
@@ -94,17 +98,20 @@ ship.
 
 ## The state of play
 
-**No implementation passes this suite today**, and the suite was written knowing
-that. Zin, the reference implementation, parses the whole grammar and enforces
-four diagnostics (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) — that is a
-subset of Level 2 and none of the ten named violations, a finding established by
-reading the source and recorded in
-[the M3 decision document](../doc/decisions/M3-the-zui-verifier.md) §1.
+| Implementation | Level | Result |
+|---|---|---|
+| [`tools/zui/`](../tools/zui/README.md) — this repository | 3 | **30 / 30 pass** (L1 6, L2 26, L3 30) |
+| Zin's compiler — the reference implementation | subset of 2 | four diagnostics, none of the ten named violations |
 
-That is exactly why the fixtures exist and why they came first. Once a suite
-exists, "two implementations drift" stops being a risk and becomes a test result
-— which is what makes the standalone-versus-embedded decision reversible instead
-of fateful.
+The suite was written *before* either could pass it, which is the whole point:
+once a suite exists, "two implementations drift" stops being a risk and becomes
+a test result — and that is what makes the standalone-versus-embedded decision
+reversible instead of fateful. A Zig verifier beside Zin's compiler would be
+measured here exactly as the JavaScript one is.
+
+Zin's four diagnostics (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) were
+established by reading its source, and are recorded in
+[the M3 decision document](../doc/decisions/M3-the-zui-verifier.md) §1.
 
 ## Adding a fixture
 
