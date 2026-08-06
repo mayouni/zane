@@ -20,14 +20,16 @@ Feel the offense, then feel the law — generalizing StzWeb's Gotchas page (7 of
 - ✅ The Gotchas split per rule family (2026-08-06): a hub and seven family pages — Stillness, Forms, State, Widgets, Reading, Navigation, Intelligence — sharing one engine stylesheet; single-offense families (Navigation, Intelligence) grow with the harvest. The site's trails adopt the branch convention (a parent shows its children, a leaf shows its ancestors — Rule 115) proven in StzWeb.
 - ✅ The vibes exhibit (2026-08-06): `site/vibes.html`, the Article VI page — the same operator screen rendered in both vibes at once, driven by one shared state (act in either pane, the other follows); what may flex listed against what never does. The exhibit's panes force their own vibe, so F2 flips the page around them while they keep showing both cultures.
 
-## M3 — The `zui` verifier
+## M3 — The `zui` verifier (in progress, opened 2026-08-06)
 
-A standalone CLI that checks declarations against the law — lifted from the Zin compiler's existing implementation (parser + semantic checks for `INTENT_FLOW`, `FORM`, `WIZARD`, `WORLD_VIEW`, `INTERACTION`, `FEEDBACK`, `SCREEN`, `COMPONENT`, `NAV_GRAPH`, `VIBE`), not rebuilt.
+A CLI that checks declarations against the law. **The premise changed on contact with the code**: this is not a lift. Zin parses the whole Zui grammar and enforces four diagnostics (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`), but the ten named violations are specification — they are implemented nowhere. M3 is new implementation against a published spec and fixtures. See **[the decision document](doc/decisions/M3-the-zui-verifier.md)**, written with Zin.
 
-- Decision document: extract the Zui subset into a standalone Zig CLI vs. make Zin's compiler embeddable as a library. Written with the Zin project, not imposed on it.
-- The named violations become the contract: `INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION`.
+- ✅ Decision document opened (2026-08-06): the audit of Zin's compiler, the three options (extract · embed · pillar-filter-first), the recommended sequence, and the open questions Zin must answer.
+- The sequence it recommends: **fixtures and spec first** (StzZui's own work, no dependency on the answer, and what makes the A-vs-B choice reversible) → **Zin's pillar filter** (~10 lines, answers the cross-pillar question empirically) → **then decide** extract vs embed against evidence.
+- The named violations become the contract: `INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, `DECORATIVE_ANIMATION` — six decidable from a single declaration, four needing a symbol table from other pillars.
+- Each violation bound to the constitutional rule it enforces, so the verifier's output cites the law.
 - Conformance fixtures: declarations with known verdicts, so any future implementation (any language) can prove agreement — the StzWeb three-runtimes discipline applied to the verifier itself.
-- Language spec extracted to `doc/language/` with Zin credited as reference implementation.
+- Language spec published at `doc/language/`, separating what the language *is* from what any implementation has reached, with Zin credited as reference implementation.
 
 ## M4 — Rendering projections
 

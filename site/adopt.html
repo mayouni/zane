@@ -53,12 +53,14 @@
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
 )</pre>
-    <p>Structure is refused early — a wizard with no <code>EXIT</code> dies on
-    the whiteboard, not in the sprint. The checker that does this compiles
-    today in the reference implementation (inside Zin, a consumer); until the
-    standalone <code>zui</code> CLI ships (M3), the declaration is still worth
-    writing — it is the design document your team and your generator are held
-    to, and an AI assistant given the law can already check it by hand.</p>
+    <p>Structure is refused early — a wizard with no <code>EXIT</code> should die
+    on the whiteboard, not in the sprint. Stated plainly: the grammar parses
+    today in the reference implementation (inside Zin, a consumer), which
+    enforces four Zui diagnostics; the structural refusals are specified and
+    are M3's work. Until the <code>zui</code> CLI ships, the declaration is
+    still worth writing — it is the design document your team and your
+    generator are held to, and an AI assistant given the law can already check
+    it by hand.</p>
   </div>
 </section>
 
@@ -126,10 +128,11 @@
   <div class="narrow">
     <h2>The road</h2>
     <p>What adoption will look like as the instruments land — stated as design,
-    not as promise: <b>M3</b>, the standalone <code>zui</code> verifier CLI
-    lifted from the reference implementation, plus the language spec published
-    here and conformance fixtures so any implementation in any language can
-    prove agreement. <b>M4</b>, the intent→widget projection tables as data,
+    not as promise: <b>M3</b>, the <code>zui</code> verifier CLI — now open,
+    with a <a href="../doc/decisions/M3-the-zui-verifier.md">decision
+    document</a> that audits what the reference implementation actually has and
+    sequences the work: the language spec and conformance fixtures first, so any
+    implementation in any language can prove agreement. <b>M4</b>, the intent→widget projection tables as data,
     checkable like the rules themselves. <b>M5</b>, the AI-interaction
     jurisdiction: laws for the chat stream, consent surfaces, and the MCP
     endpoint that serves all of it to generators. The details live in

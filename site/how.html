@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How it works — declare, check, project, measure</title>
-<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 24 verbs, 117 rules as data, ten violations refused by name.">
+<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 24 verbs, 117 rules as data, and a refusal contract of ten named violations.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css">
 <style>
@@ -143,11 +143,19 @@ table.plain th { color: var(--muted); text-transform: uppercase;
 <span class="bad">HIDDEN_AUTHORITY</span>     a consequential act names no actor
 <span class="bad">LAYOUT_DISPLACEMENT</span>  arriving content shoves the reading
 <span class="bad">DECORATIVE_ANIMATION</span> motion that reports nothing</pre>
-    <p class="caption">These checks run today in the reference implementation's
-    compiler (<code>parser.zig</code>, <code>semantic.zig</code>, inside the
-    Zin platform — a consumer of this language). The standalone
-    <code>zui</code> CLI, with conformance fixtures so any implementation in
-    any language can prove agreement, is in design — see the status board.</p>
+    <p class="caption"><b>Status, plainly:</b> the grammar above parses today in
+    the reference implementation (<code>parser.zig</code>, inside the Zin
+    platform — a consumer of this language), whose
+    <code>semantic.zig</code> enforces four Zui diagnostics: an
+    <code>INTENT_FLOW</code> without <code>SATISFIES</code>, an invalid
+    <code>PERSPECTIVE</code>, an invalid <code>TONE</code>, and an unresolved
+    <code>INTENT_FLOWS</code> reference. <b>The ten named violations are the
+    specified contract, not yet implemented</b> — they are M3's work, now open
+    with a <a href="../doc/decisions/M3-the-zui-verifier.md">decision
+    document</a>. Six of the ten are decidable from a single declaration
+    (<code>SATISFIES</code> and <code>ALWAYS_REACHABLE</code> are written in the
+    file); four need a symbol table from other pillars, which is the crux that
+    decision weighs.</p>
   </div>
 </section>
 
@@ -239,11 +247,13 @@ table.plain th { color: var(--muted); text-transform: uppercase;
       <thead><tr><th>Instrument</th><th>What it does</th><th>Status</th></tr></thead>
       <tbody>
         <tr><td>The law, <code>rules.json</code> v3.7</td><td>117 rules as data; the single source of truth</td><td class="status live">in force</td></tr>
-        <tr><td>The Zui grammar &amp; compile checks</td><td>parses the ten declaration types; refuses the named violations</td><td class="status live">live — reference impl. in Zin</td></tr>
+        <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — reference impl. in Zin</td></tr>
+        <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — reference impl. in Zin</td></tr>
+        <tr><td>The ten named violations</td><td>the refusal contract every conforming implementation must detect</td><td class="status design">specified, unimplemented — M3</td></tr>
         <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
         <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
         <tr><td>StzWeb's <code>stzw check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in StzWeb</td></tr>
-        <tr><td>Standalone <code>zui</code> verifier CLI</td><td>the reference checks, lifted out; conformance fixtures for any implementation</td><td class="status design">in design — M3</td></tr>
+        <tr><td>The <code>zui</code> verifier CLI</td><td>the named violations, plus conformance fixtures so any implementation can prove agreement — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc open</a></td><td class="status design">in design — M3</td></tr>
         <tr><td>Language spec, <code>doc/language/</code></td><td>the grammar and declaration types specified here, where the law lives</td><td class="status design">in design — M3</td></tr>
         <tr><td>Projection tables as data</td><td>intent→widget maps per medium, checkable like rules</td><td class="status design">in design — M4</td></tr>
         <tr><td>The AI-interaction jurisdiction</td><td>chat-stream rules; an MCP surface serving the law to generators while they generate</td><td class="status design">in design — M5</td></tr>
