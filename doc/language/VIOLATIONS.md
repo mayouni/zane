@@ -17,7 +17,7 @@ amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
 every diagnostic below carries a binding. Bindings cite
-`constitution/rules.json` **v3.7.2**.
+`constitution/rules.json` **v3.7.3**.
 
 ## 2. Severity and level
 

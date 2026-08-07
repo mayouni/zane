@@ -9,7 +9,7 @@ Milestones are cumulative; each ships complete or not at all (Rule 124 applies t
 - The Reader ported and rebranded — the whole law, interactive.
 - The UI Audit ported (as "site audit"; renamed 2026-08-05) — six rules measured on any same-origin UI.
 - Founding documents: README, ARCHITECTURE, this roadmap.
-- Consumer contract stated; Zing (formerly StzWeb) pinned at v3.6.
+- Consumer contract stated; Zing (formerly StzWeb) pinned at v3.7.3.
 
 ## M2 — The educational showcase ✅ (2026-08-06)
 
@@ -53,4 +53,4 @@ The law extended to the medium where interfaces are currently worst: AI conversa
 
 - License: to be chosen by the author before the repository goes public.
 - The repository is local-first until the author decides to publish.
-- Zing (formerly StzWeb) re-pins to v3.7+ in its own session, with its own verification.
+- ✅ Zing (formerly StzWeb) re-pinned to v3.7.3 (2026-08-07).
