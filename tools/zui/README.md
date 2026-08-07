@@ -141,6 +141,6 @@ One of possibly several, and deliberately so. The
 [M3 decision document](../../doc/decisions/M3-the-zui-verifier.md) left the
 extract-versus-embed question open, and the conformance suite is what makes
 that safe: **any future implementation, in any language, proves agreement
-against the same 30 fixtures.** A Zig verifier living beside Zin's compiler
+against the same 30 fixtures.** A Zig verifier living beside the reference implementation's compiler
 would be measured exactly the way this one is. That is the point of writing
 the fixtures first.

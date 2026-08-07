@@ -1,5 +1,5 @@
 // NAVIGATE is not one of the 22 verbs. It reads like one, which is exactly
-// why the grammar is closed -- and why Zin's own reference declaration
+// why the grammar is closed -- and why the reference implementation's own declaration
 // (projects/restolean/src/model/restaurant.zui) commits this defect today.
 // Navigation is LOCATE (going to a known place) or DISCOVER (finding what
 // places exist).

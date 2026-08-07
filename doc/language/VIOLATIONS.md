@@ -113,7 +113,7 @@ forbidden pattern `decorative-animation`.
 ### Level 3 — needs a symbol table
 
 These three need facts a `.zui` file does not contain. A standalone verifier may
-**accept the symbol table as an input** rather than compute it; Zin supplies it
+**accept the symbol table as an input** rather than compute it; the reference implementation supplies it
 natively from the other pillars.
 
 ---
@@ -161,9 +161,9 @@ Fear · forbidden pattern `layout-shift`.
 ## 4. Grammar and reference diagnostics
 
 Beyond the ten, a conforming implementation raises these. The four marked ✅ ship
-in Zin today, under the codes shown.
+in the reference implementation today, under the codes shown.
 
-| Diagnostic | Sev. | Level | Meaning | Zin |
+| Diagnostic | Sev. | Level | Meaning | Ref. impl. |
 |---|---|---|---|---|
 | `UNKNOWN_INTENT` | error | 1 | a verb in `SATISFIES`/`ALWAYS_REACHABLE` is not one of the 22 | ❌ |
 | `UNSPECIFIED_DECLARATION` | warning | 1 | a `.zui` declaration kind outside the ten (`WIDGET`, `USER`) | ❌ |
@@ -176,7 +176,7 @@ in Zin today, under the codes shown.
 | `VIBE_STRIPS_RIGHT` | error | 2 | a `VIBE` suppresses an intent another declaration guarantees | ❌ |
 | `UNRESOLVED_ENTITY` | warning | 3 | a `VISIBLE_ENTITIES` name resolves to no entity | ❌ |
 
-◐ Zin's `ZUI-W010` resolves the **cross-pillar** direction — `INTENT_FLOWS`
+◐ the reference implementation's `ZUI-W010` resolves the **cross-pillar** direction — `INTENT_FLOWS`
 references written in other pillars' files, checked against flow names harvested
 from `.zui`. The Zui-local direction specified here (a `FORM` whose `INTENT_FLOW`
 names nothing) is not checked today.
@@ -184,7 +184,7 @@ names nothing) is not checked today.
 `UNRESOLVED_ENTITY` is Level 3 and notable as a **gap in the reference
 implementation**: `VISIBLE_ENTITIES` is parsed and emitted to IR
 (`ir_emitter.zig:1454`) but never resolved against the entity model. Raised with
-Zin as decision-document §7.4.
+The reference implementation as decision-document §7.4.
 
 ## 5. Diagnostic output
 

@@ -1,7 +1,7 @@
 ﻿# StzZui — Architecture
 
 **Status**: founding document, 2026-08-05
-**Inherits from**: Zin `doc/spec/dsl/ZUI_SPECIFICATION_v3_0.md` (Session 27) and the StzWeb Zui Constitution (v1.0 → v3.6 lineage)
+**Inherits from**: a sibling project's interface specification v3.0 (Session 27) and the StzWeb Zui Constitution (v1.0 → v3.6 lineage)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Most UI frameworks begin with a physical assumption — screens, widgets, layouts — and try to infer what the user intends. Zui inverts the order: **it starts from human intent and treats rendering as a consequence.** A human does not come to an interface to click a button; they come to discover, focus, read, compare, select, act, confirm, and understand consequences. This inversion is what makes interface correctness *compilable*: once intent is explicit, violations are detectable before the interface ships, not after users complain.
 
-Stated as identity: **StzZui is a declarative, compilable language for intent-driven UIs.** The constitution is the language's semantic layer — the reason the compiler refuses — and the projections are its back ends. Zin and every other project are consumers of the language; Zin's compiler is today's reference implementation, not the owner. The whole assembly deploys inside any software project and holds at three moments: design (declarations checked before a pixel), development (builds linted, findings cite numbers), runtime (the painted page measured).
+Stated as identity: **StzZui is a declarative, compilable language for intent-driven UIs.** The constitution is the language's semantic layer — the reason the compiler refuses — and the projections are its back ends. Every other project is a consumer of the language, including the one whose compiler serves as today's reference implementation — a consumer, never the owner. The whole assembly deploys inside any software project and holds at three moments: design (declarations checked before a pixel), development (builds linted, findings cite numbers), runtime (the painted page measured).
 
 ## 2. Three layers, strictly ordered
 
@@ -36,10 +36,10 @@ Layer discipline (compiler-enforced where a compiler exists):
 
 | Piece | Today | Destination |
 |---|---|---|
-| The language (Layer 1) | **Owned by this project and specified here** — [`doc/language/`](language/README.md) v1.0: the grammar in EBNF, the ten declaration types, the diagnostic contract. Parsed today by Zin's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) — a consumer serving as reference implementation | Implementations prove agreement against [`conformance/`](../conformance/README.md) — 30 fixtures with known verdicts, four conformance levels |
+| The language (Layer 1) | **Owned by this project and specified here** — [`doc/language/`](language/README.md) v1.0: the grammar in EBNF, the ten declaration types, the diagnostic contract. Parsed today by the reference implementation's compiler (`src/compiler/parser.zig`, `ir_emitter.zig`) — a consumer, not the owner | Implementations prove agreement against [`conformance/`](../conformance/README.md) — 30 fixtures with known verdicts, four conformance levels |
 | The Constitution (Layer 2) | **Canonical here** — `constitution/rules.json` v3.7.3 | Stays; consumers pin versions |
-| `.zui` declarations | Live in Zin projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — Zin consumes the spec from here |
-| Compile-time violation checks | **[`tools/zui/`](../tools/zui/README.md)** enforces 19 of the 20 contract diagnostics and passes all 30 fixtures — nine of the ten named violations, six of them from a single declaration. Zin `semantic.zig` independently implements four (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) | Cross-pillar symbol *computation* (the verifier accepts a table today); `LAYOUT_DISPLACEMENT` stays with the UI audit, being a fact about a painted page. Whether Zin implements the ten in its own compiler is Zin's call ([decision doc](decisions/M3-the-zui-verifier.md) §7) |
+| `.zui` declarations | Live in the reference implementation's projects (e.g. `projects/restolean/src/model/restaurant.zui`) | Unchanged — it consumes the spec from here |
+| Compile-time violation checks | **[`tools/zui/`](../tools/zui/README.md)** enforces 19 of the 20 contract diagnostics and passes all 30 fixtures — nine of the ten named violations, six of them from a single declaration. The reference implementation's `semantic.zig` independently implements four (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) | Cross-pillar symbol *computation* (the verifier accepts a table today); `LAYOUT_DISPLACEMENT` stays with the UI audit, being a fact about a painted page. Whether the reference implementation implements the ten in its own compiler is its call ([decision doc](decisions/M3-the-zui-verifier.md) §7) |
 | Rendered-page measurement | `tools/ui-audit.html` (ported from StzWeb) — measures Rules 105, 107, 108, 114–116 on any same-origin application UI | Grows one measurement per machine-checkable rule |
 | Runtime enforcement | Zing's (formerly StzWeb) `zing check` (Zig) lints declarations and cites rule numbers | Remains in Zing; other consumers implement their own against the pinned law |
 
@@ -47,7 +47,7 @@ Layer discipline (compiler-enforced where a compiler exists):
 
 The constitution is enforced twice, at two different moments:
 
-1. **Before rendering** — the *declaration* checker (the zui compiler). Works on intent flows and surface declarations; catches structural violations (a flow with no EXIT, an ACT with no UNDO, a SELECT that mutates). Zin's compiler parses the whole grammar today and enforces four Zui diagnostics; the structural violations above are specified and awaiting M3. Six of the ten are decidable from a single declaration — `SATISFIES` and `ALWAYS_REACHABLE` are written in the `.zui` file — and four need a symbol table from other pillars ([decision doc](decisions/M3-the-zui-verifier.md) §3).
+1. **Before rendering** — the *declaration* checker (the zui compiler). Works on intent flows and surface declarations; catches structural violations (a flow with no EXIT, an ACT with no UNDO, a SELECT that mutates). The reference implementation's compiler parses the whole grammar today and enforces four Zui diagnostics; the structural violations above are specified and awaiting M3. Six of the ten are decidable from a single declaration — `SATISFIES` and `ALWAYS_REACHABLE` are written in the `.zui` file — and four need a symbol table from other pillars ([decision doc](decisions/M3-the-zui-verifier.md) §3).
 2. **After rendering** — the *measurement* tool (the UI audit). Works on the actual painted page of any application served same-origin; catches what static analysis cannot see (computed size, composited contrast, real layout at a real width). This is what `tools/ui-audit.html` does today.
 
 A rule's `enforcement` field says which instrument owns it: `machine` (declaration checker), `tool` (measurement), `judgment` (human, until an instrument is invented — the enforcement ladder).
@@ -69,6 +69,6 @@ The novel jurisdiction. Set 31 (Intelligence Under Law) already governs the agen
 
 ## 7. Credits and lineage
 
-- The three-layer model, the 24-verb grammar, and the named compile-time violations originate in **Zin's Zui pillar** (ZUI_SPECIFICATION v3.0, Session 27).
+- The three-layer model, the 24-verb grammar, and the named compile-time violations originate in **a sibling project's Zui pillar** (ZUI_SPECIFICATION v3.0, Session 27).
 - The rules corpus, the constitution-as-data discipline, the enforcement tiers, the evidence requirement, and the audit tooling originate in **StzWeb's Zui Constitution** (v1.0 → v3.6).
-- The colour, widget-role, navigation and i18n rules (117–122) were forged in **ZinBank** and the **Zin i18n decisions**; the reading-arc rule (123) in the **Refine** site rebuild; the generator's duty (124) in Zin's build-target culture. See [HARVEST-2026-08.md](HARVEST-2026-08.md).
+- The colour, widget-role, navigation and i18n rules (117–122) were forged in **a banking product** and its **i18n decisions**; the reading-arc rule (123) in the **Refine** site rebuild; the generator's duty (124) in the reference implementation's build-target culture. See [HARVEST-2026-08.md](HARVEST-2026-08.md).

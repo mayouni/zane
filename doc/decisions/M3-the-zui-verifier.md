@@ -1,8 +1,8 @@
 # M3 — The `zui` Verifier: Where It Should Live
 
-**Status**: open for decision · written with the Zin project, not imposed on it
+**Status**: open for decision · written with the reference implementation's project, not imposed on it
 **Date**: 2026-08-06
-**Author**: StzZui (the language's home) · addressed to Zin (its reference implementation)
+**Author**: StzZui (the language's home) · addressed to its reference implementation
 **Decides**: how a standalone `zui` verifier comes to exist — by extraction, by
 embedding, or by construction — and what StzZui owes the language regardless of
 the answer.
@@ -12,19 +12,19 @@ the answer.
 ## 1. The finding that reframes this decision
 
 The roadmap said M3 would be a *lift*: "a standalone CLI that checks declarations
-against the law — lifted from the Zin compiler's existing implementation, not
+against the law — lifted from the reference compiler's existing implementation, not
 rebuilt." That premise does not survive contact with the code.
 
-**The ten named violations are not implemented in Zin.** A search across all of
+**The ten named violations are not implemented there.** A search across all of
 `D:\GitHub\zin\src` for `INTENT_ORPHAN`, `SELECT_ACT_COLLAPSE`,
 `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`, `TRAPPED_FLOW`,
 `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, `LAYOUT_DISPLACEMENT`, and
 `DECORATIVE_ANIMATION` returns **zero occurrences**. They exist as a table in
-`doc/spec/dsl/ZUI_SPECIFICATION_v3_0.md` §10.1, and Zin's own §14 roadmap still
+`doc/spec/dsl/ZUI_SPECIFICATION_v3_0.md` §10.1, and the reference implementation's own §14 roadmap still
 lists them as future work. They were specification, and both projects' documents
 have been describing them as implementation.
 
-What *does* exist in Zin today is real, and worth stating precisely:
+What *does* exist in the reference implementation today is real, and worth stating precisely:
 
 | Capability | Where | Status |
 |---|---|---|
@@ -45,9 +45,9 @@ setback — the design work is done and the evidence trail is complete — but i
 changes the decision, because you do not choose an extraction strategy for code
 that does not exist yet.
 
-## 2. What Zui actually is inside Zin
+## 2. What Zui actually is inside the reference implementation
 
-Zin's compiler is **pillar-generic**, and this is its defining architectural fact.
+The reference implementation's compiler is **pillar-generic**, and this is its defining architectural fact.
 One lexer, one recursive-descent parser, one `verify()`, one IR emitter — all
 driven by table lookups keyed on a 62-variant `PillarCode` enum. Zui is one
 variant. There is no `parseZui`, no `checkZui`, no Zui module.
@@ -104,7 +104,7 @@ the data pillar.
 **The shape of the answer**: a Zui-only verifier can honestly own six of ten
 violations plus the four shipping diagnostics, with no knowledge of any other
 pillar. The remaining four need a symbol table — which a standalone tool can
-*accept as an input* rather than compute, and which Zin can supply natively.
+*accept as an input* rather than compute, and which the reference implementation can supply natively.
 
 This is the fact the decision turns on, and it was not knowable before reading the
 code.
@@ -116,7 +116,7 @@ code.
 A new Zig project carrying the lexer unchanged, the parser with its keyword tables
 pruned to Zui, and a `verify()` reduced to the Zui checks.
 
-- **For**: no dependency on Zin's release cadence, build, or `sqlite3`; a small
+- **For**: no dependency on the reference implementation's release cadence, build, or `sqlite3`; a small
   fast binary; honors StzZui's product promise — *deployable inside any software
   project, no framework to swap*. The mechanical work is deletion, not
   refactoring, because `verify()`'s 39 checks are independent blocks in one
@@ -125,17 +125,17 @@ pruned to Zui, and a `verify()` reduced to the Zui checks.
   the exact failure StzZui exists to prevent. Cross-pillar checks are structurally
   out of reach without an imported symbol table.
 
-### Option B — Make Zin's compiler embeddable, wrap it in a thin CLI
+### Option B — Make the reference implementation's compiler embeddable, wrap it in a thin CLI
 
-Add `b.addLibrary` / `b.addModule` to Zin's `build.zig` (which today exports
+Add `b.addLibrary` / `b.addModule` to the reference implementation's `build.zig` (which today exports
 nothing but the `zin` executable) and have `zui` link it.
 
 - **For**: one grammar implementation forever; cross-pillar checks free; the
   entry points are already clean — `parseSource` and `verify` are
   allocator-passing, non-global, I/O-free functions. The build change is additive;
   no monolith refactoring required.
-- **Against**: every consumer inherits the whole Zin compiler, Zig 0.15.0, and
-  Zin's release cadence. A React team wanting to check `.zui` files must adopt a
+- **Against**: every consumer inherits the whole the reference implementation compiler, Zig 0.15.0, and
+  the reference implementation's release cadence. A React team wanting to check `.zui` files must adopt a
   Zig toolchain. `verify()` is all-or-nothing — no way to request Zui-only checks —
   and `pipeline.run()` is coupled to stdout formatting, project layout, and
   sqlite, so a thin CLI needs a new narrower entry point regardless.
@@ -152,29 +152,29 @@ Roughly ten lines, no restructuring, because the checks are already independent
   `projects/restolean` and observe exactly what degrades when the other pillars
   are absent. That converts the cross-pillar question from analysis into
   measurement.
-- Is independently useful to Zin — any pillar becomes separately checkable.
+- Is independently useful to the reference implementation — any pillar becomes separately checkable.
 
 ## 5. Recommendation
 
 **Sequence, don't choose yet. Three moves, in this order.**
 
 **First — StzZui writes the conformance fixtures and the language spec.** This
-requires no decision and no dependency on Zin, and it is the move that makes
+requires no decision and no dependency on the reference implementation, and it is the move that makes
 everything after it reversible. A fixture is a `.zui` declaration plus its known
 verdict; the suite is the definition of agreement. Once it exists, "two
 implementations drift" — Option A's one serious objection — stops being a risk and
 becomes a test result. This is StzWeb's three-runtimes discipline applied to the
 verifier, and it is StzZui's own work as the language's home.
 
-**Second — Zin adds the pillar filter (Option C).** Ten lines, useful to Zin on
+**Second — the reference implementation adds the pillar filter (Option C).** Ten lines, useful to it on
 its own terms, and it produces the evidence the A-vs-B choice actually needs.
 
 **Third — decide A or B against that evidence.** Stated plainly, the present lean
 is **A, with a declared symbol-table input for the four cross-pillar violations**
 — because StzZui now sells itself as deployable in *any* project, and a verifier
-that requires the Zin toolchain contradicts that promise at the front door. But
-this lean is held loosely: it is Zin's compiler, Zin's maintenance burden, and if
-Zin's author judges that one grammar implementation is worth more than
+that requires the reference implementation's toolchain contradicts that promise at the front door. But
+this lean is held loosely: it is their compiler and their maintenance burden, and if
+The reference implementation's author judges that one grammar implementation is worth more than
 dependency-freedom, Option B is a defensible answer and the fixtures make it
 equally safe.
 
@@ -186,10 +186,10 @@ that turned out to be false.
 These are owed by the language's home whichever implementation path wins:
 
 1. **The language spec** published at `doc/language/` — the grammar stated
-   formally. Zin's `ZUI_SPECIFICATION_v3_0.md` (1,046 lines) is prose and tables
+   formally. The reference implementation's `ZUI_SPECIFICATION_v3_0.md` (1,046 lines) is prose and tables
    with no EBNF; roughly 80% of it describes language that is not implemented. The
    spec must separate *what the language is* from *what any implementation has
-   reached*, and credit Zin as the reference implementation.
+   reached*, and credit that compiler as the reference implementation.
 2. **The conformance fixtures** — declarations with known verdicts, so any
    implementation in any language can prove agreement.
 3. **The violation-to-rule mapping** — each named violation bound to the
@@ -202,20 +202,20 @@ These are owed by the language's home whichever implementation path wins:
 4. **Honest status in every StzZui document** — corrected in the same commit as
    this one (§8).
 
-## 7. Open questions for Zin
+## 7. Open questions for the reference implementation
 
-The parts that are Zin's call, not StzZui's:
+The parts that are the reference implementation's call, not StzZui's:
 
 1. **Is the pillar filter welcome?** It is ~10 lines in `semantic.verify()` and
-   useful beyond Zui — but it is Zin's function.
-2. **Would Zin accept `build.zig` exporting a module?** Additive, but it creates a
-   public surface Zin then owns and must keep stable.
-3. **Where should the ten violations be implemented first** — in Zin (so the
+   useful beyond Zui — but it is the reference implementation's function.
+2. **Would the reference implementation accept `build.zig` exporting a module?** Additive, but it creates a
+   public surface the reference implementation then owns and must keep stable.
+3. **Where should the ten violations be implemented first** — in the reference implementation (so the
    reference implementation stays ahead and StzZui's standalone tool follows the
-   fixtures), or in a standalone tool (so Zin's monolith does not grow)? This is
+   fixtures), or in a standalone tool (so the reference implementation's monolith does not grow)? This is
    the real fork; the A/B question is downstream of it.
-4. **Does Zin want `VISIBLE_ENTITIES` resolved** against `entity_names`? It is
-   parsed and emitted but never checked — a genuine gap in Zin today, independent
+4. **Does the reference implementation want `VISIBLE_ENTITIES` resolved** against `entity_names`? It is
+   parsed and emitted but never checked — a genuine gap in the reference implementation today, independent
    of everything else here.
 5. **Two known hazards** for any extraction or embedding, flagged rather than
    assumed: `build.zig` writes `src/auto_tests.zig` into the source tree during
@@ -228,10 +228,10 @@ The parts that are Zin's call, not StzZui's:
 Three of our own documents asserted the false premise and are corrected in the
 commit that lands this file:
 
-- `ROADMAP.md` M3 — "lifted from the Zin compiler's existing implementation… not
+- `ROADMAP.md` M3 — "lifted from the reference compiler's existing implementation… not
   rebuilt" → M3 restated as new implementation against a published spec and
   fixtures, with the sequence in §5.
-- `doc/ARCHITECTURE.md` — the ten named violations listed under "Today" as Zin
+- `doc/ARCHITECTURE.md` — the ten named violations listed under "Today" as the reference implementation
   `semantic.zig` behavior → corrected to the four diagnostics that exist, with the
   ten named as the specified contract.
 - `site/how.html` and `index.html` — the `zui check` output was captioned as
@@ -249,8 +249,8 @@ not get to let its own documents drift from its own implementation.
 Read against `D:\GitHub\zin` at 2026-08-06: `src/compiler/{lexer,parser,semantic,
 ir_emitter,pipeline}.zig`, `src/ast/nodes.zig`, `src/diagnostics/types.zig`,
 `src/ir/{types,bkg}.zig`, `build.zig`, `build.zig.zon`,
-`doc/spec/dsl/ZUI_SPECIFICATION_v3_0.md`. Zin at version 0.33.0, minimum Zig
-0.15.0. Zui test coverage in Zin: ~19 inline tests, no fixture files. Real `.zui`
+`doc/spec/dsl/ZUI_SPECIFICATION_v3_0.md`. The reference implementation at version 0.33.0, minimum Zig
+0.15.0. Its Zui test coverage: ~19 inline tests, no fixture files. Real `.zui`
 files on disk outside worktrees: three (`examples/bookstore/src/bookstore.zui`,
 `projects/restolean/src/model/restaurant.zui`,
 `projects/restolean/vision/restaurant-full.zui`).

@@ -16,13 +16,13 @@ That is what this repository holds.
 
 ## What StzZui is
 
-Three things, strictly layered — the architecture inherited from the Zui pillar of the [Zin](https://github.com/mayouni) project (ZUI_SPECIFICATION v3.0):
+Three things, strictly layered — the architecture inherited from a sibling project's Zui pillar (its interface specification v3.0):
 
 | Layer | Artifact | Status |
 |---|---|---|
-| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: Zin's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
+| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: the reference implementation's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
 | **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.7.3, 117 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
-| **3 · Rendering projections** | Per-medium consumers: business web (Zing, formerly StzWeb), Zin's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
+| **3 · Rendering projections** | Per-medium consumers: business web (Zing, formerly StzWeb), the reference implementation's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
 The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces. And the law has a native habitat: the language. One declaration holds at three moments — checked at design time, linted in development, measured at runtime — with no framework to swap and no dependency to take.
 
@@ -34,8 +34,8 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 - **[The language specification](doc/language/README.md)** — Zui v1.0: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). Honest throughout about what is specified versus what any implementation has reached.
 - **[The `zui` verifier](tools/zui/README.md)** — `node tools/zui/cli.js check file.zui`. Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 30 conformance fixtures.
 - **[The conformance suite](conformance/README.md)** — 30 `.zui` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; every violation fixture has a lawful twin.
-- **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the ZinBank, Zin i18n, and Refine evidence trails.
-- **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zui` language and compiler out of Zin.
+- **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the banking product, the i18n decisions, and the Refine evidence trails.
+- **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zui` language and compiler out of the reference implementation.
 - **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zui` verifier to the educational showcase.
 
 ## The consumer contract
@@ -43,7 +43,7 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 A project consumes the constitution by **pinning a version** of `rules.json` — exactly as a runtime pins a conformance-fixtures file:
 
 - **Zing** (formerly StzWeb) — first conforming consumer. Its `zing check` lints declarations against the law and cites rule numbers; its site scores zero violations under the audit. Pinned at v3.7.3.
-- **Zin** — the Zui pillar's compiler already parses `INTENT_FLOW`, `FORM`, `WIZARD`, `WORLD_VIEW`, `INTERACTION`, `FEEDBACK`, `SCREEN`, `COMPONENT`, `NAV_GRAPH`, `VIBE`; its Interface Constitution derives from the same articles.
+- **The reference implementation** — the Zui pillar's compiler already parses `INTENT_FLOW`, `FORM`, `WIZARD`, `WORLD_VIEW`, `INTERACTION`, `FEEDBACK`, `SCREEN`, `COMPONENT`, `NAV_GRAPH`, `VIBE`; its Interface Constitution derives from the same articles.
 - **Anything else** — the law is one JSON file with a stable schema. Load it, check against it, cite it.
 
 Amendment requires evidence — real usage, operator feedback, documented failure — never fashion (Article VII). Retired numbers are never reused.

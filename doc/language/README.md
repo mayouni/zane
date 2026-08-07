@@ -3,7 +3,7 @@
 **Status**: normative for the language; honest about implementations
 **Date**: 2026-08-06
 **Home**: StzZui, where the language and its constitution live
-**Reference implementation**: the Zin platform's compiler — a consumer, not the owner
+**Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
 ---
 
@@ -53,7 +53,7 @@ normative and closed: `SATISFIES [NAVIGATE]` does not name a verb of this
 language and is a `UNKNOWN_INTENT` diagnostic, however reasonable the word
 sounds. Navigation is expressed by `LOCATE` and `DISCOVER`.
 
-> **Correction of record.** Both this project's documents and Zin's
+> **Correction of record.** Both this project's documents and the reference implementation's
 > `ZUI_SPECIFICATION_v3_0.md` have described the grammar as "24 verbs" while
 > enumerating 22. The enumerations agree with each other and with
 > `constitution/rules.json`; only the count was wrong, in both projects, from the
@@ -100,7 +100,7 @@ out of reach *without being told*. Level 4 belongs to a projection or to
 
 The discipline this project exists to enforce applies first to itself, so:
 
-| Capability | Specified here | Zin (reference impl.) | Standalone `zui` |
+| Capability | Specified here | Reference impl. | Standalone `zui` |
 |---|---|---|---|
 | The grammar, 10 declaration types | ✅ v1.0 | ✅ parses 12 (see §6) | not built |
 | 22-verb closed grammar | ✅ normative | parsed as identifiers, **not validated** | not built |
@@ -111,7 +111,7 @@ The discipline this project exists to enforce applies first to itself, so:
 | The ten named violations | ✅ | ❌ **none implemented** | — |
 | Conformance fixtures | ✅ this repository | ❌ 19 inline tests, no fixtures | — |
 
-**No implementation is at Level 2 today.** Zin parses the whole grammar and
+**No implementation is at Level 2 today.** the reference implementation parses the whole grammar and
 enforces four diagnostics; the ten named violations are specification everywhere
 and code nowhere. That was established by reading the source and is recorded in
 [the M3 decision document](../decisions/M3-the-zui-verifier.md) §1. This
@@ -120,18 +120,18 @@ and the fixtures exist so agreement can be proved rather than asserted.
 
 ## 6. Two deliberate differences from the reference implementation
 
-Zin's parser accepts **twelve** `.zui` declaration kinds. This specification
+The reference implementation's parser accepts **twelve** `.zui` declaration kinds. This specification
 defines **ten**, and excludes two on stated grounds:
 
 - **`WIDGET`** is excluded on constitutional grounds. A widget is a *consequence*
   of intent, never a declared primitive; admitting `DEFINE WIDGET` into the
   language would let a declaration name a rendering and contradict the inversion
-  in §2. Zin recognizes it (`parser.zig:4275`); this language does not define it.
+  in §2. The reference implementation recognizes it (`parser.zig:4275`); this language does not define it.
 - **`USER`** is excluded as belonging to the actor model, not the interface
   language. It ties a member to an actor on a surface — a fact about *who*, which
   Zui consumes from a symbol table rather than declares.
 
-Both are open questions for Zin, raised in the decision document §7. An
+Both are open questions for the reference implementation, raised in the decision document §7. An
 implementation that accepts them is not thereby non-conforming — it is accepting
 more than this language defines, and the suite reports the difference rather than
 failing it. See [CONFORMANCE](../../conformance/README.md#extensions).
@@ -139,9 +139,9 @@ failing it. See [CONFORMANCE](../../conformance/README.md#extensions).
 ## 7. Credits
 
 The three-layer model, the 22-verb grammar, the ten declaration types and the ten
-named violations originate in **Zin's Zui pillar** (`ZUI_SPECIFICATION_v3_0.md`,
+named violations originate in **a sibling project's Zui pillar** (`ZUI_SPECIFICATION_v3_0.md`,
 Session 27), whose compiler remains the reference implementation. The
 constitution-as-data discipline, the enforcement tiers, the evidence requirement
 and this specification's conformance machinery originate in **StzZui** and its
 StzWeb lineage. The formal grammar in [GRAMMAR.md](GRAMMAR.md) is stated here for
-the first time — Zin's specification is prose and tables, with no EBNF.
+the first time — the reference implementation's specification is prose and tables, with no EBNF.

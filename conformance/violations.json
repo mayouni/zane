@@ -4,7 +4,7 @@
     "version": "1.0",
     "lastUpdated": "2026-08-06",
     "specification": "doc/language/VIOLATIONS.md",
-    "constitution": "3.7.2",
+    "constitution": "3.7.3",
     "note": "Every diagnostic a conforming Zui implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused."
   },
   "levels": {
@@ -261,7 +261,7 @@
       "rights": [],
       "forbidden_patterns": [],
       "invariant": null,
-      "note": "A known gap in the reference implementation: VISIBLE_ENTITIES is parsed and emitted to IR but never resolved. Raised with Zin as decision-document 7.4."
+      "note": "A known gap in the reference implementation: VISIBLE_ENTITIES is parsed and emitted to IR but never resolved. Raised with the reference implementation as decision-document 7.4."
     }
   ]
 }

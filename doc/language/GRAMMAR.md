@@ -1,6 +1,6 @@
 # The Zui Grammar
 
-**Normative.** Stated in EBNF for the first time — Zin's specification is prose
+**Normative.** Stated in EBNF for the first time — the reference implementation's specification is prose
 and tables. Part of [the Zui Language Specification v1.0](README.md).
 
 Notation: `=` defines, `|` alternates, `{ }` repeats zero or more, `[ ]` is
@@ -102,7 +102,7 @@ Any other identifier in verb position is `UNKNOWN_INTENT` (error). **The grammar
 is closed by design**: a projection that needs a new verb has misread its medium,
 not found a gap in the language. `NAVIGATE` is the common mistake — it is
 `LOCATE` (going to a known place) or `DISCOVER` (finding what places exist), and
-Zin's own reference declaration commits it.
+The reference implementation's own declaration commits it.
 
 ## 5. Reserved and unspecified
 

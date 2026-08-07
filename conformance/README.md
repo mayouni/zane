@@ -85,7 +85,7 @@ Report the claimed level, the pass/skip/fail counts, and every mismatch as
 
 ## Extensions
 
-An implementation may accept **more** than this language defines — Zin's compiler
+An implementation may accept **more** than this language defines — the reference implementation's compiler
 accepts `WIDGET` and `USER`, which this specification excludes on stated grounds.
 That is an extension, not a failure. It shows up as one fixture disagreeing
 (`unspecified-declaration.zui`), and the honest way to report it is:
@@ -101,15 +101,15 @@ ship.
 | Implementation | Level | Result |
 |---|---|---|
 | [`tools/zui/`](../tools/zui/README.md) — this repository | 3 | **30 / 30 pass** (L1 6, L2 26, L3 30) |
-| Zin's compiler — the reference implementation | subset of 2 | four diagnostics, none of the ten named violations |
+| The reference implementation's compiler | subset of 2 | four diagnostics, none of the ten named violations |
 
 The suite was written *before* either could pass it, which is the whole point:
 once a suite exists, "two implementations drift" stops being a risk and becomes
 a test result — and that is what makes the standalone-versus-embedded decision
-reversible instead of fateful. A Zig verifier beside Zin's compiler would be
+reversible instead of fateful. A Zig verifier beside the reference implementation's compiler would be
 measured here exactly as the JavaScript one is.
 
-Zin's four diagnostics (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) were
+The reference implementation's four diagnostics (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) were
 established by reading its source, and are recorded in
 [the M3 decision document](../doc/decisions/M3-the-zui-verifier.md) §1.
 
