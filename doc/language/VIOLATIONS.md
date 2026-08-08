@@ -207,3 +207,10 @@ The suite compares **`(fixture, code)` pairs only** — never line numbers, mess
 wording, or ordering. An implementation is free to phrase its prose however it
 likes, in whatever language its operator reads. See
 [the conformance README](../../conformance/README.md).
+
+In **machine form**, a finding travels in the family envelope —
+`{code, severity, message, span{file,line,col}, cites[], language}` — defined by
+[the Diagnostic Contract](../diagnostic-contract.md) v1.0, which this court
+*conforms to* and does not define. The contract fixes the envelope only; the
+codes, severities and bindings above remain this specification's own, cataloged
+in `conformance/violations.json`.

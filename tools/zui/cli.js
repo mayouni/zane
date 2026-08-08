@@ -25,6 +25,7 @@
 const fs = require('fs');
 const path = require('path');
 const { verify } = require('./zui.js');
+const { toEnvelope } = require('./envelope.js');
 
 /* ---- argument parsing ---- */
 
@@ -182,17 +183,15 @@ function main(argv) {
   const errors = findings.filter(f => f.severity === 'error').length;
   const warnings = findings.length - errors;
 
+  /* Machine output is the family envelope — doc/diagnostic-contract.md v1.0.
+     This court conforms to that contract; it does not define it. */
   if (opts.json) {
     console.log(JSON.stringify({
       level: opts.level,
       contract: contract ? { version: contract.version, constitution: contract.constitution } : null,
       files: opts.files,
       counts: { errors, warnings },
-      findings: findings.map(f => ({
-        file: f.file, line: f.line, id: f.id, subject: f.subject,
-        severity: f.severity, level: f.level,
-        rules: f.meta.rules || [], articles: f.meta.articles || []
-      }))
+      findings: findings.map(f => toEnvelope(f, f.meta, 'zui'))
     }, null, 2));
     return errors > 0 ? 1 : 0;
   }

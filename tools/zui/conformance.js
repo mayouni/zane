@@ -19,6 +19,7 @@
 const fs = require('fs');
 const path = require('path');
 const { verify } = require('./zui.js');
+const { toEnvelope, validate, loadShape } = require('./envelope.js');
 
 const ROOT = path.join(__dirname, '..', '..');
 const CONF = path.join(ROOT, 'conformance');
@@ -31,16 +32,23 @@ function main(argv) {
   }
   if (!(level >= 1 && level <= 4)) { console.error('--level must be 1..4'); return 2; }
 
-  let manifest, contract;
+  let manifest, contract, shape;
   try {
     manifest = JSON.parse(fs.readFileSync(path.join(CONF, 'manifest.json'), 'utf8'));
     contract = JSON.parse(fs.readFileSync(path.join(CONF, 'violations.json'), 'utf8'));
+    shape = loadShape();                     /* the family envelope, C2 */
   } catch (e) { console.error('conformance: cannot load the suite: ' + e.message); return 2; }
 
   const levelOf = new Map(contract.diagnostics.map(d => [d.id, d.level]));
+  const metaOf = new Map(contract.diagnostics.map(d => [d.id, d]));
 
   let pass = 0, fail = 0, skip = 0;
   const failures = [];
+
+  /* Every diagnostic this court emits must travel in the family envelope.
+     Validated for every fixture run, regardless of level. */
+  let envelopes = 0;
+  const envelopeProblems = [];
 
   for (const fx of manifest.fixtures) {
     if (fx.level > level) { skip++; continue; }
@@ -51,6 +59,12 @@ function main(argv) {
     catch (e) { failures.push({ file: fx.file, reason: 'unreadable: ' + e.message }); fail++; continue; }
 
     const raw = verify(src, { symbols: fx.symbols || null });
+
+    for (const d of raw) {
+      envelopes++;
+      const env = toEnvelope({ ...d, file: fx.file }, metaOf.get(d.id), 'zui');
+      envelopeProblems.push(...validate(env, shape, `${fx.file} · ${d.id}`));
+    }
 
     /* filter to what this level can see; unknown ids are structural and always count */
     const actual = new Set(
@@ -73,8 +87,15 @@ function main(argv) {
   console.log(`\nZui conformance — level ${level}`);
   console.log(`  spec         doc/language/ v1.0`);
   console.log(`  contract     violations.json v${contract.metadata.version} (constitution v${contract.metadata.constitution})`);
+  console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
   console.log(`  fixtures     ${manifest.fixtures.length} total`);
   console.log(`  pass ${pass} · fail ${fail} · skipped ${skip} (above level ${level})`);
+
+  if (envelopeProblems.length) {
+    console.log('\nEnvelope violations (doc/diagnostic-contract.schema.json):');
+    for (const p of envelopeProblems) console.log(`  ${p}`);
+    return 1;
+  }
 
   if (failures.length) {
     console.log('\nMismatches:');

@@ -27,6 +27,7 @@ Three files, no dependencies, nothing to install:
 |---|---|
 | `zui.js` | the core: lexer, parser, checks. Pure functions over a string — no I/O. Runs in Node *and* in a browser (`window.Zui`). |
 | `cli.js` | the command line: reads files, filters by level, formats findings. |
+| `envelope.js` | the family envelope: builds `{code, severity, message, span, cites, language}` findings and validates them against [the Diagnostic Contract's shape](../../doc/diagnostic-contract.schema.json). |
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
 
 It implements [the Zui language specification v1.0](../../doc/language/README.md)
@@ -69,6 +70,18 @@ it enforces.
 Both are optional at runtime: without the contract it still detects, it just
 cites less. Vendor both beside the verifier when you deploy it.
 
+## It conforms to the family Diagnostic Contract
+
+Machine output (`--json`) travels in the family envelope —
+`{code, severity, message, span{file,line}, cites[], language}` — defined by
+[the Diagnostic Contract](../../doc/diagnostic-contract.md) **v1.0** (C2 of the
+Softanza reference design). This verifier is the contract's **first conforming
+implementation**: it *conforms to* the envelope, it does not define it, and the
+conformance runner validates every diagnostic it emits against
+[the machine-readable shape](../../doc/diagnostic-contract.schema.json). The
+contract fixes the envelope only; this court's codes stay cataloged in
+[`violations.json`](../../conformance/violations.json), as before.
+
 ## Conformance
 
 ```bash
@@ -79,6 +92,7 @@ node tools/zui/conformance.js --level 4
 Zui conformance — level 4
   spec         doc/language/ v1.0
   contract     violations.json v1.0 (constitution v3.7.3)
+  envelope     diagnostic-contract v1.0 — 23 diagnostics, all conform
   fixtures     30 total
   pass 30 · fail 0 · skipped 0 (above level 4)
 

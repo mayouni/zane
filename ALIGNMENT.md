@@ -1,7 +1,7 @@
 # Alignment — StzZui against the Softanza reference design
 
-**Reference**: `softanza/REFERENCE_DESIGN.md` v0.1 (draft, unratified) · 2026-08-08
-**Status**: obligations-if-ratified.
+**Reference**: `softanza/REFERENCE_DESIGN.md` **v1.0, ratified 2026-08-08**
+**Status**: obligations in force. **C2 delivered** (2026-08-08, v1.0) — see item 1.
 
 ## What StzZui owns in the reference design
 
@@ -15,6 +15,17 @@ refusal format every court in the family speaks.
    versioned artifact — `doc/diagnostic-contract.md` plus a JSON shape — governed like
    the law: versioned, substance-tested, consumed by pin. The zui verifier becomes its
    first conforming implementation rather than its definition.
+
+   **✅ Delivered 2026-08-08 as v1.0**: [`doc/diagnostic-contract.md`](doc/diagnostic-contract.md)
+   (the envelope, code format, severity ladder and citation rule, governed by the
+   law's own versioning discipline) with
+   [`doc/diagnostic-contract.schema.json`](doc/diagnostic-contract.schema.json)
+   beside it. The zui verifier is the first conforming implementation: `--json`
+   emits the envelope, and the conformance runner validates every diagnostic it
+   emits against the shape — the 30-fixture suite still passes 30/30, no verdict
+   and no code's meaning changed. The extraction moved the envelope's ownership,
+   not its content; the court's codes stay cataloged in
+   `conformance/violations.json`.
 2. **C1 — the verifier's cross-pillar seam binds to the World Contract.** M3 already
    decided the verifier *accepts a symbol table as input*; that input becomes the
    `world.json` artifact instead of an ad-hoc table. No verifier logic changes — only
