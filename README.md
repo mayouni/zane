@@ -21,7 +21,7 @@ Three things, strictly layered — the architecture inherited from a sibling pro
 | Layer | Artifact | Status |
 |---|---|---|
 | **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: the reference implementation's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
-| **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.7.3, 117 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
+| **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.8.0, 117 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
 | **3 · Rendering projections** | Per-medium consumers: business web (Zing, formerly StzWeb), the reference implementation's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
 The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces. And the law has a native habitat: the language. One declaration holds at three moments — checked at design time, linted in development, measured at runtime — with no framework to swap and no dependency to take.

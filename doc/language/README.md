@@ -71,7 +71,7 @@ its rule, article, and operator right; the binding is also data, in
 carry rule numbers without hardcoding prose.
 
 A consumer pins a constitution version. This specification is written against
-**v3.7.3**.
+**v3.8.0**.
 
 ## 4. Conformance levels
 
