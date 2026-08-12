@@ -1,24 +1,23 @@
 # The Second Founding — StzZui as a complete platform for interfaces
 
-**Status**: **v0.1 — proposed, not ratified.** Written 2026-08-12 for the author's
+**Status**: **v0.2 — proposed, not ratified.** Written 2026-08-12 for the author's
 section-by-section pass, in the manner of the reference design's own ratification.
+**Supersedes** v0.1 of the same day, which named six strata and assumed one medium.
 **Amends**: [ARCHITECTURE.md](ARCHITECTURE.md) (founding document, 2026-08-05), whose
 three-layer model this restates rather than replaces.
-**Touches**: `softanza/REFERENCE_DESIGN.md` v1.3 — one amendment proposed in §6, **not
+**Touches**: `softanza/REFERENCE_DESIGN.md` v1.3 — amendments proposed in §7, **not
 applied**; that document is ratified and amends by its own process.
 **Preserves**: everything in §3. The inversion is not negotiable and is not negotiated here.
 
 ---
 
-## 1. The finding
+## 1. Two findings
 
 StzZui inverted the order of interface design and made intent declarable. That work is
-sound, it is finished, and it is the foundation everything below stands on.
+sound, it is finished, and it is the foundation everything below stands on. It is also,
+today, a fraction of a platform — and the project's own data says so twice.
 
-It is also, today, **one third of a platform** — and the project's own data says so.
-
-> **The law legislates a territory the language cannot declare, so the court cannot
-> reach it.**
+### 1.1 The law legislates a territory the language cannot declare
 
 The constitution holds **117 rules**. Their enforcement tiers:
 
@@ -29,436 +28,593 @@ The constitution holds **117 rules**. Their enforcement tiers:
 | `machine` | 9 | 8% | a declaration checker refuses it |
 | `tool` | 5 | 4% | measured on a painted page |
 
-**Eight percent of the law is refusable before a pixel exists.** The other 92% is prose,
-human vigilance, or a post-hoc measurement of damage already rendered.
+**Eight percent of the law is refusable before a pixel exists.** That is not a failure of
+the verifier, which enforces 19 of its 20 diagnostics and passes 30/30 fixtures. It is a
+failure of *expressible surface*: there is nothing in a `.zui` file for the other rules to
+bind to. [DECLARATIONS.md §6](language/DECLARATIONS.md) states the boundary — *"No
+`WIDGET`, no layout, no colour"* — while Sets 2, 3, 10, 13, 15 and 17 legislate exactly
+that territory anyway.
 
-That is not a failure of the verifier. The verifier enforces 19 of the 20 diagnostics it
-was given and passes 30/30 fixtures. It is a failure of *expressible surface*: there is
-nothing in a `.zui` file for those rules to bind to. [DECLARATIONS.md §6](language/DECLARATIONS.md)
-states the boundary plainly — *"No `WIDGET`, no layout, no colour"* — and Set 2 (Visual
-Principles), Set 3 (Layout), Set 10 (stzErrors), Set 13 (Widget Selection), Set 15
-(Theming) and Set 17 (Accessibility) legislate exactly that territory anyway.
+Of the 25 rules marked `machine-later`, **all but one are expression rules**: colour
+(3, 87, 56, 62), layout (85, 90, 92, 93, 95), widget role (46, 47, 96, 104), message
+(28, 29, 41, 86, 106, 99), motion and timing (15, 18, 19, 21, 100). The exception,
+Rule 26, is already reachable from intent and *is* cited by `MISSING_CANCEL`.
 
 **The law went where the language refused to follow.**
 
-### 1.1 The demonstration
+### 1.2 The law is monomodal, and believes it is medium-agnostic
 
-Two payment-approval surfaces. The first: a table, one primary action, consequence
-carried by one reserved colour, errors that name a remedy, undo as a ten-second toast.
-The second: a grid of clickable cards that look like information (Rule 119), three
-competing primaries (Rule 8), red for both brand and danger (Rules 3, 87, 117),
-*"Invalid input!"* (Rule 40), undo buried in a menu (Rule 79), body text at 11px
-(Rule 105).
+The preamble promises a law that is *"framework-agnostic, trend-resistant, and
+machine-checkable."* The intent grammar's own note promises more: *"A new medium adds
+renderings, never verbs."* The architecture lists five projections — business web, game
+worlds, CLI/TUI, **voice**, AI-agent surfaces.
 
-Declared in Zui, the two files are **byte-identical once comments are stripped**:
+Here is what the 117 rules actually contain, by word, across the whole corpus:
 
-```zui
-DEFINE INTENT_FLOW approve_payment (
-  SATISFIES [SELECT, CONFIRM, ACT],
-  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
-  ACTOR treasurer
-)
-DEFINE SCREEN payment_queue ( SATISFIES [SCAN, COMPARE, LOCATE], INTENT_FLOW approve_payment )
-DEFINE FEEDBACK approval_result ( TONE informational, REPORTS [approval_state] )
-```
+| Term | Occurrences |
+|---|---|
+| `sound`, `earcon`, `sonification`, `speech`, `tactile`, `vibration`, `braille`, `chime`, `beep`, `ambient`, `aloud` | **zero** |
+| `audio` | 3 — all inside Rule 73, which treats audio as a *document attachment* (*"no autoplay… provide captions"*) |
+| `voice` | 2 — both **typographic metaphor** in Rule 107 (*"a hero voice, a title voice"*) |
+| `haptic` | 2 — Rule 69, *"Haptic Rhythm"*, whose body is entirely about **48px touch targets, overscroll bounce and swipe** and says nothing about haptic feedback |
+| `screen reader` | 4 — Rules 60 and 104 |
 
-Both run clean at **Level 4**, the highest level the suite defines:
+So: **not one rule governs sound. Not one rule governs voice.** The single haptic rule
+reaches for the medium in its title and delivers a touch-target rule in its body. The
+only law about how an interface is *heard* is Rule 60, and it is written entirely in one
+framework's vocabulary — *"`<main>`, `<nav>`, `<section>`… `aria-label`… `aria-live`"* —
+inside a constitution whose preamble forbids exactly that. It cannot govern a voice
+assistant, a phone tree, a car, or any screen reader outside the web.
+
+Meanwhile the law's core concepts are all defined in one channel's terms: Rule 82 is
+**Visible** State; Rule 51 says *"Focus is spatial"*; Rule 112 governs **motion**;
+Rule 107 governs **sizes**; Set 2 is **Visual** Principles.
+
+> **The constitution is a monomodal law wearing a medium-agnostic preamble.** It has been
+> writing law for the eye and calling it law for the operator.
+
+This is not an oversight to patch with a set of sound rules. It is a structural finding:
+the law has no **medium axis**, so every rule silently assumes the one medium its authors
+were looking at.
+
+### 1.3 The demonstration
+
+Two payment-approval surfaces. One humane. One committing seven real violations: cards
+that look like information (119), three competing primaries (8), red for both brand and
+danger (3, 87, 117), *"Invalid input!"* (40), undo buried in a menu (79), 11px body text
+(105), a wall of text (123). Declared in Zui they are **byte-identical once comments are
+stripped**, and both run clean at **Level 4**, the highest the suite defines:
 
 ```
 clean — 1 file(s), 0 violations at level 4 against Zui v3.7.3
 clean — 1 file(s), 0 violations at level 4 against Zui v3.7.3
 ```
 
-Seven laws are broken by the second surface and the court has nothing to say, because
-the language gave it nothing to read. **The court is silent exactly where the
-deterioration lives.** Intent underdetermines the interface, and the underdetermination
-is where all the harm happens.
-
-### 1.2 The corroborating number
-
-Of the 25 rules the law marks `machine-later`, **all but one are expression rules** —
-colour (3, 87, 56, 62), layout (85, 90, 92, 93, 95), widget role (46, 47, 96, 104),
-message (28, 29, 41, 86, 106, 99), motion and timing (15, 18, 19, 21, 100). The single
-exception, Rule 26, is already reachable from intent and *is* cited today by
-`MISSING_CANCEL`.
-
-The law has been telling us where the missing instrument is, in its own data, for
-twenty-five rules.
+Now add a third surface: the same flow rendered by a voice agent that mishears
+*"approve"*, acts, and offers no way back. It, too, declares identically. It, too, runs
+clean. **The court is silent in every medium, and silent in the new ones twice over.**
 
 ## 2. The evidence the project produced without noticing
 
 While this repository legislated colour, `stzlib` **built** it.
 
-- The constitution, **Rule 118, "Two Families of Colour"** (`invariant: true`): *"Family
-  one is semantic status, five values with strict meanings: success, warning, danger,
-  info, muted."*
-- The graphics plane, `SOFTANZA_COLOR_SYSTEM.md`, founding principle: *"an author writes
-  a meaning and gets a colour."* Semantic names `:Primary :Success :Warning :Danger
-  :Info :Neutral`; role steps `:Danger.Surface / .Border / .Solid / .Text` and
-  `:OnDanger`; OKLCH ramps that are *"monotonic, evenly spaced and hue-stable BY
-  CONSTRUCTION rather than by taste"*; contrast carried as a number with WCAG 2 and APCA
-  both named at every report, and a stated refusal — *"a design system that cannot fail
-  an accessibility check does not have one."* C1 and C2 committed; 42/42 theme/role
-  pairs pass 4.5:1.
+- The constitution, **Rule 118, "Two Families of Colour"** (`invariant: true`): *"success
+  (OK, valid, under control), warning (watch this), danger (critical, exceeded,
+  incident), info (in progress, neutral), muted (waiting, inactive)."*
+- The graphics plane, `SOFTANZA_COLOR_SYSTEM.md`: *"an author writes a meaning and gets a
+  colour."* Semantic names `:Primary :Success :Warning :Danger :Info :Neutral`; role steps
+  `:Danger.Surface / .Border / .Solid / .Text` and `:OnDanger`; OKLCH ramps *"monotonic,
+  evenly spaced and hue-stable BY CONSTRUCTION rather than by taste"*; contrast carried as
+  a number under both WCAG 2 and APCA, with a stated refusal — *"a design system that
+  cannot fail an accessibility check does not have one."* C1 and C2 committed, 42/42
+  pairs passing.
 
 Two parts of one project independently derived the same five semantic values — one as
 **law that cannot be enforced**, one as **an engine that cannot be governed** — and
-**neither document cites the other.** They have already drifted: the law's fifth value
-is `muted`, the engine's is `:Neutral`.
+neither document cites the other.
 
-That drift is not a tidiness problem. It is the exact defect this project exists to
-prevent, occurring inside it, because the seam between meaning and rendering was never
-declared. It is also the best possible proof that the seam is real: two teams walked to
-opposite banks of the same missing bridge.
+**The drift is already three-way, and two of the three are inside the law itself:**
 
-A second, immediately cashable consequence: **Rule 62 (Contrast & Legibility) is marked
+| Source | Vocabulary |
+|---|---|
+| Rule 3, *Color Is a Signal* | `Neutral` · `Accent` · `Warning` · **`Error`** |
+| Rule 118, *Two Families of Colour* | `success` · `warning` · **`danger`** · `info` · **`muted`** |
+| The graphics engine | `:Primary` · `:Success` · `:Warning` · `:Danger` · `:Info` · **`:Neutral`** |
+
+Three names for the critical value (`Error`/`danger`/`:Danger`), three for the resting one
+(`Neutral`/`muted`/`:Neutral`), and an `Accent` that became `:Primary` and never reached
+Rule 118. This is the exact defect the project exists to prevent, occurring inside it,
+because the seam between meaning and rendering was never declared — and it is the best
+possible proof that the seam is real.
+
+One consequence is cashable immediately: **Rule 62 (Contrast & Legibility) is marked
 `machine-later` while `StzIsLegible` already exists and is CI-gated.** The instrument was
-built. The law does not know. That rule can move up the enforcement ladder this month.
+built; the law does not know.
+
+### 2.1 It is already happening again, in sound — and this time early enough to prevent
+
+The sound plane's plan of record (`stzlib/…/base/sound/SOFTANZA_SOUND_PLAN.md`; SN0–SN5
+closed, SN6 not started) is the same story at an earlier hour. It is a serious piece of
+engineering — kill criteria written before the numbers and then applied, a 128-voice mix
+at 0.24% of its deadline, zero underruns over 289 callbacks — and it is **entirely
+production-side**: nodes, sinks, buffers, latency, mixing, analysis.
+
+Searched across the whole plane for `earcon`, `sonification`, `sound role`, `alert
+sound`, `notification`, `chime`, `auditory`: **zero hits.** There is no notion of a sound
+*for* something — no success or error sound, no alert taxonomy, no priority, no ducking,
+no mapping from an application event to a sound. The plane's own mission says so plainly:
+*"describe a sound or a graph of sounds; the engine realizes it."* **The sound plane and
+the UI law have never referenced each other in either direction.**
+
+Two numbers that have never been placed side by side:
+
+- **Rule 18, The Speed of Thought**: *"Actions must acknowledge the user within 100ms."*
+- **The sound plane, measured**: output latency **112.6 ms** by loopback — an upper bound
+  the plan carefully decomposes as ~30 ms app buffer + ~22 ms measurement tap + ~60 ms OS
+  pipeline, with the standing instruction *"quote the buffer, never the 112 ms."*
+
+Take the honest decomposition and **the OS pipeline alone spends roughly 60% of the
+constitutional budget before the application has done anything.** If a sound *is* the
+acknowledgement — and on an eyes-free or voice surface it is the only acknowledgement —
+Rule 18 sits at the edge of satisfiable, and nobody has checked, because the two
+documents have never met.
+
+And once more the instrument precedes the law: **SN5 already ships `Loudness` (LUFS)** —
+the auditory analogue of a contrast ratio, and exactly the measurement an audibility floor
+would bind to. The constitution has no rule about auditory loudness for it to serve.
 
 ## 3. What is preserved — and is not open
 
-This document expands scope. It touches nothing below.
-
-1. **The inversion.** Intent first; rendering is a consequence. Every UI element traces
-   to at least one intent.
-2. **The closed intent grammar.** 22 verbs, six families. A new medium adds renderings,
-   never verbs. Nothing in §5 adds a verb.
-3. **The constitution's independence** from every product, including from this document
-   and from the reference design. If they conflict, the law wins on its own ground.
-4. **Evidence over fashion.** Article VII. Rule numbers stable forever; retired numbers
-   never reused; burned numbers stay burned; evidence never corrected.
+1. **The inversion.** Intent first; rendering is a consequence. Every element traces to
+   at least one intent.
+2. **The closed intent grammar.** 22 verbs, six families. §5 and §6 add no verb — and §6
+   shows the closure was load-bearing all along.
+3. **The constitution's independence** from every product, including this document.
+4. **Evidence over fashion.** Article VII; numbers stable forever; evidence never
+   corrected.
 5. **The signature move**: closed language + court + fixtures + consumers that pin.
-   §5 does not invent a new discipline; it applies this one six more times.
 6. **The substance test and the patch component**, exactly as they stand.
 
-## 4. The move: the expression stratum
+## 4. The two axes
 
-The founding architecture named three layers and left the middle one to "projections",
-which are per-medium, replaceable, and — critically — **not declarable**. So the ladder
-runs from intent (checkable) directly to pixels (measurable only after painting), with
-nothing between.
+The founding architecture named three layers and left the middle to "projections", which
+are per-medium, replaceable, and **not declarable**. So the ladder runs from intent
+(checkable) straight to pixels (measurable only after painting), with nothing between.
 
 ```
-LAYER 3 — PROJECTION      how one medium paints it        per-medium, replaceable
+LAYER 3 — PROJECTION      how one medium renders it       per-medium, replaceable
 LAYER 2 — EXPRESSION      how intent is made perceivable  ← THE MISSING MIDDLE
 LAYER 1 — INTENT          what the human is trying to do  closed, 22 verbs
 ```
 
-**Expression is not appearance.** A declaration in this stratum never names a pixel, a
-hex value, a font size, or a component library. It names a **meaning, a promise, or a
-relation** — the things HCI has understood for fifty years and no language has made
-checkable:
-
-- a *role* is a promise about behaviour, not a widget;
-- a *signal* is a meaning bound to a colour, not a colour;
-- a *structure* is a relation between things, not a grid;
-- a *message* is what the system owes the operator, not a string;
-- a *motion* is a state report, not an animation;
-- a *tempo* is a budget, not an easing curve.
+**Expression is not appearance.** A declaration here never names a pixel, a hex value, a
+font size, a component library — or a waveform. It names a **meaning, a promise, or a
+relation**.
 
 ### 4.1 The rule that keeps the inversion intact
 
 > **Every expression declaration traces to an intent, or it is an error.**
 
-This is `INTENT_ORPHAN` extended one level down: `EXPRESSION_ORPHAN`. A `ROLE` that
-serves no declared intent, a `SIGNAL` no declaration carries, a `MESSAGE` that reports no
-state — each is unlawful for the same reason a widget tracing to no intent is unlawful.
+`INTENT_ORPHAN` extended one level down: `EXPRESSION_ORPHAN`. The expression stratum is
+not a second language beside intent; it is intent's refinement, inheriting its
+discipline. That is why this is a second founding and not scope creep.
 
-The expression stratum is therefore **not a second language beside intent**. It is
-intent's refinement, and it inherits intent's discipline. That is why this is a second
-founding and not scope creep: the founding principle is not weakened, it is *extended to
-the layer where it was always needed*.
+### 4.2 The strata are functions. The media are channels.
 
-## 5. The six strata
+v0.1 of this document named six strata and quietly defined three of them in visual terms —
+`SIGNAL` as colour, `MOTION` as animation, `STRUCTURE` as layout. That was the same
+monomodal error §1.2 finds in the law, committed one layer up. Adding `SOUND` as a
+seventh stratum would compound it: **sound is not a peer of colour. It is the same
+function in a different channel.**
 
-One per territory the author named. Each is a closed vocabulary with a court and
-fixtures. Each is drawn from rules that **already exist** — extracted from the law's
-practice, never invented fresh, the discipline C2 was delivered under.
+The correct model has two axes — what an expression *does*, and where it is *carried*:
 
-### 5.1 `STRUCTURE` — layout as relation
+| Stratum (function) | Visual | Auditory | Voice | Haptic | Print |
+|---|---|---|---|---|---|
+| **SIGNAL** meaning made perceptible | colour | timbre | word choice, prosody | waveform identity | ink weight, rule |
+| **STRUCTURE** relations among parts | spatial layout | figure/ground, sequence | turn structure | — *(too narrow)* | page, column |
+| **ROLE** the promise a control makes | widget | — | utterance grammar | — | — *(no controls)* |
+| **MOTION** change reporting state | animation | envelope, rhythm | pacing | pulse train | — *(no time)* |
+| **MESSAGE** the system speaking | text | earcon | speech | — | text |
+| **TEMPO** budgets and interruption | latency | inherently temporal | turn-taking, barge-in | latency | — *(no time)* |
 
-What is grouped, what is subordinate, what order the eye takes, how dense the surface
-is, how deep it goes. Never a grid, never a pixel.
+The empty cells are the point. They are not gaps to fill; they are **refusals** — facts
+about what a channel cannot carry, and therefore what a court must check.
 
-*Sketch*: `GROUPS`, `PRIMARY` (Rule 8, one primary axis), `READING_ORDER` (Rule 123, the
-reading arc), `DENSITY`, `DEPTH`, `ANCHORS` (Rule 85).
-*Makes reachable*: Set 3 (9 rules), Set 4 (3), Set 9 (4), Rules 90/92/93/95, 107, 111,
-113, 114.
-*Implemented by*: the projection. *Governed by*: this repository.
+**The sound plane already proved this axis one layer down.** Its central architectural
+decision is *"the sink is a parameter, not a fork"* — buffer, WAV file, device, and (in
+SN6) WebAudio are one graph rendered four ways, *"so 'what you hear' and 'what you export'
+cannot drift."* That is the medium axis, discovered independently, for outputs. What the
+sound plane does for four sinks, the expression stratum does for eight media, and for the
+same stated reason: **one declaration, many renderings, no drift between them.** Three
+parts of this project have now arrived at the same shape. None of them has written it
+down as a shared law.
 
-### 5.2 `SIGNAL` — colour as meaning
+### 4.3 The medium axis already exists in the language
 
-Rule 3 already names this stratum: *"Color is a signal, not an identity."* A declaration
-binds a **meaning** to a semantic value; the engine computes the colour.
+It need not be invented, only closed. `VIBE` already carries **`SURFACE_AS`** — *"the
+medium this vibe projects to"* — and the canonical clean fixture already writes
+`SURFACE_AS terminal`. The field is live, used, and **unenumerated**: any identifier
+passes. Closing it, the way `PERSPECTIVE` and `TONE` are closed, turns the medium from a
+comment into a contract.
 
-*Sketch*: the five semantic values of Rule 118 as the closed set, plus the role steps the
-graphics plane proved necessary (`.Surface .Border .Solid .Text`, `:OnX`), plus a
-legibility obligation expressed as a floor, not a hex.
-*Makes reachable*: Set 2 (11), Set 15 (3), Set 17 (3), Rules 117, 118.
-*Implemented by*: **stzlib's graphics plane, which already built it.** This stratum's
-first act is not to design anything — it is to **reconcile `muted` with `:Neutral`, make
-the two documents cite each other, and bind Rule 62 to `StzIsLegible`.**
+### 4.4 The two laws that media impose
 
-### 5.3 `ROLE` — the element as promise
+Both are structural, both are checkable, and neither has any visual analogue — which is
+why a monomodal law could never have found them.
 
-The resolution of the `WIDGET` exclusion, and the most delicate move here. A declaration
-still may not name a widget. It may name a **role**: *this control promises instant,
-reversible, binary state* — a contract a projection must keep, and may keep with any
-widget it likes.
+**The persistence law.** A colour stays until it is changed; a sound is gone the instant
+it ends. `ALWAYS_REACHABLE` — the field that carries the operator's *rights* into the
+structure — silently assumes persistence.
 
-*Sketch*: `PROMISES` (reversible · immediate · destructive · navigational · read-only),
-`SERVES` (the intent), `KEYBOARD` (Rule 80).
-*Makes reachable*: Set 13 (7 rules, of which 5 are `judgment` and 0 are `machine`
-today), Set 11 (2), Rule 119 — *"a card is a read-only indicator… form follows role, and
-each widget plays exactly one."* The law already says **role**. It has simply had no
-place to write one down.
+> **In a non-persistent medium, a right is kept by re-requestability, not by presence.**
 
-### 5.4 `MOTION` — motion as report
+A voice interface satisfies `ALWAYS_REACHABLE [UNDO]` not by displaying undo but by
+*always accepting "undo" as an utterance and always being able to say what is undoable.*
+A surface that plays a warning once and never again has not made it reachable; it has
+made it **missable**. This is why Rule 82 must become **Perceivable State** (§7.2).
 
-Already half-declared: `VIBE` carries a `MOTION` field and Rule 112 says *motion reports,
-it never decorates*. Promote it to a declaration that must name the state it reports.
+**The seriality law.** Vision is parallel — the eye chooses its own order. Audio is
+serial — it arrives in one order at one rate. So the 22 verbs are not equally carriable:
 
-*Sketch*: `REPORTS` (reusing `FEEDBACK`'s existing field), `DURATION_CLASS`,
-`INTERRUPTIBLE`, `RESERVES_SPACE` (Rule 38).
-*Makes reachable*: Rules 19, 21, 38, 112, Set 28 (2).
+| Verb | Visual | Serial media (audio, voice) |
+|---|---|---|
+| `SCAN` | native — the eye's own operation | degrades to sequential playback |
+| `COMPARE` | native — two things held at once | becomes a **memory task** |
+| `LOCATE` | native — spatial search | requires an index or menu |
+| `ZOOM` | native | no analogue; maps to level of detail |
+| `ACT`, `CONFIRM`, `UNDO`, `CANCEL` | native | native |
 
-### 5.5 `MESSAGE` — the system speaking
+> **A medium declares which of the 22 verbs it carries, and at what cost.**
 
-Set 10 is a philosophy of error with six rules and one machine tier. The stratum makes
-the system's voice declarable: what a message must **contain**, not what it says.
+That is refusable: a flow declaring `SATISFIES [COMPARE]` on a voice-only surface, with no
+declared fallback, is an error the court can name.
 
-*Sketch*: `KIND` (error · denial · confirmation · empty · progress), `NAMES` (cause ·
-remedy · actor — Rule 40's non-accusatory pathfinding, made structural), `TONE` (the
-existing closed enumeration), `PROXIMITY` (Rule 86), `AS_DATA` (Rule 122).
-*Makes reachable*: Set 10 (6), Set 8 (4), Set 18 (3), Rules 106, 99.
-*Note*: this extends the existing `FEEDBACK` declaration rather than replacing it.
+**And here the founding decision pays off.** The 22 verbs are closed and medium-agnostic.
+*Because* they are closed, a coverage matrix over media is finite and checkable. Had the
+grammar been open — had every projection been free to add verbs — no such matrix could
+exist. The closure that looked like an aesthetic constraint turns out to be the precise
+precondition for multi-modal correctness.
 
-### 5.6 `TEMPO` — time and interruption
+## 5. The six strata, stated modality-neutrally
 
-The experiential dimension the author named last and users feel first: latency budgets,
-what may interrupt, what survives interruption, what resumes.
+Each is a closed vocabulary with a court and fixtures, drawn from rules that **already
+exist** — extracted from the law's practice, never invented fresh.
 
-*Sketch*: `BUDGET` (Rule 18's hundred milliseconds, as a declared class), `INTERRUPTS`,
-`RESUMES`, `FOCUS` (Set 14).
-*Makes reachable*: Set 5 (9), Set 6 (3), Set 14 (3), Set 28 (2), Rule 100.
+- **`STRUCTURE`** — what is grouped, subordinate, ordered, dense, deep. Spatially in
+  vision; as figure/ground and sequence in audio; as turn structure in voice.
+  *Reaches*: Set 3 (9), Set 4 (3), Set 9 (4), Rules 90/92/93/95, 107, 111, 113, 114.
+- **`SIGNAL`** — a meaning bound to a perceptible quality. Rule 3 already names the
+  stratum: *"Color is a signal, not an identity."* Colour in vision, timbre in audio,
+  waveform in haptics. *Reaches*: Set 2 (11), Set 15 (3), Set 17 (3), Rules 117, 118.
+- **`ROLE`** — the promise a control makes: *instant, reversible, binary state* — a
+  contract a projection keeps with any widget it likes. The resolution of the `WIDGET`
+  exclusion: a declaration still may not name a widget; it may name a promise. Rule 119
+  already says *"form follows role."* *Reaches*: Set 13 (7), Set 11 (2), Rule 119.
+- **`MOTION`** — change that reports state. Rule 112 already says *motion reports, it
+  never decorates*; §6.1 shows the auditory form of that rule is **stronger**.
+  *Reaches*: Rules 19, 21, 38, 112, Set 28 (2).
+- **`MESSAGE`** — what the system owes the operator when it speaks: cause, remedy, actor
+  — not the wording. *Reaches*: Set 10 (6), Set 8 (4), Set 18 (3), Rules 106, 99.
+  Extends the existing `FEEDBACK` declaration rather than replacing it.
+- **`TEMPO`** — budgets, interruption, resumption. Rule 18's hundred milliseconds as a
+  declared class. *Reaches*: Set 5 (9), Set 6 (3), Set 14 (3), Set 28 (2), Rule 100.
 
-## 6. Ownership — the boundary this must not cross
+## 6. The media
 
-The family has already assigned neighbouring territory, and a scope expansion that
-ignored it would break the doctrine *"no layer speaks for another's roadmap."* `.face`
-(RingFace) owns composition and binding, and shipped v0. C7, the Display Contract
-(stzlib), owns how a value shows itself. Zing owns delivery. The graphics plane owns
-colour computation.
+Eight, in three tiers. `SURFACE_AS`'s enumeration is exactly this list.
 
-**The split that keeps every one of those intact:**
+**Tier 1 — unlegislated and consequential. Add now.**
+
+### 6.1 `auditory` — sound as signal
+
+Zero rules in the law; zero semantics in the plane (§2.1). The engine is built and the
+meaning layer does not exist on either side — which is the one genuinely recoverable
+situation in this document, because **SN6 is not started and nothing has hardened yet.**
+
+The coherent design is not a guess. It is the colour system's own structure, transposed —
+and the sound plane already speaks the same `:Name` convention its named nodes use
+(`:tone`, `:bell`), so the five semantic values slot into a syntax that exists. This is
+the whole argument for a semantic layer in one line: *declare the meaning once, and every
+channel renders it.*
+
+| Colour — built and proven | Sound — the analogue |
+|---|---|
+| the five semantic names | **the same five names.** One vocabulary, two channels |
+| hue = identity | **timbre** = identity |
+| lightness = prominence | **salience** = loudness × spectral brightness × repetition |
+| the sRGB gamut = what can be shown | **the band between the ambient noise floor and the discomfort ceiling** |
+| chroma searched to fit the gamut | salience **fitted to the room**, never chosen |
+| role steps `.Surface .Border .Solid .Text` | `.Ambient` · `.Cue` · `.Alert` |
+| `:OnDanger` — what can be *read on* it | `:OverDanger` — what can be *heard over* it |
+| contrast as a number, floor 4.5 | **audibility margin over the measured floor** — and `Loudness` (LUFS) already ships |
+| *"a design system that cannot fail an accessibility check does not have one"* | *"a sound system that cannot fail an audibility check does not have one"* |
+
+Two mechanisms the plane does not have and a semantic layer requires: **priority** (which
+alert wins when two fire) and **ducking** (what gets quieter when one does). There is no
+bus or priority concept today beyond the mix node — so `:OverDanger` is genuinely new
+work, not a relabelling.
+
+Three laws sound needs that colour does not:
+
+1. **Sound is interruptive by default; colour is not.** A colour waits to be looked at; a
+   sound seizes attention and cannot be looked away from. Rule 112 becomes **"sound
+   reports, it never decorates"** — and in its auditory form it is the *stronger* rule,
+   because the operator has no eyelid for the ear.
+2. **Silence is the default, and must remain sufficient.** Sound is the first thing
+   switched off, and it is unavailable in open-plan offices, in meetings, and to deaf
+   operators. **Sound is always redundant, never the sole carrier of a state.** One
+   sentence that is simultaneously the accessibility law and the practicality law.
+3. **Auditory feedback is causal only inside Rule 18's hundred milliseconds.** Later than
+   that a sound is not felt as *caused by* the act; it is heard as a separate event. This
+   is where the plane's engineering meets the constitution, and the meeting is overdue:
+   §2.1's decomposition leaves little headroom, and the plane's own finding — *"what has
+   a deadline is the WAKE-UP; what must fit inside it is the burst's TOTAL work"* — is
+   the kind of fact a latency budget in the law must be written against. The plane's
+   calibrated refusal of exclusive mode by default (up to 78,020 frames dropped, 1.6 s
+   missing from a 3 s run) is already Rule 18 reasoning; it simply has no rule to cite.
+
+### 6.2 `voice` — speech in and out
+
+Named as a projection since the founding; zero rules. It is not "audio with words" — it
+is a distinct paradigm, and the one being deployed fastest into exactly the high-stakes
+business contexts this constitution was written for.
+
+**Voice is not the sound plane's job, and should not be handed to it.** That plane rules
+speech synthesis and recognition explicitly out of scope — *"OUT until asked, in writing…
+the last two would be NEURAL-tier work riding ggml, not this plane's."* That boundary is
+theirs to hold and this document does not contest it. What follows is law for whoever
+eventually renders voice; the sound plane owes it nothing.
+
+- **Recognition is probabilistic**, so voice has a failure mode vision does not: *the
+  system misheard.* Every argument for `CONFIRM` gets stronger — `SELECT_ACT_COLLAPSE` is
+  not a style error here, it is how money moves on a mishearing.
+- **Nothing persists**, so §4.4's persistence law binds hardest: every right must be
+  re-requestable, and the system must always be able to answer *"what did I just do?"*
+- **Undo has no toast.** The ten-second toast of Rule 79 has no auditory form that does
+  not nag. Voice needs its own mechanism — a permanently accepted "undo" utterance and a
+  stated window — or Rule 79 is simply unmet in the medium.
+- **Barge-in is the right to leave, in time rather than space.** An interface that cannot
+  be interrupted mid-utterance is a trapped flow with no `EXIT`.
+
+### 6.3 `haptic`
+
+Rule 69 promises this medium in its title and delivers touch targets. Real for the device
+family. Narrow-band: it carries `SIGNAL` and `MOTION` well, `STRUCTURE` and `ROLE` not at
+all — which is precisely why it must never be a sole carrier.
+
+### 6.4 `print` — the fixed record
+
+Sets 22 and 24 exist; the colour system already ships a `print` theme; business runs on
+printed records. Include it **because it is the hardest case**: print has no time, no
+interaction, no undo, no state change. `MOTION` and `TEMPO` are structurally
+unrenderable; `ROLE` has nothing to promise. It is the medium that falsifies a sloppy
+model, and if the strata survive it they are real.
+
+**Tier 2 — name them now, legislate next.**
+
+### 6.5 `ambient` — the interface that reaches you when you are not looking
+
+Notifications, badges, out-of-app interruption. Touched by Rules 1, 51, 76, 103; governed
+as a medium by none. One-shot, contextless, interruptive, and the most abused channel in
+modern software.
+
+### 6.6 `machine` — the interface consumed by a program
+
+The law already reached this conclusion by itself. Rule 104: *"Accessibility law and
+agent-interop law are one body of law with two beneficiaries… what a screen reader can
+operate, an agent can operate."*
+
+> **The medium axis makes it three.** What a screen reader can operate, an agent can
+> operate, and a non-visual medium can render. Multi-modality and accessibility are not
+> neighbouring concerns — **they are the same law**, and treating them separately is
+> exactly why accessibility has always been bolted on last.
+
+**Tier 3 — already seeded, no new work proposed.**
+
+`spatial` (`WORLD_VIEW` + `PERSPECTIVE` exist; Ringine is chartered) and `terminal`
+(already written in the clean fixture).
+
+## 7. Ownership, and the amendments this implies
+
+### 7.1 The boundary this must not cross
+
+`.face` (RingFace) owns composition and shipped v0. C7 (stzlib) owns how a value shows
+itself. Zing owns delivery. The graphics plane owns colour computation; the sound plane
+owns audio synthesis and timing.
 
 > **StzZui owns the vocabulary, the law, and the court. The siblings own the artifacts
 > and the engines.**
 
-This is precisely what StzZui already does for intent, applied six more times. It takes
-nothing from anyone:
+Exactly what StzZui already does for intent, applied across two axes. It takes nothing
+from anyone: the sound plane keeps every decision about buffers, mixing and latency, and
+gains a *meaning* vocabulary it currently has to invent for itself — the thing the
+graphics plane had to invent, and which drifted from the law because nobody owned the
+seam.
 
-| Territory | StzZui provides | The sibling provides |
+### 7.2 Amendments proposed to the constitution
+
+Each is an **amendment, not a correction**, by the project's own substance test — an
+interface lawful before becomes unlawful after — and each therefore needs evidence and
+the author's ratification.
+
+| # | Proposal | Why |
 |---|---|---|
-| Colour | the semantic values, the law, the legibility floor | stzlib computes the colour (OKLCH, contrast, themes) |
-| Composition | the role and structure vocabulary `.face` binds | RingFace's `.face` grammar, court and fixtures |
-| Value display | the role a rendered value plays | stzlib's C7 |
-| Delivery | the law the delivered page is judged against | Zing |
+| A | **Rule 82: "Visible State" → "Perceivable State"**, with visibility as its visual realization | `machine` tier today, and medium-bound in both title and body (*"the user must see it"*). A voice surface currently escapes it entirely |
+| B | **Rule 60 restated medium-neutrally**, with ARIA as the web realization rather than the rule | The only rule about how an interface is heard is written in one framework's vocabulary, inside a framework-agnostic constitution |
+| C | **Rule 69 either renamed or given its haptic body** | Title and body disagree today |
+| D | **Rule 104 extended to three beneficiaries** | The rule already made the argument; the medium axis completes it |
+| E | **Rules 3 and 118 reconciled with each other and with the engine** | Three vocabularies for five values (§2) |
+| F | **Rule 62 bound to `StzIsLegible`**, promoted off `machine-later` | The instrument exists and is CI-gated |
 
-**Proposed amendment to `softanza/REFERENCE_DESIGN.md` v1.3** — one row, not applied
-here, for the author's own ratification process: layer 2's description *"the UI law as
-data (StzZui)"* becomes *"the UI law and the interface vocabulary as data (StzZui)"*, and
-§6.3's UI-pipeline horizon gains the note that the expression vocabulary is the seam
-`.zui` and `.face` meet on.
+### 7.3 Amendment proposed to the reference design
 
-## 7. The constitution as a living institution
+One row, **not applied here**: layer 2's *"the UI law as data (StzZui)"* becomes *"the UI
+law and the interface vocabulary as data (StzZui)"*, and §6.3's UI-pipeline horizon gains
+the note that the expression vocabulary is the seam `.zui` and `.face` meet on.
 
-The author's requirement: a non-negotiable core, with laws anyone may add from the pains
-they meet in daily use. That is a governance architecture, and the law already has most
-of its parts.
+## 8. The constitution as a living institution
 
-**Three tiers, one supremacy rule.**
+Three tiers, one supremacy rule.
 
-1. **The Core — non-negotiable.** The preamble, the 7 articles, the operator rights, the
-   intent-family invariants, the forbidden patterns. Amended only by convention, never
-   by contribution. This is what makes it a constitution and not a style guide.
-2. **The Commons — contributed, curated, evidence-gated.** Today's 117 rules and every
-   rule anyone adds. Open to all.
-3. **The Local — a person's or an organisation's own laws.** Same schema, pinned
-   alongside, shipped with the app.
+1. **The Core — non-negotiable.** Preamble, 7 articles, operator rights, intent-family
+   invariants, forbidden patterns. Amended only by convention, never by contribution.
+2. **The Commons — contributed, curated, evidence-gated.** Today's 117 and everything
+   anyone adds.
+3. **The Local — a person's or organisation's own laws**, pinned alongside, shipped with
+   the app.
 
-> **Supremacy**: a local law may be *stricter* than the commons and never *looser*. It
-> may not permit what the commons forbids, and neither may permit what the Core forbids.
+> **Supremacy**: a local law may be *stricter* than the commons and never *looser*.
 
-**The admission test is already in the data.** Every one of the 117 rules carries
-`derived_from`, naming the article it descends from — and all 117 resolve to one of the
-seven. That is the coherence mechanism, and it needs no committee of taste:
-
-> **A proposed rule that derives from no article is inadmissible. A proposed rule that
-> contradicts the Core is inadmissible. Everything else is a question of evidence.**
+**The admission test is already in the data.** All 117 rules carry `derived_from`, and all
+117 resolve to one of the seven articles. So: **a proposed rule that derives from no
+article is inadmissible; one that contradicts the Core is inadmissible; everything else is
+a question of evidence.** No committee of taste is required.
 
 **The admission triple.** This project already writes every argument three ways — the
 Gotchas make an offense *feelable*, the fixtures make it *checkable*, `evidence` makes it
-*accountable*. Every conformance fixture already ships with a lawful twin; every gotcha
-already pairs an offense with its repair. So a contributed law arrives as all three or
-not at all:
+*accountable*. A contributed law arrives as all three or not at all.
 
-| | Form | Audience | Precedent in this repo |
+| | Form | Audience | Precedent |
 |---|---|---|---|
 | **The gotcha** | offense + lawful twin, playable | humans | `site/gotchas/`, 12 offenses |
 | **The fixture** | declaration + expected verdict | machines | `conformance/`, 30 fixtures |
 | **The evidence** | what happened, where, when | the record | `evidence` on all 117 rules |
 
-No taste is admitted, and no rule enters on eloquence. *Fashion is not admissible* stops
-being a slogan and becomes an intake form.
-
-### 7.1 The loop that closes it
-
-The channel the author named — every Softanza app carries a feedback mechanism — is the
-part no UI standard has ever had, and it is what makes the corpus grow from **pain**
-rather than from opinion:
+### 8.1 The loop that closes it
 
 ```
 an operator meets a pain, in the app, at the moment it hurts
-        ↓  capture: the surface, the intent it was serving, what was expected
+        ↓  capture: the surface, the intent it served, the medium it was in
 a gotcha            — reproducible, feelable, dated
-        ↓  the operator keeps it
+        ↓
 a LOCAL law         — binding on their own app immediately
-        ↓  the operator publishes it
+        ↓
 a COMMONS proposal  — gotcha + fixture + evidence
-        ↓  admitted (derives from an article, evidence stands) or refused with a reason on record
+        ↓  admitted, or refused with the reason on record
 a CANONIZED rule    — numbered forever
 ```
 
-This is the answer to the deepest cause of the deterioration: **the person who feels the
-pain has never had a channel to the person who decides.** Analytics count clicks, not
-suffering. A refusal, recorded with its reason, is as valuable as an admission — it is
-how the corpus stays small enough to be law.
+**The person who feels the pain has never had a channel to the person who decides.** That
+is the deepest cause of the deterioration, and a capture form in every app is the only
+fix anyone has proposed. Note the added field: **the medium** — without it the corpus
+would go on writing law for the eye.
 
-## 8. The protocol
-
-For StzZui to be adopted by ecosystems that owe Softanza nothing, what a participant
-downloads must be data, and the identity must be neutral. Most of the pack exists:
+## 9. The protocol
 
 | Piece | Status |
 |---|---|
-| The law, as data, versioned, pinned by hash | ✅ `constitution/rules.json` v3.8.0 |
-| The intent grammar + declaration types, in EBNF | ✅ `doc/language/` v1.0 |
+| The law as data, versioned, pinned by hash | ✅ `constitution/rules.json` v3.8.0 |
+| The intent grammar and declaration types, in EBNF | ✅ `doc/language/` v1.0 |
 | The refusal envelope every court speaks | ✅ **C2, delivered 2026-08-12**, v1.0 |
-| Conformance fixtures as the gate | ✅ `conformance/`, 30 fixtures |
+| Conformance fixtures as the gate | ✅ 30 fixtures |
 | **The six expression grammars** | ✗ §5 |
-| **The contribution protocol** (how a law enters) | ✗ §7 |
-| **The feedback protocol** (how a pain is transmitted) | ✗ §7.1 |
-| **A neutral, citable identity** for the standard | ✗ open |
+| **The medium enumeration and its capability matrix** | ✗ §4.2, §6 |
+| **The contribution and capture protocols** | ✗ §8 |
+| **A neutral, citable identity** | ✗ open |
 
-Softanza becomes the **reference implementation and the showcase** — the same
-relationship the reference design already draws for every other contract. The pack must
-be implementable by someone who never installs a Softanza component.
+Softanza becomes the reference implementation and the showcase. The pack must be
+implementable by someone who never installs a Softanza component.
 
-## 9. Why now: interfaces under generation
+## 10. Why now: interfaces under generation
 
-Every argument above predates AI. This one does not, and it is the reason the timing is
-not arbitrary.
+Interfaces are now generated faster than review can absorb, and the generator cannot
+*know* the law it breaks. Set 31 governs the agent as an actor; Rules 121 and 124 govern
+its surface. The expression stratum completes it, because a court that checks only intent
+checks almost nothing a generator gets wrong: generators rarely misdeclare intent, and
+routinely produce card grids that lie, three competing primaries, and *"Invalid input!"*
 
-Interfaces are now generated faster than any review process can absorb. If the only
-quality gate is human taste applied after rendering, that gate is already overwhelmed —
-and the generator has no way to *know* the law it is breaking. The project's existing
-position is right and incomplete: Set 31 governs the agent as an **actor**, Rule 121
-forbids the masking assistant, Rule 124 demands the generator ship a working thing.
+The medium axis makes this urgent rather than merely important. **Generated voice agents
+are being deployed into the same high-stakes business contexts this constitution was
+written for, and there is not one line of law about voice.** A voice agent that mishears,
+acts, and cannot be interrupted or reversed violates Rules 16, 79 and 26 at once — and
+today no instrument, in any medium, would refuse it.
 
-The expression stratum completes it, because a court that can only check intent can check
-almost nothing a generator gets wrong. Generators do not usually misdeclare intent. They
-produce card grids that lie, three competing primaries, red for brand and danger, and
-*"Invalid input!"* — **every failure in §1.1's second surface is a failure a generator
-makes by default**, and every one becomes refusable under §5.
+Two commitments follow: the law is **consultable while generating** (M5's MCP surface),
+and a generated surface **cites the rules it obeyed** — Rule 99's provenance, extended to
+the artifact.
 
-Two consequences worth stating as commitments:
+## 11. Practicality — three audiences, three doors
 
-- **The law is consultable while generating**, not only after (the MCP surface already on
-  the roadmap as M5).
-- **A generated surface cites the rules it obeyed**, making provenance of generated UI a
-  property of the artifact — the natural extension of Rule 99, Visible Provenance.
+- **Designers** — a vocabulary for what they already mean. The door is the Gotchas, the
+  Reader, and the capture form. *Never asked to write JSON.*
+- **Developers** — one dependency-free binary, a CI gate, an exit code, diagnostics that
+  cite a numbered law. The door is `zui check`.
+- **Tool makers** — the protocol pack of §9. The door is conformance. *An LSP, a Figma
+  plugin, a sound-design tool, a linter or a generator can prove agreement.*
 
-The strongest claim this project can make in 2026: **it is the only UI quality gate that
-scales with generation, because it refuses by law rather than by review.**
-
-## 10. Practicality — three audiences, three doors
-
-A platform nobody can pick up is a monograph. Each audience gets one door and one
-promise.
-
-- **Designers** — a vocabulary for what they already mean, and a place to write it down
-  before a tool imposes an answer. The door is the Gotchas (feel the law), the Reader
-  (read it), and the capture form (contribute to it). *Never asked to write JSON.*
-- **Developers** — one dependency-free binary, a CI gate, an exit code, and diagnostics
-  that cite a numbered law instead of an opinion. The door is `zui check`. *Nothing to
-  install beyond a runtime they already have.*
-- **Tool makers** — the protocol pack of §8: grammars as data, the law as data, the C2
-  envelope, the fixtures. The door is conformance. *An LSP, a Figma plugin, a linter or a
-  generator can be built and can prove agreement.*
-
-The C2 envelope delivered today is already the tool-makers' seam; §5 gives the other two
-doors something to be about.
-
-## 11. The book
-
-The reference book (AYOUNI Press) is not a write-up of the repository — it is the
-argument the repository is the apparatus for. Proposed spine:
+## 12. The book
 
 | Part | Argument |
 |---|---|
-| I — The Deterioration | Why interfaces got worse while tooling got better: the vocabulary collapsed into the toolkit, rendering got cheap and meaning got expensive, the pain never reached the decider, fashion replaced evidence. |
-| II — The Heritage | What HCI already knew and could not enforce: Norman's gulfs and affordances, Nielsen's heuristics, Fitts, Hick, Gestalt, Tufte, Shneiderman. Fifty years of findings, none of it checkable. |
+| I — The Deterioration | Why interfaces got worse while tooling got better: the vocabulary collapsed into the toolkit; rendering got cheap and meaning got expensive; the pain never reached the decider; fashion replaced evidence. |
+| II — The Heritage | What HCI knew and could not enforce: Norman's gulfs, Nielsen, Fitts, Hick, Gestalt, Tufte, Shneiderman. |
 | III — The Inversion | Intent first. The closed grammar. Why correctness becomes compilable. |
 | IV — The Expression | The missing middle: structure, signal, role, motion, message, tempo. |
-| V — The Law | A constitution for interfaces: articles, rights, evidence, the enforcement ladder, the substance test. |
-| VI — The Commons | Governance: the non-negotiable core, the contributed corpus, the loop from a user's pain to a numbered rule. |
-| VII — Under Generation | Interfaces made by machines, refused by law. |
-| VIII — In Practice | Adopting it; the toolchain; Softanza as the worked showcase. |
+| V — **The Senses** | Interfaces are not only seen. Sound, voice, touch, print — and why a monomodal law is an incomplete one. Accessibility as the same law, not a chapter of exceptions. |
+| VI — The Law | Articles, rights, evidence, the enforcement ladder, the substance test. |
+| VII — The Commons | Governance, and the loop from a user's pain to a numbered rule. |
+| VIII — Under Generation | Interfaces made by machines, refused by law. |
+| IX — In Practice | Adoption, the toolchain, Softanza as the worked showcase. |
 
-**One discipline the book should borrow from the law**: every claim in it that a machine
-can check should be **generated from the artifacts** — rule counts, enforcement tiers,
-fixture verdicts, the conformance table. A book about drift that drifts from its own
-apparatus would refute itself. Titles are the author's; the honest register of the
-material is closer to *A Law for Interfaces* than to a manifesto.
+**One discipline borrowed from the law**: every claim a machine can check should be
+**generated from the artifacts** — rule counts, enforcement tiers, fixture verdicts, the
+medium matrix. A book about drift that drifts from its own apparatus would refute itself.
 
-## 12. Sequencing
-
-Cheapest first, each shipping complete, no stratum opened before the one it leans on.
+## 13. Sequencing
 
 ```
-M6  The reconciliation      SIGNAL, with zero new design:
-                            muted ↔ :Neutral, the two documents cite each other,
-                            Rule 62 bound to StzIsLegible and promoted off machine-later.
-                            Pays immediately; proves the seam is real.
-M7  ROLE + MESSAGE          the two strata with the most judgment-tier rules and the
-                            most daily pain. Grammar → court → fixtures, per stratum.
-M8  The commons             core/commons/local split in rules.json; the admission
-                            triple; the capture form; the first contributed rule.
-M9  STRUCTURE + MOTION + TEMPO
-M10 The protocol pack + the MCP surface (existing M5 folded in)
+M6   The reconciliation      SIGNAL in the visual channel, zero new design:
+                             Rules 3 ↔ 118 ↔ the engine; muted ↔ :Neutral;
+                             Rule 62 bound to StzIsLegible. Cashable in days.
+M6b  The medium axis         SURFACE_AS closed to the eight; the capability matrix
+                             as data; amendments A–D. Small, and it unblocks sound.
+M7   SIGNAL in sound         the five semantic names in the auditory channel, with
+                             the sound plane as co-author: role steps, an audibility
+                             floor bound to the shipped LUFS meter, priority and
+                             ducking, and a latency budget written against Rule 18.
+                             A semantic layer ABOVE the plane — it changes no node,
+                             no sink and no callback.
+M8   ROLE + MESSAGE          the strata with the most judgment-tier rules.
+M9   The commons             core/commons/local; the admission triple; capture.
+M10  VOICE                   the paradigm, not the channel: turn-taking, barge-in,
+                             re-requestability, mishearing as a first-class failure.
+M11  STRUCTURE + MOTION + TEMPO · print and ambient
+M12  The protocol pack + the MCP surface (M5 folded in)
 ```
+
+**M6b before M7 is the load-bearing order, and M7 before SN6 is the one piece of timing
+that cannot be recovered.** The colour vocabulary drifted because the engine shipped
+before the law had a seam to bind to. SN0–SN5 are closed and SN6 — the reactive layer,
+the WebAudio sink, the game-plane doors — is where the sound plane first reaches outward.
+A semantic vocabulary agreed *before* those doors open costs a document; agreed after, it
+costs a migration and a decade of drift. **This is the recoverable case. The colour one
+was not.**
 
 `M4 — Rendering projections` is superseded: it assumed projections were the answer, and
-§4 finds that projections are downstream of a stratum that does not exist yet.
+§4 finds projections are downstream of a stratum that does not exist yet.
 
 ## Honest boundaries
 
-- **Nothing here is ratified.** This is a proposal for the author's pass, in a project
-  whose whole discipline is that the author ratifies section by section.
-- **Nothing here is implemented.** Six grammars are named and none is written. §5's
-  sketches are sketches — the field lists will not survive contact with fixtures
-  unchanged, and should not.
-- **The scope grows by roughly the work already done.** Six strata is not a milestone; it
-  is a programme of several. M6 is deliberately sized to be cashable in days, so the
-  thesis is tested before the programme is funded.
-- **The `WIDGET` exclusion is preserved in letter and re-read in spirit.** §5.3 admits a
-  *role*, never a widget. If the author judges that a role is a widget wearing a
-  disguise, the whole stratum must be reconsidered — it is the load-bearing move of §5
-  and the one most worth attacking.
-- **The colour reconciliation touches a live tree.** `stzlib`'s C3 phase is uncommitted
-  and in flight in another session; M6 must not race it.
-- **The two silent parties are the strongest evidence and were not consulted.** stzlib's
-  graphics plane and this constitution converged on five semantic values without citing
-  each other. That was observed on 2026-08-12 by reading both. Neither owner has agreed
-  to anything here.
+- **Nothing here is ratified, and nothing is implemented.** Six grammars and eight media
+  are named; none is written. The field sketches will not survive fixtures unchanged.
+- **The sound plane was read; it has agreed to nothing.** Every statement here about what
+  that plane *has built* comes from its plan of record and is reported as found. Every
+  statement about what sound *should mean* is this document's own, transposed from the
+  colour precedent. The table in §6.1 is a proposal to that session in the genre it
+  already uses for cross-plane findings — it is not a report of their design, and
+  `:OverDanger`, priority and ducking are new work I am asking for, not work I found.
+- **Its session is live and its cwd is `softanza`.** Any coordination must not race it,
+  and the plan of record already carries undocumented post-SN5 work — so its file is not
+  a safe source of truth for anything I have not verified in the tree.
+- **`ROLE` is the move most worth attacking.** If a role is a widget wearing a disguise,
+  the stratum must be reconsidered.
+- **The medium list is a judgement call.** Eight is not derived from anything; it is what
+  survived asking which channels carry meaning in this family's actual products. `ambient`
+  is the one most arguably a *placement* rather than a medium.
+- **`print` may break the model, and that is why it is in.** If `MOTION` and `TEMPO` have
+  no print form, the matrix has empty rows — honest, but it means "every stratum in every
+  medium" is not the shape of the law.
+- **Two silent parties, still not consulted.** The graphics plane and this constitution
+  converged on five values without citing each other; the sound plane and this
+  constitution have not yet met at all. Neither owner has agreed to anything here.

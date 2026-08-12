@@ -55,10 +55,19 @@ before a pixel exists, and all but one of the 25 rules the law itself marks
 timing. Two payment surfaces that differ by seven broken laws are byte-identical as
 declarations and both run clean at Level 4.
 
-It proposes six expression strata (`STRUCTURE` `SIGNAL` `ROLE` `MOTION` `MESSAGE`
-`TEMPO`), a three-tier constitution (core · commons · local) fed by a capture loop from
-the operator's own pain, and a protocol pack for ecosystems outside Softanza. **M4 and M5
-below are superseded by its §12 if it is ratified**; M5's MCP surface survives inside M10.
+A second finding (v0.2): **the law is monomodal while believing itself medium-agnostic.**
+Across 117 rules the words `sound`, `speech`, `earcon`, `tactile` and `ambient` never
+appear; `audio` appears only as a document attachment; both hits for `voice` are
+typographic metaphor; the one haptic rule is about touch targets; and the only rule about
+how an interface is *heard* is written in ARIA, inside a framework-agnostic constitution.
+
+So it proposes **two axes**: six expression strata as *functions* (`STRUCTURE` `SIGNAL`
+`ROLE` `MOTION` `MESSAGE` `TEMPO`) across eight *media* (`visual` `auditory` `voice`
+`haptic` `print` `ambient` `machine` `spatial`/`terminal`), closing the `SURFACE_AS` field
+the language already carries. Plus a three-tier constitution (core · commons · local) fed
+by a capture loop from the operator's own pain, and a protocol pack for ecosystems outside
+Softanza. **M4 and M5 below are superseded by its §13 if it is ratified**; M5's MCP
+surface survives inside M12.
 
 Awaiting the author's section-by-section pass.
 
