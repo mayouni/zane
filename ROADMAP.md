@@ -35,7 +35,34 @@ A CLI that checks declarations against the law. **The premise changed on contact
 - Still open, and the reference implementation's call: **the pillar filter** (~10 lines, useful to it on its own terms) and whether it wants the ten violations implemented in its compiler too. Open questions are in the decision document §7.
 - Honest remainder: the four cross-pillar checks work only when a symbol table is *supplied*; computing one from a host project is unbuilt. `LAYOUT_DISPLACEMENT` is not a verifier's job at all — the UI audit measures it.
 
-## M4 — Rendering projections
+## C2 — The Diagnostic Contract ✅ (2026-08-12)
+
+Delivered against the Softanza reference design (v1.3, C2), which promotes StzZui's
+refusal shape from one project's convention to a family contract. See
+[ALIGNMENT.md](ALIGNMENT.md).
+
+- ✅ **[`doc/diagnostic-contract.md`](doc/diagnostic-contract.md) v1.0** — the envelope every court in the family speaks: `{code, severity, message, span{file,line,col}, cites[], language}`, with the code format, the two-rung severity ladder and the citation rule stated normatively, governed by the law's own discipline (substance test, patch component, consumers pin).
+- ✅ **[The machine-readable shape](doc/diagnostic-contract.schema.json)** beside it, so a court can validate its own output.
+- ✅ **The verifier is the first conforming implementation** — `--json` emits the envelope; the conformance runner validates every diagnostic it emits against the shape. Extracted from existing practice: no rule, no diagnostic's meaning and no verdict changed, and the suite stayed 30/30.
+
+## The Second Founding — proposed, not ratified (2026-08-12)
+
+**[doc/THE-SECOND-FOUNDING.md](doc/THE-SECOND-FOUNDING.md) v0.1** proposes that StzZui
+grow from an intent language into a complete platform, on the finding that **the law
+legislates a territory the language cannot declare**: 8% of the 117 rules are refusable
+before a pixel exists, and all but one of the 25 rules the law itself marks
+`machine-later` are expression rules — colour, layout, widget role, message, motion,
+timing. Two payment surfaces that differ by seven broken laws are byte-identical as
+declarations and both run clean at Level 4.
+
+It proposes six expression strata (`STRUCTURE` `SIGNAL` `ROLE` `MOTION` `MESSAGE`
+`TEMPO`), a three-tier constitution (core · commons · local) fed by a capture loop from
+the operator's own pain, and a protocol pack for ecosystems outside Softanza. **M4 and M5
+below are superseded by its §12 if it is ratified**; M5's MCP surface survives inside M10.
+
+Awaiting the author's section-by-section pass.
+
+## M4 — Rendering projections *(superseded if the Second Founding is ratified)*
 
 - The intent→widget projection tables (business web, CLI, voice) formalized as data, not prose.
 - `zing` (formerly `stzweb`) documented as the reference business-web projection.

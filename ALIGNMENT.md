@@ -1,6 +1,8 @@
 # Alignment — StzZui against the Softanza reference design
 
-**Reference**: `softanza/REFERENCE_DESIGN.md` **v1.0, ratified 2026-08-08**
+**Reference**: `softanza/REFERENCE_DESIGN.md` **v1.3** — ratified 2026-08-08, amended
+2026-08-10, 2026-08-11 (C7 added) and 2026-08-12. C2 is unchanged across all three
+amendments; this alignment answers it as ratified.
 **Status**: obligations in force. **C2 delivered** (2026-08-08, v1.0) — see item 1.
 
 ## What StzZui owns in the reference design
