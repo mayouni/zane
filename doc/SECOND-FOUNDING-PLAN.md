@@ -1,0 +1,245 @@
+# Implementing the Second Founding — the programme
+
+**Derived from** [THE-SECOND-FOUNDING.md](THE-SECOND-FOUNDING.md) **v0.2**, which is
+**proposed, not ratified**. This plan is therefore conditional in most of its length and
+unconditional in one track — see §1.
+**Genre**: the three-track dashboard the family already runs in
+`softanza/prompts/README.md`. When the vision is ratified, the sessions below take
+numbers 16+ in that program and this file becomes redundant.
+**Date**: 2026-08-12.
+
+---
+
+## 1. What is gated, and what is not
+
+The founding document makes two kinds of claim, and they have different standing.
+
+- **Findings of drift** — Rule 3 vs Rule 118 vs the engine; Rule 62 marked `machine-later`
+  while its instrument ships; the law and the two planes never citing each other. These
+  are **defects observed in the tree**. They are true whether or not the vision is
+  ratified, and fixing them is a correction, not a programme.
+- **The vision** — the expression strata, the medium axis, the three-tier constitution,
+  the protocol pack. These are **proposals**, and nothing large should start before the
+  author's section-by-section pass.
+
+So **Track 0 starts now and Tracks A–C wait.** That split is not a hedge: it happens to
+put the one time-critical item on the unconditional side.
+
+## 2. The critical path
+
+> **One vocabulary for five meanings must be settled before sound acquires semantics, and
+> sound must acquire semantics before SN6 opens the sound plane's outward doors.**
+
+```
+S1  reconcile the five semantic values      ──┐
+    (law ↔ law ↔ engine)                      │
+                                              ├─→  S7  sound semantics  ──→  SN6 may open
+S2  Rule 62 → StzIsLegible                    │        (stzlib, co-authored)
+S3  the documents cite each other           ──┘
+```
+
+Everything else in this plan can slip by a quarter without loss. **S1 → S7 cannot**, for
+one reason: colour's vocabulary drifted because the engine shipped before the law had a
+seam to bind to, and the sound plane is at the same moment with SN0–SN5 closed and SN6
+not started. The cost of agreeing a vocabulary now is a document. The cost of agreeing it
+after SN6 is a migration.
+
+And S1 is the root of it — because sound reuses colour's five names, the sound work
+cannot start until it is known what those five names *are*.
+
+## 3. Track 0 — the drift corrections. Start now.
+
+Unconditional. Each is defensible on its own evidence even if the Second Founding is
+rejected entirely.
+
+### S1 · Reconcile the five semantic values · `stzzui` + `stzlib` · **small, blocked on one decision**
+
+Three vocabularies exist for one concept (founding §2). Settle them into one, amend the
+law by the substance test, and record the reconciliation in both homes.
+
+- Decide the canonical five (see §10, decision 2 — this is the author's call, and one of
+  the pairs may not be a naming question at all).
+- Amend or correct Rules 3 and 118 accordingly; state which it was and why.
+- `SOFTANZA_COLOR_SYSTEM.md` records which rule its semantic names serve.
+- **Do not** change any computed colour. This settles names, not values.
+
+### S2 · Rule 62 off `machine-later` · `stzzui` · **small**
+
+`StzIsLegible` exists, is CI-gated, and passes 42/42 theme/role pairs. Bind Rule 62's
+`lint` field to it and promote the enforcement tier. Evidence per Article VII is the
+measurement itself.
+
+### S3 · The three documents cite each other · `stzzui` + `stzlib` · **tiny**
+
+The constitution's colour rules gain an instrument pointer; the colour plan gains a "the
+law this serves" line; the sound plan gains the same once S7 lands. Cheapest item in the
+programme and the one that prevents the next drift.
+
+### S4 · The sound-plane finding, filed · `stzlib` · **tiny**
+
+Rule 18 requires acknowledgement within 100 ms; the plane measures 112.6 ms output
+latency of which ~60 ms is OS pipeline. File this as a cross-plane finding in the genre
+that plane already uses — it produced one for the graphics plane about `stzCanvas`
+lacking an image primitive. **A finding, not a demand**: the number may be fine once
+decomposed, but nobody has checked.
+
+## 4. Track A — StzZui's own work. Gated on ratification.
+
+### S5 · The medium axis · `stzzui` · **medium** · *first, because everything leans on it*
+
+- Close `SURFACE_AS` to the eight media. It is an unenumerated identifier today, written
+  in the canonical clean fixture as `SURFACE_AS terminal`.
+- Publish the **capability matrix as data**: which of the 22 verbs each medium carries,
+  and at what cost. This is the artifact tool makers consume.
+- Add the diagnostics the matrix makes decidable: a flow declaring `COMPARE` on a serial
+  medium with no fallback; a right declared `ALWAYS_REACHABLE` in a non-persistent medium
+  with no re-request path.
+- Fixtures for each, with lawful twins, per the suite's own rule.
+- **Do not** add a verb. The matrix exists *because* the verb set is closed.
+
+### S6 · The constitution's medium amendments · `stzzui` · **medium** · *law work*
+
+Amendments A–D of founding §7.2: Rule 82 → *Perceivable State*; Rule 60 restated
+medium-neutrally with ARIA as its web realization; Rule 69 reconciled with its own title;
+Rule 104 extended to three beneficiaries. Each needs evidence under Article VII and the
+author's ratification — this is the one session that cannot be delegated to judgement.
+
+### S7 · SIGNAL in sound · `stzzui` + `stzlib`, co-authored · **medium** · *time-critical*
+
+The session prompt is written: [`doc/prompts/sound-semantics.md`](prompts/sound-semantics.md).
+A semantic layer **above** the sound plane that changes no node, no sink, no callback.
+
+### S8 · SIGNAL in the visual channel · `stzzui` · **medium-large**
+
+The first expression grammar written in full — the channel where the law is richest and
+an engine already exists. It sets the pattern the other five strata copy, so it is worth
+doing slowly.
+
+### S9 · ROLE + MESSAGE · `stzzui` · **large**
+
+The two strata carrying the most `judgment`-tier rules and the most daily pain. `ROLE` is
+the load-bearing move of the whole vision and should be attacked before it is built.
+
+### S10 · STRUCTURE + MOTION + TEMPO, and the print and ambient media · `stzzui` · **large**
+
+Print last on purpose: it has no time, no interaction and no undo, so it is the medium
+that falsifies a sloppy model. If the strata survive it, they are real.
+
+## 5. Track B — the commons
+
+### S11 · Core / commons / local · `stzzui` · **medium-large** · *touches the crown jewel*
+
+A schema change to `rules.json`: tier every rule, add the supremacy rule, make
+`derived_from` the admission test. Every rule already carries `derived_from` and all 117
+resolve to one of the seven articles, so the mechanism exists — this session formalises
+it rather than inventing it. Highest-risk item in the programme because it edits the law's
+own file; it must not lose a number, an evidence field or a lineage entry.
+
+### S12 · The capture loop · `stzzui` + one Softanza app · **medium**
+
+The gotcha intake schema (offense · lawful twin · evidence · **medium**), the capture form,
+and the local-law file an app ships. One real app must carry it or the loop is theatre.
+
+### S13 · The protocol pack · `stzzui` · **medium**
+
+What a participant downloads and pins: the law, the grammars, the medium matrix, the C2
+envelope, the fixtures, the contribution protocol. Plus the open question of a neutral,
+citable identity for the standard.
+
+## 6. Track C — adoption by the siblings
+
+Each is small once its contract exists; none may start before it does.
+
+| # | Repo | Adopts | Precondition |
+|---|---|---|---|
+| S14 | `stzlib` graphics | the reconciled SIGNAL vocabulary; theme export (their C5) and the light/dark switch they already flagged as needed by StzZui | S1 |
+| S15 | `stzlib` sound | sound semantics, priority, ducking, the audibility floor | S7 |
+| S16 | `ringface` | the expression vocabulary as `.face` bindings — `.face` already binds screens to entities and is the natural carrier | S5, S8 |
+| S17 | `zing` | re-pin; `zing check` gains the expression diagnostics; delivery cites the medium | S8, S9 |
+| S18 | `microring` | the `haptic` and device media | S5, S10 |
+| S19 | `ringine` | the `spatial` medium; the game plane's own signal vocabulary | S5, S8 |
+
+## 7. The dashboard
+
+| # | Track | Repo | Size | Gated on |
+|---|---|---|---|---|
+| S1 | 0 | stzzui + stzlib | small | one decision (§10.2) |
+| S2 | 0 | stzzui | small | — |
+| S3 | 0 | stzzui + stzlib | tiny | S1 |
+| S4 | 0 | stzlib | tiny | — |
+| S5 | A | stzzui | medium | ratification |
+| S6 | A | stzzui | medium | ratification |
+| S7 | A | stzzui + stzlib | medium | **S1** · before SN6 |
+| S8 | A | stzzui | medium-large | S5 |
+| S9 | A | stzzui | large | S8 |
+| S10 | A | stzzui | large | S8 |
+| S11 | B | stzzui | medium-large | ratification |
+| S12 | B | stzzui + an app | medium | S11 |
+| S13 | B | stzzui | medium | S5, S11 |
+| S14–S19 | C | siblings | small each | their contract |
+
+**Four sessions can run today** (S1, S2, S4, and S7's drafting). Everything else waits on
+a decision or on a predecessor.
+
+## 8. Six traps
+
+1. **StzZui must not build a renderer.** Six strata is an invitation to implement. StzZui
+   owns vocabulary, law and court; the planes own the engines. The moment this repository
+   computes a colour or a waveform, the split that makes the vision safe is gone.
+2. **Do not race the live sessions.** The sound session runs with cwd `softanza`; the
+   graphics plane had uncommitted C3 work. Coordinate through the author, not through the
+   tree.
+3. **Do not edit ratified documents unilaterally.** `REFERENCE_DESIGN.md` is v1.3 and
+   amends by its own process; the founding document proposes one row and applies nothing.
+4. **Extract, never invent.** Every stratum must be drawn from rules that already exist —
+   the discipline C2 was delivered under, and the reason it was uncontroversial.
+5. **Never add a verb.** The closed 22 are what make the medium matrix finite.
+6. **`.face` and SN6 harden on their own clocks.** Both reach outward soon. A vocabulary
+   agreed before they do costs a document; agreed after, a migration.
+
+## 9. What lands where
+
+| Artifact | Home | Why |
+|---|---|---|
+| The strata grammars, the medium matrix, the law | `stzzui` | it owns the vocabulary and the court |
+| Colour computation, themes, contrast | `stzlib` graphics | it owns the engine |
+| Sound synthesis, timing, sinks, priority, ducking | `stzlib` sound | same |
+| Composition and binding | `ringface` `.face` | already shipped v0 |
+| Delivery | `zing` | already |
+| Session prompts, once ratified | `softanza/prompts/` | the family's program home |
+| The book | its own repo, later | §10.5 |
+
+## 10. Decisions the author owes before Track A opens
+
+1. **Ratify, amend or reject the Second Founding** — section by section, in the manner of
+   the reference design. `ROLE` (§5) is the move most worth attacking: if a role is a
+   widget wearing a disguise, the stratum falls and much of Track A shrinks.
+2. **The five semantic values.** Rule 3 says `Neutral · Accent · Warning · Error`;
+   Rule 118 says `success · warning · danger · info · muted`; the engine says
+   `:Primary :Success :Warning :Danger :Info :Neutral`. Two sub-questions:
+   - `Error` vs `danger` — a naming choice, and a **correction** if nothing lawful changes.
+   - `muted` vs `:Neutral` — **possibly not a naming question at all.** Rule 118's `muted`
+     means *"waiting, inactive"*, which is a **state**; the engine's `:Neutral` means the
+     absence of semantic charge. If those are two concepts, the reconciliation adds a
+     value rather than renaming one — and that is an **amendment**.
+3. **Who owns the medium axis?** Either StzZui owns it as part of the interface
+   vocabulary (this plan's assumption), or it is family-wide and belongs in the reference
+   design as **C8, the Medium Contract** — it does bear on `.face`, both planes and the
+   device family. The second reading is defensible and would change where S5 lands.
+4. **Does Track 0 proceed before ratification?** This plan assumes yes, on the ground that
+   its four items are corrections of observed drift. Say no and the critical path moves.
+5. **When does the book start?** It should trail the artifacts, since its discipline is
+   that every checkable claim is generated from them. Starting it early risks the book
+   fixing a vocabulary the programme is still moving.
+
+## Honest boundaries
+
+- **This plan is derived from an unratified document** and inherits every one of its
+  uncertainties. It is a decomposition, not a commitment.
+- **The sizes are judgement, not estimates.** Nothing here has been prototyped; "medium"
+  means "a session", not a measured quantity.
+- **No sibling has agreed to anything.** Track C is written as though the siblings will
+  adopt; each of them decides that in its own repository, by its own process.
+- **Track 0 assumes the drift findings survive contact with their owners.** They were
+  established by reading two plans and one rules file on 2026-08-12; the owners may have
+  context that dissolves them.
