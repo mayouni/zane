@@ -79,9 +79,34 @@ the `corroboration` field is written only after the editions are read. **A-7** �
 binding when a meaning→rendering path exists to obey it; recorded in the rule with its
 effective condition, so the law does not oblige machinery nobody has built.
 
-**Still owed by whoever applies this**: the drafted text for Rule 60's restatement, Rule
-69's new title, Rule 104's third beneficiary, Rule 125's body, and the sixteenth forbidden
-pattern. Wording is authorial; the rulings above fix what each must *do*, not how it reads.
+## APPLIED — 2026-08-13, `rules.json` **v3.8 → v3.9**
+
+Twenty changes. **119 rules · 16 forbidden patterns · `tool` 5 → 6.** The conformance suite
+still passes **30/30 at level 4**, and no diagnostic's verdict moved.
+
+Four notes from the application, none of which needed a further ruling:
+
+1. **Rule 117 deliberately received no instrument pointer.** C-1 named it, but nothing
+   counts colour columns yet — and a pointer to an instrument that does not exist is worse
+   than silence. Recorded rather than invented; it gets one when M4 builds the counter.
+2. **`INVISIBLE_STATE` now names a concept its rule no longer uses.** The diagnostic cites
+   Rule 82, whose title is now *Perceivable State*. Diagnostic ids are stable forever and
+   are never renamed, so it stays — but the drift between id and rule title is real and is
+   noted here rather than left to be rediscovered.
+3. **`conformance/violations.json` still pins constitution 3.8**, and that is correct
+   behaviour, not an oversight: a consumer moves its pin deliberately. The v3.8.0 lineage
+   set the precedent by leaving manifests *"stamped at the version they were verified
+   against."* Re-pinning is its own act.
+4. **The two tier moves cancel.** Rule 62 left `machine-later` for `tool`; Rule 125 entered
+   at `machine-later`. So `machine-later` stays at 25 and only `tool` changes — and the
+   finding the whole Second Founding rests on is unmoved: **8% of the law is refusable
+   before a pixel exists.**
+
+**Wording applied, and open to revision** — the rulings fixed what each must *do*, not how
+it reads. Rule 69's new title is **"The Hand Is Not a Mouse"**, echoing Rule 119's cadence
+and covering targets and gestures both. Rule 60, Rule 104, Rule 56, Rule 64, Rule 125 and
+the sixteenth forbidden pattern were drafted to the ruling and can be re-worded without
+re-ruling.
 
 ---
 
