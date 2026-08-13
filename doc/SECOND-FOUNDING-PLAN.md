@@ -168,9 +168,9 @@ doing slowly.
 The two strata carrying the most `judgment`-tier rules and the most daily pain. `ROLE` is
 the load-bearing move of the whole vision and should be attacked before it is built.
 
-### S8b · ZSS v0 — the semantic style sheet · `stzzui` + `stzlib` + `ringface` · **medium** · *added 2026-08-13*
+### S8b · `stzSense` v0 — the semantic sheet · `stzzui` + `stzlib` + `ringface` · **medium** · *added 2026-08-13*
 
-Reflection written: [ZSS.md](ZSS.md). The serialization of *meaning → rendering*, which is
+Reflection written: [STZSENSE.md](STZSENSE.md). The serialization of *meaning → rendering*, which is
 what makes the semantic system governable rather than merely implemented — the project's
 signature move applied to rendering for the first time.
 

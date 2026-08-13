@@ -1,6 +1,12 @@
-# ZSS — the Softanza Semantic Style Sheet
+# stzSense — the semantic sheet
 
-**Status**: **v0.1 — a reflection, not a proposal for ratification.** Written 2026-08-13.
+**The name is settled**: the module is **`stzSense`**, the artifact is **`.sense`**, and
+**ZSS** survives as the spoken name — the way *the law* means `rules.json` and *the court*
+means `tools/zui/`. The reasoning is in §11, which is kept rather than tidied away because
+the argument against the word *style* is the clearest statement of what this artifact is
+not. Decided 2026-08-13.
+
+**Status**: **v0.2 — a reflection, not a proposal for ratification.** Written 2026-08-13.
 **Relation to the docket**: none blocking. ZSS changes no rule. It does, however, supply
 the derivation path docket **A-7** obliges, which is worth knowing before ruling on it.
 **Relation to [THE-SECOND-FOUNDING.md](THE-SECOND-FOUNDING.md)**: this is the artifact the
@@ -232,7 +238,7 @@ question forever is a tax paid on every conversation.
 
 Three ways out, ranked:
 
-**1. `.sense` — `stzSense` — "the sense sheet."** My recommendation. The English word
+**1. `.sense` — `stzSense` — "the sense sheet."** ✅ **Chosen, 2026-08-13.** The English word
 carries *both* meanings this artifact needs at once: **sense** as perception (sight,
 hearing, touch — every medium) and **sense** as meaning (*does this make sense*). Which is
 exactly what the file does: it says how a meaning reaches a sense. It matches the book's
