@@ -59,6 +59,40 @@ before committing to anything; they are stated at the confidence I actually have
 - It is **C++**, not C, which slightly complicates the C-ABI story — wrappable, but not
   free.
 
+## 2.1 What the graphics plane already has — verified
+
+I had flagged this as unchecked. It is checked now, and it changes the picture in the
+proposal's favour.
+
+**`stzWindow` exists** (GR5 of `SOFTANZA_GRAPHICS_PLAN.md`) and is more than a surface: a
+real frame loop with `Poll()`, `DeltaTime()`, `FrameCount()`, `FPS()`, `Draw(canvas)`
+rendering straight into the screen's texture with no readback, `EachFrame()`, `SetVSync`,
+and a graceful-absence path — `IsAvailable()` answers false on a headless runner and every
+other graphics tier keeps working. Its own header explains why input was in the first
+commit rather than promised: *"a frame loop bolted onto a render-once API is a rewrite."*
+
+**And it has already drawn the boundary this proposal starts at**, deliberately:
+
+> *"WHAT A WINDOW IS NOT: it is not a widget toolkit. There are no buttons, no layout, no
+> menus. It is a rectangle that shows what the graphics plane computes and reports what the
+> user did — which is the part a graphics engine owes; the rest is a different product."*
+
+So the GUI system is not an intrusion into that plane. **It is the different product the
+plane named and left room for.**
+
+**What is present**: window, frame loop, canvas, paint, keyboard and mouse *sampling*.
+**What is absent, and each matters:**
+
+- **An event model.** Input today is polled — `KeyPressed(:Escape)`, `MouseClicked(1)`.
+  That is the game-loop shape, and it is right for a game. **A widget system needs events
+  with a target and a route**: which element was hit, who has focus, what bubbles. Polling
+  cannot express that, so this is a real architectural addition rather than a wrapper.
+- **Text input.** `KeyDown`/`KeyPressed` are key codes. There are no character events and
+  no IME, so text entry is entirely unbuilt — the silent killer of §5.2.
+- **A focus model.** Nothing today, and Rule 80 is `machine` tier.
+- Windowing is per-OS: `stz_window.dll` *"cannot be cross-built for every OS from one
+  machine"*, so it follows the sound plane's two-DLL split and may simply be absent.
+
 ## 3. Why StzZui should want this more than anyone
 
 From the law's side there is an argument stronger than convenience, and it is the one that
@@ -191,9 +225,13 @@ A spike, in the house discipline — kill criteria written before the numbers:
   must not rest on it. The licence in particular is unverified.
 - **This is a reflection, and reflections are cheap.** The spike in §9 is the first thing
   that would tell us anything real, and item 2 could end the proposal.
-- **I have not read the graphics plane's windowing or input situation.** §2's claim that
-  the painter already exists is inferred from the text pipeline and `stzCanvas`; whether
-  there is a window, an event loop, or a surface abstraction is unchecked.
+- ~~**I have not read the graphics plane's windowing or input situation.**~~ **Checked —
+  see §2.1.** The window, the frame loop and the painter all exist; the event model, text
+  input and focus do not. The correction runs in the proposal's favour on the first count
+  and against it on the second, which is the more useful direction to be wrong in.
+- **The landscape survey is in flight.** Three researchers are covering embeddable HTML/CSS
+  engines, native toolkits and standalone layout engines, and the accessibility and
+  text-input cost. §2's litehtml claims and §7's prior art stand only until that lands.
 - **The accessibility finding is the one I would not defer.** Every other risk here is an
   engineering cost. That one is a conflict with the constitution, and discovering it in
   year two would be much worse than designing for it in week one.
