@@ -413,6 +413,42 @@ choice"* — and that defence holds for the article and is thinner for some rule
 This also gives the **Local** tier a much better justification than preference. For a
 ministry, a local law forbidding a sign class may be a political necessity, not a taste.
 
+#### 4.6.3 The model belongs in stzlib, not here
+
+Culture is not a UI concern that leaked outward; it is a **computational model** that UI
+happens to need. Business records carry name models, workweeks and fiscal calendars;
+narrations read differently by audience; both planes render meaning; an agent generating
+anything needs the constraints. So the model belongs in `stzlib` as a first-class module —
+`stzCulture` and its companions — and **StzZui inherits it and augments what is specific
+to a UI law**, exactly as it consumes the colour and sound engines rather than owning them.
+
+The split that keeps it honest, and it is the module's founding law:
+
+> **A locale formats. A culture interprets.** A locale says how something is written down;
+> a culture says how it will be read. A locale can be derived from a published standard;
+> **a culture must be contributed.** No call may return a *meaning* from a locale
+> identifier alone.
+
+That guard rail is what stops the module collapsing into a re-implementation of
+`CultureInfo`. Microsoft's design is excellent at layer one — number and date formats,
+calendars, casing, collation, the parent-culture fallback chain, and the genuinely good
+`CurrentCulture` / `CurrentUICulture` split between the culture you *format* in and the
+culture you *read* in. It has no answer at all to *what does red mean here*, because
+formatting standards do not carry meanings. Softanza needs a third: the culture that
+**interprets** — the audience's, which may be none of the above.
+
+**And this is the answer to §4.6's own honest limit.** There is no CLDR for meanings, so
+the data cannot be bought or scraped; it must be contributed and evidenced. Which means
+`stzCulture`'s data inherits the commons governance of §8 by necessity rather than by
+choice — including the admission rule that writes itself: **a reading contributed by
+someone outside the culture it describes is inadmissible**, and every reading carries a
+strength, because *contested* must be expressible or the model commits the essentialism it
+exists to prevent.
+
+Whether this is family-wide enough to be **C8, a Culture Contract** in the reference design
+— it is consumed by StzZui, Zing, Narrations, both planes and the device family — is the
+author's call, and it is the same question the medium axis raised.
+
 ## 5. The six strata, stated modality-neutrally
 
 Each is a closed vocabulary with a court and fixtures, drawn from rules that **already
