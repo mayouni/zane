@@ -19,9 +19,12 @@ You are opening the culture session. Read, in this order:
    `base/sound/SOFTANZA_SOUND_PLAN.md` — **for house style, not content**: how a plane
    states a mission, writes kill criteria before the numbers, names faces and guards, and
    records outcomes. Match them exactly. You know that style better than this prompt does.
-3. Whatever the library already has for dates, calendars, number formatting, string
-   casing, sorting, Unicode and text direction. **Extract, never invent**: if collation or
-   digit shaping already exists, this module consumes it and does not restate it.
+3. `engine/SOFTANZA_LOCALE_PLAN.md` — **the active plan for layer one.** L0 and L1 are
+   done; **L2, L3 and L4 are not started.** This module docks with that plan; it does not
+   compete with it or route around it.
+4. `base/i18n/` — `stzLocale.ring`, `stzCountry.ring`, `stzLanguage.ring`,
+   `stzScript.ring`, `stzCurrency.ring`, and `base/data/stzLocaleData.ring`.
+   **Extract, never invent**: whatever is real there, this module consumes.
 
 ---
 
@@ -48,18 +51,66 @@ the culture that *interprets* — the audience's, which may be neither of the ot
 
 ## Deliver
 
-### 1. `SOFTANZA_CULTURE_PLAN.md`, the plan of record
+### 1. `base/culture/SOFTANZA_CULTURE_PLAN.md`, the plan of record
 
-Phased, with kill criteria written before the numbers, in the house discipline. Phase 0
-should be a spike that answers one question: *is there any defensible source of meaning
-data, or must all of it be contributed?* The answer shapes everything after it.
+Beside the code, as the graphics and sound plans are — with a session bootstrap, numbered
+FACTs *surveyed rather than assumed*, lessons inherited from the sibling planes, the
+vendor decision as a comparison table with kills recorded in writing, phases, "Risks,
+named now", and one STATUS section per phase carrying measured numbers and what it did
+**not** measure. Kill criteria written before the numbers. A **challenge pass before the
+faces**, as GR4 and SN4 both did.
 
-### 2. The two layers, structurally separate
+Phase 0 is a spike answering one question: **is there any defensible source of meaning
+data, or must all of it be contributed?** The answer shapes everything after it, and the
+honest expectation is *contributed* — there is no CLDR for meanings.
 
-`stzLocale` (or whatever the library already calls this) is mechanical, tabular, derivable
-from a standard. `stzCulture` is semantic, contributed, evidenced. **A culture may
-reference locales; a locale must never reference a culture.** If the dependency ever
-points the other way, the separation has failed.
+Register the module in `base/stzBase.ring` with the house comment naming its phase and
+plan. Guards go in `base/test/culture/` as narrated scenarios. Follow the naming law
+verbatim: a method is an explicit verb, `...Q()` returns the main object, `To...()`
+returns data.
+
+### 2. The two layers, structurally separate — and layer one already exists
+
+**`stzLocale` is not yours to create.** `base/i18n/` is ~3,500 lines across five classes,
+and `engine/SOFTANZA_LOCALE_PLAN.md` governs it. `stzCulture` sits *above* it.
+
+> **A culture may reference locales; a locale must never reference a culture.** If the
+> dependency ever points the other way, the separation has failed.
+
+**But survey layer one before you build on it, because parts of it are a facade.** What a
+read of the tree on 2026-08-13 found — verify each yourself rather than taking this list
+on faith:
+
+| Capability | State |
+|---|---|
+| Locale/country/language/script/currency tables | real, broad, Qt-shaped (`QtNumber` still column 1) |
+| Unicode normalization (all four forms, utf8proc) | **done properly** |
+| First-day-of-week, decimal point, group separator | genuinely locale-derived in `stzLocale` |
+| Number formatting | **hardcodes `.` and `,`; never consults `stzLocale`** — and the Ring and Zig layers disagree with each other |
+| Locale casing | **facade at three levels** — the locale argument is accepted and discarded; no `tr`/`az` path; the Turkish dotless *i* is a documented `#TODO` |
+| Collation / locale-aware sort | **does not exist** — every sort is byte or codepoint ordinal |
+| Digit shaping (Arabic-Indic, Devanagari) | **does not exist**; recognition only |
+| Non-Gregorian calendars | **do not exist** — the engine states proleptic Gregorian; `stzCalendar` is a business planner, not a calendar system |
+| Time zones | **do not exist** |
+| Bidi + Arabic shaping | excellent — **and only inside GPU glyph layout**; there is no bidi service for a plain string |
+
+### 2.1 The law that follows from that table
+
+> **No facades. An operation either honours the culture it was given, or refuses.**
+
+This is the single most important rule for this module, and it is not a style preference.
+The library today has APIs that *accept* a locale and *discard* it — a caller believes they
+received locale-sensitive casing and did not. That is the code equivalent of the fake
+progress bar Rule 18 forbids: *"a fake progress bar is a lie."*
+
+For a culture module the failure mode is worse than useless. **A module about not getting
+culture wrong, built on facades, gets culture wrong while reporting success** — and the
+caller ships it. So: any operation that resolves through layer one must either work or
+raise. `UnsupportedCulture` is a good answer. Silently returning the invariant is not.
+
+Where this module needs something layer one has not built — collation, digit shaping, a
+Hijri calendar — **that is a finding for the locale plan's L2–L4, not work to duplicate
+here.** File it and refuse; do not quietly reimplement.
 
 ### 3. The model — and it should be a model, not a lookup table
 
@@ -172,8 +223,32 @@ cross-plane finding in the genre it already uses; do not change their motifs.
 - **Do not put UI law here.** Which meanings an interface *must* express, and which
   conflicts are *refusable*, are StzZui's. This module answers what things mean; it never
   says what an interface owes.
-- **Do not restate what the library already does.** Casing, collation, dates, Unicode: if
-  it exists, consume it.
+- **Do not restate what the library already does** — and do not assume it does. Unicode
+  normalization is real; collation, digit shaping, time zones and non-Gregorian calendars
+  are not. Consume the first, file the rest.
+- **Do not reach for ICU or CLDR-at-runtime.** L0 already decided this and the reasoning
+  stands: the library dropped libcurl for a Zig HTTP client, chose SheenBidi + HarfBuzz
+  over ICU for bidi and shaping, and built regex on PCRE2. If this module needs external
+  data, follow the established path — *generate offline, commit the output* with a
+  provenance header, sized by what the library answers today, and own the refresh.
+
+## Three defects found in passing — file them, do not fix them here
+
+None is culture's work. All three sit in layer one, and each is a finding for the locale
+plan in the genre this library already uses for cross-plane findings.
+
+1. **Hebrew is reported `Neutral`, not RTL.** `engine/src/string/locale.zig:110-114` uses
+   the wrong utf8proc constants — it treats RLE and CS as RTL, NSM as LTR, and misses R
+   entirely. The Ring layer uses the correct numbering, so **the two layers disagree**.
+   Two-line fix, and it is squarely in this module's blast radius.
+2. **`stzNumber.ApplyFormatXT` has a dead option.** It reads `:FractionalSeparator` into
+   one variable and emits a different, unassigned one (~lines 7622, 7629), so the option
+   does nothing; lines after the `return` are unreachable.
+3. **A wrong answer is enshrined in a test.**
+   `base/test/datetime/76_example_15_counting_from_islamic_calendar.ring` records
+   1400 AH → 2021-08-13. 1400 AH is 1979–80 CE. The arithmetic treats the Hijri year as
+   365 days. **A guard that asserts a wrong answer is worse than no guard**, and this one
+   sits exactly where culture and calendar meet.
 
 ---
 
