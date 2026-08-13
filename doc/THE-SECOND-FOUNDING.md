@@ -1,8 +1,11 @@
 # The Second Founding — StzZui as a complete platform for interfaces
 
-**Status**: **v0.2 — proposed, not ratified.** Written 2026-08-12 for the author's
-section-by-section pass, in the manner of the reference design's own ratification.
-**Supersedes** v0.1 of the same day, which named six strata and assumed one medium.
+**Status**: **v0.3 — proposed, not ratified.** Written for the author's section-by-section
+pass, in the manner of the reference design's own ratification.
+**Supersedes** v0.1 (six strata, one medium assumed) and v0.2 (eight media, enumerated).
+v0.3 adds the physical media — light and signage — and with them a third medium law, a
+classification by properties rather than a list, a statutory tier above the constitution,
+and one gap in the Core that is named rather than filled.
 **Amends**: [ARCHITECTURE.md](ARCHITECTURE.md) (founding document, 2026-08-05), whose
 three-layer model this restates rather than replaces.
 **Touches**: `softanza/REFERENCE_DESIGN.md` v1.3 — amendments proposed in §7, **not
@@ -270,11 +273,45 @@ serial — it arrives in one order at one rate. So the 22 verbs are not equally 
 That is refusable: a flow declaring `SATISFIES [COMPARE]` on a voice-only surface, with no
 declared fallback, is an error the court can name.
 
+**The attention law.** A screen and a page are *elected* — the operator chose to look, in
+a reading posture, with context. A status light, a road sign, a notification and a sound
+are *ambient*: they must work when nobody is looking, at distance, at an angle, at speed,
+often to someone who never opted in and has no training.
+
+> **An ambient medium must carry its meaning peripherally, at a glance, without context.**
+
+A safety sign that requires reading a paragraph has failed; a printed report that requires
+reading a paragraph has not. Same fixity, same absence of interaction — opposite
+obligations, because one was elected and the other was not.
+
 **And here the founding decision pays off.** The 22 verbs are closed and medium-agnostic.
 *Because* they are closed, a coverage matrix over media is finite and checkable. Had the
 grammar been open — had every projection been free to add verbs — no such matrix could
 exist. The closure that looked like an aesthetic constraint turns out to be the precise
 precondition for multi-modal correctness.
+
+### 4.5 Media are classified, not enumerated
+
+A list of media is a list, and lists go stale — the next channel always arrives. What does
+not go stale is the set of **properties** that decide what a channel can carry. The
+capability matrix should be *computed* from these, so a new medium is classified rather
+than argued about:
+
+| Property | Question | Screen | Light | Sound | Sign | Print |
+|---|---|---|---|---|---|---|
+| **Persistence** | does the rendering remain? | yes | yes | **no** | permanently | yes |
+| **Seriality** | parallel or serial access? | parallel | parallel | **serial** | parallel | parallel |
+| **Election** | did the operator choose to attend? | yes | **no** | **no** | **no** | yes |
+| **Bandwidth** | meaning per glance | high | **1–3 bits** | low | one message | high |
+| **Mutability** | can it change at all? | yes | yes | yes | **no** | **no** |
+
+The five media that started this document differ on two rows. **Light and signage differ
+on four**, which is why adding them is not padding — they are the cases that prove the
+axis is about properties and not about a taxonomy of gadgets.
+
+Note what the `Election` row does to the earlier list: `ambient` was filed in §6 as a
+medium, and it is better read as **a property that light, signage, sound and notification
+all share**. That is a correction to §6's Tier 2, not a refinement of it.
 
 ## 5. The six strata, stated modality-neutrally
 
@@ -391,15 +428,88 @@ interaction, no undo, no state change. `MOTION` and `TEMPO` are structurally
 unrenderable; `ROLE` has nothing to promise. It is the medium that falsifies a sloppy
 model, and if the strata survive it they are real.
 
+### 6.5 `luminous` — light as a signal
+
+Indicator lamps, status LEDs, beacons, light bars, a robot's turn signal. Visual, and
+**not a screen** — a distinction that matters more than it sounds, because the `visual`
+column of §4.2 silently means *a page*. A status light shares almost nothing with one: no
+layout, no text, no widget, no reading posture.
+
+- **Bandwidth is one to three bits**: identity (which lamp, which colour), salience
+  (brightness, blink rate), and position. That is the whole channel.
+- It carries `SIGNAL` supremely — this is where semantic colour *came from*, long before
+  screens — and `MOTION` natively, because a blink or a pulse **is** a state change rather
+  than a depiction of one. It carries `STRUCTURE` barely, `MESSAGE` not at all, and `ROLE`
+  only when the lamp is inside a control.
+- It is **persistent and unelected**: readable across a room, at an angle, while the
+  operator's hands and eyes are on the work. That combination is its superpower and no
+  screen has it.
+
+**The refusal that matters, and it is concrete.** The colour plane's role steps do not
+survive here. A single-colour emitter emits what it emits; an RGB LED's gamut is not
+sRGB; there is no surface to tint and no border to draw. So in this medium `SIGNAL`
+collapses to *identity + salience* and the four-step `.Surface/.Border/.Solid/.Text` ramp
+is **unrenderable**. That is a matrix cell the court must know and the colour engine must
+not be asked to fill.
+
+### 6.6 `signage` — the fixed physical marking
+
+Traffic signs, safety placards, floor markings, hazard labels, the diamond on a tanker.
+Fixed like print — and a different medium, because it is **encountered rather than read**.
+
+- Distinguished from `print` by **election**, not by fixity. Same immutability, opposite
+  obligation: it must land at distance, at speed, peripherally, on someone who did not
+  choose to read it.
+- **Shape is a carrier with no screen equivalent.** The sign vocabulary is a closed
+  grammar of shapes — octagon, triangle, circle, diamond — as much as of colours, and it
+  works for people who cannot read the legend at all.
+- Cannot carry `MOTION`, `TEMPO` or `ROLE`, and carries `MESSAGE` only as a fixed legend.
+- **Maximally persistent**: it is there for years, whether anyone looks or not.
+
+### 6.7 What light and signage change about the law
+
+Two findings, and both are larger than the media that produced them.
+
+**The law assumes an operator; physical media address bystanders.** The preamble is
+explicit that this constitution serves *"business users [who] operate under pressure,
+responsibility, fatigue, and risk."* A pedestrian near a warehouse AGV is under risk and
+is **not an operator**: no account, no training, no manual, no consent, and no second
+attempt. A delivery robot signalling a turn is addressing someone who never opted into the
+system. **The constitution has no vocabulary for the person an interface addresses but
+does not serve** — and this is the class of interface where a misread signal is an injury
+rather than an annoyance. That is a Core-level gap, not a rule-level one, and it is filed
+here rather than drafted.
+
+**The prior art is not merely relevant — it is the thesis, already proven.** Road signage
+is the most successful interface standard in human history: a closed vocabulary of shapes
+and colours, legislated by treaty, enforced by inspection, amended slowly on crash
+evidence, working across languages, cultures, literacy levels and speeds, for sixty years.
+Everything this project argues an interface law should be, traffic signage already **is**.
+The machine-indicator and safety-sign standards (the IEC 60073 / ISO 3864 / ISO 7010
+family) do the same for exactly the media in §6.5 and §6.6, assigning settled meanings to
+indicator colours and sign geometry — broadly red for danger or emergency stop, yellow or
+amber for caution and abnormal conditions, green for safe or normal, blue for mandatory.
+
+Two consequences follow, and the second is a governance change:
+
+1. **Independent convergence, and it validates Rule 118.** Five semantic values derived
+   from business software land close to the values industrial safety derived from
+   machines, a century apart, from unrelated evidence. That is the strongest support
+   Rule 118 has ever had, and it should be recorded in the rule's own evidence field.
+2. **In physical media, the external standard outranks this constitution** — see §8.
+   *Exact clause numbers and colour assignments above must be verified against the current
+   editions before a single word enters the law.* They are stated here at the level of
+   confidence I actually have, which is the scheme and not the clause.
+
 **Tier 2 — name them now, legislate next.**
 
-### 6.5 `ambient` — the interface that reaches you when you are not looking
+### 6.8 `ambient` — the interface that reaches you when you are not looking
 
 Notifications, badges, out-of-app interruption. Touched by Rules 1, 51, 76, 103; governed
 as a medium by none. One-shot, contextless, interruptive, and the most abused channel in
 modern software.
 
-### 6.6 `machine` — the interface consumed by a program
+### 6.9 `machine` — the interface consumed by a program
 
 The law already reached this conclusion by itself. Rule 104: *"Accessibility law and
 agent-interop law are one body of law with two beneficiaries… what a screen reader can
@@ -455,8 +565,15 @@ the note that the expression vocabulary is the seam `.zui` and `.face` meet on.
 
 ## 8. The constitution as a living institution
 
-Three tiers, one supremacy rule.
+Four tiers, one supremacy rule.
 
+0. **Statute — not ours at all.** Where an interface is governed by external law or
+   binding standard — road signage, machine indicators, safety marking, medical device
+   labelling — **that instrument outranks this constitution absolutely.** This tier was
+   added by §6.7 and it is not a courtesy: in a jurisdiction where red on a machine means
+   emergency stop, a rule of ours assigning red another meaning is not a divergence, it is
+   a hazard. The court's duty here is to *refuse a conflict*, never to resolve it in our
+   favour.
 1. **The Core — non-negotiable.** Preamble, 7 articles, operator rights, intent-family
    invariants, forbidden patterns. Amended only by convention, never by contribution.
 2. **The Commons — contributed, curated, evidence-gated.** Today's 117 and everything
@@ -464,7 +581,8 @@ Three tiers, one supremacy rule.
 3. **The Local — a person's or organisation's own laws**, pinned alongside, shipped with
    the app.
 
-> **Supremacy**: a local law may be *stricter* than the commons and never *looser*.
+> **Supremacy**: a local law may be *stricter* than the commons and never *looser*; and
+> nothing at any tier may contradict a statute that binds the medium.
 
 **The admission test is already in the data.** All 117 rules carry `derived_from`, and all
 117 resolve to one of the seven articles. So: **a proposed rule that derives from no
@@ -548,7 +666,7 @@ the artifact.
 | Part | Argument |
 |---|---|
 | I — The Deterioration | Why interfaces got worse while tooling got better: the vocabulary collapsed into the toolkit; rendering got cheap and meaning got expensive; the pain never reached the decider; fashion replaced evidence. |
-| II — The Heritage | What HCI knew and could not enforce: Norman's gulfs, Nielsen, Fitts, Hick, Gestalt, Tufte, Shneiderman. |
+| II — The Heritage | What HCI knew and could not enforce: Norman's gulfs, Nielsen, Fitts, Hick, Gestalt, Tufte, Shneiderman. **And the one place it *was* enforced**: road signage — a closed vocabulary, legislated by treaty, amended on crash evidence, working across languages and literacy for sixty years. The book's existence proof, and the answer to anyone who calls a constitution for interfaces utopian. |
 | III — The Inversion | Intent first. The closed grammar. Why correctness becomes compilable. |
 | IV — The Expression | The missing middle: structure, signal, role, motion, message, tempo. |
 | V — **The Senses** | Interfaces are not only seen. Sound, voice, touch, print — and why a monomodal law is an incomplete one. Accessibility as the same law, not a chapter of exceptions. |
@@ -580,6 +698,10 @@ M9   The commons             core/commons/local; the admission triple; capture.
 M10  VOICE                   the paradigm, not the channel: turn-taking, barge-in,
                              re-requestability, mishearing as a first-class failure.
 M11  STRUCTURE + MOTION + TEMPO · print and ambient
+M11b PHYSICAL MEDIA          luminous and signage, with MicroRing and the device
+                             family. Gated on a statute review, not on us: the
+                             external standards are read and cited BEFORE a rule
+                             is written, because §8 tier 0 outranks us here.
 M12  The protocol pack + the MCP surface (M5 folded in)
 ```
 
@@ -609,9 +731,19 @@ was not.**
   a safe source of truth for anything I have not verified in the tree.
 - **`ROLE` is the move most worth attacking.** If a role is a widget wearing a disguise,
   the stratum must be reconsidered.
-- **The medium list is a judgement call.** Eight is not derived from anything; it is what
-  survived asking which channels carry meaning in this family's actual products. `ambient`
-  is the one most arguably a *placement* rather than a medium.
+- **The medium list is a judgement call, and it has already been wrong once.** It was
+  eight; `luminous` and `signage` were missing, and adding them showed that `ambient` is
+  better read as a *property* than a medium (§4.5). That is one correction in a day, which
+  is the argument for classifying media by properties rather than maintaining a list — and
+  a warning that ten is not a finished number either. XR, scent and thermal feedback are
+  the obvious next arrivals.
+- **The external standards in §6.7 are cited at the level of the scheme, not the clause.**
+  Red-for-danger and octagon-for-stop I am confident of; exact editions, clause numbers
+  and the full colour assignments must be verified before one word of it enters the law.
+  Nothing in this project may cite a statute it has not read.
+- **The bystander gap is filed, not solved.** "The person an interface addresses but does
+  not serve" has no place in the preamble, the rights, or the 22 verbs, and inventing one
+  in a footnote would be worse than naming the hole.
 - **`print` may break the model, and that is why it is in.** If `MOTION` and `TEMPO` have
   no print form, the matrix has empty rows — honest, but it means "every stratum in every
   medium" is not the shape of the law.

@@ -62,12 +62,25 @@ typographic metaphor; the one haptic rule is about touch targets; and the only r
 how an interface is *heard* is written in ARIA, inside a framework-agnostic constitution.
 
 So it proposes **two axes**: six expression strata as *functions* (`STRUCTURE` `SIGNAL`
-`ROLE` `MOTION` `MESSAGE` `TEMPO`) across eight *media* (`visual` `auditory` `voice`
-`haptic` `print` `ambient` `machine` `spatial`/`terminal`), closing the `SURFACE_AS` field
-the language already carries. Plus a three-tier constitution (core · commons · local) fed
-by a capture loop from the operator's own pain, and a protocol pack for ecosystems outside
-Softanza. **M4 and M5 below are superseded by its §13 if it is ratified**; M5's MCP
-surface survives inside M12.
+`ROLE` `MOTION` `MESSAGE` `TEMPO`) across the media that carry them — `visual` `auditory`
+`voice` `haptic` `print` `luminous` `signage` `machine` `spatial` `terminal` — closing the
+`SURFACE_AS` field the language already carries. Media are **classified by properties**
+(persistence · seriality · election · bandwidth · mutability) rather than enumerated, so a
+new channel is classified instead of argued about.
+
+v0.3 adds the physical media of robots and the real world — indicator lights and fixed
+signage — and with them a **statutory tier above the constitution**: where an external
+standard binds a medium (road signage, machine indicators, safety marking), that
+instrument outranks this law absolutely. It also records the strongest support Rule 118
+has ever had — five semantic values derived from business software landing close to those
+industrial safety derived from machines, a century apart from unrelated evidence — and one
+named gap in the Core: **the law assumes an operator, and physical media address
+bystanders.**
+
+Plus a constitution of four tiers (statute · core · commons · local) fed by a capture loop
+from the operator's own pain, and a protocol pack for ecosystems outside Softanza. **M4
+and M5 below are superseded by its §13 if it is ratified**; M5's MCP surface survives
+inside M12.
 
 Awaiting the author's section-by-section pass.
 
