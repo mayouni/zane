@@ -4,7 +4,8 @@
 **Why a docket**: StzZui's core asset is a constitution, so most of its "refactoring" is
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
-**Date**: 2026-08-12. **Law as it stands**: v3.8.0, 117 rules.
+**Date**: opened 2026-08-12; **C-2 added 2026-08-13**.
+**Law as it stands**: v3.8.0, 117 rules.
 
 **How to rule**: per item — *adopt as written* · *adopt amended* · *defer* · *reject*.
 A rejection with its reason on record is as useful as an adoption.
@@ -41,6 +42,55 @@ Add `lint`-style instrument pointers only. **No requirement changes** — this i
 class of act as v3.7.1, which corrected a stale pointer and moved nothing else.
 
 **Verdict**: correction. **Cost**: an hour. **Unblocks**: S3, and the next drift.
+
+### C-2 · Rule 118 — the industrial-safety corroboration
+
+**Gated on a standards review. Do not adopt on this document's word.**
+
+**What.** Record that the machine-indicator and safety-sign standards — the IEC 60073 /
+ISO 3864 / ISO 7010 family — independently assign meanings to indicator colours and sign
+geometry that appear to land close to Rule 118's five semantic values: broadly red for
+danger or emergency stop, amber or yellow for caution and abnormal conditions, green for
+safe or normal, blue for mandatory.
+
+**Why it is worth a docket entry.** Rule 118's evidence today is *one* source: a banking
+supervision product's two coloured columns, April 2026 — one product, one domain, one
+month. If the convergence holds, the rule gains support from an unrelated domain, derived
+from different evidence (machine safety and injury data), settled decades earlier, and
+enforced by inspection rather than by taste. **That would make Rule 118 the best-supported
+rule in this constitution**, and it matters because Rule 118 is `invariant: true` and is
+now carrying two channels — the colour engine and, since 2026-08-12, `stzEarcons`.
+
+**The discipline problem, and how to avoid it.** The architecture is explicit: *"Evidence
+is never corrected… rewriting it to match today's vocabulary would destroy the trail
+Article VII depends on."* Two ways to record this:
+
+- **(a)** Append a dated clause to `evidence`. Touches a protected field, and invites
+  exactly the editing the rule forbids.
+- **(b) — recommended.** A new `corroboration` field, leaving `evidence` **byte-identical**.
+  Precedent exists: `lint`, `absorbs` and `note` already appear on some rules and not
+  others, so the schema is additive by practice, and a consumer ignores fields it does not
+  read. The trail stays intact and the support is still recorded.
+
+**Verdict**: correction — no requirement changes, patch component — **conditional on
+verification**.
+
+**What verification means**, concretely: read the current editions; confirm the
+colour-meaning assignments and, critically, their *scope* — indicators, actuators and
+signage are governed differently and the distinction is load-bearing; record edition and
+clause. **Nothing in this project may cite a statute it has not read**, and the claim
+above is stated at the level of the scheme, which is the level of confidence actually
+held.
+
+**Both outcomes are useful, and that is why the item is safe to file.** If the values
+converge, C-2 is adopted and Rule 118 is unusually well founded. If they diverge
+materially, this is **not a failed item** — it is a *finding against Rule 118*, and
+possibly a tier-0 statutory conflict under founding §8, which would be considerably more
+important than the corroboration would have been. Either way the review pays.
+
+**Scope note**: Rule 3 (*Color Is a Signal*) is arguably corroborated by the same source
+and is deliberately left out. It is being amended anyway under A-5, and stacking a
+second change on a rule mid-amendment is how records get tangled.
 
 ---
 
@@ -185,9 +235,12 @@ acknowledgement today.
 
 | Adopted | Law becomes |
 |---|---|
-| Part 1 only | **v3.8.1** — a correction, one file, consumers keep their pin |
+| Part 1 only (C-1, C-2) | **v3.8.1** — corrections, one file, consumers keep their pin |
 | + any of P-1, A-1…A-5, N-1 | **v3.9.0** — substance moved |
 | + N-1 | 118 rules; number 125 burned into use, never reused |
+
+C-2 adds a field rather than changing one, and C-1 adds pointers. Neither moves a
+requirement, so both sit in the patch component with v3.7.1's precedent.
 
 Consumers pinned at v3.8.0 lose nothing by staying there through Part 1 alone. That is
 what the patch component is for.
@@ -212,6 +265,10 @@ Small, and worth naming honestly rather than padding:
 
 - **Nothing here is applied**, and the three sibling-derived items (C-1, A-5, N-1) rest on
   a plane whose owner has agreed to none of it.
+- **C-2 is the only item resting on a source this project has not read.** It is filed as a
+  review to commission, not a fact to adopt, and it is the one item that could return the
+  opposite of what it proposes. Ruling "adopt" on it should mean "commission the review",
+  never "write it in".
 - **N-1 rests on one measurement, on one platform.** It is filed as a candidate because
   the evidence is real and dated, not because the case is closed.
 - **A-1 is the amendment that matters.** The others are hygiene by comparison; A-1 is
