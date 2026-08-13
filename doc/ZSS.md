@@ -215,7 +215,127 @@ If v0 cannot do those three, the idea is wrong and we will know cheaply.
   prototyped; the round-trip test in §8 is the first thing that would tell us anything real,
   and it could fail.
 
-## 11. The claim, stated once
+## 11. The name
+
+**First, a correction to §10.** I implied the name breaks the family's conventions. It does
+not. The prefix rule governs *component* names (`Ring*` · `Stz*` · `Zing*`), and file
+formats have never followed it — `.zui`, `.zql`, `.face`, `.wflow`, `.game`, `.narration`
+carry no prefix, and **ZQL is direct precedent for a Z-named language that is not
+`Zing*`.** So "ZSS" is structurally fine.
+
+**The real objection is one word, and it is a factual one: `style`.** This artifact carries
+no style. It carries the binding from a meaning to a perceptible form. A reader who arrives
+expecting a style sheet will look for fonts, spacing and colours-as-choices, and will find
+none of them — and the first question every one of them asks will be *"so can I set a font
+size?"*, to which the answer is no, permanently. A name that generates the same wrong
+question forever is a tax paid on every conversation.
+
+Three ways out, ranked:
+
+**1. `.sense` — `stzSense` — "the sense sheet."** My recommendation. The English word
+carries *both* meanings this artifact needs at once: **sense** as perception (sight,
+hearing, touch — every medium) and **sense** as meaning (*does this make sense*). Which is
+exactly what the file does: it says how a meaning reaches a sense. It matches the book's
+Part V, *The Senses*; it collides with nothing (`SIGNAL` is a stratum, `sense` is the
+sheet); and `stzSense` satisfies the prefix rule for the module. The one weak spot is the
+`machine` medium, which is not a sense — though *"it makes sense to a machine"* survives
+the stretch.
+
+**2. Keep the acronym, drop the false word: ZSS = "Zui Semantic Sheet."** The cheapest fix.
+It keeps a memorable acronym that gets a stranger to the right neighbourhood in one second,
+and removes the one term that misleads. Cost: `Zui` narrows a thing that is family-wide —
+sound, print and signage are not Zui's.
+
+**3. Keep ZSS exactly as it is, and pay the tax deliberately** — leading every document
+with §6's refusals rather than the analogy. Defensible if the marketing value of the CSS
+echo is judged worth more than the recurring misunderstanding. It is a real trade, not a
+mistake.
+
+A fourth option is available and costs nothing: **let ZSS live as the spoken name and
+`.sense` as the artifact.** This project already does exactly that — *the law* is
+`rules.json`, *the court* is `tools/zui/`, *the Gotchas* are seven HTML pages. Informal
+names are how people talk; formal names are what the court reads.
+
+## 12. Where CSS sits in the Softanza world
+
+CSS is not a rival and not a dependency. **It is a projection target — one of several —
+and the only one dangerous enough to need a doctrine.**
+
+```
+MORE ABSTRACT
+   the constitution  rules.json          what must be true of any interface
+   intent            .zui                what the human is doing
+   the semantic values                   what things mean
+   the sense sheet   .sense / ZSS        how a meaning becomes perceptible
+─────────────────────────────────────── the projection boundary ───────────
+   CSS variables · theme data · earcon parameters · PWM duty cycles ·
+   print profiles · ARIA · sign geometry
+───────────────────────────────────────────────────────────────────────────
+   pixels · samples · photons · ink · vibration
+MORE CONCRETE
+```
+
+**The mapping that makes it memorable**, because the family already has the precedent one
+row up:
+
+| Softanza declares | The web renders |
+|---|---|
+| `.zui` — intent | HTML — structure |
+| the sense sheet — meaning → perception | **CSS — presentation** |
+| the court — refusal, citing a numbered law | *(nothing)* |
+
+The empty cell is the whole argument. The web has no court, which is why its quality is
+unenforceable and why the deterioration this project exists to answer was possible at all.
+
+### 12.1 The doctrine: CSS is emitted, never authored
+
+Zing already emits HTML rather than authoring it. CSS gets the same treatment, and for a
+sharper reason: **CSS is the only projection target that has an authoring culture around
+it.** Nobody hand-writes PWM duty cycles. Everybody hand-writes CSS — and *every
+hand-written CSS rule is a meaning that escaped the semantic layer*, exactly as a hex
+literal in code is. The court cannot see it, the culture axis cannot vary it, and the
+statute tier cannot constrain it.
+
+So: a Softanza project that hand-writes CSS has bypassed its own semantics, and the honest
+statement is that **the court is blind there** — not that it is forbidden.
+
+### 12.2 CSS custom properties are the emission target, and the persuasive artifact
+
+`--stz-danger-solid`, `--stz-danger-surface`, and their culture- and theme-resolved values.
+This matters strategically out of proportion to its size: **a web app that adopts nothing
+else can consume Softanza's semantics through a variables file.** That is the protocol
+pack's most persuasive object — something a stranger uses on day one without installing a
+component, and the cheapest possible on-ramp.
+
+### 12.3 What CSS does better, and Softanza must not rebuild
+
+Honesty in both directions:
+
+- **Layout.** Flexbox and grid are genuinely excellent, and `STRUCTURE` declares *relations*
+  precisely so CSS can realize them. §6's first refusal is not only a discipline — it is a
+  recognition that this problem is solved downstream.
+- **The user stylesheet.** CSS's much-maligned cascade carries real accessibility
+  infrastructure: the user's own styles outrank the author's. That is the operator
+  legislating, and it is the one part of the cascade worth preserving in spirit.
+- **Universality.** CSS is deployed everywhere. Emitting to it is leverage, not compromise.
+
+### 12.4 Design tokens are the honest prior art — and the argument
+
+The industry has been groping toward this for a decade: CSS custom properties, the W3C
+Design Tokens format, `color-mix()`, `light-dark()`, `prefers-reduced-motion`. The whole
+design-token movement is an attempt at meaning-first styling, and it is the closest thing
+to a competitor this idea has.
+
+It is also stuck, and the reason is precise and instructive. **Design tokens have no law,
+no court, no culture axis, and no medium beyond the screen.** A token named
+`color.semantic.danger` is a convention that a linter cannot check, a constitution does not
+oblige, a Chinese financial reading cannot invert, and a loudspeaker cannot render.
+
+Which places Softanza exactly: not *against* CSS, but **the layer the design-token
+movement keeps reaching for and cannot build, because a token system without a
+constitution is a naming convention with good intentions.**
+
+## 13. The claim, stated once
 
 CSS gave HTML **programmability** by making presentation into data. Its price was that the
 data meant nothing, and could not be checked.
