@@ -21,6 +21,70 @@ A rejection with its reason on record is as useful as an adoption.
 
 ---
 
+# RATIFICATION RECORD — 2026-08-13
+
+**Ruled by the author, section by section, in one pass. Twelve items, twelve rulings.
+Nothing deferred, nothing rejected.**
+
+| # | Ruling | Class |
+|---|---|---|
+| **C-1** | **Adopted as written** — instrument pointers added to Rules 3, 87, 117, 118, 56 | correction |
+| **C-2** | **Adopted as a commission** — the review is authorized; **nothing is written into `rules.json`** until the IEC 60073 / ISO 3864 / ISO 7010 editions are read and clauses recorded | correction, pending |
+| **P-1** | **Adopted, tier corrected**: Rule 62 `machine-later` → **`tool`**, not `machine` | promotion |
+| **A-1** | **Adopted now** — Rule 82 becomes **Perceivable State** | amendment |
+| **A-2** | **Adopted as a correction** — Rule 60 restated medium-neutrally, ARIA named as its web realization | correction |
+| **A-3** | **Adopted (a)** — Rule 69 renamed to what it governs; the haptic law waits for device evidence | correction |
+| **A-4** | **Adopted as a correction** — Rule 104 extended to three beneficiaries | correction |
+| **A-5** | **Adopted, without adding a value** — see below | correction |
+| **A-6** | **Adopted, bound to Rule 122** — the sixteenth forbidden pattern, and the first cultural one | amendment |
+| **A-7** | **Adopted, effective when `stzSense` can serve it** — Rule 56 across cultures | amendment, deferred effect |
+| **A-8** | **Adopted as written** — Rule 64 gains what must *not* mirror | amendment |
+| **N-1** | **Canonized, scoped** — Rule 125, narrowed to channels that demonstrably cannot meet Rule 18's budget | canonization |
+
+## Two drafting errors the pass itself caught
+
+Recorded because the point of a section-by-section pass is to find these, and both would
+have entered the law had the docket been adopted wholesale.
+
+**P-1 named the wrong tier.** I proposed `machine`, which means *the declaration checker
+refuses it*. A `.zui` file contains no colours, so `zui check` can never enforce Rule 62.
+`StzIsLegible` is a **runnable check in a repository** — the lineage's own definition of
+`tool`, and where Rule 105 already sits. Adopting as drafted would have placed a rule in a
+tier no instrument could serve.
+
+**A-5 claimed a value had to be added.** It does not. Rule 118 is titled *Two Families of
+Colour*: family one is the five semantic statuses, **family two is neutral metadata**. So
+the engine's `:Neutral` is family two — already legislated — not a missing sixth status.
+And `:Primary` maps to Rule 3's *"one primary accent color per application"*, which is a
+**quantity** rule about identity colour, not a status semantic. The reconciliation is
+therefore `Error` → `danger` and nothing more: **the closed set stays at five, and the
+vocabulary `stzEarcons` already adopted needs no revision.**
+
+## Version arithmetic
+
+Substance moved — P-1, A-1, A-6, A-7, A-8 and N-1 — so this is not a patch.
+
+> **`rules.json` v3.8 → v3.9 · 118 rules → 119 · 15 forbidden patterns → 16.**
+
+A consumer pinned at v3.8 keeps everything it had; the corrections alone would have been
+v3.8.1, and are carried inside v3.9.
+
+## What is authorized, and what is not
+
+**Authorized for application**: C-1, P-1, A-1, A-2, A-3, A-4, A-5, A-6, A-8, and N-1 as
+scoped.
+
+**Authorized but not yet writable**: **C-2** — adoption means *commission the review*, and
+the `corroboration` field is written only after the editions are read. **A-7** — ruled, and
+binding when a meaning→rendering path exists to obey it; recorded in the rule with its
+effective condition, so the law does not oblige machinery nobody has built.
+
+**Still owed by whoever applies this**: the drafted text for Rule 60's restatement, Rule
+69's new title, Rule 104's third beneficiary, Rule 125's body, and the sixteenth forbidden
+pattern. Wording is authorial; the rulings above fix what each must *do*, not how it reads.
+
+---
+
 ## Why this is the bottleneck
 
 The programme's Track 0 was written as "start now, unratified". That was half right. Of
