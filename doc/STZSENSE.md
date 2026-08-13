@@ -341,7 +341,150 @@ Which places Softanza exactly: not *against* CSS, but **the layer the design-tok
 movement keeps reaching for and cannot build, because a token system without a
 constitution is a naming convention with good intentions.**
 
-## 13. The claim, stated once
+## 13. Scope-Oriented Programming, applied — and a correction
+
+**The correction first, because it is load-bearing.** I previously described scoping as
+*"you enter a region and everything said inside applies there until you leave"* and offered
+it as the improvement over CSS selectors. **That is precisely the disease Scope-Oriented
+Programming exists to cure, not the cure.** The paradigm's own record is explicit: an
+ambient-block design (`StzWithPrecision(50, func{...})`) was proposed, built against, and
+deleted, with the reason written down — *"an ambient block is closer to the disease the
+paradigm exists to cure."* There is no current-scope object anywhere in the library, and
+no `Narrow`/`Widen`/`Enter`/`Leave`. Nesting was never the idea.
+
+The actual thesis (`SCOPE_ORIENTED_PROGRAMMING.md`):
+
+> Some fields are not hard because their operations are hard. They are hard because **the
+> same expression behaves differently depending on a context that is invisible at the place
+> you wrote it.** … Make the operative *scope* explicit and first-class **at the call
+> site**.
+
+Which is a devastating diagnosis of CSS, and a better one than §2's. `color: red` is hard
+not because colour is hard, but because *which elements it hits*, *whether it wins*, and
+*in what context it applies* are all decided somewhere you cannot see from that line.
+**CSS is the textbook case of the disease.** So this is not an analogy borrowed from
+another domain — styling is squarely the paradigm's home territory.
+
+### M1 — name the hidden frames
+
+Strip out what the semantic system already fixed (*what it means* and *is this a token or a
+literal*, both dissolved by writing `:Danger` instead of a hex), and four frames remain:
+
+| Frame | Invisible today because… |
+|---|---|
+| **medium** | the same meaning renders differently to eye, ear, lamp, page — and nothing at the call site says which |
+| **whose reading** | `:Success` is green to one operator and the colour of loss to another |
+| **role step** | `.Surface` and `.Solid` are different acts wearing one name |
+| **authority** | whether this binding wins is decided by an arithmetic you cannot see |
+
+### M2 — are they small closed sets? Two pass, one needs splitting, one fails outright
+
+- **Role step** — `.Surface .Border .Solid .Text` + `:OnX`. Five. Passes.
+- **Authority** — statute · core · commons · local · document. Five. Passes.
+- **Medium** — ten. Over the paradigm's own guideline, and its guidance is pointed: *"if
+  you can't get under ~5, the frame is probably two frames — split them."* Applied here it
+  is immediately productive, because §4.5 already split them: media differ by
+  **persistence, seriality, election, bandwidth, mutability**. Ten media are a *bundle of
+  properties*, not one frame. **Whether the sheet names media or properties is the sharpest
+  open question in this design**, and the paradigm is the thing that surfaced it.
+- **Whose reading** — cultures are open-ended and unbounded. **Fails M2 outright**, and no
+  amount of tidying fixes it; a closed set of five cultures would be both wrong and
+  offensive.
+
+That last failure is the most useful result of the whole exercise, because M2 forces the
+right question: *the frame is not **which culture** — it is **whose reading governs**.* And
+that is a small closed set:
+
+```
+:asAuthored    the author's own reading
+:asOperated    the operator's — their culture, their locale
+:asAudience    the receiver's — a report read somewhere else
+:asInvariant   nobody's; machine data, no reading applied
+```
+
+Four. This is the distinction Microsoft half-discovered as `CurrentCulture` versus
+`CurrentUICulture` and never completed, and §4.6.3 groped toward with "a third culture".
+**M2 produced it properly.**
+
+### M3 — the frame goes in the verb, and each frame picks its carrier
+
+The paradigm offers two carriers — *site-scoped* (named in the act, like `MatchLine`) and
+*value-scoped* (riding the value, like `Meters(5)`). Each frame here takes a different one,
+and the test is the numeric doc's: **how long must the frame live?**
+
+- **Medium → the verb.** This is `MatchLine` exactly. Not a rule plus an `@media` sigil
+  set elsewhere, but the act naming its own frame:
+
+  ```
+  :Danger  ShowsAs   …        :Danger  SoundsAs  …
+  :Danger  LightsAs  …        :Danger  PrintsAs  …
+  ```
+
+  **This supersedes §3.** §3 proposed selector terms (`:Danger @auditory`) — a *match
+  expression*, which is still CSS's shape with better vocabulary. The paradigm says write
+  the act, not the query. A reader of one line knows the medium without scrolling.
+- **Role step → the subject**, alongside the meaning: `:Danger.Solid ShowsAs …`.
+- **Whose reading → value-scoped**, and it belongs at *resolution* time, not authoring
+  time: the sheet states bindings, the caller states whose reading applies. A frame that
+  travels with the request, like a number's regime travels through arithmetic.
+- **Authority → provenance, not declaration.** The temptation is a `tier: local` line at
+  the top of the sheet, and that would be an ambient block wearing a hat. Better: **a
+  sheet's tier is a fact about where it came from** — statute sheets ship with the
+  statute, core with the constitution, local with the organisation. The loader knows;
+  nothing is declared; no rule carries a precedence.
+
+### M4 — what the library actually computes with these
+
+M4 is the move that makes this a paradigm rather than a naming convention — *"the scope is
+a semantic handle, not a comment."* Concretely, the court can:
+
+- **Refuse a role step in a medium that has none.** `:Danger.Surface LightsAs …` is
+  nonsense: a single-colour emitter has no surface to tint (§6.5). The scope makes that
+  decidable rather than merely documented.
+- **Refuse a statute conflict** — tier 0 outranks, and the court refuses rather than
+  resolves.
+- **Apply the right floor per medium** — contrast for `ShowsAs`, audibility for `SoundsAs`.
+- **Answer "why did this win" by naming a tier**, in one sentence, forever.
+
+### M5 — rehearsal, and it fits unusually well
+
+M5 is for when *"a scope's capabilities can differ from the host's… enabling — through
+rehearsal — acts the host lacks but the scope requires."* The system plane uses it to
+exercise firmware capabilities on a dev machine.
+
+Here it is the answer to an obvious practical problem: **you are designing for media your
+machine does not have.** A signage rendering, a luminous binding for a device with no LED
+attached, a print profile with no printer. `SoundsAs` on a silent CI box. Rehearsal is
+already the paradigm's shape for exactly this, and it means a sense sheet can be authored
+and *checked* for every medium from one laptop.
+
+### The M1 sanity check — one frame to dissolve, not surface
+
+The paradigm's escape hatch asks whether a frame is *"an essential decision, or noise to
+dissolve"* — Concurrency was dissolved deliberately rather than surfaced. Applied here the
+answer is sharp:
+
+> **Specificity is noise. Dissolve it.**
+
+CSS's cascade arithmetic is a hidden frame, and the temptation is to surface it as a scope.
+It should not exist at all. There is no specificity in a sense sheet — only provenance,
+and provenance is not computed, it is known.
+
+### Open tensions, honestly
+
+- **Ten media against M2's five.** Either the guideline bends for an enumeration this
+  concrete, or media decompose into properties and the sheet scopes on those. Unresolved,
+  and it is the question a v0 prototype would settle fastest.
+- **Provenance-as-authority is the one place this brushes the ambient failure.** I argue it
+  survives because nothing is *declared* and nothing is *inherited across call sites* — but
+  the author of the paradigm is better placed than I am to say whether that reasoning holds.
+- **The paradigm's flagship example is partly aspirational.** `MatchOneSegment()` appears in
+  the SOP document and the regex deepdive and **does not exist in the code**; greedy-versus-
+  lazy-by-verb is documented as the scope's payoff and is not implemented — `MatchSegmentsIn`
+  and `MatchFirstSegmentIn` are byte-identical, and `:NonGreedy` is never passed by any
+  scope verb. Worth knowing before treating regex as the finished template.
+
+## 14. The claim, stated once
 
 CSS gave HTML **programmability** by making presentation into data. Its price was that the
 data meant nothing, and could not be checked.
