@@ -168,6 +168,20 @@ doing slowly.
 The two strata carrying the most `judgment`-tier rules and the most daily pain. `ROLE` is
 the load-bearing move of the whole vision and should be attacked before it is built.
 
+### S8b · ZSS v0 — the semantic style sheet · `stzzui` + `stzlib` + `ringface` · **medium** · *added 2026-08-13*
+
+Reflection written: [ZSS.md](ZSS.md). The serialization of *meaning → rendering*, which is
+what makes the semantic system governable rather than merely implemented — the project's
+signature move applied to rendering for the first time.
+
+**v0 is deliberately tiny**: `SIGNAL` only, in `visual` and `auditory` only, because that
+is the only part of the system that exists. Its whole job is three tests — round-trip the
+seven existing colour themes with no loss, express the CJK financial inversion, and
+serialize the earcon set — and if it cannot do them the idea is wrong and we learn cheaply.
+
+**Do it with RingFace in the room, not near them.** `.face` shipped v0 and is hardening;
+two composition-adjacent formats designed apart will grow into each other.
+
 ### S9b · The cultural axis in the law · `stzzui` · **medium** · *added 2026-08-13*
 
 StzZui's half of culture, once `stzCulture` exists to inherit from (S20). It augments the
