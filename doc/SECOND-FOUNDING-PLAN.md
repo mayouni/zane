@@ -197,6 +197,21 @@ serialize the earcon set — and if it cannot do them the idea is wrong and we l
 **Do it with RingFace in the room, not near them.** `.face` shipped v0 and is hardening;
 two composition-adjacent formats designed apart will grow into each other.
 
+### S8c · `stzCSS` — CSS governed · `stzlib` · **medium** · *added 2026-08-13*
+
+Prompt written: [`doc/prompts/stzcss-design.md`](prompts/stzcss-design.md). The stzRegex
+move applied to CSS: not replacing it, but making its invisible governing frame explicit at
+the call site. **CSS is the textbook case of the disease Scope-Oriented Programming names.**
+
+`stzCSS` does not exist today, and the one test that anticipated it is retired pending an
+archive port that never happened. It is **not** `stzSense` and must never grow into it:
+`stzSense` speaks meanings and emits *through* `stzCSS` for the web; `stzCSS` speaks CSS and
+is the governed bridge to a world without semantics.
+
+**A refusal is an acceptable outcome** — if the M1 pass finds CSS's frames are mostly noise
+to dissolve, a thin emitter plus an auditor is the honest answer, and worth more than a
+module nobody should use.
+
 ### S9b · The cultural axis in the law · `stzzui` · **medium** · *added 2026-08-13*
 
 StzZui's half of culture, once `stzCulture` exists to inherit from (S20). It augments the
