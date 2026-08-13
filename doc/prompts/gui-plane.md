@@ -12,6 +12,32 @@ re-run the survey. The conditions under which that choice would be revisited are
 
 ---
 
+## Where it lives — `stzlib`, as a plane, not a repo of its own
+
+`base/gui/`, beside `base/graphics/` and `base/sound/`, with `SOFTANZA_GUI_PLAN.md` in the
+same directory and a `load "gui/stzGui.ring"` line in `base/stzBase.ring`.
+
+**Not a separate repository**, and the reason is the family's own extraction rule: *an asset
+consumed by many projects lives in none of them.* That rule extracted the UI **law** to
+StzZui — because a law is a **contract**, pinned by many courts. This plane is an
+**engine**: it renders. Engines live in the foundation, which is why graphics, sound, GPU
+and locale all do, despite each being consumed by several projects.
+
+The extraction that mattered has already happened, one layer up: the contracts this plane
+obeys — the law, the sense sheet — are in StzZui, and this consumes them. Extracting the
+renderer too would separate it from `stzCanvas`, `stzWindow`, `gpu_text.zig` and the
+reactive layer, which it depends on intimately, for no gain.
+
+**When extraction would become right**, so the question can be reopened on evidence rather
+than instinct: if the plane acquires consumers who take it *without* stzlib. That is an
+observation to make later, not a prediction to act on now.
+
+**A naming note, worth settling before the first commit.** `stzGui` and `StzZui` differ by
+one letter and describe two adjacent layers of one stack that will be discussed together in
+every document and commit message from now on. If that reads badly on the page — and it may
+— `stzSurface`, `stzWidget` or `stzInterface` are available. The author's call; make it once
+and early.
+
 ## Why a separate session
 
 The graphics plane drew this boundary itself, deliberately, in `stzWindow`'s own header:
