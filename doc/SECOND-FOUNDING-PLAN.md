@@ -197,6 +197,37 @@ serialize the earcon set — and if it cannot do them the idea is wrong and we l
 **Do it with RingFace in the room, not near them.** `.face` shipped v0 and is hardening;
 two composition-adjacent formats designed apart will grow into each other.
 
+### S21 · The GUI plane · `stzlib`, **new dedicated session** · **large — a programme** · *added 2026-08-13*
+
+Prompt written: [`doc/prompts/gui-plane.md`](prompts/gui-plane.md). Engine chosen: **RmlUi**
+(MIT, host-supplied renderer, no JS engine, pluggable `FontEngineInterface` with a
+`TextShapingContext` hook, real input model). Survey and reasoning in
+[GUI-SYSTEM.md](GUI-SYSTEM.md) §10.
+
+**Gated on S21a**, and it is a real gate, not a courtesy.
+
+**Not inside the graphics session.** That plane drew the boundary itself — *"a window is not
+a widget toolkit… the rest is a different product"* — and this is that product: its own
+directory, plan, phases and kill criteria, as every other plane has. It also depends on more
+than graphics (AccessKit, platform IME, the reactive layer, the sense sheet), and the
+graphics session is live with uncommitted work.
+
+**Honest sizing**: layout is ~15% of a toolkit. Flutter's non-layout, non-paint surface
+measures ~6.6 MB. IME is 1–3 engineer-years and accessibility 3–6 from scratch, of which
+AccessKit removes the adapter half. **This is a programme, not a milestone**, and §6 of the
+prompt starts it where the constitution binds least — the in-scene case — rather than at
+business applications.
+
+### S21a · Reversible text layout · `stzlib` graphics session · **small** · *added 2026-08-13*
+
+The two primitives every platform IME demands: **screen rect for a character range**, and
+**character index at a point**, with a leading/trailing affinity bit. `gpu_text.zig` must
+answer both, or a Softanza GUI can never accept CJK input.
+
+File as a cross-plane finding in the genre the sound plane already used for `stzCanvas`.
+**Cheap while the pipeline is young; the eight-year Firefox story if retrofitted.** This is
+the only time-sensitive item in the GUI programme.
+
 ### S8c · `stzCSS` — CSS governed · `stzlib` · **medium** · *added 2026-08-13*
 
 Prompt written: [`doc/prompts/stzcss-design.md`](prompts/stzcss-design.md). The stzRegex
