@@ -117,6 +117,20 @@ that plane already uses — it produced one for the graphics plane about `stzCan
 lacking an image primitive. **A finding, not a demand**: the number may be fine once
 decomposed, but nobody has checked.
 
+### S4c · Three layer-one defects, repaired · `stzlib` quality session · **small** · *added 2026-08-13*
+
+Prompt written: [`doc/prompts/locale-defects.md`](prompts/locale-defects.md). Found while
+surveying for the culture module, by reading and not by running — so each is a report to
+reproduce, not a diagnosis to act on.
+
+Hebrew classified `Neutral` instead of RTL, with the Ring and Zig layers disagreeing about
+the same string; a dead `:FractionalSeparator` option in `stzNumber` with unreachable code
+after it; and a datetime guard asserting 1400 AH → 2021 when the year is 1979–80, because
+a 365-day year was applied to a lunar calendar. **Repairs to what exists, not the locale
+plan's unstarted L2–L4.**
+
+Unconditional, independent of each other and of everything else here.
+
 ## 4. Track A — StzZui's own work. Gated on ratification.
 
 ### S5 · The medium axis · `stzzui` · **medium** · *first, because everything leans on it*
@@ -153,6 +167,18 @@ doing slowly.
 
 The two strata carrying the most `judgment`-tier rules and the most daily pain. `ROLE` is
 the load-bearing move of the whole vision and should be attacked before it is built.
+
+### S9b · The cultural axis in the law · `stzzui` · **medium** · *added 2026-08-13*
+
+StzZui's half of culture, once `stzCulture` exists to inherit from (S20). It augments the
+model rather than restating it: which meanings an interface **must** be able to express,
+which cultural conflicts are **refusable** by the court, the `CONVENTION` field and its
+enumeration, the medium × culture interaction — a sign's reading can differ by channel as
+well as by reader — and the forbidden pattern of docket A-6.
+
+**Gated on both** ratification and S20. Note one thing already in our favour: a `.zui`
+file cannot name a colour, so the language is **already culture-safe on that axis by
+construction**. The inversion protected us before we understood what it was protecting.
 
 ### S10 · STRUCTURE + MOTION + TEMPO, and the print and ambient media · `stzzui` · **large**
 
@@ -192,6 +218,14 @@ Each is small once its contract exists; none may start before it does.
 | S17 | `zing` | re-pin; `zing check` gains the expression diagnostics; delivery cites the medium | S8, S9 |
 | S18 | `microring` | the `haptic` and device media | S5, S10 |
 | S19 | `ringine` | the `spatial` medium; the game plane's own signal vocabulary | S5, S8 |
+| **S20** | **`stzlib`** | **`base/culture/` — the culture model itself**, prompt at [`doc/prompts/culture-module.md`](prompts/culture-module.md) | none hard |
+
+**S20 is not adoption of anything — it originates in stzlib**, and it is listed here only
+because that is where the sibling work lives. It can start before StzZui ratifies
+anything, because the model is general: *a locale formats, a culture interprets.* It docks
+with `engine/SOFTANZA_LOCALE_PLAN.md` (L0–L1 done, L2–L4 open) and sits above `base/i18n/`,
+which already exists and is partly a facade — hence the module's own first law, **no
+facades: an operation either honours the culture it was given, or refuses.**
 
 ## 7. The dashboard
 
@@ -210,10 +244,18 @@ Each is small once its contract exists; none may start before it does.
 | S11 | B | stzzui | medium-large | ratification |
 | S12 | B | stzzui + an app | medium | S11 |
 | S13 | B | stzzui | medium | S5, S11 |
+| S9b | A | stzzui | medium | ratification + S20 |
 | S14–S19 | C | siblings | small each | their contract |
+| S20 | C | stzlib | large | none hard |
+| S4b, S4c | 0 | stzlib | tiny / small | — |
 
-**Four sessions can run today** (S1, S2, S4, and S7's drafting). Everything else waits on
-a decision or on a predecessor.
+**Six sessions can run today**: S2, S4, S4b, **S4c** (the three defects), **S20** (the
+culture module), and S1 now needing only ratification of docket A-5 rather than a
+decision. Everything else waits on a ruling or a predecessor.
+
+**S20 is the largest unblocked item in the programme** and the only one that is large
+*and* ungated — worth knowing, because it will take longer than everything else in this
+table put together.
 
 ## 8. Six traps
 
@@ -253,10 +295,17 @@ a decision or on a predecessor.
    which settles both sub-questions: `Error → danger` is a correction, and `muted` and
    `:Neutral` are two concepts rather than two spellings, so reconciliation adds a value.
    What remains for the author is ratifying A-5, not deciding it.
-3. **Who owns the medium axis?** Either StzZui owns it as part of the interface
-   vocabulary (this plan's assumption), or it is family-wide and belongs in the reference
-   design as **C8, the Medium Contract** — it does bear on `.face`, both planes and the
-   device family. The second reading is defensible and would change where S5 lands.
+3. **Who owns the medium axis, and is culture a contract?** Two versions of one question.
+   Either StzZui owns the medium axis as part of the interface vocabulary (this plan's
+   assumption), or it is family-wide and belongs in the reference design as a **Medium
+   Contract** — it bears on `.face`, both planes and the device family. **Culture is the
+   stronger candidate of the two**: `stzCulture` would be consumed by StzZui, Zing and
+   Bedrock (name models, workweeks, fiscal calendars carried in records), Narrations, both
+   planes and the device family, and it originates in stzlib rather than here — which is
+   the exact profile of C1 and C7. If either becomes a numbered contract it is
+   **C8/C9 in `REFERENCE_DESIGN.md`, by that document's own amendment process, not ours.**
+   Neither is a docket matter: the docket holds constitutional acts, and a horizontal
+   contract is not one.
 4. **Does Track 0 proceed before ratification?** This plan assumes yes, on the ground that
    its four items are corrections of observed drift. Say no and the critical path moves.
 5. **When does the book start?** It should trail the artifacts, since its discipline is

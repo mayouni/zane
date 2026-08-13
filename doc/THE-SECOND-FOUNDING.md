@@ -24,14 +24,19 @@ today, a fraction of a platform — and the project's own data says so twice.
 
 ### 1.1 The law legislates a territory the language cannot declare
 
-The constitution holds **117 rules**. Their enforcement tiers:
+The constitution holds **118 rules**. Their enforcement tiers, **measured against
+`rules.json` v3.8** — every figure in this document is anchored to a law version, because
+a document that argues about drift and then drifts is worth nothing:
 
 | Tier | Rules | Share | Meaning |
 |---|---|---|---|
-| `judgment` | 78 | 67% | a human decides, until an instrument is invented |
+| `judgment` | 79 | 67% | a human decides, until an instrument is invented |
 | `machine-later` | 25 | 21% | **the law's own admission that the instrument is missing** |
 | `machine` | 9 | 8% | a declaration checker refuses it |
 | `tool` | 5 | 4% | measured on a painted page |
+
+*(Re-measured 2026-08-13 after Rule 126 was canonized at v3.8; the figures at v3.7.3 were
+117 rules and 78 `judgment`, and no other tier moved.)*
 
 **Eight percent of the law is refusable before a pixel exists.** That is not a failure of
 the verifier, which enforces 19 of its 20 diagnostics and passes 30/30 fixtures. It is a
@@ -54,7 +59,7 @@ machine-checkable."* The intent grammar's own note promises more: *"A new medium
 renderings, never verbs."* The architecture lists five projections — business web, game
 worlds, CLI/TUI, **voice**, AI-agent surfaces.
 
-Here is what the 117 rules actually contain, by word, across the whole corpus:
+Here is what the 118 rules actually contain, by word, across the whole corpus (v3.8):
 
 | Term | Occurrences |
 |---|---|
@@ -725,8 +730,8 @@ Four tiers, one supremacy rule.
 true of a place.* Finite attention, working memory, error recovery and the dignity of undo
 travel everywhere. Palettes, densities, accents and every colour assignment do not.
 
-**The admission test is already in the data.** All 117 rules carry `derived_from`, and all
-117 resolve to one of the seven articles. So: **a proposed rule that derives from no
+**The admission test is already in the data.** All 118 rules carry `derived_from`, and all
+118 resolve to one of the seven articles. So: **a proposed rule that derives from no
 article is inadmissible; one that contradicts the Core is inadmissible; everything else is
 a question of evidence.** No committee of taste is required.
 
@@ -738,7 +743,7 @@ Gotchas make an offense *feelable*, the fixtures make it *checkable*, `evidence`
 |---|---|---|---|
 | **The gotcha** | offense + lawful twin, playable | humans | `site/gotchas/`, 12 offenses |
 | **The fixture** | declaration + expected verdict | machines | `conformance/`, 30 fixtures |
-| **The evidence** | what happened, where, when | the record | `evidence` on all 117 rules |
+| **The evidence** | what happened, where, when | the record | `evidence` on all 118 rules |
 
 ### 8.1 The loop that closes it
 
