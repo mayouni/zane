@@ -5,7 +5,16 @@
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
 **Date**: opened 2026-08-12; **C-2 added 2026-08-13**.
-**Law as it stands**: v3.8.0, 117 rules.
+**Law as it stands**: **v3.8, 118 rules** — corrected 2026-08-12. This line previously read
+*v3.8.0* while the law was still v3.7.3; the drift is noted rather than smoothed.
+
+> **Numbering note, 2026-08-12.** Rule **126**, *Foreign Data Says It Is Foreign*, was
+> canonized outside this docket on the author's direct ruling, and the law is now v3.8.
+> It was renumbered from 125 to 126 because **N-1 below had already reserved 125** — a
+> proposed number is not a free number. N-1 keeps 125. A canonization landing outside the
+> docket is a departure from this document's own premise (one sitting, not six
+> interruptions); it is recorded here so the pass on N-1 is not made against a stale
+> picture of the law.
 
 **How to rule**: per item — *adopt as written* · *adopt amended* · *defer* · *reject*.
 A rejection with its reason on record is as useful as an adoption.
@@ -123,7 +132,7 @@ A voice or audio-only surface escapes it entirely — it can hold state the oper
 know and satisfy the rule by rendering nothing, because there is nothing to see.
 
 Proposed: the requirement becomes *perceivable in the medium the surface declares*, with
-visibility as its visual realization. **Evidence**: the corpus scan — across 117 rules,
+visibility as its visual realization. **Evidence**: the corpus scan — across 118 rules,
 `sound`, `speech`, `earcon`, `tactile` and `ambient` never appear; the law has no
 vocabulary for a state it cannot show.
 
@@ -233,11 +242,51 @@ who live inside those readings; a hazard list written from outside is the failur
 about. The capture loop of founding §8.1 is the right instrument, and this pattern is the
 one case confident enough to file today.
 
+### A-7 · Rule 56: semantic preservation across **cultures**, not only themes · *added 2026-08-13*
+
+Rule 56, *Semantic Preservation*, is `invariant: true` and already carries the whole
+argument in its `why`: **"Meaning must survive theming, or color was never a signal."**
+
+It says *theming*. Culture is the same claim one axis over: a meaning that survives dark
+mode and does not survive a reader is equally not a signal. Proposed: the requirement
+becomes *meaning survives theming and audience alike*, so that what a declaration fixes is
+the **meaning**, and the rendering is derived per theme, per medium and per culture.
+
+**Evidence.** `stzDiagramColor.ring:45` binds `:Success` to green and `:Danger` to red in
+a table labelled an *"abstraction layer"* — the exact pair that inverts in Chinese,
+Japanese, Korean and Taiwanese financial convention. Under Rule 56 as written, that table
+is lawful, because nothing about theming is broken. Under the amendment it is not.
+
+**Note in passing, and it is slightly awkward**: Rule 56's own text names *Gold* and
+*Oxblood* as the renderings of warning and error. Those are renderings, in a rule about
+meaning outliving renderings. Whether to lift them into examples is the author's call, and
+it is the kind of thing this amendment will keep surfacing.
+
+**Verdict**: amendment, MINOR. An interface lawful before — hard-coding a rendering that
+themes correctly — becomes unlawful after. **Cost is real**: it obliges a derivation path
+that does not exist yet, so it should probably be ruled *adopt, effective when `stzCulture`
+can serve it* rather than adopted bare.
+
+### A-8 · Rule 64: what must **not** mirror · *added 2026-08-13*
+
+Rule 64, *Right-to-Left Logic*, mirrors the layout axis for RTL and reasons correctly that
+*"calm that only flows left-to-right is not calm; it is locale bias."* It is silent on the
+converse, which is where the real defects live: **some things must not mirror.** Clocks,
+media transport controls, numerals within a number, and any progress that encodes a
+physical direction stay as they are, in every script.
+
+**Verdict**: amendment, MINOR — a mirrored clock was lawful before. Smaller and safer than
+A-7, and independently useful whether or not the cultural axis is ratified at all.
+
+### Not a docket matter
+
+**Whether culture becomes a numbered horizontal contract (C8) is not a constitutional
+act** and does not belong here. The docket holds acts against `rules.json`; a family
+contract lands in `REFERENCE_DESIGN.md` by that document's own amendment process. It is
+recorded as decision 3 of the programme plan.
+
 ### Candidates noted, not filed
 
-- **Rule 64 — what must *not* mirror.** The rule mirrors the layout axis for RTL and is
-  silent on the things that must stay put: clocks, media transport controls, numerals,
-  progress that encodes physical direction. A refinement with real evidence behind it.
 - **Article VI's terminology.** *Culture* in this constitution means an interaction
   culture — a vibe. The cultural axis needs its own word (`CONVENTION` proposed) and
   Article VI may want a clarifying note so the two never merge. Core-level; the author's.
@@ -295,7 +344,7 @@ acknowledgement today.
 | Adopted | Law becomes |
 |---|---|
 | Part 1 only (C-1, C-2) | **v3.8.1** — corrections, one file, consumers keep their pin |
-| + any of P-1, A-1…A-6, N-1 | **v3.9.0** — substance moved |
+| + any of P-1, A-1…A-8, N-1 | **v3.9.0** — substance moved |
 | + A-6 | 16 forbidden patterns; the first cultural one |
 | + N-1 | 118 rules; number 125 burned into use, never reused |
 
@@ -313,7 +362,7 @@ Small, and worth naming honestly rather than padding:
    recorded — the 419 ms measurement, muted-as-silence, the three-way vocabulary drift.
    A ledger that captures each with its date and source costs nothing and prevents the
    book being reconstructed from memory later.
-2. **The site telling the truth about enforcement.** The site says 117 rules and does not
+2. **The site telling the truth about enforcement.** The site says 118 rules and does not
    say that 9 are machine-enforced, 5 tool-enforced, 25 awaiting an instrument and 78
    judgement. Generated from `rules.json`, this changes no law and makes the project's
    central argument visible.

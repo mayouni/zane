@@ -19,7 +19,7 @@ Lower layers constrain upper layers. Upper layers never redefine lower layers.
 LAYER 3 — RENDERING PROJECTIONS      per-medium, replaceable, evolvable
           business web · game worlds · CLI/TUI · voice · AI-agent surfaces
 LAYER 2 — THE CONSTITUTION           non-negotiable, machine-checkable, trend-resistant
-          constitution/rules.json — 117 rules under 7 articles
+          constitution/rules.json — 118 rules under 7 articles
 LAYER 1 — THE INTENT GRAMMAR         closed, finite, medium-agnostic
           22 verbs: DISCOVER UNDERSTAND LOCATE · FOCUS FILTER COMPARE ·
           READ SCAN SCROLL ZOOM · SELECT HIGHLIGHT PREVIEW MARK ·
@@ -54,7 +54,7 @@ A rule's `enforcement` field says which instrument owns it: `machine` (declarati
 
 ## 5. The consumer contract
 
-- A consumer **pins a version** of `rules.json` and records it (Zing, formerly StzWeb, pins v3.7.3).
+- A consumer **pins a version** of `rules.json` and records it (Zing, formerly StzWeb, pins v3.8).
 - **A version denotes exactly one file.** `MAJOR.MINOR` moves when the law's substance moves — a rule canonized, amended, retired, or promoted up the enforcement ladder. A third component, `MAJOR.MINOR.PATCH`, marks a correction that changes no rule's substance: a stale pointer in a `lint` field, a broken path, a brand name left in normative prose by the law's first home. A consumer pinned at `x.y` loses no protection by staying there when `x.y.z` appears — that is the whole meaning of the patch component. First used at v3.7.1 (2026-08-06).
 - **The substance test**, which decides which component moves: *does any interface that was lawful before become unlawful after — or must any conforming implementation change anything it does?* If no, it is a correction, however much prose changed. Editing a rule's wording is not by itself an amendment; changing what the rule requires is. Applied at v3.7.2, where seven passages were de-branded and not one requirement moved, and at v3.7.3, where 21 evidence fields stopped naming a third party.
 - **Evidence is never corrected.** An `evidence` field records what happened, under the names things had when it happened; so does the `lineage`. A tool renamed later does not falsify the record, and rewriting it to match today's vocabulary would destroy the trail Article VII depends on. Pointers are corrected; history is not.

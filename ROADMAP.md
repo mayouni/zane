@@ -4,12 +4,12 @@ Milestones are cumulative; each ships complete or not at all (Rule 124 applies t
 
 ## M1 — The law at home ✅ (2026-08-05, this commit)
 
-- `constitution/rules.json` canonical here: v3.7, 117 rules, 31 sets, 7 articles.
+- `constitution/rules.json` canonical here: v3.7, 118 rules, 31 sets, 7 articles.
 - Rules 117–124 canonized from the banking-product / i18n / Refine harvest ([doc/HARVEST-2026-08.md](doc/HARVEST-2026-08.md)).
 - The Reader ported and rebranded — the whole law, interactive.
 - The UI Audit ported (as "site audit"; renamed 2026-08-05) — six rules measured on any same-origin UI.
 - Founding documents: README, ARCHITECTURE, this roadmap.
-- Consumer contract stated; Zing (formerly StzWeb) pinned at v3.7.3.
+- Consumer contract stated; Zing (formerly StzWeb) pinned at v3.8.
 
 ## M2 — The educational showcase ✅ (2026-08-06)
 
@@ -49,14 +49,14 @@ refusal shape from one project's convention to a family contract. See
 
 **[doc/THE-SECOND-FOUNDING.md](doc/THE-SECOND-FOUNDING.md) v0.1** proposes that StzZui
 grow from an intent language into a complete platform, on the finding that **the law
-legislates a territory the language cannot declare**: 8% of the 117 rules are refusable
+legislates a territory the language cannot declare**: 8% of the 118 rules are refusable
 before a pixel exists, and all but one of the 25 rules the law itself marks
 `machine-later` are expression rules — colour, layout, widget role, message, motion,
 timing. Two payment surfaces that differ by seven broken laws are byte-identical as
 declarations and both run clean at Level 4.
 
 A second finding (v0.2): **the law is monomodal while believing itself medium-agnostic.**
-Across 117 rules the words `sound`, `speech`, `earcon`, `tactile` and `ambient` never
+Across 118 rules the words `sound`, `speech`, `earcon`, `tactile` and `ambient` never
 appear; `audio` appears only as a document attachment; both hits for `voice` are
 typographic metaphor; the one haptic rule is about touch targets; and the only rule about
 how an interface is *heard* is written in ARIA, inside a framework-agnostic constitution.
@@ -102,4 +102,4 @@ The law extended to the medium where interfaces are currently worst: AI conversa
 
 - License: to be chosen by the author before the repository goes public.
 - The repository is local-first until the author decides to publish.
-- ✅ Zing (formerly StzWeb) re-pinned to v3.7.3 (2026-08-07).
+- ✅ Zing (formerly StzWeb) re-pinned to v3.7.3 (2026-08-07); re-pins to v3.8 with Rule 125.

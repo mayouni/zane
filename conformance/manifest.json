@@ -5,7 +5,7 @@
     "lastUpdated": "2026-08-06",
     "specification": "doc/language/README.md",
     "diagnostics": "conformance/violations.json",
-    "constitution": "3.7.3",
+    "constitution": "3.8",
     "comparison": "A run passes a fixture when the set of diagnostic ids it reports, filtered to the levels the implementation claims, equals expect_ids exactly. Line numbers, message wording, ordering and severity phrasing are NOT compared -- an implementation may phrase its prose in any language its operator reads.",
     "levels_note": "A fixture whose level exceeds the implementation's claimed level is SKIPPED, not failed. An implementation reports the level it satisfies; the suite records it."
   },
