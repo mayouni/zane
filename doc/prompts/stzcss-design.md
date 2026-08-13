@@ -135,6 +135,43 @@ argument that this module earns its place.
    well enough to answer "why did this win?" from a parsed sheet?** If it cannot, M4 loses
    its best item and the module should be re-scoped or refused.
 
+## 5. Add CSS to the paradigm document — as a **candidate**, not an instance
+
+`SCOPE_ORIENTED_PROGRAMMING.md` already admits work at several maturities: an instance
+table with statuses (*shipped · built · done · designed*) **and** a set of candidate fields
+analysed but not built — Time, Units, Concurrency, Memory. Those candidates carry **frames
+and scope sets only**: no verb names, no API, no example code.
+
+**CSS belongs in that second list today, in exactly that register**, and the reason is one
+this session will already be dealing with: the document's flagship regex example cites
+`MatchOneSegment()`, which does not exist, and claims greedy-versus-lazy-by-verb, which is
+not implemented. That happened because an intended design was written as though realised.
+**Do not repeat it.** M3 is where naming lives, and a verb name published in that document
+propagates to every field that adopts the paradigm afterwards.
+
+So: add M1 and M2. Leave M3 to the moment the code exists to be true to it, then promote
+the entry to an instance.
+
+**Two things CSS teaches the paradigm itself**, which do *not* depend on `stzCSS` existing
+and are the real reason to write now rather than later:
+
+> **A frame can warrant dissolving in one layer and surfacing in another.** The document
+> treats dissolve-versus-surface as a ruling about a *field* — Concurrency was dissolved.
+> CSS shows it can be a ruling about a *layer*. Specificity should be **dissolved** in a
+> semantic sheet that owns its own resolution, where there is only provenance; and
+> **surfaced and computed** in a module that must speak CSS and live with the browser's
+> arithmetic. Same frame, opposite rulings, decided by whether you own the layer.
+
+> **One field can need all three carriers at once.** Regex is verb-carried, System
+> receiver-carried, Numbers value-carried — one apiece. CSS appears to need formatting
+> context by receiver, units by value, and box model by verb, in the same field. If that
+> survives the build, M3's guidance widens from *pick your carrier* to **pick a carrier per
+> frame**.
+
+Draft the addition, propose it, and **do not edit that document without the author's
+ruling** — it is cited by every domain that adopts the paradigm, and `stzSense` is next in
+that queue.
+
 ## Do not
 
 - **Do not build a CSS engine.** Parsing, cascade *explanation*, emission and refusal — not
