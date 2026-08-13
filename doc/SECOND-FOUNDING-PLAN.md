@@ -131,6 +131,21 @@ plan's unstarted L2–L4.**
 
 Unconditional, independent of each other and of everything else here.
 
+### S4d · Three regex divergences · `stzlib` quality session · **small** · *added 2026-08-13*
+
+Prompt written: [`doc/prompts/regex-defects.md`](prompts/regex-defects.md). Found while
+studying Scope-Oriented Programming in order to apply it to `stzSense`.
+
+`MatchOneSegment()` is documented and does not exist — and *one* segment is not a synonym
+for *first* segment, so it may be a missing act rather than a missing alias.
+Greedy-versus-lazy-by-verb is the segment scope's stated payoff and is unimplemented, with
+`:NonGreedy` never passed by any scope verb. And `MatchWord` permanently rewrites the
+object's pattern, so calling it twice yields `\b\bpat\b\b`.
+
+**Two of the three are decisions, not repairs** — the design document may be the thing that
+is wrong. This matters beyond regex because `SCOPE_ORIENTED_PROGRAMMING.md` is what every
+other domain cites when it adopts the paradigm, and `stzSense` is next in that queue.
+
 ## 4. Track A — StzZui's own work. Gated on ratification.
 
 ### S5 · The medium axis · `stzzui` · **medium** · *first, because everything leans on it*
