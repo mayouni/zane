@@ -146,6 +146,24 @@ Softanza could *emit* one from declared intent, which is strictly better informa
 it must be designed in from the first spike, because accessibility retrofitted onto a
 retained-mode toolkit is a multi-year tax — ask anyone who has done it.
 
+**And there is an existing answer: AccessKit.** Found via the toolkit survey rather than
+looked for. It is a cross-platform abstraction over the platform accessibility APIs —
+**UI Automation** (Windows), **NSAccessibility** (macOS), **AT-SPI** (Linux),
+**Java accessibility** (Android), **UIAccessibility** (iOS) — licensed **Apache-2.0 OR
+MIT**, with real adopters: egui, Bevy, Slint, Freya, Xilem. In egui it is a *hard,
+non-optional dependency*, and the tree is rebuilt each frame as a by-product of the widget
+pass.
+
+Two consequences, and the second is a genuine problem for this proposal:
+
+- **An immediate-mode toolkit can be accessible.** Nuklear's total absence — zero code,
+  zero issues in its tracker's history — is Nuklear's failure, not the paradigm's. So
+  "retained tree" is not the prerequisite; *declaring what each element is* is.
+- **AccessKit has no web adapter.** It is listed as planned; egui falls back to an
+  experimental built-in screen reader in the browser. So the accessibility story would be
+  **solid natively and unsolved on the web** — the inverse of the usual situation, and it
+  lands squarely on this proposal's transversality claim.
+
 **2 · Text input.** IME for CJK, bidi editing, selection across shaped runs. This is where
 toolkits die quietly. The graphics plane's shaping pipeline helps with *display*; editing
 is a different and harder problem.
@@ -229,9 +247,17 @@ A spike, in the house discipline — kill criteria written before the numbers:
   see §2.1.** The window, the frame loop and the painter all exist; the event model, text
   input and focus do not. The correction runs in the proposal's favour on the first count
   and against it on the second, which is the more useful direction to be wrong in.
-- **The landscape survey is in flight.** Three researchers are covering embeddable HTML/CSS
-  engines, native toolkits and standalone layout engines, and the accessibility and
-  text-input cost. §2's litehtml claims and §7's prior art stand only until that lands.
+- **The landscape survey is partial, and deliberately so.** The toolkit strand has returned
+  Nuklear, egui and LVGL; the embeddable HTML/CSS strand is still out, and it carries the
+  two facts that matter most — **litehtml's actual licence, and its flex/grid maturity**,
+  which is a kill criterion. §2's litehtml claims stand only until that lands.
+- **The accessibility and text-input deep-dive was stopped before it reported.** What is
+  recorded in §5.1 arrived incidentally through the toolkit strand and is solid. What was
+  *not* obtained: the per-platform cost of implementing UIA / AT-SPI / NSAccessibility
+  directly, the IME and bidi-editing research, and any effort estimate. **Treat §5.2 and
+  §5.3 as unquantified**, and note that this is the one area where I would not trust a
+  guess — the evidence already in hand is that egui, funded and actively released, has had
+  bidi *editing* open as an issue since 2021.
 - **The accessibility finding is the one I would not defer.** Every other risk here is an
   engineering cost. That one is a conflict with the constitution, and discovering it in
   year two would be much worse than designing for it in week one.
