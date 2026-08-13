@@ -188,6 +188,65 @@ Two sub-rulings, and the second is no longer open research:
 **Verdict**: one correction, one amendment. **This is the item to rule on first**, because
 the sound session is building against it right now.
 
+### A-6 · A forbidden pattern for conscripted signs · *added 2026-08-13*
+
+The constitution carries **fifteen forbidden patterns and not one is cultural.** Propose a
+sixteenth:
+
+```
+id:        sovereign-sign-as-label
+title:     A sovereign sign conscripted as a convenience label
+violates:  ["122"]        — or a companion rule; see below
+```
+
+**Statement.** A sign that denotes sovereignty, faith or political identity must never be
+conscripted as a label for something else. The canonical instance names the class:
+**a flag is not a language.**
+
+**Evidence.** Arabic is official in some twenty-odd states; so with French, Spanish,
+Portuguese and English. Choosing one flag to denote one language selects a *state* to
+stand for a *tongue*, and the interface thereby makes a political claim on its owner's
+behalf without anyone deciding to. Shipped to a ministry whose relations with that state
+are poor, the software has issued a diplomatic statement its authors never wrote.
+**This is the only forbidden pattern in the list whose violation can end a contract
+rather than annoy an operator.**
+
+**The wording must forbid conscription, not use.** A national flag is the *correct* sign
+for country of registration on a customs form. The defect is using a sovereign sign to
+mean something it does not denote. A pattern drafted loosely here would forbid legitimate
+use and be rightly ignored — which is worse than not having it.
+
+**Which rule does it violate?** Rule 122, *Language Is Data*, is closest: it already
+requires a per-language dictionary and a *registered locale*, which implies a language is
+identified by a locale code and not by a banner. Two options: bind the pattern to 122 as
+an unstated consequence, or canonize a companion rule so the pattern points at something
+written. **Recommended: bind to 122 now**, and let a companion rule follow if the capture
+loop produces more instances of the class.
+
+**Verdict**: amendment, MINOR. An interface lawful before — 122 nowhere says *flag* —
+becomes unlawful after.
+
+**Not filed, and why.** The wider hazard class (disputed borders and place names, religious
+symbols as category icons, gestures and their emoji, sectarian colour, assumed weekends,
+name models) is real and is deliberately **not** drafted here. It needs review by people
+who live inside those readings; a hazard list written from outside is the failure it warns
+about. The capture loop of founding §8.1 is the right instrument, and this pattern is the
+one case confident enough to file today.
+
+### Candidates noted, not filed
+
+- **Rule 64 — what must *not* mirror.** The rule mirrors the layout axis for RTL and is
+  silent on the things that must stay put: clocks, media transport controls, numerals,
+  progress that encodes physical direction. A refinement with real evidence behind it.
+- **Article VI's terminology.** *Culture* in this constitution means an interaction
+  culture — a vibe. The cultural axis needs its own word (`CONVENTION` proposed) and
+  Article VI may want a clarifying note so the two never merge. Core-level; the author's.
+- **`stzDiagramColor.ring:45` — not a law item.** The engine's
+  `$acColorsBySemanticMeaning` table hard-codes `:Success = "green"` and
+  `:Danger = "red"`, the exact pair that inverts in Chinese, Japanese, Korean and
+  Taiwanese financial convention. That is a finding for the graphics plane, filed in the
+  programme rather than here, because no rule needs to change for it to be a defect.
+
 ---
 
 ## Part 4 — Canonization candidate (MINOR)
@@ -236,7 +295,8 @@ acknowledgement today.
 | Adopted | Law becomes |
 |---|---|
 | Part 1 only (C-1, C-2) | **v3.8.1** — corrections, one file, consumers keep their pin |
-| + any of P-1, A-1…A-5, N-1 | **v3.9.0** — substance moved |
+| + any of P-1, A-1…A-6, N-1 | **v3.9.0** — substance moved |
+| + A-6 | 16 forbidden patterns; the first cultural one |
 | + N-1 | 118 rules; number 125 burned into use, never reused |
 
 C-2 adds a field rather than changing one, and C-1 adds pointers. Neither moves a

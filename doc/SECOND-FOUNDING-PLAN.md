@@ -96,6 +96,19 @@ The constitution's colour rules gain an instrument pointer; the colour plan gain
 law this serves" line; the sound plan gains the same once S7 lands. Cheapest item in the
 programme and the one that prevents the next drift.
 
+### S4b · The colour table's hard-coded culture, filed · `stzlib` graphics · **tiny** · *added 2026-08-13*
+
+`stzDiagramColor.ring:45` comments `$acColorsBySemanticMeaning` as an *"abstraction
+layer"*, and it is one that stops a level too early: it abstracts hex → name, then
+hard-codes name → **one culture's reading**. `:Success = "green"` and `:Danger = "red"`
+are exactly the pair that inverts in Chinese, Japanese, Korean and Taiwanese financial
+convention, where red is gain and green is loss — so a Softanza financial dashboard
+shipped to Shanghai renders profit in the colour of loss.
+
+File it as a cross-plane finding, in the genre that plane already uses. **No rule needs to
+change for this to be a defect**, which is why it is here and not on the docket. The fix
+is not a different table; it is one more lookup — meaning → *convention* → reading.
+
 ### S4 · The sound-plane finding, filed · `stzlib` · **tiny**
 
 Rule 18 requires acknowledgement within 100 ms; the plane measures 112.6 ms output

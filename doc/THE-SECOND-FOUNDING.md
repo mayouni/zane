@@ -1,11 +1,13 @@
 # The Second Founding — StzZui as a complete platform for interfaces
 
-**Status**: **v0.3 — proposed, not ratified.** Written for the author's section-by-section
+**Status**: **v0.4 — proposed, not ratified.** Written for the author's section-by-section
 pass, in the manner of the reference design's own ratification.
-**Supersedes** v0.1 (six strata, one medium assumed) and v0.2 (eight media, enumerated).
-v0.3 adds the physical media — light and signage — and with them a third medium law, a
-classification by properties rather than a list, a statutory tier above the constitution,
-and one gap in the Core that is named rather than filled.
+**Supersedes** v0.1 (six strata, one medium assumed), v0.2 (eight media, enumerated) and
+v0.3 (the physical media, and media classified by properties).
+**v0.4 adds the third axis: culture.** A stratum says what an expression does, a medium
+says where it is carried, and neither says what it *means to the person receiving it*.
+With it come a principled Core/Commons boundary, a hazard class the fifteen forbidden
+patterns do not cover, and a defect in this project's own colour table.
 **Amends**: [ARCHITECTURE.md](ARCHITECTURE.md) (founding document, 2026-08-05), whose
 three-layer model this restates rather than replaces.
 **Touches**: `softanza/REFERENCE_DESIGN.md` v1.3 — amendments proposed in §7, **not
@@ -178,7 +180,7 @@ would bind to. The constitution has no rule about auditory loudness for it to se
 5. **The signature move**: closed language + court + fixtures + consumers that pin.
 6. **The substance test and the patch component**, exactly as they stand.
 
-## 4. The two axes
+## 4. The three axes
 
 The founding architecture named three layers and left the middle to "projections", which
 are per-medium, replaceable, and **not declarable**. So the ladder runs from intent
@@ -312,6 +314,104 @@ axis is about properties and not about a taxonomy of gadgets.
 Note what the `Election` row does to the earlier list: `ambient` was filed in §6 as a
 medium, and it is better read as **a property that light, signage, sound and notification
 all share**. That is a correction to §6's Tier 2, not a refinement of it.
+
+### 4.6 The cultural axis — the reading a sign gets
+
+A stratum says what an expression *does*. A medium says where it is *carried*. Neither
+says what it **means to the person receiving it** — and meaning is not a property of the
+sign. It is a property of the sign *and its reader*.
+
+**The law has language. It does not have culture.** Set 18 holds three rules, all
+`judgment`: dialect switching (63), right-to-left logic (64), and language as data (122) —
+the last naming Wolof, Hausa, Bambara and Zarma, which is more global than most standards
+manage. Rule 64's reasoning is already exactly right: *"Calm that only flows left-to-right
+is not calm; it is locale bias."* But **translating every string does not fix a sign whose
+meaning inverts.** Language is data; meaning is convention.
+
+**A terminology collision to settle first.** The word *culture* is already taken in this
+constitution. Article VI: *"their culture deserves architectural respect: vibes,
+densities, dialects, and surfaces."* Here culture means **interaction culture** — a vibe.
+The axis below needs its own word; `CONVENTION` is proposed and the naming is the
+author's. Quietly overloading Article VI's term would be the worst option.
+
+**The defect, in this project's own code.** `stzlib/…/graph/stzDiagramColor.ring:45`:
+
+```ring
+# Semantic color meanings (abstraction layer)
+$acColorsBySemanticMeaning = [
+    :Success = "green",  :Warning = "yellow",  :Danger = "red",
+    :Info    = "blue",   :Primary = "blue",    :Neutral = "gray"
+]
+```
+
+The comment calls it an abstraction layer, and it is one — **that stops exactly one level
+too early.** It abstracts hex → name, then hard-codes name → *one culture's reading* as if
+that were the meaning. And it picks the worst possible pair to hard-code:
+`:Success = "green"` and `:Danger = "red"` **invert** in Chinese, Japanese, Korean and
+Taiwanese financial convention, where red is gain and green is loss. **A Softanza
+financial dashboard shipped to Shanghai renders profit in the colour of loss** — in a
+domain where the operator is moving money under time pressure.
+
+**And this is the semantic layer's vindication, not its embarrassment.** An author who
+writes `#00FF00` has hard-coded a cultural reading and cannot be helped by anything. An
+author who writes `:Success` has declared a *meaning*, and the renderer can be taught.
+The founding sentence simply grows one axis: **declare the meaning once, and every medium
+and every culture renders it.**
+
+#### 4.6.1 Two problems, and conflating them would be the error
+
+**(a) Variance — parameterisable.** The same meaning renders differently: red for danger
+versus red for prosperity; white for weddings versus white for mourning; green's religious
+weight; the financial inversion above. This is what the cultural axis is *for*. The five
+semantic values of Rule 118 are meanings and survive; the seed hexes are readings and do
+not.
+
+**(b) Hazard — not parameterisable.** Some signs carry sovereignty, religion or political
+identity, and conscripting them as convenience labels is an act with consequences the
+software never intended. There is no correct rendering to select. The answer is **don't**,
+and the machinery for that already exists: the constitution carries fifteen
+`forbidden` patterns and **not one of them is cultural.**
+
+> **A sign that denotes sovereignty, faith or political identity must never be conscripted
+> as a label for something else.**
+
+The canonical case is the one that names the whole class: **a flag is not a language.**
+Arabic is official in some twenty-odd states; Spanish, Portuguese, English, French, Arabic
+each span many. Choosing one flag to mean one language is choosing a *state* to stand for
+a *tongue* — a political claim the interface makes on its owner's behalf, silently. Ship
+an interface to a ministry whose relations with that state are poor and the software has
+issued a diplomatic statement its authors never wrote. That is not a design defect to be
+apologised for in the next release; it is the kind that ends a contract.
+
+Other members of the class, offered as a starting list and not a survey: disputed borders
+and place names on maps; religious symbols used as category icons; gestures whose emoji
+are obscene in some regions and friendly in others; colours with sectarian charge in
+specific places; numbers carrying strong associations; assumed weekends and week-start
+days; personal-name models that assume a given/family pair.
+
+**And part of this class is statutory, not stylistic.** Map borders are legally mandated
+to differ by jurisdiction. That is tier 0 of §8 — the organ this document grew one
+revision ago for physical media turns out to be load-bearing here too, which is mild
+evidence it was the right organ.
+
+#### 4.6.2 What the cultural axis fixes in the governance model
+
+§8 proposed a Core that is non-negotiable and a Commons that is contributed, with the
+boundary drawn by the author's judgement. Culture supplies a **principled** boundary
+instead:
+
+> **What is non-negotiable is what is true of human beings. What is contributed is what is
+> true of a place.**
+
+Tested against the corpus, that boundary holds up well. The seven articles rest largely on
+physiology and ethics — finite attention, working memory, error recovery, the dignity of
+undo — and travel. The *rules* are where locality enters: the monastic palette, paper
+tones, one accent per screen, density preferences, and every colour assignment. Article I
+even anticipates the objection — *"Calm is a functional requirement, not an aesthetic
+choice"* — and that defence holds for the article and is thinner for some rules beneath it.
+
+This also gives the **Local** tier a much better justification than preference. For a
+ministry, a local law forbidding a sign class may be a political necessity, not a taste.
 
 ## 5. The six strata, stated modality-neutrally
 
@@ -584,6 +684,11 @@ Four tiers, one supremacy rule.
 > **Supremacy**: a local law may be *stricter* than the commons and never *looser*; and
 > nothing at any tier may contradict a statute that binds the medium.
 
+**Where the Core/Commons line falls, on principle rather than by judgement** (§4.6.2):
+*what is non-negotiable is what is true of human beings; what is contributed is what is
+true of a place.* Finite attention, working memory, error recovery and the dignity of undo
+travel everywhere. Palettes, densities, accents and every colour assignment do not.
+
 **The admission test is already in the data.** All 117 rules carry `derived_from`, and all
 117 resolve to one of the seven articles. So: **a proposed rule that derives from no
 article is inadmissible; one that contradicts the Core is inadmissible; everything else is
@@ -669,7 +774,8 @@ the artifact.
 | II — The Heritage | What HCI knew and could not enforce: Norman's gulfs, Nielsen, Fitts, Hick, Gestalt, Tufte, Shneiderman. **And the one place it *was* enforced**: road signage — a closed vocabulary, legislated by treaty, amended on crash evidence, working across languages and literacy for sixty years. The book's existence proof, and the answer to anyone who calls a constitution for interfaces utopian. |
 | III — The Inversion | Intent first. The closed grammar. Why correctness becomes compilable. |
 | IV — The Expression | The missing middle: structure, signal, role, motion, message, tempo. |
-| V — **The Senses** | Interfaces are not only seen. Sound, voice, touch, print — and why a monomodal law is an incomplete one. Accessibility as the same law, not a chapter of exceptions. |
+| V — **The Senses** | Interfaces are not only seen. Sound, voice, touch, light, signage — and why a monomodal law is an incomplete one. Accessibility as the same law, not a chapter of exceptions. |
+| VI — **The Readers** | Meaning is not a property of the sign. Where conventions differ, where they invert, and the signs that must never be conscripted at all. Why a law claiming universality owes an account of its own locality — and what in it actually travels. |
 | VI — The Law | Articles, rights, evidence, the enforcement ladder, the substance test. |
 | VII — The Commons | Governance, and the loop from a user's pain to a numbered rule. |
 | VIII — Under Generation | Interfaces made by machines, refused by law. |
@@ -744,6 +850,15 @@ was not.**
 - **The bystander gap is filed, not solved.** "The person an interface addresses but does
   not serve" has no place in the preamble, the rights, or the 22 verbs, and inventing one
   in a footnote would be worse than naming the hole.
+- **The cultural claims in §4.6 are examples, not a survey, and they are the kind most
+  easily got wrong by someone outside the culture described.** The financial red/green
+  inversion and the flag-is-not-a-language case I am confident of; the wider hazard list is
+  a starting point that needs review by people who live inside those readings, not
+  research by people who do not. **A chapter on culture written by one culture is the
+  failure it warns about**, and the capture loop of §8.1 is the only honest way to fill it.
+- **§4.6.2 judges this constitution's own locality**, which is not a neutral act. The
+  claim that the articles travel and the rules are local is argued, not proven, and the
+  author has better standing than I do to say where the line actually falls.
 - **`print` may break the model, and that is why it is in.** If `MOTION` and `TEMPO` have
   no print form, the matrix has empty rows — honest, but it means "every stratum in every
   medium" is not the shape of the law.
