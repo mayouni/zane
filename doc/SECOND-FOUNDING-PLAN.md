@@ -47,21 +47,42 @@ after SN6 is a migration.
 And S1 is the root of it — because sound reuses colour's five names, the sound work
 cannot start until it is known what those five names *are*.
 
-## 3. Track 0 — the drift corrections. Start now.
+## 3. Track 0 — the drift corrections
 
-Unconditional. Each is defensible on its own evidence even if the Second Founding is
-rejected entirely.
+Each is defensible on its own evidence even if the Second Founding is rejected entirely.
 
-### S1 · Reconcile the five semantic values · `stzzui` + `stzlib` · **small, blocked on one decision**
+**Corrected 2026-08-12**: this track was written as "start now, unratified". That was half
+right. Three of its four items turn out to be **constitutional acts** under the project's
+own versioning rule — a rule canonized, amended, or *promoted up the enforcement ladder*
+moves the law's substance — and are therefore the author's, not a session's. They are now
+filed in [AMENDMENT-DOCKET.md](AMENDMENT-DOCKET.md) for a single ratification pass. What
+is genuinely unblocked without any ruling is smaller, and is listed in that docket's §6.
 
-Three vocabularies exist for one concept (founding §2). Settle them into one, amend the
-law by the substance test, and record the reconciliation in both homes.
+### S1 · Reconcile the five semantic values · `stzzui` + `stzlib` · **small** · *now on the docket as A-5*
 
-- Decide the canonical five (see §10, decision 2 — this is the author's call, and one of
-  the pairs may not be a naming question at all).
-- Amend or correct Rules 3 and 118 accordingly; state which it was and why.
+**Updated 2026-08-12: the evidence changed, and in the project's favour.** S7 ran ahead of
+this session — and the sound plane, rather than inventing a vocabulary, deferred to the
+law: *"the vocabulary is not this plane's to choose… a sixth value here would be a
+constitutional amendment wearing a library's clothes."* It adopted
+`danger · warning · info · success · muted`.
+
+So **two of the three vocabularies now agree, and the colour engine is the outlier.** S1
+is no longer "pick a winner"; it is "bring colour into line with the law and with sound."
+
+The `muted` vs `:Neutral` question is likewise settled by evidence rather than by ruling:
+forced to render `muted`, the sound plane found the answer is **silence**, on the ground
+that muted means *waiting or inactive* and a sound announcing inactivity is a
+contradiction. A state renders as silence; an absence of semantic charge does not. They
+are two concepts, so reconciliation **adds a value rather than renaming one**.
+
+- Rule as ruled in [AMENDMENT-DOCKET.md](AMENDMENT-DOCKET.md) A-5.
 - `SOFTANZA_COLOR_SYSTEM.md` records which rule its semantic names serve.
 - **Do not** change any computed colour. This settles names, not values.
+
+**A note on the sequencing deviation.** S7 starting before S1 was the risk this plan named,
+and it did not bite — because the ownership split held: the plane treated the vocabulary as
+the law's to set. That is the split of founding §7.1 working under pressure, and it is
+better evidence for the architecture than any argument in the founding document.
 
 ### S2 · Rule 62 off `machine-later` · `stzzui` · **small**
 
@@ -214,14 +235,11 @@ a decision or on a predecessor.
 1. **Ratify, amend or reject the Second Founding** — section by section, in the manner of
    the reference design. `ROLE` (§5) is the move most worth attacking: if a role is a
    widget wearing a disguise, the stratum falls and much of Track A shrinks.
-2. **The five semantic values.** Rule 3 says `Neutral · Accent · Warning · Error`;
-   Rule 118 says `success · warning · danger · info · muted`; the engine says
-   `:Primary :Success :Warning :Danger :Info :Neutral`. Two sub-questions:
-   - `Error` vs `danger` — a naming choice, and a **correction** if nothing lawful changes.
-   - `muted` vs `:Neutral` — **possibly not a naming question at all.** Rule 118's `muted`
-     means *"waiting, inactive"*, which is a **state**; the engine's `:Neutral` means the
-     absence of semantic charge. If those are two concepts, the reconciliation adds a
-     value rather than renaming one — and that is an **amendment**.
+2. ~~**The five semantic values.**~~ **Answered by evidence, 2026-08-12** — see S1 and
+   docket A-5. The sound plane adopted the law's five and rendered `muted` as silence,
+   which settles both sub-questions: `Error → danger` is a correction, and `muted` and
+   `:Neutral` are two concepts rather than two spellings, so reconciliation adds a value.
+   What remains for the author is ratifying A-5, not deciding it.
 3. **Who owns the medium axis?** Either StzZui owns it as part of the interface
    vocabulary (this plan's assumption), or it is family-wide and belongs in the reference
    design as **C8, the Medium Contract** — it does bear on `.face`, both planes and the
