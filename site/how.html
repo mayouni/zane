@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How it works — declare, check, project, measure</title>
-<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 118 rules as data, and a refusal contract of ten named violations.">
+<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 119 rules as data, and a refusal contract of ten named violations.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css">
 <style>
@@ -163,7 +163,8 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   <div class="narrow">
     <h2>The semantic layer: a constitution as data</h2>
     <p>What makes the language refuse is not taste — it is
-    <a href="../constitution/rules.json">one JSON file</a>: v3.8.0, 118 rules in
+    <a href="../constitution/rules.json">one JSON file</a>: v<span data-law="version">3.9</span>,
+    <span data-law="rules">119</span> rules in
     31 sets under 7 articles. Every rule carries the same anatomy: what to
     avoid, the lawful solution, the <em>why</em>, the article it derives from,
     its enforcement tier, and the real-world evidence that earned it a number.
@@ -191,27 +192,41 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     <h3>The enforcement ladder</h3>
     <p>Every rule declares who can currently catch its violation, and rules
     climb as instruments are invented — Rule 107 began as judgment and is now
-    machine-checked; 117 and 118 are next (colour-column counting is
-    measurable). The census, computed from the file:</p>
+    machine-checked, and Rule 62 moved to <em>tool</em> at v3.9 once a runnable
+    contrast check existed to serve it. The census, read from the file when you
+    load this page:</p>
     <div class="tiers">
-      <div class="card"><b>9</b><h3>machine</h3><p>refused by a conforming compiler or linter, today</p></div>
-      <div class="card"><b>5</b><h3>tool</h3><p>measured on the painted page by the UI audit</p></div>
-      <div class="card"><b>25</b><h3>machine-later</h3><p>decidable; awaiting their instrument</p></div>
-      <div class="card"><b>78</b><h3>judgment</h3><p>a reviewer decides yes or no, citing the number</p></div>
+      <div class="card"><b data-law="tier:machine">9</b><h3>machine</h3><p>refused by a conforming compiler or linter, today</p></div>
+      <div class="card"><b data-law="tier:tool">6</b><h3>tool</h3><p>measured by a runnable instrument</p></div>
+      <div class="card"><b data-law="tier:machine-later">25</b><h3>machine-later</h3><p>decidable; awaiting their instrument</p></div>
+      <div class="card"><b data-law="tier:judgment">79</b><h3>judgment</h3><p>a reviewer decides yes or no, citing the number</p></div>
     </div>
+
+    <p class="law-note"><b>This is the number the project is built to move.</b>
+    Only <b data-law-share="machine">8%</b> of the law is refusable before a
+    pixel exists — the rest waits on a human, or on an instrument nobody has
+    built yet. Every rule that climbs a rung is the argument working; every
+    rule stuck at <em>machine-later</em> is the law admitting an instrument is
+    missing. These figures were hand-typed until 2026-08-13, under a heading
+    that said they were computed. They had gone stale. They are computed
+    now.</p>
 
     <h3>The rights and the forbidden</h3>
     <p>Across the rules, the law guarantees six operator rights — to
     <b>understand</b>, to <b>reverse</b>, to <b>know</b>, to <b>leave</b>, to
     <b>act without fear</b>, and to <b>a human</b> — each traceable to the
-    specific rules that enforce it. And it names fifteen forbidden patterns
+    specific rules that enforce it. And it names
+    <b data-law="forbidden">16</b> forbidden patterns
     outright: modal storms, invisible active filters, hidden destructive
     actions, selection that silently executes, confirm-shaming, pre-checked
     consent, mouse-only critical workflows, decorative animation, layout
     shifts during interaction, auto-committed configuration, accusatory
     errors, unmarked machine-made content, instant reset after a critical
-    action, "everything" as the default view, and the app closing by
-    surprise. <a href="../constitution/reader/">The Reader</a> renders all of
+    action, "everything" as the default view, the app closing by
+    surprise, and — newest, and the first cultural one — a sovereign sign
+    conscripted as a convenience label, whose canonical instance is a flag
+    used to mean a language.
+    <a href="../constitution/reader/">The Reader</a> renders all of
     it, live from the same file.</p>
   </div>
 </section>
@@ -246,7 +261,7 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     <table class="plain">
       <thead><tr><th>Instrument</th><th>What it does</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>The law, <code>rules.json</code> v3.8.0</td><td>118 rules as data; the single source of truth</td><td class="status live">in force</td></tr>
+        <tr><td>The law, <code>rules.json</code> v<span data-law="version">3.9</span></td><td><span data-law="rules">119</span> rules as data; the single source of truth</td><td class="status live">in force</td></tr>
         <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — in the reference implementation</td></tr>
         <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — in the reference implementation</td></tr>
         <tr><td>The ten named violations</td><td>the refusal contract every conforming implementation must detect</td><td class="status live">9 of 10 enforced by the verifier; the 10th is the UI audit's</td></tr>
@@ -292,5 +307,6 @@ table.plain th { color: var(--muted); text-transform: uppercase;
 </footer>
 
 <script src="stz.js"></script>
+<script src="law-numbers.js" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>
