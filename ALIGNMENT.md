@@ -32,7 +32,7 @@ refusal format every court in the family speaks.
    decided the verifier *accepts a symbol table as input*; that input becomes the
    `world.json` artifact instead of an ad-hoc table. No verifier logic changes — only
    the provenance of the table it already accepts.
-3. **C6 — lexical alignment, documented not forced.** When Ringuist publishes the
+3. **C6 — lexical alignment, documented not forced.** When Ringua publishes the
    commons, `.zui`'s divergences are recorded the way the law records burned numbers:
    named, dated, never silently rewritten.
 
@@ -46,7 +46,7 @@ ground.
 ## Order and gates
 
 C2 is this repository's first and cheapest act after ratification, and it unblocks every
-other court's adoption. Item 2 waits on stzlib's world schema; item 3 waits on Ringuist.
+other court's adoption. Item 2 waits on stzlib's world schema; item 3 waits on Ringua.
 
 ## Honest boundaries
 
