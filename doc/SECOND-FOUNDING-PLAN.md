@@ -304,33 +304,47 @@ facades: an operation either honours the culture it was given, or refuses.**
 
 ## 7. The dashboard
 
-| # | Track | Repo | Size | Gated on |
+**Status as of 2026-08-13, end of day.** The ratification pass closed the gate that held
+Track A, so the shape of this table has changed more in one day than in the week before it.
+
+| # | Track | Repo | Status | Note |
 |---|---|---|---|---|
-| S1 | 0 | stzzui + stzlib | small | one decision (§10.2) |
-| S2 | 0 | stzzui | small | — |
-| S3 | 0 | stzzui + stzlib | tiny | S1 |
-| S4 | 0 | stzlib | tiny | — |
-| S5 | A | stzzui | medium | ratification |
-| S6 | A | stzzui | medium | ratification |
-| S7 | A | stzzui + stzlib | medium | **S1** · before SN6 |
-| S8 | A | stzzui | medium-large | S5 |
-| S9 | A | stzzui | large | S8 |
-| S10 | A | stzzui | large | S8 |
-| S11 | B | stzzui | medium-large | ratification |
-| S12 | B | stzzui + an app | medium | S11 |
-| S13 | B | stzzui | medium | S5, S11 |
-| S9b | A | stzzui | medium | ratification + S20 |
-| S14–S19 | C | siblings | small each | their contract |
-| S20 | C | stzlib | large | none hard |
-| S4b, S4c | 0 | stzlib | tiny / small | — |
+| **S2** | 0 | stzzui | ✅ **done** | Rule 62 → `tool` (not `machine`; tier corrected at ratification) |
+| **S5** | A | stzzui | ✅ **done** | `SURFACE_AS` closed to ten, matrix as data, 2 diagnostics, suite 34/34 |
+| **S6** | A | stzzui | ✅ **done** | A-1…A-4 applied at v3.9; Rule 82 is *Perceivable State* |
+| **S7** | A | stzlib | ✅ **done** | `stzEarcons` shipped, adopting the law's five values on principle |
+| **S21a** | C | stzlib | ✅ **done** | `RectsOfRange` · `CaretRectAt` · `IndexAtPoint` — the G1 gate |
+| **S4** | 0 | stzlib | ✅ **done** | the plane found it first; it became **Rule 125** |
+| S1 | 0 | stzzui + stzlib | 🟡 **half** | law side done (A-5, `Error`→`Danger`); **the engine has not been told** |
+| S3 | 0 | stzzui + stzlib | 🟡 **half** | law → instruments done (C-1); the reciprocal citation is not |
+| S9b | A | stzzui | 🟡 **part** | A-6 and A-7 are law; `CONVENTION` and medium × culture unbuilt |
+| **S21** | C | stzlib | 🔵 **running** | G1 cleared; `.stzui` v0.1 shipped; finding filed |
+| S20 | C | stzlib | ⚪ ready | culture module — prompt refreshed for v3.9 |
+| S4c | 0 | stzlib | ⚪ ready | locale defects — all three re-verified |
+| S4d | 0 | stzlib | ⚪ ready | regex divergences — all three re-verified |
+| S8c | A | stzlib | ⚪ ready | stzCSS — §5 corrected, already-done part removed |
+| S4b | 0 | stzlib | ⚪ ready | the colour table's hard-coded culture, unfiled |
+| S8 | A | stzzui | ⚪ next | SIGNAL in the visual channel — now unblocked by S5 |
+| S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
+| S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
+| S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |
+| S14–S19 | C | siblings | ⏸ waits | their contracts |
 
-**Six sessions can run today**: S2, S4, S4b, **S4c** (the three defects), **S20** (the
-culture module), and S1 now needing only ratification of docket A-5 rather than a
-decision. Everything else waits on a ruling or a predecessor.
+**Six done, three half, one running, five ready to launch.**
 
-**S20 is the largest unblocked item in the programme** and the only one that is large
-*and* ungated — worth knowing, because it will take longer than everything else in this
-table put together.
+**The critical path is clear.** S1 → S7 was the one piece of timing that could not be
+recovered, and it held: the sound plane deferred to the law rather than inventing a
+vocabulary, so `stzEarcons` and Rule 118 agree without anyone having to reconcile them
+afterwards.
+
+**What now blocks most**: nothing is gated on a ruling any more. The three half-done items
+are all *the same shape* — **the law moved and the engines have not been told.** S1's
+reconciliation, S3's reciprocal citation and S4b's culture finding are three notes to
+`stzlib`, and together they are less than a session.
+
+**The largest ungated item is still S20**, the culture module. **The most valuable
+unblocked one is S8** — SIGNAL in the visual channel — because it is the first expression
+grammar written in full, and it sets the pattern the other five copy.
 
 ## 8. Six traps
 
