@@ -10,6 +10,17 @@ in order to apply it elsewhere — **not by running anything.** Every claim belo
 to reproduce, not a diagnosis to act on. If one does not hold, say so; that corrects the
 record and is a good outcome.
 
+**Re-verified 2026-08-13 against the current tree**, with lines: `MatchSegmentsIn` at
+`:440-441` and `MatchFirstSegmentIn` at `:447-448` are byte-identical, both passing
+`[ :DotMatchesAll, :MultiLine ]`; `:NonGreedy` appears only in the option table (`:68`) and
+the compile switch (`:322`) and is passed by **no scope verb at all**; `MatchOneSegment`
+does not exist anywhere in the file.
+
+**Divergence 3 is worse than reported.** It is not one verb but **two**: `MatchWordsIn`
+(`:422-424`) *and* `MatchFirstWordIn` (`:431-433`) both call `SetPattern` with the anchored
+`"\b" + Pattern() + "\b"`. Either one called twice yields `\b\bpat\b\b`; called in sequence
+they compound. Fix both, and guard both.
+
 ---
 
 ## Why these three belong in one session

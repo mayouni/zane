@@ -10,6 +10,14 @@ culture module — **not by running anything.** Treat every claim below as a rep
 reproduce, not a diagnosis to act on. If one of them does not reproduce, say so; that is a
 useful outcome and it corrects the record.
 
+**Re-verified 2026-08-13, after later commits to this tree.** All three still stand, with
+exact locations confirmed: the bidi constants against the vendored `utf8proc.h`, the dead
+variable at `stzNumber.ring:7642 / 7649 / 7731` against its assignment at `7400 / 7489`,
+and the wrong expectation at
+`base/test/datetime/76_example_15_counting_from_islamic_calendar.ring:14,18`. Defect 1 is
+**worse than first reported** — see below. Reproduce anyway; the point of the rule is not
+that I checked.
+
 **Why these three together**: they all sit in layer one (locale, number, calendar), they
 are all small, and each is the kind of defect that stays invisible until something builds
 on top of it. Nothing here belongs to the locale plan's unstarted L2–L4 — these are things
@@ -21,11 +29,26 @@ that are *wrong*, not things that are *missing*.
 
 **Where**: `engine/src/string/locale.zig`, around lines 110–114.
 
-**Reported cause**: the direction classifier uses the wrong utf8proc bidi-class constants.
-It reportedly treats RLE and CS as RTL, treats NSM as LTR, and misses R (strong
-right-to-left) entirely — which is the class Hebrew letters carry. Arabic may pass anyway
-via AL, which is exactly why this survives: **the language most likely to be tested is not
-the one that breaks.**
+**Cause — confirmed 2026-08-13 against the vendored header, not inferred.**
+`engine/vendor/utf8proc/utf8proc.h:356-369` gives the real numbering:
+
+```
+L = 1   LRE = 2   LRO = 3   R = 4   AL = 5   RLE = 6   RLO = 7
+EN = 9  AN = 12   CS = 13   NSM = 14
+```
+
+The classifier matches `1, 14 => has_ltr` and `5, 6, 13 => has_rtl`. So:
+
+- **R = 4 is never matched.** Hebrew letters carry class R, so **Hebrew is missed entirely**.
+- Arabic passes only by accident, through AL = 5 — which is exactly why this survived:
+  **the language most likely to be tested is not the one that breaks.**
+- `6` is RLE, an embedding *control*, counted as strong RTL. `13` is CS and `14` is NSM,
+  counted as RTL and LTR respectively. Three further misclassifications.
+
+**And the in-code comment is part of the defect.** Line 110 asserts
+`1=L, 2=LRE, 3=LRO, 5=R, 6=AL, 7=RLE, 8=RLO, 13=AN, 14=EN` — a numbering that **skips 4**,
+which is what made it look plausible. Fix the comment with the code, or the next reader
+re-derives the same wrong constants from it.
 
 **The part that makes it worth doing now**: the Ring layer's `stzString.IsRightToLeft()`
 reportedly uses the correct numbering and gets Hebrew right. So **the two layers disagree
