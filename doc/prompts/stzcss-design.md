@@ -135,7 +135,22 @@ argument that this module earns its place.
    well enough to answer "why did this win?" from a parsed sheet?** If it cannot, M4 loses
    its best item and the module should be re-scoped or refused.
 
-## 5. Add CSS to the paradigm document — as a **candidate**, not an instance
+## 5. Add CSS to the paradigm document — ✅ **already done, 2026-08-13**
+
+**This section is kept for its reasoning, not as a task.** The entry landed while this
+prompt was queued: `SCOPE_ORIENTED_PROGRAMMING.md` is now **v1.1**, CSS is the **fifth
+candidate field** in §9 with its M1 frames and M2 scope sets, and the two lessons below are
+recorded there. One existing claim was amended to fit it — the candidate cluster was
+described as uniformly M1–M4, and **CSS is the first candidate to reach M5**, since its
+targets differ in what they can do at all.
+
+**What is left for this session is the other direction**: when the field is *built*,
+promote the entry from candidate to instance and add M3 — the verb names — which were
+deliberately withheld. Read the entry before designing; it is the brief.
+
+---
+
+*The reasoning, kept:*
 
 `SCOPE_ORIENTED_PROGRAMMING.md` already admits work at several maturities: an instance
 table with statuses (*shipped · built · done · designed*) **and** a set of candidate fields
@@ -168,9 +183,13 @@ and are the real reason to write now rather than later:
 > survives the build, M3's guidance widens from *pick your carrier* to **pick a carrier per
 > frame**.
 
-Draft the addition, propose it, and **do not edit that document without the author's
-ruling** — it is cited by every domain that adopts the paradigm, and `stzSense` is next in
-that queue.
+**Do not edit that document without the author's ruling** — it is cited by every domain
+that adopts the paradigm. The candidate entry was ruled and applied; promoting it to an
+instance is a second ruling, not a consequence of building.
+
+**Standing, current as of 2026-08-13**: the law is `rules.json` **v3.9**, 119 rules, 16
+forbidden patterns. The semantic sheet's name is settled — the module is **`stzSense`**,
+the artifact is **`.sense`**, and *ZSS* survives only as the spoken name.
 
 ## Do not
 
