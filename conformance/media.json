@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "title": "The Medium Enumeration and Capability Matrix",
+    "version": "1.0",
+    "lastUpdated": "2026-08-13",
+    "constitution": "3.9",
+    "specification": "doc/language/DECLARATIONS.md",
+    "note": "The closed set of media a VIBE may project to, and which of the 22 intent verbs each medium can carry. Published as data because implementations consume it rather than read it -- the same reason violations.json exists. Media are described by PROPERTIES rather than enumerated by taste, so a new channel is classified rather than argued about. Ratified into the law at v3.9, when Rule 82 became Perceivable State: a rule that obliges perceivability in the declared medium needs a language that can declare one."
+  },
+
+  "properties": {
+    "persistence": "Does the rendering remain once made? persistent | permanent | transient",
+    "seriality": "Can the operator choose their own order through it? parallel | serial",
+    "election": "Did the operator choose to attend? elected | unelected -- an unelected medium must carry its meaning peripherally, at a glance, without context",
+    "bandwidth": "Meaning per glance. high | medium | low | minimal (1-3 bits) | single (one message)",
+    "mutability": "Can it change at all? mutable | immutable"
+  },
+
+  "carriage": {
+    "native": "the medium serves this intent naturally",
+    "degraded": "served, but at a cost the designer must know -- a parallel act becomes a serial one, or a perception becomes a memory task",
+    "absent": "no analogue exists in this medium; a surface declaring only this medium cannot satisfy the intent"
+  },
+
+  "media": [
+    {
+      "id": "visual",
+      "title": "A screen or page",
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable" },
+      "soleCarrier": true,
+      "carries": { "default": "native" }
+    },
+    {
+      "id": "auditory",
+      "title": "Non-speech sound",
+      "properties": { "persistence": "transient", "seriality": "serial", "election": "unelected", "bandwidth": "low", "mutability": "mutable" },
+      "soleCarrier": false,
+      "carries": {
+        "default": "native",
+        "degraded": ["SCAN", "LOCATE", "COMPARE", "READ", "SCROLL", "HIGHLIGHT"],
+        "absent": ["ZOOM"]
+      },
+      "note": "Transient, so a right is kept by re-requestability rather than presence. Never a sole carrier: sound is the first thing switched off, is unavailable in shared rooms, and is unavailable to deaf operators."
+    },
+    {
+      "id": "voice",
+      "title": "Speech in and out",
+      "properties": { "persistence": "transient", "seriality": "serial", "election": "elected", "bandwidth": "low", "mutability": "mutable" },
+      "soleCarrier": true,
+      "carries": {
+        "default": "native",
+        "degraded": ["SCAN", "LOCATE", "COMPARE", "SCROLL", "HIGHLIGHT", "MARK"],
+        "absent": ["ZOOM"]
+      },
+      "note": "Recognition is probabilistic, so CONFIRM carries more weight here than anywhere else. Nothing persists: every right must be re-requestable."
+    },
+    {
+      "id": "haptic",
+      "title": "Touch and vibration",
+      "properties": { "persistence": "transient", "seriality": "serial", "election": "unelected", "bandwidth": "minimal", "mutability": "mutable" },
+      "soleCarrier": false,
+      "carries": {
+        "default": "absent",
+        "degraded": ["CONFIRM", "RETRY"]
+      },
+      "note": "One to three bits. It carries signal and motion and essentially nothing else, which is exactly why it must never be a sole carrier."
+    },
+    {
+      "id": "print",
+      "title": "The fixed record",
+      "properties": { "persistence": "permanent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "immutable" },
+      "soleCarrier": true,
+      "carries": {
+        "default": "absent",
+        "native": ["DISCOVER", "UNDERSTAND", "LOCATE", "READ", "SCAN", "COMPARE"]
+      },
+      "note": "The hardest case, and included because of it. Print has no time and no interaction, so every acting and continuity verb is absent. If the model survives print, it is real."
+    },
+    {
+      "id": "luminous",
+      "title": "Indicator light, lamp, beacon",
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "unelected", "bandwidth": "minimal", "mutability": "mutable" },
+      "soleCarrier": false,
+      "carries": {
+        "default": "absent",
+        "degraded": ["DISCOVER", "UNDERSTAND"]
+      },
+      "note": "Visual and not a screen: no layout, no text, no reading posture. Persistent and unelected -- readable across a room while hands and eyes are on the work, which no screen manages."
+    },
+    {
+      "id": "signage",
+      "title": "Fixed physical marking",
+      "properties": { "persistence": "permanent", "seriality": "parallel", "election": "unelected", "bandwidth": "single", "mutability": "immutable" },
+      "soleCarrier": true,
+      "carries": {
+        "default": "absent",
+        "native": ["LOCATE", "DISCOVER", "UNDERSTAND"]
+      },
+      "note": "Distinguished from print by election, not fixity: encountered rather than read, at distance and at speed, by someone who did not choose to read it. Shape is a carrier here with no screen equivalent."
+    },
+    {
+      "id": "machine",
+      "title": "Consumed by a program",
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable" },
+      "soleCarrier": true,
+      "carries": { "default": "native" },
+      "note": "Rule 104's third beneficiary. What a screen reader can operate, an agent can operate and a non-visual medium can render."
+    },
+    {
+      "id": "spatial",
+      "title": "A world seen from a vantage",
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable" },
+      "soleCarrier": true,
+      "carries": { "default": "native" },
+      "note": "Already seeded in the language by WORLD_VIEW and its PERSPECTIVE enumeration."
+    },
+    {
+      "id": "terminal",
+      "title": "A text grid",
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "medium", "mutability": "mutable" },
+      "soleCarrier": true,
+      "carries": { "default": "native", "degraded": ["ZOOM"] },
+      "note": "Already written in the canonical clean fixture as SURFACE_AS terminal, which is what made closing this enumeration an extraction rather than an invention."
+    }
+  ],
+
+  "honestBoundaries": [
+    "The carriage matrix is a first cut. It was derived by reasoning about each medium's properties, not by rendering anything, and the degraded/absent lines for auditory, voice and haptic are the ones most likely to move on contact with a real surface.",
+    "ambient is deliberately NOT a medium. It was proposed as one and is better read as the election property, which luminous, signage, auditory and notification all share.",
+    "Only 'absent' raises a diagnostic. 'degraded' is recorded as data for tools and designers, because a warning that fires on every serial surface would be noise rather than law.",
+    "Re-requestability is not checked. The persistence law says a right in a transient medium is kept by being re-requestable rather than present, and the language has no field to declare a re-request path. That is a language change and deserves its own decision."
+  ]
+}

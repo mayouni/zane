@@ -1,0 +1,23 @@
+// A ledger printed for the auditors, promising an act the page cannot serve.
+//
+// Print is permanent, parallel, elected and IMMUTABLE. It has no time and
+// no interaction, so every acting and continuity verb is absent from it --
+// ACT among them. The flow declares an intent its declared medium cannot
+// carry at all, which is a promise the surface cannot keep.
+//
+// ALWAYS_REACHABLE carries UNDO and CANCEL so the reversibility checks
+// stay quiet and this fixture tests one thing. Only SATISFIES is read by
+// the medium check.
+//
+// Expected: VERB_NOT_CARRIED, and nothing else.
+
+DEFINE VIBE printed_record (
+  SURFACE_AS print,
+  MOTION none
+)
+
+DEFINE INTENT_FLOW approve_on_paper (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR auditor
+)

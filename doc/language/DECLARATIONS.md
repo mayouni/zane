@@ -142,7 +142,7 @@ flex.
 | Field | Type | Required | Meaning |
 |---|---|---|---|
 | `DENSITY` | identifier | no | e.g. `compact`, `comfortable` |
-| `SURFACE_AS` | identifier | no | the medium this vibe projects to |
+| `SURFACE_AS` | enum | no | the medium this vibe projects to — one of the ten (`UNKNOWN_MEDIUM` otherwise). It also fixes which intents the file may promise: an intent the medium cannot carry at all is `VERB_NOT_CARRIED` |
 | `MOTION` | identifier | no | `none` is lawful and common; motion must report (Rule 112) |
 | `SUPPRESSES` | verb list | no | intents this culture hides. **Legal only for intents no declaration guarantees** — suppressing one that appears in any `ALWAYS_REACHABLE` is `VIBE_STRIPS_RIGHT` |
 
@@ -163,13 +163,35 @@ DEFINE INTENT_FLOW post_ledger_entry (
 
 ## 5. Enumerations, complete
 
-Only two fields are enumerated, and both are checked by the reference
-implementation today.
+Three fields are enumerated. Two are checked by the reference implementation today;
+the third was closed at v1.1, when the law's Rule 82 became **Perceivable State** and a rule
+obliging perceivability *in the declared medium* needed a language that could declare one.
 
 | Field | On | Legal values |
 |---|---|---|
 | `PERSPECTIVE` | `WORLD_VIEW` | `top_down` · `isometric` · `first_person` · `side_scroll` |
 | `TONE` | `FEEDBACK` | `celebratory` · `cautionary` · `critical` · `neutral` · `informational` |
+| `SURFACE_AS` | `VIBE` | `visual` · `auditory` · `voice` · `haptic` · `print` · `luminous` · `signage` · `machine` · `spatial` · `terminal` |
+
+### 5.1 The medium set is closed, and why that buys something
+
+`SURFACE_AS` accepted any identifier until v1.1 — so the field was a comment rather than a
+contract, and `SURFACE_AS kiosk` passed. It is closed now for the same reason the verb set
+is closed: **a coverage matrix over media is only finite and checkable if the media are
+enumerated.**
+
+That matrix is published as data in [`conformance/media.json`](../../conformance/media.json)
+— each medium described by **properties** (persistence · seriality · election · bandwidth ·
+mutability) rather than by taste, so a new channel is *classified* rather than argued about,
+and each carrying the 22 verbs as `native`, `degraded` or `absent`.
+
+Only **absent** raises a diagnostic. *Degraded* — a parallel act becoming serial, a
+perception becoming a memory task — is recorded as data for tools and designers, because a
+warning that fired on every serial surface would be noise rather than law.
+
+**`kiosk` is not among the ten, deliberately.** A kiosk is a *visual* surface that happens
+to be **unelected**, which is a property and not a channel. The same distinction retired
+`ambient` from the medium list before it was published.
 
 Values are matched case-sensitively in lower_snake. These lists are closed;
 extending them is a language change, not an implementation choice.

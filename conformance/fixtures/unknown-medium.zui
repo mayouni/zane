@@ -1,0 +1,14 @@
+// A vibe projecting to a medium this language does not define.
+//
+// SURFACE_AS was an unenumerated identifier until the medium axis closed
+// it: any word passed, so the field was a comment rather than a contract.
+// The medium set is closed for the same reason the verb set is -- a
+// coverage matrix over media is only finite and checkable if the media
+// are enumerated.
+//
+// Expected: UNKNOWN_MEDIUM, and nothing else.
+
+DEFINE VIBE operator_holodeck (
+  SURFACE_AS holodeck,
+  MOTION none
+)

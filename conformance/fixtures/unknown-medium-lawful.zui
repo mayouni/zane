@@ -1,0 +1,12 @@
+// The lawful twin of unknown-medium.zui: one word changed.
+//
+// `voice` is one of the ten. Nothing else about the declaration moves --
+// which is the point of a twin: it proves the check fires on the medium
+// and not on the shape of a VIBE.
+//
+// Expected: no diagnostics at any level.
+
+DEFINE VIBE operator_voice (
+  SURFACE_AS voice,
+  MOTION none
+)

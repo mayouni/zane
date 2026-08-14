@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "The Zui Conformance Suite",
-    "version": "1.0",
-    "lastUpdated": "2026-08-06",
+    "version": "1.1",
+    "lastUpdated": "2026-08-13",
     "specification": "doc/language/README.md",
     "diagnostics": "conformance/violations.json",
     "constitution": "3.8",
@@ -182,6 +182,30 @@
       "symbols": {
         "entities": ["table", "order", "server"]
       }
+    },
+    {
+      "file": "unknown-medium.zui",
+      "level": 2,
+      "expect_ids": ["UNKNOWN_MEDIUM"],
+      "note": "SURFACE_AS was an unenumerated identifier until the medium axis closed it -- any word passed, so the field was a comment rather than a contract."
+    },
+    {
+      "file": "unknown-medium-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin: one word changed to one of the ten. Proves the check fires on the medium and not on the shape of a VIBE."
+    },
+    {
+      "file": "verb-not-carried.zui",
+      "level": 2,
+      "expect_ids": ["VERB_NOT_CARRIED"],
+      "note": "Print is immutable and has no time, so ACT is absent from it. ALWAYS_REACHABLE keeps the reversibility checks quiet so this fixture tests one thing."
+    },
+    {
+      "file": "verb-not-carried-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin: same medium, honest intents. READ, SCAN and COMPARE are what a page is for."
     }
   ],
   "unfixtured": [

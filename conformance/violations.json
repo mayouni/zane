@@ -1,10 +1,10 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.0",
-    "lastUpdated": "2026-08-06",
+    "version": "1.1",
+    "lastUpdated": "2026-08-13",
     "specification": "doc/language/VIOLATIONS.md",
-    "constitution": "3.8",
+    "constitution": "3.9",
     "note": "Every diagnostic a conforming Zui implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused."
   },
   "levels": {
@@ -262,6 +262,33 @@
       "forbidden_patterns": [],
       "invariant": null,
       "note": "A known gap in the reference implementation: VISIBLE_ENTITIES is parsed and emitted to IR but never resolved. Raised with the reference implementation as decision-document 7.4."
+    },
+    {
+      "id": "UNKNOWN_MEDIUM",
+      "severity": "error",
+      "level": 2,
+      "summary": "SURFACE_AS names a medium outside the ten this language defines.",
+      "decidable_from": ["SURFACE_AS"],
+      "enumeration": ["visual", "auditory", "voice", "haptic", "print", "luminous", "signage", "machine", "spatial", "terminal"],
+      "rules": [],
+      "articles": [],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "The medium set is closed for the same reason the verb set is: a coverage matrix over media is only finite and checkable if the media are enumerated. The full enumeration and its capability matrix are data in conformance/media.json."
+    },
+    {
+      "id": "VERB_NOT_CARRIED",
+      "severity": "error",
+      "level": 2,
+      "summary": "A declaration satisfies an intent the declared medium cannot carry at all.",
+      "decidable_from": ["SATISFIES", "SURFACE_AS", "file"],
+      "rules": ["82"],
+      "articles": ["intent"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "A new medium adds renderings, never verbs.",
+      "note": "Print has no UNDO; a lamp has no READ. Only ABSENT raises -- media.json also records 'degraded' carriage (a parallel act becoming serial, a perception becoming a memory task) as data for tools, because a warning firing on every serial surface would be noise rather than law. Cites Rule 82, which became Perceivable State at constitution v3.9 and is what made 'the declared medium' a legal concept."
     }
   ]
 }

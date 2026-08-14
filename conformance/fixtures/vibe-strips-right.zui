@@ -3,6 +3,13 @@
 // culture suppresses UNDO, which approve_payment promises -- Article VI's
 // vibe-invariant rights, made checkable.
 // Expected: VIBE_STRIPS_RIGHT
+//
+// SURFACE_AS read `kiosk` until the medium axis closed the enumeration, and
+// the suite caught it. A kiosk is not a medium -- it is a VISUAL surface
+// that happens to be unelected, which is a property and not a channel. The
+// same error the founding document made when it filed `ambient` as a
+// medium, sitting in our own fixture. The verdict is unchanged; only an
+// unenumerated word became an enumerated one.
 
 DEFINE INTENT_FLOW approve_payment (
   SATISFIES [SELECT, CONFIRM, ACT],
@@ -11,7 +18,7 @@ DEFINE INTENT_FLOW approve_payment (
 )
 
 DEFINE VIBE kiosk_minimal (
-  SURFACE_AS kiosk,
+  SURFACE_AS visual,
   DENSITY compact,
   SUPPRESSES [UNDO]
 )

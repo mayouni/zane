@@ -45,6 +45,42 @@ const KV_KEYS = new Set([
 const PERSPECTIVES = new Set(['top_down', 'isometric', 'first_person', 'side_scroll']);
 const TONES = new Set(['celebratory', 'cautionary', 'critical', 'neutral', 'informational']);
 
+/* The medium a VIBE projects to. Closed, like the verbs and the two
+   enumerations above -- a new medium is a language change, not an
+   implementation choice. Published as data in conformance/media.json for
+   other implementations; the shape here mirrors it deliberately, and the
+   conformance runner proves the two agree. */
+
+const MEDIA_CARRIAGE = {
+  visual:   { default: 'native' },
+  auditory: { default: 'native', absent: ['ZOOM'] },
+  voice:    { default: 'native', absent: ['ZOOM'] },
+  haptic:   { default: 'absent', keep: ['CONFIRM', 'RETRY'] },
+  print:    { default: 'absent', keep: ['DISCOVER', 'UNDERSTAND', 'LOCATE', 'READ', 'SCAN', 'COMPARE'] },
+  luminous: { default: 'absent', keep: ['DISCOVER', 'UNDERSTAND'] },
+  signage:  { default: 'absent', keep: ['LOCATE', 'DISCOVER', 'UNDERSTAND'] },
+  machine:  { default: 'native' },
+  spatial:  { default: 'native' },
+  terminal: { default: 'native' }
+};
+
+const MEDIA = new Set(Object.keys(MEDIA_CARRIAGE));
+
+/* medium -> the set of verbs it cannot carry at all. Only ABSENT is a
+   diagnostic; "degraded" is recorded in media.json as data for tools,
+   because a warning that fired on every serial surface would be noise. */
+const NOT_CARRIED = {};
+for (const [m, c] of Object.entries(MEDIA_CARRIAGE)) {
+  const gone = new Set();
+  if (c.default === 'absent') {
+    const keep = new Set(c.keep || []);
+    for (const v of INTENT_VERBS) if (!keep.has(v)) gone.add(v);
+  } else {
+    for (const v of c.absent || []) gone.add(v);
+  }
+  NOT_CARRIED[m] = gone;
+}
+
 /* Declarations that are flows: multi-step reachability applies to them. */
 const FLOW_KINDS = new Set(['INTENT_FLOW', 'WIZARD']);
 
@@ -269,6 +305,15 @@ function check(decls, symbols) {
   /* every ALWAYS_REACHABLE promise made anywhere in the file */
   const guaranteed = new Set();
   for (const d of decls) (listOf(d, 'ALWAYS_REACHABLE') || []).forEach(v => guaranteed.add(v));
+
+  /* every medium a VIBE in this file projects to -- collected file-wide, the
+     same shape VIBE_STRIPS_RIGHT already uses for guaranteed rights */
+  const declaredMedia = [];
+  for (const d of decls) {
+    if (d.kind !== 'VIBE') continue;
+    const m = valueOf(d, 'SURFACE_AS');
+    if (m !== null && MEDIA.has(m)) declaredMedia.push(m);
+  }
   const declaredFlows = new Set(decls.filter(d => d.kind === 'INTENT_FLOW').map(d => d.name));
 
   for (const decl of decls) {
@@ -349,6 +394,10 @@ function check(decls, symbols) {
       for (const v of listOf(decl, 'SUPPRESSES') || []) {
         if (guaranteed.has(v)) add('VIBE_STRIPS_RIGHT', line, `${v} suppressed by ${label}`);
       }
+      const surface = valueOf(decl, 'SURFACE_AS');
+      if (surface !== null && !MEDIA.has(surface)) {
+        add('UNKNOWN_MEDIUM', line, `${surface} on ${label}`);
+      }
     }
 
     const flowRef = valueOf(decl, 'INTENT_FLOW');
@@ -366,6 +415,24 @@ function check(decls, symbols) {
     if (symbols && Array.isArray(symbols.entities)) {
       for (const item of (decl.fieldIndex.get('VISIBLE_ENTITIES') || { items: [] }).items || []) {
         if (!symbols.entities.includes(item.v)) add('UNRESOLVED_ENTITY', item.line, `${item.v} in ${label}`);
+      }
+    }
+  }
+
+  /* -- Level 2, file-wide: the medium axis ------------------------------
+        A VIBE names the medium this file projects to. An intent that medium
+        cannot carry AT ALL is a promise the surface cannot keep -- print has
+        no UNDO, a lamp has no READ. Only absence raises; "degraded" is data
+        in media.json, not a diagnostic, because a warning firing on every
+        serial surface would be noise rather than law. */
+
+  for (const m of declaredMedia) {
+    const gone = NOT_CARRIED[m];
+    if (!gone || gone.size === 0) continue;
+    for (const decl of decls) {
+      const label = decl.name || '(unnamed)';
+      for (const v of listOf(decl, 'SATISFIES') || []) {
+        if (gone.has(v)) out.push({ id: 'VERB_NOT_CARRIED', line: decl.line, subject: `${v} in ${label} on ${m}` });
       }
     }
   }
@@ -409,7 +476,7 @@ function verify(source, opts) {
   return diagnostics.concat(check(decls, options.symbols || null));
 }
 
-const API = { verify, parse, lex, INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES };
+const API = { verify, parse, lex, INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED };
 
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
 if (typeof window !== 'undefined') window.Zui = API;

@@ -42,6 +42,36 @@ function main(argv) {
   const levelOf = new Map(contract.diagnostics.map(d => [d.id, d.level]));
   const metaOf = new Map(contract.diagnostics.map(d => [d.id, d]));
 
+  /* The medium enumeration is hardcoded in the verifier (the grammar is
+     closed) and published in media.json (implementations consume it).
+     Two sources means drift, so prove they agree before running anything. */
+  const mediaProblems = [];
+  try {
+    const spec = JSON.parse(fs.readFileSync(path.join(CONF, 'media.json'), 'utf8'));
+    const { MEDIA_CARRIAGE } = require('./zui.js');
+    const specIds = spec.media.map(m => m.id).sort();
+    const implIds = Object.keys(MEDIA_CARRIAGE).sort();
+    if (specIds.join(',') !== implIds.join(',')) {
+      mediaProblems.push(`enumeration differs — media.json {${specIds}} vs verifier {${implIds}}`);
+    }
+    for (const m of spec.media) {
+      const impl = MEDIA_CARRIAGE[m.id];
+      if (!impl) continue;
+      const sd = m.carries.default, id_ = impl.default;
+      if (sd !== id_) mediaProblems.push(`${m.id}: default carriage — media.json "${sd}" vs verifier "${id_}"`);
+      /* when the default is absent, everything CARRIED is listed -- whether
+         natively or degraded. The verifier keeps one set because only
+         absence raises; media.json keeps the distinction because tools and
+         designers need to know which verbs cost something. */
+      const sKeep = [...(m.carries.native || []), ...(m.carries.degraded || [])].sort().join(',');
+      const iKeep = (impl.keep || []).slice().sort().join(',');
+      if (sd === 'absent' && sKeep !== iKeep) mediaProblems.push(`${m.id}: carried set — media.json {${sKeep}} vs verifier {${iKeep}}`);
+      const sAbs = (m.carries.absent || []).slice().sort().join(',');
+      const iAbs = (impl.absent || []).slice().sort().join(',');
+      if (sd !== 'absent' && sAbs !== iAbs) mediaProblems.push(`${m.id}: absent set — media.json {${sAbs}} vs verifier {${iAbs}}`);
+    }
+  } catch (e) { mediaProblems.push('cannot read media.json: ' + e.message); }
+
   let pass = 0, fail = 0, skip = 0;
   const failures = [];
 
@@ -88,8 +118,15 @@ function main(argv) {
   console.log(`  spec         doc/language/ v1.0`);
   console.log(`  contract     violations.json v${contract.metadata.version} (constitution v${contract.metadata.constitution})`);
   console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
+  console.log(`  media        ${Object.keys(require('./zui.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
   console.log(`  fixtures     ${manifest.fixtures.length} total`);
   console.log(`  pass ${pass} · fail ${fail} · skipped ${skip} (above level ${level})`);
+
+  if (mediaProblems.length) {
+    console.log('\nMedium enumeration disagreements (conformance/media.json vs the verifier):');
+    for (const p of mediaProblems) console.log(`  ${p}`);
+    return 1;
+  }
 
   if (envelopeProblems.length) {
     console.log('\nEnvelope violations (doc/diagnostic-contract.schema.json):');
