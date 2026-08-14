@@ -2,11 +2,30 @@
 
 **Run in**: `D:\GitHub\stzlib`
 
-**Precondition**: none hard. StzZui's case for this is unratified, so **build a general
-model, not a UI law.** If this module ends up encoding interface rules, it has been built
-in the wrong repository.
+**Precondition**: none hard.
 
-**Standing**: proposed. `base/culture/` does not exist; nothing here is agreed.
+**Standing — changed 2026-08-13, and in this module's favour.** When this prompt was
+written the cultural axis was a proposal. It has since been **ratified into the law**, so
+there is now something to serve rather than something to anticipate:
+
+- **Rule 56** (`Semantic Preservation`) was extended from themes to **audiences**: what a
+  declaration fixes is the *meaning*, and the rendering is derived per theme, per medium
+  and per culture. It binds **once a meaning-to-rendering path exists to obey it** — which
+  is partly what this module is for.
+- **A sixteenth forbidden pattern** was canonized, the first cultural one:
+  `sovereign-sign-as-label`, bound to Rule 122, whose canonical instance is that **a flag
+  is not a language**.
+- **Rule 82** became `Perceivable State` and the medium enumeration is closed in the
+  language, so "the declared medium" is now a legal and a checkable concept.
+
+The law is `rules.json` **v3.9**, 119 rules, 16 forbidden patterns.
+
+**What has not changed, and matters more for it**: `base/culture/` does not exist, and
+**the instruction to build a general model rather than a UI law now binds harder, not
+softer.** Ratification gives this module consumers; it does not give it jurisdiction. If
+the module ends up encoding interface rules, it has been built in the wrong repository —
+which meanings an interface *must* express, and which conflicts are *refusable*, remain
+StzZui's.
 
 ---
 
