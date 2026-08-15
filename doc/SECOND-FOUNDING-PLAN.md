@@ -281,6 +281,32 @@ What a participant downloads and pins: the law, the grammars, the medium matrix,
 envelope, the fixtures, the contribution protocol. Plus the open question of a neutral,
 citable identity for the standard.
 
+### S13b · The cross-medium fixture · `stzzui` · **small** · *added 2026-08-15* · **the keystone**
+
+> **One declaration, rendered into two media, compared for what survived.**
+
+Every instrument this project has built proves something about *one* artifact: the
+verifier proves a `.zui` file's verdict, the envelope proves a diagnostic's shape, the
+matrix records what a medium carries. **Nothing proves the sentence the whole second
+founding rests on** — *one declaration, many renderings, one law.* Until something does,
+that sentence is an argument rather than a test, and every drift this project has actually
+suffered happened in exactly that gap: three colour vocabularies, a four-value engine
+beside a five-value one, a hand-typed census under a heading claiming it was computed.
+
+Not a pixel comparison — a **semantic** one. Render one declaration into two media and
+assert that the same intents are served, the same meanings carried, the same rights
+reachable, the same refusals raised. Where a medium legitimately cannot carry something,
+`conformance/media.json` already says so and the comparison **expects the absence** — the
+matrix is what makes the assertion decidable instead of aspirational.
+
+**Small in code, large in consequence.** The hard part is not the harness; it is deciding
+what *"the same meaning survived"* means mechanically, and that decision is the deliverable.
+Reasoned in [THE-INTERACTION-MODEL.md](THE-INTERACTION-MODEL.md) §7.
+
+**Wants S8** in practice, not in principle: the model has met two media in anger, visual
+and auditory, and the visual expression grammar is what gives the comparison a second side
+with enough substance to be worth comparing.
+
 ## 6. Track C — adoption by the siblings
 
 Each is small once its contract exists; none may start before it does.
@@ -328,6 +354,7 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
 | S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
 | S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |
+| **S13b** | B | stzzui | ⏸ waits | **the keystone** — cross-medium fixture; wants S8 for a second substantive side |
 | S14–S19 | C | siblings | ⏸ waits | their contracts |
 
 **Six done, three half, one running, five ready to launch.**

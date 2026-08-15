@@ -1,11 +1,12 @@
 {
   "metadata": {
     "title": "The Medium Enumeration and Capability Matrix",
-    "version": "1.0",
-    "lastUpdated": "2026-08-13",
+    "version": "1.1",
+    "lastUpdated": "2026-08-15",
     "constitution": "3.9",
     "specification": "doc/language/DECLARATIONS.md",
-    "note": "The closed set of media a VIBE may project to, and which of the 22 intent verbs each medium can carry. Published as data because implementations consume it rather than read it -- the same reason violations.json exists. Media are described by PROPERTIES rather than enumerated by taste, so a new channel is classified rather than argued about. Ratified into the law at v3.9, when Rule 82 became Perceivable State: a rule that obliges perceivability in the declared medium needs a language that can declare one."
+    "port": "render",
+    "note": "The closed set of media a VIBE may project to. These classify the RENDER port only -- the channels by which a meaning reaches a person. Sensors (the sense port) and actuators (the actuate port) are not media: they render nothing, and reach a person only when something else renders them. The enumeration says which of the 22 intent verbs each medium can carry. Published as data because implementations consume it rather than read it -- the same reason violations.json exists. Media are described by PROPERTIES rather than enumerated by taste, so a new channel is classified rather than argued about. Ratified into the law at v3.9, when Rule 82 became Perceivable State: a rule that obliges perceivability in the declared medium needs a language that can declare one."
   },
 
   "properties": {
@@ -13,7 +14,8 @@
     "seriality": "Can the operator choose their own order through it? parallel | serial",
     "election": "Did the operator choose to attend? elected | unelected -- an unelected medium must carry its meaning peripherally, at a glance, without context",
     "bandwidth": "Meaning per glance. high | medium | low | minimal (1-3 bits) | single (one message)",
-    "mutability": "Can it change at all? mutable | immutable"
+    "mutability": "Can it change at all? mutable | immutable",
+    "retractability": "Once made, can the rendering be withdrawn? immediate | self-retracting | slow | never -- this is the property that separates a rendering from an actuation, and the reason print and signage behave unlike a screen"
   },
 
   "carriage": {
@@ -26,14 +28,14 @@
     {
       "id": "visual",
       "title": "A screen or page",
-      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable" },
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable", "retractability": "immediate" },
       "soleCarrier": true,
       "carries": { "default": "native" }
     },
     {
       "id": "auditory",
       "title": "Non-speech sound",
-      "properties": { "persistence": "transient", "seriality": "serial", "election": "unelected", "bandwidth": "low", "mutability": "mutable" },
+      "properties": { "persistence": "transient", "seriality": "serial", "election": "unelected", "bandwidth": "low", "mutability": "mutable", "retractability": "self-retracting" },
       "soleCarrier": false,
       "carries": {
         "default": "native",
@@ -45,7 +47,7 @@
     {
       "id": "voice",
       "title": "Speech in and out",
-      "properties": { "persistence": "transient", "seriality": "serial", "election": "elected", "bandwidth": "low", "mutability": "mutable" },
+      "properties": { "persistence": "transient", "seriality": "serial", "election": "elected", "bandwidth": "low", "mutability": "mutable", "retractability": "self-retracting" },
       "soleCarrier": true,
       "carries": {
         "default": "native",
@@ -57,7 +59,7 @@
     {
       "id": "haptic",
       "title": "Touch and vibration",
-      "properties": { "persistence": "transient", "seriality": "serial", "election": "unelected", "bandwidth": "minimal", "mutability": "mutable" },
+      "properties": { "persistence": "transient", "seriality": "serial", "election": "unelected", "bandwidth": "minimal", "mutability": "mutable", "retractability": "self-retracting" },
       "soleCarrier": false,
       "carries": {
         "default": "absent",
@@ -68,7 +70,7 @@
     {
       "id": "print",
       "title": "The fixed record",
-      "properties": { "persistence": "permanent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "immutable" },
+      "properties": { "persistence": "permanent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "immutable", "retractability": "never" },
       "soleCarrier": true,
       "carries": {
         "default": "absent",
@@ -79,7 +81,7 @@
     {
       "id": "luminous",
       "title": "Indicator light, lamp, beacon",
-      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "unelected", "bandwidth": "minimal", "mutability": "mutable" },
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "unelected", "bandwidth": "minimal", "mutability": "mutable", "retractability": "immediate" },
       "soleCarrier": false,
       "carries": {
         "default": "absent",
@@ -90,7 +92,7 @@
     {
       "id": "signage",
       "title": "Fixed physical marking",
-      "properties": { "persistence": "permanent", "seriality": "parallel", "election": "unelected", "bandwidth": "single", "mutability": "immutable" },
+      "properties": { "persistence": "permanent", "seriality": "parallel", "election": "unelected", "bandwidth": "single", "mutability": "immutable", "retractability": "never" },
       "soleCarrier": true,
       "carries": {
         "default": "absent",
@@ -101,7 +103,7 @@
     {
       "id": "machine",
       "title": "Consumed by a program",
-      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable" },
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable", "retractability": "immediate" },
       "soleCarrier": true,
       "carries": { "default": "native" },
       "note": "Rule 104's third beneficiary. What a screen reader can operate, an agent can operate and a non-visual medium can render."
@@ -109,7 +111,7 @@
     {
       "id": "spatial",
       "title": "A world seen from a vantage",
-      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable" },
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "high", "mutability": "mutable", "retractability": "immediate" },
       "soleCarrier": true,
       "carries": { "default": "native" },
       "note": "Already seeded in the language by WORLD_VIEW and its PERSPECTIVE enumeration."
@@ -117,7 +119,7 @@
     {
       "id": "terminal",
       "title": "A text grid",
-      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "medium", "mutability": "mutable" },
+      "properties": { "persistence": "persistent", "seriality": "parallel", "election": "elected", "bandwidth": "medium", "mutability": "mutable", "retractability": "immediate" },
       "soleCarrier": true,
       "carries": { "default": "native", "degraded": ["ZOOM"] },
       "note": "Already written in the canonical clean fixture as SURFACE_AS terminal, which is what made closing this enumeration an extraction rather than an invention."
@@ -128,6 +130,7 @@
     "The carriage matrix is a first cut. It was derived by reasoning about each medium's properties, not by rendering anything, and the degraded/absent lines for auditory, voice and haptic are the ones most likely to move on contact with a real surface.",
     "ambient is deliberately NOT a medium. It was proposed as one and is better read as the election property, which luminous, signage, auditory and notification all share.",
     "Only 'absent' raises a diagnostic. 'degraded' is recorded as data for tools and designers, because a warning that fires on every serial surface would be noise rather than law.",
+    "retractability was added at v1.1, after sensors and actuators were reasoned about: smell is mutable yet cannot be un-sent, which the first five properties could not express. It explains where a rendering ends and an actuation begins, and it raises no diagnostic today -- it is a property that enables checks rather than one that performs them. No medium currently enumerated carries the 'slow' value; it exists because olfactory would take it.",
     "Re-requestability is not checked. The persistence law says a right in a transient medium is kept by being re-requestable rather than present, and the language has no field to declare a re-request path. That is a language change and deserves its own decision."
   ]
 }

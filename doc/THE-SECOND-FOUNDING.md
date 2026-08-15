@@ -243,6 +243,29 @@ same stated reason: **one declaration, many renderings, no drift between them.**
 parts of this project have now arrived at the same shape. None of them has written it
 down as a shared law.
 
+### 4.2.1 The media classify one port of three
+
+The medium axis answers one question: **through which channel does a meaning reach a
+person?** Every medium named here is a *rendering surface*. That is a narrower claim than
+"the interface", and saying it out loud prevents a category error that IoT, robotics and
+vehicles make unavoidable:
+
+| port | direction | example |
+|---|---|---|
+| **render** | system → a person's senses | screen, sound, lamp, sign — the ten media |
+| **sense** | a person or the world → system | keyboard, microphone, thermometer, gaze |
+| **actuate** | system → the world | motor, valve, lock, heater |
+
+A thermometer renders nothing. A motor renders nothing. They are not weak media — **they
+are not media at all**, and adding them to the enumeration would corrupt the axis. They
+reach a person **only when something renders them**, and at that moment the law already
+governs the rendering.
+
+`conformance/media.json` therefore declares `"port": "render"` in its metadata. The other
+two ports are unmodeled, deliberately and visibly: see
+[SENSORS-AND-ACTUATORS.md](SENSORS-AND-ACTUATORS.md), which finds four rules that meet
+cases they were not written for, and no new verbs or strata needed.
+
 ### 4.3 The medium axis already exists in the language
 
 It need not be invented, only closed. `VIBE` already carries **`SURFACE_AS`** — *"the
@@ -314,6 +337,16 @@ than argued about:
 | **Election** | did the operator choose to attend? | yes | **no** | **no** | **no** | yes |
 | **Bandwidth** | meaning per glance | high | **1–3 bits** | low | one message | high |
 | **Mutability** | can it change at all? | yes | yes | yes | **no** | **no** |
+| **Retractability** | once made, can it be withdrawn? | immediate | immediate | **self-retracting** | **never** | **never** |
+
+**Retractability was the sixth property, and it was missing until sensors forced it.**
+Smell is *mutable* — a system can emit and stop — yet it cannot be un-sent; the molecules
+are in the room. Nothing in the first five separated a screen (repaint and it is gone) from
+an odour (which decays on the world's schedule). The property earns its place because it
+is also **the line between a rendering and an actuation**: a rendering can usually be
+withdrawn, an actuation cannot, because it did not change what a person perceives — it
+changed what is true. Added to `conformance/media.json` at v1.1; it raises no diagnostic
+yet.
 
 The five media that started this document differ on two rows. **Light and signage differ
 on four**, which is why adding them is not padding — they are the cases that prove the
