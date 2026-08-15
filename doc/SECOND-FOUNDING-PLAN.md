@@ -172,11 +172,34 @@ author's ratification — this is the one session that cannot be delegated to ju
 The session prompt is written: [`doc/prompts/sound-semantics.md`](prompts/sound-semantics.md).
 A semantic layer **above** the sound plane that changes no node, no sink, no callback.
 
-### S8 · SIGNAL in the visual channel · `stzzui` · **medium-large**
+### S8 · SIGNAL in the visual channel · `stzzui` · **medium-large** · *part done 2026-08-16*
 
 The first expression grammar written in full — the channel where the law is richest and
 an engine already exists. It sets the pattern the other five strata copy, so it is worth
 doing slowly.
+
+**Done 2026-08-16 — the extraction half.** [`conformance/signal.json`](../conformance/signal.json)
+v1.0 publishes the vocabulary as data, in the shape S5 used for media: the five values
+quoted verbatim from Rule 118, what each channel actually renders them as (verified in the
+stzlib tree, not remembered), and what is **not** law. M6's other two thirds were already
+cashed — Rule 62 bound to `StzIsLegible` at v3.9, and the visual channel's missing `muted`
+filed on 2026-08-13.
+
+**Blocked on a ruling — the reconciliation half.** M6 says *"Rules 3 ↔ 118"*, and putting
+the two rules side by side for the first time found that **they disagree**: `danger`'s
+scope, `neutral`'s meaning, and whether `accent` is a third family Rule 118's closure
+clause forbids. Filed as **docket section S8**, four items, unruled. The artifact records
+them rather than resolving them, so it is publishable today.
+
+**Still to do after the ruling — the grammar half.** Nothing in `.zui` names a semantic
+value, so `signal.json` raises no diagnostic yet. Closing a field for it is a language
+change and follows the same gate `SURFACE_AS` passed through: an amendment first, then the
+enumeration, then the diagnostics, then fixtures with lawful twins.
+
+**Two findings left the plane while doing this**: the sound plane attributes its severity
+ordering to a law that states none ([finding](findings/sound-severity-order.md)), and the
+constitution turns out to have **no precedence mechanism at all** — which is why nothing in
+the law decides the four conflicts above.
 
 ### S9 · ROLE + MESSAGE · `stzzui` · **large**
 
@@ -350,7 +373,7 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S4d | 0 | stzlib | ⚪ ready | regex divergences — all three re-verified |
 | S8c | A | stzlib | ⚪ ready | stzCSS — §5 corrected, already-done part removed |
 | S4b | 0 | stzlib | ⚪ ready | the colour table's hard-coded culture, unfiled |
-| S8 | A | stzzui | ⚪ next | SIGNAL in the visual channel — now unblocked by S5 |
+| S8 | A | stzzui | 🟡 **part** | vocabulary published as `signal.json`; **four Rules 3 ↔ 118 conflicts filed, unruled** — the grammar waits on that ruling |
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
 | S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
 | S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |

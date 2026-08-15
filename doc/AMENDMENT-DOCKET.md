@@ -1,10 +1,12 @@
 # Amendment docket — one ratification pass
 
-**Status**: **ruled and applied.** The 2026-08-13 pass took twelve items to `rules.json`
-v3.9; a second pass on 2026-08-15 took the information-design harvest to **v3.10**. Both
-records are below. The *"nothing here is applied"* line this file carried until 2026-08-15
-was true when written and false for two days after — noted rather than smoothed, in
-keeping with the version-drift note that follows.
+**Status**: **two passes ruled and applied; a third section is open.** The 2026-08-13 pass
+took twelve items to `rules.json` v3.9; the 2026-08-15 pass took the information-design
+harvest to **v3.10**. **Section S8, opened 2026-08-16, is proposed and unruled** — four
+conflicts between Rules 3 and 118, found while extracting the SIGNAL vocabulary. Nothing
+in that section is applied. The *"nothing here is applied"* line this file carried until
+2026-08-15 was true when written and false for two days after — noted rather than
+smoothed, in keeping with the version-drift note that follows.
 **Why a docket**: StzZui's core asset is a constitution, so most of its "refactoring" is
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
@@ -594,3 +596,100 @@ deliberately"* — and this is that act performed, not skipped.
 - **The evidence is one surface, one operator, one implementer.** It is unusually clean
   because nobody was consulting the law while the violations happened, but it is not a
   corpus.
+
+---
+
+# SECTION S8 — OPEN, PROPOSED, UNRULED · opened 2026-08-16
+
+**Nothing in this section is applied.** It was found while doing S8's extraction work —
+publishing the `SIGNAL` vocabulary as data, in the shape S5 used for media. The extraction
+is committed as [`conformance/signal.json`](../conformance/signal.json); these four items
+are what the extraction could not resolve without legislating.
+
+**Why it surfaced now.** M6 in the founding's sequencing reads *"SIGNAL in the visual
+channel, zero new design: Rules 3 ↔ 118 ↔ the engine."* Two thirds of that were cashed
+already — Rule 62 was bound to `StzIsLegible` at v3.9, and the engine's missing `:Muted`
+was filed on 2026-08-13. **The remaining third was Rules 3 ↔ 118, and nobody had actually
+put the two rules side by side.** They disagree.
+
+| # | Conflict | Class |
+|---|---|---|
+| **S8-1** | `danger`'s scope — *system failure only* vs *critical, exceeded, incident* | substantive |
+| **S8-2** | `neutral` means two different things | substantive |
+| **S8-3** | Is `accent` a third family Rule 118 forbids? | structural |
+| **S8-4** | Neither rule points at the other | editorial |
+
+## S8-1 · `danger` — the two rules give opposite verdicts on a common case
+
+**Rule 3**: *"Danger → system failure only."* **Rule 118**: *"danger (critical, exceeded,
+incident)."*
+
+An exceeded business threshold — a credit limit passed, a tolerance breached — is an
+**incident**, and it is emphatically **not a system failure**. So a surface colouring it
+`danger` **obeys Rule 118 and violates Rule 3**. This is not a shade of emphasis; it is the
+single most common use of the colour in business software, and the law answers it twice,
+differently.
+
+**Recommendation, offered not assumed**: Rule 118 wins on the merits. It is the specific,
+later, five-value rule; it is the one both sibling planes implemented; and *"system failure
+only"* would forbid the colour in exactly the domain this constitution was written for.
+Rule 3's clause should narrow to identity and quantity — *one primary accent per
+application* — and stop enumerating status meanings that Rule 118 owns.
+
+## S8-2 · `neutral` — one word, two meanings, and the engine answers only one
+
+**Rule 3**: *"Neutral → default state"* — chrome; the resting appearance of an untouched
+control. **Rule 118, family two**: *"neutral metadata: channels, types, categories"* — data
+colour that carries no urgency.
+
+These are different things. A table cell tinted for *category* and a button at rest are not
+the same use of the same word, and `StzThemeColor(theme, :neutral)` returns one colour for
+both. An implementer reading both rules cannot tell which `:Neutral` they are building —
+and the engine, having only one, has silently chosen.
+
+## S8-3 · `accent` — the closure claim is the thing that is unclear
+
+**Rule 118**: *"An interface's colours split into exactly two families and no more."*
+**Rule 3**: *"Accent → intent (action, selection)"*, and *"one primary accent color per
+application."*
+
+Accent is neither a semantic status nor neutral metadata. So either it is a **third family
+Rule 118 forbids**, or **Rule 118's "exactly two" silently means "exactly two families of
+*data* colour"** and excludes chrome. **The law does not say which**, and this is the item
+that matters most, because it is the closure claim itself — the same claim that makes the
+vocabulary finite and therefore checkable.
+
+The v3.9 pass touched the edge of this without settling it: A-5 ruled that the engine's
+`:Primary` maps to Rule 3's accent and is *"a quantity rule about identity colour, not a
+status semantic"*. **That resolved the engine's name. It did not resolve the taxonomy.**
+
+## S8-4 · Neither rule points at the other
+
+Rule 3 enumerates four colour usages and names none of `success`, `info` or `muted`.
+Rule 118 enumerates five statuses and names no accent. **A reader arriving at either
+believes they have the whole vocabulary** — which is why the three conflicts above survived
+118 rules, two ratification passes and two implementing planes without being noticed.
+
+Whatever is ruled on S8-1 to S8-3, both rules should cite the other. C-1 established the
+pattern at v3.9 with instrument pointers; this is the same move between two rules that
+legislate one subject.
+
+## What is NOT proposed here
+
+- **No sixth value.** The closed set stays at five, as A-5 ruled.
+- **No change to the five meanings.** They are quoted verbatim into `signal.json` and both
+  planes already implement against them.
+- **No new rule.** Every item above is a conflict between two existing rules, and the fix
+  in each case is a narrowing or a cross-reference, not a canonization.
+
+## Honest boundaries
+
+- **The recommendation on S8-1 is mine, not a finding.** The conflict is verified; which
+  rule should yield is a judgement the author makes.
+- **`invariant: true` does not settle any of this.** Rule 118 carries it and Rule 3 does
+  not, which looks like precedence and is not: the Reader defines the badge as *"this rule
+  never flexes across vibes"*. **The constitution has no precedence mechanism at all** —
+  which is itself worth knowing, and is arguably the deeper finding in this section.
+- **Nothing here blocks `signal.json`.** The artifact records the conflicts rather than
+  resolving them, so it is publishable and useful today; a ruling would let it drop the
+  `openConflicts` block, not rewrite the vocabulary.

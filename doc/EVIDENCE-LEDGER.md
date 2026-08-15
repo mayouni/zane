@@ -207,6 +207,25 @@ evidence rather than compliance.
 *Serves: The Law, In Practice — and it is the strongest single answer to "why write a
 constitution at all?", because the alternative was run three times and failed three times.*
 
+## M · The law contradicts itself about colour *(added 2026-08-16)*
+
+Found by doing S8's extraction — putting Rules 3 and 118 side by side, which nobody had
+done across 122 rules and two ratification passes.
+
+| # | Finding | Evidence | Status |
+|---|---|---|---|
+| M1 | **The two colour rules give opposite verdicts on a common case.** Rule 3: *"Danger → system failure only."* Rule 118: *"danger (critical, exceeded, incident)."* An exceeded business threshold is an incident and not a system failure, so colouring it `danger` **obeys 118 and violates 3** | `rules.json` v3.10, read 2026-08-16 | `verified` |
+| M2 | **`neutral` carries two meanings.** Rule 3's is chrome (*default state*); Rule 118's family two is data colour (*channels, types, categories*). `StzThemeColor(theme, :neutral)` returns one colour for both | same, plus `stzDiagramColor.ring` `$aPalette` | `verified` |
+| M3 | **The closure claim is the unclear one.** Rule 118 says *"exactly two families and no more"*; Rule 3 names an `accent` that is neither a status nor neutral metadata. Either accent is a forbidden third family, or "exactly two" silently means *two families of data colour*. **The law does not say** | same | `verified` |
+| M4 | **Neither rule points at the other**, which is why M1–M3 survived 122 rules, two ratification passes and two implementing planes | same | `verified` |
+| M5 | **The constitution has no precedence mechanism at all.** `invariant: true` looks like one and is not — the Reader defines the badge as *"this rule never flexes across vibes"*. 46 of 122 rules carry it. **So nothing in the law decides M1–M3**, and that is the deeper finding | `constitution/reader/index.html:404-405`, 2026-08-16 | `verified` |
+| M6 | **The younger channel obeys the law and the older one does not.** `stzEarcons` implements all five values; the colour plane implements four. Sound is complete *because* it was written after Rule 118 and deferred to it, rather than having a vocabulary to defend | `stzEarcons.ring:56` and `stzDiagramColor.ring` `$aPalette`, 2026-08-16 | `verified` |
+| M7 | **A plane attributed its own design to the law.** `stzEarcons.ring:54` reads *"the five, in the law's own order of severity"*. The law states no severity order — searched all 122 rules for an ordering, a precedence and an outranking. The ordering is the plane's, is defensible, and is documented as design in its own plan; only the code comment points upward | same, plus `SOFTANZA_SOUND_PLAN.md:1740` | `verified` |
+
+*Serves: The Law, The Deterioration — and M5 is the one that generalizes, because a
+constitution with 122 rules and no way to resolve two of them is a finding about
+constitutions, not about colour.*
+
 ---
 
 ## Open items this ledger is watching
