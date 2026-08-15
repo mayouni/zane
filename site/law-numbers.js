@@ -25,6 +25,12 @@
   var here = document.currentScript;
   var src = (here && here.dataset && here.dataset.src) || 'constitution/rules.json';
 
+  /* The refusal contract is a second file. It drifts for the same reason the law
+     does -- the "ten named violations" text on How it works was true when it was
+     written and wrong once the contract reached 22. Derived, not typed. */
+  var vsrc = (here && here.dataset && here.dataset.violations) ||
+             src.replace(/constitution\/rules\.json$/, 'conformance/violations.json');
+
   function fill(law) {
     var sets = Object.keys(law).filter(function (k) { return /^set[0-9]+$/.test(k); });
     var rules = [];
@@ -65,13 +71,33 @@
     });
   }
 
-  fetch(src, { cache: 'no-cache' })          /* revalidate: never show a stale law */
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(fill)
-    .catch(function () {
-      document.querySelectorAll('[data-law], [data-law-share]').forEach(function (el) {
-        el.setAttribute('data-law-stale', '');
-        el.title = 'Static fallback — the law was not reachable from this page. Serve constitution/rules.json beside the site to see the live figure.';
-      });
+  function stale(sel, what) {
+    document.querySelectorAll(sel).forEach(function (el) {
+      if (el.hasAttribute('data-law-live')) return;
+      el.setAttribute('data-law-stale', '');
+      el.title = 'Static fallback — ' + what + ' was not reachable from this page. Serve it beside the site to see the live figure.';
     });
+  }
+
+  var json = function (u) {
+    return fetch(u, { cache: 'no-cache' })    /* revalidate: never show a stale law */
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  };
+
+  json(src).then(fill)
+    .catch(function () {
+      /* diagnostics comes from the other file and reports its own absence */
+      stale('[data-law]:not([data-law="diagnostics"]), [data-law-share]', 'the law');
+    });
+
+  json(vsrc)
+    .then(function (v) {
+      var list = v.violations || v.diagnostics || [];
+      var n = Array.isArray(list) ? list.length : Object.keys(list).length;
+      document.querySelectorAll('[data-law="diagnostics"]').forEach(function (el) {
+        el.textContent = String(n);
+        el.setAttribute('data-law-live', '');
+      });
+    })
+    .catch(function () { stale('[data-law="diagnostics"]', 'the refusal contract'); });
 })();

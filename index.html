@@ -58,11 +58,11 @@
 )</pre>
 <pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
 payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  approve_payment
-    <span class="dim">An act declares no way back: ALWAYS_REACHABLE lacks UNDO.</span>
-    <span class="dim">Rule 79 · The Undo Covenant · Article IV</span>
+    <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
+    <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
 payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  approve_payment
     <span class="dim">A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.</span>
-    <span class="dim">Rule 26 · The Back Button is Holy · Article IV</span>
+    <span class="dim">Rule 26 · The Back Button is Holy · Article IV · the right to leave</span>
 
 2 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     <p>The interface you were about to build has just been refused — at design
@@ -73,10 +73,10 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
 <pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.8.0</pre>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v<span data-law="version">3.9</span></pre>
     <p class="caption"><b>Status, plainly:</b> that is real output, copied from
     a real run — <a href="tools/zui/README.md">the verifier</a> ships in this
-    repository, passes all 30 fixtures of
+    repository, passes all 34 fixtures of
     <a href="conformance/README.md">the conformance suite</a>, and needs no
     toolchain beyond Node. It reads its diagnostic contract and its citations
     from <a href="constitution/rules.json">the law itself</a> rather than

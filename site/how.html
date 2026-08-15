@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How it works — declare, check, project, measure</title>
-<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 119 rules as data, and a refusal contract of ten named violations.">
+<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 119 rules as data, and a refusal contract of twenty-two named violations.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css">
 <style>
@@ -130,8 +130,8 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     <p>Two intent collapses are structural errors, not style choices:
     <code>SELECT → ACT</code> without <code>CONFIRM</code> (selection that
     executes), and <code>READ → ACT</code> in any form (a reading surface that
-    mutates). They belong to a contract of ten named violations that any
-    conforming implementation must detect:</p>
+    mutates). They belong to the ten named violations this language was founded
+    on — the core any conforming implementation must detect:</p>
 <pre class="term"><span class="dim">$ zui check src/model/restaurant.zui</span>
 <span class="bad">INTENT_ORPHAN</span>        an element traces to no intent
 <span class="bad">SELECT_ACT_COLLAPSE</span>  selection executes without CONFIRM
@@ -143,19 +143,28 @@ table.plain th { color: var(--muted); text-transform: uppercase;
 <span class="bad">HIDDEN_AUTHORITY</span>     a consequential act names no actor
 <span class="bad">LAYOUT_DISPLACEMENT</span>  arriving content shoves the reading
 <span class="bad">DECORATIVE_ANIMATION</span> motion that reports nothing</pre>
-    <p class="caption"><b>Status, plainly:</b> the grammar above parses today in
-    the reference implementation (<code>parser.zig</code>, inside a consumer
-    platform — a consumer of this language), whose
-    <code>semantic.zig</code> enforces four Zui diagnostics: an
-    <code>INTENT_FLOW</code> without <code>SATISFIES</code>, an invalid
-    <code>PERSPECTIVE</code>, an invalid <code>TONE</code>, and an unresolved
-    <code>INTENT_FLOWS</code> reference. <b>The ten named violations are the
-    specified contract, not yet implemented</b> — they are M3's work, now open
-    with a <a href="../doc/decisions/M3-the-zui-verifier.md">decision
-    document</a>. Six of the ten are decidable from a single declaration
-    (<code>SATISFIES</code> and <code>ALWAYS_REACHABLE</code> are written in the
-    file); four need a symbol table from other pillars, which is the crux that
-    decision weighs.</p>
+    <p class="caption"><b>Status, plainly:</b> <b>all ten are implemented and
+    enforced today</b> by <a href="../tools/zui/README.md">the <code>zui</code>
+    verifier</a> — nine of them refused before anything renders, and
+    <code>LAYOUT_DISPLACEMENT</code> measured by <a href="../tools/ui-audit.html">the
+    UI audit</a>, because whether arriving content shoves the reading is
+    undecidable from a declaration. That split is the enforcement ladder working
+    as designed, not a gap. This paragraph said <em>"not yet implemented"</em>
+    until <a href="../doc/decisions/M3-the-zui-verifier.md">M3</a> shipped it;
+    the grammar also parses in <code>parser.zig</code>, a second implementation
+    inside a consumer platform, which is what the fixtures exist to keep honest.</p>
+    <p class="caption"><b>And the contract has grown to
+    <span data-law="diagnostics">22</span>.</b> The ten above are the
+    intent-collapse core. Since then the same discipline has been applied one
+    level down — <code>UNKNOWN_INTENT</code>, <code>DUPLICATE_DECLARATION</code>
+    and four more at level 1 for the grammar itself; <code>VIBE_STRIPS_RIGHT</code>
+    and <code>UNRESOLVED_ENTITY</code> for consistency between declarations; and
+    <code>UNKNOWN_MEDIUM</code> and <code>VERB_NOT_CARRIED</code> once
+    <code>SURFACE_AS</code> was closed to ten media, so that declaring a medium
+    that cannot carry an intent you promised is now a refusal rather than a
+    discovery made after shipping. The full list is
+    <a href="../conformance/violations.json">data</a>, and each one carries the
+    same <a href="../doc/diagnostic-contract.md">C2 envelope</a>.</p>
   </div>
 </section>
 
@@ -165,7 +174,8 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     <p>What makes the language refuse is not taste — it is
     <a href="../constitution/rules.json">one JSON file</a>: v<span data-law="version">3.9</span>,
     <span data-law="rules">119</span> rules in
-    31 sets under 7 articles. Every rule carries the same anatomy: what to
+    <span data-law="sets">31</span> sets under <span data-law="articles">7</span> articles.
+    Every rule carries the same anatomy: what to
     avoid, the lawful solution, the <em>why</em>, the article it derives from,
     its enforcement tier, and the real-world evidence that earned it a number.
     Here is Rule 117, exactly as the tooling loads it:</p>
@@ -264,13 +274,15 @@ table.plain th { color: var(--muted); text-transform: uppercase;
         <tr><td>The law, <code>rules.json</code> v<span data-law="version">3.9</span></td><td><span data-law="rules">119</span> rules as data; the single source of truth</td><td class="status live">in force</td></tr>
         <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — in the reference implementation</td></tr>
         <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — in the reference implementation</td></tr>
-        <tr><td>The ten named violations</td><td>the refusal contract every conforming implementation must detect</td><td class="status live">9 of 10 enforced by the verifier; the 10th is the UI audit's</td></tr>
+        <tr><td>The refusal contract</td><td><span data-law="diagnostics">22</span> named violations every conforming implementation must detect — the ten founding ones plus grammar, consistency and medium checks added since</td><td class="status live">21 enforced by the verifier; <code>LAYOUT_DISPLACEMENT</code> is the UI audit's</td></tr>
         <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
         <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
         <tr><td>Zing's <code>zing check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in Zing</td></tr>
         <tr><td><a href="../doc/language/README.md">The language specification</a></td><td>Zui v1.0 — the grammar in EBNF, the ten declaration types, every diagnostic bound to the rule it enforces</td><td class="status live">published</td></tr>
-        <tr><td><a href="../conformance/README.md">The conformance suite</a></td><td>30 declarations with known verdicts and four conformance levels, so any implementation can prove agreement rather than assert it</td><td class="status live">published</td></tr>
-        <tr><td><a href="../tools/zui/README.md">The <code>zui</code> verifier</a></td><td>parses the grammar and enforces 19 of the 20 diagnostics; passes all 30 fixtures at every level. Zero dependencies, runs on Node or in a browser</td><td class="status live">live — level 3</td></tr>
+        <tr><td><a href="../conformance/README.md">The conformance suite</a></td><td>34 declarations with known verdicts and four conformance levels, so any implementation can prove agreement rather than assert it</td><td class="status live">published</td></tr>
+        <tr><td><a href="../tools/zui/README.md">The <code>zui</code> verifier</a></td><td>parses the grammar and enforces 21 of the 22 diagnostics; passes all 34 fixtures at every level. The
+        twenty-second, <code>LAYOUT_DISPLACEMENT</code>, is undecidable from a declaration and
+        is measured by the audit instead — the enforcement ladder working as designed. Zero dependencies, runs on Node or in a browser</td><td class="status live">live — level 3</td></tr>
         <tr><td>Cross-pillar symbols, computed</td><td>the verifier accepts a symbol table today; computing one from a host project's other pillars is the open half of Level 3 — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc</a></td><td class="status design">in design — M3</td></tr>
         <tr><td>Projection tables as data</td><td>intent→widget maps per medium, checkable like rules</td><td class="status design">in design — M4</td></tr>
         <tr><td>The AI-interaction jurisdiction</td><td>chat-stream rules; an MCP surface serving the law to generators while they generate</td><td class="status design">in design — M5</td></tr>
