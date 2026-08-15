@@ -185,6 +185,28 @@ converting one into the other is not clerical.**
 
 *Serves: In Practice — and it is the argument for the "What to change" section existing.*
 
+## L · The law rediscovered by someone not reading it *(added 2026-08-15)*
+
+**The cleanest corroboration this project has.** Softanza Central — a sibling session with
+no knowledge of the constitution's contents — built a status dashboard for its author, who
+rejected two versions and corrected the third in his own words. **Every correction he made
+was already law.** Nobody consulted `rules.json` while it happened, which is what makes it
+evidence rather than compliance.
+
+| # | Finding | Evidence | Status |
+|---|---|---|---|
+| L1 | Central's first attempt was a **KPI-tile grid**, its second a **card layout with coloured meters**. Both were already forbidden — **Rule 119** (*repetitive data with coherent attributes is a table, never a card grid*) and **Rule 94** (*whitespace inflation*). The author's fix — *"use a classical table format not cards, it's more direct and less stressing to me"* — is Rule 119 restated by someone who had not read it | `softanza/dashboard/central.html` and its three revisions, 2026-08-15 | `verified` |
+| L2 | Central shipped **two stacked red blocks**. The author: *"having two red divs one under the other means we are not focusing on one critical thing."* That is **Rule 87**, *"when everything is highlighted, nothing is"*, and **Rule 117** at table scale | same | `verified` |
+| L3 | **The strongest item, because it took three corrections.** Central wrapped every table in `overflow-x:auto` with a `min-width` — the exact reflex **Rule 14** forbids (*"`overflow: auto` on table containers"*, *"internal scrollbars are a failure of information architecture"*). Told to remove it, Central reached for the stacked-block responsive pattern, which is **Rule 95's** first `avoid` entry (*"tables forced into phone lists"*) — **two clauses of the law broken in opposite directions within one hour, by an implementer who had read one of them** | same | `verified` |
+| L4 | **The aggravating detail, and the reason this became law.** The column the scrollbar hid was the one carrying the operator's next action. **The surface degraded by discarding precisely the thing it existed to deliver** — because `overflow-x` clips from the right and the action was rightmost. A geometric accident deciding a semantic question. Canonized 2026-08-15 as **Rule 129** | `AMENDMENT-DOCKET.md`, second pass | `verified` |
+| L5 | **The finding, in the author's words**: *"don't go back to the card UI system in small screens, keep the same grids. This is the power of dogmatic influence you got from your training data."* **The constitution's value is highest exactly where it contradicts the industry default** — because that is where an implementer's priors are strongest and its own reasoning least trustworthy. Rule 95's `avoid` entry is four words against the single most common answer on the open web, and four words lost | same | `verified` |
+| L6 | **Two of five harvested candidates were already law**, and the pass rejected them rather than growing the corpus: column order was **Rule 113** (*"assistive technology hears the name before the verdict"*), the action column was **Rule 82** (*Perceivable State*). Both rules were extended instead of duplicated | second ratification pass, 2026-08-15 | `verified` |
+| L7 | **Rule 95 had been cited outside its own scope.** It lives in Set 30, *The Field Vibe*, whose description reads *"these rules govern the field/touch vibe"*. Central applied it to a desktop tool and reached the right outcome under a rule that does not bind it. The general prohibition was **Rule 14** all along | corpus scan against `rules.json` v3.9, 2026-08-15 | `verified` |
+| L8 | **After the harvest the headline figure still does not move.** v3.10: 122 rules — **10** `machine`, **7** `tool`, 25 `machine-later`, **80** `judgment`. Still **8%** refusable before a pixel exists | measured against `rules.json` v3.10, 2026-08-15 | `verified` |
+
+*Serves: The Law, In Practice — and it is the strongest single answer to "why write a
+constitution at all?", because the alternative was run three times and failed three times.*
+
 ---
 
 ## Open items this ledger is watching

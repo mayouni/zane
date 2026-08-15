@@ -24,25 +24,27 @@ today, a fraction of a platform — and the project's own data says so twice.
 
 ### 1.1 The law legislates a territory the language cannot declare
 
-The constitution holds **119 rules**. Their enforcement tiers, **measured against
-`rules.json` v3.9** — every figure in this document is anchored to a law version, because
+The constitution holds **122 rules**. Their enforcement tiers, **measured against
+`rules.json` v3.10** — every figure in this document is anchored to a law version, because
 a document that argues about drift and then drifts is worth nothing:
 
 | Tier | Rules | Share | Meaning |
 |---|---|---|---|
-| `judgment` | 79 | 66% | a human decides, until an instrument is invented |
-| `machine-later` | 25 | 21% | **the law's own admission that the instrument is missing** |
-| `machine` | 9 | 8% | a declaration checker refuses it |
-| `tool` | 6 | 5% | measured by a runnable instrument |
+| `judgment` | 80 | 66% | a human decides, until an instrument is invented |
+| `machine-later` | 25 | 20% | **the law's own admission that the instrument is missing** |
+| `machine` | 10 | 8% | a declaration checker refuses it |
+| `tool` | 7 | 6% | measured by a runnable instrument |
 
 *(Measured at v3.7.3: 117 rules, 78 `judgment`, 5 `tool`. At v3.8, after Rule 126:
-118 and 79. At **v3.9**, after the docket ratification of 2026-08-13: **119 rules**, Rule 62
+118 and 79. At v3.9, after the docket ratification of 2026-08-13: 119 rules, Rule 62
 promoted off `machine-later` to `tool`, and Rule 125 entering at `machine-later` — so the
-two moves cancel and only `tool` changes. **The finding this table exists to support is
-unmoved: 8% of the law is refusable before a pixel exists.**)*
+two moves cancelled and only `tool` changed. At **v3.10**, after the information-design
+harvest of 2026-08-15: **122 rules**, with Rules 127, 128 and 129 entering at `machine`,
+`judgment` and `tool`. **The finding this table exists to support has now survived three
+ratifications unmoved: 8% of the law is refusable before a pixel exists.**)*
 
 **Eight percent of the law is refusable before a pixel exists.** That is not a failure of
-the verifier, which enforces 19 of its 20 diagnostics and passes 30/30 fixtures. It is a
+the verifier, which enforces 21 of its 22 diagnostics and passes 34/34 fixtures. It is a
 failure of *expressible surface*: there is nothing in a `.zui` file for the other rules to
 bind to. [DECLARATIONS.md §6](language/DECLARATIONS.md) states the boundary — *"No
 `WIDGET`, no layout, no colour"* — while Sets 2, 3, 10, 13, 15 and 17 legislate exactly

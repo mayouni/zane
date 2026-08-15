@@ -1,12 +1,18 @@
 # Amendment docket — one ratification pass
 
-**Status**: **proposed, awaiting the author's pass.** Nothing here is applied.
+**Status**: **ruled and applied.** The 2026-08-13 pass took twelve items to `rules.json`
+v3.9; a second pass on 2026-08-15 took the information-design harvest to **v3.10**. Both
+records are below. The *"nothing here is applied"* line this file carried until 2026-08-15
+was true when written and false for two days after — noted rather than smoothed, in
+keeping with the version-drift note that follows.
 **Why a docket**: StzZui's core asset is a constitution, so most of its "refactoring" is
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
 **Date**: opened 2026-08-12; **C-2 added 2026-08-13**.
-**Law as it stands**: **v3.8, 118 rules** — corrected 2026-08-12. This line previously read
-*v3.8.0* while the law was still v3.7.3; the drift is noted rather than smoothed.
+**Law as it stands**: **v3.10, 122 rules** — updated 2026-08-15. This line has now been
+wrong twice and is kept as its own record: it read *v3.8.0* while the law was still
+v3.7.3, corrected 2026-08-12; it then read *v3.8, 118 rules* through the whole of v3.9.
+The drift is noted rather than smoothed.
 
 > **Numbering note, 2026-08-12.** Rule **126**, *Foreign Data Says It Is Foreign*, was
 > canonized outside this docket on the author's direct ruling, and the law is now v3.8.
@@ -474,3 +480,117 @@ Small, and worth naming honestly rather than padding:
 - **This docket assumes the Second Founding's direction** without assuming its ratification.
   If the vision is rejected, C-1, P-1, A-3(a) and A-5's correction still stand on their
   own evidence; A-1, A-4 and N-1 fall with it.
+
+---
+
+# SECOND PASS — 2026-08-15 · the information-design harvest
+
+**Source**: [`softanza/prompts/28-stzzui-information-design-rules.md`](../../softanza/prompts/28-stzzui-information-design-rules.md).
+Softanza Central built a status dashboard, had two versions rejected by its author, and
+handed over the corrections as evidence. **Central edited nothing in the law and proposed
+no wording** — it found the material, named five candidates, and said plainly that
+rejecting a candidate as already-covered would be a good outcome.
+
+**Applied to `rules.json` v3.9 → v3.10.** Five candidates, five rulings: **three canonized,
+two rejected as already law and folded into the rules that carried them.**
+
+| # | Candidate | Ruling |
+|---|---|---|
+| **1** | A data table declares its columns | **Canonized — Rule 127**, `machine` |
+| **2** | A row names its subject before its state | **Rejected as new law — already Rule 113**, which is extended |
+| **3** | A status row ends in the action it requires | **Rejected as new law — already Rule 82**, which is extended |
+| **4** | One fact, one encoding | **Canonized — Rule 128**, `judgment` |
+| **5** | The action survives width pressure | **Canonized — Rule 129**, `tool` |
+
+## The two rejections, which are the more useful half
+
+**Candidate 2 was already law, and better law than the candidate.** **Rule 113, Labels
+Follow Their Subject**, already forbids *"status markers placed before the name they
+qualify"* and already gives the reason in the stronger form: *"assistive technology hears
+the name before the verdict."* The candidate was that principle at column scale. A new
+number would have been a near-duplicate of a rule that says it better, so Rule 113 gains
+the table-row case in its `avoid` list and one sentence in its solution. **The author's
+correction and Rule 113 are the same law, reached twice.**
+
+**Candidate 3 was already law, and Central guessed the right home.** Rule 82 became
+*Perceivable State* at v3.9: *if the system knows something important, the operator must
+be able to perceive it.* An outstanding obligation is state of exactly that kind. Rule 82's
+solution now says so — every row of a summary surface states what it requires, or states
+that it requires nothing.
+
+This answers the question Central asked directly: **does the action column belong to the
+constitution?** The *column* does not; a surface may express an obligation any way it
+likes. What belongs is the **perceivability of the obligation** — the operator must never
+have to deduce from a number whether a row is asking something of them.
+
+## Two corrections to the prompt's own reading of the law
+
+Recorded because Central asked to be told, and because both change what the evidence proves.
+
+**Rule 95 does not reach a desktop dashboard.** It lives in **Set 30, The Field Vibe**,
+whose description reads *"these rules govern the field/touch vibe"*, and its own solution
+says *"in the field vibe"* and *"it is not a table **here**"*. Central cited it against a
+desktop tool and reached the right outcome under a rule that does not bind. Rule 95 now
+states its own scope and points to Rule 129 for the general case.
+
+**Rule 14 already forbade the thing that caused the defect.** *No App-Squeezing* lists
+`overflow: auto` on table containers in its `avoid` and calls internal scrollbars *"a
+failure of information architecture"* — general law, not field-vibe law. Central's
+`overflow-x:auto` wrapper violated **Rule 14** on the day it was written. The rule was read
+as vertical-only, so it now says the prohibition covers the horizontal axis too, where the
+consequence is worse.
+
+**So the gap was narrower than the prompt supposed, and sharper.** The prohibition existed;
+what no rule stated is **which column survives when width genuinely runs out** — and that
+is the whole of Rule 129.
+
+## Rule 129, and why it is `tool` rather than `judgment`
+
+The measurable half is measurable: zero horizontally scrolling elements, and every cell of
+the actionable column inside the viewport at 375 pixels. **Central ran exactly that check**
+and reported 26 of 26 action cells fully visible. That is the lineage's own definition of
+`tool` — a runnable check in a repository — and the precedent is Rule 62, moved to `tool`
+in the first pass for the same reason.
+
+Rule 129 also names the trap explicitly, on Central's advice. Rule 95's `avoid` entry
+*"tables forced into phone lists"* is four words, and the pattern it forbids is the single
+most common answer on the open web. **Central read that rule and walked into it anyway,
+within an hour of being corrected for the opposite failure.** The wording now spells the
+remedy out rather than trusting a four-word prohibition to hold against the industry
+default.
+
+## Version arithmetic
+
+Substance moved — three canonizations and a forbidden pattern — so this is not a patch. A
+table that was lawful yesterday without a header row is unlawful today.
+
+> **`rules.json` v3.9 → v3.10 · 119 rules → 122 · 16 forbidden patterns → 17 ·
+> `machine` 9 → 10 · `tool` 6 → 7 · `judgment` 79 → 80.**
+
+**The two data artifacts were re-pinned to 3.10**, and that is a deliberate act rather than
+a sweep: all 30 rule, article and forbidden-pattern references in
+`conformance/violations.json` were resolved against the new law first, and no diagnostic's
+binding moved. The first pass's note 3 set the rule — *"a consumer moves its pin
+deliberately"* — and this is that act performed, not skipped.
+
+**Suite 34/34 at level 4, unchanged.** No diagnostic, verb, medium or verdict moved.
+
+## Honest boundaries on this pass
+
+- **Three new numbers from one surface is a lot**, and the risk is corpus inflation. The
+  defence is that two of five candidates were rejected, each survivor has a distinct
+  documented failure, and the source is an operator correcting his own daily tool rather
+  than a designer reasoning in the abstract. If any one is weakest it is **128**, whose
+  principle Rule 1 and Rule 50 already imply — it is canonized because neither *states*
+  it, and a reviewer citing Rule 50 against a progress bar would be stretching a
+  widget-selection rule past its subject.
+- **Rule 127 is `machine` on a lint nobody has written.** The check is trivial — a table
+  with body rows and no `<th>` — but the instrument is the HTML linter, not `zui check`,
+  and a `.zui` file has no tables. The tier is honest about which instrument owes the
+  check; it is not a claim that the check runs today.
+- **Rule 129's second half is not measurable without a declaration.** An auditor can prove
+  nothing is clipped; proving *the actionable column* survived needs the surface to say
+  which column that is. Rule 117 already names the concept; nothing declares it yet.
+- **The evidence is one surface, one operator, one implementer.** It is unusually clean
+  because nobody was consulting the law while the violations happened, but it is not a
+  corpus.

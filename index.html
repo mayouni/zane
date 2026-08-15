@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>StzZui — the compilable language for user interfaces</title>
-<meta name="description" content="StzZui: a declarative, compilable language for intent-driven user interfaces, governed by a machine-verifiable constitution of 119 rules. Declare what the human is doing; the compiler refuses what the law forbids; projections render to any medium; the audit measures what runtime paints.">
+<meta name="description" content="StzZui: a declarative, compilable language for intent-driven user interfaces, governed by a machine-verifiable constitution of 122 rules. Declare what the human is doing; the compiler refuses what the law forbids; projections render to any medium; the audit measures what runtime paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="site/stz.css">
 <style>
@@ -40,7 +40,7 @@
     You declare what the human is trying to do — discover, select, confirm,
     undo — and the compiler refuses what its constitution forbids,
     <em>before anything is rendered</em>. Behind the language: a
-    machine-verifiable law of <span data-law="rules">119</span> rules as data. In front of it: projections
+    machine-verifiable law of <span data-law="rules">122</span> rules as data. In front of it: projections
     to any medium — web, CLI, voice, game worlds, AI-agent surfaces. It
     deploys inside any software project and holds at every phase: design,
     development, runtime.</p>
@@ -73,7 +73,7 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
 <pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v<span data-law="version">3.9</span></pre>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v<span data-law="version">3.10</span></pre>
     <p class="caption"><b>Status, plainly:</b> that is real output, copied from
     a real run — <a href="tools/zui/README.md">the verifier</a> ships in this
     repository, passes all 34 fixtures of
@@ -95,9 +95,9 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
     <div class="stats">
       <div class="card"><b>22</b><p>closed intent verbs, DISCOVER … EXIT — widgets are consequences</p></div>
       <div class="card"><b>10</b><p>declaration types, INTENT_FLOW to VIBE</p></div>
-      <div class="card"><b data-law="rules">119</b><p>constitutional rules as data, v<span data-law="version">3.9</span> — the semantic layer</p></div>
-      <div class="card"><b>10</b><p>named violations in the refusal contract — the spec M3 implements</p></div>
-      <div class="card"><b>15</b><p>forbidden patterns, named outright</p></div>
+      <div class="card"><b data-law="rules">122</b><p>constitutional rules as data, v<span data-law="version">3.10</span> — the semantic layer</p></div>
+      <div class="card"><b data-law="diagnostics">22</b><p>named violations in the refusal contract — 21 enforced by the verifier</p></div>
+      <div class="card"><b data-law="forbidden">17</b><p>forbidden patterns, named outright</p></div>
       <div class="card"><b>3</b><p>phases held: design, development, runtime</p></div>
     </div>
   </div>
@@ -136,7 +136,7 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
     exit, an act with no undo are structural errors, refused by name before
     the interface exists.</p>
     <p><b>Its semantics are a law, and the law is data.</b> One versioned JSON
-    file — <span data-law="rules">119</span> rules, each with its why, its evidence, its enforcement tier —
+    file — <span data-law="rules">122</span> rules, each with its why, its evidence, its enforcement tier —
     is the single source of truth. The compiler checks against it, linters
     load it, findings cite it, and no prose can drift from what the machine
     enforces. Amendment requires documented evidence, never fashion.</p>
