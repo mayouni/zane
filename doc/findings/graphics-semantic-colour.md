@@ -107,6 +107,72 @@ exists.
 
 ---
 
+## What to change — the call sites, verified 2026-08-13
+
+### Item 1 · `:Muted` — five edits and a guard, not one row
+
+| # | Where | Change |
+|---|---|---|
+| 1 | `base/graphics/stzColor.ring:273` | `StzSemanticColors()` — add `:Muted` |
+| 2 | `base/graphics/stzColor.ring:276` | `StzThemeRoles()` — add `:Muted` (before `:Background`, which is the theme-only slot and reads last) |
+| 3 | `base/graph/stzDiagramColor.ring:45-52` | `$acColorsBySemanticMeaning` — add `:Muted = <seed>` |
+| 4 | `base/graph/stzDiagramColor.ring:78+` | `$aPalette` — **seven themes**, each enumerating `:primary :success :warning :danger :info :neutral :background`. Each gains `:muted`. Seven edits, not one |
+| 5 | `base/test/graphics/gg_color_c2.ring`, `gg_color_c3.ring` | the contrast guard — see below |
+
+**The guard count moves, and this is the real work.** The C3 phase reports *42/42
+theme/role pairs pass 4.5:1* — that is 7 themes × 6 roles. Adding `:Muted` makes it
+**7 × 7 = 49**, and **the seven new pairs must clear the floor in every theme**, including
+`dark`, `access` and `print`. The seed cannot be chosen by eye and then checked; it has to
+be chosen *against* `StzIsLegible` across all seven.
+
+### The design problem, which is genuinely harder here than in sound
+
+The sound plane had an easy answer: **`muted` renders as silence.** There is no colour
+equivalent. "Absence of colour" is already what `:Neutral` carries, and the two must stay
+**visually distinguishable** — they mean different things:
+
+- `:Neutral` — *no semantic charge.* Metadata, chrome, the resting state of a thing that
+  has no status.
+- `:Muted` — *waiting, inactive.* A status, and a **temporary** one. The row is not
+  neutral; it is a live thing that is currently not live.
+
+So the constraint set is: reads as **quiet**, distinguishable from `:Neutral` at a glance,
+distinguishable from the four active statuses, and clears 4.5:1 in seven themes. That is
+not a mechanical addition, and **it may be exactly why this value never got implemented.**
+
+One shape worth considering, offered and not prescribed: `:Muted` may be better expressed
+as a **treatment of a status** — a desaturation the ramp already knows how to compute —
+rather than as a sixth hue. The role-step machinery exists; a *waiting danger* and a
+*waiting success* may need to remain distinguishable from each other, which a single grey
+seed cannot do. **That is this plane's call and it is the interesting part of the work.**
+
+### Items 2, 3, 4 · one line each
+
+| # | Where | Change |
+|---|---|---|
+| 2 | `SOFTANZA_COLOR_SYSTEM.md` | one line: the five semantic names serve **Rule 118**, `rules.json` v3.9 |
+| 3 | `stzDiagramColor.ring:44` | extend the `# Semantic color meanings (abstraction layer)` comment: the layer abstracts hex → name and **stops there**; name → reading is culture-bound and belongs to `base/culture/` when it exists |
+| 4 | `stzTheme.ring:109` | one line: an export resolves to hex **by design**, and the far side therefore has no resolver — a semantic export is `stzSense`'s, not this plane's |
+
+### Honest sizing, corrected
+
+I first called item 1 "about an hour". **That was wrong** — it is an hour only if `:Muted`
+is a grey nobody checks. Done properly, with a seed chosen against the contrast floor in
+seven themes and a real answer to the `:Neutral` distinction, it is a careful half-session.
+Items 2 to 4 are ten minutes together.
+
+### Why now rather than when someone trips over it
+
+`stzSense` v0 is specified to carry the five semantic values across channels. Built against
+a four-value colour engine, it either ships a value one channel cannot resolve, or ships
+four and is widened later — and widening a serialization after files exist is the migration
+this project keeps paying to avoid. The GUI plane's `.stzui` colour fields learn sense
+references at G6 and should learn five.
+
+**The finding's job is timing, not discovery.** `:Muted` would surface eventually — when
+someone building `stzSense` got stuck. Now it costs a half-session; then it costs a format
+revision.
+
 ## What is *not* being asked
 
 - **No colour values change.** Item 1 adds a name; what it resolves to is this plane's.
