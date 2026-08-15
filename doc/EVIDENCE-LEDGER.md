@@ -35,6 +35,9 @@ be wrong can be found and corrected rather than quietly repeated.
 | A3 | **Two payment surfaces differing by seven broken laws are byte-identical as `.zui` and both run clean at Level 4** — the court is silent exactly where the deterioration lives | fixtures written and run 2026-08-12; violations of Rules 119, 8, 3/87/117, 40, 79, 105, 123 | `verified` |
 | A4 | All 118 rules carry `derived_from`, and all resolve to one of the seven articles — so admission needs no committee of taste | measured 2026-08-13 | `verified` |
 
+| A5 | **After ratification the figure did not move.** v3.9: 119 rules — 9 `machine`, **6** `tool`, 25 `machine-later`, 79 `judgment`. Rule 62 left `machine-later` for `tool` and Rule 125 entered at `machine-later`, **so the two moves cancel** | measured against `rules.json` v3.9, 2026-08-13 | `verified` |
+| A6 | **The law can now be checked where it was only legislated.** `SURFACE_AS` closed to ten media, the capability matrix published as data, two diagnostics added, suite **34/34** | `conformance/media.json`, 2026-08-13 | `verified` |
+
 *Serves: The Deterioration, The Law.*
 
 ## B · The law is monomodal while believing itself medium-agnostic
@@ -57,6 +60,10 @@ be wrong can be found and corrected rather than quietly repeated.
 | C2 | **Rule 62 is `machine-later` while its instrument ships.** `StzIsLegible` at `stzColor.ring:324`, minimum 4.5, CI-gated, 42/42 theme/role pairs passing | 2026-08-12 | `verified` |
 | C3 | **A cultural assumption hard-coded in an "abstraction layer."** `stzDiagramColor.ring:45` binds `:Success = "green"`, `:Danger = "red"` — the exact pair that **inverts** in Chinese, Japanese, Korean and Taiwanese financial convention | read 2026-08-13 | `verified` (code) · `reported` (inversion) |
 | C4 | The colour plan never uses the words *culture*, *region*, *locale* or *audience* — **not once, including in its own "Risks, named now"** | 2026-08-13 | `reported` |
+
+| C5 | **The site drifted under a heading claiming it could not.** The enforcement census on *How it works* was titled *"the census, computed from the file"* and was **hand-typed** — 78 `judgment` where the law said 79, 118 rules where it said 119. It is now read from `rules.json` at page load | 2026-08-13, fixed same day | `verified` |
+| C6 | **The colour plane implements four of the law's five family-one values.** `StzSemanticColors()` has no `:Muted`, and neither `:Neutral` (family two) nor `:Primary` (Rule 3's accent quantity rule) can stand in. **Visible only because the sound plane implemented all five** — the two channels of one system disagree about how many values exist | `stzColor.ring:272-276`, 2026-08-13 | `verified` |
+| C7 | **The same category error, found in our own fixture.** `vibe-strips-right.zui` declared `SURFACE_AS kiosk`. A kiosk is not a medium — it is a *visual* surface that is **unelected**, which is a property. Identical to filing `ambient` as a medium, and caught on the first run of the closed enumeration | 2026-08-13 | `verified` |
 
 *Serves: The Deterioration, The Expression, The Readers.*
 
@@ -157,6 +164,26 @@ itself. Each is a correction *this* project made to *itself*, in the open.
 | J3 | Claimed Softanza's text pipeline is *"ahead of egui's"* | True for **display**, misleading for **editing** — see H7. Both are at zero for the edit model | 2026-08-13 |
 | J4 | The founding document's tier table said 117 rules / 78 `judgment` after the law moved to v3.8 | Re-measured and **anchored to a law version**, with the prior values recorded, so it cannot go stale silently again | 2026-08-13 |
 | J5 | Recorded the reference design as **v1.0** when it was **v1.3** | Corrected in `ALIGNMENT.md`; C2 is unchanged across all three amendments | 2026-08-13 |
+| J6 | Docket **P-1** proposed Rule 62 → `machine` | **Wrong tier.** `machine` means the *declaration checker* refuses it, and a `.zui` file has no colours. `StzIsLegible` is a runnable check in a repository — the definition of `tool`, where Rule 105 already sits. **Caught by the ratification pass itself** | 2026-08-13 |
+| J7 | Docket **A-5** claimed reconciliation must *add a value* | It does not. Rule 118 is *Two Families of Colour*; `:Neutral` is **family two**, already legislated, and `:Primary` is Rule 3's accent quantity rule. The closed set stays at five and the vocabulary `stzEarcons` adopted needs no revision | 2026-08-13 |
+| J8 | Sized the `:Muted` work at *"about an hour"* | True only if it is a grey nobody checks. See K3 — a careful half-session | 2026-08-13 |
+| J9 | Went looking for a duplicated semantic table in `stzDiagramColor` | **There isn't one.** Negative result recorded rather than dropped, because a manufactured defect is worse than a missed one | 2026-08-13 |
+
+## K · Verification that changed the claim *(added 2026-08-13)*
+
+Five times today, checking a call site altered what was about to be filed. Recorded as a
+group because the pattern is the finding: **an observation is not a work order, and
+converting one into the other is not clerical.**
+
+| # | Before checking | After checking |
+|---|---|---|
+| K1 | *"the classifier probably misses R"* | **proven** from the vendored `utf8proc.h`: `R = 4` is never matched, Arabic passes only by accident via `AL = 5`, and the in-code comment asserting `5=R` **skips 4** — the comment is part of the defect |
+| K2 | *"`MatchWord` mutates the pattern"* | **two verbs**, not one — `MatchWordsIn` *and* `MatchFirstWordIn` both call `SetPattern` |
+| K3 | *"adding `:Muted` is one row, about an hour"* | **five edits and a guard**; seven theme palettes each enumerate their roles, and the contrast pairs go **42 → 49**, all needing 4.5:1 in every theme. A careful half-session |
+| K4 | *"renaming `.stzui` is a directory listing"* | `ToText()` bakes the literal string into **canonical output**, pinned by a byte-identical round-trip guard — the rename touches the printer and its guard |
+| K5 | *"`stzDiagramColor`'s table duplicates `stzColor`'s"* | **wrong, and recorded as such.** It *is* the resolver's source; `stzColor` is the facade over it. One source of truth, correctly |
+
+*Serves: In Practice — and it is the argument for the "What to change" section existing.*
 
 ---
 

@@ -346,6 +346,36 @@ reconciliation, S3's reciprocal citation and S4b's culture finding are three not
 unblocked one is S8** — SIGNAL in the visual channel — because it is the first expression
 grammar written in full, and it sets the pattern the other five copy.
 
+## 8. Where the work now lives — corrected 2026-08-13
+
+**This plan is no longer the dispatcher, and should not act like one.** Session briefs live
+in **`softanza/prompts/`**, numbered, where the Central session synchronises them. Writing
+them into `stzzui/doc/prompts/` was this session working outside the family's own system.
+
+Everything outstanding was filed there as **prompts 21–27**:
+
+| # | Session | Carries | Detail lives in |
+|---|---|---|---|
+| 21 | StzLib — GUI implementation | the `.stzui` finding, 3 requests | `doc/findings/gui-stzui-v01.md` |
+| 22 | StzLib — Graphics engine | the semantic colour seam, 4 items — **this is S1 + S3 + S4b, consolidated** | `doc/findings/graphics-semantic-colour.md` |
+| 23 | StzLib — general tasks | six re-verified defects — **S4c + S4d** | `doc/prompts/locale-defects.md`, `regex-defects.md` |
+| 24 | Zing | re-pin v3.7.3 → v3.9 — **not previously in this plan** | — |
+| 25 | Softanza — Central | the two contract questions — **§10 decision 3, dispatched** | `THE-SECOND-FOUNDING.md` §7.3, §4.6.3 |
+| 26 | *(new session)* | the culture module — **S20** | `doc/prompts/culture-module.md` |
+| 27 | *(held)* | `stzCSS` — **S8c**, ready and deliberately not launched | `doc/prompts/stzcss-design.md` |
+
+**Two things this changes about the plan's own status.** Track 0's three half-done items
+are no longer half-done *here* — they are one consolidated finding, filed, and their
+completion is the graphics session's. And **§10's decision 3 is no longer an open question
+this document holds**; it is prompt 25, in the only repository that can answer it.
+
+**The detailed findings stay in `stzzui`** and are referenced rather than copied, so there
+is one source of truth per piece of work. The numbered prompt is the brief; the finding is
+the evidence.
+
+**What this plan is for now**: StzZui's own remaining work — **S8**, then S8b, S9, S10, and
+Track B's untouched commons items. Everything addressed to another repository has left.
+
 ## 8. Six traps
 
 1. **StzZui must not build a renderer.** Six strata is an invitation to implement. StzZui
