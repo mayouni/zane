@@ -111,6 +111,64 @@ about: **a meaning that escaped into a literal, an element that traces to no int
 name chosen before its neighbours were considered.** None is a defect. All three are the
 kind that are trivial while the corpus is one showcase file and a migration once it is not.
 
+## What to change — the call sites, verified 2026-08-13
+
+Added after the same gap was found in a sibling finding: an observation a session has to
+*locate* before it can act costs more than the act. Line numbers are from
+`base/gui/stzUiDocument.ring` as it stands today.
+
+### Finding 1 · warn on a literal colour
+
+The colour fields are `COLOR` and `BACKGROUND`, declared in the closed field sets at
+**`:56-66`** (`@aPanelFields`, `@aBoxFields`, `@aTextFields`, `@aStyleFields`) and read at
+**`:177`**, **`:476`** and **`:486`**.
+
+The check belongs in the **court**, not at paint time — same place the four existing checks
+live, alongside `_Err("NO_PANEL", …)` at **`:889`** and `_Err("MANY_PANELS", …)` at
+**`:893`**. The diagnostic builder is at **`:1133`** and already emits the C2 envelope with
+`:language = "stzui"`, so severity is a field it carries: this is the plane's **first
+warning** rather than an error, which is the whole point.
+
+Shape: for every `COLOR` / `BACKGROUND` value beginning `#`, raise
+`LITERAL_COLOUR`, severity `warning` — *"a colour that names no meaning"*. Accept it,
+record it, refuse it at G6. **The showcase will raise about twenty**, and that is the
+finding working, not the check misfiring.
+
+### Finding 2 · the intent slot
+
+`@aPanelFields` at **`:56`** is the closed set for the root kind, and the closure check at
+**`:658`** enforces it — *"a `.stzui` file declares and does nothing else."* So the field
+is one entry there plus its parse arm; unresolved, recorded, not yet checked.
+
+**Look at `def Roles()` at `:1045` first.** If that is already a role concept in this
+document's sense, the intent slot may belong beside it rather than as a new field — and
+that would be a better answer than the one this finding proposes.
+
+### Finding 3 · the rename is not only filenames
+
+**This is the part that makes it now-or-never.** `ToText()` at **`:188`** emits a header
+containing the literal string `.stzui`:
+
+```ring
+_c_ = "-- interface.stzui -- " + This._HeaderSentence() + …
+```
+
+So the extension is baked into **canonical output**, and the round-trip fixpoint —
+`Parse → ToText() → Parse`, asserted byte-identical in `gui_stzui_narrated.ring` — pins it.
+Renaming therefore touches the printer and its guard, not just a directory listing.
+
+Full touch list: `stzUiDocument.ring` prose at `:2`, `:12`, `:658`, `:860`, `:889`, `:893`
+and the emitted header at `:188`; `base/test/gui/showcase.stzui`;
+`gui_stzui_narrated.ring`; `gui_stzui_showcase.ring`; the two showcase artefacts; and
+`SOFTANZA_GUI_PLAN.md` §4b. **Roughly a dozen sites today.** Every example, tutorial and
+sibling fixture written from here on adds to it.
+
+### Honest sizing
+
+Finding 1 is an hour — one check, one code, one guard assert, and a showcase that starts
+warning. Finding 2 is smaller if `Roles()` already fits and a short design conversation if
+it does not. Finding 3 is under an hour **today** and grows monotonically.
+
 ## What is *not* being asked
 
 - **No grammar reshape.** The commons conformance, the flat named declarations, the
