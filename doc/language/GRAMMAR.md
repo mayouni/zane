@@ -54,7 +54,7 @@ ref-items       = identifier { "," identifier } [ "," ] ;
 ref-list-key    = "SATISFIES" | "ALWAYS_REACHABLE"
                 | "VISIBLE_ENTITIES" | "VISIBLE_STATE"
                 | "INTENT_FLOWS" | "STEPS" | "REPORTS"
-                | "SUPPRESSES" ;
+                | "SUPPRESSES" | "SIGNALS" ;
 
 kv-field        = kv-key value ;
 kv-key          = "INTENT_FLOW" | "PERSPECTIVE" | "TONE"

@@ -206,6 +206,30 @@
       "level": 2,
       "expect_ids": [],
       "note": "The twin: same medium, honest intents. READ, SCAN and COMPARE are what a page is for."
+    },
+    {
+      "file": "unknown-signal.zui",
+      "level": 1,
+      "expect_ids": ["UNKNOWN_SIGNAL"],
+      "note": "The offending word is 'critical', which is lawful in TONE and not in SIGNALS. The pair of closed vocabularies is deliberate -- MESSAGE and SIGNAL are different strata -- and this fixture exists to keep the boundary visible rather than to punish a typo."
+    },
+    {
+      "file": "unknown-signal-lawful.zui",
+      "level": 1,
+      "expect_ids": [],
+      "note": "The twin, differing in one word: 'critical' becomes 'danger'."
+    },
+    {
+      "file": "expression-orphan.zui",
+      "level": 2,
+      "expect_ids": ["EXPRESSION_ORPHAN"],
+      "note": "A surface that says how its values should be perceived and never says what the operator is doing. INTENT_ORPHAN one layer down."
+    },
+    {
+      "file": "expression-orphan-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin: the same signals, now refining a declared intent. One line added."
     }
   ],
   "unfixtured": [

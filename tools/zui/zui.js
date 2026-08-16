@@ -36,7 +36,7 @@ const UNSPECIFIED_KINDS = new Set(['WIDGET', 'USER']);
 
 const REF_LIST_KEYS = new Set([
   'SATISFIES', 'ALWAYS_REACHABLE', 'VISIBLE_ENTITIES', 'VISIBLE_STATE',
-  'INTENT_FLOWS', 'STEPS', 'REPORTS', 'SUPPRESSES'
+  'INTENT_FLOWS', 'STEPS', 'REPORTS', 'SUPPRESSES', 'SIGNALS'
 ]);
 const KV_KEYS = new Set([
   'INTENT_FLOW', 'PERSPECTIVE', 'TONE', 'SURFACE_AS', 'DENSITY', 'MOTION', 'ACTOR'
@@ -44,6 +44,21 @@ const KV_KEYS = new Set([
 
 const PERSPECTIVES = new Set(['top_down', 'isometric', 'first_person', 'side_scroll']);
 const TONES = new Set(['celebratory', 'cautionary', 'critical', 'neutral', 'informational']);
+
+/* The SIGNAL stratum's vocabulary: Rule 118's family one, closed at five.
+   NOT the same axis as TONE, and deliberately not reconciled with it -- TONE is
+   the register the system SPEAKS in (the MESSAGE stratum); SIGNALS is what a
+   value MEANS about a record (the SIGNAL stratum). Two strata, two vocabularies,
+   and each rule points at the other so the pair cannot drift unnoticed the way
+   Rules 3 and 118 did before v3.11. Published as data in conformance/signal.json. */
+const SIGNALS = new Set(['success', 'warning', 'danger', 'info', 'muted']);
+
+/* Fields that carry an expression rather than an intent. Every one of them must
+   trace to an intent or it is EXPRESSION_ORPHAN -- the founding's rule, and the
+   reason the expression strata are intent's refinement rather than a second
+   language beside it. SIGNALS is the first; ROLE, MOTION, MESSAGE and TEMPO join
+   this set as their grammars land. */
+const EXPRESSION_KEYS = ['SIGNALS'];
 
 /* The medium a VIBE projects to. Closed, like the verbs and the two
    enumerations above -- a new medium is a language change, not an
@@ -341,6 +356,17 @@ function check(decls, symbols) {
       }
     }
 
+    /* The SIGNAL vocabulary is closed the way the verbs and the media are: a
+       value outside the five is a language error, not a naming preference. */
+    {
+      const f = decl.fieldIndex.get('SIGNALS');
+      if (f && f.kind === 'list') {
+        for (const item of f.items) {
+          if (!SIGNALS.has(item.v)) add('UNKNOWN_SIGNAL', item.line, `${item.v} in SIGNALS of ${label}`);
+        }
+      }
+    }
+
     /* -- Level 2 -------------------------------------------------------- */
 
     const satisfies = new Set(listOf(decl, 'SATISFIES') || []);
@@ -349,6 +375,18 @@ function check(decls, symbols) {
 
     if (kind === 'INTENT_FLOW' && !decl.fieldIndex.has('SATISFIES')) {
       add('INTENT_FLOW_NO_SATISFIES', line, label);
+    }
+
+    /* Expression is intent's refinement, never a second language beside it. A
+       declaration that says how something should be PERCEIVED without saying
+       what the operator is DOING has inverted the whole model. */
+    for (const key of EXPRESSION_KEYS) {
+      const f = decl.fieldIndex.get(key);
+      if (!f) continue;
+      const nonEmpty = f.kind !== 'list' || (f.items && f.items.length > 0);
+      if (nonEmpty && satisfies.size === 0) {
+        add('EXPRESSION_ORPHAN', f.line, `${key} on ${label} traces to no intent`);
+      }
     }
 
     if (satisfies.has('SELECT') && acts && !satisfies.has('CONFIRM')) {

@@ -163,15 +163,35 @@ DEFINE INTENT_FLOW post_ledger_entry (
 
 ## 5. Enumerations, complete
 
-Three fields are enumerated. Two are checked by the reference implementation today;
-the third was closed at v1.1, when the law's Rule 82 became **Perceivable State** and a rule
+**Four** fields are enumerated. Two are checked by the reference implementation today; the
+third was closed at v1.1, when the law's Rule 82 became **Perceivable State** and a rule
 obliging perceivability *in the declared medium* needed a language that could declare one.
+The fourth arrived at v1.2 with the first expression stratum.
 
 | Field | On | Legal values |
 |---|---|---|
 | `PERSPECTIVE` | `WORLD_VIEW` | `top_down` · `isometric` · `first_person` · `side_scroll` |
 | `TONE` | `FEEDBACK` | `celebratory` · `cautionary` · `critical` · `neutral` · `informational` |
 | `SURFACE_AS` | `VIBE` | `visual` · `auditory` · `voice` · `haptic` · `print` · `luminous` · `signage` · `machine` · `spatial` · `terminal` |
+| `SIGNALS` | any declaration | `success` · `warning` · `danger` · `info` · `muted` |
+
+### 5.2 `TONE` and `SIGNALS` are two vocabularies, and that is deliberate
+
+They look like the same five values wearing different words, and they are not. **`TONE` is
+the register the system speaks in**; **`SIGNALS` is what a value means about a record.**
+Different strata — `MESSAGE` and `SIGNAL` — with different subjects, so each enumeration
+is closed and **each refuses the other's words**: `TONE danger` is `INVALID_TONE`, and
+`SIGNALS [critical]` is `UNKNOWN_SIGNAL`.
+
+That refusal is the feature. One subject with two vocabularies is precisely the defect the
+constitution corrected in itself at v3.11, when Rules 3 and 118 turned out to have
+legislated colour in two overlapping vocabularies for 122 rules without either citing the
+other. **Two subjects with two vocabularies is correct** — provided the boundary is written
+down, which is what this section is for.
+
+`SIGNALS` is quoted from **Rule 118's family one** and published as data in
+[`conformance/signal.json`](../../conformance/signal.json), alongside what each medium
+actually renders those values as.
 
 ### 5.1 The medium set is closed, and why that buys something
 
@@ -182,7 +202,8 @@ enumerated.**
 
 That matrix is published as data in [`conformance/media.json`](../../conformance/media.json)
 — each medium described by **properties** (persistence · seriality · election · bandwidth ·
-mutability) rather than by taste, so a new channel is *classified* rather than argued about,
+mutability · retractability) rather than by taste, so a new channel is *classified* rather
+than argued about,
 and each carrying the 22 verbs as `native`, `degraded` or `absent`.
 
 Only **absent** raises a diagnostic. *Degraded* — a parallel act becoming serial, a
@@ -196,10 +217,40 @@ to be **unelected**, which is a property and not a channel. The same distinction
 Values are matched case-sensitively in lower_snake. These lists are closed;
 extending them is a language change, not an implementation choice.
 
+## 5.3 `SIGNALS` — the first expression field
+
+| Field | Type | Required | Meaning |
+|---|---|---|---|
+| `SIGNALS` | enum list | no | the semantic statuses this surface carries — Rule 118's five. A value outside them is `UNKNOWN_SIGNAL` |
+
+**It names a meaning, never a colour.** `SIGNALS [danger]` says *this surface carries
+values that are critical, exceeded or incident*; it does not say red, and a declaration
+that needed to say red would have stopped describing expression and started describing
+paint. Which colour, timbre or waveform serves `danger` is the rendering's business, per
+medium and per culture.
+
+**It must trace to an intent.** A declaration carrying `SIGNALS` with no `SATISFIES` is
+`EXPRESSION_ORPHAN` — `INTENT_ORPHAN` one level down, and the rule that keeps the inversion
+intact. Expression is intent's *refinement*, never a second language beside it: a surface
+that says how its values should be perceived without saying what the operator is doing has
+inverted the model this language exists to enforce.
+
+```zui
+DEFINE SCREEN overdue_invoices (
+  SATISFIES [SCAN, COMPARE, LOCATE],
+  SIGNALS [danger, warning, muted]
+)
+```
+
+`SIGNALS` is the first of six expression fields. `ROLE`, `MOTION`, `MESSAGE` and `TEMPO`
+raise the **same** `EXPRESSION_ORPHAN` as their grammars land, which is why that diagnostic
+names the stratum family rather than the field.
+
 ## 6. What a declaration may not do
 
 - **Name a rendering.** No `WIDGET`, no layout, no colour. A declaration that
-  needs to say "card" has stopped describing intent.
+  needs to say "card" has stopped describing intent. `SIGNALS` is not an exception:
+  it names the *meaning* a rendering must carry, and never the rendering.
 - **Nest.** Fields hold scalars and identifier lists. (GRAMMAR §2.)
 - **Invent a verb.** The 22 are closed. (GRAMMAR §4.)
 - **Collapse intents.** `SELECT` with `ACT` and no `CONFIRM`, or `READ` with

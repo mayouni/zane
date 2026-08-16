@@ -72,6 +72,38 @@ function main(argv) {
     }
   } catch (e) { mediaProblems.push('cannot read media.json: ' + e.message); }
 
+  /* The prose specification catalogues the same diagnostics the contract holds.
+     It drifted: UNKNOWN_MEDIUM and VERB_NOT_CARRIED were added to violations.json
+     and to the verifier and never to VIOLATIONS.md, so the table described 20
+     while the contract held 22, and nothing noticed for three law versions.
+     Same discipline as the media check -- two sources means prove they agree. */
+  /* Read rather than hardcode: this line printed v1.0 through the whole of the
+     language's v1.1, because a number in a console.log is not attached to
+     anything that could contradict it. */
+  let specVersion = '(unreadable)';
+  try {
+    const rm = fs.readFileSync(path.join(__dirname, '..', '..', 'doc', 'language', 'README.md'), 'utf8');
+    const mm = rm.match(/^#\s+The Zui Language\s+—\s+Specification\s+v(\S+)/m);
+    if (mm) specVersion = mm[1];
+  } catch (e) { /* reported as (unreadable) rather than guessed */ }
+
+  const specProblems = [];
+  try {
+    const md = fs.readFileSync(path.join(__dirname, '..', '..', 'doc', 'language', 'VIOLATIONS.md'), 'utf8');
+    const documented = new Set();
+    /* Two shapes carry a catalogue entry: a row of the grammar-diagnostics
+       table, and the bolded heading each of the ten named violations opens
+       with. A bare mention in prose does not count as documenting one. */
+    for (const mm of md.matchAll(/^\|\s*`([A-Z][A-Z0-9_]+)`\s*\|/gm)) documented.add(mm[1]);
+    for (const mm of md.matchAll(/^\*\*`([A-Z][A-Z0-9_]+)`/gm)) documented.add(mm[1]);
+    for (const d of contract.diagnostics) {
+      if (!documented.has(d.id)) specProblems.push(`${d.id} is in the contract and not in VIOLATIONS.md`);
+    }
+    for (const id of documented) {
+      if (!metaOf.has(id)) specProblems.push(`${id} is in VIOLATIONS.md and not in the contract`);
+    }
+  } catch (e) { specProblems.push('cannot read VIOLATIONS.md: ' + e.message); }
+
   let pass = 0, fail = 0, skip = 0;
   const failures = [];
 
@@ -115,16 +147,23 @@ function main(argv) {
   }
 
   console.log(`\nZui conformance — level ${level}`);
-  console.log(`  spec         doc/language/ v1.0`);
+  console.log(`  spec         doc/language/ v${specVersion}`);
   console.log(`  contract     violations.json v${contract.metadata.version} (constitution v${contract.metadata.constitution})`);
   console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
   console.log(`  media        ${Object.keys(require('./zui.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
+  console.log(`  catalogue    ${contract.diagnostics.length} diagnostics — ${specProblems.length ? specProblems.length + ' disagreements with VIOLATIONS.md' : 'contract agrees with VIOLATIONS.md'}`);
   console.log(`  fixtures     ${manifest.fixtures.length} total`);
   console.log(`  pass ${pass} · fail ${fail} · skipped ${skip} (above level ${level})`);
 
   if (mediaProblems.length) {
     console.log('\nMedium enumeration disagreements (conformance/media.json vs the verifier):');
     for (const p of mediaProblems) console.log(`  ${p}`);
+    return 1;
+  }
+
+  if (specProblems.length) {
+    console.log('\nCatalogue disagreements (conformance/violations.json vs doc/language/VIOLATIONS.md):');
+    for (const p of specProblems) console.log(`  ${p}`);
     return 1;
   }
 

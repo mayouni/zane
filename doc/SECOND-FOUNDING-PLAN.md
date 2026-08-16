@@ -172,7 +172,7 @@ author's ratification — this is the one session that cannot be delegated to ju
 The session prompt is written: [`doc/prompts/sound-semantics.md`](prompts/sound-semantics.md).
 A semantic layer **above** the sound plane that changes no node, no sink, no callback.
 
-### S8 · SIGNAL in the visual channel · `stzzui` · **medium-large** · *part done 2026-08-16*
+### S8 · SIGNAL in the visual channel · `stzzui` · **medium-large** · *done 2026-08-16*
 
 The first expression grammar written in full — the channel where the law is richest and
 an engine already exists. It sets the pattern the other five strata copy, so it is worth
@@ -193,10 +193,26 @@ forbade. Filed as docket section S8 and **ruled the same day, delegated**, at **
 the other, and both now carry `see_also`. No rule was canonized or retired and no tier
 moved.
 
-**Still to do after the ruling — the grammar half.** Nothing in `.zui` names a semantic
-value, so `signal.json` raises no diagnostic yet. Closing a field for it is a language
-change and follows the same gate `SURFACE_AS` passed through: an amendment first, then the
-enumeration, then the diagnostics, then fixtures with lawful twins.
+**Done 2026-08-16 — the grammar half. Language v1.1 → v1.2.** `SIGNALS` is a closed
+enumeration on any declaration, carrying Rule 118's five and nothing else. Two diagnostics:
+**`UNKNOWN_SIGNAL`** (level 1) and **`EXPRESSION_ORPHAN`** (level 2) — the founding's own
+rule that *every expression declaration traces to an intent*, and deliberately named for
+the stratum family so `ROLE`, `MOTION`, `MESSAGE` and `TEMPO` raise the same one. Four
+fixtures with lawful twins; suite **38/38**.
+
+**The finding that shaped the design.** `FEEDBACK` already had `TONE` — *five* semantic
+values, and **not the law's five**. `TONE danger` is refused and `TONE critical` is clean,
+so the language was rejecting the law's own vocabulary. The ruling was **not** to reconcile
+them: the founding puts `MESSAGE` and `SIGNAL` in different strata, `TONE` is the register
+the system *speaks* in while `SIGNALS` is what a value *means* about a record, and two
+subjects legitimately carry two vocabularies. Each enumeration now refuses the other's
+words, with the boundary written into `DECLARATIONS.md` §5.2 so the pair cannot drift the
+way Rules 3 and 118 did.
+
+**S8 is now complete.** What remains for the stratum is not S8: `muted` renders as silence
+in the auditory channel, so a surface whose only signal is `muted` on a silent medium has
+declared something nobody can perceive — decidable from `SIGNALS` + `SURFACE_AS`, and the
+first check that would make the medium axis earn its keep. Filed, not built.
 
 **Two findings left the plane while doing this**: the sound plane attributes its severity
 ordering to a law that states none ([finding](findings/sound-severity-order.md)), and the
@@ -375,7 +391,7 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S4d | 0 | stzlib | ⚪ ready | regex divergences — all three re-verified |
 | S8c | A | stzlib | ⚪ ready | stzCSS — §5 corrected, already-done part removed |
 | S4b | 0 | stzlib | ⚪ ready | the colour table's hard-coded culture, unfiled |
-| S8 | A | stzzui | 🟡 **part** | vocabulary published as `signal.json` v1.1; the four Rules 3 ↔ 118 conflicts **ruled at v3.11**. **The grammar half is what remains** — a language change |
+| **S8** | A | stzzui | ✅ **done** | `signal.json` v1.1; Rules 3 ↔ 118 ruled at law v3.11; `SIGNALS` + 2 diagnostics at language **v1.2**; suite 38/38 |
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
 | S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
 | S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |

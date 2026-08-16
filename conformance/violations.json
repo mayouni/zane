@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.1",
-    "lastUpdated": "2026-08-13",
+    "version": "1.2",
+    "lastUpdated": "2026-08-16",
     "specification": "doc/language/VIOLATIONS.md",
     "constitution": "3.11",
     "note": "Every diagnostic a conforming Zui implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused."
@@ -289,6 +289,32 @@
       "forbidden_patterns": [],
       "invariant": "A new medium adds renderings, never verbs.",
       "note": "Print has no UNDO; a lamp has no READ. Only ABSENT raises -- media.json also records 'degraded' carriage (a parallel act becoming serial, a perception becoming a memory task) as data for tools, because a warning firing on every serial surface would be noise rather than law. Cites Rule 82, which became Perceivable State at constitution v3.9 and is what made 'the declared medium' a legal concept."
+    },
+    {
+      "id": "UNKNOWN_SIGNAL",
+      "severity": "error",
+      "level": 1,
+      "summary": "A value in SIGNALS is not one of Rule 118's five semantic statuses.",
+      "decidable_from": ["SIGNALS"],
+      "rules": ["118"],
+      "articles": ["calm"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "The colours an interface uses to say something about a record split into exactly two families and no more.",
+      "note": "Closed for the same reason the verbs and the media are closed: a vocabulary that anyone may extend cannot be checked, and a status palette with more values than an operator can keep apart is what Rule 118 forbids. NOT reconciled with TONE, and deliberately so -- TONE is the register the system speaks in (the MESSAGE stratum), SIGNALS is what a value means about a record (the SIGNAL stratum). Each enumeration refuses the other's words, which is correct for two strata and is why both are documented pointing at each other."
+    },
+    {
+      "id": "EXPRESSION_ORPHAN",
+      "severity": "error",
+      "level": 2,
+      "summary": "An expression field is declared on a declaration that satisfies no intent.",
+      "decidable_from": ["SIGNALS", "SATISFIES"],
+      "rules": [],
+      "articles": ["intent"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "Every expression declaration traces to an intent, or it is an error.",
+      "note": "INTENT_ORPHAN one level down, and the rule that keeps the inversion intact: expression is intent's refinement, never a second language beside it. A declaration saying how something should be PERCEIVED without saying what the operator is DOING has inverted the model this language exists to enforce. SIGNALS is the first expression field; ROLE, MOTION, MESSAGE and TEMPO raise the same diagnostic as their grammars land, which is why this id names the stratum family rather than the field."
     }
   ]
 }

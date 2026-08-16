@@ -230,6 +230,24 @@ constitution with 122 rules and no way to resolve two of them is a finding about
 constitutions, not about colour. M9 is its instrument-shaped cousin: the project that
 argues about drift has four artifacts pinning a law version and nothing checking them.*
 
+## N · Four drifts the apparatus could not see *(added 2026-08-16)*
+
+Found while building the grammar half of S8. Each is small; together they are one finding,
+which is that **this project's own instruments checked the law and the fixtures and nothing
+else.**
+
+| # | Finding | Evidence | Status |
+|---|---|---|---|
+| N1 | **The language refused the law's own vocabulary.** `TONE danger` → `INVALID_TONE`; `TONE critical` → clean. `FEEDBACK` carried five semantic values that were **not** Rule 118's five, and no instrument compared them | run against the verifier, 2026-08-16 | `verified` |
+| N2 | **Ruled deliberate, not reconciled.** `TONE` is the register the system *speaks* in — the `MESSAGE` stratum; `SIGNALS` is what a value *means* about a record — the `SIGNAL` stratum. Two subjects legitimately carry two vocabularies. The defect was never the second vocabulary; it was that **no document said where the boundary was** | `DECLARATIONS.md` §5.2, written 2026-08-16 | `verified` |
+| N3 | **`VIOLATIONS.md` catalogued 20 diagnostics while the contract held 22.** `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` were added to `violations.json` and to the verifier at S5 and never to the prose spec — through three law versions | read 2026-08-16 | `verified` |
+| N4 | **The language spec's own title said v1.0 through the whole of v1.1.** `DECLARATIONS.md` recorded the `SURFACE_AS` closure as a v1.1 change; the README heading never moved, and the conformance runner **printed the version from a hardcoded string** | `doc/language/README.md`, `conformance.js`, 2026-08-16 | `verified` |
+| N5 | **Both are now instruments rather than intentions.** The runner compares the contract against `VIOLATIONS.md` and fails on disagreement — proved by deleting a row and watching it exit 1 — and reads the spec version from the README heading instead of a literal | `tools/zui/conformance.js`, negative-tested 2026-08-16 | `verified` |
+
+*Serves: The Deterioration, In Practice. N3 and N4 are the same shape as M9 and as the
+hand-typed census: **a number in prose is attached to nothing that can contradict it.**
+Every one of these was found by a person looking, and every one is now found by a run.*
+
 ---
 
 ## Open items this ledger is watching

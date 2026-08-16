@@ -1,0 +1,10 @@
+// Expression is intent's refinement, never a second language beside it.
+// This screen says how its values should be PERCEIVED and never says what the
+// operator is DOING -- the inversion this whole language exists to prevent,
+// committed one layer below INTENT_ORPHAN.
+//
+// Expected: EXPRESSION_ORPHAN
+
+DEFINE SCREEN dashboard (
+  SIGNALS [danger, warning, muted]
+)

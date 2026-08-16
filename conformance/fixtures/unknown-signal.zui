@@ -1,0 +1,15 @@
+// SIGNALS admits exactly five values -- Rule 118's family one:
+// success, warning, danger, info, muted.
+//
+// 'critical' is a real word in this language, but it belongs to TONE, which is
+// the register the system SPEAKS in. SIGNALS says what a value MEANS about a
+// record. Two strata, two closed vocabularies, and each refuses the other's --
+// which is the point: borrowing across them is exactly how one subject ends up
+// with two vocabularies that drift.
+//
+// Expected: UNKNOWN_SIGNAL
+
+DEFINE SCREEN overdue_invoices (
+  SATISFIES [SCAN, COMPARE, LOCATE],
+  SIGNALS [danger, critical]
+)

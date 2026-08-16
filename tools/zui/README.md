@@ -105,11 +105,17 @@ wording or order.
 
 ## What it enforces, and what it does not
 
-**19 of the 20 diagnostics** in the contract. Six of the ten named violations
+**23 of the 24 diagnostics** in the contract. Six of the ten named violations
 are decidable from a single declaration and are enforced by default:
 `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`,
-`TRAPPED_FLOW`, `DECORATIVE_ANIMATION` — plus the grammar checks, both
+`TRAPPED_FLOW`, `DECORATIVE_ANIMATION` — plus the grammar checks, all **four**
 enumerations, reference resolution and `VIBE_STRIPS_RIGHT`.
+
+The contract has grown twice since this section was written: `UNKNOWN_MEDIUM`
+and `VERB_NOT_CARRIED` when `SURFACE_AS` closed to ten media, and
+`UNKNOWN_SIGNAL` and `EXPRESSION_ORPHAN` with `SIGNALS`, the first expression
+field. The one still unenforced here is `LAYOUT_DISPLACEMENT`, which is
+undecidable from a declaration and belongs to the UI audit.
 
 Three more (`INTENT_ORPHAN`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, and
 `UNRESOLVED_ENTITY`) work at Level 3 **when you supply the symbol table**.
@@ -155,6 +161,6 @@ One of possibly several, and deliberately so. The
 [M3 decision document](../../doc/decisions/M3-the-zui-verifier.md) left the
 extract-versus-embed question open, and the conformance suite is what makes
 that safe: **any future implementation, in any language, proves agreement
-against the same 30 fixtures.** A Zig verifier living beside the reference implementation's compiler
+against the same 38 fixtures.** A Zig verifier living beside the reference implementation's compiler
 would be measured exactly the way this one is. That is the point of writing
 the fixtures first.

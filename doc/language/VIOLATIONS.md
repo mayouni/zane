@@ -160,8 +160,8 @@ Fear · forbidden pattern `layout-shift`.
 
 ## 4. Grammar and reference diagnostics
 
-Beyond the ten, a conforming implementation raises these. The four marked ✅ ship
-in the reference implementation today, under the codes shown.
+Beyond the ten, a conforming implementation raises these **fourteen**. The four marked ✅
+ship in the reference implementation today, under the codes shown.
 
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
 |---|---|---|---|---|
@@ -175,6 +175,22 @@ in the reference implementation today, under the codes shown.
 | `UNRESOLVED_INTENT_FLOW` | warning | 2 | an `INTENT_FLOW` reference names no declared flow | ◐ `ZUI-W010` |
 | `VIBE_STRIPS_RIGHT` | error | 2 | a `VIBE` suppresses an intent another declaration guarantees | ❌ |
 | `UNRESOLVED_ENTITY` | warning | 3 | a `VISIBLE_ENTITIES` name resolves to no entity | ❌ |
+| `UNKNOWN_MEDIUM` | error | 2 | `SURFACE_AS` names a medium outside the ten | ❌ |
+| `VERB_NOT_CARRIED` | error | 2 | a declaration satisfies an intent the declared medium cannot carry at all | ❌ |
+| `UNKNOWN_SIGNAL` | error | 1 | a value in `SIGNALS` is not one of Rule 118's five | ❌ |
+| `EXPRESSION_ORPHAN` | error | 2 | an expression field on a declaration that satisfies no intent | ❌ |
+
+**The last four are `zui`-verifier-only**, and the ❌ column means the *reference
+implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
+nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
+ten media; `UNKNOWN_SIGNAL` and `EXPRESSION_ORPHAN` arrived with the first expression
+stratum.
+
+**The first two were added to `conformance/violations.json` and to the verifier and were
+not added here**, so this table described 20 diagnostics while the contract held 22.
+Recorded rather than quietly corrected: a specification that argues about drift is worth
+nothing if its own table lags the data it describes, and nothing in the suite compares the
+two.
 
 ◐ the reference implementation's `ZUI-W010` resolves the **cross-pillar** direction — `INTENT_FLOWS`
 references written in other pillars' files, checked against flow names harvested
