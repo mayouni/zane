@@ -53,6 +53,20 @@ const TONES = new Set(['celebratory', 'cautionary', 'critical', 'neutral', 'info
    Rules 3 and 118 did before v3.11. Published as data in conformance/signal.json. */
 const SIGNALS = new Set(['success', 'warning', 'danger', 'info', 'muted']);
 
+/* Which semantic values a medium renders as NOTHING AT ALL. Not "quietly" --
+   nothing. The sound plane discovered this by building it: `muted` means waiting
+   or inactive, and a sound announcing inactivity is a contradiction, so muted
+   renders as silence and the voice channel enqueues nothing for it.
+
+   Only the two channels with a shipped implementation are listed. A medium
+   absent from this table raises nothing, because nobody has built the renderer
+   that would tell us -- silence here means UNDECIDED, never "perceptible".
+   Published in conformance/signal.json; the runner proves the two agree. */
+const SIGNAL_ABSENCE = {
+  auditory: ['muted'],
+  voice: ['muted']
+};
+
 /* Fields that carry an expression rather than an intent. Every one of them must
    trace to an intent or it is EXPRESSION_ORPHAN -- the founding's rule, and the
    reason the expression strata are intent's refinement rather than a second
@@ -475,6 +489,36 @@ function check(decls, symbols) {
     }
   }
 
+  /* Rule 82 meeting the medium axis, and the first check that needs both.
+     A surface may declare `muted` on a silent channel all it likes -- silence
+     is the CORRECT rendering of "waiting, inactive". The defect is narrower:
+     when EVERY value a surface declares renders as absence in the medium it
+     declared, the surface has promised a perceptible status and rendered
+     nothing at all. That is imperceivable state in the declared medium, which
+     is exactly what Rule 82 became at v3.9.
+
+     Stated over "every declared value renders as absence" rather than over
+     `muted` by name: today only muted does it, so the two are the same test,
+     but the general form survives the next channel's data without a rewrite. */
+
+  for (const m of declaredMedia) {
+    const silent = new Set(SIGNAL_ABSENCE[m] || []);
+    if (silent.size === 0) continue;
+    for (const decl of decls) {
+      const f = decl.fieldIndex.get('SIGNALS');
+      if (!f || f.kind !== 'list' || !f.items || f.items.length === 0) continue;
+      const declared = f.items.map(i => i.v).filter(v => SIGNALS.has(v));
+      if (declared.length === 0) continue;              /* UNKNOWN_SIGNAL owns that */
+      if (declared.every(v => silent.has(v))) {
+        out.push({
+          id: 'SIGNAL_UNPERCEIVABLE',
+          line: f.line,
+          subject: `${declared.join(', ')} in ${decl.name || '(unnamed)'} on ${m}`
+        });
+      }
+    }
+  }
+
   /* -- Level 3, file-wide ---------------------------------------------- */
 
   if (symbols && Array.isArray(symbols.elements)) {
@@ -514,7 +558,7 @@ function verify(source, opts) {
   return diagnostics.concat(check(decls, options.symbols || null));
 }
 
-const API = { verify, parse, lex, INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED };
+const API = { verify, parse, lex, INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED, SIGNALS, SIGNAL_ABSENCE };
 
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
 if (typeof window !== 'undefined') window.Zui = API;

@@ -209,10 +209,24 @@ subjects legitimately carry two vocabularies. Each enumeration now refuses the o
 words, with the boundary written into `DECLARATIONS.md` §5.2 so the pair cannot drift the
 way Rules 3 and 118 did.
 
-**S8 is now complete.** What remains for the stratum is not S8: `muted` renders as silence
-in the auditory channel, so a surface whose only signal is `muted` on a silent medium has
-declared something nobody can perceive — decidable from `SIGNALS` + `SURFACE_AS`, and the
-first check that would make the medium axis earn its keep. Filed, not built.
+**Done 2026-08-16 — `SIGNAL_UNPERCEIVABLE`, and the medium axis earns its keep.** A surface
+whose declared statuses *all* render as absence in its declared medium has promised a
+perceptible status and emits nothing. **The first diagnostic needing two axes**, and
+therefore the first evidence that closing `SURFACE_AS` bought a *check* rather than a
+taxonomy. Declaring `muted` on a silent channel is not the defect — silence is the correct
+rendering of *waiting, inactive*. Suite **40/40**; contract at 25.
+
+**And it surfaced a cross-plane disagreement.** The sound plane states in writing that
+muted renders as absence *"everywhere — nothing painted, nothing said"*, and that a
+paintable `:Muted` *"would be the bug"*. StzZui accepts that for auditory and voice and
+rejects it for visual: Rule 118 is titled *Two Families of **Colour*** and family one
+includes `muted`, which in practice is the greyed row distinguishing waiting work from
+active. The evidence the plane cites — `StzColorToNumber(:Muted)` refusing "by name" —
+turns out to be the resolver's generic typo guard, the same path that refuses `:Blorp`.
+Filed in [the sound finding](findings/sound-severity-order.md); **the 2026-08-13 graphics
+finding stands.**
+
+**S8 is complete.** The stratum's remaining work is S9's, not S8's.
 
 **Two findings left the plane while doing this**: the sound plane attributes its severity
 ordering to a law that states none ([finding](findings/sound-severity-order.md)), and the
@@ -391,7 +405,7 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S4d | 0 | stzlib | ⚪ ready | regex divergences — all three re-verified |
 | S8c | A | stzlib | ⚪ ready | stzCSS — §5 corrected, already-done part removed |
 | S4b | 0 | stzlib | ⚪ ready | the colour table's hard-coded culture, unfiled |
-| **S8** | A | stzzui | ✅ **done** | `signal.json` v1.1; Rules 3 ↔ 118 ruled at law v3.11; `SIGNALS` + 2 diagnostics at language **v1.2**; suite 38/38 |
+| **S8** | A | stzzui | ✅ **done** | `signal.json` v1.1; Rules 3 ↔ 118 ruled at law v3.11; `SIGNALS` + 3 diagnostics at language **v1.2**; suite 40/40 |
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
 | S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
 | S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |

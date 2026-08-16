@@ -2,17 +2,18 @@
 
 **Status**: normative for the language; honest about implementations
 **Date**: 2026-08-06, revised 2026-08-16
+**Home**: StzZui, where the language and its constitution live
+**Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
 **Lineage.** **v1.0** (2026-08-06) the language as founded. **v1.1** closed `SURFACE_AS`
 to ten media when the law's Rule 82 became *Perceivable State*. **v1.2** (2026-08-16) adds
-`SIGNALS`, the first expression field, with `UNKNOWN_SIGNAL` and `EXPRESSION_ORPHAN`.
+`SIGNALS`, the first expression field, with `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and
+`SIGNAL_UNPERCEIVABLE`.
 
-> **This line said v1.0 until 2026-08-16**, through the whole of v1.1 — `DECLARATIONS.md`
-> recorded the change and the title never moved. Noted rather than smoothed, and the
+> **This title said v1.0 until 2026-08-16**, through the whole of v1.1 — `DECLARATIONS.md`
+> recorded the change and the heading never moved. Noted rather than smoothed, and the
 > conformance runner now reads this heading rather than hardcoding a number, so the next
 > divergence is a failing run instead of a discovery.
-**Home**: StzZui, where the language and its constitution live
-**Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
 ---
 
@@ -80,7 +81,8 @@ its rule, article, and operator right; the binding is also data, in
 carry rule numbers without hardcoding prose.
 
 A consumer pins a constitution version. This specification is written against
-**v3.8.0**.
+**v3.11**. It said *v3.8.0* until 2026-08-16 — a version the law never had, since
+the constitution carries no patch component.
 
 ## 4. Conformance levels
 

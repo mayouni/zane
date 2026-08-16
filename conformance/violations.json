@@ -315,6 +315,19 @@
       "forbidden_patterns": [],
       "invariant": "Every expression declaration traces to an intent, or it is an error.",
       "note": "INTENT_ORPHAN one level down, and the rule that keeps the inversion intact: expression is intent's refinement, never a second language beside it. A declaration saying how something should be PERCEIVED without saying what the operator is DOING has inverted the model this language exists to enforce. SIGNALS is the first expression field; ROLE, MOTION, MESSAGE and TEMPO raise the same diagnostic as their grammars land, which is why this id names the stratum family rather than the field."
+    },
+    {
+      "id": "SIGNAL_UNPERCEIVABLE",
+      "severity": "error",
+      "level": 2,
+      "summary": "Every semantic status a surface declares renders as absence in the medium it declared.",
+      "decidable_from": ["SIGNALS", "SURFACE_AS", "file"],
+      "rules": ["82"],
+      "articles": ["visible"],
+      "rights": ["know"],
+      "forbidden_patterns": [],
+      "invariant": "If the system knows something important, the operator must be able to perceive it -- in the medium the surface declares.",
+      "note": "Declaring muted on a silent channel is not the defect: silence is the CORRECT rendering of 'waiting, inactive', and a sound announcing inactivity is a contradiction. The defect is narrower and needs both axes -- when EVERY value a surface declares renders as absence, the surface promised a perceptible status and rendered nothing at all. The first check that needs the medium enumeration and the signal vocabulary together, which is what the medium axis was closed for. Stated over 'every declared value renders as absence' rather than over muted by name, so the next channel's data does not require a rewrite. Which values a medium renders as absence is data in signal.json, listed only for channels with a shipped renderer -- a medium absent from that table is UNDECIDED and raises nothing."
     }
   ]
 }

@@ -1,0 +1,21 @@
+// A queue monitor projected to sound, declaring one status: muted.
+//
+// Silence is the CORRECT rendering of "waiting, inactive" -- an earcon
+// announcing inactivity is a contradiction, and the sound plane found that by
+// building it. So the defect is not the muted. The defect is that muted is the
+// ONLY status this surface declares, on a channel that renders it as nothing:
+// the surface promises the operator a perceptible status and emits silence,
+// forever. Imperceivable state in the declared medium -- Rule 82.
+//
+// Needs both axes to see: the signal vocabulary and the medium enumeration.
+//
+// Expected: SIGNAL_UNPERCEIVABLE
+
+DEFINE VIBE queue_audio (
+  SURFACE_AS auditory
+)
+
+DEFINE SCREEN queue_monitor (
+  SATISFIES [DISCOVER, UNDERSTAND],
+  SIGNALS [muted]
+)

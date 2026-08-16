@@ -72,6 +72,31 @@ function main(argv) {
     }
   } catch (e) { mediaProblems.push('cannot read media.json: ' + e.message); }
 
+  /* Same discipline for the SIGNAL vocabulary: the five values and the
+     per-medium absence table live in the verifier and in signal.json, so
+     prove they agree rather than trusting them to. */
+  try {
+    const sig = JSON.parse(fs.readFileSync(path.join(CONF, 'signal.json'), 'utf8'));
+    const { SIGNALS, SIGNAL_ABSENCE } = require('./zui.js');
+    const specVals = sig.values.map(v => v.id).sort().join(',');
+    const implVals = [...SIGNALS].sort().join(',');
+    if (specVals !== implVals) {
+      mediaProblems.push(`SIGNAL vocabulary differs — signal.json {${specVals}} vs verifier {${implVals}}`);
+    }
+    for (const [medium, r] of Object.entries(sig.renderings)) {
+      if (!r || typeof r !== 'object' || !('rendersAsAbsence' in r)) continue;
+      const s = (r.rendersAsAbsence || []).slice().sort().join(',');
+      const i = (SIGNAL_ABSENCE[medium] || []).slice().sort().join(',');
+      if (s !== i) mediaProblems.push(`${medium}: absence set — signal.json {${s}} vs verifier {${i}}`);
+    }
+    for (const medium of Object.keys(SIGNAL_ABSENCE)) {
+      const r = sig.renderings[medium];
+      if (!r || !('rendersAsAbsence' in r)) {
+        mediaProblems.push(`${medium}: verifier declares an absence set and signal.json records none`);
+      }
+    }
+  } catch (e) { mediaProblems.push('cannot read signal.json: ' + e.message); }
+
   /* The prose specification catalogues the same diagnostics the contract holds.
      It drifted: UNKNOWN_MEDIUM and VERB_NOT_CARRIED were added to violations.json
      and to the verifier and never to VIOLATIONS.md, so the table described 20

@@ -30,7 +30,7 @@ Three files, no dependencies, nothing to install:
 | `envelope.js` | the family envelope: builds `{code, severity, message, span, cites, language}` findings and validates them against [the Diagnostic Contract's shape](../../doc/diagnostic-contract.schema.json). |
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
 
-It implements [the Zui language specification v1.0](../../doc/language/README.md)
+It implements [the Zui language specification v1.2](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).
 
 ## Options
@@ -90,22 +90,32 @@ node tools/zui/conformance.js --level 4
 
 ```
 Zui conformance — level 4
-  spec         doc/language/ v1.0
-  contract     violations.json v1.0 (constitution v3.8)
-  envelope     diagnostic-contract v1.0 — 23 diagnostics, all conform
-  fixtures     30 total
-  pass 30 · fail 0 · skipped 0 (above level 4)
+  spec         doc/language/ v1.2
+  contract     violations.json v1.2 (constitution v3.11)
+  envelope     diagnostic-contract v1.0 — 28 diagnostics, all conform
+  media        10 media — verifier agrees with media.json
+  catalogue    25 diagnostics — contract agrees with VIOLATIONS.md
+  fixtures     40 total
+  pass 40 · fail 0 · skipped 0 (above level 4)
 
   conforms at level 4 — every fixture in the suite.
 ```
 
-Per level: **L1** 6 pass, 24 skipped · **L2** 26 pass, 4 skipped · **L3** and
-**L4** 30 pass. Comparison is by diagnostic id only — never line numbers,
+Per level: **L1** 8 pass, 32 skipped · **L2** 36 pass, 4 skipped · **L3** and
+**L4** 40 pass. Comparison is by diagnostic id only — never line numbers,
 wording or order.
+
+**The `media` and `catalogue` lines are agreement checks, not counts.** Two
+sources of one truth drift: the medium enumeration lives in the verifier *and*
+in `media.json`, the SIGNAL vocabulary and its absence table in the verifier
+*and* in `signal.json`, and the diagnostic list in `violations.json` *and* in
+`VIOLATIONS.md`. Each pair is compared on every run and disagreement exits 1 —
+added after the prose spec was found catalogueing 20 diagnostics while the
+contract held 22, through three law versions, with nothing to notice.
 
 ## What it enforces, and what it does not
 
-**23 of the 24 diagnostics** in the contract. Six of the ten named violations
+**24 of the 25 diagnostics** in the contract. Six of the ten named violations
 are decidable from a single declaration and are enforced by default:
 `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`,
 `TRAPPED_FLOW`, `DECORATIVE_ANIMATION` — plus the grammar checks, all **four**
@@ -113,8 +123,8 @@ enumerations, reference resolution and `VIBE_STRIPS_RIGHT`.
 
 The contract has grown twice since this section was written: `UNKNOWN_MEDIUM`
 and `VERB_NOT_CARRIED` when `SURFACE_AS` closed to ten media, and
-`UNKNOWN_SIGNAL` and `EXPRESSION_ORPHAN` with `SIGNALS`, the first expression
-field. The one still unenforced here is `LAYOUT_DISPLACEMENT`, which is
+`UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` with `SIGNALS`,
+the first expression field. The one still unenforced here is `LAYOUT_DISPLACEMENT`, which is
 undecidable from a declaration and belongs to the UI audit.
 
 Three more (`INTENT_ORPHAN`, `INVISIBLE_STATE`, `HIDDEN_AUTHORITY`, and
@@ -161,6 +171,6 @@ One of possibly several, and deliberately so. The
 [M3 decision document](../../doc/decisions/M3-the-zui-verifier.md) left the
 extract-versus-embed question open, and the conformance suite is what makes
 that safe: **any future implementation, in any language, proves agreement
-against the same 38 fixtures.** A Zig verifier living beside the reference implementation's compiler
+against the same 40 fixtures.** A Zig verifier living beside the reference implementation's compiler
 would be measured exactly the way this one is. That is the point of writing
 the fixtures first.

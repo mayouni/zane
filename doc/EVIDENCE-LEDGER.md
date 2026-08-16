@@ -244,9 +244,16 @@ else.**
 | N4 | **The language spec's own title said v1.0 through the whole of v1.1.** `DECLARATIONS.md` recorded the `SURFACE_AS` closure as a v1.1 change; the README heading never moved, and the conformance runner **printed the version from a hardcoded string** | `doc/language/README.md`, `conformance.js`, 2026-08-16 | `verified` |
 | N5 | **Both are now instruments rather than intentions.** The runner compares the contract against `VIOLATIONS.md` and fails on disagreement — proved by deleting a row and watching it exit 1 — and reads the spec version from the README heading instead of a literal | `tools/zui/conformance.js`, negative-tested 2026-08-16 | `verified` |
 
+| N6 | **The medium axis earned its keep.** `SIGNAL_UNPERCEIVABLE` is the first diagnostic needing **two** axes — the signal vocabulary and the medium enumeration. A surface declaring only `muted` on a silent channel promised a perceptible status and emits nothing, forever. Until this, closing `SURFACE_AS` had bought a taxonomy; it now buys a check | `conformance/fixtures/signal-unperceivable.zui`, 2026-08-16 | `verified` |
+| N7 | **A second cross-channel over-claim from the sound plane.** It states in writing that muted's *"rendering is ABSENCE everywhere — silence in sound, nothing painted, nothing said"*, and that a paintable `:Muted` *"would be the bug"*. StzZui accepts it for auditory and voice and **rejects it for visual**: Rule 118 is titled *Two Families of Colour* and family one includes `muted`, which in practice is the greyed row that distinguishes waiting work from active | `SOFTANZA_VOICE_PLAN.md:1163-1168`, 2026-08-16 | `verified` |
+| N8 | **The evidence cited for N7 is a typo guard.** The plan offers `StzColorToNumber(:Muted)` refusing *"by name"* as proof the absence is designed. The function hands any non-hex token to `StzTryResolveColor` and raises a generic *"is not a colour"* — **the same path that refuses `:Blorp`**. Incidental, not deliberate: evidence the channel *lacks* muted, not that it declines it. **The 2026-08-13 graphics finding stands** | `stzColor.ring:26-63`, read 2026-08-16 | `verified` |
+
 *Serves: The Deterioration, In Practice. N3 and N4 are the same shape as M9 and as the
 hand-typed census: **a number in prose is attached to nothing that can contradict it.**
-Every one of these was found by a person looking, and every one is now found by a run.*
+Every one of these was found by a person looking, and every one is now found by a run.
+N7 and N8 are the shape of L7 and of the severity-order item: **a cross-channel law
+asserted from single-channel evidence** — three instances now, from two different planes,
+which makes it a pattern rather than a slip.*
 
 ---
 

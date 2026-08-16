@@ -230,6 +230,18 @@
       "level": 2,
       "expect_ids": [],
       "note": "The twin: the same signals, now refining a declared intent. One line added."
+    },
+    {
+      "file": "signal-unperceivable.zui",
+      "level": 2,
+      "expect_ids": ["SIGNAL_UNPERCEIVABLE"],
+      "note": "The first fixture that needs BOTH axes -- the signal vocabulary and the medium enumeration -- and therefore the first evidence that closing SURFACE_AS bought a check rather than a taxonomy. Two declarations, because the medium is declared on a VIBE and the signals on a screen."
+    },
+    {
+      "file": "signal-unperceivable-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin, differing by one word inside the SIGNALS list. muted still renders as silence and that is still correct; the surface now also carries a status this channel can render."
     }
   ],
   "unfixtured": [

@@ -1,0 +1,16 @@
+// The lawful twin, differing by one word in the SIGNALS list.
+//
+// The surface still carries muted -- waiting work is still waiting, and still
+// renders as silence. But it also carries danger, which this channel renders
+// audibly, so the operator can perceive the status the surface promised.
+//
+// Expected: clean
+
+DEFINE VIBE queue_audio (
+  SURFACE_AS auditory
+)
+
+DEFINE SCREEN queue_monitor (
+  SATISFIES [DISCOVER, UNDERSTAND],
+  SIGNALS [muted, danger]
+)

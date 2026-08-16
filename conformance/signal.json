@@ -48,6 +48,7 @@
 
   "renderings": {
     "note": "What each channel binds a value to. This records what EXISTS, per channel, verified in the tree -- it is not a specification of what a channel ought to do.",
+    "rendersAsAbsenceNote": "Per medium, the values that render as NOTHING AT ALL -- not quietly, nothing. A medium with no entry is UNDECIDED, not 'perceptible': only channels with a shipped renderer can say. This is what SIGNAL_UNPERCEIVABLE reads, and the verifier mirrors it; the conformance runner proves the two agree.",
     "visual": {
       "quality": "colour",
       "instrument": "stzlib graphics plane, StzThemeColor / StzSemanticColors",
@@ -61,10 +62,30 @@
       "instrument": "stzlib base/sound/stzEarcons",
       "implements": ["success", "warning", "danger", "info", "muted"],
       "missing": [],
-      "verified": "stzlib base/sound/stzEarcons.ring:56, read 2026-08-16.",
+      "rendersAsAbsence": ["muted"],
+      "verified": "stzlib base/sound/stzEarcons.ring:56, read 2026-08-16. The absence entry is stzEarcons.ring:264, which sets LastReason to 'muted renders as silence' -- the plane's own words, discovered by building it rather than by reasoning about it.",
       "note": "The complete channel, and the younger one. It is complete BECAUSE it was written after Rule 118 and deferred to it rather than inventing a vocabulary."
+    },
+    "voice": {
+      "quality": "word choice and prosody",
+      "instrument": "stzlib base/sound, the voice face",
+      "implements": ["success", "warning", "danger", "info", "muted"],
+      "missing": [],
+      "rendersAsAbsence": ["muted"],
+      "verified": "SOFTANZA_VOICE_PLAN.md:767, read 2026-08-16: ':Muted enqueues nothing, and LastReason() says why.' Correct for this channel for the same reason as auditory -- an utterance announcing inactivity is a contradiction."
     }
   },
+
+  "disputed": [
+    {
+      "id": "absence-everywhere",
+      "claim": "The sound plane states in writing that muted's 'rendering is ABSENCE everywhere -- silence in sound, nothing painted, nothing said', and that a colour face answering :Muted with a paintable colour 'would be the bug'.",
+      "where": "stzlib SOFTANZA_VOICE_PLAN.md:1165, and the same sentence at :767 as 'muted renders as silence, in every channel'",
+      "position": "StzZui accepts it for auditory and voice and REJECTS it for visual. Rule 118 is titled Two Families of COLOUR and family one is five values including muted, so the law says a muted colour exists. In practice it is the greyed row of a queue -- which is how an operator tells waiting from active at a glance, and painting nothing would make the two indistinguishable, which is Rule 82.",
+      "evidenceCorrection": "The plane cites StzColorToNumber(:Muted) as refusing 'by name', which would make the absence deliberate. It does not. Read 2026-08-16: the function hands any non-hex token to StzTryResolveColor and raises a generic 'is not a colour' for anything unresolved -- the same path that refuses a typo. The refusal is incidental, not designed, so it is evidence that the visual channel LACKS muted, not that it declines it.",
+      "consequence": "rendersAsAbsence lists auditory and voice only. If 'everywhere' were right, SIGNAL_UNPERCEIVABLE would have to fire on visual too, and the colour plane's missing :Muted would be a feature rather than the gap filed on 2026-08-13. That finding stands."
+    }
+  ],
 
   "notLaw": [
     "SEVERITY ORDER IS NOT LAW. stzEarcons.ring:54 introduces its list as 'the five, in the law's own order of severity' and orders them danger > warning > info > success, with muted silent. The constitution states no severity order anywhere -- searched across all 122 rules for an ordering, a precedence and an outranking, 2026-08-16. The ordering is a sound-plane design decision and a defensible one; the attribution is wrong. Rule 118 lists the five as success, warning, danger, info, muted, and that is a listing, not a ranking.",

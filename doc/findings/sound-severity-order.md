@@ -71,6 +71,55 @@ sound plane is the only implementer with evidence about it. If the plane has a v
 worth saying — the docket takes evidence from implementers, and Rule 125 entered the law
 exactly that way, from this plane's own measurement.
 
+---
+
+## Addendum, 2026-08-16 — a second claim, and this one is load-bearing
+
+Found while building `SIGNAL_UNPERCEIVABLE`, which needs to know **which media render
+which values as nothing**. The plane has already answered that question in writing, and
+the answer is wider than its evidence.
+
+> *"`:Muted` renders in neither. That is coherent rather than broken: muted means waiting
+> is not an event, and its rendering is ABSENCE everywhere — silence in sound, nothing
+> painted, nothing said. A colour face that answered `:Muted` with a paintable colour would
+> be the bug."*
+> — `SOFTANZA_VOICE_PLAN.md:1163-1168`, and the same claim at `:767` as *"muted renders as
+> silence, in every channel."*
+
+**StzZui accepts this for auditory and voice, and rejects it for visual.** Both are
+recorded in [`conformance/signal.json`](../../conformance/signal.json), which lists
+`rendersAsAbsence` for the two channels with a shipped renderer and for no others.
+
+**Why the visual half is wrong.** Rule 118 is titled *Two Families of **Colour***, and
+family one is five values *including* `muted`. The law says a muted colour exists. And in
+practice it is the greyed row of a queue — which is precisely how an operator tells waiting
+work from active work at a glance. A screen that painted nothing for `muted` would render
+waiting rows identically to active ones, which is Rule 82 with the operator unable to
+perceive what the system knows.
+
+**And the evidence cited for it does not say what it is read as saying.** The plan offers
+`StzColorToNumber(:Muted)` refusing *"by name"* as proof the absence is deliberate. Read
+2026-08-16: that function hands any non-hex token to `StzTryResolveColor` and raises a
+generic *"'…' is not a colour"* for anything unresolved — **the same path that refuses a
+typo**. `:Muted` is refused because the resolver does not know it, exactly as `:Blorp`
+would be. That is evidence the visual channel **lacks** `muted`, not that it declines it.
+
+**So the graphics finding of 2026-08-13 stands.** The missing `:Muted` is a gap, not a
+feature.
+
+**This is the same shape as the severity-order item above**, which is why it belongs in the
+same finding rather than a new one: *a cross-channel law asserted from single-channel
+evidence.* Sound is right about sound — an earcon announcing inactivity is a contradiction,
+and that insight is genuinely the plane's to claim. It does not generalise to a channel
+that has persistence, parallel access and no time.
+
+### What to change
+
+Narrow the claim to the channels it was learned in. *"Absence everywhere"* becomes
+*"absence in every channel this plane owns"*, and the `StzColorToNumber` sentence either
+goes or says plainly that the refusal is the resolver's generic one. **No behaviour
+changes**; the sentence does.
+
 ## Honest boundaries
 
 - **Nothing here is a defect in the plane's behaviour**, and if this reads as a complaint

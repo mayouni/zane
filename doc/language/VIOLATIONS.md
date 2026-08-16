@@ -1,6 +1,6 @@
 # Diagnostics and the Law They Enforce
 
-**Normative.** Part of [the Zui Language Specification v1.0](README.md). The
+**Normative.** Part of [the Zui Language Specification v1.2](README.md). The
 machine-readable form of this document is
 [`conformance/violations.json`](../../conformance/violations.json) — that file is
 the contract; this one explains it.
@@ -17,7 +17,7 @@ amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
 every diagnostic below carries a binding. Bindings cite
-`constitution/rules.json` **v3.8.0**.
+`constitution/rules.json` **v3.11**.
 
 ## 2. Severity and level
 
@@ -134,7 +134,7 @@ exist to be traced. Given a scope, it is mechanical.
 > The system holds state the operator must know, and no surface declares showing
 > it. Requires the state model to know what the system holds.
 
-**Binds to** Rule 82 (Visible State) · Article III, Visible Over Hidden · the
+**Binds to** Rule 82 (Perceivable State) · Article III, Visible Over Hidden · the
 Right to Know · forbidden pattern `invisible-active-filters`.
 
 ---
@@ -160,7 +160,7 @@ Fear · forbidden pattern `layout-shift`.
 
 ## 4. Grammar and reference diagnostics
 
-Beyond the ten, a conforming implementation raises these **fourteen**. The four marked ✅
+Beyond the ten, a conforming implementation raises these **fifteen**. The four marked ✅
 ship in the reference implementation today, under the codes shown.
 
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
@@ -179,12 +179,23 @@ ship in the reference implementation today, under the codes shown.
 | `VERB_NOT_CARRIED` | error | 2 | a declaration satisfies an intent the declared medium cannot carry at all | ❌ |
 | `UNKNOWN_SIGNAL` | error | 1 | a value in `SIGNALS` is not one of Rule 118's five | ❌ |
 | `EXPRESSION_ORPHAN` | error | 2 | an expression field on a declaration that satisfies no intent | ❌ |
+| `SIGNAL_UNPERCEIVABLE` | error | 2 | every status a surface declares renders as absence in the medium it declared | ❌ |
 
-**The last four are `zui`-verifier-only**, and the ❌ column means the *reference
+**The last five are `zui`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
-ten media; `UNKNOWN_SIGNAL` and `EXPRESSION_ORPHAN` arrived with the first expression
-stratum.
+ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with
+the first expression stratum.
+
+**`SIGNAL_UNPERCEIVABLE` is the first diagnostic that needs two axes**, and therefore the
+first evidence that closing `SURFACE_AS` bought a *check* rather than a taxonomy. Declaring
+`muted` on a silent channel is not the defect — silence is the correct rendering of
+*waiting, inactive*, and a sound announcing inactivity is a contradiction. The defect is
+that **every** status the surface declares renders as absence there, so it promised a
+perceptible status and emits nothing. Which values a medium renders as absence is data in
+[`signal.json`](../../conformance/signal.json), recorded only for channels with a shipped
+renderer: **a medium absent from that table is undecided and raises nothing**, never
+"perceptible by default".
 
 **The first two were added to `conformance/violations.json` and to the verifier and were
 not added here**, so this table described 20 diagnostics while the contract held 22.
