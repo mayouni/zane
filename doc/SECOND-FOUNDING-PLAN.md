@@ -185,11 +185,13 @@ stzlib tree, not remembered), and what is **not** law. M6's other two thirds wer
 cashed — Rule 62 bound to `StzIsLegible` at v3.9, and the visual channel's missing `muted`
 filed on 2026-08-13.
 
-**Blocked on a ruling — the reconciliation half.** M6 says *"Rules 3 ↔ 118"*, and putting
-the two rules side by side for the first time found that **they disagree**: `danger`'s
-scope, `neutral`'s meaning, and whether `accent` is a third family Rule 118's closure
-clause forbids. Filed as **docket section S8**, four items, unruled. The artifact records
-them rather than resolving them, so it is publishable today.
+**Done 2026-08-16 — the reconciliation half.** M6 says *"Rules 3 ↔ 118"*, and putting the
+two rules side by side for the first time found that **they disagreed**: `danger`'s scope,
+`neutral`'s meaning, and whether `accent` was a third family Rule 118's closure clause
+forbade. Filed as docket section S8 and **ruled the same day, delegated**, at **v3.11**:
+*Rule 3 owns chrome; Rule 118 owns what a colour means about a record.* Neither restates
+the other, and both now carry `see_also`. No rule was canonized or retired and no tier
+moved.
 
 **Still to do after the ruling — the grammar half.** Nothing in `.zui` names a semantic
 value, so `signal.json` raises no diagnostic yet. Closing a field for it is a language
@@ -373,7 +375,7 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S4d | 0 | stzlib | ⚪ ready | regex divergences — all three re-verified |
 | S8c | A | stzlib | ⚪ ready | stzCSS — §5 corrected, already-done part removed |
 | S4b | 0 | stzlib | ⚪ ready | the colour table's hard-coded culture, unfiled |
-| S8 | A | stzzui | 🟡 **part** | vocabulary published as `signal.json`; **four Rules 3 ↔ 118 conflicts filed, unruled** — the grammar waits on that ruling |
+| S8 | A | stzzui | 🟡 **part** | vocabulary published as `signal.json` v1.1; the four Rules 3 ↔ 118 conflicts **ruled at v3.11**. **The grammar half is what remains** — a language change |
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
 | S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
 | S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |

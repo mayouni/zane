@@ -222,9 +222,13 @@ done across 122 rules and two ratification passes.
 | M6 | **The younger channel obeys the law and the older one does not.** `stzEarcons` implements all five values; the colour plane implements four. Sound is complete *because* it was written after Rule 118 and deferred to it, rather than having a vocabulary to defend | `stzEarcons.ring:56` and `stzDiagramColor.ring` `$aPalette`, 2026-08-16 | `verified` |
 | M7 | **A plane attributed its own design to the law.** `stzEarcons.ring:54` reads *"the five, in the law's own order of severity"*. The law states no severity order — searched all 122 rules for an ordering, a precedence and an outranking. The ordering is the plane's, is defensible, and is documented as design in its own plan; only the code comment points upward | same, plus `SOFTANZA_SOUND_PLAN.md:1740` | `verified` |
 
+| M8 | **Settled the same day, at v3.11** — Rule 118 owns what a colour means about a record; Rule 3 owns chrome. M1–M4 are closed. **M5 is not**: the conflicts were resolved by amending both rules so they no longer overlap, *not* by deciding which outranks the other, because nothing in the law can decide that | `AMENDMENT-DOCKET.md` section S8, ruled 2026-08-16 | `verified` |
+| M9 | **`conformance/manifest.json` was pinned at 3.8 — three versions behind**, while the suite it describes had passed against 3.9, 3.10 and 3.11. Found by grepping for the field, not by any check. **Nothing in the repository verifies that an artifact's pin matches the law it was verified against** | read 2026-08-16 | `verified` |
+
 *Serves: The Law, The Deterioration — and M5 is the one that generalizes, because a
 constitution with 122 rules and no way to resolve two of them is a finding about
-constitutions, not about colour.*
+constitutions, not about colour. M9 is its instrument-shaped cousin: the project that
+argues about drift has four artifacts pinning a law version and nothing checking them.*
 
 ---
 

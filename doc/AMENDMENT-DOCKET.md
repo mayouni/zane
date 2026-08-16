@@ -1,17 +1,17 @@
 # Amendment docket — one ratification pass
 
-**Status**: **two passes ruled and applied; a third section is open.** The 2026-08-13 pass
-took twelve items to `rules.json` v3.9; the 2026-08-15 pass took the information-design
-harvest to **v3.10**. **Section S8, opened 2026-08-16, is proposed and unruled** — four
-conflicts between Rules 3 and 118, found while extracting the SIGNAL vocabulary. Nothing
-in that section is applied. The *"nothing here is applied"* line this file carried until
+**Status**: **three passes, all ruled and applied.** 2026-08-13 took twelve items to
+`rules.json` v3.9; 2026-08-15 took the information-design harvest to **v3.10**; 2026-08-16
+took the colour reconciliation to **v3.11**. Section S8 was opened *proposed and unruled*
+and ruled the same day — its header is left as it was written, so the sequence is legible.
+The *"nothing here is applied"* line this file carried until
 2026-08-15 was true when written and false for two days after — noted rather than
 smoothed, in keeping with the version-drift note that follows.
 **Why a docket**: StzZui's core asset is a constitution, so most of its "refactoring" is
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
 **Date**: opened 2026-08-12; **C-2 added 2026-08-13**.
-**Law as it stands**: **v3.10, 122 rules** — updated 2026-08-15. This line has now been
+**Law as it stands**: **v3.11, 122 rules** — updated 2026-08-16. This line has now been
 wrong twice and is kept as its own record: it read *v3.8.0* while the law was still
 v3.7.3, corrected 2026-08-12; it then read *v3.8, 118 rules* through the whole of v3.9.
 The drift is noted rather than smoothed.
@@ -693,3 +693,69 @@ legislate one subject.
 - **Nothing here blocks `signal.json`.** The artifact records the conflicts rather than
   resolving them, so it is publishable and useful today; a ruling would let it drop the
   `openConflicts` block, not rewrite the vocabulary.
+
+## RULED — 2026-08-16, `rules.json` **v3.10 → v3.11**
+
+**Four items, four rulings, delegated by the author** (*"I let you decide"*). Recorded as a
+delegation rather than an authorial pass, because the difference matters to anyone reading
+this record later.
+
+| # | Ruling |
+|---|---|
+| **S8-1** | **Rule 118 governs.** Rule 3's status enumeration is removed |
+| **S8-2** | **Both meanings are legitimate** and are now named apart inside Rule 118 |
+| **S8-3** | **Rule 118's closure is over data colour**, and always was. Chrome is Rule 3's |
+| **S8-4** | **Adopted** — both rules carry `see_also` |
+
+### The division of labour, which is the whole ruling
+
+> **Rule 3 owns chrome. Rule 118 owns what a colour means about a record.**
+
+Everything else follows. Rule 3 keeps the resting palette, the single identity accent and
+the restraint on gradients and shadows — and stops enumerating status meanings it was never
+the right rule to hold. Rule 118 keeps the five statuses and family two, and now says what
+its closure closes *over*.
+
+**S8-1 went to Rule 118 on the merits, not by seniority.** It is the later and more
+specific rule; it is what both implementing planes built against; and *"system failure
+only"* forbade the colour in exactly the domain this constitution serves. A law for
+business software that cannot colour an exceeded credit limit has mistaken its subject.
+
+**S8-3 was the one that mattered**, and it is worth being plain about why. A closure claim
+that does not say what it closes over cannot make a vocabulary checkable — and *checkable*
+is the only thing this project has ever been trying to buy. Rule 118 said *"exactly two
+families and no more"* while the engine shipped seven roles per theme, and both were right,
+because they were closing over different sets. That is not a drafting slip; it is the
+closure being unfalsifiable.
+
+### Version arithmetic
+
+Two rules amended. No rule canonized, retired or moved a tier.
+
+> **`rules.json` v3.10 → v3.11 · 122 rules unchanged · 17 forbidden patterns unchanged ·
+> every tier count unchanged.**
+
+**Nothing lawful became unlawful.** The amendment widens where it moves at all: colouring
+an exceeded threshold `danger` was forbidden by one rule and required by another, and is
+now simply lawful. A consumer pinned at v3.10 loses nothing by moving.
+
+**All four conformance artifacts re-pinned to 3.11** after the suite was run — and
+`conformance/manifest.json` turned out to be pinned at **3.8**, three versions behind,
+found only by grepping for the field. The suite it describes had passed against 3.9, 3.10
+and 3.11 without anyone moving it. **Suite 34/34 at level 4**; no diagnostic, verb, medium
+or verdict moved.
+
+### What was deliberately not done
+
+**No precedence mechanism was invented.** The four conflicts were settled by amending both
+rules so they no longer overlap — *not* by deciding which outranks the other, because
+nothing in this constitution can decide that. `invariant: true` looks like precedence and
+is not; the Reader defines it as *"never flexes across vibes"*, and 46 of 122 rules carry
+it.
+
+**So the deeper finding survives this pass untouched**: two rules can still contradict each
+other, and the only reason this pair was caught is that someone put them side by side by
+hand. Whether the law should acquire a precedence rule — or a machine check for overlapping
+subjects — is a constitutional question of a different order, and inventing one inside a
+delegated ruling would be exactly the overreach this docket exists to prevent. **It is filed
+here and nowhere else.**

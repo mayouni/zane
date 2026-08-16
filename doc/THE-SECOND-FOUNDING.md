@@ -25,7 +25,7 @@ today, a fraction of a platform — and the project's own data says so twice.
 ### 1.1 The law legislates a territory the language cannot declare
 
 The constitution holds **122 rules**. Their enforcement tiers, **measured against
-`rules.json` v3.10** — every figure in this document is anchored to a law version, because
+`rules.json` v3.11** — every figure in this document is anchored to a law version, because
 a document that argues about drift and then drifts is worth nothing:
 
 | Tier | Rules | Share | Meaning |
@@ -38,10 +38,13 @@ a document that argues about drift and then drifts is worth nothing:
 *(Measured at v3.7.3: 117 rules, 78 `judgment`, 5 `tool`. At v3.8, after Rule 126:
 118 and 79. At v3.9, after the docket ratification of 2026-08-13: 119 rules, Rule 62
 promoted off `machine-later` to `tool`, and Rule 125 entering at `machine-later` — so the
-two moves cancelled and only `tool` changed. At **v3.10**, after the information-design
-harvest of 2026-08-15: **122 rules**, with Rules 127, 128 and 129 entering at `machine`,
-`judgment` and `tool`. **The finding this table exists to support has now survived three
-ratifications unmoved: 8% of the law is refusable before a pixel exists.**)*
+two moves cancelled and only `tool` changed. At v3.10, after the information-design harvest
+of 2026-08-15: 122 rules, with Rules 127, 128 and 129 entering at `machine`, `judgment` and
+`tool`. At **v3.11**, after the colour reconciliation of 2026-08-16: **unchanged in every
+column** — Rules 3 and 118 were amended to stop legislating one subject in two
+vocabularies, and an amendment that moves no rule between tiers moves nothing here.
+**The finding this table exists to support has now survived four ratifications unmoved:
+8% of the law is refusable before a pixel exists.**)*
 
 **Eight percent of the law is refusable before a pixel exists.** That is not a failure of
 the verifier, which enforces 21 of its 22 diagnostics and passes 34/34 fixtures. It is a

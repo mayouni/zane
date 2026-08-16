@@ -1,9 +1,9 @@
 {
   "metadata": {
     "title": "The SIGNAL Vocabulary",
-    "version": "1.0",
+    "version": "1.1",
     "lastUpdated": "2026-08-16",
-    "constitution": "3.10",
+    "constitution": "3.11",
     "stratum": "SIGNAL",
     "specification": "doc/THE-SECOND-FOUNDING.md section 5",
     "note": "SIGNAL is the expression stratum for a meaning bound to a perceptible quality -- colour in the visual channel, timbre in the auditory one, waveform in haptics. This file publishes the vocabulary as data for the same reason media.json exists: implementations consume it rather than read it, and two channels of one semantic system had already drifted apart before anyone could see it in a diff. EXTRACTED, NOT DESIGNED: every value and every meaning below is quoted from Rule 118, which is the law of record. Where this file records something the law does not say, it says so."
@@ -14,7 +14,7 @@
     "neutralMetadata": "Family two. Channels, types, categories -- one quiet style for all of them, carrying no urgency. Not a sixth status."
   },
 
-  "closure": "Rule 118 says an interface's colours split into exactly two families AND NO MORE. The five below are the whole of family one. A colour-per-entity scheme is family two's job, and adding a sixth status is a constitutional amendment, not an implementation choice.",
+  "closure": "Rule 118 says the colours an interface uses to SAY SOMETHING ABOUT A RECORD split into exactly two families and no more. The five below are the whole of family one. A colour-per-entity scheme is family two's job, and adding a sixth status is a constitutional amendment, not an implementation choice. Chrome -- the resting surface, the single identity accent, the background -- is outside this closure and belongs to Rule 3. That boundary was ambiguous until v3.11 and is the reason the closure is now checkable: a finite vocabulary needs to know what it is finite OVER.",
 
   "values": [
     {
@@ -25,14 +25,13 @@
     {
       "id": "warning",
       "meaning": "watch this",
-      "source": "Rule 118, verbatim",
-      "conflict": "Rule 3 says warning is a 'user-correctable issue', which is narrower. See openConflicts."
+      "source": "Rule 118, verbatim"
     },
     {
       "id": "danger",
       "meaning": "critical, exceeded, incident",
       "source": "Rule 118, verbatim",
-      "conflict": "Rule 3 says danger is for 'system failure only', which excludes an exceeded business threshold that Rule 118 admits. See openConflicts."
+      "note": "Until v3.11 Rule 3 restricted this value to 'system failure only', which excluded the exceeded business threshold Rule 118 admits -- so the two rules gave opposite verdicts on the commonest use of the colour in this domain. Rule 3 no longer legislates status meaning."
     },
     {
       "id": "info",
@@ -72,37 +71,39 @@
     "No rule says what happens when two values contend for the same element. The sound plane needed an answer and invented one, which is the correct order of events -- but the answer belongs in the law or in this file, not in a comment inside one channel."
   ],
 
-  "openConflicts": [
-    {
-      "id": "danger-scope",
-      "between": ["3", "118"],
-      "statement": "Rule 3 restricts danger to 'system failure only'. Rule 118 defines it as 'critical, exceeded, incident'. An exceeded business threshold is an incident, not a system failure, so a surface colouring it danger obeys 118 and violates 3.",
-      "severity": "substantive -- the two rules give opposite verdicts on a common case"
-    },
-    {
-      "id": "neutral-meaning",
-      "between": ["3", "118"],
-      "statement": "Rule 3's 'Neutral -> default state' is chrome: the resting appearance of an untouched control. Rule 118's family two is 'neutral metadata: channels, types, categories' -- data colour carrying no urgency. One word, two meanings, and the engine's :Neutral answers only one of them.",
-      "severity": "substantive -- an implementer reading both cannot tell which :Neutral they are building"
-    },
-    {
-      "id": "accent-as-third-family",
-      "between": ["3", "118"],
-      "statement": "Rule 3 names 'Accent -> intent (action, selection)'. Rule 118 says colours split into exactly two families and no more. Accent is neither a semantic status nor neutral metadata, so either it is a third family Rule 118 forbids, or Rule 118's 'exactly two' is about DATA colour and silently excludes chrome. The law does not say which.",
-      "severity": "structural -- it is the closure claim itself that is unclear"
-    },
-    {
-      "id": "vocabulary-coverage",
-      "between": ["3", "118"],
-      "statement": "Rule 3 enumerates four colour usages and names none of success, info or muted. Rule 118 enumerates five statuses and names no accent. Neither rule points at the other, so a reader arriving at either believes they have the whole vocabulary.",
-      "severity": "editorial, but it is why the other three went unnoticed"
-    }
-  ],
+  "settledAt": {
+    "version": "3.11",
+    "date": "2026-08-16",
+    "note": "Four conflicts between Rules 3 and 118 were found while building v1.0 of this file and ruled at v3.11. Recorded rather than deleted: a consumer pinned below 3.11 is reading a law that still contains them, and the settlement is the reason this vocabulary can be published as one thing.",
+    "ruling": "Rule 118 owns what a colour MEANS about a record. Rule 3 owns CHROME. Neither restates the other, and both now carry see_also.",
+    "conflicts": [
+      {
+        "id": "danger-scope",
+        "was": "Rule 3 restricted danger to 'system failure only' while Rule 118 defined it as 'critical, exceeded, incident'. An exceeded business threshold is an incident and not a system failure, so a surface colouring it danger obeyed 118 and violated 3.",
+        "ruled": "Rule 118 governs. Rule 3's status enumeration is removed -- it was the later, specific, five-value rule, it is what both implementing planes built against, and 'system failure only' forbade the colour in exactly the domain this law serves."
+      },
+      {
+        "id": "neutral-meaning",
+        "was": "Rule 3's neutral was chrome (the resting appearance of an untouched control); Rule 118's family two is data colour carrying no urgency. One word, two meanings, and StzThemeColor returns one colour for both.",
+        "ruled": "Both meanings are legitimate and now named apart in Rule 118's own text. The engine still offers one colour for both, which is now a visible gap rather than an ambiguity."
+      },
+      {
+        "id": "accent-as-third-family",
+        "was": "Rule 118 said colours split into exactly two families and no more; Rule 3 named an accent that is neither a status nor neutral metadata.",
+        "ruled": "Rule 118's closure is over DATA colour and always was; chrome is Rule 3's and outside it. The scope is now written into the rule. This was the structural item -- a closure claim that does not say what it closes over cannot make a vocabulary checkable."
+      },
+      {
+        "id": "vocabulary-coverage",
+        "was": "Neither rule pointed at the other, so a reader arriving at either believed they had the whole vocabulary.",
+        "ruled": "Both carry see_also -- the first reciprocal pointers between two rules in this constitution."
+      }
+    ]
+  },
 
   "honestBoundaries": [
     "This file records the SIGNAL vocabulary; it does not yet make it DECLARABLE. Nothing in the .zui grammar names a semantic value, so no diagnostic can be raised from this file today. Closing a language field is a language change and is the author's ruling to make -- the same gate SURFACE_AS passed through before media.json could be enforced.",
     "Only two of the ten media have a rendering recorded, because only two have been built. The other eight are absent rather than empty: print, luminous and signage all carry SIGNAL in principle and none has an instrument.",
-    "The four open conflicts are filed, not resolved. Rule 118 is invariant: true and Rule 3 is not -- but invariant means 'never flexes across vibes' (the Reader's own wording), NOT 'outranks'. The constitution has no precedence mechanism, so nothing in the law currently decides these four. That is the finding.",
+    "THE CONSTITUTION STILL HAS NO PRECEDENCE MECHANISM, and that is unchanged by v3.11. The four conflicts were settled by amending both rules so they no longer overlap -- not by deciding which wins, because nothing in the law can decide that. Rule 118 is invariant: true and Rule 3 is not, which looks like precedence and is not: invariant means 'never flexes across vibes', the Reader's own wording. 46 of 122 rules carry it. The next two rules to collide will collide the same way, and the only reason this pair was found is that someone put them side by side by hand.",
     "The visual channel's gap was filed on 2026-08-13 and is unchanged. This file does not re-file it; it records it so a consuming tool can see the two channels disagree about how many values exist."
   ]
 }
