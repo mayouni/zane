@@ -174,7 +174,10 @@ working engine behind them.
 It is also the smallest version that proves or kills the thesis, because it must
 immediately do three things that matter:
 
-1. **Round-trip the seven existing colour themes** with no loss.
+1. ~~**Round-trip the seven existing colour themes** with no loss.~~ **Already done, and not
+   by seven themes.** Corrected 2026-08-17: the plane's C5 round-trips **ten** themes
+   through CSS with a byte-identical pixel guard. This test was proposed against a state of
+   the world that had already moved, and v0 does not get to claim it.
 2. **Express the CJK financial inversion** — `:Success @visual ~zh-financial` — which is
    the live defect in `stzDiagramColor.ring:45`.
 3. **Serialize the earcon set**, so one document carries both channels and the claim
@@ -187,8 +190,17 @@ If v0 cannot do those three, the idea is wrong and we will know cheaply.
 - **It closes the seam that caused the drift.** Rule 118, `stzColor` and `stzEarcons`
   currently agree by *coincidence and good intentions*. With ZSS they agree by *pinning
   the same artifact*, and a court can prove it.
-- **It is the colour plane's unimplemented C5.** That phase — theme export to CSS/JSON/Ring
-  — is not started. ZSS is the format it was reaching for, generalised past colour.
+- ~~**It is the colour plane's unimplemented C5.** That phase — theme export to CSS/JSON/Ring
+  — is not started.~~ **STALE, corrected 2026-08-17: C5 shipped, and this is the most
+  consequential correction in this document.** `SOFTANZA_COLOR_SYSTEM.md` records
+  *"C1–C5 are complete"*, with `StzThemeFromCSS` (`stzTheme.ring:53`) parsing
+  `--stz-`-prefixed CSS custom properties back into role/value pairs, **all ten themes
+  exporting**, and a kill criterion met in pixels: out to CSS, back, painted from nothing
+  but the parsed file — **0 bytes differing across 7,783 sampled**, with a negative sibling
+  reporting 282. **So v0's first test — round-trip the themes with no loss — is already
+  performed, for ten themes, by the plane itself.** What v0 must now justify is what it adds
+  *beyond* a working semantic-name ↔ CSS round-trip: the culture axis (test 2) and one
+  document carrying two channels (test 3). Those remain unbuilt and remain the real case.
 - **It makes culture deployable rather than theoretical.** A ministry's local overrides are
   a ZSS file it ships. Without ZSS, the cultural axis has nowhere to live in production.
 - **It gives the court a second artifact class.** Today `zui check` judges `.zui` and

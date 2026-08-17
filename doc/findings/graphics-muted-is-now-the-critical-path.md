@@ -91,10 +91,22 @@ neutral · background`. `muted` joins as an eighth, distinct from `neutral`: **n
 family two** (metadata carrying no urgency), **muted is family one** (a *state* — waiting,
 inactive). They are not the same concept and the law separated them at v3.11.
 
-StzZui sized this once and got it wrong, so the earlier estimate is withdrawn: it is not
-one row. Seven theme palettes each enumerate their roles, and the contrast-pair guard goes
-from 42 to 49 pairs, each needing 4.5:1 in every theme (Rule 62, bound to `StzIsLegible`).
-**A careful half-session, not an hour.**
+> **CORRECTION, 2026-08-17, same day this finding was filed and routed.** The paragraph
+> below originally said *"seven theme palettes… contrast pairs from 42 to 49"*. **That was
+> wrong**, and it is the second wrong estimate StzZui has published about this one change
+> — the first was *"about an hour"*. Measured this time instead of remembered:
+> `$aPalette` at `stzDiagramColor.ring:78` holds **ten** themes, each enumerating **seven**
+> roles, so the grid is **70 cells and an eighth role makes it 80**. The number 42 belongs
+> to something else — Rule 62's lint note records `StzIsLegible` passing 42 theme/role
+> pairs, a different and smaller set — and StzZui conflated the guard's count with the
+> palette's. **If this finding is read for its sizing, read this paragraph and not the
+> original.** The graphics session's own count beats both.
+
+`$aPalette` holds **ten** themes, each enumerating seven roles, so adding an eighth role
+takes the grid from **70 cells to 80**, each needing 4.5:1 in every theme (Rule 62, bound
+to `StzIsLegible`). StzZui's first estimate of *"about an hour"* is withdrawn.
+**A careful half-session**, and that figure is now the only one in this document that has
+not been measured — treat it as the loosest claim here.
 
 **2 · Say what the visual channel renders for each of the five.** This is the part the
 keystone is waiting on, and it is smaller than the first: a statement, per value, of
