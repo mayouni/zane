@@ -255,6 +255,23 @@ N7 and N8 are the shape of L7 and of the severity-order item: **a cross-channel 
 asserted from single-channel evidence** — three instances now, from two different planes,
 which makes it a pattern rather than a slip.*
 
+## O · The keystone runs, and reports not proved *(added 2026-08-17)*
+
+S13b built. The instrument that converts *one declaration, many renderings, one law* from
+an argument into a test.
+
+| # | Finding | Evidence | Status |
+|---|---|---|---|
+| O1 | **The mechanical definition of "the same meaning survived"** — the part the plan called the whole difficulty — is *"every difference between the two renderings is one the published data already predicted"*. Not sameness, which would be false: print has no time, sound is serial | `tools/zui/cross-medium.js`, 2026-08-17 | `verified` |
+| O2 | **Zero drift.** Five intents cross both pairs intact, including `visual vs print` — the hardest honest case, in the enumeration precisely because print has no time and no interaction. The four predicted differences are auditory's degradations of `SCAN`, `LOCATE`, `COMPARE`, `READ`, each already in the matrix. **The model held on first contact** | run 2026-08-17 | `verified` |
+| O3 | **And the claim is NOT PROVED**, for one reason: `signal.json` records no rendering for the visual channel, because that channel implements four of the law's five values. **The missing `:Muted` is not a tidiness finding** — it is the single thing between this project and proving its central claim, and it blocks exactly the pair where both channels shipped | run 2026-08-17, tracing to the 2026-08-13 graphics finding | `verified` |
+| O4 | **The runner's first draft had the bug it exists to prevent.** Two silences compared equal and vanished from the report — an agreement nobody verified, presented as an agreement proved. Silence is now tested *before* equality | `cross-medium.js`, corrected before commit | `verified` |
+| O5 | **`undecided` was first collapsed into `drift`**, which cries wolf: a gap in coverage is not a contradiction. Three verdicts now, and only `predicted` passes — collapsing the other way would claim a proof nobody performed | same | `verified` |
+
+*Serves: The Law, In Practice — and O3 is the one to carry, because it converts a
+housekeeping item into the critical path. Every other finding in this ledger says something
+drifted. **O2 says something held**, which the record needed at least once.*
+
 ---
 
 ## Open items this ledger is watching

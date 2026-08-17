@@ -362,6 +362,35 @@ Reasoned in [THE-INTERACTION-MODEL.md](THE-INTERACTION-MODEL.md) §7.
 and auditory, and the visual expression grammar is what gives the comparison a second side
 with enough substance to be worth comparing.
 
+### Built 2026-08-17 — and it reports NOT PROVED, which is the result
+
+`tools/zui/cross-medium.js` with `conformance/cross-medium/`. The mechanical definition of
+*"the same meaning survived"* — the part the plan called the whole difficulty — turned out
+to be this:
+
+> **Every difference between the two renderings is one the published data already
+> predicted.**
+
+Not sameness, which would be false. Three verdicts: **predicted** (the data accounts for
+it), **undecided** (the data is silent — nothing contradicted, nothing proved), **drift**
+(the data is contradicted). Only the first passes.
+
+**What it found.** **Zero drift**, and five intents crossing both pairs intact — including
+`visual vs print`, the hardest honest case, put in the enumeration because print has no
+time and no interaction. The four predicted differences are auditory's degradations of
+`SCAN`, `LOCATE`, `COMPARE` and `READ`, each already in the matrix. **The model held.**
+
+**And the claim is still not proved**, for exactly one reason: `signal.json` records no
+rendering for the **visual** channel, because that channel implements four of the law's
+five values. **The missing `:Muted` is no longer a tidiness finding** — it is the single
+thing standing between this project and proving its central claim, and it blocks precisely
+the pair where both channels shipped.
+
+Two bugs were caught in the runner itself and both are recorded in its README: two silences
+compared equal and vanished from the report (an unverified agreement passing as a proved
+one — the exact failure the instrument exists to prevent), and `undecided` was first
+collapsed into `drift`, which cries wolf.
+
 ## 6. Track C — adoption by the siblings
 
 Each is small once its contract exists; none may start before it does.
@@ -409,7 +438,7 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
 | S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
 | S11–S13 | B | stzzui | ⏸ open | the commons; ungated but untouched |
-| **S13b** | B | stzzui | ⏸ waits | **the keystone** — cross-medium fixture; wants S8 for a second substantive side |
+| **S13b** | B | stzzui | ✅ **built** | the keystone runs: **0 drift, 5 intents crossing both pairs**. Reports NOT PROVED — `signal.json` is silent on visual, because the colour plane lacks `muted` |
 | S14–S19 | C | siblings | ⏸ waits | their contracts |
 
 **Six done, three half, one running, five ready to launch.**

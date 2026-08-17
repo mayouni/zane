@@ -1,0 +1,11 @@
+// One declaration, medium-free. It names what the operator is doing and what
+// the values mean, and says nothing about how any channel renders it.
+//
+// This file is never edited by the comparison. Each projection appends a VIBE
+// naming its medium and nothing else -- which is the claim under test: that a
+// declaration survives a change of channel without being rewritten for it.
+
+DEFINE INTENT_FLOW review_overdue_invoices (
+  SATISFIES [DISCOVER, LOCATE, SCAN, COMPARE, READ],
+  SIGNALS [danger, warning, muted]
+)

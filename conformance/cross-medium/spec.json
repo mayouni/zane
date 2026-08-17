@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "title": "The Cross-Medium Conformance Suite",
+    "version": "1.0",
+    "lastUpdated": "2026-08-17",
+    "constitution": "3.11",
+    "specification": "doc/THE-INTERACTION-MODEL.md section 7",
+    "note": "One declaration, two renderings, one law -- S13b, the keystone. The assertion is NOT that the two renderings match: they are irreducibly different, and pretending otherwise would promise portability the model cannot deliver. The assertion is that EVERY difference between them is one media.json or signal.json already predicted. A difference the data accounts for is the model working; a difference it does not account for is drift, and it fails the run."
+  },
+  "cases": [
+    {
+      "file": "invoice-review.zui",
+      "media": ["visual", "print"],
+      "note": "The hardest honest pair. Print was included in the medium enumeration precisely because it has no time and no interaction -- if the model survives print, it is real. Both channels are parallel, persistent and high-bandwidth, so a reading-and-comparing flow should cross almost intact, and every place it does not must be in the matrix."
+    },
+    {
+      "file": "invoice-review.zui",
+      "media": ["visual", "auditory"],
+      "media_note": "The pair that actually shipped. Both channels have a real implementation, so this is the only case where a divergence could be checked against running code rather than against a table.",
+      "note": "Serial versus parallel, transient versus persistent. SCAN, COMPARE, LOCATE and READ all degrade here, and muted renders as silence -- so this case exercises both matrices at once."
+    }
+  ]
+}
