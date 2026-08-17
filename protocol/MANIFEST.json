@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "title": "The Zui Protocol Pack",
+    "version": "1.0",
+    "generated": "by tools/zui/pack.js -- never hand-edited",
+    "note": "Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.",
+    "hash": "sha256 over LF-normalised content"
+  },
+  "versions": {
+    "constitution": "3.11",
+    "rules": 122,
+    "forbiddenPatterns": 17,
+    "language": "1.2",
+    "refusalContract": "1.2",
+    "diagnostics": 25,
+    "media": 10,
+    "signalValues": 5,
+    "fixtures": 40
+  },
+  "pinned": [
+    {
+      "file": "constitution/rules.json",
+      "role": "the law",
+      "bytes": 162090,
+      "sha256": "04efdc3abc6b2204005873cc078794283af228e9b9234ea9aea021653f7f1aa9"
+    },
+    {
+      "file": "doc/language/README.md",
+      "role": "the language",
+      "bytes": 8902,
+      "sha256": "e6ff25d3c0dcad89494078fd72a586551c1d464d30502d149ea2d6186f5e1065"
+    },
+    {
+      "file": "doc/language/GRAMMAR.md",
+      "role": "the language",
+      "bytes": 6302,
+      "sha256": "c7228e01efa98fc33524fda9a59615bdb5e500358425ae4031f70e470e1e3852"
+    },
+    {
+      "file": "doc/language/DECLARATIONS.md",
+      "role": "the language",
+      "bytes": 12164,
+      "sha256": "70b0cf2afc24c1da51c2e92377a4c0e61899262b7087ddc575c3f4eae736a378"
+    },
+    {
+      "file": "doc/language/VIOLATIONS.md",
+      "role": "the language",
+      "bytes": 11232,
+      "sha256": "ee60bf27f80bcb1615783629f2af4268167a569fc082c5bd6d4e1dd4bc32da06"
+    },
+    {
+      "file": "conformance/violations.json",
+      "role": "the refusal contract",
+      "bytes": 14404,
+      "sha256": "88faa3e7750f097c70de8bac6356f9f2db7c25fc70d2bb2c1d24b1b983ef9dd7"
+    },
+    {
+      "file": "doc/diagnostic-contract.md",
+      "role": "the refusal contract",
+      "bytes": 8445,
+      "sha256": "1fcafdd81957b2ce276ca2bb9be6915938b5be6c4131a0d522ef14ed03bda9ad"
+    },
+    {
+      "file": "doc/diagnostic-contract.schema.json",
+      "role": "the refusal contract",
+      "bytes": 2284,
+      "sha256": "d2db8227929a92d2a6dfba05169a7611299924734caac4b89c9f2b4587ae9f65"
+    },
+    {
+      "file": "conformance/media.json",
+      "role": "the axes",
+      "bytes": 8823,
+      "sha256": "13c34dc1c91c1f20c6f31343bcf70a1d35af25cbb626739c4c0a81d3e65b84ff"
+    },
+    {
+      "file": "conformance/signal.json",
+      "role": "the axes",
+      "bytes": 11332,
+      "sha256": "d78d3dac05be25572f0d02da3f72638d6fc9faee0d3b46cb4157277470d42eba"
+    },
+    {
+      "file": "conformance/manifest.json",
+      "role": "the proof",
+      "bytes": 8544,
+      "sha256": "8c73608bf9100238538d72e4f6fd7ce9621ef996b29f744cc518687bc4840d75"
+    },
+    {
+      "file": "conformance/cross-medium/spec.json",
+      "role": "the proof",
+      "bytes": 1636,
+      "sha256": "072c30a1f52786d66597deb102c337caa6882919996613a20d9aa725ede6bd61"
+    }
+  ]
+}

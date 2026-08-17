@@ -272,6 +272,22 @@ an argument into a test.
 housekeeping item into the critical path. Every other finding in this ledger says something
 drifted. **O2 says something held**, which the record needed at least once.*
 
+## P · The pack, and a pin that can be refuted *(added 2026-08-17)*
+
+S13 built. What a stranger downloads, and the mechanism that makes their claim checkable.
+
+| # | Finding | Evidence | Status |
+|---|---|---|---|
+| P1 | **A version number cannot detect drift; a hash can.** Proved rather than argued: one trailing space added inside `rules.json` leaves the version at v3.11 and fails `pack.js --check`. **That is the exact case a version pin misses**, and it is how most of this ledger's findings entered the tree | negative-tested 2026-08-17 | `verified` |
+| P2 | **The pack is 12 files in five roles and contains no code.** No runtime, no framework, no library — which is the only arrangement under which an implementation in any language proves agreement by *running the fixtures* rather than by sharing code | `protocol/MANIFEST.json`, 2026-08-17 | `verified` |
+| P3 | **The pack checks its own prose.** Six counts stated in `protocol/README.md` are compared against the manifest on every run, after prose-versus-data drift turned up four times in two days (M9, N3, N4, and STZSENSE's stale C5 claim) | negative-tested by editing one count, 2026-08-17 | `verified` |
+| P4 | **The manifest never regenerates itself**, deliberately. A manifest that follows the tree automatically pins nothing, so `--check` reports drift and refuses to fix it | by design | `verified` |
+| P5 | **The identity question is stated and not decided.** URN, domain, DOI and content addressing, each with its cost. The pack uses content addressing because it is the only one already paid for; the recommendation offered is a URN for citation plus hashes for verification, and **no domain until something outside the family needs to fetch the law over HTTP** — a domain bought early is a dependency acquired early | `protocol/README.md` §7 | `reported` |
+| P6 | **The pack ships an instrument that fails.** `cross-medium.js` reports NOT PROVED and §4 says so rather than omitting it. Recorded because the temptation was real and the alternative — a pack whose every tool passes because the failing one was left out — would be the drift this project exists to catch, committed by its own standard | `protocol/README.md` §4 | `verified` |
+
+*Serves: In Practice, The Commons — and P6 is the one to keep. Publishing the failing
+instrument is the only version of this pack that a stranger could trust.*
+
 ---
 
 ## Open items this ledger is watching
