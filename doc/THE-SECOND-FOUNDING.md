@@ -858,10 +858,15 @@ the artifact.
 | IV — The Expression | The missing middle: structure, signal, role, motion, message, tempo. |
 | V — **The Senses** | Interfaces are not only seen. Sound, voice, touch, light, signage — and why a monomodal law is an incomplete one. Accessibility as the same law, not a chapter of exceptions. |
 | VI — **The Readers** | Meaning is not a property of the sign. Where conventions differ, where they invert, and the signs that must never be conscripted at all. Why a law claiming universality owes an account of its own locality — and what in it actually travels. |
-| VI — The Law | Articles, rights, evidence, the enforcement ladder, the substance test. |
-| VII — The Commons | Governance, and the loop from a user's pain to a numbered rule. |
-| VIII — Under Generation | Interfaces made by machines, refused by law. |
-| IX — In Practice | Adoption, the toolchain, Softanza as the worked showcase. |
+| VII — The Law | Articles, rights, evidence, the enforcement ladder, the substance test. |
+| VIII — The Commons | Governance, and the loop from a user's pain to a numbered rule. |
+| IX — Under Generation | Interfaces made by machines, refused by law. |
+| X — In Practice | Adoption, the toolchain, Softanza as the worked showcase. |
+
+> **Renumbered 2026-08-17.** *The Readers* was inserted as a new Part VI and the four parts
+> below it were never moved, so this table carried **two Parts VI** and stopped at IX while
+> listing ten parts. Nothing cites a part by number yet, which is the only reason this was
+> cheap; it was on the evidence ledger's watchlist for exactly that reason.
 
 **One discipline borrowed from the law**: every claim a machine can check should be
 **generated from the artifacts** — rule counts, enforcement tiers, fixture verdicts, the

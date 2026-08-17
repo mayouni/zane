@@ -278,6 +278,7 @@ drifted. **O2 says something held**, which the record needed at least once.*
 
 - **Docket C-2** gates the industrial-standards claim (E5) on reading the actual editions.
   Until then it must not be printed.
-- **The book's part numbering** in `THE-SECOND-FOUNDING.md` §12 has two entries at VI since
-  *The Readers* was inserted. Renumber before anything cites a part by number.
+- ~~**The book's part numbering** in `THE-SECOND-FOUNDING.md` §12 has two entries at VI since
+  *The Readers* was inserted.~~ **Closed 2026-08-17**: renumbered to ten parts, I–X. It was
+  cheap only because nothing cites a part by number yet, which was the watch condition.
 - **I1's treaty citations** are unchecked. The argument stands; the footnotes do not exist.
