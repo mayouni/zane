@@ -233,10 +233,46 @@ ordering to a law that states none ([finding](findings/sound-severity-order.md))
 constitution turns out to have **no precedence mechanism at all** — which is why nothing in
 the law decides the four conflicts above.
 
-### S9 · ROLE + MESSAGE · `stzzui` · **large**
+### S9 · ROLE + MESSAGE · `stzzui` · **large** · *attacked 2026-08-17, not yet built*
 
 The two strata carrying the most `judgment`-tier rules and the most daily pain. `ROLE` is
 the load-bearing move of the whole vision and should be attacked before it is built.
+
+**The attack is done: [ROLE-DESIGN.md](ROLE-DESIGN.md).** It found the founding's account
+of ROLE **wrong in its sourcing and nearly right in its content**.
+
+- **Wrong source.** The founding says ROLE *"reaches Set 13 (7)"*. Set 13 is *Widget
+  Selection* and six of its seven rules **prescribe widgets** — plaintext fields, monospaced
+  numbers, the Ledger, the agenda view, sparklines. Sourcing ROLE there would deliver
+  `card | button | table` and defeat the `WIDGET` exclusion by spelling. The real sources are
+  **Set 26** (Action Reversibility), **Set 29**, **Set 31** and **Set 5**, which legislate
+  *consequence*.
+- **Five values, each traced to a rule**: `inert` (119, 16), `navigate` (112),
+  `reversible` (79), `irreversible` (79), `proposal` (98).
+- **`binary state` dropped, and the law says why.** Rule 106 calls a state-labelled toggle
+  *"a quiz"* — a defect the law names, so a declaration must not be able to claim it as its
+  intent. **`instant` dropped too**: it appears in seven rules but always about latency or
+  undo speed, which makes it a `TEMPO` word. Putting it in ROLE would put one concept in two
+  strata, the exact defect v3.11 corrected for colour.
+- **The check that pays for the stratum** is `CONFIRM_ON_REVERSIBLE`. Rule 79 forbids the
+  confirmation dialog on a common operation and **no instrument can enforce that clause
+  today**, because `SATISFIES [ACT, CONFIRM]` reads identically for *delete a line* and
+  *revoke every credential*. The role separates them in one word.
+- **Attachment recommended**: `ROLE` as a scalar on `INTERACTION`, which already means *an
+  act bound to an object*. **Not** a map field — that needs pairs, which breaks GRAMMAR §2's
+  flat rule, and nesting is where widget trees return.
+- **The residual risk is named and unresolved**: under-declaration is invisible. A surface
+  that declares no roles raises nothing, so whether the law should ever *require* a role on a
+  declaration satisfying `ACT` is what decides if the stratum has teeth.
+
+**MESSAGE is deliberately not analysed yet.** Its extraction test shows `cause` in 14 rules
+and `actor` in 4, but `remedy` in none — the concept lives in Rule 40 as a *"fixing verb"*,
+under a different word. Separate pass, not folded in.
+
+**Also recorded there**: this analysis reached a confident, tidy, **wrong** conclusion first,
+from a corpus search whose patterns had been mangled into matching a backspace character.
+The only thing that caught it was a control term returning an impossible zero.
+**Put a control in every corpus test.**
 
 ### S8b · `stzSense` v0 — the semantic sheet · `stzzui` + `stzlib` + `ringface` · **medium** · *added 2026-08-13*
 
@@ -464,7 +500,8 @@ Track A, so the shape of this table has changed more in one day than in the week
 | S4b | 0 | stzlib | ⚪ ready | the colour table's hard-coded culture, unfiled |
 | **S8** | A | stzzui | ✅ **done** | `signal.json` v1.1; Rules 3 ↔ 118 ruled at law v3.11; `SIGNALS` + 3 diagnostics at language **v1.2**; suite 40/40 |
 | S8b | A | stzzui + siblings | ⏸ waits | `stzSense` v0 — wants S8 |
-| S9, S10 | A | stzzui | ⏸ waits | ROLE + MESSAGE, then STRUCTURE + MOTION + TEMPO |
+| S9 | A | stzzui | 🟡 **attacked** | ROLE design pass done: 5 values traced to rules, `binary state` and `instant` dropped with reasons, attachment settled. **Grammar not built**; MESSAGE not started |
+| S10 | A | stzzui | ⏸ waits | STRUCTURE + MOTION + TEMPO |
 | **S13** | B | stzzui | ✅ **done** | the protocol pack: `protocol/` + `pack.js`, 12 files hashed, prose checked against the manifest, identity question stated not decided |
 | S11–S12 | B | stzzui | ⏸ open | the commons and the capture loop; ungated, untouched |
 | **S13b** | B | stzzui | ✅ **built** | the keystone runs: **0 drift, 5 intents crossing both pairs**. Reports NOT PROVED — `signal.json` is silent on visual, because the colour plane lacks `muted` |

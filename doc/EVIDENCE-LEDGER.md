@@ -288,6 +288,25 @@ S13 built. What a stranger downloads, and the mechanism that makes their claim c
 *Serves: In Practice, The Commons — and P6 is the one to keep. Publishing the failing
 instrument is the only version of this pack that a stranger could trust.*
 
+## Q · ROLE, attacked *(added 2026-08-17)*
+
+S9's design pass. The plan said ROLE should be attacked before it is built; this is what the
+attack found.
+
+| # | Finding | Evidence | Status |
+|---|---|---|---|
+| Q1 | **A corpus search matched a literal backspace character and returned zero for everything**, including the control term `undo` in a law containing *The Undo Covenant*. It produced a confident, tidy, wrong conclusion — that none of ROLE's values appear in the law — and the only thing that caught it was the impossible control result. **Put a control in every corpus test** | 2026-08-17, corrected in the same session | `verified` |
+| Q2 | **Re-measured, ROLE is grounded**: `instant` in 7 rules, `reversible` and `irreversible` in 3 each, `destructive` in 1, `promise` in 4, `role` in 6, `affordance` in 4. The founding did not invent it | plain substring match with a control, 2026-08-17 | `verified` |
+| Q3 | **But the founding sources it from the wrong set.** It says ROLE *"reaches Set 13 (7)"*; Set 13 is *Widget Selection* and six of its seven rules prescribe widgets — plaintext fields, monospaced numbers, the Ledger, the agenda view, sparklines. **Sourcing ROLE there yields `card / button / table` and defeats the `WIDGET` exclusion by spelling.** Found by reading the rules, not by searching | read 2026-08-17 | `verified` |
+| Q4 | **Five values extract cleanly from the sets that legislate consequence** — Set 26, 29, 31, 5: `inert` (119, 16), `navigate` (112), `reversible` (79), `irreversible` (79), `proposal` (98) | `ROLE-DESIGN.md` §2 | `verified` |
+| Q5 | **Two of the founding's three proposed values must be dropped, and the law says why for one.** Rule 106 calls a state-labelled toggle *"a quiz"* — so `binary state` is a defect the law names, and a declaration must not be able to claim it as intent. `instant` goes because its seven appearances are all about latency or undo speed, making it a `TEMPO` word; keeping it would put one concept in two strata, the exact defect v3.11 corrected for colour | same | `verified` |
+| Q6 | **The stratum pays for itself on one check.** Rule 79 forbids the confirmation dialog on a common operation, and **no instrument can enforce that clause today** because `SATISFIES [ACT, CONFIRM]` reads identically for *delete a line* and *revoke every credential*. A role separates them in one word — and the defect it catches trains the reflex that makes an operator click through the dialog that mattered | same | `verified` |
+| Q7 | **The residual risk is invisible failure.** A surface declaring no roles raises nothing, so under-declaration passes by silence. Whether the law should ever *require* a role on a declaration satisfying `ACT` is what decides if the stratum has teeth, and it is unresolved | same | `reported` |
+
+*Serves: The Expression, In Practice. Q1 is the one to carry beyond this project: the
+measurement was broken in a way that produced a **clean** answer, and a clean answer is
+exactly what stops you looking again.*
+
 ---
 
 ## Open items this ledger is watching
