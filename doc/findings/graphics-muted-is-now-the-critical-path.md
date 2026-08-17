@@ -91,22 +91,31 @@ neutral · background`. `muted` joins as an eighth, distinct from `neutral`: **n
 family two** (metadata carrying no urgency), **muted is family one** (a *state* — waiting,
 inactive). They are not the same concept and the law separated them at v3.11.
 
-> **CORRECTION, 2026-08-17, same day this finding was filed and routed.** The paragraph
-> below originally said *"seven theme palettes… contrast pairs from 42 to 49"*. **That was
-> wrong**, and it is the second wrong estimate StzZui has published about this one change
-> — the first was *"about an hour"*. Measured this time instead of remembered:
-> `$aPalette` at `stzDiagramColor.ring:78` holds **ten** themes, each enumerating **seven**
-> roles, so the grid is **70 cells and an eighth role makes it 80**. The number 42 belongs
-> to something else — Rule 62's lint note records `StzIsLegible` passing 42 theme/role
-> pairs, a different and smaller set — and StzZui conflated the guard's count with the
-> palette's. **If this finding is read for its sizing, read this paragraph and not the
-> original.** The graphics session's own count beats both.
+> **SIZING, MEASURED — and this paragraph was rewritten twice before it was right.**
+> Recorded that way on purpose: the numbers below are the third pass, and the first two
+> were remembered rather than looked up. **There are two different grids and they have
+> different sizes**, which is what confused the earlier passes:
+>
+> | grid | where | today | with `:Muted` |
+> |---|---|---|---|
+> | the **palette** — cells an author must fill | `stzDiagramColor.ring:78`, `$aPalette` | **10** themes × **7** roles = **70** | **80** |
+> | the **contrast guard** — pairs CI checks at 4.5:1 | `test/graphics/gg_color_c3.ring:70`, `aThemes` × `aRoles` | **7** themes × **6** roles = **42** | **49** |
+>
+> The guard sweeps seven themes and six roles — it omits `background`, which is a surface
+> and holds no text, and omits the three grey themes. **So this finding's original
+> `42 → 49` was correct for the guard**, and StzZui's first correction wrongly discarded
+> it. What was actually wrong in the original was *"seven theme palettes"*: seven is the
+> guard's theme count, ten is the palette's. **Both numbers were real and they were
+> attached to the wrong things.**
+>
+> StzZui's very first estimate, *"about an hour"*, stays withdrawn.
 
-`$aPalette` holds **ten** themes, each enumerating seven roles, so adding an eighth role
-takes the grid from **70 cells to 80**, each needing 4.5:1 in every theme (Rule 62, bound
-to `StzIsLegible`). StzZui's first estimate of *"about an hour"* is withdrawn.
-**A careful half-session**, and that figure is now the only one in this document that has
-not been measured — treat it as the loosest claim here.
+Adding the role means **80 palette cells** where there are now 70, and the CI contrast
+sweep going **42 → 49** pairs, each needing 4.5:1 in every theme (Rule 62, bound to
+`StzIsLegible`).
+
+**A careful half-session** — and that remains the one figure here nobody has measured, so
+treat it as the loosest claim in this document. The graphics session's own number beats it.
 
 **2 · Say what the visual channel renders for each of the five.** This is the part the
 keystone is waiting on, and it is smaller than the first: a statement, per value, of
