@@ -1,0 +1,10 @@
+// The lawful twin, differing in one word. Archiving can be taken back, so the
+// promise is reversible and the UNDO is already declared.
+//
+// Expected: clean
+
+DEFINE INTERACTION archive_invoice (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO],
+  ROLE reversible
+)

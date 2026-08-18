@@ -109,6 +109,10 @@ its first clause; its second — *"no confirmation dialogs for common operations
 for irreversible system-level operations"* — has been unenforceable, because nothing in a
 declaration said which kind of act it was.
 
+> **BUILT 2026-08-18, and building changed this table.** Two of the six proposed checks
+> were **withdrawn as unbuildable**, one was added, and one discovery outranks all of them.
+> The table below is the design as proposed; §3.1 records what survived contact.
+
 | check | fires when | enforces |
 |---|---|---|
 | `ROLE_AFFORDANCE_LIE` | an `inert` role carries an action affordance | 16, 119 |
@@ -117,6 +121,49 @@ declaration said which kind of act it was.
 | `IRREVERSIBLE_CLAIMS_UNDO` | an `irreversible` role declares `UNDO` | **79** — a promise the surface cannot keep |
 | `PROPOSAL_COMMITS` | a `proposal` role satisfies `ACT` without a named `ACTOR` | **98**, 83 |
 | `ROLE_VARIES` | the same control name carries two roles in one file | **83** — *"same action, same consequence"* |
+
+### 3.1 What survived contact — and one thing nobody predicted
+
+**`CONFIRM_ON_REVERSIBLE` is withdrawn, and it was §3's headline.** It cannot be built,
+because it contradicts `SELECT_ACT_COLLAPSE`: a declaration holding `SELECT` and `ACT`
+**must** hold `CONFIRM` to be lawful, so a reversible selection flow would have had no
+lawful configuration at all. The deeper reason is that **the declaration cannot see the
+defect**: `CONFIRM` in `SATISFIES` means *the operator confirms*, which covers both a review
+step and Rule 79's forbidden modal — and those are the same declaration with two renderings.
+**Rule 79's dialog clause is a fact about a rendering, not about a declaration**, so it
+belongs to the audit rather than to this court. Recorded rather than quietly dropped,
+because §3 called it *"the one that pays for the stratum"* and that claim was wrong.
+
+**`ROLE_VARIES` is withdrawn as unreachable.** `DUPLICATE_DECLARATION` already refuses two
+declarations sharing a kind and a name, so one `INTERACTION` name cannot carry two roles in
+one file. The check could never fire.
+
+**`IRREVERSIBLE_WITHOUT_CONFIRM` is withdrawn as over-reach.** Rule 79 *reserves*
+confirmation for irreversible operations; it does not *require* it. Reserving a tool for a
+case is not obliging its use, and reading it as an obligation would legislate past the rule.
+
+**`ROLE_MISPLACED` was added while building** — `ROLE` on a `SCREEN` would otherwise be
+ignored in silence, which is what `TONE` and `PERSPECTIVE` do today when they land on the
+wrong kind. **That silence is a gap in those two, not a precedent worth copying.**
+
+**And the discovery that outranks the whole table:**
+
+> **`ROLE irreversible` is Rule 79's escape clause, made expressible for the first time.**
+
+The action family's invariant has always read *"every act has a reachable undo, **or
+declares why it cannot**"*, and `VIOLATIONS.md` has always said a genuinely irreversible
+declaration must say so explicitly rather than stay silent. **The language had no way to say
+it.** So the second half of that invariant was prose the grammar could not carry, and the
+only way past `MISSING_UNDO` was to promise an `UNDO` that could not be honoured — the exact
+lie `IRREVERSIBLE_CLAIMS_UNDO` now refuses.
+
+`MISSING_UNDO` therefore does not fire on a declaration carrying `ROLE irreversible`. This
+is **not an exemption added to make a fixture pass**; it is an invariant that has been in
+the law since v1 finally having a form. The pair now partitions the space cleanly: *keep the
+undo, or say plainly that you cannot.* **Silence is still refused.**
+
+That was not predicted in §3 and is the strongest argument for the stratum — stronger than
+the one §3 offered and then lost.
 
 **`CONFIRM_ON_REVERSIBLE` is the one that pays for the stratum**, and it is worth being
 concrete about why. Rule 79 already forbids the confirmation dialog on a common operation.

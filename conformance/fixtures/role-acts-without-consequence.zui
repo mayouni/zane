@@ -1,0 +1,20 @@
+// Rule 119's card, at declaration level. A KPI card informs; it is the
+// read-only indicator the rule describes, with no call to action inside it.
+//
+// This one declares that it acts. The promise and the intent contradict each
+// other, and the operator is left to poke the interface to learn which is true
+// -- which is Rule 119's own reason: an interface learned by poking is an
+// interface that was never read.
+//
+// Expected: ROLE_ACTS_WITHOUT_CONSEQUENCE
+
+DEFINE INTERACTION revenue_card (
+  SATISFIES [READ],
+  ROLE inert
+)
+
+DEFINE INTERACTION overdue_card (
+  SATISFIES [SCAN, ACT],
+  ALWAYS_REACHABLE [UNDO],
+  ROLE inert
+)

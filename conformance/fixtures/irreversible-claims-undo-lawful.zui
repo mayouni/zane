@@ -1,0 +1,12 @@
+// The lawful twin: the same act, honest about itself. UNDO is dropped because
+// it cannot be honoured; CANCEL stays, because abandoning before committing is
+// a different right and this act can still be abandoned.
+//
+// Expected: clean
+
+DEFINE INTERACTION purge_archive (
+  SATISFIES [ACT, CONFIRM],
+  ALWAYS_REACHABLE [CANCEL],
+  ROLE irreversible,
+  ACTOR administrator
+)

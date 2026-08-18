@@ -39,7 +39,7 @@ const REF_LIST_KEYS = new Set([
   'INTENT_FLOWS', 'STEPS', 'REPORTS', 'SUPPRESSES', 'SIGNALS'
 ]);
 const KV_KEYS = new Set([
-  'INTENT_FLOW', 'PERSPECTIVE', 'TONE', 'SURFACE_AS', 'DENSITY', 'MOTION', 'ACTOR'
+  'INTENT_FLOW', 'PERSPECTIVE', 'TONE', 'SURFACE_AS', 'DENSITY', 'MOTION', 'ACTOR', 'ROLE'
 ]);
 
 const PERSPECTIVES = new Set(['top_down', 'isometric', 'first_person', 'side_scroll']);
@@ -72,7 +72,26 @@ const SIGNAL_ABSENCE = {
    reason the expression strata are intent's refinement rather than a second
    language beside it. SIGNALS is the first; ROLE, MOTION, MESSAGE and TEMPO join
    this set as their grammars land. */
-const EXPRESSION_KEYS = ['SIGNALS'];
+const EXPRESSION_KEYS = ['SIGNALS', 'ROLE'];
+
+/* The ROLE stratum: what happens when the operator acts. Five values, each
+   extracted from a rule that legislates CONSEQUENCE -- never from Set 13, which
+   prescribes widgets and would have delivered `card | button | table`, defeating
+   the WIDGET exclusion by spelling. See doc/ROLE-DESIGN.md.
+
+     inert         informs; acting on it does nothing        Rules 119, 16
+     navigate      changes what is shown, never what is true Rule 112
+     reversible    changes what is true, and can be undone   Rule 79
+     irreversible  changes what is true, and cannot          Rule 79
+     proposal      commits nothing until an authority accepts Rule 98
+
+   Nothing here names a widget: a reversible role may be a button, a swipe, a
+   spoken command or a physical switch, and the promise is the same. */
+const ROLES = new Set(['inert', 'navigate', 'reversible', 'irreversible', 'proposal']);
+
+/* A role is per-control, and INTERACTION is the only declaration that means
+   "an act bound to an object" -- a control's referent without being a widget. */
+const ROLE_HOST = 'INTERACTION';
 
 /* The medium a VIBE projects to. Closed, like the verbs and the two
    enumerations above -- a new medium is a language change, not an
@@ -409,7 +428,13 @@ function check(decls, symbols) {
     if (satisfies.has('READ') && acts) {
       add('READ_ACT_COLLAPSE', line, label);
     }
-    if (acts && !reachable.has('UNDO')) {
+    /* Rule 79's invariant is "every act has a reachable undo, OR DECLARES WHY IT
+       CANNOT", and VIOLATIONS.md has always said a genuinely irreversible
+       declaration must say so explicitly rather than stay silent. Until ROLE
+       existed the language had no way to say it, so the escape clause was prose
+       and the only way past this check was to promise an UNDO that could not be
+       honoured. `ROLE irreversible` IS the declaration the rule asks for. */
+    if (acts && !reachable.has('UNDO') && valueOf(decl, 'ROLE') !== 'irreversible') {
       add('MISSING_UNDO', line, label);
     }
     if (FLOW_KINDS.has(kind) && acts && !reachable.has('CANCEL')) {
@@ -424,6 +449,44 @@ function check(decls, symbols) {
     if (kind === 'WORLD_VIEW') {
       const persp = valueOf(decl, 'PERSPECTIVE');
       if (persp !== null && !PERSPECTIVES.has(persp)) add('INVALID_PERSPECTIVE', line, `${persp} on ${label}`);
+    }
+
+    /* -- ROLE: the promise a control makes ------------------------------
+          Each check below is a promise the declaration cannot keep. None of
+          them reads a widget, and none of them fires on a declaration that
+          carries no ROLE -- which is the stratum's known weakness, recorded
+          in doc/ROLE-DESIGN.md rather than papered over. */
+    {
+      const role = valueOf(decl, 'ROLE');
+      if (role !== null) {
+        const roleLine = (decl.fieldIndex.get('ROLE') || { line }).line;
+
+        if (!ROLES.has(role)) {
+          add('UNKNOWN_ROLE', roleLine, `${role} on ${label}`);
+        } else if (kind !== ROLE_HOST) {
+          /* Silently ignoring a misplaced enum is what TONE and PERSPECTIVE do
+             today, and it is a gap: a field that does nothing where it sits
+             reads as a declaration that was honoured. */
+          add('ROLE_MISPLACED', roleLine, `ROLE on ${kind} ${label}; a role belongs to an ${ROLE_HOST}`);
+        } else {
+          if ((role === 'inert' || role === 'navigate') && acts) {
+            add('ROLE_ACTS_WITHOUT_CONSEQUENCE', roleLine, `${role} ${label} satisfies ACT`);
+          }
+          /* MISSING_UNDO already covers "satisfies ACT, keeps no UNDO" and cites
+             the same rule. Firing both would report one defect twice, so this
+             takes only the case MISSING_UNDO cannot see: a control that promises
+             reversibility without declaring that it acts at all. */
+          if (role === 'reversible' && !reachable.has('UNDO') && !acts) {
+            add('ROLE_PROMISE_BROKEN', roleLine, `reversible ${label} keeps no reachable UNDO`);
+          }
+          if (role === 'irreversible' && (reachable.has('UNDO') || satisfies.has('UNDO'))) {
+            add('IRREVERSIBLE_CLAIMS_UNDO', roleLine, `irreversible ${label} declares UNDO`);
+          }
+          if (role === 'proposal' && acts && valueOf(decl, 'ACTOR') === null) {
+            add('PROPOSAL_COMMITS', roleLine, `proposal ${label} acts and names no ACTOR`);
+          }
+        }
+      }
     }
 
     if (kind === 'FEEDBACK') {

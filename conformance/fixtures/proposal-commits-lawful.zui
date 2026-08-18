@@ -1,0 +1,11 @@
+// The lawful twin, differing by one field. The authority that turns the
+// proposal into a commit is named, so the act has someone standing behind it.
+//
+// Expected: clean
+
+DEFINE INTERACTION suggest_reconciliation (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  ROLE proposal,
+  ACTOR accountant
+)

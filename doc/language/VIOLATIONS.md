@@ -160,7 +160,7 @@ Fear · forbidden pattern `layout-shift`.
 
 ## 4. Grammar and reference diagnostics
 
-Beyond the ten, a conforming implementation raises these **fifteen**. The four marked ✅
+Beyond the ten, a conforming implementation raises these **twenty-one**. The four marked ✅
 ship in the reference implementation today, under the codes shown.
 
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
@@ -180,12 +180,38 @@ ship in the reference implementation today, under the codes shown.
 | `UNKNOWN_SIGNAL` | error | 1 | a value in `SIGNALS` is not one of Rule 118's five | ❌ |
 | `EXPRESSION_ORPHAN` | error | 2 | an expression field on a declaration that satisfies no intent | ❌ |
 | `SIGNAL_UNPERCEIVABLE` | error | 2 | every status a surface declares renders as absence in the medium it declared | ❌ |
+| `UNKNOWN_ROLE` | error | 1 | a `ROLE` value is not one of the five promises | ❌ |
+| `ROLE_MISPLACED` | error | 2 | `ROLE` declared on a kind that is not an `INTERACTION` | ❌ |
+| `ROLE_ACTS_WITHOUT_CONSEQUENCE` | error | 2 | an `inert` or `navigate` control declares that it acts | ❌ |
+| `ROLE_PROMISE_BROKEN` | error | 2 | a `reversible` control keeps no reachable `UNDO` | ❌ |
+| `IRREVERSIBLE_CLAIMS_UNDO` | error | 2 | an `irreversible` control declares an `UNDO` it cannot honour | ❌ |
+| `PROPOSAL_COMMITS` | error | 2 | a `proposal` acts without naming the authority that accepted it | ❌ |
 
-**The last five are `zui`-verifier-only**, and the ❌ column means the *reference
+**The last eleven are `zui`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
 ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with
 the first expression stratum.
+
+### `ROLE` gives Rule 79's escape clause its first expressible form
+
+The action family's invariant reads *"every act has a reachable undo, **or declares why it
+cannot**"*, and §3 has always said a genuinely irreversible declaration **must say so
+explicitly rather than stay silent**. Until `ROLE` existed **the language had no way to say
+it**, so the escape clause was prose the grammar could not carry, and the only way past
+`MISSING_UNDO` was to promise an `UNDO` that could not be honoured.
+
+**`ROLE irreversible` is the declaration the rule asks for**, so `MISSING_UNDO` does not
+fire on a declaration carrying it. This is not an exemption bolted on to make a fixture
+pass — it is the second half of an invariant that has been in the law since v1 with nothing
+able to express it. The pair `IRREVERSIBLE_CLAIMS_UNDO` and `MISSING_UNDO` now partition
+the space: **promise the undo and keep it, or say plainly that you cannot.** Silence is
+still refused.
+
+`ROLE_PROMISE_BROKEN` is scoped away from `MISSING_UNDO` for the same reason — it fires
+only where `MISSING_UNDO` cannot see, on a control promising reversibility without
+declaring that it acts at all. **Two diagnostics for one defect is noise**, and the first
+draft of these checks produced exactly that.
 
 **`SIGNAL_UNPERCEIVABLE` is the first diagnostic that needs two axes**, and therefore the
 first evidence that closing `SURFACE_AS` bought a *check* rather than a taxonomy. Declaring

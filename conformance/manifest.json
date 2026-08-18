@@ -26,7 +26,9 @@
     {
       "file": "select-act-collapse.zui",
       "level": 2,
-      "expect_ids": ["SELECT_ACT_COLLAPSE"]
+      "expect_ids": [
+        "SELECT_ACT_COLLAPSE"
+      ]
     },
     {
       "file": "select-act-lawful.zui",
@@ -37,7 +39,9 @@
     {
       "file": "read-act-collapse.zui",
       "level": 2,
-      "expect_ids": ["READ_ACT_COLLAPSE"]
+      "expect_ids": [
+        "READ_ACT_COLLAPSE"
+      ]
     },
     {
       "file": "read-act-lawful.zui",
@@ -48,7 +52,9 @@
     {
       "file": "missing-undo.zui",
       "level": 2,
-      "expect_ids": ["MISSING_UNDO"]
+      "expect_ids": [
+        "MISSING_UNDO"
+      ]
     },
     {
       "file": "missing-undo-lawful.zui",
@@ -58,7 +64,9 @@
     {
       "file": "missing-cancel.zui",
       "level": 2,
-      "expect_ids": ["MISSING_CANCEL"]
+      "expect_ids": [
+        "MISSING_CANCEL"
+      ]
     },
     {
       "file": "missing-cancel-lawful.zui",
@@ -68,7 +76,9 @@
     {
       "file": "trapped-flow.zui",
       "level": 2,
-      "expect_ids": ["TRAPPED_FLOW"],
+      "expect_ids": [
+        "TRAPPED_FLOW"
+      ],
       "note": "Scope test: the same omission on a single-surface INTENT_FLOW is not a violation."
     },
     {
@@ -79,7 +89,9 @@
     {
       "file": "decorative-animation.zui",
       "level": 2,
-      "expect_ids": ["DECORATIVE_ANIMATION"]
+      "expect_ids": [
+        "DECORATIVE_ANIMATION"
+      ]
     },
     {
       "file": "decorative-animation-lawful.zui",
@@ -89,24 +101,32 @@
     {
       "file": "unknown-intent.zui",
       "level": 1,
-      "expect_ids": ["UNKNOWN_INTENT"],
+      "expect_ids": [
+        "UNKNOWN_INTENT"
+      ],
       "note": "NAVIGATE. The defect the reference implementation's own declaration commits today."
     },
     {
       "file": "unspecified-declaration.zui",
       "level": 1,
-      "expect_ids": ["UNSPECIFIED_DECLARATION"],
+      "expect_ids": [
+        "UNSPECIFIED_DECLARATION"
+      ],
       "note": "WIDGET. An implementation that defines WIDGET reports nothing here and is an extension, not a failure -- see conformance/README.md."
     },
     {
       "file": "duplicate-field.zui",
       "level": 1,
-      "expect_ids": ["DUPLICATE_FIELD"]
+      "expect_ids": [
+        "DUPLICATE_FIELD"
+      ]
     },
     {
       "file": "duplicate-declaration.zui",
       "level": 1,
-      "expect_ids": ["DUPLICATE_DECLARATION"]
+      "expect_ids": [
+        "DUPLICATE_DECLARATION"
+      ]
     },
     {
       "file": "comments-and-formatting.zui",
@@ -117,32 +137,47 @@
     {
       "file": "intent-flow-no-satisfies.zui",
       "level": 2,
-      "expect_ids": ["INTENT_FLOW_NO_SATISFIES"]
+      "expect_ids": [
+        "INTENT_FLOW_NO_SATISFIES"
+      ]
     },
     {
       "file": "invalid-perspective.zui",
       "level": 2,
-      "expect_ids": ["INVALID_PERSPECTIVE"]
+      "expect_ids": [
+        "INVALID_PERSPECTIVE"
+      ]
     },
     {
       "file": "invalid-tone.zui",
       "level": 2,
-      "expect_ids": ["INVALID_TONE"]
+      "expect_ids": [
+        "INVALID_TONE"
+      ]
     },
     {
       "file": "unresolved-intent-flow.zui",
       "level": 2,
-      "expect_ids": ["UNRESOLVED_INTENT_FLOW"]
+      "expect_ids": [
+        "UNRESOLVED_INTENT_FLOW"
+      ]
     },
     {
       "file": "vibe-strips-right.zui",
       "level": 2,
-      "expect_ids": ["VIBE_STRIPS_RIGHT"]
+      "expect_ids": [
+        "VIBE_STRIPS_RIGHT"
+      ]
     },
     {
       "file": "multiple-violations.zui",
       "level": 2,
-      "expect_ids": ["SELECT_ACT_COLLAPSE", "MISSING_UNDO", "TRAPPED_FLOW", "DECORATIVE_ANIMATION"],
+      "expect_ids": [
+        "SELECT_ACT_COLLAPSE",
+        "MISSING_UNDO",
+        "TRAPPED_FLOW",
+        "DECORATIVE_ANIMATION"
+      ],
       "note": "An implementation must report every independent failure, not stop at the first."
     },
     {
@@ -154,39 +189,62 @@
     {
       "file": "intent-orphan.zui",
       "level": 3,
-      "expect_ids": ["INTENT_ORPHAN"],
+      "expect_ids": [
+        "INTENT_ORPHAN"
+      ],
       "symbols": {
-        "elements": ["balance_card", "export_button"]
+        "elements": [
+          "balance_card",
+          "export_button"
+        ]
       }
     },
     {
       "file": "invisible-state.zui",
       "level": 3,
-      "expect_ids": ["INVISIBLE_STATE"],
+      "expect_ids": [
+        "INVISIBLE_STATE"
+      ],
       "symbols": {
-        "state": ["active_filter", "pending_drafts"]
+        "state": [
+          "active_filter",
+          "pending_drafts"
+        ]
       }
     },
     {
       "file": "hidden-authority.zui",
       "level": 3,
-      "expect_ids": ["HIDDEN_AUTHORITY"],
+      "expect_ids": [
+        "HIDDEN_AUTHORITY"
+      ],
       "symbols": {
-        "actors": ["accountant", "auditor"]
+        "actors": [
+          "accountant",
+          "auditor"
+        ]
       }
     },
     {
       "file": "unresolved-entity.zui",
       "level": 3,
-      "expect_ids": ["UNRESOLVED_ENTITY"],
+      "expect_ids": [
+        "UNRESOLVED_ENTITY"
+      ],
       "symbols": {
-        "entities": ["table", "order", "server"]
+        "entities": [
+          "table",
+          "order",
+          "server"
+        ]
       }
     },
     {
       "file": "unknown-medium.zui",
       "level": 2,
-      "expect_ids": ["UNKNOWN_MEDIUM"],
+      "expect_ids": [
+        "UNKNOWN_MEDIUM"
+      ],
       "note": "SURFACE_AS was an unenumerated identifier until the medium axis closed it -- any word passed, so the field was a comment rather than a contract."
     },
     {
@@ -198,7 +256,9 @@
     {
       "file": "verb-not-carried.zui",
       "level": 2,
-      "expect_ids": ["VERB_NOT_CARRIED"],
+      "expect_ids": [
+        "VERB_NOT_CARRIED"
+      ],
       "note": "Print is immutable and has no time, so ACT is absent from it. ALWAYS_REACHABLE keeps the reversibility checks quiet so this fixture tests one thing."
     },
     {
@@ -210,7 +270,9 @@
     {
       "file": "unknown-signal.zui",
       "level": 1,
-      "expect_ids": ["UNKNOWN_SIGNAL"],
+      "expect_ids": [
+        "UNKNOWN_SIGNAL"
+      ],
       "note": "The offending word is 'critical', which is lawful in TONE and not in SIGNALS. The pair of closed vocabularies is deliberate -- MESSAGE and SIGNAL are different strata -- and this fixture exists to keep the boundary visible rather than to punish a typo."
     },
     {
@@ -222,7 +284,9 @@
     {
       "file": "expression-orphan.zui",
       "level": 2,
-      "expect_ids": ["EXPRESSION_ORPHAN"],
+      "expect_ids": [
+        "EXPRESSION_ORPHAN"
+      ],
       "note": "A surface that says how its values should be perceived and never says what the operator is doing. INTENT_ORPHAN one layer down."
     },
     {
@@ -234,7 +298,9 @@
     {
       "file": "signal-unperceivable.zui",
       "level": 2,
-      "expect_ids": ["SIGNAL_UNPERCEIVABLE"],
+      "expect_ids": [
+        "SIGNAL_UNPERCEIVABLE"
+      ],
       "note": "The first fixture that needs BOTH axes -- the signal vocabulary and the medium enumeration -- and therefore the first evidence that closing SURFACE_AS bought a check rather than a taxonomy. Two declarations, because the medium is declared on a VIBE and the signals on a screen."
     },
     {
@@ -242,6 +308,62 @@
       "level": 2,
       "expect_ids": [],
       "note": "The twin, differing by one word inside the SIGNALS list. muted still renders as silence and that is still correct; the surface now also carries a status this channel can render."
+    },
+    {
+      "file": "unknown-role.zui",
+      "level": 1,
+      "expect_ids": [
+        "UNKNOWN_ROLE"
+      ],
+      "note": "The offending word is \"destructive\", which is Rule 79 word for the ACT and deliberately not a role: the law splits that class into reversible, where one-click undo is owed, and irreversible, where confirmation is reserved. A single destructive role would collapse the distinction the rule exists to make."
+    },
+    {
+      "file": "unknown-role-lawful.zui",
+      "level": 1,
+      "expect_ids": [],
+      "note": "The twin, differing in one word."
+    },
+    {
+      "file": "irreversible-claims-undo.zui",
+      "level": 2,
+      "expect_ids": [
+        "IRREVERSIBLE_CLAIMS_UNDO"
+      ],
+      "note": "Purging is Rule 79 own example of what confirmation is RESERVED for. Offering UNDO is worse than offering none: the operator acts believing there is a way back."
+    },
+    {
+      "file": "irreversible-claims-undo-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin. UNDO is dropped because it cannot be honoured; CANCEL stays, because abandoning before committing is a different right. THIS FIXTURE ALSO PINS THE ESCAPE CLAUSE: it satisfies ACT with no UNDO and is clean, because ROLE irreversible is the declaration Rule 79 invariant asks for."
+    },
+    {
+      "file": "role-acts-without-consequence.zui",
+      "level": 2,
+      "expect_ids": [
+        "ROLE_ACTS_WITHOUT_CONSEQUENCE"
+      ],
+      "note": "Rule 119 card at declaration level: a read-only indicator that declares it acts. Two declarations, because the lawful one beside it shows the check does not fire on every card."
+    },
+    {
+      "file": "role-acts-without-consequence-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin: the second card genuinely acts, so it takes the promise that matches. Its intents and rights were correct all along."
+    },
+    {
+      "file": "proposal-commits.zui",
+      "level": 2,
+      "expect_ids": [
+        "PROPOSAL_COMMITS"
+      ],
+      "note": "Rule 98: a proposal becomes a commit only through an authority the declaration NAMES. This one acts and names nobody."
+    },
+    {
+      "file": "proposal-commits-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin, differing by one field: the authority is named."
     }
   ],
   "unfixtured": [

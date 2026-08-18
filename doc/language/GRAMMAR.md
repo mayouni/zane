@@ -59,6 +59,7 @@ ref-list-key    = "SATISFIES" | "ALWAYS_REACHABLE"
 kv-field        = kv-key value ;
 kv-key          = "INTENT_FLOW" | "PERSPECTIVE" | "TONE"
                 | "SURFACE_AS"  | "DENSITY"     | "MOTION"
+                | "ROLE"
                 | "ACTOR" ;
 value           = identifier | string | number | boolean ;
 ```

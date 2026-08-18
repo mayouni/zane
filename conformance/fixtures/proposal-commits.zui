@@ -1,0 +1,14 @@
+// Rule 98: intelligence advises, execution decides. A model's output is a
+// proposal -- reviewable, dismissible -- and becomes a commit only through an
+// authority the declaration NAMES.
+//
+// This one acts and names nobody, so the proposal has quietly become a commit
+// and there is no answer to "who did this?" when the ledger is read back.
+//
+// Expected: PROPOSAL_COMMITS
+
+DEFINE INTERACTION suggest_reconciliation (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  ROLE proposal
+)

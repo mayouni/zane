@@ -328,6 +328,84 @@
       "forbidden_patterns": [],
       "invariant": "If the system knows something important, the operator must be able to perceive it -- in the medium the surface declares.",
       "note": "Declaring muted on a silent channel is not the defect: silence is the CORRECT rendering of 'waiting, inactive', and a sound announcing inactivity is a contradiction. The defect is narrower and needs both axes -- when EVERY value a surface declares renders as absence, the surface promised a perceptible status and rendered nothing at all. The first check that needs the medium enumeration and the signal vocabulary together, which is what the medium axis was closed for. Stated over 'every declared value renders as absence' rather than over muted by name, so the next channel's data does not require a rewrite. Which values a medium renders as absence is data in signal.json, listed only for channels with a shipped renderer -- a medium absent from that table is UNDECIDED and raises nothing."
+    },
+    {
+      "id": "UNKNOWN_ROLE",
+      "severity": "error",
+      "level": 1,
+      "summary": "A ROLE value is not one of the five promises this language defines.",
+      "decidable_from": ["ROLE"],
+      "rules": [],
+      "articles": ["intent"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "A declaration may not name a widget; it may name a promise.",
+      "note": "The five are inert, navigate, reversible, irreversible and proposal, each extracted from a rule that legislates consequence. Deliberately NOT sourced from Set 13, Widget Selection, whose rules prescribe widgets -- sourcing there would have produced card, button and table, defeating the WIDGET exclusion by spelling. Reasoning in doc/ROLE-DESIGN.md."
+    },
+    {
+      "id": "ROLE_MISPLACED",
+      "severity": "error",
+      "level": 2,
+      "summary": "ROLE is declared on a kind that is not an INTERACTION.",
+      "decidable_from": ["ROLE", "kind"],
+      "rules": [],
+      "articles": ["intent"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "A role is per-control, and INTERACTION is the only declaration meaning 'an act bound to an object' -- a control's referent without being a widget. A role on a SCREEN would claim the whole surface is irreversible, which means nothing. This raises where TONE and PERSPECTIVE stay silent: both are ignored today when they appear on the wrong kind, and a field that does nothing where it sits reads as a declaration that was honoured. That silence is a gap in those two, not a precedent this one follows."
+    },
+    {
+      "id": "ROLE_ACTS_WITHOUT_CONSEQUENCE",
+      "severity": "error",
+      "level": 2,
+      "summary": "A control promising to change nothing declares that it acts.",
+      "decidable_from": ["ROLE", "SATISFIES"],
+      "rules": ["119", "112", "16"],
+      "articles": ["intent"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "Form follows role, and each widget plays exactly one.",
+      "note": "inert informs and navigate changes what is shown, never what is true -- Rule 112 lists following a link, opening a panel and switching a vibe as exactly this class. Either one satisfying ACT is a contradiction between the promise and the intent, and it is the declaration-level form of Rule 119's card that behaves like a button."
+    },
+    {
+      "id": "ROLE_PROMISE_BROKEN",
+      "severity": "error",
+      "level": 2,
+      "summary": "A reversible control keeps no reachable UNDO.",
+      "decidable_from": ["ROLE", "ALWAYS_REACHABLE"],
+      "rules": ["79"],
+      "articles": ["reversibility"],
+      "rights": ["reverse"],
+      "forbidden_patterns": [],
+      "invariant": "Every act has a reachable undo, or declares why it cannot.",
+      "note": "Rule 79 requires instant one-click undo for destructive actions, and retired Rule 33 into itself under the title 'Undo over Confirm' -- so the principle is in the law's own lineage. reversible is a promise that the change can be taken back; without UNDO in ALWAYS_REACHABLE the declaration has promised something it does not provide. SCOPED AWAY FROM MISSING_UNDO deliberately: that diagnostic already covers 'satisfies ACT and keeps no UNDO' and cites the same rule, so this one fires only where MISSING_UNDO cannot see -- a control promising reversibility without declaring that it acts at all. Two diagnostics for one defect is noise, and the first draft of this check produced exactly that."
+    },
+    {
+      "id": "IRREVERSIBLE_CLAIMS_UNDO",
+      "severity": "error",
+      "level": 2,
+      "summary": "An irreversible control declares an UNDO it cannot honour.",
+      "decidable_from": ["ROLE", "SATISFIES", "ALWAYS_REACHABLE"],
+      "rules": ["79"],
+      "articles": ["reversibility"],
+      "rights": ["reverse"],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "Rule 79 reserves confirmation for irreversible system-level operations -- purge a database, revoke credentials -- precisely because nothing can take them back. Offering UNDO on one is worse than offering none: the operator acts believing there is a way back. The mirror of ROLE_PROMISE_BROKEN, and the pair is why the vocabulary needed two values rather than one 'destructive'."
+    },
+    {
+      "id": "PROPOSAL_COMMITS",
+      "severity": "error",
+      "level": 2,
+      "summary": "A proposal acts without naming the authority that accepted it.",
+      "decidable_from": ["ROLE", "SATISFIES", "ACTOR"],
+      "rules": ["98", "83"],
+      "articles": ["authority"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "Intelligence advises; execution decides.",
+      "note": "Rule 98: a model's output is a proposal and becomes a commit only through an authority the declaration names. Overlaps HIDDEN_AUTHORITY in spirit and not in reach -- that one is level 3 and needs the actor model, this one is level 2 and decidable from the file, because the role has already said the act was advisory."
     }
   ]
 }

@@ -1,0 +1,16 @@
+// ROLE admits exactly five promises: inert, navigate, reversible,
+// irreversible, proposal. Each is a claim about what happens when the operator
+// acts, and none of them names a widget.
+//
+// 'destructive' is the word Rule 79 uses for the ACT, and it is deliberately
+// not a role: the law splits that class in two -- reversible, where one-click
+// undo is owed, and irreversible, where confirmation is reserved. A single
+// 'destructive' role would collapse the distinction the rule exists to make.
+//
+// Expected: UNKNOWN_ROLE
+
+DEFINE INTERACTION archive_invoice (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO],
+  ROLE destructive
+)

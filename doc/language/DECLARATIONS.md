@@ -122,7 +122,15 @@ A dashboard or a game world: entities in a space, seen from a stated vantage.
 
 ### `INTERACTION` — an act bound to an object
 
-How an intent is triggered against a thing.
+How an intent is triggered against a thing. **The host of `ROLE`**, because it is the only
+declaration meaning *a control's referent* without naming a widget.
+
+| Field | Type | Required | Meaning |
+|---|---|---|---|
+| `ROLE` | enum | no | the promise this control makes — `inert` · `navigate` · `reversible` · `irreversible` · `proposal`. Any other value is `UNKNOWN_ROLE`; on any other kind it is `ROLE_MISPLACED` |
+| `SATISFIES` | verb list | no | the intents this interaction serves |
+| `ALWAYS_REACHABLE` | verb list | no | intents reachable throughout it |
+| `ACTOR` | identifier | no | who performs the act — required by `PROPOSAL_COMMITS` when a `proposal` acts |
 
 ### `FEEDBACK` — what the system says back
 
@@ -163,7 +171,7 @@ DEFINE INTENT_FLOW post_ledger_entry (
 
 ## 5. Enumerations, complete
 
-**Four** fields are enumerated. Two are checked by the reference implementation today; the
+**Five** fields are enumerated. Two are checked by the reference implementation today; the
 third was closed at v1.1, when the law's Rule 82 became **Perceivable State** and a rule
 obliging perceivability *in the declared medium* needed a language that could declare one.
 The fourth arrived at v1.2 with the first expression stratum.
@@ -174,6 +182,7 @@ The fourth arrived at v1.2 with the first expression stratum.
 | `TONE` | `FEEDBACK` | `celebratory` · `cautionary` · `critical` · `neutral` · `informational` |
 | `SURFACE_AS` | `VIBE` | `visual` · `auditory` · `voice` · `haptic` · `print` · `luminous` · `signage` · `machine` · `spatial` · `terminal` |
 | `SIGNALS` | any declaration | `success` · `warning` · `danger` · `info` · `muted` |
+| `ROLE` | `INTERACTION` | `inert` · `navigate` · `reversible` · `irreversible` · `proposal` |
 
 ### 5.2 `TONE` and `SIGNALS` are two vocabularies, and that is deliberate
 

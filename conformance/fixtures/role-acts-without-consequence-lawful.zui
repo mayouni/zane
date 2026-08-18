@@ -1,0 +1,16 @@
+// The lawful twin. The second card genuinely acts, so it stops claiming to be
+// inert and takes the promise that matches what it does. Nothing else moves:
+// the intents and the right it already declared were correct all along.
+//
+// Expected: clean
+
+DEFINE INTERACTION revenue_card (
+  SATISFIES [READ],
+  ROLE inert
+)
+
+DEFINE INTERACTION overdue_card (
+  SATISFIES [SCAN, ACT],
+  ALWAYS_REACHABLE [UNDO],
+  ROLE reversible
+)

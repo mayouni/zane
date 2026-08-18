@@ -1,0 +1,15 @@
+// Purging a database is Rule 79's own example of the operation confirmation is
+// RESERVED for, precisely because nothing can take it back.
+//
+// Offering UNDO here is worse than offering none: the operator acts believing
+// there is a way back, and finds out there is not at the only moment it
+// matters. The promise and the right contradict each other.
+//
+// Expected: IRREVERSIBLE_CLAIMS_UNDO
+
+DEFINE INTERACTION purge_archive (
+  SATISFIES [ACT, CONFIRM],
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  ROLE irreversible,
+  ACTOR administrator
+)
