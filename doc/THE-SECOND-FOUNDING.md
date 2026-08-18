@@ -739,11 +739,30 @@ the author's ratification.
 | E | **Rules 3 and 118 reconciled with each other and with the engine** | Three vocabularies for five values (§2) |
 | F | **Rule 62 bound to `StzIsLegible`**, promoted off `machine-later` | The instrument exists and is CI-gated |
 
-### 7.3 Amendment proposed to the reference design
+### 7.3 Amendment to the reference design — **ADOPTED 2026-08-18**
 
-One row, **not applied here**: layer 2's *"the UI law as data (StzZui)"* becomes *"the UI
-law and the interface vocabulary as data (StzZui)"*, and §6.3's UI-pipeline horizon gains
+Proposed here, ruled by the Principal and applied in `REFERENCE_DESIGN.md` on 2026-08-18
+(`STZZUI-DESCRIPTION-WIDEN`). Layer 2's *"the UI law as data (StzZui)"* now reads **"the UI
+law and the interface vocabulary as data (StzZui)"**, and §6.3's UI-pipeline horizon gains
 the note that the expression vocabulary is the seam `.zui` and `.face` meet on.
+
+**Keep the Principal's reason, because it is stronger than the one this document gave.**
+This section argued the widening on accuracy — StzZui now publishes the medium enumeration
+and the capability matrix as data, so the old sentence undercounted it. The ruling gave a
+structural reason instead:
+
+> **A description narrower than the thing it names is how a later session assigns the
+> medium enumeration elsewhere and collapses the layering quietly.**
+
+That is a claim about failure modes rather than tidiness, and it generalises past this row:
+a layer described by less than it owns has an unclaimed remainder, and unclaimed work gets
+re-homed by whoever needs it next — without anyone deciding to move it.
+
+**Also ruled in the same sitting, and it settles a question this document left open**: the
+**medium axis is not numbered as a family contract.** Culture was numbered C8; the medium
+axis stays StzZui's, on the ground that it is **one project's vocabulary published as data,
+not a fact the foundation owes everyone.** So `conformance/media.json` is this repository's
+to keep, amend and version — which is what §6 assumed and never had confirmed.
 
 ## 8. The constitution as a living institution
 

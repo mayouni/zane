@@ -128,8 +128,24 @@ the drafting errors each pass caught in itself.
 
 ## 7. The open question: what should this standard be called from outside?
 
-**Unresolved, and deliberately not decided here**, because it commits someone to something
-outside this repository.
+**RULED 2026-08-18 by the Principal** (`STZZUI-IDENTITY-4`), and the ruling is a *trigger*
+rather than a scheme:
+
+> **The pack stays content-addressed. Buy a domain when the first outside citation is
+> asked for.**
+
+The reasoning, kept because it is the part that transfers: there is no outside consumer
+yet and the pack's hashes already verify, so nothing is unresolved in practice; **a domain
+is the cheapest upgrade and the only one that is also a standing commitment** — it must be
+renewed forever and it dies with the payment; and a DOI needs a published artifact with an
+institution behind it, which is a different decision taken at a different time.
+
+**So this is now a condition to watch, not a question to re-ask.** The condition is
+narrow and observable: *someone outside this family asks how to cite the law*. Until then
+the section below stands as the analysis behind the ruling.
+
+The URN recommendation is **not adopted** — it was offered and the ruling did not take it.
+A URN that nothing resolves is a convention, and the pack already has one that verifies.
 
 A standard other projects cite needs an identity that does not depend on one repository
 host, one company, or one person's account. `constitution/rules.json` is currently cited by
@@ -148,10 +164,11 @@ The shapes available, with the cost each carries:
 paid for. `MANIFEST.json`'s hashes identify an edition exactly, and the version numbers
 inside it say which edition a human meant.
 
-**The recommendation, offered rather than taken**: a URN namespace for citation plus
-content addressing for verification, and no domain until something outside this family
-actually needs to fetch the law over HTTP. A domain bought early is a dependency acquired
-early. **This is the author's to decide** and nothing in the pack blocks on it.
+**The recommendation as it was offered**, superseded above: a URN namespace for citation
+plus content addressing for verification, and no domain until something outside this family
+actually needs to fetch the law over HTTP. **The ruling kept the second half and declined
+the first** — content addressing plus a trigger, and no URN. *A domain bought early is a
+dependency acquired early* was the argument that survived.
 
 ## Honest boundaries
 
