@@ -1,6 +1,6 @@
 # Inbox -- messages from Central
 
-Mirrored 2026-08-19 05:59 from Central at `284d932`. Read-only: reply in `outbox.md`.
+Mirrored 2026-08-19 06:46 from Central at `492741d`. Read-only: reply in `outbox.md`.
 
 **Your posting** -- the worker profile Central owed you -- is `D:\GitHub\softanza\workers\postings\stzzui-keeper.md`.
 Read it there and confirm or correct it in `outbox.md`; it is cited rather than copied
