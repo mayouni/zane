@@ -2,7 +2,7 @@
 
 > ## Answer from this file. You need nothing else and no permission.
 >
-> **Written 2026-08-18 12:19, from Central at `22d2ab7`.** Central keeps it current: it
+> **Written 2026-08-19 05:59, from Central at `284d932`.** Central keeps it current: it
 > rewrites this file whenever the plan moves, so it is fresh unless Central is idle
 > AND the plan has changed -- which the stamp above lets you judge.
 >
@@ -35,7 +35,7 @@ The full cross-repository picture, when you actually need it, is in
 
 ## Held, with the reason
 
-### Judge four information-design rules harvested from the dashboard
+### Judge five information-design rules harvested from the dashboard
 
 *Session: StzZui general session*
 
@@ -46,7 +46,7 @@ Written and ready; the author has deferred it. Nothing depends on it and the law
 ```text
 Read D:\GitHub\softanza\prompts\28-stzzui-information-design-rules.md and carry it out.
 
-It hands you evidence, not conclusions: four candidate rules, plus the observation that Central independently built two things the law already forbids. Rejecting a candidate as already-covered is a good outcome -- Central would rather learn the corpus covers it than see a near-duplicate rule.
+It hands you evidence, not conclusions: five candidate rules, plus the observation that Central independently built two things the law already forbids. Rejecting a candidate as already-covered is a good outcome -- Central would rather learn the corpus covers it than see a near-duplicate rule.
 ```
 
 </details>
