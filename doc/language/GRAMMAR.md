@@ -1,7 +1,7 @@
 # The Zui Grammar
 
 **Normative.** Stated in EBNF for the first time — the reference implementation's specification is prose
-and tables. Part of [the Zui Language Specification v1.2](README.md).
+and tables. Part of [the Zui Language Specification v1.3](README.md).
 
 Notation: `=` defines, `|` alternates, `{ }` repeats zero or more, `[ ]` is
 optional, `" "` is a literal, `(* *)` is a comment.
@@ -163,7 +163,8 @@ DEFINE WORLD_VIEW floor_map (
 
 DEFINE INTERACTION confirm_gesture (
   SATISFIES [CONFIRM],
-  ALWAYS_REACHABLE [CANCEL]
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  ROLE reversible
 )
 
 DEFINE FEEDBACK payment_sent (

@@ -582,6 +582,45 @@ function check(decls, symbols) {
     }
   }
 
+  /* -- Level 2, file-wide: the counter-check, and it never refuses -------
+        EXPRESSION_ORPHAN catches expression declared without intent. This is
+        the other direction -- intent declared without expression -- and it is
+        the failure doc/ROLE-DESIGN.md section 4 predicted and could not see:
+        a surface with controls and no roles raises nothing, so the stratum
+        passes by silence.
+
+        ADVISORY, NOT A REFUSAL, and that is the whole design. The five values
+        have not met a real surface. Requiring a role would buy a declared role
+        rather than an accurate one -- an author who finds one INTERACTION per
+        control tedious declares one, gives it a role, and the surface passes
+        with a role that is WRONG. Invisible under-declaration would become
+        invisible mis-declaration, which is worse: it turns a silent gap into a
+        green check. So this MEASURES and does not gate, and the requirement is
+        decided later on two numbers read together -- how much under-declaration
+        there is, and whether the roles authors did declare are accurate.
+
+        FILE-WIDE and once: the ruling's subject is a SURFACE with declared
+        interactions and zero roles, not each roleless control. Counted over
+        roles on INTERACTIONs, so a ROLE sitting on the wrong kind does not
+        silence it -- that is ROLE_MISPLACED's error and not a role declared.
+
+        WHAT IT STILL CANNOT SEE, stated because the measurement will be read as
+        if it could: an author who declares no INTERACTION at all. Roles per
+        interaction is what this counts; interactions per control is the deeper
+        under-declaration, and .zui has no control primitive to count against. */
+
+  {
+    const interactions = decls.filter(d => d.kind === ROLE_HOST);
+    const roled = decls.some(d => d.kind === ROLE_HOST && d.fieldIndex.has('ROLE'));
+    if (interactions.length > 0 && !roled) {
+      out.push({
+        id: 'ROLE_UNDECLARED',
+        line: 0,
+        subject: `${interactions.length} INTERACTION${interactions.length === 1 ? '' : 's'}, no ROLE`
+      });
+    }
+  }
+
   /* -- Level 3, file-wide ---------------------------------------------- */
 
   if (symbols && Array.isArray(symbols.elements)) {

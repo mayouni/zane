@@ -1,0 +1,20 @@
+// The lawful twin, and the only thing that changed is that the promises are
+// now written down. The intents, the rights and the interactions are the ones
+// the unlawful twin already declared.
+//
+// One role is enough to silence the advisory: it reports a surface that has
+// not met the vocabulary at all, not a surface that declared some roles and
+// not others. A per-control count would be a requirement wearing a warning's
+// clothes, and requiring a role is what the Principal ruled NOT YET.
+//
+// Expected: clean
+
+DEFINE INTERACTION export_ledger (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO],
+  ROLE reversible
+)
+
+DEFINE INTERACTION open_details (
+  SATISFIES [READ]
+)

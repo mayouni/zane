@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.2",
-    "lastUpdated": "2026-08-16",
+    "version": "1.3",
+    "lastUpdated": "2026-08-20",
     "specification": "doc/language/VIOLATIONS.md",
     "constitution": "3.11",
     "note": "Every diagnostic a conforming Zui implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused."
@@ -406,6 +406,19 @@
       "forbidden_patterns": [],
       "invariant": "Intelligence advises; execution decides.",
       "note": "Rule 98: a model's output is a proposal and becomes a commit only through an authority the declaration names. Overlaps HIDDEN_AUTHORITY in spirit and not in reach -- that one is level 3 and needs the actor model, this one is level 2 and decidable from the file, because the role has already said the act was advisory."
+    },
+    {
+      "id": "ROLE_UNDECLARED",
+      "severity": "warning",
+      "level": 2,
+      "summary": "A surface declares interactions and gives none of them a role.",
+      "decidable_from": ["kind", "ROLE"],
+      "rules": [],
+      "articles": [],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "THE COUNTER-CHECK EXPRESSION_ORPHAN DOES NOT COVER, and deliberately a warning: it is REPORTED and never refuses. EXPRESSION_ORPHAN catches expression without intent; this catches the other direction, and it is the failure doc/ROLE-DESIGN.md section 4 predicted and could not see -- a surface with controls and no roles raises nothing, so the stratum passes by silence. It cites no rule because no rule is violated: nothing in the law requires a role today, and a warning that cited one would be claiming otherwise. Requiring a role was ruled NOT YET on 2026-08-19 (stz-principal LEDGER line 38) and this measurement was ruled in its place, because requiring an unproven vocabulary buys a declared role rather than an accurate one -- invisible under-declaration would become invisible mis-declaration, worse because it turns a silent gap into a green check. Fires once per file, span line 0, counted over roles on INTERACTIONs so a misplaced ROLE does not silence it. What it cannot see: an author who declares no INTERACTION at all."
     }
   ]
 }

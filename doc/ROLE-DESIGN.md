@@ -204,9 +204,39 @@ by silence. **That failure is invisible** — a surface with no roles declared r
 role for a declaration satisfying `ACT` is the question that decides whether this stratum
 has teeth, and it is not answered here.
 
+### The risk was ruled on, and the answer was a measurement — 2026-08-20
+
+**The requirement: not yet, and not refused.** The Principal ruled on 2026-08-19
+(`stz-principal/decisions/LEDGER.md` line 38) that requiring a role is **deferred to
+evidence**, and ruled the counter-check into its place. Its reason came from this document's
+own honest boundary: **the five values have not met a real surface**, so requiring an
+unproven vocabulary redirects the pressure rather than removing it. The author who finds one
+`INTERACTION` per control tedious declares one, gives it a role, and passes with a role that
+is **wrong**. *Invisible under-declaration becomes invisible mis-declaration*, which is worse
+than the gap it closes: a silent gap turned into a green check.
+
+**Built instead**: `ROLE_UNDECLARED`, severity `warning`, level 2, once per file at span
+`line: 0`, firing when a file declares at least one `INTERACTION` and no `ROLE` on any of
+them. It cites no rule, because no rule is violated. It refuses nothing — a run carrying only
+this diagnostic exits **0**. Fixtures: `role-undeclared.zui` and its lawful twin.
+
+**What decides the requirement is two numbers read together**, and neither alone: how much
+under-declaration there is, **and** whether the roles authors did declare are accurate.
+Require it if under-declaration is high *and* the declared roles are accurate. If they are
+inaccurate, **the vocabulary is wrong**, and requiring it would have entrenched the error.
+
+**The datum that has not arrived**: no `.zui` file outside this repository's fixtures has
+declared a role yet. The first real surface that does is the observation this whole question
+waits on, and the court says so in its outbox when it happens.
+
+**What the measurement still cannot see**, restated because a number invites more confidence
+than it earns: an author who declares no `INTERACTION` at all. `ROLE_UNDECLARED` counts
+*roles per interaction*. *Interactions per control* is the deeper under-declaration named at
+the top of this section, and `.zui` has no control primitive to count against — by design.
+
 ## Honest boundaries
 
-- **This is a design pass and nothing is built.** No grammar, no diagnostic, no fixture.
+- **This was a design pass and nothing was built.** No grammar, no diagnostic, no fixture. **Superseded**: the grammar, the six checks and their fixtures shipped on 2026-08-19, and `ROLE_UNDECLARED` joined them on 2026-08-20. The boundary is kept rather than deleted, because everything reasoned below it was reasoned before any of it met an implementation.
 - **§0's correction matters more than it looks.** The first version of this analysis reached
   a confident, tidy, wrong conclusion from a broken measurement, and the only reason it did
   not ship is that a control term returned an impossible zero. **Put a control in every

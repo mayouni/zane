@@ -1,6 +1,6 @@
 # Diagnostics and the Law They Enforce
 
-**Normative.** Part of [the Zui Language Specification v1.2](README.md). The
+**Normative.** Part of [the Zui Language Specification v1.3](README.md). The
 machine-readable form of this document is
 [`conformance/violations.json`](../../conformance/violations.json) — that file is
 the contract; this one explains it.
@@ -160,7 +160,7 @@ Fear · forbidden pattern `layout-shift`.
 
 ## 4. Grammar and reference diagnostics
 
-Beyond the ten, a conforming implementation raises these **twenty-one**. The four marked ✅
+Beyond the ten, a conforming implementation raises these **twenty-two**. The four marked ✅
 ship in the reference implementation today, under the codes shown.
 
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
@@ -186,8 +186,9 @@ ship in the reference implementation today, under the codes shown.
 | `ROLE_PROMISE_BROKEN` | error | 2 | a `reversible` control keeps no reachable `UNDO` | ❌ |
 | `IRREVERSIBLE_CLAIMS_UNDO` | error | 2 | an `irreversible` control declares an `UNDO` it cannot honour | ❌ |
 | `PROPOSAL_COMMITS` | error | 2 | a `proposal` acts without naming the authority that accepted it | ❌ |
+| `ROLE_UNDECLARED` | warning | 2 | a surface declares interactions and gives none of them a role | ❌ |
 
-**The last eleven are `zui`-verifier-only**, and the ❌ column means the *reference
+**The last twelve are `zui`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
 ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with
@@ -207,6 +208,38 @@ pass — it is the second half of an invariant that has been in the law since v1
 able to express it. The pair `IRREVERSIBLE_CLAIMS_UNDO` and `MISSING_UNDO` now partition
 the space: **promise the undo and keep it, or say plainly that you cannot.** Silence is
 still refused.
+
+**`ROLE_UNDECLARED` is the counter-check, and it is the only diagnostic in this
+specification that measures rather than judges.** `EXPRESSION_ORPHAN` catches expression
+declared without intent; this catches the other direction, and it is the failure
+[the design pass](../ROLE-DESIGN.md) predicted of itself: *"a surface with no roles declared
+raises nothing"*, so every role check above passes by silence on a surface that never met
+the vocabulary.
+
+**It is a warning, it cites nothing, and both of those are the point.** It cites nothing
+because **nothing in the law requires a role** -- a citation would be claiming otherwise,
+and the citation rule in [the Diagnostic Contract](../diagnostic-contract.md) exists so a
+finding that cites can be answered only by fixing the artifact or amending the law. It is a
+warning because requiring a role was ruled **not yet** on 2026-08-19, and this measurement
+was ruled in its place: requiring an unproven vocabulary buys *a declared role* rather than
+*an accurate one*. An author who finds one `INTERACTION` per control tedious declares one,
+gives it a role, and the surface passes with a role that is **wrong** -- invisible
+under-declaration becomes invisible **mis-declaration**, which is worse, because it turns a
+silent gap into a green check. The requirement is decided later on two numbers read
+together: how much under-declaration there is, **and** whether the roles authors did declare
+are accurate. If they are inaccurate the vocabulary is wrong, and requiring it would have
+entrenched the error.
+
+**One role silences it**, file-wide, span `line: 0`. It reports a surface that has not met
+the vocabulary **at all**, never a surface that roled some controls and not others: a
+per-control count would be a requirement wearing a warning's clothes. Roles are counted on
+`INTERACTION`s, so a `ROLE` sitting on the wrong kind does not silence it -- that is
+`ROLE_MISPLACED`'s error, not a role declared.
+
+**What it cannot see, stated because the number will be read as if it could**: an author who
+declares no `INTERACTION` at all. This counts *roles per interaction*; *interactions per
+control* is the deeper under-declaration, and `.zui` has no control primitive to count
+against.
 
 `ROLE_PROMISE_BROKEN` is scoped away from `MISSING_UNDO` for the same reason — it fires
 only where `MISSING_UNDO` cannot see, on a control promising reversibility without

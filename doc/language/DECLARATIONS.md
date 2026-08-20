@@ -1,6 +1,6 @@
 # The Ten Declaration Types
 
-**Normative.** Part of [the Zui Language Specification v1.2](README.md). Syntax is
+**Normative.** Part of [the Zui Language Specification v1.3](README.md). Syntax is
 in [GRAMMAR.md](GRAMMAR.md); diagnostics are in [VIOLATIONS.md](VIOLATIONS.md).
 
 ---

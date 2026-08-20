@@ -1,0 +1,21 @@
+// The counter-check EXPRESSION_ORPHAN does not cover. That one catches
+// expression declared without intent; this catches the other direction --
+// a surface that declares controls and gives none of them a promise.
+//
+// Nothing here is unlawful. Both interactions satisfy intents, both keep the
+// rights their intents owe, and no rule in the constitution requires a ROLE.
+// That is exactly why this is a WARNING and never refuses: it MEASURES
+// under-declaration so the question of requiring a role can be decided on
+// numbers, and requiring it today would buy a declared role rather than an
+// accurate one.
+//
+// Expected: ROLE_UNDECLARED, file-wide (span line 0)
+
+DEFINE INTERACTION export_ledger (
+  SATISFIES [ACT],
+  ALWAYS_REACHABLE [UNDO]
+)
+
+DEFINE INTERACTION open_details (
+  SATISFIES [READ]
+)

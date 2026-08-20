@@ -1,19 +1,32 @@
-# The Zui Language — Specification v1.2
+# The Zui Language — Specification v1.3
 
 **Status**: normative for the language; honest about implementations
-**Date**: 2026-08-06, revised 2026-08-16
+**Date**: 2026-08-06, revised 2026-08-20
 **Home**: StzZui, where the language and its constitution live
 **Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
 **Lineage.** **v1.0** (2026-08-06) the language as founded. **v1.1** closed `SURFACE_AS`
 to ten media when the law's Rule 82 became *Perceivable State*. **v1.2** (2026-08-16) adds
 `SIGNALS`, the first expression field, with `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and
-`SIGNAL_UNPERCEIVABLE`.
+`SIGNAL_UNPERCEIVABLE`. **v1.3** (2026-08-20) adds `ROLE` on `INTERACTION`,
+the second expression field, with `UNKNOWN_ROLE`, `ROLE_MISPLACED`,
+`ROLE_ACTS_WITHOUT_CONSEQUENCE`, `ROLE_PROMISE_BROKEN`, `IRREVERSIBLE_CLAIMS_UNDO` and
+`PROPOSAL_COMMITS` — and with `ROLE_UNDECLARED`, the advisory that measures how often a
+surface declares controls and no promises.
 
 > **This title said v1.0 until 2026-08-16**, through the whole of v1.1 — `DECLARATIONS.md`
 > recorded the change and the heading never moved. Noted rather than smoothed, and the
 > conformance runner now reads this heading rather than hardcoding a number, so the next
 > divergence is a failing run instead of a discovery.
+>
+> **It happened again, and the guard did not catch it.** `ROLE` and six diagnostics landed
+> after 2026-08-16 and this heading stayed at v1.2 until 2026-08-20 — recorded in
+> `DECLARATIONS.md` and in the contract, absent from the lineage above. The runner compares
+> the heading against nothing, so a heading that never moves is not a failing run; it reads
+> the number honestly and has no second source to contradict it. **What a version-drift check
+> would need is a source the number cannot be silently equal to** — the diagnostic count in
+> `violations.json`, or the lineage entries here. Not built, and named so the next lapse is a
+> known gap rather than a discovery.
 
 ---
 
