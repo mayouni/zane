@@ -296,7 +296,10 @@ likes, in whatever language its operator reads. See
 
 In **machine form**, a finding travels in the family envelope —
 `{code, severity, message, span{file,line,col}, cites[], language}` — defined by
-[the Diagnostic Contract](../diagnostic-contract.md) v1.0, which this court
-*conforms to* and does not define. The contract fixes the envelope only; the
+[the Diagnostic Contract](../diagnostic-contract.md) **v1.1**, which this court
+*conforms to* and does not define. A run of the verifier emits **one object**,
+never a top-level array, carrying its findings under the key `diagnostics` —
+the outer shape v1.1 states. **That key was `findings` until 2026-08-20**, and
+the rename is a breaking change for anything reading `zui check --json`. The contract fixes the envelope only; the
 codes, severities and bindings above remain this specification's own, cataloged
 in `conformance/violations.json`.

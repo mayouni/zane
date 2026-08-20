@@ -4,13 +4,19 @@
 
    Every diagnostic this court emits in machine form travels in the family
    envelope: {code, severity, message, span{file,line,col}, cites[], language}
-   — governed by doc/diagnostic-contract.md v1.0, validated against
+   — governed by doc/diagnostic-contract.md v1.1, validated against
    doc/diagnostic-contract.schema.json. This court CONFORMS to that contract;
    it does not define it.
 
    The schema file is the authority. validate() interprets it rather than
    restating it, so the shape and the check cannot drift apart. No
    dependencies, same as the rest of the verifier.
+
+   v1.1 added the OUTER shape -- what carries a run's diagnostics. One object
+   under the key "diagnostics", never a top-level array, because the family's
+   JSON reader returns a one-element list for a bare array and fails quietly.
+   It lives in the schema's definitions.report, so the pair of files the
+   contract versions stays a pair.
    ========================================================================== */
 
 const fs = require('fs');
@@ -56,7 +62,11 @@ function toEnvelope(finding, meta, language) {
 
 /* ---- a small validator for the subset of JSON Schema the shape uses ---- */
 
-function walk(v, s, at, out) {
+function walk(v, s, at, out, root) {
+  /* "$ref": "#" is the only reference the shape uses: definitions.report
+     pointing back at the diagnostic itself. Resolved rather than restated, so
+     the report check and the diagnostic check cannot disagree. */
+  if (s.$ref === '#' && root) { walk(v, root, at, out, root); return; }
   if (s.enum) {
     if (!s.enum.includes(v)) out.push(`${at}: ${JSON.stringify(v)} is not one of ${JSON.stringify(s.enum)}`);
     return;
@@ -65,7 +75,7 @@ function walk(v, s, at, out) {
     case 'object':
       if (typeof v !== 'object' || v === null || Array.isArray(v)) { out.push(`${at}: expected an object`); return; }
       for (const k of s.required || []) if (!(k in v)) out.push(`${at}: missing required field "${k}"`);
-      for (const [k, sub] of Object.entries(s.properties || {})) if (k in v) walk(v[k], sub, `${at}.${k}`, out);
+      for (const [k, sub] of Object.entries(s.properties || {})) if (k in v) walk(v[k], sub, `${at}.${k}`, out, root);
       if (s.additionalProperties === false) {
         for (const k of Object.keys(v)) {
           if (!(s.properties && k in s.properties)) out.push(`${at}: unexpected field "${k}"`);
@@ -74,7 +84,7 @@ function walk(v, s, at, out) {
       return;
     case 'array':
       if (!Array.isArray(v)) { out.push(`${at}: expected an array`); return; }
-      if (s.items) v.forEach((item, i) => walk(item, s.items, `${at}[${i}]`, out));
+      if (s.items) v.forEach((item, i) => walk(item, s.items, `${at}[${i}]`, out, root));
       return;
     case 'string':
       if (typeof v !== 'string') { out.push(`${at}: expected a string`); return; }
@@ -91,8 +101,22 @@ function walk(v, s, at, out) {
 /** Validate one envelope against the shape. Returns an array of problems, empty when it conforms. */
 function validate(envelope, shape, where) {
   const problems = [];
-  walk(envelope, shape, where || 'diagnostic', problems);
+  walk(envelope, shape, where || 'diagnostic', problems, shape);
   return problems;
 }
 
-module.exports = { toEnvelope, validate, loadShape, SCHEMA_PATH };
+/**
+ * Validate a whole machine-form report -- the object that CARRIES the
+ * diagnostics -- against definitions.report. A shape without that definition
+ * is a pre-v1.1 contract, and the report shape is then unspecified rather than
+ * satisfied: say so instead of passing.
+ */
+function validateReport(report, shape, where) {
+  const def = shape.definitions && shape.definitions.report;
+  if (!def) return ['report shape: the pinned contract predates v1.1 and specifies no outer shape'];
+  const problems = [];
+  walk(report, def, where || 'report', problems, shape);
+  return problems;
+}
+
+module.exports = { toEnvelope, validate, validateReport, loadShape, SCHEMA_PATH };

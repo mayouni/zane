@@ -19,7 +19,7 @@
 const fs = require('fs');
 const path = require('path');
 const { verify } = require('./zui.js');
-const { toEnvelope, validate, loadShape } = require('./envelope.js');
+const { toEnvelope, validate, validateReport, loadShape } = require('./envelope.js');
 
 const ROOT = path.join(__dirname, '..', '..');
 const CONF = path.join(ROOT, 'conformance');
@@ -134,7 +134,7 @@ function main(argv) {
 
   /* Every diagnostic this court emits must travel in the family envelope.
      Validated for every fixture run, regardless of level. */
-  let envelopes = 0;
+  let envelopes = 0, reports = 0;
   const envelopeProblems = [];
 
   for (const fx of manifest.fixtures) {
@@ -147,11 +147,27 @@ function main(argv) {
 
     const raw = verify(src, { symbols: fx.symbols || null });
 
+    const perFixture = [];
     for (const d of raw) {
       envelopes++;
       const env = toEnvelope({ ...d, file: fx.file }, metaOf.get(d.id), 'zui');
+      perFixture.push(env);
       envelopeProblems.push(...validate(env, shape, `${fx.file} · ${d.id}`));
     }
+
+    /* The OUTER shape, C2 v1.1: what carries the diagnostics is checked the same
+       way each diagnostic is. Built here in the shape cli.js --json emits -- one
+       object, the court's own outer keys beside the required one -- because an
+       outer shape nothing runs against is exactly the unspecified rule v1.1 was
+       written to close. A CLEAN fixture matters most: it proves the key is
+       present and empty rather than omitted, which is the difference between
+       "clean" and "no output" for every consumer downstream. */
+    reports++;
+    envelopeProblems.push(...validateReport(
+      { level, contract: { version: contract.metadata.version }, files: [fx.file], counts: {}, diagnostics: perFixture },
+      shape,
+      `${fx.file} · report`
+    ));
 
     /* filter to what this level can see; unknown ids are structural and always count */
     const actual = new Set(
@@ -174,7 +190,7 @@ function main(argv) {
   console.log(`\nZui conformance — level ${level}`);
   console.log(`  spec         doc/language/ v${specVersion}`);
   console.log(`  contract     violations.json v${contract.metadata.version} (constitution v${contract.metadata.constitution})`);
-  console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
+  console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics and ${reports} reports, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
   console.log(`  media        ${Object.keys(require('./zui.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
   console.log(`  catalogue    ${contract.diagnostics.length} diagnostics — ${specProblems.length ? specProblems.length + ' disagreements with VIOLATIONS.md' : 'contract agrees with VIOLATIONS.md'}`);
   console.log(`  fixtures     ${manifest.fixtures.length} total`);

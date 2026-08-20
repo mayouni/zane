@@ -183,15 +183,26 @@ function main(argv) {
   const errors = findings.filter(f => f.severity === 'error').length;
   const warnings = findings.length - errors;
 
-  /* Machine output is the family envelope — doc/diagnostic-contract.md v1.0.
-     This court conforms to that contract; it does not define it. */
+  /* Machine output is the family envelope — doc/diagnostic-contract.md v1.1.
+     This court conforms to that contract; it does not define it.
+
+     THE KEY IS "diagnostics", AND IT USED TO BE "findings". v1.1 states the
+     outer shape the contract had left unspecified: one object, never a
+     top-level array, carrying the diagnostics under that name. Two courts had
+     already chosen an object and agreed by accident; this one had chosen a
+     different key for the array inside it, which is the half of the guess the
+     accident did not cover. Renamed here rather than legislated around, so the
+     contract's normative home is not also the exception to it.
+
+     level, contract, files and counts are this court's own outer keys, which
+     v1.1 permits and which no consumer may assume of another court. */
   if (opts.json) {
     console.log(JSON.stringify({
       level: opts.level,
       contract: contract ? { version: contract.version, constitution: contract.constitution } : null,
       files: opts.files,
       counts: { errors, warnings },
-      findings: findings.map(f => toEnvelope(f, f.meta, 'zui'))
+      diagnostics: findings.map(f => toEnvelope(f, f.meta, 'zui'))
     }, null, 2));
     return errors > 0 ? 1 : 0;
   }

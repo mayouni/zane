@@ -44,6 +44,7 @@ refusal shape from one project's convention to a family contract. See
 - ✅ **[`doc/diagnostic-contract.md`](doc/diagnostic-contract.md) v1.0** — the envelope every court in the family speaks: `{code, severity, message, span{file,line,col}, cites[], language}`, with the code format, the two-rung severity ladder and the citation rule stated normatively, governed by the law's own discipline (substance test, patch component, consumers pin).
 - ✅ **[The machine-readable shape](doc/diagnostic-contract.schema.json)** beside it, so a court can validate its own output.
 - ✅ **The verifier is the first conforming implementation** — `--json` emits the envelope; the conformance runner validates every diagnostic it emits against the shape. Extracted from existing practice: no rule, no diagnostic's meaning and no verdict changed, and the suite stayed 30/30.
+- ✅ **v1.1 (2026-08-20) states the outer shape** — the machine form of a run is one object carrying `diagnostics`, never a top-level array, because the family's JSON reader returns a one-element list for a bare array and fails quietly. Measured by the RingFlex court while choosing its wire shape; two courts had already agreed by accident, and the third would have paid. **This court renamed its own key from `findings` to comply**, and the suite now validates every run's outer object as well as every diagnostic.
 
 ## The Second Founding — proposed, not ratified (2026-08-12)
 

@@ -3,7 +3,7 @@
 **Normative. Family-wide.** This is **C2** of the Softanza reference design: the
 envelope every court in the family speaks when it refuses.
 
-**Version**: **v1.0** · 2026-08-08
+**Version**: **v1.1** · 2026-08-20 (v1.0 · 2026-08-08)
 **Machine-readable shape**: [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json)
 — that file is the shape a court validates against; this one governs it.
 **Extracted from**: the zui verifier's working practice —
@@ -131,14 +131,67 @@ The lowercase identifier of the language being judged:
 field names the language, and therefore the instrument in which the cites
 resolve.
 
+### 2.7 The outer shape — what carries the diagnostics *(v1.1)*
+
+A run emits more than one diagnostic, and until v1.1 this contract said nothing
+about what carries them. **It says so now, and the reason is measured rather
+than argued.**
+
+**The machine form of a run is one JSON object. Never a top-level array.**
+
+> **The family's JSON reader cannot read a top-level array.** The `jsonlib`
+> shipped with Ring 1.27 returns a **one-element list** for a bare JSON array.
+> A court emitting its diagnostics as a top-level array therefore emits
+> something the family cannot read — and it **fails quietly**, as a list of one,
+> rather than loudly as a parse error. Found by the RingFlex court on 2026-08-19
+> while choosing its wire shape, which is the only reason it is written here
+> instead of being met a third time.
+
+The object carries them under the key **`diagnostics`**, an array of envelopes:
+
+```json
+{
+  "diagnostics": [
+    { "code": "MISSING_UNDO", "severity": "error", "…": "…" }
+  ]
+}
+```
+
+Normatively:
+
+- **The key is `diagnostics`, and it is never omitted and never null.** A clean
+  run emits `"diagnostics": []`. *Clean* and *no output* are different facts and
+  a consumer must be able to tell them apart without guessing.
+- **A court may add outer keys of its own** — the zui court adds `level`,
+  `contract`, `files` and `counts`. They are that court's, and no consumer may
+  assume them of another court. They may not replace or rename `diagnostics`.
+- **Nothing else about the outer object is specified.** Ordering, grouping by
+  file, pretty-printing: a court's own business.
+
+**Why name the key at all, rather than say only "an object".** Because §1's
+whole claim is that *one* CI gate, *one* editor plugin, *one* dashboard consume
+every court in the family. A consumer that must probe for the array's name has
+paid the context switch this contract exists to remove, and the rule would have
+delivered the half that is easy to state instead of the half that is load-bearing.
+
+**Two courts already emitted an object when this was written, and that is not
+why the rule says object.** They agreed by accident: neither had a rule to
+follow. *Agreement between two implementations is not evidence of a specified
+rule — it is evidence that two authors made the same choice, and the third is
+the one who pays.* The measured fact about the reader is the evidence; the
+agreement is only what kept it from being noticed sooner.
+
 ## 3. Conformance
 
 A court conforms to this contract when:
 
 1. every diagnostic it emits in machine form validates against
    [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json);
-2. its extension fields never collide with, replace, or alter the six;
-3. it records, in its own documentation, the contract version it pins.
+2. **its machine form is one object carrying `diagnostics`**, validating against
+   `definitions.report` in that same file *(v1.1)*;
+3. its extension fields never collide with, replace, or alter the six, and its
+   outer keys never collide with, replace, or rename `diagnostics`;
+4. it records, in its own documentation, the contract version it pins.
 
 Conformance is about the envelope alone. It says nothing about which codes a
 court defines, what its verdicts are, or how it proves them — that remains each
@@ -148,7 +201,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.0 | `--json` emits the envelope; the conformance runner validates every diagnostic of the 30-fixture suite against the shape |
+| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.1 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape |
 
 ## 4. Governance
 
@@ -172,6 +225,16 @@ mechanism:
   carry more submits the diagnostic it cannot express. Fashion is not
   admissible.
 
+**v1.0 → v1.1, and why the MINOR component moved.** The substance test asks:
+*does any envelope that validated before stop validating after — or must any
+conforming court change anything it emits?* **Yes to the second.** The six
+fields are untouched and every v1.0 diagnostic still validates unchanged, but
+v1.1 states a requirement about the machine form that a court can fail, and one
+court did: this one emitted its array under `findings` and renamed it. That is a
+substance move, not a correction, however little prose changed. **Courts pinned
+at v1.0 lose nothing by staying there** — they move by their own decision, which
+is what pinning is for.
+
 ## Honest boundaries
 
 - **One court conforms today.** The contract is family law by designation
@@ -184,6 +247,24 @@ mechanism:
   this document and is a different artifact: it catalogs *the zui court's codes*
   (severities, levels, rule bindings); this document fixes *the envelope those
   codes travel in*. Neither governs the other.
+- **The outer shape was legislated from two courts, and one of them was this
+  one.** RingFlex and this court both emitted an object; RingServ's machine form
+  **was not read** before v1.1 was written, and this document does not claim it
+  was. If RingServ carries its array under another name, the key is the part of
+  §2.7 to re-examine — not the object rule, which rests on the measured reader
+  and not on any court's practice.
+- **This court renamed itself rather than legislating its own spelling.** `zui`
+  emitted `findings` and now emits `diagnostics`, which is the contract's own
+  word for the thing throughout. **That is a breaking change for any consumer
+  reading `findings` from `zui check --json`**, announced as one, and nothing
+  inside this repository read that key. A contract's normative home choosing the
+  spelling it already had would have been the cheapest possible rule and the
+  least trustworthy.
+- **`definitions.report` is not a second file.** The contract versions exactly
+  one pair — this document and the schema — so the outer shape lives inside the
+  schema, pointing at the schema's own root for each item. A pre-v1.1 schema has
+  no such definition, and a court validating against one is told its report
+  shape is *unspecified* rather than *satisfied*.
 - **This contract moved ownership, not content.** The envelope was already the
   verifier's practice; what is new is only that the practice is versioned,
   substance-tested, and pinnable by courts that are not this one.
