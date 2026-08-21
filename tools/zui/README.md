@@ -74,7 +74,7 @@ cites less. Vendor both beside the verifier when you deploy it.
 
 Machine output (`--json`) travels in the family envelope —
 `{code, severity, message, span{file,line}, cites[], language}` — defined by
-[the Diagnostic Contract](../../doc/diagnostic-contract.md) **v1.0** (C2 of the
+[the Diagnostic Contract](../../doc/diagnostic-contract.md) **v1.1.1** (C2 of the
 Softanza reference design). This verifier is the contract's **first conforming
 implementation**: it *conforms to* the envelope, it does not define it, and the
 conformance runner validates every diagnostic it emits against
@@ -92,7 +92,7 @@ node tools/zui/conformance.js --level 4
 Zui conformance — level 4
   spec         doc/language/ v1.3
   contract     violations.json v1.3 (constitution v3.11)
-  envelope     diagnostic-contract v1.1 — 33 diagnostics and 50 reports, all conform
+  envelope     diagnostic-contract v1.1.1 — 33 diagnostics and 50 reports, all conform
   media        10 media — verifier agrees with media.json
   catalogue    32 diagnostics — contract agrees with VIOLATIONS.md
   fixtures     50 total

@@ -57,14 +57,14 @@
     {
       "file": "doc/diagnostic-contract.md",
       "role": "the refusal contract",
-      "bytes": 13117,
-      "sha256": "0cc30f27466827a7d5e2654c6f5a8d0189c22750e250fd89aaf44dbe2e9becb8"
+      "bytes": 18106,
+      "sha256": "16b1daa4fd30cc7835722b4b71c8e0878bc5bec7c83e1e1778229c74784d445d"
     },
     {
       "file": "doc/diagnostic-contract.schema.json",
       "role": "the refusal contract",
-      "bytes": 3315,
-      "sha256": "0e7933fc2d268d2767e1532d7fcf1e68594f371ec146e785e32bf8a03a36bbc3"
+      "bytes": 3705,
+      "sha256": "2d08421b4864ff5cd60d896a149778e82b7b834a62fb50561b6aa0a8d395eddf"
     },
     {
       "file": "conformance/media.json",

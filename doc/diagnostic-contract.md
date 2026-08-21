@@ -3,7 +3,7 @@
 **Normative. Family-wide.** This is **C2** of the Softanza reference design: the
 envelope every court in the family speaks when it refuses.
 
-**Version**: **v1.1** · 2026-08-20 (v1.0 · 2026-08-08)
+**Version**: **v1.1.1** · 2026-08-21 (v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
 **Machine-readable shape**: [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json)
 — that file is the shape a court validates against; this one governs it.
 **Extracted from**: the zui verifier's working practice —
@@ -131,21 +131,57 @@ The lowercase identifier of the language being judged:
 field names the language, and therefore the instrument in which the cites
 resolve.
 
-### 2.7 The outer shape — what carries the diagnostics *(v1.1)*
+### 2.7 The outer shape — what carries the diagnostics *(v1.1, justification corrected v1.1.1)*
 
 A run emits more than one diagnostic, and until v1.1 this contract said nothing
-about what carries them. **It says so now, and the reason is measured rather
-than argued.**
+about what carries them. **It says so now, and every claim under it is a
+measurement with a date, including the two this section got wrong first.**
 
 **The machine form of a run is one JSON object. Never a top-level array.**
 
-> **The family's JSON reader cannot read a top-level array.** The `jsonlib`
-> shipped with Ring 1.27 returns a **one-element list** for a bare JSON array.
-> A court emitting its diagnostics as a top-level array therefore emits
-> something the family cannot read — and it **fails quietly**, as a list of one,
-> rather than loudly as a parse error. Found by the RingFlex court on 2026-08-19
-> while choosing its wire shape, which is the only reason it is written here
-> instead of being met a third time.
+> **A Ring consumer reads a top-level array, but not at the depth it expects.**
+> Re-measured here on Ring 1.27, 2026-08-21, against a `jsonlib` claim this
+> section made too strongly at v1.1 and a correction that arrived with its own
+> two examples reversed:
+>
+> | what is decoded | `JSON2List` gives |
+> |---|---|
+> | top-level **object**, 3 members | a list of **3** — spread |
+> | top-level **array**, 3 items | a list of **1**, everything at element 1 — **wrapped** |
+> | the same array **under a key** | not wrapped; the array is the member's value |
+>
+> **Decoded shape depends on depth.** A bare array is therefore *surprising*,
+> not unreadable: a caller who expected to iterate finds one element and is one
+> `len()` call from the truth. The v1.1 wording said the family *cannot read* a
+> top-level array. **That was one degree too strong and the first person to try
+> it would have refuted it.** Found by the RingFlex court on 2026-08-19 while
+> choosing its wire shape; corrected against upstream by RingUpstream on
+> 2026-08-20; re-measured here before this paragraph was rewritten.
+
+**The encoder is worse than the decoder, and it is *not* evidence for this
+rule.** `List2JSON` emits documents `JSON2List` cannot parse — it renders a
+member as `"k": "v"` only when that member is a two-string list, and emits
+everything else bare between braces:
+
+| round-tripped through Ring 1.27 | comes back as | re-read |
+|---|---|---|
+| `["a","b"]` | `{ "a", "b" }` | **raises** |
+| `[["a","b"],["c","d"]]` | `{"a":"b","c":"d"}` | **parses — silently now an object** |
+| `{"diagnostics":[]}` | `{ "diagnostics", [ ] }` | **raises** |
+| `{"diagnostics":[{…}]}` | `{ "diagnostics", […] }` | **raises** |
+
+**Read the third and fourth rows before citing this against arrays: the C2
+object form does not survive a Ring round-trip either.** The encoder fails on
+*both* shapes, so it separates nothing and cannot argue for one over the other.
+It was offered to this court as the stronger argument for §2.7 and it is not an
+argument for §2.7 at all — it is a fact about re-emitting *any* decoded JSON
+from Ring, which no court here does. Recorded because a rule defended by
+evidence that does not discriminate is a rule waiting to be overturned by
+whoever checks.
+
+**So the jsonlib evidence for the object is the decoder alone, and it is mild.**
+The load-bearing argument is the one below it — §1's single consumer, and the
+`[]`-versus-absent distinction — neither of which depends on Ring.
 
 The object carries them under the key **`diagnostics`**, an array of envelopes:
 
@@ -167,6 +203,13 @@ Normatively:
   assume them of another court. They may not replace or rename `diagnostics`.
 - **Nothing else about the outer object is specified.** Ordering, grouping by
   file, pretty-printing: a court's own business.
+- **A court emitting a bare array is *pre-v1.1*, not broken.** This requirement
+  did not exist before 2026-08-20 and pinning is each court's own decision, so a
+  bare top-level array is a court that has not adopted v1.1 — a conformance gate
+  reading red against this section should say which of the two it found. **One
+  such court is known and named**: RingServ's `ringserv check --json` writes `[`,
+  one object per finding, `]`, verified by running the binary on 2026-08-20 on a
+  clean app and a failing one. It is pinned at v1.0 and conforms to what it pins.
 
 **Why name the key at all, rather than say only "an object".** Because §1's
 whole claim is that *one* CI gate, *one* editor plugin, *one* dashboard consume
@@ -180,6 +223,15 @@ follow. *Agreement between two implementations is not evidence of a specified
 rule — it is evidence that two authors made the same choice, and the third is
 the one who pays.* The measured fact about the reader is the evidence; the
 agreement is only what kept it from being noticed sooner.
+
+**The third court has now answered, and it is the counterexample rather than the
+confirmation.** RingServ emits a bare array — not a different key, which is what
+§2.7 was written expecting, but a shape this section forbids outright. *The
+sentence above was written as a caution and came true as a measurement within a
+day.* It changes nothing normative here: whether RingServ adopts v1.1 is
+RingServ's, reserved to it by §4 and its own `VENDOR.md`, and it has raised
+`RINGSERV-C2V11-01` to decide. **This court neither ratified that nor asked for
+it.**
 
 ## 3. Conformance
 
@@ -201,7 +253,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.1 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape |
+| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.1.1 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape |
 
 ## 4. Governance
 
@@ -235,6 +287,19 @@ substance move, not a correction, however little prose changed. **Courts pinned
 at v1.0 lose nothing by staying there** — they move by their own decision, which
 is what pinning is for.
 
+**v1.1 → v1.1.1, and why only the PATCH component moved.** The substance test asks
+the same two questions and the answer to both is **no**. Every envelope that
+validated still validates; **no conforming court must change one byte of what it
+emits**; the outer object, the key `diagnostics`, and the never-omitted empty
+array all stand exactly as written. What changed is the *justification* §2.7
+gave for itself — a jsonlib claim stated too strongly at v1.1, and a correction
+to it that arrived with its own examples reversed — plus a line naming the
+pre-v1.1 case and a table row. **A court pinned at v1.1 loses no requirement by
+staying there, and gains only a truer reason.** Recorded rather than folded in
+silently because the pair is hash-pinned: the bytes moved, so the version must
+say so, or two different editions answer to one number and the manifest is the
+only thing that knows.
+
 ## Honest boundaries
 
 - **One court conforms today.** The contract is family law by designation
@@ -248,11 +313,22 @@ is what pinning is for.
   (severities, levels, rule bindings); this document fixes *the envelope those
   codes travel in*. Neither governs the other.
 - **The outer shape was legislated from two courts, and one of them was this
-  one.** RingFlex and this court both emitted an object; RingServ's machine form
-  **was not read** before v1.1 was written, and this document does not claim it
-  was. If RingServ carries its array under another name, the key is the part of
-  §2.7 to re-examine — not the object rule, which rests on the measured reader
-  and not on any court's practice.
+  one — the third court has since answered, and it did not confirm.** RingFlex
+  and this court both emitted an object; RingServ's machine form **was not read**
+  before v1.1 was written, and this document never claimed it was. It was read on
+  2026-08-20, by running the binary: **a bare top-level array, no outer object,
+  therefore no key.** The re-examination §2.7 offered was of *the key*; what
+  arrived was a court whose whole shape the rule forbids. **The rule was not
+  softened in response** — it rests on §1's single consumer and the empty-versus-
+  absent distinction, and one non-adopting court is what pinning is for, not
+  evidence the requirement is wrong. Whether that stays true at a fourth court is
+  not something this document can claim.
+- **The jsonlib argument was overstated at v1.1 and is now the weaker half of the
+  case, deliberately left in place.** §2.7 could have been quietly re-founded on
+  the encoder defect offered to this court as the stronger argument. It was
+  measured first, and it does not hold: the encoder mangles the C2 object form
+  and the bare array alike. **An argument that does not discriminate was not
+  substituted for one that was merely mild.**
 - **This court renamed itself rather than legislating its own spelling.** `zui`
   emitted `findings` and now emits `diagnostics`, which is the contract's own
   word for the thing throughout. **That is a breaking change for any consumer

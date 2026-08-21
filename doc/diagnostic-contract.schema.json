@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "The Diagnostic Contract — the envelope",
-  "description": "C2 of the Softanza reference design: the shape of every diagnostic a conforming court emits in machine form. One object per diagnostic; the object that CARRIES them is definitions.report, added at v1.1. Prose governing this shape is doc/diagnostic-contract.md; this file is what a court validates against. Version v1.1, 2026-08-20.",
-  "version": "1.1",
+  "description": "C2 of the Softanza reference design: the shape of every diagnostic a conforming court emits in machine form. One object per diagnostic; the object that CARRIES them is definitions.report, added at v1.1. Prose governing this shape is doc/diagnostic-contract.md; this file is what a court validates against. Version v1.1.1, 2026-08-21.",
+  "version": "1.1.1",
   "type": "object",
   "required": ["code", "severity", "message", "span", "cites", "language"],
   "additionalProperties": true,
@@ -48,7 +48,7 @@
   },
   "definitions": {
     "report": {
-      "description": "The outer shape, added at v1.1: what carries a run's diagnostics. ONE OBJECT, NEVER A TOP-LEVEL ARRAY — measured, not argued: the jsonlib shipped with Ring 1.27 returns a one-element list for a bare JSON array, so a court emitting an array emits something the family cannot read, and it fails quietly. The diagnostics travel under the key \"diagnostics\", present even when empty, so clean is distinguishable from no output. A court may add outer keys of its own; the zui court adds level, contract, files and counts.",
+      "description": "The outer shape, added at v1.1: what carries a run's diagnostics. ONE OBJECT, NEVER A TOP-LEVEL ARRAY. Justification corrected at v1.1.1 and the requirement is unchanged: Ring's jsonlib DOES read a bare top-level array, it wraps it in one extra level (an object is spread, an array is wrapped, an array under a key is not), so the bare form is surprising rather than unreadable. The load-bearing argument is one consumer across every court, plus diagnostics:[] being distinguishable from absent. Do NOT cite the jsonlib encoder for this rule: it emits unparseable output for the object form too, so it discriminates nothing. See doc/diagnostic-contract.md section 2.7 for the measurements. The diagnostics travel under the key \"diagnostics\", present even when empty, so clean is distinguishable from no output. A court may add outer keys of its own; the zui court adds level, contract, files and counts.",
       "type": "object",
       "required": ["diagnostics"],
       "additionalProperties": true,
