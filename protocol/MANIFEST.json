@@ -75,8 +75,8 @@
     {
       "file": "conformance/signal.json",
       "role": "the axes",
-      "bytes": 11332,
-      "sha256": "d78d3dac05be25572f0d02da3f72638d6fc9faee0d3b46cb4157277470d42eba"
+      "bytes": 14506,
+      "sha256": "64b82ed70d143f05948ec9848cae2cb74c1d42f9bc33f5f7749e9c66ca324df3"
     },
     {
       "file": "conformance/manifest.json",

@@ -1,21 +1,55 @@
 {
   "metadata": {
     "title": "The SIGNAL Vocabulary",
-    "version": "1.1",
-    "lastUpdated": "2026-08-16",
+    "version": "1.2",
+    "lastUpdated": "2026-08-21",
     "constitution": "3.11",
     "stratum": "SIGNAL",
     "specification": "doc/THE-SECOND-FOUNDING.md section 5",
     "note": "SIGNAL is the expression stratum for a meaning bound to a perceptible quality -- colour in the visual channel, timbre in the auditory one, waveform in haptics. This file publishes the vocabulary as data for the same reason media.json exists: implementations consume it rather than read it, and two channels of one semantic system had already drifted apart before anyone could see it in a diff. EXTRACTED, NOT DESIGNED: every value and every meaning below is quoted from Rule 118, which is the law of record. Where this file records something the law does not say, it says so."
   },
-
   "families": {
     "semanticStatus": "Family one. Five values with strict meanings, closed. A status says what an operator must do about a record.",
     "neutralMetadata": "Family two. Channels, types, categories -- one quiet style for all of them, carrying no urgency. Not a sixth status."
   },
-
   "closure": "Rule 118 says the colours an interface uses to SAY SOMETHING ABOUT A RECORD split into exactly two families and no more. The five below are the whole of family one. A colour-per-entity scheme is family two's job, and adding a sixth status is a constitutional amendment, not an implementation choice. Chrome -- the resting surface, the single identity accent, the background -- is outside this closure and belongs to Rule 3. That boundary was ambiguous until v3.11 and is the reason the closure is now checkable: a finite vocabulary needs to know what it is finite OVER.",
-
+  "reference": {
+    "note": "HOW AN ARTIFACT NAMES A MEANING INSTEAD OF A VALUE. This is the half of the semantic sheet that is usable today, and it is published separately BECAUSE it is usable today: a .panel, a .face or a stylesheet can stop writing hex literals without waiting for the sheet, the culture axis, or anything else. EXTRACTED, NOT DESIGNED -- the form below is the one both stzlib channels already speak, measured in the tree on 2026-08-21.",
+    "form": "value  or  value.step",
+    "formNote": "The VALUE is shared across channels and closed at five. The STEP is the medium's own and the sets differ deliberately -- stzEarcons.ring:58 states the reason: 'a SURFACE is not a thing sound has and an ALERT is not a thing colour has. Sharing the lists would force one medium to carry the other's ideas, which is the opposite of what a semantic layer is for.' One spelling, per-channel vocabularies.",
+    "pair": {
+      "form": "On<Value>",
+      "means": "what can be READ on the value's solid -- the foreground guaranteed legible against it",
+      "note": "A distinct form rather than a step, because it names the OTHER side of a contrast pair. Rule 62 binds it: StzIsLegible against 4.5:1."
+    },
+    "steps": {
+      "visual": {
+        "set": [
+          "Surface",
+          "Border",
+          "Solid",
+          "Text"
+        ],
+        "verified": "stzlib base/graphics/stzTheme.ring StepOf(role, step), read 2026-08-21. The theme's CSS export emits every role with its four steps and its pair, so --stz-danger-surface and --stz-on-danger exist as tokens.",
+        "status": "built -- SOFTANZA_COLOR_SYSTEM.md records C1-C5 complete"
+      },
+      "auditory": {
+        "set": [
+          "cue",
+          "alert",
+          "ambient"
+        ],
+        "verified": "stzlib base/sound/stzEarcons.ring:63 StzEarconSteps(), read 2026-08-21.",
+        "status": "built"
+      }
+    },
+    "resolution": "An artifact writing danger.Surface is entitled to a colour that (a) means danger under Rule 118, (b) is that channel's Surface step, and (c) is resolved through the active theme rather than baked. It is NOT entitled to a particular hex: the same reference resolves differently per theme, and that is the whole point. A reference that cannot be resolved must REFUSE rather than fall back -- the strict resolver already behaves this way, so a typo raises instead of being quietly substituted.",
+    "whatThisIsNot": [
+      "Not the sense sheet. A sheet SERIALISES meaning-to-rendering for a whole system; this names one meaning at one site. The sheet still owes the culture axis and one document carrying two channels, and both are unbuilt.",
+      "Not a grammar. StzZui publishes the form and the vocabularies; whether .panel spells it BACKGROUND danger.Surface or otherwise is the GUI plane's own grammar decision, and this file has no standing over it.",
+      "Not a resolver. The resolution lives in the engine that owns the channel, and always did."
+    ]
+  },
   "values": [
     {
       "id": "success",
@@ -45,37 +79,58 @@
       "note": "The value that separates a state from an absence. 'Waiting' is a state the operator may need to act on; family two's neutral is the absence of semantic charge. The auditory channel learned the difference by rendering it -- muted renders as SILENCE, because a sound announcing inactivity is a contradiction."
     }
   ],
-
   "renderings": {
     "note": "What each channel binds a value to. This records what EXISTS, per channel, verified in the tree -- it is not a specification of what a channel ought to do.",
     "rendersAsAbsenceNote": "Per medium, the values that render as NOTHING AT ALL -- not quietly, nothing. A medium with no entry is UNDECIDED, not 'perceptible': only channels with a shipped renderer can say. This is what SIGNAL_UNPERCEIVABLE reads, and the verifier mirrors it; the conformance runner proves the two agree.",
     "visual": {
       "quality": "colour",
       "instrument": "stzlib graphics plane, StzThemeColor / StzSemanticColors",
-      "implements": ["success", "warning", "danger", "info"],
-      "missing": ["muted"],
+      "implements": [
+        "success",
+        "warning",
+        "danger",
+        "info"
+      ],
+      "missing": [
+        "muted"
+      ],
       "verified": "stzlib base/graph/stzDiagramColor.ring $aPalette, read 2026-08-16: every theme enumerates primary, success, warning, danger, info, neutral, background. There is no muted.",
       "note": "The engine's :Neutral is family two and its :Primary is Rule 3's identity accent -- both were ratified as such at v3.9 (docket A-5), so neither is a candidate for the missing fifth. Filed as doc/findings/graphics-semantic-colour.md."
     },
     "auditory": {
       "quality": "timbre and motif",
       "instrument": "stzlib base/sound/stzEarcons",
-      "implements": ["success", "warning", "danger", "info", "muted"],
+      "implements": [
+        "success",
+        "warning",
+        "danger",
+        "info",
+        "muted"
+      ],
       "missing": [],
-      "rendersAsAbsence": ["muted"],
+      "rendersAsAbsence": [
+        "muted"
+      ],
       "verified": "stzlib base/sound/stzEarcons.ring:56, read 2026-08-16. The absence entry is stzEarcons.ring:264, which sets LastReason to 'muted renders as silence' -- the plane's own words, discovered by building it rather than by reasoning about it.",
       "note": "The complete channel, and the younger one. It is complete BECAUSE it was written after Rule 118 and deferred to it rather than inventing a vocabulary."
     },
     "voice": {
       "quality": "word choice and prosody",
       "instrument": "stzlib base/sound, the voice face",
-      "implements": ["success", "warning", "danger", "info", "muted"],
+      "implements": [
+        "success",
+        "warning",
+        "danger",
+        "info",
+        "muted"
+      ],
       "missing": [],
-      "rendersAsAbsence": ["muted"],
+      "rendersAsAbsence": [
+        "muted"
+      ],
       "verified": "SOFTANZA_VOICE_PLAN.md:767, read 2026-08-16: ':Muted enqueues nothing, and LastReason() says why.' Correct for this channel for the same reason as auditory -- an utterance announcing inactivity is a contradiction."
     }
   },
-
   "disputed": [
     {
       "id": "absence-everywhere",
@@ -86,12 +141,10 @@
       "consequence": "rendersAsAbsence lists auditory and voice only. If 'everywhere' were right, SIGNAL_UNPERCEIVABLE would have to fire on visual too, and the colour plane's missing :Muted would be a feature rather than the gap filed on 2026-08-13. That finding stands."
     }
   ],
-
   "notLaw": [
     "SEVERITY ORDER IS NOT LAW. stzEarcons.ring:54 introduces its list as 'the five, in the law's own order of severity' and orders them danger > warning > info > success, with muted silent. The constitution states no severity order anywhere -- searched across all 122 rules for an ordering, a precedence and an outranking, 2026-08-16. The ordering is a sound-plane design decision and a defensible one; the attribution is wrong. Rule 118 lists the five as success, warning, danger, info, muted, and that is a listing, not a ranking.",
     "No rule says what happens when two values contend for the same element. The sound plane needed an answer and invented one, which is the correct order of events -- but the answer belongs in the law or in this file, not in a comment inside one channel."
   ],
-
   "settledAt": {
     "version": "3.11",
     "date": "2026-08-16",
@@ -120,7 +173,6 @@
       }
     ]
   },
-
   "honestBoundaries": [
     "This file records the SIGNAL vocabulary; it does not yet make it DECLARABLE. Nothing in the .zui grammar names a semantic value, so no diagnostic can be raised from this file today. Closing a language field is a language change and is the author's ruling to make -- the same gate SURFACE_AS passed through before media.json could be enforced.",
     "Only two of the ten media have a rendering recorded, because only two have been built. The other eight are absent rather than empty: print, luminous and signage all carry SIGNAL in principle and none has an instrument.",
