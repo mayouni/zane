@@ -3,7 +3,7 @@
 **Normative. Family-wide.** This is **C2** of the Softanza reference design: the
 envelope every court in the family speaks when it refuses.
 
-**Version**: **v1.1.1** · 2026-08-21 (v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
+**Version**: **v1.1.2** · 2026-08-21 (v1.1.1 · 2026-08-21 · v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
 **Machine-readable shape**: [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json)
 — that file is the shape a court validates against; this one governs it.
 **Extracted from**: the zui verifier's working practice —
@@ -131,7 +131,7 @@ The lowercase identifier of the language being judged:
 field names the language, and therefore the instrument in which the cites
 resolve.
 
-### 2.7 The outer shape — what carries the diagnostics *(v1.1, justification corrected v1.1.1)*
+### 2.7 The outer shape — what carries the diagnostics *(v1.1, justification corrected v1.1.1, encoder table corrected v1.1.2)*
 
 A run emits more than one diagnostic, and until v1.1 this contract said nothing
 about what carries them. **It says so now, and every claim under it is a
@@ -158,30 +158,63 @@ measurement with a date, including the two this section got wrong first.**
 > choosing its wire shape; corrected against upstream by RingUpstream on
 > 2026-08-20; re-measured here before this paragraph was rewritten.
 
-**The encoder is worse than the decoder, and it is *not* evidence for this
-rule.** `List2JSON` emits documents `JSON2List` cannot parse — it renders a
-member as `"k": "v"` only when that member is a two-string list, and emits
-everything else bare between braces:
+**The encoder collapses some lists into objects, and the trigger is one thing:**
 
-| round-tripped through Ring 1.27 | comes back as | re-read |
+> **Inside a list being rendered, `List2JSON` emits a member as `"key": value`
+> when that member is a 2-element list *whose first element is a string*.**
+> Everything else is emitted bare between braces, which is invalid at the top
+> level.
+
+That single rule accounts for every row below. **Re-measured here on Ring 1.27
+before this paragraph was rewritten**, round-tripping each document through
+`JSON2List` and back:
+
+| round-tripped through Ring 1.27 | comes back as | verdict |
 |---|---|---|
-| `["a","b"]` | `{ "a", "b" }` | **raises** |
-| `[["a","b"],["c","d"]]` | `{"a":"b","c":"d"}` | **parses — silently now an object** |
-| `{"diagnostics":[]}` | `{ "diagnostics", [ ] }` | **raises** |
-| `{"diagnostics":[{…}]}` | `{ "diagnostics", […] }` | **raises** |
+| `{"diagnostics":[]}` | `{"diagnostics": []}` | **survives** |
+| `{"diagnostics":[{"code":"E1",…}]}` | the same document | **survives** |
+| `{"span":[[12,4],[12,9]]}` | `{"span": [[12,4],[12,9]]}` | **survives — first element is a number** |
+| `{"k":["a","b"]}` | `{"k": ["a","b"]}` | **survives — the pair is the *value*, not a member** |
+| `{"m":[["line",12],["col",4]]}` | `{"m": {"line": 12,"col": 4}}` | **collapses to an object** |
+| `{"attrs":[["k","v"],["x","y"]]}` | `{"attrs": {"k": "v","x": "y"}}` | **collapses to an object** |
+| `["a","b"]` *(bare array)* | `{"a": "b"}` | **the array is silently lost** |
+| `[["a","b"],["c","d"]]` *(bare array)* | `{{"a": "b",…}}` | **double brace — raises** |
 
-**Read the third and fourth rows before citing this against arrays: the C2
-object form does not survive a Ring round-trip either.** The encoder fails on
-*both* shapes, so it separates nothing and cannot argue for one over the other.
-It was offered to this court as the stronger argument for §2.7 and it is not an
-argument for §2.7 at all — it is a fact about re-emitting *any* decoded JSON
-from Ring, which no court here does. Recorded because a rule defended by
-evidence that does not discriminate is a rule waiting to be overturned by
-whoever checks.
+**So the encoder does discriminate, and it discriminates the right way**: the C2
+object form round-trips intact, and both bare top-level arrays are damaged — one
+loudly, one silently, which is the worse of the two.
 
-**So the jsonlib evidence for the object is the decoder alone, and it is mild.**
-The load-bearing argument is the one below it — §1's single consumer, and the
-`[]`-versus-absent distinction — neither of which depends on Ring.
+**It is still not the argument for this rule.** Demoted for a better reason than
+the one first given: **no court here re-emits its own output.** The encoder
+describes what happens when *decoded* JSON is re-encoded from Ring, which is a
+thing no conforming implementation does. A rule defended by evidence about an
+operation nobody performs is a rule waiting to be overturned by whoever checks.
+
+### What this does change, for anyone designing a payload
+
+**Two practical consequences, and they point in opposite directions:**
+
+- **A span rendered `[line, col]` as numbers is safe.** The first element is a
+  number, so nothing collapses. An earlier version of this section warned about
+  spans generally; **that warning was broader than the measurement supports** and
+  is withdrawn.
+- **An attribute list of `[["k","v"], …]` pairs is not safe**, and that half
+  hardens. It silently becomes an object, and a consumer that expected a list of
+  pairs gets a map — with duplicate keys collapsed and order gone.
+
+> **A correction of method, worth more than the table.** Two sessions measured
+> this and got different answers, and neither was wrong: one measured
+> `List2JSON` on a **Ring literal**, the other measured a **round trip** through
+> `JSON2List` first. **The difference was a decode step, not a fact** — and both
+> descriptions said *"encodes to"*, so the disagreement was invisible until
+> somebody ran both. When a measurement is relayed, the operation it measured
+> travels less reliably than the number it produced.
+
+**So the jsonlib evidence for the object is the decoder alone, and it is mild** —
+not because the encoder points the other way, but because it describes an
+operation no court performs. The load-bearing argument is the one below it —
+§1's single consumer, and the `[]`-versus-absent distinction — neither of which
+depends on Ring at all.
 
 The object carries them under the key **`diagnostics`**, an array of envelopes:
 
@@ -253,7 +286,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.1.1 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape |
+| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.1.2 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape |
 
 ## 4. Governance
 
@@ -286,6 +319,18 @@ court did: this one emitted its array under `findings` and renamed it. That is a
 substance move, not a correction, however little prose changed. **Courts pinned
 at v1.0 lose nothing by staying there** — they move by their own decision, which
 is what pinning is for.
+
+**v1.1.1 → v1.1.2, PATCH again, and for the third time about the same paragraph.**
+The requirement has never moved: one object, never a top-level array, `diagnostics`
+present even when empty. What moved is §2.7's **encoder table**, which v1.1.1
+published wrong — it claimed the C2 object form is mangled by `List2JSON` and
+therefore that the encoder discriminates nothing. **It is not, and it does.** The
+error was one bracket level: `List2JSON(["diagnostics", []])` is not the shape a
+court emits, because an object with one member is a list *containing* a pair. The
+stated trigger moved too, from *"a two-string list"* to *"a 2-element list whose
+first element is a string"* — a one-word correction that **changes who is at
+risk**, since it makes `[line, col]` as numbers safe and `[["k","v"], …]` unsafe.
+No envelope stops validating and no conforming court changes a byte.
 
 **v1.1 → v1.1.1, and why only the PATCH component moved.** The substance test asks
 the same two questions and the answer to both is **no**. Every envelope that
@@ -325,10 +370,21 @@ only thing that knows.
   not something this document can claim.
 - **The jsonlib argument was overstated at v1.1 and is now the weaker half of the
   case, deliberately left in place.** §2.7 could have been quietly re-founded on
-  the encoder defect offered to this court as the stronger argument. It was
-  measured first, and it does not hold: the encoder mangles the C2 object form
-  and the bare array alike. **An argument that does not discriminate was not
-  substituted for one that was merely mild.**
+  the encoder defect offered to this court as the stronger argument. **It was
+  measured first — twice, and the first measurement was wrong.** At v1.1.1 this
+  court published that the encoder mangles the C2 object form and the bare array
+  alike, and therefore discriminated nothing. **It does discriminate**: the
+  object form round-trips intact and both bare arrays are damaged. The error was
+  one bracket level — `List2JSON(["diagnostics", []])` is not the shape a court
+  emits; an object with one member is a list *containing* a pair. Corrected at
+  v1.1.2, and the encoder stays demoted for the reason that survives both
+  measurements: **no court re-emits its own output.**
+- **The same defect twice, one layer apart, is the finding worth keeping.** v1.1
+  transcribed a relayed measurement into a rule's justification; v1.1.1 refuted
+  it and, in the same paragraph, published a second unrun measurement as the
+  correction. Both were caught by somebody running the thing. **A normative home
+  that accepts a number without the operation that produced it will keep doing
+  this**, because the number always travels and the operation does not.
 - **This court renamed itself rather than legislating its own spelling.** `zui`
   emitted `findings` and now emits `diagnostics`, which is the contract's own
   word for the thing throughout. **That is a breaking change for any consumer
