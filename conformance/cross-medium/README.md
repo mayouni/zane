@@ -39,28 +39,43 @@ vanish from the report — an agreement nobody verified, presented as an agreeme
 That bug was in the first draft of this runner and is the precise failure the instrument
 exists to make impossible.
 
-## What it says today, and it is not a pass
+## What it says today — the shipped pair is proved
 
 ```
 invoice-review.zui — visual vs print       3 undecided · 0 drift
-invoice-review.zui — visual vs auditory    4 predicted · 3 undecided · 0 drift
+invoice-review.zui — visual vs auditory    5 predicted · 0 undecided · 0 drift
 ```
+
+*(2026-08-17 to 2026-08-22 this read `4 predicted · 3 undecided` on the second
+line, and the paragraphs below explain why. The change is one datum, not one
+line of code: `signal.json` learned what the visual channel renders.)*
 
 **No drift anywhere. Five intents cross both pairs intact**, including the pair with print,
 which was put in the enumeration precisely because it is the hardest honest case — no time,
 no interaction. The four predicted differences are the auditory degradations of `SCAN`,
 `LOCATE`, `COMPARE` and `READ`, each one already written in the matrix.
 
-**And the claim is still not proved, for one reason.** Every `undecided` is the same
-finding: **`signal.json` records no rendering for the visual channel.** It records none
-because the visual channel implements four of the law's five semantic values —
-[the missing `:Muted`](../../doc/findings/graphics-semantic-colour.md), filed 2026-08-13.
+**And on `visual vs auditory` the claim is now PROVED** — *2026-08-23*. Every difference
+between the two renderings is one the published data already predicted, including the one
+that matters most: `muted` renders as a filled colour on screen and as **silence** in
+sound, and `signal.json` predicted both. **The same declaration, two channels that
+disagree about what the value looks like, and no drift.** That is the sentence the whole
+design rests on, tested on the only pair where both channels have running code.
 
-That reframes a finding that read as tidiness. **The missing value is not an untidy engine;
-it is the single thing standing between this project and proving its central claim** — and
-the pair it blocks is `visual vs auditory`, the only pair where both channels actually
-shipped, and therefore the only one where a divergence could be checked against running
-code rather than against a table.
+**What unblocked it was not this repository.** Every `undecided` on that line was the same
+finding — `signal.json` recorded no rendering for the visual channel, because that channel
+implemented four of the law's five values ([the missing `:Muted`](../../doc/findings/graphics-semantic-colour.md),
+filed 2026-08-13). The graphics plane shipped `:Muted` on 2026-08-22 and answered
+`rendersAsAbsence = []`; the datum was written here on 2026-08-23 and the pair went green
+with no change to the runner. **A finding that read as tidiness turned out to be the
+critical path, and it stayed the critical path for nine days.**
+
+**The remaining three `undecided` are `visual vs print`, and no datum closes them.**
+`signal.json` records a channel's renderings only where a renderer has shipped — a medium
+with no instrument is *undecided*, never *perceptible*, because nobody can say what an
+unbuilt channel renders. Print has no instrument. So this suite exits `1` until print gets
+one, and that is the instrument reporting honestly rather than a gap somebody forgot to
+fill. **Do not close it by writing data.**
 
 ## Adding a case
 

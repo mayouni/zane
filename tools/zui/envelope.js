@@ -12,6 +12,14 @@
    restating it, so the shape and the check cannot drift apart. No
    dependencies, same as the rest of the verifier.
 
+   v1.2.0 added ONE CONSTRAINT ON EXTENSION FIELDS: a court's own added
+   field may be anything except a bare boolean or null, because Ring's
+   jsonlib returns those three as STRINGS on a round trip and raises
+   nothing. The schema states it one level deep, which is as far as the
+   keyword reaches; scalarsThatDoNotSurvive() below enforces it at FULL
+   depth, which is as far as the defect reaches. Two mechanisms because
+   neither one alone covers the rule.
+
    v1.1 added the OUTER shape -- what carries a run's diagnostics. One object
    under the key "diagnostics", never a top-level array, because the family's
    JSON reader returns a one-element list for a bare array and fails quietly.
@@ -67,6 +75,16 @@ function walk(v, s, at, out, root) {
      pointing back at the diagnostic itself. Resolved rather than restated, so
      the report check and the diagnostic check cannot disagree. */
   if (s.$ref === '#' && root) { walk(v, root, at, out, root); return; }
+  /* "not" with a bare type list is the only negation the shape uses: v1.2.0's
+     forbidding of boolean and null extension values. Interpreted rather than
+     restated, same rule as everything else here. */
+  if (s.not && s.not.type) {
+    if (isOfType(v, s.not.type)) {
+      out.push(`${at}: ${JSON.stringify(v)} is ${[].concat(s.not.type).join(' or ')}, which the contract forbids here -- ` +
+               `the family's JSON encoder returns true, false and null as strings on a round trip`);
+    }
+    return;
+  }
   if (s.enum) {
     if (!s.enum.includes(v)) out.push(`${at}: ${JSON.stringify(v)} is not one of ${JSON.stringify(s.enum)}`);
     return;
@@ -79,6 +97,12 @@ function walk(v, s, at, out, root) {
       if (s.additionalProperties === false) {
         for (const k of Object.keys(v)) {
           if (!(s.properties && k in s.properties)) out.push(`${at}: unexpected field "${k}"`);
+        }
+      } else if (s.additionalProperties && typeof s.additionalProperties === 'object') {
+        /* v1.2.0: extras are permitted AND constrained. Every property the
+           shape does not name is checked against that subschema. */
+        for (const k of Object.keys(v)) {
+          if (!(s.properties && k in s.properties)) walk(v[k], s.additionalProperties, `${at}.${k}`, out, root);
         }
       }
       return;
@@ -98,10 +122,49 @@ function walk(v, s, at, out, root) {
   }
 }
 
+/* JSON's own type names, which are not JavaScript's: null is a type, an array
+   is not an object, and an integer is a number that happens to be whole. */
+function jsonTypeOf(v) {
+  if (v === null) return 'null';
+  if (Array.isArray(v)) return 'array';
+  if (typeof v === 'number') return Number.isInteger(v) ? 'integer' : 'number';
+  return typeof v;
+}
+
+function isOfType(v, type) {
+  const want = [].concat(type), got = jsonTypeOf(v);
+  return want.some(t => t === got || (t === 'number' && got === 'integer'));
+}
+
+/**
+ * CENTRAL-JSONSCALAR-01, enforced at full depth. Ring's jsonlib round-trips
+ * true, false and null into the strings "true", "false" and "null" -- in every
+ * position, nested or not, with no error raised. Numbers survive. So a court
+ * that emits one has emitted a document that will silently become a different
+ * document, and the consumer testing it is wrong without knowing.
+ *
+ * The schema forbids it one level deep, which is all "additionalProperties"
+ * reaches. This reaches everywhere, because the defect does.
+ */
+function scalarsThatDoNotSurvive(value, at, out) {
+  out = out || [];
+  at = at || 'document';
+  if (value === null || typeof value === 'boolean') {
+    out.push(`${at}: ${JSON.stringify(value)} does not survive a round trip through the family's ` +
+             `JSON encoder -- it returns as the string "${String(value)}". Contract v1.2.0 §2.8`);
+  } else if (Array.isArray(value)) {
+    value.forEach((item, i) => scalarsThatDoNotSurvive(item, `${at}[${i}]`, out));
+  } else if (value && typeof value === 'object') {
+    for (const [k, sub] of Object.entries(value)) scalarsThatDoNotSurvive(sub, `${at}.${k}`, out);
+  }
+  return out;
+}
+
 /** Validate one envelope against the shape. Returns an array of problems, empty when it conforms. */
 function validate(envelope, shape, where) {
   const problems = [];
   walk(envelope, shape, where || 'diagnostic', problems, shape);
+  scalarsThatDoNotSurvive(envelope, where || 'diagnostic', problems);
   return problems;
 }
 
@@ -116,7 +179,12 @@ function validateReport(report, shape, where) {
   if (!def) return ['report shape: the pinned contract predates v1.1 and specifies no outer shape'];
   const problems = [];
   walk(report, def, where || 'report', problems, shape);
+  /* Scans the diagnostics too, so a caller running both checks on one failing
+     run can see the same scalar named twice. Duplicated on failure is the
+     right side to err on; a scan that stopped at the carrier would miss the
+     nesting the schema keyword already misses. */
+  scalarsThatDoNotSurvive(report, where || 'report', problems);
   return problems;
 }
 
-module.exports = { toEnvelope, validate, validateReport, loadShape, SCHEMA_PATH };
+module.exports = { toEnvelope, validate, validateReport, loadShape, scalarsThatDoNotSurvive, SCHEMA_PATH };

@@ -444,11 +444,20 @@ it), **undecided** (the data is silent — nothing contradicted, nothing proved)
 time and no interaction. The four predicted differences are auditory's degradations of
 `SCAN`, `LOCATE`, `COMPARE` and `READ`, each already in the matrix. **The model held.**
 
-**And the claim is still not proved**, for exactly one reason: `signal.json` records no
-rendering for the **visual** channel, because that channel implements four of the law's
-five values. **The missing `:Muted` is no longer a tidiness finding** — it is the single
-thing standing between this project and proving its central claim, and it blocks precisely
-the pair where both channels shipped.
+**And the claim is PROVED on the shipped pair as of 2026-08-23.** It was not on
+2026-08-17, and the reason it was not is worth keeping: `signal.json` recorded no rendering
+for the **visual** channel, because that channel implemented four of the law's five values.
+The missing `:Muted` was never a tidiness finding — it was the critical path, it stayed on
+it for nine days, and it closed the day somebody chased it rather than the day it was
+routed. The graphics plane shipped `:Muted` on 2026-08-22 with `rendersAsAbsence = []`;
+writing that one datum here turned `visual vs auditory` into **5 predicted · 0 undecided ·
+0 drift**, with **no change to the runner**. `muted` is a filled colour on screen and
+silence in sound — two channels disagreeing about one value, and the published data
+predicting the disagreement, which is the strongest form this claim can be tested in.
+
+**`visual vs print` remains undecided, and no datum closes it**: a medium with no shipped
+renderer is *undecided*, never *perceptible*, so the suite exits `1` until print has an
+instrument. That is the instrument being honest, not a gap left unfilled.
 
 Two bugs were caught in the runner itself and both are recorded in its README: two silences
 compared equal and vanished from the report (an unverified agreement passing as a proved

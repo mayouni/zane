@@ -3,7 +3,7 @@
 **Normative. Family-wide.** This is **C2** of the Softanza reference design: the
 envelope every court in the family speaks when it refuses.
 
-**Version**: **v1.1.2** · 2026-08-21 (v1.1.1 · 2026-08-21 · v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
+**Version**: **v1.2.0** · 2026-08-23 (v1.1.2 · 2026-08-21 · v1.1.1 · 2026-08-21 · v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
 **Machine-readable shape**: [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json)
 — that file is the shape a court validates against; this one governs it.
 **Extracted from**: the zui verifier's working practice —
@@ -266,6 +266,65 @@ RingServ's, reserved to it by §4 and its own `VENDOR.md`, and it has raised
 `RINGSERV-C2V11-01` to decide. **This court neither ratified that nor asked for
 it.**
 
+### 2.8 What a value may BE — the scalar types that survive *(v1.2.0)*
+
+Every section above specifies a field's **shape**. This one specifies something
+shape cannot reach: which JSON scalar **types** a value may be at all, anywhere
+in the envelope.
+
+**The rule.** No value in the envelope or in the report that carries it, at any
+depth, may be a bare `true`, `false` or `null`. Strings, numbers, arrays and
+objects are unconstrained. This binds a court's own extension fields, which is
+where the exposure actually is — the six are strings, an integer and an array.
+
+**Measured, not reasoned.** RingFlex measured Ring's `jsonlib` on Ring 1.27 on
+2026-08-22, round-tripping through `JSON2List` then `List2JSON`:
+
+    {"k":[true,false,null,12,"a"]}  ->  {"k":["true","false","null",12,"a"]}
+    {"a":true,"b":null,"c":12}      ->  {"a":"true","b":"null","c":12}
+
+In every position — inside an array, under a key, nested. **Numbers survive.**
+The document stays valid JSON and stays a **different document**, with nothing
+raised at any point. A consumer that tests `x = true` reads the string `"true"`
+and is wrong without knowing. It is the same silence as the collapse defect in
+§2.7 and it reaches further, because it needs no particular *shape* to bite —
+only a *type*.
+
+**What this changes for a court today: nothing.** No conforming court emits a
+bare boolean; the schema declared zero boolean-typed properties before this
+section existed. That was a **field choice, not a design** — the third time this
+month that exact sentence has been the finding — and §2.8 is what turns the
+choice into a requirement, so the next hand to add a field cannot lose the
+distinction by accident.
+
+**Stated twice, and each mechanism's reach is stated with it.** A rule with one
+enforcement whose limits are unmeasured is a rule that is enforced somewhere and
+not enforced somewhere else, and nobody knows where the line is:
+
+| mechanism | where | reach |
+|---|---|---|
+| `additionalProperties: {"not": {"type": ["boolean","null"]}}` in the schema, at the root and at `definitions.report` | any court's own JSON Schema validator | **one level.** A boolean nested inside an extension object passes it |
+| `scalarsThatDoNotSurvive()` in `tools/zui/envelope.js`, wired into `validate()` and `validateReport()` | this court | **full depth**, because that is how far the defect reaches |
+
+Proved by running it: an extension field `cached: true` is refused by both, a
+nested `meta.ok: null` by the scan alone, and the 50-fixture suite — 33
+diagnostics and 50 report objects — passes clean, which is this court asserting
+about its own output what RingFlex asserts about its own document.
+
+**What this section does not do.** It does not ask anyone to fix Ring's encoder:
+that library is owned by nobody in this estate, and a contract's business is what
+its own documents may contain, not what a third party's code does. It does not
+require a court pinned at v1.1.2 to re-pin — §4 reserves that to each court —
+and a court that never emits a boolean is already conforming to §2.8 without
+knowing it.
+
+**The general rule, which is RingFlex's and outlives the instance.** *A corpus
+that varies one dimension confirms rules about that dimension.* Two sessions
+built shape corpora against this encoder over two days, both found a shape rule,
+and one of them published a shape rule that was wrong — because not one case in
+either corpus changed the **type** of anything. The single case that varied a
+type is what found this. Carried as `CENTRAL-JSONSCALAR-01`.
+
 ## 3. Conformance
 
 A court conforms to this contract when:
@@ -286,7 +345,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.1.2 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape |
+| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.2.0 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 50-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 33 diagnostics, 50 reports, clean |
 
 ## 4. Governance
 
@@ -320,6 +379,24 @@ substance move, not a correction, however little prose changed. **Courts pinned
 at v1.0 lose nothing by staying there** — they move by their own decision, which
 is what pinning is for.
 
+**v1.1.2 → v1.2.0, and why the MINOR component moved.** The substance test asks
+whether a court can newly fail. It can: §2.8 forbids a bare `true`, `false` or
+`null` anywhere in the envelope, and a court emitting one now fails a check it
+previously passed. Nothing measured emits one today, so the edition breaks no
+court that exists — but "no court fails it today" is a fact about this month, not
+a reason to call a new requirement a patch. **A version denotes exactly one pair
+of files**, and this pair states a rule the last pair did not.
+
+**And the editorial defect rides with it, rather than in place.** The v1.1.2
+bytes carried `"version": "1.1.2"` beside a description string still ending
+*Version v1.1.1, 2026-08-21* — two editions answering to one file, found by Zing
+in the act of pinning, which is what pinning is for. It could not be corrected
+*as v1.1.2*: two courts hold `sha256` of those bytes, so editing them while
+keeping the number would leave two different byte sequences both claiming to be
+v1.1.2, which is a worse defect than the one being fixed and is the one §4
+already forbids — *the bytes moved, so the version must*. **The v1.1.2 pins that
+zing and this court hold stay valid and name the same bytes they always did.**
+
 **v1.1.1 → v1.1.2, PATCH again, and for the third time about the same paragraph.**
 The requirement has never moved: one object, never a top-level array, `diagnostics`
 present even when empty. What moved is §2.7's **encoder table**, which v1.1.1
@@ -346,6 +423,15 @@ say so, or two different editions answer to one number and the manifest is the
 only thing that knows.
 
 ## Honest boundaries
+
+- **§2.8 is enforced by two mechanisms because neither one covers the rule.**
+  The schema keyword is what a *foreign* validator reads and it stops one level
+  down; the full-depth scan is this court's and no other court inherits it. So a
+  conforming court that validates only against the schema is protected against
+  the common case and not against a boolean nested inside its own extension
+  object. That gap is stated rather than closed: closing it would mean either a
+  schema keyword that draft-07 does not have, or this contract shipping code,
+  and it ships shape.
 
 - **One court conforms today.** The contract is family law by designation
   (reference design C2, ratified 2026-08-08), but it earns "family-wide" one

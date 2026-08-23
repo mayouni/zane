@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "The SIGNAL Vocabulary",
-    "version": "1.2",
-    "lastUpdated": "2026-08-21",
+    "version": "1.3",
+    "lastUpdated": "2026-08-23",
     "constitution": "3.11",
     "stratum": "SIGNAL",
     "specification": "doc/THE-SECOND-FOUNDING.md section 5",
@@ -76,7 +76,7 @@
       "id": "muted",
       "meaning": "waiting, inactive",
       "source": "Rule 118, verbatim",
-      "note": "The value that separates a state from an absence. 'Waiting' is a state the operator may need to act on; family two's neutral is the absence of semantic charge. The auditory channel learned the difference by rendering it -- muted renders as SILENCE, because a sound announcing inactivity is a contradiction."
+      "note": "The value that separates a state from an absence. 'Waiting' is a state the operator may need to act on; family two's neutral is the absence of semantic charge. The auditory channel learned the difference by rendering it -- muted renders as SILENCE, because a sound announcing inactivity is a contradiction. Both channels have now rendered it, and they rendered it OPPOSITELY -- which is the strongest form this vocabulary can be tested in. Sound learned that an earcon announcing inactivity is a contradiction; colour learned that painting nothing is not silence but the active appearance. One value, two renderings, and the difference is predicted by the MEDIUM rather than by the value."
     }
   ],
   "renderings": {
@@ -84,18 +84,30 @@
     "rendersAsAbsenceNote": "Per medium, the values that render as NOTHING AT ALL -- not quietly, nothing. A medium with no entry is UNDECIDED, not 'perceptible': only channels with a shipped renderer can say. This is what SIGNAL_UNPERCEIVABLE reads, and the verifier mirrors it; the conformance runner proves the two agree.",
     "visual": {
       "quality": "colour",
-      "instrument": "stzlib graphics plane, StzThemeColor / StzSemanticColors",
+      "instrument": "stzlib graphics plane, StzThemeColor / StzSemanticColors, and for the fifth value the muting treatment at StzMutedOf / _StzMuteHex",
       "implements": [
         "success",
         "warning",
         "danger",
-        "info"
-      ],
-      "missing": [
+        "info",
         "muted"
       ],
-      "verified": "stzlib base/graph/stzDiagramColor.ring $aPalette, read 2026-08-16: every theme enumerates primary, success, warning, danger, info, neutral, background. There is no muted.",
-      "note": "The engine's :Neutral is family two and its :Primary is Rule 3's identity accent -- both were ratified as such at v3.9 (docket A-5), so neither is a candidate for the missing fifth. Filed as doc/findings/graphics-semantic-colour.md."
+      "missing": [],
+      "verified": "stzlib libraries/stzlib/base/graph/stzDiagramColor.ring and libraries/stzlib/base/graphics/SOFTANZA_COLOR_SYSTEM.md section 3.4b, read 2026-08-23. :Muted shipped 2026-08-22: all ten theme rows of $aPalette now name a muted role and _StzMuteHex is the single mechanism behind them. The 2026-08-16 reading this entry used to carry -- 'every theme enumerates primary, success, warning, danger, info, neutral, background; there is no muted' -- was true when it was taken and is SUPERSEDED, not deleted. Read in that repository's WORKING TREE: the plane reports the work committed and held from push pending the author's review, so a reader who has only the remote does not find it yet.",
+      "note": "THE GAP FILED 2026-08-13 IS CLOSED. The engine's :Neutral is family two and its :Primary is Rule 3's identity accent -- both ratified as such at v3.9 (docket A-5), so neither was ever a candidate for the missing fifth, and the fifth arrived as itself. The finding is at doc/findings/graphics-semantic-colour.md. rendersAsAbsence = [] is the EMPTY SET STATED, which is a different fact from the key being absent: an empty array is a channel with a shipped renderer answering, an absent key is nobody having asked. SIGNAL_UNPERCEIVABLE and cross-medium.js both read that distinction.",
+      "rendersAsAbsence": [],
+      "treatment": {
+        "form": "hold the status's own hue, keep a quarter of its chroma, and let the lightness travel four tenths of the way to the ramp's Surface rung.",
+        "constants": "StzMuteChroma() = 0.25, StzMutePull() = 0.40, StzRoleStepL(:Surface) = 0.95 -- read at stzDiagramColor.ring 2026-08-23.",
+        "why": "A SINGLE GREY WAS REFUSED, and the refusal is the load-bearing half: a waiting danger and a waiting success are different facts, and one grey renders them identically. So muted is a TREATMENT of a status, and the enumerated :Muted is that same treatment applied to the one colour carrying no status -- ONE mechanism, not two definitions that drift. It also lands distinguishable from family two's :Neutral, which a chroma-only mute could not have achieved: grey has no chroma to remove, so it is the lightness travel that separates them.",
+        "source": "The graphics plane's own reasoning, carried by Central 2026-08-22 17:26 and then found in the tree at the paths above rather than taken on the relay."
+      },
+      "themeCollapse": {
+        "claim": "A THEME CAN COLLAPSE THIS CHANNEL WITHOUT THE CHANNEL LACKING THE VALUE. The graphics plane names neutral, print and lightgray as three of the ten themes that 'paint every role white by construction and distinguish by outline alone', and its instruction to any consumer is to DERIVE A GUARD'S EXEMPTION FROM THAT FACT, never from a list of theme names.",
+        "predicate": "The derived exemption: in theme T, two values are indistinguishable when their RESOLVED colours are not separated by a stated threshold. Not a theme name -- and, the sharper half, not token identity either, because two different tokens can resolve indistinguishably and a guard comparing tokens would report them distinct.",
+        "measured": "This file read $aPalette rather than the summary, and the name list and the fact do not have the same extension. print is the ONLY row of the ten giving every family-one status the same token -- primary, success, warning, danger, info and neutral are all 'white'. neutral keeps success=green, warning=orange, danger=red and collapses only primary, info and neutral into white. lightgray separates success, warning, danger and info by lightness (gray--, gray-, gray++, gray+) and collapses only primary and neutral. In all three, muted is a DIFFERENT token, 'white.muted' -- so by identity it collapses in none of them, while by measurement it collapses in all three: the plane's own constants put white.muted at lightness 1.00 + (0.95 - 1.00) x 0.40 = 0.98 against white's 1.00, two hundredths of the range, which no legibility threshold calls distinct. COMPUTED FROM THE CONSTANTS, NOT EXECUTED -- this session ran no Ring, and a run is what would settle it.",
+        "consequence": "Nothing in the data above moves because of it: rendersAsAbsence is a CHANNEL fact and this file has no theme axis. It is recorded because the boundary is the part a relay usually loses, and because performing the derivation the plane asked for does not reproduce the summary it came from. Reported back to the graphics plane through Central 2026-08-23. This file has no standing to amend their document and did not."
+      }
     },
     "auditory": {
       "quality": "timbre and motif",
@@ -138,7 +150,14 @@
       "where": "stzlib SOFTANZA_VOICE_PLAN.md:1165, and the same sentence at :767 as 'muted renders as silence, in every channel'",
       "position": "StzZui accepts it for auditory and voice and REJECTS it for visual. Rule 118 is titled Two Families of COLOUR and family one is five values including muted, so the law says a muted colour exists. In practice it is the greyed row of a queue -- which is how an operator tells waiting from active at a glance, and painting nothing would make the two indistinguishable, which is Rule 82.",
       "evidenceCorrection": "The plane cites StzColorToNumber(:Muted) as refusing 'by name', which would make the absence deliberate. It does not. Read 2026-08-16: the function hands any non-hex token to StzTryResolveColor and raises a generic 'is not a colour' for anything unresolved -- the same path that refuses a typo. The refusal is incidental, not designed, so it is evidence that the visual channel LACKS muted, not that it declines it.",
-      "consequence": "rendersAsAbsence lists auditory and voice only. If 'everywhere' were right, SIGNAL_UNPERCEIVABLE would have to fire on visual too, and the colour plane's missing :Muted would be a feature rather than the gap filed on 2026-08-13. That finding stands."
+      "consequence": "rendersAsAbsence lists auditory and voice only. If 'everywhere' were right, SIGNAL_UNPERCEIVABLE would have to fire on visual too, and the colour plane's missing :Muted would be a feature rather than the gap filed on 2026-08-13. That finding stands.",
+      "resolved": {
+        "date": "2026-08-22",
+        "by": "the graphics plane, routed as STZZUI-MUTEDCOLOUR-1 and carried by Central 2026-08-22 17:26",
+        "outcome": "StzZui's split reading is UPHELD IN BOTH HALVES, and by the channel that would have lost by it. The plane accepts absence for sound and voice and rejects it for colour on grounds that are its own, not this court's: SILENCE IS WHAT A CHANNEL OF EVENTS IN TIME DOES WITH A THING THAT IS NOT AN EVENT, and a screen has no silence because it paints something at every pixel, always. So 'paint nothing' is not absence on a screen; it is painting the ACTIVE appearance, and a queue whose waiting rows look like its live ones is not declining to speak, it is saying the wrong thing.",
+        "evidenceCorrectionUpheld": "The correction recorded above was confirmed at the source: StzColorToNumber refused :Muted through the same path that refuses a typo. A missing value, not a declined one -- so the plane had been reading its own accident as its own design, which is the class of error only a second reader finds.",
+        "standing": "Kept rather than deleted. A consumer pinned below this date reads a vocabulary in which the visual channel is silent, and the dispute is why."
+      }
     }
   ],
   "notLaw": [
@@ -175,8 +194,8 @@
   },
   "honestBoundaries": [
     "This file records the SIGNAL vocabulary; it does not yet make it DECLARABLE. Nothing in the .zui grammar names a semantic value, so no diagnostic can be raised from this file today. Closing a language field is a language change and is the author's ruling to make -- the same gate SURFACE_AS passed through before media.json could be enforced.",
-    "Only two of the ten media have a rendering recorded, because only two have been built. The other eight are absent rather than empty: print, luminous and signage all carry SIGNAL in principle and none has an instrument.",
+    "THREE of the ten media record a rendering -- visual, auditory and voice -- because three have been built, and as of 2026-08-23 all three ANSWER rather than merely appear: each carries rendersAsAbsence, so each is decidable. The other seven are absent rather than empty: print, luminous and signage all carry SIGNAL in principle and none has an instrument, so a cross-medium pair naming one of them stays UNDECIDED, correctly.",
     "THE CONSTITUTION STILL HAS NO PRECEDENCE MECHANISM, and that is unchanged by v3.11. The four conflicts were settled by amending both rules so they no longer overlap -- not by deciding which wins, because nothing in the law can decide that. Rule 118 is invariant: true and Rule 3 is not, which looks like precedence and is not: invariant means 'never flexes across vibes', the Reader's own wording. 46 of 122 rules carry it. The next two rules to collide will collide the same way, and the only reason this pair was found is that someone put them side by side by hand.",
-    "The visual channel's gap was filed on 2026-08-13 and is unchanged. This file does not re-file it; it records it so a consuming tool can see the two channels disagree about how many values exist."
+    "The visual channel's gap, filed 2026-08-13 and open nine days, is CLOSED at 2026-08-22 -- and it closed the day it was chased rather than the day it was routed, with no new argument and no new evidence in between. What changed is that somebody asked twice. The estate lesson is not about the waiting: for those nine days the keystone at this end published NOT PROVED, which is indistinguishable on any board from a claim that failed."
   ]
 }

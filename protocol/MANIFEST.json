@@ -57,14 +57,14 @@
     {
       "file": "doc/diagnostic-contract.md",
       "role": "the refusal contract",
-      "bytes": 21919,
-      "sha256": "036b3947f3d2399f979c95997e78f9d7dee91fcd0dbb5d87d7c82d71d3e938f5"
+      "bytes": 27462,
+      "sha256": "4923b48a12d3289304ef5e900046ca59f35f3acada142c71cdcdee2be97e2574"
     },
     {
       "file": "doc/diagnostic-contract.schema.json",
       "role": "the refusal contract",
-      "bytes": 4332,
-      "sha256": "71ad254737c4c1fe0f48acbbb0d497292fa379d277c0ef0e38f1586785e50565"
+      "bytes": 6767,
+      "sha256": "9f93b18a0254a3a389d79b9c1d1b60dbb2ff4ac414c3c650d6d14f0638456571"
     },
     {
       "file": "conformance/media.json",
@@ -75,8 +75,8 @@
     {
       "file": "conformance/signal.json",
       "role": "the axes",
-      "bytes": 14506,
-      "sha256": "64b82ed70d143f05948ec9848cae2cb74c1d42f9bc33f5f7749e9c66ca324df3"
+      "bytes": 20789,
+      "sha256": "899c14ff876419b5a6cd095197bacd5ed20f626768617ae903081ea2acb9ab7a"
     },
     {
       "file": "conformance/manifest.json",

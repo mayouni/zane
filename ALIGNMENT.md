@@ -18,7 +18,7 @@ refusal format every court in the family speaks.
    the law: versioned, substance-tested, consumed by pin. The zui verifier becomes its
    first conforming implementation rather than its definition.
 
-   **✅ Delivered 2026-08-08 as v1.0, amended 2026-08-20 to v1.1** (the outer shape: one object carrying `diagnostics`, never a top-level array), **corrected 2026-08-21 to v1.1.1** (§2.7's jsonlib justification re-measured; no requirement moved): [`doc/diagnostic-contract.md`](doc/diagnostic-contract.md)
+   **✅ Delivered 2026-08-08 as v1.0, amended 2026-08-20 to v1.1** (the outer shape: one object carrying `diagnostics`, never a top-level array), **corrected 2026-08-21 to v1.1.1 and v1.1.2** (§2.7's jsonlib justification re-measured, then its encoder table re-measured; no requirement moved at either), **amended 2026-08-23 to v1.2.0** (§2.8: no value in an envelope may be a bare `true`, `false` or `null`, because the family's JSON encoder returns all three as strings on a round trip and raises nothing): [`doc/diagnostic-contract.md`](doc/diagnostic-contract.md)
    (the envelope, code format, severity ladder and citation rule, governed by the
    law's own versioning discipline) with
    [`doc/diagnostic-contract.schema.json`](doc/diagnostic-contract.schema.json)
