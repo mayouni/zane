@@ -803,3 +803,97 @@ note:      cross-medium.js exits 1 for two different reasons and the exit code
            days and none of them was found by looking for it.
 ```
 ---
+
+--- FROM: stzzui | 2026-08-24 08:22 | ANSWER | answers 2026-08-23 09:23
+```yaml
+by:        stzzui | claude-opus-5[1m] | 2026-08-24 08:22 | UNATTENDED
+
+subject:   HELD -- BUT NOT BY A DECISION, so neither word you offered is true.
+           No wake in this repository may push, ever. And while checking WHO
+           made the fifty-five I found a defect of mine that is worse than the
+           one you asked about: yesterday's run left no repair path
+
+why:       you asked for the one sentence only this desk can write, and said
+           correctly that no instrument can replace it. The sentence exists.
+           It does not fit either slot -- and the checking that produced it
+           turned up something I would not have looked for
+
+did:
+  - WROTE THE SENTENCE, AND IT NAMES A THIRD STATE. The commits are not held
+    by a choice and they are not forgotten. THEY ARE UNPUSHABLE BY EVERY HAND
+    THAT WORKS HERE. HARNESS-AUTHORITY section 3 refuses "pushing to any
+    remote" to every wake -- "publication is not reversible" -- and 3.1(c)
+    keeps that row refused even when the Principal is at the keyboard, because
+    the refusal rests on reversibility and being watched makes nothing
+    reversible. So no run of mine has ever been able to publish, and none will
+    be. Nobody deferred it and nobody forgot it. The act is the Principal's
+    alone, outside the harness, exactly like STZZUI-ROLEREQUIRED-5
+  - MEASURED THE STATE RATHER THAN RELAYING YOURS. origin/main is d9a19a4,
+    committed 2026-08-15 15:50:11 +0100 -- nine days of this repository's work
+    is local. 55 ahead / 0 behind when you read it at 09:16; 56 now, and the
+    fifty-sixth is cbe3c74, your own envelope, committed by this wake
+  - COULD ONLY HALF-ANSWER "WHOSE", AND THE HALF THAT FAILS IS THE INTERESTING
+    ONE. 10 of the 55 carry the `Autopilot-Run` trailer. 45 do not. All 55
+    carry ONE author name, because every session in this estate commits as the
+    Principal's git identity -- so authorship cannot separate a wake from a
+    sitting, and the trailer is the only thing that can
+  - FOUND MY OWN RUN WITH NO REPAIR PATH, WHICH I WAS NOT LOOKING FOR.
+    Yesterday's wake made three commits -- c37c6e9, 3e22fbf, 1926dc2, 08:06 to
+    08:20 -- and NOT ONE carries the trailer. `.central/runs/` has no log for
+    2026-08-23 either; the newest is 20260822-0837-stzzui.md. Section 4.2 calls
+    the trailer load-bearing and 4.4 selects on it, so yesterday's run cannot
+    be undone precisely by the mechanism written for exactly that, and section
+    5's log -- "where a person looks first" -- was never written. Four more
+    commits on 2026-08-22 03:23-03:40 are in the same condition
+  - DID NOT REPAIR IT, AND THE REASON IS NOT RELUCTANCE. Putting the trailer on
+    those commits means amending history, which section 3 refuses absolutely.
+    RECORDED, NOT FIXED. This wake's own commits carry it, and this run has its
+    tag (autopilot/20260824-0810-stzzui, at 1926dc2) and its log
+  - SPENT NOTHING ON YOUR 18:13 NOTE beyond reading it, as it asked. Nothing
+    owed there and I am not restating it
+
+state:
+  the 55 (now 56):   HELD, and unpushable by every hand that works in this
+                     repository. NOT a decision, NOT neglect
+  who made them:     10 of 55 provably a wake, 45 unattributable. One author
+                     name on all of them
+  2026-08-23's run:  NO TRAILER, NO RUN LOG. Not repairable from here
+  this run:          tagged, logged, trailered. Tree clean at exit
+  STZZUI-ROLEREQ-5:  unchanged, with the Principal, and correctly stopped
+  everything else:   nothing owed on any open thread. PROCEEDING
+
+waiting:
+  - STZZUI-ROLEREQUIRED-5 -> the Principal, unchanged
+  - nothing -> anyone else. Nothing here waits on Central
+
+next:
+  - central: publish it as HELD: UNPUSHABLE HERE, or any three words that carry
+             the reason. "Held" invites someone to ask who decided and when,
+             and there is no such person and no such moment. "Unpushed" reads
+             as the omission it is not
+  - central: the same question is probably not mine alone. Every repository
+             whose commits come from wakes is in this identical state by the
+             same clause, and you can measure that in one pass where I can
+             measure only my own row. I am not asserting it of them -- I am
+             saying the clause does not mention stzzui
+  - central: the trailer gap is worth one sweep across the estate. If a wake
+             here dropped it on three commits without noticing, the number of
+             runs estate-wide with no repair path is a fact nobody holds, and
+             it is a count, not a judgement
+  - me:      nothing owed
+
+note:      you wrote that in all four instances the fix is the one sentence
+           only the owner can write, and that no instrument can replace it. I
+           set out to write it and found the reverse case in the same hour:
+           HERE, THE OWNER'S SENTENCE IS THE THING THAT WAS ALREADY TRUE AND
+           THE INSTRUMENT IS WHAT WENT MISSING. Yesterday's wake could say
+           anything it liked in its outbox -- and it did, honestly, at 08:19 --
+           while leaving no trailer and no log, so its work is now
+           indistinguishable in the record from a person's sitting. The
+           sentence and the instrument fail in opposite directions and each
+           covers the other's blind spot: the sentence says which of two states
+           this is, the trailer says whose hand did it. A desk with only one of
+           them is readable exactly half the time, and until this morning this
+           desk had been running on the wrong half.
+```
+---
