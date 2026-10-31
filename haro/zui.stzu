@@ -1,0 +1,558 @@
+-- zui.stzu -- StzZui, declared as a Haro language
+--
+-- The first artifact of the re-declaration ruled on 2026-10-31. Written FROM the pack's own
+-- data (conformance/media.json, signal.json, violations.json, doc/language/DECLARATIONS.md)
+-- and judged by the stzu meta-court:
+--     rnxc haro.ring zui.stzu       (ringpp/haro/spike)
+-- The verifier (tools/zui/zui.js) is NOT changed and NOT replaced by this file. This file
+-- declares what the meta-language can carry; the SEAMS below count what it cannot.
+--
+-- Words are lower_snake here and UPPER in a .zui file (DISCOVER, SATISFIES): the meta-language
+-- reserves UPPER_SNAKE for its own keywords, and Z made the same trade ("a step is lower_snake
+-- here where ZQL names it UPPER"). Case is the forge's printer to restore, not a declaration.
+--
+-- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (32):
+--   S1  severity: every refusal a court speaks is an error. Five diagnostics are warnings in
+--       zui.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,
+--       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not
+--       over-refuse. The exception is WIDGET and USER, see D2.
+--   S2  cites: CONSTRAINT carries CODE and no CITES, so a refusal cites rule:<element name>
+--       and not rule:16 / article:intent / pattern:select-silently-acts. REFUSAL and SYMBOL
+--       have CITES; CONSTRAINT, MENU, RANGE, FORMAT and UNION do not.
+--   S3  the world: INTENT_ORPHAN, INVISIBLE_STATE, HIDDEN_AUTHORITY check a host world in the
+--       direction "everything the world holds is declared", which SYMBOL (a declared name
+--       resolves) does not say. Level 3 is not carried.
+--   S4  the rendered surface: LAYOUT_DISPLACEMENT (level 4) is judged on a pixel, not a
+--       declaration. It stays with the tool tier of the enforcement ladder.
+--   S5  a universal field: SATISFIES, ALWAYS_REACHABLE, SIGNALS and ACTOR belong to every
+--       kind and the meta-language has no "on every declaration", so they repeat on all ten.
+--   S6  the media matrix: 77 cells are "absent" in media.json; two are carried below as the
+--       proof that a cross-declaration cell can be said (zoom on auditory and voice). The
+--       other 75 are sayable the same way and are the forge's to generate, not hand-written.
+--   S7  VIBE_STRIPS_RIGHT needs "a suppressed verb that ANY declaration guarantees": a join of
+--       the values of one list against the lists of other declarations. I found no such form in the
+--       condition language of 2026-10-31; that is not a proof that none can be made.
+--   S8  ROLE_MISPLACED: a seat that exists on one kind only is, elsewhere, an unknown clause
+--       and refuses as PARSE; the code and the sentence "a role belongs to an INTERACTION"
+--       are lost.
+--   S9  the multi-pillar file: zui.js ignores other pillars' declarations silently; a
+--       declared language refuses what it does not know. Ruling needed (D3).
+--   S10 RATIONALE: the Commons (stzu GRAMMAR, C6 3.8) makes RATIONALE mandatory on every
+--       declaration of a language the forge makes; a .zui declaration has none. Adopting the
+--       court means every .zui declaration says why. That is a language change, not a
+--       translation, and it is the author's to rule (D4).
+--   S11 duplicates: DUPLICATE_FIELD is refused as PARSE and DUPLICATE_DECLARATION as
+--       DUPLICATE_NAME. Both are refused; the codes StzZui published are not the ones spoken.
+--   S12 first refusal: the forged court's diagnose speaks the first refusal it meets;
+--       zui.js reports every one. The collecting court exists (haro.ring all) and is not
+--       what a forged court does yet.
+--
+-- DIVERGENCES from zui.js that this declaration makes by being closed (each is a ruling for
+-- the author, not a decision taken here):
+--   D1  fields are declared per kind from DECLARATIONS.md. zui.js accepts any field on any
+--       kind and ignores a misplaced TONE or PERSPECTIVE silently; a closed declaration refuses
+--       it. The declaration is the stricter of the two and the prose is on its side.
+--   D2  WIDGET and USER are named and refused as errors; zui.js reports them as a warning.
+--   D3  other pillars' kinds are refused, not ignored (S9).
+--   D4  every declaration gains a RATIONALE (S10).
+--
+-- MEASURED 2026-10-31 by haro/judge-zui-court.js: the 50 fixtures of conformance/manifest.json, each
+-- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE) and judged by
+-- the court forged from this file. 38 agree with the manifest (19 of them lawful twins judged
+-- clean). 12 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host
+-- world (S3), 2 are refused under another code (S11), and one each is VIBE_STRIPS_RIGHT (S7),
+-- VERB_NOT_CARRIED on print x ACT (S6) and a foreign pillar refused (S9).
+
+DEFINE LANGUAGE zui AS (
+  VERSION "1.3", GRAMMAR "1.3",
+  COURT "conformance/manifest.json",
+  EXTENSION ".zui"
+) RATIONALE "What a human is DOING, declared before anything is rendered: ten declaration kinds over twenty-two intent verbs, judged by a constitution -- the surface is a consequence and is never named"
+
+-- ---- the closed vocabularies -----------------------------------------------------------
+
+DEFINE MENU intents AS (
+  WORDS [discover, understand, locate, focus, filter, compare, read, scan, scroll, zoom, select, highlight, preview, mark, act, confirm, cancel, undo, pause, resume, retry, exit],
+  MESSAGE "An intent is one of the twenty-two verbs: DISCOVER, UNDERSTAND, LOCATE, FOCUS, FILTER, COMPARE, READ, SCAN, SCROLL, ZOOM, SELECT, HIGHLIGHT, PREVIEW, MARK, ACT, CONFIRM, CANCEL, UNDO, PAUSE, RESUME, RETRY, EXIT -- the verb set is closed, and NAVIGATE is LOCATE or DISCOVER",
+  CODE "UNKNOWN_INTENT"
+) RATIONALE "Six families: orienting (discover understand locate), attention (focus filter compare), information (read scan scroll zoom), selection (select highlight preview mark), action (act confirm cancel undo), continuity (pause resume retry exit). The families carry the invariants; a menu has no seat for a family"
+
+DEFINE MENU media AS (
+  WORDS [visual, auditory, voice, haptic, print, luminous, signage, machine, spatial, terminal],
+  MESSAGE "A surface is projected to one of ten media: visual, auditory, voice, haptic, print, luminous, signage, machine, spatial, terminal -- a kiosk is a visual surface that happens to be unelected, which is a property and not a channel",
+  CODE "UNKNOWN_MEDIUM"
+) RATIONALE "Closed so that a coverage matrix over media is finite and checkable; a new channel is classified by its six properties, not argued about"
+
+DEFINE MENU signals AS (
+  WORDS [success, warning, danger, info, muted],
+  MESSAGE "A signal is what a value means about a record: success, warning, danger, info, muted -- a meaning, never a colour",
+  CODE "UNKNOWN_SIGNAL"
+) RATIONALE "Rule 118 family one; TONE is a different vocabulary and each refuses the other's words"
+
+DEFINE MENU roles AS (
+  WORDS [inert, navigate, reversible, irreversible, proposal],
+  MESSAGE "A role is the promise a control makes: inert, navigate, reversible, irreversible, proposal",
+  CODE "UNKNOWN_ROLE"
+) RATIONALE "The consequence of acting, in five values; irreversible is Rule 79's escape clause, or declares why it cannot"
+
+DEFINE MENU tones AS (
+  WORDS [celebratory, cautionary, critical, neutral, informational],
+  MESSAGE "A tone is the register the system speaks in: celebratory, cautionary, critical, neutral, informational",
+  CODE "INVALID_TONE"
+) RATIONALE "The MESSAGE stratum; deliberately a separate vocabulary from signals"
+
+DEFINE MENU perspectives AS (
+  WORDS [top_down, isometric, first_person, side_scroll],
+  MESSAGE "A perspective is top_down, isometric, first_person, side_scroll -- the vantage of a spatial surface",
+  CODE "INVALID_PERSPECTIVE"
+) RATIONALE "WORLD_VIEW only"
+
+-- ---- the forms and the world -----------------------------------------------------------
+
+DEFINE FORM step AS (
+  SEATS [value: name]
+) RATIONALE "One named step of a wizard; a list of names is a list of this form written as bare words"
+
+DEFINE FORM state AS (
+  SEATS [value: name]
+) RATIONALE "One piece of state a navigation shows; a list of names is a list of this form written as bare words"
+
+DEFINE FORM report AS (
+  SEATS [value: name]
+) RATIONALE "One piece of state a feedback or a moving vibe reports; a list of names is a list of this form written as bare words"
+
+DEFINE FORM entity AS (
+  SEATS [value: name]
+) RATIONALE "One entity a world view shows; the host world resolves it, and in zui.js an unresolved one is a warning (S1, S3); a list of names is a list of this form written as bare words"
+
+
+-- ---- the ten kinds ---------------------------------------------------------------------
+
+DEFINE DECLARATION intent_flow AS (
+  VERB "INTENT_FLOW",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?]
+) RATIONALE "The unit of intent: a named sequence of intents a human moves through; the one kind meant to carry SATISFIES"
+
+DEFINE DECLARATION form AS (
+  VERB "FORM",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, intent_flow: name?]
+) RATIONALE "An input surface, bound to a flow rather than restating it"
+
+DEFINE DECLARATION wizard AS (
+  VERB "WIZARD",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, steps: [step]?]
+) RATIONALE "A multi-step flow; because it is multi-step, EXIT is always reachable or it is a trap"
+
+DEFINE DECLARATION screen AS (
+  VERB "SCREEN",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?]
+) RATIONALE "An addressable surface; SATISFIES says why the human came"
+
+DEFINE DECLARATION component AS (
+  VERB "COMPONENT",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?]
+) RATIONALE "A reusable semantic unit; a component declares meaning, never appearance"
+
+DEFINE DECLARATION nav_graph AS (
+  VERB "NAV_GRAPH",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, visible_state: [state]?]
+) RATIONALE "How surfaces connect"
+
+DEFINE DECLARATION world_view AS (
+  VERB "WORLD_VIEW",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, perspective: perspectives?, visible_entities: [entity]?]
+) RATIONALE "A spatial surface: a dashboard or a game world seen from a stated vantage"
+
+DEFINE DECLARATION interaction AS (
+  VERB "INTERACTION",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, role: roles?]
+) RATIONALE "An act bound to an object, and the host of ROLE because it is the only kind meaning a control's referent without naming a widget"
+
+DEFINE DECLARATION feedback AS (
+  VERB "FEEDBACK",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, tone: tones?, reports: [report]?, motion: name?]
+) RATIONALE "What the system says back; feedback that reports nothing is decoration"
+
+DEFINE DECLARATION vibe AS (
+  VERB "VIBE",
+  SEATS [satisfies: [intents]?, always_reachable: [intents]?, signals: [signals]?, actor: name?, density: name?, surface_as: media?, motion: name?, reports: [report]?, suppresses: [intents]?]
+) RATIONALE "An interaction culture: Article VI made declarable. It may set density, motion and surface and may never remove an intent another declaration guarantees"
+
+-- ---- the court: level 2, local semantics ------------------------------------------------
+-- Each constraint states the OFFENCE as its WHEN and speaks the diagnostic id as its CODE.
+-- CODE is the C2 stable identifier; a cite is not declarable here (S2).
+
+DEFINE CONSTRAINT select_act_collapse_intent_flow AS (
+  ON intent_flow, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_form AS (
+  ON form, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_wizard AS (
+  ON wizard, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_screen AS (
+  ON screen, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_component AS (
+  ON component, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_nav_graph AS (
+  ON nav_graph, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_world_view AS (
+  ON world_view, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_interaction AS (
+  ON interaction, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_feedback AS (
+  ON feedback, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT select_act_collapse_vibe AS (
+  ON vibe, WHEN "satisfies contains select and satisfies contains act and not satisfies contains confirm",
+  MESSAGE "{name} selects and acts and never confirms: selection expresses interest, never commitment",
+  CODE "SELECT_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_intent_flow AS (
+  ON intent_flow, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_form AS (
+  ON form, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_wizard AS (
+  ON wizard, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_screen AS (
+  ON screen, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_component AS (
+  ON component, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_nav_graph AS (
+  ON nav_graph, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_world_view AS (
+  ON world_view, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_interaction AS (
+  ON interaction, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_feedback AS (
+  ON feedback, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT read_act_collapse_vibe AS (
+  ON vibe, WHEN "satisfies contains read and satisfies contains act",
+  MESSAGE "{name} reads and acts: a read surface that silently acts is an intent violation",
+  CODE "READ_ACT_COLLAPSE"
+) RATIONALE "Rule 16; level 2"
+
+DEFINE CONSTRAINT missing_undo_intent_flow AS (
+  ON intent_flow, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_form AS (
+  ON form, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_wizard AS (
+  ON wizard, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_screen AS (
+  ON screen, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_component AS (
+  ON component, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_nav_graph AS (
+  ON nav_graph, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_world_view AS (
+  ON world_view, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_interaction AS (
+  ON interaction, WHEN "satisfies contains act and not always_reachable contains undo and not role = irreversible",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_feedback AS (
+  ON feedback, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_undo_vibe AS (
+  ON vibe, WHEN "satisfies contains act and not always_reachable contains undo",
+  MESSAGE "{name} acts and keeps no reachable UNDO: every act has one, or declares why it cannot",
+  CODE "MISSING_UNDO"
+) RATIONALE "Rule 79; level 2"
+
+DEFINE CONSTRAINT missing_cancel_intent_flow AS (
+  ON intent_flow, WHEN "satisfies contains act and not always_reachable contains cancel",
+  MESSAGE "{name} acts and keeps no reachable CANCEL",
+  CODE "MISSING_CANCEL"
+) RATIONALE "Rule 26; level 2"
+
+DEFINE CONSTRAINT missing_cancel_wizard AS (
+  ON wizard, WHEN "satisfies contains act and not always_reachable contains cancel",
+  MESSAGE "{name} acts and keeps no reachable CANCEL",
+  CODE "MISSING_CANCEL"
+) RATIONALE "Rule 26; level 2"
+
+DEFINE CONSTRAINT trapped_flow_wizard AS (
+  ON wizard, WHEN "not always_reachable contains exit",
+  MESSAGE "{name} is multi-step and EXIT is not always reachable: a trapped flow is unconstitutional",
+  CODE "TRAPPED_FLOW"
+) RATIONALE "Rules 51, 53; level 2"
+
+DEFINE CONSTRAINT expression_orphan_intent_flow AS (
+  ON intent_flow, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_form AS (
+  ON form, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_wizard AS (
+  ON wizard, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_screen AS (
+  ON screen, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_component AS (
+  ON component, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_nav_graph AS (
+  ON nav_graph, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_world_view AS (
+  ON world_view, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_interaction AS (
+  ON interaction, WHEN "(signals nonempty or role present) and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_feedback AS (
+  ON feedback, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT expression_orphan_vibe AS (
+  ON vibe, WHEN "signals nonempty and (satisfies absent or satisfies empty)",
+  MESSAGE "{name} says how a value is perceived without saying what the operator is doing: expression is intent's refinement, never a second language",
+  CODE "EXPRESSION_ORPHAN"
+) RATIONALE "Article intent; level 2"
+
+DEFINE CONSTRAINT role_acts_without_consequence AS (
+  ON interaction, WHEN "(role = inert or role = navigate) and satisfies contains act",
+  MESSAGE "{name} declares a role that has no consequence and satisfies ACT",
+  CODE "ROLE_ACTS_WITHOUT_CONSEQUENCE"
+) RATIONALE "Rules 119, 112, 16"
+
+DEFINE CONSTRAINT role_promise_broken AS (
+  ON interaction, WHEN "role = reversible and not always_reachable contains undo and not satisfies contains act",
+  MESSAGE "{name} promises to be reversible and keeps no reachable UNDO",
+  CODE "ROLE_PROMISE_BROKEN"
+) RATIONALE "Rule 79"
+
+DEFINE CONSTRAINT irreversible_claims_undo AS (
+  ON interaction, WHEN "role = irreversible and (always_reachable contains undo or satisfies contains undo)",
+  MESSAGE "{name} declares itself irreversible and declares an UNDO: it cannot be both",
+  CODE "IRREVERSIBLE_CLAIMS_UNDO"
+) RATIONALE "Rule 79"
+
+DEFINE CONSTRAINT proposal_commits AS (
+  ON interaction, WHEN "role = proposal and satisfies contains act and actor absent",
+  MESSAGE "{name} proposes and acts and names no ACTOR",
+  CODE "PROPOSAL_COMMITS"
+) RATIONALE "Rules 98, 83"
+
+DEFINE CONSTRAINT decorative_animation_feedback AS (
+  ON feedback, WHEN "(tone present or motion present) and (reports absent or reports empty)",
+  MESSAGE "{name} speaks or moves and reports nothing: feedback that reports nothing is decoration",
+  CODE "DECORATIVE_ANIMATION"
+) RATIONALE "Rule 112"
+
+DEFINE CONSTRAINT decorative_animation_vibe AS (
+  ON vibe, WHEN "motion present and motion != none and (reports absent or reports empty)",
+  MESSAGE "{name} moves and reports nothing: motion that moves must report",
+  CODE "DECORATIVE_ANIMATION"
+) RATIONALE "Rule 112"
+
+-- ---- the medium axis: two cells of the matrix, as proof (S6) ----------------------------
+
+DEFINE CONSTRAINT verb_not_carried_zoom AS (
+  ON vibe, WHEN "(surface_as = auditory or surface_as = voice) and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT signal_unperceivable_intent_flow AS (
+  ON intent_flow, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_form AS (
+  ON form, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_wizard AS (
+  ON wizard, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_screen AS (
+  ON screen, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_component AS (
+  ON component, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_nav_graph AS (
+  ON nav_graph, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_world_view AS (
+  ON world_view, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_interaction AS (
+  ON interaction, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_feedback AS (
+  ON feedback, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+DEFINE CONSTRAINT signal_unperceivable_vibe AS (
+  ON vibe, WHEN "signals contains muted and not signals contains success and not signals contains warning and not signals contains danger and not signals contains info and ((some vibe where surface_as = auditory) or (some vibe where surface_as = voice))",
+  MESSAGE "{name} carries only the muted signal on a medium where muted is silence",
+  CODE "SIGNAL_UNPERCEIVABLE"
+) RATIONALE "Rule 82; signal.json absence"
+
+-- ---- the refusals ----------------------------------------------------------------------
+
+DEFINE REFUSAL unknown_verb AS (
+  MESSAGE "The Zui declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."
+) RATIONALE "A verb outside the grammar is not forbidden, it is unparseable"
+
+DEFINE REFUSAL unknown_declaration AS (
+  MESSAGE "The ten kinds are INTENT_FLOW, FORM, WIZARD, SCREEN, COMPONENT, NAV_GRAPH, WORLD_VIEW, INTERACTION, FEEDBACK and VIBE.",
+  NAMED [widget: "WIDGET names a rendering, and a declaration that needs to say card has stopped describing intent", user: "USER is not a kind this language defines"],
+  CODES [widget: "UNSPECIFIED_DECLARATION", user: "UNSPECIFIED_DECLARATION"]
+) RATIONALE "Two kinds the reference implementation recognises and the language does not define (D2). Warnings in zui.js; errors here"
+
