@@ -15,7 +15,7 @@
     "diagnostics": 37,
     "media": 10,
     "signalValues": 5,
-    "fixtures": 56
+    "fixtures": 57
   },
   "pinned": [
     {
@@ -58,7 +58,7 @@
       "file": "doc/diagnostic-contract.md",
       "role": "the refusal contract",
       "bytes": 27462,
-      "sha256": "9cf791615a103770edb2a88629d1d1164730551d98bce7a8777236f101c7bcfc"
+      "sha256": "ca6b9709464ab7ee09452e0c1b85e290103d3912cd8a9e1b2706c49fdaf6537d"
     },
     {
       "file": "doc/diagnostic-contract.schema.json",
@@ -81,8 +81,8 @@
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
-      "bytes": 15230,
-      "sha256": "eaee07009fd7f0fae598ec253b49e6fc085ea460e591f5e1fd103e7b0cbea2a3"
+      "bytes": 15696,
+      "sha256": "7440de12de4d1db3c6b4ace45ac571ec7977a2caf0cda03db238fe0410cce5f5"
     },
     {
       "file": "conformance/cross-medium/spec.json",

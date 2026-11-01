@@ -422,6 +422,14 @@
         "ROLE_PROMISE_BROKEN"
       ],
       "note": "A reversible control that keeps no UNDO and does not declare ACT, the one case MISSING_UNDO cannot see. Scoped away from MISSING_UNDO on purpose, so this fires alone. Had no fixture until 2026-11-01."
+    },
+    {
+      "file": "unexpected-character.zui",
+      "level": 1,
+      "expect_ids": [
+        "UNEXPECTED_CHARACTER"
+      ],
+      "note": "An at-sign between two lawful declarations: a character outside the lexical grammar of GRAMMAR.md section 1. Placed between declarations so it raises alone. Skipped by the lexer, which is why both declarations still read, and why this id needs no recovery to be pinned, unlike SYNTAX_ERROR and UNTERMINATED_STRING."
     }
   ],
   "unfixtured": [

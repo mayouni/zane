@@ -88,7 +88,7 @@ w('--       court means every .zui declaration says why. That is a language chan
 w('--       translation. RULED 2026-10-31: .zui 1.3 gains no mandatory RATIONALE (D4); at the');
 w('--       boundary a declaration with none reaches the court as "none given".');
 w('--   S11 codes: DUPLICATE_FIELD is refused as PARSE, DUPLICATE_DECLARATION as DUPLICATE_NAME and');
-w('--       FIELD_MISPLACED and UNKNOWN_FIELD as UNKNOWN_CLAUSE. All are refused; the codes StzZui published are not');
+w('--       FIELD_MISPLACED and UNKNOWN_FIELD as UNKNOWN_CLAUSE and UNEXPECTED_CHARACTER as PARSE. All are refused; the codes StzZui published are not');
 w('--       the ones spoken.');
 w('--   S12 first refusal: the forged court\'s diagnose speaks the first refusal it meets;');
 w('--       zui.js reports every one. The collecting court exists (haro.ring all) and is not');
@@ -109,11 +109,11 @@ w('--   D3  other pillars\' kinds are refused, not ignored (S9). RULED 2026-10-3
 w('--   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zui 1.3 is unchanged and the');
 w('--       translator writes "none given"; RATIONALE stays mandatory in the agent\'s grammar.');
 w('--');
-w('-- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 56 fixtures of conformance/manifest.json, each');
+w('-- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 57 fixtures of conformance/manifest.json, each');
 w('-- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and');
 w('-- judged by the court forged from this file. 40 agree with the manifest (20 of them lawful twins');
-w('-- judged clean). 16 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host');
-w('-- world (S3), 4 are refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is VIBE_STRIPS_RIGHT (S7),');
+w('-- judged clean). 17 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host');
+w('-- world (S3), 5 are refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is VIBE_STRIPS_RIGHT (S7),');
 w('-- VERB_NOT_CARRIED on print x ACT (S6), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.');
 
 w('');

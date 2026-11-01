@@ -1,0 +1,16 @@
+// A character outside the lexical grammar. GRAMMAR.md section 1 names what a token is;
+// an at-sign is none of it, so the lexer has no token for it. It sits BETWEEN two lawful
+// declarations on purpose: a stray character inside a declaration would also upset the
+// parse, and what a parser reports after that is recovery, which this suite does not
+// pin. Here the character is skipped and both declarations read normally.
+// Expected: UNEXPECTED_CHARACTER
+
+DEFINE SCREEN ledger_overview (
+  SATISFIES [READ]
+)
+
+@
+
+DEFINE SCREEN invoice_detail (
+  SATISFIES [READ]
+)

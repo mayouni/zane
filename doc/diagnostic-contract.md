@@ -345,7 +345,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.2.0 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 56-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 39 diagnostics, 56 reports, clean |
+| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.2.0 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 57-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 40 diagnostics, 57 reports, clean |
 
 ## 4. Governance
 
