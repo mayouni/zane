@@ -1127,3 +1127,88 @@ note:      YOUR LAW LANDED ON A DESK THAT WAS ALREADY GUILTY AND DID NOT KNOW,
            ARMED NOTHING. WROTE NOTHING OUTSIDE D:\GitHub\stzzui
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 12:30 | NOTE | answers 2026-10-31 22:54 (D1 TO D4 ARE RULED) | the D1 sweep, before the diagnostic ships: 202 .zui files, 550 declarations, ZERO misplaced fields
+
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 12:30 | ATTENDED
+
+subject:   the D1 sweep -- every known field on a kind that does not declare it, over every .zui file under D:\GitHub
+
+why:       you asked that any hit outside a deliberate fixture reach you BEFORE the diagnostic ships, because it is an author who believes a field is working
+
+did:
+  - wrote misplacedFields(decls) in tools/zui/zui.js as a pure function over the parsed declarations, exported and NOT called by check(), so no verdict changed
+  - took the legal fields per kind from doc/language/DECLARATIONS.md and the SEATS of haro/zui.stzu, which agree: four universal (SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR) and these per kind -- FORM INTENT_FLOW; WIZARD STEPS; NAV_GRAPH VISIBLE_STATE; WORLD_VIEW PERSPECTIVE, VISIBLE_ENTITIES; INTERACTION ROLE; FEEDBACK TONE, REPORTS, MOTION; VIBE DENSITY, SURFACE_AS, MOTION, REPORTS, SUPPRESSES; INTENT_FLOW, SCREEN, COMPONENT none
+  - walked D:\GitHub skipping node_modules, .git and zig caches, found 202 .zui files, and parsed all 202 with zui.js parse()
+  - proved the function is not blind by feeding it a SCREEN carrying TONE, PERSPECTIVE, ROLE, STEPS, SURFACE_AS and an unknown FOO: it returned the first five and left FOO to UNKNOWN_FIELD
+
+state:
+  files swept:             202 -- 50 in conformance/fixtures, 1 in conformance/cross-medium, 151 elsewhere (141 of them under zin/.claude/worktrees, copies of the same few sources)
+  declarations parsed:     550
+  hits in the 50 fixtures: 0 -- no fixture places a field on a kind that does not declare it
+  hits elsewhere:          0 -- ringface (4 files), zin examples and projects (3), zin-one (3) and the zin worktree copies are all clean
+  ROLE on a wrong kind:    0, and it is already ROLE_MISPLACED, so the new diagnostic will leave ROLE to it rather than report one defect twice
+  STEPS on a non-WIZARD:   0 -- noted because zui.js TODAY reads STEPS on any kind as multi-step (TRAPPED_FLOW), so it is not silent there; no file depends on it, and the choice is made in the next memo
+  author who believes a field works: NONE FOUND
+
+waiting:
+  - nothing: the sweep returned no author to warn, so the diagnostic ships without a hold [proceeding]
+
+next:
+  - me:      name the diagnostic, give it its level, add the fixture and its lawful twin, update the law text and versions, run the full suite
+  - me:      change haro/judge-zui-court.js to write "none given" and re-run it on rnxc (D4)
+
+note:      A ZERO IS ONLY AS GOOD AS THE FILES IT WAS TAKEN FROM. The fixtures and the zin sources are the whole estate that carries .zui today; a .zui written outside D:\GitHub, or embedded in a string of another language, was not read.
+```
+---
+
+--- FROM: stzzui | 2026-11-01 13:38 | ANSWER | answers 2026-10-31 22:54 (D1 TO D4 ARE RULED) | D1 is in the verifier as FIELD_MISPLACED at language v1.4, D4 is in the translator, and the court agrees on 39 of 52 where it agreed on 38 of 50 -- all local, nothing pushed
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 13:38 | ATTENDED (a session started by another session)
+
+subject:   ruling D1 built, D4 built, D2 and D3 left exactly as ruled -- read on branch main from 7922603, committed as 6de8b51, 80db0c2 and fa9e0d7
+
+why:       the verifier was silent where an author's field did nothing; it now speaks, and the court that exposed it can be re-measured
+
+did:
+  - swept first and reported first: 202 .zui files under D:/GitHub, 550 declarations, ZERO misplaced fields, so no author was found who believes a field works (the memo above, filed before any diagnostic was wired)
+  - named the diagnostic FIELD_MISPLACED, error, level 2, one report per field at that field's line; it generalises ROLE_MISPLACED and leaves ROLE to it, so a ROLE on a SCREEN is still reported once and under its old id
+  - added the diagnostic to conformance/violations.json (contract 1.3 to 1.4, 33 diagnostics), to doc/language/VIOLATIONS.md with the per-kind table, to DECLARATIONS.md section 3, and to the README lineage; language 1.3 to 1.4, manifest 1.2 to 1.3
+  - wrote conformance/fixtures/field-misplaced.zui (TONE and PERSPECTIVE, both lawful values, on a SCREEN) and its twin field-misplaced-lawful.zui (the same fields on FEEDBACK and WORLD_VIEW), and registered both in manifest.json
+  - regenerated protocol/MANIFEST.json with tools/zui/pack.js and verified it with --check; updated every count a README states (52 fixtures, 33 diagnostics, 35 diagnostics and 52 reports in the envelope line, per-level figures)
+  - changed haro/judge-zui-court.js to write RATIONALE "none given" (D4), re-ran it on rnxc, regenerated haro/judge-rows.csv, and regenerated haro/zui.stzu from gen-zui-stzu.js with D1 marked closed and D2 to D4 marked ruled
+  - committed CLAUDE.md by path, as asked on 2026-10-30; left .central/inbox.md and WHATS-NEXT.md uncommitted, since you asked me not to commit what is not mine
+
+state:
+  conformance suite:    52 of 52 pass at level 4, 0 fail, 0 skipped (was 50); level 1 10, level 2 48, levels 3 and 4 52
+  catalogue guard:      33 diagnostics, contract agrees with VIOLATIONS.md
+  pack manifest:        regenerated, verified
+  cross-medium run:     no drift, as before
+  verdicts that moved:  NONE among the 50 fixtures that existed. D1 changes the verifier on no existing fixture, because none carries a misplaced field
+  the court (rnxc):     39 of 52 agree, 20 of them lawful twins judged clean. Was 38 of 50 and 19. 13 differ, each a named seam: 4 warnings not declared (S1), 3 need the host world (S3), 3 refused under another code (S11), one each VIBE_STRIPS_RIGHT (S7), VERB_NOT_CARRIED on print x ACT (S6) and a foreign pillar (S9)
+  the "none given" fix: moved no verdict. The court never read the rationale text; it only needed one to be present
+  the new row:          field-misplaced.zui is refused by the court as UNKNOWN_CLAUSE, with the sentence "allowed are SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR". Same refusal as the verifier, a different code, so it joins S11 and is not a new seam
+  the judge's run time: about 1.4 seconds here, not the 40 you quoted; I did not look for why
+  pushed:               NO. Three local commits on main, ahead of origin
+
+gates owned and not run:
+  - tools/ui-audit.html: owned, level 4, it measures LAYOUT_DISPLACEMENT on a painted page and needs a browser. Not run, and nothing here touches a rendering
+  - the Ring 1.27 guards of other repositories that load this pack: they execute elsewhere
+
+waiting:
+  - nothing from Central before the next step [proceeding]
+  - the push -> the Principal, who says when [not routed: it is in your brief]
+
+next:
+  - me:      append the cost line to .central/cost.jsonl and commit it with this memo by path
+  - central: three judgements of mine are yours to reverse, listed in the note. None blocks anything
+
+note:      THREE CHOICES I MADE WHERE THE RULING WAS SILENT.
+           1. The legal fields come from the haro seats and DECLARATIONS.md, which agree, so I applied them strictly: STEPS off a WIZARD, INTENT_FLOW off a FORM, VISIBLE_STATE off a NAV_GRAPH and VISIBLE_ENTITIES off a WORLD_VIEW are FIELD_MISPLACED too, although zui.js reads each of those on any kind today and so was not silent about them. No file in the estate does it, so nothing breaks; the cost is that an author who relied on STEPS elsewhere to get TRAPPED_FLOW now gets two diagnostics. I kept the TRAPPED_FLOW code as it was and said so in VIOLATIONS.md. If the ruling meant only the fields that are ignored in silence, that is one line to narrow in KIND_FIELDS.
+           2. INTENT_FLOWS, a list key the grammar admits and no kind declares, is FIELD_MISPLACED on every kind. Zero uses anywhere, and the reference implementation reads it only in other pillars' files.
+           3. The language moved to v1.4 and not v1.3.1, because a file lawful at v1.3 can be refused at v1.4. That is how v1.3 treated ROLE.
+           ONE GAP I FOUND AND DID NOT FIX: zui.js emits UNKNOWN_FIELD, and violations.json has no entry for it, so the diagnostic I tell authors to expect for an unknown name is not in the contract. Pre-existing, small, and a law change that is yours to size.
+           WROTE NOTHING OUTSIDE D:/GitHub/stzzui EXCEPT SCRATCH FILES IN THIS SESSION'S TEMP SCRATCHPAD
+```
+---
