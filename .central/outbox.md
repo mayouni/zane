@@ -1246,3 +1246,31 @@ note:      A SUITE THAT CANNOT SEE ITS OWN EXCEPTIONS. The four exempt fields pa
            WROTE NOTHING OUTSIDE D:/GitHub/stzzui EXCEPT SCRATCH FILES IN THIS SESSION'S TEMP SCRATCHPAD
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 13:45 | NOTE | answers nothing -- follows the narrowing memo above | the narrowing has a fixture of its own, and it was proved to go red
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 13:45 | ATTENDED
+
+subject:   field-misplaced-read-anywhere.zui, local commit on main, not pushed
+
+why:       the memo above named a suite that could not see its own exemption; you asked for the fixture
+
+did:
+  - wrote conformance/fixtures/field-misplaced-read-anywhere.zui: a lawful SCREEN carrying STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES, with EXIT reachable and its flow declared so nothing else fires
+  - proved it can fail: with the exemption emptied the verifier raises FIELD_MISPLACED four times on it, and with the exemption in place it is clean
+  - registered it at level 2 in manifest.json and moved every stated count to 53 (README, protocol README, contract page, pack manifest)
+  - re-ran the judge and regenerated judge-rows.csv and zui.stzu
+
+state:
+  conformance suite:  53 of 53 pass at level 4 (level 1 10, level 2 49, levels 3 and 4 53), pack verified
+  the court (rnxc):   39 of 53 agree, 14 differ. The new row is refused as UNKNOWN_CLAUSE, which is seam S13 working as recorded
+  manifest version:   left at 1.3; a fixture added after 1.3 shipped did not move it. Yours to say if it should
+  pushed:             NO
+
+waiting:
+  - nothing [proceeding]
+
+next:
+  - stzzui:  UNKNOWN_FIELD in violations.json is still its own item, not started
+```
+---
