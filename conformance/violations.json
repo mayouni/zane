@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.4",
+    "version": "1.5",
     "lastUpdated": "2026-11-01",
     "specification": "doc/language/VIOLATIONS.md",
     "constitution": "3.11",
@@ -432,6 +432,19 @@
       "forbidden_patterns": [],
       "invariant": null,
       "note": "Ruling D1, 2026-10-31. Each kind declares the fields DECLARATIONS.md lists for it, plus the four every kind carries (SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR). A TONE on a SCREEN or a PERSPECTIVE on a FORM is read by nothing and does nothing, and until this diagnostic the verifier said nothing, so the author believed it was honoured. That silence was the defect, and it is the gap ROLE_MISPLACED named in TONE and PERSPECTIVE when it closed its own. Generalised from ROLE_MISPLACED rather than replacing it: ROLE keeps its own id, because ids are stable forever, and FIELD_MISPLACED leaves ROLE to it so one defect is not reported twice. Only a known field is judged, and only one the verifier would otherwise ignore there: STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read on any kind, so they are not silent and are not judged. A name the grammar does not know is UNKNOWN_FIELD. WIDGET and USER are UNSPECIFIED_DECLARATION's and are not judged. The kind list comes from the declaration tables and is mirrored in the Haro declaration haro/zui.stzu, whose court refused this placement before the verifier did."
+    },
+    {
+      "id": "UNKNOWN_FIELD",
+      "severity": "error",
+      "level": 1,
+      "summary": "A field name is not one the grammar defines in the form it is written.",
+      "decidable_from": ["field-list"],
+      "rules": [],
+      "articles": [],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "Raised by the parser since the verifier shipped and, until contract 1.5, known only to the CLI's own table of structural ids, so the diagnostic FIELD_MISPLACED and VIOLATIONS.md tell authors to expect for an unknown name was in no catalogue. A field is known in ONE form: a list key (SATISFIES, ALWAYS_REACHABLE, VISIBLE_ENTITIES, VISIBLE_STATE, INTENT_FLOWS, STEPS, REPORTS, SUPPRESSES, SIGNALS) written as a bracketed list, or a value key (INTENT_FLOW, PERSPECTIVE, TONE, SURFACE_AS, DENSITY, MOTION, ACTOR, ROLE) written as a scalar. A name outside both sets is this, and so is a known name in the other form -- TONE [neutral] and SATISFIES READ. It is a failure to read the declaration rather than a judgement of it, so no law applies and the bindings are empty, like DUPLICATE_FIELD. FIELD_MISPLACED judges only a field that is known in the form written. SYNTAX_ERROR, UNEXPECTED_CHARACTER and UNTERMINATED_STRING are the other three ids the parser raises that way; they stay outside the contract, in the CLI's structural table, and that is a decision still to be made and not one made here."
     }
   ]
 }

@@ -56,7 +56,7 @@ w('-- Words are lower_snake here and UPPER in a .zui file (DISCOVER, SATISFIES):
 w('-- reserves UPPER_SNAKE for its own keywords, and Z made the same trade ("a step is lower_snake');
 w('-- here where ZQL names it UPPER"). Case is the forge\'s printer to restore, not a declaration.');
 w('--');
-w('-- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (33):');
+w('-- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (34):');
 w('--   S1  severity: every refusal a court speaks is an error. Five diagnostics are warnings in');
 w('--       zui.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,');
 w('--       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not');
