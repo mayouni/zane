@@ -161,7 +161,7 @@ Fear · forbidden pattern `layout-shift`.
 
 ## 4. Grammar and reference diagnostics
 
-Beyond the ten, a conforming implementation raises these **twenty-four**. The four marked ✅
+Beyond the ten, a conforming implementation raises these **twenty-seven**. The four marked ✅
 ship in the reference implementation today, under the codes shown.
 
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
@@ -190,8 +190,11 @@ ship in the reference implementation today, under the codes shown.
 | `ROLE_UNDECLARED` | warning | 2 | a surface declares interactions and gives none of them a role | ❌ |
 | `FIELD_MISPLACED` | error | 2 | a known field on a kind that does not declare it (`ROLE` is `ROLE_MISPLACED`'s) | ❌ |
 | `UNKNOWN_FIELD` | error | 1 | a field name the grammar does not define, or a known one written in the wrong form (`TONE [x]`, `SATISFIES x`) | ❌ |
+| `SYNTAX_ERROR` | error | 1 | the source does not parse as `DEFINE <KIND> <name> ( field, … )` | ❌ |
+| `UNEXPECTED_CHARACTER` | error | 1 | a character the lexer has no token for | ❌ |
+| `UNTERMINATED_STRING` | error | 1 | a string is opened and the file ends before it closes | ❌ |
 
-**The last fourteen are `zui`-verifier-only**, and the ❌ column means the *reference
+**The last seventeen are `zui`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
 ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with

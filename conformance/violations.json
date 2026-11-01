@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.5",
+    "version": "1.6",
     "lastUpdated": "2026-11-01",
     "specification": "doc/language/VIOLATIONS.md",
     "constitution": "3.11",
@@ -444,7 +444,46 @@
       "rights": [],
       "forbidden_patterns": [],
       "invariant": null,
-      "note": "Raised by the parser since the verifier shipped and, until contract 1.5, known only to the CLI's own table of structural ids, so the diagnostic FIELD_MISPLACED and VIOLATIONS.md tell authors to expect for an unknown name was in no catalogue. A field is known in ONE form: a list key (SATISFIES, ALWAYS_REACHABLE, VISIBLE_ENTITIES, VISIBLE_STATE, INTENT_FLOWS, STEPS, REPORTS, SUPPRESSES, SIGNALS) written as a bracketed list, or a value key (INTENT_FLOW, PERSPECTIVE, TONE, SURFACE_AS, DENSITY, MOTION, ACTOR, ROLE) written as a scalar. A name outside both sets is this, and so is a known name in the other form -- TONE [neutral] and SATISFIES READ. It is a failure to read the declaration rather than a judgement of it, so no law applies and the bindings are empty, like DUPLICATE_FIELD. FIELD_MISPLACED judges only a field that is known in the form written. SYNTAX_ERROR, UNEXPECTED_CHARACTER and UNTERMINATED_STRING are the other three ids the parser raises that way; they stay outside the contract, in the CLI's structural table, and that is a decision still to be made and not one made here."
+      "note": "Raised by the parser since the verifier shipped and, until contract 1.5, known only to the CLI's own table of structural ids, so the diagnostic FIELD_MISPLACED and VIOLATIONS.md tell authors to expect for an unknown name was in no catalogue. A field is known in ONE form: a list key (SATISFIES, ALWAYS_REACHABLE, VISIBLE_ENTITIES, VISIBLE_STATE, INTENT_FLOWS, STEPS, REPORTS, SUPPRESSES, SIGNALS) written as a bracketed list, or a value key (INTENT_FLOW, PERSPECTIVE, TONE, SURFACE_AS, DENSITY, MOTION, ACTOR, ROLE) written as a scalar. A name outside both sets is this, and so is a known name in the other form -- TONE [neutral] and SATISFIES READ. It is a failure to read the declaration rather than a judgement of it, so no law applies and the bindings are empty, like DUPLICATE_FIELD. FIELD_MISPLACED judges only a field that is known in the form written. SYNTAX_ERROR, UNEXPECTED_CHARACTER and UNTERMINATED_STRING are the other three ids the parser raises that way; they joined the contract at 1.6, so all four structural ids are now catalogued."
+    },
+    {
+      "id": "SYNTAX_ERROR",
+      "severity": "error",
+      "level": 1,
+      "summary": "The source does not parse as DEFINE <KIND> <name> ( field, ... ).",
+      "decidable_from": ["source"],
+      "rules": [],
+      "articles": [],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "Raised by the parser since the verifier shipped and, until contract 1.6, known only to the CLI's table of structural ids. One id for every way a declaration fails to have its shape: no kind after DEFINE, no name, no opening parenthesis, no field name where one is due, no value for a field, an unexpected value inside a list, an unclosed declaration, and any token outside a declaration. The subject says which. It is a failure to read the declaration, so no law applies and the bindings are empty. The grammar is GRAMMAR.md; this id carries no sentence of it, because splitting it into one id per failure would catalogue the parser's recovery paths and not the language."
+    },
+    {
+      "id": "UNEXPECTED_CHARACTER",
+      "severity": "error",
+      "level": 1,
+      "summary": "The source holds a character the lexer has no token for.",
+      "decidable_from": ["source"],
+      "rules": [],
+      "articles": [],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "Raised by the lexer, one per character, and the character is the subject. The lexer skips it and goes on, so a single stray character does not hide the diagnostics after it. A failure to read the file, not a judgement of a declaration: no law applies and the bindings are empty. Until contract 1.6 known only to the CLI's table of structural ids."
+    },
+    {
+      "id": "UNTERMINATED_STRING",
+      "severity": "error",
+      "level": 1,
+      "summary": "A string is opened and the file ends before it closes.",
+      "decidable_from": ["source"],
+      "rules": [],
+      "articles": [],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": null,
+      "note": "Raised by the lexer at the line the string opened on, and the lexer stops there, since everything after an open quote is inside it. Usually followed by SYNTAX_ERROR for the declaration the string swallowed, and that is expected, not a duplicate: one says why the text ended, the other what the declaration lacks. A failure to read the file, so no law applies and the bindings are empty. Until contract 1.6 known only to the CLI's table of structural ids."
     }
   ]
 }

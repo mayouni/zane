@@ -36,7 +36,7 @@ are checked, not typed and trusted.**
 |---|---|---|
 | **the law** | `constitution/rules.json` | 122 rules, 7 articles, 6 rights, 17 forbidden patterns — the semantic layer every diagnostic cites |
 | **the language** | `doc/language/` — README, GRAMMAR, DECLARATIONS, VIOLATIONS | the grammar in EBNF, the ten declaration types, the four closed enumerations, and every diagnostic bound to the rule it enforces |
-| **the refusal contract** | `conformance/violations.json`, `doc/diagnostic-contract.md` + `.schema.json` | 34 diagnostics with severities, levels and bindings; and the envelope every finding travels in, `{code, severity, message, span, cites, language}`, carried in one object under `diagnostics` -- never a top-level array |
+| **the refusal contract** | `conformance/violations.json`, `doc/diagnostic-contract.md` + `.schema.json` | 37 diagnostics with severities, levels and bindings; and the envelope every finding travels in, `{code, severity, message, span, cites, language}`, carried in one object under `diagnostics` -- never a top-level array |
 | **the axes** | `conformance/media.json`, `conformance/signal.json` | the ten media with their properties and per-verb carriage; the five semantic values with what each channel renders them as |
 | **the proof** | `conformance/manifest.json`, `conformance/cross-medium/spec.json` | 53 fixtures with known verdicts at four levels; and the cross-medium cases |
 

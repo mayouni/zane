@@ -11,8 +11,8 @@
     "rules": 122,
     "forbiddenPatterns": 17,
     "language": "1.4",
-    "refusalContract": "1.5",
-    "diagnostics": 34,
+    "refusalContract": "1.6",
+    "diagnostics": 37,
     "media": 10,
     "signalValues": 5,
     "fixtures": 53
@@ -45,14 +45,14 @@
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
-      "bytes": 18515,
-      "sha256": "881ddb68c8739de5044a5cc44ddfdb74dd631ebe0063a5780f2534ba3d7f8c93"
+      "bytes": 18809,
+      "sha256": "44f5833f7eb31b5435c0058a1679198337b289362aad1eed51efc14e824d1776"
     },
     {
       "file": "conformance/violations.json",
       "role": "the refusal contract",
-      "bytes": 23743,
-      "sha256": "1107145b1918a200c61abf29f27d96b722743daba2353e6d39553cd12ec4be2c"
+      "bytes": 26192,
+      "sha256": "2b305a233e9cf02dd2d9b84539902015515c5e8c26152a4c549355a7d882d3aa"
     },
     {
       "file": "doc/diagnostic-contract.md",

@@ -97,10 +97,10 @@ node tools/zui/conformance.js --level 4
 ```
 Zui conformance — level 4
   spec         doc/language/ v1.4
-  contract     violations.json v1.5 (constitution v3.11)
+  contract     violations.json v1.6 (constitution v3.11)
   envelope     diagnostic-contract v1.2.0 — 35 diagnostics and 53 reports, all conform
   media        10 media — verifier agrees with media.json
-  catalogue    34 diagnostics — contract agrees with VIOLATIONS.md
+  catalogue    37 diagnostics — contract agrees with VIOLATIONS.md
   fixtures     53 total
   pass 53 · fail 0 · skipped 0 (above level 4)
 
@@ -121,7 +121,7 @@ contract held 22, through three law versions, with nothing to notice.
 
 ## What it enforces, and what it does not
 
-**33 of the 34 diagnostics** in the contract. Six of the ten named violations
+**36 of the 37 diagnostics** in the contract. Six of the ten named violations
 are decidable from a single declaration and are enforced by default:
 `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`,
 `TRAPPED_FLOW`, `DECORATIVE_ANIMATION` — plus the grammar checks, all **four**

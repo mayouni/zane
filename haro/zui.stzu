@@ -11,7 +11,7 @@
 -- reserves UPPER_SNAKE for its own keywords, and Z made the same trade ("a step is lower_snake
 -- here where ZQL names it UPPER"). Case is the forge's printer to restore, not a declaration.
 --
--- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (34):
+-- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (37):
 --   S1  severity: every refusal a court speaks is an error. Five diagnostics are warnings in
 --       zui.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,
 --       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not

@@ -85,8 +85,9 @@ function loadContract(explicit) {
   return null;
 }
 
-/* Diagnostics the parser can raise that are not in the contract: they are
-   failures to read the file at all, and always fatal. */
+/* Failures to read the file at all, always fatal. They are in the contract
+   since 1.6 and meta() prefers it; this table is the fallback for a run that
+   cannot find violations.json, which the tool is meant to survive. */
 const STRUCTURAL = {
   SYNTAX_ERROR: { severity: 'error', level: 1 },
   UNKNOWN_FIELD: { severity: 'error', level: 1 },
