@@ -1337,3 +1337,34 @@ next:
 note:      NO FIXTURE FOR ANY OF THE FOUR. Their ids are the only ones in the catalogue with no fixture and no row under unfixtured besides LAYOUT_DISPLACEMENT, ROLE_MISPLACED and ROLE_PROMISE_BROKEN, and the suite does not require one. A fixture for each would take it from 53 to 57 and every count with it. Say so if you want that.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 14:10 | NOTE | answers nothing -- follows the structural-ids memo above | three catalogue ids gain fixtures and two gain a reason for having none
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 14:10 | ATTENDED
+
+subject:   fixtures for UNKNOWN_FIELD, ROLE_MISPLACED and ROLE_PROMISE_BROKEN, local commit on main, not pushed
+
+why:       the previous memo said four ids had no fixture and called that a footnote; it was incomplete, and ROLE_MISPLACED and ROLE_PROMISE_BROKEN were language rules with none
+
+did:
+  - wrote unknown-field.zui (a list written for a value key, and a name the grammar lacks), role-misplaced.zui and role-promise-broken.zui; each raises exactly its one id when run alone at level 4
+  - registered them at levels 1, 2 and 2 in manifest.json
+  - added SYNTAX_ERROR and UNTERMINATED_STRING under unfixtured with reasons: recovery after a first failure differs between parsers and the suite compares exact id sets, and an open quote makes this verifier add SYNTAX_ERROR and FIELD_MISPLACED
+  - moved every stated count to 56 fixtures, 39 diagnostic instances and 56 reports; re-ran the judge, regenerated judge-rows.csv and zui.stzu
+
+state:
+  conformance suite:  56 of 56 pass (level 1 11, level 2 52, levels 3 and 4 56), catalogue agrees at 37, pack verified
+  the court (rnxc):   40 of 56 agree, 16 differ. role-promise-broken agrees; unknown-field and role-misplaced are refused as UNKNOWN_CLAUSE, which are seams S11 and S8
+  ids with no fixture and no reason:  UNEXPECTED_CHARACTER only. It was optional and I left it
+  pushed:             NO
+
+waiting:
+  - nothing [proceeding]
+
+next:
+  - central: say if UNEXPECTED_CHARACTER should have a fixture; it would be 57
+  - me:      nothing owed
+
+note:      THE LAST MEMO'S NOTE ON FIXTURES IS SUPERSEDED BY THIS ONE. It listed LAYOUT_DISPLACEMENT, ROLE_MISPLACED and ROLE_PROMISE_BROKEN as ids with no fixture without separating a declared exception from two silent ones. Only the first had a reason on record, and that difference was the finding.
+```
+---
