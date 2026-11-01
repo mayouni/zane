@@ -1368,3 +1368,32 @@ next:
 note:      THE LAST MEMO'S NOTE ON FIXTURES IS SUPERSEDED BY THIS ONE. It listed LAYOUT_DISPLACEMENT, ROLE_MISPLACED and ROLE_PROMISE_BROKEN as ids with no fixture without separating a declared exception from two silent ones. Only the first had a reason on record, and that difference was the finding.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 14:18 | NOTE | answers the question in my fixtures memo above | UNEXPECTED_CHARACTER has its fixture, so every catalogued id now has a fixture or a stated reason
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 14:18 | ATTENDED
+
+subject:   unexpected-character.zui, local commit on main, not pushed
+
+why:       the memo above left one id with neither a fixture nor a reason; the author asked for the fixture
+
+did:
+  - wrote conformance/fixtures/unexpected-character.zui: an at-sign between two lawful declarations, which raises exactly UNEXPECTED_CHARACTER when run alone at level 4
+  - placed the character between declarations on purpose, so the fixture pins the lexical alphabet and no parser's recovery
+  - registered it at level 1 and moved every stated count to 57 fixtures, 40 diagnostic instances and 57 reports; re-ran the judge and regenerated judge-rows.csv and zui.stzu
+
+state:
+  conformance suite:  57 of 57 pass (level 1 12, level 2 53, levels 3 and 4 57), catalogue agrees at 37, pack verified
+  the court (rnxc):   40 of 57 agree, 17 differ. The stray character is refused as PARSE, another code for the same refusal (S11)
+  catalogued ids:     37 in all: 34 with a fixture, and LAYOUT_DISPLACEMENT, SYNTAX_ERROR and UNTERMINATED_STRING under unfixtured with reasons. None without either
+  pushed:             NO
+
+waiting:
+  - nothing [proceeding]
+
+next:
+  - me:      nothing owed. The fixture work on the catalogue is closed
+
+note:      I COUNTED THE CATALOGUE AGAINST THE MANIFEST BEFORE WRITING THE LINE ABOVE and not from memory, after the last memo's count was incomplete. 37 ids, 34 expected by some fixture, 3 unfixtured.
+```
+---
