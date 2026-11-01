@@ -11,7 +11,7 @@
 -- reserves UPPER_SNAKE for its own keywords, and Z made the same trade ("a step is lower_snake
 -- here where ZQL names it UPPER"). Case is the forge's printer to restore, not a declaration.
 --
--- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (32):
+-- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (33):
 --   S1  severity: every refusal a court speaks is an error. Five diagnostics are warnings in
 --       zui.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,
 --       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not
@@ -40,31 +40,36 @@
 --   S10 RATIONALE: the Commons (stzu GRAMMAR, C6 3.8) makes RATIONALE mandatory on every
 --       declaration of a language the forge makes; a .zui declaration has none. Adopting the
 --       court means every .zui declaration says why. That is a language change, not a
---       translation, and it is the author's to rule (D4).
---   S11 duplicates: DUPLICATE_FIELD is refused as PARSE and DUPLICATE_DECLARATION as
---       DUPLICATE_NAME. Both are refused; the codes StzZui published are not the ones spoken.
+--       translation. RULED 2026-10-31: .zui 1.3 gains no mandatory RATIONALE (D4); at the
+--       boundary a declaration with none reaches the court as "none given".
+--   S11 codes: DUPLICATE_FIELD is refused as PARSE, DUPLICATE_DECLARATION as DUPLICATE_NAME and
+--       FIELD_MISPLACED as UNKNOWN_CLAUSE. All are refused; the codes StzZui published are not
+--       the ones spoken.
 --   S12 first refusal: the forged court's diagnose speaks the first refusal it meets;
 --       zui.js reports every one. The collecting court exists (haro.ring all) and is not
 --       what a forged court does yet.
 --
 -- DIVERGENCES from zui.js that this declaration makes by being closed (each is a ruling for
 -- the author, not a decision taken here):
---   D1  fields are declared per kind from DECLARATIONS.md. zui.js accepts any field on any
---       kind and ignores a misplaced TONE or PERSPECTIVE silently; a closed declaration refuses
---       it. The declaration is the stricter of the two and the prose is on its side.
+--   D1  CLOSED at language v1.4 (2026-11-01). Fields are declared per kind from DECLARATIONS.md;
+--       zui.js used to accept any field on any kind and ignore a misplaced TONE or PERSPECTIVE
+--       silently. It now refuses it as FIELD_MISPLACED (ROLE stays ROLE_MISPLACED), so court and
+--       verifier agree on which placements are refused; only the code spoken differs (S11).
 --   D2  WIDGET and USER are named and refused as errors; zui.js reports them as a warning.
---   D3  other pillars' kinds are refused, not ignored (S9).
---   D4  every declaration gains a RATIONALE (S10).
+--       RULED 2026-10-31: the verifier keeps its warning, until Haro has a severity seat.
+--   D3  other pillars' kinds are refused, not ignored (S9). RULED 2026-10-31: the verifier ignores.
+--   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zui 1.3 is unchanged and the
+--       translator writes "none given"; RATIONALE stays mandatory in the agent's grammar.
 --
--- MEASURED 2026-10-31 by haro/judge-zui-court.js: the 50 fixtures of conformance/manifest.json, each
--- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE) and judged by
--- the court forged from this file. 38 agree with the manifest (19 of them lawful twins judged
--- clean). 12 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host
--- world (S3), 2 are refused under another code (S11), and one each is VIBE_STRIPS_RIGHT (S7),
+-- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 52 fixtures of conformance/manifest.json, each
+-- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and
+-- judged by the court forged from this file. 39 agree with the manifest (20 of them lawful twins
+-- judged clean). 13 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host
+-- world (S3), 3 are refused under another code (S11), and one each is VIBE_STRIPS_RIGHT (S7),
 -- VERB_NOT_CARRIED on print x ACT (S6) and a foreign pillar refused (S9).
 
 DEFINE LANGUAGE zui AS (
-  VERSION "1.3", GRAMMAR "1.3",
+  VERSION "1.4", GRAMMAR "1.4",
   COURT "conformance/manifest.json",
   EXTENSION ".zui"
 ) RATIONALE "What a human is DOING, declared before anything is rendered: ten declaration kinds over twenty-two intent verbs, judged by a constitution -- the surface is a consequence and is never named"

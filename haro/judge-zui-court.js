@@ -32,8 +32,10 @@ function translate(src) {
       : val.trim().toLowerCase() === val.trim() ? val : val;
     return pre + ws + key + ' ' + v;
   });
-  // close each declaration with RATIONALE
-  s = s.replace(/\)(\s*)(?=\n\s*DEFINE|\s*$)/g, ') RATIONALE "translated from a .zui fixture"$1');
+  // close each declaration with RATIONALE. A .zui declaration carries none (D4, 2026-10-31), so the
+  // court is told so in words; the old text, "translated from a .zui fixture", was a reason the
+  // fixtures never gave.
+  s = s.replace(/\)(\s*)(?=\n\s*DEFINE|\s*$)/g, ') RATIONALE "none given"$1');
   return s;
 }
 

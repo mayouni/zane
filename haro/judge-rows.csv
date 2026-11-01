@@ -49,3 +49,5 @@ proposal-commits.zui,2,PROPOSAL_COMMITS,PROPOSAL_COMMITS
 proposal-commits-lawful.zui,2,,(clean)
 role-undeclared.zui,2,ROLE_UNDECLARED,(clean)
 role-undeclared-lawful.zui,2,,(clean)
+field-misplaced.zui,2,FIELD_MISPLACED,UNKNOWN_CLAUSE
+field-misplaced-lawful.zui,2,,(clean)
