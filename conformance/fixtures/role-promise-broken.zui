@@ -1,0 +1,10 @@
+// A reversible control promises the change can be taken back. This one keeps no
+// reachable UNDO, and it does not declare that it acts, so MISSING_UNDO cannot see it
+// (that diagnostic needs ACT in SATISFIES). ROLE_PROMISE_BROKEN fires only where
+// MISSING_UNDO cannot, so one defect is never reported twice.
+// Expected: ROLE_PROMISE_BROKEN
+
+DEFINE INTERACTION archive_invoice (
+  SATISFIES [SELECT],
+  ROLE reversible
+)

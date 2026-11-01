@@ -398,6 +398,30 @@
       "level": 2,
       "expect_ids": [],
       "note": "Pins the exemption, ruled 2026-11-01. STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read by the verifier on any kind, so on a SCREEN they are not silent and FIELD_MISPLACED does not judge them. Proved to go red: with the exemption emptied, the verifier raises FIELD_MISPLACED four times here. The Haro court still refuses all four (seam S13)."
+    },
+    {
+      "file": "unknown-field.zui",
+      "level": 1,
+      "expect_ids": [
+        "UNKNOWN_FIELD"
+      ],
+      "note": "A field is known in ONE form. TONE [neutral] is a list for a value key, and COLOR is no name at all; each raises it once. FIELD_MISPLACED stays quiet because it judges only a field known in the form written. Raises twice, the set holds one id. Level 1: it is the grammar that does not know the field."
+    },
+    {
+      "file": "role-misplaced.zui",
+      "level": 2,
+      "expect_ids": [
+        "ROLE_MISPLACED"
+      ],
+      "note": "ROLE on a SCREEN, with a lawful value so UNKNOWN_ROLE stays quiet. FIELD_MISPLACED leaves ROLE to this diagnostic, so the defect is reported once and under its older id. Had no fixture until 2026-11-01."
+    },
+    {
+      "file": "role-promise-broken.zui",
+      "level": 2,
+      "expect_ids": [
+        "ROLE_PROMISE_BROKEN"
+      ],
+      "note": "A reversible control that keeps no UNDO and does not declare ACT, the one case MISSING_UNDO cannot see. Scoped away from MISSING_UNDO on purpose, so this fires alone. Had no fixture until 2026-11-01."
     }
   ],
   "unfixtured": [
@@ -405,6 +429,16 @@
       "id": "LAYOUT_DISPLACEMENT",
       "level": 4,
       "reason": "Undecidable from a declaration: it is a fact about a painted page. Measured today by tools/ui-audit.html. A fixture here would be theatre -- the suite says so rather than pretending coverage."
+    },
+    {
+      "id": "SYNTAX_ERROR",
+      "level": 1,
+      "reason": "Recovery is not part of the language. One id covers every way a declaration lacks its shape, and what a parser reports AFTER the first failure differs between parsers, so a fixture would pin this verifier's error recovery into the suite every other implementation must match. The id set is compared exactly."
+    },
+    {
+      "id": "UNTERMINATED_STRING",
+      "level": 1,
+      "reason": "The same reason, and sharper: an open quote swallows the rest of the file, so this verifier also reports SYNTAX_ERROR for the declaration the string ate and FIELD_MISPLACED for a field left without a value. A fixture would require every implementation to cascade the same way."
     }
   ]
 }

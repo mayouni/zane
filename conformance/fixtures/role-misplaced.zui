@@ -1,0 +1,10 @@
+// A role is per-control, and INTERACTION is the only declaration meaning an act
+// bound to an object. ROLE on a SCREEN would claim the whole surface is inert, which
+// means nothing. The value is lawful, so UNKNOWN_ROLE stays quiet, and FIELD_MISPLACED
+// leaves ROLE to this diagnostic so the defect is reported once.
+// Expected: ROLE_MISPLACED
+
+DEFINE SCREEN ledger_overview (
+  SATISFIES [READ],
+  ROLE inert
+)

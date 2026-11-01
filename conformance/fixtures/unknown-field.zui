@@ -1,0 +1,11 @@
+// A field is known in ONE form. TONE is a value key, so TONE [neutral] -- a list --
+// is not a field this grammar has, and COLOR is not a name it has in any form.
+// Both are UNKNOWN_FIELD, once each. FIELD_MISPLACED stays quiet: it judges only a
+// field that is known in the form written.
+// Expected: UNKNOWN_FIELD
+
+DEFINE FEEDBACK deploy_result (
+  TONE [neutral],
+  COLOR red,
+  REPORTS [deploy_state]
+)
