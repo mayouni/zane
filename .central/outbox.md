@@ -1304,3 +1304,36 @@ next:
 note:      I CALLED THIS A GAP, AND IT WAS HALF ONE. cli.js keeps four parser ids in a table of structural ids on purpose, as failures to read a file at all. UNKNOWN_FIELD was one of the four, so it was a decision and not an omission. It is also a judgement of the declaration and not only a failure to read it, which is why I catalogued it and left the other three. The note in violations.json says so. Reverse it if you want the four kept together.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 14:02 | ANSWER | answers my own open question in the UNKNOWN_FIELD memo above | all four structural ids are in the contract
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 14:02 | ATTENDED
+
+subject:   SYNTAX_ERROR, UNEXPECTED_CHARACTER and UNTERMINATED_STRING in conformance/violations.json, contract 1.5 to 1.6, local commit on main, not pushed
+
+why:       the author asked that the four structural ids be catalogued together, which closes the question I routed to you in the last memo
+
+did:
+  - added the three ids as errors at level 1 with empty bindings, so the contract now holds all four structural ids and 37 diagnostics
+  - checked each note against the parser on one input: a stray @ gives UNEXPECTED_CHARACTER and parsing goes on, an open quote gives UNTERMINATED_STRING and parsing stops, and a missing parenthesis or unclosed declaration gives SYNTAX_ERROR
+  - kept SYNTAX_ERROR as one id for every way a declaration lacks its shape, and said why in its note
+  - added three rows to VIOLATIONS.md, which now counts twenty-seven, and moved every stated count to 37
+  - kept the CLI's structural table as the fallback for a run that cannot find violations.json and corrected its comment; the CLI now prints the contract's sentence for these ids
+  - rewrote the UNKNOWN_FIELD note so it no longer calls the other three outside the contract; regenerated zui.stzu and the pack manifest
+
+state:
+  conformance suite:  53 of 53 pass, catalogue agrees at 37 diagnostics, pack verified
+  the court (rnxc):   39 of 53 agree, unchanged
+  contract version:   1.6; language stays v1.4
+  pushed:             NO
+
+waiting:
+  - nothing [proceeding]
+
+next:
+  - central: nothing owed. The question in my last memo is closed by this one
+  - me:      nothing owed
+
+note:      NO FIXTURE FOR ANY OF THE FOUR. Their ids are the only ones in the catalogue with no fixture and no row under unfixtured besides LAYOUT_DISPLACEMENT, ROLE_MISPLACED and ROLE_PROMISE_BROKEN, and the suite does not require one. A fixture for each would take it from 53 to 57 and every count with it. Say so if you want that.
+```
+---
