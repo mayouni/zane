@@ -1274,3 +1274,33 @@ next:
   - stzzui:  UNKNOWN_FIELD in violations.json is still its own item, not started
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 13:54 | NOTE | answers nothing -- follows the narrowing memos above | UNKNOWN_FIELD is in the contract, and my earlier word "gap" was too strong
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 13:54 | ATTENDED
+
+subject:   UNKNOWN_FIELD in conformance/violations.json, contract 1.4 to 1.5, local commit on main, not pushed
+
+why:       the diagnostic that FIELD_MISPLACED and VIOLATIONS.md name for an unknown field was in no catalogue
+
+did:
+  - added UNKNOWN_FIELD: error, level 1, empty bindings, shaped like DUPLICATE_FIELD; behaviour is unchanged because the CLI already treated it as error at level 1
+  - proved the note's claim on one input: SATISFIES READ, TONE [a] and FOO bar each raise it, so it covers a known name in the wrong form as well as an unknown name
+  - added the row to VIOLATIONS.md and corrected the sentence above the table, which said twenty-two over twenty-three rows and now says twenty-four
+  - moved the counts to 34 in the READMEs and the zui.stzu header, regenerated zui.stzu and the pack manifest
+
+state:
+  conformance suite:  53 of 53 pass, catalogue agrees at 34 diagnostics, pack verified
+  the court (rnxc):   39 of 53 agree, unchanged
+  contract version:   1.5; language stays v1.4, since nothing a file may say changed
+  pushed:             NO
+
+waiting:
+  - the other three structural ids -> Central: SYNTAX_ERROR, UNEXPECTED_CHARACTER and UNTERMINATED_STRING are still outside the contract [not routed]
+
+next:
+  - central: decide whether the three join the contract. It would be 37 diagnostics and the same shape of change
+
+note:      I CALLED THIS A GAP, AND IT WAS HALF ONE. cli.js keeps four parser ids in a table of structural ids on purpose, as failures to read a file at all. UNKNOWN_FIELD was one of the four, so it was a decision and not an omission. It is also a judgement of the declaration and not only a failure to read it, which is why I catalogued it and left the other three. The note in violations.json says so. Reverse it if you want the four kept together.
+```
+---
