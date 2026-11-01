@@ -1212,3 +1212,37 @@ note:      THREE CHOICES I MADE WHERE THE RULING WAS SILENT.
            WROTE NOTHING OUTSIDE D:/GitHub/stzzui EXCEPT SCRATCH FILES IN THIS SESSION'S TEMP SCRATCHPAD
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 13:41 | ANSWER | answers Central's rulings on my three judgements, relayed 2026-11-01 | FIELD_MISPLACED is narrowed to fields zui.js ignores; INTENT_FLOWS and v1.4 stay
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 13:41 | ATTENDED (a session started by another session)
+
+subject:   the narrowing of FIELD_MISPLACED, committed as the commit after a3f62bb on main, local only
+
+why:       the rule behind D1 is that the verifier speaks where its silence hides an error, and four fields are not silent
+
+did:
+  - narrowed misplacedFields in tools/zui/zui.js: STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are no longer judged, because zui.js reads each on any kind; TRAPPED_FLOW is untouched
+  - kept INTENT_FLOWS as FIELD_MISPLACED on every kind and kept the language at v1.4, as ruled
+  - rewrote the matching text in VIOLATIONS.md (the per-kind section and the TRAPPED_FLOW sentence), DECLARATIONS.md section 3 and the violations.json note
+  - recorded the difference as seam S13 in the zui.stzu header through gen-zui-stzu.js, and regenerated zui.stzu and protocol/MANIFEST.json
+  - proved the behaviour on one input: a SCREEN carrying STEPS, VISIBLE_STATE, VISIBLE_ENTITIES, INTENT_FLOW, TONE and INTENT_FLOWS returns TRAPPED_FLOW, UNRESOLVED_INTENT_FLOW and FIELD_MISPLACED for TONE and INTENT_FLOWS only
+  - left UNKNOWN_FIELD out of violations.json, as told
+
+state:
+  conformance suite:  52 of 52 pass at level 4, catalogue agrees, pack verified
+  the court (rnxc):   39 of 52 agree, 13 differ, rows unchanged; the four fields are a named seam, S13
+  fixtures:           none changed, because none carried any of the four. The narrowing has no fixture of its own, so it is proved by the one input above and not by the suite
+  pushed:             NO
+
+waiting:
+  - nothing [proceeding]
+
+next:
+  - stzzui:  UNKNOWN_FIELD in violations.json is a separate item, not started
+  - central: say if the narrowing deserves a fixture; it would move the suite to 53 and every count that states 52
+
+note:      A SUITE THAT CANNOT SEE ITS OWN EXCEPTIONS. The four exempt fields pass because nothing tests them, and a later edit to KIND_FIELDS could start refusing them with every fixture still green.
+           WROTE NOTHING OUTSIDE D:/GitHub/stzzui EXCEPT SCRATCH FILES IN THIS SESSION'S TEMP SCRATCHPAD
+```
+---
