@@ -51,3 +51,4 @@ role-undeclared.zui,2,ROLE_UNDECLARED,(clean)
 role-undeclared-lawful.zui,2,,(clean)
 field-misplaced.zui,2,FIELD_MISPLACED,UNKNOWN_CLAUSE
 field-misplaced-lawful.zui,2,,(clean)
+field-misplaced-read-anywhere.zui,2,,UNKNOWN_CLAUSE

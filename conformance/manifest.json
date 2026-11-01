@@ -392,6 +392,12 @@
       "level": 2,
       "expect_ids": [],
       "note": "The twin: the same two fields on the kinds that declare them, and the SCREEN keeping only the four fields every kind may carry."
+    },
+    {
+      "file": "field-misplaced-read-anywhere.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Pins the exemption, ruled 2026-11-01. STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read by the verifier on any kind, so on a SCREEN they are not silent and FIELD_MISPLACED does not judge them. Proved to go red: with the exemption emptied, the verifier raises FIELD_MISPLACED four times here. The Haro court still refuses all four (seam S13)."
     }
   ],
   "unfixtured": [

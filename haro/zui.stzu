@@ -64,12 +64,12 @@
 --   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zui 1.3 is unchanged and the
 --       translator writes "none given"; RATIONALE stays mandatory in the agent's grammar.
 --
--- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 52 fixtures of conformance/manifest.json, each
+-- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 53 fixtures of conformance/manifest.json, each
 -- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and
 -- judged by the court forged from this file. 39 agree with the manifest (20 of them lawful twins
--- judged clean). 13 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host
+-- judged clean). 14 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host
 -- world (S3), 3 are refused under another code (S11), and one each is VIBE_STRIPS_RIGHT (S7),
--- VERB_NOT_CARRIED on print x ACT (S6) and a foreign pillar refused (S9).
+-- VERB_NOT_CARRIED on print x ACT (S6), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.
 
 DEFINE LANGUAGE zui AS (
   VERSION "1.4", GRAMMAR "1.4",

@@ -98,17 +98,17 @@ node tools/zui/conformance.js --level 4
 Zui conformance — level 4
   spec         doc/language/ v1.4
   contract     violations.json v1.4 (constitution v3.11)
-  envelope     diagnostic-contract v1.2.0 — 35 diagnostics and 52 reports, all conform
+  envelope     diagnostic-contract v1.2.0 — 35 diagnostics and 53 reports, all conform
   media        10 media — verifier agrees with media.json
   catalogue    33 diagnostics — contract agrees with VIOLATIONS.md
-  fixtures     52 total
-  pass 52 · fail 0 · skipped 0 (above level 4)
+  fixtures     53 total
+  pass 53 · fail 0 · skipped 0 (above level 4)
 
   conforms at level 4 — every fixture in the suite.
 ```
 
-Per level: **L1** 10 pass, 40 skipped · **L2** 48 pass, 4 skipped · **L3** and
-**L4** 52 pass. Comparison is by diagnostic id only — never line numbers,
+Per level: **L1** 10 pass, 40 skipped · **L2** 49 pass, 4 skipped · **L3** and
+**L4** 53 pass. Comparison is by diagnostic id only — never line numbers,
 wording or order.
 
 **The `media` and `catalogue` lines are agreement checks, not counts.** Two
@@ -187,6 +187,6 @@ One of possibly several, and deliberately so. The
 [M3 decision document](../../doc/decisions/M3-the-zui-verifier.md) left the
 extract-versus-embed question open, and the conformance suite is what makes
 that safe: **any future implementation, in any language, proves agreement
-against the same 52 fixtures.** A Zig verifier living beside the reference implementation's compiler
+against the same 53 fixtures.** A Zig verifier living beside the reference implementation's compiler
 would be measured exactly the way this one is. That is the point of writing
 the fixtures first.
