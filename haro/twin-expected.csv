@@ -1,0 +1,17 @@
+fixture,zuijs_says,court_says,seam,class
+duplicate-field.zui,DUPLICATE_FIELD,PARSE,S11,other-code
+duplicate-declaration.zui,DUPLICATE_DECLARATION,DUPLICATE_NAME,S11,other-code
+field-misplaced.zui,FIELD_MISPLACED,UNKNOWN_CLAUSE,S11,other-code
+unknown-field.zui,UNKNOWN_FIELD,UNKNOWN_CLAUSE,S11,other-code
+unexpected-character.zui,UNEXPECTED_CHARACTER,PARSE,S11,other-code
+role-misplaced.zui,ROLE_MISPLACED,UNKNOWN_CLAUSE,S8,other-code
+intent-flow-no-satisfies.zui,INTENT_FLOW_NO_SATISFIES,(clean),S1,not-refused
+unresolved-intent-flow.zui,UNRESOLVED_INTENT_FLOW,(clean),S1,not-refused
+unresolved-entity.zui,UNRESOLVED_ENTITY,(clean),S1,not-refused
+role-undeclared.zui,ROLE_UNDECLARED,(clean),S1,not-refused
+intent-orphan.zui,INTENT_ORPHAN,(clean),S3,not-refused
+invisible-state.zui,INVISIBLE_STATE,(clean),S3,not-refused
+hidden-authority.zui,HIDDEN_AUTHORITY,(clean),S3,not-refused
+vibe-strips-right.zui,VIBE_STRIPS_RIGHT,(clean),S7,not-refused
+foreign-pillar-ignored.zui,(clean),UNKNOWN_KIND,S9,court-only
+field-misplaced-read-anywhere.zui,(clean),UNKNOWN_CLAUSE,S13,court-only

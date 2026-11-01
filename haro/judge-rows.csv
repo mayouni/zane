@@ -31,7 +31,7 @@ hidden-authority.zui,3,HIDDEN_AUTHORITY,(clean)
 unresolved-entity.zui,3,UNRESOLVED_ENTITY,(clean)
 unknown-medium.zui,2,UNKNOWN_MEDIUM,UNKNOWN_MEDIUM
 unknown-medium-lawful.zui,2,,(clean)
-verb-not-carried.zui,2,VERB_NOT_CARRIED,(clean)
+verb-not-carried.zui,2,VERB_NOT_CARRIED,VERB_NOT_CARRIED
 verb-not-carried-lawful.zui,2,,(clean)
 unknown-signal.zui,1,UNKNOWN_SIGNAL,UNKNOWN_SIGNAL
 unknown-signal-lawful.zui,1,,(clean)

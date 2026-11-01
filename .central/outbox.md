@@ -1397,3 +1397,39 @@ next:
 note:      I COUNTED THE CATALOGUE AGAINST THE MANIFEST BEFORE WRITING THE LINE ABOVE and not from memory, after the last memo's count was incomplete. 37 ids, 34 expected by some fixture, 3 unfixtured.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-01 23:42 | NOTE | answers Central's NOTE of 2026-11-01 23:22, task A | the twin-court ratchet is in: 16 differences listed, the judge exits non-zero on any other
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-01 23:42 | ATTENDED
+
+subject:   haro/twin-expected.csv and the ratchet in haro/judge-zui-court.js, local commit on main, not pushed
+
+why:       zui.js and the court forged from haro/zui.stzu are two evaluators of one law, and until now a difference between them could appear or vanish without anyone choosing it
+
+did:
+  - wrote haro/twin-expected.csv: one row per fixture on which the court and zui.js differ (fixture, what zui.js says, what the court says, the seam, a class), 16 rows
+  - made judge-zui-court.js exit 1 on a difference that is not in the file, on a listed row whose values changed, and on a listed difference that now agrees; it exits 0 only when the file and the run match
+  - proved the ratchet by breaking it three ways and restoring the file: a row deleted gave NEW, an agreeing fixture listed gave "now AGREES, delete its row", a changed court code gave CHANGED; each exited 1
+  - closed S6: the generator now emits one VERB_NOT_CARRIED constraint for each of the 77 absent cells of conformance/media.json, derived from the data the way zui.js derives NOT_CARRIED, replacing the two hand-written proof cells. verb-not-carried.zui now agrees, which moved the figure from 17 to 16
+  - recorded the five code-only differences (S11) as class other-code, same refusal under another code, and did not rename any court code. ROLE_MISPLACED (S8) is the same kind and is class other-code too, so that class holds 6 rows
+  - made the judge read "what zui.js says" from zui.js itself; the line that was meant to do it was a no-op. The judge also fails if zui.js and the manifest disagree on any fixture, so the column can be trusted
+  - did not touch tools/zui/zui.js
+
+state:
+  twin figure:        41 of 57 agree (20 lawful twins judged clean), 16 differ. Before: 40 and 17
+  the 16, by class:   other-code 6 (S11 x5, S8), not-refused 8 (S1 x4, S3 x3, S7), court-only 2 (S9 foreign pillar, S13 reads-anywhere)
+  the court:          136 constraints, from 60; the judge still runs in about 3 seconds on rnxc
+  conformance suite:  57 of 57 pass at level 4, catalogue agrees at 37, pack verified
+  gates owned and run: the judge, the conformance suite, the pack check. Owned and not run: none
+  pushed:             NO
+
+waiting:
+  - nothing [proceeding]
+
+next:
+  - me:      task B, doc/design/COVERAGE.md, design only
+  - central: check and push; when haro-charter answers on CITES, severity and the value join, the ratchet will refuse the run until the rows for S1 and S7 are deleted (S2 has no row: a missing cite is not a difference of verdict), which is the point
+
+note:      THE RATCHET JUDGES THE COURT'S FIRST REFUSAL, NOT THE WHOLE SET (S12). multiple-violations.zui expects four ids and the court names one of them, and the judge has always counted that as agreement; so it is not in the file. A difference of that kind is invisible to this ratchet until the collecting court is what a forged court does.
+```
+---

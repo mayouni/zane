@@ -71,9 +71,8 @@ w('--   S4  the rendered surface: LAYOUT_DISPLACEMENT (level 4) is judged on a p
 w('--       declaration. It stays with the tool tier of the enforcement ladder.');
 w('--   S5  a universal field: SATISFIES, ALWAYS_REACHABLE, SIGNALS and ACTOR belong to every');
 w('--       kind and the meta-language has no "on every declaration", so they repeat on all ten.');
-w('--   S6  the media matrix: 77 cells are "absent" in media.json; two are carried below as the');
-w('--       proof that a cross-declaration cell can be said (zoom on auditory and voice). The');
-w('--       other 75 are sayable the same way and are the forge\'s to generate, not hand-written.');
+w('--   S6  CLOSED 2026-11-01: the media matrix has 77 "absent" cells in media.json and the generator');
+w('--       emits one VERB_NOT_CARRIED constraint for each, derived from the data the way zui.js derives it.');
 w('--   S7  VIBE_STRIPS_RIGHT needs "a suppressed verb that ANY declaration guarantees": a join of');
 w('--       the values of one list against the lists of other declarations. I found no such form in the');
 w('--       condition language of 2026-10-31; that is not a proof that none can be made.');
@@ -89,7 +88,8 @@ w('--       translation. RULED 2026-10-31: .zui 1.3 gains no mandatory RATIONALE
 w('--       boundary a declaration with none reaches the court as "none given".');
 w('--   S11 codes: DUPLICATE_FIELD is refused as PARSE, DUPLICATE_DECLARATION as DUPLICATE_NAME and');
 w('--       FIELD_MISPLACED and UNKNOWN_FIELD as UNKNOWN_CLAUSE and UNEXPECTED_CHARACTER as PARSE. All are refused; the codes StzZui published are not');
-w('--       the ones spoken.');
+w('--       the ones spoken. Recorded in haro/twin-expected.csv as class other-code (same refusal, another');
+w('--       code), not fixed by renaming the court\'s codes.');
 w('--   S12 first refusal: the forged court\'s diagnose speaks the first refusal it meets;');
 w('--       zui.js reports every one. The collecting court exists (haro.ring all) and is not');
 w('--       what a forged court does yet.');
@@ -111,10 +111,11 @@ w('--       translator writes "none given"; RATIONALE stays mandatory in the age
 w('--');
 w('-- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 57 fixtures of conformance/manifest.json, each');
 w('-- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and');
-w('-- judged by the court forged from this file. 40 agree with the manifest (20 of them lawful twins');
-w('-- judged clean). 17 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host');
-w('-- world (S3), 5 are refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is VIBE_STRIPS_RIGHT (S7),');
-w('-- VERB_NOT_CARRIED on print x ACT (S6), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.');
+w('-- judged by the court forged from this file. 41 agree with the manifest (20 of them lawful twins');
+w('-- judged clean). 16 differ, and each is a named seam, one row each in haro/twin-expected.csv, which');
+w('-- the judge enforces as a ratchet: 4 are warnings not declared (S1), 3 need the host world (S3), 5 are');
+w('-- refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is');
+w('-- VIBE_STRIPS_RIGHT (S7), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.');
 
 w('');
 w('DEFINE LANGUAGE zui AS (');
@@ -258,11 +259,23 @@ cons('decorative_animation_vibe', 'vibe', 'motion present and motion != none and
 CARRIED.add('DECORATIVE_ANIMATION');
 
 // ---- the media axis: the proof cells
-w('-- ---- the medium axis: two cells of the matrix, as proof (S6) ----------------------------');
+w('-- ---- the medium axis: every absent cell of the matrix (S6) ------------------------------');
+w('-- One constraint per (medium, verb) cell that media.json marks absent, derived the way');
+w('-- zui.js derives NOT_CARRIED: a medium whose default is "absent" keeps only its native and');
+w('-- degraded verbs; any other medium loses its listed "absent" verbs.');
 w('');
-const anyKind = cond => KINDS.filter(k => k !== 'form' || true).map(k => `(some ${k} where ${cond})`).join(' or ');
-cons('verb_not_carried_zoom', 'vibe', `(surface_as = auditory or surface_as = voice) and (${anyKind('satisfies contains zoom')})`,
-  'VERB_NOT_CARRIED', '{name} projects to a medium that has no ZOOM, and a declaration of this file promises it', 'Rule 82; media.json absent');
+const anyKind = cond => KINDS.map(k => `(some ${k} where ${cond})`).join(' or ');
+const absentCells = [];
+for (const m of media.media) {
+  const c = m.carries;
+  const keep = new Set([...(c.native || []), ...(c.degraded || [])]);
+  const gone = c.default === 'absent' ? [...Z.INTENT_VERBS].filter(v => !keep.has(v)) : (c.absent || []);
+  for (const v of gone) absentCells.push([m.id, v.toLowerCase()]);
+}
+for (const [m, v] of absentCells) {
+  cons(`verb_not_carried_${m}_${v}`, 'vibe', `surface_as = ${m} and (${anyKind(`satisfies contains ${v}`)})`,
+    'VERB_NOT_CARRIED', `{name} projects to ${m}, a medium that has no ${v.toUpperCase()}, and a declaration of this file promises it`, 'Rule 82; media.json absent');
+}
 CARRIED.add('VERB_NOT_CARRIED');
 for (const k of KINDS) {
   cons(`signal_unperceivable_${k}`, k,

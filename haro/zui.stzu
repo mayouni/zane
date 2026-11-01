@@ -26,9 +26,8 @@
 --       declaration. It stays with the tool tier of the enforcement ladder.
 --   S5  a universal field: SATISFIES, ALWAYS_REACHABLE, SIGNALS and ACTOR belong to every
 --       kind and the meta-language has no "on every declaration", so they repeat on all ten.
---   S6  the media matrix: 77 cells are "absent" in media.json; two are carried below as the
---       proof that a cross-declaration cell can be said (zoom on auditory and voice). The
---       other 75 are sayable the same way and are the forge's to generate, not hand-written.
+--   S6  CLOSED 2026-11-01: the media matrix has 77 "absent" cells in media.json and the generator
+--       emits one VERB_NOT_CARRIED constraint for each, derived from the data the way zui.js derives it.
 --   S7  VIBE_STRIPS_RIGHT needs "a suppressed verb that ANY declaration guarantees": a join of
 --       the values of one list against the lists of other declarations. I found no such form in the
 --       condition language of 2026-10-31; that is not a proof that none can be made.
@@ -44,7 +43,8 @@
 --       boundary a declaration with none reaches the court as "none given".
 --   S11 codes: DUPLICATE_FIELD is refused as PARSE, DUPLICATE_DECLARATION as DUPLICATE_NAME and
 --       FIELD_MISPLACED and UNKNOWN_FIELD as UNKNOWN_CLAUSE and UNEXPECTED_CHARACTER as PARSE. All are refused; the codes StzZui published are not
---       the ones spoken.
+--       the ones spoken. Recorded in haro/twin-expected.csv as class other-code (same refusal, another
+--       code), not fixed by renaming the court's codes.
 --   S12 first refusal: the forged court's diagnose speaks the first refusal it meets;
 --       zui.js reports every one. The collecting court exists (haro.ring all) and is not
 --       what a forged court does yet.
@@ -66,10 +66,11 @@
 --
 -- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 57 fixtures of conformance/manifest.json, each
 -- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and
--- judged by the court forged from this file. 40 agree with the manifest (20 of them lawful twins
--- judged clean). 17 differ, and each is a named seam: 4 are warnings not declared (S1), 3 need the host
--- world (S3), 5 are refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is VIBE_STRIPS_RIGHT (S7),
--- VERB_NOT_CARRIED on print x ACT (S6), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.
+-- judged by the court forged from this file. 41 agree with the manifest (20 of them lawful twins
+-- judged clean). 16 differ, and each is a named seam, one row each in haro/twin-expected.csv, which
+-- the judge enforces as a ratchet: 4 are warnings not declared (S1), 3 need the host world (S3), 5 are
+-- refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is
+-- VIBE_STRIPS_RIGHT (S7), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.
 
 DEFINE LANGUAGE zui AS (
   VERSION "1.4", GRAMMAR "1.4",
@@ -484,11 +485,470 @@ DEFINE CONSTRAINT decorative_animation_vibe AS (
   CODE "DECORATIVE_ANIMATION"
 ) RATIONALE "Rule 112"
 
--- ---- the medium axis: two cells of the matrix, as proof (S6) ----------------------------
+-- ---- the medium axis: every absent cell of the matrix (S6) ------------------------------
+-- One constraint per (medium, verb) cell that media.json marks absent, derived the way
+-- zui.js derives NOT_CARRIED: a medium whose default is "absent" keeps only its native and
+-- degraded verbs; any other medium loses its listed "absent" verbs.
 
-DEFINE CONSTRAINT verb_not_carried_zoom AS (
-  ON vibe, WHEN "(surface_as = auditory or surface_as = voice) and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
-  MESSAGE "{name} projects to a medium that has no ZOOM, and a declaration of this file promises it",
+DEFINE CONSTRAINT verb_not_carried_auditory_zoom AS (
+  ON vibe, WHEN "surface_as = auditory and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to auditory, a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_voice_zoom AS (
+  ON vibe, WHEN "surface_as = voice and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to voice, a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_discover AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains discover) or (some form where satisfies contains discover) or (some wizard where satisfies contains discover) or (some screen where satisfies contains discover) or (some component where satisfies contains discover) or (some nav_graph where satisfies contains discover) or (some world_view where satisfies contains discover) or (some interaction where satisfies contains discover) or (some feedback where satisfies contains discover) or (some vibe where satisfies contains discover))",
+  MESSAGE "{name} projects to haptic, a medium that has no DISCOVER, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_understand AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains understand) or (some form where satisfies contains understand) or (some wizard where satisfies contains understand) or (some screen where satisfies contains understand) or (some component where satisfies contains understand) or (some nav_graph where satisfies contains understand) or (some world_view where satisfies contains understand) or (some interaction where satisfies contains understand) or (some feedback where satisfies contains understand) or (some vibe where satisfies contains understand))",
+  MESSAGE "{name} projects to haptic, a medium that has no UNDERSTAND, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_locate AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains locate) or (some form where satisfies contains locate) or (some wizard where satisfies contains locate) or (some screen where satisfies contains locate) or (some component where satisfies contains locate) or (some nav_graph where satisfies contains locate) or (some world_view where satisfies contains locate) or (some interaction where satisfies contains locate) or (some feedback where satisfies contains locate) or (some vibe where satisfies contains locate))",
+  MESSAGE "{name} projects to haptic, a medium that has no LOCATE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_focus AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains focus) or (some form where satisfies contains focus) or (some wizard where satisfies contains focus) or (some screen where satisfies contains focus) or (some component where satisfies contains focus) or (some nav_graph where satisfies contains focus) or (some world_view where satisfies contains focus) or (some interaction where satisfies contains focus) or (some feedback where satisfies contains focus) or (some vibe where satisfies contains focus))",
+  MESSAGE "{name} projects to haptic, a medium that has no FOCUS, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_filter AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains filter) or (some form where satisfies contains filter) or (some wizard where satisfies contains filter) or (some screen where satisfies contains filter) or (some component where satisfies contains filter) or (some nav_graph where satisfies contains filter) or (some world_view where satisfies contains filter) or (some interaction where satisfies contains filter) or (some feedback where satisfies contains filter) or (some vibe where satisfies contains filter))",
+  MESSAGE "{name} projects to haptic, a medium that has no FILTER, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_compare AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains compare) or (some form where satisfies contains compare) or (some wizard where satisfies contains compare) or (some screen where satisfies contains compare) or (some component where satisfies contains compare) or (some nav_graph where satisfies contains compare) or (some world_view where satisfies contains compare) or (some interaction where satisfies contains compare) or (some feedback where satisfies contains compare) or (some vibe where satisfies contains compare))",
+  MESSAGE "{name} projects to haptic, a medium that has no COMPARE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_read AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains read) or (some form where satisfies contains read) or (some wizard where satisfies contains read) or (some screen where satisfies contains read) or (some component where satisfies contains read) or (some nav_graph where satisfies contains read) or (some world_view where satisfies contains read) or (some interaction where satisfies contains read) or (some feedback where satisfies contains read) or (some vibe where satisfies contains read))",
+  MESSAGE "{name} projects to haptic, a medium that has no READ, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_scan AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains scan) or (some form where satisfies contains scan) or (some wizard where satisfies contains scan) or (some screen where satisfies contains scan) or (some component where satisfies contains scan) or (some nav_graph where satisfies contains scan) or (some world_view where satisfies contains scan) or (some interaction where satisfies contains scan) or (some feedback where satisfies contains scan) or (some vibe where satisfies contains scan))",
+  MESSAGE "{name} projects to haptic, a medium that has no SCAN, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_scroll AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains scroll) or (some form where satisfies contains scroll) or (some wizard where satisfies contains scroll) or (some screen where satisfies contains scroll) or (some component where satisfies contains scroll) or (some nav_graph where satisfies contains scroll) or (some world_view where satisfies contains scroll) or (some interaction where satisfies contains scroll) or (some feedback where satisfies contains scroll) or (some vibe where satisfies contains scroll))",
+  MESSAGE "{name} projects to haptic, a medium that has no SCROLL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_zoom AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to haptic, a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_select AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains select) or (some form where satisfies contains select) or (some wizard where satisfies contains select) or (some screen where satisfies contains select) or (some component where satisfies contains select) or (some nav_graph where satisfies contains select) or (some world_view where satisfies contains select) or (some interaction where satisfies contains select) or (some feedback where satisfies contains select) or (some vibe where satisfies contains select))",
+  MESSAGE "{name} projects to haptic, a medium that has no SELECT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_highlight AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains highlight) or (some form where satisfies contains highlight) or (some wizard where satisfies contains highlight) or (some screen where satisfies contains highlight) or (some component where satisfies contains highlight) or (some nav_graph where satisfies contains highlight) or (some world_view where satisfies contains highlight) or (some interaction where satisfies contains highlight) or (some feedback where satisfies contains highlight) or (some vibe where satisfies contains highlight))",
+  MESSAGE "{name} projects to haptic, a medium that has no HIGHLIGHT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_preview AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains preview) or (some form where satisfies contains preview) or (some wizard where satisfies contains preview) or (some screen where satisfies contains preview) or (some component where satisfies contains preview) or (some nav_graph where satisfies contains preview) or (some world_view where satisfies contains preview) or (some interaction where satisfies contains preview) or (some feedback where satisfies contains preview) or (some vibe where satisfies contains preview))",
+  MESSAGE "{name} projects to haptic, a medium that has no PREVIEW, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_mark AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains mark) or (some form where satisfies contains mark) or (some wizard where satisfies contains mark) or (some screen where satisfies contains mark) or (some component where satisfies contains mark) or (some nav_graph where satisfies contains mark) or (some world_view where satisfies contains mark) or (some interaction where satisfies contains mark) or (some feedback where satisfies contains mark) or (some vibe where satisfies contains mark))",
+  MESSAGE "{name} projects to haptic, a medium that has no MARK, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_act AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains act) or (some form where satisfies contains act) or (some wizard where satisfies contains act) or (some screen where satisfies contains act) or (some component where satisfies contains act) or (some nav_graph where satisfies contains act) or (some world_view where satisfies contains act) or (some interaction where satisfies contains act) or (some feedback where satisfies contains act) or (some vibe where satisfies contains act))",
+  MESSAGE "{name} projects to haptic, a medium that has no ACT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_cancel AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains cancel) or (some form where satisfies contains cancel) or (some wizard where satisfies contains cancel) or (some screen where satisfies contains cancel) or (some component where satisfies contains cancel) or (some nav_graph where satisfies contains cancel) or (some world_view where satisfies contains cancel) or (some interaction where satisfies contains cancel) or (some feedback where satisfies contains cancel) or (some vibe where satisfies contains cancel))",
+  MESSAGE "{name} projects to haptic, a medium that has no CANCEL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_undo AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains undo) or (some form where satisfies contains undo) or (some wizard where satisfies contains undo) or (some screen where satisfies contains undo) or (some component where satisfies contains undo) or (some nav_graph where satisfies contains undo) or (some world_view where satisfies contains undo) or (some interaction where satisfies contains undo) or (some feedback where satisfies contains undo) or (some vibe where satisfies contains undo))",
+  MESSAGE "{name} projects to haptic, a medium that has no UNDO, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_pause AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains pause) or (some form where satisfies contains pause) or (some wizard where satisfies contains pause) or (some screen where satisfies contains pause) or (some component where satisfies contains pause) or (some nav_graph where satisfies contains pause) or (some world_view where satisfies contains pause) or (some interaction where satisfies contains pause) or (some feedback where satisfies contains pause) or (some vibe where satisfies contains pause))",
+  MESSAGE "{name} projects to haptic, a medium that has no PAUSE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_resume AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains resume) or (some form where satisfies contains resume) or (some wizard where satisfies contains resume) or (some screen where satisfies contains resume) or (some component where satisfies contains resume) or (some nav_graph where satisfies contains resume) or (some world_view where satisfies contains resume) or (some interaction where satisfies contains resume) or (some feedback where satisfies contains resume) or (some vibe where satisfies contains resume))",
+  MESSAGE "{name} projects to haptic, a medium that has no RESUME, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_haptic_exit AS (
+  ON vibe, WHEN "surface_as = haptic and ((some intent_flow where satisfies contains exit) or (some form where satisfies contains exit) or (some wizard where satisfies contains exit) or (some screen where satisfies contains exit) or (some component where satisfies contains exit) or (some nav_graph where satisfies contains exit) or (some world_view where satisfies contains exit) or (some interaction where satisfies contains exit) or (some feedback where satisfies contains exit) or (some vibe where satisfies contains exit))",
+  MESSAGE "{name} projects to haptic, a medium that has no EXIT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_focus AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains focus) or (some form where satisfies contains focus) or (some wizard where satisfies contains focus) or (some screen where satisfies contains focus) or (some component where satisfies contains focus) or (some nav_graph where satisfies contains focus) or (some world_view where satisfies contains focus) or (some interaction where satisfies contains focus) or (some feedback where satisfies contains focus) or (some vibe where satisfies contains focus))",
+  MESSAGE "{name} projects to print, a medium that has no FOCUS, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_filter AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains filter) or (some form where satisfies contains filter) or (some wizard where satisfies contains filter) or (some screen where satisfies contains filter) or (some component where satisfies contains filter) or (some nav_graph where satisfies contains filter) or (some world_view where satisfies contains filter) or (some interaction where satisfies contains filter) or (some feedback where satisfies contains filter) or (some vibe where satisfies contains filter))",
+  MESSAGE "{name} projects to print, a medium that has no FILTER, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_scroll AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains scroll) or (some form where satisfies contains scroll) or (some wizard where satisfies contains scroll) or (some screen where satisfies contains scroll) or (some component where satisfies contains scroll) or (some nav_graph where satisfies contains scroll) or (some world_view where satisfies contains scroll) or (some interaction where satisfies contains scroll) or (some feedback where satisfies contains scroll) or (some vibe where satisfies contains scroll))",
+  MESSAGE "{name} projects to print, a medium that has no SCROLL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_zoom AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to print, a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_select AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains select) or (some form where satisfies contains select) or (some wizard where satisfies contains select) or (some screen where satisfies contains select) or (some component where satisfies contains select) or (some nav_graph where satisfies contains select) or (some world_view where satisfies contains select) or (some interaction where satisfies contains select) or (some feedback where satisfies contains select) or (some vibe where satisfies contains select))",
+  MESSAGE "{name} projects to print, a medium that has no SELECT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_highlight AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains highlight) or (some form where satisfies contains highlight) or (some wizard where satisfies contains highlight) or (some screen where satisfies contains highlight) or (some component where satisfies contains highlight) or (some nav_graph where satisfies contains highlight) or (some world_view where satisfies contains highlight) or (some interaction where satisfies contains highlight) or (some feedback where satisfies contains highlight) or (some vibe where satisfies contains highlight))",
+  MESSAGE "{name} projects to print, a medium that has no HIGHLIGHT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_preview AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains preview) or (some form where satisfies contains preview) or (some wizard where satisfies contains preview) or (some screen where satisfies contains preview) or (some component where satisfies contains preview) or (some nav_graph where satisfies contains preview) or (some world_view where satisfies contains preview) or (some interaction where satisfies contains preview) or (some feedback where satisfies contains preview) or (some vibe where satisfies contains preview))",
+  MESSAGE "{name} projects to print, a medium that has no PREVIEW, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_mark AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains mark) or (some form where satisfies contains mark) or (some wizard where satisfies contains mark) or (some screen where satisfies contains mark) or (some component where satisfies contains mark) or (some nav_graph where satisfies contains mark) or (some world_view where satisfies contains mark) or (some interaction where satisfies contains mark) or (some feedback where satisfies contains mark) or (some vibe where satisfies contains mark))",
+  MESSAGE "{name} projects to print, a medium that has no MARK, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_act AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains act) or (some form where satisfies contains act) or (some wizard where satisfies contains act) or (some screen where satisfies contains act) or (some component where satisfies contains act) or (some nav_graph where satisfies contains act) or (some world_view where satisfies contains act) or (some interaction where satisfies contains act) or (some feedback where satisfies contains act) or (some vibe where satisfies contains act))",
+  MESSAGE "{name} projects to print, a medium that has no ACT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_confirm AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains confirm) or (some form where satisfies contains confirm) or (some wizard where satisfies contains confirm) or (some screen where satisfies contains confirm) or (some component where satisfies contains confirm) or (some nav_graph where satisfies contains confirm) or (some world_view where satisfies contains confirm) or (some interaction where satisfies contains confirm) or (some feedback where satisfies contains confirm) or (some vibe where satisfies contains confirm))",
+  MESSAGE "{name} projects to print, a medium that has no CONFIRM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_cancel AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains cancel) or (some form where satisfies contains cancel) or (some wizard where satisfies contains cancel) or (some screen where satisfies contains cancel) or (some component where satisfies contains cancel) or (some nav_graph where satisfies contains cancel) or (some world_view where satisfies contains cancel) or (some interaction where satisfies contains cancel) or (some feedback where satisfies contains cancel) or (some vibe where satisfies contains cancel))",
+  MESSAGE "{name} projects to print, a medium that has no CANCEL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_undo AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains undo) or (some form where satisfies contains undo) or (some wizard where satisfies contains undo) or (some screen where satisfies contains undo) or (some component where satisfies contains undo) or (some nav_graph where satisfies contains undo) or (some world_view where satisfies contains undo) or (some interaction where satisfies contains undo) or (some feedback where satisfies contains undo) or (some vibe where satisfies contains undo))",
+  MESSAGE "{name} projects to print, a medium that has no UNDO, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_pause AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains pause) or (some form where satisfies contains pause) or (some wizard where satisfies contains pause) or (some screen where satisfies contains pause) or (some component where satisfies contains pause) or (some nav_graph where satisfies contains pause) or (some world_view where satisfies contains pause) or (some interaction where satisfies contains pause) or (some feedback where satisfies contains pause) or (some vibe where satisfies contains pause))",
+  MESSAGE "{name} projects to print, a medium that has no PAUSE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_resume AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains resume) or (some form where satisfies contains resume) or (some wizard where satisfies contains resume) or (some screen where satisfies contains resume) or (some component where satisfies contains resume) or (some nav_graph where satisfies contains resume) or (some world_view where satisfies contains resume) or (some interaction where satisfies contains resume) or (some feedback where satisfies contains resume) or (some vibe where satisfies contains resume))",
+  MESSAGE "{name} projects to print, a medium that has no RESUME, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_retry AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains retry) or (some form where satisfies contains retry) or (some wizard where satisfies contains retry) or (some screen where satisfies contains retry) or (some component where satisfies contains retry) or (some nav_graph where satisfies contains retry) or (some world_view where satisfies contains retry) or (some interaction where satisfies contains retry) or (some feedback where satisfies contains retry) or (some vibe where satisfies contains retry))",
+  MESSAGE "{name} projects to print, a medium that has no RETRY, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_print_exit AS (
+  ON vibe, WHEN "surface_as = print and ((some intent_flow where satisfies contains exit) or (some form where satisfies contains exit) or (some wizard where satisfies contains exit) or (some screen where satisfies contains exit) or (some component where satisfies contains exit) or (some nav_graph where satisfies contains exit) or (some world_view where satisfies contains exit) or (some interaction where satisfies contains exit) or (some feedback where satisfies contains exit) or (some vibe where satisfies contains exit))",
+  MESSAGE "{name} projects to print, a medium that has no EXIT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_locate AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains locate) or (some form where satisfies contains locate) or (some wizard where satisfies contains locate) or (some screen where satisfies contains locate) or (some component where satisfies contains locate) or (some nav_graph where satisfies contains locate) or (some world_view where satisfies contains locate) or (some interaction where satisfies contains locate) or (some feedback where satisfies contains locate) or (some vibe where satisfies contains locate))",
+  MESSAGE "{name} projects to luminous, a medium that has no LOCATE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_focus AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains focus) or (some form where satisfies contains focus) or (some wizard where satisfies contains focus) or (some screen where satisfies contains focus) or (some component where satisfies contains focus) or (some nav_graph where satisfies contains focus) or (some world_view where satisfies contains focus) or (some interaction where satisfies contains focus) or (some feedback where satisfies contains focus) or (some vibe where satisfies contains focus))",
+  MESSAGE "{name} projects to luminous, a medium that has no FOCUS, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_filter AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains filter) or (some form where satisfies contains filter) or (some wizard where satisfies contains filter) or (some screen where satisfies contains filter) or (some component where satisfies contains filter) or (some nav_graph where satisfies contains filter) or (some world_view where satisfies contains filter) or (some interaction where satisfies contains filter) or (some feedback where satisfies contains filter) or (some vibe where satisfies contains filter))",
+  MESSAGE "{name} projects to luminous, a medium that has no FILTER, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_compare AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains compare) or (some form where satisfies contains compare) or (some wizard where satisfies contains compare) or (some screen where satisfies contains compare) or (some component where satisfies contains compare) or (some nav_graph where satisfies contains compare) or (some world_view where satisfies contains compare) or (some interaction where satisfies contains compare) or (some feedback where satisfies contains compare) or (some vibe where satisfies contains compare))",
+  MESSAGE "{name} projects to luminous, a medium that has no COMPARE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_read AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains read) or (some form where satisfies contains read) or (some wizard where satisfies contains read) or (some screen where satisfies contains read) or (some component where satisfies contains read) or (some nav_graph where satisfies contains read) or (some world_view where satisfies contains read) or (some interaction where satisfies contains read) or (some feedback where satisfies contains read) or (some vibe where satisfies contains read))",
+  MESSAGE "{name} projects to luminous, a medium that has no READ, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_scan AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains scan) or (some form where satisfies contains scan) or (some wizard where satisfies contains scan) or (some screen where satisfies contains scan) or (some component where satisfies contains scan) or (some nav_graph where satisfies contains scan) or (some world_view where satisfies contains scan) or (some interaction where satisfies contains scan) or (some feedback where satisfies contains scan) or (some vibe where satisfies contains scan))",
+  MESSAGE "{name} projects to luminous, a medium that has no SCAN, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_scroll AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains scroll) or (some form where satisfies contains scroll) or (some wizard where satisfies contains scroll) or (some screen where satisfies contains scroll) or (some component where satisfies contains scroll) or (some nav_graph where satisfies contains scroll) or (some world_view where satisfies contains scroll) or (some interaction where satisfies contains scroll) or (some feedback where satisfies contains scroll) or (some vibe where satisfies contains scroll))",
+  MESSAGE "{name} projects to luminous, a medium that has no SCROLL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_zoom AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to luminous, a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_select AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains select) or (some form where satisfies contains select) or (some wizard where satisfies contains select) or (some screen where satisfies contains select) or (some component where satisfies contains select) or (some nav_graph where satisfies contains select) or (some world_view where satisfies contains select) or (some interaction where satisfies contains select) or (some feedback where satisfies contains select) or (some vibe where satisfies contains select))",
+  MESSAGE "{name} projects to luminous, a medium that has no SELECT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_highlight AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains highlight) or (some form where satisfies contains highlight) or (some wizard where satisfies contains highlight) or (some screen where satisfies contains highlight) or (some component where satisfies contains highlight) or (some nav_graph where satisfies contains highlight) or (some world_view where satisfies contains highlight) or (some interaction where satisfies contains highlight) or (some feedback where satisfies contains highlight) or (some vibe where satisfies contains highlight))",
+  MESSAGE "{name} projects to luminous, a medium that has no HIGHLIGHT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_preview AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains preview) or (some form where satisfies contains preview) or (some wizard where satisfies contains preview) or (some screen where satisfies contains preview) or (some component where satisfies contains preview) or (some nav_graph where satisfies contains preview) or (some world_view where satisfies contains preview) or (some interaction where satisfies contains preview) or (some feedback where satisfies contains preview) or (some vibe where satisfies contains preview))",
+  MESSAGE "{name} projects to luminous, a medium that has no PREVIEW, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_mark AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains mark) or (some form where satisfies contains mark) or (some wizard where satisfies contains mark) or (some screen where satisfies contains mark) or (some component where satisfies contains mark) or (some nav_graph where satisfies contains mark) or (some world_view where satisfies contains mark) or (some interaction where satisfies contains mark) or (some feedback where satisfies contains mark) or (some vibe where satisfies contains mark))",
+  MESSAGE "{name} projects to luminous, a medium that has no MARK, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_act AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains act) or (some form where satisfies contains act) or (some wizard where satisfies contains act) or (some screen where satisfies contains act) or (some component where satisfies contains act) or (some nav_graph where satisfies contains act) or (some world_view where satisfies contains act) or (some interaction where satisfies contains act) or (some feedback where satisfies contains act) or (some vibe where satisfies contains act))",
+  MESSAGE "{name} projects to luminous, a medium that has no ACT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_confirm AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains confirm) or (some form where satisfies contains confirm) or (some wizard where satisfies contains confirm) or (some screen where satisfies contains confirm) or (some component where satisfies contains confirm) or (some nav_graph where satisfies contains confirm) or (some world_view where satisfies contains confirm) or (some interaction where satisfies contains confirm) or (some feedback where satisfies contains confirm) or (some vibe where satisfies contains confirm))",
+  MESSAGE "{name} projects to luminous, a medium that has no CONFIRM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_cancel AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains cancel) or (some form where satisfies contains cancel) or (some wizard where satisfies contains cancel) or (some screen where satisfies contains cancel) or (some component where satisfies contains cancel) or (some nav_graph where satisfies contains cancel) or (some world_view where satisfies contains cancel) or (some interaction where satisfies contains cancel) or (some feedback where satisfies contains cancel) or (some vibe where satisfies contains cancel))",
+  MESSAGE "{name} projects to luminous, a medium that has no CANCEL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_undo AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains undo) or (some form where satisfies contains undo) or (some wizard where satisfies contains undo) or (some screen where satisfies contains undo) or (some component where satisfies contains undo) or (some nav_graph where satisfies contains undo) or (some world_view where satisfies contains undo) or (some interaction where satisfies contains undo) or (some feedback where satisfies contains undo) or (some vibe where satisfies contains undo))",
+  MESSAGE "{name} projects to luminous, a medium that has no UNDO, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_pause AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains pause) or (some form where satisfies contains pause) or (some wizard where satisfies contains pause) or (some screen where satisfies contains pause) or (some component where satisfies contains pause) or (some nav_graph where satisfies contains pause) or (some world_view where satisfies contains pause) or (some interaction where satisfies contains pause) or (some feedback where satisfies contains pause) or (some vibe where satisfies contains pause))",
+  MESSAGE "{name} projects to luminous, a medium that has no PAUSE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_resume AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains resume) or (some form where satisfies contains resume) or (some wizard where satisfies contains resume) or (some screen where satisfies contains resume) or (some component where satisfies contains resume) or (some nav_graph where satisfies contains resume) or (some world_view where satisfies contains resume) or (some interaction where satisfies contains resume) or (some feedback where satisfies contains resume) or (some vibe where satisfies contains resume))",
+  MESSAGE "{name} projects to luminous, a medium that has no RESUME, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_retry AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains retry) or (some form where satisfies contains retry) or (some wizard where satisfies contains retry) or (some screen where satisfies contains retry) or (some component where satisfies contains retry) or (some nav_graph where satisfies contains retry) or (some world_view where satisfies contains retry) or (some interaction where satisfies contains retry) or (some feedback where satisfies contains retry) or (some vibe where satisfies contains retry))",
+  MESSAGE "{name} projects to luminous, a medium that has no RETRY, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_luminous_exit AS (
+  ON vibe, WHEN "surface_as = luminous and ((some intent_flow where satisfies contains exit) or (some form where satisfies contains exit) or (some wizard where satisfies contains exit) or (some screen where satisfies contains exit) or (some component where satisfies contains exit) or (some nav_graph where satisfies contains exit) or (some world_view where satisfies contains exit) or (some interaction where satisfies contains exit) or (some feedback where satisfies contains exit) or (some vibe where satisfies contains exit))",
+  MESSAGE "{name} projects to luminous, a medium that has no EXIT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_focus AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains focus) or (some form where satisfies contains focus) or (some wizard where satisfies contains focus) or (some screen where satisfies contains focus) or (some component where satisfies contains focus) or (some nav_graph where satisfies contains focus) or (some world_view where satisfies contains focus) or (some interaction where satisfies contains focus) or (some feedback where satisfies contains focus) or (some vibe where satisfies contains focus))",
+  MESSAGE "{name} projects to signage, a medium that has no FOCUS, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_filter AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains filter) or (some form where satisfies contains filter) or (some wizard where satisfies contains filter) or (some screen where satisfies contains filter) or (some component where satisfies contains filter) or (some nav_graph where satisfies contains filter) or (some world_view where satisfies contains filter) or (some interaction where satisfies contains filter) or (some feedback where satisfies contains filter) or (some vibe where satisfies contains filter))",
+  MESSAGE "{name} projects to signage, a medium that has no FILTER, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_compare AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains compare) or (some form where satisfies contains compare) or (some wizard where satisfies contains compare) or (some screen where satisfies contains compare) or (some component where satisfies contains compare) or (some nav_graph where satisfies contains compare) or (some world_view where satisfies contains compare) or (some interaction where satisfies contains compare) or (some feedback where satisfies contains compare) or (some vibe where satisfies contains compare))",
+  MESSAGE "{name} projects to signage, a medium that has no COMPARE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_read AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains read) or (some form where satisfies contains read) or (some wizard where satisfies contains read) or (some screen where satisfies contains read) or (some component where satisfies contains read) or (some nav_graph where satisfies contains read) or (some world_view where satisfies contains read) or (some interaction where satisfies contains read) or (some feedback where satisfies contains read) or (some vibe where satisfies contains read))",
+  MESSAGE "{name} projects to signage, a medium that has no READ, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_scan AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains scan) or (some form where satisfies contains scan) or (some wizard where satisfies contains scan) or (some screen where satisfies contains scan) or (some component where satisfies contains scan) or (some nav_graph where satisfies contains scan) or (some world_view where satisfies contains scan) or (some interaction where satisfies contains scan) or (some feedback where satisfies contains scan) or (some vibe where satisfies contains scan))",
+  MESSAGE "{name} projects to signage, a medium that has no SCAN, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_scroll AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains scroll) or (some form where satisfies contains scroll) or (some wizard where satisfies contains scroll) or (some screen where satisfies contains scroll) or (some component where satisfies contains scroll) or (some nav_graph where satisfies contains scroll) or (some world_view where satisfies contains scroll) or (some interaction where satisfies contains scroll) or (some feedback where satisfies contains scroll) or (some vibe where satisfies contains scroll))",
+  MESSAGE "{name} projects to signage, a medium that has no SCROLL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_zoom AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains zoom) or (some form where satisfies contains zoom) or (some wizard where satisfies contains zoom) or (some screen where satisfies contains zoom) or (some component where satisfies contains zoom) or (some nav_graph where satisfies contains zoom) or (some world_view where satisfies contains zoom) or (some interaction where satisfies contains zoom) or (some feedback where satisfies contains zoom) or (some vibe where satisfies contains zoom))",
+  MESSAGE "{name} projects to signage, a medium that has no ZOOM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_select AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains select) or (some form where satisfies contains select) or (some wizard where satisfies contains select) or (some screen where satisfies contains select) or (some component where satisfies contains select) or (some nav_graph where satisfies contains select) or (some world_view where satisfies contains select) or (some interaction where satisfies contains select) or (some feedback where satisfies contains select) or (some vibe where satisfies contains select))",
+  MESSAGE "{name} projects to signage, a medium that has no SELECT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_highlight AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains highlight) or (some form where satisfies contains highlight) or (some wizard where satisfies contains highlight) or (some screen where satisfies contains highlight) or (some component where satisfies contains highlight) or (some nav_graph where satisfies contains highlight) or (some world_view where satisfies contains highlight) or (some interaction where satisfies contains highlight) or (some feedback where satisfies contains highlight) or (some vibe where satisfies contains highlight))",
+  MESSAGE "{name} projects to signage, a medium that has no HIGHLIGHT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_preview AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains preview) or (some form where satisfies contains preview) or (some wizard where satisfies contains preview) or (some screen where satisfies contains preview) or (some component where satisfies contains preview) or (some nav_graph where satisfies contains preview) or (some world_view where satisfies contains preview) or (some interaction where satisfies contains preview) or (some feedback where satisfies contains preview) or (some vibe where satisfies contains preview))",
+  MESSAGE "{name} projects to signage, a medium that has no PREVIEW, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_mark AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains mark) or (some form where satisfies contains mark) or (some wizard where satisfies contains mark) or (some screen where satisfies contains mark) or (some component where satisfies contains mark) or (some nav_graph where satisfies contains mark) or (some world_view where satisfies contains mark) or (some interaction where satisfies contains mark) or (some feedback where satisfies contains mark) or (some vibe where satisfies contains mark))",
+  MESSAGE "{name} projects to signage, a medium that has no MARK, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_act AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains act) or (some form where satisfies contains act) or (some wizard where satisfies contains act) or (some screen where satisfies contains act) or (some component where satisfies contains act) or (some nav_graph where satisfies contains act) or (some world_view where satisfies contains act) or (some interaction where satisfies contains act) or (some feedback where satisfies contains act) or (some vibe where satisfies contains act))",
+  MESSAGE "{name} projects to signage, a medium that has no ACT, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_confirm AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains confirm) or (some form where satisfies contains confirm) or (some wizard where satisfies contains confirm) or (some screen where satisfies contains confirm) or (some component where satisfies contains confirm) or (some nav_graph where satisfies contains confirm) or (some world_view where satisfies contains confirm) or (some interaction where satisfies contains confirm) or (some feedback where satisfies contains confirm) or (some vibe where satisfies contains confirm))",
+  MESSAGE "{name} projects to signage, a medium that has no CONFIRM, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_cancel AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains cancel) or (some form where satisfies contains cancel) or (some wizard where satisfies contains cancel) or (some screen where satisfies contains cancel) or (some component where satisfies contains cancel) or (some nav_graph where satisfies contains cancel) or (some world_view where satisfies contains cancel) or (some interaction where satisfies contains cancel) or (some feedback where satisfies contains cancel) or (some vibe where satisfies contains cancel))",
+  MESSAGE "{name} projects to signage, a medium that has no CANCEL, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_undo AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains undo) or (some form where satisfies contains undo) or (some wizard where satisfies contains undo) or (some screen where satisfies contains undo) or (some component where satisfies contains undo) or (some nav_graph where satisfies contains undo) or (some world_view where satisfies contains undo) or (some interaction where satisfies contains undo) or (some feedback where satisfies contains undo) or (some vibe where satisfies contains undo))",
+  MESSAGE "{name} projects to signage, a medium that has no UNDO, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_pause AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains pause) or (some form where satisfies contains pause) or (some wizard where satisfies contains pause) or (some screen where satisfies contains pause) or (some component where satisfies contains pause) or (some nav_graph where satisfies contains pause) or (some world_view where satisfies contains pause) or (some interaction where satisfies contains pause) or (some feedback where satisfies contains pause) or (some vibe where satisfies contains pause))",
+  MESSAGE "{name} projects to signage, a medium that has no PAUSE, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_resume AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains resume) or (some form where satisfies contains resume) or (some wizard where satisfies contains resume) or (some screen where satisfies contains resume) or (some component where satisfies contains resume) or (some nav_graph where satisfies contains resume) or (some world_view where satisfies contains resume) or (some interaction where satisfies contains resume) or (some feedback where satisfies contains resume) or (some vibe where satisfies contains resume))",
+  MESSAGE "{name} projects to signage, a medium that has no RESUME, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_retry AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains retry) or (some form where satisfies contains retry) or (some wizard where satisfies contains retry) or (some screen where satisfies contains retry) or (some component where satisfies contains retry) or (some nav_graph where satisfies contains retry) or (some world_view where satisfies contains retry) or (some interaction where satisfies contains retry) or (some feedback where satisfies contains retry) or (some vibe where satisfies contains retry))",
+  MESSAGE "{name} projects to signage, a medium that has no RETRY, and a declaration of this file promises it",
+  CODE "VERB_NOT_CARRIED"
+) RATIONALE "Rule 82; media.json absent"
+
+DEFINE CONSTRAINT verb_not_carried_signage_exit AS (
+  ON vibe, WHEN "surface_as = signage and ((some intent_flow where satisfies contains exit) or (some form where satisfies contains exit) or (some wizard where satisfies contains exit) or (some screen where satisfies contains exit) or (some component where satisfies contains exit) or (some nav_graph where satisfies contains exit) or (some world_view where satisfies contains exit) or (some interaction where satisfies contains exit) or (some feedback where satisfies contains exit) or (some vibe where satisfies contains exit))",
+  MESSAGE "{name} projects to signage, a medium that has no EXIT, and a declaration of this file promises it",
   CODE "VERB_NOT_CARRIED"
 ) RATIONALE "Rule 82; media.json absent"
 

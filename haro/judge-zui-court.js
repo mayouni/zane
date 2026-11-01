@@ -1,7 +1,13 @@
 // node haro/judge-zui-court.js  (needs rnxc and the Haro spike: RNXC, HARO_SPIKE)
 // Runs every StzZui fixture through the court forged from haro/zui.stzu and compares it with the
 // manifest. A .zui file is translated MECHANICALLY into the Commons shape (AS, lower_snake words,
-// RATIONALE) -- nothing else is touched. Scratch tool, not committed.
+// RATIONALE) -- nothing else is touched.
+//
+// A RATCHET: haro/twin-expected.csv lists every fixture on which the court and zui.js differ today
+// (fixture, what zui.js says, what the court says, the seam, a class). The run exits 1 on a difference
+// that is NOT in the file, on a listed row whose values changed, and on a listed difference that now
+// agrees -- so the list shrinks only when someone deletes a row on purpose, and never grows by accident.
+// Exit 2: the court could not be forged.
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -63,9 +69,9 @@ for (const f of man.fixtures) {
     const d = parsed.diagnostics || [];
     code = d.length ? d[0].code : '(clean)';
   } catch (e) { code = 'UNREADABLE:' + raw.trim().slice(0, 80); }
-  // ground truth: what zui.js says on the original
-  const truth = (Z.verify(src, {}).diagnostics || Z.verify(src, {})).map ? null : null;
-  rows.push({ file: f.file, level: f.level, expect: f.expect_ids, got: code, msg: parsed && parsed.diagnostics && parsed.diagnostics[0] ? parsed.diagnostics[0].message : '' });
+  // ground truth: what zui.js says on the original, with the fixture's own symbols
+  const truth = [...new Set(Z.verify(src, { symbols: f.symbols || null }).map(d => d.id))].sort();
+  rows.push({ file: f.file, level: f.level, expect: f.expect_ids, truth, got: code, msg: parsed && parsed.diagnostics && parsed.diagnostics[0] ? parsed.diagnostics[0].message : '' });
 }
 
 const warnOnly = r => r.expect.length > 0 && r.expect.every(id => sev[id] === 'warning');
@@ -86,3 +92,33 @@ console.log('\n-- warning-only fixtures the court did not refuse --');
 for (const r of notcarried) console.log(`${r.file.padEnd(40)} ${r.expect.join('+')}`);
 const csv = ['file,level,expected,got'].concat(rows.map(r => [r.file, r.level, r.expect.join('+'), r.got].join(','))).join('\n') + '\n';
 fs.writeFileSync(path.join(__dirname, 'judge-rows.csv'), csv);
+
+// ---- the ratchet ---------------------------------------------------------------------------
+const says = ids => ids.length ? ids.join('+') : '(clean)';
+const current = new Map([...disagree, ...notcarried, ...lawfulBad].map(r => [r.file, { zuijs: says(r.truth), court: r.got }]));
+const listed = new Map();
+for (const line of fs.readFileSync(path.join(__dirname, 'twin-expected.csv'), 'utf8').split(/\r?\n/).slice(1)) {
+  if (!line.trim()) continue;
+  const [fixture, zuijs, court, seam, cls] = line.split(',');
+  listed.set(fixture, { zuijs, court, seam, cls });
+}
+const problems = [];
+for (const r of rows) {
+  const want = [...r.expect].sort();
+  if (want.join('+') !== r.truth.join('+'))
+    problems.push(`zui.js says ${says(r.truth)} on ${r.file} and the manifest says ${says(want)}: the "zui.js says" column cannot be trusted until they agree`);
+}
+for (const [file, c] of current) {
+  const l = listed.get(file);
+  if (!l) problems.push(`NEW difference, not in twin-expected.csv: ${file}  zui.js ${c.zuijs}, court ${c.court}`);
+  else if (l.zuijs !== c.zuijs || l.court !== c.court)
+    problems.push(`CHANGED difference: ${file}  listed zui.js ${l.zuijs}, court ${l.court}; now zui.js ${c.zuijs}, court ${c.court}`);
+}
+for (const [file, l] of listed) {
+  if (!current.has(file)) problems.push(`listed difference now AGREES, delete its row: ${file} (${l.seam})`);
+}
+const byClass = {};
+for (const l of listed.values()) byClass[l.cls] = (byClass[l.cls] || 0) + 1;
+console.log(`\n-- ratchet: ${listed.size} listed (${Object.entries(byClass).map(([k, v]) => k + ' ' + v).join(', ')}), ${current.size} differing now, ${problems.length} problem(s)`);
+for (const m of problems) console.log('  RATCHET: ' + m);
+process.exitCode = problems.length ? 1 : 0;
