@@ -1,7 +1,7 @@
-# The Zui Language — Specification v1.3
+# The Zui Language — Specification v1.4
 
 **Status**: normative for the language; honest about implementations
-**Date**: 2026-08-06, revised 2026-08-20
+**Date**: 2026-08-06, revised 2026-11-01
 **Home**: StzZui, where the language and its constitution live
 **Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
@@ -12,7 +12,10 @@ to ten media when the law's Rule 82 became *Perceivable State*. **v1.2** (2026-0
 the second expression field, with `UNKNOWN_ROLE`, `ROLE_MISPLACED`,
 `ROLE_ACTS_WITHOUT_CONSEQUENCE`, `ROLE_PROMISE_BROKEN`, `IRREVERSIBLE_CLAIMS_UNDO` and
 `PROPOSAL_COMMITS` — and with `ROLE_UNDECLARED`, the advisory that measures how often a
-surface declares controls and no promises.
+surface declares controls and no promises. **v1.4** (2026-11-01, ruling D1 of 2026-10-31)
+adds `FIELD_MISPLACED`: a known field on a kind that does not declare it, which every
+earlier version ignored in silence. No field and no value is added; a file that carried
+such a field was lawful at v1.3 and is not at v1.4.
 
 > **This title said v1.0 until 2026-08-16**, through the whole of v1.1 — `DECLARATIONS.md`
 > recorded the change and the heading never moved. Noted rather than smoothed, and the

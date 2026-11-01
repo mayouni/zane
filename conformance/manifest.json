@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "The Zui Conformance Suite",
-    "version": "1.2",
-    "lastUpdated": "2026-08-20",
+    "version": "1.3",
+    "lastUpdated": "2026-11-01",
     "specification": "doc/language/README.md",
     "diagnostics": "conformance/violations.json",
     "constitution": "3.11",
@@ -378,6 +378,20 @@
       "level": 2,
       "expect_ids": [],
       "note": "The twin: one role written down silences it. The advisory reports a surface that has not met the vocabulary at all, never a surface that roled some controls and not others -- a per-control count would be a requirement wearing a warning's clothes."
+    },
+    {
+      "file": "field-misplaced.zui",
+      "level": 2,
+      "expect_ids": [
+        "FIELD_MISPLACED"
+      ],
+      "note": "Ruling D1, 2026-10-31. TONE and PERSPECTIVE, both with lawful values, written on a SCREEN: read by nothing, so the author believes them honoured. The values are lawful on purpose, so INVALID_TONE and INVALID_PERSPECTIVE stay quiet and the fixture isolates the placement. Fires once per misplaced field."
+    },
+    {
+      "file": "field-misplaced-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "The twin: the same two fields on the kinds that declare them, and the SCREEN keeping only the four fields every kind may carry."
     }
   ],
   "unfixtured": [

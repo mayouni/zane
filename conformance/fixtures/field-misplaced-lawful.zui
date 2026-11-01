@@ -1,0 +1,18 @@
+// The twin: the same two fields on the kinds that declare them. TONE sits on a
+// FEEDBACK that reports the state it speaks about, PERSPECTIVE on a WORLD_VIEW,
+// and the SCREEN keeps only what every kind may carry.
+// Expected: clean
+
+DEFINE SCREEN overdue_invoices (
+  SATISFIES [SCAN, COMPARE]
+)
+
+DEFINE FEEDBACK overdue_notice (
+  TONE cautionary,
+  REPORTS [overdue_count]
+)
+
+DEFINE WORLD_VIEW invoice_map (
+  SATISFIES [DISCOVER, LOCATE],
+  PERSPECTIVE top_down
+)

@@ -1,6 +1,6 @@
 # The Ten Declaration Types
 
-**Normative.** Part of [the Zui Language Specification v1.3](README.md). Syntax is
+**Normative.** Part of [the Zui Language Specification v1.4](README.md). Syntax is
 in [GRAMMAR.md](GRAMMAR.md); diagnostics are in [VIOLATIONS.md](VIOLATIONS.md).
 
 ---
@@ -33,9 +33,13 @@ where several of the named violations come from.
 These invariants are quoted verbatim from `constitution/rules.json` §`intents`,
 which is their source of truth.
 
-## 3. The two universal fields
+## 3. The universal fields, and the rule for every other one
 
-Most declarations accept these; their meaning never changes by kind.
+`SATISFIES` and `ALWAYS_REACHABLE` below, with `SIGNALS` (§5.3) and `ACTOR` (end of §4), are
+carried by every kind; their meaning never changes by kind. **Every other field belongs to
+the kinds §4 lists it under and to no others**: a known field on any other kind is
+`FIELD_MISPLACED` (v1.4), because it would be read by nothing and the author would believe
+it honoured. `ROLE` keeps its own diagnostic, `ROLE_MISPLACED`.
 
 **`SATISFIES [ verb, … ]`** — the intents this surface serves. Every verb must be
 one of the 22 (`UNKNOWN_INTENT` otherwise). This field is what makes a declaration
@@ -138,6 +142,7 @@ declaration meaning *a control's referent* without naming a widget.
 |---|---|---|---|
 | `TONE` | enum | no | `celebratory` · `cautionary` · `critical` · `neutral` · `informational` — any other value is `INVALID_TONE` |
 | `REPORTS` | identifier list | no | the state this feedback reports; **feedback that reports nothing is decoration** (`DECORATIVE_ANIMATION`) |
+| `MOTION` | identifier | no | how the feedback moves, if it does; motion must report (Rule 112) |
 
 ### `VIBE` — an interaction culture
 
@@ -152,6 +157,7 @@ flex.
 | `DENSITY` | identifier | no | e.g. `compact`, `comfortable` |
 | `SURFACE_AS` | enum | no | the medium this vibe projects to — one of the ten (`UNKNOWN_MEDIUM` otherwise). It also fixes which intents the file may promise: an intent the medium cannot carry at all is `VERB_NOT_CARRIED` |
 | `MOTION` | identifier | no | `none` is lawful and common; motion must report (Rule 112) |
+| `REPORTS` | identifier list | no | the state a moving vibe reports; motion that moves and reports nothing is `DECORATIVE_ANIMATION` |
 | `SUPPRESSES` | verb list | no | intents this culture hides. **Legal only for intents no declaration guarantees** — suppressing one that appears in any `ALWAYS_REACHABLE` is `VIBE_STRIPS_RIGHT` |
 
 ### `ACTOR` — the field that names authority

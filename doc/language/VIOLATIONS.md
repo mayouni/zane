@@ -1,6 +1,6 @@
 # Diagnostics and the Law They Enforce
 
-**Normative.** Part of [the Zui Language Specification v1.3](README.md). The
+**Normative.** Part of [the Zui Language Specification v1.4](README.md). The
 machine-readable form of this document is
 [`conformance/violations.json`](../../conformance/violations.json) — that file is
 the contract; this one explains it.
@@ -86,7 +86,8 @@ was done, cancel abandons what is being done.
 
 **`TRAPPED_FLOW`** · error · Level 2
 > A multi-step flow (`WIZARD`, or any declaration carrying `STEPS`) whose
-> `ALWAYS_REACHABLE` does not hold `EXIT`.
+> `ALWAYS_REACHABLE` does not hold `EXIT`. A `STEPS` on a kind other than `WIZARD` is
+> also `FIELD_MISPLACED` since v1.4, and still counts as multi-step here.
 
 The continuity invariant is explicit that this is not a matter of degree: *a
 trapped flow is unconstitutional*. Note the scope — a single-surface
@@ -187,12 +188,45 @@ ship in the reference implementation today, under the codes shown.
 | `IRREVERSIBLE_CLAIMS_UNDO` | error | 2 | an `irreversible` control declares an `UNDO` it cannot honour | ❌ |
 | `PROPOSAL_COMMITS` | error | 2 | a `proposal` acts without naming the authority that accepted it | ❌ |
 | `ROLE_UNDECLARED` | warning | 2 | a surface declares interactions and gives none of them a role | ❌ |
+| `FIELD_MISPLACED` | error | 2 | a known field on a kind that does not declare it (`ROLE` is `ROLE_MISPLACED`'s) | ❌ |
 
-**The last twelve are `zui`-verifier-only**, and the ❌ column means the *reference
+**The last thirteen are `zui`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
 ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with
 the first expression stratum.
+
+### `FIELD_MISPLACED` closes the silence `ROLE_MISPLACED` named
+
+`ROLE_MISPLACED` was added with the sentence *"a field that does nothing where it sits
+reads as a declaration that was honoured. That silence is a gap in `TONE` and `PERSPECTIVE`,
+not a precedent."* The gap stayed open for the other fields until **v1.4 (2026-11-01,
+ruling D1 of 2026-10-31)**. It surfaced when the language was declared as a Haro language
+(`haro/zui.stzu`): the court forged from that declaration refused a `TONE` or a `PERSPECTIVE`
+on a `SCREEN` while the verifier said nothing, so an author believed a field was working
+that nothing read.
+
+**Each kind declares the fields [DECLARATIONS.md](DECLARATIONS.md) lists for it, plus the
+four every kind carries** — `SATISFIES`, `ALWAYS_REACHABLE`, `SIGNALS`, `ACTOR`. Any other
+*known* field on it is `FIELD_MISPLACED`, once per field, at that field's line:
+
+| Kind | Fields beyond the four |
+|---|---|
+| **INTENT_FLOW, SCREEN, COMPONENT** | none |
+| **FORM** | `INTENT_FLOW` |
+| **WIZARD** | `STEPS` |
+| **NAV_GRAPH** | `VISIBLE_STATE` |
+| **WORLD_VIEW** | `PERSPECTIVE`, `VISIBLE_ENTITIES` |
+| **INTERACTION** | `ROLE` |
+| **FEEDBACK** | `TONE`, `REPORTS`, `MOTION` |
+| **VIBE** | `DENSITY`, `SURFACE_AS`, `MOTION`, `REPORTS`, `SUPPRESSES` |
+
+Three edges, stated so they are not rediscovered. **`ROLE` is left to `ROLE_MISPLACED`**,
+which keeps its own id because ids are stable forever, so one defect is never reported
+twice. **A name the grammar does not know is `UNKNOWN_FIELD`**, not this. **`WIDGET` and
+`USER`** are `UNSPECIFIED_DECLARATION`'s and their fields are not judged. `INTENT_FLOWS`,
+which the grammar admits as a list key and no kind declares, is `FIELD_MISPLACED` on every
+kind.
 
 ### `ROLE` gives Rule 79's escape clause its first expressible form
 

@@ -333,6 +333,46 @@ function parse(src) {
 }
 
 /* ==========================================================================
+   Fields per kind (ruling D1, 2026-10-31)
+
+   Which fields each kind declares, from doc/language/DECLARATIONS.md and the
+   per-kind seats of haro/zui.stzu. SATISFIES, ALWAYS_REACHABLE, SIGNALS and
+   ACTOR belong to every kind; the rest belong to the kinds listed.
+   ========================================================================== */
+
+const UNIVERSAL_FIELDS = new Set(['SATISFIES', 'ALWAYS_REACHABLE', 'SIGNALS', 'ACTOR']);
+const KIND_FIELDS = {
+  INTENT_FLOW: [],
+  FORM:        ['INTENT_FLOW'],
+  WIZARD:      ['STEPS'],
+  SCREEN:      [],
+  COMPONENT:   [],
+  NAV_GRAPH:   ['VISIBLE_STATE'],
+  WORLD_VIEW:  ['PERSPECTIVE', 'VISIBLE_ENTITIES'],
+  INTERACTION: ['ROLE'],
+  FEEDBACK:    ['TONE', 'REPORTS', 'MOTION'],
+  VIBE:        ['DENSITY', 'SURFACE_AS', 'MOTION', 'REPORTS', 'SUPPRESSES']
+};
+
+/* Every known field a declaration carries that its kind does not declare.
+   Pure: returns {line, kind, name, field, owned} and raises nothing. `owned`
+   names the diagnostic that already speaks for the field, or null. */
+function misplacedFields(decls) {
+  const hits = [];
+  for (const d of decls) {
+    const legal = KIND_FIELDS[d.kind];
+    if (!legal) continue;                                    /* WIDGET, USER: UNSPECIFIED_DECLARATION owns them */
+    for (const f of d.fields) {
+      const known = f.kind === 'list' ? REF_LIST_KEYS.has(f.key) : KV_KEYS.has(f.key);
+      if (!known) continue;                                  /* UNKNOWN_FIELD owns it */
+      if (UNIVERSAL_FIELDS.has(f.key) || legal.includes(f.key)) continue;
+      hits.push({ line: f.line, kind: d.kind, name: d.name, field: f.key, owned: f.key === 'ROLE' ? 'ROLE_MISPLACED' : null });
+    }
+  }
+  return hits;
+}
+
+/* ==========================================================================
    Checks
    ========================================================================== */
 
@@ -444,6 +484,15 @@ function check(decls, symbols) {
     const multiStep = kind === 'WIZARD' || decl.fieldIndex.has('STEPS');
     if (multiStep && !reachable.has('EXIT')) {
       add('TRAPPED_FLOW', line, label);
+    }
+
+    /* A field on a kind that does not declare it is ignored where it sits, and
+       an author who wrote TONE on a SCREEN believes the tone is honoured. ROLE
+       is left to ROLE_MISPLACED, which names the one kind it belongs to. */
+    for (const h of misplacedFields([decl])) {
+      if (h.owned) continue;
+      const homes = Object.keys(KIND_FIELDS).filter(k => KIND_FIELDS[k].includes(h.field));
+      add('FIELD_MISPLACED', h.line, `${h.field} on ${kind} ${label}; ${homes.length ? 'it belongs to ' + homes.join(', ') : 'no kind declares it'}`);
     }
 
     if (kind === 'WORLD_VIEW') {
@@ -660,7 +709,7 @@ function verify(source, opts) {
   return diagnostics.concat(check(decls, options.symbols || null));
 }
 
-const API = { verify, parse, lex, INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED, SIGNALS, SIGNAL_ABSENCE };
+const API = { verify, parse, lex, misplacedFields, KIND_FIELDS,INTENT_VERBS, ZUI_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED, SIGNALS, SIGNAL_ABSENCE };
 
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
 if (typeof window !== 'undefined') window.Zui = API;

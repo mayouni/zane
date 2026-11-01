@@ -1,0 +1,13 @@
+// A field on a kind that does not declare it. TONE belongs to FEEDBACK and
+// PERSPECTIVE to WORLD_VIEW; written on a SCREEN, each is read by nothing and
+// does nothing, and the author believes the tone and the vantage are honoured.
+// Both values here are lawful ones, so INVALID_TONE and INVALID_PERSPECTIVE stay
+// quiet and the fixture isolates the placement. ROLE on the wrong kind is
+// ROLE_MISPLACED's, and is not repeated here.
+// Expected: FIELD_MISPLACED
+
+DEFINE SCREEN overdue_invoices (
+  SATISFIES [SCAN, COMPARE],
+  TONE cautionary,
+  PERSPECTIVE top_down
+)
