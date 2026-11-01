@@ -45,8 +45,8 @@
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
-      "bytes": 18809,
-      "sha256": "44f5833f7eb31b5435c0058a1679198337b289362aad1eed51efc14e824d1776"
+      "bytes": 19468,
+      "sha256": "6310a00bbe45ccb7e3d2a976fcc399905d2b56bf36f0f0d3ff283c497ac4efa0"
     },
     {
       "file": "conformance/violations.json",

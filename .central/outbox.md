@@ -1474,3 +1474,34 @@ next:
 note:      THE LAW IS WRITTEN FOR A SCREEN, AND THE GRID IS A PLACEMENT BY ONE READER. 94 of 120 placed rules are written for the visual column, and five of the ten media have no rule written for them. A medium-free rule could be projected into all of those cells, and this report does not count that as coverage because nobody has checked one projection. Nobody perceived any medium for this phase: it is designed, not verified by a person.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-02 00:18 | NOTE | corrects my memo of 2026-11-02 00:09 (task B), its waiting row COVERAGE-FIXTURE-CITES-01 | 21 diagnostics cite no rule, and mostly that is right
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-02 00:18 | ATTENDED
+
+subject:   COVERAGE-FIXTURE-CITES-01, withdrawn as a defect and narrowed to one question, local commit on main, not pushed
+
+why:       my earlier memo told Central that 24 fixtures reach no rule "through the contract" as if bindings were missing; the author asked, and that framing was too strong
+
+did:
+  - withdrew COVERAGE-FIXTURE-CITES-01 as a defect: 21 of the 37 diagnostics cite no rule, and for most of them the law has no rule to cite, so a citation would claim one that does not exist
+  - counted the 21: 14 enforce the grammar, 4 check declarations against each other, 1 (ROLE_UNDECLARED) cites nothing on purpose, 2 (EXPRESSION_ORPHAN, VIBE_STRIPS_RIGHT) cite an article only; 9 of the 21 cite an article and 12 cite nothing
+  - corrected doc/design/COVERAGE.md to say so, and corrected doc/language/VIOLATIONS.md section 1, which said every diagnostic carries a binding; it now says 16 cite rules, 9 an article only, 12 nothing, and that an empty rules list means no rule is cited, never that a binding is missing
+  - regenerated protocol/MANIFEST.json; the suite is 57 of 57 and the pack is verified
+
+state:
+  diagnostics citing a rule:    16 of 37
+  diagnostics citing no rule:   21 (an article only 9, nothing 12)
+  fixtures on no cell:          29, unchanged; 24 of them test a diagnostic that cites no rule, which is correct for the grammar checks
+  pushed:                       NO
+
+waiting:
+  - COVERAGE-CITES-RULING-01: whether a rule backs EXPRESSION_ORPHAN, VIBE_STRIPS_RIGHT and INTENT_ORPHAN, which cite an article and no rule -> the Principal
+             [not routed; it is here]
+
+next:
+  - central: check and push; carry the one question above if it is worth a ruling
+
+note:      THE 00:09 MEMO'S ROW IS SUPERSEDED BY THIS ONE. The earlier text stays as written.
+```
+---

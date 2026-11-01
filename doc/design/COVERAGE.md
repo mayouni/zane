@@ -128,8 +128,12 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
   fixture; 2 medium cells (trust on auditory and on print) have fixtures and no rule written for them,
   which is Rule 82 running there medium-free.
 - **29 fixtures land on no cell.** 5 declare no rule (the clean and exemption fixtures). 24 test a
-  diagnostic that cites no rule in `violations.json`. That second number is about the contract's bindings
-  and not about this grid; it is reported to Central, not repaired here.
+  diagnostic that cites no rule in `violations.json`. That is mostly right, not a defect. Of the 21
+  diagnostics that cite no rule, 14 enforce the grammar, 4 check declarations against each other, and
+  where the law has no rule to cite, a citation would claim one that does not exist; `ROLE_UNDECLARED`
+  cites nothing on purpose; and 2 (`EXPRESSION_ORPHAN`, `VIBE_STRIPS_RIGHT`) cite an article only. Three
+  (those two and `INTENT_ORPHAN`) are worth a ruling on whether a rule backs them, and that is a ruling
+  on the law, which this grid cannot settle.
 
 ### What this grid cannot tell you
 

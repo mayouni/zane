@@ -16,8 +16,16 @@ law the project pinned, and it can only be answered by fixing the declaration or
 amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
-every diagnostic below carries a binding. Bindings cite
+a diagnostic that enforces a rule carries a binding. Bindings cite
 `constitution/rules.json` **v3.11**.
+
+Not every diagnostic enforces a rule. Of the 37, 16 cite one or more rules, 9 cite an article and no
+rule, and 12 cite nothing. Fourteen of those 21 enforce the grammar (vocabularies, duplicates, fields,
+parse failures) and four check declarations against each other; there the law has no rule, and a
+citation would claim one that does not exist. `ROLE_UNDECLARED` cites nothing on purpose (see below).
+For `EXPRESSION_ORPHAN`, `VIBE_STRIPS_RIGHT` and `INTENT_ORPHAN`, which cite an article only, whether a
+rule backs them is a ruling on the law and is open. An empty `rules` list therefore means "no rule is
+cited", never "a binding is missing".
 
 ## 2. Severity and level
 
