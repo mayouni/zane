@@ -354,7 +354,16 @@ const KIND_FIELDS = {
   VIBE:        ['DENSITY', 'SURFACE_AS', 'MOTION', 'REPORTS', 'SUPPRESSES']
 };
 
-/* Every known field a declaration carries that its kind does not declare.
+/* Fields the checks below already read on ANY kind. They are declared on one
+   kind and not silent on another -- STEPS makes a flow multi-step (TRAPPED_FLOW),
+   INTENT_FLOW is resolved (UNRESOLVED_INTENT_FLOW), VISIBLE_STATE and
+   VISIBLE_ENTITIES are collected file-wide -- so the rule behind D1, that the
+   verifier speaks where its silence HIDES an error, does not reach them. The
+   court (haro/zui.stzu) still refuses them; that is a named seam. */
+const READ_ON_ANY_KIND = new Set(['STEPS', 'INTENT_FLOW', 'VISIBLE_STATE', 'VISIBLE_ENTITIES']);
+
+/* Every known field a declaration carries that its kind does not declare AND
+   that zui.js would otherwise ignore there.
    Pure: returns {line, kind, name, field, owned} and raises nothing. `owned`
    names the diagnostic that already speaks for the field, or null. */
 function misplacedFields(decls) {
@@ -365,7 +374,7 @@ function misplacedFields(decls) {
     for (const f of d.fields) {
       const known = f.kind === 'list' ? REF_LIST_KEYS.has(f.key) : KV_KEYS.has(f.key);
       if (!known) continue;                                  /* UNKNOWN_FIELD owns it */
-      if (UNIVERSAL_FIELDS.has(f.key) || legal.includes(f.key)) continue;
+      if (UNIVERSAL_FIELDS.has(f.key) || legal.includes(f.key) || READ_ON_ANY_KIND.has(f.key)) continue;
       hits.push({ line: f.line, kind: d.kind, name: d.name, field: f.key, owned: f.key === 'ROLE' ? 'ROLE_MISPLACED' : null });
     }
   }

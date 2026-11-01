@@ -86,8 +86,8 @@ was done, cancel abandons what is being done.
 
 **`TRAPPED_FLOW`** · error · Level 2
 > A multi-step flow (`WIZARD`, or any declaration carrying `STEPS`) whose
-> `ALWAYS_REACHABLE` does not hold `EXIT`. A `STEPS` on a kind other than `WIZARD` is
-> also `FIELD_MISPLACED` since v1.4, and still counts as multi-step here.
+> `ALWAYS_REACHABLE` does not hold `EXIT`. `STEPS` is read on any kind, so a `STEPS` on a
+> kind other than `WIZARD` is not silent and is not `FIELD_MISPLACED`.
 
 The continuity invariant is explicit that this is not a matter of degree: *a
 trapped flow is unconstitutional*. Note the scope — a single-surface
@@ -208,7 +208,9 @@ that nothing read.
 
 **Each kind declares the fields [DECLARATIONS.md](DECLARATIONS.md) lists for it, plus the
 four every kind carries** — `SATISFIES`, `ALWAYS_REACHABLE`, `SIGNALS`, `ACTOR`. Any other
-*known* field on it is `FIELD_MISPLACED`, once per field, at that field's line:
+*known* field on it is `FIELD_MISPLACED`, once per field, at that field's line — **except
+the four the verifier reads on any kind**, below. The rule behind it is that the verifier
+speaks where its silence *hides* an error; a field it already reads is not silent:
 
 | Kind | Fields beyond the four |
 |---|---|
@@ -221,12 +223,18 @@ four every kind carries** — `SATISFIES`, `ALWAYS_REACHABLE`, `SIGNALS`, `ACTOR
 | **FEEDBACK** | `TONE`, `REPORTS`, `MOTION` |
 | **VIBE** | `DENSITY`, `SURFACE_AS`, `MOTION`, `REPORTS`, `SUPPRESSES` |
 
-Three edges, stated so they are not rediscovered. **`ROLE` is left to `ROLE_MISPLACED`**,
+**Not judged, because the verifier reads them on any kind:** `STEPS` (any declaration
+carrying it is multi-step, `TRAPPED_FLOW`), `INTENT_FLOW` (resolved wherever it appears,
+`UNRESOLVED_INTENT_FLOW`), `VISIBLE_STATE` and `VISIBLE_ENTITIES` (collected file-wide). A
+`STEPS` on a `SCREEN` is therefore not `FIELD_MISPLACED`. The Haro court refuses all four off
+their kind; that difference is a named seam in `haro/zui.stzu`, not a disagreement about the law.
+
+Three more edges, stated so they are not rediscovered. **`ROLE` is left to `ROLE_MISPLACED`**,
 which keeps its own id because ids are stable forever, so one defect is never reported
 twice. **A name the grammar does not know is `UNKNOWN_FIELD`**, not this. **`WIDGET` and
 `USER`** are `UNSPECIFIED_DECLARATION`'s and their fields are not judged. `INTENT_FLOWS`,
-which the grammar admits as a list key and no kind declares, is `FIELD_MISPLACED` on every
-kind.
+which the grammar admits as a list key, no kind declares and nothing reads, is
+`FIELD_MISPLACED` on every kind.
 
 ### `ROLE` gives Rule 79's escape clause its first expressible form
 

@@ -39,7 +39,9 @@ which is their source of truth.
 carried by every kind; their meaning never changes by kind. **Every other field belongs to
 the kinds §4 lists it under and to no others**: a known field on any other kind is
 `FIELD_MISPLACED` (v1.4), because it would be read by nothing and the author would believe
-it honoured. `ROLE` keeps its own diagnostic, `ROLE_MISPLACED`.
+it honoured. Two exceptions: `ROLE` keeps its own diagnostic, `ROLE_MISPLACED`; and `STEPS`,
+`INTENT_FLOW`, `VISIBLE_STATE` and `VISIBLE_ENTITIES` are read by the verifier on any kind,
+so they are not silent elsewhere and are not `FIELD_MISPLACED`.
 
 **`SATISFIES [ verb, … ]`** — the intents this surface serves. Every verb must be
 one of the 22 (`UNKNOWN_INTENT` otherwise). This field is what makes a declaration
