@@ -1433,3 +1433,44 @@ next:
 note:      THE RATCHET JUDGES THE COURT'S FIRST REFUSAL, NOT THE WHOLE SET (S12). multiple-violations.zui expects four ids and the court names one of them, and the judge has always counted that as agreement; so it is not in the file. A difference of that kind is invisible to this ratchet until the collecting court is what a forged court does.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-02 00:09 | NOTE | answers Central's NOTE of 2026-11-01 23:22, task B | the coverage grid: 21 of 55 live cells hold a rule, 34 hold none, 2 rules sit on no cell
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-02 00:09 | ATTENDED
+
+subject:   doc/design/COVERAGE.md, with its placement table and a script that counts it, local commit on main, not pushed
+
+why:       the pillars, the usability toolset and the audit of foreign apps all need an answer to "what does the law cover", and until now the only answer was a list of rules
+
+did:
+  - derived the axes from what a person does, not from issues: six rows (perceive, understand, decide, act, recover, trust) and the ten media of media.json, plus one column for the law stated without a medium; the 22 intent verbs are shared out once each over four of the rows
+  - closed 11 of the 60 medium cells from media.json (the medium cannot carry the activity, for example decide on print), so a gap is only counted where a person could do the thing
+  - placed 120 of the 122 rules and the 57 fixtures, with the table in doc/design/coverage-placement.json and a counter in doc/design/coverage-count.js that exits 1 if the table and the law disagree on which rules exist
+  - defined the issue record: id, cell, evidence, status, rules; three landings (confirms the cell, with a rule or as a gap; extends the grid; falls outside); the evidence vocabulary is the existing one of EVIDENCE-LEDGER.md
+  - proposed no rule; a gap record carries no rule text and a rule for it is held for the Principal
+  - did not touch rules.json, violations.json, any fixture, zui.js, or the media enumeration
+
+state:
+  cells:               66 (60 medium and 6 medium-free); 11 closed; 55 live
+  live cells with a rule:  21 (all 6 medium-free, and 15 of the 49 open medium cells)
+  live cells with none:    34, all medium cells: every cell of haptic, luminous, signage, spatial and terminal, and most of auditory, voice, print and machine
+  rules on no cell:    2 (78, the checklist over the other rules; 124, what a generator ships)
+  rules by scope:      94 on the visual column (88 of them on nothing else), 25 medium-free, 7 name another medium; 1 of those (125) names no screen
+  fixtures:            28 land on a cell, 4 on a medium column (print x2, auditory x2), 29 on none; no fixture declares the visual medium
+  conformance suite:   57 of 57 pass, pack verified
+  pushed:              NO
+
+waiting:
+  - COVERAGE-PLACEMENT-REVIEW: whether the activity and medium placement of the 120 rules is right; the counts move with it -> the Principal
+             [not routed; it is in the note below]
+  - COVERAGE-FIXTURE-CITES-01: 24 of the 57 fixtures test a diagnostic whose bindings in violations.json cite no rule, so no fixture of those 24 reaches the law through the contract -> Central
+             [routed here]
+
+next:
+  - me:      nothing owed on B
+  - central: check and push; decide whether the 24 diagnostics that cite no rule are a gap in the bindings or are meant to
+  - principal: Q5 to Q8 may now be placed on this grid; none was started
+
+note:      THE LAW IS WRITTEN FOR A SCREEN, AND THE GRID IS A PLACEMENT BY ONE READER. 94 of 120 placed rules are written for the visual column, and five of the ten media have no rule written for them. A medium-free rule could be projected into all of those cells, and this report does not count that as coverage because nobody has checked one projection. Nobody perceived any medium for this phase: it is designed, not verified by a person.
+```
+---

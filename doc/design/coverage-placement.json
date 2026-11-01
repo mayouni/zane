@@ -1,0 +1,808 @@
+{
+ "_about": "First-cut placement of the 122 rules on the coverage grid (doc/design/COVERAGE.md). activities: P perceive, U understand, D decide, A act, R recover, T trust. media: \"any\" = the rule names no medium and has no screen wording (or a medium-free check is bound to it), else the list of media it is written for. off: rules on no cell, with the reason. Counted by doc/design/coverage-count.js.",
+ "rules": {
+  "1": {
+   "title": "Cognitive Mercy",
+   "activities": "PD",
+   "media": [
+    "visual"
+   ]
+  },
+  "2": {
+   "title": "White Space Is Structural",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "3": {
+   "title": "Color Is a Signal",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "4": {
+   "title": "Typography: Read, Don't Impress",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "5": {
+   "title": "The Monastic Palette",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "6": {
+   "title": "The Golden Ratio of Information",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "8": {
+   "title": "One Primary Axis",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "9": {
+   "title": "Progressive Disclosure",
+   "activities": "UD",
+   "media": "any"
+  },
+  "10": {
+   "title": "The Z-Axis of Importance",
+   "activities": "PD",
+   "media": [
+    "visual"
+   ]
+  },
+  "11": {
+   "title": "The Ledger Principle",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "12": {
+   "title": "The Law of the Eternal Scroll",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "13": {
+   "title": "Sticky Context, Not Sticky Chrome",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "14": {
+   "title": "No App-Squeezing",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "15": {
+   "title": "No Surprises",
+   "activities": "PT",
+   "media": [
+    "visual"
+   ]
+  },
+  "16": {
+   "title": "Intentional Clicks",
+   "activities": "DAT",
+   "media": "any"
+  },
+  "17": {
+   "title": "Disable Loud Interactions",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "18": {
+   "title": "The Speed of Thought",
+   "activities": "AT",
+   "media": "any"
+  },
+  "19": {
+   "title": "Physicality of Elements",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "20": {
+   "title": "Linear Chronology",
+   "activities": "UR",
+   "media": [
+    "visual"
+   ]
+  },
+  "21": {
+   "title": "Streaming States",
+   "activities": "PT",
+   "media": [
+    "visual"
+   ]
+  },
+  "22": {
+   "title": "The Last Word Rule",
+   "activities": "RU",
+   "media": "any"
+  },
+  "23": {
+   "title": "The Omnibar",
+   "activities": "DA",
+   "media": [
+    "visual"
+   ]
+  },
+  "24": {
+   "title": "Navigation as Orientation",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "25": {
+   "title": "The Breadcrumb Trail",
+   "activities": "UR",
+   "media": [
+    "visual"
+   ]
+  },
+  "26": {
+   "title": "The Back Button is Holy",
+   "activities": "R",
+   "media": "any"
+  },
+  "27": {
+   "title": "Horizontal Menu Discipline",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "28": {
+   "title": "Forms as Conversations",
+   "activities": "DU",
+   "media": [
+    "visual"
+   ]
+  },
+  "29": {
+   "title": "Honest Validation",
+   "activities": "UR",
+   "media": [
+    "visual"
+   ]
+  },
+  "31": {
+   "title": "The Socratic Method",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "32": {
+   "title": "Smart Defaults",
+   "activities": "D",
+   "media": "any"
+  },
+  "34": {
+   "title": "The 25% Rule",
+   "activities": "D",
+   "media": [
+    "visual"
+   ]
+  },
+  "36": {
+   "title": "Ephemeral Controls",
+   "activities": "PA",
+   "media": [
+    "visual"
+   ]
+  },
+  "37": {
+   "title": "Errors as Events",
+   "activities": "RU",
+   "media": [
+    "visual"
+   ]
+  },
+  "38": {
+   "title": "Zero Displacement",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "39": {
+   "title": "Classification by Weight",
+   "activities": "PD",
+   "media": [
+    "visual"
+   ]
+  },
+  "40": {
+   "title": "Non-Accusatory Pathfinding",
+   "activities": "UR",
+   "media": "any"
+  },
+  "41": {
+   "title": "Validation on Blur",
+   "activities": "R",
+   "media": [
+    "visual"
+   ]
+  },
+  "42": {
+   "title": "Icons Are Optional",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "43": {
+   "title": "Illustrations Must Be Structural",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "44": {
+   "title": "Strong Defaults Over Customization",
+   "activities": "D",
+   "media": "any"
+  },
+  "45": {
+   "title": "Text Editing: Auto-expanding Plaintext",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "46": {
+   "title": "Date Selection: Semantic Text Input",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "47": {
+   "title": "Numbers: Monospaced Input",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "48": {
+   "title": "Tables: High-Density Ledger",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "49": {
+   "title": "Calendar: Vertical Agenda View",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "50": {
+   "title": "Charts: Tufte-style Sparklines",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "51": {
+   "title": "The Cognitive Tunnel",
+   "activities": "D",
+   "media": "any"
+  },
+  "52": {
+   "title": "The Scrim",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "53": {
+   "title": "Interaction Lockdown",
+   "activities": "R",
+   "media": "any"
+  },
+  "54": {
+   "title": "Night Mode Ocular Preservation",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "55": {
+   "title": "Low-Blue Law",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "56": {
+   "title": "Semantic Preservation",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "57": {
+   "title": "The Wayline",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "58": {
+   "title": "Living Diagram Principle",
+   "activities": "UT",
+   "media": [
+    "visual"
+   ]
+  },
+  "59": {
+   "title": "State Visualization",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "60": {
+   "title": "Screen Reader Harmony",
+   "activities": "PU",
+   "media": [
+    "visual",
+    "voice",
+    "machine"
+   ]
+  },
+  "62": {
+   "title": "Contrast & Legibility",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "63": {
+   "title": "Business Dialect Switching",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "64": {
+   "title": "Right-to-Left Logic",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "65": {
+   "title": "Structural Slicing",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "66": {
+   "title": "Interactive Projection",
+   "activities": "UT",
+   "media": [
+    "visual"
+   ]
+  },
+  "67": {
+   "title": "The Law of the Thumb",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "68": {
+   "title": "Bottom Sheet Focus",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "69": {
+   "title": "The Hand Is Not a Mouse",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "70": {
+   "title": "The Monastery of Configuration",
+   "activities": "DR",
+   "media": [
+    "visual"
+   ]
+  },
+  "71": {
+   "title": "The Explainer Rule",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "72": {
+   "title": "The Canvas Logic",
+   "activities": "P",
+   "media": [
+    "visual",
+    "print"
+   ]
+  },
+  "73": {
+   "title": "Multimedia Handling",
+   "activities": "P",
+   "media": [
+    "visual",
+    "auditory"
+   ]
+  },
+  "74": {
+   "title": "The Face & Role Trinity",
+   "activities": "UT",
+   "media": [
+    "visual"
+   ]
+  },
+  "75": {
+   "title": "Permission Sliders",
+   "activities": "UT",
+   "media": [
+    "visual"
+   ]
+  },
+  "76": {
+   "title": "Batch Action Silence",
+   "activities": "P",
+   "media": "any"
+  },
+  "77": {
+   "title": "The Trinity Structure",
+   "activities": "U",
+   "media": [
+    "visual",
+    "print"
+   ]
+  },
+  "79": {
+   "title": "The Undo Covenant",
+   "activities": "R",
+   "media": "any"
+  },
+  "80": {
+   "title": "Keyboard Sovereignty",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  },
+  "81": {
+   "title": "Loading State Dignity",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "82": {
+   "title": "Perceivable State",
+   "activities": "PT",
+   "media": "any"
+  },
+  "83": {
+   "title": "Predictable Authority",
+   "activities": "T",
+   "media": "any"
+  },
+  "85": {
+   "title": "Semantic Anchoring",
+   "activities": "UT",
+   "media": [
+    "visual"
+   ]
+  },
+  "86": {
+   "title": "Error Proximity",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "87": {
+   "title": "Color Economy",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "89": {
+   "title": "No Dark Pattern",
+   "activities": "DT",
+   "media": [
+    "visual"
+   ]
+  },
+  "90": {
+   "title": "One Action Per Screen",
+   "activities": "D",
+   "media": [
+    "visual"
+   ]
+  },
+  "91": {
+   "title": "Business Time",
+   "activities": "U",
+   "media": "any"
+  },
+  "92": {
+   "title": "A Sheet Is a Hover, Not a Navigation",
+   "activities": "R",
+   "media": [
+    "visual"
+   ]
+  },
+  "93": {
+   "title": "Navigation Invariance and the Sacred Back",
+   "activities": "R",
+   "media": [
+    "visual"
+   ]
+  },
+  "94": {
+   "title": "Calm Density",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "95": {
+   "title": "Zero Horizontal Scroll",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "96": {
+   "title": "Contextual Defaults",
+   "activities": "D",
+   "media": "any"
+  },
+  "97": {
+   "title": "The Agent Is an Actor",
+   "activities": "T",
+   "media": "any"
+  },
+  "98": {
+   "title": "Proposals, Not Commits",
+   "activities": "DT",
+   "media": "any"
+  },
+  "99": {
+   "title": "Visible Provenance",
+   "activities": "T",
+   "media": "any"
+  },
+  "100": {
+   "title": "Deterministic Islands",
+   "activities": "T",
+   "media": [
+    "visual"
+   ]
+  },
+  "101": {
+   "title": "The Dignity Contract",
+   "activities": "UT",
+   "media": "any"
+  },
+  "102": {
+   "title": "The Right to a Human",
+   "activities": "RT",
+   "media": [
+    "visual"
+   ]
+  },
+  "103": {
+   "title": "Grounded Proactivity",
+   "activities": "PT",
+   "media": "any"
+  },
+  "104": {
+   "title": "Machine Legibility",
+   "activities": "PU",
+   "media": [
+    "visual",
+    "voice",
+    "machine"
+   ]
+  },
+  "105": {
+   "title": "The Legibility Floor",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "106": {
+   "title": "The Verb on the Button",
+   "activities": "UA",
+   "media": [
+    "visual"
+   ]
+  },
+  "107": {
+   "title": "Hierarchy Is Not Miniaturization",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "108": {
+   "title": "The Trail Is Always Shown",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "109": {
+   "title": "Zeros Align, They Do Not Decorate",
+   "activities": "PU",
+   "media": [
+    "visual"
+   ]
+  },
+  "110": {
+   "title": "Nothing Floats Over the Reading",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "111": {
+   "title": "The Stranger's First Screen",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "112": {
+   "title": "Motion Reports, It Never Decorates",
+   "activities": "PU",
+   "media": "any"
+  },
+  "113": {
+   "title": "Labels Follow Their Subject",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "114": {
+   "title": "Room Before Scrollbars",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "115": {
+   "title": "The Path Shows Every Depth",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "116": {
+   "title": "The Menu Tells the Truth About the Tree",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "117": {
+   "title": "One Column Carries the Colour",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "118": {
+   "title": "Two Families of Colour",
+   "activities": "PU",
+   "media": "any"
+  },
+  "119": {
+   "title": "A Card Is Not a Button",
+   "activities": "UD",
+   "media": "any"
+  },
+  "120": {
+   "title": "The Second Level Turns",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "121": {
+   "title": "The Assistant Never Masks the Work",
+   "activities": "T",
+   "media": [
+    "visual"
+   ]
+  },
+  "122": {
+   "title": "Language Is Data",
+   "activities": "U",
+   "media": "any"
+  },
+  "123": {
+   "title": "The Reading Arc",
+   "activities": "U",
+   "media": [
+    "visual",
+    "print"
+   ]
+  },
+  "125": {
+   "title": "Sound Corroborates, It Does Not Acknowledge",
+   "activities": "PA",
+   "media": [
+    "auditory",
+    "voice"
+   ]
+  },
+  "126": {
+   "title": "Foreign Data Says It Is Foreign",
+   "activities": "UT",
+   "media": [
+    "visual"
+   ]
+  },
+  "127": {
+   "title": "A Table Declares Its Columns",
+   "activities": "U",
+   "media": [
+    "visual"
+   ]
+  },
+  "128": {
+   "title": "One Fact, One Encoding",
+   "activities": "P",
+   "media": [
+    "visual"
+   ]
+  },
+  "129": {
+   "title": "The Action Is the Last Thing to Go",
+   "activities": "A",
+   "media": [
+    "visual"
+   ]
+  }
+ },
+ "off": {
+  "78": "A checklist applied to the other rules before shipping. Its subject is the law being tested, not a person doing something with an interface.",
+  "124": "Concerns what a generator ships. Its subject is the maker of an interface, and no person is yet doing anything with it."
+ }
+}
