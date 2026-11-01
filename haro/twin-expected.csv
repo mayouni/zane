@@ -1,3 +1,5 @@
+# baseline: Haro spike at ringpp commit 6611d18 (v0.23, remote private/next). 16 differences; none moved when the forge was regenerated against it.
+# reproduce: git -C D:/GitHub/ringpp archive 6611d18 haro/spike | tar -x -C D:/tmp/haro-v23, then HARO_SPIKE=D:/tmp/haro-v23/haro/spike node haro/judge-zui-court.js
 fixture,zuijs_says,court_says,seam,class
 duplicate-field.zui,DUPLICATE_FIELD,PARSE,S11,other-code
 duplicate-declaration.zui,DUPLICATE_DECLARATION,DUPLICATE_NAME,S11,other-code

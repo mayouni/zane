@@ -71,7 +71,7 @@ for (const f of man.fixtures) {
   } catch (e) { code = 'UNREADABLE:' + raw.trim().slice(0, 80); }
   // ground truth: what zui.js says on the original, with the fixture's own symbols
   const truth = [...new Set(Z.verify(src, { symbols: f.symbols || null }).map(d => d.id))].sort();
-  rows.push({ file: f.file, level: f.level, expect: f.expect_ids, truth, got: code, msg: parsed && parsed.diagnostics && parsed.diagnostics[0] ? parsed.diagnostics[0].message : '' });
+  rows.push({ file: f.file, level: f.level, expect: f.expect_ids, truth, got: code, cites: (parsed && parsed.diagnostics && parsed.diagnostics[0] && parsed.diagnostics[0].cites) || null, msg: parsed && parsed.diagnostics && parsed.diagnostics[0] ? parsed.diagnostics[0].message : '' });
 }
 
 const warnOnly = r => r.expect.length > 0 && r.expect.every(id => sev[id] === 'warning');
@@ -93,12 +93,24 @@ for (const r of notcarried) console.log(`${r.file.padEnd(40)} ${r.expect.join('+
 const csv = ['file,level,expected,got'].concat(rows.map(r => [r.file, r.level, r.expect.join('+'), r.got].join(','))).join('\n') + '\n';
 fs.writeFileSync(path.join(__dirname, 'judge-rows.csv'), csv);
 
+// ---- a measurement, not a ratchet: what the court's envelope cites against the contract's bindings (S2)
+// Every fixture the court refuses under the code the contract names is compared; a refusal under another
+// code (S11, S8) has no binding of the same name to compare with and is left out.
+{
+  const bound = c => { const d = viol.find(x => x.id === c); return d ? [...(d.rules || []).map(x => 'rule:' + x), ...(d.articles || []).map(x => 'article:' + x), ...(d.rights || []).map(x => 'right:' + x), ...(d.forbidden_patterns || []).map(x => 'pattern:' + x)] : null; };
+  const cmp = rows.filter(r => r.got !== '(clean)' && r.cites && bound(r.got));
+  const same = cmp.filter(r => JSON.stringify([...r.cites].sort()) === JSON.stringify(bound(r.got).sort()));
+  console.log(`\n-- cites: ${same.length} of ${cmp.length} envelopes cite exactly what violations.json binds to their code`);
+  for (const r of cmp) if (!same.includes(r)) console.log(`  ${r.file}: ${r.got} cites [${r.cites.join(', ')}], contract binds [${bound(r.got).join(', ')}]`);
+}
+
 // ---- the ratchet ---------------------------------------------------------------------------
 const says = ids => ids.length ? ids.join('+') : '(clean)';
 const current = new Map([...disagree, ...notcarried, ...lawfulBad].map(r => [r.file, { zuijs: says(r.truth), court: r.got }]));
 const listed = new Map();
-for (const line of fs.readFileSync(path.join(__dirname, 'twin-expected.csv'), 'utf8').split(/\r?\n/).slice(1)) {
-  if (!line.trim()) continue;
+for (const line of fs.readFileSync(path.join(__dirname, 'twin-expected.csv'), 'utf8').split(/\r?\n/)) {
+  if (line.startsWith('# baseline')) console.log('\n-- ' + line.slice(2));
+  if (!line.trim() || line.startsWith('#') || line.startsWith('fixture,')) continue;
   const [fixture, zuijs, court, seam, cls] = line.split(',');
   listed.set(fixture, { zuijs, court, seam, cls });
 }

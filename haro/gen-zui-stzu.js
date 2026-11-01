@@ -61,9 +61,12 @@ w('--   S1  severity: every refusal a court speaks is an error. Five diagnostics
 w('--       zui.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,');
 w('--       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not');
 w('--       over-refuse. The exception is WIDGET and USER, see D2.');
-w('--   S2  cites: CONSTRAINT carries CODE and no CITES, so a refusal cites rule:<element name>');
-w('--       and not rule:16 / article:intent / pattern:select-silently-acts. REFUSAL and SYMBOL');
-w('--       have CITES; CONSTRAINT, MENU, RANGE, FORMAT and UNION do not.');
+w('--   S2  cites: CLOSED for constraints at Haro v0.23 (ringpp 6611d18), 2026-11-02. Each constraint, and the');
+w('--       unknown_declaration refusal, carries CITES written from its diagnostic in violations.json');
+w('--       (rule:16, article:intent, pattern:select-silently-acts), and the envelope cites them. STILL OPEN');
+w('--       for the six MENUs (UNKNOWN_INTENT, UNKNOWN_MEDIUM, UNKNOWN_SIGNAL, UNKNOWN_ROLE, INVALID_TONE,');
+w('--       INVALID_PERSPECTIVE): a MENU has no CITES, so it cites the default rule:<CODE>, a rule that does');
+w('--       not exist. RANGE, FORMAT and UNION have none either.');
 w('--   S3  the world: INTENT_ORPHAN, INVISIBLE_STATE, HIDDEN_AUTHORITY check a host world in the');
 w('--       direction "everything the world holds is declared", which SYMBOL (a declared name');
 w('--       resolves) does not say. Level 3 is not carried.');
@@ -192,16 +195,27 @@ for (const k of KINDS) {
 // ------------------------------------------------------------------ constraints
 w('-- ---- the court: level 2, local semantics ------------------------------------------------');
 w('-- Each constraint states the OFFENCE as its WHEN and speaks the diagnostic id as its CODE.');
-w('-- CODE is the C2 stable identifier; a cite is not declarable here (S2).');
+w('-- CODE is the C2 stable identifier; CITES is what the diagnostic enforces, from violations.json (S2).');
 w('');
 const sum = {};
 for (const d of contract.diagnostics) sum[d.id] = d.summary;
-let nCons = 0;
+// What a diagnostic cites, from its binding in violations.json (S2, closed at Haro v0.23): the rules, the
+// articles, the rights and the forbidden patterns it enforces, as kind:value strings.
+const citesOf = {};
+for (const d of contract.diagnostics) citesOf[d.id] = [
+  ...(d.rules || []).map(x => 'rule:' + x),
+  ...(d.articles || []).map(x => 'article:' + x),
+  ...(d.rights || []).map(x => 'right:' + x),
+  ...(d.forbidden_patterns || []).map(x => 'pattern:' + x)
+];
+let nCons = 0, nCited = 0;
 const cons = (name, on, when, code, msg, why) => {
   w(`DEFINE CONSTRAINT ${name} AS (`);
   w(`  ON ${on}, WHEN ${q(when)},`);
   w(`  MESSAGE ${q(msg)},`);
-  w(`  CODE ${q(code)}`);
+  const cites = citesOf[code] || [];
+  if (cites.length) { w(`  CODE ${q(code)},`); w(`  CITES [${cites.map(q).join(', ')}]`); nCited++; }
+  else w(`  CODE ${q(code)}`);
   w(`) RATIONALE ${q(why)}`);
   w('');
   nCons++;
@@ -295,13 +309,14 @@ w('');
 w('DEFINE REFUSAL unknown_declaration AS (');
 w('  MESSAGE "The ten kinds are INTENT_FLOW, FORM, WIZARD, SCREEN, COMPONENT, NAV_GRAPH, WORLD_VIEW, INTERACTION, FEEDBACK and VIBE.",');
 w('  NAMED [widget: "WIDGET names a rendering, and a declaration that needs to say card has stopped describing intent", user: "USER is not a kind this language defines"],');
-w('  CODES [widget: "UNSPECIFIED_DECLARATION", user: "UNSPECIFIED_DECLARATION"]');
+w('  CODES [widget: "UNSPECIFIED_DECLARATION", user: "UNSPECIFIED_DECLARATION"],');
+w(`  CITES [${citesOf.UNSPECIFIED_DECLARATION.map(q).join(', ')}]`);
 w(') RATIONALE "Two kinds the reference implementation recognises and the language does not define (D2). Warnings in zui.js; errors here"');
 w('');
 CARRIED.add('UNSPECIFIED_DECLARATION');
 
 fs.writeFileSync(R('haro/zui.stzu'), out.join('\n') + '\n');
 const all = contract.diagnostics.map(d => d.id);
-console.log('constraints', nCons, 'lines', out.length);
+console.log('constraints', nCons, 'with CITES', nCited, 'lines', out.length);
 console.log('diagnostics', all.length, 'carried-by-declaration', all.filter(x => CARRIED.has(x)).length);
 console.log('not carried:', all.filter(x => !CARRIED.has(x)).join(' '));

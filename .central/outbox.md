@@ -1505,3 +1505,39 @@ next:
 note:      THE 00:09 MEMO'S ROW IS SUPERSEDED BY THIS ONE. The earlier text stays as written.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-02 00:40 | NOTE | answers Central's addendum C of 2026-11-02 00:15 | S2 is closed for constraints and the refusal; 15 of 21 envelopes cite what the contract binds, and the 6 that do not are the MENUs
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-02 00:40 | ATTENDED
+
+subject:   CITES on every constraint of haro/zui.stzu, judged against Haro v0.23 (ringpp 6611d18), local commit on main, not pushed
+
+why:       Haro v0.23 lets a CONSTRAINT carry CITES, so the court's refusals can cite the law's rule, article and pattern and not a made-up rule named after the code
+
+did:
+  - extracted commit 6611d18 read-only with git archive into D:/tmp/haro-v23 and ran the judge with HARO_SPIKE pointing there; did not pull or check out in D:/GitHub/ringpp
+  - re-baselined first, before any CITES: regenerated forge, same court, 16 differences, none moved. Central's note says 17; it is 16 since task A closed S6
+  - made gen-zui-stzu.js write CITES on each of the 136 constraints from the rules, articles, rights and forbidden_patterns of its diagnostic in violations.json, as rule:16, article:intent, pattern:select-silently-acts; the forge accepted all of them
+  - added CITES to the unknown_declaration refusal, which closes UNSPECIFIED_DECLARATION (article:intent)
+  - measured, as asked: the judge now compares each refused envelope's cites with the contract's bindings and prints how many agree. It is a measurement and does not fail the run
+  - recorded the baseline commit and the reproduction command in the header of haro/twin-expected.csv, and made the judge skip comment lines and print that header
+  - did not touch zui.js
+
+state:
+  envelope cites vs contract:  15 of 21 agree exactly (the 21 are the refusals under the code the contract names)
+  the 6 that do not:           UNKNOWN_INTENT, UNKNOWN_MEDIUM, UNKNOWN_SIGNAL, UNKNOWN_ROLE, INVALID_TONE, INVALID_PERSPECTIVE; all six are MENUs, which carry no CITES, so each cites the default rule:<CODE>
+  twin figure:                 41 of 57 agree, 16 differ, unchanged against 6611d18
+  conformance suite:           57 of 57 pass, pack verified
+  pushed:                      NO
+
+waiting:
+  - HARO-MENU-CITES-01: a MENU cannot carry CITES, so six envelopes cite rule:INVALID_TONE and the like, rules that do not exist. For three of them (INVALID_PERSPECTIVE, INVALID_TONE, UNKNOWN_MEDIUM) the contract binds nothing at all, so the honest cite is none -> haro-charter, through Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed on C
+  - central: check and push; carry the MENU question to haro-charter
+
+note:      TASK B WAS ALREADY COMMITTED (93c5886, 8063da3) WHEN THIS ARRIVED, so C went in after B and not between A and B. Nothing in B depends on it. The 21 compared envelopes are the refusals under the contract's own code; the six S11 and S8 differences refuse under another code and have no like-named binding to compare with.
+```
+---
