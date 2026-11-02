@@ -186,7 +186,7 @@ ship in the reference implementation today, under the codes shown.
 | `VIBE_STRIPS_RIGHT` | error | 2 | a `VIBE` suppresses an intent another declaration guarantees | ❌ |
 | `UNRESOLVED_ENTITY` | warning | 3 | a `VISIBLE_ENTITIES` name resolves to no entity | ❌ |
 | `UNKNOWN_MEDIUM` | error | 2 | `SURFACE_AS` names a medium outside the ten | ❌ |
-| `VERB_NOT_CARRIED` | error | 2 | a declaration satisfies an intent the declared medium cannot carry at all | ❌ |
+| `VERB_NOT_CARRIED` | error | 2 | a declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all | ❌ |
 | `UNKNOWN_SIGNAL` | error | 1 | a value in `SIGNALS` is not one of Rule 118's five | ❌ |
 | `EXPRESSION_ORPHAN` | error | 2 | an expression field on a declaration that satisfies no intent | ❌ |
 | `SIGNAL_UNPERCEIVABLE` | error | 2 | every status a surface declares renders as absence in the medium it declared | ❌ |

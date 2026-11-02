@@ -89,16 +89,16 @@ fixture that declares none sits on `any`. A fixture lands on every activity of t
 
 ## 3. The result
 
-Each cell reads **rules written for it / fixtures on it**. The figures are those after D5 (71 fixtures) and D6 (123 rules); section 3b gives what D5 moved and section 3c what D6 moved. `x` closed, `.` nothing.
+Each cell reads **rules written for it / fixtures on it**. The figures are those after D5 and PG-2 (73 fixtures) and D6 (123 rules); section 3b gives what D5 moved and section 3c what D6 moved. `x` closed, `.` nothing.
 
 | | any | visual | auditory | voice | haptic | print | luminous | signage | machine | spatial | terminal |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| perceive | 5/8 | 36/2 | 2/2 | 3/0 | . | 1/4 | . | . | 2/0 | . | . |
+| perceive | 5/8 | 36/2 | 2/2 | 3/0 | . | 1/6 | . | . | 2/0 | . | . |
 | understand | 10/8 | 48/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
 | decide | 9/12 | 9/3 | . | 0/2 | x | x | x | x | . | . | . |
 | act | 2/7 | 12/3 | 1/0 | 1/2 | . | x | x | x | . | . | . |
 | recover | 5/10 | 9/1 | 0/2 | . | . | x | x | x | 0/2 | . | . |
-| trust | 9/11 | 12/4 | 0/2 | 0/2 | . | 0/2 | . | . | . | . | . |
+| trust | 9/11 | 12/4 | 0/2 | 0/2 | . | 0/4 | . | . | . | . | . |
 
 A rule sits on several cells, so a column does not add up to a number of rules.
 
@@ -191,11 +191,11 @@ A gap records the cell, the rule and what failed. It is not a rule and proposes 
 | id | cell | rule | what failed |
 |---|---|---|---|
 | **PG-1** | perceive x print (and understand x print: Rule 112 is written for both) | 112 | `projection-print-motion-lawful.zui` is clean in both verifiers: a printed notice that declares `MOTION fade` and reports its state change is admitted. `media.json` says print "has no time", so no motion can occur on it. The rule is satisfied in a medium where it cannot apply, and nothing says so. |
-| PG-2 (observed, no fixture) | recover x print, a closed cell | 79, 26 | A print flow that satisfies only `READ` and promises `ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]` is clean in `zui.js`. `NOT_CARRIED` is applied to `SATISFIES` only, so a promise print cannot keep is not read. Probe: a VIBE with `SURFACE_AS print` and an INTENT_FLOW with those two fields, measured once on 2026-11-02 and not pinned by a fixture, because D5 asked for one fixture per medium. |
+| **PG-2** **CLOSED** 2026-11-02 | recover x print, a closed cell | 79, 26 | A print flow that satisfies only `READ` and promises `ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]` was clean in `zui.js`: `NOT_CARRIED` was applied to `SATISFIES` only, so a guarantee print cannot keep was not read. **Closed by** one narrow change to the medium-axis block of `zui.js`, which now applies `NOT_CARRIED` to `ALWAYS_REACHABLE` as well and raises the same `VERB_NOT_CARRIED` with the same subject shape. No new diagnostic, no new level. Pinned by `projection-print-promise.zui` (`VERB_NOT_CARRIED`) and its lawful twin. No existing fixture changed its verdict (71 of 71 still passed before the two were added). The court is silent on the new fixture (seam S14, in `twin-expected.csv`). |
 
-Both are open to the Principal. Nothing here says a rule should change: PG-1 may mean the rule is vacuous
-on print and that is fine, and PG-2 may mean `ALWAYS_REACHABLE` should be read against the medium, which
-is a change to the verifier and not to a rule.
+PG-2 was ruled on 2026-11-02 (the Principal's word, relayed by Central): silence hiding an error, so the verifier
+changes, as D1's rule says it must. PG-1 was ruled **no change**: it hides no error, and rule 112, `media.json` and
+the verifier are left as they are. It stays recorded here, open as a fact and closed as a question. Neither gap is a rule.
 
 ### What D5 did to the counts
 
@@ -203,9 +203,9 @@ Run again with `node doc/design/coverage-count.js`:
 
 | | before | after |
 |---|---|---|
-| fixtures | 57 | 71 |
-| fixtures on a cell | 28 | 42 |
-| fixtures on a medium column | 4 | 18 |
+| fixtures | 57 | 73 (71 at D5, 2 more for PG-2) |
+| fixtures on a cell | 28 | 45 |
+| fixtures on a medium column | 4 | 20 |
 | open medium cells with a fixture | 4 | 16 |
 | cells with a rule and no fixture | 13 | 5 |
 | cells with a fixture and no rule written for them | 2 | 6 |

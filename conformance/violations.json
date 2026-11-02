@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.7",
+    "version": "1.8",
     "lastUpdated": "2026-11-02",
     "specification": "doc/language/VIOLATIONS.md",
     "constitution": "3.12",
@@ -281,8 +281,8 @@
       "id": "VERB_NOT_CARRIED",
       "severity": "error",
       "level": 2,
-      "summary": "A declaration satisfies an intent the declared medium cannot carry at all.",
-      "decidable_from": ["SATISFIES", "SURFACE_AS", "file"],
+      "summary": "A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.",
+      "decidable_from": ["SATISFIES", "ALWAYS_REACHABLE", "SURFACE_AS", "file"],
       "rules": ["82"],
       "articles": ["intent"],
       "rights": [],

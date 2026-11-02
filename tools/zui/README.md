@@ -97,7 +97,7 @@ node tools/zui/conformance.js --level 4
 ```
 Zui conformance — level 4
   spec         doc/language/ v1.4
-  contract     violations.json v1.7 (constitution v3.12)
+  contract     violations.json v1.8 (constitution v3.12)
   envelope     diagnostic-contract v1.2.0 — 40 diagnostics and 57 reports, all conform
   media        10 media — verifier agrees with media.json
   catalogue    37 diagnostics — contract agrees with VIOLATIONS.md

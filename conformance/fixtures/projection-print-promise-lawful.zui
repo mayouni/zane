@@ -1,0 +1,13 @@
+// The lawful twin: the same flow with the guarantee it cannot keep removed.
+// A printed record that only reads promises nothing about the way back.
+//
+// Expected: clean
+
+DEFINE VIBE ledger_print (
+  SURFACE_AS print
+)
+
+DEFINE INTENT_FLOW read_ledger (
+  SATISFIES [READ],
+  ACTOR auditor
+)

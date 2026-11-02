@@ -70,3 +70,5 @@ projection-visual-decide.zui,2,SELECT_ACT_COLLAPSE,SELECT_ACT_COLLAPSE
 projection-visual-act.zui,2,READ_ACT_COLLAPSE,READ_ACT_COLLAPSE
 projection-visual-recover.zui,2,MISSING_UNDO,MISSING_UNDO
 projection-visual-trust.zui,3,HIDDEN_AUTHORITY,(clean)
+projection-print-promise.zui,2,VERB_NOT_CARRIED,(clean)
+projection-print-promise-lawful.zui,2,,(clean)

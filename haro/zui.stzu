@@ -54,6 +54,9 @@
 --   S13 reads-anywhere fields: zui.js reads STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES on
 --       any kind, so off their own kind it is not silent and FIELD_MISPLACED does not judge them
 --       (D1, narrowed by ruling 2026-11-01). The court refuses them there as UNKNOWN_CLAUSE.
+--   S14 guarantees read against the medium: zui.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in
+--       ALWAYS_REACHABLE as well as in SATISFIES. The 77 medium constraints read SATISFIES only, so the
+--       court is silent on projection-print-promise.zui. Listed in twin-expected.csv, not yet generated.
 --
 -- DIVERGENCES from zui.js that this declaration makes by being closed (each is a ruling for
 -- the author, not a decision taken here):

@@ -540,6 +540,20 @@
           "auditor"
         ]
       }
+    },
+    {
+      "file": "projection-print-promise.zui",
+      "level": 2,
+      "expect_ids": [
+        "VERB_NOT_CARRIED"
+      ],
+      "note": "Projection (D5, PG-2): ALWAYS_REACHABLE read against the medium. A print flow satisfying only READ and promising UNDO, CANCEL and EXIT. Cell recover x print, a closed cell."
+    },
+    {
+      "file": "projection-print-promise-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin of projection-print-promise.zui."
     }
   ],
   "unfixtured": [

@@ -11,11 +11,11 @@
     "rules": 123,
     "forbiddenPatterns": 17,
     "language": "1.4",
-    "refusalContract": "1.7",
+    "refusalContract": "1.8",
     "diagnostics": 37,
     "media": 10,
     "signalValues": 5,
-    "fixtures": 71
+    "fixtures": 73
   },
   "pinned": [
     {
@@ -45,14 +45,14 @@
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
-      "bytes": 19577,
-      "sha256": "69eab8a8474d1fb16cc56248a81507fe0198ae80a9e165a567649d6c07c23c05"
+      "bytes": 19609,
+      "sha256": "7b8e9b252e288bf5830c7c74c5a8151f302f7712a97fb408e2fb03d62719eab4"
     },
     {
       "file": "conformance/violations.json",
       "role": "the refusal contract",
-      "bytes": 26197,
-      "sha256": "cafdd098d9cd54e6e4b7c428bbdb1f0a51574eebf6b3f68873f93a99086ae3bc"
+      "bytes": 26249,
+      "sha256": "2788b79ed00f52bd6c57b253640ef37d0e22101012a023f74c467ff785b604a0"
     },
     {
       "file": "doc/diagnostic-contract.md",
@@ -81,8 +81,8 @@
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
-      "bytes": 18930,
-      "sha256": "101d30fb6fe82728fb10df397e1be66ba0684f0d61c300e866047d6774524a0e"
+      "bytes": 19422,
+      "sha256": "8ce0e57ee764334f88b4b45e4878b894e5d47466b3118619042ec367dc176873"
     },
     {
       "file": "conformance/cross-medium/spec.json",

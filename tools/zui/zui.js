@@ -595,17 +595,23 @@ function check(decls, symbols) {
   /* -- Level 2, file-wide: the medium axis ------------------------------
         A VIBE names the medium this file projects to. An intent that medium
         cannot carry AT ALL is a promise the surface cannot keep -- print has
-        no UNDO, a lamp has no READ. Only absence raises; "degraded" is data
-        in media.json, not a diagnostic, because a warning firing on every
-        serial surface would be noise rather than law. */
+        no UNDO, a lamp has no READ. The promise is made in SATISFIES (what the
+        surface does) and in ALWAYS_REACHABLE (what it guarantees stays within
+        reach); a guarantee the medium cannot carry is the same unkeepable
+        promise, and was silent until PG-2 of doc/design/COVERAGE.md. Only
+        absence raises; "degraded" is data in media.json, not a diagnostic,
+        because a warning firing on every serial surface would be noise rather
+        than law. */
 
   for (const m of declaredMedia) {
     const gone = NOT_CARRIED[m];
     if (!gone || gone.size === 0) continue;
     for (const decl of decls) {
       const label = decl.name || '(unnamed)';
-      for (const v of listOf(decl, 'SATISFIES') || []) {
-        if (gone.has(v)) out.push({ id: 'VERB_NOT_CARRIED', line: decl.line, subject: `${v} in ${label} on ${m}` });
+      for (const key of ['SATISFIES', 'ALWAYS_REACHABLE']) {
+        for (const v of listOf(decl, key) || []) {
+          if (gone.has(v)) out.push({ id: 'VERB_NOT_CARRIED', line: decl.line, subject: `${v} in ${label} on ${m}` });
+        }
       }
     }
   }
