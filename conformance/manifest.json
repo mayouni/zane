@@ -430,6 +430,116 @@
         "UNEXPECTED_CHARACTER"
       ],
       "note": "An at-sign between two lawful declarations: a character outside the lexical grammar of GRAMMAR.md section 1. Placed between declarations so it raises alone. Skipped by the lexer, which is why both declarations still read, and why this id needs no recovery to be pinned, unlike SYNTAX_ERROR and UNTERMINATED_STRING."
+    },
+    {
+      "file": "projection-auditory-undo.zui",
+      "level": 2,
+      "expect_ids": [
+        "MISSING_UNDO"
+      ],
+      "note": "Projection (D5): Rule 79 under SURFACE_AS auditory. Cell recover x auditory."
+    },
+    {
+      "file": "projection-auditory-undo-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin of projection-auditory-undo.zui."
+    },
+    {
+      "file": "projection-voice-select-act.zui",
+      "level": 2,
+      "expect_ids": [
+        "SELECT_ACT_COLLAPSE"
+      ],
+      "note": "Projection (D5): Rule 16 under SURFACE_AS voice. Cell decide x voice."
+    },
+    {
+      "file": "projection-voice-select-act-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin of projection-voice-select-act.zui."
+    },
+    {
+      "file": "projection-machine-cancel.zui",
+      "level": 2,
+      "expect_ids": [
+        "MISSING_CANCEL"
+      ],
+      "note": "Projection (D5): Rule 26 under SURFACE_AS machine. Cell recover x machine."
+    },
+    {
+      "file": "projection-machine-cancel-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin of projection-machine-cancel.zui."
+    },
+    {
+      "file": "projection-print-motion.zui",
+      "level": 2,
+      "expect_ids": [
+        "DECORATIVE_ANIMATION"
+      ],
+      "note": "Projection (D5): Rule 112 under SURFACE_AS print. Cell perceive x print."
+    },
+    {
+      "file": "projection-print-motion-lawful.zui",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Lawful twin of projection-print-motion.zui. Clean in zui.js although print has no time: projection gap PG-1."
+    },
+    {
+      "file": "projection-visual-perceive.zui",
+      "level": 2,
+      "expect_ids": [
+        "DECORATIVE_ANIMATION"
+      ],
+      "note": "Projection (D5): the visual-declaring twin of decorative-animation.zui. Row perceive, Rule 112."
+    },
+    {
+      "file": "projection-visual-understand.zui",
+      "level": 2,
+      "expect_ids": [
+        "ROLE_ACTS_WITHOUT_CONSEQUENCE"
+      ],
+      "note": "Projection (D5): the visual-declaring twin of role-acts-without-consequence.zui. Row understand, Rule 119."
+    },
+    {
+      "file": "projection-visual-decide.zui",
+      "level": 2,
+      "expect_ids": [
+        "SELECT_ACT_COLLAPSE"
+      ],
+      "note": "Projection (D5): the visual-declaring twin of select-act-collapse.zui. Row decide, Rule 16."
+    },
+    {
+      "file": "projection-visual-act.zui",
+      "level": 2,
+      "expect_ids": [
+        "READ_ACT_COLLAPSE"
+      ],
+      "note": "Projection (D5): the visual-declaring twin of read-act-collapse.zui. Row act, Rule 16."
+    },
+    {
+      "file": "projection-visual-recover.zui",
+      "level": 2,
+      "expect_ids": [
+        "MISSING_UNDO"
+      ],
+      "note": "Projection (D5): the visual-declaring twin of missing-undo.zui. Row recover, Rule 79."
+    },
+    {
+      "file": "projection-visual-trust.zui",
+      "level": 3,
+      "expect_ids": [
+        "HIDDEN_AUTHORITY"
+      ],
+      "note": "Projection (D5): the visual-declaring twin of hidden-authority.zui. Row trust, Rule 83.",
+      "symbols": {
+        "actors": [
+          "accountant",
+          "auditor"
+        ]
+      }
     }
   ],
   "unfixtured": [

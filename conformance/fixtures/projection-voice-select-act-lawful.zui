@@ -1,0 +1,13 @@
+// The lawful twin: the same flow, differing by one word, CONFIRM added to SATISFIES.
+//
+// Expected: clean
+
+DEFINE VIBE order_voice (
+  SURFACE_AS voice
+)
+
+DEFINE INTENT_FLOW order_by_voice (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR customer
+)

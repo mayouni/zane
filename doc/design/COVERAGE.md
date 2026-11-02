@@ -2,7 +2,7 @@
 
 **What this is.** A map of what the law covers, drawn from what a person does with an interface
 and not from the issues found so far. It places the 122 rules of `constitution/rules.json` (v3.11)
-and the 57 fixtures of `conformance/manifest.json` on that map, counts the cells that have a rule and
+and the fixtures of `conformance/manifest.json` (57 when the grid was drawn, 71 after the projection fixtures of D5) on that map, counts the cells that have a rule and
 the cells that have none, and defines the record a discovered issue is filed as, so that it lands on
 a cell.
 
@@ -89,16 +89,16 @@ fixture that declares none sits on `any`. A fixture lands on every activity of t
 
 ## 3. The result
 
-Each cell reads **rules written for it / fixtures on it**. `x` closed, `.` nothing.
+Each cell reads **rules written for it / fixtures on it**. The fixture figures are those after D5 (71 fixtures); the rule figures did not move, because D5 wrote no rule. `x` closed, `.` nothing.
 
 | | any | visual | auditory | voice | haptic | print | luminous | signage | machine | spatial | terminal |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| perceive | 5/8 | 36/0 | 2/2 | 3/0 | . | 1/2 | . | . | 2/0 | . | . |
-| understand | 9/7 | 48/0 | . | 2/0 | x | 2/0 | . | . | 2/0 | . | . |
-| decide | 8/11 | 9/0 | . | . | x | x | x | x | . | . | . |
-| act | 2/7 | 12/0 | 1/0 | 1/0 | . | x | x | x | . | . | . |
-| recover | 5/10 | 9/0 | . | . | . | x | x | x | . | . | . |
-| trust | 9/11 | 12/0 | 0/2 | . | . | 0/2 | . | . | . | . | . |
+| perceive | 5/8 | 36/2 | 2/2 | 3/0 | . | 1/4 | . | . | 2/0 | . | . |
+| understand | 9/7 | 48/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
+| decide | 8/11 | 9/3 | . | 0/2 | x | x | x | x | . | . | . |
+| act | 2/7 | 12/3 | 1/0 | 1/2 | . | x | x | x | . | . | . |
+| recover | 5/10 | 9/1 | 0/2 | . | . | x | x | x | 0/2 | . | . |
+| trust | 9/11 | 12/4 | 0/2 | 0/2 | . | 0/2 | . | . | . | . | . |
 
 A rule sits on several cells, so a column does not add up to a number of rules.
 
@@ -122,10 +122,10 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
   projected there and not a statement that anyone has done it. The 25 medium-free rules would reach
   every one of the 34 empty cells, so this report does not count that reach as coverage: if it did, the
   honest gap would read 0, and nobody checked the projection once.
-- **Fixtures test the law medium-free.** 28 of 57 land on a cell, and only 4 (the two print and the two
-  auditory fixtures) land on a medium column. **Not one fixture declares the visual medium**, so
-  the 6 visual cells that hold 94 rules hold no fixture. 13 of the 15 medium cells with a rule have no
-  fixture; 2 medium cells (trust on auditory and on print) have fixtures and no rule written for them,
+- **Fixtures tested the law medium-free, until D5.** At the first count 28 of 57 landed on a cell, and
+  only 4 (the two print and the two auditory fixtures) on a medium column. **Not one fixture declared
+  the visual medium**, so the 6 visual cells that hold 94 rules held no fixture. 13 of the 15 medium cells with a rule had no
+  fixture; 2 medium cells (trust on auditory and on print) had fixtures and no rule written for them,
   which is Rule 82 running there medium-free.
 - **29 fixtures land on no cell.** 5 declare no rule (the clean and exemption fixtures). 24 test a
   diagnostic that cites no rule in `violations.json`. That is mostly right, not a defect. Of the 21
@@ -147,6 +147,78 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
   verb between rows changes which cells are closed; moving one between perceive and trust cannot, as they own none.
 - **A rule on a cell does not mean the cell is covered.** 80 of 122 rules are `judgment`. A rule that only
   a person can apply is a rule that has been written, and it says nothing about whether anything checks it.
+
+---
+
+## 3b. What the projection fixtures measured (D5, 2026-11-02)
+
+The 34 empty cells are reached only by medium-free rules, and nobody had checked that those rules
+survive projection. D5 (the Principal's ruling, relayed by Central) forbids writing a rule for
+them until that is measured. So 14 fixtures were added, each applying a rule that already exists
+under a declared medium, and each read through both courts: `zui.js` and the court forged from
+`haro/zui.stzu`, judged on Haro v0.23 (ringpp 6611d18). **No rule, diagnostic or verifier changed.**
+
+| fixture | rule | cell | zui.js | court | verdict |
+|---|---|---|---|---|---|
+| `projection-auditory-undo` and `-lawful` | 79 | recover x auditory | MISSING_UNDO, then clean | same | applies |
+| `projection-voice-select-act` and `-lawful` | 16 | decide x voice | SELECT_ACT_COLLAPSE, then clean | same | applies |
+| `projection-machine-cancel` and `-lawful` | 26 | recover x machine | MISSING_CANCEL, then clean | same | applies |
+| `projection-print-motion` and `-lawful` | 112 | perceive x print | DECORATIVE_ANIMATION, then clean | same | **gap PG-1** |
+| `projection-visual-perceive` | 112 | perceive x visual | DECORATIVE_ANIMATION | same | applies |
+| `projection-visual-understand` | 119 | understand x visual | ROLE_ACTS_WITHOUT_CONSEQUENCE | same | applies |
+| `projection-visual-decide` | 16 | decide x visual | SELECT_ACT_COLLAPSE | same | applies |
+| `projection-visual-act` | 16 | act x visual | READ_ACT_COLLAPSE | same | applies |
+| `projection-visual-recover` | 79 | recover x visual | MISSING_UNDO | same | applies |
+| `projection-visual-trust` | 83 | trust x visual | HIDDEN_AUTHORITY | **clean** | applies; one new difference, S3 |
+
+Each visual fixture is the visual-declaring twin of a fixture that already existed (the source is named
+in its manifest note); the four medium pairs are new. "Applies" means the rule fired on the violating
+fixture and stayed quiet on the lawful twin, in both verifiers. It does not mean a person heard
+or read the result in that medium: **no one has perceived any of these fixtures, and the phase is
+reported as projected by instrument, not as verified by a person** (`CENTRAL-PERCEPTGATE-01`).
+
+**Differences this added: 1.** `projection-visual-trust` is `hidden-authority.zui` again, and the court
+is silent on it for the same reason (S3: the court has no actor model). It is in `haro/twin-expected.csv`
+with seam S3 and class `not-refused`; the ratchet lists 17 now, 16 before.
+
+**Medium-free is not the same as projectable.** Three of the four media projected cleanly. The fourth
+did not, and the gap is the one the grid was suspicious of.
+
+### Projection gaps
+
+A gap records the cell, the rule and what failed. It is not a rule and proposes none.
+
+| id | cell | rule | what failed |
+|---|---|---|---|
+| **PG-1** | perceive x print (and understand x print: Rule 112 is written for both) | 112 | `projection-print-motion-lawful.zui` is clean in both verifiers: a printed notice that declares `MOTION fade` and reports its state change is admitted. `media.json` says print "has no time", so no motion can occur on it. The rule is satisfied in a medium where it cannot apply, and nothing says so. |
+| PG-2 (observed, no fixture) | recover x print, a closed cell | 79, 26 | A print flow that satisfies only `READ` and promises `ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]` is clean in `zui.js`. `NOT_CARRIED` is applied to `SATISFIES` only, so a promise print cannot keep is not read. Probe: a VIBE with `SURFACE_AS print` and an INTENT_FLOW with those two fields, measured once on 2026-11-02 and not pinned by a fixture, because D5 asked for one fixture per medium. |
+
+Both are open to the Principal. Nothing here says a rule should change: PG-1 may mean the rule is vacuous
+on print and that is fine, and PG-2 may mean `ALWAYS_REACHABLE` should be read against the medium, which
+is a change to the verifier and not to a rule.
+
+### What D5 did to the counts
+
+Run again with `node doc/design/coverage-count.js`:
+
+| | before | after |
+|---|---|---|
+| fixtures | 57 | 71 |
+| fixtures on a cell | 28 | 42 |
+| fixtures on a medium column | 4 | 18 |
+| open medium cells with a fixture | 4 | 16 |
+| cells with a rule and no fixture | 13 | 5 |
+| cells with a fixture and no rule written for them | 2 | 6 |
+| cells with at least one rule written for them | 21 of 55 | 21 of 55 |
+| cells with none (the honest gap) | 34 of 55 | 34 of 55 |
+| rules on no cell | 2 | 2 |
+
+The honest gap did not move, as it must not: D5 measured reach and wrote no rule. What moved is how much of the
+reach is known. The six cells that now have a fixture and no rule written for them (decide x voice, recover x
+auditory, recover x machine, trust x voice, trust x auditory, trust x print) are where a medium-free rule has
+been seen to work. Rule text for haptic, luminous, signage, spatial and terminal stays held until a product
+that ships in one is named. The projection fixtures per medium are auditory, voice, machine, print and visual;
+the rest of the 34 cells have not been projected.
 
 ---
 

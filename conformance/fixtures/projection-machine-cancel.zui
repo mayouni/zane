@@ -1,0 +1,17 @@
+// PROJECTION, D5: Rule 26 (the Back Button is Holy) applied under SURFACE_AS machine.
+// A batch-submission flow for a machine caller that acts and offers no CANCEL.
+// Machine carries every verb natively, so the rule fires. Whether "the way back" means
+// the same thing to an API client as to a person is a judgement no verifier makes.
+// Cell: recover x machine.
+//
+// Expected: MISSING_CANCEL
+
+DEFINE VIBE ledger_api (
+  SURFACE_AS machine
+)
+
+DEFINE INTENT_FLOW submit_batch (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, EXIT],
+  ACTOR integration
+)

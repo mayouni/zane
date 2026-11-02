@@ -1,0 +1,21 @@
+// PROJECTION, D5: role-acts-without-consequence with a VIBE that declares SURFACE_AS visual.
+// Rule 119 on the row "understand". No fixture declared the visual medium before this one,
+// although 94 of the 122 rules are written for it. Visual carries every verb, so nothing about
+// the medium should change the verdict: this fixture proves it does not.
+//
+// Expected: ROLE_ACTS_WITHOUT_CONSEQUENCE
+
+DEFINE VIBE screen_surface (
+  SURFACE_AS visual
+)
+
+DEFINE INTERACTION revenue_card (
+  SATISFIES [READ],
+  ROLE inert
+)
+
+DEFINE INTERACTION overdue_card (
+  SATISFIES [SCAN, ACT],
+  ALWAYS_REACHABLE [UNDO],
+  ROLE inert
+)

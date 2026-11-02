@@ -1,0 +1,15 @@
+// PROJECTION, D5: hidden-authority with a VIBE that declares SURFACE_AS visual.
+// Rule 83 on the row "trust". No fixture declared the visual medium before this one,
+// although 94 of the 122 rules are written for it. Visual carries every verb, so nothing about
+// the medium should change the verdict: this fixture proves it does not.
+//
+// Expected: HIDDEN_AUTHORITY
+
+DEFINE VIBE screen_surface (
+  SURFACE_AS visual
+)
+
+DEFINE INTENT_FLOW post_ledger_entry (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]
+)

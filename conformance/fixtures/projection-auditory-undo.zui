@@ -1,0 +1,16 @@
+// PROJECTION, D5: Rule 79 (the Undo Covenant) applied under SURFACE_AS auditory.
+// A spoken alert dismissal acts and keeps no UNDO. Auditory carries ACT, CONFIRM and UNDO
+// natively (only ZOOM is absent), so the rule has something to say and should say it.
+// Cell: recover x auditory.
+//
+// Expected: MISSING_UNDO
+
+DEFINE VIBE alert_audio (
+  SURFACE_AS auditory
+)
+
+DEFINE INTENT_FLOW dismiss_alert (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [CANCEL, EXIT],
+  ACTOR operator
+)

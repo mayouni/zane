@@ -1,0 +1,12 @@
+// The lawful twin: the same notice, differing by one line, REPORTS added. It is clean, and that is
+// the finding. Print "has no time" (media.json), so no motion can occur on it, yet a motion that
+// reports is admitted without a word. The rule is satisfied in a medium where it cannot apply.
+// Recorded as PROJECTION GAP PG-1 in doc/design/COVERAGE.md; it is NOT turned into a rule.
+//
+// Expected: clean
+
+DEFINE VIBE printed_notice (
+  SURFACE_AS print,
+  MOTION fade,
+  REPORTS [save_state]
+)

@@ -56,3 +56,17 @@ unknown-field.zui,1,UNKNOWN_FIELD,UNKNOWN_CLAUSE
 role-misplaced.zui,2,ROLE_MISPLACED,UNKNOWN_CLAUSE
 role-promise-broken.zui,2,ROLE_PROMISE_BROKEN,ROLE_PROMISE_BROKEN
 unexpected-character.zui,1,UNEXPECTED_CHARACTER,PARSE
+projection-auditory-undo.zui,2,MISSING_UNDO,MISSING_UNDO
+projection-auditory-undo-lawful.zui,2,,(clean)
+projection-voice-select-act.zui,2,SELECT_ACT_COLLAPSE,SELECT_ACT_COLLAPSE
+projection-voice-select-act-lawful.zui,2,,(clean)
+projection-machine-cancel.zui,2,MISSING_CANCEL,MISSING_CANCEL
+projection-machine-cancel-lawful.zui,2,,(clean)
+projection-print-motion.zui,2,DECORATIVE_ANIMATION,DECORATIVE_ANIMATION
+projection-print-motion-lawful.zui,2,,(clean)
+projection-visual-perceive.zui,2,DECORATIVE_ANIMATION,DECORATIVE_ANIMATION
+projection-visual-understand.zui,2,ROLE_ACTS_WITHOUT_CONSEQUENCE,ROLE_ACTS_WITHOUT_CONSEQUENCE
+projection-visual-decide.zui,2,SELECT_ACT_COLLAPSE,SELECT_ACT_COLLAPSE
+projection-visual-act.zui,2,READ_ACT_COLLAPSE,READ_ACT_COLLAPSE
+projection-visual-recover.zui,2,MISSING_UNDO,MISSING_UNDO
+projection-visual-trust.zui,3,HIDDEN_AUTHORITY,(clean)

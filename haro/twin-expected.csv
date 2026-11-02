@@ -1,4 +1,4 @@
-# baseline: Haro spike at ringpp commit 6611d18 (v0.23, remote private/next). 16 differences; none moved when the forge was regenerated against it.
+# baseline: Haro spike at ringpp commit 6611d18 (v0.23, remote private/next). 17 differences: the 16 of the first baseline, none moved, plus projection-visual-trust.zui (D5), which is hidden-authority.zui again under SURFACE_AS visual.
 # reproduce: git -C D:/GitHub/ringpp archive 6611d18 haro/spike | tar -x -C D:/tmp/haro-v23, then HARO_SPIKE=D:/tmp/haro-v23/haro/spike node haro/judge-zui-court.js
 fixture,zuijs_says,court_says,seam,class
 duplicate-field.zui,DUPLICATE_FIELD,PARSE,S11,other-code
@@ -14,6 +14,7 @@ role-undeclared.zui,ROLE_UNDECLARED,(clean),S1,not-refused
 intent-orphan.zui,INTENT_ORPHAN,(clean),S3,not-refused
 invisible-state.zui,INVISIBLE_STATE,(clean),S3,not-refused
 hidden-authority.zui,HIDDEN_AUTHORITY,(clean),S3,not-refused
+projection-visual-trust.zui,HIDDEN_AUTHORITY,(clean),S3,not-refused
 vibe-strips-right.zui,VIBE_STRIPS_RIGHT,(clean),S7,not-refused
 foreign-pillar-ignored.zui,(clean),UNKNOWN_KIND,S9,court-only
 field-misplaced-read-anywhere.zui,(clean),UNKNOWN_CLAUSE,S13,court-only

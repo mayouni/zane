@@ -1,0 +1,16 @@
+// PROJECTION, D5: read-act-collapse with a VIBE that declares SURFACE_AS visual.
+// Rule 16 on the row "act". No fixture declared the visual medium before this one,
+// although 94 of the 122 rules are written for it. Visual carries every verb, so nothing about
+// the medium should change the verdict: this fixture proves it does not.
+//
+// Expected: READ_ACT_COLLAPSE
+
+DEFINE VIBE screen_surface (
+  SURFACE_AS visual
+)
+
+DEFINE SCREEN invoice_reader (
+  SATISFIES [READ, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR clerk
+)

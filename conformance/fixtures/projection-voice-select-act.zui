@@ -1,0 +1,16 @@
+// PROJECTION, D5: Rule 16 (Intentional Clicks) applied under SURFACE_AS voice.
+// A spoken order that selects and acts in one utterance, with no CONFIRM between them.
+// Voice carries SELECT, ACT and CONFIRM natively, so the rule should say it.
+// Cell: decide x voice.
+//
+// Expected: SELECT_ACT_COLLAPSE
+
+DEFINE VIBE order_voice (
+  SURFACE_AS voice
+)
+
+DEFINE INTENT_FLOW order_by_voice (
+  SATISFIES [SELECT, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR customer
+)

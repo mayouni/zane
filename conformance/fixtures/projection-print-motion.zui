@@ -1,0 +1,10 @@
+// PROJECTION, D5: Rule 112 (Motion Reports, It Never Decorates) applied under SURFACE_AS print.
+// A printed notice that declares MOTION fade and reports nothing. The rule fires.
+// Cell: perceive x print.
+//
+// Expected: DECORATIVE_ANIMATION
+
+DEFINE VIBE printed_notice (
+  SURFACE_AS print,
+  MOTION fade
+)

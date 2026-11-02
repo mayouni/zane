@@ -1,0 +1,16 @@
+// PROJECTION, D5: missing-undo with a VIBE that declares SURFACE_AS visual.
+// Rule 79 on the row "recover". No fixture declared the visual medium before this one,
+// although 94 of the 122 rules are written for it. Visual carries every verb, so nothing about
+// the medium should change the verdict: this fixture proves it does not.
+//
+// Expected: MISSING_UNDO
+
+DEFINE VIBE screen_surface (
+  SURFACE_AS visual
+)
+
+DEFINE INTENT_FLOW post_entry (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [CANCEL, EXIT],
+  ACTOR accountant
+)

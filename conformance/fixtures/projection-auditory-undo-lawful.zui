@@ -1,0 +1,13 @@
+// The lawful twin: the same flow, differing by one word, UNDO added to ALWAYS_REACHABLE.
+//
+// Expected: clean
+
+DEFINE VIBE alert_audio (
+  SURFACE_AS auditory
+)
+
+DEFINE INTENT_FLOW dismiss_alert (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR operator
+)

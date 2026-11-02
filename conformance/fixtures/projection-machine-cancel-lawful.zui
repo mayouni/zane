@@ -1,0 +1,13 @@
+// The lawful twin: the same flow, differing by one word, CANCEL added to ALWAYS_REACHABLE.
+//
+// Expected: clean
+
+DEFINE VIBE ledger_api (
+  SURFACE_AS machine
+)
+
+DEFINE INTENT_FLOW submit_batch (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR integration
+)

@@ -15,7 +15,7 @@
     "diagnostics": 37,
     "media": 10,
     "signalValues": 5,
-    "fixtures": 57
+    "fixtures": 71
   },
   "pinned": [
     {
@@ -81,8 +81,8 @@
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
-      "bytes": 15696,
-      "sha256": "7440de12de4d1db3c6b4ace45ac571ec7977a2caf0cda03db238fe0410cce5f5"
+      "bytes": 18930,
+      "sha256": "d0c60375fdcce718081fb941af4d789357cd8e5a448b9cb834ca5148aa69cbed"
     },
     {
       "file": "conformance/cross-medium/spec.json",
