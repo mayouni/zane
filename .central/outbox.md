@@ -1541,3 +1541,51 @@ next:
 note:      TASK B WAS ALREADY COMMITTED (93c5886, 8063da3) WHEN THIS ARRIVED, so C went in after B and not between A and B. Nothing in B depends on it. The 21 compared envelopes are the refusals under the contract's own code; the six S11 and S8 differences refuse under another code and have no like-named binding to compare with.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-02 13:06 | NOTE | answers Central's D5 and D6 NOTE of 2026-11-02 11:02 | D5 IS 14 PROJECTION FIXTURES AND ONE GAP IN PRINT; D6 IS RULE 130, ITS OWN COMMIT, df82039, AND THE RULING'S "RECOVER ROW" READS THE CHECK BACKWARDS
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-02 13:06 | ATTENDED
+
+subject:   D5 (commit 9ada7c9) and D6 (commit df82039), both local on main, not pushed, one commit each as ruled
+
+why:       Central asked for the reach of the 25 medium-free rules to be measured before any rule is written, and for INTENT_ORPHAN to get a rule as a commit the Principal can read alone
+
+did:
+  - D5: wrote 14 fixtures and ran each through zui.js and the court forged from haro/zui.stzu, judged on Haro v0.23 (ringpp 6611d18). Auditory, voice, machine and print each have a violating fixture and its lawful twin; visual has six, one per activity row, each the visual-declaring twin of a fixture that already existed. Order followed: auditory, voice, machine, print, then visual
+  - D5: no rule, diagnostic, verifier or existing fixture changed. Manifest 57 to 71 fixtures; protocol/README.md counts followed so pack --check holds
+  - D5: recorded the verdicts in doc/design/COVERAGE.md section 3b, with two PROJECTION GAPS (PG-1, PG-2) that are NOT turned into rules
+  - D5: added the one new difference to haro/twin-expected.csv with its seam and class (S3, not-refused); did not widen any list otherwise
+  - D6: drafted Rule 130, Every Element Serves an Intent, in constitution/rules.json (Set 29, derived from Article II, enforcement machine), with its own avoid, solution, why, evidence and grid place; bumped the law to v3.12 (123 rules)
+  - D6: moved INTENT_ORPHAN's binding in violations.json (now v1.7) from none to rule 130; re-pinned manifest, media, signal and cross-medium spec to 3.12; recorded the ruling in doc/AMENDMENT-DOCKET.md; updated the live counts on the site and in the protocol and language READMEs
+  - D6: placed Rule 130 in doc/design/coverage-placement.json and re-ran doc/design/coverage-count.js, whose hard-coded 122 now reads the law's own totalRules
+  - D6: regenerated haro/zui.stzu. It is byte-identical, and that is a finding: the court does not carry INTENT_ORPHAN (S3), so no constraint exists for the new CITES to ride on. The CITES follow when S3 closes
+
+state:
+  projection, auditory / recover / rule 79:   applies. MISSING_UNDO fires, the lawful twin is clean, in both courts
+  projection, voice / decide / rule 16:       applies. SELECT_ACT_COLLAPSE fires, twin clean, both courts
+  projection, machine / recover / rule 26:    applies. MISSING_CANCEL fires, twin clean, both courts. Whether "the way back" means the same to an API as to a person is not something a verifier can say
+  projection, print / perceive / rule 112:    GAP PG-1. DECORATIVE_ANIMATION fires, but the lawful twin (a motion that reports) is clean in both courts, though media.json says print has no time
+  projection, visual x6 (one per row):        applies in all six; five agree in both courts, the sixth (trust, HIDDEN_AUTHORITY) is clean in the court
+  PG-2, observed with a probe and not fixtured: a print flow that satisfies only READ and promises ALWAYS_REACHABLE [UNDO, CANCEL, EXIT] is clean in zui.js, because NOT_CARRIED is applied to SATISFIES only
+  twin differences:                           17 listed (was 16): the new one is projection-visual-trust.zui, S3, the same cause as hidden-authority.zui
+  cites measurement:                          24 of 30 envelopes agree with the contract (was 15 of 21); the 6 that do not are the same six MENUs
+  conformance suite:                          71 of 71 pass at level 4; pack --check verified
+  grid, after D5 and D6:                      cells with a rule 21 of 55 (unchanged); cells with none 34 of 55 (unchanged); rules on no cell 2 of 123; fixtures on a cell 43 of 71 (was 28 of 57); on a medium column 18 (was 4); cells with a rule and no fixture 5 (was 13)
+  law:                                        v3.12, 123 rules, machine tier +1, nothing else moved
+  pushed:                                     NO
+
+waiting:
+  - COVERAGE-PG-RULING-01: PG-1 (rule 112 satisfied on a medium with no time) and PG-2 (ALWAYS_REACHABLE not read against the medium) are recorded, not acted on. PG-2 would be a change to zui.js, which D5 forbids touching; neither is a rule -> Principal, via Central
+             [not routed; it is here]
+  - COVERAGE-RULE130-CELL-01: D6 called the rule the recover row ("an intent nobody can reach"). The check finds an ELEMENT with no intent (fixture intent-orphan.zui: export_button traces to nothing), the other direction. I wrote the rule for the check and placed it on understand and decide, medium any. An intent that no element carries is a real defect nothing checks, and I proposed no rule for it -> Central, to confirm the placement or say the check was meant to be something else
+             [not routed; it is here]
+  - HARO-MENU-CITES-01: unchanged, still with haro-charter via Central
+
+next:
+  - me:      nothing owed on D5 or D6
+  - central: read the D6 diff (df82039) before any push, then push by sha; D5 is 9ada7c9 and is fixtures and docs only
+  - central: Q5 to Q8 stay held; the projection result is in, and it says 3 of 4 non-visual media projected cleanly and one did not
+
+note:      PERCEPTION, honestly: nobody heard, read or felt any of these fixtures. The verdicts are by instrument in two verifiers, so this is projected and not verified by a person (CENTRAL-PERCEPTGATE-01). Also: D5 gave print only the rule that could fire there; every other medium-free rule keys on ACT, which print refuses, so the print row is thinner than the other three
+```
+---
