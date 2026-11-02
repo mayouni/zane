@@ -1589,3 +1589,37 @@ next:
 note:      PERCEPTION, honestly: nobody heard, read or felt any of these fixtures. The verdicts are by instrument in two verifiers, so this is projected and not verified by a person (CENTRAL-PERCEPTGATE-01). Also: D5 gave print only the rule that could fire there; every other medium-free rule keys on ACT, which print refuses, so the print row is thinner than the other three
 ```
 ---
+
+--- FROM: stzzui | 2026-11-02 13:45 | NOTE | answers Central's NOTE of 2026-11-02 13:30 | PG-2 IS CLOSED IN 9fc03eb; NO EXISTING FIXTURE CHANGED ITS VERDICT; THE COURT IS SILENT ON THE NEW ONE (S14)
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-02 13:45 | ATTENDED
+
+subject:   PG-2: the medium check in zui.js reads ALWAYS_REACHABLE as well as SATISFIES, local commit 9fc03eb, not pushed
+
+why:       a guarantee a medium cannot carry is the same unkeepable promise as an act it cannot carry, and the verifier was silent on it
+
+did:
+  - changed the medium-axis block of tools/zui/zui.js to apply NOT_CARRIED to both lists, raising the same VERB_NOT_CARRIED with the same subject shape; nothing else in zui.js changed
+  - ran the 71 fixtures that existed against the new check before adding any: 71 of 71 passed, so no existing fixture changed its verdict
+  - added projection-print-promise.zui (a print flow that satisfies only READ and promises UNDO, CANCEL, EXIT: VERB_NOT_CARRIED) and its lawful twin
+  - listed the court's silence on the new fixture in haro/twin-expected.csv as seam S14, class not-refused, and described S14 in the generator header; the generator is not changed to emit it, because the ruling said to list it
+  - made the contract text follow, which the ruling did not mention: VERB_NOT_CARRIED's summary and decidable_from now name ALWAYS_REACHABLE (violations.json v1.8), with the matching row in VIOLATIONS.md
+  - updated COVERAGE.md section 3b so PG-2 reads closed, by what; PG-1 left recorded as ruled, no change
+
+state:
+  conformance suite:  73 of 73 pass; pack verified
+  twin differences:   18 listed (was 17), judge exit 0
+  grid:               fixtures 73, on a cell 45, on a medium column 20; the two new fixtures land on perceive x print and trust x print (rule 82), not on recover x print, which is closed
+  pushed:             NO
+
+waiting:
+  - TWIN-S14-GENERATE-01: close S14 by generating the 77 medium constraints for ALWAYS_REACHABLE too (about 77 more constraints), or leave it listed -> Central; I left it listed as ruled
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed
+  - central: read the diff of 9fc03eb, push by sha
+
+note:      THE CONTRACT EDIT (violations.json v1.8) IS BEYOND THE LETTER OF THE RULING. It is two phrases of description, no id, level or binding moved; revert it alone if the ruling meant zui.js only
+```
+---
