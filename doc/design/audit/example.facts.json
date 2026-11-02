@@ -1,0 +1,43 @@
+{
+  "format": "zui-audit-facts",
+  "version": "1.0",
+  "capture": {
+    "image": "example/ledger-screen.png",
+    "image_sha256": null,
+    "width_px": 1280,
+    "height_px": 800,
+    "scale": 2,
+    "box_kind": "line",
+    "ocr": { "engine": "hand-made", "lang": "eng" },
+    "luminance": {
+      "standard": "WCAG-2.x-relative-luminance-sRGB",
+      "method": "hand-made: text #999999 on #ffffff for L1, text #333333 on #ffffff for L2"
+    }
+  },
+  "lines": [
+    {
+      "id": "L1",
+      "text": "Overdue balance",
+      "score": 0.97,
+      "box": [120, 412, 396, 436],
+      "line_height_px": 24,
+      "line_height_pt": 9,
+      "fg_luminance": 0.3185,
+      "bg_luminance": 1,
+      "contrast_ratio": 2.85,
+      "bg_spread": 0
+    },
+    {
+      "id": "L2",
+      "text": "Account summary",
+      "score": 0.99,
+      "box": [120, 120, 520, 168],
+      "line_height_px": 48,
+      "line_height_pt": 18,
+      "fg_luminance": 0.0331,
+      "bg_luminance": 1,
+      "contrast_ratio": 12.63,
+      "bg_spread": 0
+    }
+  ]
+}

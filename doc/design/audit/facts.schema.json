@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "zui-audit-facts/1.0",
+  "title": "Zui audit facts, version 1.0",
+  "description": "What a writer must measure from ONE screenshot so that the audit can judge the rules a screenshot can decide (doc/design/AUDIT-FACTS.md). The writer measures; it never judges. Every derived field is recomputable from the others and doc/design/audit/check-facts.js proves it. A field the writer could not measure is null, never a guess and never zero.",
+  "type": "object",
+  "required": ["format", "version", "capture", "lines"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "zui-audit-facts" },
+    "version": { "const": "1.0" },
+    "capture": {
+      "type": "object",
+      "required": ["image", "width_px", "height_px", "scale", "box_kind", "ocr", "luminance"],
+      "additionalProperties": false,
+      "properties": {
+        "image": { "type": "string", "minLength": 1, "description": "The screenshot path the caller gave, as given." },
+        "image_sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$", "description": "Optional. Lets a later reader prove the facts belong to this exact image." },
+        "width_px": { "type": "integer", "minimum": 1 },
+        "height_px": { "type": "integer", "minimum": 1 },
+        "scale": { "type": "number", "exclusiveMinimum": 0, "description": "Device pixels per CSS pixel, supplied by the CALLER (2 on a typical high-density display). The writer cannot measure it from pixels, so it must not guess it." },
+        "box_kind": { "enum": ["line", "ink"], "description": "What each box encloses. 'line': the whole line box, at least as tall as the font's em. 'ink': a tight box around the drawn glyphs, which can be about half an em for a line with no ascender or descender. The size verdict needs 'line' (see AUDIT-FACTS.md section 4)." },
+        "ocr": {
+          "type": "object",
+          "required": ["engine", "lang"],
+          "additionalProperties": false,
+          "properties": {
+            "engine": { "type": "string", "minLength": 1 },
+            "lang": { "type": "string", "minLength": 1 }
+          }
+        },
+        "luminance": {
+          "type": "object",
+          "required": ["standard", "method"],
+          "additionalProperties": false,
+          "properties": {
+            "standard": { "const": "WCAG-2.x-relative-luminance-sRGB" },
+            "method": { "type": "string", "minLength": 1, "description": "How foreground and background were separated inside a box, in the writer's words (for example 'crop, grayscale, Otsu split, median of each side'). Recorded so a ratio can be argued with." }
+          }
+        }
+      }
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "text", "score", "box", "line_height_px", "line_height_pt", "fg_luminance", "bg_luminance", "contrast_ratio"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^L[0-9]+$", "description": "Stable within the file; the audit's findings cite it." },
+          "text": { "type": "string" },
+          "score": { "type": "number", "minimum": 0, "maximum": 1, "description": "The OCR engine's confidence in the text." },
+          "box": {
+            "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "integer", "minimum": 0 },
+            "description": "[x0, y0, x1, y1] in image pixels, x1 > x0 and y1 > y0, inside the image."
+          },
+          "line_height_px": { "type": "integer", "minimum": 1, "description": "y1 - y0, exactly." },
+          "line_height_pt": { "type": "number", "minimum": 0, "description": "line_height_px x 72 / (96 x scale), rounded to 2 decimals. A line box, so an UPPER BOUND on the font size when box_kind is 'line'." },
+          "fg_luminance": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "WCAG relative luminance of the text colour, 0 (black) to 1 (white)." },
+          "bg_luminance": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "WCAG relative luminance of the colour behind the text." },
+          "contrast_ratio": { "type": ["number", "null"], "minimum": 1, "maximum": 21, "description": "(max + 0.05) / (min + 0.05) of the two luminances, rounded to 2 decimals. null when either luminance is null." },
+          "bg_spread": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "OPTIONAL. The range (max - min) of luminance seen in the background pixels of the box. Large means text over a gradient or an image, where one background luminance is a fiction. null or absent means the writer did not measure it, and the audit then says the contrast is an estimate it cannot vouch for." }
+        }
+      }
+    }
+  }
+}

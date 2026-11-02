@@ -259,6 +259,25 @@ fixture for it was part of D5, which did not know it was coming.
 
 ---
 
+## 3d. What a screenshot can decide (Q8, 2026-11-02)
+
+The audit of a foreign app judges only the rules a screenshot can decide, and the facts it reads are specified in
+[`AUDIT-FACTS.md`](AUDIT-FACTS.md). Searching the law for rules that a text line, a box and two luminances could
+decide leaves three, all on one cell:
+
+| rule | activities | medium | decided by the facts |
+|---|---|---|---|
+| 62 Contrast & Legibility | perceive | visual | contrast under 4.5:1 |
+| 105 The Legibility Floor | perceive | visual | the contrast half only |
+| 107 Hierarchy Is Not Miniaturization | perceive | visual | a font under 16 CSS px, as an upper bound |
+
+**Three of the 36 rules written for perceive x visual**, and none for any other cell: a screenshot is visual, and the
+other 33 rules on that cell are judgment or need more than a line of text. The audit adds no rule and no cell; it
+adds an instrument to a cell that already has rules and, since D5, six fixtures. Every other rule is reported
+"not audited", never "passed". The placements are unchanged and `coverage-count.js` is unchanged.
+
+---
+
 ## 4. The record for a discovered issue
 
 An issue is filed so that it lands on a cell. It is never filed as a new rule.
