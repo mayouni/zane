@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How it works — declare, check, project, measure</title>
-<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 122 rules as data, and a refusal contract of twenty-five named violations.">
+<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 123 rules as data, and a refusal contract of twenty-five named violations.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css">
 <style>
@@ -172,8 +172,8 @@ table.plain th { color: var(--muted); text-transform: uppercase;
   <div class="narrow">
     <h2>The semantic layer: a constitution as data</h2>
     <p>What makes the language refuse is not taste — it is
-    <a href="../constitution/rules.json">one JSON file</a>: v<span data-law="version">3.11</span>,
-    <span data-law="rules">122</span> rules in
+    <a href="../constitution/rules.json">one JSON file</a>: v<span data-law="version">3.12</span>,
+    <span data-law="rules">123</span> rules in
     <span data-law="sets">31</span> sets under <span data-law="articles">7</span> articles.
     Every rule carries the same anatomy: what to
     avoid, the lawful solution, the <em>why</em>, the article it derives from,
@@ -271,7 +271,7 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     <table class="plain">
       <thead><tr><th>Instrument</th><th>What it does</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>The law, <code>rules.json</code> v<span data-law="version">3.11</span></td><td><span data-law="rules">122</span> rules as data; the single source of truth</td><td class="status live">in force</td></tr>
+        <tr><td>The law, <code>rules.json</code> v<span data-law="version">3.12</span></td><td><span data-law="rules">123</span> rules as data; the single source of truth</td><td class="status live">in force</td></tr>
         <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — in the reference implementation</td></tr>
         <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — in the reference implementation</td></tr>
         <tr><td>The refusal contract</td><td><span data-law="diagnostics">25</span> named violations every conforming implementation must detect — the ten founding ones plus grammar, consistency and medium checks added since</td><td class="status live">24 enforced by the verifier; <code>LAYOUT_DISPLACEMENT</code> is the UI audit's</td></tr>

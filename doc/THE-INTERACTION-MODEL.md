@@ -84,7 +84,7 @@ system — over-unify and it lies; under-unify and it is a pile of parts.
 |---|---|
 | the **intent** (22 verbs, closed) | how each medium *serves* an intent, or cannot |
 | the **meaning** (semantic values) | what colour, timbre, waveform or word carries it |
-| the **law** (122 rules) | which instrument can enforce which rule, and where |
+| the **law** (123 rules) | which instrument can enforce which rule, and where |
 | the **refusal envelope** (C2) | each court's own codes |
 | the **ports** (render · sense · actuate) | every device's actual transducers |
 | the **question** *"what does this mean, and to whom?"* | every answer to it |

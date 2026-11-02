@@ -34,7 +34,7 @@ are checked, not typed and trusted.**
 
 | Role | Files | What it fixes |
 |---|---|---|
-| **the law** | `constitution/rules.json` | 122 rules, 7 articles, 6 rights, 17 forbidden patterns — the semantic layer every diagnostic cites |
+| **the law** | `constitution/rules.json` | 123 rules, 7 articles, 6 rights, 17 forbidden patterns — the semantic layer every diagnostic cites |
 | **the language** | `doc/language/` — README, GRAMMAR, DECLARATIONS, VIOLATIONS | the grammar in EBNF, the ten declaration types, the four closed enumerations, and every diagnostic bound to the rule it enforces |
 | **the refusal contract** | `conformance/violations.json`, `doc/diagnostic-contract.md` + `.schema.json` | 37 diagnostics with severities, levels and bindings; and the envelope every finding travels in, `{code, severity, message, span, cites, language}`, carried in one object under `diagnostics` -- never a top-level array |
 | **the axes** | `conformance/media.json`, `conformance/signal.json` | the ten media with their properties and per-verb carriage; the five semantic values with what each channel renders them as |
@@ -49,11 +49,11 @@ the findings, the evidence ledger. They are worth reading and they are not the s
 > edition.**
 
 Vendor the twelve files, record `MANIFEST.json` beside them, and make
-`pack.js --check` a step in your build. Then *"conforms to Zui v3.11"* is a claim your CI
+`pack.js --check` a step in your build. Then *"conforms to Zui v3.12"* is a claim your CI
 can refute.
 
 This is not paranoia; it is this project's own history. A single trailing space added to a
-title inside `rules.json` leaves the version at v3.11 and changes the law's bytes. Every
+title inside `rules.json` leaves the version at v3.12 and changes the law's bytes. Every
 drift recorded in `doc/EVIDENCE-LEDGER.md` came from something being **described** rather
 than **checked** — a hand-typed census under a heading claiming it was computed, a prose
 catalogue two diagnostics behind the data, a spec whose own title lagged a version.
@@ -91,7 +91,7 @@ is worth more than one that passes by not looking.**
 
 ## 5. What you may claim, and what you may not
 
-**May**: *"conforms to Zui v3.11 at level 2, verified against manifest `<hash>`."*
+**May**: *"conforms to Zui v3.12 at level 2, verified against manifest `<hash>`."*
 **May**: your own diagnostic codes, in your own words, in any language.
 **May not**: extend a closed set. The 22 verbs, the ten media, the five semantic values,
 the four enumerations and the ten declaration types are closed. **Adding to one is a
@@ -155,7 +155,7 @@ The shapes available, with the cost each carries:
 
 | Option | Buys | Costs |
 |---|---|---|
-| a **URN** namespace, e.g. `urn:zui:law:3.11` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
+| a **URN** namespace, e.g. `urn:zui:law:3.12` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
 | a **domain** the artifacts resolve from | a real fetchable URL, versioned paths | someone owns and renews it forever; it dies with the payment |
 | a **DOI** per version | citable in literature, permanent | a registration agency, a fee, and a workflow per release |
 | **content addressing** — the manifest hash *is* the name | already true, costs nothing, cannot rot | unreadable, and says nothing about which edition is current |

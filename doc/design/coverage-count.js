@@ -50,7 +50,7 @@ const lawRules = [];
 for (let i = 1; i <= 31; i++) for (const x of rules['set' + i].rules) lawRules.push(x.number);
 for (const n of lawRules) if (!(n in place.rules) && !(n in place.off)) problems.push(`rule ${n} is neither placed nor off-grid`);
 for (const n of Object.keys(place.rules).concat(Object.keys(place.off))) if (!lawRules.includes(n)) problems.push(`placement names rule ${n}, which the law does not have`);
-if (lawRules.length !== 122) problems.push(`the law has ${lawRules.length} rules, not 122`);
+if (lawRules.length !== rules.metadata.totalRules) problems.push(`the law lists ${lawRules.length} rules and its metadata says ${rules.metadata.totalRules}`);
 
 const cellRules = {}, cellFix = {};
 const key = (a, m) => a + '|' + m;

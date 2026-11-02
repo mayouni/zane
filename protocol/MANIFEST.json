@@ -7,11 +7,11 @@
     "hash": "sha256 over LF-normalised content"
   },
   "versions": {
-    "constitution": "3.11",
-    "rules": 122,
+    "constitution": "3.12",
+    "rules": 123,
     "forbiddenPatterns": 17,
     "language": "1.4",
-    "refusalContract": "1.6",
+    "refusalContract": "1.7",
     "diagnostics": 37,
     "media": 10,
     "signalValues": 5,
@@ -21,14 +21,14 @@
     {
       "file": "constitution/rules.json",
       "role": "the law",
-      "bytes": 162090,
-      "sha256": "04efdc3abc6b2204005873cc078794283af228e9b9234ea9aea021653f7f1aa9"
+      "bytes": 165465,
+      "sha256": "c2f49afd7ca1a8154daf6c533932407cbf25b6b45c395504d9c615fb9fb30371"
     },
     {
       "file": "doc/language/README.md",
       "role": "the language",
       "bytes": 10195,
-      "sha256": "8c84bc7f14d0688d5a8ac0a96bdbd89f26328598a2268222d911b203d314eb06"
+      "sha256": "10a1790936cb5f4e609c2d3e01ee4dd6354301ba3e05d1402ef873334b76f778"
     },
     {
       "file": "doc/language/GRAMMAR.md",
@@ -45,14 +45,14 @@
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
-      "bytes": 19468,
-      "sha256": "6310a00bbe45ccb7e3d2a976fcc399905d2b56bf36f0f0d3ff283c497ac4efa0"
+      "bytes": 19577,
+      "sha256": "69eab8a8474d1fb16cc56248a81507fe0198ae80a9e165a567649d6c07c23c05"
     },
     {
       "file": "conformance/violations.json",
       "role": "the refusal contract",
-      "bytes": 26192,
-      "sha256": "2b305a233e9cf02dd2d9b84539902015515c5e8c26152a4c549355a7d882d3aa"
+      "bytes": 26197,
+      "sha256": "cafdd098d9cd54e6e4b7c428bbdb1f0a51574eebf6b3f68873f93a99086ae3bc"
     },
     {
       "file": "doc/diagnostic-contract.md",
@@ -70,25 +70,25 @@
       "file": "conformance/media.json",
       "role": "the axes",
       "bytes": 8823,
-      "sha256": "13c34dc1c91c1f20c6f31343bcf70a1d35af25cbb626739c4c0a81d3e65b84ff"
+      "sha256": "3f89923716a3feb8010b11b0cd6e511a78e2a9a100c55efc75b9a57fb9395938"
     },
     {
       "file": "conformance/signal.json",
       "role": "the axes",
       "bytes": 20789,
-      "sha256": "899c14ff876419b5a6cd095197bacd5ed20f626768617ae903081ea2acb9ab7a"
+      "sha256": "3aee9839152cb37d034bfac1c85dbc0926307af3beb629f2ac6d3cc6de70acd7"
     },
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
       "bytes": 18930,
-      "sha256": "d0c60375fdcce718081fb941af4d789357cd8e5a448b9cb834ca5148aa69cbed"
+      "sha256": "101d30fb6fe82728fb10df397e1be66ba0684f0d61c300e866047d6774524a0e"
     },
     {
       "file": "conformance/cross-medium/spec.json",
       "role": "the proof",
       "bytes": 1636,
-      "sha256": "072c30a1f52786d66597deb102c337caa6882919996613a20d9aa725ede6bd61"
+      "sha256": "a12709ef7c93bb520a1f0d7fe41d17ee4c43e1d87c1bb860693996599b1d30a2"
     }
   ]
 }

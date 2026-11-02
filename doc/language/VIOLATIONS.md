@@ -17,14 +17,14 @@ amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
 a diagnostic that enforces a rule carries a binding. Bindings cite
-`constitution/rules.json` **v3.11**.
+`constitution/rules.json` **v3.12**.
 
-Not every diagnostic enforces a rule. Of the 37, 16 cite one or more rules, 9 cite an article and no
-rule, and 12 cite nothing. Fourteen of those 21 enforce the grammar (vocabularies, duplicates, fields,
-parse failures) and four check declarations against each other; there the law has no rule, and a
+Not every diagnostic enforces a rule. Of the 37, 17 cite one or more rules, 8 cite an article and no
+rule, and 12 cite nothing. Fourteen of those 20 enforce the grammar (vocabularies, duplicates, fields,
+parse failures) and three check declarations against each other; there the law has no rule, and a
 citation would claim one that does not exist. `ROLE_UNDECLARED` cites nothing on purpose (see below).
-For `EXPRESSION_ORPHAN`, `VIBE_STRIPS_RIGHT` and `INTENT_ORPHAN`, which cite an article only, whether a
-rule backs them is a ruling on the law and is open. An empty `rules` list therefore means "no rule is
+`INTENT_ORPHAN` gained a rule at v3.12 (Rule 130). For `EXPRESSION_ORPHAN` and `VIBE_STRIPS_RIGHT`, which cite an
+article only, the Principal ruled on 2026-11-02 that they stay so. An empty `rules` list therefore means "no rule is
 cited", never "a binding is missing".
 
 ## 2. Severity and level
@@ -135,7 +135,8 @@ one intent* — and the reason correctness is compilable at all. It is Level 3 o
 because deciding it requires the **element inventory**: the set of things that
 exist to be traced. Given a scope, it is mechanical.
 
-**Binds to** Article II, Intent Over Mechanics (the layer discipline itself).
+**Binds to** Rule 130, Every Element Serves an Intent (canonized at v3.12 from this check), and Article II,
+Intent Over Mechanics (the layer discipline itself).
 
 ---
 

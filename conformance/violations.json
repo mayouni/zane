@@ -1,10 +1,10 @@
 {
   "metadata": {
     "title": "The Zui Diagnostic Contract",
-    "version": "1.6",
-    "lastUpdated": "2026-11-01",
+    "version": "1.7",
+    "lastUpdated": "2026-11-02",
     "specification": "doc/language/VIOLATIONS.md",
-    "constitution": "3.11",
+    "constitution": "3.12",
     "note": "Every diagnostic a conforming Zui implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused."
   },
   "levels": {
@@ -92,7 +92,7 @@
       "level": 3,
       "summary": "A declared element traces to no intent.",
       "decidable_from": ["symbols.elements", "SATISFIES"],
-      "rules": [],
+      "rules": ["130"],
       "articles": ["intent"],
       "rights": [],
       "forbidden_patterns": [],

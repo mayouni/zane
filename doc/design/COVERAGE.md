@@ -1,7 +1,7 @@
 # The coverage grid
 
 **What this is.** A map of what the law covers, drawn from what a person does with an interface
-and not from the issues found so far. It places the 122 rules of `constitution/rules.json` (v3.11)
+and not from the issues found so far. It was drawn on the 122 rules of `constitution/rules.json` at v3.11 and is kept current at v3.12 (123 rules, after D6)
 and the fixtures of `conformance/manifest.json` (57 when the grid was drawn, 71 after the projection fixtures of D5) on that map, counts the cells that have a rule and
 the cells that have none, and defines the record a discovered issue is filed as, so that it lands on
 a cell.
@@ -89,13 +89,13 @@ fixture that declares none sits on `any`. A fixture lands on every activity of t
 
 ## 3. The result
 
-Each cell reads **rules written for it / fixtures on it**. The fixture figures are those after D5 (71 fixtures); the rule figures did not move, because D5 wrote no rule. `x` closed, `.` nothing.
+Each cell reads **rules written for it / fixtures on it**. The figures are those after D5 (71 fixtures) and D6 (123 rules); section 3b gives what D5 moved and section 3c what D6 moved. `x` closed, `.` nothing.
 
 | | any | visual | auditory | voice | haptic | print | luminous | signage | machine | spatial | terminal |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | perceive | 5/8 | 36/2 | 2/2 | 3/0 | . | 1/4 | . | . | 2/0 | . | . |
-| understand | 9/7 | 48/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
-| decide | 8/11 | 9/3 | . | 0/2 | x | x | x | x | . | . | . |
+| understand | 10/8 | 48/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
+| decide | 9/12 | 9/3 | . | 0/2 | x | x | x | x | . | . | . |
 | act | 2/7 | 12/3 | 1/0 | 1/2 | . | x | x | x | . | . | . |
 | recover | 5/10 | 9/1 | 0/2 | . | . | x | x | x | 0/2 | . | . |
 | trust | 9/11 | 12/4 | 0/2 | 0/2 | . | 0/2 | . | . | . | . | . |
@@ -108,18 +108,18 @@ A rule sits on several cells, so a column does not add up to a number of rules.
 |---|---|
 | **cells with at least one rule** | **21 of 55 live cells**: all 6 in `any`, and 15 of the 49 open medium cells |
 | **cells with none** (the honest gap) | **34 of 55 live cells**, all of them medium cells: every cell of haptic, luminous, signage, spatial and terminal, and most of auditory, voice, print and machine |
-| **rules on no cell** (what the grid cannot see) | **2 of 122**: Rule 78 and Rule 124 |
+| **rules on no cell** (what the grid cannot see) | **2 of 123**: Rule 78 and Rule 124 |
 
 Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
 
 ### What the counts say
 
-- **The law is written for a screen.** 94 of 120 placed rules are written for the visual column
-  and 88 of them for nothing else. 25 are medium-free. Seven name another medium, and one of those (125)
+- **The law is written for a screen.** 94 of 121 placed rules are written for the visual column
+  and 88 of them for nothing else. 26 are medium-free. Seven name another medium, and one of those (125)
   names no screen at all.
 - **Five of the ten media have no rule written for them**: haptic, luminous, signage, spatial and
   terminal. A rule reaches them only if it is medium-free, which is a claim that the rule *can* be
-  projected there and not a statement that anyone has done it. The 25 medium-free rules would reach
+  projected there and not a statement that anyone has done it. The 26 medium-free rules would reach
   every one of the 34 empty cells, so this report does not count that reach as coverage: if it did, the
   honest gap would read 0, and nobody checked the projection once.
 - **Fixtures tested the law medium-free, until D5.** At the first count 28 of 57 landed on a cell, and
@@ -127,13 +127,13 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
   the visual medium**, so the 6 visual cells that hold 94 rules held no fixture. 13 of the 15 medium cells with a rule had no
   fixture; 2 medium cells (trust on auditory and on print) had fixtures and no rule written for them,
   which is Rule 82 running there medium-free.
-- **29 fixtures land on no cell.** 5 declare no rule (the clean and exemption fixtures). 24 test a
-  diagnostic that cites no rule in `violations.json`. That is mostly right, not a defect. Of the 21
-  diagnostics that cite no rule, 14 enforce the grammar, 4 check declarations against each other, and
+- **28 fixtures land on no cell** (29 before D6). 5 declare no rule (the clean and exemption fixtures). 23 test a
+  diagnostic that cites no rule in `violations.json`. That is mostly right, not a defect. Of the 20
+  diagnostics that cite no rule, 14 enforce the grammar, 3 check declarations against each other, and
   where the law has no rule to cite, a citation would claim one that does not exist; `ROLE_UNDECLARED`
   cites nothing on purpose; and 2 (`EXPRESSION_ORPHAN`, `VIBE_STRIPS_RIGHT`) cite an article only. Three
-  (those two and `INTENT_ORPHAN`) are worth a ruling on whether a rule backs them, and that is a ruling
-  on the law, which this grid cannot settle.
+  were worth a ruling on whether a rule backs them. The Principal ruled on 2026-11-02 (D6): `INTENT_ORPHAN`
+  gets one (Rule 130, section 3c), and the other two stay article-only.
 
 ### What this grid cannot tell you
 
@@ -145,7 +145,7 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
   this phase is reported as designed, not as verified by a person.
 - **The verb map is a judgement.** COMPARE sits under understand and HIGHLIGHT under decide. Moving a
   verb between rows changes which cells are closed; moving one between perceive and trust cannot, as they own none.
-- **A rule on a cell does not mean the cell is covered.** 80 of 122 rules are `judgment`. A rule that only
+- **A rule on a cell does not mean the cell is covered.** 80 of 123 rules are `judgment`. A rule that only
   a person can apply is a rule that has been written, and it says nothing about whether anything checks it.
 
 ---
@@ -219,6 +219,43 @@ auditory, recover x machine, trust x voice, trust x auditory, trust x print) are
 been seen to work. Rule text for haptic, luminous, signage, spatial and terminal stays held until a product
 that ships in one is named. The projection fixtures per medium are auditory, voice, machine, print and visual;
 the rest of the 34 cells have not been projected.
+
+---
+
+## 3c. Rule 130 (D6, 2026-11-02, law v3.12)
+
+`INTENT_ORPHAN` (an element that traces to no intent) enforced the invariant *every element serves an
+intent* since language v1.0 and cited only Article II. The Principal ruled that it gets a rule. **Rule 130, Every
+Element Serves an Intent**, is in Set 29 beside Rules 82 and 83, derived from Article II, enforcement `machine`
+(Level 3, decided against an element inventory).
+
+**Where it sits on the grid:** activities **understand** and **decide**, medium scope **any**. The person who meets
+an element asks what it is, and one that serves no intent has no answer (understand); an indicator or control with
+no intent behind it offers a choice that is not one (decide). The check does not look at the medium, so it is
+medium-free, and the rule is stated to hold in every medium. Both are recorded in `coverage-placement.json`.
+
+**One correction to the ruling's wording.** D6 describes this as the *recover* row: "an intent nobody can reach
+leaves the person stuck". That is the opposite direction from the check. `INTENT_ORPHAN` finds an **element with no
+intent**, not an **intent with no element**, and the fixture `intent-orphan.zui` shows it (`export_button` traces to
+nothing). The rule was written for the check as it is, and so sits on understand and decide. An intent no element
+carries is a real defect too; nothing checks it today, `UNRESOLVED_INTENT_FLOW` being a different thing, and no
+rule is proposed for it here.
+
+| | before D6 | after D6 |
+|---|---|---|
+| rules | 122 | 123 |
+| medium-free rules | 25 | 26 |
+| `understand x any` | 9 rules, 7 fixtures | 10 rules, 8 fixtures |
+| `decide x any` | 8 rules, 11 fixtures | 9 rules, 12 fixtures |
+| cells with at least one rule written for them | 21 of 55 | 21 of 55 |
+| cells with none (the honest gap) | 34 of 55 | 34 of 55 |
+| diagnostics that cite a rule | 16 | 17 |
+| fixtures on no cell | 29 | 28 |
+| rules on no cell | 2 | 2 |
+
+The honest gap does not move: a rule written for the `any` column does not write itself into a medium. Rule 130 is
+the 26th medium-free rule, and like the other 25 it has not been projected into the empty cells; no projection
+fixture for it was part of D5, which did not know it was coming.
 
 ---
 

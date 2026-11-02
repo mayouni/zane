@@ -1,5 +1,5 @@
 {
- "_about": "First-cut placement of the 122 rules on the coverage grid (doc/design/COVERAGE.md). activities: P perceive, U understand, D decide, A act, R recover, T trust. media: \"any\" = the rule names no medium and has no screen wording (or a medium-free check is bound to it), else the list of media it is written for. off: rules on no cell, with the reason. Counted by doc/design/coverage-count.js.",
+ "_about": "First-cut placement of the 123 rules on the coverage grid (doc/design/COVERAGE.md). activities: P perceive, U understand, D decide, A act, R recover, T trust. media: \"any\" = the rule names no medium and has no screen wording (or a medium-free check is bound to it), else the list of media it is written for. off: rules on no cell, with the reason. Counted by doc/design/coverage-count.js.",
  "rules": {
   "1": {
    "title": "Cognitive Mercy",
@@ -799,6 +799,11 @@
    "media": [
     "visual"
    ]
+  },
+  "130": {
+   "title": "Every Element Serves an Intent",
+   "activities": "UD",
+   "media": "any"
   }
  },
  "off": {

@@ -11,7 +11,7 @@ smoothed, in keeping with the version-drift note that follows.
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
 **Date**: opened 2026-08-12; **C-2 added 2026-08-13**.
-**Law as it stands**: **v3.11, 122 rules** — updated 2026-08-16. This line has now been
+**Law as it stands**: **v3.12, 123 rules** — updated 2026-11-02 (v3.11, 122 rules, until then). This line has now been
 wrong twice and is kept as its own record: it read *v3.8.0* while the law was still
 v3.7.3, corrected 2026-08-12; it then read *v3.8, 118 rules* through the whole of v3.9.
 The drift is noted rather than smoothed.
@@ -759,3 +759,45 @@ hand. Whether the law should acquire a precedence rule — or a machine check fo
 subjects — is a constitutional question of a different order, and inventing one inside a
 delegated ruling would be exactly the overreach this docket exists to prevent. **It is filed
 here and nowhere else.**
+
+---
+
+## RULED — 2026-11-02, `rules.json` **v3.11 → v3.12**
+
+**One item, ruled by the Principal's delegation** (D6, relayed by Central: *"decide"*, 2026-11-02 11:02).
+Recorded as a delegation, as the v3.11 pass was.
+
+| # | Ruling |
+|---|---|
+| **D6** | **`INTENT_ORPHAN` gets a rule.** `EXPRESSION_ORPHAN` and `VIBE_STRIPS_RIGHT` stay article-only |
+
+### Where it came from
+
+The coverage grid (`doc/design/COVERAGE.md`, 2026-11-01) found 37 diagnostics, of which 16 cite a rule, 9 cite an
+article and no rule, and 12 cite nothing. Three of the article-only ones were worth asking about: the
+founding check `INTENT_ORPHAN` (*every element traces to an intent*) and the two checks that guard the expression
+strata. The Principal ruled that the first has a rule, and that the other two stay as they are.
+
+### The rule
+
+**Rule 130, Every Element Serves an Intent**, Set 29 (Declaration Governance), derived from Article II,
+enforcement `machine` (Level 3: decided against an element inventory). Its evidence is the existing check and the
+grid, not an observed defect, and the rule says so; that is the reverse of the usual order and is recorded
+here for the same reason. It sits on the grid at **understand** and **decide**, medium scope **any**.
+The ruling described the check as the *recover* row ("an intent nobody can reach"), which is the opposite direction
+from what the check does (an element with no intent); the rule was written for the check, and
+`COVERAGE.md` section 3c records the difference. An intent that no element carries is a separate defect, unchecked
+today, and no rule is proposed for it.
+
+### Version arithmetic
+
+One rule canonized. No rule amended, retired or moved a tier. Number 130 is the next free one (129 was the last
+in use; retired and burned numbers are never reused).
+
+> **`rules.json` v3.11 → v3.12 · 122 rules → 123 · 17 forbidden patterns unchanged ·
+> `machine` tier +1, every other tier count unchanged.**
+
+**Nothing lawful became unlawful.** The verifier refused an element tracing to no intent before this rule existed;
+the refusal now cites Rule 130 and Article II, where it cited Article II alone. `violations.json` v1.6 → v1.7
+(the `INTENT_ORPHAN` binding), and the four other conformance artifacts re-pinned to 3.12 after the suite was run.
+**Suite 71/71 at level 4**; no diagnostic, verb, medium or verdict moved.
