@@ -4,10 +4,30 @@
 // Exit 0: valid, and for the example the verdicts are the ones the document states. Exit 1: not.
 const fs = require('fs');
 const path = require('path');
-const file = process.argv[2] || path.join(__dirname, 'example.facts.json');
+// node doc/design/audit/check-facts.js [facts.json] [--rules 62,105]   --rules asks for decisions on those rules only
+// and is REFUSED (exit 1) for any rule that decides.json does not name: a screenshot does not decide it.
+const args = process.argv.slice(2);
+const file = args.find((a, i) => !a.startsWith('--') && args[i - 1] !== '--rules') || path.join(__dirname, 'example.facts.json');
 const schema = JSON.parse(fs.readFileSync(path.join(__dirname, 'facts.schema.json'), 'utf8'));
 const facts = JSON.parse(fs.readFileSync(file, 'utf8'));
 const problems = [];
+
+// ---- what the audit may decide, and by what thresholds: doc/design/audit/decides.json is the one place
+const decides = JSON.parse(fs.readFileSync(path.join(__dirname, 'decides.json'), 'utf8'));
+{
+  const law = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', '..', 'constitution', 'rules.json'), 'utf8'));
+  const numbers = new Set();
+  for (const k of Object.keys(law)) if (/^set\d+$/.test(k)) for (const r of law[k].rules) numbers.add(r.number);
+  const named = [...new Set(decides.decisions.flatMap(d => d.rules))].sort();
+  if (named.join() !== [...decides.rules].sort().join()) problems.push(`decides.json: "rules" (${decides.rules}) is not the union of its decisions (${named})`);
+  for (const r of decides.rules) if (!numbers.has(r)) problems.push(`decides.json: rule ${r} is not in the law`);
+  const i = args.indexOf('--rules');
+  if (i >= 0) for (const r of String(args[i + 1] || '').split(',').filter(Boolean)) if (!decides.rules.includes(r))
+    problems.push(`rule ${r} is not decidable from these facts: decides.json names only ${decides.rules.join(', ')}`);
+}
+const T = decides.thresholds;
+const ruleList = rs => (rs.length === 1 ? 'rule ' : 'rules ') + rs.join(', ');
+const label = id => ruleList(decides.decisions.find(d => d.id === id).rules);
 
 // ---- a validator for exactly the schema keywords facts.schema.json uses
 const typeOf = v => v === null ? 'null' : Array.isArray(v) ? 'array' : Number.isInteger(v) ? 'integer' : typeof v;
@@ -65,7 +85,7 @@ if (!problems.length) {
 }
 
 // ---- the two decisions. Three outcomes: fail, pass, not_decided. A size is never "pass": see section 4.
-const MIN_SCORE = 0.5, SPREAD_LIMIT = 0.25, CONTRAST_FLOOR = 4.5, SIZE_FLOOR_PT = 12; // 1rem = 16 CSS px = 12 pt
+const MIN_SCORE = T.min_ocr_score, SPREAD_LIMIT = T.spread_limit, CONTRAST_FLOOR = T.contrast_floor, SIZE_FLOOR_PT = T.size_floor_pt; // 1rem = 16 CSS px = 12 pt
 // The WORST END of the background: bg_luminance moved by bg_spread toward the text colour. A pass must hold there.
 function worstEnd(l) {
   const bg = l.fg_luminance > l.bg_luminance ? Math.min(1, l.bg_luminance + l.bg_spread) : Math.max(0, l.bg_luminance - l.bg_spread);
@@ -98,9 +118,9 @@ if (!problems.length) {
   for (const l of facts.lines) {
     const c = contrast(l), s = size(l, facts.capture.box_kind);
     out.push({ id: l.id, contrast: c[0], size: s[0] });
-    console.log(`${l.id} "${l.text}"\n  contrast (rules 62, 105)  ${c[0].padEnd(11)} ${c[1]}\n  size floor (rule 107)     ${s[0].padEnd(11)} ${s[1]}`);
+    console.log(`${l.id} "${l.text}"\n  ${('contrast (' + label('contrast') + ')').padEnd(26)}${c[0].padEnd(11)} ${c[1]}\n  ${('size floor (' + label('size') + ')').padEnd(26)}${s[0].padEnd(11)} ${s[1]}`);
   }
-  console.log('\nNOT AUDITED: every rule other than 62, 105 (its contrast half) and 107. A screenshot does not decide them, and "not audited" is not "passed".');
+  console.log(`\nNOT AUDITED: every rule other than ${decides.rules.join(', ')} (rule 105 only for its contrast half). A screenshot does not decide them, and "not audited" is not "passed".`);
   console.log('PROJECTED, NOT VERIFIED BY A PERSON (CENTRAL-PERCEPTGATE-01): nobody looked at the screenshot these facts describe.');
   if (path.resolve(file) === path.resolve(__dirname, 'example.facts.json')) {
     const want = { L1: ['fail', 'fail'], L2: ['pass', 'not_decided'], L3: ['not_decided', 'not_decided'] };

@@ -32,7 +32,7 @@ The one thing that was already right: **the law's own figures** (123 rules, vers
 
 1. **"88 of 123 rules written for a screen only" is 89 of 123** since rule 123 moved from `visual + print` to `visual` on 2026-11-03 (`coverage-count.js`: `visual_only` 89). The rules on the visual column, counting those also written for another medium, are 94.
 2. **"73 fixtures at four levels, each beside its lawful twin" is not what the manifest holds.** The 73 sit at levels 1, 2 and 3; level 4 has none, by design (`LAYOUT_DISPLACEMENT` is a fact about a painted page, listed under `unfixtured`). 22 are lawful twins, and 20 of the 46 refusing fixtures have one. The page will say *73 fixtures, 46 of them refusals, 22 lawful twins*, and nothing about "each".
-3. **"the GBNF makes a violating token unemittable" overstates what the grammar holds.** The forge does emit `zui.gbnf` (3,877 bytes; produced on every run of `haro/judge-zui-court.js`), and what it fixes is the *shape*: the ten kinds, which clauses each kind may carry, the lexical form. It does not enumerate the verbs (a name list is any identifier), and its own header says "a clause given twice and a required seat absent are the court's to refuse". So a **misplaced field and a malformed shape are unemittable; an unknown verb, an act with no undo and every other semantic refusal remain the court's.** The page says that. It also cannot yet link a checked-in grammar: **there is no `zui.gbnf` in this repository**, only in the forge's temporary output. Proposal for step 2: the judge copies it to `haro/zui.gbnf` and the page links it; until then the page states the claim as measured on a run, not as an artefact.
+3. **"the GBNF makes a violating token unemittable" overstates what the grammar holds.** The forge does emit `zui.gbnf` (3,877 bytes; produced on every run of `haro/judge-zui-court.js`), and what it fixes is the *shape*: the ten kinds, which clauses each kind may carry, the lexical form. It does not enumerate the verbs (a name list is any identifier), and its own header says "a clause given twice and a required seat absent are the court's to refuse". So a **misplaced field and a malformed shape are unemittable; an unknown verb, an act with no undo and every other semantic refusal remain the court's.** The page says that. It also cannot yet link a checked-in grammar: **there is no `zui.gbnf` in this repository**, only in the forge's temporary output. Proposal for step 2: the judge copies it to `haro/zui.gbnf` and the page links it; until then the page states the claim as measured on a run, not as an artefact. **Done in piece 2 (2026-11-04):** `haro/judge-zui-court.js` writes `haro/zui.gbnf` and fails when the checked-in copy differs from what the forge writes now. **Piece 1's ruling (SITE-P1-LABELS-01):** the head page of each section is labelled with the section's name, because the audit's Rule 116 check requires a menu label to equal the page's own label; the table below follows that.
 
 ---
 
@@ -43,7 +43,7 @@ A reader is a person with a question. Each has a first page that exists and says
 | reader | their question | first page | what they leave with |
 |---|---|---|---|
 | a | I build business software. Can I gate CI on this? | **Adopt > Build** | pin the law, lint, gate, measure the paint |
-| b | I design, or I care about UX. What is the case? | **Law > Why a law** | the decay, the evidence, the stance |
+| b | I design, or I care about UX. What is the case? | **Law** (head page, kicker "Why a law") | the decay, the evidence, the stance |
 | c | I generate interfaces with AI. How do I stop it breaking them? | **Adopt > Generate** | the forged grammar, what it holds and what it leaves to the court, the offences to feel |
 | d | I ship where there is no screen (voice, sound, print, an API). | **Media** | ten media, and the honest map of which cells have a rule |
 | e | I must judge an application I do not own. | **Audit > Screenshots** | what a screenshot can decide, what it refuses to decide |
@@ -93,12 +93,12 @@ The section is carried by the rail, not by the path. Labels change; files do not
 | section | page (label) | file | its one question (Rule 123: one message per section) | status |
 |---|---|---|---|---|
 | | **Home** | `index.html` | What is Zui, and is it for me? | rewritten |
-| **Language** | What it is, step by step | `site/how.html` | How does a declaration go from an intent to a refusal or a pass? | rewritten, status board moved out |
+| **Language** | Language (the head page; what it is, step by step, is its kicker) | `site/how.html` | How does a declaration go from an intent to a refusal or a pass? | rewritten, status board moved out |
 | | What it refuses | `site/refusal.html` | What does the contract refuse, and how do I know a refusal is lawful? | **new**: 37 diagnostics, levels, the C2 envelope, rule citations |
 | | A language declared | `site/haro.html` | Is the language itself declared, and what does that buy? | **new**: `zui.stzu`, the forge, the twin courts |
 | | Conformance | `site/conformance.html` | How does anyone prove they implement it? | **new**: the suite, levels, pack, Zing |
 | | Status | `site/status.html` | What exists, what is designed, what is held? | **new**: the board, rebuilt from the tree |
-| **Law** | Why a law | `site/why.html` | Why a law and not guidelines? | kept, figures re-read |
+| **Law** | Law (the head page; "Why a law" is its kicker) | `site/why.html` | Why a law and not guidelines? | kept, figures re-read |
 | | The 123 rules | `site/law.html` | What does the law say, tier by tier? | **new**: the census, the Reader linked |
 | | What a violation feels like | `site/gotchas/index.html` + 7 family pages | What does each family of offence feel like? | renamed (was "Gotchas"), kept as subtitle |
 | | Two cultures, one truth | `site/vibes.html` | Can one truth be read two ways? | renamed (was "Vibes"), kept as subtitle |

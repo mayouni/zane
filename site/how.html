@@ -167,7 +167,7 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     the grammar also parses in <code>parser.zig</code>, a second implementation
     inside a consumer platform, which is what the fixtures exist to keep honest.</p>
     <p class="caption"><b>And the contract has grown to
-    <span data-law="diagnostics">25</span>.</b> The ten above are the
+    <span data-law="diagnostics">37</span>.</b> The ten above are the
     intent-collapse core. Since then the same discipline has been applied one
     level down — <code>UNKNOWN_INTENT</code>, <code>DUPLICATE_DECLARATION</code>
     and four more at level 1 for the grammar itself; <code>VIBE_STRIPS_RIGHT</code>
@@ -219,14 +219,14 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     contrast check existed to serve it. The census, read from the file when you
     load this page:</p>
     <div class="tiers">
-      <div class="card"><b data-law="tier:machine">10</b><h3>machine</h3><p>refused by a conforming compiler or linter, today</p></div>
+      <div class="card"><b data-law="tier:machine">11</b><h3>machine</h3><p>refused by a conforming compiler or linter, today</p></div>
       <div class="card"><b data-law="tier:tool">7</b><h3>tool</h3><p>measured by a runnable instrument</p></div>
       <div class="card"><b data-law="tier:machine-later">25</b><h3>machine-later</h3><p>decidable; awaiting their instrument</p></div>
       <div class="card"><b data-law="tier:judgment">80</b><h3>judgment</h3><p>a reviewer decides yes or no, citing the number</p></div>
     </div>
 
     <p class="law-note"><b>This is the number the project is built to move.</b>
-    Only <b data-law-share="machine">8%</b> of the law is refusable before a
+    Only <b data-law-share="machine">9%</b> of the law is refusable before a
     pixel exists — the rest waits on a human, or on an instrument nobody has
     built yet. Every rule that climbs a rung is the argument working; every
     rule stuck at <em>machine-later</em> is the law admitting an instrument is
@@ -287,7 +287,7 @@ table.plain th { color: var(--muted); text-transform: uppercase;
         <tr><td>The law, <code>rules.json</code> v<span data-law="version">3.13</span></td><td><span data-law="rules">123</span> rules as data; the single source of truth</td><td class="status live">in force</td></tr>
         <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — in the reference implementation</td></tr>
         <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — in the reference implementation</td></tr>
-        <tr><td>The refusal contract</td><td><span data-law="diagnostics">25</span> named violations every conforming implementation must detect — the ten founding ones plus grammar, consistency and medium checks added since</td><td class="status live">24 enforced by the verifier; <code>LAYOUT_DISPLACEMENT</code> is the UI audit's</td></tr>
+        <tr><td>The refusal contract</td><td><span data-law="diagnostics">37</span> named violations every conforming implementation must detect — the ten founding ones plus grammar, consistency and medium checks added since</td><td class="status live">24 enforced by the verifier; <code>LAYOUT_DISPLACEMENT</code> is the UI audit's</td></tr>
         <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
         <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
         <tr><td>Zing's <code>zing check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in Zing</td></tr>

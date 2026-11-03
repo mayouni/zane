@@ -129,6 +129,25 @@ for (const [file, c] of current) {
 for (const [file, l] of listed) {
   if (!current.has(file)) problems.push(`listed difference now AGREES, delete its row: ${file} (${l.seam})`);
 }
+// ---- the grammar the forge writes, checked in so a page can link a file (SITE-GBNF-01) ---------------------
+// haro/zui.gbnf is what the forge writes from haro/zui.stzu, behind one header line naming the forge commit (the baseline of
+// twin-expected.csv). The judge regenerates it on every run and fails if the checked-in copy differs; --write-gbnf rewrites it.
+// What it holds is the SHAPE of a declaration: the ten kinds, the clauses each takes, the lexical form. The verbs are an identifier
+// list and the semantic refusals stay the court's.
+{
+  const baseline = fs.readFileSync(path.join(__dirname, 'twin-expected.csv'), 'utf8').split(/\r?\n/).find(l => l.startsWith('# baseline')) || '';
+  const commit = (/ringpp commit ([0-9a-f]{7,40})/.exec(baseline) || [])[1] || 'unknown';
+  const made = fs.readFileSync(path.join(OUT, 'zui.gbnf'), 'utf8').replace(/\r\n/g, '\n');
+  const want = `# haro/zui.gbnf -- written by haro/judge-zui-court.js from the forge at ringpp commit ${commit}. The judge fails when this file differs from what the forge writes now.\n` + made;
+  const GBNF = path.join(__dirname, 'zui.gbnf');
+  if (process.argv.includes('--write-gbnf')) { fs.writeFileSync(GBNF, want); console.log(`\n-- wrote haro/zui.gbnf (${want.length} bytes, forge ${commit})`); }
+  else {
+    const have = fs.existsSync(GBNF) ? fs.readFileSync(GBNF, 'utf8').replace(/\r\n/g, '\n') : null;
+    if (have === null) problems.push('haro/zui.gbnf is missing: run the judge with --write-gbnf');
+    else if (have !== want) problems.push('haro/zui.gbnf differs from the grammar the forge writes now: run the judge with --write-gbnf and read the difference');
+    else console.log(`\n-- haro/zui.gbnf matches the forge's output (${want.length} bytes, forge ${commit})`);
+  }
+}
 const byClass = {};
 for (const l of listed.values()) byClass[l.cls] = (byClass[l.cls] || 0) + 1;
 console.log(`\n-- ratchet: ${listed.size} listed (${Object.entries(byClass).map(([k, v]) => k + ' ' + v).join(', ')}), ${current.size} differing now, ${problems.length} problem(s)`);

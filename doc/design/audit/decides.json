@@ -1,0 +1,14 @@
+{
+  "_about": "The rules a screenshot can decide, and the thresholds the audit judges them by (doc/design/AUDIT-FACTS.md sections 3 and 4). The site's figure 'the audit decides N rules' is derived from this file, and doc/design/audit/check-facts.js reads it: it prints these decisions and no others, and refuses a request to decide any other rule. A rule enters this file only when it is shown decidable from the facts, and a size is never a pass.",
+  "decisions": [
+    { "id": "contrast", "rules": ["62", "105"], "decides": "body text below 4.5:1, judged at the worst end of the background; for rule 105, the contrast half only" },
+    { "id": "size", "rules": ["107"], "decides": "text set below the reading floor of 12 pt (16 CSS px), as an upper bound; never a pass" }
+  ],
+  "rules": ["62", "105", "107"],
+  "thresholds": {
+    "contrast_floor": 4.5,
+    "size_floor_pt": 12,
+    "min_ocr_score": 0.5,
+    "spread_limit": 0.25
+  }
+}

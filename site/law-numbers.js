@@ -100,4 +100,21 @@
       });
     })
     .catch(function () { stale('[data-law="diagnostics"]', 'the refusal contract'); });
+
+  /* Every other figure is derived from the tree by tools/site-facts.js and written to site/facts.json; a span
+     marked data-fact="..." reads it. The static text stays when the file is not reachable, and the same script
+     fails when that static text is not what the tree says (node tools/site-facts.js). */
+  var fsrc = (here && here.dataset && here.dataset.facts) ||
+             src.replace(/constitution\/rules\.json$/, 'site/facts.json');
+  json(fsrc)
+    .then(function (f) {
+      var facts = f.facts || {};
+      document.querySelectorAll('[data-fact]').forEach(function (el) {
+        var v = facts[el.getAttribute('data-fact')];
+        if (v === undefined || v === null) return;
+        el.textContent = String(v);
+        el.setAttribute('data-law-live', '');
+      });
+    })
+    .catch(function () { stale('[data-fact]', 'the site facts'); });
 })();
