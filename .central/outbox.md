@@ -1699,3 +1699,39 @@ next:
 note:      ONE READER, ONE READ, 31 RULES. This is a doubt with a number, not a replacement placement. Two method differences are stated in the document: the reader had no diagnostics, and it was told it could answer "off", which is a hint toward the off-grid pair, so that part of the check is weaker than it looks
 ```
 ---
+
+--- FROM: stzzui | 2026-11-03 09:47 | NOTE | answers Central's NOTE of 2026-11-03 01:44 (FINDING-01, SAMPLE-01) | UNDERSTAND IS ON RULES 62 AND 105 AND NO COUNT MOVED; THE SECOND READ MOVES THE 34 TO 38 ON THIS READER'S PLACEMENT, AND TWO NAMED PLACEMENTS HAVE NO SUPPORT IN THEIR RULES' WORDS
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-03 09:47 | ATTENDED
+
+subject:   item 1 (commit bc769fb) and item 2 (commit c49da0c), both local on main, not pushed
+
+why:       the first read could not test the rules that decide the 34 empty cells, and the perceive/understand split needed one recorded sentence, not a merge
+
+did:
+  - item 1: recorded understand on rules 62 and 105 in coverage-placement.json (they stay on visual), re-ran coverage-count.js and compared the whole summary before and after: it is identical, so no count moved and I did not stop. The only cell figure that changed is understand x visual, 48 to 50 rules. One paragraph in COVERAGE.md section 3d; AUDIT-FACTS.md follows. Rule 107 stays perceive-only because it was not in the sample
+  - item 2: reproduced the sample mechanically: every rule placed other than visual-only, 33 rules (26 medium-free and the 7 named; your count of 32 predates rule 130, the 26th medium-free). Packet adds the bound diagnostics (id, summary, decidable_from) and nothing else new
+  - item 2: started a second fresh subagent, not the first, briefed with the section 1 grid and the full three-step order with the bound-diagnostic clause; no "off". It reported reading only the one file, which I did not verify. Raw answer saved, compared with compare2.js, section 3f written with the 23 disagreements and one line each
+  - changed nothing in coverage-placement.json for item 2, and nothing in zui.js, any rule, any fixture or violations.json
+
+state:
+  activities, 33 rules:       exact 15, overlap 16, disjoint 2
+  medium scope, 33 rules:     same 22, different 11; both agree on 10 of 33
+  medium-free, diagnostic bound: the reader agrees on 12 of 12; without a diagnostic on 7 of 14 (it moves 9, 18, 22, 40, 76, 91, 96 to visual)
+  named rules (7):            medium same 3, different 4 (60, 104, 123, 125)
+  bound, three counts:        cells with a rule 21 to 17; cells with none 34 to 38; rules on no cell 2 to 2
+  bound, the 34 cells:        1 would gain a rule (understand x auditory); 5 cells that hold a rule would hold none (perceive x voice, perceive x print, perceive x machine, understand x voice, act x voice), all five from named rules 60, 72, 104, 125
+  item 1 counts:              21, 34, 2 unchanged
+  pushed:                     NO
+
+waiting:
+  - COVERAGE-NAMED-PLACEMENT-01: rule 123 is placed on print and rule 125 on voice, and neither rule's own words name that medium (123 names none; 125 names sound and earcons). Rule 60 is placed on machine and names a voice assistant, a phone tree and an embedded panel, not a machine reader. These three decide most of the five cells that would empty. I did not change them -> Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed
+  - central: read both commits, push by sha, bring the Principal the numbers
+
+note:      TWO READERS, ONE READ EACH, AND NINE RULES (18, 22, 26, 53, 79, 83, 97, 101, 130) WERE IN BOTH SAMPLES. This is a measurement of the placement, not a replacement for it, and the honest gap is 34 on this placement and 38 on this reader's. Projected, not verified by a person: nobody perceived any medium for this grid
+```
+---
