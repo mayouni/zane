@@ -1981,3 +1981,40 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at it but me, through a browser at 800 by 606 and once at 375 wide. At 375 the rail stacks above the page, the bar scrolls as one row and the page does not scroll sideways; BUT THE CULTURE SWITCH SITS OFF-SCREEN AT THE RIGHT END OF THE BAR on a phone and needs a swipe, which is not "both states always visible" there. I did not fix it; a decision for you is whether the switch moves into the footer or under the menu on narrow screens. The vibes page keeps its own two-pane exhibit, untouched
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 00:23 | NOTE | answers Central's NOTE of 2026-11-04 00:07 (site build, piece 2, and the phone fix) | THE PHONE SWITCH IS FIXED (ddb4f61) AND PIECE 2 IS COMMITTED (8a3706c); BOTH CHECKS GREEN; THE FACTS CHECK ALREADY FOUND FIVE STALE FIGURES; ANSWER ON THE VERSION QUERY: YES
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 00:23 | ATTENDED
+
+subject:   two local commits on main, not pushed: ddb4f61 (the phone fix, its own commit) and 8a3706c (piece 2). Stopped here for your read
+
+why:       a two-state control off screen is not "both states always visible"; and a site that argues about drift must have its figures checked against the tree
+
+did:
+  - ddb4f61 THE PHONE FIX: the menu links now sit in their own row (a .menu in the bar) that may scroll sideways; the switch is outside it, and below 760 px it takes its own row under the menu. Measured in a browser and the state read back. At 375: both buttons lie inside the viewport (65 to 241), the page does not scroll sideways, the menu row scrolls, the switch sits under the menu, and clicking Retro reads Retro pressed with the culture changed. At 526 and 800 the switch is inside and nothing scrolls sideways. site-shell.js renders it into all 17 pages and its check passes. Audit 0 on 17 pages in Modern and in Retro
+  - 8a3706c PIECE 2: tools/site-facts.js derives 49 figures from the tree (law, contract, manifest, media.json, signal.json, zui.stzu, twin-expected.csv, the coverage grid, decides.json) into site/facts.json; node tools/site-facts.js is the check. law-numbers.js fills data-fact spans from facts.json (checked live: the two I converted show "live")
+  - haro/zui.gbnf is written by the judge behind one header line naming the forge commit (6611d18, from the baseline in twin-expected.csv), and the judge fails if the checked-in copy differs from what the forge writes now; --write-gbnf rewrites it. I appended one character to the file and the judge exited 1; restored, it exits 0. It is 4,043 bytes (the 3,877 I quoted in SITE.md was an earlier run)
+  - doc/design/audit/decides.json names the three rules and the thresholds; check-facts.js reads both (thresholds too, so they are no longer typed in two places), prints those decisions only, and refuses --rules for any other rule: --rules 62,56 exits 1 with "rule 56 is not decidable from these facts"
+  - SITE.md: table follows the accepted labels (Language, Law as head pages, kickers keep "Why a law"), and records the grammar as done. Said here and in the commit, as you asked
+
+state:
+  tools/site-facts.js, the output:   spans checked: 27; wrong: 0; ninety seconds re-run: 2 of the page's terminals / typed numbers outside a span, not checked: 46 across 8 page(s) / site facts ok
+  negative tests, three ways:        a span edited to 38 fails; "Rule 79" changed to "Rule 78" in the home terminal fails with both texts printed; facts.json with twin.differences 17 fails as stale. All restored, check ok
+  FIVE STALE FIGURES THE FIRST RUN FOUND, in the existing fallbacks, now corrected: the contract reads 37 (the pages said 25, three places); the machine tier is 11, not 10; and it is 9 percent of the law, not 8. Live, law-numbers.js had been showing the right number to anyone who could fetch the file; the fallback is what everyone else saw
+  UI audit:                          0 on 17 pages in Modern, 0 in Retro (before piece 2: 0 and 0)
+  other gates:                       site-shell check ok; conformance 73 of 73; pack --check verified; judge exit 0, ratchet 18 listed, 0 problems; check-facts exit 0; ui-audit tests 16 and 9 pass
+  pushed:                            NO
+
+waiting:
+  - SITE-P2-VERSIONQUERY-01: SHOULD stz.css CARRY A VERSION QUERY? YES. GitHub Pages serves static files with a ten-minute cache and browsers cache stylesheets heuristically beyond that, which is what showed you August's styles over November's pages. Proposal: a fenced shell:assets region in each page's head that renders stz.css?v=<first 8 hex of the file's sha256>, likewise stz.js, gotchas.css and law-numbers.js, written by site-shell.js, and its check fails when a page carries a stale hash. A changed file then changes its address, with nothing to remember. NOT DONE in piece 2, because it rewrites the head of all 17 pages; I would do it at the start of piece 3 -> Central, to rule
+             [not routed; it is here]
+  - SITE-P2-UNCHECKED-01: 46 typed numbers sit outside any span on 8 pages. The count is a rough lint, not a proof, and it over-counts: it includes rule numbers inside lists (audit.html has five, why.html many). The ones the tree contradicts, which I know of: index.html 40 and 24; how.html 40, 24 and 23. The check cannot see a number that is spelled out ( "four diagnostics", "six rules"). Each page piece rewrites its own and the count should reach zero by piece 6; I propose --unchecked fail the check from piece 6 on -> Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed until you have read it
+  - central: read ddb4f61 and 8a3706c, push by sha; rule on the version query
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at the phone layout but me, through measurements at 375, 526 and 800 and one click, not on a device. The stale prose "24 enforced by the verifier", "40 fixtures" and "Zui v1.0" is still on the pages: they are typed text and not in a span, which is exactly what piece 3 onward removes
+```
+---
