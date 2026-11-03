@@ -76,10 +76,14 @@ function menu(p) {
   const wrapClose = p.outside === 'reader' ? '' : '  </div>\n';
   /* the Reader draws its own bar with its own styles; the switch belongs to the pages that carry stz.css */
   const switchHtml = p.outside === 'reader' ? '' : cultureSwitch() + '\n';
+  /* the links sit in their own row, which may scroll sideways on a narrow screen; the culture switch never does (Rule 106) */
+  const row = p.outside === 'reader' ? '' : '    ';
+  const menuOpen = p.outside === 'reader' ? '' : '    <div class="menu">\n';
+  const menuClose = p.outside === 'reader' ? '' : '    </div>\n';
   return `<nav class="${cls}" aria-label="Main menu">
-${wrapOpen}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
+${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
 ${links}
-${switchHtml}${wrapClose}</nav>`;
+${menuClose}${switchHtml}${wrapClose}</nav>`;
 }
 /* Rule 106: a control with two states shows both. The current one is marked by weight, an underline
    and a check mark, never by colour alone, and says so to assistive technology. */

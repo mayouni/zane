@@ -62,9 +62,13 @@ nav.site {
   background: var(--deep); color: var(--halo);
   position: sticky; top: 0; z-index: 10;
 }
-nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: nowrap;
+nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: nowrap; }
+/* the menu is one row that never wraps; where it is wider than the screen it scrolls on its own, and the culture
+   switch stays outside it, always on screen (Rules 27, 106) */
+nav.site .menu { display: flex; align-items: center; gap: 1.2rem; flex: 1 1 auto; min-width: 0;
   overflow-x: auto; scrollbar-width: none; }
-nav.site .wrap > * { flex: none; }
+nav.site .menu > * { flex: none; }
+nav.site .wrap > .culture { flex: none; }
 nav.site .brand { font-weight: var(--black); font-size: 1.1rem; letter-spacing: .04em;
   color: var(--accent-lite); text-decoration: none; text-transform: uppercase; }
 nav.site a:not(.brand) { color: var(--halo); text-decoration: none; font-size: 1rem; opacity: .9; }
@@ -308,6 +312,9 @@ footer.site .row { display: flex; flex-wrap: wrap; gap: 1.6rem; }
 footer.site .bar { display: flex; align-items: center; gap: 1.4rem;
   flex-wrap: wrap; justify-content: space-between; }
 
-@media (max-width: 720px) {
-  nav.site .wrap { gap: .8rem; }
+@media (max-width: 760px) {
+  /* the switch takes its own row under the menu, so it is never off screen */
+  nav.site .wrap { flex-wrap: wrap; gap: .5rem 1.2rem; padding: .6rem 1.4rem; }
+  nav.site .menu { flex: 1 1 100%; gap: 1rem; }
+  nav.site .wrap > .culture { flex: 1 1 100%; margin-left: 0; }
 }
