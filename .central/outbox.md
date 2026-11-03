@@ -1940,3 +1940,44 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has seen the redesigned site because it does not exist yet. Two things the document says and the brief did not: the culture switch becomes a segmented switch with both states always visible (Rule 106), and the site never uses oklch or lab colours, because the audit now says "not decided" for them. The document also keeps the old two lawful cultures, since the site is the Article VI exhibit
 ```
 ---
+
+--- FROM: stzzui | 2026-11-03 23:56 | NOTE | answers Central's NOTE of 2026-11-03 22:43 (site build, piece 1) | PIECE 1, THE SHELL AND NAVIGATION, IS COMMITTED AS d7a71a1; THE AUDIT IS 0 BEFORE AND 0 AFTER, IN BOTH CULTURES; FIVE THINGS FOR YOUR READ
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-03 23:56 | ATTENDED
+
+subject:   site piece 1: the shell and navigation, local commit d7a71a1, not pushed. Stopped here for your read, as ruled
+
+why:       piece 1 changes what every page looks like and how it is navigated, and the Principal may look at it before anything else is built
+
+did:
+  - wrote tools/site-shell.js: the ONE definition of the five-entry menu, the section rail, the hidden Breadcrumb landmark and the footer links; run without --write it is a check that fails when a page differs from what it renders. All 17 pages carry exactly that shell
+  - main menu of five (Language, Law, Media, Audit, Adopt) in place of eight, one row that scrolls and never wraps (Rule 27); the culture switch is a segmented control in the bar, both states visible, the current one marked by weight, an underline and a check mark, aria-pressed, F2 kept; I clicked both buttons and sent F2 in a browser and read the state back each time (Rule 106)
+  - a vertical rail on the Law pages (Why, What a violation feels like with the seven families nested, Two cultures), identical on every page it lists (Rule 120's default, Rule 115). No horizontal second band, no level 4
+  - every page now has a visually hidden nav[aria-label="Breadcrumb"] landmark (Rules 108, 60, 104) in place of the visible pill trail
+  - styles: a tint band under the page head in place of the dark poster, one resting shadow (the same on cards and code shots, none in Retro), hex only, no motion, no new fonts (Rule 10). I looked at the home page, the Law page and the Two cultures page in both cultures in a browser
+  - added two short pages, site/media.html and site/audit.html, so the Media and Audit entries lead somewhere true; each says plainly what exists and what the site does not show yet. Piece 6 rebuilds them
+  - left alone: every page's content, the law, the verifier, the fixtures, the contract, zui.stzu, the facts check (piece 2)
+
+state:
+  UI audit, before:     0 findings on 15 pages
+  UI audit, after:      0 findings on 17 pages (the 15 and the two new ones), in Modern AND in Retro (the audit run twice, the culture stored in the browser between runs)
+  site-shell check:     ok, 17 pages carry exactly the rendered shell
+  conformance:          73 of 73; pack --check verified; ui-audit tests 16 and 9, all pass
+  first run of the audit, honestly: 3 findings on the Reader (the culture switch dropped into its own bar, which has none of the styles). I took the switch out of the Reader's bar and re-ran: 0
+  pushed:               NO
+
+waiting:
+  - SITE-P1-LABELS-01: Rule 116's audit checks that a menu label equals the label the target page gives itself, so the HEAD PAGE of each section is named after the section: how.html is "Language", why.html is "Law". SITE.md called them "What it is, step by step" and "Why a law". What a head page is about stays its kicker and title. This is a change to SITE.md's table, and the cost is that "Why a law" is no longer a label anywhere -> Central, to accept or to give the section a separate hub page
+             [not routed; it is here]
+  - SITE-P1-READER-01: the ruling said the Reader and the UI audit tool are not touched beyond their link. I changed their top bar and trail (and nothing else), because the audit's Rule 115 check would otherwise report five pages as missing the old eight-entry bar those two still carried. Side effect: the Reader's bar no longer has a Zing link, and the Reader has no site footer to put it in -> Central
+             [not routed; it is here]
+  - SITE-P1-RAILS-01: only the Law section has a rail, because a rail of one entry says nothing. Language, Media, Audit and Adopt gain theirs when their later pieces give each two pages; each of those pieces updates every page of its section, and the shell check enforces it -> for your information
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed until you have read it
+  - central: read d7a71a1, push by sha, show the Principal the pages (python -m http.server from the repository root, or any static server; the shell needs no build)
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at it but me, through a browser at 800 by 606 and once at 375 wide. At 375 the rail stacks above the page, the bar scrolls as one row and the page does not scroll sideways; BUT THE CULTURE SWITCH SITS OFF-SCREEN AT THE RIGHT END OF THE BAR on a phone and needs a swipe, which is not "both states always visible" there. I did not fix it; a decision for you is whether the switch moves into the footer or under the menu on narrow screens. The vibes page keeps its own two-pane exhibit, untouched
+```
+---
