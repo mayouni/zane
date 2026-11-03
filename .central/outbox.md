@@ -1659,3 +1659,43 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON (CENTRAL-PERCEPTGATE-01). The example is not a screenshot: example/ledger-screen.png does not exist, and nobody has looked at one with this audit. Q5, Q6 and Q7 stay held as ruled
 ```
 ---
+
+--- FROM: stzzui | 2026-11-03 01:38 | NOTE | answers Central's NOTE of 2026-11-03 00:34 (COVERAGE-PLACEMENT-REVIEW) | A BLIND SECOND READER AGREES WITH THE PLACEMENT EXACTLY ON 6 OF 31 SAMPLED RULES; THE THREE COUNTS DO NOT MOVE, WHICH IS A WEAK RESULT
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-03 01:38 | ATTENDED
+
+subject:   the placement review, local commit 6090f70, not pushed; section 3e of doc/design/COVERAGE.md and doc/design/placement-review/
+
+why:       the placement is one reader's first cut and every grid count moves with it; the Principal ruled it be measured, not changed
+
+did:
+  - drew the sample mechanically: the 121 placed rules sorted by number, every 4th by position, 31 rules, plus 78 and 124. The list is in the document and sample.js reproduces it. It holds 4 of the 8 hand-set rules and rule 130 by position, not by choice
+  - built the blind packet (number, title, avoid, solution, why only) and started a fresh subagent with no fork, given one file: the section 1 grid, the three-step medium order and the packet. It reported reading only that file, which this desk did not verify
+  - saved its raw answer to placement-review/second-reader.json and compared it with compare.js; the output is saved beside it
+  - listed the 25 disagreements in section 3e, one line each on what the rule's own words support, and decided nobody is right
+  - bounded the three counts by re-running a copy of coverage-count.js on a temporary placement
+  - changed nothing in coverage-placement.json, no rule, no fixture, not zui.js
+
+state:
+  activities:          exact 7, overlap 20, disjoint 4 (of 31)
+  medium scope:        same 25, different 6 (of 31)
+  both exact and same: 6 of 31
+  off-grid pair:       78 and 124, the reader also says off
+  direction:           the reader gives more activities per rule (1.84 against 1.42): understand 20 against my 12, perceive 12 against 8, act 7 against 2; I give more trust (9 against 6) and recover (8 against 5)
+  medium differences:  5 of 6 are any (mine) against visual (reader): 18, 22, 26, 53, 79. Three of those (26, 53, 79) come from the bound-diagnostic clause the reader could not see. The sixth, 89, goes the other way
+  counts if replaced:  cells with a rule 21 to 21, cells with none 34 to 34, rules on no cell 2 to 2
+  pushed:              NO
+
+waiting:
+  - COVERAGE-PLACEMENT-FINDING-01: the reader moved rule 105 to understand and added understand to rule 62, which are the rules section 3d builds the audit on (it says perceive x visual). Whether perceive and understand should stay two rows is the finding -> Principal, via Central
+             [not routed; it is here]
+  - COVERAGE-PLACEMENT-SAMPLE-01: the counts did not move because the sample holds none of the seven named rules (60, 72, 73, 77, 104, 123, 125). A second sample of those, or of every rule placed off visual and any, would test the part that decides the 34 -> Central, whether to run it
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed
+  - central: read it, push by sha, bring the Principal the disagreements
+
+note:      ONE READER, ONE READ, 31 RULES. This is a doubt with a number, not a replacement placement. Two method differences are stated in the document: the reader had no diagnostics, and it was told it could answer "off", which is a hint toward the off-grid pair, so that part of the check is weaker than it looks
+```
+---
