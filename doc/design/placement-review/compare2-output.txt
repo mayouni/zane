@@ -1,0 +1,63 @@
+rules read: 33
+ACTIVITIES  exact 15, overlap 16, disjoint 2
+MEDIUM      same 22, different 11
+BOTH exact and same: 10 of 33
+  medium-free (mine any): 26; medium same 19; activities exact 11
+  named (mine a medium list): 7; medium same 3; activities exact 4
+
+-- disagreements --
+9  mine decide+understand / any   reader decide+understand / visual   [exact, different]
+      reader: Reveals complexity only when needed, which concerns what the person must take in and choose; the avoid list is about toggles and settings panels, so it is screen wording.
+16  mine act+decide+trust / any   reader trust+understand / any   [overlap, same]
+      reader: Asks whether a control is recognisable as one and whether its affordance can be relied on; it has bound diagnostics that do not read the medium.
+18  mine act+trust / any   reader act+perceive+trust / visual   [overlap, different]
+      reader: Acknowledgement within 100ms and no fake success cover sensing state, knowing an act landed, and reliance on what is shown; the wording is screen-bound (progress bar, highlight) and there are no diagnostics.
+22  mine recover+understand / any   reader act+understand / visual   [overlap, different]
+      reader: Completion status and next-step guidance tell the person where they are and that the act finished; the wording ('bottom of the current view') is screen wording.
+32  mine decide / any   reader act+decide / any   [overlap, same]
+      reader: Remembered and pre-filled values save choosing and re-entering; the title, avoid and solution carry no real screen wording and there are no diagnostics.
+40  mine recover+understand / any   reader recover+understand / visual   [exact, different]
+      reader: An error message must say what is required and give a verb that fixes it, so the person can recover; the avoid list names red text, which is screen wording.
+51  mine decide / any   reader decide+perceive+recover / any   [overlap, same]
+      reader: Focus isolation sets what the person can choose and shows that the rest waits, and Esc always exits; the bound TRAPPED_FLOW diagnostic does not read the medium, so step 2 puts it on any.
+53  mine recover / any   reader decide+recover / any   [overlap, same]
+      reader: Disabling the background restricts choices to the focus, and Esc is the guaranteed way out; the bound TRAPPED_FLOW diagnostic does not read the medium.
+60  mine perceive+understand / machine+visual+voice   reader perceive+understand / any   [exact, different]
+      reader: Structure, labels and non-interrupting announcements let people who cannot see locate and read the interface; the rule states the web markup is only a realisation and asks for the same structure in any medium.
+72  mine perceive / print+visual   reader understand / print+visual   [disjoint, same]
+      reader: A document is read and viewed as a destination with chrome receding; the rule names print and PDF and is also written for the screen.
+73  mine perceive / auditory+visual   reader perceive+understand / auditory+visual   [overlap, same]
+      reader: Video and audio must not autoplay and need captions or transcripts so the content can be understood; the rule names video and audio.
+76  mine perceive / any   reader act+perceive / visual   [overlap, different]
+      reader: One quiet progress indication tells the person that a bulk act is happening and finished; the wording (progress bar, notifications, blocking UI) is screen wording.
+79  mine recover / any   reader act+recover / any   [overlap, same]
+      reader: Instant undo replaces confirmation dialogs after an act; the bound undo diagnostics do not read the medium.
+82  mine perceive+trust / any   reader perceive+trust+understand / any   [overlap, same]
+      reader: State the system knows must be perceivable in the surface's own medium and explained in plain words; the bound diagnostics do not read the medium.
+83  mine trust / any   reader act+trust / any   [overlap, same]
+      reader: A committing act must name its actor and a control must mean the same thing everywhere, so authority can be relied on; the bound diagnostics do not read the medium.
+91  mine understand / any   reader act+perceive / visual   [disjoint, different]
+      reader: The result of a critical action must stay long enough to be registered; the avoid list names transitions 'the eye cannot follow', which is visual wording, and there are no diagnostics.
+96  mine decide / any   reader decide+understand / visual   [overlap, different]
+      reader: A list opens pre-filtered to the task's slice, which narrows the person's choices and says what they are looking at; the wording (views, lists, filters) is screen wording and there are no diagnostics.
+99  mine trust / any   reader perceive+trust / any   [overlap, same]
+      reader: Machine-made content must be visibly marked, which is perceivable state that supports reliance on what the interface says; the wording is medium-free.
+104  mine perceive+understand / machine+visual+voice   reader understand / machine   [overlap, different]
+      reader: Names machines and agents as readers: structure, anchors and declared intents so an agent can read and operate the interface.
+112  mine perceive+understand / any   reader perceive / any   [overlap, same]
+      reader: Motion is allowed only when it reports a change the person might miss, which concerns sensing state; the bound diagnostics do not read the medium.
+119  mine decide+understand / any   reader act+understand / any   [overlap, same]
+      reader: A widget's form must show its role, so the person can tell an indicator from an action; the bound ROLE_ACTS_WITHOUT_CONSEQUENCE diagnostic does not read the medium.
+123  mine understand / print+visual   reader understand / visual   [exact, different]
+      reader: A reading surface has a section budget and no walls of text so it can be read and scanned; the wording (page, sections, paragraphs) is screen wording and there are no diagnostics.
+125  mine act+perceive / auditory+voice   reader act+perceive / auditory   [exact, different]
+      reader: Names sound and earcons as a channel that may corroborate but not be the acknowledgement of an act.
+
+-- the three counts, mine -> if the reader had placed these rules --
+cells with at least one rule: 21 -> 17
+cells with none:              34 -> 38
+rules on no cell:             2 -> 2
+of the 34 cells with none, 1 would gain a rule: understand x auditory
+of the cells that have a rule, 5 would lose every rule: perceive x voice; perceive x print; perceive x machine; understand x voice; act x voice
+problems the reader's placement raises (a rule on a closed cell and the like): 0
+(a bound on these rules only: the visual-only rules keep their placement)

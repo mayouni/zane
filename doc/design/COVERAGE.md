@@ -379,6 +379,98 @@ looks. This is a measurement of 31 rules, read once by one reader: it is a doubt
 
 ---
 
+## 3f. The second blind read: the rules that decide the 34 (2026-11-03)
+
+The first read (section 3e) held no rule placed on a medium other than visual or `any`, so it could not move the 34 empty
+cells. The Principal ruled a second read of exactly those rules.
+
+**The sample, mechanical.** Every rule the placement file places anywhere other than visual-only: **33 rules**, the 26 medium-free
+rules and the 7 named for another medium. (The ruling counted 32, from 25 medium-free; Rule 130, canonized at v3.12, is the 26th.)
+List: 9 16 18 22 26 32 40 44 51 53 60 72 73 76 77 79 82 83 91 96 97 98 99 101 103 104 112 118 119 122 123 125 130. Named:
+60 72 73 77 104 123 125. Reproduce with `node doc/design/placement-review/sample2.js`.
+
+**The reader.** A second fresh subagent, not the first, with no fork. Its brief is the section 1 grid and the full three-step order of
+section 2 **including the bound-diagnostic clause** (`placement-review/brief-order-2.md`, the exact text). The packet adds, for each rule,
+the diagnostics bound to it (id, summary, `decidable_from`) and nothing else new: no placement, tier, fixture or hand-set list.
+"Off" was not offered. It reported reading only that one file, which this desk did not verify. Its raw answer is
+`placement-review/second-reader-2.json`; compare with `node doc/design/placement-review/compare2.js` (output saved beside it).
+
+### The figures
+
+| | |
+|---|---|
+| **activities**, 33 rules | **exact 15, overlap 16, disjoint 2** |
+| **medium scope**, 33 rules | **same 22, different 11** |
+| both exact and same | **10 of 33** |
+| the 26 medium-free rules | medium same 19, activities exact 11 |
+| the 7 named rules | medium same 3 (72, 73, 77), different 4 (60, 104, 123, 125); activities exact 4 |
+
+**Where the medium disagreements are.** Of the 26 medium-free rules, **12 have a diagnostic bound to it and the reader agreed on all 12**
+(16 26 51 53 79 82 83 98 112 118 119 130). The other 14 have none, and the reader agreed on 7 of them; the 7 it moved are 9, 18, 22, 40, 76, 91
+and 96, every one from `any` to `visual`. With diagnostics visible, the clause that decides step 2 for a bound rule is stable. For an unbound
+rule it is a reading of the words, and the two readers read them differently.
+
+### The bound: what these rules do to the 34
+
+The three counts move: **cells with at least one rule 21 to 17, cells with none 34 to 38, rules on no cell 2 to 2.**
+
+- **1 of the 34 would gain a rule:** understand x auditory, from rule 73, where the reader adds understand.
+- **0 of the 34 would lose one**, having none to lose. But **5 cells that now hold a rule would hold none**, which is how 34 becomes 38: perceive x voice,
+  perceive x print, perceive x machine, understand x voice and act x voice. All five come from named rules: 125 on voice (act x voice, and part of
+  perceive x voice), 60 and 104 on voice and machine (perceive x voice and machine, understand x voice), and 72 (the reader moves it from perceive to understand, which empties perceive x print).
+- No placement of the reader's raised a problem (no rule on a closed cell).
+
+So the honest gap is **34 on this placement and 38 on this reader's**, and the difference is made by about five judgments about named rules.
+
+### What the rules' own words say about the named placements
+
+For three of the four medium disagreements on named rules, the words of the rule are the question:
+
+- **Rule 123, print:** the rule names no medium at all, in its title, avoid, solution or why. Its evidence is a web site. The placement's `print` has no support in the rule's words.
+- **Rule 125, voice:** the rule names sound and earcons, not voice. The placement's `voice` has no support in the rule's words, and the reader's `auditory` alone is what it says.
+- **Rule 60:** it names a voice assistant, a phone tree and an embedded panel, and says the web markup is "the realization, not the rule". It does not name a machine reader; the word `machine` in the record is its enforcement tier.
+- **Rule 104** names machines, agents and screen readers, and a non-visual medium; `machine` is plainly named, and `visual` and `voice` are inferred from "three beneficiaries".
+
+### The disagreements (23 of 33)
+
+`mine` is the placement file, `reader` is the second reader; one line each on what the rule's own words support. Nobody is declared right.
+
+| rule | mine | reader | what the rule's own words support |
+|---|---|---|---|
+| 9 Progressive Disclosure | decide+understand / any | / visual | Activities agree. The avoid list names "settings panels with dozens of toggles", the one screen phrase; the solution has none. No diagnostic |
+| 16 Intentional Clicks | act+decide+trust | trust+understand | "Users should never wonder is this clickable" is understand and the why ("a promise ... breaks trust") is trust; act and decide rest on "nothing else behaves like either" and on the bound select and read diagnostics |
+| 18 The Speed of Thought | act+trust / any | act+perceive+trust / visual | Perceive: acknowledge "within 100ms (a highlight or state change)". Medium: "progress bar" is screen wording, "never show Success until confirmed" is not. No diagnostic |
+| 22 The Last Word Rule | recover+understand / any | act+understand / visual | "Never leave the user at a dead end" is recover; "completion should feel like a natural conclusion" is act. "Bottom of the current view" is the one screen phrase |
+| 32 Smart Defaults | decide / any | act+decide / any | "Forcing users to re-enter known information" is act as well as decide |
+| 40 Non-Accusatory Pathfinding | recover+understand / any | / visual | Activities agree. The avoid list names "red text that screams", screen wording, and step 2 reads title, avoid and solution; the principle (what an error message says) is medium-free |
+| 51 The Cognitive Tunnel | decide / any | decide+perceive+recover / any | "Esc key always exits" is recover and "the world must visibly wait" is perceive; the reader's additions are in the words |
+| 53 Interaction Lockdown | recover / any | decide+recover / any | "Only the focused container and its children are interactive" narrows what can be chosen |
+| 60 Screen Reader Harmony | perceive+understand / machine+visual+voice | / any | Names a voice assistant, a phone tree and an embedded panel and calls the web markup a realization: supports voice and, in the same breath, any. Names no machine reader |
+| 72 The Canvas Logic | perceive / print+visual | understand / print+visual | "Chrome should recede" is perceive; "when viewing a document" is understand. Print is named ("PDF printout") |
+| 73 Multimedia Handling | perceive / auditory+visual | perceive+understand / same | "Always provide captions or transcripts" is about the content being understood |
+| 76 Batch Action Silence | perceive / any | act+perceive / visual | "Changing roles for 50 users" is an act. "One quiet progress bar" and "notifications" are screen wording; the why is not. No diagnostic |
+| 79 The Undo Covenant | recover / any | act+recover / any | "Every destructive action" is an act as well as a recovery |
+| 82 Perceivable State | perceive+trust / any | perceive+trust+understand / any | "Every norm carries a MESSAGE a human operator can read" is understand |
+| 83 Predictable Authority | trust / any | act+trust / any | "Every step that commits ... names its ACTOR": the commit is an act |
+| 91 Business Time | understand / any | act+perceive / visual | Disjoint. "After a critical action, the result stays long enough to be registered" is act and perceive; "periods, cutoffs and deadlines shown in operational terms" is understand. "Transitions the eye cannot follow" is visual wording. No diagnostic |
+| 96 Contextual Defaults | decide / any | decide+understand / visual | "Opening on all records" is about what the person is looking at, which is understand. "List" and "view" are the screen-ish words. No diagnostic |
+| 99 Visible Provenance | trust / any | perceive+trust / any | "Marked as machine-made wherever it appears ... provenance is visible state" is perceive |
+| 104 Machine Legibility | perceive+understand / machine+visual+voice | understand / machine | Machine is named; "meaning conveyed only by pixels" in the avoid list touches perceive weakly. Visual and voice are not named |
+| 112 Motion Reports | perceive+understand / any | perceive / any | "A change the operator caused and might otherwise miss" is perceive; understand is not in the words |
+| 119 A Card Is Not a Button | decide+understand / any | act+understand / any | "An action takes the shape of a button or a link" is act; "what is pressable" is also decide. Both are in the words |
+| 123 The Reading Arc | understand / print+visual | / visual | Activities agree. The words name no medium, so `print` has no support in them; "page", "sections" and "paragraph" are the reading-surface wording |
+| 125 Sound Corroborates | act+perceive / auditory+voice | / auditory | Activities agree. Names sound and earcons, not voice |
+
+### What this says, for the Principal
+
+(a) **The medium-free column is stable where a diagnostic is bound and soft where none is.** 12 of 12 against 7 of 14. The step-2 test for an unbound rule, "no
+screen wording in its title, avoid or solution", is a reading, and a single phrase in an avoid list (40, 9) can tip it. (b) **The 34 depends on about five judgments
+about named rules**, and for two of them (123 on print, 125 on voice) the placement names a medium the rule's own words do not. Those are the placements most worth a second
+look, and they are not decided here. (c) Taken with section 3e, the pattern repeats: where the two readings differ on activities, it is mostly the reader giving a rule one more activity than the first
+reading did (in this sample 16 overlaps against 2 disjoint). Nine rules (18, 22, 26, 53, 79, 83, 97, 101, 130) were in both samples and the readers saw them with and without diagnostics. This is two readers, one read each. It is a measurement, not a replacement placement.
+
+---
+
 ## 4. The record for a discovered issue
 
 An issue is filed so that it lands on a cell. It is never filed as a new rule.

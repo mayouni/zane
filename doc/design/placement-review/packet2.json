@@ -1,0 +1,590 @@
+[
+  {
+    "number": 9,
+    "title": "Progressive Disclosure",
+    "avoid": [
+      "Advanced options always visible",
+      "Settings panels with dozens of toggles",
+      "Preloading complexity \"just in case\""
+    ],
+    "solution": "Show what's needed now. Reveal more when intent is clear. Never preload complexity \"just in case.\" Advanced options should be revealed after a clear action, not visible from the start.",
+    "why": "Complexity paid before it is needed is a tax on every user for the sake of a few.",
+    "diagnostics": []
+  },
+  {
+    "number": 16,
+    "title": "Intentional Clicks",
+    "avoid": [
+      "\"Mystery meat\" navigation (unclear clickable areas)",
+      "Buttons that look like links and vice versa",
+      "Inconsistent interaction patterns"
+    ],
+    "solution": "Buttons look like buttons. Links look like links. Nothing else behaves like either. Every interactive element must have clear visual affordance. Users should never wonder \"Is this clickable?\"",
+    "why": "Affordance is a promise; a control that lies about being one breaks trust cheaply.",
+    "diagnostics": [
+      {
+        "id": "SELECT_ACT_COLLAPSE",
+        "summary": "Selection has become execution: SATISFIES holds SELECT and ACT without CONFIRM.",
+        "decidable_from": [
+          "SATISFIES"
+        ]
+      },
+      {
+        "id": "READ_ACT_COLLAPSE",
+        "summary": "A reading surface mutates: SATISFIES holds READ and ACT.",
+        "decidable_from": [
+          "SATISFIES"
+        ]
+      },
+      {
+        "id": "ROLE_ACTS_WITHOUT_CONSEQUENCE",
+        "summary": "A control promising to change nothing declares that it acts.",
+        "decidable_from": [
+          "ROLE",
+          "SATISFIES"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 18,
+    "title": "The Speed of Thought",
+    "avoid": [
+      "Fake progress indicators",
+      "Delayed feedback on user actions",
+      "Optimistic UI that lies about success"
+    ],
+    "solution": "Optimistic UI vs. Truth: Never show \"Success\" until the execution is confirmed. Calm is built on Trust. A fake progress bar is a lie. The 100ms Rule: Actions must acknowledge the user within 100ms (a highlight or state change), even if the backend takes longer.",
+    "why": "Feedback within 100ms keeps causality felt; a fake success is a debt the truth collects later.",
+    "diagnostics": []
+  },
+  {
+    "number": 22,
+    "title": "The Last Word Rule",
+    "avoid": [
+      "Workflows that end abruptly",
+      "No indication of completion status",
+      "Missing next-step guidance"
+    ],
+    "solution": "In any workflow, the UI should always suggest the most logical next step at the bottom of the current view. Never leave the user at a dead end. Completion should feel like a natural conclusion, not an abrupt stop.",
+    "why": "Every ending is a beginning the UI already knows; dead ends transfer the routing job to the human.",
+    "diagnostics": []
+  },
+  {
+    "number": 26,
+    "title": "The Back Button is Holy",
+    "avoid": [
+      "Breaking browser back button functionality",
+      "No hash-based navigation for deep links",
+      "Dead ends with no escape path"
+    ],
+    "solution": "Never break the browser's back button. If you change the view significantly, update the window.location.hash so the user can \"return\" in time. Every sub-page or focus view must have a clear \"Exit\" path in the top-left or bottom-center.",
+    "why": "The back button is the user's oldest contract with the web; breaking it breaks the web.",
+    "diagnostics": [
+      {
+        "id": "MISSING_CANCEL",
+        "summary": "A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.",
+        "decidable_from": [
+          "SATISFIES",
+          "ALWAYS_REACHABLE",
+          "kind"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 32,
+    "title": "Smart Defaults",
+    "avoid": [
+      "Forcing users to re-enter known information",
+      "Ignoring previous selections",
+      "No memory of user preferences"
+    ],
+    "solution": "A Calm UI remembers. If a user always selects \"USD,\" don't make them select it again. Defaults are an act of service. Pre-fill known values and remember user preferences across sessions.",
+    "why": "Re-asking what the system knows tells the operator their time is worthless.",
+    "diagnostics": []
+  },
+  {
+    "number": 40,
+    "title": "Non-Accusatory Pathfinding",
+    "avoid": [
+      "\"Invalid Input\" messages",
+      "Technical jargon in error messages",
+      "No clear resolution path",
+      "Blaming language (\"You entered invalid data\")",
+      "Red text that \"screams\" at the user"
+    ],
+    "solution": "Bad: \"Invalid Input.\" (Blames the user). Lawful: \"We require a 10-digit phone number to proceed.\" (Explains the system's requirement). The Rule: Every error message must contain a verb that tells the user how to fix it.",
+    "why": "The system failed to understand -- saying so, with a verb that fixes it, keeps dignity and momentum.",
+    "diagnostics": []
+  },
+  {
+    "number": 44,
+    "title": "Strong Defaults Over Customization",
+    "avoid": [
+      "Too many configuration options",
+      "Forcing users to make trivial decisions",
+      "Customization before clarity"
+    ],
+    "solution": "Calm UI prefers: strong defaults, minimal theming, fewer knobs. Customization is allowed after clarity. Most users should never need to change defaults. The system should work perfectly out of the box for 95% of use cases.",
+    "why": "Every knob transfers a design decision to someone hired to do other work.",
+    "diagnostics": []
+  },
+  {
+    "number": 51,
+    "title": "The Cognitive Tunnel",
+    "avoid": [
+      "Modal dialogs that don't dim the background",
+      "Side panels that remain visible during focus tasks",
+      "Notifications that appear during intensive work"
+    ],
+    "solution": "Focus Mode is visual isolation. When engaged, a high-opacity scrim covers the rest of the interface. Only the active container remains at 100% opacity. Everything else is blurred and desaturated. Pointer events for the background are disabled. Esc key always exits.",
+    "why": "Focus is spatial; the world must visibly wait, not vanish.",
+    "diagnostics": [
+      {
+        "id": "TRAPPED_FLOW",
+        "summary": "A multi-step flow has no reachable EXIT.",
+        "decidable_from": [
+          "ALWAYS_REACHABLE",
+          "STEPS",
+          "kind"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 53,
+    "title": "Interaction Lockdown",
+    "avoid": [
+      "Clickable background elements during focus mode",
+      "Keyboard shortcuts that exit focus unexpectedly",
+      "No clear exit path from focus mode"
+    ],
+    "solution": "Pointer events for the background are disabled during Focus Mode. Only the focused container and its children are interactive. The Esc key is the universal exit path. A subtle \"Exit Focus (Esc)\" hint should be visible in the container header.",
+    "why": "A focus that can be escaped only by luck is a trap; Esc is the covenant.",
+    "diagnostics": [
+      {
+        "id": "TRAPPED_FLOW",
+        "summary": "A multi-step flow has no reachable EXIT.",
+        "decidable_from": [
+          "ALWAYS_REACHABLE",
+          "STEPS",
+          "kind"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 60,
+    "title": "Screen Reader Harmony",
+    "avoid": [
+      "Non-semantic HTML structure",
+      "Missing ARIA labels for interactive elements",
+      "aria-live regions that interrupt user flow"
+    ],
+    "solution": "The interface exposes its structure to assistive technology: semantic landmarks that can be navigated, a descriptive label for every icon and complex widget, and non-interrupting announcement of updates such as stzErrors. On the web this is realized with <main>, <nav>, <section>, aria-label, aria-describedby and aria-live=\"polite\" -- that is the realization, not the rule. A voice assistant, a phone tree, an embedded panel or any screen reader outside the web owes the same structure by its own means.",
+    "why": "The interface must speak to those who cannot see it; semantics is how, in whatever medium it speaks.",
+    "diagnostics": []
+  },
+  {
+    "number": 72,
+    "title": "The Canvas Logic",
+    "avoid": [
+      "Cluttered document views with full navigation chrome",
+      "Inconsistent rendering between screen and print",
+      "No focus mode for document review"
+    ],
+    "solution": "When viewing a document or diagram, the UI chrome (sidebar, top-nav) should recede by 50% opacity or slide away entirely. The \"Print-First\" Design: A Purchase Order should look exactly the same on the screen as it does on a PDF printout. Mermaid Diagrams: Render within the \"River of Content\" but offer a \"Full Screen\" button that triggers Focus Mode.",
+    "why": "A document is a destination; chrome should bow out.",
+    "diagnostics": []
+  },
+  {
+    "number": 73,
+    "title": "Multimedia Handling",
+    "avoid": [
+      "Autoplaying videos or audio",
+      "Custom controls that don't match UI theme",
+      "No captions or transcripts for accessibility"
+    ],
+    "solution": "Videos or audio logs should be \"Subdued.\" No autoplay. Use custom, minimal controls that match the Monastic Palette. Always provide captions or transcripts for accessibility. Multimedia should support the business context, not distract from it.",
+    "why": "Media serves the record; autoplay serves nobody.",
+    "diagnostics": []
+  },
+  {
+    "number": 76,
+    "title": "Batch Action Silence",
+    "avoid": [
+      "50 individual success notifications",
+      "No progress indication for bulk operations",
+      "Blocking UI during batch processing"
+    ],
+    "solution": "When changing roles for 50 users, show one quiet progress bar. Do not send 50 individual \"Success\" notifications. Batch operations should be efficient and unobtrusive, respecting the user's focus.",
+    "why": "Fifty successes are one event; announcing each is noise wearing a success mask.",
+    "diagnostics": []
+  },
+  {
+    "number": 77,
+    "title": "The Trinity Structure",
+    "avoid": [
+      "Inconsistent document layouts across the application",
+      "Missing critical document elements",
+      "Poor print formatting"
+    ],
+    "solution": "Whether it's a Bill, a Quote, or a PO, every document follows the Document Trinity: The Header (Identity): Logo, Date, Document Number (Top-Left/Right). The Body (The Meat): The Table/Ledger of items. (Rule 11, The Ledger Principle, applies here). The Footer (Conclusion): Totals, Terms, and the \"Call to Action\" (Signature/Approve). This ensures consistency and professionalism across all business documents.",
+    "why": "A business document is a genre; readers navigate it by its anatomy.",
+    "diagnostics": []
+  },
+  {
+    "number": 79,
+    "title": "The Undo Covenant",
+    "avoid": [
+      "Confirmation dialogs for every deletion",
+      "No way to reverse common destructive actions",
+      "Undo buried in menus or requiring multiple steps",
+      "Breaking workflow with confirmation dialogs"
+    ],
+    "solution": "Every destructive action (delete, archive, clear) must have instant, one-click undo for 10 seconds via a toast notification. No confirmation dialogs for common operations—just immediate reversal. Show 'Deleted 3 items. [Undo]' at bottom of screen. Trust users, respect their flow. Confirmation dialogs reserved only for irreversible system-level operations (purge database, revoke credentials).",
+    "why": "Undo trusts first and interrupts never; confirmation interrupts always and trusts nothing.",
+    "diagnostics": [
+      {
+        "id": "MISSING_UNDO",
+        "summary": "An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.",
+        "decidable_from": [
+          "SATISFIES",
+          "ALWAYS_REACHABLE"
+        ]
+      },
+      {
+        "id": "ROLE_PROMISE_BROKEN",
+        "summary": "A reversible control keeps no reachable UNDO.",
+        "decidable_from": [
+          "ROLE",
+          "ALWAYS_REACHABLE"
+        ]
+      },
+      {
+        "id": "IRREVERSIBLE_CLAIMS_UNDO",
+        "summary": "An irreversible control declares an UNDO it cannot honour.",
+        "decidable_from": [
+          "ROLE",
+          "SATISFIES",
+          "ALWAYS_REACHABLE"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 82,
+    "title": "Perceivable State",
+    "avoid": [
+      "Norms that fail without telling the operator why",
+      "Error codes where human language belongs",
+      "Active filters, pending drafts, or permission constraints the user cannot see",
+      "Background operations with no visible trace"
+    ],
+    "solution": "If the system knows something important, the operator must be able to perceive it -- in the medium the surface declares. On a screen that means visible. In an auditory or voice surface it means announced and re-requestable, because a rendering that does not persist has been made missable rather than reachable. Every norm carries a MESSAGE a human operator can read; every validation that refuses says why in plain words. Imperceivable state is a violation -- in the UI and in the declaration alike. An outstanding obligation is state of exactly this kind: on a summary surface every row says what it requires of the operator, or says plainly that it requires nothing. An obligation the operator must deduce from a number has been made missable rather than perceivable.",
+    "why": "A user who reasons from state they cannot perceive has been harmed by the interface.",
+    "diagnostics": [
+      {
+        "id": "INVISIBLE_STATE",
+        "summary": "The system holds state the operator must know, and no surface declares showing it.",
+        "decidable_from": [
+          "symbols.state",
+          "VISIBLE_STATE"
+        ]
+      },
+      {
+        "id": "VERB_NOT_CARRIED",
+        "summary": "A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.",
+        "decidable_from": [
+          "SATISFIES",
+          "ALWAYS_REACHABLE",
+          "SURFACE_AS",
+          "file"
+        ]
+      },
+      {
+        "id": "SIGNAL_UNPERCEIVABLE",
+        "summary": "Every semantic status a surface declares renders as absence in the medium it declared.",
+        "decidable_from": [
+          "SIGNALS",
+          "SURFACE_AS",
+          "file"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 83,
+    "title": "Predictable Authority",
+    "avoid": [
+      "Irreversible commits with no declared actor",
+      "Targets claiming roles that governance never declared",
+      "Controls that change meaning based on hidden context",
+      "Role differences left implicit"
+    ],
+    "solution": "No control may change meaning based on hidden context: same action, same consequence; same icon, same intent. In declarations, every step that commits to Bedrock names its ACTOR, and every role a target claims is declared in governance. Ambiguity is operational risk.",
+    "why": "Ambiguous authority is operational risk; sameness of meaning is how trust scales.",
+    "diagnostics": [
+      {
+        "id": "HIDDEN_AUTHORITY",
+        "summary": "A consequential act names no actor.",
+        "decidable_from": [
+          "symbols.actors",
+          "ACTOR",
+          "SATISFIES"
+        ]
+      },
+      {
+        "id": "PROPOSAL_COMMITS",
+        "summary": "A proposal acts without naming the authority that accepted it.",
+        "decidable_from": [
+          "ROLE",
+          "SATISFIES",
+          "ACTOR"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 91,
+    "title": "Business Time",
+    "avoid": [
+      "Instant resets after critical actions",
+      "Machine-speed transitions the eye cannot follow",
+      "Timeouts that ignore operational reality"
+    ],
+    "solution": "Interfaces respect business time, not machine time. After a critical action, the result stays long enough to be registered; periods, cutoffs, and deadlines are shown in operational terms; long operations acknowledge the wait.",
+    "why": "Machines reset instantly; humans need a moment to vibe what just happened.",
+    "diagnostics": []
+  },
+  {
+    "number": 96,
+    "title": "Contextual Defaults",
+    "avoid": [
+      "Opening on 'all records'",
+      "Filters reset on every visit",
+      "Entry links that dump into unfiltered lists"
+    ],
+    "solution": "No view opens on 'everything.' Every list opens pre-filtered to the task's slice -- this week, the pending ones, this supplier -- and a contextual entry opens the exact item, not the list that contains it.",
+    "why": "'Everything' is not a view; the task's slice is.",
+    "diagnostics": []
+  },
+  {
+    "number": 97,
+    "title": "The Agent Is an Actor",
+    "avoid": [
+      "Agent actions outside the audit trail",
+      "Model calls that bypass norms",
+      "AI features exempted from the constitution"
+    ],
+    "solution": "An intelligent agent participating in a flow is an ACTOR: named in the step, subject to the same validations, norms, signatures, and audit trail as any human. The agent is not a ghost in the machine -- it is a citizen of the same law.",
+    "why": "An agent outside the law is a ghost; inside it, it is accountable like everyone else.",
+    "diagnostics": []
+  },
+  {
+    "number": 98,
+    "title": "Proposals, Not Commits",
+    "avoid": [
+      "LLM output written directly to records",
+      "Auto-applied AI corrections",
+      "Agent-triggered irreversible operations"
+    ],
+    "solution": "Intelligence advises; execution decides. A model's output is a proposal -- rendered as such, reviewable, dismissible -- and becomes a commit only through an authority the declaration names. No prompt reaches Bedrock.",
+    "why": "Intelligence advises; execution decides -- the commit belongs to a named authority.",
+    "diagnostics": [
+      {
+        "id": "PROPOSAL_COMMITS",
+        "summary": "A proposal acts without naming the authority that accepted it.",
+        "decidable_from": [
+          "ROLE",
+          "SATISFIES",
+          "ACTOR"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 99,
+    "title": "Visible Provenance",
+    "avoid": [
+      "AI-generated text indistinguishable from records",
+      "Suggestions styled as facts",
+      "Machine edits without attribution"
+    ],
+    "solution": "Content produced by a model is marked as machine-made wherever it appears, and the mark travels with it. Provenance is visible state; an unmarked machine sentence is a forged signature.",
+    "why": "Machine-made content unmarked is invisible state of the most corrosive kind.",
+    "diagnostics": []
+  },
+  {
+    "number": 101,
+    "title": "The Dignity Contract",
+    "avoid": [
+      "Messages implying user incompetence",
+      "Comparisons to other users",
+      "Service withheld as pressure"
+    ],
+    "solution": "Machine-facing language never blames, shames, or compares. A refusal states the circumstance, not the failure: \"current criteria were not met\" carries the same fact as \"you failed\" -- without the insult. Every rejection offers a next step.",
+    "why": "Software that blames diminishes; the fact can always be stated without the insult.",
+    "diagnostics": []
+  },
+  {
+    "number": 103,
+    "title": "Grounded Proactivity",
+    "avoid": [
+      "Assistants that interrupt on model whim",
+      "Unsolicited suggestions during focused work",
+      "Proactive notifications without declared triggers"
+    ],
+    "solution": "A proactive intervention fires only from a declared trigger -- a norm, a threshold, a schedule -- never from an undeclared hunch. Calm governs what the machine says, not just what it shows; silence is the assistant's default vibe.",
+    "why": "An assistant that interrupts on a hunch spends attention it did not earn.",
+    "diagnostics": []
+  },
+  {
+    "number": 104,
+    "title": "Machine Legibility",
+    "avoid": [
+      "Meaning conveyed only by pixels",
+      "Anchors on DOM order or coordinates",
+      "Interfaces agents must scrape to read"
+    ],
+    "solution": "The interface is legible to machines for the same reason it is legible to screen readers: semantic structure, durable named anchors, declared intents. Accessibility law, agent-interop law and multi-modal law are one body of law with three beneficiaries.",
+    "why": "What a screen reader can operate, an agent can operate and a non-visual medium can render; legibility is one law with three beneficiaries.",
+    "diagnostics": []
+  },
+  {
+    "number": 112,
+    "title": "Motion Reports, It Never Decorates",
+    "avoid": [
+      "Smooth-scrolling to an anchor or a menu selection",
+      "Fades, slides, and reveals when content arrives",
+      "Transitions that delay a state the operator already asked for",
+      "Any movement that would look the same if nothing had changed"
+    ],
+    "solution": "Movement is allowed only when it reports a change the operator caused and might otherwise miss -- a value updating, a step becoming active, a toast arriving with its undo. Everything else is instant: selecting a menu item, following a link or an anchor, opening a panel, switching a vibe. Animated scrolling is the clearest case -- the operator asked to be somewhere, and the interface makes them watch a journey they did not request. If motion would look the same whether or not anything changed, it is decoration; remove it.",
+    "why": "Decorative motion spends the operator's attention on the interface itself -- and every frame of it is time between asking and arriving.",
+    "diagnostics": [
+      {
+        "id": "DECORATIVE_ANIMATION",
+        "summary": "Motion or feedback that reports no state.",
+        "decidable_from": [
+          "REPORTS",
+          "MOTION",
+          "TONE"
+        ]
+      },
+      {
+        "id": "ROLE_ACTS_WITHOUT_CONSEQUENCE",
+        "summary": "A control promising to change nothing declares that it acts.",
+        "decidable_from": [
+          "ROLE",
+          "SATISFIES"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 118,
+    "title": "Two Families of Colour",
+    "avoid": [
+      "One colour per agent, per channel, per category -- a palette that grows with the data",
+      "Decorative colour on metadata that carries no urgency",
+      "A status palette with more values than an operator can keep apart",
+      "The same hue used for a status in one screen and a category in another",
+      "Restating the five statuses in another rule, where they drift"
+    ],
+    "solution": "The colours an interface uses to say something about a record split into exactly two families and no more. Chrome is not in scope and is Rule 3's: the resting surface, the single identity accent, the background. The closure is over DATA colour, which is what makes it finite and therefore checkable. Family one is semantic status, five values with strict meanings: success (OK, valid, under control), warning (watch this), danger (critical, exceeded, incident), info (in progress, neutral), muted (waiting, inactive). Family two is neutral metadata: channels, types, categories -- one quiet style for all of them. A colour-per-entity scheme is noise wearing a system's clothes: it grows without bound and teaches the operator nothing. Family two's neutral is not the chrome default of Rule 3, though the word is shared and an engine offering one colour for both has answered only one of them: family two is a reading about a record that carries no urgency, not the resting appearance of an untouched control.",
+    "why": "A palette the operator can hold in their head is a language; a palette that grows with the data is confetti.",
+    "diagnostics": [
+      {
+        "id": "UNKNOWN_SIGNAL",
+        "summary": "A value in SIGNALS is not one of Rule 118's five semantic statuses.",
+        "decidable_from": [
+          "SIGNALS"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 119,
+    "title": "A Card Is Not a Button",
+    "avoid": [
+      "Clickable tiles styled like information cards",
+      "A KPI card with a chevron pretending to be read-only",
+      "Repetitive rows with identical attributes laid out as a grid of cards",
+      "A decorative pipeline strip that looks pressable"
+    ],
+    "solution": "Form follows role, and each widget plays exactly one. A card is a read-only indicator -- KPI, summary, state -- with no call to action inside it. An action takes the shape of a button or a link: distinct background, honest affordance. And repetitive data with coherent attributes is a table, never a card grid -- five records with the same five fields are rows, whatever the fashion says. A surface that blurs these roles makes the operator test every element to learn what it does.",
+    "why": "When everything might be pressable, the operator must poke the interface to learn it -- and an interface learned by poking is an interface that was never read.",
+    "diagnostics": [
+      {
+        "id": "ROLE_ACTS_WITHOUT_CONSEQUENCE",
+        "summary": "A control promising to change nothing declares that it acts.",
+        "decidable_from": [
+          "ROLE",
+          "SATISFIES"
+        ]
+      }
+    ]
+  },
+  {
+    "number": 122,
+    "title": "Language Is Data",
+    "avoid": [
+      "Strings hard-coded in markup or logic",
+      "A second language added by forking templates",
+      "Localized UI that keeps the source language's technical jargon",
+      "Strings duplicated between code and dictionary"
+    ],
+    "solution": "Every human-readable string lives in a per-language dictionary file; the code references keys, and the dictionary is the single source of truth. Adding a language -- Wolof, Hausa, Bambara, Zarma, Arabic -- means adding a file and registering a locale, never touching code. And a localized interface speaks its language whole: when the UI is French, 'workflow' is 'parcours', 'monitoring' is 'supervision', 'legacy' is 'patrimoine' -- jargon imported untranslated reserves the interface for developers and shuts out the operators it was written for.",
+    "why": "The constitution is data so the law cannot drift from the linter; language is data for the same reason -- and because the next operator's mother tongue should cost a file, not a fork.",
+    "diagnostics": []
+  },
+  {
+    "number": 123,
+    "title": "The Reading Arc",
+    "avoid": [
+      "A page of twenty sections where the reader forgets the first by the tenth",
+      "Walls of text past a thousand characters without a break",
+      "Depth placed before orientation -- specifics ahead of the general picture",
+      "Two messages fighting for one section"
+    ],
+    "solution": "A reading surface has a budget: roughly ten to twelve sections, ordered general to specific and quick to dense -- skimmable value on top, depth below, links out for the rest. Each section carries one message. A paragraph that passes roughly eight hundred characters unbroken has become a wall: cut it to a lead plus a link. The budget is not a limit on content; it is a limit on what one page may demand of one sitting.",
+    "why": "A reader who has met twenty sections remembers none of them. Arriving cold, they owe you nothing -- the arc must earn the next section each time.",
+    "diagnostics": []
+  },
+  {
+    "number": 125,
+    "title": "Sound Corroborates, It Does Not Acknowledge",
+    "avoid": [
+      "A click whose only response is a sound arriving hundreds of milliseconds later",
+      "Treating an earcon as the confirmation that an act landed",
+      "Quoting a channel's best-case latency rather than the one measured end to end"
+    ],
+    "solution": "An act is acknowledged in a channel that can meet Rule 18's hundred milliseconds. Where a channel demonstrably cannot -- measured, not assumed -- it may corroborate an acknowledgement the operator has already received elsewhere, and may never be that acknowledgement itself. A surface whose only acknowledgement arrives outside the budget has not acknowledged.",
+    "why": "Feedback that arrives after causality has faded is not feedback; it is news.",
+    "diagnostics": []
+  },
+  {
+    "number": 130,
+    "title": "Every Element Serves an Intent",
+    "avoid": [
+      "An element that is there because a template, a framework or a predecessor put it there, and that no intent of the person asks for",
+      "An indicator or a control that no declaration traces to a verb the person is performing",
+      "Keeping an element in case someone needs it, with no intent that would reach for it",
+      "Decoration that takes the shape of information or of a choice"
+    ],
+    "solution": "Every element of an interface traces to at least one declared intent: the verb the person is performing when they meet it. An element that traces to none is removed, or the intent it was always meant to serve is declared, and declaring it is the moment the element is first asked what it is for. The trace is made in the declaration and not in the look of the element, so it holds in every medium: a printed figure, a spoken status and a control each answer to the intent they carry.",
+    "why": "An element no intent asks for competes with the ones that matter (Article I) and answers a question nobody put. The person spends attention deciding it is irrelevant, or takes it for a choice. Being able to name the intent is the cheapest test an element has to pass, and an element that cannot pass it is mechanics, which Article II puts below intent.",
+    "diagnostics": [
+      {
+        "id": "INTENT_ORPHAN",
+        "summary": "A declared element traces to no intent.",
+        "decidable_from": [
+          "symbols.elements",
+          "SATISFIES"
+        ]
+      }
+    ]
+  }
+]
