@@ -49,11 +49,11 @@ the findings, the evidence ledger. They are worth reading and they are not the s
 > edition.**
 
 Vendor the twelve files, record `MANIFEST.json` beside them, and make
-`pack.js --check` a step in your build. Then *"conforms to Zui v3.12"* is a claim your CI
+`pack.js --check` a step in your build. Then *"conforms to Zui v3.13"* is a claim your CI
 can refute.
 
 This is not paranoia; it is this project's own history. A single trailing space added to a
-title inside `rules.json` leaves the version at v3.12 and changes the law's bytes. Every
+title inside `rules.json` leaves the version at v3.13 and changes the law's bytes. Every
 drift recorded in `doc/EVIDENCE-LEDGER.md` came from something being **described** rather
 than **checked** — a hand-typed census under a heading claiming it was computed, a prose
 catalogue two diagnostics behind the data, a spec whose own title lagged a version.
@@ -91,7 +91,7 @@ is worth more than one that passes by not looking.**
 
 ## 5. What you may claim, and what you may not
 
-**May**: *"conforms to Zui v3.12 at level 2, verified against manifest `<hash>`."*
+**May**: *"conforms to Zui v3.13 at level 2, verified against manifest `<hash>`."*
 **May**: your own diagnostic codes, in your own words, in any language.
 **May not**: extend a closed set. The 22 verbs, the ten media, the five semantic values,
 the four enumerations and the ten declaration types are closed. **Adding to one is a
@@ -155,7 +155,7 @@ The shapes available, with the cost each carries:
 
 | Option | Buys | Costs |
 |---|---|---|
-| a **URN** namespace, e.g. `urn:zui:law:3.12` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
+| a **URN** namespace, e.g. `urn:zui:law:3.13` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
 | a **domain** the artifacts resolve from | a real fetchable URL, versioned paths | someone owns and renews it forever; it dies with the payment |
 | a **DOI** per version | citable in literature, permanent | a registration agency, a fee, and a workflow per release |
 | **content addressing** — the manifest hash *is* the name | already true, costs nothing, cannot rot | unreadable, and says nothing about which edition is current |

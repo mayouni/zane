@@ -11,7 +11,7 @@ smoothed, in keeping with the version-drift note that follows.
 **legislation, not implementation**. Six scattered amendment requests is six interruptions;
 this is one sitting. The genre follows the reference design's own ratification record.
 **Date**: opened 2026-08-12; **C-2 added 2026-08-13**.
-**Law as it stands**: **v3.12, 123 rules** — updated 2026-11-02 (v3.11, 122 rules, until then). This line has now been
+**Law as it stands**: **v3.13, 123 rules** — updated 2026-11-03 (v3.12 until then; v3.11, 122 rules, before 2026-11-02). This line has now been
 wrong twice and is kept as its own record: it read *v3.8.0* while the law was still
 v3.7.3, corrected 2026-08-12; it then read *v3.8, 118 rules* through the whole of v3.9.
 The drift is noted rather than smoothed.
@@ -863,3 +863,25 @@ The question was whether a light tint under a page head and a light shadow under
   **Rule 10 is amended by one clause**: one resting shadow is lawful, if it separates and never ranks, the same on every card, unchanged by hover or state, such that removing it loses no information. Judgment tier; no number is invented for blur or opacity.
 - **A three-way tension, recorded:** Rule 3 forbids shadows as emphasis, Rule 10 says elevation without shadows, and **Rule 52 (The Scrim) prescribes "a subtle border and box-shadow to enhance the spotlight effect"**. They had never been
   put side by side. **Rule 52's text is not changed**; Rules 3, 10 and 52 now carry see_also to each other, so a reader of one finds the other two.
+
+### Item 5 — the two-state control: Rule 106
+
+The author's finding on a screenshot of the Softanza book reader (2026-10-15): a single toggle whose label named the action it would take ("Show every chapter" while the spine was shown, "Read the spine only"
+otherwise), so the reader could not see which state was current. *"This button is confusing, never use it like that, make the two states visible in sliding button or in a combo box."*
+Rule 106 does not forbid it as written: the label was verb-led, and the rule's avoid list names a toggle labelled with the current state or with a target state *and no verb*.
+
+**Rule 106 is amended**: a control with exactly two states shows both, as a segmented switch or a select, the current one marked in more than colour, and is never one button whose label names the other state; a switch that shows both
+states answers the quiz Rule 106 already named, and a verb-led button stays right for a one-shot action. One avoid entry follows. Tier stays machine-later. This item was the first answer the finding received: it had sat in the mailbox since 2026-10-15.
+
+### Version arithmetic
+
+Seven rules amended (10, 27, 106, 108, 115, 116, 120), seven carrying see_also. No rule canonized, retired or moved a tier.
+
+> **`rules.json` v3.12 → v3.13 · 123 rules unchanged · 17 forbidden patterns unchanged · every tier count unchanged.**
+
+**Does anything lawful become unlawful?** For three rules, yes, and it is said plainly: a two-state control drawn as one verb-led button (106), a label that names the author's metaphor (116), and, on a reading surface, a horizontal menu of six to eight items (27); all three are judgment-tier and no verifier decides them.
+Everything else widens or states what was already meant: a second horizontal bar, an omitted trail, a distributed path, a resting shadow. **Rule 120's literal text is reversed on the author's own request (prompt 53).**
+The conformance suite is untouched and **no fixture changed its verdict** (73 of 73 at every commit of the pass). The audit tool follows Rules 115 and 108: on 17 stzsite pages 27 findings became 29 (two true new Rule 115 findings, and the five Rule 108 findings now say
+a landmark is missing); on the 15 pages of this site, 0 stayed 0. All conformance artifacts re-pinned to 3.13 after the suite was run.
+
+**Held, not refused:** one subject on one page (READINGDEPTH B3); a reason carrier for `ROLE irreversible` (ROLE-REASON-01); rules for haptic, luminous, signage, spatial and terminal.
