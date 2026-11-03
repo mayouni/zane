@@ -76,8 +76,9 @@ The other 18 rules that mention the same words stay out. Rule 56 repeats the 4.5
 the *pair* of themes, and one screenshot is one theme. Rules 54, 66, 69, 4, 6, 10 and the rest are judgment
 and need more than a line of text. **Every rule not in this table is reported "not audited", never "passed".**
 
-Grid place of all three: **perceive x visual**, a screenshot being visual and the rules being about whether text can
-be read. That cell already holds 36 rules; the audit reaches 3 of them, and 62 and 105 share one decision.
+Grid place: **perceive x visual** for all three, and **understand x visual** as well for 62 and 105 (placed on both rows since
+2026-11-03, COVERAGE.md section 3d), a screenshot being visual and the rules being about whether text can be read. The
+perceive cell already holds 36 rules; the audit reaches 3 of them, and 62 and 105 share one decision.
 
 ## 4. The two decisions
 

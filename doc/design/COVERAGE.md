@@ -94,7 +94,7 @@ Each cell reads **rules written for it / fixtures on it**. The figures are those
 | | any | visual | auditory | voice | haptic | print | luminous | signage | machine | spatial | terminal |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | perceive | 5/8 | 36/2 | 2/2 | 3/0 | . | 1/6 | . | . | 2/0 | . | . |
-| understand | 10/8 | 48/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
+| understand | 10/8 | 50/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
 | decide | 9/12 | 9/3 | . | 0/2 | x | x | x | x | . | . | . |
 | act | 2/7 | 12/3 | 1/0 | 1/2 | . | x | x | x | . | . | . |
 | recover | 5/10 | 9/1 | 0/2 | . | . | x | x | x | 0/2 | . | . |
@@ -267,14 +267,24 @@ decide leaves three, all on one cell:
 
 | rule | activities | medium | decided by the facts |
 |---|---|---|---|
-| 62 Contrast & Legibility | perceive | visual | contrast under 4.5:1 |
-| 105 The Legibility Floor | perceive | visual | the contrast half only |
+| 62 Contrast & Legibility | perceive, understand | visual | contrast under 4.5:1 |
+| 105 The Legibility Floor | perceive, understand | visual | the contrast half only |
 | 107 Hierarchy Is Not Miniaturization | perceive | visual | a font under 16 CSS px, as an upper bound |
 
 **Three of the 36 rules written for perceive x visual**, and none for any other cell: a screenshot is visual, and the
 other 33 rules on that cell are judgment or need more than a line of text. The audit adds no rule and no cell; it
 adds an instrument to a cell that already has rules and, since D5, six fixtures. Every other rule is reported
 "not audited", never "passed". The placements are unchanged and `coverage-count.js` is unchanged.
+
+**Understand as well (2026-11-03, ruled after the placement review of section 3e).** The blind second reader added understand
+to rule 62 and moved rule 105 to it, and the Principal ruled to keep perceive and understand as two rows and to record
+understand on both. Perceive owns no verb on purpose, because a lamp is perceived and cannot be read, so text that
+is faint is first a perceive matter and, once seen, a reading matter; the two rows are not merged for that. Rules 62
+and 105 are now placed on perceive and understand, both on visual, and the audit's decisions touch both rows. Rule 107
+stays on perceive only in the placement file: it was not in the sample, so nobody has read it a second time. The three counts did
+not move (21, 34 and 2), and the only cell figure that did is understand x visual, 48 to 50 rules. The comparison output
+saved at the time of the review (`placement-review/compare-output.txt`) is a record of that read and is not regenerated:
+re-running `compare.js` today would show rule 62 as an exact match and rule 105 as an overlap.
 
 ---
 
