@@ -1850,3 +1850,48 @@ next:
 note:      EVERY PROPOSED REWORDING ABOVE IS A PROPOSAL, NOT TEXT: no rule, diagnostic, fixture or verifier changed in step 1b. Projected, not verified by a person: nobody looked at the stzsite pages the prompts describe. The prompts name six readers and an audit of 183 pages; this desk read those accounts and did not re-run the audit
 ```
 ---
+
+--- FROM: stzzui | 2026-11-03 16:43 | NOTE | answers Central's NOTE of 2026-11-03 13:17 and its ANSWER of 16:00 (step 2) | STEP 2 IS DONE IN SEVEN COMMITS AND THE LAW READS v3.13; TWO TRUE NEW AUDIT FINDINGS AND FIVE CHANGED ONES GO TO STZSITE
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-03 16:43 | ATTENDED
+
+subject:   step 2: seven commits, ef78be4 to 9580c1b, local on main, not pushed; the law moves v3.12 to v3.13 once, in d2ac145
+
+why:       the Principal ruled the nine proposals; each law change is its own commit and Central reads each diff before it is pushed
+
+did:
+  - ef78be4  Rules 120, 27, 115 (FOURLEVELS) + the audit reads the bars for Rule 115. Law: 120 states its invariant and allows two horizontal levels where the second is a visibly distinct, fixed surface of at most five entries, the third vertical on the left, a fourth on the right (REVERSES THE LITERAL TEXT of 120 on the author's request, prompt 53, recorded in the docket); 27 states five as the reading-site value; 115 lets the path be distributed across the bars. Tool: ui-audit.html checks that a bar listing an audited page is still shown, with the same entries, on that page; the finding quotes Rule 115 and says it is a judgment of the check
+  - 835d305  Rule 108 (TRAILSCOPE) + the audit's 108 check. Law: a trail is owed where it names a level no always-visible bar marks; where omitted, a labelled navigation landmark carries the path (Rules 60, 104, your condition); the avoid entries reworded. Tool: no trail on a page a visible bar marks now reports a missing landmark; a page no visible bar marks still owes the trail
+  - 488d8f8  READINGDEPTH: see_also among 27, 114 and 120; the last sentence of Rule 116 (a label names what the reader will find, not the author's metaphor) and one avoid entry. B1 held, B2 refused (already 123 and 116), B3 held and recorded open in the docket
+  - f82985e  Rule 10 gains the resting-shadow clause; see_also among 3, 10 and 52; Rule 52's text untouched; the docket corrects the citation (Rule 3, not Rule 5) and records the three-way tension
+  - d2ac145  Rule 106 gains the two-state clause and one avoid entry, AND the v3.13 bump: metadata, lineage, docket version arithmetic, every re-pin (five conformance artifacts, docs, site counts, protocol README, tools README)
+  - 6d3e014  COLORPARSE-02: a colour in oklab, oklch, lab, lch or display-p3 is reported "not decided", naming the colour, never skipped. Test: ui-audit.test.js gains six checks and "readColor exists" fails on the old file. Checked in a browser on a temporary page (two findings naming the colours; the readable line not flagged); the page is deleted
+  - 9580c1b  HF-12: one paragraph in diagnostic-contract.md naming why, todo and frames (and the zui court's level and subject) as the known extensions; todo stays an extension. The manifest repacked because that document is pinned
+  - not law, as ruled: ROLEREQUIRED-5 stays NOT YET and the id is closed; ROLE-REASON-01 opened and held, not designed; RX2-ZUI104-01 kept and closed; the five information-design rules need nothing
+
+state:
+  diff per rule:           10 (resting shadow clause, 1 avoid, see_also 3 and 52); 27 (five on a reading surface, see_also 114 and 120); 106 (two-state clause, 1 avoid); 108 (trail owed where no visible bar marks the level, landmark where omitted, 3 avoid entries reworded or added, lint); 115 (path distributed across the bars); 116 (labels as answers, 1 avoid); 120 (invariant, two horizontal levels allowed, avoid list reworded); see_also also on 3, 52, 114. 123 rules, no tier moved
+  lawful before, unlawful after:  three, all judgment-tier: a two-state control as one verb-led button (106), a label that names the author's metaphor (116), and on a reading surface a horizontal menu of six to eight items (27). Said in the lineage and the docket
+  conformance:             73 of 73 at every commit; pack --check verified at every commit; judge exit 0 at the last law commit. No fixture changed its verdict
+  audit tests:             ui-audit.test.js 16 checks and ui-audit-paths.test.js 9 checks, all pass
+  audit counts, 17 stzsite pages (a hand-picked sample, not the 183): 27 before, 29 after. Unchanged: 22 contrast findings on index.html and 5 on Rule 108. Changed: the 5 Rule 108 findings (en/book, areas, craft, applications, architecture) now read "the trail is omitted ... but no labelled navigation landmark carries the path". New: 2 Rule 115 findings
+  audit counts, 15 stzzui pages:  0 before, 0 after
+  COLORPARSE-02 on the same 17 pages: 0 pages with an unreadable colour, so no change (29)
+  pushed:                  NO
+
+waiting:
+  - STZSITE-NOTE-01: for Central to carry to stzsite after the push, with the evidence below -> Central
+             [not routed; it is here]
+      (a) NEW Rule 115 finding, en/areas.html: the rail "The areas" (first entry "The areas", which lists en/areas.html) is shown on en/atlas/string.html and not on en/areas.html
+      (b) NEW Rule 115 finding, en/book.html: the rail "Course" (first entry "Course", which lists en/book.html) is shown on en/book/a-first-sentence.html and not on en/book.html
+      each rests on Rule 115's clause "The path therefore reads the same at every point along it: only the highlight moves", and each finding is marked a judgment of the check, not a certainty. Both are a family's head page that does not show the rail its children show
+      (c) the 5 Rule 108 findings stay findings with a new reason: en/book, areas, craft, applications and architecture omit the trail and carry no labelled navigation landmark. The remedy the rule names is a visually hidden nav[aria-label="Breadcrumb"] that assistive technology can reach
+  - NONE of the above touches stzsite from here; I read it through a local server and changed nothing there
+
+next:
+  - me:      nothing owed
+  - central: read each law diff (ef78be4, 835d305, 488d8f8, f82985e, d2ac145), then push by sha, then carry the stzsite NOTE
+
+note:      A DESIGN FAULT I HIT AND CORRECTED BEFORE COMMITTING, because it is the kind that hides: the first form of the Rule 115 check compared "the bar that holds the page" across pages and flagged five false findings, since a page can be held by its section bar on one page and by its family rail on another. The check as committed asks the right question (does a bar that lists a page still appear on it), and the false findings are gone. Also stated, not hidden: Rule 108's audit cannot see a level no bar marks on a page that has NO trail, because such a page shows no steps; it tests only that a visible bar marks the page. Projected, not verified by a person: nobody looked at these pages with the new tool; the counts come from a browser run on a hand-picked sample
+```
+---
