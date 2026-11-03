@@ -9,7 +9,8 @@ const file = process.argv[2] || path.join(__dirname, 'ui-audit.html');
 const html = fs.readFileSync(file, 'utf8');
 const a = html.indexOf('function parseColor'), b = html.indexOf('/* the background actually painted');
 if (a < 0 || b < 0) { console.error('cannot find the colour functions in ' + file); process.exit(2); }
-const { parseColor, composite, luminance, contrast } = new Function(html.slice(a, b) + '\nreturn { parseColor, composite, luminance, contrast };')();
+const span = html.slice(a, b);
+const { parseColor, composite, luminance, contrast, readColor } = new Function(span + '\nreturn { parseColor, composite, luminance, contrast, readColor: typeof readColor === "function" ? readColor : null };')();
 
 let failed = 0;
 const near = (x, y, tol) => Math.abs(x - y) <= tol;
@@ -37,6 +38,20 @@ check('white against black is 21:1', white && black && near(contrast(white, blac
 const half = parseColor('color(srgb 1 1 1 / 0.5)');
 const comp = half && black ? composite(half, black) : null;
 check('a translucent mixed colour composites over its background', comp && near(comp.r, 127.5, 0.1), JSON.stringify(comp));
+
+// COLORPARSE-02: an unreadable colour is named, never silently skipped
+check('readColor exists', typeof readColor === 'function', 'the audit has no way to say a colour is unreadable');
+if (typeof readColor === 'function') {
+  const un = readColor('oklch(0.7 0.1 200)');
+  check('a colour in oklch is unreadable and carries its value', un.state === 'unreadable' && un.value === 'oklch(0.7 0.1 200)', JSON.stringify(un));
+  const dp = readColor('color(display-p3 1 0 0)');
+  check('a colour in display-p3 is unreadable', dp.state === 'unreadable' && /display-p3/.test(dp.value), JSON.stringify(dp));
+  const ok = readColor('rgb(10, 20, 30)');
+  check('a readable colour reads', ok.state === 'ok' && ok.color.r === 10, JSON.stringify(ok));
+  check('transparent is transparent, not unreadable', readColor('transparent').state === 'transparent' && readColor('').state === 'transparent', 'wrong state');
+  const mixed = readColor('color(srgb 0.5 0.5 0.5)');
+  check('color(srgb) still reads', mixed.state === 'ok', JSON.stringify(mixed));
+}
 
 console.log(failed ? `\n${failed} check(s) failed in ${file}` : `\nall checks passed in ${file}`);
 process.exitCode = failed ? 1 : 0;

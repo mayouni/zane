@@ -225,6 +225,13 @@ function parseColor(c) {
   if (rgb.some(Number.isNaN) || Number.isNaN(a)) return null;
   return { r: rgb[0], g: rgb[1], b: rgb[2], a };
 }
+/* COLORPARSE-02: a colour the audit cannot read must be said, never skipped. 'unreadable' carries the value as the page wrote it. */
+function readColor(value) {
+  const v = String(value).trim();
+  if (v === '' || v === 'transparent') return { state: 'transparent' };
+  const c = parseColor(v);
+  return c ? { state: 'ok', color: c } : { state: 'unreadable', value: v };
+}
 function composite(fg, bg) {
   return { r: fg.r * fg.a + bg.r * (1 - fg.a),
            g: fg.g * fg.a + bg.g * (1 - fg.a),
@@ -242,7 +249,9 @@ function contrast(a, b) {
 function backgroundOf(el, win) {
   let node = el, acc = null;
   while (node && node.nodeType === 1) {
-    const c = parseColor(win.getComputedStyle(node).backgroundColor);
+    const read = readColor(win.getComputedStyle(node).backgroundColor);
+    if (read.state === 'unreadable') return { unreadable: read.value };
+    const c = read.color;
     if (c && c.a > 0) {
       acc = acc ? composite(acc, c) : c;
       if (acc.a >= 0.999) return acc;
@@ -517,8 +526,16 @@ function auditDocument(doc, win, label, strict) {
       if (vb && vb.width && box.width) size = size * (box.width / vb.width);
     }
 
+    const cls0 = (typeof el.className === 'string' && el.className.trim()) ? '.' + el.className.trim().split(/\s+/).join('.') : '';
     const bg = backgroundOf(el, win);
-    let fg = parseColor(cs.color);
+    const fgRead = readColor(cs.color);
+    if (bg.unreadable || fgRead.state === 'unreadable') {
+      const what = fgRead.state === 'unreadable' ? 'the text colour ' + fgRead.value : 'a background colour ' + bg.unreadable;
+      findings.push({ page: label, where: el.tagName.toLowerCase() + cls0, text: own.slice(0, 44),
+                      issues: 'not decided: ' + what + ' is in a space this audit does not read, so contrast was not judged [Rule 105]' });
+      return;
+    }
+    let fg = fgRead.color;
     if (!fg) return;
     if (fg.a < 1) fg = composite(fg, bg);
     const op = parseFloat(cs.opacity);
