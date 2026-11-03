@@ -801,3 +801,27 @@ in use; retired and burned numbers are never reused).
 the refusal now cites Rule 130 and Article II, where it cited Article II alone. `violations.json` v1.6 → v1.7
 (the `INTENT_ORPHAN` binding), and the four other conformance artifacts re-pinned to 3.12 after the suite was run.
 **Suite 71/71 at level 4**; no diagnostic, verb, medium or verdict moved.
+
+---
+
+## RULED — 2026-11-03, navigation, shadow and toggle: one pass, `rules.json` v3.12 → v3.13 in several commits
+
+**Ruled on the Principal's word** (*"close all the pending points on my behalf"*), after nine proposals were put beside the rules'
+own words (outbox memo of 2026-11-03). The pass lands as separate commits, one per law change, and **the version moves to v3.13 once, in the last law commit**; until then the
+law reads v3.12 and each commit passes conformance and `pack.js --check`. Rules 27, 106, 108, 10, 115, 116 and 120 change.
+
+### Item 1 — four levels of navigation (STZZUI-FOURLEVELS-01): Rules 120, 27, 115
+
+The author's ruling (prompt 53, 2026-10-16): level 1 the main top menu, level 2 a horizontal bar fixed on scroll, level 3 a left bar, level 4 (when needed) a right bar, no more
+than five short labels in any horizontal menu.
+
+- **Rule 120** now states its invariant, *the operator can tell at a glance which bar owns the page*, keeps the vertical turn as the default, and allows two horizontal levels where the second
+  is a visibly distinct, fixed surface of at most five entries; the third level turns vertical on the left, a fourth stands on the right.
+  **This reverses the literal text of Rule 120** ("the first level runs horizontal, the second runs vertical"), **on the author's own request (prompt 53)**, and is recorded as such here.
+- **Rule 27** keeps 6-8 for application menus and states **five as the reading-site value**, for the main menu and any second horizontal bar.
+- **Rule 115** says the path may be **distributed across the bars** if every depth sits on exactly one always-visible surface.
+
+**The tool follows.** `tools/ui-audit.html` read the path only as a breadcrumb, where Rule 115 says "a path". It now also reads every always-visible navigation bar and checks that a bar
+which lists an audited page is still shown, with the same entries, on that page. The finding quotes Rule 115 and says it is a judgment of the check, not a certainty. Run on
+17 pages of the stzsite site the audit went from 27 findings to 29 (two new Rule 115 findings, both a family's head page that does not show the rail its children show); on the 15 pages of this
+repository's site it stayed at 0. The Principal's desk ruled that the check ships as it is.

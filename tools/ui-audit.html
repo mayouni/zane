@@ -307,7 +307,8 @@ function auditTrail(doc, label) {
    another, that page must show the same steps in the same order -- only the
    highlight moves. This is what lets the reader see the whole branch from
    any point in it. */
-function auditTrailConsistency(trails) {
+function auditTrailConsistency(allTrails) {
+  const trails = allTrails.filter(t => !t.byBar);   /* a page held by a bar is compared by that bar */
   const out = [];
   const key = t => t.steps.map(s => s.label).join(' > ');
   trails.forEach(t => {
@@ -324,6 +325,60 @@ function auditTrailConsistency(trails) {
   });
   /* one finding per page, however many neighbours disagree */
   return out.filter((f, i, a) => a.findIndex(x => x.page === f.page) === i);
+}
+
+/* ---- pure: the path as carried by the bars (Rules 120 and 115) --------------------------------
+   Rule 120 lets a surface carry its levels on more than one bar, and Rule 115 lets the path be distributed
+   across them: every depth on exactly one always-visible surface, only the highlight moving. So a bar that
+   lists a page must still be there, with the same entries, when the reader gets to that page: the path reads
+   the same at every point along it. No DOM in this block, so it can be tested without one. */
+function barKey(bar) { return bar.items.map(i => i.label + ' <' + i.href + '>').join(' | '); }
+function auditBarPersistence(pages) {
+  const out = [];
+  pages.forEach(a => {
+    a.bars.forEach(bar => {
+      bar.items.forEach(it => {
+        const other = pages.find(x => x !== a && x.href === it.href);
+        if (!other) return;                      /* not audited: nothing to compare */
+        if (other.bars.some(y => barKey(y) === barKey(bar))) return;
+        out.push({ page: other.label, where: 'nav (' + bar.name + ')', text: bar.items.map(i => i.label).join(' > '),
+                   issues: 'the bar "' + bar.name + '" lists this page on ' + a.label + ' but is not shown here with the same entries'
+                         + ' — Rule 115: "The path therefore reads the same at every point along it: only the highlight moves.". This is a judgment of the check, not a certainty: it reads a bar that lists a page as a depth the page must still show.' });
+      });
+    });
+  });
+  /* one finding per page and bar, however many neighbours list it */
+  return out.filter((f, i, arr) => arr.findIndex(x => x.page === f.page && x.where === f.where && x.text === f.text) === i);
+}
+/* ---- end pure ------------------------------------------------------------------------------- */
+
+const PAGEBARS = [];
+function normHref(h, base) { return new URL(h, base).href.replace(/[?#].*$/, '').replace(/index\.html$/, ''); }
+function isMarked(a) {
+  const c = a.getAttribute('aria-current');
+  return (c !== null && c !== 'false') || a.classList.contains('here') || a.classList.contains('current') || a.classList.contains('active');
+}
+/* an always-visible bar: rendered, and either held in place or inside the first screen */
+function isShown(el, win) {
+  const cs = win.getComputedStyle(el);
+  if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+  const r = el.getBoundingClientRect();
+  if (!r.width || !r.height) return false;
+  return cs.position === 'fixed' || cs.position === 'sticky' || r.top < win.innerHeight;
+}
+/* every navigation bar on the page except the trail, as data */
+function barsOf(doc, win, label) {
+  const base = resolvePath(label), here = normHref(base, base);
+  return [...doc.querySelectorAll('nav')]
+    .filter(n => !n.matches('nav[aria-label="Breadcrumb"], .crumbs') && isShown(n, win))
+    .map(n => {
+      const items = [...n.querySelectorAll('a')]
+        .filter(a => a.getAttribute('href') && !/^(https?:|mailto:|#)/.test(a.getAttribute('href')))
+        .map(a => ({ label: a.textContent.trim(), href: normHref(a.getAttribute('href'), base), marked: isMarked(a) }));
+      return { name: n.getAttribute('aria-label') || (typeof n.className === 'string' && n.className) || 'nav',
+               items, holdsPage: items.some(i => i.marked && i.href === here) };
+    })
+    .filter(b => b.items.length);
 }
 
 /* Rule 116: the menu is a claim about the structure. Every entry in the main
@@ -424,8 +479,11 @@ function auditRoom(doc, win, label) {
 
 function auditDocument(doc, win, label, strict) {
   const findings = auditTrail(doc, label).concat(auditRoom(doc, win, label));
+  const bars = barsOf(doc, win, label);
+  const holding = bars.some(b => b.holdsPage);
   const t = trailOf(doc, label);
-  if (t) TRAILS.push(t);
+  if (t) { t.byBar = holding; TRAILS.push(t); }   /* Rule 116 still reads every trail's depth */
+  if (bars.length) PAGEBARS.push({ label, href: normHref(resolvePath(label), resolvePath(label)), bars });
   const mn = menuOf(doc, label);
   if (mn) MENUS.push(mn);
   doc.querySelectorAll('body *').forEach(el => {
@@ -570,12 +628,13 @@ $('#run').addEventListener('click', async () => {
   verdict.textContent = 'Measuring…';
 
   const all = [];
-  TRAILS.length = 0; MENUS.length = 0;
+  TRAILS.length = 0; MENUS.length = 0; PAGEBARS.length = 0;
   for (let i = 0; i < pages.length; i++) {
     progress.textContent = 'page ' + (i + 1) + ' of ' + pages.length + ' — ' + pages[i];
     all.push(...await loadAndAudit(pages[i], strict));
   }
   all.push(...auditTrailConsistency(TRAILS));   /* Rule 115, once every trail is known */
+  all.push(...auditBarPersistence(PAGEBARS));   /* Rule 115, each bar on the pages it lists */
   all.push(...auditMenuDepth(MENUS, TRAILS));   /* Rule 116, the menu against the tree */
   progress.textContent = '';
   $('#run').disabled = false;

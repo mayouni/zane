@@ -1148,11 +1148,11 @@
           "Horizontal menus that wrap to multiple lines",
           "Missing keyboard navigation support"
         ],
-        "solution": "Horizontal menus should be limited to 6-8 primary items maximum. Use semantic grouping with clear visual separation. Current section should be highlighted with the primary color. Avoid dropdowns; if needed, use the Omnibar instead. The horizontal menu serves as orientation (\"Where am I?\"), not exploration (\"What else can I do?\"). Menus must never wrap to multiple lines and must support full keyboard navigation (Tab, Enter, arrows); on small viewports they collapse into the Omnibar or a scrollable row.",
+        "solution": "Horizontal menus should be limited to 6-8 primary items maximum. On a reading surface the cap is five, with short labels, for the main menu and for any second horizontal bar alike (Rule 120). Use semantic grouping with clear visual separation. Current section should be highlighted with the primary color. Avoid dropdowns; if needed, use the Omnibar instead. The horizontal menu serves as orientation (\"Where am I?\"), not exploration (\"What else can I do?\"). Menus must never wrap to multiple lines and must support full keyboard navigation (Tab, Enter, arrows); on small viewports they collapse into the Omnibar or a scrollable row.",
         "why": "A menu that wraps, hides levels, or forgets the keyboard stops orienting and starts testing.",
         "derived_from": "operator",
         "enforcement": "judgment",
-        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice). v3.13: five stated as the reading-site value, on the author's ruling (prompt 53, 2026-10-16); 6-8 stays the value for application menus.",
         "absorbs": [
           "35"
         ]
@@ -1186,12 +1186,12 @@
           "A path that changes shape as you move along it",
           "Hover styled like the current position -- a place you are not, painted as though you were"
         ],
-        "solution": "A path is a map of the branch, not a record of the walk. It names every depth of that branch -- the levels above the page and the levels below it -- so a reader standing anywhere sees the whole picture, including where they have not yet been. Where a depth holds several pages, it shows them all; they are the alternatives at that level, and hiding them makes the reader guess. The path therefore reads the same at every point along it: only the highlight moves. The top depth belongs to the main menu, which already spells it out; everything under it belongs to the path, which is the only surface that shows it. Mark the current position by colour alone, and leave hover unstyled -- the pointer already becomes a hand, and repainting a step in the current-position colour claims 'you are here' about a place the reader is not. Like Rule 108, this presupposes a branch with depth. On a flat surface there is no branch to map and no path is owed -- the main menu is the whole structure, and it is already spelling it out.",
+        "solution": "A path is a map of the branch, not a record of the walk. It names every depth of that branch -- the levels above the page and the levels below it -- so a reader standing anywhere sees the whole picture, including where they have not yet been. Where a depth holds several pages, it shows them all; they are the alternatives at that level, and hiding them makes the reader guess. The path therefore reads the same at every point along it: only the highlight moves. Where the levels below the top are carried by more than one bar (Rule 120), the path may be distributed across them, provided every depth sits on exactly one always-visible surface. The top depth belongs to the main menu, which already spells it out; everything under it belongs to the path, whether one surface or several bars that together name each depth once. Mark the current position by colour alone, and leave hover unstyled -- the pointer already becomes a hand, and repainting a step in the current-position colour claims 'you are here' about a place the reader is not. Like Rule 108, this presupposes a branch with depth. On a flat surface there is no branch to map and no path is owed -- the main menu is the whole structure, and it is already spelling it out.",
         "why": "A path that only looks backwards tells the reader where they have been, which they already know. What they do not know is what lies below -- and a branch whose depths appear one click at a time can only be learned by wandering.",
         "derived_from": "visible",
         "enforcement": "tool",
         "invariant": true,
-        "evidence": "Author observation on this site: the Constitution index showed 'StzWeb > The Constitution' and stopped, so the Reader, the Gotchas and the Site Audit -- the three pages that live beneath it -- were invisible to anyone standing on their parent. The site audit now compares the path of every page that names another; they must read the same. Scoped at v3.8 by author feedback: the RingScript site (August 2026) added trails to eight flat pages sitting under one always-visible menu, and its author judged them a duplication and an annoyance -- the path named nothing the menu had not already named, and spent a line of every page saying it again. The trail was removed and the rule given the scope it always assumed."
+        "evidence": "Author observation on this site: the Constitution index showed 'StzWeb > The Constitution' and stopped, so the Reader, the Gotchas and the Site Audit -- the three pages that live beneath it -- were invisible to anyone standing on their parent. The site audit now compares the path of every page that names another; they must read the same. Scoped at v3.8 by author feedback: the RingScript site (August 2026) added trails to eight flat pages sitting under one always-visible menu, and its author judged them a duplication and an annoyance -- the path named nothing the menu had not already named, and spent a line of every page saying it again. The trail was removed and the rule given the scope it always assumed. v3.13: the path may be distributed across the bars of Rule 120, on the author's ruling (prompt 53)."
       }
     ]
   },
@@ -1324,16 +1324,17 @@
         "number": "120",
         "title": "The Second Level Turns",
         "avoid": [
-          "Two horizontal tab rows stacked one over the other",
+          "Two horizontal tab rows stacked on one surface and styled alike",
           "Sub-navigation styled identically to its parent navigation",
-          "An operator who cannot tell which row owns the page they are on"
+          "An operator who cannot tell which row owns the page they are on",
+          "A second horizontal bar that scrolls away, or runs past five entries"
         ],
-        "solution": "When navigation nests, the second level changes axis: the first level runs horizontal, the second runs vertical. Two stacked horizontal rows of tabs are indistinguishable at a glance -- the operator must read both rows and reconstruct the hierarchy in their head. The turn of axis is the hierarchy, made visible without a single label.",
+        "solution": "When navigation nests, the operator must be able to tell at a glance which bar owns the page they are on, and the geometry carries that, not the labels. The default is a turn of axis: the first level runs horizontal, the second runs vertical, because two stacked horizontal rows of tabs are indistinguishable at a glance -- the operator must read both rows and reconstruct the hierarchy in their head. A reading surface may instead run two horizontal levels, but only where the second is a visibly distinct, fixed surface -- its own band and background, held in place when the page scrolls -- of at most five entries; the third level then turns vertical, on the left, and a fourth, when it exists, stands on the right. What is never lawful is a second row that looks like the first.",
         "why": "Orientation should be carried by the geometry, not reconstructed from it.",
         "derived_from": "visible",
         "enforcement": "judgment",
         "invariant": true,
-        "evidence": "That banking product's studio (April 2026): an agent sheet's surfaces (form / declaration / test bench) and the Settings sub-sections were second-level tabs drawn horizontally under horizontal main tabs; both were turned vertical and the confusion ended."
+        "evidence": "That banking product's studio (April 2026): an agent sheet's surfaces (form / declaration / test bench) and the Settings sub-sections were second-level tabs drawn horizontally under horizontal main tabs; both were turned vertical and the confusion ended. Amended v3.13 on the author's own request (prompt 53, 2026-10-16): the Softanza website's reading surface ran a main menu, a fixed second bar, a left bar and a right bar, and the second bar stayed legible because it was a distinct fixed band of five. The amendment keeps the rule's purpose and moves where the turn happens; it reverses the literal text of the rule."
       }
     ]
   },
