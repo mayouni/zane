@@ -23,7 +23,16 @@
    ========================================================================== */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const ROOT = path.join(__dirname, '..');
+
+/* The four files every page shares. Their address carries the first 8 hex of the sha256 of their content, read with LF line
+   ends so the hash is the same on every checkout. A changed file changes its address: nothing to remember, and a returning
+   reader is never served an older stylesheet under a newer page. Written by --write, and the check fails on any page whose
+   query differs from the file's hash. */
+const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js'];
+const assetHash = name => crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'site', name), 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 8);
+const ASSET_RE = new RegExp('((?:href|src)=")([^"?]*?(' + ASSETS.map(a => a.replace('.', '\\.')).join('|') + '))(?:\\?v=[0-9a-f]{8})?"', 'g');
 
 /* ---- the structure --------------------------------------------------------------------------- */
 const SECTIONS = [
@@ -271,6 +280,8 @@ function apply(p, text) {
     const fine = fineIn(fenceRe('footer').exec(t)[0]) || DEFAULT_FINE;
     fill('footer', footer(p, fine));
   }
+  /* ---- the assets carry the hash of their own content, so a returning reader is served the stylesheet that matches the page ---- */
+  t = t.replace(ASSET_RE, (m, attr, url, name) => `${attr}${url}?v=${assetHash(name)}"`);
   return { text: t, problems };
 }
 
