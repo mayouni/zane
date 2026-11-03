@@ -7,7 +7,7 @@ const html = fs.readFileSync(file, 'utf8');
 const a = html.indexOf('/* ---- pure:'), b = html.indexOf('/* ---- end pure');
 if (a < 0 || b < 0) { console.error('no pure block in ' + file); process.exit(2); }
 const block = html.slice(a, b);
-const names = ['auditBarPersistence', 'trailOwed'].filter(n => block.includes('function ' + n + '('));
+const names = ['auditBarPersistence', 'pathVerdict'].filter(n => block.includes('function ' + n + '('));
 const fns = new Function(block + '\nreturn { ' + names.join(', ') + ' };')();
 let failed = 0;
 function check(name, ok, detail) { console.log((ok ? 'ok   ' : 'FAIL ') + name + (ok ? '' : '  ' + detail)); if (!ok) failed++; }
@@ -37,19 +37,10 @@ if (fns.auditBarPersistence) {
   const lonely = [page('Course', mk('Section', ['Course', 'Elsewhere']))];
   check('a bar naming a page that was not audited has nothing to compare', fns.auditBarPersistence(lonely).length === 0, JSON.stringify(fns.auditBarPersistence(lonely)));
 }
-if (fns.trailOwed) {
-  const steps = labels => labels.map(l => ({ label: l, href: '/s/' + l.toLowerCase() }));
-  const marked = labels => labels.map(l => ({ label: l, href: '/s/' + l.toLowerCase() }));
-  const r1 = fns.trailOwed(steps(['Home', 'Learn', 'Course']), marked(['Learn', 'Course']));
-  check('a trail whose every step above the root is marked by a bar is not owed', r1.owed === false, JSON.stringify(r1));
-  const r2 = fns.trailOwed(steps(['Home', 'Platform', 'The areas', 'String']), marked(['Platform', 'String']));
-  check('a trail naming a level no bar marks is owed, and says which', r2.owed === true && r2.unmarked.length === 1 && r2.unmarked[0] === 'The areas', JSON.stringify(r2));
-  const r3 = fns.trailOwed(steps(['Home', 'Learn']), []);
-  check('with no marking bar at all the trail is owed', r3.owed === true, JSON.stringify(r3));
-  const r4 = fns.trailOwed(steps(['Home']), []);
-  check('the root alone owes nothing', r4.owed === false, JSON.stringify(r4));
-  const r5 = fns.trailOwed([{ label: 'Course page', href: '/s/course' }], [{ label: 'Course', href: '/s/course' }]);
-  check('a step is marked if its address is marked, even under another label', r5.owed === false, JSON.stringify(r5));
+if (fns.pathVerdict) {
+  check('a labelled landmark carries the path: nothing is owed', fns.pathVerdict(true, true) === 'ok' && fns.pathVerdict(true, false) === 'ok', 'not ok');
+  check('no trail, but a visible bar marks the page: the landmark is what is missing', fns.pathVerdict(false, true) === 'landmark-missing', fns.pathVerdict(false, true));
+  check('no trail and no visible bar marks the page: the trail is owed', fns.pathVerdict(false, false) === 'owed', fns.pathVerdict(false, false));
 }
 console.log(failed ? `\n${failed} check(s) failed in ${file}` : `\nall checks passed in ${file}`);
 process.exitCode = failed ? 1 : 0;

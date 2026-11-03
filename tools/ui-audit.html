@@ -254,14 +254,22 @@ function backgroundOf(el, win) {
 
 /* Rule 108: the trail. Marked as a trail, rooted at the site root,
    ending on the page you are actually on. */
-function auditTrail(doc, label) {
+function auditTrail(doc, label, win) {
   const isRoot = new URL(resolvePath(label)).href.replace(/index\.html$/, '')
                === SITE_ROOT.replace(/index\.html$/, '');
   if (isRoot) return [];                       /* the root has no ancestors */
-  const trail = doc.querySelector('nav[aria-label="Breadcrumb"], .crumbs');
+  const found = doc.querySelector('nav[aria-label="Breadcrumb"], .crumbs');
+  /* a trail hidden from assistive technology (display:none, aria-hidden) is not a landmark */
+  const trail = found && found.getAttribute('aria-hidden') !== 'true' && win.getComputedStyle(found).display !== 'none' ? found : null;
   if (!trail) {
+    const markedByBar = barsOf(doc, win, label).some(b => b.holdsPage);
+    if (pathVerdict(false, markedByBar) === 'owed') {
+      return [{ page: label, where: 'nav[aria-label="Breadcrumb"]', text: '(none)',
+                issues: 'no trail home — the page cannot say where it sits, and no always-visible bar marks it [Rule 108]' }];
+    }
     return [{ page: label, where: 'nav[aria-label="Breadcrumb"]', text: '(none)',
-              issues: 'no trail home — the page cannot say where it sits [Rule 108]' }];
+              issues: 'the trail is omitted, which Rule 108 allows where an always-visible bar marks the page, but no labelled navigation landmark carries the path: '
+                    + '"Where the visible trail is omitted, the path stays available to assistive technology as a labelled navigation landmark" [Rule 108; Rules 60, 104]' }];
   }
   const out = [];
   if (!trail.matches('nav[aria-label="Breadcrumb"]')) {
@@ -349,6 +357,13 @@ function auditBarPersistence(pages) {
   });
   /* one finding per page and bar, however many neighbours list it */
   return out.filter((f, i, arr) => arr.findIndex(x => x.page === f.page && x.where === f.where && x.text === f.text) === i);
+}
+/* Rule 108 (v3.13): is the path owed, and is it carried? A trail is owed on a page that no always-visible bar marks;
+   where a bar marks the page it may be omitted, but then a labelled navigation landmark must carry the path. A page
+   with no trail at all shows no steps, so what the audit can test is whether the page itself is marked by a visible bar. */
+function pathVerdict(hasLandmark, markedByBar) {
+  if (hasLandmark) return 'ok';
+  return markedByBar ? 'landmark-missing' : 'owed';
 }
 /* ---- end pure ------------------------------------------------------------------------------- */
 
@@ -478,7 +493,7 @@ function auditRoom(doc, win, label) {
 }
 
 function auditDocument(doc, win, label, strict) {
-  const findings = auditTrail(doc, label).concat(auditRoom(doc, win, label));
+  const findings = auditTrail(doc, label, win).concat(auditRoom(doc, win, label));
   const bars = barsOf(doc, win, label);
   const holding = bars.some(b => b.holdsPage);
   const t = trailOf(doc, label);

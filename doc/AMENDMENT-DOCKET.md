@@ -825,3 +825,17 @@ than five short labels in any horizontal menu.
 which lists an audited page is still shown, with the same entries, on that page. The finding quotes Rule 115 and says it is a judgment of the check, not a certainty. Run on
 17 pages of the stzsite site the audit went from 27 findings to 29 (two new Rule 115 findings, both a family's head page that does not show the rail its children show); on the 15 pages of this
 repository's site it stayed at 0. The Principal's desk ruled that the check ships as it is.
+
+### Item 2 — a trail only where it names a level no bar marks (STZZUI-TRAILSCOPE-01): Rule 108
+
+The author's ruling (prompt 54, 2026-10-16): *"The path should not be present in the case where only 3 levels are there (unnecessary duplication), just where it is needed."*
+
+- **Rule 108**: a trail is owed on a page where it names a level that no always-visible bar marks, and not owed where every step it would show is already marked. The flat-surface exception was
+  the same reasoning, and is now its plainest case. The avoid entry that named "Breadcrumbs that appear only on deep pages" is reworded, and the flat-surface entry generalised.
+- **A condition, accepted from the Principal's desk:** where the visible trail is omitted, the path stays available to assistive technology as a labelled navigation landmark (Rules 60, 104). A breadcrumb is also a landmark
+  a screen-reader user navigates by, so omitting it costs the sighted reader chrome and the screen-reader user nothing.
+
+**The tool follows.** `tools/ui-audit.html` no longer reports a missing trail on a page that an always-visible bar marks; it reports instead that the path is not carried by a labelled navigation landmark. A page that no visible bar marks
+still owes the trail. A trail hidden from assistive technology (`display:none`, `aria-hidden`) is not a landmark. **Limit:** a page with no trail shows no steps, so the audit cannot see a level that no bar marks on it;
+what it tests is whether a visible bar marks the page itself. On the 17 stzsite pages the five findings on `en/book`, `areas`, `craft`, `applications` and `architecture` stay findings, with the new reason: those pages
+omit the trail and carry no landmark. The count stays at 29; the stzzui site stays at 0.
