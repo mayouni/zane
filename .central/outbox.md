@@ -1895,3 +1895,48 @@ next:
 note:      A DESIGN FAULT I HIT AND CORRECTED BEFORE COMMITTING, because it is the kind that hides: the first form of the Rule 115 check compared "the bar that holds the page" across pages and flagged five false findings, since a page can be held by its section bar on one page and by its family rail on another. The check as committed asks the right question (does a bar that lists a page still appear on it), and the false findings are gone. Also stated, not hidden: Rule 108's audit cannot see a level no bar marks on a page that has NO trail, because such a page shows no steps; it tests only that a visible bar marks the page. Projected, not verified by a person: nobody looked at these pages with the new tool; the counts come from a browser run on a hand-picked sample
 ```
 ---
+
+--- FROM: stzzui | 2026-11-03 22:16 | NOTE | answers Central's NOTE of 2026-11-03 20:26 (the website redesign, step 1) | doc/design/SITE.md IS WRITTEN: FIVE ENTRIES, 19 PAGES, A FACTS CHECK, AND THREE CORRECTIONS TO THE BRIEF
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-03 22:16 | ATTENDED
+
+subject:   doc/design/SITE.md, local commit c77ea84, not pushed. No page, rule, fixture, contract, verifier, zui.stzu, Reader or audit tool changed
+
+why:       the Principal charged a deep redesign of the site; step 1 is the document Central reads and rules on before any build
+
+did:
+  - measured the site against the tree and recorded the gap row by row, with the file each tree figure is read from
+  - designed the information architecture: main menu LANGUAGE, LAW, MEDIA, AUDIT, ADOPT (five, Rule 27); level 2 a vertical left rail (Rule 120 default; the two-horizontal-bands allowance is deliberately NOT used); level 3 nested inside the Law rail only; no level 4
+  - listed 19 pages in five sections plus 7 gotcha-family pages (15 files today), each with its one question; existing file names kept so no inbound link breaks, the section carried by the rail; Reader, UI audit and Zing go one level down; nothing deleted
+  - mapped seven readers (a to g) to a first page that exists
+  - wrote the content map: every figure with its file; proposed ONE generated file, site/facts.json, written by tools/site-facts.js, with --check that fails on any data-fact fallback that differs from the derived value or on a stale facts.json, and that re-runs the home page's "ninety seconds" command against its text
+  - rebuilt the status-board plan row by row: M3 unchanged, M4 partly built as media.json and signal.json (not as widget tables), M5 unchanged; new rows each with their honest limit; a third state, held
+  - listed what is removed and why, the reference look (the Compass form on the StzZui livery, with hex tokens and contrast computed), and how each v3.13 rule is answered and what checks it
+  - set the build as six reviewable pieces, each with the audit before and after
+
+state:
+  CORRECTIONS TO THE BRIEF, found by reading the files (section 1 of the document):
+    - "88 of 123 rules for a screen only" is 89: rule 123 left print on 2026-11-03 (coverage-count.js visual_only 89)
+    - "73 fixtures at four levels, each beside its lawful twin": the 73 sit at levels 1, 2 and 3 (12, 56, 5); level 4 holds none by design; 22 are lawful twins and 20 of the 46 refusing fixtures have one
+    - "the GBNF makes a violating token unemittable": the forged grammar (3,877 bytes, written on every judge run) fixes the SHAPE: the ten kinds, which clauses each kind takes, the lexical form. It does not enumerate verbs; its own header leaves the semantic refusals to the court. A misplaced field is unemittable; an unknown verb or an act with no undo is not. There is also no zui.gbnf checked in anywhere in this repository
+  pushed:  NO
+
+waiting:
+  - SITE-LIVERY-01: keep the StzZui indigo and garnet cultures and take only the form of the Compass look (my proposal), or take stzsite's palette too -> Central
+             [not routed; it is here]
+  - SITE-FILENAMES-01: keep every existing path (my proposal) or move to section directories with redirect stubs -> Central
+             [not routed; it is here]
+  - SITE-GBNF-01: produce haro/zui.gbnf from the forge in step 2 so the page can link it, or leave the claim unlinked -> Central
+             [not routed; it is here]
+  - SITE-DECIDES-01: add doc/design/audit/decides.json, the three rules the screenshot audit can decide, so that figure is derived like the others -> Central
+             [not routed; it is here]
+  - SITE-FIVE-LABELS-01 and SITE-SCOPE-01: the five labels, and whether to cut the scope (about 19 pages and a facts script in six commits) -> Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed until Central rules
+  - central: read doc/design/SITE.md, rule on the six questions in its last section, then brief step 2
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has seen the redesigned site because it does not exist yet. Two things the document says and the brief did not: the culture switch becomes a segmented switch with both states always visible (Rule 106), and the site never uses oklch or lab colours, because the audit now says "not decided" for them. The document also keeps the old two lawful cultures, since the site is the Article VI exhibit
+```
+---
