@@ -11,23 +11,29 @@
 </head>
 <body>
 
-<nav class="site" aria-label="Main">
+<!-- shell:menu -->
+<nav class="site" aria-label="Main menu">
   <div class="wrap">
     <a class="brand" href="../../index.html">StzZui</a>
-    <a href="../why.html">Why</a>
-    <a href="../how.html">How it works</a>
-    <a class="here" href="./">Gotchas</a>
-    <a href="../vibes.html">Vibes</a>
+    <a href="../how.html">Language</a>
+    <a class="here" aria-current="true" href="../why.html">Law</a>
+    <a href="../media.html">Media</a>
+    <a href="../audit.html">Audit</a>
     <a href="../adopt.html">Adopt</a>
-    <a href="../../constitution/reader/">Reader</a>
-    <a href="../../tools/ui-audit.html">UI audit</a>
-    <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>
   </div>
 </nav>
+<!-- /shell:menu -->
 
 <header class="page">
   <div class="narrow">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="./">Gotchas</a><span class="sep">›</span><span class="level"><a href="stillness.html">Stillness</a><a href="forms.html">Forms</a><a href="state.html">State</a><a href="widgets.html">Widgets</a><span class="here-crumb" aria-current="page">Reading</span><a href="navigation.html">Navigation</a><a href="intelligence.html">Intelligence</a></span></nav>
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">StzZui</a><span class="sep">›</span><a href="../why.html">Law</a><span class="sep">›</span><a href="./">What a violation feels like</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Reading</span></nav>
+<!-- /shell:trail -->
     <p class="kicker">Gotchas · the reading family — both born in the 2026 harvest</p>
     <h1>What the eye is owed</h1>
     <p class="sub">Scanning a table and reading a page are the same act at two
@@ -37,6 +43,28 @@
     were committed by an AI on a real application before they were law.</p>
   </div>
 </header>
+
+<!-- shell:rail -->
+<div class="layout has-rail">
+<nav class="rail" aria-label="Pages of the section">
+  <ul>
+    <li><a href="../why.html">Law</a></li>
+    <li><a href="./">What a violation feels like</a>
+      <ul>
+        <li><a href="stillness.html">Stillness</a></li>
+        <li><a href="forms.html">Forms</a></li>
+        <li><a href="state.html">State</a></li>
+        <li><a href="widgets.html">Widgets</a></li>
+        <li><a class="here" aria-current="page" href="reading.html">Reading</a></li>
+        <li><a href="navigation.html">Navigation</a></li>
+        <li><a href="intelligence.html">Intelligence</a></li>
+      </ul>
+    </li>
+    <li><a href="../vibes.html">Two cultures, one truth</a></li>
+  </ul>
+</nav>
+<!-- /shell:rail -->
+<main id="main">
 
 <section>
   <div class="wrap">
@@ -170,26 +198,24 @@
     <a href="navigation.html"><span class="label">Next family</span>Navigation →</a>
   </div>
 </div>
+</main>
+</div>
 
+<!-- shell:footer -->
 <footer class="site">
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a href="../../constitution/reader/">Reader</a>
+        <a href="../../constitution/reader/index.html">Reader</a>
         <a href="../../tools/ui-audit.html">UI audit</a>
-      </div>
-      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
-        <label for="vibe-select">Style</label>
-        <select id="vibe-select">
-          <option value="curator">Modern</option>
-          <option value="guardian">Retro</option>
-        </select>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
       </div>
     </div>
     <p class="fine">© 2026 StzZui — a Softanza project · The red frames are the
     only lawless pixels on this site, and they are fenced.</p>
   </div>
 </footer>
+<!-- /shell:footer -->
 
 <script src="../stz.js"></script>
 <script>

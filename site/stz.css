@@ -13,6 +13,8 @@
   --muted: #4a4661; --line: #d8d4e6; --card: #fdfcff;
   --accent-ink: #8f1d3d; --accent-lite: #ff8fa8;
   --on-accent: #1c0710; --ok: #1d6b4f;
+  --tint: #ebe8f5;               /* the band under the page head: a paper tone, not an emphasis */
+  --shadow: 0 1px 2px rgba(33,29,51,.04), 0 6px 18px rgba(33,29,51,.06);   /* the one resting shadow (Rule 10) */
   --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --black: 900;
@@ -23,6 +25,7 @@
   --muted: #8fa992; --line: #1e2f22; --card: #0b120d;
   --accent-ink: #46e07f; --accent-lite: #46e07f;
   --on-accent: #060b07; --ok: #7ee2ae;
+  --tint: #0b120d; --shadow: none;   /* a terminal does not float cards */
 }
 [data-vibe="guardian"] body { font-family: var(--mono); }
 [data-vibe="guardian"] h1, [data-vibe="guardian"] h2 { letter-spacing: 0; }
@@ -59,14 +62,28 @@ nav.site {
   background: var(--deep); color: var(--halo);
   position: sticky; top: 0; z-index: 10;
 }
-nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: wrap; }
+nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: nowrap;
+  overflow-x: auto; scrollbar-width: none; }
+nav.site .wrap > * { flex: none; }
 nav.site .brand { font-weight: var(--black); font-size: 1.1rem; letter-spacing: .04em;
   color: var(--accent-lite); text-decoration: none; text-transform: uppercase; }
 nav.site a:not(.brand) { color: var(--halo); text-decoration: none; font-size: 1rem; opacity: .9; }
 nav.site a:not(.brand):hover { opacity: 1; color: var(--accent-lite); }
 nav.site a.here { color: var(--accent-lite); opacity: 1; border-bottom: 2px solid var(--accent); }
-/* the style picker lives in the bottom bar -- nothing floats over the
-   reading (Rule 110) */
+/* the culture switch: two states, BOTH always visible; the current one is marked by weight, an underline and a
+   check mark, never by colour alone (Rule 106) */
+.culture { display: flex; align-items: center; gap: .35rem; margin-left: auto; color: var(--halo); }
+.culture-label { font-size: 1rem; opacity: .85; margin-right: .2rem; }
+.culture .seg {
+  font: 1rem var(--sans); color: var(--halo); background: transparent; cursor: pointer;
+  border: 1.5px solid rgba(234,231,246,.4); border-radius: 99px; padding: .2rem .8rem; min-height: 34px;
+}
+.culture .seg[aria-pressed="true"] {
+  font-weight: 800; border-color: var(--accent-lite); color: var(--accent-lite);
+  text-decoration: underline; text-underline-offset: .25em;
+}
+.culture .seg[aria-pressed="true"]::before { content: "\2713\00a0"; }
+/* the style picker of a page outside the shell (a select, in its footer) keeps its place */
 .vibe-picker {
   display: flex; align-items: center; gap: .5rem; margin-left: auto;
 }
@@ -108,22 +125,68 @@ a.leaves::after {
   background: rgba(224, 74, 110, .16);
 }
 .crumbs .sep { color: var(--halo); opacity: .5; padding: 0 .1rem; }
+/* visually hidden, still a navigation landmark for assistive technology (Rules 60, 104, 108) */
+.trail-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+/* a visible trail on the light page head (the UI audit page keeps one) */
+header.page .crumbs a, header.page .crumbs .here-crumb {
+  background: transparent; border-color: var(--line); color: var(--accent-ink);
+}
+header.page .crumbs .here-crumb { color: var(--ink); border-color: var(--accent); }
+header.page .crumbs .sep { color: var(--muted); opacity: 1; }
 
 /* ---- page hero (smaller than the front-door poster) ---- */
 header.page {
-  background: var(--deep); color: var(--halo); padding: 3.2rem 0 2.8rem;
+  background: var(--tint); color: var(--ink); padding: 2.6rem 0 2.2rem;
+  border-bottom: 1px solid var(--line);
 }
 header.page .kicker { font: 1rem var(--mono); text-transform: uppercase;
-  letter-spacing: .12em; color: var(--halo); opacity: .75; margin: 0 0 .7rem; }
+  letter-spacing: .12em; color: var(--muted); margin: 0 0 .7rem; }
 header.page h1 {
   margin: 0; font-weight: var(--black); text-transform: uppercase;
   font-size: clamp(2rem, 5vw, 3.4rem); line-height: .98; letter-spacing: -.01em;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
-header.page .sub { color: var(--halo); font-size: 1.125rem; max-width: 42rem; margin: 1.2rem 0 0; }
-header.page a:not(.brand) { color: var(--accent-lite); }
-header.page code, footer.site code {
+header.page .sub { color: var(--ink); font-size: 1.125rem; max-width: 42rem; margin: 1.2rem 0 0; }
+header.page a:not(.brand) { color: var(--accent-ink); }
+header.page code { background: var(--card); border-color: var(--line); color: var(--ink); }
+footer.site code {
   background: rgba(0, 0, 0, .25); border-color: transparent; color: var(--halo);
+}
+
+/* ---- the rail: level 2, vertical, the same on every page it lists (Rules 115, 120) ---- */
+.skip { position: absolute; left: .6rem; top: -4rem; background: var(--card); color: var(--ink);
+  border: 2px solid var(--accent); border-radius: 8px; padding: .5rem .9rem; z-index: 20; }
+.skip:focus { top: .6rem; }
+.layout { display: block; }
+.layout.has-rail {
+  display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); gap: 2rem;
+  max-width: 78rem; margin: 0 auto; padding: 0 1.4rem;
+}
+.layout.has-rail > main { min-width: 0; }
+.layout.has-rail main section { padding-left: 0; padding-right: 0; }
+.layout.has-rail main .narrow { padding: 0; max-width: 48rem; margin: 0; }
+.layout.has-rail main .narrow .shot, .layout.has-rail main .narrow .term { width: 100%; margin-left: 0; }
+nav.rail {
+  align-self: start; position: sticky; top: 4.6rem; margin: 2.6rem 0 0;
+  max-height: calc(100vh - 6rem); overflow-y: auto; overflow-x: hidden;
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: .6rem 0;
+}
+nav.rail ul { list-style: none; margin: 0; padding: 0; max-width: none; }
+nav.rail li { margin: 0; }
+nav.rail a {
+  display: block; padding: .45rem 1rem; color: var(--ink); text-decoration: none;
+  border-left: 3px solid transparent; font-size: 1rem; line-height: 1.4;
+}
+nav.rail ul ul a { padding-left: 1.9rem; font-size: 1rem; color: var(--muted); }
+/* no hover repaint: the pointer already becomes a hand, and a place the reader is not must not look like "here" (Rule 115) */
+nav.rail a.here { font-weight: 800; border-left-color: var(--accent); text-decoration: underline;
+  text-underline-offset: .22em; color: var(--ink); }
+@media (max-width: 900px) {
+  .layout.has-rail { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  nav.rail { position: static; margin: 1.4rem 0 0; max-height: none; }
 }
 
 /* ---- sections & prose ---- */
@@ -143,7 +206,7 @@ li { margin: .3rem 0; }
 /* ---- code shots & terminals ---- */
 .shot {
   background: var(--deep-2); color: #e8e4f4; border-radius: 10px;
-  padding: 1.2rem 1.4rem; overflow-x: auto; box-shadow: 0 10px 30px rgba(24,18,57,.18);
+  padding: 1.2rem 1.4rem; overflow-x: auto; box-shadow: var(--shadow);
   font-size: 1rem; line-height: 1.55; font-family: var(--mono);
 }
 .shot .c { color: #9a93c0; }
@@ -176,7 +239,7 @@ li { margin: .3rem 0; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-  padding: 1.1rem 1.3rem; box-shadow: 0 3px 10px rgba(24,18,57,.05);
+  padding: 1.1rem 1.3rem; box-shadow: var(--shadow);
   min-width: 0;                      /* a grid child may shrink */
   overflow-wrap: anywhere;           /* nothing leaves its frame */
 }

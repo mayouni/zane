@@ -1,0 +1,300 @@
+#!/usr/bin/env node
+'use strict';
+/* ==========================================================================
+   site-shell.js -- the one definition of the site's navigation.
+
+     node tools/site-shell.js            check: every page carries exactly the shell this file renders
+     node tools/site-shell.js --write    render the shell into every page
+
+   doc/design/SITE.md decides the shape: a main menu of FIVE entries (Rule 27), a vertical rail for
+   level 2 (Rule 120, the default), and a visually hidden Breadcrumb landmark on every page (Rule 108),
+   with the same rail on every page it lists (Rule 115). Five menus, nineteen rails and as many
+   landmarks written by hand would drift; this file is the only place they are written, and the check
+   fails when a page differs from it. The regions it owns are fenced in each page:
+
+       <!-- shell:menu --> ... <!-- /shell:menu -->      the top bar, with the culture switch
+       <!-- shell:trail --> ... <!-- /shell:trail -->    the hidden Breadcrumb landmark
+       <!-- shell:rail --> ... <!-- /shell:rail -->      the section rail (only where a section has pages to list)
+       <!-- shell:footer --> ... <!-- /shell:footer -->  the footer links
+
+   A page that does not have the fences yet is migrated by --write from the markup the old site used.
+   The pages outside the shell proper, the Reader and the UI audit tool, take the menu and the trail
+   only; the rest of their markup is not touched.
+   ========================================================================== */
+const fs = require('fs');
+const path = require('path');
+const ROOT = path.join(__dirname, '..');
+
+/* ---- the structure --------------------------------------------------------------------------- */
+const SECTIONS = [
+  { id: 'language', label: 'Language', head: 'site/how.html' },
+  { id: 'law', label: 'Law', head: 'site/why.html' },
+  { id: 'media', label: 'Media', head: 'site/media.html' },
+  { id: 'audit', label: 'Audit', head: 'site/audit.html' },
+  { id: 'adopt', label: 'Adopt', head: 'site/adopt.html' }
+];
+/* A page's label is the one name it goes by in the menu, the rail and the trail (Rule 116). The head page
+   of a section is named after the section; what the page is about is its kicker and its title. */
+const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'State'], ['widgets', 'Widgets'],
+                  ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
+const PAGES = [
+  { file: 'index.html', home: true },
+  { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
+  { file: 'site/why.html', section: 'law', label: 'Law', rail: true },
+  { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
+  ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),
+  { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true },
+  { file: 'site/media.html', section: 'media', label: 'Media', rail: true, stub: 'media' },
+  { file: 'site/audit.html', section: 'audit', label: 'Audit', rail: true, stub: 'audit' },
+  { file: 'site/adopt.html', section: 'adopt', label: 'Adopt', rail: true },
+  /* outside the shell proper: menu and trail only */
+  { file: 'constitution/reader/index.html', section: 'law', label: 'Reader', outside: 'reader' },
+  { file: 'tools/ui-audit.html', section: 'audit', label: 'UI audit', outside: 'tool' }
+];
+const by = new Map(PAGES.map(p => [p.file, p]));
+const sec = id => SECTIONS.find(s => s.id === id);
+
+const rel = (from, to) => {
+  const r = path.posix.relative(path.posix.dirname(from), to);
+  return r === '' ? path.posix.basename(to) : r;
+};
+const href = (from, to) => {
+  if (to === 'site/gotchas/index.html') { const r = rel(from, to).replace(/index.html$/, ''); return r === '' ? './' : r; }
+  return rel(from, to);
+};
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+/* ---- the renderers --------------------------------------------------------------------------- */
+function menu(p) {
+  const cls = p.outside === 'reader' ? 'topnav' : 'site';
+  const here = p.section;
+  const links = SECTIONS.map(s => {
+    const on = s.id === here;
+    return `    <a${on ? ' class="here" aria-current="true"' : ''} href="${href(p.file, s.head)}">${s.label}</a>`;
+  }).join('\n');
+  const wrapOpen = p.outside === 'reader' ? '' : '  <div class="wrap">\n';
+  const wrapClose = p.outside === 'reader' ? '' : '  </div>\n';
+  /* the Reader draws its own bar with its own styles; the switch belongs to the pages that carry stz.css */
+  const switchHtml = p.outside === 'reader' ? '' : cultureSwitch() + '\n';
+  return `<nav class="${cls}" aria-label="Main menu">
+${wrapOpen}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
+${links}
+${switchHtml}${wrapClose}</nav>`;
+}
+/* Rule 106: a control with two states shows both. The current one is marked by weight, an underline
+   and a check mark, never by colour alone, and says so to assistive technology. */
+function cultureSwitch() {
+  return `    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>`;
+}
+function chain(p) {
+  const out = [];
+  if (p.parent) { const up = by.get(p.parent); out.push(up); }
+  return out;
+}
+function trail(p) {
+  if (p.home) return '';
+  const s = sec(p.section);
+  const steps = [{ label: 'StzZui', to: 'index.html' }];
+  const head = by.get(s.head);
+  if (head !== p) steps.push({ label: head.label, to: head.file });
+  if (p.parent) { const up = by.get(p.parent); if (up !== head) steps.push({ label: up.label, to: up.file }); }
+  const links = steps.map(x => `<a href="${href(p.file, x.to)}">${esc(x.label)}</a>`).join('<span class="sep">›</span>');
+  return `<nav class="crumbs trail-hidden" aria-label="Breadcrumb">${links}<span class="sep">›</span><span class="here-crumb" aria-current="page">${esc(p.label)}</span></nav>`;
+}
+function railPages(sectionId) { return PAGES.filter(p => p.section === sectionId && p.rail && !p.stub); }
+/* A rail is drawn only where a section has at least two pages to list; a rail of one entry says nothing. */
+function railOf(sectionId) {
+  const members = PAGES.filter(p => p.section === sectionId && p.rail);
+  const top = members.filter(p => !p.parent);
+  return top.length + members.filter(p => p.parent).length >= 2 ? { members, top } : null;
+}
+function rail(p) {
+  if (p.home || p.outside || !p.rail) return '';
+  const r = railOf(p.section);
+  if (!r) return '';
+  const li = q => {
+    const on = q === p;
+    const kids = r.members.filter(k => k.parent === q.file);
+    const a = `<a${on ? ' class="here" aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>`;
+    const nest = kids.length ? `\n      <ul>\n${kids.map(k => `        <li>${k === p ? `<a class="here" aria-current="page" href="${href(p.file, k.file)}">${esc(k.label)}</a>` : `<a href="${href(p.file, k.file)}">${esc(k.label)}</a>`}</li>`).join('\n')}\n      </ul>\n    ` : '';
+    return `    <li>${a}${nest}</li>`;
+  };
+  return `<nav class="rail" aria-label="Pages of the section">
+  <ul>
+${r.top.map(li).join('\n')}
+  </ul>
+</nav>`;
+}
+function footer(p, fine) {
+  const to = f => href(p.file, f);
+  return `<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="${to('constitution/reader/index.html')}">Reader</a>
+        <a href="${to('tools/ui-audit.html')}">UI audit</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+      </div>
+    </div>
+    <p class="fine">${fine}</p>
+  </div>
+</footer>`;
+}
+const DEFAULT_FINE = '© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.';
+
+/* ---- the stubs: two pages that exist only so that the menu leads somewhere true -------------------- */
+function stub(p) {
+  const s = p.stub === 'media' ? {
+    kicker: 'Media · being built',
+    title: 'One declaration, ten media',
+    sub: 'This section is being built. What exists today is data and instruments in the repository; this page names them and says what the site does not yet show.',
+    h2: 'What exists today',
+    body: `<p>The ten media a declaration can name, and what each carries, are published as data in <a href="../conformance/media.json"><code>conformance/media.json</code></a>.
+    A verb a medium cannot carry is refused by the verifier, and the signal vocabulary and the statuses that render as silence are in
+    <a href="../conformance/signal.json"><code>conformance/signal.json</code></a>.</p>
+    <p>The instrument that checks that renderings differ only as that data predicts is <code>tools/zui/cross-medium.js</code>, and the map of where the law has
+    something to say, and where it is silent, is <code>doc/design/COVERAGE.md</code> in the repository.</p>`,
+    h2b: 'What this site does not show yet',
+    body2: `<p>The pages that present the media, the coverage grid and its gaps, and the cross-medium proof are not written. Nobody has perceived any of these media for this grid, so
+    the grid is designed and measured and not verified by a person.</p>`
+  } : {
+    kicker: 'Audit · the painted page',
+    title: 'Does a running interface meet the law?',
+    sub: 'The audit measures what an interface actually paints, not what its source declares: computed size, true contrast, the trail, the room a block has, and the menu against the tree.',
+    h2: 'The UI audit',
+    body: `<p>It runs in a browser on any same-origin interface and reports, for each finding, the rule it rests on. It measures Rules 105, 107, 108, 114, 115 and 116.
+    <a href="../tools/ui-audit.html">Open the UI audit</a>.</p>
+    <p>A colour it cannot read is reported as <em>not decided</em>, naming the colour, and never skipped.</p>`,
+    h2b: 'Judging an application you do not own',
+    body2: `<p>A second audit, for a screenshot of an application nobody on this project owns, is designed and its fact schema is written; it is described in
+    <code>doc/design/AUDIT-FACTS.md</code> in the repository. This site does not present it yet, and no real application's screenshot has been run through it.</p>`
+  };
+  return `<header class="page">
+  <div class="narrow">
+    <!-- shell:trail --><!-- /shell:trail -->
+    <p class="kicker">${s.kicker}</p>
+    <h1>${s.title}</h1>
+    <p class="sub">${s.sub}</p>
+  </div>
+</header>
+
+<section>
+  <div class="narrow">
+    <h2>${s.h2}</h2>
+    ${s.body}
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>${s.h2b}</h2>
+    ${s.body2}
+  </div>
+</section>`;
+}
+function stubPage(p) {
+  const s = p.stub === 'media' ? 'Media — one declaration, ten media' : 'Audit — does a running interface meet the law?';
+  return `<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${s}</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css">
+</head>
+<body>
+
+<!-- shell:menu --><!-- /shell:menu -->
+
+${stub(p)}
+
+<!-- shell:footer --><!-- /shell:footer -->
+
+<script src="stz.js"></script>
+</body>
+</html>
+`;
+}
+
+/* ---- applying the shell to a page's text ------------------------------------------------------- */
+const fence = (name, inner) => `<!-- shell:${name} -->\n${inner}\n<!-- /shell:${name} -->`;
+const fenceRe = name => new RegExp(`<!-- shell:${name} -->[\\s\\S]*?<!-- /shell:${name} -->`);
+const fineIn = text => (/<p class="fine">([\s\S]*?)<\/p>/.exec(text) || [])[1];
+function apply(p, text) {
+  let t = text.replace(/\r\n/g, '\n');
+  const problems = [];
+
+  /* ---- migration from the old markup, once ---- */
+  if (!fenceRe('menu').test(t)) {
+    const re = p.outside === 'reader' ? /<nav class="topnav"[\s\S]*?<\/nav>/ : /<nav class="site"[\s\S]*?<\/nav>/;
+    if (!re.test(t)) problems.push('no top bar to replace');
+    else t = t.replace(re, () => fence('menu', ''));
+  }
+  if (!p.home && !fenceRe('trail').test(t)) {
+    if (/<nav class="crumbs"[\s\S]*?<\/nav>/.test(t)) t = t.replace(/<nav class="crumbs"[\s\S]*?<\/nav>/, () => fence('trail', ''));
+    else problems.push('no trail to replace');
+  }
+  if (!p.outside && !fenceRe('footer').test(t)) {
+    const m = /<footer class="site">[\s\S]*?<\/footer>/.exec(t);
+    if (!m) problems.push('no footer to replace');
+    else t = t.replace(m[0], () => fence('footer', m[0]));
+  }
+  /* main, and the fenced opening of the layout (which holds the rail where there is one), once */
+  if (!p.outside && !/<main id="main">/.test(t)) {
+    const a = t.indexOf('</header>');
+    const b = t.indexOf('<!-- shell:footer -->');
+    if (a < 0 || b < 0) problems.push('no header or footer to wrap');
+    else {
+      const body = t.slice(a + '</header>'.length, b);
+      t = t.slice(0, a + '</header>'.length) + '\n\n' + fence('rail', '') + '\n<main id="main">' + body.replace(/\s+$/, '') + '\n</main>\n</div>\n\n' + t.slice(b);
+    }
+  }
+
+  /* ---- render ---- */
+  const fill = (name, inner) => { t = t.replace(fenceRe(name), () => fence(name, inner)); };
+  if (fenceRe('menu').test(t)) fill('menu', menu(p));
+  if (!p.home && fenceRe('trail').test(t)) fill('trail', trail(p));
+  if (fenceRe('rail').test(t)) {
+    const r = rail(p);
+    fill('rail', `<div class="layout${r ? ' has-rail' : ''}">` + (r ? '\n' + r : ''));
+  }
+  if (fenceRe('footer').test(t)) {
+    const fine = fineIn(fenceRe('footer').exec(t)[0]) || DEFAULT_FINE;
+    fill('footer', footer(p, fine));
+  }
+  return { text: t, problems };
+}
+
+/* ---- the run ------------------------------------------------------------------------------------- */
+function main(argv) {
+  const write = argv.includes('--write');
+  const problems = [];
+  let changed = 0;
+  for (const p of PAGES) {
+    const file = path.join(ROOT, p.file);
+    let text;
+    if (!fs.existsSync(file)) {
+      if (p.stub && write) text = stubPage(p);
+      else { problems.push(`${p.file}: missing`); continue; }
+    } else text = fs.readFileSync(file, 'utf8');
+    const crlf = text.includes('\r\n');
+    const bom = text.charCodeAt(0) === 0xFEFF;
+    const r = apply(p, bom ? text.slice(1) : text);
+    r.problems.forEach(m => problems.push(`${p.file}: ${m}`));
+    const out = (bom ? '﻿' : '') + (crlf ? r.text.replace(/\n/g, '\r\n') : r.text);
+    if (out !== text) {
+      if (write) { fs.writeFileSync(file, out); changed++; console.log('wrote  ' + p.file); }
+      else problems.push(`${p.file}: differs from the shell this file renders (run with --write)`);
+    }
+  }
+  if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }
+  console.log(write ? `shell written: ${changed} page(s) changed` : `shell ok: ${PAGES.length} pages carry exactly the shell site-shell.js renders`);
+  return 0;
+}
+if (require.main === module) process.exitCode = main(process.argv.slice(2));
+module.exports = { SECTIONS, PAGES, menu, trail, rail, footer };
