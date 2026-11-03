@@ -1,0 +1,65 @@
+sampled placed rules: 31; off-grid check rules: 2
+
+ACTIVITIES  exact 7, overlap 20, disjoint 4, reader says off 0
+MEDIUM      same 25, different 6, reader says off 0
+BOTH exact and same: 6 of 31
+OFF-GRID    78: reader says off; 124: reader says off
+
+-- disagreements --
+1  mine decide+perceive / visual   reader perceive / visual   [overlap, same]
+      reader: Attention spent on autoplay, badges and hover animation is a screen matter; the person senses what draws the eye.
+5  mine perceive / visual   reader perceive+understand / visual   [overlap, same]
+      reader: Paper-tone backgrounds and colour meaning are sensed and read; hex colours are screen wording.
+10  mine decide+perceive / visual   reader decide+perceive+understand / visual   [overlap, same]
+      reader: Depth, a single H1 and two equal buttons: sensing hierarchy, reading it, and choosing between competing targets; shadows and modals are screen wording.
+14  mine perceive / visual   reader understand / visual   [disjoint, same]
+      reader: Table containers, scrollbars and overflow are about reading and scrolling data on a screen.
+18  mine act+trust / any   reader act+perceive+trust / visual   [overlap, different]
+      reader: Acknowledging an action and not faking success or progress; progress bar and highlight are screen wording (close call for any).
+22  mine recover+understand / any   reader decide+understand / visual   [overlap, different]
+      reader: Knowing the workflow is finished and which next step to choose; 'bottom of the current view' is screen wording.
+26  mine recover / any   reader recover / visual   [exact, different]
+      reader: Back button, location hash and an Exit path are about going back and leaving in a browser.
+37  mine recover+understand / visual   reader perceive+recover+understand / visual   [overlap, same]
+      reader: Errors are noticed, read and used to correct course; layout shifts, colours and modals are screen wording.
+41  mine recover / visual   reader act+perceive / visual   [disjoint, same]
+      reader: When validation speaks while a person fills a field; blur, focus and fading messages are screen wording.
+53  mine recover / any   reader decide+recover / visual   [overlap, different]
+      reader: Focus mode limits what can be chosen and gives an exit; pointer events, Esc and header hint are screen wording.
+57  mine understand / visual   reader act+understand / visual   [overlap, same]
+      reader: A flow shows where the document sits and clicking a node navigates back; nodes and scrolling are screen wording.
+62  mine perceive / visual   reader perceive+understand / visual   [overlap, same]
+      reader: Contrast ratio and scalable text so content can be read; rem/em and colour are screen wording.
+66  mine trust+understand / visual   reader decide+understand / visual   [overlap, same]
+      reader: Presenting live data and pointing at or highlighting values; cursor, slides and arrow keys are screen wording.
+70  mine decide+recover / visual   reader act+decide / visual   [overlap, same]
+      reader: Finding settings by search and a pending-changes bar to confirm saves; menus, toggles and bars are screen wording.
+74  mine trust+understand / visual   reader perceive+understand / visual   [overlap, same]
+      reader: A user list shows who, role and status for quick scanning; avatars and status dots are screen wording.
+79  mine recover / any   reader act+recover / visual   [overlap, different]
+      reader: One-click undo after a destructive action, replacing confirmation; toast, dialogs and bottom of screen are screen wording.
+83  mine trust / any   reader trust+understand / any   [overlap, same]
+      reader: Same action same consequence, declared actors and roles; no clearly screen wording beyond 'icon' (close call for visual).
+89  mine decide+trust / visual   reader act+decide+trust / any   [overlap, different]
+      reader: Consent defaults to no and the decline path is as reachable as accept; the solution is medium-free, though 'pre-checked' is a close call for visual.
+93  mine recover / visual   reader recover+understand / visual   [overlap, same]
+      reader: Back is honoured and navigation keeps its place across screens; navigation position and screens are screen wording.
+105  mine perceive / visual   reader understand / visual   [disjoint, same]
+      reader: Text size and contrast so that reading text stays legible; rem and colour are screen wording.
+109  mine perceive+understand / visual   reader understand / visual   [overlap, same]
+      reader: Leading zeros on numbers read and scanned in headings, lists and columns; headings and columns are screen wording.
+117  mine perceive / visual   reader perceive+understand / visual   [overlap, same]
+      reader: Colour in one table column so the eye finds what needs action; colour and columns are screen wording.
+121  mine trust / visual   reader perceive+understand / visual   [disjoint, same]
+      reader: A floating assistant must not cover the work the person is looking at; widget, hover and panel are screen wording.
+126  mine trust+understand / visual   reader perceive+trust+understand / visual   [overlap, same]
+      reader: Marking referenced data as foreign, with freshness, so the operator can tell it at a glance; table, card, hover and vibes are screen wording.
+130  mine decide+understand / any   reader decide+perceive / any   [overlap, same]
+      reader: Every element traces to an intent so none is mistaken for information or a choice; the rule states it holds in every medium.
+
+-- the three counts, mine -> if the reader had placed the sampled rules --
+cells with at least one rule: 21 -> 21
+cells with none:              34 -> 34
+rules on no cell:             2 -> 2
+problems the reader's placement raises (rules on a closed cell and the like): 0
+(a bound on the sampled rules only: the other rules keep their placement)

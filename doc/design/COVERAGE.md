@@ -278,6 +278,97 @@ adds an instrument to a cell that already has rules and, since D5, six fixtures.
 
 ---
 
+## 3e. How far the placement can be trusted: a blind second reader (2026-11-03)
+
+The placement is one reader's first cut, and every count in this document moves with it. The Principal ruled that it be
+measured, not changed: a second reader who has seen none of it re-places a sample, and this section reports how many
+placements differ. **Nothing in `coverage-placement.json` was changed, and this section does not say who is right.**
+A disagreement is a finding for the Principal.
+
+**The sample, mechanical.** The rules the placement file places (121 at v3.12), sorted by number, every 4th by position
+(1st, 5th, 9th, ...): **31 rules** (1 5 10 14 18 22 26 31 37 41 45 49 53 57 62 66 70 74 79 83 89 93 97 101 105 109 113 117 121 126 130),
+plus the two off-grid rules, 78 and 124. Reproduce with `node doc/design/placement-review/sample.js`. Nothing was chosen:
+the sample holds 4 of the 8 hand-set rules (5, 41, 49, 74) and rule 130, which this desk wrote, because position put them there.
+
+**The reader.** A fresh subagent, started with no fork, given one file: the section 1 grid of this document, the
+three-step order of section 2, and the packet (number, title, avoid, solution, why of each sampled rule, and nothing else).
+It was not given the hand-set list, the placement file, the enforcement tiers, the diagnostics or the fixtures. It reported
+that it read only that one file; that is its own account, not something this desk checked. Its raw answer is
+`placement-review/second-reader.json`. Compare with `node doc/design/placement-review/compare.js`.
+
+**Two differences in method, stated because they explain some disagreements.** (1) The first placement could consult a rule's
+bound diagnostic for step 2 of the medium order (a rule bound to a diagnostic whose check ignores the medium sits on `any`
+even with screen wording). The reader had no diagnostics and decided step 2 from the words. (2) The reader was told it
+could answer "off" for a rule that is about the maker of an interface, which is a hint toward the off-grid pair.
+
+### The figures
+
+| | |
+|---|---|
+| **activities**, 31 placed rules | **exact 7, overlap 20, disjoint 4** |
+| **medium scope**, 31 placed rules | **same 25, different 6** |
+| both activities exact and medium same | **6 of 31** |
+| off-grid pair (78, 124) | the reader also says off, both |
+| the three counts, if the reader's placement replaced mine on these 31 | **21 -> 21, 34 -> 34, 2 -> 2** |
+
+**Direction.** The reader gives more activities per rule (mean 1.84 against 1.42): in 13 of the 24 inexact rules my set sits
+inside the reader's, in 2 the reader's sits inside mine, and in 9 they cross. The reader reaches for **understand** (20
+rules against my 12), **perceive** (12 against 8) and **act** (7 against 2); I reach for **trust** (9 against 6) and **recover** (8
+against 5). **Medium:** 5 of the 6 differences are `any` (mine) against `visual` (the reader's): rules 18, 22, 26, 53, 79. Three of
+those (26, 53, 79) are bound to a medium-free diagnostic, which is method difference (1), not a difference of reading.
+The sixth, rule 89, goes the other way (mine visual, reader any).
+
+### The bound, and its limit
+
+The three counts do not move at all, and **that is a weak result, not a strong one.** The 34 empty cells are all medium cells
+other than visual, and none of the 31 sampled rules is one I placed on a medium other than visual or `any` (the seven named
+rules, 60, 72, 73, 77, 104, 123 and 125, fell outside the sample), nor did the reader place any there. A sample
+that holds none of those rules cannot test them. What the bound does say: the **visual column** and the **any column**, where
+the disagreement lives, are not what decides the three counts. Fixture placements and the per-cell figures in section 3
+would move, and were not recomputed.
+
+### The disagreements (25 of 31)
+
+One line each on what the rule's own words support. `mine` is the placement file, `reader` is the second reader.
+
+| rule | mine | reader | what the rule's own words support |
+|---|---|---|---|
+| 1 Cognitive Mercy | decide+perceive | perceive | Perceive: "draws attention without serving intent". Decide rests on the badges and interruptions in the avoid list, which is thinner |
+| 5 The Monastic Palette | perceive | perceive+understand | Both: the why is about sensing (vibrates), the second sentence about what a colour means from page to page, which is reading |
+| 10 The Z-Axis of Importance | decide+perceive | +understand | "One clear H1", "unclear visual hierarchy" is how a person tells what matters, so the reader's addition is supported |
+| 14 No App-Squeezing | perceive | understand | "Nested scrollbars hide data and steal the wheel": hiding data from a reader is understand (READ and SCROLL are its verbs); perceive is thin |
+| 18 The Speed of Thought | act+trust / any | act+perceive+trust / visual | Perceive: acknowledge "within 100ms (a highlight or state change)". Medium is a close call, "progress bar" is screen wording and "Never show Success until confirmed" is not |
+| 22 The Last Word Rule | recover+understand / any | decide+understand / visual | Decide: "suggest the most logical next step"; recover: "never leave the user at a dead end". Both are in the text. "bottom of the current view" is the one screen phrase |
+| 26 The Back Button is Holy | recover / any | recover / visual | The words are web wording (browser back, location hash, top-left). `any` came from the bound diagnostic (method difference 1) |
+| 37 Errors as Events | recover+understand | +perceive | "Reserve space for errors", weight classes (Hint, Warning, Error): an error is noticed before it is read, so perceive is supported |
+| 41 Validation on Blur | recover | act+perceive | Both: the why ("correcting mid-keystroke") is recover; the body (validate on blur, the message fades) is entering data and a message appearing |
+| 53 Interaction Lockdown | recover / any | decide+recover / visual | "Pointer events", "Esc", "Exit Focus (Esc)" hint in the header are screen wording. Decide: "only the focused container is interactive" narrows what can be chosen. `any` came from the bound diagnostic |
+| 57 The Wayline | understand | act+understand | "Clicking a previous node should scroll the user back": the interactive nodes support act as well |
+| 62 Contrast & Legibility | perceive | perceive+understand | Contrast is perceive; "hierarchy clear without colour" and text that scales is reading. **This is also the cell section 3d uses for the audit** |
+| 66 Interactive Projection | trust+understand | decide+understand | "Inability to highlight specific data points" and the pointer support decide (HIGHLIGHT is its verb); trust rests on "live slides end the screenshot lie" |
+| 70 The Monastery of Configuration | decide+recover | act+decide | The "Contextual Save" and "Pending Changes" bar are about saving a change, which is act; recover is thinner |
+| 74 The Face & Role Trinity | trust+understand | perceive+understand | "Status dots ... for quick scanning" and "no visual indication of user status" are perceive; trust rests on "actors in the system" |
+| 79 The Undo Covenant | recover / any | act+recover / visual | "Every destructive action" is act; "toast", "dialogs", "bottom of screen" are screen wording. `any` came from the bound diagnostic. Note D5 showed rule 79's check fires in auditory, voice and machine, so the diagnostic and the words disagree about the medium |
+| 83 Predictable Authority | trust / any | trust+understand / any | "Same icon, same intent": what a control means is understand as well as trust |
+| 89 No Dark Pattern | decide+trust / visual | act+decide+trust / any | The solution has no screen wording ("confirmation texts are declared fields, consent defaults to no"); "pre-checked" in the avoid list is the one that does. Consent given is act |
+| 93 Navigation Invariance | recover / visual | recover+understand / visual | "Primary navigation keeps its position on every screen" is where-am-I, which is understand |
+| 105 The Legibility Floor | perceive / visual | understand / visual | Both: "text you must lean into is text you will misread" is reading; "faintness" is sensing. **Also the audit's cell (section 3d)** |
+| 109 Zeros Align | perceive+understand | understand | "Makes the reader parse two characters to learn one digit" is understand; perceive is not in the words |
+| 117 One Column Carries the Colour | perceive | perceive+understand | "Where to look first" is perceive; "the one that answers must I act on this row" is reading what a column says |
+| 121 The Assistant Never Masks the Work | trust / visual | perceive+understand / visual | "Never covering the work the operator is deciding about" is perceive and understand; trust is not in the words |
+| 126 Foreign Data Says It Is Foreign | trust+understand | +perceive | "Visibly marked ... without clicking, hovering or asking" is perceive |
+| 130 Every Element Serves an Intent | decide+understand / any | decide+perceive / any | The rule's own why supports both: an element "takes it for a choice" (decide) and "competes with the ones that matter" (perceive). Written by this desk |
+
+**What the disagreements say, for the Principal.** (a) The placement is stable where the rule names its subject
+plainly and unstable where a rule is about attention or reading: the 7 exact matches and the 4 disjoint ones
+are not random, three of the four disjoint ones (14 and 105 perceive against understand, 41 recover against act and perceive) are confusions between neighbouring rows, and the fourth (121) is trust against perceive and understand.
+(b) Perceive and understand are the least separable pair of rows: 62 and 105 are the rules section 3d builds the audit on,
+and the reader added understand to 62 and moved 105 to it. (c) The `any` / `visual` line is where this placement and the reader's
+differ most in *medium*, and half of it is the diagnostic clause, so the diagnostic clause carries more weight than it
+looks. This is a measurement of 31 rules, read once by one reader: it is a doubt with a number, not a replacement placement.
+
+---
+
 ## 4. The record for a discovered issue
 
 An issue is filed so that it lands on a cell. It is never filed as a new rule.

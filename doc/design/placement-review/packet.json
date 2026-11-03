@@ -1,0 +1,374 @@
+[
+  {
+    "number": 1,
+    "title": "Cognitive Mercy",
+    "avoid": [
+      "Auto-playing videos and animated backgrounds",
+      "Notification badges that demand attention",
+      "Hover animations for decorative purposes",
+      "\"Delightful\" micro-interactions that interrupt flow"
+    ],
+    "solution": "The interface must never compete with the user's thinking. If a UI element draws attention without serving intent, it does not belong. White space is structural, not decorative. Color is a signal, not an identity.",
+    "why": "Attention is the operator's scarcest resource; an interface that spends it on itself steals it from the work."
+  },
+  {
+    "number": 5,
+    "title": "The Monastic Palette",
+    "avoid": [],
+    "solution": "Backgrounds use \"paper\" tones (#fdfdfc or #1a1a1a) rather than pure #000000 or #ffffff to reduce ocular strain over 8-hour workdays. Semantic consistency: If blue means \"action\" on page one, blue never means \"information\" on page two.",
+    "why": "Pure black on pure white vibrates; paper tones spare the eyes across a shift."
+  },
+  {
+    "number": 10,
+    "title": "The Z-Axis of Importance",
+    "avoid": [
+      "Blurry drop-shadows for depth",
+      "Multiple competing focal points",
+      "Unclear visual hierarchy"
+    ],
+    "solution": "Elevation without shadows. In Zui, we indicate depth through shades, not blurry drop-shadows. A modal shouldn't \"float\" in a void; it should appear as a focused layer that dims the world behind it. The Single Source of Truth: Every screen must have one clear H1. If a user has to choose between two equally large buttons or headers, the UI is shouting.",
+    "why": "Depth by dimming keeps focus without inventing a floating world; two equal heads mean nobody leads."
+  },
+  {
+    "number": 14,
+    "title": "No App-Squeezing",
+    "avoid": [
+      "overflow: auto on table containers",
+      "height: 400px on data grids",
+      "Any pattern that creates nested scrollbars",
+      "overflow-x on a table container, hiding columns sideways"
+    ],
+    "solution": "Never force a complex business table into a fixed-height container. If a table has 500 rows, let the whole page grow. The Eternal Scroll is the primary navigation mechanism. Internal scrollbars are a failure of information architecture. The prohibition is not vertical-only: a container that scrolls sideways hides columns for the same reason and with a worse consequence, since clipping starts at the right where the action usually sits (Rule 129).",
+    "why": "Nested scrollbars hide data and steal the wheel; the page already knows how to grow."
+  },
+  {
+    "number": 18,
+    "title": "The Speed of Thought",
+    "avoid": [
+      "Fake progress indicators",
+      "Delayed feedback on user actions",
+      "Optimistic UI that lies about success"
+    ],
+    "solution": "Optimistic UI vs. Truth: Never show \"Success\" until the execution is confirmed. Calm is built on Trust. A fake progress bar is a lie. The 100ms Rule: Actions must acknowledge the user within 100ms (a highlight or state change), even if the backend takes longer.",
+    "why": "Feedback within 100ms keeps causality felt; a fake success is a debt the truth collects later."
+  },
+  {
+    "number": 22,
+    "title": "The Last Word Rule",
+    "avoid": [
+      "Workflows that end abruptly",
+      "No indication of completion status",
+      "Missing next-step guidance"
+    ],
+    "solution": "In any workflow, the UI should always suggest the most logical next step at the bottom of the current view. Never leave the user at a dead end. Completion should feel like a natural conclusion, not an abrupt stop.",
+    "why": "Every ending is a beginning the UI already knows; dead ends transfer the routing job to the human."
+  },
+  {
+    "number": 26,
+    "title": "The Back Button is Holy",
+    "avoid": [
+      "Breaking browser back button functionality",
+      "No hash-based navigation for deep links",
+      "Dead ends with no escape path"
+    ],
+    "solution": "Never break the browser's back button. If you change the view significantly, update the window.location.hash so the user can \"return\" in time. Every sub-page or focus view must have a clear \"Exit\" path in the top-left or bottom-center.",
+    "why": "The back button is the user's oldest contract with the web; breaking it breaks the web."
+  },
+  {
+    "number": 31,
+    "title": "The Socratic Method",
+    "avoid": [
+      "Impersonal field labels (\"Name\")",
+      "No context for complex inputs",
+      "Assuming user knows business terminology"
+    ],
+    "solution": "Ask, Don't Command: Instead of a label saying \"Name,\" consider \"What is the client's name?\" for complex onboarding. Provide contextual help that explains why the information is needed.",
+    "why": "Questions carry context that labels drop."
+  },
+  {
+    "number": 37,
+    "title": "Errors as Events",
+    "avoid": [
+      "Error messages that blame users",
+      "Layout shifts when errors appear",
+      "Modal dialogs for validation errors"
+    ],
+    "solution": "An error is not a stop sign; it is a navigation correction. Reserve space for errors to prevent layout shifts. Classify by weight: Hint (neutral), Warning (ochre), Error (oxblood). Use non-accusatory \"pathfinding\": \"We require a 10-digit phone number to proceed\" instead of \"Invalid Input.\"",
+    "why": "An error is a course correction; treating it as catastrophe teaches fear of the tool."
+  },
+  {
+    "number": 41,
+    "title": "Validation on Blur",
+    "avoid": [
+      "Validating while user is still typing",
+      "Errors appearing before field loses focus",
+      "Interrupting user flow with premature validation"
+    ],
+    "solution": "Validation should happen when the field loses focus (blur), not while typing. As soon as the user starts typing in a field with an error, the error message should fade out. Give them the benefit of the doubt that they are fixing it.",
+    "why": "Correcting mid-keystroke is interruption; blur is the polite moment to speak."
+  },
+  {
+    "number": 45,
+    "title": "Text Editing: Auto-expanding Plaintext",
+    "avoid": [
+      "WYSIWYG editors with 20+ icons",
+      "Modal dialogs for text editing",
+      "Separate \"Save\" buttons for text fields"
+    ],
+    "solution": "For business notes and descriptions: Auto-expanding plaintext or Markdown fields. Editing happens in-place. No \"Save\" button for text; we use \"Blur-to-Save.\" Assumes trust in the user's intent. Markdown separates structure of thought from decoration.",
+    "why": "In-place plaintext with blur-to-save keeps writing where thinking is."
+  },
+  {
+    "number": 49,
+    "title": "Calendar: Vertical Agenda View",
+    "avoid": [
+      "Monthly grid views for task management",
+      "Cluttered date cells with too much information",
+      "No focus on current tasks"
+    ],
+    "solution": "Vertical Agenda View for scheduling and audit trails. Linearity: Business is a sequence of events. Monthly grids are for \"planning\"; Agendas are for \"doing.\" Show only relevant events with clear time indicators.",
+    "why": "Business time is a sequence; grids are for planning, agendas for doing."
+  },
+  {
+    "number": 53,
+    "title": "Interaction Lockdown",
+    "avoid": [
+      "Clickable background elements during focus mode",
+      "Keyboard shortcuts that exit focus unexpectedly",
+      "No clear exit path from focus mode"
+    ],
+    "solution": "Pointer events for the background are disabled during Focus Mode. Only the focused container and its children are interactive. The Esc key is the universal exit path. A subtle \"Exit Focus (Esc)\" hint should be visible in the container header.",
+    "why": "A focus that can be escaped only by luck is a trap; Esc is the covenant."
+  },
+  {
+    "number": 57,
+    "title": "The Wayline",
+    "avoid": [
+      "Linear progress bars that hide complexity",
+      "Static flow diagrams that don't reflect current state",
+      "No interaction with flow visualization"
+    ],
+    "solution": "Business flows should be visible at the top of the \"River,\" showing where the current document sits in the grander lifecycle. Non-Blocking Logic: The flow should be visible but not obstructive. Interactive Nodes: Clicking a previous node should scroll the user back to that historical data—treating the flow as a Time-Travel Navigation tool.",
+    "why": "A document that shows its place in the lifecycle answers the meeting's first question."
+  },
+  {
+    "number": 62,
+    "title": "Contrast & Legibility",
+    "avoid": [
+      "Insufficient color contrast ratios",
+      "Fixed font sizes (px instead of rem/em)",
+      "Text that doesn't scale with browser settings"
+    ],
+    "solution": "Maintain minimum 4.5:1 contrast ratio for text, even in night mode. Use rem and em units to respect user's browser font settings. Test with grayscale mode to ensure information hierarchy remains clear without color.",
+    "why": "Text that ignores user settings excludes the users who set them."
+  },
+  {
+    "number": 66,
+    "title": "Interactive Projection",
+    "avoid": [
+      "Static screenshots that can't be updated",
+      "No presenter controls during projection",
+      "Inability to highlight specific data points"
+    ],
+    "solution": "The Laser Pointer: A custom cursor (large, high-contrast) for the presenter. Live-Data Refresh: Unlike static PowerPoint, the \"Slides\" are live widgets. You can update a value in a table, and the chart reflects it instantly during the meeting. Navigation: Arrow keys move between slides; Esc exits presentation mode.",
+    "why": "Live slides end the screenshot lie."
+  },
+  {
+    "number": 70,
+    "title": "The Monastery of Configuration",
+    "avoid": [
+      "Deep menu hierarchies in settings",
+      "Hundreds of toggles on a single page",
+      "No search functionality for settings"
+    ],
+    "solution": "Treat settings as a Searchable Library. The Flat Hierarchy: Avoid 4-level deep menus. Use broad categories (General, Security, Billing) and let the Omnibar handle the rest. The \"Contextual Save\": For critical business settings, use a \"Pending Changes\" bar at the bottom. This prevents the micro-anxiety of wondering if a toggle was saved instantly or if it needs a \"Confirm\" click.",
+    "why": "Configuration that commits itself removes consent from change."
+  },
+  {
+    "number": 74,
+    "title": "The Face & Role Trinity",
+    "avoid": [
+      "Generic user lists with only names",
+      "No visual indication of user status",
+      "Unclear role assignments"
+    ],
+    "solution": "People are not \"Records\"; they are actors in the system. The \"Face & Role\" Trinity: A user list should always show: Who (Avatar/Name), What (Role/Permissions), and Status (Active/Away/Inactive). Use status dots (green for active, gray for away) for quick scanning.",
+    "why": "People are actors, not rows; who, what, and status is the minimum dignity of representation."
+  },
+  {
+    "number": 78,
+    "title": "The Grand Unified Test",
+    "avoid": [
+      "Shipping interfaces without user validation",
+      "Ignoring accessibility requirements",
+      "Focusing on aesthetics over usability"
+    ],
+    "solution": "Before shipping an interface, it must pass: Context: Does terminology match the user's role (Dialect)? Continuity: Does the page flow logically from top-to-bottom (The River)? Resilience: Does it handle errors without jumping (stzErrors)? Inclusivity: Is it accessible and RTL-ready? Scale: Can it be projected in a boardroom with one button press? Additionally, ask these questions: • Can I understand this without instructions? • Is anything trying to attract attention unnecessarily? • Is the most important thing obvious in 3 seconds? • Would removing something make it calmer? • Would I enjoy maintaining this UI in 2 years? • Can a user look at this for 8 hours without a headache? • If printed in black and white, would it still be functional? • Can a new employee perform basic tasks without a manual?",
+    "why": "A law that cannot be tested at the door will be negotiated in the hallway."
+  },
+  {
+    "number": 79,
+    "title": "The Undo Covenant",
+    "avoid": [
+      "Confirmation dialogs for every deletion",
+      "No way to reverse common destructive actions",
+      "Undo buried in menus or requiring multiple steps",
+      "Breaking workflow with confirmation dialogs"
+    ],
+    "solution": "Every destructive action (delete, archive, clear) must have instant, one-click undo for 10 seconds via a toast notification. No confirmation dialogs for common operations—just immediate reversal. Show 'Deleted 3 items. [Undo]' at bottom of screen. Trust users, respect their flow. Confirmation dialogs reserved only for irreversible system-level operations (purge database, revoke credentials).",
+    "why": "Undo trusts first and interrupts never; confirmation interrupts always and trusts nothing."
+  },
+  {
+    "number": 83,
+    "title": "Predictable Authority",
+    "avoid": [
+      "Irreversible commits with no declared actor",
+      "Targets claiming roles that governance never declared",
+      "Controls that change meaning based on hidden context",
+      "Role differences left implicit"
+    ],
+    "solution": "No control may change meaning based on hidden context: same action, same consequence; same icon, same intent. In declarations, every step that commits to Bedrock names its ACTOR, and every role a target claims is declared in governance. Ambiguity is operational risk.",
+    "why": "Ambiguous authority is operational risk; sameness of meaning is how trust scales."
+  },
+  {
+    "number": 89,
+    "title": "No Dark Pattern",
+    "avoid": [
+      "Pre-checked consent",
+      "Confirm-shaming (\"No, I hate saving money\")",
+      "Guilt-wording on decline paths",
+      "Disguised advertisements"
+    ],
+    "solution": "Manipulation is structurally impossible, not merely discouraged: confirmation texts are declared fields, consent defaults to no, and the decline path is as calm and reachable as the accept path.",
+    "why": "Declared confirmation text makes manipulation unparseable, not just discouraged."
+  },
+  {
+    "number": 93,
+    "title": "Navigation Invariance and the Sacred Back",
+    "avoid": [
+      "Navigation that moves or reflows across screens",
+      "Hardware back closing the app mid-task",
+      "Back paths that skip or reorder history"
+    ],
+    "solution": "Primary navigation keeps its position on every screen of a vibe. The hardware or browser back is an intent: intercept it, honor it, and never let the app close by surprise. Every screen opens from the top.",
+    "why": "The app must never close by surprise; the hardware back is an intent, not an accident."
+  },
+  {
+    "number": 97,
+    "title": "The Agent Is an Actor",
+    "avoid": [
+      "Agent actions outside the audit trail",
+      "Model calls that bypass norms",
+      "AI features exempted from the constitution"
+    ],
+    "solution": "An intelligent agent participating in a flow is an ACTOR: named in the step, subject to the same validations, norms, signatures, and audit trail as any human. The agent is not a ghost in the machine -- it is a citizen of the same law.",
+    "why": "An agent outside the law is a ghost; inside it, it is accountable like everyone else."
+  },
+  {
+    "number": 101,
+    "title": "The Dignity Contract",
+    "avoid": [
+      "Messages implying user incompetence",
+      "Comparisons to other users",
+      "Service withheld as pressure"
+    ],
+    "solution": "Machine-facing language never blames, shames, or compares. A refusal states the circumstance, not the failure: \"current criteria were not met\" carries the same fact as \"you failed\" -- without the insult. Every rejection offers a next step.",
+    "why": "Software that blames diminishes; the fact can always be stated without the insult."
+  },
+  {
+    "number": 105,
+    "title": "The Legibility Floor",
+    "avoid": [
+      "Body text below 1rem",
+      "Muted grays that fail 4.5:1 contrast against their background",
+      "Accent-colored text that fails contrast on light backgrounds",
+      "Meaning conveyed by faintness"
+    ],
+    "solution": "Main reading text is at least 1rem with generous line height, and never lighter than 4.5:1 against its background; long-form prose aims for 7:1. Secondary text may be quieter in size or weight -- never in legibility. If a color carries meaning, it must also carry contrast.",
+    "why": "Text you must lean into is text you will misread -- faintness is not a design language, it is a tax on every reader."
+  },
+  {
+    "number": 109,
+    "title": "Zeros Align, They Do Not Decorate",
+    "avoid": [
+      "Section headings numbered 01, 02, 03",
+      "Padded numbers where nothing is stacked beneath them",
+      "Digits used as ornament in prose or titles",
+      "Padding that changes as a list grows past nine"
+    ],
+    "solution": "Write numbers as they are said: 1, 2, 3. A leading zero is a typesetting tool, not a style -- it is lawful only where numbers are stacked vertically and the padding makes every following character start in the same column: a table of contents, an index, a ledger, a numbered list. Nothing stacked, no zero. And when padding is used, it is sized for the largest number in the set, so the column never shifts as the set grows.",
+    "why": "A zero that aligns nothing is decoration wearing the costume of precision -- and it makes the reader parse two characters to learn one digit."
+  },
+  {
+    "number": 113,
+    "title": "Labels Follow Their Subject",
+    "avoid": [
+      "Badges floated beside a title, landing wherever the width leaves room",
+      "A classifier that sits right of the heading on a wide screen and under it on a narrow one",
+      "Status markers placed before the name they qualify",
+      "Position that changes with the viewport",
+      "A table row that opens with a count or a state before it names its subject"
+    ],
+    "solution": "A label that classifies something sits beneath what it classifies, in the same place at every width -- and after it in the document, so assistive technology hears the name before the verdict. Floating a badge beside a title hands its position to the layout engine: right of the heading on a wide screen, tucked into it on a medium one, under it on a phone -- the same screen never looks the same twice, and the eye must hunt for what it read a moment ago. Fix the label in the flow; let the title be announced first. The same order governs a row of a table: the subject is named first, then where it stands, then what it demands -- a row opening with \"0 of 4\" makes the reader hold a number that has no referent yet.",
+    "why": "A label that moves with the window teaches the eye to search instead of read -- and a classifier met before its subject is a verdict before a name."
+  },
+  {
+    "number": 117,
+    "title": "One Column Carries the Colour",
+    "avoid": [
+      "Several coloured columns competing in one table row",
+      "The same green meaning two different things two columns apart",
+      "Colour applied because a value merely has states, not because the operator must act",
+      "A table where the eye cannot tell which column answers 'do I need to act?'"
+    ],
+    "solution": "Colour is a scarce signalling resource, and a table spends it in exactly one place: the actionable-status column -- the one that answers 'must I act on this row?'. Every other column is plain text, however stateful its values. When two columns are both coloured, the eye no longer knows where to look first, and worse, one colour acquires two meanings the operator must memorise apart.",
+    "why": "A signal that appears everywhere is a signal that means nothing. The operator scanning two hundred rows at hour seven deserves one place to look."
+  },
+  {
+    "number": 121,
+    "title": "The Assistant Never Masks the Work",
+    "avoid": [
+      "A floating agent widget with a permanent label eating screen width",
+      "An assistant panel that covers the content the operator is acting on",
+      "An agent affordance that cannot be dismissed or moved off the work"
+    ],
+    "solution": "The agent's calling surface is the one floating affordance an interface may carry, and it earns that exception by being minimal: a small circle with a mark, its name appearing only on hover, its expanded surface never covering the work the operator is deciding about. The assistant is a colleague at the elbow, not a billboard over the desk. Rule 110 keeps everything else out of the air; this rule disciplines the one thing allowed to float.",
+    "why": "An assistant that hides the work it is meant to help with has inverted its own purpose."
+  },
+  {
+    "number": 124,
+    "title": "The Generator Ships a Working Thing",
+    "avoid": [
+      "Scaffolding presented as a result",
+      "Empty tables and placeholder fields where sample data belongs",
+      "A generated app the user must finish before they can judge it",
+      "Output with no account of what was generated, why, and how to change it"
+    ],
+    "solution": "A generator -- human-driven or AI -- ships artifacts that work the moment they are opened: real sample data derived from the declarations, typed inputs introspected from the entities, a simulator when the target cannot run in place, and an embedded, didactic account of what was generated, why, and how to regenerate it differently. Scaffolding is a promise, not a deliverable; the operator should never have to finish the machine's work to evaluate it.",
+    "why": "An empty shell teaches nothing and proves less. The generated thing is the argument for the generator -- it must stand up on its own."
+  },
+  {
+    "number": 126,
+    "title": "Foreign Data Says It Is Foreign",
+    "avoid": [
+      "Referenced rows rendered exactly like governed records",
+      "A screen where the operator cannot tell what the application owns from what it borrows",
+      "Provenance available only by hovering, clicking through, or opening a detail panel",
+      "A value read from an unreachable system shown as if it were current"
+    ],
+    "solution": "Data the application does not own must be visibly marked wherever it appears — in a table, a card, a field, a report. Without clicking, hovering or asking, an operator must be able to tell which values are governed records the application is accountable for, and which are a window onto a system it merely reads. The marker is consistent across the application and survives both vibes, and it names the source where the source changes the meaning. Freshness travels with it: referenced data carries when it was read, because a window onto a system that is currently unreachable is showing the past.",
+    "why": "An operator acts on what they see. A governed record carries the application's accountability — it walked a flow, an actor stands behind it, the ledger can prove it. A referenced value carries none of that and may already be stale. Presenting the two identically invites a decision taken on the wrong footing, and the operator will never know they took it."
+  },
+  {
+    "number": 130,
+    "title": "Every Element Serves an Intent",
+    "avoid": [
+      "An element that is there because a template, a framework or a predecessor put it there, and that no intent of the person asks for",
+      "An indicator or a control that no declaration traces to a verb the person is performing",
+      "Keeping an element in case someone needs it, with no intent that would reach for it",
+      "Decoration that takes the shape of information or of a choice"
+    ],
+    "solution": "Every element of an interface traces to at least one declared intent: the verb the person is performing when they meet it. An element that traces to none is removed, or the intent it was always meant to serve is declared, and declaring it is the moment the element is first asked what it is for. The trace is made in the declaration and not in the look of the element, so it holds in every medium: a printed figure, a spoken status and a control each answer to the intent they carry.",
+    "why": "An element no intent asks for competes with the ones that matter (Article I) and answers a question nobody put. The person spends attention deciding it is irrelevant, or takes it for a choice. Being able to name the intent is the cheapest test an element has to pass, and an element that cannot pass it is mechanics, which Article II puts below intent."
+  }
+]
