@@ -371,8 +371,7 @@
    "activities": "PU",
    "media": [
     "visual",
-    "voice",
-    "machine"
+    "voice"
    ]
   },
   "62": {
@@ -634,7 +633,6 @@
    "activities": "PU",
    "media": [
     "visual",
-    "voice",
     "machine"
    ]
   },
@@ -760,16 +758,14 @@
    "title": "The Reading Arc",
    "activities": "U",
    "media": [
-    "visual",
-    "print"
+    "visual"
    ]
   },
   "125": {
    "title": "Sound Corroborates, It Does Not Acknowledge",
    "activities": "PA",
    "media": [
-    "auditory",
-    "voice"
+    "auditory"
    ]
   },
   "126": {

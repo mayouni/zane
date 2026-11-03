@@ -67,9 +67,10 @@ That leaves 49 open medium cells and 6 open cells in the `any` column: 55 live c
 **A rule** has a set of activities, read from its title and its stated reason (`why`). It then has a
 medium scope, decided in this order:
 
-1. **named**: a rule whose own words or realisation name a medium sits on that medium. Seven do
-   (60 and 104 on voice and machine, 72, 77 and 123 on print, 73 on auditory, 125 on auditory and
-   voice). Rules 60, 72, 73, 77, 104 and 123 are also written for the screen, so they sit on visual too.
+1. **named**: a rule whose own words name a medium sits on that medium. Six do (60 on voice, 104 on machine,
+   72 and 77 on print, 73 and 125 on auditory), as corrected on 2026-11-03 (section 3g); at the first count seven did,
+   with 60 and 104 also on machine and voice, 123 on print and 125 on voice, three of which the rules' words do not
+   support. Rules 60, 72, 73, 77 and 104 are also written for the screen, so they sit on visual too.
 2. **medium-free**: a rule with a diagnostic whose check does not look at the medium (all bound
    diagnostics except `LAYOUT_DISPLACEMENT`), or with no screen wording in its title, `avoid` or
    `solution`, sits on `any`.
@@ -93,10 +94,10 @@ Each cell reads **rules written for it / fixtures on it**. The figures are those
 
 | | any | visual | auditory | voice | haptic | print | luminous | signage | machine | spatial | terminal |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| perceive | 5/8 | 36/2 | 2/2 | 3/0 | . | 1/6 | . | . | 2/0 | . | . |
-| understand | 10/8 | 50/2 | . | 2/0 | x | 2/2 | . | . | 2/0 | . | . |
+| perceive | 5/8 | 36/2 | 2/2 | 1/0 | . | 1/6 | . | . | 1/0 | . | . |
+| understand | 10/8 | 50/2 | . | 1/0 | x | 1/2 | . | . | 1/0 | . | . |
 | decide | 9/12 | 9/3 | . | 0/2 | x | x | x | x | . | . | . |
-| act | 2/7 | 12/3 | 1/0 | 1/2 | . | x | x | x | . | . | . |
+| act | 2/7 | 12/3 | 1/0 | 0/2 | . | x | x | x | . | . | . |
 | recover | 5/10 | 9/1 | 0/2 | . | . | x | x | x | 0/2 | . | . |
 | trust | 9/11 | 12/4 | 0/2 | 0/2 | . | 0/4 | . | . | . | . | . |
 
@@ -106,8 +107,8 @@ A rule sits on several cells, so a column does not add up to a number of rules.
 
 | | |
 |---|---|
-| **cells with at least one rule** | **21 of 55 live cells**: all 6 in `any`, and 15 of the 49 open medium cells |
-| **cells with none** (the honest gap) | **34 of 55 live cells**, all of them medium cells: every cell of haptic, luminous, signage, spatial and terminal, and most of auditory, voice, print and machine |
+| **cells with at least one rule** | **20 of 55 live cells**: all 6 in `any`, and 14 of the 49 open medium cells |
+| **cells with none** (the honest gap) | **35 of 55 live cells**, all of them medium cells: every cell of haptic, luminous, signage, spatial and terminal, and most of auditory, voice, print and machine |
 | **rules on no cell** (what the grid cannot see) | **2 of 123**: Rule 78 and Rule 124 |
 
 Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
@@ -115,7 +116,7 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
 ### What the counts say
 
 - **The law is written for a screen.** 94 of 121 placed rules are written for the visual column
-  and 88 of them for nothing else. 26 are medium-free. Seven name another medium, and one of those (125)
+  and 89 of them for nothing else. 26 are medium-free. Six name another medium, and one of those (125)
   names no screen at all.
 - **Five of the ten media have no rule written for them**: haptic, luminous, signage, spatial and
   terminal. A rule reaches them only if it is medium-free, which is a claim that the rule *can* be
@@ -468,6 +469,36 @@ screen wording in its title, avoid or solution", is a reading, and a single phra
 about named rules**, and for two of them (123 on print, 125 on voice) the placement names a medium the rule's own words do not. Those are the placements most worth a second
 look, and they are not decided here. (c) Taken with section 3e, the pattern repeats: where the two readings differ on activities, it is mostly the reader giving a rule one more activity than the first
 reading did (in this sample 16 overlaps against 2 disjoint). Nine rules (18, 22, 26, 53, 79, 83, 97, 101, 130) were in both samples and the readers saw them with and without diagnostics. This is two readers, one read each. It is a measurement, not a replacement placement.
+
+---
+
+## 3g. Named placements held to their words (2026-11-03)
+
+The second blind read (section 3f) found three named placements the rules' own words do not support. The Principal ruled to apply the grid's step 1
+as written, **a rule sits on a medium only where its own words name it**, to those three and to the four others, and to change only the ones whose
+words do not support their medium. The placement file is the only thing changed.
+
+| rule | placed before | its own words | placed now |
+|---|---|---|---|
+| 60 Screen Reader Harmony | visual voice machine | web markup (visual); "a voice assistant, a phone tree" (voice); an "embedded panel" and "any screen reader" name no medium; no machine reader | **visual voice** |
+| 72 The Canvas Logic | visual print | "a PDF printout", "between screen and print" | unchanged |
+| 73 Multimedia Handling | visual auditory | "videos or audio logs", autoplay of video or audio | unchanged |
+| 77 The Trinity Structure | visual print | "poor print formatting"; document and table layout | unchanged |
+| 104 Machine Legibility | visual voice machine | "machines", "agents", "pixels" (visual); "a non-visual medium" and "multi-modal" name no voice | **visual machine** |
+| 123 The Reading Arc | visual print | names no medium; "page", "sections", "paragraph" are reading-surface wording | **visual** (step 3) |
+| 125 Sound Corroborates | auditory voice | "a sound", "an earcon"; voice is not named | **auditory** |
+
+Four rules changed (60, 104, 123, 125) and three were tested and left (72, 73, 77). Activities are unchanged for all seven. The seven medium-free rules the
+second reader moved to visual (9, 18, 22, 40, 76, 91, 96) were not touched, as ruled.
+
+**The three counts, before and after.** Cells with at least one rule **21 to 20**; cells with none **34 to 35**; rules on no cell **2 to 2**. Medium cells
+with a rule 15 to 14. **One cell empties, act x voice**, whose only rule was 125. It is not five: the reader's five came from a different change (it also moved
+72 from perceive to understand and gave 60 and 104 other media), and this change touches only the media the rules' words do not name. The other four cells
+the reader would have emptied keep a rule: perceive x voice and understand x voice keep 60, perceive x machine keeps 104, and perceive x print keeps 72.
+No rule is on a closed cell. The honest gap is now **35**, and the 38 of section 3f stays what it was, a bound on that reader's whole placement.
+
+Figures in sections 3e and 3f were measured against the placement as it stood when each read was made. Re-running `compare.js`, `compare2.js` or `sample2.js`
+today would give other figures (`sample2.js` would select 32 rules: 26 medium-free and 6 named). The saved outputs are a record of those reads and are not regenerated.
 
 ---
 
