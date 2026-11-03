@@ -277,6 +277,10 @@ depth, may be a bare `true`, `false` or `null`. Strings, numbers, arrays and
 objects are unconstrained. This binds a court's own extension fields, which is
 where the exposure actually is — the six are strings, an integer and an array.
 
+**Known extensions (HF-12, ruled 2026-11-03).** The Haro court adds `why`, `todo` and `frames`, and the zui court adds `level` and `subject`. All
+of them are extensions and none is a seventh contract field: `todo` stays an extension, because nothing in this family reads it and promoting it would oblige every
+court to emit it. It would be promoted, as a new minor version of this contract, if a second independent court emitted a `todo` or a consumer needed one.
+
 **Measured, not reasoned.** RingFlex measured Ring's `jsonlib` on Ring 1.27 on
 2026-08-22, round-tripping through `JSON2List` then `List2JSON`:
 
