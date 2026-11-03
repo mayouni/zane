@@ -201,10 +201,29 @@ const FLOOR = 16;              // Rule 105's reading floor, in px
 const LARGE = 24;              // WCAG large-text threshold
 const LARGE_BOLD = 18.66;
 
+/* A computed colour comes back in the form the page wrote it in. rgb() and rgba() carry 0..255; color(srgb ...) -- what
+   color-mix() computes to -- carries 0..1, and reading those as 0..255 turns every mixed background into near-black
+   (STZZUI-COLORPARSE-01: 48 false contrast findings on one site, 1.28:1 reported where the real figure was 14.80:1).
+   A colour in another space (oklab, oklch, lab, lch, display-p3) is not converted here and parses to null. */
 function parseColor(c) {
-  const m = String(c).match(/[\d.]+/g);
-  if (!m) return null;
-  return { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] };
+  const fn = /^([a-z-]+)\(\s*([^)]*?)\s*\)$/i.exec(String(c).trim());
+  if (!fn) return null;
+  const name = fn[1].toLowerCase();
+  const t = fn[2].split(/[\s,\/]+/).filter(Boolean);
+  const num = (v, scale) => v.endsWith('%') ? parseFloat(v) / 100 * scale : parseFloat(v);
+  let rgb, alpha;
+  if (name === 'rgb' || name === 'rgba') {
+    if (t.length < 3) return null;
+    rgb = t.slice(0, 3).map(v => num(v, 255));
+    alpha = t[3];
+  } else if (name === 'color' && t[0] === 'srgb') {
+    if (t.length < 4) return null;
+    rgb = t.slice(1, 4).map(v => num(v, 1) * 255);
+    alpha = t[4];
+  } else return null;
+  const a = alpha === undefined ? 1 : num(alpha, 1);
+  if (rgb.some(Number.isNaN) || Number.isNaN(a)) return null;
+  return { r: rgb[0], g: rgb[1], b: rgb[2], a };
 }
 function composite(fg, bg) {
   return { r: fg.r * fg.a + bg.r * (1 - fg.a),
