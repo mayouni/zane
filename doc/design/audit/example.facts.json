@@ -11,7 +11,7 @@
     "ocr": { "engine": "hand-made", "lang": "eng" },
     "luminance": {
       "standard": "WCAG-2.x-relative-luminance-sRGB",
-      "method": "hand-made: text #999999 on #ffffff for L1, text #333333 on #ffffff for L2"
+      "method": "hand-made: text #999999 on #ffffff for L1, text #333333 on #ffffff for L2, white text on a dark gradient for L3"
     }
   },
   "lines": [
@@ -38,6 +38,18 @@
       "bg_luminance": 1,
       "contrast_ratio": 12.63,
       "bg_spread": 0
+    },
+    {
+      "id": "L3",
+      "text": "Quarterly results",
+      "score": 0.95,
+      "box": [120, 600, 560, 648],
+      "line_height_px": 48,
+      "line_height_pt": 18,
+      "fg_luminance": 1,
+      "bg_luminance": 0.1753,
+      "contrast_ratio": 4.66,
+      "bg_spread": 0.18
     }
   ]
 }

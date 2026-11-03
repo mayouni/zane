@@ -276,6 +276,7 @@ decide leaves three, all on one cell:
 other 33 rules on that cell are judgment or need more than a line of text. The audit adds no rule and no cell; it
 adds an instrument to a cell that already has rules and, since D5, six fixtures. Every other rule is reported
 "not audited", never "passed". The placements are unchanged and `coverage-count.js` is unchanged.
+The writer that now exists produces ink boxes, so rule 107 cannot be decided from its facts today; rules 62 and 105 can, at the worst end of the background (AUDIT-FACTS.md sections 4 and 6).
 
 **Understand as well (2026-11-03, ruled after the placement review of section 3e).** The blind second reader added understand
 to rule 62 and moved rule 105 to it, and the Principal ruled to keep perceive and understand as two rows and to record

@@ -51,7 +51,7 @@ One file per screenshot, JSON, `format: "zui-audit-facts"`, `version: "1.0"`.
 | `line_height_pt` | `line_height_px x 72 / (96 x scale)`, 2 decimals |
 | `fg_luminance`, `bg_luminance` | WCAG relative luminance, 0 to 1, or `null` |
 | `contrast_ratio` | `(max + 0.05) / (min + 0.05)`, 2 decimals, `null` exactly when a luminance is |
-| `bg_spread` | **optional**: the range of luminance in the background pixels of the box. This field and `box_kind` are the two additions to the list the intelligence desk was asked for |
+| `bg_spread` | **optional**: the range of luminance in the background pixels of the box (the writer built to this schema takes the 2nd to the 98th percentile over background pixels 3 px or more from ink). This field and `box_kind` are the two additions to the list the intelligence desk was asked for |
 
 The derived fields (`line_height_px`, `line_height_pt`, `contrast_ratio`) are in the file so a reader need not
 recompute them, and `check-facts.js` recomputes them so a writer cannot drift.
@@ -91,9 +91,15 @@ Three outcomes per line and decision: **fail**, **pass**, **not_decided**. Thres
 | minimum OCR score | 0.5 | a default to argue with: a line read with less confidence is not judged |
 | background spread limit | 0.25 | a default to argue with: above it the text sits on a gradient or an image |
 
-**Contrast (rules 62, 105).** `not_decided` if the score is under the minimum, a luminance is null, or `bg_spread`
-is over the limit. Otherwise `pass` at 4.5:1 or more and `fail` below. If `bg_spread` is absent the verdict is
-given and marked an estimate.
+**Contrast (rules 62, 105), judged at the worst end of the background.** `not_decided` if the score is under the minimum, a
+luminance is null, or `bg_spread` is over the limit. Otherwise: `fail` if the ratio is under 4.5:1 at the typical background; and if
+it is 4.5:1 or more, the audit moves `bg_luminance` by `bg_spread` toward the text colour (lighter if the text is lighter than the
+background, darker if it is darker, kept between 0 and 1) and computes the ratio again. **`pass` only if the ratio holds at that worst end too.**
+If it fails only there, the decision is `not_decided`, with both ratios in the reason, and **never `pass`**. If `bg_spread` is absent the
+verdict is given and marked an estimate, because the worst end is unknown. Why: white text over a gradient read a spread of 0.18, under the
+limit, and passed at 4.66:1 while 46% of the line sat over background down to 2.99:1; a pass the audit cannot defend is the defect this
+document exists to refuse. Moving by the whole spread is more cautious than the real extreme (the spread runs both sides of the typical value),
+and that is deliberate.
 
 **Size floor (rule 107).** `not_decided` if the score is under the minimum or `box_kind` is `ink`. Otherwise
 `fail` if `line_height_pt` is under 12, and `not_decided` if it is 12 or more. **A size is never `pass`.** A line
@@ -106,9 +112,12 @@ because line height can be generous around small text. The pt figure is an upper
 |---|---|---|
 | `L1` "Overdue balance", 9 pt line box, 2.85:1 | **fail** | **fail** |
 | `L2` "Account summary", 18 pt line box, 12.63:1 | **pass** | **not_decided** |
+| `L3` "Quarterly results", white on a gradient, 18 pt line box, 4.66:1 at the typical background, spread 0.18 | **not_decided** (2.59:1 at the worst end) | **not_decided** |
 
 `L2` is the lawful line, and the audit still does not say its size is lawful. That is the design and not a gap
-in the example: *no violation found* is all a line box can give about size.
+in the example: *no violation found* is all a line box can give about size. `L3` is the line a plain ratio would have passed:
+4.66:1 clears the floor, and the audit refuses to say so because the same line fails at the worst end of its background.
+The example declares `box_kind: line` so that the size decision can be shown; the writer built to this schema produces `ink` (section 6).
 
 The luminances are those of #999999 and #333333 on white (0.3185 and 0.0331 against 1), computed by hand and
 re-derived by `check-facts.js`.
@@ -119,6 +128,10 @@ re-derived by `check-facts.js`.
   The example is not a screenshot at all: `example/ledger-screen.png` does not exist.
 - **The luminance is an estimate** from a foreground and background split inside a box. Antialiasing, subpixel
   rendering and text on texture all move it. `luminance.method` records how, and `bg_spread` flags the worst case.
-- **`box_kind` is open.** Which kind `StzOcrModelLinesXT` returns is not known to this desk. If it is `ink`,
-  the size decision returns `not_decided` for every line until the writer can produce a line box.
+- **`box_kind` is `ink`** for the writer that exists (answered 2026-11-03). So the size decision returns `not_decided` for every
+  line it writes, and **rule 107 cannot be decided from these facts** until a writer produces a line box.
 - **The two defaults** (score 0.5, spread 0.25) were chosen here, not measured, and nothing yet argues for them.
+- **The audit judges only the lines the OCR found, and a line that is not there is never a pass.** Text the OCR missed has no line in the facts:
+  text over vertical stripes is the known case. The audit's output therefore begins "N lines found; text the OCR did not find is not audited",
+  and `check-facts.js` prints it. This is a stated limit, not code that looks for the missing text.
+- **Nobody has run a real application's screenshot through the writer and then the audit.** The example is hand-made.

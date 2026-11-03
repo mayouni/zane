@@ -66,12 +66,22 @@ if (!problems.length) {
 
 // ---- the two decisions. Three outcomes: fail, pass, not_decided. A size is never "pass": see section 4.
 const MIN_SCORE = 0.5, SPREAD_LIMIT = 0.25, CONTRAST_FLOOR = 4.5, SIZE_FLOOR_PT = 12; // 1rem = 16 CSS px = 12 pt
+// The WORST END of the background: bg_luminance moved by bg_spread toward the text colour. A pass must hold there.
+function worstEnd(l) {
+  const bg = l.fg_luminance > l.bg_luminance ? Math.min(1, l.bg_luminance + l.bg_spread) : Math.max(0, l.bg_luminance - l.bg_spread);
+  return { bg, ratio: rel(l.fg_luminance, bg) };
+}
 function contrast(l) {
   if (l.score < MIN_SCORE) return ['not_decided', `OCR score ${l.score} is below ${MIN_SCORE}`];
   if (l.contrast_ratio === null) return ['not_decided', 'luminance was not measured'];
   if (l.bg_spread !== undefined && l.bg_spread !== null && l.bg_spread > SPREAD_LIMIT) return ['not_decided', `background spread ${l.bg_spread} is above ${SPREAD_LIMIT}: text over a gradient or an image`];
-  const est = (l.bg_spread === undefined || l.bg_spread === null) ? ' (an estimate: background spread not measured)' : '';
-  return l.contrast_ratio >= CONTRAST_FLOOR ? ['pass', `${l.contrast_ratio}:1 is at least ${CONTRAST_FLOOR}:1${est}`] : ['fail', `${l.contrast_ratio}:1 is below ${CONTRAST_FLOOR}:1${est}`];
+  if (l.contrast_ratio < CONTRAST_FLOOR) return ['fail', `${l.contrast_ratio}:1 is below ${CONTRAST_FLOOR}:1${(l.bg_spread === undefined || l.bg_spread === null) ? ' (an estimate: background spread not measured)' : ''}`];
+  if (l.bg_spread === undefined || l.bg_spread === null) return ['pass', `${l.contrast_ratio}:1 is at least ${CONTRAST_FLOOR}:1 (an estimate: background spread not measured, so the worst end of the background is unknown)`];
+  if (l.bg_spread === 0) return ['pass', `${l.contrast_ratio}:1 is at least ${CONTRAST_FLOOR}:1, background uniform`];
+  const w = worstEnd(l);
+  return w.ratio >= CONTRAST_FLOOR
+    ? ['pass', `${l.contrast_ratio}:1, and ${w.ratio}:1 at the worst end of the background: at least ${CONTRAST_FLOOR}:1 at both`]
+    : ['not_decided', `${l.contrast_ratio}:1 at the typical background but ${w.ratio}:1 at the worst end (background ${l.bg_luminance} moved ${l.bg_spread} toward the text colour): never a pass`];
 }
 function size(l, kind) {
   if (l.score < MIN_SCORE) return ['not_decided', `OCR score ${l.score} is below ${MIN_SCORE}`];
@@ -83,6 +93,8 @@ function size(l, kind) {
 
 let out = [];
 if (!problems.length) {
+  console.log(`${facts.lines.length} line${facts.lines.length === 1 ? '' : 's'} found; text the OCR did not find is not audited
+`);
   for (const l of facts.lines) {
     const c = contrast(l), s = size(l, facts.capture.box_kind);
     out.push({ id: l.id, contrast: c[0], size: s[0] });
@@ -91,7 +103,7 @@ if (!problems.length) {
   console.log('\nNOT AUDITED: every rule other than 62, 105 (its contrast half) and 107. A screenshot does not decide them, and "not audited" is not "passed".');
   console.log('PROJECTED, NOT VERIFIED BY A PERSON (CENTRAL-PERCEPTGATE-01): nobody looked at the screenshot these facts describe.');
   if (path.resolve(file) === path.resolve(__dirname, 'example.facts.json')) {
-    const want = { L1: ['fail', 'fail'], L2: ['pass', 'not_decided'] };
+    const want = { L1: ['fail', 'fail'], L2: ['pass', 'not_decided'], L3: ['not_decided', 'not_decided'] };
     for (const r of out) if (want[r.id][0] !== r.contrast || want[r.id][1] !== r.size) problems.push(`${r.id}: the document states ${want[r.id]}, the decision gave ${[r.contrast, r.size]}`);
   }
 }

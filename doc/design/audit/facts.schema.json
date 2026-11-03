@@ -59,7 +59,7 @@
           "fg_luminance": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "WCAG relative luminance of the text colour, 0 (black) to 1 (white)." },
           "bg_luminance": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "WCAG relative luminance of the colour behind the text." },
           "contrast_ratio": { "type": ["number", "null"], "minimum": 1, "maximum": 21, "description": "(max + 0.05) / (min + 0.05) of the two luminances, rounded to 2 decimals. null when either luminance is null." },
-          "bg_spread": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "OPTIONAL. The range (max - min) of luminance seen in the background pixels of the box. Large means text over a gradient or an image, where one background luminance is a fiction. null or absent means the writer did not measure it, and the audit then says the contrast is an estimate it cannot vouch for." }
+          "bg_spread": { "type": ["number", "null"], "minimum": 0, "maximum": 1, "description": "OPTIONAL. The range of luminance seen in the background pixels of the box (the writer built for this schema takes the 2nd to the 98th percentile over background pixels 3 px or more from ink). Large means text over a gradient or an image, where one background luminance is a fiction. The audit judges contrast at the worst end of it: bg_luminance moved by bg_spread toward the text colour. null or absent means the writer did not measure it, and the audit then says the contrast is an estimate it cannot vouch for." }
         }
       }
     }
