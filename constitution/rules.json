@@ -742,7 +742,11 @@
         "derived_from": "operator",
         "enforcement": "tool",
         "invariant": true,
-        "evidence": "Author observation on this site: the tutorial's terminal transcript scrolled horizontally inside the 48rem prose column on a 1490px window -- with roughly 700px of page sitting unused on either side. tools/legibility-audit.html now flags any block that scrolls while the page has room."
+        "evidence": "Author observation on this site: the tutorial's terminal transcript scrolled horizontally inside the 48rem prose column on a 1490px window -- with roughly 700px of page sitting unused on either side. tools/legibility-audit.html now flags any block that scrolls while the page has room.",
+        "see_also": [
+          "27",
+          "120"
+        ]
       },
       {
         "id": "the-reading-arc",
@@ -1155,6 +1159,10 @@
         "evidence": "Extracted from the February 2026 corpus (Organizium-era practice). v3.13: five stated as the reading-site value, on the author's ruling (prompt 53, 2026-10-16); 6-8 stays the value for application menus.",
         "absorbs": [
           "35"
+        ],
+        "see_also": [
+          "114",
+          "120"
         ]
       },
       {
@@ -1311,14 +1319,15 @@
           "A menu order that puts a page before the section it belongs to",
           "Two entries at the same level that are not at the same level in the application",
           "A menu grown by addition -- every page someone wanted promoted, promoted",
-          "The same page called one thing in the menu and another in its path"
+          "The same page called one thing in the menu and another in its path",
+          "A label that names the author's metaphor and not what the page holds"
         ],
-        "solution": "A menu is not a list of favourites; it is a claim about how the thing is built. Every entry must sit at the level the menu puts it at, and in the order the structure implies -- a child never stands beside its parent, and a page never precedes the section that contains it. When a page matters but belongs inside a section, the answer is to make the section's path show it (Rule 115), not to promote the page. That is what keeps the menu short: the top level names the whole of the application once, and the path opens each part. A menu that grows by promotion teaches the operator a structure the software does not have, and every wrong model they build from it costs them later. And the entry must call the page what the page calls itself: a menu label and a path label that disagree are one page wearing two names, which the operator must learn twice and match by guesswork.",
+        "solution": "A menu is not a list of favourites; it is a claim about how the thing is built. Every entry must sit at the level the menu puts it at, and in the order the structure implies -- a child never stands beside its parent, and a page never precedes the section that contains it. When a page matters but belongs inside a section, the answer is to make the section's path show it (Rule 115), not to promote the page. That is what keeps the menu short: the top level names the whole of the application once, and the path opens each part. A menu that grows by promotion teaches the operator a structure the software does not have, and every wrong model they build from it costs them later. And the entry must call the page what the page calls itself: a menu label and a path label that disagree are one page wearing two names, which the operator must learn twice and match by guesswork. And a label names what the reader will find there, not the author's metaphor: a page called \"The craft\" or \"Depth\" makes the reader open it to learn what it is.",
         "why": "People navigate from the model the interface hands them. A menu that contradicts the real structure does not merely mislead once -- it installs a wrong map, and the operator keeps paying for it at every turn.",
         "derived_from": "visible",
         "enforcement": "tool",
         "invariant": true,
-        "evidence": "Author observation on this site: 'Gotchas' stood in the main menu beside 'Constitution', though it is a page inside the Constitution -- and the reading path numbered it step 6, one before its own parent at step 7. The menu is now eight top-level stops; the Gotchas is reached from the Constitution's path, and the reading path renumbered to match the tree. A later pass found the second half of the same defect: the menu said Why, Story, Constitution while the path said Why StzWeb, The Story, The Constitution. One name each now, checked by the same tool."
+        "evidence": "Author observation on this site: 'Gotchas' stood in the main menu beside 'Constitution', though it is a page inside the Constitution -- and the reading path numbered it step 6, one before its own parent at step 7. The menu is now eight top-level stops; the Gotchas is reached from the Constitution's path, and the reading path renumbered to match the tree. A later pass found the second half of the same defect: the menu said Why, Story, Constitution while the path said Why StzWeb, The Story, The Constitution. One name each now, checked by the same tool. v3.13: labels as answers, from six readers of the Softanza website who had to open pages called \"The craft\", \"Depth\" and \"Reach\" to learn what each held (prompt 52)."
       },
       {
         "id": "the-second-level-turns",
@@ -1335,7 +1344,11 @@
         "derived_from": "visible",
         "enforcement": "judgment",
         "invariant": true,
-        "evidence": "That banking product's studio (April 2026): an agent sheet's surfaces (form / declaration / test bench) and the Settings sub-sections were second-level tabs drawn horizontally under horizontal main tabs; both were turned vertical and the confusion ended. Amended v3.13 on the author's own request (prompt 53, 2026-10-16): the Softanza website's reading surface ran a main menu, a fixed second bar, a left bar and a right bar, and the second bar stayed legible because it was a distinct fixed band of five. The amendment keeps the rule's purpose and moves where the turn happens; it reverses the literal text of the rule."
+        "evidence": "That banking product's studio (April 2026): an agent sheet's surfaces (form / declaration / test bench) and the Settings sub-sections were second-level tabs drawn horizontally under horizontal main tabs; both were turned vertical and the confusion ended. Amended v3.13 on the author's own request (prompt 53, 2026-10-16): the Softanza website's reading surface ran a main menu, a fixed second bar, a left bar and a right bar, and the second bar stayed legible because it was a distinct fixed band of five. The amendment keeps the rule's purpose and moves where the turn happens; it reverses the literal text of the rule.",
+        "see_also": [
+          "27",
+          "114"
+        ]
       }
     ]
   },

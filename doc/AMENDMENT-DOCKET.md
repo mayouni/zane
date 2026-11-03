@@ -839,3 +839,16 @@ The author's ruling (prompt 54, 2026-10-16): *"The path should not be present in
 still owes the trail. A trail hidden from assistive technology (`display:none`, `aria-hidden`) is not a landmark. **Limit:** a page with no trail shows no steps, so the audit cannot see a level that no bar marks on it;
 what it tests is whether a visible bar marks the page itself. On the 17 stzsite pages the five findings on `en/book`, `areas`, `craft`, `applications` and `architecture` stay findings, with the new reason: those pages
 omit the trail and carry no landmark. The count stays at 29; the stzzui site stays at 0.
+
+### Item 3 — the depth and breadth of a reading site (STZZUI-READINGDEPTH-01): Rules 27, 114, 120, 116
+
+Prompt 52 (2026-10-15), from six readers of the Softanza website. Ruled part by part:
+
+| part | ruling |
+|---|---|
+| **A** the 114 / 27 / 120 collision | **see_also among Rules 27, 114 and 120**, no normative words: the repair for 114 (a block widens while the page has room) made a second row wrap, which breaks 27, and 120 is the rule that dissolves it |
+| **B1** a budget for depth and breadth | **Held**: superseded by item 1, which sets the number of levels and the five-entry cap |
+| **B2** a section answers one question | **Refused as new law**: already Rule 123 ("each section carries one message") and Rule 116 |
+| **B3** one subject, one page | **HELD, and open.** The evidence is one author's reading of one site, not a measurement; it is not ratified now. Rule 116 forbids one page under two names and nothing forbids one subject under two pages, which is a real gap, recorded here as open |
+| **B4** labels say what is inside | **Amended**: the last sentence of Rule 116 now says a label names what the reader will find there, not the author's metaphor; one avoid entry follows |
+| **C** the audit compares breadcrumbs where Rule 115 says "path" | **A tool change, done with item 1** (the audit reads the bars) |

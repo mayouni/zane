@@ -21,8 +21,8 @@
     {
       "file": "constitution/rules.json",
       "role": "the law",
-      "bytes": 168227,
-      "sha256": "382df383821eabcca2bf98d96793b10e643121fa1b27add8b96ccba3e7a3193b"
+      "bytes": 168842,
+      "sha256": "4ae862123f848be244d8ec345a3e3878844e0faa14fdd8cdc4a9a36fffb3a1a1"
     },
     {
       "file": "doc/language/README.md",
