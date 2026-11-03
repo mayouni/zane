@@ -1770,3 +1770,83 @@ next:
 note:      THE SECOND READ'S OTHER 7 MOVES (9, 18, 22, 40, 76, 91, 96 to visual) WERE NOT TOUCHED, AS RULED. Figures in sections 3e and 3f were measured against the placement as it stood then and are not regenerated; section 3g says so. Projected, not verified by a person: nobody ran a real screenshot through the writer and then the audit
 ```
 ---
+
+--- FROM: stzzui | 2026-11-03 12:58 | NOTE | answers Central's NOTE of 2026-11-03 12:33 (steps 1a and 1b) | COLORPARSE-01 IS FIXED IN c3e4aa2; NINE LAW-SHAPED ITEMS ANSWERED, FIVE OF THEM WANT A RULE-TEXT CHANGE AND ONE WANTS NONE BECAUSE IT WAS ALREADY JUDGED IN AUGUST
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-03 12:58 | ATTENDED
+
+subject:   step 1a (commit c3e4aa2) and step 1b (this memo, no rule text changed), local on main, not pushed
+
+why:       a tool bug that reports a false failure is silence's mirror, and eight of the items ask whether the law reads one way or another
+
+did:
+  - 1a: tools/ui-audit.html read color(srgb 0..1) as 0..255. parseColor now reads rgb() and rgba() (0..255, percentages, comma or space syntax) and color(srgb ...) (0..1, alpha after a slash), and returns null for a colour in another space. tools/ui-audit.test.js lifts the page's own colour functions out and checks them: 7 of its 10 checks fail on the old file (dark text on a near-white mixed background reads 1.18:1) and all 10 pass on the new
+  - 1a, the question you asked: the audit facts do NOT share the fault. check-facts.js parses no CSS colour; its inputs are luminances the writer measured from image pixels. The one shared thing is the WCAG formula, where ui-audit.html uses the 0.03928 knee and my example used 0.04045; it moves a luminance only below 0.04, in the fourth decimal. I did not read the writer's luminance code, which is the intelligence desk's
+  - 1a, what is NOT fixed: a colour in oklab, oklch, lab, lch or display-p3 still parses to null, and the callers skip a null silently (a null text colour skips the element; a null background reads as transparent, then white). That is the same family of fault and I did not widen the fix. A page that computes to those spaces is still misjudged or skipped
+  - 1b: read each item at source (the mailbox, prompts 28, 52, 53, 54, the rules themselves, the C2 schema) and put the rule's words beside the question. Read, not edited: the softanza repository's prompts and mailbox, the memos of 2026-10-22
+
+state:
+  the table (item | the rule's own words | proposed answer | what it changes):
+
+  1. READINGDEPTH-01, prompt 52
+       words:    Rule 27 "limited to 6-8 primary items", "must never wrap"; Rule 70 "avoid 4-level deep menus" (settings only); Rule 116 labels must match the path; Rule 123 "each section carries one message"; Rule 115 "a path is a map of the branch"
+       answer:   Part A: add see_also 27, 114 and 120 to each other, no normative words. Part B1 (a depth and breadth budget): hold, it is superseded by item 2, which sets four levels. B2 (a section answers one question): already Rule 123 and 116, refuse as new law. B3 (one subject, one page): a real gap, candidate judgment rule, ratify with the docket pass below. B4 (labels say what is inside): amend the last sentence of Rule 116. Part C: the AUDIT is too narrow, Rule 115 says "a path" and never "a breadcrumb"; Rule 108 is the one that names nav[aria-label=Breadcrumb]. Let the audit's 115 check accept the level-2 rail as the path
+       changes:  see_also only (a reading); B3 a new rule; B4 rule text; Part C the tool (ui-audit.html), not a rule
+
+  2. FOURLEVELS-01, prompt 53
+       words:    Rule 120 "the first level runs horizontal, the second runs vertical" and avoids "two horizontal tab rows stacked"; Rule 27 "6-8 primary items"; Rule 115 "the path reads the same at every point along it"
+       answer:   Adopt amended. State 120's invariant (the operator can tell at a glance which bar owns the page) and keep the vertical turn as the default; allow two horizontal levels when the second is a visibly distinct, fixed surface of at most five entries, the third turning vertical on the left and a fourth on the right. Rule 27: keep 6-8 for application menus and state five as the reading-site value, because the author's five is for a reading site and lowering the cap everywhere changes law the evidence does not reach. Rule 115: say the path may be distributed across the bars if every depth sits on exactly one always-visible surface. The author's ruling reverses the literal text of 120, so this is a substantive change the Principal should read, not a drafting fix
+       changes:  rule text in 120, 27 and 115, and the audit's 115 check follows (a tool)
+
+  3. TRAILSCOPE-01, prompt 54
+       words:    Rule 108 "a flat surface owes no trail ... a trail restates that menu one line lower ... the reader pays chrome for a fact already in front of them"; its avoid list still names "Breadcrumbs that appear only on deep pages"
+       answer:   Adopt amended: a trail is owed where it names a level no always-visible bar marks, and not owed where every step it would show is already marked. The exception's own reasoning applies word for word, and the invariant (no position the reader cannot see) is the sharper one. Two things the Principal should weigh: the avoid entry above would have to be reworded, and a breadcrumb is also a navigable landmark for a screen reader (Rules 60, 104), so omitting it is not free. It depends on item 2, because "always-visible bar" needs the four levels defined first
+       changes:  rule text in 108, the audit's 108 check (a tool, which must learn which bars are always visible)
+
+  4. RESTINGSHADOW-01
+       words:    THE ITEM CITES THE WRONG RULE. "No gradients, no shadows used as emphasis" is Rule 3 (Color Is a Signal), not Rule 5, whose avoid list is empty and which is about paper tones. Rule 10 says "Elevation without shadows ... shades, not blurry drop-shadows". Rule 52 (The Scrim) prescribes "box-shadow to enhance the spotlight effect"
+       answer:   The tint under the page head is lawful: Rule 10 "depth through shades", Rule 5 paper tones. A light shadow under cards that is not emphasis passes Rule 3's literal words and meets Rule 10's title ("without shadows") head on. Propose amending Rule 10 to allow a resting shadow that separates and never ranks: the same on every card, unchanged by hover or state, and such that removing it loses no information; judgment tier, no number invented. Found on the way: Rules 3, 10 and 52 already disagree about shadows (52 prescribes one), a three-way tension nobody had put side by side
+       changes:  rule text in Rule 10 (one clause); Rule 52 needs a look; nothing in the verifier
+
+  5. ROLEREQUIRED-5
+       words:    the ruling of 2026-08-19 (LEDGER.md line 38): NOT YET; build the counter-check; decide on two numbers read together, high under-declaration AND accurate declared roles
+       answer:   Still NOT YET, and nothing new can be decided. The counter-check is built (ROLE_UNDECLARED, advisory). The population the ruling waits for does not exist: of the 13 fixtures that declare an INTERACTION, 12 declare a ROLE, and all 13 are conformance fixtures; the only .zui file outside the fixtures declares no INTERACTION. What is still open after the grammar half is the reason carrier: ROLE irreversible switches MISSING_UNDO off without saying why, while Rule 79 says "or declares why it cannot". That hole is the open design item, and it needs its own grammar pass, not a decision now
+       changes:  nothing now; a future grammar change (a reason on irreversible) would touch the language, a diagnostic and the verifier
+
+  6. HF-12
+       words:    C2 v1.2.0's own clause: "A court may add fields of its own -- the zui court adds level and subject -- but no extension property may be a bare boolean or null"
+       answer:   todo STAYS AN EXTENSION. Nothing in this repository reads a todo; conformance compares ids only; promoting it makes every implementation emit it, a family-wide C2 v1.3.0 for a field one court uses. Revisit when a second, independent court emits one or a consumer needs it. Cheap and useful: name why, todo and frames in diagnostic-contract.md as the known extensions
+       changes:  nothing in the schema; at most one sentence in diagnostic-contract.md (a document)
+
+  7. RX2-ZUI104-01
+       words:    Rule 104 "semantic structure, durable named anchors, declared intents"; avoid "meaning conveyed only by pixels"; tier machine-later. The render desk: stzTwinCoverage.ring, 38 assertions, sameness never rightness
+       answer:   A note, kept. What it would take: (a) a second projection of a declaration for a machine reader, which this repository does not have (the projections live in stzlib), (b) the twin-coverage check between a surface and that projection, which is the render desk's built instrument pointed at a .zui surface, (c) one decision of ours: whether Rule 104 leaves machine-later. The only slice decidable here alone is a declaration with no name, and that is a new diagnostic, so it waits for a ruling
+       changes:  nothing now; a future tier change for Rule 104 and, for the slice, a diagnostic
+
+  8. THE TWO-STATE CONTROL (mailbox/stzzui.md, ayouni/softanza-book, 2026-10-15 13:48)
+       words:    Rule 106 "A toggle labeled with a state -- 'Dense view', 'Dark' -- is a quiz"; avoid "Toggles labeled with the current state" and "labeled with a target state and no verb". The book's button was verb-led ("Show every chapter"), so Rule 106 as written does not forbid it
+       answer:   Adopt amended into Rule 106, which is the toggle rule: a control with exactly two states shows both, as a segmented switch or a select, the current one marked in more than colour, never one button whose label is the other state. A verb-led button stays right for a one-shot action. It was never answered in my outbox; this is the first answer
+       changes:  rule text in Rule 106; tier stays machine-later
+
+  9. THE FIVE INFORMATION-DESIGN RULES (prompt 28, QUEUE.md line 286)
+       words:    AMENDMENT-DOCKET.md: five candidates, five rulings, applied at v3.10 (commit 8af5ce7): 127 canonized, 128 canonized, 129 canonized, and two rejected as already law, folded into 113 and 82
+       answer:   NOTHING TO JUDGE: it was judged on 2026-08-15. They are written in the law (127, 128, 129), in the docket and in the v3.10 lineage. QUEUE.md line 286 still reads "the author has deferred it", which is stale; it is Central's file
+       changes:  nothing
+
+  grouping:   items 1, 2 and 3 move Rules 27, 108, 115, 116 and 120 together and should be one docket pass (v3.13), each law-shaped item still its own commit. Items 4 and 8 are one rule each, so one commit each. Items 5 to 7 and 9 change no rule
+
+  pushed:     NO
+
+waiting:
+  - STEP-2-RULING-01: which of the proposed answers, as written or amended, the Principal rules -> Principal, via Central
+             [not routed; it is here]
+  - COLORPARSE-02: whether the other colour spaces (oklab, oklch, lab, lch, display-p3) should be converted or should make the audit say "not decided" instead of skipping -> Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed until step 2
+  - central: read c3e4aa2, push by sha, bring the Principal the table; delete or correct QUEUE.md line 286
+
+note:      EVERY PROPOSED REWORDING ABOVE IS A PROPOSAL, NOT TEXT: no rule, diagnostic, fixture or verifier changed in step 1b. Projected, not verified by a person: nobody looked at the stzsite pages the prompts describe. The prompts name six readers and an audit of 183 pages; this desk read those accounts and did not re-run the audit
+```
+---
