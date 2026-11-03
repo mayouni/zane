@@ -436,6 +436,8 @@
         "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
         "lint": "instrument: stzlib graphics plane -- semantic names resolve to colour (an author writes a meaning and gets a colour)",
         "see_also": [
+          "10",
+          "52",
           "118"
         ]
       },
@@ -653,13 +655,18 @@
         "avoid": [
           "Blurry drop-shadows for depth",
           "Multiple competing focal points",
-          "Unclear visual hierarchy"
+          "Unclear visual hierarchy",
+          "A shadow that varies with hover, state or importance, so that it ranks one card above another"
         ],
-        "solution": "Elevation without shadows. In Zui, we indicate depth through shades, not blurry drop-shadows. A modal shouldn't \"float\" in a void; it should appear as a focused layer that dims the world behind it. The Single Source of Truth: Every screen must have one clear H1. If a user has to choose between two equally large buttons or headers, the UI is shouting.",
+        "solution": "Elevation without shadows. In Zui, we indicate depth through shades, not blurry drop-shadows. One resting shadow is lawful: it separates and never ranks -- the same on every card, unchanged by hover or state, such that removing it loses no information. A modal shouldn't \"float\" in a void; it should appear as a focused layer that dims the world behind it. The Single Source of Truth: Every screen must have one clear H1. If a user has to choose between two equally large buttons or headers, the UI is shouting.",
         "why": "Depth by dimming keeps focus without inventing a floating world; two equal heads mean nobody leads.",
         "derived_from": "calm",
         "enforcement": "judgment",
-        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice). v3.13: the resting shadow, on the author's request (the Softanza website adopted the Compass artifacts' style, a light tint under the page head and a light shadow under cards, neither used for emphasis). Rule 3 forbids shadows used as emphasis and Rule 52 prescribes a box-shadow for the spotlight; the three now point at one another.",
+        "see_also": [
+          "3",
+          "52"
+        ]
       },
       {
         "id": "the-ledger-principle",
@@ -1662,7 +1669,11 @@
         "why": "A consistent scrim isolates without nausea and without pretending the world is gone.",
         "derived_from": "calm",
         "enforcement": "judgment",
-        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice)."
+        "evidence": "Extracted from the February 2026 corpus (Organizium-era practice).",
+        "see_also": [
+          "3",
+          "10"
+        ]
       },
       {
         "id": "interaction-lockdown",

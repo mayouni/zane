@@ -852,3 +852,14 @@ Prompt 52 (2026-10-15), from six readers of the Softanza website. Ruled part by 
 | **B3** one subject, one page | **HELD, and open.** The evidence is one author's reading of one site, not a measurement; it is not ratified now. Rule 116 forbids one page under two names and nothing forbids one subject under two pages, which is a real gap, recorded here as open |
 | **B4** labels say what is inside | **Amended**: the last sentence of Rule 116 now says a label names what the reader will find there, not the author's metaphor; one avoid entry follows |
 | **C** the audit compares breadcrumbs where Rule 115 says "path" | **A tool change, done with item 1** (the audit reads the bars) |
+
+### Item 4 — a resting shadow (STZZUI-RESTINGSHADOW-01): Rule 10
+
+The question was whether a light tint under a page head and a light shadow under cards, neither used for emphasis, sit inside **"Rule 5"**.
+**The citation is corrected here: the words quoted, "no gradients, no shadows used as emphasis", are Rule 3 (Color Is a Signal)**, not Rule 5, whose avoid list is empty and which is about paper tones.
+
+- The **tint** is lawful as written: Rule 10 "depth through shades", Rule 5 paper tones.
+- A **light shadow under cards** passes the literal words of Rule 3 (it forbids shadows used as emphasis) and meets Rule 10 head on: its title says "Elevation without shadows" and it names "blurry drop-shadows for depth".
+  **Rule 10 is amended by one clause**: one resting shadow is lawful, if it separates and never ranks, the same on every card, unchanged by hover or state, such that removing it loses no information. Judgment tier; no number is invented for blur or opacity.
+- **A three-way tension, recorded:** Rule 3 forbids shadows as emphasis, Rule 10 says elevation without shadows, and **Rule 52 (The Scrim) prescribes "a subtle border and box-shadow to enhance the spotlight effect"**. They had never been
+  put side by side. **Rule 52's text is not changed**; Rules 3, 10 and 52 now carry see_also to each other, so a reader of one finds the other two.
