@@ -28,7 +28,7 @@ td.issue { color: #a33422; font-weight: 700; }
 [data-vibe="guardian"] td.issue { color: #ff9d8a; }
 .controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1rem; }
 .run { font: 700 1rem var(--sans); cursor: pointer; border-radius: 8px;
-  border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent);
+  border: 2px solid var(--btn-bg); background: var(--btn-bg); color: var(--btn-fg);
   padding: .6rem 1.3rem; }
 .run:hover { filter: brightness(1.06); }
 .opt { font: 1rem var(--sans); color: var(--ink); display: inline-flex;
@@ -154,7 +154,7 @@ td.issue { color: #a33422; font-weight: 700; }
     <div class="controls">
       <button class="run" id="run">Run the audit</button>
       <label class="opt"><input type="checkbox" id="strict">
-        <span>Strict: also report text that clears the floor but still reads small (16–17px)</span></label>
+        <span>Strict: also report text that clears the floor but still reads small (16–17px), and interactive text under 7:1</span></label>
       <span id="progress"></span>
     </div>
     <p class="caption">The floor is <b>16px</b> (Rule 105) and this site reads at
@@ -262,6 +262,14 @@ function contrast(a, b) {
   const l1 = luminance(a), l2 = luminance(b);
   return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
 }
+/* Comfort is not the floor. Rule 105 lets text pass at 4.5:1 and says long-form prose aims for 7:1; a label a person must press, set in bold over a saturated
+   ground, can be lawful at 4.94:1 and still tiring (the Principal, 2026-11-04, of this site's own button). In strict mode every interactive text is asked for 7:1
+   as well, and the finding says "comfort", not "fails". Pure, so it is tested without a DOM. */
+const COMFORT = 7;
+function comfortIssue(ratio, interactive, strict) {
+  return strict && interactive && ratio < COMFORT ? 'interactive text ' + ratio.toFixed(2) + ':1 (comfort target ' + COMFORT + ')' : '';
+}
+
 /* the background actually painted behind the text, composited up the tree */
 function backgroundOf(el, win) {
   let node = el, acc = null;
@@ -566,6 +574,10 @@ function auditDocument(doc, win, label, strict) {
     if (size < FLOOR) issues.push('size ' + size.toFixed(1) + 'px (floor ' + FLOOR + ')');
     else if (strict && size < 18) issues.push('size ' + size.toFixed(1) + 'px (below comfort)');
     if (ratio < needed) issues.push('contrast ' + ratio.toFixed(2) + ':1 (needs ' + needed + ')');
+    else {
+      const comfort = comfortIssue(ratio, !!el.closest('a, button, summary, select, [role="button"]'), strict);
+      if (comfort) issues.push(comfort);
+    }
     if (!issues.length) return;
 
     const cls = (typeof el.className === 'string' && el.className.trim())

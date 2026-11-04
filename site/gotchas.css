@@ -23,8 +23,8 @@
 .demo-btn { font: 700 1rem var(--sans); cursor: pointer; border-radius: 7px;
   border: 1.5px solid var(--muted); background: var(--paper); color: var(--ink);
   padding: .4rem .9rem; }
-.demo-btn.primary { background: var(--accent); border-color: var(--accent);
-  color: var(--on-accent); }
+.demo-btn.primary { background: var(--btn-bg); border-color: var(--btn-bg);
+  color: var(--btn-fg); }
 .demo-btn:hover { filter: brightness(1.05); }
 .why-line { color: var(--muted); margin-top: .8rem; max-width: 46rem; }
 .why-line b { color: var(--accent-ink); }
@@ -46,7 +46,7 @@
 .toast { margin-top: .7rem; background: var(--deep); color: var(--halo);
   border-radius: 8px; padding: .55rem 1rem;
   display: flex; align-items: center; gap: .9rem; }
-.toast button { font: 700 1rem var(--sans); background: var(--accent); color: var(--on-accent);
+.toast button { font: 700 1rem var(--sans); background: var(--btn-bg); color: var(--btn-fg);
   border: none; border-radius: 6px; padding: .25rem .7rem; cursor: pointer; }
 .toast .bar { flex: 1 1 4rem; height: 4px; background: rgba(255,255,255,.25); border-radius: 2px; overflow: hidden; }
 .toast .bar i { display: block; height: 100%; background: var(--accent); }
@@ -100,8 +100,8 @@ table.mini th { color: var(--muted); text-transform: uppercase; letter-spacing: 
 .assist-overlay { position: absolute; inset: 0; background: var(--deep);
   color: var(--halo); padding: 1rem 1.2rem; display: none; }
 .assist-overlay.open { display: block; }
-.assist-overlay button { font: 700 1rem var(--sans); background: var(--accent);
-  color: var(--on-accent); border: none; border-radius: 6px; padding: .25rem .7rem;
+.assist-overlay button { font: 700 1rem var(--sans); background: var(--btn-bg);
+  color: var(--btn-fg); border: none; border-radius: 6px; padding: .25rem .7rem;
   cursor: pointer; }
 .lawsplit { display: flex; gap: .9rem; align-items: stretch; }
 .lawsplit .work { flex: 1 1 55%; min-width: 0; }

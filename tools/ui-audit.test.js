@@ -10,7 +10,7 @@ const html = fs.readFileSync(file, 'utf8');
 const a = html.indexOf('function parseColor'), b = html.indexOf('/* the background actually painted');
 if (a < 0 || b < 0) { console.error('cannot find the colour functions in ' + file); process.exit(2); }
 const span = html.slice(a, b);
-const { parseColor, composite, luminance, contrast, readColor } = new Function(span + '\nreturn { parseColor, composite, luminance, contrast, readColor: typeof readColor === "function" ? readColor : null };')();
+const { parseColor, composite, luminance, contrast, readColor, comfortIssue } = new Function(span + '\nreturn { parseColor, composite, luminance, contrast, readColor: typeof readColor === "function" ? readColor : null, comfortIssue: typeof comfortIssue === "function" ? comfortIssue : null };')();
 
 let failed = 0;
 const near = (x, y, tol) => Math.abs(x - y) <= tol;
@@ -52,6 +52,15 @@ if (typeof readColor === 'function') {
   const mixed = readColor('color(srgb 0.5 0.5 0.5)');
   check('color(srgb) still reads', mixed.state === 'ok', JSON.stringify(mixed));
 }
+
+/* the comfort check (SITE-3.md 5.3): a label at 4.94:1 passes the floor and is asked for 7:1 in strict mode, on interactive text only */
+if (comfortIssue) {
+  check('comfort: 4.94:1 on a button is a finding in strict mode', /comfort/.test(comfortIssue(4.94, true, true)), comfortIssue(4.94, true, true));
+  check('comfort: nothing without strict mode', comfortIssue(4.94, true, false) === '', comfortIssue(4.94, true, false));
+  check('comfort: nothing for plain text', comfortIssue(4.94, false, true) === '', comfortIssue(4.94, false, true));
+  check('comfort: 10.6:1 passes', comfortIssue(10.55, true, true) === '', comfortIssue(10.55, true, true));
+  check('comfort: the old button, #1c0710 on #e04a6e, is 4.9 to 1', near(contrast(parseColor('rgb(28, 7, 16)'), parseColor('rgb(224, 74, 110)')), 4.94, 0.02), String(contrast(parseColor('rgb(28, 7, 16)'), parseColor('rgb(224, 74, 110)'))));
+} else { check('comfortIssue is defined in the page', false, 'not found'); }
 
 console.log(failed ? `\n${failed} check(s) failed in ${file}` : `\nall checks passed in ${file}`);
 process.exitCode = failed ? 1 : 0;
