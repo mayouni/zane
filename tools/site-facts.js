@@ -71,6 +71,7 @@ function derive(prev) {
   put('haro.constraints', (stzu.match(/^DEFINE CONSTRAINT /gm) || []).length, 'haro/zui.stzu (DEFINE CONSTRAINT)');
   const csv = fs.readFileSync(R('haro/twin-expected.csv'), 'utf8').split(/\r?\n/).filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('fixture,'));
   put('twin.differences', csv.length, 'haro/twin-expected.csv rows');
+  put('twin.agree', m.fixtures.length - csv.length, 'conformance/manifest.json fixtures minus haro/twin-expected.csv rows');
   put('twin.seams', new Set(csv.map(l => l.split(',')[3])).size, 'haro/twin-expected.csv seam column');
   for (const [k, name] of [['other-code', 'otherCode'], ['not-refused', 'notRefused'], ['court-only', 'courtOnly']])
     put('twin.' + name, csv.filter(l => l.split(',')[4] === k).length, 'haro/twin-expected.csv class column');

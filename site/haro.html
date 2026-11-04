@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Declared in Haro — the language as data</title>
+<meta name="description" content="StzZui is written a second time as a declaration in Haro, from which a court and a decoder grammar are forged. The forged court is run against the same suite as the verifier; where the two differ, each difference is named, counted and held by a ratchet.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=86bec427">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a class="here" aria-current="true" href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a href="media.html">Media</a>
+    <a href="audit.html">Audit</a>
+    <a href="adopt.html">Adopt</a>
+    </div>
+    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="how.html">Language</a></li>
+    <li><a href="refusal.html">What it refuses</a></li>
+    <li><a aria-current="page" href="haro.html">Declared in Haro</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Declared in Haro</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Language · for people who build languages and the tools around them</p>
+    <h1>The language is also written as data, and a court is made from it.</h1>
+    <p class="sub">StzZui exists twice: as a hand-written verifier, and as a declaration in Haro, a language for declaring languages. A court forged from the declaration judges
+    the same <span data-fact="fixtures.total">73</span> fixtures. They agree on <span data-fact="twin.agree">55</span>; on the other <span data-fact="twin.differences">18</span> each difference
+    is named, and a ratchet fails if one is added or hidden.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="../haro/zui.stzu">Read the declaration →</a>
+      <p class="note"><span data-fact="haro.constraints">136</span> constraints, one file.</p>
+    </div>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
+<main id="main">
+
+<section>
+  <div class="narrow">
+    <h2>The same offence, declared</h2>
+    <p>The verifier refused a wizard that cannot be left, citing two rules, an article and a right. In the declaration the same offence is one constraint: where it applies,
+    the condition that makes it an offence, the sentence, the stable code, and what it cites. It is written from the contract, and the court speaks that code.</p>
+<pre class="excerpt" data-excerpt="haro/zui.stzu"><span class="k">DEFINE CONSTRAINT</span> <span class="n">trapped_flow_wizard</span> <span class="k">AS</span> (
+  ON wizard, WHEN <span class="s">"not always_reachable contains exit"</span>,
+  MESSAGE <span class="s">"{name} is multi-step and EXIT is not always reachable: a trapped flow is unconstitutional"</span>,
+  CODE <span class="s">"TRAPPED_FLOW"</span>,
+  CITES [<span class="s">"rule:51"</span>, <span class="s">"rule:53"</span>, <span class="s">"article:intent"</span>, <span class="s">"right:leave"</span>]
+) RATIONALE <span class="s">"Rules 51, 53; level 2"</span></pre>
+    <p>The <span data-fact="kinds">10</span> kinds, the <span data-fact="verbs">22</span> verbs and six closed vocabularies are declared the same way, from the pack's own data. The declaration does not replace the verifier.
+    It declares what the meta-language can carry, and counts what it cannot.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>Two courts, one suite</h2>
+    <figure class="figure">
+      <div class="scroll">
+      <svg viewBox="0 0 780 300" role="img" aria-labelledby="two-t two-d">
+        <title id="two-t">Two courts judging the same fixtures</title>
+        <desc id="two-d">The suite of fixtures sits at the left. Two arrows go to two courts: the hand-written verifier in tools/zui, and the court forged from the Haro declaration. From the two courts, one arrow goes to a result box: they agree on part of the fixtures and differ on the rest. Each difference is a named row, held by a ratchet.</desc>
+        <defs><marker id="two-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
+        <rect class="dg-data" x="10" y="100" width="170" height="100" rx="10"/>
+        <text class="dg-t" x="95" y="140" text-anchor="middle">The suite</text>
+        <text class="dg-s" x="95" y="166" text-anchor="middle"><tspan data-fact="fixtures.total">73</tspan> fixtures</text>
+        <text class="dg-s" x="95" y="188" text-anchor="middle">the same files</text>
+        <rect class="dg-live" x="250" y="20" width="230" height="100" rx="10"/>
+        <text class="dg-t" x="365" y="58" text-anchor="middle">The verifier</text>
+        <text class="dg-s" x="365" y="84" text-anchor="middle">hand-written, in</text>
+        <text class="dg-s" x="365" y="106" text-anchor="middle">tools/zui</text>
+        <rect class="dg-live" x="250" y="180" width="230" height="100" rx="10"/>
+        <text class="dg-t" x="365" y="218" text-anchor="middle">The forged court</text>
+        <text class="dg-s" x="365" y="244" text-anchor="middle">made from the Haro</text>
+        <text class="dg-s" x="365" y="266" text-anchor="middle">declaration</text>
+        <rect class="dg-box" x="550" y="100" width="220" height="100" rx="10"/>
+        <text class="dg-t" x="660" y="136" text-anchor="middle">Compared</text>
+        <text class="dg-s" x="660" y="162" text-anchor="middle"><tspan data-fact="twin.agree">55</tspan> agree</text>
+        <text class="dg-bad" x="660" y="188" text-anchor="middle"><tspan data-fact="twin.differences">18</tspan> named differences</text>
+        <line class="dg-line" x1="180" y1="130" x2="248" y2="80" marker-end="url(#two-ah)"/>
+        <line class="dg-line" x1="180" y1="170" x2="248" y2="220" marker-end="url(#two-ah)"/>
+        <line class="dg-line" x1="480" y1="80" x2="548" y2="130" marker-end="url(#two-ah)"/>
+        <line class="dg-line" x1="480" y1="220" x2="548" y2="170" marker-end="url(#two-ah)"/>
+      </svg>
+      </div>
+      <figcaption>The verifier runs in this repository's gates. The forged court runs through a judge that needs the Haro spike checked out beside it, so it is not one of them. <b>Not shown:</b> agreement on a
+      fixture is agreement with the file's expected verdict, which proves the two courts alike on it, not that the verdict is right for a person.</figcaption>
+    </figure>
+    <p><b>How the ratchet works.</b> Every fixture where the two differ is one row in <a href="../haro/twin-expected.csv"><code>haro/twin-expected.csv</code></a>, with the seam that explains it and
+    the class of difference. The judge fails if a row is missing, if a difference is not listed, or if the grammar file differs from what the forge writes now. Fixing a seam shrinks the file; nothing can grow it silently.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Where the two differ, in three classes</h2>
+    <table class="board">
+      <thead><tr><th>Class</th><th>Files</th><th>What it means</th><th>Why, by seam</th></tr></thead>
+      <tbody>
+        <tr><td>Another code</td><td><span data-fact="twin.otherCode">6</span></td><td>Both refuse. The forged court speaks a different code, for instance a parse error where the verifier says a field is given twice.</td><td>S8, S11: the meta-language has its own codes for what is structurally malformed.</td></tr>
+        <tr><td>Not refused</td><td><span data-fact="twin.notRefused">10</span></td><td>The verifier refuses or warns; the forged court says clean.</td><td>S1: a warning has no seat. S3: a check that needs the host world. S7, S14: two checks the condition language cannot yet express.</td></tr>
+        <tr><td>Court only</td><td><span data-fact="twin.courtOnly">2</span></td><td>A lawful file the verifier accepts and the forged court refuses.</td><td>S9: a foreign pillar's declaration. S13: a field the verifier reads on any kind.</td></tr>
+      </tbody>
+    </table>
+    <p>The ten that the forged court does not refuse are the ones to read first: that class is where a court made from data would say <b>clean</b> to something the law forbids.
+    Four of them are warnings the verifier raises and the declaration does not declare.</p>
+    <p>Where a difference is a ruling rather than a defect, the declaration says so. The verifier keeps its warning for a named widget until Haro has a seat for severity; it ignores another
+    pillar's declarations where the forged court refuses them; and a declaration still needs no mandatory rationale in a <code>.zui</code> file. These were ruled by the author, and the page does not reopen them.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>A grammar a generator can be held to</h2>
+    <p>The same declaration yields <a href="../haro/zui.gbnf"><code>haro/zui.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4043</span> bytes of GBNF, the notation grammar-constrained decoders read.
+    It fixes the shape of a declaration: the <span data-fact="gbnf.kinds">10</span> kinds, the clauses each kind may carry, and the lexical form. It does not fix the verbs or the values, and it
+    cannot refuse an offence such as the wizard above, which is well formed and wrong. The court does that, so a generator held to the grammar still has to pass the verifier.
+    <a href="generate.html">The Generate page</a> shows the two together.</p>
+    <p>Nothing here states what Haro is for. That is the charter of the Haro project, and this page claims only what its own repository can run: the declaration, the judge, the ratchet and the grammar.</p>
+  </div>
+</section>
+</main>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/index.html">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=51932dd5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>
