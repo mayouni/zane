@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generate — how to hold an AI generator to the law</title>
+<meta name="description" content="Two layers: a grammar that fixes the shape of what a generator can write, and a court that refuses what the law forbids. This page says which layer holds what.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=19b21989">
+</head>
+<body>
+
+<!-- shell:menu -->
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a href="media.html">Media</a>
+    <a href="audit.html">Audit</a>
+    <a class="here" aria-current="true" href="adopt.html">Adopt</a>
+    </div>
+    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>
+  </div>
+</nav>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Adopt</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Generate</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Adopt · generate · you build interfaces with AI</p>
+    <h1>How do I hold an AI generator to the law?</h1>
+    <p class="sub">Two layers: a grammar that fixes the shape of what a generator can write, and a court that
+    refuses what the law forbids. They hold different things, and this page says which holds what.</p>
+  </div>
+</header>
+
+<!-- shell:rail -->
+<div class="layout has-rail">
+<nav class="rail" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Adopt</a></li>
+    <li><a href="build.html">Build</a></li>
+    <li><a class="here" aria-current="page" href="generate.html">Generate</a></li>
+  </ul>
+</nav>
+<!-- /shell:rail -->
+<main id="main">
+
+<section>
+  <div class="narrow">
+    <h2>A declaration the grammar allows and the law refuses</h2>
+    <p>An AI asked to build a business interface reproduces the habits it was trained on, politely and at machine speed.
+    Make it declare intent first, and the intent can be checked before anything is drawn. Here is a declaration in which
+    every clause is one the language has; the law still refuses the flow:</p>
+<pre class="shot"><span class="c">// what a generator may well emit: every clause is allowed</span>
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">pick_and_pay</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
+  <span class="k">ACTOR</span> operator
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check pick.zui</span>
+pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPSE</span>  pick_and_pay
+    <span class="dim">Selection has become execution: SATISFIES holds SELECT and ACT without CONFIRM.</span>
+    <span class="dim">Rule 16 · Intentional Clicks · Article II</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    <p>That is a real run, re-run by this site's own check. The refusal names the rule it rests on, which is what lets a
+    generator be told <em>which</em> law it broke instead of being told it was wrong.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The grammar holds the shape</h2>
+    <p>The language is declared in Haro, and the forge writes from that declaration a grammar a decoder can be held to. It is
+    checked in as <a href="../haro/zui.gbnf"><code>haro/zui.gbnf</code></a>, a few kilobytes of GBNF, the notation grammar-constrained
+    decoders accept.</p>
+    <p><b>What it fixes:</b> the <span data-fact="gbnf.kinds">10</span> kinds of declaration, which clauses each kind may carry, and the
+    lexical form (comments, quoted strings, upper-case keywords, lower-case names, trailing commas). A clause that does not belong to a
+    kind cannot be written under it: a role on a screen, for example, is not a sentence of this grammar.</p>
+    <p><b>What it does not hold:</b> the verbs. A list of names is any identifier, so an unknown verb is a sentence the grammar
+    accepts and the court refuses. Neither does it hold anything that needs two clauses read together: the declaration above is
+    well-formed. <b>Every refusal of meaning stays the court's.</b> The grammar narrows what a generator can say; it does not make it lawful.</p>
+    <p><b>How far it is checked:</b> the judge regenerates the file from the declaration on every run and fails if the copy checked in
+    differs, so the file cannot drift from the forge. It has not been run under a decoder in this repository: no model has been decoded
+    under it here, and the site does not claim one has.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>A loop you can run today</h2>
+    <p>With any capable assistant: put the law in its context, instruct it to declare each surface in <code>.zui</code> before rendering it,
+    run the verifier, and hand it the findings by rule number:</p>
+<pre class="term"><span class="p">You are building under the Zui Constitution (rules.json attached).</span>
+<span class="p">Declare each surface in .zui before rendering it, and cite the rules you obeyed.</span>
+<span class="p">Here is the verifier's report on your last declaration. Fix every finding, by rule:</span>
+<span class="bad">pick.zui:2 error SELECT_ACT_COLLAPSE (Rule 16)</span></pre>
+    <p>This is a procedure, not a measured result: nobody has yet measured how many rounds a model needs under it, or whether the declared
+    surface and the rendered one stay in step. The runtime half is the audit, which measures what was actually painted
+    (<a href="../tools/ui-audit.html">the UI audit</a>).</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>Feel what the law forbids first</h2>
+    <p>The defects a generator reproduces have rules behind them. <a href="gotchas/">What a violation feels like</a> lets you commit each
+    family of offence yourself, safely fenced, each beside its lawful twin, before you ask a model to avoid them.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>What is not written</h2>
+    <p>The law already says how an agent may act on an interface: it is a named actor under the same audit as a person, its output is a
+    reviewable proposal, and what it produces is marked as machine-made. What is <b>not written</b> is the jurisdiction over the chat
+    stream, and a surface that serves the law to an agent while it works. That is unchanged and held, and nothing on this site advances it.</p>
+    <div class="next">
+      <a href="build.html"><span class="label">Back</span>← Build</a>
+      <a href="adopt.html"><span class="label">Up</span>Which way in is yours →</a>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/index.html">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=6a53b578"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

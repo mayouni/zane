@@ -171,7 +171,8 @@ footer.site code {
 }
 .layout.has-rail > main { min-width: 0; }
 .layout.has-rail main section { padding-left: 0; padding-right: 0; }
-.layout.has-rail main .narrow { padding: 0; max-width: 48rem; margin: 0; }
+/* the column is as wide as the page allows, so a code block takes the room (Rule 114); prose keeps its own measure (p, ul) */
+.layout.has-rail main .narrow { padding: 0; max-width: none; margin: 0; }
 .layout.has-rail main .narrow .shot, .layout.has-rail main .narrow .term { width: 100%; margin-left: 0; }
 nav.rail {
   align-self: start; position: sticky; top: 4.6rem; margin: 2.6rem 0 0;
@@ -252,6 +253,10 @@ li { margin: .3rem 0; }
 .card p { margin: 0; color: var(--muted); }
 .card .proof { display: block; margin-top: .6rem; font: 1rem var(--mono);
   overflow-wrap: anywhere; word-break: break-word; }
+
+/* a row of reader cards: one line each, and the link is the point */
+.readers .card p { margin-bottom: .7rem; }
+.readers .card .proof a { font-weight: 700; }
 
 /* ---- stamp ---- */
 .stamp {

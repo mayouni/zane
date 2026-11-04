@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build — put the law in a project and gate your CI</title>
+<meta name="description" content="Declare before you draw, pin the law as a hash, fail the build on a refusal, and measure what the browser actually paints.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=19b21989">
+</head>
+<body>
+
+<!-- shell:menu -->
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a href="media.html">Media</a>
+    <a href="audit.html">Audit</a>
+    <a class="here" aria-current="true" href="adopt.html">Adopt</a>
+    </div>
+    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>
+  </div>
+</nav>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Adopt</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Build</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Adopt · build · you ship business software</p>
+    <h1>Put the law in a project and gate your CI</h1>
+    <p class="sub">Declare before you draw, pin the law as a hash, fail the build on a refusal,
+    and measure what the browser actually paints. Nothing here needs more than Node and a browser.</p>
+  </div>
+</header>
+
+<!-- shell:rail -->
+<div class="layout has-rail">
+<nav class="rail" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Adopt</a></li>
+    <li><a class="here" aria-current="page" href="build.html">Build</a></li>
+    <li><a href="generate.html">Generate</a></li>
+  </ul>
+</nav>
+<!-- /shell:rail -->
+<main id="main">
+
+<section>
+  <div class="narrow">
+    <h2>Declare before you draw</h2>
+    <p>Before wireframes harden, write the surface's <code>.zui</code> declaration: which intents it
+    satisfies, what stays always reachable. A few minutes of declaration replaces a meeting of taste:
+    the design review reads <code>SATISFIES [SELECT, CONFIRM, ACT]</code> and asks one question,
+    <em>is that what the operator is actually doing?</em>, instead of debating paddings.</p>
+<pre class="shot"><span class="c">// specs/checkout.zui — written at the whiteboard, checked at the desk</span>
+<span class="k">DEFINE WIZARD</span> <span class="n">checkout</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check checkout.zui</span>
+checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  checkout
+    <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
+    <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    <p>That is the output of a real run, and this site's own check re-runs it. The wizard has an exit and a way
+    to cancel, and the law still refuses it, because it acts and promises no undo. The verifier ships in this
+    repository and runs on Node alone. It reads its contract and its citations from the law rather than hardcoding
+    them.</p>
+    <p><b>What a declaration alone can decide is level two, the default.</b> A check that needs a fact a
+    declaration does not hold (the entities, the actors, the state, the elements of a surface) is skipped unless you
+    hand it a symbol table with <code>--symbols</code>: undecidable is silence, never a pass. Computing that table
+    from a host project is not built (see the last section).</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>Pin the law as a hash, not only a version</h2>
+    <p><b>A version says which edition you meant. A hash says the bytes you hold are that edition.</b> Vendor the
+    files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
+    proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
+<pre class="term"><span class="dim">$ node tools/zui/pack.js --check</span></pre>
+    <p>Then <em>conforms to Zui v<span data-law="version">3.13</span></em> is a claim your CI can refute. Numbers
+    are stable forever: a retired number is never reused, so a finding that cites Rule 79 means the same thing in ten
+    years. <a href="../protocol/README.md">The protocol pack</a> says what to vendor and what you may and may not claim.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Fail the build on a refusal</h2>
+    <p>The verifier exits non-zero when any declaration is refused, and zero when there are only warnings. Run it
+    over your specifications in CI:</p>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check specs/*.zui</span>
+<span class="dim">$ node tools/zui/cli.js check specs/*.zui --json</span>   <span class="dim"># for a machine to read</span></pre>
+    <p>The contract names <span data-law="diagnostics">37</span> diagnostics at <span data-fact="diag.levels">4</span>
+    conformance levels, and every finding carries the rule, article or right it rests on. The suite that proves any
+    implementation agrees, <span data-fact="fixtures.total">73</span> fixtures with known verdicts, is in
+    <a href="../conformance/README.md"><code>conformance/</code></a>; <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a> is the first conforming consumer.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>Measure the paint</h2>
+    <p>Declaring is not enough: a page can be lawful on paper and unlawful in the browser. Serve your application and
+    point <a href="../tools/ui-audit.html">the UI audit</a> at it, one path per line, any same-origin pages; nothing
+    leaves your browser. It measures what static analysis cannot see: computed text sizes, true contrast against the
+    composited background, the trail, the room before scrollbars, the navigation bars against each other and the menu
+    against the tree. A colour it cannot read is reported as <em>not decided</em>, naming the colour, and never skipped.
+    It exports a Markdown report, each finding citing its rule.</p>
+    <p>Run it in every culture you ship: a page can be lawful in one palette and unlawful in another. This site audits itself
+    that way before it ships.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Amend with evidence</h2>
+    <p>The law grows one way only (Article VII): real usage, operator feedback, documented failure. If your project hits a
+    recurring defect the law does not name, record it as the law records its own: what happened, where, how it was
+    corrected, why it generalizes, and whether a reviewer could decide it yes or no. Every rule carries an <code>evidence</code>
+    field saying where it came from, and fashion, trends and developer convenience are not admissible.
+    <a href="../doc/AMENDMENT-DOCKET.md">The amendment docket</a> shows how a pass is ruled.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>What is not here yet</h2>
+    <p>Stated as held or designed, not as promised.</p>
+    <ul>
+      <li><b>Cross-pillar symbols are not computed.</b> The verifier accepts a symbol table you supply; building one from a host
+      project's other pillars is the open half of level three, unchanged.</li>
+      <li><b>One violation belongs to the audit, not the verifier.</b> <code>LAYOUT_DISPLACEMENT</code> is a fact about a painted
+      page, so it has no fixture by design.</li>
+      <li><b>The AI-interaction jurisdiction is not written:</b> no rules for the chat stream, and no endpoint that serves the law to
+      an agent while it works. The <a href="../ROADMAP.md">roadmap</a> keeps the account.</li>
+      <li><b>The Second Founding is proposed, not ratified.</b> It argues for a wider design and its own rulings; the law you pin is
+      the one above, not that document.</li>
+    </ul>
+    <div class="next">
+      <a href="adopt.html"><span class="label">Back</span>← Which way in is yours</a>
+      <a href="generate.html"><span class="label">Next</span>Generate with AI →</a>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/index.html">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=6a53b578"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

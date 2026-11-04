@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>StzZui — the compilable language for user interfaces</title>
-<meta name="description" content="StzZui: a declarative, compilable language for intent-driven user interfaces, governed by a machine-verifiable constitution of 123 rules. Declare what the human is doing; the compiler refuses what the law forbids; projections render to any medium; the audit measures what runtime paints.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="site/stz.css?v=0f318111">
+<meta name="description" content="StzZui: a declarative, compilable language for intent-driven user interfaces, governed by a machine-verifiable constitution. Declare what the human is doing; the compiler refuses what the law forbids; one declaration holds across media; the audit measures what an interface paints.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='system-ui' font-weight='900' font-size='22' text-anchor='middle' fill='%23e04a6e'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="site/stz.css?v=19b21989">
 <style>
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
   gap: 1.2rem; }
@@ -14,6 +14,7 @@
   font-family: var(--mono); }
 .readers .card p { margin-bottom: .7rem; }
 .readers .card .proof a { font-weight: 700; }
+.fresh .card .limit { margin-top: .6rem; color: var(--ink); }
 </style>
 </head>
 <body>
@@ -42,14 +43,10 @@
   <div class="narrow">
     <p class="kicker">A Softanza project · a language with a court</p>
     <h1>The compilable language for user interfaces</h1>
-    <p class="sub">Zui is a <b>declarative language for intent-driven UIs</b>.
-    You declare what the human is trying to do — discover, select, confirm,
-    undo — and the compiler refuses what its constitution forbids,
-    <em>before anything is rendered</em>. Behind the language: a
-    machine-verifiable law of <span data-law="rules">123</span> rules as data. In front of it: projections
-    to any medium — web, CLI, voice, game worlds, AI-agent surfaces. It
-    deploys inside any software project and holds at every phase: design,
-    development, runtime.</p>
+    <p class="sub">Zui is a declarative language for <b>intent-driven UIs</b>. You declare what the human is trying to do
+    — discover, select, confirm, undo — and the compiler refuses what its constitution forbids, <em>before anything is rendered</em>.
+    Behind the language: a machine-verifiable law of <span data-law="rules">123</span> rules as data, v<span data-law="version">3.13</span>.
+    In front of it: one declaration for <span data-fact="media.count">10</span> media, and an audit that reads what an interface actually paints.</p>
   </div>
 </header>
 
@@ -85,64 +82,98 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
 )</pre>
 <pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v<span data-law="version">3.13</span></pre>
-    <p class="caption"><b>Status, plainly:</b> that is real output, copied from
-    a real run — <a href="tools/zui/README.md">the verifier</a> ships in this
-    repository, passes all 40 fixtures of
-    <a href="conformance/README.md">the conformance suite</a>, and needs no
-    toolchain beyond Node. It reads its diagnostic contract and its citations
-    from <a href="constitution/rules.json">the law itself</a> rather than
-    hardcoding them. What it does <em>not</em> yet do: the four cross-pillar
-    checks need a symbol table you supply, and one violation
-    (<code>LAYOUT_DISPLACEMENT</code>) belongs to
-    <a href="tools/ui-audit.html">the UI audit</a> because it is a fact about a
-    painted page. The <a href="site/how.html">status board</a> keeps the whole
-    account honest.</p>
+    <p class="caption"><b>That is real output, copied from a real run</b>, and this site's own check re-runs it: it fails if the
+    page and the verifier ever disagree. The verifier ships in this repository and needs no toolchain beyond Node.
+    <a href="site/how.html">The status board</a> says plainly what exists, what is designed and what is held.</p>
   </div>
 </section>
 
 <section class="alt">
-  <div class="narrow">
-    <h2>The language, in numbers</h2>
-    <div class="stats">
-      <div class="card"><b data-fact="verbs">22</b><p>closed intent verbs, DISCOVER … EXIT — widgets are consequences</p></div>
-      <div class="card"><b data-fact="kinds">10</b><p>declaration types, INTENT_FLOW to VIBE</p></div>
-      <div class="card"><b data-law="rules">123</b><p>constitutional rules as data, v<span data-law="version">3.13</span> — the semantic layer</p></div>
-      <div class="card"><b data-law="diagnostics">37</b><p>named violations in the refusal contract — 24 enforced by the verifier</p></div>
-      <div class="card"><b data-law="forbidden">17</b><p>forbidden patterns, named outright</p></div>
-      <div class="card"><b>3</b><p>phases held: design, development, runtime</p></div>
+  <div class="narrow fresh">
+    <h2>What is new: four things, each with its instrument</h2>
+    <p class="lead">Each comes with the figure its instrument reports and the limit that figure has.</p>
+    <div class="grid">
+      <div class="card"><h3>The language is declared</h3>
+        <p><a href="haro/zui.stzu"><code>zui.stzu</code></a> is StzZui written in Haro: <span data-fact="haro.constraints">136</span> constraints,
+        each citing the rule, article, right or pattern it enforces. A forge writes a second court and a grammar from it, and the
+        two evaluators of the law (the verifier and the forged court) have <span data-fact="twin.differences">18</span> known differences,
+        listed by seam. The judge fails on any other.</p>
+        <p class="limit"><b>Limit:</b> the forged court is silent on the warnings and on three checks that need facts a declaration does not hold.</p></div>
+      <div class="card"><h3>One declaration, ten media</h3>
+        <p>The ten media are enumerated in <a href="conformance/media.json"><code>media.json</code></a>, and a verb a medium cannot carry
+        is refused. The coverage grid maps what a person does against them: <span data-fact="grid.cellsWithRule">20</span> of
+        <span data-fact="grid.cellsLive">55</span> live cells have a rule written for that medium, <span data-fact="grid.cellsNone">35</span> have none,
+        and <span data-fact="grid.rulesScreenOnly">89</span> of the <span data-law="rules">123</span> rules are written for a screen only.</p>
+        <p class="limit"><b>Limit:</b> the gap is the finding. Nobody has perceived any of these media for the grid.
+        <a href="site/media.html">Media</a> is being built.</p></div>
+      <div class="card"><h3>The law reaches interfaces nobody declared</h3>
+        <p>A screenshot is reduced to facts (text, box, luminances, contrast) and judged against the <span data-fact="audit.decides">3</span> rules a
+        screenshot can decide. Every other rule reads <em>not audited</em>, never <em>passed</em>; a size is never a pass; contrast is judged at the
+        worst end of the background.</p>
+        <p class="limit"><b>Limit:</b> no real application's screenshot has been run through it yet, and no person has looked at any.
+        <a href="site/audit.html">Audit</a></p></div>
+      <div class="card"><h3>The refusal contract grew</h3>
+        <p><span data-law="diagnostics">37</span> diagnostics at <span data-fact="diag.levels">4</span> conformance levels, every finding carrying the
+        rule it rests on, and <span data-fact="fixtures.total">73</span> fixtures with known verdicts that any implementation can prove it agrees with.
+        A rule was canonized from a check that had cited only an article.</p>
+        <p class="limit"><b>Limit:</b> level four holds no fixture by design: a painted layout is measured by the audit, not declared.
+        <a href="conformance/violations.json">The contract</a></p></div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="narrow readers">
-    <h2>Three ways in</h2>
-    <div class="grid">
-      <div class="card"><h3>You build business software</h3>
-        <p>Declare intent before you render, gate your CI on the law, measure
-        the painted page in your browser. Framework-independent by
-        construction — the declaration outlives your stack.</p>
-        <span class="proof"><a href="site/adopt.html">Deploy it in your project →</a></span></div>
-      <div class="card"><h3>You design, or you care about UX</h3>
-        <p>The full argument: what is decaying, why guidelines failed, and the
-        recorded evidence — a year of AI-built applications, defect by defect,
-        correction by correction.</p>
-        <span class="proof"><a href="site/why.html">Read the case →</a></span></div>
-      <div class="card"><h3>You generate UIs with AI</h3>
-        <p>Make the generator declare intent before it draws, and hold it to a
-        law it can be measured against. The defects it reproduces have numbers
-        here — feel them first.</p>
-        <span class="proof"><a href="site/gotchas/">Feel the offenses →</a></span></div>
+  <div class="narrow">
+    <h2>The language, in numbers</h2>
+    <div class="stats">
+      <div class="card"><b data-fact="verbs">22</b><p>closed intent verbs, DISCOVER … EXIT — widgets are consequences</p></div>
+      <div class="card"><b data-fact="kinds">10</b><p>declaration kinds, INTENT_FLOW to VIBE</p></div>
+      <div class="card"><b data-law="rules">123</b><p>constitutional rules as data, v<span data-law="version">3.13</span> — the semantic layer</p></div>
+      <div class="card"><b data-law="diagnostics">37</b><p>diagnostics in the refusal contract</p></div>
+      <div class="card"><b data-law="forbidden">17</b><p>forbidden patterns, named outright</p></div>
+      <div class="card"><b data-fact="fixtures.total">73</b><p>conformance fixtures with known verdicts</p></div>
+      <div class="card"><b data-fact="media.count">10</b><p>media a declaration can name</p></div>
+      <div class="card"><b data-fact="haro.constraints">136</b><p>constraints in the language's own declaration</p></div>
     </div>
   </div>
 </section>
 
 <section class="alt">
+  <div class="narrow readers">
+    <h2>Who it is for</h2>
+    <div class="grid">
+      <div class="card"><h3>You build business software</h3>
+        <p>Declare intent, gate your CI on the law, measure the painted page.</p>
+        <span class="proof"><a href="site/build.html">Build →</a></span></div>
+      <div class="card"><h3>You design, or you care about UX</h3>
+        <p>What is decaying, why guidelines failed, and the evidence.</p>
+        <span class="proof"><a href="site/why.html">Read the case →</a></span></div>
+      <div class="card"><h3>You build with AI</h3>
+        <p>What a grammar can hold, and what only the court can.</p>
+        <span class="proof"><a href="site/generate.html">Generate →</a></span></div>
+      <div class="card"><h3>You ship where there is no screen</h3>
+        <p>Voice, sound, print, an API a machine reads.</p>
+        <span class="proof"><a href="site/media.html">Media →</a></span></div>
+      <div class="card"><h3>You judge an application you do not own</h3>
+        <p>What a screenshot can decide, and what it refuses to.</p>
+        <span class="proof"><a href="site/audit.html">Audit →</a></span></div>
+      <div class="card"><h3>You design a language</h3>
+        <p>StzZui is declared in Haro; the declaration is the example.</p>
+        <span class="proof"><a href="haro/zui.stzu">Read zui.stzu →</a></span></div>
+      <div class="card"><h3>You implement StzZui elsewhere</h3>
+        <p>The pack to pin, the suite to run, the discipline for two evaluators.</p>
+        <span class="proof"><a href="protocol/README.md">The protocol pack →</a></span></div>
+    </div>
+    <p class="caption">Not sure which? <a href="site/adopt.html">Which way in is yours</a> says what each one leaves you with.</p>
+  </div>
+</section>
+
+<section>
   <div class="narrow">
     <h2>What makes it different</h2>
     <p><b>It is a language, not a library.</b> A human never comes to click a
     button; they come to discover, compare, act, confirm, undo. Zui makes that
-    declarable — ten declaration types over a closed grammar of 22 verbs — and
+    declarable — <span data-fact="kinds">10</span> declaration kinds over a closed grammar of <span data-fact="verbs">22</span> verbs — and
     therefore <em>compilable</em>: a selection that executes, a flow with no
     exit, an act with no undo are structural errors, refused by name before
     the interface exists.</p>
@@ -155,9 +186,20 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
     checked before a pixel exists. In development every build is linted and
     every finding carries a rule number. At runtime
     <a href="tools/ui-audit.html">the UI audit</a> measures the painted page —
-    sizes, true contrast, the trail, the room, the menu against the tree.
-    <a href="site/how.html">The full pipeline</a>, including the instruments
-    still in design, is documented facet by facet.</p>
+    sizes, true contrast, the path, the room, the menu against the tree.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>What this site does not claim</h2>
+    <ul>
+      <li><b>No person has perceived any medium</b> for the coverage grid; it is designed and measured, not verified by a person.</li>
+      <li><b>The screenshot audit has never been run on a real application.</b></li>
+      <li><b>The wider design, the Second Founding, is proposed, not ratified</b>, and nothing here rests on it.</li>
+      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal media until a product that ships in one is named;
+      other pillars; a usability toolset.</li>
+    </ul>
   </div>
 </section>
 
@@ -165,17 +207,15 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
   <div class="narrow">
     <h2>Proof, not promises</h2>
     <p>This site obeys the law it publishes: it audits itself, in both of its
-    vibes, before any page ships — press <kbd>F2</kbd> to switch culture and
-    notice that your rights don't flex (Article VI). The
-    <a href="site/gotchas/">Gotchas</a> let you commit twelve offenses
-    yourself, safely fenced, each beside its lawful twin, and the
-    <a href="site/vibes.html">vibes exhibit</a> renders one shared truth in
+    cultures, before any page ships — press <kbd>F2</kbd> to switch culture and
+    notice that your rights don't flex (Article VI). <a href="site/gotchas/">What a violation feels like</a>
+    lets you commit each family of offence yourself, safely fenced, each beside its lawful twin, and the
+    <a href="site/vibes.html">two-cultures exhibit</a> renders one shared truth in
     both cultures at once. The consumers are
     real: the <b>reference implementation</b> compiles the grammar and refuses the named
     violations today, and <a class="leaves"
     href="https://mayouni.github.io/zing/" target="_blank"
-    rel="noopener">Zing</a> lints its declarations against the pinned law
-    and scores zero violations under the audit.</p>
+    rel="noopener">Zing</a> lints its declarations against the pinned law.</p>
     <p>The stance is opinionated, openly: <b>business applications first</b> —
     operators, not explorers. Calm over power. Intent over mechanics. Visible
     over hidden. Undo is dignity.</p>

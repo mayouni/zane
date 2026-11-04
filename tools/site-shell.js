@@ -56,6 +56,8 @@ const PAGES = [
   { file: 'site/media.html', section: 'media', label: 'Media', rail: true, stub: 'media' },
   { file: 'site/audit.html', section: 'audit', label: 'Audit', rail: true, stub: 'audit' },
   { file: 'site/adopt.html', section: 'adopt', label: 'Adopt', rail: true },
+  { file: 'site/build.html', section: 'adopt', label: 'Build', rail: true },
+  { file: 'site/generate.html', section: 'adopt', label: 'Generate', rail: true },
   /* outside the shell proper: menu and trail only */
   { file: 'constitution/reader/index.html', section: 'law', label: 'Reader', outside: 'reader' },
   { file: 'tools/ui-audit.html', section: 'audit', label: 'UI audit', outside: 'tool' }

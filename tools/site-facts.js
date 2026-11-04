@@ -13,7 +13,8 @@
    This script derives every figure from the tree and fails when
      - site/facts.json differs from what the tree gives now,
      - any span's fallback differs from the derived value,
-     - the home page's "ninety seconds" no longer matches a real run of tools/zui/cli.js.
+     - a declaration shown on a page, with the terminal that checked it, no longer matches a real run of tools/zui/cli.js
+       (the home page's "ninety seconds" and every pair like it).
    A typed number outside a span is invisible to the first two; --unchecked counts them so they can
    be driven to zero as the pages are rewritten.
    ========================================================================== */
@@ -69,6 +70,8 @@ function derive() {
   put('twin.differences', csv.length, 'haro/twin-expected.csv rows');
   put('twin.seams', new Set(csv.map(l => l.split(',')[3])).size, 'haro/twin-expected.csv seam column');
   put('haro.gbnfBytes', fs.existsSync(R('haro/zui.gbnf')) ? fs.statSync(R('haro/zui.gbnf')).size : 0, 'haro/zui.gbnf');
+  const gb = fs.readFileSync(R('haro/zui.gbnf'), 'utf8');
+  put('gbnf.kinds', (gb.match(/^decl_[A-Z_]+ ::=/gm) || []).length, 'haro/zui.gbnf (decl_* productions)');
 
   const g = spawnSync(process.execPath, [R('doc/design/coverage-count.js'), '--json'], { encoding: 'utf8', maxBuffer: 1 << 26 });
   const s = JSON.parse(g.stdout).sum;
@@ -114,28 +117,31 @@ function spansOf(html) {
 }
 const decode = s => s.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
 
-// ---- the home page's "ninety seconds" against a real run ----------------------------------------------
-function ninetySeconds(problems) {
-  const html = fs.readFileSync(R('index.html'), 'utf8').replace(/\r\n/g, '\n');
-  const a = html.indexOf('Ninety seconds of Zui');
-  if (a < 0) { problems.push('index.html: no "Ninety seconds of Zui" section to verify'); return 0; }
-  const rest = html.slice(a, html.indexOf('</section>', a));
-  const shots = [...rest.matchAll(/<pre class="shot">([\s\S]*?)<\/pre>/g)].map(x => decode(x[1]));
-  const terms = [...rest.matchAll(/<pre class="term">([\s\S]*?)<\/pre>/g)].map(x => decode(x[1]));
-  if (!shots.length || shots.length !== terms.length) { problems.push(`index.html: the ninety seconds has ${shots.length} declaration(s) and ${terms.length} terminal(s)`); return 0; }
+// ---- every declaration and terminal pair on a page against a real run -----------------------------------------
+/* A page shows a declaration (<pre class="shot">) and, right after it, the terminal that checked it (<pre class="term">) whose first
+   line is "$ node tools/zui/cli.js check NAME.zui". This writes the declaration to NAME.zui, runs the verifier on it, and compares
+   what it prints with what the page says, so "copied from a real run" is verified, not asserted. */
+function verifyRuns(problems) {
   const tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'site-facts-'));
+  const norm = t => t.replace(/\r\n/g, '\n').split('\n').map(l => l.replace(/\s+$/, '')).join('\n').replace(/\n+$/, '');
+  const per = {};
   let n = 0;
-  shots.forEach((src, i) => {
-    const lines = terms[i].split('\n');
-    const cmd = lines[0].replace(/^\$\s*/, '');
-    if (!/^node tools\/zui\/cli\.js check payments\.zui$/.test(cmd)) { problems.push(`index.html: terminal ${i + 1} runs "${cmd}", which this check does not know how to re-run`); return; }
-    fs.writeFileSync(path.join(tmp, 'payments.zui'), src.replace(/\s+$/, '') + '\n');
-    const r = spawnSync(process.execPath, [R('tools/zui/cli.js'), 'check', 'payments.zui'], { cwd: tmp, encoding: 'utf8' });
-    const norm = t => t.replace(/\r\n/g, '\n').split('\n').map(l => l.replace(/\s+$/, '')).join('\n').replace(/\n+$/, '');
-    const got = norm(r.stdout || ''), want = norm(lines.slice(1).join('\n'));
-    n++;
-    if (got !== want) problems.push(`index.html: the ninety seconds, terminal ${i + 1}, is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
-  });
+  for (const p of pages()) {
+    const html = fs.readFileSync(R(p), 'utf8').replace(/\r\n/g, '\n');
+    const re = /<pre class="shot">([\s\S]*?)<\/pre>\s*<pre class="term">([\s\S]*?)<\/pre>/g;
+    let m;
+    while ((m = re.exec(html))) {
+      const lines = decode(m[2]).split('\n');
+      const cmd = /^\$\s*node tools\/zui\/cli\.js check (\S+\.zui)\s*$/.exec(lines[0]);
+      if (!cmd) continue;                           /* a terminal that is not a verifier run is not claimed to be one */
+      fs.writeFileSync(path.join(tmp, cmd[1]), decode(m[1]).replace(/\s+$/, '') + '\n');
+      const r = spawnSync(process.execPath, [R('tools/zui/cli.js'), 'check', cmd[1]], { cwd: tmp, encoding: 'utf8' });
+      const got = norm(r.stdout || ''), want = norm(lines.slice(1).join('\n'));
+      n++; per[p] = (per[p] || 0) + 1;
+      if (got !== want) problems.push(`${p}: the terminal for ${cmd[1]} is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
+    }
+  }
+  if (!per['index.html']) problems.push('index.html: its "ninety seconds" has no declaration and terminal pair to verify');
   return n;
 }
 
@@ -192,8 +198,8 @@ function main(argv) {
     total += u.length;
     if (u.length) per.push(`${p}: ${u.length} (${[...new Set(u)].slice(0, 8).join(', ')})`);
   }
-  const ninety = ninetySeconds(problems);
-  console.log(`spans checked: ${spans}; wrong: ${bad}; ninety seconds re-run: ${ninety} of the page's terminals`);
+  const ninety = verifyRuns(problems);
+  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);
   if (listUnchecked) per.forEach(l => console.log('  ' + l));
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }

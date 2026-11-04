@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Adopt — deploy the law in your project</title>
-<meta name="description" content="How to deploy Zui inside any software project: declare intent at design time, pin and lint the law in development, measure the painted page at runtime, and hold your AI generator to all of it. The consumer contract, phase by phase.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0f318111">
+<title>Adopt — which way in is yours</title>
+<meta name="description" content="Seven kinds of reader, each with a first page that exists: build business software, design, generate with AI, ship off a screen, judge an application you do not own, design a language, implement StzZui elsewhere.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=19b21989">
 </head>
 <body>
 
@@ -35,130 +35,87 @@
     <!-- shell:trail -->
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Adopt</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">The contract · one law, three phases of your project</p>
-    <h1>Deploy the law in your project</h1>
-    <p class="sub">Zui deploys inside any software project — no framework to
-    swap, no dependency to take. The declaration is plain text beside your
-    code; the law is one JSON file with a stable schema; the audit runs in a
-    browser. Here is the whole contract, phase by phase: what it does at
-    design time, in development, and at runtime — and what you can start this
-    afternoon.</p>
+    <p class="kicker">Adopt · which way in is yours</p>
+    <h1>Which way in is yours?</h1>
+    <p class="sub">Seven kinds of reader, each with a first page that exists. Pick the one that sounds like your
+    next week; every way in rests on the same law, the same refusal contract and the same proof.</p>
   </div>
 </header>
 
 <!-- shell:rail -->
-<div class="layout">
+<div class="layout has-rail">
+<nav class="rail" aria-label="Pages of the section">
+  <ul>
+    <li><a class="here" aria-current="page" href="adopt.html">Adopt</a></li>
+    <li><a href="build.html">Build</a></li>
+    <li><a href="generate.html">Generate</a></li>
+  </ul>
+</nav>
 <!-- /shell:rail -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2>In design — declare before you draw</h2>
-    <p>Before wireframes harden, write the surface's <code>.zui</code>
-    declaration: which intents it satisfies, what stays always reachable,
-    which entities are visible to whom. Ten minutes of declaration replaces a
-    meeting of taste: the design review reads
-    <code>SATISFIES [SELECT, CONFIRM, ACT]</code> and asks one question —
-    <em>is that what the operator is actually doing?</em> — instead of
-    debating paddings.</p>
-<pre class="shot"><span class="c">// specs/checkout.zui — written at the whiteboard, checked at the desk</span>
-<span class="k">DEFINE WIZARD</span> <span class="n">checkout</span> (
-  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
-  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
-)</pre>
-    <p>Structure is refused early — a wizard with no <code>EXIT</code> should die
-    on the whiteboard, not in the sprint. Stated plainly: the grammar parses
-    today in the reference implementation (a consumer), which
-    enforces four Zui diagnostics; the structural refusals are specified and
-    are M3's work. Until the <code>zui</code> CLI ships, the declaration is
-    still worth writing — it is the design document your team and your
-    generator are held to, and an AI assistant given the law can already check
-    it by hand.</p>
+    <h2>Seven ways in</h2>
+    <div class="grid readers">
+      <div class="card"><h3>You build business software</h3>
+        <p>Declare intent before you render, gate your CI on the law, measure the painted page in your browser.
+        Framework-independent by construction: the declaration outlives your stack.</p>
+        <span class="proof"><a href="build.html">Build →</a></span></div>
+      <div class="card"><h3>You design, or you care about UX</h3>
+        <p>The full argument: what is decaying, why guidelines failed, and the recorded evidence, defect by defect.</p>
+        <span class="proof"><a href="why.html">Read the case →</a></span></div>
+      <div class="card"><h3>You build with AI</h3>
+        <p>Make the generator declare intent before it draws, and see what a grammar can hold and what only the court can.
+        Say honestly what has not been measured.</p>
+        <span class="proof"><a href="generate.html">Generate →</a></span></div>
+      <div class="card"><h3>You ship where there is no screen</h3>
+        <p>Voice, sound, print, an API a machine reads: one declaration, ten media, and an honest account of which
+        cells have a rule written for them. This section is being built.</p>
+        <span class="proof"><a href="media.html">Media →</a></span></div>
+      <div class="card"><h3>You must judge an application you do not own</h3>
+        <p>The audit measures what a page paints; a second audit, designed and never yet run on a real application, reads a
+        screenshot and says plainly which rules it can decide and which it refuses to.</p>
+        <span class="proof"><a href="audit.html">Audit →</a></span></div>
+      <div class="card"><h3>You design a language</h3>
+        <p>StzZui is itself declared, in Haro. The declaration is the worked example: constraints that each cite the rule they
+        enforce, and a forged court and grammar that come from it.</p>
+        <span class="proof"><a href="../haro/zui.stzu">Read zui.stzu →</a></span></div>
+      <div class="card"><h3>You implement StzZui elsewhere</h3>
+        <p>Pin the pack, run the suite, and keep two evaluators honest with a list of their known differences. Zing is the first
+        conforming consumer.</p>
+        <span class="proof"><a href="../protocol/README.md">The protocol pack →</a></span></div>
+    </div>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>In development — pin, lint, gate</h2>
-    <p>Vendor <a href="../constitution/rules.json"><code>rules.json</code></a>
-    into your repository and record the version. Your build now has a fact,
-    not an opinion: <em>conforms to Zui v<span data-law="version">3.13</span></em>. Numbers are stable forever —
-    retired numbers are never reused — so a finding that cites Rule 79 means
-    the same thing in ten years.</p>
-<pre class="term"><span class="dim">$ curl -O https://…/constitution/rules.json</span>
-<span class="dim">$ git add vendor/zui/rules.json</span>
-<span class="dim">$ git commit -m</span> <span class="cmd">"pin Zui v<span data-law="version">3.13</span>"</span></pre>
-    <p>Then make the law a gate, not a poster: lint declarations and markup
-    against the pinned file in CI, and fail the build on machine-tier
-    violations. Zing's <code>zing check</code> is the first conforming
-    linter and the working model — every finding cites its rule number.</p>
-    <p><b>Holding your generator to it works today</b>, with any capable AI
-    assistant: put <code>rules.json</code> in its context, instruct it to
-    declare intent before rendering and to cite the rules it obeyed, then
-    close the loop with the audit's report:</p>
-<pre class="term"><span class="p">You are building under the Zui Constitution (rules.json attached).</span>
-<span class="p">Declare each surface in .zui before rendering it. Every screen must</span>
-<span class="p">conform; cite the rule numbers you obeyed. Here is the audit report</span>
-<span class="p">of your last attempt — fix every finding, by number:</span> <span class="bad">2 violations
-[Rule 105, Rule 114]</span></pre>
-    <p>The generator now has what it never had before: a written law it can be
-    held to, and a measurement it cannot argue with.</p>
+    <h2>What every way in shares</h2>
+    <p><b>One law, as data:</b> <span data-law="rules">123</span> rules in one versioned file, v<span data-law="version">3.13</span>.
+    <b>One refusal contract:</b> <span data-law="diagnostics">37</span> diagnostics, each bound to the rule, article or right it enforces.
+    <b>One proof:</b> <span data-fact="fixtures.total">73</span> fixtures with known verdicts, so an implementation can prove it agrees
+    instead of asserting it. None of it needs more than Node and a browser.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>At runtime — measure the paint</h2>
-    <p>Serve your application and point <a href="../tools/ui-audit.html">the UI
-    audit</a> at it — one path per line, any same-origin pages, nothing leaves
-    your browser. It measures what static analysis cannot see: computed text
-    sizes, true contrast against the composited background, the trail, the
-    room before scrollbars, the menu against the tree — and exports a Markdown
-    report, each violation citing its rule number.</p>
-    <p>Run it in every theme you ship — a page can be lawful in one palette
-    and unlawful in another. This site audits itself, in both vibes, before
-    any page ships; the audit once caught its own defect doing so. Designed
-    next on this front: a runtime guard that watches the projection's
-    guarantees live — no dropped UNDO, no hidden action — and the MCP surface
-    (M5) that serves the law to agents while they operate.</p>
+    <h2>Where nothing is written yet</h2>
+    <p>Stated as held or designed, so that no way in promises a page that is not there.</p>
+    <ul>
+      <li><b>The media pages</b> are being built. What exists today is data and instruments in the repository.</li>
+      <li><b>The screenshot audit</b> has a written fact schema and a writer; no real application's screenshot has been run through it,
+      and no person has looked at one.</li>
+      <li><b>Rules for haptic, luminous, signage, spatial and terminal media</b> are held until a product that ships in one is named.</li>
+      <li><b>The wider design, the Second Founding, is proposed, not ratified.</b> This page does not rest on it.</li>
+    </ul>
+    <div class="next">
+      <a href="../index.html"><span class="label">Back</span>← StzZui</a>
+      <a href="build.html"><span class="label">Next</span>Build →</a>
+    </div>
   </div>
 </section>
-
-<section class="alt">
-  <div class="narrow">
-    <h2>Amend with evidence</h2>
-    <p>The law grows one way only (Article VII): real usage, operator feedback,
-    documented failure. If your project hits a recurring defect the law does
-    not name, record it the way the harvest records were kept — what happened,
-    where, how it was corrected, why it generalizes, and whether a reviewer
-    could decide it yes-or-no. That record is an amendment candidate. Fashion,
-    trends, and developer convenience are not admissible; every rule above 104
-    entered exactly this way.</p>
-  </div>
-</section>
-
-<section>
-  <div class="narrow">
-    <h2>The road</h2>
-    <p>What adoption will look like as the instruments land — stated as design,
-    not as promise: <b>M3</b>, the <code>zui</code> verifier CLI — now open,
-    with a <a href="../doc/decisions/M3-the-zui-verifier.md">decision
-    document</a> that audits what the reference implementation actually has and
-    sequences the work: the language spec and conformance fixtures first, so any
-    implementation in any language can prove agreement. <b>M4</b>, the intent→widget projection tables as data,
-    checkable like the rules themselves. <b>M5</b>, the AI-interaction
-    jurisdiction: laws for the chat stream, consent surfaces, and the MCP
-    endpoint that serves all of it to generators. The details live in
-    <a href="../ROADMAP.md">the roadmap</a>.</p>
-  </div>
-</section>
-
-<div class="narrow">
-  <div class="next">
-    <a href="gotchas/"><span class="label">Back</span>← Gotchas</a>
-    <a href="../constitution/reader/"><span class="label">Next</span>Read the law itself →</a>
-  </div>
-</div>
 </main>
 </div>
 
@@ -172,8 +129,7 @@
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · Declare it, pin it,
-    measure it — conformance is a fact about a build.</p>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
   </div>
 </footer>
 <!-- /shell:footer -->
