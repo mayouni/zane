@@ -57,6 +57,7 @@ const PAGES = [
   { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),
   { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true },
+  { file: 'site/positioning.html', section: 'law', label: 'Positioning', rail: true },
   { file: 'site/media.html', section: 'media', label: 'Media', rail: true, stub: 'media' },
   { file: 'site/audit.html', section: 'audit', label: 'Audit', rail: true, stub: 'audit' },
   { file: 'site/adopt.html', section: 'adopt', label: 'Adopt', rail: true },

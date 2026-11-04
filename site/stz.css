@@ -312,6 +312,19 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 .status.designed::before { content: "\25D0\00a0"; }
 .status.held::before { content: "\25CB\00a0"; }
 
+/* a table of four columns that reads as cards on a phone */
+.board.position { table-layout: fixed; }
+.board.position th:first-child, .board.position td:first-child { width: 14rem; }
+@media (max-width: 860px) {
+  .board.position, .board.position tbody, .board.position tr, .board.position td { display: block; width: auto; }
+  .board.position thead { display: none; }
+  .board.position tr { border: 1px solid var(--line); border-radius: 10px; margin: 0 0 1rem; padding: .4rem .2rem; }
+  .board.position td { border: 0; padding: .35rem .8rem; }
+  .board.position td:first-child { width: auto; }
+  .board.position td::before { content: attr(data-label); display: block; font: 700 1rem var(--mono); color: var(--muted); }
+  .board.position td:first-child::before { content: none; }
+}
+
 /* ---- stamp ---- */
 .stamp {
   background: var(--accent); color: var(--on-accent); padding: 1.3rem 1.5rem;
