@@ -223,16 +223,17 @@ ul, ol { max-width: 44rem; }
 li { margin: .3rem 0; }
 
 /* ---- code shots & terminals: a light panel as wide as its content needs, wrapping rather than scrolling ---- */
-.shot, .term {
+.shot, .term, .excerpt {
   background: var(--code-bg); color: var(--code-ink); border: 1px solid var(--code-line); border-left: 4px solid var(--code-rule);
   border-radius: 8px; padding: .9rem 1.2rem; font: 1rem/1.55 var(--mono); margin: 1.2rem 0;
   width: fit-content; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; box-shadow: none;
 }
 .term { border-left-color: var(--c-dim); }
-.shot .c { color: var(--c-comment); }
-.shot .k { color: var(--c-key); font-weight: 700; }
-.shot .s { color: var(--c-str); }
-.shot .n { color: var(--c-name); }
+.excerpt { border-left-color: var(--c-name); }
+.shot .c, .excerpt .c { color: var(--c-comment); }
+.shot .k, .excerpt .k { color: var(--c-key); font-weight: 700; }
+.shot .s, .excerpt .s { color: var(--c-str); }
+.shot .n, .excerpt .n { color: var(--c-name); }
 .term .p { color: var(--c-prompt); }
 .term .cmd { color: var(--code-ink); font-weight: 700; }
 .term .dim { color: var(--c-dim); }
@@ -258,6 +259,58 @@ li { margin: .3rem 0; }
 /* a row of reader cards: one line each, and the link is the point */
 .readers .card p { margin-bottom: .7rem; }
 .readers .card .proof a { font-weight: 700; }
+
+/* ---- narration devices: the pair, the scene, the figure, the workflow, the one call to action ---- */
+/* a call to action: one per page, the first thing the reader can do */
+.cta-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.4rem; }
+.cta-row .note { color: var(--muted); max-width: 32rem; margin: 0; }
+/* the pair: an established practice on the left, Zui on the right, the same case, both with their outcome */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
+.pair > div { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.2rem;
+  box-shadow: var(--shadow); min-width: 0; }
+.pair .lbl { font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0; }
+.pair .zui .lbl { color: var(--accent-ink); }
+.pair p { margin: .5rem 0 0; max-width: none; }
+.pair .shot, .pair .term { margin: .7rem 0 0; }
+@media (max-width: 860px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+/* the scene: one worked example that runs, with its caption */
+.scene { margin: 1.6rem 0; }
+.scene .shot, .scene .term { margin-bottom: 0; }
+.scene .term { margin-top: .6rem; }
+/* the figure: an inline drawing in both cultures, with a caption that says what it does not show */
+figure.figure { margin: 1.6rem 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem 1.2rem; box-shadow: var(--shadow); }
+figure.figure .scroll { overflow-x: auto; }
+figure.figure svg { display: block; width: 100%; min-width: 40rem; max-width: 56rem; height: auto; }
+figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46rem; }
+.dg-box { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+.dg-live { fill: var(--card); stroke: var(--c-good); stroke-width: 2; }
+.dg-data { fill: var(--card); stroke: var(--c-str); stroke-width: 2; stroke-dasharray: 6 4; }
+.dg-held { fill: var(--card); stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 2 4; }
+.dg-refused { fill: var(--card); stroke: var(--c-bad); stroke-width: 2; }
+.dg-line { stroke: var(--muted); stroke-width: 1.8; fill: none; }
+.dg-arrow { fill: var(--muted); }
+.dg-t { font: 700 17px var(--sans); fill: var(--ink); }
+.dg-s { font: 16px var(--mono); fill: var(--muted); }
+.dg-a { font: 700 16px var(--mono); fill: var(--accent-ink); }
+.dg-bad { font: 700 16px var(--mono); fill: var(--c-bad); }
+/* the workflow: numbered real steps, each with the file it touches */
+.workflow { counter-reset: step; list-style: none; padding: 0; max-width: none; margin: 1.4rem 0; }
+.workflow > li { counter-increment: step; position: relative; margin: 0 0 0 1.1rem; padding: 0 0 1.3rem 2rem;
+  border-left: 2px solid var(--line); max-width: 46rem; }
+.workflow > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.workflow > li::before { content: counter(step); position: absolute; left: -1.05rem; top: 0; width: 2rem; height: 2rem;
+  border-radius: 50%; background: var(--card); border: 2px solid var(--accent); color: var(--accent-ink);
+  font: 700 1rem var(--mono); display: flex; align-items: center; justify-content: center; }
+.workflow .file { font: 1rem var(--mono); color: var(--muted); }
+/* a status row: what exists, what is designed, what is held, each by a word and a mark, never by colour alone */
+.board { width: 100%; border-collapse: collapse; margin: 1.2rem 0; background: var(--card); }
+.board th, .board td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.board th { color: var(--muted); font-size: 1rem; }
+.status { font: 700 1rem var(--mono); white-space: nowrap; }
+.status.exists::before { content: "\25CF\00a0"; }
+.status.designed::before { content: "\25D0\00a0"; }
+.status.held::before { content: "\25CB\00a0"; }
 
 /* ---- stamp ---- */
 .stamp {
@@ -301,6 +354,7 @@ details.qa .a p { margin: .4rem 0; }
 .btn.primary { background: var(--accent); color: var(--on-accent); }
 .btn.ghost { color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.08); }
+header.page a.btn.primary { color: var(--on-accent); }
 /* ---- footer ---- */
 footer.site { background: var(--deep); color: var(--halo); padding: 2.2rem 0; margin-top: 3rem; }
 footer.site a { color: var(--halo); }

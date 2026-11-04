@@ -3,27 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How it works — declare, check, project, measure</title>
-<meta name="description" content="The Zui pipeline: declare intent in a compilable language, let the compiler refuse what the constitution forbids, project the declaration to any medium, measure what runtime paints. Ten declaration types, 22 verbs, 123 rules as data, and a refusal contract of twenty-five named violations.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=013147e7">
-<style>
-table.plain { border-collapse: collapse; width: 100%; background: var(--card); }
-table.plain th, table.plain td { text-align: left; padding: .55rem .8rem;
-  border-bottom: 1px solid var(--line); vertical-align: top; }
-table.plain th { color: var(--muted); text-transform: uppercase;
-  letter-spacing: .04em; font-size: 1rem; }
-.status { font: 700 1rem var(--mono); white-space: nowrap; }
-.status.live { color: var(--ok); }
-.status.design { color: var(--accent-ink); }
-[data-vibe="guardian"] .status.design { color: var(--accent); }
-.verbs { font: 700 1rem var(--mono); color: var(--accent-ink); letter-spacing: .03em;
-  overflow-wrap: anywhere; }
-.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1.2rem; }
-.tiers .card b { font-size: 1.6rem; color: var(--accent-ink); display: block; }
-.pipe .card h3 .stepnum { color: var(--accent-ink); font-family: var(--mono); }
-.decls { font: 700 1rem var(--mono); color: var(--accent-ink); overflow-wrap: anywhere; }
-</style>
+<title>Language — what it is, step by step</title>
+<meta name="description" content="A declaration states what the person is doing, not the widgets; the law refuses what it forbids, by name, before anything is drawn. The four steps from a declaration to a measured page, and which of them exist today.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=86bec427">
 </head>
 <body>
 
@@ -54,15 +37,15 @@ table.plain th { color: var(--muted); text-transform: uppercase;
     <!-- shell:trail -->
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Language</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">The pipeline · declare → check → project → measure</p>
-    <h1>How the language works</h1>
-    <p class="sub">Most UI frameworks begin with a physical assumption — screens,
-    widgets, layouts — and try to infer what the user intends. Zui inverts the
-    order: <b>you declare human intent, and rendering is a consequence.</b>
-    Once intent is source code, interface correctness is compilable: violations
-    are refused before the interface exists, cited while it is built, and
-    measured after it is painted. One declaration, one law, every phase of the
-    project.</p>
+    <p class="kicker">Language · for people who build or judge interfaces</p>
+    <h1>Say what the person is doing. The law refuses the rest, by name.</h1>
+    <p class="sub">A declaration states the intent of a surface in a closed vocabulary of <span data-fact="verbs">22</span> verbs and
+    <span data-fact="kinds">10</span> kinds of declaration, with no widget in it. This page walks the four steps from a declaration to a
+    measured page, and says which of them exist today and where each one stops.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="build.html">Check a declaration of your own →</a>
+      <p class="note">It needs Node and nothing else.</p>
+    </div>
   </div>
 </header>
 
@@ -72,240 +55,130 @@ table.plain th { color: var(--muted); text-transform: uppercase;
 <main id="main">
 
 <section>
-  <div class="narrow pipe">
-    <h2>The pipeline</h2>
-    <div class="grid">
-      <div class="card"><h3><span class="stepnum">1 ·</span> Declare</h3>
-        <p>In design, before a pixel: <code>.zui</code> files state what the
-        human is doing on each surface — flows, forms, screens, worlds. The
-        declaration is the design document, and it compiles.</p></div>
-      <div class="card"><h3><span class="stepnum">2 ·</span> Check</h3>
-        <p>The compiler refuses unlawful structure by name — ten named
-        violations — and checks the declaration against the constitution.
-        Findings cite rule numbers, not opinions.</p></div>
-      <div class="card"><h3><span class="stepnum">3 ·</span> Project</h3>
-        <p>A projection renders the checked declaration to its medium —
-        business web, CLI, voice, game world, agent surface. It owns
-        <em>how</em>; it has zero freedom over <em>what</em>.</p></div>
-      <div class="card"><h3><span class="stepnum">4 ·</span> Measure</h3>
-        <p>At runtime, the <a href="../tools/ui-audit.html">UI audit</a>
-        measures the painted page — computed sizes, true contrast, the trail,
-        the room, the menu against the tree — what static analysis cannot
-        see.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="alt">
   <div class="narrow">
-    <h2>The language</h2>
-    <p>Ten declaration types cover the interface's whole life:
-    <span class="decls">INTENT_FLOW · FORM · WIZARD · SCREEN · COMPONENT ·
-    NAV_GRAPH · WORLD_VIEW · INTERACTION · FEEDBACK · VIBE</span>.
-    This is a real declaration, compiling today in the reference
-    implementation:</p>
-<pre class="shot"><span class="c">// Restolean — Human Interface Layer (Zui)</span>
-<span class="k">DEFINE INTENT_FLOW</span> <span class="n">order_flow_intent</span> (
-  <span class="k">SATISFIES</span> [<span class="s">ACT, CONFIRM, SELECT</span>],
-  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
-)
-
-<span class="k">DEFINE FORM</span> <span class="n">new_order_form</span> (
-  <span class="k">INTENT_FLOW</span> <span class="n">order_flow_intent</span>
-)
-
-<span class="k">DEFINE WORLD_VIEW</span> <span class="n">kitchen_dashboard</span> (
-  <span class="k">PERSPECTIVE</span> <span class="s">top_down</span>,
-  <span class="k">VISIBLE_ENTITIES</span> [<span class="s">order, dish, ingredient</span>],
-  <span class="k">SATISFIES</span> [<span class="s">NAVIGATE</span>]
+    <h2>A guideline cannot fail a build</h2>
+    <p>The practices you already use are good at what they do. They differ in when they speak and in whether anything can say no.</p>
+    <div class="pair">
+      <div>
+        <p class="lbl">A published guideline</p>
+        <p>A widely used set of ten usability heuristics asks, among other things, that a person can always leave a state they did not mean to
+        enter and take back what they did. It is applied by an expert reading a finished screen, so it finds problems only a person can see.
+        It also cannot stop an unfinished screen from shipping: nothing in it refuses anything.</p>
+        <p><a class="leaves" href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank" rel="noopener">The heuristics, at Nielsen Norman Group</a></p>
+      </div>
+      <div class="zui">
+        <p class="lbl">The same idea, as a law</p>
+<pre class="shot"><span class="c">// delete_invoice.zui</span>
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">delete_invoice</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
 )</pre>
-    <p>Declarations quantify over a <b>closed grammar of 22 verbs</b> — a new
-    medium adds renderings, never verbs. Every UI element must trace to at
-    least one intent; an orphan element is a compile error.</p>
-    <div class="grid">
-      <div class="card"><h3>Orienting</h3><p class="verbs">DISCOVER · UNDERSTAND · LOCATE</p>
-        <p>Discovery must be satisfiable at every entry point.</p></div>
-      <div class="card"><h3>Attention</h3><p class="verbs">FOCUS · FILTER · COMPARE</p>
-        <p>An active filter is visible state; focus and discovery cannot both be at maximum.</p></div>
-      <div class="card"><h3>Information</h3><p class="verbs">READ · SCAN · SCROLL · ZOOM</p>
-        <p>A read surface that silently acts is an intent violation.</p></div>
-      <div class="card"><h3>Selection</h3><p class="verbs">SELECT · HIGHLIGHT · PREVIEW · MARK</p>
-        <p>Selection expresses interest, never commitment.</p></div>
-      <div class="card"><h3>Action</h3><p class="verbs">ACT · CONFIRM · CANCEL · UNDO</p>
-        <p>Every act has a reachable undo, or declares why it cannot.</p></div>
-      <div class="card"><h3>Continuity</h3><p class="verbs">PAUSE · RESUME · RETRY · EXIT</p>
-        <p>Pause, resume, and exit are always reachable; a trapped flow is unconstitutional.</p></div>
-    </div>
-  </div>
-</section>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check delete_invoice.zui</span>
+delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  delete_invoice
+    <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
+    <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
 
-<section>
-  <div class="narrow">
-    <h2>Compilation: refusal by name</h2>
-    <p>Two intent collapses are structural errors, not style choices:
-    <code>SELECT → ACT</code> without <code>CONFIRM</code> (selection that
-    executes), and <code>READ → ACT</code> in any form (a reading surface that
-    mutates). They belong to the ten named violations this language was founded
-    on — the core any conforming implementation must detect:</p>
-<pre class="term"><span class="dim">$ zui check src/model/restaurant.zui</span>
-<span class="bad">INTENT_ORPHAN</span>        an element traces to no intent
-<span class="bad">SELECT_ACT_COLLAPSE</span>  selection executes without CONFIRM
-<span class="bad">READ_ACT_COLLAPSE</span>    a reading surface mutates
-<span class="bad">MISSING_UNDO</span>         an act declares no way back
-<span class="bad">MISSING_CANCEL</span>       a flow cannot be abandoned
-<span class="bad">TRAPPED_FLOW</span>         no reachable EXIT
-<span class="bad">INVISIBLE_STATE</span>      the system knows; the operator can't see
-<span class="bad">HIDDEN_AUTHORITY</span>     a consequential act names no actor
-<span class="bad">LAYOUT_DISPLACEMENT</span>  arriving content shoves the reading
-<span class="bad">DECORATIVE_ANIMATION</span> motion that reports nothing</pre>
-    <p class="caption"><b>Status, plainly:</b> <b>all ten are implemented and
-    enforced today</b> by <a href="../tools/zui/README.md">the <code>zui</code>
-    verifier</a> — nine of them refused before anything renders, and
-    <code>LAYOUT_DISPLACEMENT</code> measured by <a href="../tools/ui-audit.html">the
-    UI audit</a>, because whether arriving content shoves the reading is
-    undecidable from a declaration. That split is the enforcement ladder working
-    as designed, not a gap. This paragraph said <em>"not yet implemented"</em>
-    until <a href="../doc/decisions/M3-the-zui-verifier.md">M3</a> shipped it;
-    the grammar also parses in <code>parser.zig</code>, a second implementation
-    inside a consumer platform, which is what the fixtures exist to keep honest.</p>
-    <p class="caption"><b>And the contract has grown to
-    <span data-law="diagnostics">37</span>.</b> The ten above are the
-    intent-collapse core. Since then the same discipline has been applied one
-    level down — <code>UNKNOWN_INTENT</code>, <code>DUPLICATE_DECLARATION</code>
-    and four more at level 1 for the grammar itself; <code>VIBE_STRIPS_RIGHT</code>
-    and <code>UNRESOLVED_ENTITY</code> for consistency between declarations; and
-    <code>UNKNOWN_MEDIUM</code> and <code>VERB_NOT_CARRIED</code> once
-    <code>SURFACE_AS</code> was closed to ten media, so that declaring a medium
-    that cannot carry an intent you promised is now a refusal rather than a
-    discovery made after shipping. The full list is
-    <a href="../conformance/violations.json">data</a>, and each one carries the
-    same <a href="../doc/diagnostic-contract.md">C2 envelope</a>.</p>
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+      </div>
+    </div>
+    <p>Both are right. The heuristic judges what only a person can judge; the law refuses what a machine can see before a pixel exists.
+    This site does not claim the second replaces the first.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>The semantic layer: a constitution as data</h2>
-    <p>What makes the language refuse is not taste — it is
-    <a href="../constitution/rules.json">one JSON file</a>: v<span data-law="version">3.13</span>,
-    <span data-law="rules">123</span> rules in
-    <span data-law="sets">31</span> sets under <span data-law="articles">7</span> articles.
-    Every rule carries the same anatomy: what to
-    avoid, the lawful solution, the <em>why</em>, the article it derives from,
-    its enforcement tier, and the real-world evidence that earned it a number.
-    Here is Rule 117, exactly as the tooling loads it:</p>
-<pre class="shot">{
-  <span class="k">"number"</span>: <span class="s">"117"</span>,
-  <span class="k">"title"</span>: <span class="s">"One Column Carries the Colour"</span>,
-  <span class="k">"avoid"</span>: [<span class="s">"Several coloured columns competing in one table row"</span>,
-            <span class="s">"The same green meaning two different things two columns apart"</span>, <span class="c">…</span>],
-  <span class="k">"solution"</span>: <span class="s">"Colour is a scarce signalling resource, and a table spends
-     it in exactly one place: the actionable-status column…"</span>,
-  <span class="k">"why"</span>: <span class="s">"A signal that appears everywhere is a signal that means nothing.
-     The operator scanning two hundred rows at hour seven deserves one
-     place to look."</span>,
-  <span class="k">"derived_from"</span>: <span class="s">"calm"</span>,
-  <span class="k">"enforcement"</span>: <span class="s">"judgment"</span>,
-  <span class="k">"evidence"</span>: <span class="s">"the banking product's supervision tables (April 2026): …"</span>
-}</pre>
-    <p>The articles are the axioms — Calm, Intent Over Mechanics, Visible
-    State, Reversibility, Predictable Authority, Operator Primacy &amp; Vibes,
-    Amendment — and the rules are their case law. Because the law is data,
-    the reader renders it, the compiler checks it, findings cite it, and no
-    prose can drift from what the machine enforces.</p>
-
-    <h3>The enforcement ladder</h3>
-    <p>Every rule declares who can currently catch its violation, and rules
-    climb as instruments are invented — Rule 107 began as judgment and is now
-    machine-checked, and Rule 62 moved to <em>tool</em> at v3.9 once a runnable
-    contrast check existed to serve it. The census, read from the file when you
-    load this page:</p>
-    <div class="tiers">
-      <div class="card"><b data-law="tier:machine">11</b><h3>machine</h3><p>refused by a conforming compiler or linter, today</p></div>
-      <div class="card"><b data-law="tier:tool">7</b><h3>tool</h3><p>measured by a runnable instrument</p></div>
-      <div class="card"><b data-law="tier:machine-later">25</b><h3>machine-later</h3><p>decidable; awaiting their instrument</p></div>
-      <div class="card"><b data-law="tier:judgment">80</b><h3>judgment</h3><p>a reviewer decides yes or no, citing the number</p></div>
-    </div>
-
-    <p class="law-note"><b>This is the number the project is built to move.</b>
-    Only <b data-law-share="machine">9%</b> of the law is refusable before a
-    pixel exists — the rest waits on a human, or on an instrument nobody has
-    built yet. Every rule that climbs a rung is the argument working; every
-    rule stuck at <em>machine-later</em> is the law admitting an instrument is
-    missing. These figures were hand-typed until 2026-08-13, under a heading
-    that said they were computed. They had gone stale. They are computed
-    now.</p>
-
-    <h3>The rights and the forbidden</h3>
-    <p>Across the rules, the law guarantees six operator rights — to
-    <b>understand</b>, to <b>reverse</b>, to <b>know</b>, to <b>leave</b>, to
-    <b>act without fear</b>, and to <b>a human</b> — each traceable to the
-    specific rules that enforce it. And it names
-    <b data-law="forbidden">17</b> forbidden patterns
-    outright: modal storms, invisible active filters, hidden destructive
-    actions, selection that silently executes, confirm-shaming, pre-checked
-    consent, mouse-only critical workflows, decorative animation, layout
-    shifts during interaction, auto-committed configuration, accusatory
-    errors, unmarked machine-made content, instant reset after a critical
-    action, "everything" as the default view, the app closing by
-    surprise, and — newest, and the first cultural one — a sovereign sign
-    conscripted as a convenience label, whose canonical instance is a flag
-    used to mean a language.
-    <a href="../constitution/reader/">The Reader</a> renders all of
-    it, live from the same file.</p>
+    <h2>Four steps, and which of them exist</h2>
+    <figure class="figure">
+      <div class="scroll">
+      <svg viewBox="0 0 780 230" role="img" aria-labelledby="pipe-t pipe-d">
+        <title id="pipe-t">Declare, refuse, project, measure</title>
+        <desc id="pipe-d">Four boxes in a row joined by arrows. Declare, a .zui file: exists. Refuse, the verifier in tools/zui: exists. Project, the media data: data only, the renderers are elsewhere. Measure, the UI audit: exists.</desc>
+        <defs><marker id="pipe-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
+        <rect class="dg-live" x="10" y="20" width="160" height="70" rx="10"/>
+        <rect class="dg-live" x="210" y="20" width="160" height="70" rx="10"/>
+        <rect class="dg-data" x="410" y="20" width="160" height="70" rx="10"/>
+        <rect class="dg-live" x="610" y="20" width="160" height="70" rx="10"/>
+        <line class="dg-line" x1="170" y1="55" x2="208" y2="55" marker-end="url(#pipe-ah)"/>
+        <line class="dg-line" x1="370" y1="55" x2="408" y2="55" marker-end="url(#pipe-ah)"/>
+        <line class="dg-line" x1="570" y1="55" x2="608" y2="55" marker-end="url(#pipe-ah)"/>
+        <text class="dg-t" x="90" y="62" text-anchor="middle">1 Declare</text>
+        <text class="dg-t" x="290" y="62" text-anchor="middle">2 Refuse</text>
+        <text class="dg-t" x="490" y="62" text-anchor="middle">3 Project</text>
+        <text class="dg-t" x="690" y="62" text-anchor="middle">4 Measure</text>
+        <text class="dg-s" x="90" y="124" text-anchor="middle">a .zui file</text>
+        <text class="dg-s" x="90" y="146" text-anchor="middle">intent, no widget</text>
+        <text class="dg-s" x="290" y="124" text-anchor="middle">tools/zui</text>
+        <text class="dg-s" x="290" y="146" text-anchor="middle">the law, by name</text>
+        <text class="dg-s" x="490" y="124" text-anchor="middle">media.json</text>
+        <text class="dg-s" x="490" y="146" text-anchor="middle">what each carries</text>
+        <text class="dg-s" x="690" y="124" text-anchor="middle">the UI audit</text>
+        <text class="dg-s" x="690" y="146" text-anchor="middle">what was painted</text>
+        <text class="dg-a" x="90" y="196" text-anchor="middle">exists</text>
+        <text class="dg-a" x="290" y="196" text-anchor="middle">exists</text>
+        <text class="dg-bad" x="490" y="196" text-anchor="middle">data only</text>
+        <text class="dg-a" x="690" y="196" text-anchor="middle">exists</text>
+      </svg>
+      </div>
+      <figcaption>Solid outline: built and run in this repository. Dashed: the data exists and a check proves renderings differ only as the data predicts, but the renderers that
+      draw, speak or print live in other projects. <b>Not shown:</b> the person who looks at the result; no person has perceived any medium for this site's grid.</figcaption>
+    </figure>
+    <p><b>Declare.</b> A <code>.zui</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
+    declaration and <span data-fact="verbs">22</span> verbs, closed on purpose: a widget is a consequence of an intent, never a primitive.</p>
+    <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.13</span>), and refuses what it forbids.
+    Every refusal cites the rule, article or right it rests on.</p>
+    <p><b>Project.</b> One declaration can be rendered in more than one medium, and a verb a medium cannot carry is refused. That check is built; the media data is in
+    <a href="../conformance/media.json"><code>conformance/media.json</code></a>.</p>
+    <p><b>Measure.</b> A declaration is not a page. <a href="../tools/ui-audit.html">The UI audit</a> measures what a browser actually paints: size, true contrast, the bars, the room
+    a block has, the menu against the tree.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>Projections: any medium, zero discretion over rights</h2>
-    <p>A projection maps a checked declaration to a concrete medium: business
-    web, CLI/TUI, voice, game worlds — and, for the first time, the AI-agent
-    surface itself: the chat stream, the tool-approval prompt, the generated
-    artifact. Rule 121 (the assistant never masks the work) and Rule 124 (the
-    generator ships a working thing) are the first laws written for that
-    medium; a full chat-stream jurisdiction is in design.</p>
-    <p>The discipline is one sentence: <b>a projection owns <em>how</em>, never
-    <em>what</em>.</b> It may choose typography, widgets, pacing, even whether
-    the medium has a screen at all. It may not define a new verb, hide an
-    available action, drop a declared UNDO, or strip EXIT from a flow. Two
-    projections of one declaration are two cultures of one truth — press
-    <kbd>F2</kbd> on this site to feel it.</p>
+    <h2>The same law at three moments</h2>
+    <figure class="figure">
+      <div class="scroll">
+      <svg viewBox="0 0 780 240" role="img" aria-labelledby="mom-t mom-d">
+        <title id="mom-t">The law at design time, in development and at runtime</title>
+        <desc id="mom-d">Three boxes joined by arrows. At design time the verifier checks the declaration. In development the build runs the pack check and the conformance suite. At runtime the UI audit measures the painted page. Under runtime a dashed box: the screenshot audit is designed and has never been run on a real application.</desc>
+        <defs><marker id="mom-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
+        <rect class="dg-live" x="10" y="20" width="220" height="110" rx="10"/>
+        <rect class="dg-live" x="280" y="20" width="220" height="110" rx="10"/>
+        <rect class="dg-live" x="550" y="20" width="220" height="110" rx="10"/>
+        <line class="dg-line" x1="230" y1="75" x2="278" y2="75" marker-end="url(#mom-ah)"/>
+        <line class="dg-line" x1="500" y1="75" x2="548" y2="75" marker-end="url(#mom-ah)"/>
+        <text class="dg-t" x="120" y="52" text-anchor="middle">Design time</text>
+        <text class="dg-s" x="120" y="84" text-anchor="middle">the verifier on</text>
+        <text class="dg-s" x="120" y="106" text-anchor="middle">a declaration</text>
+        <text class="dg-t" x="390" y="52" text-anchor="middle">Development</text>
+        <text class="dg-s" x="390" y="84" text-anchor="middle">the pack check and</text>
+        <text class="dg-s" x="390" y="106" text-anchor="middle">the suite, in CI</text>
+        <text class="dg-t" x="660" y="52" text-anchor="middle">Runtime</text>
+        <text class="dg-s" x="660" y="84" text-anchor="middle">the UI audit on</text>
+        <text class="dg-s" x="660" y="106" text-anchor="middle">the painted page</text>
+        <rect class="dg-held" x="550" y="160" width="220" height="62" rx="10"/>
+        <text class="dg-s" x="660" y="186" text-anchor="middle">screenshot audit:</text>
+        <text class="dg-s" x="660" y="208" text-anchor="middle">designed, never run</text>
+      </svg>
+      </div>
+      <figcaption>The same law, read from one file, holds at all three. <b>Not shown:</b> what happens between the moments, such as a generator that drifts from its declaration after design.
+      The audit for an application nobody on this project owns is designed and has not been run on a real one.</figcaption>
+    </figure>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>One law, three moments — and the status board</h2>
-    <p>The same law holds at <b>design time</b> (the declaration is checked
-    before a pixel exists), in <b>development</b> (every build is linted,
-    every finding cites a number, generators are held to the file), and at
-    <b>runtime</b> (the audit measures what was actually painted). What exists
-    today and what is designed but not yet built — stated plainly, because a
-    site about honest interfaces does not get to blur its own status:</p>
-    <table class="plain">
-      <thead><tr><th>Instrument</th><th>What it does</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td>The law, <code>rules.json</code> v<span data-law="version">3.13</span></td><td><span data-law="rules">123</span> rules as data; the single source of truth</td><td class="status live">in force</td></tr>
-        <tr><td>The Zui grammar</td><td>parses the ten declaration types and their fields</td><td class="status live">live — in the reference implementation</td></tr>
-        <tr><td>Zui semantic checks</td><td>four diagnostics: missing <code>SATISFIES</code>, invalid <code>PERSPECTIVE</code>, invalid <code>TONE</code>, unresolved <code>INTENT_FLOWS</code> ref</td><td class="status live">live — in the reference implementation</td></tr>
-        <tr><td>The refusal contract</td><td><span data-law="diagnostics">37</span> named violations every conforming implementation must detect — the ten founding ones plus grammar, consistency and medium checks added since</td><td class="status live">24 enforced by the verifier; <code>LAYOUT_DISPLACEMENT</code> is the UI audit's</td></tr>
-        <tr><td><a href="../constitution/reader/">The Reader</a></td><td>the whole law, interactive, rendered from the file</td><td class="status live">live</td></tr>
-        <tr><td><a href="../tools/ui-audit.html">The UI audit</a></td><td>measures 6 rules on any same-origin UI</td><td class="status live">live</td></tr>
-        <tr><td>Zing's <code>zing check</code></td><td>first conforming linter; cites rule numbers</td><td class="status live">live, in Zing</td></tr>
-        <tr><td><a href="../doc/language/README.md">The language specification</a></td><td>Zui v1.0 — the grammar in EBNF, the ten declaration types, every diagnostic bound to the rule it enforces</td><td class="status live">published</td></tr>
-        <tr><td><a href="../conformance/README.md">The conformance suite</a></td><td>40 declarations with known verdicts and four conformance levels, so any implementation can prove agreement rather than assert it</td><td class="status live">published</td></tr>
-        <tr><td><a href="../tools/zui/README.md">The <code>zui</code> verifier</a></td><td>parses the grammar and enforces 23 of the 24 diagnostics; passes all 40 fixtures at every level. The
-        twenty-second, <code>LAYOUT_DISPLACEMENT</code>, is undecidable from a declaration and
-        is measured by the audit instead — the enforcement ladder working as designed. Zero dependencies, runs on Node or in a browser</td><td class="status live">live — level 3</td></tr>
-        <tr><td>Cross-pillar symbols, computed</td><td>the verifier accepts a symbol table today; computing one from a host project's other pillars is the open half of Level 3 — <a href="../doc/decisions/M3-the-zui-verifier.md">decision doc</a></td><td class="status design">in design — M3</td></tr>
-        <tr><td>Projection tables as data</td><td>intent→widget maps per medium, checkable like rules</td><td class="status design">in design — M4</td></tr>
-        <tr><td>The AI-interaction jurisdiction</td><td>chat-stream rules; an MCP surface serving the law to generators while they generate</td><td class="status design">in design — M5</td></tr>
-      </tbody>
-    </table>
+    <h2>What exists today, and what does not</h2>
+    <ul>
+      <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">37</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">73</span> fixtures that any implementation can prove it agrees with.</li>
+      <li><b>Data, not renderers:</b> the media carriage and the signal vocabulary. The pieces that draw, speak or print are not part of this repository.</li>
+      <li><b>Not built:</b> computing the facts a declaration does not hold (the entities, actors, state and elements of a surface) from a host project. The verifier accepts a table you supply and says nothing without one.</li>
+      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal media, until a product that ships in one is named.</li>
+    </ul>
   </div>
 </section>
-
 </main>
 </div>
 
@@ -319,8 +192,7 @@ table.plain th { color: var(--muted); text-transform: uppercase;
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · The censuses on this page
-    are computed from rules.json; the reader shows the same numbers.</p>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
   </div>
 </footer>
 <!-- /shell:footer -->

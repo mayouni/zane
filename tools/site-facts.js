@@ -50,6 +50,9 @@ function derive(prev) {
   put('diag.contract', v.metadata.version, 'conformance/violations.json metadata.version');
   put('diag.levels', Object.keys(v.levels).length, 'conformance/violations.json levels');
   put('diag.citingRules', v.diagnostics.filter(d => (d.rules || []).length).length, 'conformance/violations.json rules');
+  put('diag.articleOnly', v.diagnostics.filter(d => !(d.rules || []).length && (d.articles || []).length).length, 'conformance/violations.json articles with no rule');
+  put('diag.citeNothing', v.diagnostics.filter(d => !(d.rules || []).length && !(d.articles || []).length && !(d.rights || []).length && !(d.forbidden_patterns || []).length).length, 'conformance/violations.json bindings empty');
+  for (const l of [1, 2, 3, 4]) put('diag.level' + l, v.diagnostics.filter(d => d.level === l).length, 'conformance/violations.json level');
 
   const m = json('conformance/manifest.json');
   const twins = m.fixtures.filter(x => /-lawful\.zui$/.test(x.file)).length;
@@ -69,6 +72,8 @@ function derive(prev) {
   const csv = fs.readFileSync(R('haro/twin-expected.csv'), 'utf8').split(/\r?\n/).filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('fixture,'));
   put('twin.differences', csv.length, 'haro/twin-expected.csv rows');
   put('twin.seams', new Set(csv.map(l => l.split(',')[3])).size, 'haro/twin-expected.csv seam column');
+  for (const [k, name] of [['other-code', 'otherCode'], ['not-refused', 'notRefused'], ['court-only', 'courtOnly']])
+    put('twin.' + name, csv.filter(l => l.split(',')[4] === k).length, 'haro/twin-expected.csv class column');
   put('haro.gbnfBytes', fs.existsSync(R('haro/zui.gbnf')) ? fs.statSync(R('haro/zui.gbnf')).size : 0, 'haro/zui.gbnf');
   const gb = fs.readFileSync(R('haro/zui.gbnf'), 'utf8');
   put('gbnf.kinds', (gb.match(/^decl_[A-Z_]+ ::=/gm) || []).length, 'haro/zui.gbnf (decl_* productions)');
@@ -162,6 +167,27 @@ function verifyRuns(problems) {
   return all.length;
 }
 
+// ---- an excerpt shown on a page is a passage of the file it names --------------------------------------------
+/* <pre class="excerpt" data-excerpt="haro/zui.stzu"> ... </pre>: its text, with the highlighting spans removed and whitespace collapsed,
+   must appear in that file. A page cannot show a passage of the language's declaration that the declaration does not contain. */
+function verifyExcerpts(problems) {
+  let n = 0;
+  const squash = t => t.replace(/\s+/g, ' ').trim();
+  for (const p of pages()) {
+    const html = fs.readFileSync(R(p), 'utf8').replace(/\r\n/g, '\n');
+    const re = /<pre class="excerpt" data-excerpt="([^"]+)">([\s\S]*?)<\/pre>/g;
+    let m;
+    while ((m = re.exec(html))) {
+      n++;
+      if (!fs.existsSync(R(m[1]))) { problems.push(`${p}: excerpt of ${m[1]}, which does not exist`); continue; }
+      const file = squash(fs.readFileSync(R(m[1]), 'utf8'));
+      const shown = decode(m[2]).split('\n').filter(l => !/^\s*(\.\.\.|…)\s*$/.test(l)).map(squash).filter(Boolean);
+      for (const line of shown) if (!file.includes(line)) { problems.push(`${p}: the excerpt of ${m[1]} shows a line the file does not contain: "${line.slice(0, 80)}"`); break; }
+    }
+  }
+  return n;
+}
+
 // ---- the typed numbers outside any span (informational) -----------------------------------------------------
 function unchecked(html) {
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')
@@ -217,7 +243,8 @@ function main(argv) {
     if (u.length) per.push(`${p}: ${u.length} (${[...new Set(u)].slice(0, 8).join(', ')})`);
   }
   const ninety = verifyRuns(problems);
-  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}`);
+  const excerpts = verifyExcerpts(problems);
+  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; excerpts checked against their files: ${excerpts}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);
   if (listUnchecked) per.forEach(l => console.log('  ' + l));
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }
