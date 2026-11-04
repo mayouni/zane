@@ -2367,3 +2367,48 @@ next:
 note:      the Zig sources are untested. Nothing in S1 is claimed.
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 21:47 | NOTE | answers Central's NOTE of 2026-11-04 21:03 (piece B) | PIECE B IS FOUR LOCAL COMMITS PLUS ONE SMALL ONE, 0EA07F6 TO 6805D47; THE AUDIT IS 0 ON 27 PAGES IN BOTH CULTURES; S1 STILL WAITS ON THE GUARD
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 21:47 | ATTENDED
+
+subject:   site piece B, the Approach section, local on main, not pushed: 0ea07f6, bf1920e, 20f7bba, 6805d47
+
+why:       your 21:03 NOTE: Approach as SITE-3 says: The thinking, The grid, Channels, Comparison widened, Claims
+
+did:
+  - 0EA07F6, THE GRID AND CHANNELS: the grid page draws the coverage grid from the files that hold its figures through a new tool, tools/site-grid.js, which the site's own check re-runs (a row per channel, a column per activity, a word in every cell: the count, "none" or "closed"). It says the law is written for a screen, that 5 of the 10 channels have no rule, that 80 of 123 rules still need a person, and how far the placement can be trusted. Channels replaces the stub: the ten channels by their properties from media.json, native/degraded/absent, the fan-out figure, one declaration refused in a voice and its twin clean on a screen (both re-run), and the cross-channel proof's real output
+  - TWO FINDINGS THE PAGES CARRY, NOT SMOOTHED: (1) the two blind reads' figures. COVERAGE.md says re-running compare.js today gives other figures (a ruling moved four rules), and it does: 7 of 31 and 12 of 33 today against the recorded 6 of 31 and 10 of 33. The site reads the saved outputs, says "as measured on 3 November", and says a re-run differs. (2) cross-medium.js reports the central claim NOT PROVED for the print pair (three differences the signal data is silent on, no drift) and exits 1; the page shows that, and does not call it a pass
+  - BF1920E, COMPARISON WIDENED: seven practices, four UI frameworks (React, SwiftUI, Jetpack Compose, Flutter) and five description languages (task models and abstract UI with ConcurTaskTrees, UIML, XForms, VoiceXML, SCXML), each from the project's own page, paraphrased, linked, "in the pages listed here, read on 4 November 2026". HOW EACH WAS READ is on the page: React's in full, Apple's, Google's, Flutter's and the long W3C specifications through overviews, search and abstracts; Flutter's front page does not describe its model and the row says so; VoiceXML's row says StzZui's own voice carriage was derived by reasoning and not from it. ISO/IEC 24744 stays named and set aside. Correction 1 stands
+  - 20F7BBA, THE THINKING AND CLAIMS (one commit, the band lists both): the essay in eight parts, each naming its source document and marking the Second Founding as proposed and not ratified; a "who is who" for Zui, StzZui, Zing, Haro, Softanza. Claims: five structural claims each with an instrument and a limit, and what is not shown (no study, no user, no foreign application end to end). THE WORD "innovation" IS ON THE CLAIMS PAGE ONLY, once, with its limit in the same paragraph (correction 5)
+  - 6805D47: the typed-numbers scan skips tables drawn from their data. 18 typed numbers on 3 pages, as before piece B, none on any page of piece B
+
+state:
+  UI audit, before:  0 on 25 pages in Modern and Retro
+  UI audit, after:   0 on 27 pages in Modern and Retro (25 plus grid and claims; thinking and channels were already listed); strict, 0 interactive text under 7:1
+  375 wide:          no sideways scroll on the five Approach pages
+  gates:             site-shell ok (27 pages), site-facts ok (155 spans, 9 verifier runs, 3 commands re-run, 13 status words, 3 excerpts), pack verified, conformance 73 of 73
+  the counts, 1280 by 800, screens below the bars. Columns: first example / first sourced number / first button / first real terminal
+    The thinking:  1.6 / 1.8 / 0.6 / none (11.2 screens; its example is the layers figure)
+    The grid:      1.3 / 0.4 / 0.6 / none (10.3 screens; its example is the table)
+    Channels:      1.3 / 2.8 / 0.6 / 4.8 (8.7 screens; two real terminals further down)
+    Comparison:    1.8 / 1.2 / 0.6 / none (14.8 screens; the longest page of the site, which is a finding about the page)
+    Claims:        none / 1.6 / 0.6 / none (6.9 screens; it has no example by design, and says what is not shown)
+  stubs left:      one, Try's head (piece D)
+  zig sources:     zig/ and build.zig written, NOT BUILT, NOT COMMITTED; the guard has not changed
+
+waiting:
+  - SITE3-B-LOOK-01: the Principal looks at the five Approach pages at 1280 and in Retro. In particular Comparison (14.8 screens) and The thinking (11.2): too long, or the depth he asked for? -> the Principal, via Central
+             [not routed; it is here]
+  - SITE3-B-FRAMEWORKS-01: the four framework rows were written from pages some of which build themselves in the browser; a reader who knows React, SwiftUI, Compose or Flutter should check the "decides" and "adds" cells -> Central, whether to have someone read them
+             [not routed; it is here]
+  - BINARY-GUARD-01: unchanged, with the Principal -> the Principal
+             [not routed; it is here]
+
+next:
+  - me:      piece C of SITE-3 (Use: Which way in re-aimed, Web apps, Mobile apps, Beyond screens, Your stack with Softanza and Other languages), which needs no build. S1 resumes the moment a build is allowed
+  - central: read piece B, push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody but me has read the five pages as a reader. The audit cannot see whether the essay explains anything, whether the grid is understood, or whether a framework row is fair
+```
+---
