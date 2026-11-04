@@ -65,6 +65,9 @@ function derive(prev) {
   put('fixtures.unfixtured', m.unfixtured.length, 'conformance/manifest.json unfixtured');
 
   put('media.count', json('conformance/media.json').media.length, 'conformance/media.json media');
+  /* how a medium carries a verb: absent / degraded / native, by the same reading the verifier makes of media.json */
+  const carriage = (mm, v) => { const c = mm.carries || {}; return (c.absent || []).includes(v) ? 'absent' : (c.degraded || []).includes(v) ? 'degraded' : (c.native || []).includes(v) ? 'native' : (c.default || 'native'); };
+  put('media.actAbsent', json('conformance/media.json').media.filter(mm => carriage(mm, 'ACT') === 'absent').length, 'conformance/media.json media carriage of ACT');
   put('pack.files', json('protocol/MANIFEST.json').pinned.length, 'protocol/MANIFEST.json pinned');
   put('signals.count', json('conformance/signal.json').values.length, 'conformance/signal.json values');
 
