@@ -52,10 +52,11 @@ const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'Sta
                   ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
 const PAGES = [
   { file: 'index.html', home: true },
-  { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true, stub: 'thinking' },
+  { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true },
   { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true },
   { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true },
   { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true },
+  { file: 'site/innovation.html', section: 'approach', label: 'Claims', rail: true },
   { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
   { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true },
