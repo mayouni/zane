@@ -48,9 +48,11 @@
     "law.version": "3.13",
     "media.count": 10,
     "signals.count": 5,
+    "site.verifierRuns": 4,
     "twin.differences": 18,
     "twin.seams": 8,
-    "verbs": 22
+    "verbs": 22,
+    "zing.pinned": "3.11"
   },
   "sources": {
     "audit.contrastFloor": "doc/design/audit/decides.json thresholds",
@@ -100,8 +102,10 @@
     "law.version": "constitution/rules.json metadata.version",
     "media.count": "conformance/media.json media",
     "signals.count": "conformance/signal.json values",
+    "site.verifierRuns": "the declaration and terminal pairs on the site pages (re-run by this script)",
     "twin.differences": "haro/twin-expected.csv rows",
     "twin.seams": "haro/twin-expected.csv seam column",
-    "verbs": "constitution/rules.json intents.families"
+    "verbs": "constitution/rules.json intents.families",
+    "zing.pinned": "zing/constitution/rules.json (a sibling repository: read when reachable, carried from the last facts.json when not)"
   }
 }
