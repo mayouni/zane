@@ -227,12 +227,15 @@ function verifyCommands(problems) {
   return n;
 }
 
-// ---- a button is an action, so it leaves the page ----------------------------------------------------------
-/* A <a class="btn primary"> that points at "#something" scrolls the reader to a place they can already see; it is not a call to action. */
+// ---- the head of a reading page has no button --------------------------------------------------------------
+/* A button in the head of a page that is read from top to bottom interrupts the reading and proposes a change of context (the author, 2026-11-04).
+   Only the front page keeps its one action. A primary button anywhere else in a page body still may not point into its own page. */
 function verifyCtas(problems) {
   let n = 0;
   for (const p of pages()) {
-    const html = fs.readFileSync(R(p), 'utf8');
+    const html = fs.readFileSync(R(p), 'utf8').replace(/\r\n/g, '\n');
+    const head = /<header class="page">[\s\S]*?<\/header>/.exec(html);
+    if (head && /\bbtn\b[^"]*\bprimary\b/.test(head[0])) problems.push(p + ': the head of a reading page carries a primary button; only the front page does');
     for (const m of html.matchAll(/<a\b[^>]*class="[^"]*\bbtn\b[^"]*\bprimary\b[^"]*"[^>]*href="([^"]*)"|<a\b[^>]*href="([^"]*)"[^>]*class="[^"]*\bbtn\b[^"]*\bprimary\b[^"]*"/g)) {
       n++;
       const href = m[1] !== undefined ? m[1] : m[2];

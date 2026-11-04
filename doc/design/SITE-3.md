@@ -227,7 +227,7 @@ prose, labels and the nav say "channels"; the quoted law and the diagnostics kee
 
 ## 7. The new and changed pages, each against its reader
 
-Every page follows SITE-2 section 3: a hero with a promise and one action, a pair against the practice it replaces where one exists, a figure where a figure explains, the limit in the page and in the caption, the
+Every page follows SITE-2 section 3: a hero with a promise (and, until the author ruled otherwise on 2026-11-04, one action: now only the front page has one), a pair against the practice it replaces where one exists, a figure where a figure explains, the limit in the page and in the caption, the
 three counts in the memo. **Every number is a span; the unchecked-numbers check becomes a failure in the last piece** (as SITE-2 piece 10 says).
 
 ### 7.1 The thinking (head of Approach), for a designer who wants the reasoning
