@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web apps — a real site's navigation, declared and audited</title>
+<meta name="description" content="A workflow for a team with a web application in production, run on the navigation of a site this project does not own: declare its surfaces, run the verifier, run the UI audit on the live pages, place the findings on the grid, and what it yields today.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=96cb4f5b">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a class="here" aria-current="true" href="adopt.html">Use</a>
+    <a href="audit.html">Try</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Use</a></li>
+    <li><a aria-current="page" href="web.html">Web apps</a></li>
+    <li><a href="mobile.html">Mobile apps</a></li>
+    <li><a href="beyond.html">Beyond screens</a></li>
+    <li><a href="stack.html">Your stack</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Web apps</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Use · for a team with a web application already in production</p>
+    <h1>Declare its surfaces, run the verifier, audit the live pages, and see what came out.</h1>
+    <p class="sub">The case is the navigation of stzsite, the Softanza site: a real site in production that this project reads and does not own. It was never edited, its own desk has not agreed to this reading, and what follows is this project's run, with what it took and where it stops.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="../tools/ui-audit.html">Open the UI audit →</a>
+      <p class="note">Point it at any page you can serve beside it.</p>
+    </div>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#the-case">The case, and what it is</a></li>
+      <li><a href="#declare-and-run">Declare the surfaces, and run the verifier</a></li>
+      <li><a href="#audit-the-live-pages">Audit the live pages</a></li>
+      <li><a href="#place-the-findings">Place each finding on the grid</a></li>
+      <li><a href="#what-it-yields">What this yields today, and where it stops</a></li>
+    </ul>
+  </details>
+</nav>
+<!-- /shell:layout -->
+<main id="main">
+
+<section id="the-case">
+  <div class="narrow">
+    <h2>The case, and what it is</h2>
+
+    <p>A web application already in production is the common case, and the one where a retrofit has to cost an afternoon and not a rewrite. The subject here is the navigation of <b>stzsite</b>, the Softanza site: a main menu of five entries, a start link, and a language switch.
+    It is another desk's repository, read here and never written; the declarations below are <b>StzZui's description of pages it does not own</b>, and say so in their file's header.</p>
+    <p class="limit"><b>Limit:</b> this is one navigation on one site, read on 4 November 2026. It shows the workflow and its cost. It does not show how the law fares on a typical application, and the declarations are written by hand, because no importer from a page to a declaration exists.</p>
+  </div>
+</section>
+
+<section class="alt" id="declare-and-run">
+  <div class="narrow">
+    <h2>Declare the surfaces, and run the verifier</h2>
+
+    <p>Step one is writing down, in the language, what the reader does there. My first draft of the language switch said it <em>acts</em> and also that its role is to <em>navigate</em>. The verifier refused it:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE NAV_GRAPH</span> <span class="n">site_menu</span> (
+  <span class="k">SATISFIES</span> [<span class="s">LOCATE, DISCOVER, UNDERSTAND</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">EXIT</span>],
+  <span class="k">VISIBLE_STATE</span> [<span class="s">current_section, language</span>],
+  <span class="k">ACTOR</span> <span class="s">reader</span>
+)
+<span class="k">DEFINE INTERACTION</span> <span class="n">language_switch</span> (
+  <span class="k">SATISFIES</span> [<span class="s">ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>],
+  <span class="k">ROLE</span> <span class="s">navigate</span>,
+  <span class="k">ACTOR</span> <span class="s">reader</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check stzsite_menu.zui</span>
+stzsite_menu.zui:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS_WITHOUT_CONSEQUENCE</span>  navigate language_switch satisfies ACT
+<span class="dim">    A control promising to change nothing declares that it acts.</span>
+<span class="dim">    Rule 119 · A Card Is Not a Button · Rule 112 · Motion Reports, It Never Decorates · Rule 16 · Intentional Clicks · Article II</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    </div>
+    <p>That is the verifier doing its work on the author: a control that changes what is shown, and nothing that is true, is not an act. The reading was wrong, not the site. Corrected, it is a selection:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE NAV_GRAPH</span> <span class="n">site_menu</span> (
+  <span class="k">SATISFIES</span> [<span class="s">LOCATE, DISCOVER, UNDERSTAND</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">EXIT</span>],
+  <span class="k">VISIBLE_STATE</span> [<span class="s">current_section, language</span>],
+  <span class="k">ACTOR</span> <span class="s">reader</span>
+)
+<span class="k">DEFINE INTERACTION</span> <span class="n">language_switch</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>],
+  <span class="k">ROLE</span> <span class="s">navigate</span>,
+  <span class="k">ACTOR</span> <span class="s">reader</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check stzsite_menu_fixed.zui</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+    </div>
+    <p>The checked-in file is <a href="../examples/web-case/stzsite-navigation.zui"><code>examples/web-case/stzsite-navigation.zui</code></a>, with the third surface (the start page) and a header that says whose description it is.
+    Both runs above are re-run by this site's own check.</p>
+  </div>
+</section>
+
+<section id="audit-the-live-pages">
+  <div class="narrow">
+    <h2>Audit the live pages</h2>
+
+    <p>The UI audit measures what a browser paints, and it reads pages through same-origin frames, so a site served from somewhere else cannot be audited from it. For a site you are only allowed to read, the smallest honest way past that is a read-only server that puts the other
+    folder and the audit on one origin: <a href="../examples/web-case/serve-beside.js"><code>examples/web-case/serve-beside.js</code></a>, thirty-six lines, binding the local machine only, answering GET only, writing nothing.</p>
+    <p>Run on six pages (the home page and the Platform, Vision, Learn, Reference and Zui pages), in the default mode, on 4 November 2026, it reported twenty-six findings. They are of two kinds, and only one is a finding about the site:</p>
+    <ul>
+      <li><b>Four findings on Rule 108, the path:</b> the Platform, Vision, Learn and Reference pages omit the visible trail, which the rule allows where an always-visible bar marks the page, but carry no labelled navigation landmark for the path. The Zui page carries one and is clean.</li>
+      <li><b>Twenty-two findings of contrast on the home page,</b> every one of text laid over the photograph. These are not findings about the site: the audit reads the colours of the elements behind a text and cannot see through a photograph or a text shadow. The site's own page says it measures those words over the brightest part of the photograph, which is the right measure, and which this audit does not take.</li>
+    </ul>
+    <p class="limit"><b>Limit:</b> the audit passes what it cannot see through and flags it by the wrong reasoning; both directions are limits of the instrument, and the second is the same one this site's own front page has. Read the four as findings, and the twenty-two as a reason to measure over the photograph.</p>
+  </div>
+</section>
+
+<section class="alt" id="place-the-findings">
+  <div class="narrow">
+    <h2>Place each finding on the grid</h2>
+
+    <p>A finding is filed so that it lands on a cell of <a href="grid.html">the grid</a>, and never as a new rule. The missing path landmark is <b>understand</b> (where am I) on the <b>visual</b> channel, a cell with a rule written for it (Rule 108): it <em>confirms</em> the cell, and that the audit has a check for it is the system working.
+    The photograph contrast belongs to <b>perceive</b> on the visual channel, where the law has rules too; it is filed as a finding about the instrument, since the site's own measure is the right one. Neither extends the grid.</p>
+  </div>
+</section>
+
+<section id="what-it-yields">
+  <div class="narrow">
+    <h2>What this yields today, and where it stops</h2>
+
+    <ul>
+      <li><b>Yields:</b> three surfaces declared by hand, one real refusal of the author's own reading and its fix; six pages audited with four findings the site's owner can verify; the cost, a few hours of reading and a thirty-six-line server.</li>
+      <li><b>Stops:</b> nothing reads a page into a declaration; the audit needs the other site served beside it; the audit cannot see through photographs, so a site with a hero image gets false findings or none; and the owner's agreement is not part of any of this.</li>
+      <li><b>If a team's own application is the subject,</b> the same steps apply and the owner is the team: declare, run, serve the application beside the audit, place each finding on a cell.</li>
+    </ul>
+    <p>The single-file build of the tools, designed in <a href="../doc/design/BINARY.md"><code>doc/design/BINARY.md</code></a>, would replace that server with one command. It is not built.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=57039fc5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

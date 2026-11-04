@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Other languages — implement StzZui and prove it agrees</title>
+<meta name="description" content="The port recipe for another language or framework: pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences, and what you may and may not claim.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=96cb4f5b">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a class="here" aria-current="true" href="adopt.html">Use</a>
+    <a href="audit.html">Try</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Use</a></li>
+    <li><a href="web.html">Web apps</a></li>
+    <li><a href="mobile.html">Mobile apps</a></li>
+    <li><a href="beyond.html">Beyond screens</a></li>
+    <li><a aria-current="true" href="stack.html">Your stack</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Other languages</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Use · for people who implement StzZui in another language</p>
+    <h1>You do not adopt a library: you implement the language and run the fixtures.</h1>
+    <p class="sub">A verifier in any language is a peer of the one in this repository. It reads the same pinned files, parses the same grammar, and reports the same diagnostics on the same fixtures, or the suite says which one disagreed. Here is the recipe, and the limits of what a pass lets you say.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="../protocol/README.md">Read the protocol pack →</a>
+      <p class="note">Twelve files, no runtime, nothing to link.</p>
+    </div>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout has-list">
+<nav class="list3" aria-label="Pages of the family">
+  <ul>
+    <li><a href="build.html">Build</a></li>
+    <li><a href="generate.html">Generate</a></li>
+    <li><a href="softanza.html">Softanza</a></li>
+    <li><a aria-current="page" href="ports.html">Other languages</a></li>
+  </ul>
+</nav>
+<!-- /shell:layout -->
+<main id="main">
+
+<section id="the-recipe">
+  <div class="narrow">
+    <h2>The recipe</h2>
+
+    <ol class="workflow">
+      <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant; the hash says the bytes you hold are that edition. <span class="file">tools/zui/pack.js --check</span></li>
+      <li><b>Implement the grammar</b> from <a href="../doc/language/GRAMMAR.md"><code>doc/language/GRAMMAR.md</code></a>: the ten kinds, the closed enumerations and the <span data-fact="verbs">22</span> verbs.</li>
+      <li><b>Run the <span data-fact="fixtures.total">73</span> fixtures at the level you claim.</b> Compare by diagnostic id only, never by line number, wording or order. A fixture above your level is skipped and recorded, never failed.</li>
+      <li><b>Emit the refusal envelope</b> (the six fields of <a href="refusal.html">What it refuses</a>) so one CI step can read any court.</li>
+      <li><b>List your differences from the reference,</b> the way the twin ratchet does: each a named row, and a failure on any other. <a href="haro.html">Declared in Haro</a> shows one.</li>
+    </ol>
+    <pre class="term" data-run="node tools/zui/pack.js --check"><span class="dim">$ node tools/zui/pack.js --check</span>
+
+The Zui protocol pack
+  law          v3.13 — 123 rules, 17 forbidden patterns
+  language     v1.4 — 37 diagnostics
+  axes         10 media, 5 semantic values
+  proof        73 fixtures + the cross-medium spec
+  pinned       12 files, sha256 over LF-normalised content
+  README       every count on the page matches the manifest
+
+  verified — every pinned file matches the manifest</pre>
+  </div>
+</section>
+
+<section class="alt" id="what-you-may-claim">
+  <div class="narrow">
+    <h2>What you may claim, and may not</h2>
+
+    <p><b>May:</b> "conforms to Zui v3.13 at level 2, verified against manifest &lt;hash&gt;", your own diagnostic codes in your own words, and your own language for the prose.</p>
+    <p><b>May not:</b> extend a closed set. The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed; adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
+    <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b>. The last one does not fully pass today, in this repository either: <a href="media.html">Channels</a> shows its real output, proved for one pair and not proved for another.</p>
+  </div>
+</section>
+
+<section id="who-has-done-it">
+  <div class="narrow">
+    <h2>Who has</h2>
+
+    <p>The <b>reference</b> is the JavaScript verifier in this repository. <b>Zing</b>, a separate framework in the Softanza family, is described in its own pinning record as the first conforming consumer of the law, and pins law v<span data-fact="zing.pinned">3.11</span>.
+    This page states no conformance level for it: that is its own claim to make, and this site has not re-run its checker. A single-file verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a> and not built.</p>
+    <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, not a record of one succeeding.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=57039fc5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

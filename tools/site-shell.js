@@ -68,8 +68,14 @@ const PAGES = [
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),
   { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true },
   { file: 'site/adopt.html', section: 'use', label: 'Use', rail: true },
-  { file: 'site/build.html', section: 'use', label: 'Build', rail: true },
-  { file: 'site/generate.html', section: 'use', label: 'Generate', rail: true },
+  { file: 'site/web.html', section: 'use', label: 'Web apps', rail: true },
+  { file: 'site/mobile.html', section: 'use', label: 'Mobile apps', rail: true },
+  { file: 'site/beyond.html', section: 'use', label: 'Beyond screens', rail: true },
+  { file: 'site/stack.html', section: 'use', label: 'Your stack', rail: true },
+  { file: 'site/build.html', section: 'use', label: 'Build', parent: 'site/stack.html', rail: true },
+  { file: 'site/generate.html', section: 'use', label: 'Generate', parent: 'site/stack.html', rail: true },
+  { file: 'site/softanza.html', section: 'use', label: 'Softanza', parent: 'site/stack.html', rail: true },
+  { file: 'site/ports.html', section: 'use', label: 'Other languages', parent: 'site/stack.html', rail: true },
   { file: 'site/audit.html', section: 'try', label: 'Try', rail: true, stub: 'audit' },
   /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
   { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' }

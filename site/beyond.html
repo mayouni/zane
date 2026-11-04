@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond screens — voice, sound and agents with no interface to see</title>
+<meta name="description" content="For conversational, voice-oriented and UI-less applications: four declarations run through the verifier, what each channel decides, the two rules for agent surfaces, and which cells of the grid have a rule and which do not.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=96cb4f5b">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a class="here" aria-current="true" href="adopt.html">Use</a>
+    <a href="audit.html">Try</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Use</a></li>
+    <li><a href="web.html">Web apps</a></li>
+    <li><a href="mobile.html">Mobile apps</a></li>
+    <li><a aria-current="page" href="beyond.html">Beyond screens</a></li>
+    <li><a href="stack.html">Your stack</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Beyond screens</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Use · for conversational, voice and UI-less applications</p>
+    <h1>When there is nothing to look at, the law still says what the person must be able to do.</h1>
+    <p class="sub">A phone line, a status chime, an agent that a machine drives and a sign in a lobby have no screen, and still make promises: you can leave, you can undo, you can tell what state it is in. Four declarations, run for real, and what each channel decides.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="media.html">Read what each channel can carry →</a>
+      <p class="note">A channel is what the law calls a medium.</p>
+    </div>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#a-voice-line">A voice line cannot zoom</a></li>
+      <li><a href="#an-agent">An agent can act and cannot leave</a></li>
+      <li><a href="#a-status-chime">A chime that says "nothing" says nothing</a></li>
+      <li><a href="#a-sign">A sign that also acts</a></li>
+      <li><a href="#where-the-law-is-silent">Where the law is silent</a></li>
+    </ul>
+  </details>
+</nav>
+<!-- /shell:layout -->
+<main id="main">
+
+<section id="a-voice-line">
+  <div class="narrow">
+    <h2>A voice line cannot zoom</h2>
+
+    <p>A person asking for their balance over the phone, in a flow that promises ZOOM, has been promised something a voice cannot carry. The verifier refuses the promise, not the voice line:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">phone_line</span> (
+  <span class="k">SURFACE_AS</span> <span class="s">voice</span>,
+  <span class="k">MOTION</span> <span class="s">none</span>
+)
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">check_balance</span> (
+  <span class="k">SATISFIES</span> [<span class="s">UNDERSTAND, ZOOM</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
+  <span class="k">ACTOR</span> <span class="s">caller</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check check_balance.zui</span>
+check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
+<span class="dim">    A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.</span>
+<span class="dim">    Rule 82 · Perceivable State · Article II</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="an-agent">
+  <div class="narrow">
+    <h2>An agent can act and cannot leave</h2>
+
+    <p>An interface for an agent is an interface: the agent is the person at the other end, and the law about leaving and undoing applies to it as much as to anyone. A flow that places orders and cannot be abandoned is refused:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">agent_api</span> (
+  <span class="k">SURFACE_AS</span> <span class="s">machine</span>,
+  <span class="k">MOTION</span> <span class="s">none</span>
+)
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">place_order</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, EXIT</span>],
+  <span class="k">ACTOR</span> <span class="s">agent</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check agent_order.zui</span>
+agent_order.zui:5  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  place_order
+<span class="dim">    A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.</span>
+<span class="dim">    Rule 26 · The Back Button is Holy · Article IV · the right to leave</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    </div>
+    <p>Declaring the way out is the whole fix:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">agent_api</span> (
+  <span class="k">SURFACE_AS</span> <span class="s">machine</span>,
+  <span class="k">MOTION</span> <span class="s">none</span>
+)
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">place_order</span> (
+  <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
+  <span class="k">ACTOR</span> <span class="s">agent</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check agent_order_fixed.zui</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+    </div>
+    <p>Two rules are written for this channel and are judgment rules, so the verifier does not check them: <b>Rule 121</b>, the assistant never masks the work, and <b>Rule 124</b>, the generator ships a working thing. They are the only rules the law has for agent surfaces, and the grid below says why that is thin.</p>
+  </div>
+</section>
+
+<section id="a-status-chime">
+  <div class="narrow">
+    <h2>A chime that says "nothing" says nothing</h2>
+
+    <p>A surface may declare a status that a channel renders as silence, and silence is the correct rendering of "waiting, inactive". The defect is narrower: when <em>every</em> status a surface declares is rendered as nothing in the channel it declared, the surface promised a perceptible state and delivered none:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">chime_only</span> (
+  <span class="k">SURFACE_AS</span> <span class="s">auditory</span>,
+  <span class="k">MOTION</span> <span class="s">none</span>
+)
+<span class="k">DEFINE INTERACTION</span> <span class="n">job_status</span> (
+  <span class="k">SATISFIES</span> [<span class="s">UNDERSTAND</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">EXIT</span>],
+  <span class="k">SIGNALS</span> [<span class="s">muted</span>],
+  <span class="k">ROLE</span> <span class="s">inert</span>,
+  <span class="k">ACTOR</span> <span class="s">operator</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check chime.zui</span>
+chime.zui:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIVABLE</span>  muted in job_status on auditory
+<span class="dim">    Every semantic status a surface declares renders as absence in the medium it declared.</span>
+<span class="dim">    Rule 82 · Perceivable State · Article III · the right to know</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    </div>
+    <p>That is the right to know, enforced for a channel with no screen. Only two channels have a recorded rendering of statuses today (sound and voice); in any other the verifier is silent, which means undecided, not fine.</p>
+  </div>
+</section>
+
+<section class="alt" id="a-sign">
+  <div class="narrow">
+    <h2>A sign that also acts</h2>
+
+    <p>A fixed sign carries wayfinding, and almost nothing else. A declaration for a lobby screen that promises ACT on a sign draws four refusals: the verbs a sign cannot carry (ACT and EXIT) and the undo and cancel that an act owes. The suite's own <a href="../conformance/fixtures/verb-not-carried.zui">printed-ledger case</a> draws the same kind of refusals for a page that promises an act.
+    The channels that cannot carry most verbs are the fixed ones: print, signage, a lamp.</p>
+  </div>
+</section>
+
+<section id="where-the-law-is-silent">
+  <div class="narrow">
+    <h2>Where the law is silent</h2>
+
+    <p>For these channels the grid has <span data-fact="grid.channelsNoRule">5</span> of ten with no rule written for them at all (haptic, luminous, signage, spatial and terminal), and the voice, sound and machine channels have a rule on only a few cells. <a href="grid.html">The grid</a> draws it, empty cells empty. The refusals above are real, and they are the
+    checks that exist: a verb a channel cannot carry, a flow that cannot be left, a status that renders as nothing. They are not a full account of what a good voice line or a good agent surface is.</p>
+    <p class="limit"><b>Limit:</b> the verifier checks the declaration. Whether a voice line is <em>heard</em> as intended, or an agent surface is usable by the agent, has no instrument here, and nobody has perceived any of these channels.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=57039fc5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

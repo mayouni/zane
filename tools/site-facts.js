@@ -215,7 +215,7 @@ function verifyCommands(problems) {
     let m;
     while ((m = re.exec(html))) {
       const cmd = decode(m[1]).split(/\s+/);
-      if (cmd[0] !== 'node' || !/^tools\/zui\/[a-z-]+\.js$/.test(cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (node tools/zui/NAME.js)`); continue; }
+      if (cmd[0] !== 'node' || !/^(tools\/zui\/[a-z-]+|doc\/design\/audit\/check-facts)\.js$/.test(cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (node tools/zui/NAME.js)`); continue; }
       n++;
       const lines = decode(m[2]).split('\n');
       if (lines[0].replace(/^\$\s*/, '').trim() !== cmd.join(' ')) problems.push(`${p}: the first line of the terminal for "${cmd.join(' ')}" is not that command`);

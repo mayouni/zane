@@ -1,0 +1,28 @@
+// StzZui's description of pages it does not own.
+//
+// The subject is the navigation of stzsite (the Softanza site, D:\GitHub\stzsite), read on 2026-11-04 from
+// index.html and en/*.html and never edited. This file is StzZui's reading of what a reader does there,
+// written by hand from the markup: there is no importer, and stzsite's own desk has not seen or agreed to it.
+//
+// The first draft said the language switch satisfies ACT and has ROLE navigate; the verifier refused it
+// (ROLE_ACTS_WITHOUT_CONSEQUENCE: a control that changes what is shown, and nothing that is true, is not an act).
+
+DEFINE NAV_GRAPH site_menu (
+  SATISFIES [LOCATE, DISCOVER, UNDERSTAND],
+  ALWAYS_REACHABLE [EXIT],
+  VISIBLE_STATE [current_section, language],
+  ACTOR reader
+)
+
+DEFINE INTERACTION language_switch (
+  SATISFIES [SELECT],
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  ROLE navigate,
+  ACTOR reader
+)
+
+DEFINE SCREEN start_page (
+  SATISFIES [UNDERSTAND, DISCOVER],
+  ALWAYS_REACHABLE [EXIT],
+  ACTOR reader
+)
