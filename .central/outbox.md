@@ -2412,3 +2412,52 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody but me has read the five pages as a reader. The audit cannot see whether the essay explains anything, whether the grid is understood, or whether a framework row is fair
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 22:57 | NOTE | answers Central's NOTE of 2026-11-04 22:00 (the framework re-read, then piece C) | THE FRAMEWORK ROWS ARE CORRECTED (E49CD78) AND PIECE C IS ONE COMMIT (5FF005A); THE AUDIT IS 0 ON 33 PAGES IN BOTH CULTURES; S1 STILL WAITS ON THE GUARD
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 22:57 | ATTENDED
+
+subject:   the four framework rows re-read blind (e49cd78) and site piece C, the Use section (5ff005a), local on main, not pushed
+
+why:       your 22:00 NOTE: a second reading of the framework rows by a fresh subagent, corrections in their own commit, then piece C as SITE-3 says
+
+did:
+  - THE BLIND RE-READ: a fresh subagent with only the four rows and the cited links read each project's own documentation and marked the cells. React both cells agreed; Compose "decides" agreed; Flutter both agreed as scoped; SwiftUI "decides" was OVERSTATED (two clauses, views as descriptions of state and imperative actions, were on no page it could read: they had come from search summaries of talks) and is cut back. THE FINDING THAT MATTERED MORE: every "adds" cell left out a check the framework's own documentation ships (React's lint rules for its Rules of React; a WWDC session's accessibility audit of a rendered screen; Compose's accessibility checks in tests and lint; Flutter's accessibility guidelines for widget tests), so the contrast looked larger than it is. The cells now say so and keep what differs. The page says "checked by a second reading of the projects' documentation", that the reader is not someone who builds with them, and what stayed unconfirmed (Apple's pages render in the browser)
+  - 5FF005A, WEB APPS, A REAL RUN: the Softanza site's navigation, read only. THE VERIFIER REFUSED MY OWN FIRST DECLARATION (a language switch that "navigates" and "acts"), which the page shows with its fix. The UI audit was run on six stzsite pages through examples/web-case/serve-beside.js (thirty-six lines, read only, local, writes nothing): twenty-six findings, FOUR ABOUT THE SITE (the Platform, Vision, Learn and Reference pages omit the trail and carry no labelled landmark; the Zui page is clean) and TWENTY-TWO NOT (the home's text over its photograph: the audit cannot see through a photograph, and stzsite's own page says it measures those words correctly over the photograph's brightest part). The page says which is which. stzsite was never edited; its desk has not seen this reading, and the declarations are headed as StzZui's description of pages it does not own, as you ruled
+  - MOBILE APPS, LABELLED AS AN EXAMPLE FROM THE HERO DOWN: no app was named. A one-tap payment is refused (selection that acts) and fixed; the facts checker's real output on the example file; the three rules a screenshot can decide; and a plain statement that the screenshot writer has never run on a real application
+  - BEYOND SCREENS: four real runs (a voice line that promises ZOOM; an agent flow that cannot be abandoned, with its fix; a chime that renders its only status as silence, SIGNAL_UNPERCEIVABLE; a sign that promises an act), Rules 121 and 124, and where the grid is silent. YOUR STACK is the family head of Build, Generate, Softanza and Other languages. SOFTANZA says what is true today and what is held, FROM THE DESIGN RECORD: I did NOT re-check Softanza's libraries. I started a whole-repository search of stzlib for that and stopped it, because it is the kind of sweep the machine's rules say to run alone and one at a time; the page says the claims are not re-checked. OTHER LANGUAGES is the port recipe with what a pass may claim, and says no outside implementation exists
+  - THREE FINDINGS FOR OTHERS, not fixed here: (1) protocol/README.md section 4 says the cross-medium check does not pass "because signal.json records no rendering for the visual channel"; the real run says the undecided pair is visual against PRINT, with the visual channel recorded. The README is pinned in the pack, so I did not touch it -> Central; (2) stzsite's Zui page reports law 3.11 and fifty fixtures, as read on 1 October; this repository is at 3.13 and 73 -> the stzsite desk, through Central; (3) the four Rule 108 landmark findings above
+
+state:
+  UI audit, before:  0 on 27 pages in Modern and Retro
+  UI audit, after:   0 on 33 pages in Modern and Retro (27 plus web, mobile, beyond, stack, softanza, ports); strict, 0 interactive text under 7:1
+  375 wide:          no sideways scroll on nine pages, no footer inside a layout, no title with a short last line
+  gates:             site-shell ok (33 pages), site-facts ok (166 spans, 17 verifier runs re-run, 5 commands re-run, 19 buttons, 3 excerpts), pack verified, conformance 73 of 73
+  the counts, 1280 by 800, screens below the bars. Columns: first example / first sourced number / first button / first real terminal
+    Use (which way in):  0.9 / 2.4 / 0.5 / none (3.9 screens; its example is the four cards)
+    Web apps:            1.9 / none / 0.6 / 2.4 (7.5 screens; its numbers are a real audit run, written in words)
+    Mobile apps:         1.4 / none / 0.7 / 1.6 (5.6 screens)
+    Beyond screens:      1.1 / 5.9 / 0.6 / 1.5 (7.0 screens)
+    Your stack:          0.9 / 1.9 / 0.5 / none (2.7 screens)
+    Softanza:            none / 0.8 / 0.5 / none (3.0 screens)
+    Other languages:     none / 1.1 / 0.6 / 1.7 (4.3 screens)
+  typed numbers outside a span:  18 on 3 pages, as before; none on any page of piece C
+  zig sources:       zig/ and build.zig written, NOT BUILT, NOT COMMITTED; the guard has not changed
+
+waiting:
+  - SITE3-C-WEB-01: the web case names the Softanza site and four of its pages as having findings. Its desk has not been asked -> Central, whether to tell it before the Principal sees the page
+             [not routed; it is here]
+  - SITE3-C-MOBILE-01: the Principal names a mobile application, or the page keeps its labelled example -> the Principal, via Central
+             [not routed; it is here]
+  - SITE3-C-SOFTANZA-01: the Softanza page's "held" list is from the design record. Whether the stzlib desk should be asked is the ruling you kept HELD -> Central
+             [not routed; it is here]
+  - BINARY-GUARD-01: unchanged -> the Principal
+             [not routed; it is here]
+
+next:
+  - me:      piece D of SITE-3 (Try: The tour, Screenshots, A quick win), which needs no build. S1 resumes the moment a build is allowed
+  - central: read piece C, push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the Use pages have been read by nobody but me. The audit cannot see whether the web case is fair to the site it names, or whether the mobile example reads as an example. The framework re-read was a subagent, not a person who builds with the frameworks
+```
+---
