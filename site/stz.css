@@ -349,6 +349,18 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 .messages a { font-weight: 700; }
 .front-note { margin-top: 1.6rem; }
 
+/* ---- the grid: a table of counts, with a word in every cell, never a colour alone ---- */
+.scroll { overflow-x: auto; }
+table.gridmap { width: 100%; border-collapse: collapse; margin: 1.2rem 0 .6rem; background: var(--card); }
+table.gridmap caption { text-align: left; color: var(--muted); padding: 0 0 .6rem; caption-side: top; }
+table.gridmap th, table.gridmap td { border: 1px solid var(--line); padding: .45rem .6rem; text-align: center; vertical-align: middle; }
+table.gridmap thead th { font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+table.gridmap tbody th { text-align: left; font: 700 1rem var(--mono); white-space: nowrap; }
+table.gridmap .g-has b { color: var(--accent-ink); font-size: 1.1rem; }
+table.gridmap .g-none { color: var(--muted); }
+table.gridmap .g-closed { color: var(--muted); background: var(--tint); font-style: italic; }
+table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; font: 1rem var(--sans); text-transform: none; letter-spacing: 0; }
+
 /* ---- stamp ---- */
 .stamp {
   background: var(--accent); color: var(--on-accent); padding: 1.3rem 1.5rem;

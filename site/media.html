@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Channels — one declaration, ten channels</title>
+<meta name="description" content="A channel is where a declaration is carried: a screen, a voice, a printed page, a machine reader. The ten channels by what each is made of, what each can carry, and what the proof of one declaration in two channels says and does not.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=98a5b020">
+<link rel="stylesheet" href="stz.css?v=e62be53a">
 </head>
 <body>
 
@@ -26,6 +27,7 @@
 <nav class="band" aria-label="Pages of the section">
   <ul>
     <li><a href="thinking.html">Approach</a></li>
+    <li><a href="grid.html">The grid</a></li>
     <li><a aria-current="page" href="media.html">Channels</a></li>
     <li><a href="positioning.html">Comparison</a></li>
   </ul>
@@ -38,38 +40,194 @@
     <!-- shell:trail -->
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="thinking.html">Approach</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Channels</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Channels · being built</p>
-    <h1>One declaration, ten channels</h1>
-    <p class="sub">This section is being built. What exists today is data and instruments in the repository; this page names them and says what the site does not yet show. A channel is what the language and the law call a medium.</p>
+    <p class="kicker">Approach · for anyone who ships beyond a screen</p>
+    <h1>One declaration, ten channels, and what each one can carry.</h1>
+    <p class="sub">A channel is where a declaration is carried: a screen, a voice, a printed page, a lamp, a machine reader. The language declares what a person is doing once; a channel that cannot carry something the
+    declaration promises is refused by name, before anything is drawn, spoken or printed. A <b>channel</b> is what the language and the law call a <b>medium</b>.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#two-channels">See one declaration refused in a voice →</a>
+      <p class="note">A real run, and its twin on a screen.</p>
+    </div>
   </div>
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#what-a-channel-is">What a channel is made of</a></li>
+      <li><a href="#native-degraded-absent">Native, degraded, absent</a></li>
+      <li><a href="#two-channels">One declaration, two channels</a></li>
+      <li><a href="#the-proof">What the proof says, and what it does not</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
-<section>
+<section id="what-a-channel-is">
   <div class="narrow">
-    <h2 id="what-exists-today">What exists today</h2>
-    <p>The ten channels a declaration can name, and what each carries, are published as data in <a href="../conformance/media.json"><code>conformance/media.json</code></a>
-    (the keyword in a declaration is <code>SURFACE_AS</code>, and the diagnostics say <em>medium</em>).
-    A verb a channel cannot carry is refused by the verifier, and the signal vocabulary and the statuses that render as silence are in
-    <a href="../conformance/signal.json"><code>conformance/signal.json</code></a>.</p>
-    <p>The instrument that checks that renderings differ only as that data predicts is <code>tools/zui/cross-medium.js</code>, and the map of where the law has
-    something to say, and where it is silent, is <code>doc/design/COVERAGE.md</code> in the repository.</p>
+    <h2>What a channel is made of</h2>
+    <p>The ten channels are a closed list, so a map of what a person can do in each is finite. They are described by properties and not by taste, so a new one is classified and not argued about: whether the rendering stays,
+    whether the person can choose their order through it, whether they chose to attend, how much meaning arrives in a glance, and whether it can be withdrawn once made. That last property is what separates a rendering from an actuation,
+    and the reason print and signage behave unlike a screen.</p>
+<!-- channels:table -->
+<div class="scroll">
+<table class="gridmap channels">
+  <caption>The ten channels, by what each is made of, from <code>conformance/media.json</code>.</caption>
+  <thead><tr><th scope="col">Channel</th><th scope="col">What it is</th><th scope="col">Rendering stays</th><th scope="col">Order</th><th scope="col">Attention</th><th scope="col">Per glance</th><th scope="col">Can be withdrawn</th><th scope="col">Alone is a whole interface</th><th scope="col">Verbs it cannot carry</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">visual</th><td>A screen or page</td><td>persistent</td><td>parallel</td><td>elected</td><td>high</td><td>immediate</td><td>yes</td><td>0 of 22</td></tr>
+    <tr><th scope="row">auditory</th><td>Non-speech sound</td><td>transient</td><td>serial</td><td>unelected</td><td>low</td><td>self-retracting</td><td>no</td><td>1 of 22</td></tr>
+    <tr><th scope="row">voice</th><td>Speech in and out</td><td>transient</td><td>serial</td><td>elected</td><td>low</td><td>self-retracting</td><td>yes</td><td>1 of 22</td></tr>
+    <tr><th scope="row">haptic</th><td>Touch and vibration</td><td>transient</td><td>serial</td><td>unelected</td><td>minimal</td><td>self-retracting</td><td>no</td><td>20 of 22</td></tr>
+    <tr><th scope="row">print</th><td>The fixed record</td><td>permanent</td><td>parallel</td><td>elected</td><td>high</td><td>never</td><td>yes</td><td>16 of 22</td></tr>
+    <tr><th scope="row">luminous</th><td>Indicator light, lamp, beacon</td><td>persistent</td><td>parallel</td><td>unelected</td><td>minimal</td><td>immediate</td><td>no</td><td>20 of 22</td></tr>
+    <tr><th scope="row">signage</th><td>Fixed physical marking</td><td>permanent</td><td>parallel</td><td>unelected</td><td>single</td><td>never</td><td>yes</td><td>19 of 22</td></tr>
+    <tr><th scope="row">machine</th><td>Consumed by a program</td><td>persistent</td><td>parallel</td><td>elected</td><td>high</td><td>immediate</td><td>yes</td><td>0 of 22</td></tr>
+    <tr><th scope="row">spatial</th><td>A world seen from a vantage</td><td>persistent</td><td>parallel</td><td>elected</td><td>high</td><td>immediate</td><td>yes</td><td>0 of 22</td></tr>
+    <tr><th scope="row">terminal</th><td>A text grid</td><td>persistent</td><td>parallel</td><td>elected</td><td>medium</td><td>immediate</td><td>yes</td><td>0 of 22</td></tr>
+  </tbody>
+</table>
+</div>
+<!-- /channels:table -->
+    <p class="caption">In a declaration the keyword is <code>SURFACE_AS</code> and the diagnostics say <em>medium</em>; the data file is <code>media.json</code>. None of those words change. Sensors and actuators are not channels: they render nothing, and reach a person only when something else renders them.
+    The coverage of the law across these channels is <a href="grid.html">the grid</a>.</p>
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" id="native-degraded-absent">
   <div class="narrow">
-    <h2 id="what-this-site-does-not-show-yet">What this site does not show yet</h2>
-    <p>The pages that present the channels, the coverage grid and its gaps, and the cross-channel proof are not written. Nobody has perceived any of these channels for this grid, so
-    the grid is designed and measured and not verified by a person.</p>
+    <h2>Native, degraded, absent</h2>
+    <p>For each of the <span data-fact="verbs">22</span> verbs, each channel is recorded as <b>native</b> (it serves the intent naturally), <b>degraded</b> (served at a cost the designer must know, such as a parallel act becoming a serial one) or <b>absent</b>
+    (no analogue exists, so a surface declaring only this channel cannot satisfy the intent). <b>Only absent raises a diagnostic.</b> Degraded is data for tools and designers, because a warning that fired on every serial surface would be noise and not law.</p>
+    <figure class="figure">
+      <div class="scroll">
+      <svg viewBox="0 0 780 300" style="min-width:780px" role="img" aria-labelledby="fan-t fan-d">
+        <title id="fan-t">One declaration that acts, projected to ten channels</title>
+        <desc id="fan-d">A box on the left holds one declaration that satisfies ACT. Two arrows lead to two rows of five channels. Six channels carry ACT: visual, auditory, voice, machine, spatial and terminal. Four cannot carry it at all and refuse it: haptic, print, luminous and signage.</desc>
+        <defs><marker id="fan-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
+        <rect class="dg-data" x="6" y="85" width="150" height="130" rx="10"/>
+        <text class="dg-t" x="81" y="128" text-anchor="middle">One declaration</text>
+        <text class="dg-s" x="81" y="156" text-anchor="middle">SATISFIES</text>
+        <text class="dg-s" x="81" y="178" text-anchor="middle">[ACT]</text>
+        <line class="dg-line" x1="156" y1="125" x2="196" y2="75" marker-end="url(#fan-ah)"/>
+        <line class="dg-line" x1="156" y1="175" x2="196" y2="225" marker-end="url(#fan-ah)"/>
+        <rect class="dg-live" x="200" y="20" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="252" y="66" text-anchor="middle">visual</text>
+        <text class="dg-a" x="252" y="98" text-anchor="middle">carried</text>
+        <rect class="dg-live" x="312" y="20" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="364" y="66" text-anchor="middle">auditory</text>
+        <text class="dg-a" x="364" y="98" text-anchor="middle">carried</text>
+        <rect class="dg-live" x="424" y="20" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="476" y="66" text-anchor="middle">voice</text>
+        <text class="dg-a" x="476" y="98" text-anchor="middle">carried</text>
+        <rect class="dg-refused" x="536" y="20" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="588" y="66" text-anchor="middle">haptic</text>
+        <text class="dg-bad" x="588" y="98" text-anchor="middle">refused</text>
+        <rect class="dg-refused" x="648" y="20" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="700" y="66" text-anchor="middle">print</text>
+        <text class="dg-bad" x="700" y="98" text-anchor="middle">refused</text>
+        <rect class="dg-refused" x="200" y="170" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="252" y="216" text-anchor="middle">luminous</text>
+        <text class="dg-bad" x="252" y="248" text-anchor="middle">refused</text>
+        <rect class="dg-refused" x="312" y="170" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="364" y="216" text-anchor="middle">signage</text>
+        <text class="dg-bad" x="364" y="248" text-anchor="middle">refused</text>
+        <rect class="dg-live" x="424" y="170" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="476" y="216" text-anchor="middle">machine</text>
+        <text class="dg-a" x="476" y="248" text-anchor="middle">carried</text>
+        <rect class="dg-live" x="536" y="170" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="588" y="216" text-anchor="middle">spatial</text>
+        <text class="dg-a" x="588" y="248" text-anchor="middle">carried</text>
+        <rect class="dg-live" x="648" y="170" width="104" height="110" rx="10"/>
+        <text class="dg-t" x="700" y="216" text-anchor="middle">terminal</text>
+        <text class="dg-a" x="700" y="248" text-anchor="middle">carried</text>
+      </svg>
+      </div>
+      <figcaption><span data-fact="media.actAbsent">4</span> of the <span data-fact="media.count">10</span> channels cannot carry ACT at all, read from
+      <a href="../conformance/media.json"><code>media.json</code></a>. <b>Not shown:</b> how the other verbs fare in each channel, some degraded, and that no person has perceived any of these channels.</figcaption>
+    </figure>
+    <p class="limit"><b>Limit:</b> the carriage is a first cut. It was derived by reasoning about each channel's properties and not by rendering anything, and the lines for auditory, voice and haptic are the ones most likely to move on contact with a real surface.</p>
+  </div>
+</section>
+
+<section id="two-channels">
+  <div class="narrow">
+    <h2>One declaration, two channels</h2>
+    <p>A phone line cannot zoom. A person asking for their balance by voice, in a flow that promises ZOOM, has been promised something the channel cannot carry:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">phone_line</span> (
+  <span class="k">SURFACE_AS</span> <span class="s">voice</span>,
+  <span class="k">MOTION</span> <span class="s">none</span>
+)
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">check_balance</span> (
+  <span class="k">SATISFIES</span> [<span class="s">UNDERSTAND, ZOOM</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
+  <span class="k">ACTOR</span> <span class="n">caller</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check check_balance.zui</span>
+check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
+    <span class="dim">A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.</span>
+    <span class="dim">Rule 82 · Perceivable State · Article II</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    </div>
+    <p>The same flow on a screen carries it, and is clean:</p>
+    <div class="scene">
+<pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">screen_page</span> (
+  <span class="k">SURFACE_AS</span> <span class="s">visual</span>,
+  <span class="k">MOTION</span> <span class="s">none</span>
+)
+<span class="k">DEFINE INTENT_FLOW</span> <span class="n">check_balance</span> (
+  <span class="k">SATISFIES</span> [<span class="s">UNDERSTAND, ZOOM</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
+  <span class="k">ACTOR</span> <span class="n">caller</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check check_balance_screen.zui</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+    </div>
+    <p>Both runs are re-run by the site's own check. A refusal here is a refusal of a <em>promise</em>, not of the voice line: the declaration is lawful in a voice if it asks for what a voice can carry.</p>
+  </div>
+</section>
+
+<section class="alt" id="the-proof">
+  <div class="narrow">
+    <h2>What the proof says, and what it does not</h2>
+    <p>The sentence the design rests on is <b>one declaration, many renderings, one law</b>. The instrument for it does not assert that two renderings match: they are irreducibly different. It asserts that <em>every difference
+    between them is one the published data already predicted</em>. A difference the data accounts for is the model working; a difference it does not is drift, and fails the run. Run on the suite's two cases it says:</p>
+<pre class="term" data-run="node tools/zui/cross-medium.js"><span class="dim">$ node tools/zui/cross-medium.js</span>
+
+Cross-medium conformance — 2 case(s)
+  media        10 enumerated, matrix v1.1
+  signals      5 values, vocabulary v1.3
+
+  invoice-review.zui  —  visual vs print
+    intents      5 declared · 5 carried by both
+    signals      3 declared
+    differences  3 total · 0 predicted · 3 undecided · 0 drift
+
+    UNDECIDED — nothing is contradicted; the data is silent, so this pair is not proved:
+      signal danger: signal.json records no rendering for print, so this value is unproved rather than wrong
+      signal muted: signal.json records no rendering for print, so this value is unproved rather than wrong
+      signal warning: signal.json records no rendering for print, so this value is unproved rather than wrong
+
+  invoice-review.zui  —  visual vs auditory
+    intents      5 declared · 5 carried by both
+    signals      3 declared
+    differences  5 total · 5 predicted · 0 undecided · 0 drift
+
+  no drift, and 3 difference(s) the data cannot yet speak to.
+  Nothing here is wrong. The central claim is NOT PROVED for these pairs,
+  and it will not be until the silent channel records what it renders.</pre>
+    <p><b>So the claim is proved for one pair and not proved for the other.</b> Screen against sound has five differences, all predicted. Screen against print has three the data is silent on, because the signal file records no rendering
+    for print: that is unproved, not wrong, and the instrument exits non-zero rather than call it a pass.</p>
+    <p class="limit"><b>Limit:</b> nobody has perceived any of these channels. Two renderings that agree with the data can still both be wrong for a person, and no counter here can see it.</p>
   </div>
 </section>
 </main>
-</div>
 
 <!-- shell:footer -->
 <footer class="site">
@@ -94,5 +252,6 @@
 <!-- /shell:footer -->
 
 <script src="stz.js?v=57039fc5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

@@ -98,6 +98,14 @@ function derive(prev) {
   put('grid.rulesNamedOther', s.rules.other_media, 'doc/design/coverage-count.js');
   put('grid.rulesOffGrid', s.rules.on_no_cell, 'doc/design/coverage-count.js');
   put('grid.rulesOnVisual', s.rules_on_the_visual_column, 'doc/design/coverage-count.js');
+  put('grid.channelsNoRule', s.media_with_no_rule_written_for_them.length, 'doc/design/coverage-count.js media_with_no_rule_written_for_them');
+  put('grid.rulesPlaced', s.rules.placed, 'doc/design/coverage-count.js');
+  /* the two blind reads: as measured when each was made, from the outputs saved beside them (COVERAGE.md says so; re-running today gives other figures) */
+  for (const [k, f] of [['read1', 'compare-output.txt'], ['read2', 'compare2-output.txt']]) {
+    const o = fs.readFileSync(R('doc/design/placement-review/' + f), 'utf8');
+    const m = /BOTH exact and same: (\d+) of (\d+)/.exec(o);
+    if (m) { put('grid.' + k + '.both', +m[1], 'doc/design/placement-review/' + f); put('grid.' + k + '.of', +m[2], 'doc/design/placement-review/' + f); }
+  }
 
   const d = json('doc/design/audit/decides.json');
   put('audit.decides', d.rules.length, 'doc/design/audit/decides.json');
@@ -298,6 +306,7 @@ function main(argv) {
   const ninety = verifyRuns(problems);
   const excerpts = verifyExcerpts(problems);
   const commands = verifyCommands(problems);
+  { const g = spawnSync(process.execPath, [R('tools/site-grid.js')], { encoding: 'utf8' }); if (g.status !== 0) problems.push(...(g.stdout || '').split('\n').filter(l => l.startsWith('PROBLEM ')).map(l => l.slice(8))); }
   const statuses = verifyStatuses(problems);
   console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; status words checked: ${statuses}; excerpts checked against their files: ${excerpts}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);

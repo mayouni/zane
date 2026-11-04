@@ -150,7 +150,9 @@ const grid = () => {
   }
 };
 
-if (process.argv.includes('--json')) { console.log(JSON.stringify({ sum, closed: closedCells, no_rule: noStated, fixtures: fixtureRows }, null, 1)); }
+/* the grid itself, for the site: one entry per cell, so a page can draw it without redoing the placement */
+const gridCells = ACTIVITIES.flatMap(a => COLS.map(m => ({ activity: a, column: m, closed: closed(a, m), rules: cellRules[key(a, m)].length, fixtures: cellFix[key(a, m)].length })));
+if (process.argv.includes('--json')) { console.log(JSON.stringify({ sum, closed: closedCells, no_rule: noStated, fixtures: fixtureRows, grid: { activities: ACTIVITIES, columns: COLS, verbs: VERBS, cells: gridCells } }, null, 1)); }
 else {
   console.log('coverage grid:', sum.axes.activities, 'activities x', sum.axes.media, 'media =', sum.axes.medium_cells, 'cells, plus', sum.axes.medium_free_cells, 'medium-free cells');
   console.log('closed by media.json (the medium cannot carry the activity):', sum.closed_by_media_json, ' open:', sum.open_cells);

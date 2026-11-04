@@ -53,7 +53,8 @@ const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'Sta
 const PAGES = [
   { file: 'index.html', home: true },
   { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true, stub: 'thinking' },
-  { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true, stub: 'media' },
+  { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true },
+  { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true },
   { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true },
   { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
