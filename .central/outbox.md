@@ -2120,3 +2120,41 @@ next:
 note:      MY RECOMMENDATION IS THE NEW ORDER (navigation and code first). The Language pages written on the old shell would be rewritten twice: once for the band and the light code, once for the narration devices; the content they carry (what it refuses, the declared language, conformance, the board) does not depend on the order. The two home links that point at files (zui.stzu, protocol/README.md) and the status link wait for those pages either way
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 08:54 | NOTE | answers Central's NOTE of 2026-11-04 08:32 (SITE-2 piece 4: navigation and code) | PIECE 4 IS COMMITTED AS d996741; THE AUDIT IS 0 ON 19 PAGES IN BOTH CULTURES; A PHONE AT 375 MEASURED; STOPPED FOR YOUR READ AND THE PRINCIPAL'S LOOK
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 08:54 | ATTENDED
+
+subject:   site piece 4, local commit d996741 on main, not pushed. It also stands on top of three earlier unpushed commits: 2dab227 (PROTOCOL-01), 9a8d21a (the three home claims) and 207e7be (their memo)
+
+why:       the author's four navigation and code points, as SITE-2.md section 2 states them, and your re-brief of 08:32
+
+did:
+  - THE BAND: level 2 is a fixed horizontal band under the main menu, stuck with it as one stack; it lists the section's pages, five at most (site-shell.js now REFUSES a sixth, Rule 27), marks the current page or the family it belongs to, and is identical on every page of its section (Rule 115). The commit message records that this REVERSES your ruling of 2026-11-04 00:07 on the rail, as you asked
+  - THE LIST: a vertical list on the left ONLY at level 3 (the seven offence families), and the page then takes the full width; no list, no column
+  - NEXT AND BACK: removed from every page, with the empty wrappers they left
+  - CODE: light panels sized to their content (fit-content, wrapping, never scrolling), the terminal keeping a left rule and the words error and clean keeping their colour; every syntax colour checked at 6.3 to 8.8 to 1 on the panel. Retro keeps a dark terminal ground, because that culture is the exhibit. The Rule 114 widening hack is gone, so the audit has nothing to find there by construction
+  - ONE CONTAINER: the menu, the band, the head and the page share one left edge (72 rem); prose keeps its own measure through p, ul and the lead. This changes the look of every page, not only the navigation: the old centred 48 rem column is gone
+  - site-shell.js renders the band and the list; a small script in stz.js measures the stack so the list and the anchors sit below it. No page's content changed
+
+state:
+  UI audit, before:   0 on 19 pages in Modern and Retro
+  UI audit, after:    0 on 19 pages in Modern and Retro. (You wrote 21; the audit's list is 19 pages: the 15 originals and media, audit, build, generate. I did not invent two)
+  375 wide, read back:  the switch inside the viewport on its own row; the menu row and the band each scroll on their own; the list stacks above the page and is not sticky; no sideways scroll; a click on Retro reads Retro pressed. The stack is 136 px tall at that width, 17 percent of a phone screen, which is heavy: see below
+  gates:              site-shell ok (19 pages), site-facts ok (55 spans, 4 verifier runs), conformance 73 of 73, pack verified
+  looked at:          the Forms page and the Build page at 1280 in Modern, the Two cultures page at 1280 in Retro, by screenshot; the two bars stay while the page scrolls
+  pushed:             NO
+
+waiting:
+  - SITE2-P4-PHONESTACK-01: two sticky rows of the menu plus its own switch row plus the band is 136 px of a 812 px phone. The author asked for the bars fixed; on a phone I would let the band scroll away and keep only the menu fixed. Not done, because it departs from what he asked -> Central, with the author
+             [not routed; it is here]
+  - SITE2-P4-LOOK-01: the Principal looks now. Serve the repository root (any static server) and open site/gotchas/forms.html, site/build.html, index.html and site/vibes.html; press F2 for Retro. The one change he did not name that he will see first is the shared left edge -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      the five corrections of your NOTE go into the pieces that carry them (1, 2 and 3 in pieces 6 and 5; 4 in piece 9; 5 in pieces 5 and 7), none in this one; piece 5, the narration devices and the Language section, once you have read piece 4 and the Principal has looked
+  - central: read d996741, 9a8d21a, 2dab227; push by sha; bring the Principal the look
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at piece 4 but me, through three screenshots and measurements, at 1280 and 375, not on a device. A thing the audit cannot see: it passes the band and the list as present and identical, and cannot tell whether either is pleasant to use
+```
+---
