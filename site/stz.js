@@ -1,9 +1,8 @@
 'use strict';
 /* Shared by every page: the interaction VIBE -- the constitution's word
-   (Article VI), a culture, not a skin. Two buttons in the top bar, both
-   always visible, the current one pressed (Rule 106), and F2 for the
-   operators who never touch the mouse. A page outside the shell may still
-   carry the older select in its footer; both are kept in step. */
+   (Article VI), a culture, not a skin. A select at the right end of the
+   footer with both states as options, the current one shown (Rule 106 allows
+   it), and F2 for the operators who never touch the mouse. */
 (function () {
   const html = document.documentElement;
   const select = document.getElementById('vibe-select');

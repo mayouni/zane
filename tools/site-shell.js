@@ -6,17 +6,20 @@
      node tools/site-shell.js            check: every page carries exactly the shell this file renders
      node tools/site-shell.js --write    render the shell into every page
 
-   doc/design/SITE-2.md decides the shape: a main menu of FIVE entries (Rule 27); under it, fixed with it, a
+   doc/design/SITE-2.md and SITE-3.md decide the shape: a main menu of FIVE entries (Rule 27), Approach, Language, Law, Use, Try; under it, fixed with it, a
    band of the section's pages, five at most (Rules 27, 120); a vertical list on the left ONLY where a page
    has a family (level 3), and the page then takes the full width; and a visually hidden Breadcrumb landmark
    on every page (Rule 108). The same band is on every page of its section, the same list on every page of
    its family (Rule 115). Menus, bands, lists and landmarks written by hand would drift; this file is the only
    place they are written, and the check fails when a page differs from it. The regions it owns are fenced:
 
-       <!-- shell:menu --> ... <!-- /shell:menu -->      the two sticky bars (menu, with the culture switch, and band)
+       <!-- shell:menu --> ... <!-- /shell:menu -->      the two sticky bars (the menu and the band)
        <!-- shell:trail --> ... <!-- /shell:trail -->    the hidden Breadcrumb landmark
        <!-- shell:layout --> ... <!-- /shell:layout -->  the opening of the layout, holding the level-3 list where there is one
-       <!-- shell:footer --> ... <!-- /shell:footer -->  the footer links
+       <!-- shell:footer --> ... <!-- /shell:footer -->  the footer: links, the style select, the licence line
+
+   Every page of the site is on a bar (SITE-3.md section 3.4): the check below fails a page the registry does not list, a
+   page no bar lists, and a footer link to a page the bars do not list.
 
    A page that does not have the fences yet is migrated by --write from the markup the old site used.
    The pages outside the shell proper, the Reader and the UI audit tool, take the menu and the trail
@@ -37,11 +40,11 @@ const ASSET_RE = new RegExp('((?:href|src)=")([^"?]*?(' + ASSETS.map(a => a.repl
 
 /* ---- the structure --------------------------------------------------------------------------- */
 const SECTIONS = [
+  { id: 'approach', label: 'Approach', head: 'site/thinking.html' },
   { id: 'language', label: 'Language', head: 'site/how.html' },
   { id: 'law', label: 'Law', head: 'site/why.html' },
-  { id: 'media', label: 'Media', head: 'site/media.html' },
-  { id: 'audit', label: 'Audit', head: 'site/audit.html' },
-  { id: 'adopt', label: 'Adopt', head: 'site/adopt.html' }
+  { id: 'use', label: 'Use', head: 'site/adopt.html' },
+  { id: 'try', label: 'Try', head: 'site/audit.html' }
 ];
 /* A page's label is the one name it goes by in the menu, the rail and the trail (Rule 116). The head page
    of a section is named after the section; what the page is about is its kicker and its title. */
@@ -49,6 +52,9 @@ const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'Sta
                   ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
 const PAGES = [
   { file: 'index.html', home: true },
+  { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true, stub: 'thinking' },
+  { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true, stub: 'media' },
+  { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true },
   { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
   { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true },
@@ -58,15 +64,13 @@ const PAGES = [
   { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),
   { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true },
-  { file: 'site/positioning.html', section: 'law', label: 'Positioning', rail: true },
-  { file: 'site/media.html', section: 'media', label: 'Media', rail: true, stub: 'media' },
-  { file: 'site/audit.html', section: 'audit', label: 'Audit', rail: true, stub: 'audit' },
-  { file: 'site/adopt.html', section: 'adopt', label: 'Adopt', rail: true },
-  { file: 'site/build.html', section: 'adopt', label: 'Build', rail: true },
-  { file: 'site/generate.html', section: 'adopt', label: 'Generate', rail: true },
-  /* outside the shell proper: menu and trail only */
-  { file: 'constitution/reader/index.html', section: 'law', label: 'Reader', outside: 'reader' },
-  { file: 'tools/ui-audit.html', section: 'audit', label: 'UI audit', outside: 'tool' }
+  { file: 'site/adopt.html', section: 'use', label: 'Use', rail: true },
+  { file: 'site/build.html', section: 'use', label: 'Build', rail: true },
+  { file: 'site/generate.html', section: 'use', label: 'Generate', rail: true },
+  { file: 'site/audit.html', section: 'try', label: 'Try', rail: true, stub: 'audit' },
+  /* outside the shell proper: the UI audit takes the bars and the footer, the Reader the menu and the trail only, until it takes the shell (SITE-3.md 3.3) */
+  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' },
+  { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', outside: 'reader', pending: 'the Reader takes the shell in its own commit; until then the footer still links it' }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 const sec = id => SECTIONS.find(s => s.id === id);
@@ -91,28 +95,28 @@ function menu(p) {
   }).join('\n');
   const wrapOpen = p.outside === 'reader' ? '' : '  <div class="wrap">\n';
   const wrapClose = p.outside === 'reader' ? '' : '  </div>\n';
-  /* the Reader draws its own bar with its own styles; the switch belongs to the pages that carry stz.css */
-  const switchHtml = p.outside === 'reader' ? '' : cultureSwitch() + '\n';
-  /* the links sit in their own row, which may scroll sideways on a narrow screen; the culture switch never does (Rule 106) */
+  /* the links sit in their own row, which may scroll sideways on a narrow screen; the style select is in the footer (SITE-3.md 5.1) */
   const row = p.outside === 'reader' ? '' : '    ';
   const menuOpen = p.outside === 'reader' ? '' : '    <div class="menu">\n';
   const menuClose = p.outside === 'reader' ? '' : '    </div>\n';
   const bar = `<nav class="${cls}" aria-label="Main menu">
 ${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
 ${links}
-${menuClose}${switchHtml}${wrapClose}</nav>`;
+${menuClose}${wrapClose}</nav>`;
   if (p.outside === 'reader') return bar;
   const b = band(p);
   return `<div class="bars">\n${bar}${b ? '\n' + b : ''}\n</div>`;
 }
-/* Rule 106: a control with two states shows both. The current one is marked by weight, an underline
-   and a check mark, never by colour alone, and says so to assistive technology. */
-function cultureSwitch() {
-  return `    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
-      <span class="culture-label">Style</span>
-      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
-      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
-    </div>`;
+/* Rule 106 (v3.13) allows the two-state control as a select: both states are options, the current one is the one shown. It is in the footer,
+   at the right (SITE-3.md 5.1), and stz.js binds it. */
+function stylePicker() {
+  return `<div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>`;
 }
 function chain(p) {
   const out = [];
@@ -137,7 +141,7 @@ function bandOf(sectionId) {
 }
 for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
 function band(p) {
-  if (p.home || p.outside || !p.section) return '';
+  if (p.home || p.outside === 'reader' || !p.section) return '';
   const top = bandOf(p.section);
   if (!top) return '';
   const items = top.map(q => {
@@ -167,49 +171,68 @@ ${f.kids.map(li).join('\n')}
   </ul>
 </nav>`;
 }
-function footer(p, fine) {
+const REPO = 'https://github.com/mayouni/stzzui';
+function footer(p) {
   const to = f => href(p.file, f);
+  const pending = PAGES.find(q => q.pending);
   return `<footer class="site">
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a href="${to('constitution/reader/index.html')}">Reader</a>
-        <a href="${to('tools/ui-audit.html')}">UI audit</a>
+${pending ? `        <a href="${to(pending.file)}">Reader</a>\n` : ''}        <a class="leaves" href="${REPO}" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="${to('LICENSE')}">LICENSE</a>
       </div>
+      ${stylePicker()}
     </div>
-    <p class="fine">${fine}</p>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>`;
 }
-const DEFAULT_FINE = '© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.';
 
 /* ---- the stubs: two pages that exist only so that the menu leads somewhere true -------------------- */
 function stub(p) {
-  const s = p.stub === 'media' ? {
-    kicker: 'Media · being built',
-    title: 'One declaration, ten media',
-    sub: 'This section is being built. What exists today is data and instruments in the repository; this page names them and says what the site does not yet show.',
+  const s = p.stub === 'thinking' ? {
+    kicker: 'Approach · being built',
+    title: 'The thinking behind an intent-driven interface',
+    sub: 'This section holds the reasoning, the grid of what an interface must let a person do, and the comparison with what already exists. The essay is being written; what exists today is the documents it will draw on.',
+    h2: 'The design documents',
+    body: `<p>The reasoning is written in the repository. In the order a reader would take them:
+    <a href="../doc/ARCHITECTURE.md">the founding architecture</a> (intent before widgets, three layers);
+    <a href="../doc/THE-INTERACTION-MODEL.md">the interaction model</a> (one declaration, many renderings, one law);
+    <a href="../doc/SENSORS-AND-ACTUATORS.md">sensors and actuators</a> (what the closed vocabulary survives);
+    <a href="../doc/STZSENSE.md">stzSense</a> (how style is declared);
+    <a href="../doc/GUI-SYSTEM.md">a GUI system, read by the law</a>;
+    <a href="../doc/design/COVERAGE.md">the coverage map</a> (where the law speaks and where it is silent).</p>
+    <p>One more is proposed and not ratified: <a href="../doc/THE-SECOND-FOUNDING.md">the Second Founding</a>, the wider design. Nothing on this site rests on it.</p>
+    <p>What is already on the site: <a href="positioning.html">the comparison</a> with the practices a reader already uses.</p>`,
+    h2b: 'What this site does not show yet',
+    body2: `<p>The essay, the coverage grid as a page, and the claims with their limits are not written. The grid is designed and measured and not verified by a person.</p>`
+  } : p.stub === 'media' ? {
+    kicker: 'Channels · being built',
+    title: 'One declaration, ten channels',
+    sub: 'This section is being built. What exists today is data and instruments in the repository; this page names them and says what the site does not yet show. A channel is what the language and the law call a medium.',
     h2: 'What exists today',
-    body: `<p>The ten media a declaration can name, and what each carries, are published as data in <a href="../conformance/media.json"><code>conformance/media.json</code></a>.
-    A verb a medium cannot carry is refused by the verifier, and the signal vocabulary and the statuses that render as silence are in
+    body: `<p>The ten channels a declaration can name, and what each carries, are published as data in <a href="../conformance/media.json"><code>conformance/media.json</code></a>
+    (the keyword in a declaration is <code>SURFACE_AS</code>, and the diagnostics say <em>medium</em>).
+    A verb a channel cannot carry is refused by the verifier, and the signal vocabulary and the statuses that render as silence are in
     <a href="../conformance/signal.json"><code>conformance/signal.json</code></a>.</p>
     <p>The instrument that checks that renderings differ only as that data predicts is <code>tools/zui/cross-medium.js</code>, and the map of where the law has
     something to say, and where it is silent, is <code>doc/design/COVERAGE.md</code> in the repository.</p>`,
     h2b: 'What this site does not show yet',
-    body2: `<p>The pages that present the media, the coverage grid and its gaps, and the cross-medium proof are not written. Nobody has perceived any of these media for this grid, so
+    body2: `<p>The pages that present the channels, the coverage grid and its gaps, and the cross-channel proof are not written. Nobody has perceived any of these channels for this grid, so
     the grid is designed and measured and not verified by a person.</p>`
   } : {
-    kicker: 'Audit · the painted page',
-    title: 'Does a running interface meet the law?',
+    kicker: 'Try · things to run',
+    title: 'Run it on an interface and see what it finds',
     sub: 'The audit measures what an interface actually paints, not what its source declares: computed size, true contrast, the trail, the room a block has, and the menu against the tree.',
     h2: 'The UI audit',
     body: `<p>It runs in a browser on any same-origin interface and reports, for each finding, the rule it rests on. It measures Rules 105, 107, 108, 114, 115 and 116.
     <a href="../tools/ui-audit.html">Open the UI audit</a>.</p>
     <p>A colour it cannot read is reported as <em>not decided</em>, naming the colour, and never skipped.</p>`,
-    h2b: 'Judging an application you do not own',
+    h2b: 'Not here yet',
     body2: `<p>A second audit, for a screenshot of an application nobody on this project owns, is designed and its fact schema is written; it is described in
-    <code>doc/design/AUDIT-FACTS.md</code> in the repository. This site does not present it yet, and no real application's screenshot has been run through it.</p>`
+    <code>doc/design/AUDIT-FACTS.md</code> in the repository. No real application's screenshot has been run through it. The tour, a worked quick win and a single-file build of the tools are planned and not built.</p>`
   };
   return `<header class="page">
   <div class="narrow">
@@ -235,7 +258,7 @@ function stub(p) {
 </section>`;
 }
 function stubPage(p) {
-  const s = p.stub === 'media' ? 'Media — one declaration, ten media' : 'Audit — does a running interface meet the law?';
+  const s = { thinking: 'Approach — the thinking behind an intent-driven interface', media: 'Channels — one declaration, ten channels' }[p.stub] || 'Try — run it on an interface';
   return `<!DOCTYPE html>
 <html lang="en" data-vibe="curator">
 <head>
@@ -262,7 +285,6 @@ ${stub(p)}
 /* ---- applying the shell to a page's text ------------------------------------------------------- */
 const fence = (name, inner) => `<!-- shell:${name} -->\n${inner}\n<!-- /shell:${name} -->`;
 const fenceRe = name => new RegExp(`<!-- shell:${name} -->[\\s\\S]*?<!-- /shell:${name} -->`);
-const fineIn = text => (/<p class="fine">([\s\S]*?)<\/p>/.exec(text) || [])[1];
 function apply(p, text) {
   let t = text.replace(/\r\n/g, '\n');
   const problems = [];
@@ -303,18 +325,55 @@ function apply(p, text) {
     fill('layout', `<div class="layout${r ? ' has-list' : ''}">` + (r ? '\n' + r : ''));
   }
   if (fenceRe('footer').test(t)) {
-    const fine = fineIn(fenceRe('footer').exec(t)[0]) || DEFAULT_FINE;
-    fill('footer', footer(p, fine));
+    fill('footer', footer(p));
   }
   /* ---- the assets carry the hash of their own content, so a returning reader is served the stylesheet that matches the page ---- */
   t = t.replace(ASSET_RE, (m, attr, url, name) => `${attr}${url}?v=${assetHash(name)}"`);
   return { text: t, problems };
 }
 
-/* ---- the run ------------------------------------------------------------------------------------- */
+/* ---- every page is on a bar (SITE-3.md 3.4) ----------------------------------------------------------- */
+/* The registry lists what the site serves; each listed page must be named by a bar (the menu, a band or a family list), and the
+   footer may link no internal page the bars do not name. A page reachable only from a link in prose or in the footer is the defect. */
+function walk(dir, out) {
+  for (const e of fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
+    const q = path.posix.join(dir, e.name);
+    if (e.isDirectory()) { if (!['assets', 'node_modules'].includes(e.name)) walk(q, out); }
+    else if (e.name.endsWith('.html')) out.push(q);
+  }
+  return out;
+}
+function barsOfPage(p) {
+  const on = [];
+  if (p.home) on.push('the brand link');
+  if (SECTIONS.some(sc => sc.head === p.file)) on.push('the menu');
+  if (p.rail && !p.parent && bandOf(p.section)) on.push('the band of ' + p.section);
+  if (p.parent) on.push('the list of ' + by.get(p.parent).label);
+  return on;
+}
+function checkBars(problems, notes) {
+  const served = ['index.html', ...walk('site', []), ...walk('tools', []), ...walk('constitution/reader', [])];
+  for (const f of served) if (!by.has(f)) problems.push(`${f}: a page the site serves that the registry does not list, so no bar names it`);
+  for (const p of PAGES) {
+    if (p.pending) { notes.push(`NOTE ${p.file}: ${p.pending}`); continue; }
+    if (barsOfPage(p).length === 0) problems.push(`${p.file}: on no bar`);
+  }
+  const home = by.get('index.html');
+  const links = [...footer(home).matchAll(/href="([^"]+)"/g)].map(m => m[1]).filter(h => !/^https?:/.test(h));
+  for (const h of links) {
+    const target = path.posix.normalize(h).replace(/^\.\//, '');
+    const q = by.get(target);
+    if (q) { if (!q.pending && barsOfPage(q).length === 0) problems.push(`footer links ${target}, which no bar names`); }
+    else if (target.endsWith('.html')) problems.push(`footer links ${target}, a page the registry does not list`);
+    else if (!fs.existsSync(path.join(ROOT, target))) problems.push(`footer links ${target}, which does not exist`);
+  }
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
+  const notes = [];
+  checkBars(problems, notes);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);
@@ -333,9 +392,10 @@ function main(argv) {
       else problems.push(`${p.file}: differs from the shell this file renders (run with --write)`);
     }
   }
+  notes.forEach(m => console.log(m));
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }
   console.log(write ? `shell written: ${changed} page(s) changed` : `shell ok: ${PAGES.length} pages carry exactly the shell site-shell.js renders`);
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer };
+module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars };

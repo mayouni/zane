@@ -6,7 +6,7 @@
 <title>UI audit — Rules 105, 107, 108, 114–116, measured</title>
 <meta name="description" content="Measures every rendered text node of any application UI: computed size and true contrast against the composited background. The enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=13f24227">
+<link rel="stylesheet" href="../site/stz.css?v=c73dd23b">
 <style>
 textarea {
   width: 100%; min-height: 8.5rem; font: 1rem var(--mono); color: var(--ink);
@@ -45,18 +45,19 @@ td.issue { color: #a33422; font-weight: 700; }
   <div class="wrap">
     <div class="menu">
         <a class="brand" href="../index.html">StzZui</a>
+    <a href="../site/thinking.html">Approach</a>
     <a href="../site/how.html">Language</a>
     <a href="../site/why.html">Law</a>
-    <a href="../site/media.html">Media</a>
-    <a class="here" aria-current="true" href="../site/audit.html">Audit</a>
-    <a href="../site/adopt.html">Adopt</a>
-    </div>
-    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
-      <span class="culture-label">Style</span>
-      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
-      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    <a href="../site/adopt.html">Use</a>
+    <a class="here" aria-current="true" href="../site/audit.html">Try</a>
     </div>
   </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="../site/audit.html">Try</a></li>
+    <li><a aria-current="page" href="ui-audit.html">UI audit</a></li>
+  </ul>
 </nav>
 </div>
 <!-- /shell:menu -->
@@ -65,7 +66,7 @@ td.issue { color: #a33422; font-weight: 700; }
 <header class="page">
   <div class="narrow">
     <!-- shell:trail -->
-<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="../site/audit.html">Audit</a><span class="sep">›</span><span class="here-crumb" aria-current="page">UI audit</span></nav>
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="../site/audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">UI audit</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">The tool · Rules 105, 107, 108, 114–116, measured not guessed</p>
     <h1>UI audit</h1>
@@ -142,6 +143,7 @@ td.issue { color: #a33422; font-weight: 700; }
 /site/gotchas/intelligence.html
 /site/vibes.html
 /site/positioning.html
+/site/thinking.html
 /site/adopt.html
 /site/build.html
 /site/generate.html
@@ -183,14 +185,17 @@ td.issue { color: #a33422; font-weight: 700; }
   </div>
 </section>
 
+<!-- shell:footer -->
 <footer class="site">
-  <div class="wrap">
+  <div class="narrow">
     <div class="bar">
-    <div class="row">
-      <a href="../constitution/reader/">Reader</a>
-      <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
-    </div>
-      <div class="vibe-picker" title="Two equivalent interaction cultures — not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+      <div class="row">
+        <a href="../constitution/reader/index.html">Reader</a>
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
         <label for="vibe-select">Style</label>
         <select id="vibe-select">
           <option value="curator">Modern</option>
@@ -198,12 +203,12 @@ td.issue { color: #a33422; font-weight: 700; }
         </select>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · A law that cannot be measured
-    will be negotiated in the hallway.</p>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>
+<!-- /shell:footer -->
 
-<script src="../site/stz.js?v=51932dd5"></script>
+<script src="../site/stz.js?v=6bb13859"></script>
 <script>
 'use strict';
 /* ==========================================================================

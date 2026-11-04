@@ -6,7 +6,7 @@
 <title>Conformance — a claim your CI can refute</title>
 <meta name="description" content="What it means for a tool to conform to StzZui: the same verdict as the reference on the fixtures, against a pinned pack of files. How to check it, what the check cannot say, and a status board of what exists, what is designed and what is held.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=13f24227">
+<link rel="stylesheet" href="stz.css?v=c73dd23b">
 </head>
 <body>
 
@@ -16,16 +16,11 @@
   <div class="wrap">
     <div class="menu">
         <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
     <a class="here" aria-current="true" href="how.html">Language</a>
     <a href="why.html">Law</a>
-    <a href="media.html">Media</a>
-    <a href="audit.html">Audit</a>
-    <a href="adopt.html">Adopt</a>
-    </div>
-    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
-      <span class="culture-label">Style</span>
-      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
-      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    <a href="adopt.html">Use</a>
+    <a href="audit.html">Try</a>
     </div>
   </div>
 </nav>
@@ -128,8 +123,8 @@ Zui conformance — level 4
         <tr><td>The Reader</td><td class="status exists">exists</td><td>Renders the law from the same file. It does not judge anything.</td></tr>
         <tr><td>The UI audit</td><td class="status exists">exists</td>
           <td>Measures six rules on a page a browser paints, same-origin only. It cannot say whether anyone found the page pleasant. <a href="../tools/ui-audit.html">Run it</a>.</td></tr>
-        <tr><td>The media data and the cross-medium check</td><td class="status exists">exists</td>
-          <td><span data-fact="media.count">10</span> media, and a proof that renderings differ only as the data predicts. The renderers that draw, speak or print are in other projects.</td></tr>
+        <tr><td>The channel data and the cross-channel check</td><td class="status exists">exists</td>
+          <td><span data-fact="media.count">10</span> channels, and a proof that renderings differ only as the data predicts. The renderers that draw, speak or print are in other projects.</td></tr>
         <tr><td>The forged court in Haro, and the decoder grammar</td><td class="status exists">exists</td>
           <td>Judges the suite and agrees on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span>. Its judge needs the Haro spike, so it is not one of the gates. See <a href="haro.html">Declared in Haro</a>.</td></tr>
         <tr><td>Zing's <code>zing check</code>, the first conforming linter</td><td class="status exists">exists</td>
@@ -139,10 +134,10 @@ Zui conformance — level 4
         <tr><td>The screenshot audit</td><td class="status designed">designed</td>
           <td>Its fact schema is written and decides <span data-fact="audit.decides">3</span> rules. It has never been run on a real application and no person has looked at its output.</td></tr>
         <tr><td>Rendering projections as data (the roadmap's M4)</td><td class="status designed">designed</td>
-          <td>The roadmap lists it as superseded if the Second Founding is ratified, and that is not ratified. The part built is data: the media carriage in <a href="../conformance/media.json"><code>media.json</code></a> and the signal vocabulary in <a href="../conformance/signal.json"><code>signal.json</code></a>. The intent-to-widget tables as data are not built here.</td></tr>
+          <td>The roadmap lists it as superseded if the Second Founding is ratified, and that is not ratified. The part built is data: the channel carriage in <a href="../conformance/media.json"><code>media.json</code></a> and the signal vocabulary in <a href="../conformance/signal.json"><code>signal.json</code></a>. The intent-to-widget tables as data are not built here.</td></tr>
         <tr><td>The AI-interaction jurisdiction (the roadmap's M5)</td><td class="status designed">designed</td>
-          <td>On the roadmap as chat-stream rules, rules for tool approval and consent, and an MCP surface that serves the law to generators; superseded by the Second Founding if ratified, except the MCP surface, which the roadmap carries into a later milestone. Two rules for the medium exist: Rule 121, the assistant never masks the work, and Rule 124, the generator ships a working thing. The rest and the MCP surface are not built.</td></tr>
-        <tr><td>Rules for haptic, luminous, signage, spatial and terminal media</td><td class="status held">held</td>
+          <td>On the roadmap as chat-stream rules, rules for tool approval and consent, and an MCP surface that serves the law to generators; superseded by the Second Founding if ratified, except the MCP surface, which the roadmap carries into a later milestone. Two rules for that channel exist: Rule 121, the assistant never masks the work, and Rule 124, the generator ships a working thing. The rest and the MCP surface are not built.</td></tr>
+        <tr><td>Rules for haptic, luminous, signage, spatial and terminal channels</td><td class="status held">held</td>
           <td>Not advanced until a product that ships in one of them is named.</td></tr>
       </tbody>
     </table>
@@ -157,16 +152,24 @@ Zui conformance — level 4
     <div class="bar">
       <div class="row">
         <a href="../constitution/reader/index.html">Reader</a>
-        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=51932dd5"></script>
+<script src="stz.js?v=6bb13859"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

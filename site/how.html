@@ -6,7 +6,7 @@
 <title>Language — what it is, step by step</title>
 <meta name="description" content="A declaration states what the person is doing, not the widgets; the law refuses what it forbids, by name, before anything is drawn. The four steps from a declaration to a measured page, and which of them exist today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=13f24227">
+<link rel="stylesheet" href="stz.css?v=c73dd23b">
 </head>
 <body>
 
@@ -16,16 +16,11 @@
   <div class="wrap">
     <div class="menu">
         <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
     <a class="here" aria-current="true" href="how.html">Language</a>
     <a href="why.html">Law</a>
-    <a href="media.html">Media</a>
-    <a href="audit.html">Audit</a>
-    <a href="adopt.html">Adopt</a>
-    </div>
-    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
-      <span class="culture-label">Style</span>
-      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
-      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    <a href="adopt.html">Use</a>
+    <a href="audit.html">Try</a>
     </div>
   </div>
 </nav>
@@ -101,7 +96,7 @@ delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_
       <div class="scroll">
       <svg viewBox="0 0 780 230" style="min-width:780px" role="img" aria-labelledby="pipe-t pipe-d">
         <title id="pipe-t">Declare, refuse, project, measure</title>
-        <desc id="pipe-d">Four boxes in a row joined by arrows. Declare, a .zui file: exists. Refuse, the verifier in tools/zui: exists. Project, the media data: data only, the renderers are elsewhere. Measure, the UI audit: exists.</desc>
+        <desc id="pipe-d">Four boxes in a row joined by arrows. Declare, a .zui file: exists. Refuse, the verifier in tools/zui: exists. Project, the channel data: data only, the renderers are elsewhere. Measure, the UI audit: exists.</desc>
         <defs><marker id="pipe-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
         <rect class="dg-live" x="10" y="20" width="160" height="70" rx="10"/>
         <rect class="dg-live" x="210" y="20" width="160" height="70" rx="10"/>
@@ -135,7 +130,7 @@ delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_
     declaration and <span data-fact="verbs">22</span> verbs, closed on purpose: a widget is a consequence of an intent, never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be made from that.</p>
     <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.13</span>), and refuses what it forbids.
     Every refusal cites the rule, article or right it rests on. <a href="refusal.html">See one, line by line.</a></p>
-    <p><b>Project.</b> One declaration can be rendered in more than one medium, and a verb a medium cannot carry is refused. That check is built; the media data is in
+    <p><b>Project.</b> One declaration can be rendered in more than one channel (what the grammar and the law call a medium), and a verb a channel cannot carry is refused. That check is built; the media data is in
     <a href="../conformance/media.json"><code>conformance/media.json</code></a>.</p>
     <p><b>Measure.</b> A declaration is not a page. <a href="../tools/ui-audit.html">The UI audit</a> measures what a browser actually paints: size, true contrast, the bars, the room
     a block has, the menu against the tree.</p>
@@ -183,7 +178,7 @@ delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_
       <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">37</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">73</span> fixtures that any implementation can prove it agrees with.</li>
       <li><b>Data, not renderers:</b> the media carriage and the signal vocabulary. The pieces that draw, speak or print are not part of this repository.</li>
       <li><b>Not built:</b> computing the facts a declaration does not hold (the entities, actors, state and elements of a surface) from a host project. The verifier accepts a table you supply and says nothing without one.</li>
-      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal media, until a product that ships in one is named.</li>
+      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal channels, until a product that ships in one is named.</li>
     </ul>
     <p>Every part, with where it stops, is on <a href="conformance.html#status">the status board</a>; how to prove a tool agrees is on <a href="conformance.html">Conformance</a>.</p>
   </div>
@@ -197,16 +192,24 @@ delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_
     <div class="bar">
       <div class="row">
         <a href="../constitution/reader/index.html">Reader</a>
-        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=51932dd5"></script>
+<script src="stz.js?v=6bb13859"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

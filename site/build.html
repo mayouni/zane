@@ -6,7 +6,7 @@
 <title>Build — put the law in a project and gate your CI</title>
 <meta name="description" content="Declare before you draw, pin the law as a hash, fail the build on a refusal, and measure what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=13f24227">
+<link rel="stylesheet" href="stz.css?v=c73dd23b">
 </head>
 <body>
 
@@ -16,22 +16,17 @@
   <div class="wrap">
     <div class="menu">
         <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
     <a href="how.html">Language</a>
     <a href="why.html">Law</a>
-    <a href="media.html">Media</a>
-    <a href="audit.html">Audit</a>
-    <a class="here" aria-current="true" href="adopt.html">Adopt</a>
-    </div>
-    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
-      <span class="culture-label">Style</span>
-      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
-      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    <a class="here" aria-current="true" href="adopt.html">Use</a>
+    <a href="audit.html">Try</a>
     </div>
   </div>
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
-    <li><a href="adopt.html">Adopt</a></li>
+    <li><a href="adopt.html">Use</a></li>
     <li><a aria-current="page" href="build.html">Build</a></li>
     <li><a href="generate.html">Generate</a></li>
   </ul>
@@ -42,9 +37,9 @@
 <header class="page">
   <div class="narrow">
     <!-- shell:trail -->
-<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Adopt</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Build</span></nav>
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Build</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Adopt · build · you ship business software</p>
+    <p class="kicker">Use · build · you ship business software</p>
     <h1>Put the law in a project and gate your CI</h1>
     <p class="sub">Declare before you draw, pin the law as a hash, fail the build on a refusal,
     and measure what the browser actually paints. Nothing here needs more than Node and a browser.</p>
@@ -162,16 +157,24 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
     <div class="bar">
       <div class="row">
         <a href="../constitution/reader/index.html">Reader</a>
-        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=51932dd5"></script>
+<script src="stz.js?v=6bb13859"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

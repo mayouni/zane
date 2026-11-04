@@ -72,31 +72,16 @@ nav.site {
   background: var(--deep); color: var(--halo);
 }
 nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: nowrap; }
-/* the menu is one row that never wraps; where it is wider than the screen it scrolls on its own, and the culture
-   switch stays outside it, always on screen (Rules 27, 106) */
+/* the menu is one row that never wraps; where it is wider than the screen it scrolls on its own (Rule 27) */
 nav.site .menu { display: flex; align-items: center; gap: 1.2rem; flex: 1 1 auto; min-width: 0;
   overflow-x: auto; scrollbar-width: none; }
 nav.site .menu > * { flex: none; }
-nav.site .wrap > .culture { flex: none; }
 nav.site .brand { font-weight: var(--black); font-size: 1.1rem; letter-spacing: .04em;
   color: var(--accent-lite); text-decoration: none; text-transform: uppercase; }
 nav.site a:not(.brand) { color: var(--halo); text-decoration: none; font-size: 1rem; opacity: .9; }
 nav.site a:not(.brand):hover { opacity: 1; color: var(--accent-lite); }
 nav.site a.here { color: var(--accent-lite); opacity: 1; border-bottom: 2px solid var(--accent); }
-/* the culture switch: two states, BOTH always visible; the current one is marked by weight, an underline and a
-   check mark, never by colour alone (Rule 106) */
-.culture { display: flex; align-items: center; gap: .35rem; margin-left: auto; color: var(--halo); }
-.culture-label { font-size: 1rem; opacity: .85; margin-right: .2rem; }
-.culture .seg {
-  font: 1rem var(--sans); color: var(--halo); background: transparent; cursor: pointer;
-  border: 1.5px solid rgba(234,231,246,.4); border-radius: 99px; padding: .2rem .8rem; min-height: 34px;
-}
-.culture .seg[aria-pressed="true"] {
-  font-weight: 800; border-color: var(--accent-lite); color: var(--accent-lite);
-  text-decoration: underline; text-underline-offset: .25em;
-}
-.culture .seg[aria-pressed="true"]::before { content: "\2713\00a0"; }
-/* the style picker of a page outside the shell (a select, in its footer) keeps its place */
+/* the style picker: a select at the right end of the footer (Rule 106 allows it: both states are options, the current one is shown) */
 .vibe-picker {
   display: flex; align-items: center; gap: .5rem; margin-left: auto;
 }
@@ -378,11 +363,8 @@ footer.site .bar { display: flex; align-items: center; gap: 1.4rem;
   flex-wrap: wrap; justify-content: space-between; }
 
 @media (max-width: 760px) {
-  /* the switch takes its own row under the menu, so it is never off screen */
-  nav.site .wrap { flex-wrap: wrap; gap: .1rem 1.2rem; padding: .25rem 1.4rem; }
-  nav.site .menu { flex: 1 1 100%; gap: 1rem; }
-  nav.site .wrap > .culture { flex: 1 1 100%; margin-left: 0; }
-  /* the fixed stack is kept (Rule 120) but lightened: about a hundred pixels of a phone screen, not a hundred and thirty-six */
-  .culture .seg { min-height: 28px; padding: .05rem .7rem; }
+  /* the fixed stack is kept (Rule 120) and is lighter now that the style select has left the bar */
+  nav.site .wrap { padding: .25rem 1.4rem; }
+  nav.site .menu { gap: 1rem; }
   nav.band a { min-height: 36px; }
 }
