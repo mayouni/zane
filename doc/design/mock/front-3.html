@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StzZui — front page, mock for SITE-3</title>
+<!-- A MOCK, NOT THE SITE. It carries the proposed front page of doc/design/SITE-3.md section 2, so the Principal can look at it before
+     anything is built. Serve the repository root and open doc/design/mock/front-3.html. Nothing in the site links here.
+     The photograph: the National Museum of Niamey, provided by the author on 2026-11-04; kept at site/assets/niamey-national-museum.webp
+     (382,022 bytes, sha256 bbf131a966299b3adb1900625d7957118556e7575e22de748970cf55208c9780). It is read from that copy and never from the
+     author's temporary folder. -->
+<link rel="stylesheet" href="../../../site/stz.css">
+<style>
+/* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file), panel 80% */
+.hero { position: relative; min-height: min(100svh - 96px, 760px); background: #15110d; overflow: hidden; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.hero .panel { position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; width: min(40rem, calc(100% - 2.8rem));
+  background: rgba(18, 20, 19, .80); color: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; }
+.hero .panel h1 { color: #fff; font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.12; margin: 0; }
+.hero .panel h1 span { display: block; }
+.hero .panel p { color: #fff; margin: .8rem 0 0; max-width: none; }
+.hero .panel .btn.primary { margin-top: 1.1rem; background: #fff; color: #7a1633; border-color: #fff; }
+.hero .panel .btn.primary:hover { filter: none; background: #ffe3ea; }
+@media (max-width: 760px) {
+  .hero { min-height: 0; background: var(--bg, #fff); }
+  .hero img { position: static; height: 46svh; min-height: 260px; }
+  .hero .panel { position: static; width: auto; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
+  .hero .panel h1, .hero .panel p { color: var(--ink); }
+  .hero .panel .btn.primary { background: #7a1633; color: #fff; border-color: #7a1633; }
+}
+.messages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.2rem 0 0; }
+@media (max-width: 860px) { .messages { grid-template-columns: minmax(0, 1fr); } }
+.messages .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.3rem; }
+.messages h2 { font-size: 1.35rem; margin: 0 0 .4rem; }
+.messages p { margin: 0 0 .7rem; max-width: none; }
+.present { margin: 1.4rem 0 0; padding: 1.1rem 1.3rem; border: 2px solid var(--accent-ink); border-radius: 10px; background: var(--card); }
+.present h2 { font-size: 1.35rem; margin: 0 0 .4rem; }
+.present ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; padding: 0; margin: .5rem 0 0; max-width: none; }
+.foot-tools { display: flex; justify-content: flex-end; align-items: center; gap: .6rem; margin-top: 1rem; }
+.foot-tools select { font: inherit; padding: .3rem .6rem; border-radius: 8px; border: 1px solid var(--halo); background: transparent; color: var(--halo); }
+.foot-tools select option { color: #1c0710; }
+</style>
+</head>
+<body>
+
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+      <a class="brand" href="front-3.html">StzZui</a>
+      <a href="#">Approach</a>
+      <a href="#">Language</a>
+      <a href="#">Law</a>
+      <a href="#">Use</a>
+      <a href="#">Tools</a>
+    </div>
+  </div>
+</nav>
+</div>
+
+<header class="hero">
+  <img src="../../../site/assets/niamey-national-museum.webp" width="1699" height="926"
+       alt="The National Museum of Niamey: a white facade with blue geometric reliefs and a blue door, above terraced stone steps with blue flower pots.">
+  <div class="panel">
+    <h1><span>The compilable language</span> <span>for user interfaces</span></h1>
+    <p>Declare what a person is doing. A law refuses the rest, by name, before anything is drawn.</p>
+    <a class="btn primary" href="#">See a refusal, line by line →</a>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="narrow">
+    <div class="messages">
+      <div class="card"><h2>Intent, not widgets</h2>
+        <p>A person comes to discover, compare, act and undo. A declaration says that, and the screen is a consequence.</p>
+        <a href="#">The thinking →</a></div>
+      <div class="card"><h2>A law that refuses by name</h2>
+        <p>A flow with no exit, an act with no undo: refused with the rule, the article and the right it rests on.</p>
+        <a href="#">What it refuses →</a></div>
+      <div class="card"><h2>One declaration, every channel</h2>
+        <p>A screen, a voice, a printed page, a machine reader. A channel that cannot carry a promise is refused.</p>
+        <a href="#">The channels →</a></div>
+      <div class="card"><h2>The whole ground, as a grid</h2>
+        <p>What a person does, against every channel, with a rule on each cell that has one and the empty cells drawn empty.</p>
+        <a href="#">The grid →</a></div>
+      <div class="card"><h2>Beside what you already use</h2>
+        <p>Heuristics, accessibility standards, design systems, UI frameworks and description languages, each read from its own page.</p>
+        <a href="#">The comparison →</a></div>
+      <div class="card"><h2>Use it on what you have</h2>
+        <p>A web application, a mobile app, a voice line, an agent with no screen: what it yields today, and where it stops.</p>
+        <a href="#">Which way in →</a></div>
+    </div>
+    <div class="present">
+      <h2>Present it to your team</h2>
+      <p>A short tour, in full-screen scenes, ordered for who is in the room.</p>
+      <ul>
+        <li><a href="#">UX designer →</a></li>
+        <li><a href="#">Product designer →</a></li>
+        <li><a href="#">Programmer →</a></li>
+        <li><a href="#">AI builder →</a></li>
+        <li><a href="#">Decision maker →</a></li>
+      </ul>
+    </div>
+    <p style="margin-top:1.4rem">What exists, what is designed and what is held: <a href="#">the status board →</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="#">GitHub</a>
+        <a class="leaves" href="#">Zing</a>
+        <a href="#">LICENSE</a>
+      </div>
+    </div>
+    <div class="foot-tools">
+      <label for="style">Style</label>
+      <select id="style" aria-label="Style: two equivalent cultures, the same truth read another way. Keyboard: F2">
+        <option value="curator">Modern</option>
+        <option value="guardian">Retro</option>
+      </select>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<script>
+document.getElementById('style').addEventListener('change', function () { document.documentElement.setAttribute('data-vibe', this.value); });
+document.addEventListener('keydown', function (e) { if (e.key === 'F2') { var s = document.getElementById('style'); s.value = s.value === 'curator' ? 'guardian' : 'curator'; s.dispatchEvent(new Event('change')); e.preventDefault(); } });
+</script>
+</body>
+</html>
