@@ -148,7 +148,7 @@ header.page .kicker { font: 1rem var(--mono); text-transform: uppercase;
   letter-spacing: .12em; color: var(--muted); margin: 0 0 .7rem; }
 header.page h1 {
   margin: 0; font-weight: var(--black); text-transform: uppercase;
-  font-size: clamp(2rem, 5vw, 3.4rem); line-height: .98; letter-spacing: -.01em;
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.08; letter-spacing: -.005em;
   color: var(--accent-ink);
 }
 header.page .sub { color: var(--ink); font-size: 1.3rem; max-width: 42rem; margin: 1.2rem 0 0; }
@@ -179,6 +179,10 @@ nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent);
   max-width: 72rem; margin: 0 auto; padding: 0 1.4rem;
 }
 .layout.has-list > main { min-width: 0; }
+/* "On this page" sits on the right of the page it lists; a family list (level 3) stays on the left */
+.layout.has-list.sections-right { grid-template-columns: minmax(0, 1fr) 14rem; }
+.layout.has-list.sections-right > main { grid-column: 1; grid-row: 1; }
+.layout.has-list.sections-right > nav.list3 { grid-column: 2; grid-row: 1; }
 .layout.has-list main section { padding-left: 1.4rem; padding-right: 1.4rem; margin-left: -1.4rem; margin-right: -1.4rem; }
 .layout.has-list main .narrow, .layout.has-list main .wrap { padding: 0; max-width: none; margin: 0; }
 nav.list3 {
@@ -198,6 +202,8 @@ nav.list3 .sub a { padding-left: 1.8rem; font-size: 1rem; }
 html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
 @media (max-width: 900px) {
   .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .layout.has-list.sections-right { grid-template-columns: minmax(0, 1fr); }
+  .layout.has-list.sections-right > main, .layout.has-list.sections-right > nav.list3 { grid-column: auto; grid-row: auto; }
   nav.list3 { position: static; margin: 1.4rem 0 0; max-height: none; }
 }
 
@@ -310,7 +316,7 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 .status.held::before { content: "\25CB\00a0"; }
 
 /* a plain table on a phone scrolls inside itself and never widens the page (Rule 114 measures this at 1280, where it has room) */
-@media (max-width: 860px) { table.board:not(.position) { display: block; overflow-x: auto; } }
+@media (max-width: 860px) { table.board:not(.position), table.evidence { display: block; overflow-x: auto; } }
 /* a table of four columns that reads as cards on a phone */
 .board.position { table-layout: fixed; }
 .board.position th:first-child, .board.position td:first-child { width: 14rem; }

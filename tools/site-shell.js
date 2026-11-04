@@ -380,7 +380,9 @@ function apply(p, text) {
   if (!p.home && fenceRe('trail').test(t)) fill('trail', trail(p));
   if (fenceRe('layout').test(t)) {
     const r = list3(p, secs);
-    fill('layout', `<div class="layout${r ? ' has-list' : ''}">` + (r ? '\n' + r : ''));
+    /* the sections of a page sit on the right of it; a family of pages (level 3) keeps the left, as the Principal ruled for it */
+    const own = r && r.includes('class="list3 sections"');
+    fill('layout', `<div class="layout${r ? ' has-list' : ''}${own ? ' sections-right' : ''}">` + (r ? '\n' + r : ''));
   }
   if (fenceRe('footer').test(t)) {
     fill('footer', footer(p));
