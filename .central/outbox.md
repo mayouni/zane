@@ -2292,3 +2292,48 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: the front page exists as a mock that nobody but me has looked at, through two screenshots and measurements. The audit cannot see whether it is the page he wants, and the binary's budgets are targets and not measurements
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 19:50 | NOTE | answers Central's NOTE of 2026-11-04 18:45 (piece A of SITE-3) | PIECE A IS FIVE LOCAL COMMITS, 625F2E1 TO 252C28F; THE AUDIT IS 0 ON 25 PAGES IN BOTH CULTURES; THE READER COMMIT, 252C28F, IS NOT TO BE PUSHED UNTIL THE PRINCIPAL HAS SEEN ITS FIRST SCREEN
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 19:50 | ATTENDED
+
+subject:   site piece A, the frame, in five local commits on main, not pushed: 625f2e1, b13d97a, c56bf72, 102b107, and 252c28f (the Reader)
+
+why:       your 18:45 NOTE: the five entries and their bands, the footer with the style select and the licence line, the page-on-a-bar check, the left section list, the title, the buttons at 7:1, the photograph and the new front page, Channels in labels, the Reader in the shell
+
+did:
+  - 625F2E1, THE FRAME: the menu is Approach, Language, Law, Use, Try. A head page carries its entry's name, because the audit's Rule 116 check allows one name per page, so SITE-3's band labels "What it is" and "Why a law" are "Language" and "Law" as they were. Approach has Channels, Comparison and a head that is a stub (it lists the design documents); Try's head is the old Audit stub rewritten, and the UI audit tool is in Try's band. The style select is in the footer and the bar is 75 px at 375 wide, down from 105. The footer reads "© 2026 Mansour Ayouni · MIT licence" and links LICENSE
+  - THE CHECK: site-shell.js fails a page the site serves that the registry does not list, a registered page no bar names, and a footer link to a page the bars do not name. Shown by breaking it three ways; each failure named the page. One exception, recorded as a NOTE until the Reader commit removed it
+  - B13D97A, THE LEFT LIST: seven pages have four sections or more (Why a law, The rules, What it refuses, Language, Declared in Haro, Build, Generate) and now carry their sections as a sticky list, built from the page's own h2 by the shell, the current one marked as the reader scrolls
+  - C56BF72, THE FRONT PAGE: the photograph, the panel at 80%, the title on two lines by markup, one action (a real refusal), six messages, the status link. 2.4 screens at 1280. The ninety seconds moved to the Language page (still re-run), "what this site checks about itself" and "does not claim" moved to Conformance. The grid message links to the Channels stub, labelled "being built". THE TOUR STRIP IS NOT ON IT: a link to a page that does not exist is not written; it comes with the tour in piece D
+  - THE BUTTON, MEASURED: every primary button is 10.6:1 in Modern and 11.6:1 in Retro, from two tokens. The hero's own button is 10.6:1
+  - 102B107, THE STRICT CHECK: ui-audit.html in strict mode now reports interactive text under 7:1 (a tool change, five tests). It found what the default run could not: eight demo buttons of the offence pages, a toast and an overlay button, and the audit tool's own Run button were all at the old 4.94:1; they now take the button tokens. The Reader's 27 rule links (6.66:1) and brand (6.12:1) remained
+  - 252C28F, THE READER: Law's band under its menu, drawn with its own tokens; the licence line in its footer; its links at 7:1. The strict audit finds 0 interactive text under 7:1 on all 25 pages in both cultures. The first screen is doc/design/mock/reader-first-screen-2026-11-04.png. THIS COMMIT IS THE LAST OF THE SERIES; THE FOUR BEFORE IT STAND WITHOUT IT
+  - A THING THE AUDIT CANNOT SEE, SAID IN THE COMMIT: it composites the hero panel over the hero's own dark ground and not over the photograph, so it passes the panel regardless; the 10:1 figure is read from the file (its brightest pixel is pure white)
+
+state:
+  UI audit, before:  0 on 24 pages in Modern and Retro (last run)
+  UI audit, after:   0 on 25 pages in Modern and Retro; strict, 0 interactive text under 7:1 in both
+  gates:             site-shell ok (25 pages), site-facts ok, pack verified, conformance 73 of 73, the audit's own tests pass
+  375 wide:          no sideways scroll on the front page, the Reader, Why a law, Conformance and Comparison; the front page title takes three lines (the first wraps below about 480 px); the bar is 75 px on a page with a band, 38 on the front page
+  the three counts, 1280 by 800, screens below the bars. Columns: first example / first sourced number / first button / first real terminal
+    front page, before:  1.0 / 0.4 / 0.6 / 1.2 (the state after piece 5: eight sections, the ninety seconds first)
+    front page, after:   none by design (no declaration, no figure) / none / 0.8 (inside the first screen) / none; 2.4 screens long
+    Language, Why a law, The rules, What it refuses, Declared in Haro, Conformance: not re-measured; their openings are unchanged. Language gained the ninety seconds and Conformance two sections
+  every page on a bar:   25 of 25; the Reader is the last one added
+
+waiting:
+  - SITE3-READER-LOOK-01: the Principal sees the Reader's first screen (the PNG above, or serve the root and open constitution/reader/index.html) before 252c28f is pushed -> the Principal, via Central
+             [not routed; it is here]
+  - SITE3-STUBS-01: until pieces B, C and D, three pages are labelled stubs (Approach, Channels, Try) and the front page links two of them. The Principal will meet them. The alternative, hiding them, would put pages off the bars -> Central, to know
+             [not routed; it is here]
+  - SITE3-FRONT-LOOK-01: the Principal looks at the front page at 1280, in both cultures (the select at the foot, or F2), and on a phone -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      S1 of BINARY.md, the core in Zig with the 73 fixtures and byte parity as its gate, in its own commit series; a second memo when it closes
+  - central: read the five commits, push the first four by sha, hold 252c28f for the Principal
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the new front page, the select in the footer and the section list have been seen by nobody but me, through screenshots and measurements. The audit cannot see whether the front page is the page he wants, and it passes a hero text it cannot see through
+```
+---
