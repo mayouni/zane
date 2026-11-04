@@ -75,6 +75,8 @@ footer .fine { font: 1rem ui-monospace, monospace; color: var(--muted); margin-t
 .topnav .here { color: #ff8fa8; opacity: 1; border-bottom: 2px solid #e04a6e; }
 .topnav a.leaves { opacity: .8; }
 
+/* the trail is a landmark and not a drawing: the menu and the band mark every step (Rules 108, 115), so it is kept for assistive technology and hidden from the eye */
+.trail-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 /* ---- breadcrumbs: a visible trail back (Rule 25) ---- */
 .crumbs {
   display: flex; flex-wrap: wrap; align-items: center; gap: .15rem;
