@@ -6,7 +6,7 @@
 <title>Conformance — a claim your CI can refute</title>
 <meta name="description" content="What it means for a tool to conform to StzZui: the same verdict as the reference on the fixtures, against a pinned pack of files. How to check it, what the check cannot say, and a status board of what exists, what is designed and what is held.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=534fc5a5">
+<link rel="stylesheet" href="stz.css?v=98a5b020">
 </head>
 <body>
 
@@ -53,7 +53,19 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#two-commands">Two commands</a></li>
+      <li><a href="#what-a-pass-does-not-prove">What a pass does not prove</a></li>
+      <li><a href="#status">Status, part by part</a></li>
+      <li><a href="#self-check">What this site checks about itself</a></li>
+      <li><a href="#not-claimed">What this site does not claim</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
@@ -142,6 +154,33 @@ Zui conformance — level 4
       </tbody>
     </table>
     <p>The rows are written by hand from the repository's files, not computed: the figures in them are checked, the statuses are not, so a status that is wrong will not fail a check.</p>
+  </div>
+</section>
+
+<section class="alt" id="self-check">
+  <div class="narrow">
+    <h2>What this site checks about itself</h2>
+    <p>This site tries to obey the law it publishes. Before each piece of it shipped, its author ran the <a href="../tools/ui-audit.html">UI audit</a> in both cultures and recorded the result with the commit;
+    <b>no gate enforces it yet</b>. Press <kbd>F2</kbd>, or use the style select at the foot of any page, to switch culture and notice that your rights don't flex (Article VI).
+    <a href="gotchas/index.html">What a violation feels like</a> lets you commit each family of offence yourself, safely fenced, each beside its lawful twin, and
+    <a href="vibes.html">the two-cultures exhibit</a> renders one shared truth in both cultures at once.</p>
+    <p>The consumers, with their figures. The <b>reference implementation</b> is <a href="../tools/zui/README.md"><code>tools/zui</code></a>, and this site's own check
+    (<code>tools/site-facts.js</code>) re-runs it on <span data-fact="site.verifierRuns">7</span> declarations shown on these pages and fails if the page and the verifier ever disagree.
+    <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>, the first conforming consumer, pins law v<span data-fact="zing.pinned">3.11</span> while this site
+    reads v<span data-law="version">3.13</span>; a re-pin has been asked of it.</p>
+  </div>
+</section>
+
+<section id="not-claimed">
+  <div class="narrow">
+    <h2>What this site does not claim</h2>
+    <ul>
+      <li><b>No person has perceived any channel</b> for the coverage grid; it is designed and measured, not verified by a person.</li>
+      <li><b>The screenshot audit has never been run on a real application.</b></li>
+      <li><b>The wider design, the Second Founding, is proposed, not ratified</b>, and nothing here rests on it.</li>
+      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal channels until a product that ships in one is named; other pillars; a usability toolset.</li>
+    </ul>
+    <p>The stance is opinionated, openly: <b>business applications first</b>, operators and not explorers. Calm over power. Intent over mechanics. Visible over hidden. Undo is dignity.</p>
   </div>
 </section>
 </main>

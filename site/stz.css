@@ -13,6 +13,8 @@
   --muted: #4a4661; --line: #d8d4e6; --card: #fdfcff;
   --accent-ink: #8f1d3d; --accent-lite: #ff8fa8;
   --on-accent: #1c0710; --ok: #1d6b4f;
+  /* contrast: #FFFFFF | #7A1633 | 10.6 | the primary button's label on its ground, Modern (SITE-3.md 5.3: 7:1 or more) */
+  --btn-bg: #7a1633; --btn-fg: #ffffff;
   --code-bg: #fdfcff; --code-ink: #211d33; --code-line: #d8d4e6; --code-rule: #8f1d3d;
   --c-comment: #5a5578; --c-key: #8f1d3d; --c-str: #7a4a00; --c-name: #1d5f8c;
   --c-dim: #4a4661; --c-bad: #a33422; --c-good: #1d6b4f; --c-prompt: #211d33;
@@ -28,6 +30,8 @@
   --muted: #8fa992; --line: #1e2f22; --card: #0b120d;
   --accent-ink: #46e07f; --accent-lite: #46e07f;
   --on-accent: #060b07; --ok: #7ee2ae;
+  /* contrast: #060B07 | #46E07F | 11.6 | the primary button's label on its ground, Retro */
+  --btn-bg: #46e07f; --btn-fg: #060b07;
   --tint: #0b120d; --shadow: none;   /* a terminal does not float cards */
   /* in Retro a code block is what a terminal is: the culture is the exhibit */
   --code-bg: #0b120d; --code-ink: #cfe0cf; --code-line: #1e2f22; --code-rule: #46e07f;
@@ -314,6 +318,37 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
   .board.position td:first-child::before { content: none; }
 }
 
+/* ---- the front page (SITE-3.md section 2) ---- */
+/* The photograph is the National Museum of Niamey, provided by the author on 2026-11-04 (site/assets/niamey-national-museum.webp, 382,022 bytes,
+   sha256 bbf131a966299b3adb1900625d7957118556e7575e22de748970cf55208c9780). Its brightest pixel under the panel is pure white (read from the file in a
+   browser), so the panel is 80% of #121413: white text over it is 10.1 to 1 at the worst pixel. */
+/* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file) */
+.hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: #15110d; overflow: hidden; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.hero .panel { position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; width: min(40rem, calc(100% - 2.8rem));
+  background: rgba(18, 20, 19, .80); color: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; }
+.hero .panel h1 { color: #fff; font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.12; margin: 0; }
+.hero .panel h1 span { display: block; }
+.hero .panel p { color: #fff; margin: .8rem 0 0; max-width: none; }
+.hero .panel .btn.primary { margin-top: 1.1rem; background: #fff; color: #7a1633; border-color: #fff; }
+.hero .panel .btn.primary:hover { filter: none; background: #ffe3ea; }
+[data-vibe="guardian"] .hero .panel .btn.primary { background: #46e07f; color: #060b07; border-color: #46e07f; }
+[data-vibe="guardian"] .hero .panel .btn.primary:hover { background: #7ee2ae; }
+@media (max-width: 760px) {
+  .hero { min-height: 0; background: var(--paper); }
+  .hero img { position: static; height: 46svh; min-height: 260px; }
+  .hero .panel { position: static; width: auto; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
+  .hero .panel h1, .hero .panel p { color: var(--ink); }
+  .hero .panel .btn.primary, [data-vibe="guardian"] .hero .panel .btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
+}
+.messages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.2rem 0 0; }
+@media (max-width: 860px) { .messages { grid-template-columns: minmax(0, 1fr); } }
+.messages .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.3rem; box-shadow: var(--shadow); }
+.messages h2 { font-size: 1.35rem; margin: 0 0 .4rem; }
+.messages p { margin: 0 0 .7rem; max-width: none; }
+.messages a { font-weight: 700; }
+.front-note { margin-top: 1.6rem; }
+
 /* ---- stamp ---- */
 .stamp {
   background: var(--accent); color: var(--on-accent); padding: 1.3rem 1.5rem;
@@ -353,10 +388,10 @@ details.qa .a p { margin: .4rem 0; }
   display: inline-block; text-decoration: none; font-weight: 700;
   padding: .65rem 1.2rem; border-radius: 8px; border: 2px solid var(--accent);
 }
-.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
 .btn.ghost { color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.08); }
-header.page a.btn.primary { color: var(--on-accent); }
+header.page a.btn.primary { color: var(--btn-fg); }
 /* ---- footer ---- */
 footer.site { background: var(--deep); color: var(--halo); padding: 2.2rem 0; margin-top: 3rem; }
 footer.site a { color: var(--halo); }

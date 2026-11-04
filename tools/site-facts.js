@@ -170,7 +170,7 @@ function verifyRuns(problems) {
     per[q.page] = (per[q.page] || 0) + 1;
     if (got !== want) problems.push(`${q.page}: the terminal for ${q.file} is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
   }
-  if (!per['index.html']) problems.push('index.html: its "ninety seconds" has no declaration and terminal pair to verify');
+  if (!per['site/how.html']) problems.push('site/how.html: its pair has no declaration and terminal to verify');
   return all.length;
 }
 
