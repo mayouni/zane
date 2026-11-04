@@ -227,6 +227,21 @@ function verifyCommands(problems) {
   return n;
 }
 
+// ---- a button is an action, so it leaves the page ----------------------------------------------------------
+/* A <a class="btn primary"> that points at "#something" scrolls the reader to a place they can already see; it is not a call to action. */
+function verifyCtas(problems) {
+  let n = 0;
+  for (const p of pages()) {
+    const html = fs.readFileSync(R(p), 'utf8');
+    for (const m of html.matchAll(/<a\b[^>]*class="[^"]*\bbtn\b[^"]*\bprimary\b[^"]*"[^>]*href="([^"]*)"|<a\b[^>]*href="([^"]*)"[^>]*class="[^"]*\bbtn\b[^"]*\bprimary\b[^"]*"/g)) {
+      n++;
+      const href = m[1] !== undefined ? m[1] : m[2];
+      if (href.startsWith('#')) problems.push(p + ': the primary button "' + href + '" scrolls within its own page; a call to action leaves it');
+    }
+  }
+  return n;
+}
+
 // ---- a status word is one of three -------------------------------------------------------------------------
 /* <td class="status WORD">WORD</td>: the class and the word must agree and must be exists, designed or held. The truth of a word cannot be
    checked; its vocabulary can, so a fourth word cannot appear beside the mark that goes with each of the three. */
@@ -310,7 +325,8 @@ function main(argv) {
   const commands = verifyCommands(problems);
   { const g = spawnSync(process.execPath, [R('tools/site-grid.js')], { encoding: 'utf8' }); if (g.status !== 0) problems.push(...(g.stdout || '').split('\n').filter(l => l.startsWith('PROBLEM ')).map(l => l.slice(8))); }
   const statuses = verifyStatuses(problems);
-  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; status words checked: ${statuses}; excerpts checked against their files: ${excerpts}`);
+  const ctas = verifyCtas(problems);
+  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; status words checked: ${statuses}; buttons checked: ${ctas}; excerpts checked against their files: ${excerpts}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);
   if (listUnchecked) per.forEach(l => console.log('  ' + l));
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }

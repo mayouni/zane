@@ -6,7 +6,7 @@
 <title>The thinking — why an interface starts from intent</title>
 <meta name="description" content="The reasoning behind StzZui as an essay: the inversion of intent before widgets, why a closed set of verbs, rights and articles, one declaration with many renderings, the senses and actuators, culture, style as data, and what is still open. Each section names the document it comes from.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=e62be53a">
+<link rel="stylesheet" href="stz.css?v=96cb4f5b">
 </head>
 <body>
 
@@ -41,13 +41,13 @@
     <!-- shell:trail -->
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Approach</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Approach · for a designer who wants the reasoning, not the features</p>
+    <p class="kicker">Approach · for a designer who wants the reasoning</p>
     <h1>An interface is what a person is doing, rendered. Everything else is a consequence.</h1>
     <p class="sub">An essay in eight parts on why StzZui starts from intent: what it inverts, why the vocabulary is closed, what is unified and what must stay different, and where the thinking is still open. Each part names the design
     document it comes from, and says when that document is a proposal and not a ruling.</p>
     <div class="cta-row">
-      <a class="btn primary" href="#the-inversion">Start with the inversion →</a>
-      <p class="note">Eight short parts; each stands alone.</p>
+      <a class="btn primary" href="grid.html">See the whole ground, as a grid →</a>
+      <p class="note">The essay is below, in eight short parts.</p>
     </div>
   </div>
 </header>
@@ -82,21 +82,26 @@
     before anything has been drawn. The architecture is three layers, strictly ordered, and lower ones constrain upper ones:</p>
     <figure class="figure">
       <div class="scroll">
-      <svg viewBox="0 0 780 300" style="min-width:780px" role="img" aria-labelledby="lay-t lay-d">
+      <svg viewBox="0 0 780 396" style="min-width:780px" role="img" aria-labelledby="lay-t lay-d">
         <title id="lay-t">Three layers, the lower constraining the upper</title>
-        <desc id="lay-d">Three stacked boxes. At the bottom the intent grammar: closed, finite, independent of channel, with twenty-two verbs. In the middle the constitution: non-negotiable and machine-checkable, as rules under seven articles. At the top the rendering projections: per channel and replaceable. Arrows point upward: each layer constrains the one above.</desc>
+        <desc id="lay-d">Three stacked boxes. At the bottom the intent grammar: closed, finite, independent of channel, with twenty-two verbs. In the middle the constitution: non-negotiable and machine-checkable, as rules under seven articles. At the top the rendering projections: per channel and replaceable. Arrows point upward between the boxes: each layer constrains the one above.</desc>
         <defs><marker id="lay-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
-        <rect class="dg-box" x="10" y="14" width="760" height="76" rx="10"/>
-        <text class="dg-t" x="30" y="44">3 · Rendering projections</text>
-        <text class="dg-s" x="30" y="72">per channel, replaceable: a business web page, a game world, a terminal, a voice, an agent surface</text>
-        <rect class="dg-live" x="10" y="112" width="760" height="76" rx="10"/>
-        <text class="dg-t" x="30" y="142">2 · The constitution</text>
-        <text class="dg-s" x="30" y="170">non-negotiable, machine-checkable: <tspan data-law="rules">123</tspan> rules under <tspan data-law="articles">7</tspan> articles</text>
-        <rect class="dg-live" x="10" y="210" width="760" height="76" rx="10"/>
-        <text class="dg-t" x="30" y="240">1 · The intent grammar</text>
-        <text class="dg-s" x="30" y="268">closed, finite, independent of channel: <tspan data-fact="verbs">22</tspan> verbs</text>
-        <line class="dg-line" x1="700" y1="208" x2="700" y2="192" marker-end="url(#lay-ah)"/>
-        <line class="dg-line" x1="700" y1="110" x2="700" y2="94" marker-end="url(#lay-ah)"/>
+        <rect class="dg-box" x="10" y="10" width="760" height="100" rx="10"/>
+        <text class="dg-t" x="32" y="42">3 · Rendering projections</text>
+        <text class="dg-s" x="32" y="70">per channel, replaceable: a business web page, a game world,</text>
+        <text class="dg-s" x="32" y="94">a terminal, a voice, an agent surface</text>
+        <rect class="dg-live" x="10" y="148" width="760" height="100" rx="10"/>
+        <text class="dg-t" x="32" y="180">2 · The constitution</text>
+        <text class="dg-s" x="32" y="208">non-negotiable, machine-checkable:</text>
+        <text class="dg-s" x="32" y="232"><tspan data-law="rules">123</tspan> rules under <tspan data-law="articles">7</tspan> articles</text>
+        <rect class="dg-live" x="10" y="286" width="760" height="100" rx="10"/>
+        <text class="dg-t" x="32" y="318">1 · The intent grammar</text>
+        <text class="dg-s" x="32" y="346">closed, finite, independent of channel:</text>
+        <text class="dg-s" x="32" y="370"><tspan data-fact="verbs">22</tspan> verbs</text>
+        <line class="dg-line" x1="600" y1="284" x2="600" y2="250" marker-end="url(#lay-ah)"/>
+        <text class="dg-a" x="620" y="272">constrains</text>
+        <line class="dg-line" x1="600" y1="146" x2="600" y2="112" marker-end="url(#lay-ah)"/>
+        <text class="dg-a" x="620" y="134">constrains</text>
       </svg>
       </div>
       <figcaption>The lower layer constrains the upper and never the reverse: no projection may define a new verb or bypass a rule. <b>Not shown:</b> that the projections are mostly not built here (the channels' renderers live in other projects),
@@ -111,7 +116,9 @@
     <p>The grammar has <span data-fact="verbs">22</span> verbs, and it is closed on purpose: a new channel adds renderings, never verbs. Closure is what lets a map of what a person can do in each channel be finite, so that a gap can be a count and not an opinion.
     <em>From the founding architecture, section 2.</em></p>
     <p>The verbs are shared out, once each, among six activities that are the questions a person is asking in the order they meet an interface: <b>perceive</b> (is there something, and in what state), <b>understand</b>, <b>decide</b>, <b>act</b>,
-    <b>recover</b> and <b>trust</b>. Two of the six, perceive and trust, own no verb, because a state is sensed before any verb is used and trust is a property of every verb and not one of them. That choice is what keeps the map true of a lamp, which has no READ and whose
+    <b>recover</b> and <b>trust</b>.</p>
+    <p>Two of the six, perceive and trust, own no verb, because a state is sensed before any verb is used and trust is a property of every verb and not one of them.</p>
+    <p>That choice is what keeps the map true of a lamp, which has no READ and whose
     state is still perceived across a room. <a href="grid.html">The grid</a> draws the six against the ten channels, and says where the law has nothing to say.</p>
   </div>
 </section>
@@ -120,7 +127,8 @@
   <div class="narrow">
     <h2>Rights, and the articles they come from</h2>
     <p>A rule that cannot say why it exists is a taste. In the constitution every rule derives from one of <span data-law="articles">7</span> articles (Calm, Intent Over Mechanics, Visible State, Reversibility, Predictable Authority, Operator Primacy and Vibes, and Amendment),
-    and the law guarantees <span data-law="rights">6</span> rights to the person using the interface: to understand, to reverse, to know, to leave, to act without fear, and to a human. A refusal cites the rule, the article and the right it rests on, so a review is an audit.
+    and the law guarantees <span data-law="rights">6</span> rights to the person using the interface: to understand, to reverse, to know, to leave, to act without fear, and to a human.</p>
+    <p>A refusal cites the rule, the article and the right it rests on, so a review is an audit.
     <a href="rules.html">The rules page</a> shows one rule as the tools load it, who can catch a violation of it today, and how the law changes.</p>
     <p>The stance behind it is openly narrow: business applications first, for people who use the same screens for hours under pressure. <em>Calm over power, intent over mechanics, visible over hidden, undo is dignity.</em> Where a rule needs a
     consumer-delight argument, it is out of jurisdiction.</p>
@@ -132,9 +140,12 @@
     <h2>One declaration, many renderings, one law</h2>
     <p>The sentence the design rests on has three parts. <b>One declaration</b>: what the person is doing and what things mean, blind to channel, culture and technology. <b>Many renderings</b>: screen, sound, voice, lamp, page, sign, actuator,
     each genuinely different, and never pretending otherwise. <b>One law</b>: the invariant that must survive every rendering, and the court that refuses when it does not. <em>From the interaction model, section 3.</em></p>
-    <p>The discipline is in knowing what is unified and what must not be. The intent, the meaning, the law, the refusal envelope and the question <em>what does this mean, and to whom</em> are one. How each channel serves an intent, what colour or timbre or word carries a meaning,
-    which instrument can enforce which rule, each court's own codes and every device's transducers are many. Over-unify and the model lies; under-unify and it is a pile of parts. And the seam is declared and not hoped for: the channel is named by <code>SURFACE_AS</code>, what it can carry
-    by the matrix, and the culture by its own axis. The same shape was found independently in three unrelated parts of the project, for unrelated reasons, which is the evidence that it is a property of the system and not an opinion of its author.
+    <p>The discipline is in knowing what is unified and what must not be. The intent, the meaning, the law, the refusal envelope and the question <em>what does this mean, and to whom</em> are one.</p>
+    <p>How each channel serves an intent, what colour or timbre or word carries a meaning,
+    which instrument can enforce which rule, each court's own codes and every device's transducers are many. Over-unify and the model lies; under-unify and it is a pile of parts.</p>
+    <p>And the seam is declared and not hoped for: the channel is named by <code>SURFACE_AS</code>, what it can carry
+    by the matrix, and the culture by its own axis.</p>
+    <p>The same shape was found independently in three unrelated parts of the project, for unrelated reasons, which is the evidence that it is a property of the system and not an opinion of its author.
     <em>From the interaction model, sections 2 and 5.</em></p>
     <p>A sentence like that is cheap. <a href="media.html">The Channels page</a> shows the instrument that tests it, and what it says: proved for one pair of channels, and not proved for another, which is where it is honest.</p>
   </div>
@@ -143,11 +154,15 @@
 <section id="senses-and-actuators">
   <div class="narrow">
     <h2>Senses and actuators: what the closed vocabulary survives</h2>
-    <p>The obvious move, when a building, a vehicle or a greenhouse is the interface, is to add sensors and actuators to the list of channels. That would corrupt the axis. A channel answers one question: through what does a meaning reach a person? A thermometer renders
-    nothing and a motor renders nothing; they are the system's other two ports. A system has three ports, not one: <b>render</b> (to a person's senses), <b>sense</b> (from a person or the world), and <b>actuate</b> (onto the world). Channels classify only the first, and
+    <p>The obvious move, when a building, a vehicle or a greenhouse is the interface, is to add sensors and actuators to the list of channels. That would corrupt the axis. A channel answers one question: through what does a meaning reach a person?</p>
+    <p>A thermometer renders
+    nothing and a motor renders nothing; they are the system's other two ports. A system has three ports, not one: <b>render</b> (to a person's senses), <b>sense</b> (from a person or the world), and <b>actuate</b> (onto the world).</p>
+    <p>Channels classify only the first, and
     sensors and actuators reach a person only when something else renders them: a motor turning is not a rendering, a person hearing it is. <em>From the sensors and actuators study, section 1.</em></p>
-    <p>The result worth reporting is where the pressure landed. The <span data-fact="verbs">22</span> verbs survived: opening a valve is a rendering of ACT into the world, as a button is a rendering of it onto a screen, so no verb was added. The strata absorbed the rest. What bent was the <em>law</em>: four rules meet cases
-    they were not written for (undo meeting a world that does not undo; perceivable state meeting a system that knows too much; the hundred milliseconds meeting physical time; the bystander who never chose the interface). The document states plainly that nothing structural broke and that this is
+    <p>The result worth reporting is where the pressure landed. The <span data-fact="verbs">22</span> verbs survived: opening a valve is a rendering of ACT into the world, as a button is a rendering of it onto a screen, so no verb was added. The strata absorbed the rest.</p>
+    <p>What bent was the <em>law</em>: four rules meet cases
+    they were not written for (undo meeting a world that does not undo; perceivable state meeting a system that knows too much; the hundred milliseconds meeting physical time; the bystander who never chose the interface).</p>
+    <p>The document states plainly that nothing structural broke and that this is
     a better result than the framework deserved. <em>From the study, sections 5 and 6.</em></p>
     <p class="limit"><b>Limit:</b> this is design reasoning. The study's four collisions are named and not yet resolved into rules, and the rules for the physical channels are held until a product that ships in one is named.</p>
   </div>
@@ -156,7 +171,8 @@
 <section class="alt" id="culture">
   <div class="narrow">
     <h2>Culture: a third axis, and a switch that is not a skin</h2>
-    <p>A statement of what an expression does, and of where it is carried, still does not say what it means to the person receiving it. Colour, a flag used for a language, a gesture: meaning is read through a culture. The wider design proposes culture as a third axis beside the
+    <p>A statement of what an expression does, and of where it is carried, still does not say what it means to the person receiving it. Colour, a flag used for a language, a gesture: meaning is read through a culture.</p>
+    <p>The wider design proposes culture as a third axis beside the
     intent and the channel, with a boundary between what the law fixes everywhere and what a culture may vary. <b>That design, the Second Founding, is proposed and not ratified, and nothing on this site rests on it.</b>
     <a href="../doc/THE-SECOND-FOUNDING.md">The document</a> is the place to read it.</p>
     <p>What does exist is Article VI, operator primacy and vibes: an interaction <em>culture</em> may set density, motion and surface, and may never remove an intent another declaration guarantees. This site has two, Modern and Retro, and the select at the foot of every page is the control.
@@ -167,8 +183,10 @@
 <section id="style-as-data">
   <div class="narrow">
     <h2>Style is the resolution from meaning to rendering</h2>
-    <p>The same logic applied to appearance gives an unexpected verdict. A style sheet is not a list of looks; it is the <em>resolution from meaning to rendering</em>, made declarable, versioned and checkable. Every hand-written style rule is a meaning that escaped the semantic layer, exactly as a
-    hex colour in code is: the court cannot see it and the culture axis cannot vary it. So the doctrine in the study is that style is <b>emitted, never authored</b>, and where a project writes it by hand the honest statement is that the court is blind there, not that it is forbidden.
+    <p>The same logic applied to appearance gives an unexpected verdict. A style sheet is not a list of looks; it is the <em>resolution from meaning to rendering</em>, made declarable, versioned and checkable.</p>
+    <p>Every hand-written style rule is a meaning that escaped the semantic layer, exactly as a
+    hex colour in code is: the court cannot see it and the culture axis cannot vary it.</p>
+    <p>So the doctrine in the study is that style is <b>emitted, never authored</b>, and where a project writes it by hand the honest statement is that the court is blind there, not that it is forbidden.
     <em>From stzSense, sections 1 and 12.</em></p>
     <p class="limit"><b>Limit:</b> a design verdict. The study proposes the format and its first small coverage; the site does not claim it is built.</p>
   </div>
@@ -179,8 +197,8 @@
     <h2>The seams, and what is still open</h2>
     <p>The thinking has loose ends, and they are measured. The language is declared a second time as data and a court is forged from it; that court and the hand-written verifier disagree on <span data-fact="twin.differences">18</span> of the suite's <span data-fact="fixtures.total">73</span> fixtures, and each is a named seam
     (<span data-fact="twin.seams">8</span> of them), counted and held by a ratchet. <a href="haro.html">Declared in Haro</a> has them.</p>
-    <p>The interaction model lists four things missing before it is whole, and says so in its own words. The declaration is spread across four artifacts that do not reference each other. Judgment is per language and not per system, so parts that are each lawful can be unlawful between them.
-    Context (which channels, which culture, which device) is not declared and so cannot be checked. And nothing proved cross-channel agreement, which the instrument on <a href="media.html">the Channels page</a> now begins to do, and does not yet complete. <em>From the interaction model, section 6.</em></p>
+    <p>The interaction model lists four things missing before it is whole, and says so in its own words. The declaration is spread across four artifacts that do not reference each other. Judgment is per language and not per system, so parts that are each lawful can be unlawful between them.</p>
+    <p>Context (which channels, which culture, which device) is not declared and so cannot be checked. And nothing proved cross-channel agreement, which the instrument on <a href="media.html">the Channels page</a> now begins to do, and does not yet complete. <em>From the interaction model, section 6.</em></p>
     <p>And the status board says, part by part, what exists, what is designed and what is held: <a href="conformance.html#status">the board</a>.</p>
   </div>
 </section>
@@ -188,13 +206,15 @@
 <section id="names">
   <div class="narrow">
     <h2>Who is who</h2>
-    <p>Five names appear on this site, and a stranger should not have to guess. <b>Zui</b> is the language: declarations of what a person is doing. <b>StzZui</b> is this project: the language, its law, its verifier and its tools. <b>Zing</b> is a separate open-source framework and the first tool that consumes the law:
+    <p>Five names appear on this site, and a stranger should not have to guess. <b>Zui</b> is the language: declarations of what a person is doing. <b>StzZui</b> is this project: the language, its law, its verifier and its tools.</p>
+    <p><b>Zing</b> is a separate open-source framework and the first tool that consumes the law:
     its <code>zing check</code> reads the same file and cites the same rules. <b>Haro</b> is a language for declaring languages, in which StzZui is declared a second time. <b>Softanza</b> is the family of projects all of this belongs to.</p>
     <p>The reasoning above comes from these documents, in this order: <a href="../doc/ARCHITECTURE.md">the founding architecture</a>, <a href="../doc/THE-INTERACTION-MODEL.md">the interaction model</a>, <a href="../doc/SENSORS-AND-ACTUATORS.md">sensors and actuators</a>,
     <a href="../doc/STZSENSE.md">stzSense</a>, <a href="../doc/GUI-SYSTEM.md">a GUI system, read by the law</a>, <a href="../doc/design/COVERAGE.md">the coverage map</a>, and, proposed and not ratified, <a href="../doc/THE-SECOND-FOUNDING.md">the Second Founding</a>.</p>
   </div>
 </section>
 </main>
+</div>
 
 <!-- shell:footer -->
 <footer class="site">

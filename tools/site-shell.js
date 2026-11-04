@@ -361,6 +361,9 @@ function apply(p, text) {
     }
   }
 
+  /* the layout the fence opens is closed after main, before the footer: a footer left inside it is a grid item beside the left list */
+  if (fenceRe('layout').test(t)) t = t.replace(/<\/main>\s*(?:<\/div>\s*)?(?=<!-- shell:footer -->)/, '</main>\n</div>\n\n');
+
   /* ---- the sections of a page get ids, and the list is made from them ---- */
   let secs = [];
   if (!p.home && !p.outside) { const r = sectionsOf(t); t = r.text; secs = r.list; }

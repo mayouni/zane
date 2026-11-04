@@ -57,7 +57,7 @@
 /* navigation arrives at once: motion is never decoration (Rule 112) */
 body {
   margin: 0; background: var(--paper); color: var(--ink);
-  font: 1.125rem/1.7 var(--sans); -webkit-font-smoothing: antialiased;
+  font: 1.25rem/1.75 var(--sans); -webkit-font-smoothing: antialiased;
 }
 a { color: var(--accent-ink); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -151,7 +151,7 @@ header.page h1 {
   font-size: clamp(2rem, 5vw, 3.4rem); line-height: .98; letter-spacing: -.01em;
   color: var(--accent-ink);
 }
-header.page .sub { color: var(--ink); font-size: 1.125rem; max-width: 42rem; margin: 1.2rem 0 0; }
+header.page .sub { color: var(--ink); font-size: 1.3rem; max-width: 42rem; margin: 1.2rem 0 0; }
 header.page a:not(.brand) { color: var(--accent-ink); }
 header.page code { background: var(--card); border-color: var(--line); color: var(--ink); }
 footer.site code {
@@ -179,7 +179,7 @@ nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent);
   max-width: 72rem; margin: 0 auto; padding: 0 1.4rem;
 }
 .layout.has-list > main { min-width: 0; }
-.layout.has-list main section { padding-left: 0; padding-right: 0; }
+.layout.has-list main section { padding-left: 1.4rem; padding-right: 1.4rem; margin-left: -1.4rem; margin-right: -1.4rem; }
 .layout.has-list main .narrow, .layout.has-list main .wrap { padding: 0; max-width: none; margin: 0; }
 nav.list3 {
   align-self: start; position: sticky; top: calc(var(--bars-h, 6rem) + 1rem); margin: 2.6rem 0 0;
@@ -211,8 +211,11 @@ h2 {
 h2 .num { color: var(--accent-ink); }
 h3 { font-size: 1.125rem; font-weight: 800; margin: 1.8rem 0 .4rem; color: var(--ink); }
 .lead { color: var(--muted); max-width: 46rem; margin: 0 0 1.6rem; }
-p { max-width: 46rem; }
-ul, ol { max-width: 44rem; }
+p { max-width: 42rem; margin: 0 0 1.15em; text-wrap: pretty; }
+ul, ol { max-width: 40rem; }
+li { margin-bottom: .45em; }
+/* a title is balanced across its lines, never a word left alone on the last one */
+h1, h2, h3, .kicker { text-wrap: balance; }
 li { margin: .3rem 0; }
 
 /* ---- code shots & terminals: a light panel as wide as its content needs, wrapping rather than scrolling ---- */
@@ -298,13 +301,16 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 .workflow .file { font: 1rem var(--mono); color: var(--muted); }
 /* a status row: what exists, what is designed, what is held, each by a word and a mark, never by colour alone */
 .board { width: 100%; border-collapse: collapse; margin: 1.2rem 0; background: var(--card); }
-.board th, .board td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.board th, .board td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: break-word; }
+.board td:first-child { min-width: 7.5rem; }
 .board th { color: var(--muted); font-size: 1rem; }
 .status { font: 700 1rem var(--mono); white-space: nowrap; }
 .status.exists::before { content: "\25CF\00a0"; }
 .status.designed::before { content: "\25D0\00a0"; }
 .status.held::before { content: "\25CB\00a0"; }
 
+/* a plain table on a phone scrolls inside itself and never widens the page (Rule 114 measures this at 1280, where it has room) */
+@media (max-width: 860px) { table.board:not(.position) { display: block; overflow-x: auto; } }
 /* a table of four columns that reads as cards on a phone */
 .board.position { table-layout: fixed; }
 .board.position th:first-child, .board.position td:first-child { width: 14rem; }
