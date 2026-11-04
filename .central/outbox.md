@@ -2158,3 +2158,52 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at piece 4 but me, through three screenshots and measurements, at 1280 and 375, not on a device. A thing the audit cannot see: it passes the band and the list as present and identical, and cannot tell whether either is pleasant to use
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 16:40 | NOTE | answers Central's NOTE of 2026-11-04 09:02 (the phone stack, then piece 5) | THE PHONE STACK IS C77B2E4; PIECE 5 IS FIVE LOCAL COMMITS, E57D307 TO 300AE14; THE AUDIT IS 0 ON 22 PAGES IN BOTH CULTURES; STOPPED FOR YOUR READ
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 16:40 | ATTENDED
+
+subject:   the phone-stack lightening (c77b2e4) and site piece 5 (e57d307, 9a65711, 476256a, cf43827, 300ae14), local on main, not pushed
+
+why:       your 09:02 NOTE: lighten the bars inside Rule 120, then the narration devices, the four diagrams and the Language section, each page written against its named reader, with the three screen counts
+
+did:
+  - THE PHONE STACK: 136 px to 105 px at 375 wide, still fixed, by tighter row padding, a shorter switch and shorter band links. Read back: the switch inside the viewport on its own row, no sideways scroll, a click on Retro reads Retro pressed
+  - ITEM 1 (e57d307), the devices and the Language head page: the call to action, the pair, the scene, the figure with its drawing classes, the workflow, the status mark and the excerpt, all in stz.css and drawn from the palette. how.html is rewritten for a person who builds or judges interfaces: a hero with one action, a pair, a pipeline figure and a three-moments figure, and a list of what exists. The hero button had 2.23 to 1 contrast (a header rule outranked the button); the audit found it and it is fixed. The audit's own page lost its back and next links and now lists every page
+  - ITEM 2 (9a65711), What it refuses: one real refusal (a wizard with no EXIT, TRAPPED_FLOW, Rules 51 and 53) read line by line, the lawful twin that comes back clean, the same refusal as the C2 envelope, and what the 37 diagnostics can decide by level. The page says that 12 diagnostics cite nothing and 8 only an article
+  - ITEM 3 (476256a), Declared in Haro: the trapped-flow constraint as an excerpt checked against haro/zui.stzu, a two-courts figure, the 18 differences in three classes with their seams, and what the GBNF file fixes and does not. It says the forged court is not one of the gates, and it does not restate the Haro charter
+  - ITEM 4 (cf43827), Conformance: the two commands with output the check re-runs, what a level-four claim says when the suite holds no fixture above level three, what a pass does not prove, and the status board rebuilt row by row (11 rows: 8 exist, 2 designed, 1 held), each with where it stops
+  - ITEM 5 (300ae14), the home: one call to action, a "same declaration, ten media" figure (four media cannot carry ACT: haptic, print, luminous, signage; the count is derived), and the three cards now point at the new pages
+  - THE FIVE CORRECTIONS that reach this piece: (3) the pair paraphrases the heuristics, quotes nothing, and links the source; (2) no universal negative about the field: the only absence claimed is of the practice named, and what the page does not show is in each figure caption; (5) the word "innovation" appears on no page yet, so the limit has nothing to attach to until piece 7. Corrections 1 and 4 are in pieces 6 and 9 as you said
+  - TWO CHECKS ADDED to site-facts.js: an excerpt must be lines of the file it names, and a terminal that names its command (data-run) is re-run and compared. Every figure's minimum width now equals its drawing width, so its text never renders under 16 px
+
+state:
+  UI audit, before:   0 on 19 pages in Modern and Retro
+  UI audit, after:    0 on 22 pages in Modern and Retro (19 plus refusal, haro, conformance)
+  375 wide:           no sideways scroll on the home, Language, refusal, Haro and Conformance pages; each figure scrolls inside its own frame
+  gates:              site-shell ok (22 pages), site-facts ok (100 spans, 7 verifier runs, 2 commands, 1 excerpt), pack verified, conformance 73 of 73
+  the three counts:   at 1280 by 800, in screens below the bars. Columns: first example / first sourced number / first action (the button) / first real terminal
+    home, before:     0.8 / 0.4 / none / 1.0
+    home, after:      1.0 / 0.4 / 0.6 / 1.2     the button costs the example 0.2 screens
+    Language, before: no example above 3.4 / 4.3 / none / 3.4 (12.5 screens long; its first box was a row of four step cards, not an example)
+    Language, after:  0.9 / 0.3 / 0.5 / 1.3 (4.9 screens long)
+    What it refuses:  1.0 / 0.3 / 0.5 / 1.3 (6.4 screens)
+    Declared in Haro: 1.0 / 0.4 / 0.5 / none (an excerpt, not a terminal) (5.1 screens)
+    Conformance:      0.9 / 0.3 / 0.5 / 0.9 (5.5 screens)
+  typed numbers outside a span:  36 on 5 pages (was 42 on 6); none on the four pages written in this piece
+
+waiting:
+  - SITE2-P5-LOOK-01: the Principal looks at how.html, refusal.html, haro.html, conformance.html and index.html at 1280, in both cultures (F2). I looked through the pane at 1280 and 375 and by measurement only -> the Principal, via Central
+             [not routed; it is here]
+  - SITE2-P5-STATUS-01: the status board's rows are written by hand. The figures in them are checked; the words exists, designed and held are not, and no check can fail on one. Two old rows (projection tables as data, M4; the AI-interaction jurisdiction, M5) are dropped because nothing in this tree states their status today -> Central, whether to restore them from a source I cannot see
+             [not routed; it is here]
+  - SITE2-P5-ZING-01: the board says Zing pins law 3.11 against this pack's 3.13 and that it has not been re-run from here. It is derived from ../zing when reachable, otherwise carried from the last facts.json -> Central, which holds the re-pin
+             [not routed; it is here]
+
+next:
+  - me:      piece 6 (Law: Why a law, The 123 rules, the offence families, Two cultures, Positioning with correction 1) once you have read piece 5
+  - central: read the five commits and 9a65711's pair of refusal terminals, push by sha, bring the Principal the look
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at piece 5 but me. The audit cannot see whether a figure explains anything; the four figures were checked for text size and for what each caption says it leaves out, not for whether a reader understands them. The three counts measure position on the page, not comprehension
+```
+---
