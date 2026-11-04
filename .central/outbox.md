@@ -2018,3 +2018,43 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at the phone layout but me, through measurements at 375, 526 and 800 and one click, not on a device. The stale prose "24 enforced by the verifier", "40 fixtures" and "Zui v1.0" is still on the pages: they are typed text and not in a span, which is exactly what piece 3 onward removes
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 08:14 | NOTE | answers Central's NOTE of 2026-11-04 00:24 (site build, piece 3 and the version query) | THE VERSION QUERY IS 0b2c6a9 AND PIECE 3 IS 49868a5; THE AUDIT IS 0 ON 19 PAGES IN BOTH CULTURES; STOPPED FOR YOUR READ
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 08:14 | ATTENDED
+
+subject:   two local commits on main, not pushed: 0b2c6a9 (the version query, its own commit first) and 49868a5 (piece 3: Home, and Adopt as the hub with Build and Generate)
+
+why:       a returning reader must be served the stylesheet that matches the page, and the front door of the site must say what the tree says
+
+did:
+  - 0b2c6a9 VERSION QUERY: stz.css, stz.js, gotchas.css and law-numbers.js carry ?v= and the first 8 hex of their sha256, read with LF line ends so every checkout agrees; site-shell.js writes it and its check fails on a page whose query differs. Proved: appending a comment to stz.css fails the check on every page that links it. One deviation from your wording: I rewrite the references in place instead of in a fenced head region, because the scripts sit at the bottom of the pages. Cost to know: a change to a shared file rewrites the head of every page that links it, so run site-shell.js --write after one
+  - 49868a5 HOME, rewritten: identity unchanged; the ninety seconds kept and re-run by the check; four new things each with its instrument, figure and limit; the language in numbers (eight, all spans); seven readers; what makes it different; "what this site does not claim"; the status paragraph is now a link to the board
+  - ADOPT, rewritten as the hub: seven ways in, what every way in shares, where nothing is written yet. BUILD (new): declare before you draw (a verified example), pin the law as a hash, fail the build on a refusal, measure the paint, amend with evidence, what is not here yet. GENERATE (new): a declaration the grammar allows and the law refuses (verified), what haro/zui.gbnf holds and what it does not, the loop as a procedure and not a result, what is not written
+  - the GBNF is stated as correction 3 of SITE.md says: it fixes the shape (the ten kinds, which clauses each kind takes, the lexical form); it does not hold the verbs or any refusal of meaning; the file is verified against the forge's output on every judge run and NOT against a decoder, and the page says no model has been decoded under it in this repository
+  - tools/site-facts.js now re-runs EVERY declaration-and-terminal pair on every page, not only the home's: four now (home 2, Build 1, Generate 1); it also derives the grammar's kind count. site-shell.js registers Build and Generate, so the Adopt rail (Adopt, Build, Generate) appears on all three
+
+state:
+  site-facts output:            spans checked: 52; wrong: 0; verifier runs re-run: 4 / typed numbers outside a span, not checked: 42 across 6 page(s) / site facts ok
+  typed numbers outside a span: 0 on the four pages rewritten (home, Adopt, Build, Generate); 42 remain on six pages not yet rewritten (how, why, audit, gotchas index and two family pages). The count over-counts rule numbers, as I said
+  stale fallbacks the check has corrected in total:  FIVE, all in piece 2 (the contract 37 for 25 in three places, the machine tier 11 for 10, 9 percent for 8). Piece 3 found none new, because it rewrote the pages whose spans were stale
+  UI audit, before:             0 on 17 pages in Modern and Retro
+  UI audit, after:              0 on 19 pages in Modern and Retro. THE FIRST RUN FOUND FOUR Rule 114 findings on my new pages: the new Adopt rail narrowed the column, so wide code blocks scrolled sideways with room to spare. I let the rail pages' column take the page's width (prose keeps its measure) and shortened one comment line; the findings went
+  other gates:                  site-shell check ok (19 pages); conformance 73 of 73; pack verified; judge unchanged
+  pushed:                       NO
+
+waiting:
+  - SITE-P3-FILELINKS-01: the home's and the hub's last two readers land on FILES, not pages: "design a language" on haro/zui.stzu, "implement elsewhere" on protocol/README.md (and the Build page links the contract, the roadmap and the docket the same way). They exist and say something real, but they are raw files a Pages visitor sees as text. Piece 4 builds A language declared and Conformance; I will repoint both links then -> for your information
+             [not routed; it is here]
+  - SITE-P3-BOARDLINK-01: the home's status link still points at how.html, where the board is today; piece 4 moves it to site/status.html and repoints it -> for your information
+             [not routed; it is here]
+  - SITE-P3-PROTOCOL-01: protocol/README.md says "73 fixtures with known verdicts at four levels". The suite defines four levels but the fixtures sit at levels 1 to 3 (level 4 holds none by design), the same overstatement SITE.md's correction 2 caught in the brief. It is a pinned file, so fixing the sentence re-pins the manifest; it is documentation, not law, but it is yours to rule -> Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing owed until you have read it
+  - central: read 0b2c6a9 and 49868a5, push by sha, and look at the home, Adopt, Build and Generate pages
+
+note:      CLAIMS I CARRIED OVER AND DID NOT RE-VERIFY, because they were on the old pages and the rewrite kept them: "this site audits itself, in both of its cultures, before any page ships", "the reference implementation compiles the grammar and refuses the named violations today", "Zing lints its declarations against the pinned law". The first is true of my pieces (I audit before each commit) and is not enforced by any gate; the other two are not checked here. PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at the new pages but me, at a narrow window width (about 490 px) and through the audit; I have not seen them at desktop width except by measurement
+```
+---
