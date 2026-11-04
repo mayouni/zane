@@ -61,6 +61,7 @@ const PAGES = [
   { file: 'site/conformance.html', section: 'language', label: 'Conformance', rail: true },
   { file: 'site/why.html', section: 'law', label: 'Law', rail: true },
   { file: 'site/rules.html', section: 'law', label: 'The rules', rail: true },
+  { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', rail: true, outside: 'reader' },
   { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),
   { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true },
@@ -68,9 +69,8 @@ const PAGES = [
   { file: 'site/build.html', section: 'use', label: 'Build', rail: true },
   { file: 'site/generate.html', section: 'use', label: 'Generate', rail: true },
   { file: 'site/audit.html', section: 'try', label: 'Try', rail: true, stub: 'audit' },
-  /* outside the shell proper: the UI audit takes the bars and the footer, the Reader the menu and the trail only, until it takes the shell (SITE-3.md 3.3) */
-  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' },
-  { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', outside: 'reader', pending: 'the Reader takes the shell in its own commit; until then the footer still links it' }
+  /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
+  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 const sec = id => SECTIONS.find(s => s.id === id);
@@ -103,8 +103,8 @@ function menu(p) {
 ${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
 ${links}
 ${menuClose}${wrapClose}</nav>`;
-  if (p.outside === 'reader') return bar;
   const b = band(p);
+  if (p.outside === 'reader') return bar + (b ? '\n' + b : '');
   return `<div class="bars">\n${bar}${b ? '\n' + b : ''}\n</div>`;
 }
 /* Rule 106 (v3.13) allows the two-state control as a select: both states are options, the current one is the one shown. It is in the footer,
@@ -141,7 +141,7 @@ function bandOf(sectionId) {
 }
 for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
 function band(p) {
-  if (p.home || p.outside === 'reader' || !p.section) return '';
+  if (p.home || !p.section) return '';
   const top = bandOf(p.section);
   if (!top) return '';
   const items = top.map(q => {

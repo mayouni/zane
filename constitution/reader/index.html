@@ -16,10 +16,10 @@
    ========================================================================== */
 :root {
   --paper: #f4f3f9; --ink: #211d33; --muted: #4a4661; --line: #d8d4e6;
-  --card: #fdfcff; --accent: #8f1d3d; --accent-soft: #f7dde4;
+  --card: #fdfcff; --accent: #7a1633; --accent-soft: #f7dde4;
   --amend: #6b5416; --amend-soft: #f7f0dc;
   --avoid: #8c3b32; --avoid-soft: #f5dcd2;
-  --code: #e9e6f2; --focus: #8f1d3d;
+  --code: #e9e6f2; --focus: #7a1633;
   --measure: 48rem; --pad: 1.25rem; --gap: 2.5rem; --fs: 1.125rem;
 }
 [data-theme="dark"] {
@@ -64,7 +64,14 @@ a { color: var(--accent); }
 .topnav a { color: #eae7f6; text-decoration: none; font-size: 1rem; opacity: .9; }
 .topnav a:hover { opacity: 1; color: #ff8fa8; }
 .topnav .brand { font-weight: 900; text-transform: uppercase; letter-spacing: .04em;
-  color: #ff8fa8; font-size: 1.05rem; }
+  color: #ff8fa8; font-size: 1.05rem; opacity: 1; }
+/* the section's band, the same entries as on every page of Law (Rules 115 and 120), drawn with this page's own tokens */
+nav.band { background: var(--card); border-bottom: 1px solid var(--line); }
+nav.band ul { list-style: none; display: flex; gap: 1.4rem; margin: 0; padding: 0 1.25rem; overflow-x: auto; scrollbar-width: none; }
+nav.band a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent); }
+nav.band a:hover { color: var(--accent); }
+footer .fine { font: 1rem ui-monospace, monospace; color: var(--muted); margin-top: 1rem; }
 .topnav .here { color: #ff8fa8; opacity: 1; border-bottom: 2px solid #e04a6e; }
 .topnav a.leaves { opacity: .8; }
 
@@ -283,6 +290,15 @@ footer ul { padding-left: 1.2rem; }
     <a href="../../site/adopt.html">Use</a>
     <a href="../../site/audit.html">Try</a>
 </nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="../../site/why.html">Law</a></li>
+    <li><a href="../../site/rules.html">The rules</a></li>
+    <li><a aria-current="page" href="index.html">The Reader</a></li>
+    <li><a href="../../site/gotchas/">What a violation feels like</a></li>
+    <li><a href="../../site/vibes.html">Two cultures, one truth</a></li>
+  </ul>
+</nav>
 <!-- /shell:menu -->
 
 <header>
@@ -360,6 +376,7 @@ footer ul { padding-left: 1.2rem; }
   </button>
   </div>
   <p id="retired-note"></p>
+  <p class="fine"><a href="../../LICENSE">LICENSE</a> · © 2026 Mansour Ayouni · MIT licence</p>
   <p>Rules badged as machine-enforced are machine law: a conforming linter (Zing’s <code>zing check</code> is the first) loads this
   very file and cites article numbers in its verdicts. Rules marked <em>on the
   enforcement ladder</em> are lintable and queued (Article VII: recurring violations
