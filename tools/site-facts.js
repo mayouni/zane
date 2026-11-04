@@ -249,6 +249,8 @@ function verifyStatuses(problems) {
 // ---- the typed numbers outside any span (informational) -----------------------------------------------------
 function unchecked(html) {
   html = html.replace(/<a [^>]*#rule-\d+[^>]*>\d+<\/a>/g, ' ');
+  /* a table drawn from its data by tools/site-grid.js is checked there, against the files that hold its figures */
+  html = html.replace(/<!-- (grid|channels):table -->[\s\S]*?<!-- \/\1:table -->/g, ' ');
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')
     .replace(/<([a-z0-9]+)\b[^>]*?\sdata-(law-share|law|fact)="[^"]*"[^>]*>[^<]*<\/\1>/g, ' ');
   t = t.replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/g, ' ');
