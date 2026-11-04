@@ -52,6 +52,7 @@ const PAGES = [
   { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
   { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true },
+  { file: 'site/conformance.html', section: 'language', label: 'Conformance', rail: true },
   { file: 'site/why.html', section: 'law', label: 'Law', rail: true },
   { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conformance — a claim your CI can refute</title>
+<meta name="description" content="What it means for a tool to conform to StzZui: the same verdict as the reference on the fixtures, against a pinned pack of files. How to check it, what the check cannot say, and a status board of what exists, what is designed and what is held.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=86bec427">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a class="here" aria-current="true" href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a href="media.html">Media</a>
+    <a href="audit.html">Audit</a>
+    <a href="adopt.html">Adopt</a>
+    </div>
+    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="how.html">Language</a></li>
+    <li><a href="refusal.html">What it refuses</a></li>
+    <li><a href="haro.html">Declared in Haro</a></li>
+    <li><a aria-current="page" href="conformance.html">Conformance</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Conformance</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Language · for people who build a tool that reads StzZui</p>
+    <h1>A claim to conform that your CI can refute.</h1>
+    <p class="sub">A tool conforms when it gives the reference's verdict on every one of <span data-fact="fixtures.total">73</span> fixtures, against a pack of
+    <span data-fact="pack.files">12</span> files pinned by hash. There is no library to adopt: agreement is proved by running the fixtures. This page shows the two commands,
+    what they cannot say, and the status of every part of the system.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#status">Read the status board →</a>
+      <p class="note">Both commands need Node and nothing else.</p>
+    </div>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
+<main id="main">
+
+<section>
+  <div class="narrow">
+    <h2>Two commands</h2>
+    <p>The first asks whether the bytes you hold are the pack you meant. A version number says which edition you intended; the hash says the bytes are that edition.
+    The second runs every fixture through the verifier and says which, if any, disagreed.</p>
+<pre class="term" data-run="node tools/zui/pack.js --check"><span class="dim">$ node tools/zui/pack.js --check</span>
+
+The Zui protocol pack
+  law          v3.13 — 123 rules, 17 forbidden patterns
+  language     v1.4 — 37 diagnostics
+  axes         10 media, 5 semantic values
+  proof        73 fixtures + the cross-medium spec
+  pinned       12 files, sha256 over LF-normalised content
+  README       every count on the page matches the manifest
+
+  <span class="good">verified</span> — every pinned file matches the manifest</pre>
+<pre class="term" data-run="node tools/zui/conformance.js"><span class="dim">$ node tools/zui/conformance.js</span>
+
+Zui conformance — level 4
+  spec         doc/language/ v1.4
+  contract     violations.json v1.8 (constitution v3.13)
+  envelope     diagnostic-contract v1.2.0 — 56 diagnostics and 73 reports, all conform
+  media        10 media — verifier agrees with media.json
+  catalogue    37 diagnostics — contract agrees with VIOLATIONS.md
+  fixtures     73 total
+  pass 73 · fail 0 · skipped 0 (above level 4)
+
+  <span class="good">conforms at level 4</span> — every fixture in the suite.</pre>
+    <p>Both outputs above are re-run by this site's own check, so they cannot drift from the tools.</p>
+    <p><b>What "level 4" says here.</b> The suite holds <span data-fact="fixtures.level1">12</span> fixtures at level one, <span data-fact="fixtures.level2">56</span> at level two,
+    <span data-fact="fixtures.level3">5</span> at level three and <span data-fact="fixtures.level4">0</span> at level four. A claim at level four means every fixture there is passes, and
+    the suite has none above level three, by design: a painted layout is the audit's to measure, not a declaration's. Read a level-four claim as a level-three claim.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>What a pass does not prove</h2>
+    <ul>
+      <li><b>It proves agreement, not rightness.</b> Two tools that refuse the same wrong thing pass together. The suite fixes what the law refuses; whether the law is right for a person is
+      the question of perception, and no person has perceived this site's media grid.</li>
+      <li><b>It covers what the fixtures cover.</b> <span data-fact="fixtures.unfixtured">3</span> diagnostics have no fixture, on purpose, each with its reason in the manifest: one is a painted layout, two are about recovering from a malformed file, which the language does not define. A tool can pass the suite and differ on them.</li>
+      <li><b>A twin proves a tool does not over-refuse.</b> The suite holds <span data-fact="fixtures.twins">22</span> lawful twins, files that differ from a refused one by one change. A tool that refuses everything fails them.</li>
+      <li><b>It does not make a port.</b> A tool states its level, pins the manifest, emits the <a href="refusal.html">refusal envelope</a>, and lists where it differs from the reference the way
+      <a href="haro.html">the forged court</a> does.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="status">
+  <div class="narrow">
+    <h2>Status, part by part</h2>
+    <p>Every row says what the part is, one word for where it stands, and where it stops. <b>Exists</b>: built and run in this repository or named as run elsewhere. <b>Designed</b>: written down and
+    not built. <b>Held</b>: deliberately not advanced, awaiting a named reason.</p>
+    <table class="board">
+      <thead><tr><th>Part</th><th>Status</th><th>Where it stops</th></tr></thead>
+      <tbody>
+        <tr><td>The law as data: <span data-law="rules">123</span> rules in v<span data-law="version">3.13</span></td><td class="status exists">exists</td>
+          <td>Only <span data-law="tier:machine">11</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> wait on a person's judgment.</td></tr>
+        <tr><td>The grammar, the verifier and the refusal contract</td><td class="status exists">exists</td>
+          <td><span data-law="diagnostics">37</span> diagnostics, decided from a file at levels one and two. Level three needs a symbol table that you supply.</td></tr>
+        <tr><td>The conformance suite and the pack</td><td class="status exists">exists</td>
+          <td><span data-fact="fixtures.total">73</span> fixtures and <span data-fact="pack.files">12</span> pinned files. Nothing at level four.</td></tr>
+        <tr><td>The Reader</td><td class="status exists">exists</td><td>Renders the law from the same file. It does not judge anything.</td></tr>
+        <tr><td>The UI audit</td><td class="status exists">exists</td>
+          <td>Measures six rules on a page a browser paints, same-origin only. It cannot say whether anyone found the page pleasant. <a href="../tools/ui-audit.html">Run it</a>.</td></tr>
+        <tr><td>The media data and the cross-medium check</td><td class="status exists">exists</td>
+          <td><span data-fact="media.count">10</span> media, and a proof that renderings differ only as the data predicts. The renderers that draw, speak or print are in other projects.</td></tr>
+        <tr><td>The forged court in Haro, and the decoder grammar</td><td class="status exists">exists</td>
+          <td>Judges the suite and agrees on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span>. Its judge needs the Haro spike, so it is not one of the gates. See <a href="haro.html">Declared in Haro</a>.</td></tr>
+        <tr><td>Zing's <code>zing check</code>, the first conforming linter</td><td class="status exists">exists</td>
+          <td>Lives in another repository and pins law v<span data-fact="zing.pinned">3.11</span>, behind this pack's v<span data-law="version">3.13</span>. It has not been re-run from here.</td></tr>
+        <tr><td>The symbol table, computed from a host project</td><td class="status designed">designed</td>
+          <td>The M3 decision document describes it. Nothing computes entities, actors and state from a project yet; the verifier says nothing about them without a table.</td></tr>
+        <tr><td>The screenshot audit</td><td class="status designed">designed</td>
+          <td>Its fact schema is written and decides <span data-fact="audit.decides">3</span> rules. It has never been run on a real application and no person has looked at its output.</td></tr>
+        <tr><td>Rules for haptic, luminous, signage, spatial and terminal media</td><td class="status held">held</td>
+          <td>Not advanced until a product that ships in one of them is named.</td></tr>
+      </tbody>
+    </table>
+    <p>The rows are written by hand from the repository's files, not computed: the figures in them are checked, the statuses are not, so a status that is wrong will not fail a check.</p>
+  </div>
+</section>
+</main>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/index.html">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=51932dd5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

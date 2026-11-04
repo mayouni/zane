@@ -65,6 +65,7 @@ function derive(prev) {
   put('fixtures.unfixtured', m.unfixtured.length, 'conformance/manifest.json unfixtured');
 
   put('media.count', json('conformance/media.json').media.length, 'conformance/media.json media');
+  put('pack.files', json('protocol/MANIFEST.json').pinned.length, 'protocol/MANIFEST.json pinned');
   put('signals.count', json('conformance/signal.json').values.length, 'conformance/signal.json values');
 
   const stzu = fs.readFileSync(R('haro/zui.stzu'), 'utf8');
@@ -189,6 +190,30 @@ function verifyExcerpts(problems) {
   return n;
 }
 
+// ---- a terminal that names its command is a real run of it ---------------------------------------------------
+/* <pre class="term" data-run="node tools/zui/conformance.js"> ... </pre>: the first line is "$ " and the command, the rest is what it
+   printed. Only the pack's own read-only commands (node tools/zui/...) are run; the output is compared with the page's. */
+function verifyCommands(problems) {
+  let n = 0;
+  const norm = t => t.replace(/\r\n/g, '\n').split('\n').map(l => l.replace(/\s+$/, '')).join('\n').replace(/\n+$/, '');
+  for (const p of pages()) {
+    const html = fs.readFileSync(R(p), 'utf8').replace(/\r\n/g, '\n');
+    const re = /<pre class="term" data-run="([^"]+)">([\s\S]*?)<\/pre>/g;
+    let m;
+    while ((m = re.exec(html))) {
+      const cmd = decode(m[1]).split(/\s+/);
+      if (cmd[0] !== 'node' || !/^tools\/zui\/[a-z-]+\.js$/.test(cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (node tools/zui/NAME.js)`); continue; }
+      n++;
+      const lines = decode(m[2]).split('\n');
+      if (lines[0].replace(/^\$\s*/, '').trim() !== cmd.join(' ')) problems.push(`${p}: the first line of the terminal for "${cmd.join(' ')}" is not that command`);
+      const r = spawnSync(process.execPath, cmd.slice(1).map((a, i) => i === 0 ? R(a) : a), { cwd: R('.'), encoding: 'utf8' });
+      const got = norm(r.stdout || ''), want = norm(lines.slice(1).join('\n'));
+      if (got !== want) problems.push(`${p}: the terminal for "${cmd.join(' ')}" is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
+    }
+  }
+  return n;
+}
+
 // ---- the typed numbers outside any span (informational) -----------------------------------------------------
 function unchecked(html) {
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')
@@ -245,7 +270,8 @@ function main(argv) {
   }
   const ninety = verifyRuns(problems);
   const excerpts = verifyExcerpts(problems);
-  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; excerpts checked against their files: ${excerpts}`);
+  const commands = verifyCommands(problems);
+  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; excerpts checked against their files: ${excerpts}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);
   if (listUnchecked) per.forEach(l => console.log('  ' + l));
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }
