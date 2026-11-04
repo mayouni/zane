@@ -13,6 +13,9 @@
   --muted: #4a4661; --line: #d8d4e6; --card: #fdfcff;
   --accent-ink: #8f1d3d; --accent-lite: #ff8fa8;
   --on-accent: #1c0710; --ok: #1d6b4f;
+  --code-bg: #fdfcff; --code-ink: #211d33; --code-line: #d8d4e6; --code-rule: #8f1d3d;
+  --c-comment: #5a5578; --c-key: #8f1d3d; --c-str: #7a4a00; --c-name: #1d5f8c;
+  --c-dim: #4a4661; --c-bad: #a33422; --c-good: #1d6b4f; --c-prompt: #211d33;
   --tint: #ebe8f5;               /* the band under the page head: a paper tone, not an emphasis */
   --shadow: 0 1px 2px rgba(33,29,51,.04), 0 6px 18px rgba(33,29,51,.06);   /* the one resting shadow (Rule 10) */
   --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -26,12 +29,16 @@
   --accent-ink: #46e07f; --accent-lite: #46e07f;
   --on-accent: #060b07; --ok: #7ee2ae;
   --tint: #0b120d; --shadow: none;   /* a terminal does not float cards */
+  /* in Retro a code block is what a terminal is: the culture is the exhibit */
+  --code-bg: #0b120d; --code-ink: #cfe0cf; --code-line: #1e2f22; --code-rule: #46e07f;
+  --c-comment: #9a93c0; --c-key: #ff8fa8; --c-str: #e6c987; --c-name: #9fd8c0;
+  --c-dim: #7d8f85; --c-bad: #ff9d8a; --c-good: #7ee2ae; --c-prompt: #5cc296;
 }
 [data-vibe="guardian"] body { font-family: var(--mono); }
 [data-vibe="guardian"] h1, [data-vibe="guardian"] h2 { letter-spacing: 0; }
 [data-vibe="guardian"] .stamp { background: transparent; border: 2px solid var(--accent); }
 [data-vibe="guardian"] .stamp * { color: var(--accent) !important; }
-[data-vibe="guardian"] .card, [data-vibe="guardian"] .shot { box-shadow: none; }
+[data-vibe="guardian"] .card { box-shadow: none; }
 
 * { box-sizing: border-box; }
 /* scrollbars belong to the page, not to the operating system */
@@ -55,12 +62,14 @@ code { background: var(--card); border: 1px solid var(--line); border-radius: 4p
   padding: 0 .3em; font-size: 1em; }
 kbd { border: 1px solid var(--muted); border-radius: 4px; padding: 0 .35em; font-size: 1em; }
 .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.4rem; }
-.narrow { max-width: 48rem; margin: 0 auto; padding: 0 1.4rem; }
+/* one container for the bars, the head and the page, so everything shares a left edge; prose keeps its own measure (p, ul, .lead) */
+.narrow { max-width: 72rem; margin: 0 auto; padding: 0 1.4rem; }
 
 /* ---- nav ---- */
+/* the main menu and the section's band stick together under the top of the screen */
+.bars { position: sticky; top: 0; z-index: 10; }
 nav.site {
   background: var(--deep); color: var(--halo);
-  position: sticky; top: 0; z-index: 10;
 }
 nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: nowrap; }
 /* the menu is one row that never wraps; where it is wider than the screen it scrolls on its own, and the culture
@@ -160,38 +169,43 @@ footer.site code {
   background: rgba(0, 0, 0, .25); border-color: transparent; color: var(--halo);
 }
 
-/* ---- the rail: level 2, vertical, the same on every page it lists (Rules 115, 120) ---- */
+/* ---- the band: level 2, horizontal, fixed under the menu, at most five entries, the same on every page of its section
+   (Rules 27, 115, 120) ---- */
 .skip { position: absolute; left: .6rem; top: -4rem; background: var(--card); color: var(--ink);
   border: 2px solid var(--accent); border-radius: 8px; padding: .5rem .9rem; z-index: 20; }
 .skip:focus { top: .6rem; }
+nav.band { background: var(--card); border-bottom: 1px solid var(--line); }
+nav.band ul { list-style: none; margin: 0 auto; padding: 0 1.4rem; max-width: 72rem;
+  display: flex; gap: 0 1.8rem; overflow-x: auto; scrollbar-width: none; }
+nav.band li { margin: 0; flex: none; }
+/* no hover repaint: the pointer already becomes a hand, and a place the reader is not must not look like "here" (Rule 115) */
+nav.band a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none;
+  white-space: nowrap; font-size: 1rem; border-bottom: 3px solid transparent; }
+nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent); }
+
+/* ---- level 3: a vertical list on the left, only where a page has a family, and then the page takes the full width ---- */
 .layout { display: block; }
-.layout.has-rail {
-  display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); gap: 2rem;
-  max-width: 78rem; margin: 0 auto; padding: 0 1.4rem;
+.layout.has-list {
+  display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 2rem;
+  max-width: 72rem; margin: 0 auto; padding: 0 1.4rem;
 }
-.layout.has-rail > main { min-width: 0; }
-.layout.has-rail main section { padding-left: 0; padding-right: 0; }
-/* the column is as wide as the page allows, so a code block takes the room (Rule 114); prose keeps its own measure (p, ul) */
-.layout.has-rail main .narrow { padding: 0; max-width: none; margin: 0; }
-.layout.has-rail main .narrow .shot, .layout.has-rail main .narrow .term { width: 100%; margin-left: 0; }
-nav.rail {
-  align-self: start; position: sticky; top: 4.6rem; margin: 2.6rem 0 0;
-  max-height: calc(100vh - 6rem); overflow-y: auto; overflow-x: hidden;
+.layout.has-list > main { min-width: 0; }
+.layout.has-list main section { padding-left: 0; padding-right: 0; }
+.layout.has-list main .narrow, .layout.has-list main .wrap { padding: 0; max-width: none; margin: 0; }
+nav.list3 {
+  align-self: start; position: sticky; top: calc(var(--bars-h, 6rem) + 1rem); margin: 2.6rem 0 0;
+  max-height: calc(100vh - var(--bars-h, 6rem) - 2rem); overflow-y: auto; overflow-x: hidden;
   background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: .6rem 0;
 }
-nav.rail ul { list-style: none; margin: 0; padding: 0; max-width: none; }
-nav.rail li { margin: 0; }
-nav.rail a {
-  display: block; padding: .45rem 1rem; color: var(--ink); text-decoration: none;
-  border-left: 3px solid transparent; font-size: 1rem; line-height: 1.4;
-}
-nav.rail ul ul a { padding-left: 1.9rem; font-size: 1rem; color: var(--muted); }
-/* no hover repaint: the pointer already becomes a hand, and a place the reader is not must not look like "here" (Rule 115) */
-nav.rail a.here { font-weight: 800; border-left-color: var(--accent); text-decoration: underline;
-  text-underline-offset: .22em; color: var(--ink); }
+nav.list3 ul { list-style: none; margin: 0; padding: 0; max-width: none; }
+nav.list3 li { margin: 0; }
+nav.list3 a { display: block; padding: .45rem 1rem; color: var(--ink); text-decoration: none;
+  border-left: 3px solid transparent; font-size: 1rem; line-height: 1.4; }
+nav.list3 a[aria-current] { font-weight: 800; border-left-color: var(--accent); text-decoration: underline; text-underline-offset: .22em; }
+html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
 @media (max-width: 900px) {
-  .layout.has-rail { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  nav.rail { position: static; margin: 1.4rem 0 0; max-height: none; }
+  .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  nav.list3 { position: static; margin: 1.4rem 0 0; max-height: none; }
 }
 
 /* ---- sections & prose ---- */
@@ -208,35 +222,22 @@ p { max-width: 46rem; }
 ul, ol { max-width: 44rem; }
 li { margin: .3rem 0; }
 
-/* ---- code shots & terminals ---- */
-.shot {
-  background: var(--deep-2); color: #e8e4f4; border-radius: 10px;
-  padding: 1.2rem 1.4rem; overflow-x: auto; box-shadow: var(--shadow);
-  font-size: 1rem; line-height: 1.55; font-family: var(--mono);
+/* ---- code shots & terminals: a light panel as wide as its content needs, wrapping rather than scrolling ---- */
+.shot, .term {
+  background: var(--code-bg); color: var(--code-ink); border: 1px solid var(--code-line); border-left: 4px solid var(--code-rule);
+  border-radius: 8px; padding: .9rem 1.2rem; font: 1rem/1.55 var(--mono); margin: 1.2rem 0;
+  width: fit-content; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; box-shadow: none;
 }
-.shot .c { color: #9a93c0; }
-.shot .k { color: #ff8fa8; font-weight: 700; }
-.shot .s { color: #e6c987; }
-.shot .n { color: #9fd8c0; }
-.term {
-  background: #060b07; color: #cfe0cf; border-radius: 10px; padding: 1.1rem 1.3rem;
-  font: 1rem/1.6 var(--mono); overflow-x: auto;
-}
-/* Room before scrollbars (Rule 114). A code block is bound by the prose
-   column only while that column is enough. When the page has width to spare,
-   the block takes it -- centred on the same axis as the text, so the reading
-   line never moves -- and only scrolls when even the page has run out. */
-.narrow .shot, .narrow .term {
-  --room: min(72rem, calc(100vw - 2.8rem));   /* the page's own measure */
-  width: var(--room);
-  max-width: none;
-  margin-left: calc((100% - var(--room)) / 2);
-}
-.term .p { color: #5cc296; }
-.term .cmd { color: #46e07f; }
-.term .dim { color: #7d8f85; }
-.term .bad { color: #ff9d8a; }
-.term .good { color: #7ee2ae; }
+.term { border-left-color: var(--c-dim); }
+.shot .c { color: var(--c-comment); }
+.shot .k { color: var(--c-key); font-weight: 700; }
+.shot .s { color: var(--c-str); }
+.shot .n { color: var(--c-name); }
+.term .p { color: var(--c-prompt); }
+.term .cmd { color: var(--code-ink); font-weight: 700; }
+.term .dim { color: var(--c-dim); }
+.term .bad { color: var(--c-bad); font-weight: 700; }
+.term .good { color: var(--c-good); font-weight: 700; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.4rem; }
 .caption { color: var(--muted); margin-top: .8rem; max-width: 46rem; }
 
@@ -300,14 +301,6 @@ details.qa .a p { margin: .4rem 0; }
 .btn.primary { background: var(--accent); color: var(--on-accent); }
 .btn.ghost { color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.08); }
-.next {
-  margin: 3rem 0 0; padding: 1.4rem 0 0; border-top: 1px solid var(--line);
-  display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
-}
-.next .label { font: 1rem var(--mono); text-transform: uppercase;
-  letter-spacing: .1em; color: var(--muted); display: block; }
-.next a { font-weight: 700; text-decoration: none; }
-
 /* ---- footer ---- */
 footer.site { background: var(--deep); color: var(--halo); padding: 2.2rem 0; margin-top: 3rem; }
 footer.site a { color: var(--halo); }

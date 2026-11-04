@@ -6,11 +6,12 @@
 <title>Build — put the law in a project and gate your CI</title>
 <meta name="description" content="Declare before you draw, pin the law as a hash, fail the build on a refusal, and measure what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=19b21989">
+<link rel="stylesheet" href="stz.css?v=2c81e128">
 </head>
 <body>
 
 <!-- shell:menu -->
+<div class="bars">
 <nav class="site" aria-label="Main menu">
   <div class="wrap">
     <div class="menu">
@@ -28,6 +29,14 @@
     </div>
   </div>
 </nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Adopt</a></li>
+    <li><a aria-current="page" href="build.html">Build</a></li>
+    <li><a href="generate.html">Generate</a></li>
+  </ul>
+</nav>
+</div>
 <!-- /shell:menu -->
 
 <header class="page">
@@ -42,16 +51,9 @@
   </div>
 </header>
 
-<!-- shell:rail -->
-<div class="layout has-rail">
-<nav class="rail" aria-label="Pages of the section">
-  <ul>
-    <li><a href="adopt.html">Adopt</a></li>
-    <li><a class="here" aria-current="page" href="build.html">Build</a></li>
-    <li><a href="generate.html">Generate</a></li>
-  </ul>
-</nav>
-<!-- /shell:rail -->
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
 <main id="main">
 
 <section>
@@ -149,10 +151,6 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
       <li><b>The Second Founding is proposed, not ratified.</b> It argues for a wider design and its own rulings; the law you pin is
       the one above, not that document.</li>
     </ul>
-    <div class="next">
-      <a href="adopt.html"><span class="label">Back</span>← Which way in is yours</a>
-      <a href="generate.html"><span class="label">Next</span>Generate with AI →</a>
-    </div>
   </div>
 </section>
 </main>
@@ -173,7 +171,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6a53b578"></script>
+<script src="stz.js?v=51932dd5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

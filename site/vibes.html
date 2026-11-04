@@ -6,7 +6,7 @@
 <title>Vibes — two cultures, one truth (the Article VI exhibit)</title>
 <meta name="description" content="The Article VI exhibit: the same operator screen rendered in both vibes at once, driven by one shared state. Act in either pane and the other follows — the truth is shared; only the projection differs. What may flex, and what never does.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=19b21989">
+<link rel="stylesheet" href="stz.css?v=2c81e128">
 <style>
 /* Scoped curator variables: a pane forces its vibe whatever the page wears.
    (Guardian's scoped block already lives in stz.css; curator is the :root
@@ -54,6 +54,7 @@
 <body>
 
 <!-- shell:menu -->
+<div class="bars">
 <nav class="site" aria-label="Main menu">
   <div class="wrap">
     <div class="menu">
@@ -71,6 +72,14 @@
     </div>
   </div>
 </nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="why.html">Law</a></li>
+    <li><a href="gotchas/">What a violation feels like</a></li>
+    <li><a aria-current="page" href="vibes.html">Two cultures, one truth</a></li>
+  </ul>
+</nav>
+</div>
 <!-- /shell:menu -->
 
 <header class="page">
@@ -89,26 +98,9 @@
   </div>
 </header>
 
-<!-- shell:rail -->
-<div class="layout has-rail">
-<nav class="rail" aria-label="Pages of the section">
-  <ul>
-    <li><a href="why.html">Law</a></li>
-    <li><a href="gotchas/">What a violation feels like</a>
-      <ul>
-        <li><a href="gotchas/stillness.html">Stillness</a></li>
-        <li><a href="gotchas/forms.html">Forms</a></li>
-        <li><a href="gotchas/state.html">State</a></li>
-        <li><a href="gotchas/widgets.html">Widgets</a></li>
-        <li><a href="gotchas/reading.html">Reading</a></li>
-        <li><a href="gotchas/navigation.html">Navigation</a></li>
-        <li><a href="gotchas/intelligence.html">Intelligence</a></li>
-      </ul>
-    </li>
-    <li><a class="here" aria-current="page" href="vibes.html">Two cultures, one truth</a></li>
-  </ul>
-</nav>
-<!-- /shell:rail -->
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
 <main id="main">
 
 <section>
@@ -189,12 +181,6 @@
   </div>
 </section>
 
-<div class="narrow">
-  <div class="next">
-    <a href="gotchas/"><span class="label">Back</span>← Gotchas</a>
-    <a href="adopt.html"><span class="label">Next</span>Deploy the law →</a>
-  </div>
-</div>
 </main>
 </div>
 
@@ -214,7 +200,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6a53b578"></script>
+<script src="stz.js?v=51932dd5"></script>
 <script>
 'use strict';
 /* One truth. Two projections. No synchronization — there is nothing to sync. */

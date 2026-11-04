@@ -6,15 +6,16 @@
      node tools/site-shell.js            check: every page carries exactly the shell this file renders
      node tools/site-shell.js --write    render the shell into every page
 
-   doc/design/SITE.md decides the shape: a main menu of FIVE entries (Rule 27), a vertical rail for
-   level 2 (Rule 120, the default), and a visually hidden Breadcrumb landmark on every page (Rule 108),
-   with the same rail on every page it lists (Rule 115). Five menus, nineteen rails and as many
-   landmarks written by hand would drift; this file is the only place they are written, and the check
-   fails when a page differs from it. The regions it owns are fenced in each page:
+   doc/design/SITE-2.md decides the shape: a main menu of FIVE entries (Rule 27); under it, fixed with it, a
+   band of the section's pages, five at most (Rules 27, 120); a vertical list on the left ONLY where a page
+   has a family (level 3), and the page then takes the full width; and a visually hidden Breadcrumb landmark
+   on every page (Rule 108). The same band is on every page of its section, the same list on every page of
+   its family (Rule 115). Menus, bands, lists and landmarks written by hand would drift; this file is the only
+   place they are written, and the check fails when a page differs from it. The regions it owns are fenced:
 
-       <!-- shell:menu --> ... <!-- /shell:menu -->      the top bar, with the culture switch
+       <!-- shell:menu --> ... <!-- /shell:menu -->      the two sticky bars (menu, with the culture switch, and band)
        <!-- shell:trail --> ... <!-- /shell:trail -->    the hidden Breadcrumb landmark
-       <!-- shell:rail --> ... <!-- /shell:rail -->      the section rail (only where a section has pages to list)
+       <!-- shell:layout --> ... <!-- /shell:layout -->  the opening of the layout, holding the level-3 list where there is one
        <!-- shell:footer --> ... <!-- /shell:footer -->  the footer links
 
    A page that does not have the fences yet is migrated by --write from the markup the old site used.
@@ -91,10 +92,13 @@ function menu(p) {
   const row = p.outside === 'reader' ? '' : '    ';
   const menuOpen = p.outside === 'reader' ? '' : '    <div class="menu">\n';
   const menuClose = p.outside === 'reader' ? '' : '    </div>\n';
-  return `<nav class="${cls}" aria-label="Main menu">
+  const bar = `<nav class="${cls}" aria-label="Main menu">
 ${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
 ${links}
 ${menuClose}${switchHtml}${wrapClose}</nav>`;
+  if (p.outside === 'reader') return bar;
+  const b = band(p);
+  return `<div class="bars">\n${bar}${b ? '\n' + b : ''}\n</div>`;
 }
 /* Rule 106: a control with two states shows both. The current one is marked by weight, an underline
    and a check mark, never by colour alone, and says so to assistive technology. */
@@ -120,27 +124,41 @@ function trail(p) {
   const links = steps.map(x => `<a href="${href(p.file, x.to)}">${esc(x.label)}</a>`).join('<span class="sep">›</span>');
   return `<nav class="crumbs trail-hidden" aria-label="Breadcrumb">${links}<span class="sep">›</span><span class="here-crumb" aria-current="page">${esc(p.label)}</span></nav>`;
 }
-function railPages(sectionId) { return PAGES.filter(p => p.section === sectionId && p.rail && !p.stub); }
-/* A rail is drawn only where a section has at least two pages to list; a rail of one entry says nothing. */
-function railOf(sectionId) {
-  const members = PAGES.filter(p => p.section === sectionId && p.rail);
-  const top = members.filter(p => !p.parent);
-  return top.length + members.filter(p => p.parent).length >= 2 ? { members, top } : null;
+/* Level 2: the pages of a section, in one horizontal band under the menu, fixed with it. At most five (Rule 27). Drawn only where
+   a section has at least two pages; a band of one entry says nothing. Identical on every page of the section (Rule 115). */
+function bandOf(sectionId) {
+  const top = PAGES.filter(p => p.section === sectionId && p.rail && !p.parent);
+  return top.length >= 2 ? top : null;
 }
-function rail(p) {
-  if (p.home || p.outside || !p.rail) return '';
-  const r = railOf(p.section);
-  if (!r) return '';
-  const li = q => {
-    const on = q === p;
-    const kids = r.members.filter(k => k.parent === q.file);
-    const a = `<a${on ? ' class="here" aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>`;
-    const nest = kids.length ? `\n      <ul>\n${kids.map(k => `        <li>${k === p ? `<a class="here" aria-current="page" href="${href(p.file, k.file)}">${esc(k.label)}</a>` : `<a href="${href(p.file, k.file)}">${esc(k.label)}</a>`}</li>`).join('\n')}\n      </ul>\n    ` : '';
-    return `    <li>${a}${nest}</li>`;
-  };
-  return `<nav class="rail" aria-label="Pages of the section">
+for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
+function band(p) {
+  if (p.home || p.outside || !p.section) return '';
+  const top = bandOf(p.section);
+  if (!top) return '';
+  const items = top.map(q => {
+    const on = q === p || (p.parent && by.get(p.parent) === q);
+    return `    <li><a${on ? ' aria-current="' + (q === p ? 'page' : 'true') + '"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a></li>`;
+  }).join('\n');
+  return `<nav class="band" aria-label="Pages of the section">
   <ul>
-${r.top.map(li).join('\n')}
+${items}
+  </ul>
+</nav>`;
+}
+/* Level 3: a vertical list on the left, only where a page has a family; the page then takes the full width. */
+function familyOf(p) {
+  const head = p.parent ? by.get(p.parent) : p;
+  const kids = PAGES.filter(q => q.parent === head.file);
+  return kids.length ? { head, kids } : null;
+}
+function list3(p) {
+  if (p.home || p.outside) return '';
+  const f = familyOf(p);
+  if (!f) return '';
+  const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a></li>`;
+  return `<nav class="list3" aria-label="Pages of the family">
+  <ul>
+${f.kids.map(li).join('\n')}
   </ul>
 </nav>`;
 }
@@ -259,6 +277,7 @@ function apply(p, text) {
     if (!m) problems.push('no footer to replace');
     else t = t.replace(m[0], () => fence('footer', m[0]));
   }
+  t = t.replace(/<!-- shell:rail -->/g, '<!-- shell:layout -->').replace(/<!-- \/shell:rail -->/g, '<!-- /shell:layout -->');
   /* main, and the fenced opening of the layout (which holds the rail where there is one), once */
   if (!p.outside && !/<main id="main">/.test(t)) {
     const a = t.indexOf('</header>');
@@ -266,7 +285,7 @@ function apply(p, text) {
     if (a < 0 || b < 0) problems.push('no header or footer to wrap');
     else {
       const body = t.slice(a + '</header>'.length, b);
-      t = t.slice(0, a + '</header>'.length) + '\n\n' + fence('rail', '') + '\n<main id="main">' + body.replace(/\s+$/, '') + '\n</main>\n</div>\n\n' + t.slice(b);
+      t = t.slice(0, a + '</header>'.length) + '\n\n' + fence('layout', '') + '\n<main id="main">' + body.replace(/\s+$/, '') + '\n</main>\n</div>\n\n' + t.slice(b);
     }
   }
 
@@ -274,9 +293,9 @@ function apply(p, text) {
   const fill = (name, inner) => { t = t.replace(fenceRe(name), () => fence(name, inner)); };
   if (fenceRe('menu').test(t)) fill('menu', menu(p));
   if (!p.home && fenceRe('trail').test(t)) fill('trail', trail(p));
-  if (fenceRe('rail').test(t)) {
-    const r = rail(p);
-    fill('rail', `<div class="layout${r ? ' has-rail' : ''}">` + (r ? '\n' + r : ''));
+  if (fenceRe('layout').test(t)) {
+    const r = list3(p);
+    fill('layout', `<div class="layout${r ? ' has-list' : ''}">` + (r ? '\n' + r : ''));
   }
   if (fenceRe('footer').test(t)) {
     const fine = fineIn(fenceRe('footer').exec(t)[0]) || DEFAULT_FINE;
@@ -314,4 +333,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menu, trail, rail, footer };
+module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer };

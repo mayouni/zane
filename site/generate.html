@@ -6,11 +6,12 @@
 <title>Generate — how to hold an AI generator to the law</title>
 <meta name="description" content="Two layers: a grammar that fixes the shape of what a generator can write, and a court that refuses what the law forbids. This page says which layer holds what.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=19b21989">
+<link rel="stylesheet" href="stz.css?v=2c81e128">
 </head>
 <body>
 
 <!-- shell:menu -->
+<div class="bars">
 <nav class="site" aria-label="Main menu">
   <div class="wrap">
     <div class="menu">
@@ -28,6 +29,14 @@
     </div>
   </div>
 </nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="adopt.html">Adopt</a></li>
+    <li><a href="build.html">Build</a></li>
+    <li><a aria-current="page" href="generate.html">Generate</a></li>
+  </ul>
+</nav>
+</div>
 <!-- /shell:menu -->
 
 <header class="page">
@@ -42,16 +51,9 @@
   </div>
 </header>
 
-<!-- shell:rail -->
-<div class="layout has-rail">
-<nav class="rail" aria-label="Pages of the section">
-  <ul>
-    <li><a href="adopt.html">Adopt</a></li>
-    <li><a href="build.html">Build</a></li>
-    <li><a class="here" aria-current="page" href="generate.html">Generate</a></li>
-  </ul>
-</nav>
-<!-- /shell:rail -->
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
 <main id="main">
 
 <section>
@@ -124,10 +126,6 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
     <p>The law already says how an agent may act on an interface: it is a named actor under the same audit as a person, its output is a
     reviewable proposal, and what it produces is marked as machine-made. What is <b>not written</b> is the jurisdiction over the chat
     stream, and a surface that serves the law to an agent while it works. That is unchanged and held, and nothing on this site advances it.</p>
-    <div class="next">
-      <a href="build.html"><span class="label">Back</span>← Build</a>
-      <a href="adopt.html"><span class="label">Up</span>Which way in is yours →</a>
-    </div>
   </div>
 </section>
 </main>
@@ -148,7 +146,7 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6a53b578"></script>
+<script src="stz.js?v=51932dd5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>
