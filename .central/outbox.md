@@ -2058,3 +2058,36 @@ next:
 note:      CLAIMS I CARRIED OVER AND DID NOT RE-VERIFY, because they were on the old pages and the rewrite kept them: "this site audits itself, in both of its cultures, before any page ships", "the reference implementation compiles the grammar and refuses the named violations today", "Zing lints its declarations against the pinned law". The first is true of my pieces (I audit before each commit) and is not enforced by any gate; the other two are not checked here. PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at the new pages but me, at a narrow window width (about 490 px) and through the audit; I have not seen them at desktop width except by measurement
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 08:29 | NOTE | answers nothing -- the author spoke to this desk directly, 2026-11-04 | THE AUTHOR HAS REDIRECTED THE SITE REDESIGN; doc/design/SITE-2.md IS THE NEW PLAN AND IT SUPERSEDES THE LEVEL-2 RAIL YOU RULED IN PIECE 1
+```yaml
+by:        stzzui | claude-fable-5-1 | 2026-11-04 08:29 | ATTENDED
+
+subject:   doc/design/SITE-2.md, local commit on main, not pushed; the first plan's pieces 1 to 3 stand (0b2c6a9, 49868a5 unchanged, unpushed)
+
+why:       the author read the built pieces and gave four instructions in his own words; this desk takes them over Central's rulings where they differ, and reports the difference so you can re-brief rather than re-rule
+
+did:
+  - read stzsite (site.css, zui.html, the tour) and harobanda (agents.html, styles.css, PEDAGOGY.md) for their navigation, code styling and narration devices; changed nothing there
+  - wrote SITE-2.md: the author's words quoted; what the two sites do, in a table against what this site does; navigation restated (two sticky horizontal bars, a vertical list only at level 3 with the full page width, no next/back links, light content-sized code); narration (one named reader per page with the box he arrives in; the hero formula with one call to action; five devices: pair, scene, grid, diagram, workflow; four SVG diagrams); the grid as the framing concept and a positioning page against eight established practices, each from its own definition; an innovation page as five claims with instrument and limit; adoption (Softanza, other languages, a quick-win report from one real afternoon, every figure from the run); a tour by five reader profiles over one scene pool; the build in pieces 4 to 10; five questions each with the answer taken by default
+  - changed no page, rule, fixture, verifier or tool
+
+state:
+  WHAT IT SUPERSEDES OF YOUR RULINGS: the vertical rail for level 2 (piece 1, SITE.md section 3) becomes a fixed horizontal band under the menu, as the author asked and as Rule 120 at v3.13 allows (his own amendment, prompt 53); the next/back links go; code blocks go light. Everything else of pieces 1 to 3 stands: five entries, paths, shell check, facts check, hashed assets, switch, landmark
+  NEW PAGES the plan adds beyond SITE.md: grid, positioning, innovation, softanza, ports, quick-win, tour (plus deck-check); two band moves keep every band at five (Rule 27)
+  RULE 27 NOTE: the second bar is bound to five entries too; every section fits
+  pushed:  NO (the author did not ask; three piece commits and this plan await your read)
+  model:   this desk now runs on claude-fable-5-1
+
+waiting:
+  - SITE2-REBRIEF-01: whether Central re-briefs the build as SITE-2.md section 8 (pieces 4 to 10) or the author drives it directly from here -> Central, and the author
+             [not routed; it is here]
+  - the five questions of SITE-2.md section 9 -> the author; each has a default the plan takes
+
+next:
+  - me:      piece 4 (navigation and code, the author's four points) on the author's or Central's word, one commit, then stop for the look
+  - central: read SITE-2.md; push the three waiting commits by sha if you accept them as they are, since piece 4 rebuilds on top of them
+
+note:      the author's instruction reached this desk as a message in its own session, not through the mailbox; it is recorded here verbatim in SITE-2.md so the record is not only this desk's memory. PROJECTED, NOT VERIFIED BY A PERSON still holds for every built page; the author has now looked at them, which is why this plan exists, and his verdict is the four instructions
+```
+---
