@@ -150,29 +150,29 @@
           <td><b>React</b><br><a class="leaves" href="https://react.dev/learn" target="_blank" rel="noopener">react.dev</a></td>
           <td data-label="What it decides, and when">Presented as a way to build an app from components: JavaScript functions that return markup, nested, fed data as props and kept current by state. The page sets rules for writing a component (names, closed tags, where a hook may be called) and says nothing of accessibility.</td>
           <td data-label="What StzZui takes">The habit of describing a screen from data and state, and not commanding it.</td>
-          <td data-label="What StzZui adds">A declaration of what the person is doing, one level above the component tree. In what we read, a component tree cannot be asked whether the person can leave or undo.</td>
+          <td data-label="What StzZui adds">A declaration of what the person is doing, one level above the component tree. React documents lint rules for its own Rules of React; in what we read, none is about whether the person can leave or undo.</td>
         </tr>
         <tr>
           <td><b>SwiftUI</b><br><a class="leaves" href="https://developer.apple.com/documentation/swiftui" target="_blank" rel="noopener">Apple documentation</a>, <a class="leaves" href="https://developer.apple.com/swiftui/get-started/" target="_blank" rel="noopener">get started</a></td>
-          <td data-label="What it decides, and when">Described as a framework for declaring an app's interface and behavior on every Apple platform: the developer writes the outcome wanted, views are descriptions of the current state, and actions are still written imperatively.</td>
+          <td data-label="What it decides, and when">Described as declarative programming for an app's interface and behavior on every Apple platform: the developer writes the outcome wanted and SwiftUI builds the interface from it. (Apple's documentation pages build themselves in the browser, so this rests on its get-started page and its overview as search returns it.)</td>
           <td data-label="What StzZui takes">Writing the outcome and not the steps; the idea that a view describes a state.</td>
-          <td data-label="What StzZui adds">A statement of the intent behind the outcome, and a law that can refuse it. The pages we read describe no check of that kind.</td>
+          <td data-label="What StzZui adds">A statement of the intent behind the outcome, and a law that can refuse it. The SwiftUI pages we read describe no check of that kind; a WWDC session describes a separate accessibility audit that checks a rendered screen when tests run.</td>
         </tr>
         <tr>
           <td><b>Jetpack Compose</b><br><a class="leaves" href="https://developer.android.com/compose" target="_blank" rel="noopener">developer.android.com</a></td>
           <td data-label="What it decides, and when">Android's recommended toolkit for native interfaces: Kotlin functions describe what the screen should look like, and it updates when state changes. Its course covers accessibility and testing beside layout, theming and state.</td>
           <td data-label="What StzZui takes">Accessibility and testing placed beside the way a screen is built, not after it.</td>
-          <td data-label="What StzZui adds">Rules about what a person must be able to do, as data a tool can load before a screen exists.</td>
+          <td data-label="What StzZui adds">Compose documents accessibility checks that run in tests on a rendered interface (labels, contrast, touch-target size) and lint checks. StzZui adds rules about what a person must be able to do, as data a tool can load before a screen exists.</td>
         </tr>
         <tr>
           <td><b>Flutter</b><br><a class="leaves" href="https://flutter.dev" target="_blank" rel="noopener">flutter.dev</a></td>
-          <td data-label="What it decides, and when">Presented as an open-source framework for natively compiled apps on several platforms from one codebase, written in Dart. The page we read does not say how an interface is described in it.</td>
+          <td data-label="What it decides, and when">Presented as an open-source framework for natively compiled apps on several platforms from one codebase, written in Dart. The front page does not say how an interface is described in it; its documentation describes the framework as declarative.</td>
           <td data-label="What StzZui takes">One description carried to several platforms, which is the same ambition as one declaration for several channels.</td>
-          <td data-label="What StzZui adds">A refusal when a promise cannot be carried: a verb a platform or channel lacks is refused by name. Whether Flutter does anything of the kind, the page does not say.</td>
+          <td data-label="What StzZui adds">A refusal when a promise cannot be carried: a verb a platform or channel lacks is refused by name. Flutter's documentation offers accessibility guidelines for widget tests (contrast, target size, labels); none that we found refuses a promise a platform cannot keep.</td>
         </tr>
       </tbody>
     </table>
-    <p class="caption">What the pages we read say about checking is stated per row. React's page was the only one read in full; Apple's and Google's were read through their overviews and documentation search, and Flutter's front page does not describe its model.</p>
+    <p class="caption"><b>Checked by a second reading of the projects' documentation.</b> A second reader, started with only these rows and the projects' own links, marked each cell as agreeing, overstated or wrong. It found one overstated cell (SwiftUI's, whose claims went past the pages that could be read) and found that each framework's own documentation ships accessibility or lint checks that the first wording left out; the cells now say so. It is not a person who builds with these frameworks. Apple's documentation pages render in the browser, so that row still rests on an overview and a search; Compose's "Kotlin functions" clause was not independently confirmed.</p>
   </div>
 </section>
 
