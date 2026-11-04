@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The rules — one file, and how it changes</title>
+<meta name="description" content="What a rule in the constitution is made of, who can catch a violation of it today, and how the law changes: only from recorded evidence, with numbers that are never reused.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=13f24227">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="how.html">Language</a>
+    <a class="here" aria-current="true" href="why.html">Law</a>
+    <a href="media.html">Media</a>
+    <a href="audit.html">Audit</a>
+    <a href="adopt.html">Adopt</a>
+    </div>
+    <div class="culture" role="group" aria-label="Style: two equivalent cultures, the same truth read another way (Article VI). Keyboard: F2">
+      <span class="culture-label">Style</span>
+      <button type="button" class="seg" data-vibe-set="curator" aria-pressed="true">Modern</button>
+      <button type="button" class="seg" data-vibe-set="guardian" aria-pressed="false">Retro</button>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="why.html">Law</a></li>
+    <li><a aria-current="page" href="rules.html">The rules</a></li>
+    <li><a href="gotchas/">What a violation feels like</a></li>
+    <li><a href="vibes.html">Two cultures, one truth</a></li>
+    <li><a href="positioning.html">Positioning</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="why.html">Law</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The rules</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Law · for people who review an interface and cite what it breaks</p>
+    <h1>A rule says what to avoid, what to do instead, why, and what earned it a number.</h1>
+    <p class="sub">The law is one versioned file: <span data-law="rules">123</span> rules in <span data-law="sets">31</span> sets under <span data-law="articles">7</span> articles, v<span data-law="version">3.13</span>.
+    This page shows what one rule holds, how many of them a machine can refuse today, and how the law changes, which is only from recorded evidence.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="../constitution/reader/index.html">Open the Reader →</a>
+      <p class="note">All of it, rendered live from the same file.</p>
+    </div>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
+<main id="main">
+
+<section>
+  <div class="narrow">
+    <h2>One rule, as the tools load it</h2>
+    <p>Rule 79 is the one the verifier cited in <a href="refusal.html">What it refuses</a>. These are fields of its entry in the file, with the long solution text left out:</p>
+<pre class="excerpt" data-excerpt="constitution/rules.json"><span class="s">"number"</span>: <span class="s">"79"</span>,
+<span class="s">"title"</span>: <span class="s">"The Undo Covenant"</span>,
+<span class="s">"avoid"</span>: [
+  <span class="s">"Confirmation dialogs for every deletion"</span>,
+  <span class="s">"No way to reverse common destructive actions"</span>,
+…
+<span class="s">"why"</span>: <span class="s">"Undo trusts first and interrupts never; confirmation interrupts always and trusts nothing."</span>,
+<span class="s">"derived_from"</span>: <span class="s">"reversibility"</span>,
+<span class="s">"enforcement"</span>: <span class="s">"machine"</span>,
+<span class="s">"evidence"</span>: <span class="s">"v1.3 practice addition; narrative constitution Art. IV."</span>,</pre>
+    <ul>
+      <li><b>avoid</b> and a <b>solution</b> make it something a reviewer can decide yes or no.</li>
+      <li><b>why</b> and <b>derived_from</b> tie it to one of the <span data-law="articles">7</span> articles, here Reversibility, so a rule is a case of a principle and never a taste.</li>
+      <li><b>enforcement</b> says who can catch a violation today. Here it is <b>machine</b>: the verifier refuses a declaration with an act and no undo.</li>
+      <li><b>evidence</b> says what earned it a number. This one's is a general practice addition, not a defect recorded in a real build, which is a thinner pedigree; the file states it as it is.</li>
+    </ul>
+    <p>Because every consumer loads the same file, the Reader that renders the rule, the verifier that refuses for it and the finding that cites it cannot drift apart.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>Who can catch a violation, today</h2>
+    <p>Each rule declares one rung of an enforcement ladder, and rules climb as instruments are invented. The census is read from the file when the page loads.</p>
+    <table class="board">
+      <thead><tr><th>Rung</th><th>Rules</th><th>Share</th><th>Who catches it</th></tr></thead>
+      <tbody>
+        <tr><td><b>machine</b></td><td><span data-law="tier:machine">11</span></td><td><span data-law-share="machine">9%</span></td><td>A conforming compiler or linter refuses it, today.</td></tr>
+        <tr><td><b>tool</b></td><td><span data-law="tier:tool">7</span></td><td><span data-law-share="tool">6%</span></td><td>A runnable instrument measures it, such as the UI audit.</td></tr>
+        <tr><td><b>machine-later</b></td><td><span data-law="tier:machine-later">25</span></td><td><span data-law-share="machine-later">20%</span></td><td>It is decidable, and awaits its instrument.</td></tr>
+        <tr><td><b>judgment</b></td><td><span data-law="tier:judgment">80</span></td><td><span data-law-share="judgment">65%</span></td><td>A reviewer decides yes or no and cites the number.</td></tr>
+      </tbody>
+    </table>
+    <p>So most of the law waits on a person. That is the figure the project is built to move, and the page does not hide it: a rule that climbs a rung is the argument working, and one stuck at
+    <b>machine-later</b> is the law admitting an instrument is missing. These figures were typed by hand until August 2026 and had gone stale; they are computed now.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Rights and forbidden patterns</h2>
+    <p>Across the rules the law guarantees <span data-law="rights">6</span> operator rights, each traceable to the rules that serve it, and it names <span data-law="forbidden">17</span> forbidden patterns outright,
+    for instance selection that silently executes and a flow with no exit. A refusal cites them: <i>the right to leave</i> in the verifier's output is one of the six.
+    <a href="../constitution/reader/index.html">The Reader lists all of them</a>.</p>
+  </div>
+</section>
+
+<section class="alt" id="changes">
+  <div class="narrow">
+    <h2>How it changes</h2>
+    <p>The seventh article is Amendment. In its own words the law grows only from evidence of real use, operator feedback and documented failure, and a trend or a developer's convenience is not a ground.
+    Removing a protection needs proof that the harm is gone. In practice a change goes like this:</p>
+    <ol class="workflow">
+      <li><b>A defect is recorded when it happens.</b> The newest rules were canonized from defects found while building real applications, and the <a href="why.html#evidence">evidence table</a> names the latest eight.</li>
+      <li><b>It is kept only if it generalises and can be decided yes or no.</b> A rule that a reviewer could only argue about does not get a number.</li>
+      <li><b>It is numbered and placed in a set.</b> Retired numbers (<span data-fact="law.retired">5</span> so far) and burned ones (<span data-fact="law.burned">2</span>) are never reused, so a citation means the same thing for ever.</li>
+      <li><b>The version moves and the pack's hash with it.</b> A consumer that pins the <a href="conformance.html">pack</a> sees the change as a different hash, and one trailing space in the file is a different hash too.</li>
+      <li><b>Its tier is stated, and may climb.</b> A rule declares who can catch it today and moves up when an instrument is invented: Rule 107 began as judgment and is now machine-checked, and Rule 62 became a tool rule once a runnable contrast check existed.</li>
+    </ol>
+    <p>The record of passes is in <a href="../doc/AMENDMENT-DOCKET.md">the amendment docket</a> and the lineage line of <a href="../constitution/rules.json"><code>rules.json</code></a>. The most recent change, to v<span data-law="version">3.13</span>,
+    is what allowed this site's navigation to have two horizontal levels.</p>
+    <p class="limit"><b>Limit:</b> this describes how the project's own law has changed, and it was ruled by the project. It is not a process that other teams have used, and nothing here shows that anyone outside it has proposed an amendment.</p>
+  </div>
+</section>
+</main>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../constitution/reader/index.html">Reader</a>
+        <a href="../tools/ui-audit.html">UI audit</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+      </div>
+    </div>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=51932dd5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

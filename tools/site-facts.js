@@ -36,6 +36,8 @@ function derive(prev) {
   put('law.rules', rules.length, 'constitution/rules.json');
   put('law.version', law.metadata.version, 'constitution/rules.json metadata.version');
   put('law.articles', Object.keys(law.articles).length, 'constitution/rules.json articles');
+  put('law.retired', (Array.isArray(law.retired) ? law.retired.length : Object.keys(law.retired).length), 'constitution/rules.json retired');
+  put('law.burned', (Array.isArray(law.burned) ? law.burned.length : Object.keys(law.burned).length), 'constitution/rules.json burned');
   put('law.rights', Object.keys(law.rights).length, 'constitution/rules.json rights');
   put('law.forbidden', law.forbidden.length, 'constitution/rules.json forbidden');
   put('law.sets', sets.length, 'constitution/rules.json set*');
@@ -238,11 +240,12 @@ function verifyStatuses(problems) {
 
 // ---- the typed numbers outside any span (informational) -----------------------------------------------------
 function unchecked(html) {
+  html = html.replace(/<a [^>]*#rule-\d+[^>]*>\d+<\/a>/g, ' ');
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')
     .replace(/<([a-z0-9]+)\b[^>]*?\sdata-(law-share|law|fact)="[^"]*"[^>]*>[^<]*<\/\1>/g, ' ');
   t = t.replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/g, ' ');
   /* a rule number is a name, not a measured figure: "Rules 79, 26 and 51"; so is a version of another body's document: "WCAG 2.0 to 2.2", "UIML 4.0" */
-  t = t.replace(/Rules?\s+\d+(?:\s*(?:,|and|to|-)\s*\d+)*/g, ' ').replace(/\b(?:WCAG|UIML|ISO(?:\/IEC)?)\s+[\d.]+(?:\s+to\s+[\d.]+)?/g, ' ');
+  t = t.replace(/Rules?\s+\d+(?:\s*(?:,|and|to|through|-|\u2013)\s*\d+)*/g, ' ').replace(/\b(?:WCAG|UIML|ISO(?:\/IEC)?)\s+[\d.]+(?:\s+to\s+[\d.]+)?/g, ' ');
   const found = [];
   const re = /(?<![\w.#/-])(\d{2,}|\d+\.\d+)(?![\w.:/-])/g;
   let m;
