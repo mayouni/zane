@@ -2253,3 +2253,42 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has read the Positioning rows against their sources but me, through search results and fetched pages, some of them paraphrased by a fetch tool before I read them. Treat a row as my reading of a source, with its link beside it for you to check. The audit cannot see whether a paraphrase is fair
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 18:34 | NOTE | answers Central's NOTE of 2026-11-04 17:30 (the Principal's first look) | THE LICENCE IS 02BE226, SITE-3.MD IS 99F0887, BINARY.MD IS 0A1A7D3; THE BUILD IS PAUSED AS ORDERED; STOPPED FOR YOUR READ
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 18:34 | ATTENDED
+
+subject:   LICENSE (02be226), doc/design/SITE-3.md with a front-page mock and the author's photograph (99f0887), doc/design/BINARY.md (0a1a7d3), local on main, not pushed. No page of the site changed
+
+why:       the Principal's sixteen points of 2026-11-04, and your order: finish the status-row commit (already 7f801ab), SITE-3.md, BINARY.md, each its own commit, then stop
+
+did:
+  - LICENSE: the MIT text, Copyright (c) 2026 Mansour Ayouni, own commit, his words quoted in the message
+  - SITE-3.md: answers his bullets by number. YOUR HEADER SAYS SEVENTEEN; THE NOTE HAS SIXTEEN BULLETS, and the document says so and asks for the missing one. Front page proposed as a photograph, one title on two lines, one action (a real refusal, which needs no install), six messages and a present-it strip; the mock is 2.6 screens at 1280. Five entries proposed: Approach, Language, Law, Use, Try ("Try" for your "Tools", with the reason; "Tools" is acceptable); every band at five or fewer; the map of all 35 pages with the one bar each sits on; the Reader in Law's band; the check that fails a page off the bars and a footer link to a page the bars do not list; the left section list at four h2 or more (seven pages today); the style select in the footer; "Channels" accepted; the new pages each against a reader; piece order A to E
+  - THE PHOTOGRAPH is copied to site/assets/ (382,022 bytes, sha256 bbf131a9...c9780) with its provenance in the mock's comment. Measured in a browser: the brightest pixel in the panel region is pure white, so a panel at 0.71 gives 7:1 and the mock's 0.80 gives about 10:1
+  - THE BUTTON, YOUR QUESTION: today it is 4.94:1 (dark text on pink). The audit computed it correctly: it reported 2.23:1 on this very button when a header rule overrode its colour, and passed 4.94 afterwards. The finding is about the bar and not the arithmetic: 4.5 is the failing floor (Rule 105 itself says long-form prose aims for 7:1). Proposed: every primary button at 7:1 or more (white on a darker ground gives 8.7 to 10.6) and an audit strict-mode check, interactive text under 7:1. That is a tool change; whether 7:1 for controls becomes a rule is the Principal's
+  - THE WALK ("etc!!!"): from the front page as each of the seven readers, two paths are dead ends today: Media and Audit are stubs. None of the five tour profiles has a path, because there is no tour. Ten more gaps listed in order (names, what it needs to run, the invisible design documents, no "get it", no about or contact, English only, no search, the Reader's different world)
+  - BINARY.md, design only: one Zig executable (check, conformance, pack, cross-medium, audit-facts, serve with an --app mode that serves a person's application beside the UI audit, which removes the audit's same-origin obstacle) and a wasm build of the same core. The Node dependence is thin: one pure 730-line core and about 1,600 lines of file handling, using only fs, path and crypto. Six stages with gates; parity as byte-identical envelopes on the 73 fixtures and a seeded corpus, not only matching verdicts; the Haro judge gains a third column; budgets (1.5 MB without the site, 4 MB with it, 150 KB wasm) to be measured and not claimed; Windows verified, macOS built and not run
+
+state:
+  site:          unchanged: audit 0 on 24 pages (last run), site-shell and site-facts ok, pack verified, conformance 73 of 73 (not re-run after the documents, which touch no page)
+  the mock:      doc/design/mock/front-3.html, opened at 1280 and at 375 (no sideways scroll); the title is two lines at 1280 and three at 375
+  pushed:        NO
+
+waiting:
+  - SITE3-RULINGS-01: the seven items of SITE-3 section 9 (the five entries and "Try"; the Reader taking the shell; 7:1 for buttons; the mobile case; French; stzsite's navigation as the web case; the missing seventeenth point) -> Central, then the Principal
+             [not routed; it is here]
+  - BINARY-RULINGS-01: the nine items of BINARY.md section 11. THE ONE I CANNOT DECIDE: Zing's cli/src/check.zig is already a Zig checker of the law (449 lines, pinned at 3.11). I propose an independent third evaluator and sharing nothing but the pack; if Central would rather the two converge, that needs Zing's desk -> Central
+             [not routed; it is here]
+  - BINARY-COURT-01: you list "the court" among what the binary hosts. I read it as the verifier. The Haro-forged court needs a Haro runtime in Zig and stays on rnxc. Say if you meant the forged court -> Central
+             [not routed; it is here]
+  - SITE3-LOOK-01: the Principal opens the mock (serve the repository root, open doc/design/mock/front-3.html, F2 for Retro) before anything is built -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing until you rule; then piece A of SITE-3 and, in parallel on its own worktree if you want it, S1 of BINARY.md
+  - central: read SITE-3.md and BINARY.md, rule, bring the Principal the mock
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the front page exists as a mock that nobody but me has looked at, through two screenshots and measurements. The audit cannot see whether it is the page he wants, and the binary's budgets are targets and not measurements
+```
+---
