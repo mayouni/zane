@@ -217,6 +217,25 @@ function verifyCommands(problems) {
   return n;
 }
 
+// ---- a status word is one of three -------------------------------------------------------------------------
+/* <td class="status WORD">WORD</td>: the class and the word must agree and must be exists, designed or held. The truth of a word cannot be
+   checked; its vocabulary can, so a fourth word cannot appear beside the mark that goes with each of the three. */
+function verifyStatuses(problems) {
+  let n = 0;
+  for (const p of pages()) {
+    const html = fs.readFileSync(R(p), 'utf8').replace(/\r\n/g, '\n');
+    const re = /<(\w+)\b[^>]*\bclass="status([^"]*)"[^>]*>([^<]*)<\/\1>/g;
+    let m;
+    while ((m = re.exec(html))) {
+      n++;
+      const cls = m[2].trim(), word = m[3].trim();
+      if (!['exists', 'designed', 'held'].includes(word)) problems.push(p + ': the status word "' + word + '" is not one of exists, designed, held');
+      else if (cls !== word) problems.push(p + ': the status "' + word + '" carries the class "' + cls + '", so its mark would be wrong');
+    }
+  }
+  return n;
+}
+
 // ---- the typed numbers outside any span (informational) -----------------------------------------------------
 function unchecked(html) {
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')
@@ -274,7 +293,8 @@ function main(argv) {
   const ninety = verifyRuns(problems);
   const excerpts = verifyExcerpts(problems);
   const commands = verifyCommands(problems);
-  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; excerpts checked against their files: ${excerpts}`);
+  const statuses = verifyStatuses(problems);
+  console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; status words checked: ${statuses}; excerpts checked against their files: ${excerpts}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);
   if (listUnchecked) per.forEach(l => console.log('  ' + l));
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }
