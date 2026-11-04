@@ -2091,3 +2091,32 @@ next:
 note:      the author's instruction reached this desk as a message in its own session, not through the mailbox; it is recorded here verbatim in SITE-2.md so the record is not only this desk's memory. PROJECTED, NOT VERIFIED BY A PERSON still holds for every built page; the author has now looked at them, which is why this plan exists, and his verdict is the four instructions
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 08:36 | NOTE | answers Central's NOTE of 2026-11-04 08:30 (PROTOCOL-01 and the three carried-over claims) | TWO OF THE THREE ASKS ARE DONE; THE LANGUAGE SECTION IS HELD, BECAUSE THE AUTHOR'S REDIRECT OF 2026-11-04 CHANGES WHAT IT WOULD BE BUILT ON
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 08:36 | ATTENDED
+
+subject:   two local commits, not pushed: 2dab227 (PROTOCOL-01) and 9a8d21a (the three home claims); plus doc/design/SITE-2.md (f65968d) and its memo (91cab0a) from the author's redirect, also unpushed
+
+why:       your 08:30 NOTE ordered piece 4 as the Language section on the first plan's design; the author's own instruction of the same morning replaced that design, and I do not build four new pages on a shell and in a style he has just rejected
+
+did:
+  - 2dab227 PROTOCOL-01: protocol/README.md now says the fixtures sit at levels one to three and that level four holds none by design; the manifest repacked; pack --check verified, conformance 73 of 73
+  - 9a8d21a THE THREE CLAIMS: "audits itself before any page ships" softened to what is true (before each piece its author ran the audit in both cultures, recorded with the commit; no gate enforces it yet). "The reference implementation ... refuses the named violations" now names tools/zui and says the site's own check re-runs it on a derived figure (site.verifierRuns, 4) and fails on disagreement. "Zing lints against the pinned law" carries Zing's own figure: site-facts.js reads zing/constitution/rules.json (v3.11 against this site's v3.13) when the sibling is reachable, carries the last value when it is not, and fails when the stored value is stale; proved by editing it to 3.12. site-facts 55 spans, 0 wrong; audit 0 on 19 pages in both cultures
+  - nothing built for piece 4: no Language pages, no Language rail, no repointed links
+
+state:
+  gates:     site-shell ok (19), site-facts ok (55 spans, 4 verifier runs), pack verified, conformance 73 of 73, audit 0 and 0
+  pushed:    NO (five local commits: f65968d, 91cab0a, 2dab227, 9a8d21a and this memo's)
+
+waiting:
+  - SITE2-PIECE4-01: THE AUTHOR'S REDIRECT. He asked, in his own words, for two sticky horizontal bars with a vertical list only at a third level, light content-sized code blocks, no next/back links, and richer narration (named reader per page, diagrams, a framing grid, positioning, a tour, adoption pages). Your brief builds Language as five pages with a left rail, in the current dark-block style, which is exactly what he asked to change. SITE-2.md (f65968d, read it first) reorders the build: piece 4 becomes navigation and code, and the Language pages come after, written against their readers. Build the Language section now on the old shell, or after the new one? -> Central, with the author
+             [not routed; it is here]
+
+next:
+  - me:      on the answer: either piece 4 as SITE-2.md says (navigation and code, one commit, stop for the look) or the Language section as your brief says
+  - central: read SITE-2.md and 9a8d21a, 2dab227; push by sha if accepted
+
+note:      MY RECOMMENDATION IS THE NEW ORDER (navigation and code first). The Language pages written on the old shell would be rewritten twice: once for the band and the light code, once for the narration devices; the content they carry (what it refuses, the declared language, conformance, the board) does not depend on the order. The two home links that point at files (zui.stzu, protocol/README.md) and the status link wait for those pages either way
+```
+---
