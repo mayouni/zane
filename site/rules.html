@@ -6,7 +6,7 @@
 <title>The rules — one file, and how it changes</title>
 <meta name="description" content="What a rule in the constitution is made of, who can catch a violation of it today, and how the law changes: only from recorded evidence, with numbers that are never reused.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c73dd23b">
+<link rel="stylesheet" href="stz.css?v=534fc5a5">
 </head>
 <body>
 
@@ -52,13 +52,24 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#one-rule-as-the-tools-load-it">One rule, as the tools load it</a></li>
+      <li><a href="#who-can-catch-a-violation-today">Who can catch a violation, today</a></li>
+      <li><a href="#rights-and-forbidden-patterns">Rights and forbidden patterns</a></li>
+      <li><a href="#changes">How it changes</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2>One rule, as the tools load it</h2>
+    <h2 id="one-rule-as-the-tools-load-it">One rule, as the tools load it</h2>
     <p>Rule 79 is the one the verifier cited in <a href="refusal.html">What it refuses</a>. These are fields of its entry in the file, with the long solution text left out:</p>
 <pre class="excerpt" data-excerpt="constitution/rules.json"><span class="s">"number"</span>: <span class="s">"79"</span>,
 <span class="s">"title"</span>: <span class="s">"The Undo Covenant"</span>,
@@ -82,7 +93,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2>Who can catch a violation, today</h2>
+    <h2 id="who-can-catch-a-violation-today">Who can catch a violation, today</h2>
     <p>Each rule declares one rung of an enforcement ladder, and rules climb as instruments are invented. The census is read from the file when the page loads.</p>
     <table class="board">
       <thead><tr><th>Rung</th><th>Rules</th><th>Share</th><th>Who catches it</th></tr></thead>
@@ -100,7 +111,7 @@
 
 <section>
   <div class="narrow">
-    <h2>Rights and forbidden patterns</h2>
+    <h2 id="rights-and-forbidden-patterns">Rights and forbidden patterns</h2>
     <p>Across the rules the law guarantees <span data-law="rights">6</span> operator rights, each traceable to the rules that serve it, and it names <span data-law="forbidden">17</span> forbidden patterns outright,
     for instance selection that silently executes and a flow with no exit. A refusal cites them: <i>the right to leave</i> in the verifier's output is one of the six.
     <a href="../constitution/reader/index.html">The Reader lists all of them</a>.</p>
@@ -149,7 +160,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6bb13859"></script>
+<script src="stz.js?v=57039fc5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

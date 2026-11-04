@@ -6,7 +6,7 @@
 <title>Generate — how to hold an AI generator to the law</title>
 <meta name="description" content="Two layers: a grammar that fixes the shape of what a generator can write, and a court that refuses what the law forbids. This page says which layer holds what.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c73dd23b">
+<link rel="stylesheet" href="stz.css?v=534fc5a5">
 </head>
 <body>
 
@@ -47,13 +47,25 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#a-declaration-the-grammar-allows-and-the">A declaration the grammar allows and the law refuses</a></li>
+      <li><a href="#the-grammar-holds-the-shape">The grammar holds the shape</a></li>
+      <li><a href="#a-loop-you-can-run-today">A loop you can run today</a></li>
+      <li><a href="#feel-what-the-law-forbids-first">Feel what the law forbids first</a></li>
+      <li><a href="#what-is-not-written">What is not written</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2>A declaration the grammar allows and the law refuses</h2>
+    <h2 id="a-declaration-the-grammar-allows-and-the">A declaration the grammar allows and the law refuses</h2>
     <p>An AI asked to build a business interface reproduces the habits it was trained on, politely and at machine speed.
     Make it declare intent first, and the intent can be checked before anything is drawn. Here is a declaration in which
     every clause is one the language has; the law still refuses the flow:</p>
@@ -76,7 +88,7 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
 
 <section class="alt">
   <div class="narrow">
-    <h2>The grammar holds the shape</h2>
+    <h2 id="the-grammar-holds-the-shape">The grammar holds the shape</h2>
     <p>The language is declared in Haro, and the forge writes from that declaration a grammar a decoder can be held to. It is
     checked in as <a href="../haro/zui.gbnf"><code>haro/zui.gbnf</code></a>, a few kilobytes of GBNF, the notation grammar-constrained
     decoders accept.</p>
@@ -94,7 +106,7 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
 
 <section>
   <div class="narrow">
-    <h2>A loop you can run today</h2>
+    <h2 id="a-loop-you-can-run-today">A loop you can run today</h2>
     <p>With any capable assistant: put the law in its context, instruct it to declare each surface in <code>.zui</code> before rendering it,
     run the verifier, and hand it the findings by rule number:</p>
 <pre class="term"><span class="p">You are building under the Zui Constitution (rules.json attached).</span>
@@ -109,7 +121,7 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
 
 <section class="alt">
   <div class="narrow">
-    <h2>Feel what the law forbids first</h2>
+    <h2 id="feel-what-the-law-forbids-first">Feel what the law forbids first</h2>
     <p>The defects a generator reproduces have rules behind them. <a href="gotchas/">What a violation feels like</a> lets you commit each
     family of offence yourself, safely fenced, each beside its lawful twin, before you ask a model to avoid them.</p>
   </div>
@@ -117,7 +129,7 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
 
 <section>
   <div class="narrow">
-    <h2>What is not written</h2>
+    <h2 id="what-is-not-written">What is not written</h2>
     <p>The law already says how an agent may act on an interface: it is a named actor under the same audit as a person, its output is a
     reviewable proposal, and what it produces is marked as machine-made. What is <b>not written</b> is the jurisdiction over the chat
     stream, and a surface that serves the law to an agent while it works. That is unchanged and held, and nothing on this site advances it.</p>
@@ -149,7 +161,7 @@ pick.zui:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPS
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6bb13859"></script>
+<script src="stz.js?v=57039fc5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

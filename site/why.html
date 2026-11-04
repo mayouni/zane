@@ -6,7 +6,7 @@
 <title>Why a law — the case, and where it is weak</title>
 <meta name="description" content="Why interface guidelines alone did not hold, what a law stored as data changes, the evidence from real builds that earned each recent rule, and what a law cannot do.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c73dd23b">
+<link rel="stylesheet" href="stz.css?v=534fc5a5">
 </head>
 <body>
 
@@ -52,13 +52,27 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#the-decay-you-already-know">The decay you already know</a></li>
+      <li><a href="#what-the-record-shows">What the record shows</a></li>
+      <li><a href="#what-changes-when-the-law-is-data">What changes when the law is data</a></li>
+      <li><a href="#what-a-law-cannot-do">What a law cannot do</a></li>
+      <li><a href="#the-story-a-year-of-building-with-ai">The story: a year of building with AI</a></li>
+      <li><a href="#evidence">The evidence</a></li>
+      <li><a href="#the-stance">The stance</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2>The decay you already know</h2>
+    <h2 id="the-decay-you-already-know">The decay you already know</h2>
     <p>You have used this software. Small faint text you lean into. Buttons
     labeled "OK" that do not say what they will do. A chat launcher floating
     over the paragraph you were reading. A breadcrumb that shows where you came
@@ -74,7 +88,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2>What the record shows</h2>
+    <h2 id="what-the-record-shows">What the record shows</h2>
     <p>The law in this project was not written in a seminar room. Its newest rules were extracted, defect by defect, from real applications built with AI assistance in 2026, each correction recorded when it was made and
     kept only if it generalised and a reviewer could decide it yes or no. Rules 105 to 124 each come from such a defect, and the table further down names the newest eight.</p>
     <p>The working thesis is a narrow one: in those builds, a generator reproduced the inherited conventions quickly and confidently, under an instruction to be careful, because nothing it was given had the standing to
@@ -85,7 +99,7 @@
 
 <section>
   <div class="narrow">
-    <h2>What changes when the law is data</h2>
+    <h2 id="what-changes-when-the-law-is-data">What changes when the law is data</h2>
     <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the Positioning page</a> says where each stops. What a guideline cannot do alone is say no to a build.
     Storing the law as one versioned file changes that in five ways, and each one can be checked:</p>
     <table class="board">
@@ -105,7 +119,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2>What a law cannot do</h2>
+    <h2 id="what-a-law-cannot-do">What a law cannot do</h2>
     <ul>
       <li><b>Most of it waits on a person.</b> Only <span data-law="tier:machine">11</span> of the <span data-law="rules">123</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> need a reviewer's judgment.</li>
       <li><b>It does not tell you the page is pleasant.</b> The verifier checks a declaration and the audit checks what was painted. Whether a person finds it usable is for usability testing, which nothing here replaces.</li>
@@ -117,7 +131,7 @@
 
 <section>
   <div class="narrow">
-    <h2>The story: a year of building with AI</h2>
+    <h2 id="the-story-a-year-of-building-with-ai">The story: a year of building with AI</h2>
     <p class="lead">Every correction below was recorded at the moment it was made, then canonized only if it generalised and could be decided
     yes or no by a reviewer.</p>
     <p><b>the banking product</b> (April 2026) — a full agentic banking platform, built
@@ -166,7 +180,7 @@
 
 <section>
   <div class="narrow">
-    <h2>The stance</h2>
+    <h2 id="the-stance">The stance</h2>
     <p>Opinionated, and openly so: <b>business applications first</b>.
     Operators, not explorers — people who use the same screens eight hours a
     day under pressure, responsibility, and fatigue. Consumer-site delight is
@@ -205,7 +219,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6bb13859"></script>
+<script src="stz.js?v=57039fc5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

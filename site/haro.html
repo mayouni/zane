@@ -6,7 +6,7 @@
 <title>Declared in Haro — the language as data</title>
 <meta name="description" content="StzZui is written a second time as a declaration in Haro, from which a court and a decoder grammar are forged. The forged court is run against the same suite as the verifier; where the two differ, each difference is named, counted and held by a ratchet.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c73dd23b">
+<link rel="stylesheet" href="stz.css?v=534fc5a5">
 </head>
 <body>
 
@@ -53,13 +53,24 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#the-same-offence-declared">The same offence, declared</a></li>
+      <li><a href="#two-courts-one-suite">Two courts, one suite</a></li>
+      <li><a href="#where-the-two-differ-in-three-classes">Where the two differ, in three classes</a></li>
+      <li><a href="#a-grammar-a-generator-can-be-held-to">A grammar a generator can be held to</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2>The same offence, declared</h2>
+    <h2 id="the-same-offence-declared">The same offence, declared</h2>
     <p>The verifier refused a wizard that cannot be left, citing two rules, an article and a right. In the declaration the same offence is one constraint: where it applies,
     the condition that makes it an offence, the sentence, the stable code, and what it cites. It is written from the contract, and the court speaks that code.</p>
 <pre class="excerpt" data-excerpt="haro/zui.stzu"><span class="k">DEFINE CONSTRAINT</span> <span class="n">trapped_flow_wizard</span> <span class="k">AS</span> (
@@ -75,7 +86,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2>Two courts, one suite</h2>
+    <h2 id="two-courts-one-suite">Two courts, one suite</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 300" style="min-width:780px" role="img" aria-labelledby="two-t two-d">
@@ -114,7 +125,7 @@
 
 <section>
   <div class="narrow">
-    <h2>Where the two differ, in three classes</h2>
+    <h2 id="where-the-two-differ-in-three-classes">Where the two differ, in three classes</h2>
     <table class="board">
       <thead><tr><th>Class</th><th>Files</th><th>What it means</th><th>Why, by seam</th></tr></thead>
       <tbody>
@@ -132,7 +143,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2>A grammar a generator can be held to</h2>
+    <h2 id="a-grammar-a-generator-can-be-held-to">A grammar a generator can be held to</h2>
     <p>The same declaration yields <a href="../haro/zui.gbnf"><code>haro/zui.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4043</span> bytes of GBNF, the notation grammar-constrained decoders read.
     It fixes the shape of a declaration: the <span data-fact="gbnf.kinds">10</span> kinds, the clauses each kind may carry, and the lexical form. It does not fix the verbs or the values, and it
     cannot refuse an offence such as the wizard above, which is well formed and wrong. The court does that, so a generator held to the grammar still has to pass the verifier.
@@ -165,7 +176,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6bb13859"></script>
+<script src="stz.js?v=57039fc5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

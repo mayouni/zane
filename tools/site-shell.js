@@ -154,21 +154,64 @@ ${items}
   </ul>
 </nav>`;
 }
-/* Level 3: a vertical list on the left, only where a page has a family; the page then takes the full width. */
+/* Level 3: a vertical list on the left, where a page has a family or four or more sections; the page then takes the full width.
+   The sections are the page's own h2, read from the page by this file, which gives each one an id when it has none, so the list cannot
+   disagree with the page (SITE-3.md section 4). Where a page is in a family, the family is the list and its sections nest under its entry. */
 function familyOf(p) {
   const head = p.parent ? by.get(p.parent) : p;
   const kids = PAGES.filter(q => q.parent === head.file);
   return kids.length ? { head, kids } : null;
 }
-function list3(p) {
+const SECTION_MIN = 4;
+const slug = (text, taken) => {
+  let base = text.toLowerCase().replace(/&[a-z#0-9]+;/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40).replace(/-+$/, '') || 'section';
+  let id = base, n = 2;
+  while (taken.has(id)) id = base + '-' + n++;
+  taken.add(id);
+  return id;
+};
+const plain = h => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+/* the h2 of a page's main, each with the id it is reached by: the id of its own section where that has one, else its own */
+function sectionsOf(t) {
+  const a = t.indexOf('<main id="main">'), b = t.indexOf('</main>');
+  if (a < 0 || b < 0) return { text: t, list: [] };
+  let body = t.slice(a, b);
+  const taken = new Set([...t.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]));
+  const list = [];
+  let lastSection = null;
+  body = body.replace(/<section\b([^>]*)>|<h2\b([^>]*)>([\s\S]*?)<\/h2>/g, (m, secAttrs, attrs, inner) => {
+    if (secAttrs !== undefined) { const i = /\sid="([^"]+)"/.exec(secAttrs); lastSection = i ? i[1] : null; return m; }
+    const own = /\sid="([^"]+)"/.exec(attrs);
+    let id = own ? own[1] : lastSection;
+    let out = m;
+    if (!id) { id = slug(plain(inner), taken); out = '<h2' + attrs + ' id="' + id + '">' + inner + '</h2>'; }
+    list.push({ id, label: plain(inner) });
+    lastSection = null;
+    return out;
+  });
+  return { text: t.slice(0, a) + body + t.slice(b), list };
+}
+function list3(p, secs) {
   if (p.home || p.outside) return '';
   const f = familyOf(p);
-  if (!f) return '';
-  const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a></li>`;
-  return `<nav class="list3" aria-label="Pages of the family">
+  const own = secs && secs.length >= SECTION_MIN ? secs : null;
+  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
+  if (f) {
+    const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>${q === p ? subs : ''}</li>`;
+    return `<nav class="list3" aria-label="Pages of the family">
   <ul>
 ${f.kids.map(li).join('\n')}
   </ul>
+</nav>`;
+  }
+  if (!own) return '';
+  return `<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+${own.map(x => `      <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}
+    </ul>
+  </details>
 </nav>`;
 }
 const REPO = 'https://github.com/mayouni/stzzui';
@@ -316,12 +359,16 @@ function apply(p, text) {
     }
   }
 
+  /* ---- the sections of a page get ids, and the list is made from them ---- */
+  let secs = [];
+  if (!p.home && !p.outside) { const r = sectionsOf(t); t = r.text; secs = r.list; }
+
   /* ---- render ---- */
   const fill = (name, inner) => { t = t.replace(fenceRe(name), () => fence(name, inner)); };
   if (fenceRe('menu').test(t)) fill('menu', menu(p));
   if (!p.home && fenceRe('trail').test(t)) fill('trail', trail(p));
   if (fenceRe('layout').test(t)) {
-    const r = list3(p);
+    const r = list3(p, secs);
     fill('layout', `<div class="layout${r ? ' has-list' : ''}">` + (r ? '\n' + r : ''));
   }
   if (fenceRe('footer').test(t)) {

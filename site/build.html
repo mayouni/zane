@@ -6,7 +6,7 @@
 <title>Build — put the law in a project and gate your CI</title>
 <meta name="description" content="Declare before you draw, pin the law as a hash, fail the build on a refusal, and measure what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c73dd23b">
+<link rel="stylesheet" href="stz.css?v=534fc5a5">
 </head>
 <body>
 
@@ -47,13 +47,26 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#declare-before-you-draw">Declare before you draw</a></li>
+      <li><a href="#pin-the-law-as-a-hash-not-only-a-version">Pin the law as a hash, not only a version</a></li>
+      <li><a href="#fail-the-build-on-a-refusal">Fail the build on a refusal</a></li>
+      <li><a href="#measure-the-paint">Measure the paint</a></li>
+      <li><a href="#amend-with-evidence">Amend with evidence</a></li>
+      <li><a href="#what-is-not-here-yet">What is not here yet</a></li>
+    </ul>
+  </details>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2>Declare before you draw</h2>
+    <h2 id="declare-before-you-draw">Declare before you draw</h2>
     <p>Before wireframes harden, write the surface's <code>.zui</code> declaration: which intents it
     satisfies, what stays always reachable. A few minutes of declaration replaces a meeting of taste:
     the design review reads <code>SATISFIES [SELECT, CONFIRM, ACT]</code> and asks one question,
@@ -82,7 +95,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 
 <section class="alt">
   <div class="narrow">
-    <h2>Pin the law as a hash, not only a version</h2>
+    <h2 id="pin-the-law-as-a-hash-not-only-a-version">Pin the law as a hash, not only a version</h2>
     <p><b>A version says which edition you meant. A hash says the bytes you hold are that edition.</b> Vendor the
     files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
     proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
@@ -95,7 +108,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 
 <section>
   <div class="narrow">
-    <h2>Fail the build on a refusal</h2>
+    <h2 id="fail-the-build-on-a-refusal">Fail the build on a refusal</h2>
     <p>The verifier exits non-zero when any declaration is refused, and zero when there are only warnings. Run it
     over your specifications in CI:</p>
 <pre class="term"><span class="dim">$ node tools/zui/cli.js check specs/*.zui</span>
@@ -109,7 +122,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 
 <section class="alt">
   <div class="narrow">
-    <h2>Measure the paint</h2>
+    <h2 id="measure-the-paint">Measure the paint</h2>
     <p>Declaring is not enough: a page can be lawful on paper and unlawful in the browser. Serve your application and
     point <a href="../tools/ui-audit.html">the UI audit</a> at it, one path per line, any same-origin pages; nothing
     leaves your browser. It measures what static analysis cannot see: computed text sizes, true contrast against the
@@ -123,7 +136,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 
 <section>
   <div class="narrow">
-    <h2>Amend with evidence</h2>
+    <h2 id="amend-with-evidence">Amend with evidence</h2>
     <p>The law grows one way only (Article VII): real usage, operator feedback, documented failure. If your project hits a
     recurring defect the law does not name, record it as the law records its own: what happened, where, how it was
     corrected, why it generalizes, and whether a reviewer could decide it yes or no. Every rule carries an <code>evidence</code>
@@ -134,7 +147,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 
 <section class="alt">
   <div class="narrow">
-    <h2>What is not here yet</h2>
+    <h2 id="what-is-not-here-yet">What is not here yet</h2>
     <p>Stated as held or designed, not as promised.</p>
     <ul>
       <li><b>Cross-pillar symbols are not computed.</b> The verifier accepts a symbol table you supply; building one from a host
@@ -174,7 +187,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=6bb13859"></script>
+<script src="stz.js?v=57039fc5"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

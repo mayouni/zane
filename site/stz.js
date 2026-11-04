@@ -22,6 +22,23 @@
   const bars = document.querySelector('.bars');
   function pin() { if (bars) html.style.setProperty('--bars-h', Math.round(bars.getBoundingClientRect().height) + 'px'); }
   pin(); window.addEventListener('resize', pin); window.addEventListener('load', pin);
+  /* the left list of a long page: the section being read is marked (aria-current, which the stylesheet draws as weight, a rule and an
+     underline, never colour alone); on a narrow screen the list starts closed */
+  const secLinks = [...document.querySelectorAll('nav.list3 a[href^="#"]')];
+  if (secLinks.length) {
+    const box = document.querySelector('nav.list3.sections details');
+    if (box && window.matchMedia('(max-width: 860px)').matches) box.open = false;
+    const targets = secLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    const mark = () => {
+      const line = (parseInt(getComputedStyle(html).getPropertyValue('--bars-h'), 10) || 100) + 24;
+      let cur = targets[0];
+      targets.forEach(el => { if (el.getBoundingClientRect().top <= line) cur = el; });
+      secLinks.forEach(a => {
+        if (cur && a.getAttribute('href') === '#' + cur.id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    };
+    mark(); window.addEventListener('scroll', mark, { passive: true }); window.addEventListener('resize', mark);
+  }
   document.addEventListener('keydown', e => {
     if (e.key === 'F2') {
       e.preventDefault();
