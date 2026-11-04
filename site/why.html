@@ -3,23 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why — the case for a law of user interfaces</title>
-<meta name="description" content="Why the Zui Constitution exists: interfaces are decaying, AI generators amplify the decay at machine speed, and guidelines have failed. The case for a machine-verifiable law, with the recorded evidence.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
+<title>Why a law — the case, and where it is weak</title>
+<meta name="description" content="Why interface guidelines alone did not hold, what a law stored as data changes, the evidence from real builds that earned each recent rule, and what a law cannot do.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=13f24227">
-<style>
-table.evidence { border-collapse: collapse; width: 100%; background: var(--card); }
-table.evidence th, table.evidence td { text-align: left; padding: .55rem .8rem;
-  border-bottom: 1px solid var(--line); vertical-align: top; }
-table.evidence th { color: var(--muted); text-transform: uppercase;
-  letter-spacing: .04em; font-size: 1rem; }
-table.evidence td.num { font: 700 1rem var(--mono); color: var(--accent-ink); white-space: nowrap; }
-blockquote.preamble {
-  margin: 2rem 0 0; padding: 1.2rem 1.5rem; border-left: 3px solid var(--accent);
-  background: var(--card); max-width: 46rem; font-size: 1.25rem; line-height: 1.6;
-}
-blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin-top: .6rem; }
-</style>
 </head>
 <body>
 
@@ -45,6 +32,7 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
 <nav class="band" aria-label="Pages of the section">
   <ul>
     <li><a aria-current="page" href="why.html">Law</a></li>
+    <li><a href="rules.html">The rules</a></li>
     <li><a href="gotchas/">What a violation feels like</a></li>
     <li><a href="vibes.html">Two cultures, one truth</a></li>
     <li><a href="positioning.html">Positioning</a></li>
@@ -58,13 +46,14 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
     <!-- shell:trail -->
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Law</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">The case · why a law, not another guideline</p>
-    <h1>Interfaces are decaying. Guidelines didn't stop it. A law can.</h1>
-    <p class="sub">This page makes the argument in full: what is decaying, why the
-    AI era turned a chronic problem into an acute one, why forty years of
-    guidelines failed to hold the line — and what is structurally different
-    about Zui's answer: a compilable language for intent, backed by a
-    constitution written as data.</p>
+    <p class="kicker">Law · for people deciding whether a law is worth having</p>
+    <h1>Interfaces keep decaying in the same ways. A law can refuse them by name.</h1>
+    <p class="sub">The case in six steps, each with where to check it, and then where it is weak. The evidence is the author's own builds, recorded as they happened. There is no study,
+    and no one outside the project has applied the law to a product of theirs. Of its <span data-law="rules">123</span> rules, a machine can refuse <span data-law="tier:machine">11</span> today.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="refusal.html">See a refusal, line by line →</a>
+      <p class="note">One real declaration the verifier says no to, and the same one fixed.</p>
+    </div>
   </div>
 </header>
 
@@ -82,78 +71,61 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
     from but not where you could go. A table that scrolls sideways next to
     twenty centimetres of empty page. A menu that lists a page as top-level
     while the page's own path says it lives two levels deep.</p>
-    <p>None of this is an accident of taste, and none of it is new. These are
-    <em>inherited conventions</em> — patterns copied for decades because they
-    are everywhere, kept because nothing is required to refuse them. Each one
-    taxes the person using the screen: a little attention here, a little
-    confidence there, eight hours a day.</p>
+    <p>None of this is new. These are <em>inherited conventions</em>: patterns copied
+    because they are everywhere, and kept because nothing in the process is required to refuse them.
+    Each one taxes the person using the screen, a little attention here, a little
+    confidence there, for hours every day.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>The amplifier</h2>
-    <p>Then generators arrived, trained on that corpus. An AI asked to build a
-    business interface reproduces the corpus's every inherited assumption —
-    politely, confidently, <em>at machine speed</em>. It does not do this
-    because it is careless. It does it because nothing it was given has the
-    standing to refuse.</p>
-    <p>The claim is recorded, not rhetorical: <b>every rule numbered above 104
-    in this constitution was canonized from a defect an AI produced while
-    building a real application — under explicit instruction to be
-    careful.</b> The evidence table below names each defect and the project it
-    was committed in.</p>
-    <p>This is the thesis of StzZui: in the AI era, UX is the first casualty —
-    and the only correction that scales at the generator's speed is a law the
-    generator can be made to check.</p>
+    <h2>What the record shows</h2>
+    <p>The law in this project was not written in a seminar room. Its newest rules were extracted, defect by defect, from real applications built with AI assistance in 2026, each correction recorded when it was made and
+    kept only if it generalised and a reviewer could decide it yes or no. Rules 105 to 124 each come from such a defect, and the table further down names the newest eight.</p>
+    <p>The working thesis is a narrow one: in those builds, a generator reproduced the inherited conventions quickly and confidently, under an instruction to be careful, because nothing it was given had the standing to
+    refuse them. The only correction that keeps pace with a generator is a rule the generator can be made to check.</p>
+    <p class="limit"><b>Limit:</b> this is the record of one author's builds. It shows that these defects occurred and were corrected; it does not show how common they are in other teams' work.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>The abdication</h2>
-    <p>The discipline that once policed these things has largely gone quiet.
-    Much of the HCI and UI/UX community is riding the "AI will replace us"
-    wave — producing commentary about tools rather than restating first
-    principles. The principles did not stop being true. They stopped being
-    written down in a form anything could enforce.</p>
-    <p>Someone has to write them down in a form a machine can refuse to
-    violate. That is the whole project.</p>
+    <h2>What changes when the law is data</h2>
+    <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the Positioning page</a> says where each stops. What a guideline cannot do alone is say no to a build.
+    Storing the law as one versioned file changes that in five ways, and each one can be checked:</p>
+    <table class="board">
+      <thead><tr><th>The claim</th><th>Where to check it</th></tr></thead>
+      <tbody>
+        <tr><td>The Reader that shows the law and the verifier that refuses for it load the same file, so they cannot drift apart.</td><td><a href="../constitution/reader/index.html">The Reader</a>, and <a href="rules.html">one rule as the tools load it</a>.</td></tr>
+        <tr><td>A finding cites a rule, an article and a right, so a review is an audit and not an argument.</td><td><a href="refusal.html">What it refuses</a>.</td></tr>
+        <tr><td>A consumer pins a version and a hash, so conformance is a fact about a build.</td><td><a href="conformance.html">Conformance</a>.</td></tr>
+        <tr><td>An amendment needs documented evidence, never fashion (Article VII).</td><td><a href="rules.html#changes">How it changes</a>.</td></tr>
+        <tr><td>Retired numbers are never reused, so a citation means the same for ever.</td><td><a href="rules.html#changes">How it changes</a>, and the lineage line in <code>rules.json</code>.</td></tr>
+      </tbody>
+    </table>
+    <p>The law also has a home that prose lacks: <b>a language</b>. Interfaces are declared in StzZui, what the person is doing and what stays reachable, and the verifier refuses unlawful structure before anything is drawn,
+    while <a href="../tools/ui-audit.html">the UI audit</a> measures what was painted. <a href="how.html">The Language page</a> walks the four steps.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>Why guidelines fail, and law doesn't</h2>
-    <p>Guidelines are prose. Prose advises; a reviewer negotiates; a deadline
-    wins. A guideline drifts silently from what anyone actually checks, and no
-    two teams inherit the same reading of it.</p>
-    <p>The Zui Constitution is <b>data</b> — one versioned JSON file. What
-    follows structurally is what prose can never guarantee: linters load the
-    same file the reader renders, so documentation and enforcement cannot
-    drift apart. Findings cite rule numbers, so a review is an audit, not an
-    argument. Consumers pin a version, so conformance is a fact about a
-    build. Amendment requires documented evidence — real usage, operator
-    feedback, recorded failure — never fashion (Article VII). And retired
-    numbers are never reused, so a citation means the same thing forever.</p>
-    <p>And the law has a native habitat prose never had: <b>a language</b>.
-    Interfaces are declared in Zui — what the human is doing, what stays
-    reachable — and the compiler refuses unlawful structure before a pixel
-    exists. A law that cannot be measured will be negotiated in the hallway;
-    this one is compiled at design time and
-    <a href="../tools/ui-audit.html">measured at runtime</a>.
-    <a href="how.html">How it works</a> covers the whole pipeline.</p>
+    <h2>What a law cannot do</h2>
+    <ul>
+      <li><b>Most of it waits on a person.</b> Only <span data-law="tier:machine">11</span> of the <span data-law="rules">123</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> need a reviewer's judgment.</li>
+      <li><b>It does not tell you the page is pleasant.</b> The verifier checks a declaration and the audit checks what was painted. Whether a person finds it usable is for usability testing, which nothing here replaces.</li>
+      <li><b>It is not shown to be right for other teams.</b> No study, no user and no foreign application run end to end stand behind it, only this repository.</li>
+      <li><b>It has a stance.</b> Business applications first, below.</li>
+    </ul>
   </div>
 </section>
 
 <section>
   <div class="narrow">
     <h2>The story: a year of building with AI</h2>
-    <p class="lead">This law was not written in a seminar room. It was
-    extracted, defect by defect, from real applications built with AI
-    assistance through 2026 — every correction recorded at the moment it was
-    made, then canonized only if it generalized and could be decided
-    yes-or-no by a reviewer.</p>
+    <p class="lead">Every correction below was recorded at the moment it was made, then canonized only if it generalised and could be decided
+    yes or no by a reviewer.</p>
     <p><b>the banking product</b> (April 2026) — a full agentic banking platform, built
     and corrected screen by screen. Supervision tables where the same green
     meant two different things two columns apart. Card-styled tiles you had
@@ -163,7 +135,7 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
     leaving French screens full of untranslated jargon, until language became
     data. <b>The Refine rebuild</b> (June 2026) — a 22-section homepage the
     author judged unreadable, rebuilt under a reading budget.</p>
-    <p><b>The StzWeb site</b> (August 2026) — twelve rules, 105 through 116,
+    <p><b>The StzWeb site</b> (August 2026) — twelve rules, from Rule 105 through 116,
     each canonized live from a defect the generator produced <em>while
     building the site that documents the law</em>. The audit tool then caught
     its own depth-calculation defect on its first run in this repository.
@@ -171,7 +143,7 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" id="evidence">
   <div class="narrow">
     <h2>The evidence</h2>
     <p class="lead">Each of the eight newest rules, the defect that earned it
@@ -215,7 +187,6 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
 </section>
 
 </main>
-</div>
 
 <!-- shell:footer -->
 <footer class="site">
@@ -227,12 +198,12 @@ blockquote.preamble footer { font: 1rem var(--mono); color: var(--muted); margin
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
       </div>
     </div>
-    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page
-    is either measured by the tooling or recorded in the harvest.</p>
+    <p class="fine">© 2026 StzZui — a Softanza project · Every claim on this page is either measured by the tooling or recorded in the harvest.</p>
   </div>
 </footer>
 <!-- /shell:footer -->
 
 <script src="stz.js?v=51932dd5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>
