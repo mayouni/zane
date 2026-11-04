@@ -50,6 +50,7 @@ const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'Sta
 const PAGES = [
   { file: 'index.html', home: true },
   { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
+  { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
   { file: 'site/why.html', section: 'law', label: 'Law', rail: true },
   { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),

@@ -29,6 +29,12 @@
     </div>
   </div>
 </nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a aria-current="page" href="how.html">Language</a></li>
+    <li><a href="refusal.html">What it refuses</a></li>
+  </ul>
+</nav>
 </div>
 <!-- /shell:menu -->
 
@@ -126,7 +132,7 @@ delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_
     <p><b>Declare.</b> A <code>.zui</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
     declaration and <span data-fact="verbs">22</span> verbs, closed on purpose: a widget is a consequence of an intent, never a primitive.</p>
     <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.13</span>), and refuses what it forbids.
-    Every refusal cites the rule, article or right it rests on.</p>
+    Every refusal cites the rule, article or right it rests on. <a href="refusal.html">See one, line by line.</a></p>
     <p><b>Project.</b> One declaration can be rendered in more than one medium, and a verb a medium cannot carry is refused. That check is built; the media data is in
     <a href="../conformance/media.json"><code>conformance/media.json</code></a>.</p>
     <p><b>Measure.</b> A declaration is not a page. <a href="../tools/ui-audit.html">The UI audit</a> measures what a browser actually paints: size, true contrast, the bars, the room
