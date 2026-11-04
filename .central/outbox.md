@@ -2207,3 +2207,49 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has looked at piece 5 but me. The audit cannot see whether a figure explains anything; the four figures were checked for text size and for what each caption says it leaves out, not for whether a reader understands them. The three counts measure position on the page, not comprehension
 ```
 ---
+
+--- FROM: stzzui | 2026-11-04 17:59 | NOTE | answers Central's NOTE of 2026-11-04 16:49 (the status rows, then piece 6) | THE STATUS ROWS ARE 7F801AB; PIECE 6 IS FOUR LOCAL COMMITS, 603B959 TO 29D156C; THE AUDIT IS 0 ON 24 PAGES IN BOTH CULTURES; STOPPED FOR YOUR READ
+```yaml
+by:        stzzui | claude-sonnet-5-5 | 2026-11-04 17:59 | ATTENDED
+
+subject:   the M4 and M5 status rows with the vocabulary check (7f801ab) and site piece 6, Law and Positioning (603b959, acf7c14, dc1f1d4, 29d156c), local on main, not pushed
+
+why:       your 16:49 NOTE: restore the two rows from ROADMAP.md and check the status vocabulary, then piece 6 with corrections 1, 2 and 3
+
+did:
+  - 7F801AB: M4 and M5 restored from ROADMAP.md's own words (both "designed"; M4 says what is built as data, media.json and signal.json; M5 names Rules 121 and 124 as the two that exist). My claim that nothing in the tree stated their status was wrong, and the memo of 16:40 should be read with that correction. The board has 13 rows (8 exist, 4 designed, 1 held). site-facts.js now fails on any status word that is not exists, designed or held, or whose class disagrees; shown by breaking one, which named 8 problems
+  - 603B959, POSITIONING: eight rows (heuristics, WCAG 2.2, design systems, design tokens, component libraries, an accessibility linter, usability testing, model-based UI), each paraphrased from the practice's own page, linked, four columns. CORRECTION 1: ISO/IEC 24744 read from ISO's page; its scope is a metamodel for software-engineering development methodologies, so it has no row and the page says why. The model-based row cites the W3C task-models and abstract-UI notes, UIML 4.0 and ConcurTaskTrees. CORRECTION 2: the claim reads "in the pages listed here, read on 4 November 2026", names what was not read in full, and asks a reader to say if a practice already does this. CORRECTION 3: nothing is quoted
+  - TWO PLAN CLAIMS DID NOT SURVIVE READING and were not written: the plan said the law cites WCAG through Rules 60, 62 and 104, and rules.json does not mention WCAG (the page says the rules do not cite it, and that Rules 62 and 105 set the same 4.5:1 floor); the plan said a design system is "widgets first, intent nowhere", and Apple's guide has patterns for common tasks, so the row says what the pages describe and what they do not
+  - A FAIRNESS FIX in the Language page: it said the heuristics are "applied by an expert reading a finished screen". NN/g's page says nothing about when, so the pair now says the page names no pass or fail
+  - ACF7C14, THE RULES: Rule 79 as the tools load it (an excerpt checked against rules.json), the enforcement ladder with shares read from the file, the rights and forbidden patterns, and How it changes inside it (Article VII, five steps, retired and burned numbers derived, the pack hash, and a stated limit: the process is the project's own). 
+  - DC1F1D4, WHY A LAW, rewritten for a person deciding whether a law is worth having: the "abdication" section is removed (a claim about a whole community); "every rule above 104 came from an AI defect" is narrowed to Rules 105 to 124; "why guidelines fail" is a table of five claims each with the page where it is checked; a new "what a law cannot do" says 11 of 123 rules are refused by a machine and that no study stands behind it
+  - 29D156C: the home's designer card points at Positioning
+  - THE POSITIONING TABLE reads as cards below 860 px; no sideways scroll at 375. site-facts.js no longer counts a rule number, a rule range, a link to a rule or another body's version (WCAG 2.2, UIML 4.0) as a typed figure; 18 are left on 3 pages, all in the offence-family pages not yet rewritten
+
+state:
+  UI audit, before:   0 on 22 pages in Modern and Retro
+  UI audit, after:    0 on 24 pages in Modern and Retro (22 plus positioning and rules)
+  gates:              site-shell ok (24 pages), site-facts ok (125 spans, 7 verifier runs, 2 commands, 13 status words, 2 excerpts), pack verified, conformance 73 of 73
+  the counts, 1280 by 800, screens below the bars. Columns: first example / first sourced number / first button / first real terminal
+    Positioning:    1.7 / 1.1 / 0.5 / none (6.7 screens; its example is the table)
+    The rules:      1.0 / 0.4 / 0.6 / none (5.8 screens; its example is the Rule 79 excerpt)
+    Why a law:      2.9 / 0.5 / 0.6 / none (8.1 screens; before, not measured: it was prose with the evidence table near the end). The first sourced number is in the hero because the page opens on its own weakness
+    home:           unchanged by this piece except one card; not re-measured
+  typed numbers outside a span:  18 on 3 pages (was 30 on 4)
+  OFFENCE FAMILIES AND TWO CULTURES: NOT REWRITTEN. Both already open on a hero and are playable; I judged a rewrite would change claims I have not checked (the "twelve offenses, five committed by an AI" line is one). They are the next candidates if you want them in piece 6
+
+waiting:
+  - SITE2-P6-LOOK-01: the Principal looks at positioning.html, rules.html, why.html and conformance.html at 1280 and in Retro (F2). I looked through the pane and measured -> the Principal, via Central
+             [not routed; it is here]
+  - SITE2-P6-READ-01: the Material and Apple guideline pages build themselves in the browser, so the rows describe what each site says of itself in its overview and in search results, and the page says so. A reader who has read them in full should correct a row that over-reads -> Central, whether to have someone read them
+             [not routed; it is here]
+  - SITE2-P6-FAMILIES-01: whether the offence-family pages and Two cultures are to be reworked in this piece or left as built -> Central
+             [not routed; it is here]
+
+next:
+  - me:      piece 7 (Media: ten media, the grid as the framing page, the proof; Innovation with the limit within one screen of the word, correction 5) once you have read piece 6
+  - central: read the five commits, push by sha, bring the Principal the look
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has read the Positioning rows against their sources but me, through search results and fetched pages, some of them paraphrased by a fetch tool before I read them. Treat a row as my reading of a source, with its link beside it for you to check. The audit cannot see whether a paraphrase is fair
+```
+---
