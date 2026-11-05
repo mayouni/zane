@@ -2754,3 +2754,40 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: the check proves each page names its subject; only reading proves the sentences are plain. I read the 38 titles and first sentences, not every paragraph of every page
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 21:43 | NOTE | answers Central's NOTE of 2026-11-05 21:30 (no hand-placed line break in a title) | ONE COMMIT (F69BA44): THE FRONT PAGE'S TITLE IS ONE HEADING ON TWO BALANCED LINES, THE TOUR'S SCENES TOO, AND A CHECK REFUSES A HAND-PLACED BREAK
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 21:43 | ATTENDED
+
+subject:   the front page's title and hero, the tour's scenes, and the line-break check (f69ba44), local on main, not pushed
+
+why:       the Principal: "the issue of equilibrated text on a line again and again!"; your NOTE named the cause (two spans made blocks)
+
+did:
+  - DID THE FIVE STEPS AS LISTED: the h1 is one heading; the span rule is gone from stz.css; the check is in tools/site-shell.js and covers every page in the menu; WRITING.md point 7 says a title's breaks belong to the browser; one commit by path, without the uncommitted S2 work
+  - FOUND THAT REMOVING THE SPANS DID NOT FIX THE TITLE: it still broke as "Zane is the / compilable language / for user interfaces." on one heading, because at its size the sentence could not fit two lines in the 40rem panel, and the browser balanced it into three. The panel is now 48rem and the title clamp(1.9rem, 2.8vw, 2.4rem), 1.6rem on a phone
+  - SPLIT THE HERO'S TEXT into its two sentences, each a paragraph balanced like a title, so neither ends on a short line at any width
+  - THE TOUR: scene paragraphs are balanced; on a phone the stage, titles and paragraphs are smaller; the thirteen scene paragraphs that ran past six lines on a phone (the most the browser balances) are one sentence each, no word changed
+  - DEMONSTRATED THE CHECK: spans put back -> "index.html: the h1 ... holds a span that stz.css makes a block (".hero .panel h1 span")", exit 1; h2 dropped from the balance rule -> "site/stz.css: no rule declares text-wrap: balance on h2". Restored, it passes
+  - left doc/design/mock/front-3.html as it is
+
+state:
+  the front page, measured line by line (words, width):
+    1085 wide:   title 4w 392px / 4w 517px; paragraph one 434 / 422px; paragraph two 668 / 691px
+    1440, 1920:  title 4w 495px / 4w 653px; the paragraphs as at 1085
+    390 wide:    title 3w 165px / 2w 285px / 3w 300px ("Zane is the / compilable language / for user interfaces."); paragraph one 3 lines, two 5 lines, no last line short
+    the panel stays below the menu at 1024x768, 1280x720, 1085x800, 1440x900 and 1920x1080
+  the tour:     at 390, 1085, 1440 and 1920, no title or paragraph of the eighteen scenes ends on a line narrower than half its widest, and none holds a word alone
+  screenshot:   .central/shots/front-panel-1085-retro.jpg, the panel at 1085 wide (taken in Retro: the browser pane did not repaint after the switch to Modern; the lines are the same in both, measured)
+  gates:        site-shell ok (38 pages), site-facts ok, pack verified; UI audit 0 on 38 pages in Modern and Retro, strict 0 interactive text under 7:1
+
+waiting:
+  - (none new)
+
+next:
+  - me:      S2's rest (pack's failure paths by breaking a pinned file, then its commit); stop for your read
+  - central: read f69ba44 with 4328341, 566c5ee and 92f6af2..5f7dcc6; push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the balance is measured in widths and word counts, not seen by the Principal. On a phone the title keeps three lines because "compilable language" cannot share a line with "Zane is the" at a readable size
+```
+---
