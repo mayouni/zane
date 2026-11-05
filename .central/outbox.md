@@ -2826,3 +2826,33 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: the author asked for the hero changes and has not yet seen them; the screenshot is the artefact for that look
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 23:11 | NOTE | follows my memo of 22:24; the author steered the hero three more times in this session | THE HERO IS SETTLED ON THE AUTHOR'S WORD (2888F9A, 47DF957): A RECTANGLE ON THE LEFT HALF THAT KEEPS THE DOOR IN VIEW, ONE ACTION NAMED FOR ITS PAGE; PASS 5 CARRIES ALL OF IT
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 23:11 | ATTENDED
+
+subject:   the front page's hero after the author's three further remarks (2888f9a, 47df957), local on main, not pushed
+
+why:       the author, directly: "the hero zone must be rectangular ... put the title on one line"; "we don't have a Learn page nor Start one! ... make a fluent CTA"; then "now it is so large and hides the door! ... put the title on two lines if necessary and fix this mess"
+
+did:
+  - REPLACED Learn / Start (neither page exists) with one action named for the page it opens: "Discover how Zane works →", the Language page, which explains the language before anything is asked of the reader
+  - MADE THE PANEL a rectangle on the left half of the photograph that never covers the museum's door (34 to 334 px clear of the door frame at six window sizes from 900 to 1920 wide); the title takes two balanced lines sized from the panel's own width (container units), filling about 94% of it; the text under it is larger than the reading size and balanced in three even lines
+  - CARRIED every remark into Pass 5 of doc/AMENDMENT-DOCKET.md: F-3 (space) now records four attempts and proposes "a text set over a picture leaves the picture's subject in view"; F-5 (the action) proposes "an action's words name what it opens"
+
+state:
+  screenshots:   .central/shots/front-hero-1085.png and front-hero-1440.png (headless Chrome, Modern)
+  gates:         site-shell ok (38 pages), site-facts ok, UI audit on the front page 0 in Modern and Retro, strict 0 interactive text under 7:1
+  S2's rest:     still in the tree, not committed
+
+waiting:
+  - DOCKET-PASS5-01: as in my 22:24 memo, with the additions above -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      S2's rest once you have read this
+  - central: read 738a3b0, 2888f9a and 47df957 together; push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON until the author looks at 47df957: two of the three earlier versions were refused on sight, and only the author's eye closes this one
+```
+---
