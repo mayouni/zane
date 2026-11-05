@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mobile apps — declare the screens, then judge a screenshot</title>
-<meta name="description" content="A workflow for a team with an iOS or Android application: there is no page to measure, so declare the screens and judge facts reduced from screenshots. What runs today, what has never run, and an example that is labelled as an example.">
+<title>Mobile apps — checking a mobile app through its declared screens and its screenshots</title>
+<meta name="description" content="The mobile workflow checks an iOS or Android application, which has no page to measure, by checking the declarations of its screens and judging facts reduced from its screenshots. The page says what runs today and what has never run, and its example is labelled as an example.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Mobile apps</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · for a team with an iOS or Android application</p>
-    <h1>There is no page to measure, so judge the screenshot, and be told what it cannot decide.</h1>
-    <p class="sub">A phone app has no markup for the UI audit to read. Two things apply instead: the language, which checks what the screens declare, and a screenshot audit, which judges facts reduced from an image against the three rules a screenshot can decide. The first runs. <b>The second has never been run on a real application.</b></p>
+    <h1>Zane checks a mobile app through the declarations of its screens and a screenshot audit, because a mobile app has no page to measure.</h1>
+    <p class="sub">The mobile workflow checks an iOS or Android application, which has no markup for the UI audit to read, with two tools: the language checks what the screens declare, and a screenshot audit judges facts reduced from an image against the three rules a screenshot can decide.
+    The workflow lets a team check the declared flows of a phone app, and it prevents a screenshot from passing a rule that a screenshot cannot decide. The language check runs today. <b>The screenshot audit has never been run on a real application.</b></p>
   </div>
 </header>
 
@@ -54,10 +55,10 @@
 
 <section id="an-example-not-an-app">
   <div class="narrow">
-    <h2>An example, labelled as one</h2>
+    <h2>A made-up example of a mobile payment flow, checked by the verifier</h2>
 
-    <p class="limit"><b>This case is made up.</b> No mobile application was chosen, and none has been run through the screenshot audit. The flow below is a typical one, a one-tap payment, written to show what the verifier decides about the declaration of a mobile flow. It is not a finding about anybody's product.</p>
-    <p>A phone screen that pays on one tap has made selection into execution: the person pointed, and money moved. In the language that is a selection that acts without a confirmation, and it is refused:</p>
+    <p class="limit"><b>This case is made up.</b> No mobile application was chosen, and none has been run through the screenshot audit. The flow below is a typical one-tap payment, written to show what the verifier decides about the declaration of a mobile flow. This case is not a finding about anybody's product.</p>
+    <p>A phone screen that pays on one tap turns selection into execution: the person points, and money moves. In the language this flow is a selection that acts without a confirmation, and the verifier refuses it:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE INTENT_FLOW</span> <span class="n">tap_to_pay</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, ACT</span>],
@@ -71,7 +72,7 @@ tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     </div>
-    <p>Declaring the confirmation, which on a phone is the second tap or a held press, is what the law asks for:</p>
+    <p>The law asks the flow to declare a confirmation, which on a phone is a second tap or a held press, and the declaration below passes:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE INTENT_FLOW</span> <span class="n">tap_to_pay</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
@@ -86,10 +87,10 @@ tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_
 
 <section class="alt" id="the-screenshot-audit">
   <div class="narrow">
-    <h2>The screenshot audit, and what it decides</h2>
+    <h2>The screenshot audit and the three rules it decides</h2>
 
-    <p>For an application with no page to read, a screenshot is reduced to <b>facts</b> (each line of text, its box, the luminances behind it) by a writer, and an audit judges the facts. It decides three rules and nothing else: <b>Rules 62 and 105</b> for contrast against a floor, and <b>Rule 107</b> for the size of text. Every other rule reads
-    <em>not audited</em>, never <em>passed</em>, and a measurement that could be wrong at its worst end (a photographic background) is never a pass. The shape of the facts file, its arithmetic and the decisions are checked by a script that needs nothing installed, here on the example file that ships with it, made by hand:</p>
+    <p>For an application with no page to read, a writer reduces a screenshot to <b>facts</b> (each line of text, its box and the luminances behind it), and an audit judges the facts. The audit decides three rules and nothing else: <b>Rules 62 and 105</b> for contrast against a floor, and <b>Rule 107</b> for the size of text. Every other rule reads
+    <em>not audited</em>, never <em>passed</em>, and a measurement that could be wrong at its worst end (a photographic background) is never a pass. A script that needs nothing installed checks the shape of the facts file, its arithmetic and the decisions. Below, the script runs on the example file that ships with it, which is made by hand:</p>
     <pre class="term" data-run="node doc/design/audit/check-facts.js doc/design/audit/example.facts.json"><span class="dim">$ node doc/design/audit/check-facts.js doc/design/audit/example.facts.json</span>
 3 lines found; text the OCR did not find is not audited
 
@@ -107,20 +108,20 @@ NOT AUDITED: every rule other than 62, 105, 107 (rule 105 only for its contrast 
 PROJECTED, NOT VERIFIED BY A PERSON (CENTRAL-PERCEPTGATE-01): nobody looked at the screenshot these facts describe.
 
 doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
-    <p>Three lines: one fails on contrast and on size, one passes on contrast and cannot be decided on size, and one is never a pass because its background moves toward the text at the worst end. That last line is the point of the design.</p>
+    <p>The example has three lines. The first fails on contrast and on size, the second passes on contrast and cannot be decided on size, and the third is never a pass because its background moves toward the text at the worst end. The third line shows the purpose of the design: an uncertain measurement is never a pass.</p>
   </div>
 </section>
 
 <section id="what-runs-today">
   <div class="narrow">
-    <h2>What runs today, and what does not</h2>
+    <h2>Which parts of the mobile workflow run today, and which do not</h2>
 
     <ul>
-      <li><b>Runs:</b> the verifier on a mobile flow's declaration (above), and the checker of the facts file and its three decisions.</li>
-      <li><b>Has never run:</b> the writer that reduces a real screenshot to facts, on a real application. The capture loop is a separate thing and is not built. So this page cannot show a real mobile run, and says so rather than show a made-up one.</li>
-      <li><b>Nobody has looked:</b> the facts describe a screenshot no person has looked at, and the checker prints that on every run.</li>
+      <li><b>Two parts run today:</b> the verifier on a mobile flow's declaration, shown above, and the checker of the facts file with its three decisions.</li>
+      <li><b>One part has never run:</b> the writer that reduces a real screenshot to facts, on a real application. The capture loop is a separate part and is not built. This page therefore cannot show a real mobile run, and it says so rather than show a made-up one.</li>
+      <li><b>No person has looked at the screenshot.</b> The facts describe a screenshot that no person has looked at, and the checker prints that on every run.</li>
     </ul>
-    <p class="limit"><b>Limit:</b> a real case needs an application and its owner's agreement. Until one is named, the second half of this workflow is designed and not run.</p>
+    <p class="limit"><b>Limit:</b> a real case needs an application and its owner's agreement. Until someone names such an application, the second half of this workflow is designed and not run.</p>
   </div>
 </section>
 

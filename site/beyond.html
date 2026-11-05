@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Beyond screens — voice, sound and agents with no interface to see</title>
-<meta name="description" content="For conversational, voice-oriented and UI-less applications: four declarations run through the verifier, what each channel decides, the two rules for agent surfaces, and which cells of the grid have a rule and which do not.">
+<title>Beyond screens — checking interfaces that have no screen</title>
+<meta name="description" content="Zane checks interfaces with no screen, such as a voice line, a status chime, an agent surface or a sign, against what a person must be able to do there. The page runs four declarations through the verifier, says what each channel decides, names the two rules for agent surfaces, and shows which cells of the grid have no rule.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Beyond screens</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · for conversational, voice and UI-less applications</p>
-    <h1>When there is nothing to look at, the law still says what the person must be able to do.</h1>
-    <p class="sub">A phone line, a status chime, an agent that a machine drives and a sign in a lobby have no screen, and still make promises: you can leave, you can undo, you can tell what state it is in. Four declarations, run for real, and what each channel decides.</p>
+    <h1>Zane checks interfaces with no screen, such as a voice line, a chime, a sign or an agent, against what a person must be able to do there.</h1>
+    <p class="sub">This page applies Zane to interfaces with no screen, such as a phone line, a status chime, an agent that a machine drives and a sign in a lobby, which still promise that a person can leave, can undo and can tell what state the interface is in.
+    The verifier ensures that a declaration for such an interface promises only what its channel can carry, and keeps the way out and the state within reach. The page runs four declarations for real and says what each channel decides.</p>
   </div>
 </header>
 
@@ -53,11 +54,11 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#a-voice-line">A voice line cannot zoom</a></li>
-      <li><a href="#an-agent">An agent can act and cannot leave</a></li>
-      <li><a href="#a-status-chime">A chime that says "nothing" says nothing</a></li>
-      <li><a href="#a-sign">A sign that also acts</a></li>
-      <li><a href="#where-the-law-is-silent">Where the law is silent</a></li>
+      <li><a href="#a-voice-line">A voice line that promises a verb a voice cannot carry</a></li>
+      <li><a href="#an-agent">An agent surface that acts and offers no way to cancel</a></li>
+      <li><a href="#a-status-chime">A status chime whose every status renders as silence</a></li>
+      <li><a href="#a-sign">A sign that promises to act</a></li>
+      <li><a href="#where-the-law-is-silent">Channels beyond the screen where the law has no rule</a></li>
     </ul>
   </details>
 </nav>
@@ -66,9 +67,9 @@
 
 <section id="a-voice-line">
   <div class="narrow">
-    <h2>A voice line cannot zoom</h2>
+    <h2>A voice line that promises a verb a voice cannot carry</h2>
 
-    <p>A person asking for their balance over the phone, in a flow that promises ZOOM, has been promised something a voice cannot carry. The verifier refuses the promise, not the voice line:</p>
+    <p>A person who asks for a balance over the phone, in a flow that promises ZOOM, is promised something a voice cannot carry. The verifier refuses the promise, and it does not refuse the voice line:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">phone_line</span> (
   <span class="k">SURFACE_AS</span> <span class="s">voice</span>,
@@ -91,9 +92,9 @@ check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT
 
 <section class="alt" id="an-agent">
   <div class="narrow">
-    <h2>An agent can act and cannot leave</h2>
+    <h2>An agent surface that acts and offers no way to cancel</h2>
 
-    <p>An interface for an agent is an interface: the agent is the person at the other end, and the law about leaving and undoing applies to it as much as to anyone. A flow that places orders and cannot be abandoned is refused:</p>
+    <p>An interface for an agent is an interface: the agent is the person at the other end, and the law about leaving and undoing applies to it as much as to anyone. The verifier refuses a flow that places orders and cannot be abandoned:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">agent_api</span> (
   <span class="k">SURFACE_AS</span> <span class="s">machine</span>,
@@ -111,7 +112,7 @@ agent_order.zane:5  <span class="bad">error</span>  <span class="bad">MISSING_CA
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     </div>
-    <p>Declaring the way out is the whole fix:</p>
+    <p>The whole fix is to declare the way out:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">agent_api</span> (
   <span class="k">SURFACE_AS</span> <span class="s">machine</span>,
@@ -125,15 +126,15 @@ agent_order.zane:5  <span class="bad">error</span>  <span class="bad">MISSING_CA
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check agent_order_fixed.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.14</pre>
     </div>
-    <p>Two rules are written for this channel and are judgment rules, so the verifier does not check them: <b>Rule 121</b>, the assistant never masks the work, and <b>Rule 124</b>, the generator ships a working thing. They are the only rules the law has for agent surfaces, and the grid below says why that is thin.</p>
+    <p>Two rules are written for this channel, and they are judgment rules, so the verifier does not check them: <b>Rule 121</b>, the assistant never masks the work, and <b>Rule 124</b>, the generator ships a working thing. They are the only rules the law has for agent surfaces, and the last section of this page shows, from the grid, why that coverage is thin.</p>
   </div>
 </section>
 
 <section id="a-status-chime">
   <div class="narrow">
-    <h2>A chime that says "nothing" says nothing</h2>
+    <h2>A status chime whose every status renders as silence</h2>
 
-    <p>A surface may declare a status that a channel renders as silence, and silence is the correct rendering of "waiting, inactive". The defect is narrower: when <em>every</em> status a surface declares is rendered as nothing in the channel it declared, the surface promised a perceptible state and delivered none:</p>
+    <p>A surface may declare a status that a channel renders as silence, and silence is the correct rendering of "waiting, inactive". The defect is narrower: when <em>every</em> status that a surface declares renders as nothing in the channel it declared, the surface promises a perceptible state and delivers none:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">chime_only</span> (
   <span class="k">SURFACE_AS</span> <span class="s">auditory</span>,
@@ -153,26 +154,26 @@ chime.zane:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIV
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     </div>
-    <p>That is the right to know, enforced for a channel with no screen. Only two channels have a recorded rendering of statuses today (sound and voice); in any other the verifier is silent, which means undecided, not fine.</p>
+    <p>This refusal enforces the right to know for a channel with no screen. Only two channels have a recorded rendering of statuses today (sound and voice). In any other channel the verifier is silent, and its silence means undecided, not fine.</p>
   </div>
 </section>
 
 <section class="alt" id="a-sign">
   <div class="narrow">
-    <h2>A sign that also acts</h2>
+    <h2>A sign that promises to act</h2>
 
-    <p>A fixed sign carries wayfinding, and almost nothing else. A declaration for a lobby screen that promises ACT on a sign draws four refusals: the verbs a sign cannot carry (ACT and EXIT) and the undo and cancel that an act owes. The suite's own <a href="../conformance/fixtures/verb-not-carried.zane">printed-ledger case</a> draws the same kind of refusals for a page that promises an act.
-    The channels that cannot carry most verbs are the fixed ones: print, signage, a lamp.</p>
+    <p>A fixed sign carries wayfinding and almost nothing else. A declaration for a lobby screen that promises ACT on a sign draws four refusals, which concern the verbs a sign cannot carry (ACT and EXIT) and the undo and cancel that an act owes. The suite's own <a href="../conformance/fixtures/verb-not-carried.zane">printed-ledger case</a> draws the same kind of refusals for a page that promises an act.
+    The fixed channels, such as print, signage and a lamp, are the channels that cannot carry most verbs.</p>
   </div>
 </section>
 
 <section id="where-the-law-is-silent">
   <div class="narrow">
-    <h2>Where the law is silent</h2>
+    <h2>Channels beyond the screen where the law has no rule</h2>
 
-    <p>For these channels the grid has <span data-fact="grid.channelsNoRule">5</span> of ten with no rule written for them at all (haptic, luminous, signage, spatial and terminal), and the voice, sound and machine channels have a rule on only a few cells. <a href="grid.html">The grid</a> draws it, empty cells empty. The refusals above are real, and they are the
-    checks that exist: a verb a channel cannot carry, a flow that cannot be left, a status that renders as nothing. They are not a full account of what a good voice line or a good agent surface is.</p>
-    <p class="limit"><b>Limit:</b> the verifier checks the declaration. Whether a voice line is <em>heard</em> as intended, or an agent surface is usable by the agent, has no instrument here, and nobody has perceived any of these channels.</p>
+    <p>On the grid, <span data-fact="grid.channelsNoRule">5</span> of the ten channels have no rule written for them at all (haptic, luminous, signage, spatial and terminal), and the voice, sound and machine channels have a rule on only a few cells. <a href="grid.html">The grid</a> draws this coverage and leaves the empty cells empty. The refusals above are real, and they are the
+    checks that exist: a verb a channel cannot carry, a flow that cannot be left, and a status that renders as nothing. They are not a full account of what a good voice line or a good agent surface is.</p>
+    <p class="limit"><b>Limit:</b> the verifier checks the declaration. No instrument here checks whether a voice line is <em>heard</em> as intended or whether an agent surface is usable by the agent, and nobody has perceived any of these channels.</p>
   </div>
 </section>
 

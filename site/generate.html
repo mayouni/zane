@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Generate — how to hold an AI generator to the law</title>
-<meta name="description" content="Two layers: a grammar that fixes the shape of what a generator can write, and a court that refuses what the law forbids. This page says which layer holds what.">
+<title>Generate — holding an AI generator to the law with a grammar and a court</title>
+<meta name="description" content="The generate workflow holds an AI generator to the law through two layers: a grammar that fixes the shape of what the generator can write, and a court that refuses what the law forbids. The page says which layer holds what.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,9 +42,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Generate</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · generate · you build interfaces with AI</p>
-    <h1>How do I hold an AI generator to the law?</h1>
-    <p class="sub">Two layers: a grammar that fixes the shape of what a generator can write, and a court that
-    refuses what the law forbids. They hold different things, and this page says which holds what.</p>
+    <h1>The generate workflow holds an AI generator to the law with a grammar that fixes what it can write and a court that refuses what the law forbids.</h1>
+    <p class="sub">The generate workflow holds an AI generator to the law through two layers: a grammar that fixes the shape of what the generator can write, and a court that
+    refuses what the law forbids. The workflow lets a team check what a generator intends before anything is drawn, and tells the generator which rule it broke. The two layers hold different things, and this page says which layer holds what.</p>
   </div>
 </header>
 
@@ -56,10 +56,10 @@
     <li><a aria-current="page" href="generate.html">Generate</a>
       <ul class="sub">
         <li><a href="#a-declaration-the-grammar-allows-and-the">A declaration the grammar allows and the law refuses</a></li>
-        <li><a href="#the-grammar-holds-the-shape">The grammar holds the shape</a></li>
-        <li><a href="#a-loop-you-can-run-today">A loop you can run today</a></li>
-        <li><a href="#feel-what-the-law-forbids-first">Feel what the law forbids first</a></li>
-        <li><a href="#what-is-not-written">What is not written</a></li>
+        <li><a href="#the-grammar-holds-the-shape">What the grammar fixes, what it does not hold, and how far it is checked</a></li>
+        <li><a href="#a-loop-you-can-run-today">A loop with an assistant that you can run today</a></li>
+        <li><a href="#feel-what-the-law-forbids-first">Pages that let you commit each violation before asking a generator to avoid it</a></li>
+        <li><a href="#what-is-not-written">The part of the law for agents that is not written yet</a></li>
       </ul>
     </li>
     <li><a href="softanza.html">Softanza</a></li>
@@ -72,9 +72,9 @@
 <section>
   <div class="narrow">
     <h2 id="a-declaration-the-grammar-allows-and-the">A declaration the grammar allows and the law refuses</h2>
-    <p>An AI asked to build a business interface reproduces the habits it was trained on, politely and at machine speed.
-    Make it declare intent first, and the intent can be checked before anything is drawn. Here is a declaration in which
-    every clause is one the language has; the law still refuses the flow:</p>
+    <p>An AI that is asked to build a business interface reproduces the habits it was trained on, politely and at machine speed.
+    When a generator must declare intent first, the intent can be checked before anything is drawn. The declaration below uses
+    only clauses that the language has, and the law still refuses the flow:</p>
 <pre class="shot"><span class="c">// what a generator may well emit: every clause is allowed</span>
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">pick_and_pay</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, ACT</span>],
@@ -87,58 +87,58 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
     <span class="dim">Rule 16 · Intentional Clicks · Article II</span>
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
-    <p>That is a real run, re-run by this site's own check. The refusal names the rule it rests on, which is what lets a
-    generator be told <em>which</em> law it broke instead of being told it was wrong.</p>
+    <p>The run above is real, and this site's own check re-runs it. The refusal names the rule it rests on, and this lets a
+    generator be told <em>which</em> law it broke instead of being told only that it was wrong.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="the-grammar-holds-the-shape">The grammar holds the shape</h2>
-    <p>The language is declared in Haro, and the forge writes from that declaration a grammar a decoder can be held to. It is
-    checked in as <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, a few kilobytes of GBNF, the notation grammar-constrained
+    <h2 id="the-grammar-holds-the-shape">What the grammar fixes, what it does not hold, and how far it is checked</h2>
+    <p>The language is declared in Haro, and from that declaration the forge writes a grammar that a decoder can be held to. The grammar is
+    checked in as <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, a few kilobytes of GBNF, which is the notation that grammar-constrained
     decoders accept.</p>
-    <p><b>What it fixes:</b> the <span data-fact="gbnf.kinds">10</span> kinds of declaration, which clauses each kind may carry, and the
+    <p><b>The grammar fixes</b> the <span data-fact="gbnf.kinds">10</span> kinds of declaration, the clauses each kind may carry, and the
     lexical form (comments, quoted strings, upper-case keywords, lower-case names, trailing commas). A clause that does not belong to a
     kind cannot be written under it: a role on a screen, for example, is not a sentence of this grammar.</p>
-    <p><b>What it does not hold:</b> the verbs. A list of names is any identifier, so an unknown verb is a sentence the grammar
-    accepts and the court refuses. Neither does it hold anything that needs two clauses read together: the declaration above is
-    well-formed. <b>Every refusal of meaning stays the court's.</b> The grammar narrows what a generator can say; it does not make it lawful.</p>
-    <p><b>How far it is checked:</b> the judge regenerates the file from the declaration on every run and fails if the copy checked in
-    differs, so the file cannot drift from the forge. It has not been run under a decoder in this repository: no model has been decoded
-    under it here, and the site does not claim one has.</p>
+    <p><b>The grammar does not hold the verbs.</b> A list of names accepts any identifier, so an unknown verb is a sentence that the grammar
+    accepts and the court refuses. The grammar also does not hold anything that needs two clauses read together: the declaration above is
+    well-formed. <b>Every refusal of meaning stays with the court.</b> The grammar narrows what a generator can say, and it does not make what the generator says lawful.</p>
+    <p><b>The grammar is checked against its source:</b> the judge regenerates the file from the declaration on every run and fails if the checked-in copy
+    differs, so the file cannot drift from the forge. The grammar has not been run under a decoder in this repository: no model has been decoded
+    under it here, and the site does not claim that one has.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="a-loop-you-can-run-today">A loop you can run today</h2>
-    <p>With any capable assistant: put the law in its context, instruct it to declare each surface in <code>.zane</code> before rendering it,
+    <h2 id="a-loop-you-can-run-today">A loop with an assistant that you can run today</h2>
+    <p>With any capable assistant, you put the law in its context, instruct it to declare each surface in <code>.zane</code> before rendering it,
     run the verifier, and hand it the findings by rule number:</p>
 <pre class="term"><span class="p">You are building under the Zane Constitution (rules.json attached).</span>
 <span class="p">Declare each surface in .zane before rendering it, and cite the rules you obeyed.</span>
 <span class="p">Here is the verifier's report on your last declaration. Fix every finding, by rule:</span>
 <span class="bad">pick.zane:2 error SELECT_ACT_COLLAPSE (Rule 16)</span></pre>
-    <p>This is a procedure, not a measured result: nobody has yet measured how many rounds a model needs under it, or whether the declared
-    surface and the rendered one stay in step. The runtime half is the audit, which measures what was actually painted
-    (<a href="../tools/ui-audit.html">the UI audit</a>).</p>
+    <p>This loop is a procedure, not a measured result: nobody has yet measured how many rounds a model needs under it, or whether the declared
+    surface and the rendered surface stay in step. The runtime half is <a href="../tools/ui-audit.html">the UI audit</a>, which measures
+    what was actually painted.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="feel-what-the-law-forbids-first">Feel what the law forbids first</h2>
-    <p>The defects a generator reproduces have rules behind them. <a href="gotchas/">What a violation feels like</a> lets you commit each
-    family of offence yourself, safely fenced, each beside its lawful twin, before you ask a model to avoid them.</p>
+    <h2 id="feel-what-the-law-forbids-first">Pages that let you commit each violation before asking a generator to avoid it</h2>
+    <p>The defects that a generator reproduces have rules behind them. <a href="gotchas/">What a violation feels like</a> lets you commit each
+    family of offence yourself, safely fenced and beside its lawful twin, before you ask a model to avoid them.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-is-not-written">What is not written</h2>
-    <p>The law already says how an agent may act on an interface: it is a named actor under the same audit as a person, its output is a
-    reviewable proposal, and what it produces is marked as machine-made. What is <b>not written</b> is the jurisdiction over the chat
-    stream, and a surface that serves the law to an agent while it works. That is unchanged and held, and nothing on this site advances it.</p>
+    <h2 id="what-is-not-written">The part of the law for agents that is not written yet</h2>
+    <p>The law already says how an agent may act on an interface: the agent is a named actor under the same audit as a person, its output is a
+    reviewable proposal, and what it produces is marked as machine-made. Two things are <b>not written</b>: the jurisdiction over the chat
+    stream, and a surface that serves the law to an agent while it works. Both are unchanged and held, and nothing on this site advances them.</p>
   </div>
 </section>
 </main>

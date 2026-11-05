@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build — put the law in a project and gate your CI</title>
-<meta name="description" content="Declare before you draw, pin the law as a hash, fail the build on a refusal, and measure what the browser actually paints.">
+<title>Build — putting the law into a project and failing the build on a refusal</title>
+<meta name="description" content="The build workflow puts Zane into a software project: the team declares each surface before drawing it, pins the law as a hash, fails the build on a refusal, and measures what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,9 +42,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Build</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · build · you ship business software</p>
-    <h1>Put the law in a project and gate your CI</h1>
-    <p class="sub">Declare before you draw, pin the law as a hash, fail the build on a refusal,
-    and measure what the browser actually paints. Nothing here needs more than Node and a browser.</p>
+    <h1>The build workflow puts the law into a project and makes the CI build fail when the verifier refuses a declaration.</h1>
+    <p class="sub">The build workflow puts Zane into a software project: the team declares each surface before drawing it, pins the law as a hash, fails the build on a refusal,
+    and measures what the browser actually paints. The workflow prevents a declaration that the law refuses from passing the CI. Nothing in it needs more than Node and a browser.</p>
   </div>
 </header>
 
@@ -54,12 +54,12 @@
   <ul>
     <li><a aria-current="page" href="build.html">Build</a>
       <ul class="sub">
-        <li><a href="#declare-before-you-draw">Declare before you draw</a></li>
-        <li><a href="#pin-the-law-as-a-hash-not-only-a-version">Pin the law as a hash, not only a version</a></li>
-        <li><a href="#fail-the-build-on-a-refusal">Fail the build on a refusal</a></li>
-        <li><a href="#measure-the-paint">Measure the paint</a></li>
-        <li><a href="#amend-with-evidence">Amend with evidence</a></li>
-        <li><a href="#what-is-not-here-yet">What is not here yet</a></li>
+        <li><a href="#declare-before-you-draw">Writing a surface's declaration before drawing the surface</a></li>
+        <li><a href="#pin-the-law-as-a-hash-not-only-a-version">Pinning the law as a hash, not only as a version</a></li>
+        <li><a href="#fail-the-build-on-a-refusal">Making the CI build fail when the verifier refuses a declaration</a></li>
+        <li><a href="#measure-the-paint">Measuring the painted page with the UI audit</a></li>
+        <li><a href="#amend-with-evidence">Proposing a new rule with evidence from your project</a></li>
+        <li><a href="#what-is-not-here-yet">Parts of the build workflow that are held or designed, not built</a></li>
       </ul>
     </li>
     <li><a href="generate.html">Generate</a></li>
@@ -72,9 +72,9 @@
 
 <section>
   <div class="narrow">
-    <h2 id="declare-before-you-draw">Declare before you draw</h2>
-    <p>Before wireframes harden, write the surface's <code>.zane</code> declaration: which intents it
-    satisfies, what stays always reachable. A few minutes of declaration replaces a meeting of taste:
+    <h2 id="declare-before-you-draw">Writing a surface's declaration before drawing the surface</h2>
+    <p>Before wireframes harden, you write the surface's <code>.zane</code> declaration: which intents it
+    satisfies, and what stays always reachable. A few minutes of declaration replace a meeting about taste:
     the design review reads <code>SATISFIES [SELECT, CONFIRM, ACT]</code> and asks one question,
     <em>is that what the operator is actually doing?</em>, instead of debating paddings.</p>
 <pre class="shot"><span class="c">// specs/checkout.zane — written at the whiteboard, checked at the desk</span>
@@ -88,25 +88,25 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
-    <p>That is the output of a real run, and this site's own check re-runs it. The wizard has an exit and a way
+    <p>The output above comes from a real run, and this site's own check re-runs it. The wizard has an exit and a way
     to cancel, and the law still refuses it, because it acts and promises no undo. The verifier ships in this
     repository and runs on Node alone. It reads its contract and its citations from the law rather than hardcoding
     them.</p>
-    <p><b>What a declaration alone can decide is level two, the default.</b> A check that needs a fact a
+    <p><b>Level two, the default level, is what a declaration alone can decide.</b> A check that needs a fact a
     declaration does not hold (the entities, the actors, the state, the elements of a surface) is skipped unless you
-    hand it a symbol table with <code>--symbols</code>: undecidable is silence, never a pass. Computing that table
-    from a host project is not built (see the last section).</p>
+    hand it a symbol table with <code>--symbols</code>, and an undecidable check stays silent and is never a pass. A tool that computes that table
+    from a host project is not built, as the last section says.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="pin-the-law-as-a-hash-not-only-a-version">Pin the law as a hash, not only a version</h2>
-    <p><b>A version says which edition you meant. A hash says the bytes you hold are that edition.</b> Vendor the
+    <h2 id="pin-the-law-as-a-hash-not-only-a-version">Pinning the law as a hash, not only as a version</h2>
+    <p><b>A version says which edition you meant, and a hash proves that the bytes you hold are that edition.</b> You vendor the
     files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
     proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
 <pre class="term"><span class="dim">$ node tools/zane/pack.js --check</span></pre>
-    <p>Then <em>conforms to Zane v<span data-law="version">3.14</span></em> is a claim your CI can refute. Numbers
+    <p>With this step, <em>conforms to Zane v<span data-law="version">3.14</span></em> becomes a claim that your CI can refute. Rule numbers
     are stable forever: a retired number is never reused, so a finding that cites Rule 79 means the same thing in ten
     years. <a href="../protocol/README.md">The protocol pack</a> says what to vendor and what you may and may not claim.</p>
   </div>
@@ -114,56 +114,56 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section>
   <div class="narrow">
-    <h2 id="fail-the-build-on-a-refusal">Fail the build on a refusal</h2>
-    <p>The verifier exits non-zero when any declaration is refused, and zero when there are only warnings. Run it
+    <h2 id="fail-the-build-on-a-refusal">Making the CI build fail when the verifier refuses a declaration</h2>
+    <p>The verifier exits non-zero when any declaration is refused, and it exits zero when there are only warnings. You run it
     over your specifications in CI:</p>
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check specs/*.zane</span>
 <span class="dim">$ node tools/zane/cli.js check specs/*.zane --json</span>   <span class="dim"># for a machine to read</span></pre>
     <p>The contract names <span data-law="diagnostics">37</span> diagnostics at <span data-fact="diag.levels">4</span>
     conformance levels, and every finding carries the rule, article or right it rests on. The suite that proves any
     implementation agrees, <span data-fact="fixtures.total">73</span> fixtures with known verdicts, is in
-    <a href="../conformance/README.md"><code>conformance/</code></a>; <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a> is the first conforming consumer.</p>
+    <a href="../conformance/README.md"><code>conformance/</code></a>, and <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a> is the first conforming consumer.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="measure-the-paint">Measure the paint</h2>
-    <p>Declaring is not enough: a page can be lawful on paper and unlawful in the browser. Serve your application and
-    point <a href="../tools/ui-audit.html">the UI audit</a> at it, one path per line, any same-origin pages; nothing
-    leaves your browser. It measures what static analysis cannot see: computed text sizes, true contrast against the
+    <h2 id="measure-the-paint">Measuring the painted page with the UI audit</h2>
+    <p>A declaration is not enough, because a page can be lawful on paper and unlawful in the browser. You serve your application and
+    point <a href="../tools/ui-audit.html">the UI audit</a> at it, one path per line, on any same-origin pages, and nothing
+    leaves your browser. The audit measures what static analysis cannot see: computed text sizes, true contrast against the
     composited background, the trail, the room before scrollbars, the navigation bars against each other and the menu
-    against the tree. A colour it cannot read is reported as <em>not decided</em>, naming the colour, and never skipped.
-    It exports a Markdown report, each finding citing its rule.</p>
-    <p>Run it in every culture you ship: a page can be lawful in one palette and unlawful in another. This site audits itself
+    against the tree. The audit reports a colour it cannot read as <em>not decided</em>, names the colour, and never skips it.
+    It exports a Markdown report in which each finding cites its rule.</p>
+    <p>You run the audit in every culture you ship, because a page can be lawful in one palette and unlawful in another. This site audits itself
     that way before it ships.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="amend-with-evidence">Amend with evidence</h2>
-    <p>The law grows one way only (Article VII): real usage, operator feedback, documented failure. If your project hits a
-    recurring defect the law does not name, record it as the law records its own: what happened, where, how it was
+    <h2 id="amend-with-evidence">Proposing a new rule with evidence from your project</h2>
+    <p>The law grows in one way only (Article VII): from real usage, operator feedback and documented failure. If your project hits a
+    recurring defect that the law does not name, you record it as the law records its own defects: what happened, where, how it was
     corrected, why it generalizes, and whether a reviewer could decide it yes or no. Every rule carries an <code>evidence</code>
-    field saying where it came from, and fashion, trends and developer convenience are not admissible.
+    field that says where the rule came from, and fashion, trends and developer convenience are not admissible as evidence.
     <a href="../doc/AMENDMENT-DOCKET.md">The amendment docket</a> shows how a pass is ruled.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-is-not-here-yet">What is not here yet</h2>
-    <p>Stated as held or designed, not as promised.</p>
+    <h2 id="what-is-not-here-yet">Parts of the build workflow that are held or designed, not built</h2>
+    <p>This section states each missing part as held or designed, and not as promised.</p>
     <ul>
-      <li><b>Cross-pillar symbols are not computed.</b> The verifier accepts a symbol table you supply; building one from a host
-      project's other pillars is the open half of level three, unchanged.</li>
-      <li><b>One violation belongs to the audit, not the verifier.</b> <code>LAYOUT_DISPLACEMENT</code> is a fact about a painted
+      <li><b>Cross-pillar symbols are not computed.</b> The verifier accepts a symbol table that you supply, and building one from a host
+      project's other pillars is the open half of level three, which is unchanged.</li>
+      <li><b>One violation belongs to the audit, not to the verifier.</b> <code>LAYOUT_DISPLACEMENT</code> is a fact about a painted
       page, so it has no fixture by design.</li>
-      <li><b>The AI-interaction jurisdiction is not written:</b> no rules for the chat stream, and no endpoint that serves the law to
+      <li><b>The AI-interaction jurisdiction is not written.</b> The law has no rules for the chat stream, and no endpoint serves the law to
       an agent while it works. The <a href="../ROADMAP.md">roadmap</a> keeps the account.</li>
-      <li><b>The Second Founding is proposed, not ratified.</b> It argues for a wider design and its own rulings; the law you pin is
-      the one above, not that document.</li>
+      <li><b>The Second Founding is proposed, not ratified.</b> It argues for a wider design and its own rulings, and the law you pin is
+      the law described above, not that document.</li>
     </ul>
   </div>
 </section>

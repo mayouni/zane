@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Other languages — implement Zane and prove it agrees</title>
-<meta name="description" content="The port recipe for another language or framework: pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences, and what you may and may not claim.">
+<title>Other languages — implementing Zane in other languages and proving that it agrees</title>
+<meta name="description" content="Zane is implemented in other languages by writing a verifier that reads the same pinned files and passes the same fixtures. The page gives the port recipe (pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences) and says what a port may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Other languages</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · for people who implement Zane in another language</p>
-    <h1>You do not adopt a library: you implement the language and run the fixtures.</h1>
-    <p class="sub">A verifier in any language is a peer of the one in this repository. It reads the same pinned files, parses the same grammar, and reports the same diagnostics on the same fixtures, or the suite says which one disagreed. Here is the recipe, and the limits of what a pass lets you say.</p>
+    <h1>Zane is implemented in other languages by implementing its language and running its fixtures, not by adopting a library.</h1>
+    <p class="sub">Porting Zane to other languages means writing a verifier that is a peer of the one in this repository: it reads the same pinned files, parses the same grammar, and reports the same diagnostics on the same fixtures.
+    The fixture suite ensures that a port proves its agreement instead of asserting it, and the suite names any fixture on which the port disagrees. The page gives the recipe and the limits of what a pass lets you say.</p>
   </div>
 </header>
 
@@ -62,14 +63,14 @@
 
 <section id="the-recipe">
   <div class="narrow">
-    <h2>The recipe</h2>
+    <h2>The recipe for implementing Zane in another language</h2>
 
     <ol class="workflow">
-      <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant; the hash says the bytes you hold are that edition. <span class="file">tools/zane/pack.js --check</span></li>
+      <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant, and the hash proves that the bytes you hold are that edition. <span class="file">tools/zane/pack.js --check</span></li>
       <li><b>Implement the grammar</b> from <a href="../doc/language/GRAMMAR.md"><code>doc/language/GRAMMAR.md</code></a>: the ten kinds, the closed enumerations and the <span data-fact="verbs">22</span> verbs.</li>
       <li><b>Run the <span data-fact="fixtures.total">73</span> fixtures at the level you claim.</b> Compare by diagnostic id only, never by line number, wording or order. A fixture above your level is skipped and recorded, never failed.</li>
-      <li><b>Emit the refusal envelope</b> (the six fields of <a href="refusal.html">What it refuses</a>) so one CI step can read any court.</li>
-      <li><b>List your differences from the reference,</b> the way the twin ratchet does: each a named row, and a failure on any other. <a href="haro.html">Declared in Haro</a> shows one.</li>
+      <li><b>Emit the refusal envelope</b> (the six fields of <a href="refusal.html">What it refuses</a>) so that one CI step can read any court.</li>
+      <li><b>List your differences from the reference,</b> as the twin ratchet does: each difference is a named row, and any other difference is a failure. <a href="haro.html">Declared in Haro</a> shows one such list.</li>
     </ol>
     <pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
 
@@ -87,21 +88,21 @@ The Zane protocol pack
 
 <section class="alt" id="what-you-may-claim">
   <div class="narrow">
-    <h2>What you may claim, and may not</h2>
+    <h2>What a port may claim, and what it may not claim</h2>
 
-    <p><b>May:</b> "conforms to Zane v3.14 at level 2, verified against manifest &lt;hash&gt;", your own diagnostic codes in your own words, and your own language for the prose.</p>
-    <p><b>May not:</b> extend a closed set. The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed; adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
-    <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b>. The last one does not fully pass today, in this repository either: <a href="media.html">Channels</a> shows its real output, proved for one pair and not proved for another.</p>
+    <p><b>A port may claim</b> "conforms to Zane v3.14 at level 2, verified against manifest &lt;hash&gt;", and it may use its own diagnostic codes in its own words and its own language for the prose.</p>
+    <p><b>A port may not extend a closed set.</b> The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed. Adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
+    <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b> conformance. The last claim does not fully pass today, in this repository either: <a href="media.html">Channels</a> shows its real output, which is proved for one pair and not proved for another.</p>
   </div>
 </section>
 
 <section id="who-has-done-it">
   <div class="narrow">
-    <h2>Who has</h2>
+    <h2>Who has implemented Zane so far</h2>
 
-    <p>The <b>reference</b> is the JavaScript verifier in this repository. <b>Zing</b>, a separate framework in the Softanza family, is described in its own pinning record as the first conforming consumer of the law, and pins law v<span data-fact="zing.pinned">3.11</span>.
-    This page states no conformance level for it: that is its own claim to make, and this site has not re-run its checker. A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>. Its first stage, the check, is built: it prints what the JavaScript prints, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). It has run on Windows only, and the browser build is not built.</p>
-    <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, not a record of one succeeding.</p>
+    <p>The <b>reference</b> is the JavaScript verifier in this repository. <b>Zing</b>, a separate framework in the Softanza family, is described in its own pinning record as the first conforming consumer of the law, and it pins law v<span data-fact="zing.pinned">3.11</span>.
+    This page states no conformance level for Zing, because that claim is Zing's own to make and this site has not re-run its checker. A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>. Its first stage, the check, is built, and it prints what the JavaScript verifier prints, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). The Zig check has run on Windows only, and the browser build is not built.</p>
+    <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, and it is not a record of a stranger succeeding.</p>
   </div>
 </section>
 
