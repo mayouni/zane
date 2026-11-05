@@ -108,7 +108,7 @@ function main(argv) {
   let specVersion = '(unreadable)';
   try {
     const rm = fs.readFileSync(path.join(__dirname, '..', '..', 'doc', 'language', 'README.md'), 'utf8');
-    const mm = rm.match(/^#\s+The Zui Language\s+—\s+Specification\s+v(\S+)/m);
+    const mm = rm.match(/^#\s+The Zane Language\s+—\s+Specification\s+v(\S+)/m);
     if (mm) specVersion = mm[1];
   } catch (e) { /* reported as (unreadable) rather than guessed */ }
 

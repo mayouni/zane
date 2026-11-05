@@ -1,8 +1,8 @@
-# The Zui Language — Specification v1.4
+# The Zane Language — Specification v1.5
 
 **Status**: normative for the language; honest about implementations
-**Date**: 2026-08-06, revised 2026-11-01
-**Home**: StzZui, where the language and its constitution live
+**Date**: 2026-08-06, revised 2026-11-05
+**Home**: this repository, where the language and its constitution live (inside the Softanza family its formal name is StzZui)
 **Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
 **Lineage.** **v1.0** (2026-08-06) the language as founded. **v1.1** closed `SURFACE_AS`
@@ -15,7 +15,16 @@ the second expression field, with `UNKNOWN_ROLE`, `ROLE_MISPLACED`,
 surface declares controls and no promises. **v1.4** (2026-11-01, ruling D1 of 2026-10-31)
 adds `FIELD_MISPLACED`: a known field on a kind that does not declare it, which every
 earlier version ignored in silence. No field and no value is added; a file that carried
-such a field was lawful at v1.3 and is not at v1.4.
+such a field was lawful at v1.3 and is not at v1.4. **v1.5** (2026-11-05) renames the language from Zui to
+Zane and changes nothing else: no field, value, diagnostic or verdict.
+
+**The name.** The language was called Zui until 2026-11-05. The Principal named it Zane, in these words:
+
+> In the Hausa language, the term Azané (often pronounced or transliterated by non-native speakers as azen) refers to traditional geometric wall patterns, engravings, or designs. These decorative forms are central to traditional Hausa architecture and are deeply tied to cultural identity, religion, and social prestige. I will call the StzZui language then as "Zane". Which recalls Azané, the arabic word "زَيْنْ" meaning Beauty and decoration, and because it's practical and easy to pronounce.
+
+The files of the language are named `.zane`. **`.zui`, the former extension, is still read**: a verifier
+reads the file it is given, whatever its extension, with no warning and no change of output, so a
+declaration written before the rename keeps working until its owner renames it.
 
 > **This title said v1.0 until 2026-08-16**, through the whole of v1.1 — `DECLARATIONS.md`
 > recorded the change and the heading never moved. Noted rather than smoothed, and the
@@ -35,7 +44,7 @@ such a field was lawful at v1.3 and is not at v1.4.
 
 ## 1. What this specifies
 
-Zui is a **declarative language for intent-driven user interfaces**. A `.zui` file
+Zane is a **declarative language for intent-driven user interfaces**. A `.zane` file
 declares what a human is trying to *do* on a surface — discover, select, confirm,
 undo — and says nothing about how any medium draws it. Rendering is a consequence.
 
@@ -88,8 +97,8 @@ sounds. Navigation is expressed by `LOCATE` and `DISCOVER`.
 
 ## 3. The constitution is the semantics
 
-Zui is not a linter with opinions. Every diagnostic it raises cites a numbered
-rule of [the Zui Constitution](../../constitution/rules.json), which is the
+Zane is not a linter with opinions. Every diagnostic it raises cites a numbered
+rule of [the Zane Constitution](../../constitution/rules.json), which is the
 language's semantic layer: the compiler refuses a declaration *because* the law
 forbids what it declares. [VIOLATIONS.md](VIOLATIONS.md) binds each diagnostic to
 its rule, article, and operator right; the binding is also data, in
@@ -114,7 +123,7 @@ suite reports which level a run satisfied.**
 | **4** | Projection | a rendered surface | Level 3 + `LAYOUT_DISPLACEMENT` and everything only a painted page reveals |
 
 **Level 2 is the meaningful target for a standalone verifier**, and the reason a
-`.zui` file is worth checking alone: six of the ten named violations are decidable
+`.zane` file is worth checking alone: six of the ten named violations are decidable
 from a single declaration, because `SATISFIES` and `ALWAYS_REACHABLE` are written
 in the file itself.
 
@@ -127,7 +136,7 @@ out of reach *without being told*. Level 4 belongs to a projection or to
 
 The discipline this project exists to enforce applies first to itself, so:
 
-| Capability | Specified here | Reference impl. | Standalone `zui` |
+| Capability | Specified here | Reference impl. | Standalone `zane` |
 |---|---|---|---|
 | The grammar, 10 declaration types | ✅ v1.0 | ✅ parses 12 (see §6) | not built |
 | 22-verb closed grammar | ✅ normative | parsed as identifiers, **not validated** | not built |
@@ -147,7 +156,7 @@ and the fixtures exist so agreement can be proved rather than asserted.
 
 ## 6. Two deliberate differences from the reference implementation
 
-The reference implementation's parser accepts **twelve** `.zui` declaration kinds. This specification
+The reference implementation's parser accepts **twelve** `.zane` declaration kinds. This specification
 defines **ten**, and excludes two on stated grounds:
 
 - **`WIDGET`** is excluded on constitutional grounds. A widget is a *consequence*
@@ -156,7 +165,7 @@ defines **ten**, and excludes two on stated grounds:
   in §2. The reference implementation recognizes it (`parser.zig:4275`); this language does not define it.
 - **`USER`** is excluded as belonging to the actor model, not the interface
   language. It ties a member to an actor on a surface — a fact about *who*, which
-  Zui consumes from a symbol table rather than declares.
+  Zane consumes from a symbol table rather than declares.
 
 Both are open questions for the reference implementation, raised in the decision document §7. An
 implementation that accepts them is not thereby non-conforming — it is accepting

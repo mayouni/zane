@@ -12,7 +12,7 @@ const builtin = @import("builtin");
 const core = @import("core.zig");
 const contract_mod = @import("contract.zig");
 
-const language_version = "1.4";
+const language_version = "1.5";
 
 const usage =
     \\zane — the Zane verifier

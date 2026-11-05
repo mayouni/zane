@@ -1,6 +1,6 @@
 # The Ten Declaration Types
 
-**Normative.** Part of [the Zui Language Specification v1.4](README.md). Syntax is
+**Normative.** Part of [the Zane Language Specification v1.5](README.md). Syntax is
 in [GRAMMAR.md](GRAMMAR.md); diagnostics are in [VIOLATIONS.md](VIOLATIONS.md).
 
 ---
@@ -65,7 +65,7 @@ A named sequence of intents a human moves through. The only declaration that is
 *required* to carry `SATISFIES`; without it there is no flow, only a name
 (`INTENT_FLOW_NO_SATISFIES`).
 
-```zui
+```zane
 DEFINE INTENT_FLOW approve_payment (
   SATISFIES [SELECT, CONFIRM, ACT],
   ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]
@@ -169,7 +169,7 @@ holds `ACT`. It names who performs the act. Its absence, when the actor model
 binds no actor either, is `HIDDEN_AUTHORITY` — the law's requirement that every
 consequential act names its actor (Rule 83, Article V).
 
-```zui
+```zane
 DEFINE INTENT_FLOW post_ledger_entry (
   SATISFIES [CONFIRM, ACT],
   ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
@@ -252,7 +252,7 @@ intact. Expression is intent's *refinement*, never a second language beside it: 
 that says how its values should be perceived without saying what the operator is doing has
 inverted the model this language exists to enforce.
 
-```zui
+```zane
 DEFINE SCREEN overdue_invoices (
   SATISFIES [SCAN, COMPARE, LOCATE],
   SIGNALS [danger, warning, muted]

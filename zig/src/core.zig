@@ -1,6 +1,6 @@
 //! core.zig: the Zane verifier core, in Zig.
 //!
-//! Lexer, parser and checks for the Zane language (doc/language/ v1.4), the third evaluator of the law
+//! Lexer, parser and checks for the Zane language (doc/language/ v1.5), the third evaluator of the law
 //! (doc/design/BINARY.md, stage S1). It is PURE: it takes a source string and an allocator and returns the
 //! diagnostics in source order. No file system, no clock, no network, no global state, so the same code
 //! compiles to a native executable and to wasm32-freestanding.

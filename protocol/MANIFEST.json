@@ -10,7 +10,7 @@
     "constitution": "3.14",
     "rules": 123,
     "forbiddenPatterns": 17,
-    "language": "1.4",
+    "language": "1.5",
     "refusalContract": "1.9",
     "diagnostics": 37,
     "media": 10,
@@ -27,26 +27,26 @@
     {
       "file": "doc/language/README.md",
       "role": "the language",
-      "bytes": 10196,
-      "sha256": "4cfc6b3456dd943c13b5b629ede791153417498391d42313d2f47f00c8fe3bc1"
+      "bytes": 11290,
+      "sha256": "9deffb62d50939e298a0e8bfade27d4e6ac200d05fe22eb71996a3ee5e521862"
     },
     {
       "file": "doc/language/GRAMMAR.md",
       "role": "the language",
-      "bytes": 6352,
-      "sha256": "d7dcee6cd3a58f693ad10eeac8aed830896169b20e8354ed786e87bc136340cf"
+      "bytes": 6420,
+      "sha256": "ea4139cc25b8b4f35a4bd39e4f020640f06e249a536a7c1715eaaa17e597d538"
     },
     {
       "file": "doc/language/DECLARATIONS.md",
       "role": "the language",
-      "bytes": 13704,
-      "sha256": "698f9d7995d695694e2b4644d381e945ca7685efeb380fdf2ee7dd3db5881918"
+      "bytes": 13708,
+      "sha256": "f0afcba5bb8d2713808228134d1db749f7d8a55776a4690e78fa336feda2b3af"
     },
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
-      "bytes": 19609,
-      "sha256": "5307acc4adbd5bdd41502a4d145ec79b7597dd22ae3291bf94d497ce110dc522"
+      "bytes": 19619,
+      "sha256": "bada1863e6ad71bc3825657b3dbecbe4265d92be36ba60a05ceb0f8fb50c6e6c"
     },
     {
       "file": "conformance/violations.json",
@@ -81,8 +81,8 @@
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
-      "bytes": 19507,
-      "sha256": "8702c5486762f98e834a2071aec6c131a81751308541995eb239726c0f80be82"
+      "bytes": 19509,
+      "sha256": "090c9cc2359b5c2b2634373fa8f6dc37338c8ef8a793576323be9070546994a8"
     },
     {
       "file": "conformance/cross-medium/spec.json",

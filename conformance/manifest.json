@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "The Zui Conformance Suite",
+    "title": "The Zane Conformance Suite",
     "version": "1.3",
     "lastUpdated": "2026-11-01",
     "specification": "doc/language/README.md",
@@ -184,7 +184,7 @@
       "file": "foreign-pillar-ignored.zane",
       "level": 2,
       "expect_ids": [],
-      "note": "Non-Zui declarations must be ignored silently. A warning here is a failure."
+      "note": "Non-Zane declarations must be ignored silently. A warning here is a failure."
     },
     {
       "file": "intent-orphan.zane",

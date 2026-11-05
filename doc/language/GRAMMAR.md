@@ -1,7 +1,7 @@
-# The Zui Grammar
+# The Zane Grammar
 
 **Normative.** Stated in EBNF for the first time — the reference implementation's specification is prose
-and tables. Part of [the Zui Language Specification v1.4](README.md).
+and tables. Part of [the Zane Language Specification v1.5](README.md).
 
 Notation: `=` defines, `|` alternates, `{ }` repeats zero or more, `[ ]` is
 optional, `" "` is a literal, `(* *)` is a comment.
@@ -26,7 +26,7 @@ number      = [ "-" ] digit { digit } [ "." digit { digit } ] ;
 boolean     = "true" | "false" ;
 ```
 
-**Encoding.** A `.zui` file is UTF-8. Line endings are LF or CRLF; a conforming
+**Encoding.** A `.zane` file is UTF-8 (a `.zui` file, the former extension, is read the same way). Line endings are LF or CRLF; a conforming
 implementation must accept both and must not report a diagnostic for either.
 
 **Case.** Declaration keywords, field keywords and intent verbs are matched
@@ -114,15 +114,15 @@ An implementation encountering them should report `UNSPECIFIED_DECLARATION`
 (warning, not error) so the difference is visible rather than silent.
 
 All other `DEFINE <KIND>` forms belong to other pillars of the host language, if
-any, and are outside this specification. A Zui-only verifier reading a
-multi-pillar file must **ignore non-Zui declarations silently** — it has no
+any, and are outside this specification. A Zane-only verifier reading a
+multi-pillar file must **ignore non-Zane declarations silently** — it has no
 standing to judge them.
 
 ## 6. A complete, lawful example
 
 Every construct of the grammar, in one file:
 
-```zui
+```zane
 // A payment approval, declared before anything is rendered.
 
 DEFINE INTENT_FLOW approve_payment (
@@ -179,6 +179,6 @@ DEFINE VIBE operator_dense (
 )
 ```
 
-This file is fixture `clean-full.zui` in
-[the conformance suite](../../conformance/fixtures/clean-full.zui), and its
+This file is fixture `clean-full.zane` in
+[the conformance suite](../../conformance/fixtures/clean-full.zane), and its
 expected verdict is **no diagnostics at any level**.

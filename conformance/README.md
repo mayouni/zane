@@ -1,4 +1,4 @@
-# The Zui Conformance Suite
+# The Zane Conformance Suite
 
 **Declarations with known verdicts, so any implementation in any language can
 prove agreement rather than assert it.**

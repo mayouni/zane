@@ -1157,7 +1157,7 @@ DEFINE CONSTRAINT signal_unperceivable_vibe AS (
 -- ---- the refusals ----------------------------------------------------------------------
 
 DEFINE REFUSAL unknown_verb AS (
-  MESSAGE "The Zui declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."
+  MESSAGE "The Zane declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."
 ) RATIONALE "A verb outside the grammar is not forbidden, it is unparseable"
 
 DEFINE REFUSAL unknown_declaration AS (

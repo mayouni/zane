@@ -1,6 +1,6 @@
 # Diagnostics and the Law They Enforce
 
-**Normative.** Part of [the Zui Language Specification v1.4](README.md). The
+**Normative.** Part of [the Zane Language Specification v1.5](README.md). The
 machine-readable form of this document is
 [`conformance/violations.json`](../../conformance/violations.json) — that file is
 the contract; this one explains it.
@@ -121,7 +121,7 @@ forbidden pattern `decorative-animation`.
 
 ### Level 3 — needs a symbol table
 
-These three need facts a `.zui` file does not contain. A standalone verifier may
+These three need facts a `.zane` file does not contain. A standalone verifier may
 **accept the symbol table as an input** rather than compute it; the reference implementation supplies it
 natively from the other pillars.
 
@@ -176,7 +176,7 @@ ship in the reference implementation today, under the codes shown.
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
 |---|---|---|---|---|
 | `UNKNOWN_INTENT` | error | 1 | a verb in `SATISFIES`/`ALWAYS_REACHABLE` is not one of the 22 | ❌ |
-| `UNSPECIFIED_DECLARATION` | warning | 1 | a `.zui` declaration kind outside the ten (`WIDGET`, `USER`) | ❌ |
+| `UNSPECIFIED_DECLARATION` | warning | 1 | a `.zane` declaration kind outside the ten (`WIDGET`, `USER`) | ❌ |
 | `DUPLICATE_FIELD` | error | 1 | a field key appears twice in one declaration | ❌ |
 | `DUPLICATE_DECLARATION` | error | 1 | two declarations share a kind and a name | ❌ |
 | `INTENT_FLOW_NO_SATISFIES` | warning | 2 | an `INTENT_FLOW` declares no intents | ✅ `ZUI-W001` |
@@ -203,7 +203,7 @@ ship in the reference implementation today, under the codes shown.
 | `UNEXPECTED_CHARACTER` | error | 1 | a character the lexer has no token for | ❌ |
 | `UNTERMINATED_STRING` | error | 1 | a string is opened and the file ends before it closes | ❌ |
 
-**The last seventeen are `zui`-verifier-only**, and the ❌ column means the *reference
+**The last seventeen are `zane`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
 ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with
@@ -215,7 +215,7 @@ the first expression stratum.
 reads as a declaration that was honoured. That silence is a gap in `TONE` and `PERSPECTIVE`,
 not a precedent."* The gap stayed open for the other fields until **v1.4 (2026-11-01,
 ruling D1 of 2026-10-31)**. It surfaced when the language was declared as a Haro language
-(`haro/zui.stzu`): the court forged from that declaration refused a `TONE` or a `PERSPECTIVE`
+(`haro/zane.stzu`): the court forged from that declaration refused a `TONE` or a `PERSPECTIVE`
 on a `SCREEN` while the verifier said nothing, so an author believed a field was working
 that nothing read.
 
@@ -240,7 +240,7 @@ speaks where its silence *hides* an error; a field it already reads is not silen
 carrying it is multi-step, `TRAPPED_FLOW`), `INTENT_FLOW` (resolved wherever it appears,
 `UNRESOLVED_INTENT_FLOW`), `VISIBLE_STATE` and `VISIBLE_ENTITIES` (collected file-wide). A
 `STEPS` on a `SCREEN` is therefore not `FIELD_MISPLACED`. The Haro court refuses all four off
-their kind; that difference is a named seam in `haro/zui.stzu`, not a disagreement about the law.
+their kind; that difference is a named seam in `haro/zane.stzu`, not a disagreement about the law.
 
 Three more edges, stated so they are not rediscovered. **`ROLE` is left to `ROLE_MISPLACED`**,
 which keeps its own id because ids are stable forever, so one defect is never reported
@@ -293,7 +293,7 @@ per-control count would be a requirement wearing a warning's clothes. Roles are 
 
 **What it cannot see, stated because the number will be read as if it could**: an author who
 declares no `INTERACTION` at all. This counts *roles per interaction*; *interactions per
-control* is the deeper under-declaration, and `.zui` has no control primitive to count
+control* is the deeper under-declaration, and `.zane` has no control primitive to count
 against.
 
 `ROLE_PROMISE_BROKEN` is scoped away from `MISSING_UNDO` for the same reason — it fires
@@ -319,7 +319,7 @@ two.
 
 ◐ the reference implementation's `ZUI-W010` resolves the **cross-pillar** direction — `INTENT_FLOWS`
 references written in other pillars' files, checked against flow names harvested
-from `.zui`. The Zui-local direction specified here (a `FORM` whose `INTENT_FLOW`
+from `.zane`. The Zane-local direction specified here (a `FORM` whose `INTENT_FLOW`
 names nothing) is not checked today.
 
 `UNRESOLVED_ENTITY` is Level 3 and notable as a **gap in the reference
@@ -333,7 +333,7 @@ Not normative, but conformance is easier to prove when implementations agree.
 Recommended: one finding per line, machine-parseable first, prose after.
 
 ```
-payments.zui:2  error  MISSING_UNDO  approve_payment
+payments.zane:2  error  MISSING_UNDO  approve_payment
     An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.
     Rule 79 · The Undo Covenant · Article IV · the right to reverse
 ```

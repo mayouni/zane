@@ -91,7 +91,7 @@ function versions() {
   let rules = 0; for (const s of sets) rules += (law[s].rules || []).length;
 
   const spec = fs.readFileSync(path.join(ROOT, 'doc/language/README.md'), 'utf8')
-    .match(/^#\s+The Zui Language\s+—\s+Specification\s+v(\S+)/m);
+    .match(/^#\s+The Zane Language\s+—\s+Specification\s+v(\S+)/m);
 
   const contract = read('conformance/violations.json');
   const fixtures = read('conformance/manifest.json');

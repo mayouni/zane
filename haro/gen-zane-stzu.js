@@ -306,7 +306,7 @@ for (const k of KINDS) {
 w('-- ---- the refusals ----------------------------------------------------------------------');
 w('');
 w('DEFINE REFUSAL unknown_verb AS (');
-w('  MESSAGE "The Zui declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."');
+w('  MESSAGE "The Zane declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."');
 w(') RATIONALE "A verb outside the grammar is not forbidden, it is unparseable"');
 w('');
 w('DEFINE REFUSAL unknown_declaration AS (');
