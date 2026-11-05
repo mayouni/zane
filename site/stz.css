@@ -337,21 +337,22 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 /* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file) */
 .hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: #15110d; overflow: hidden; }
 .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-/* The panel is as wide as its title and no wider (the author, 2026-11-05: "the space to the right is not necessary! Space is a functional
-   communication tool that we must use with care"). The title's one line is 20.6 of its own em, and balanced on two lines its longer line is
-   11.8, so the panel's text is 12 title-ems wide and the panel fits it. The line under the title is set larger than the reading size, at 0.62
-   of the title ("the secondary text must be bigger!"). */
-.hero .panel { --title: clamp(1.9rem, 2.8vw, 2.4rem); position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; width: fit-content;
+/* The hero's panel is a rectangle as wide as its title, which holds one line (the author, 2026-11-05: "the hero zone must be rectangular and
+   you have space: put the title on one line and stretch the text to the right!"). The line under the title fills that width and does not widen
+   the panel (width 0, min-width 100%), and it is larger than the reading size, at 0.62 of the title ("the secondary text must be bigger!"). On
+   a phone the panel is not drawn and the title wraps. The title's size follows the window so its one line always fits: the widest face (Retro's
+   monospace) sets it 25.2 of its em wide, so the title is at most a 26th of the window less the panel's margins and padding. */
+.hero .panel { --title: clamp(1.6rem, calc((100vw - 7rem) / 26), 2.4rem); position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; width: fit-content;
   max-width: calc(100% - 2.8rem); background: rgba(18, 20, 19, .80); color: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; }
-.hero .panel h1 { color: #fff; font-size: var(--title); line-height: 1.12; margin: 0; max-width: calc(var(--title) * 12); }
-.hero .panel p { color: #fff; margin: .8rem 0 0; max-width: calc(var(--title) * 12); font-size: max(1.3rem, calc(var(--title) * .62)); line-height: 1.45; text-wrap: balance; }
-/* Two plain actions, as the Softanza site has them, the first one to understand the language (the author: a call to action that asks for a
-   commitment before the reader knows what the language is "is intrusive and disruptive") */
-.hero .panel .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.3rem; }
-.hero .panel .actions .btn { background: #fff; color: #1c1830; border-color: #fff; border-radius: 999px; padding: .55rem 1.5rem; font-weight: 700; }
-.hero .panel .actions .btn:hover { filter: none; background: #ece9f7; }
-[data-vibe="guardian"] .hero .panel .actions .btn { background: #46e07f; color: #060b07; border-color: #46e07f; }
-[data-vibe="guardian"] .hero .panel .actions .btn:hover { background: #7ee2ae; }
+.hero .panel h1 { color: #fff; font-size: var(--title); line-height: 1.12; margin: 0; white-space: nowrap; }
+.hero .panel p { color: #fff; margin: .7rem 0 0; width: 0; min-width: 100%; max-width: none; font-size: max(1.3rem, calc(var(--title) * .62)); line-height: 1.45; text-wrap: pretty; }
+/* One action, named for the page it opens, and that page explains the language before anything is asked of the reader (the author: a call to
+   action that asks for a commitment before the reader knows what the language is "is intrusive and disruptive"; and "we don't have a Learn
+   page nor Start one!") */
+.hero .panel .btn.primary { margin-top: 1.2rem; background: #fff; color: #1c1830; border-color: #fff; border-radius: 999px; padding: .6rem 1.6rem; font-weight: 700; }
+.hero .panel .btn.primary:hover { filter: none; background: #ece9f7; }
+[data-vibe="guardian"] .hero .panel .btn.primary { background: #46e07f; color: #060b07; border-color: #46e07f; }
+[data-vibe="guardian"] .hero .panel .btn.primary:hover { background: #7ee2ae; }
 /* The front page (the author, 2026-11-05): the menu lies over the photograph and lets a quarter of it through, and the photograph fills the window.
    Measured on the file, cover-fitted at nine window sizes from 800x1000 to 2560x1440: the brightest pixel under the menu's top 76 px is
    rgb(249,255,245), luminance 0.983, and a blur barely lowers it (0.945 at 8 px), so the bar's own opacity carries the contrast. The bar is 75% of
@@ -363,14 +364,16 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 [data-vibe="guardian"] .front nav.site { background: rgba(6, 11, 7, .75); }
 .front nav.site .brand, .front nav.site a:not(.brand) { color: #fff; opacity: 1; }
 .front .hero { min-height: 100svh; }
+/* on a narrow window the line under the title has three lines or more, and is balanced so that none ends alone */
+@media (max-width: 900px) { .hero .panel p { text-wrap: balance; } }
 @media (max-width: 760px) {
   .hero, .front .hero { min-height: 0; background: var(--paper); }
   .hero img { position: static; height: 46svh; min-height: 260px; }
   .hero .panel { position: static; width: auto; max-width: none; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
   .hero .panel h1, .hero .panel p { color: var(--ink); max-width: none; }
-  .hero .panel h1 { font-size: 1.6rem; }
-  .hero .panel p { font-size: 1.3rem; }
-  .hero .panel .actions .btn, [data-vibe="guardian"] .hero .panel .actions .btn { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
+  .hero .panel h1 { font-size: 1.6rem; white-space: normal; }
+  .hero .panel p { font-size: 1.3rem; width: auto; text-wrap: balance; }
+  .hero .panel .btn.primary, [data-vibe="guardian"] .hero .panel .btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
 }
 .messages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.2rem 0 0; }
 @media (max-width: 860px) { .messages { grid-template-columns: minmax(0, 1fr); } }
