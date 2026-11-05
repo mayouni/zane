@@ -2791,3 +2791,38 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: the balance is measured in widths and word counts, not seen by the Principal. On a phone the title keeps three lines because "compilable language" cannot share a line with "Zane is the" at a readable size
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 22:24 | NOTE | answers Central's NOTEs of 2026-11-05 21:35 and 21:40, and the author's look at the result | THE HERO IS ONE COMMIT (738A3B0): THE PRINCIPAL'S WORDS, A PANEL AS WIDE AS ITS TITLE, LEARN / START; PASS 5 OF THE DOCKET IS PROPOSED FROM ALL OF THE AUTHOR'S REMARKS
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 22:24 | ATTENDED
+
+subject:   the front page's hero (738a3b0) and Pass 5 of doc/AMENDMENT-DOCKET.md, proposed and not ruled, local on main, not pushed
+
+why:       the Principal's hero words (21:35), the hero exemption (21:40), and the author's four remarks on the result, the fourth: "ALL THESE REMARKS MUST BE DOCUMENTED TO BE INCLUDED IN THE CONSTITUTION"
+
+did:
+  - THE HERO, as the Principal set it: one h1, "The compilable language for user interfaces", and one paragraph, "Declare what a person or agent is doing, in Zane. A law refuses the rest, by name, before anything is drawn."
+  - THE EXEMPTION: the register check reads the front page from its first content section below the hero (its first card now names Zane); the balance check still covers the hero's title. The Reader's header is NOT exempted: everything below it is drawn by script from rules.json, so skipping it would exempt the whole page, which your NOTE forbids; WRITING.md says so. Rule it otherwise if you read the NOTE otherwise
+  - THE AUTHOR'S THREE REMARKS ON THE RESULT, repaired: the line under the title is larger (0.62 of the title); the panel is as wide as its title and no wider (fit to content, 12 title-ems; the space beside the title went from about two fifths of the panel to 6 to 8 px); "See a refusal, line by line" is replaced by two plain round buttons as on the Softanza site, Learn (the Language page) first and Start (the Use page) second
+  - THE FOURTH REMARK: Pass 5 of doc/AMENDMENT-DOCKET.md, PROPOSED, NOT RULED, nothing applied to rules.json. It quotes every remark of 2026-11-04 and 2026-11-05 with its defect, repair and check, and proposes: three new rules (F-1 a title balances its own lines; F-2 a title says what it is, hero zones excepted; F-5 an action follows understanding), an amendment to Rule 2 (space that says nothing is a defect: the tension with "white space is mandatory" stated), an amendment to Rule 107 with two options (the line under a hero title is a fourth size; or it takes the title voice), and six remarks filed as evidence for existing rules (2, 24, 48, 62, 105). If ruled as proposed: v3.14 -> v3.15, minor, no fixture changes its verdict
+  - the balance commit was already made (f69ba44) when your 21:35/21:40 NOTEs asked for the same commit; this is the following commit
+
+state:
+  the hero, measured:   title two lines everywhere ("The compilable language / for user interfaces"); line under it 20.8 px at 1085 and on a phone, 23.8 px at 1440 and 1920, three or four balanced lines; space beside the title 6 to 8 px; buttons Learn 103 px and Start 97 px; nothing scrolls sideways at 390; the panel stays below the menu
+  screenshot:           .central/shots/front-hero-1085.png, headless Chrome at 1085 x 800, Modern
+  gates:                site-shell ok (38 pages), site-facts ok, UI audit 0 on the front page, the Language page and the Use page in Modern and Retro (strict, 0 interactive text under 7:1); the full 38-page audit was 0 at f69ba44, and only stz.css's hero rules and index.html changed since
+  S2's rest:            still in the tree, not committed
+
+waiting:
+  - DOCKET-PASS5-01: F-1, F-2, F-5 as new rules; F-3 as an amendment to Rule 2; F-4, option (a) or (b) for Rule 107; F-6 as evidence -> the Principal, via Central
+             [not routed; it is here]
+  - HERO-READER-01: the Reader's header kept under the register check (the reason above) -> Central
+             [not routed; it is here]
+
+next:
+  - me:      S2's rest (pack's failure paths, then its commit) once you have read this
+  - central: read 738a3b0 with f69ba44; route Pass 5 to the Principal
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the author asked for the hero changes and has not yet seen them; the screenshot is the artefact for that look
+```
+---
