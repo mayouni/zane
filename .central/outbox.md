@@ -2550,3 +2550,55 @@ next:
 note:      Parity is sameness, not rightness (CENTRAL-PERCEPTGATE-01): the binary agrees with the JavaScript on every input it was given, mistakes included. Only Windows was built and run; no other target was built
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 14:10 | NOTE | answers Central's NOTEs of 2026-11-05 13:30 (piece E) and the walk-table answer relayed after 14:06 | PIECE E IS FOUR COMMITS (0CEADC1, 5C453D6, 0119A3F, DB72E2D): 0 UNCHECKED NUMBERS, COMPARISON SPLIT, THE WALK DONE AND ITS TWO BREAKS MENDED; AUDIT 0 ON 38 PAGES
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 14:10 | ATTENDED
+
+subject:   site piece E of SITE-3, close (0ceadc1, 5c453d6, 0119a3f, db72e2d), local on main, not pushed
+
+why:       your 13:30 NOTE: the Comparison split, the unchecked-numbers check failing above 0, the final walk; and your answer on the walk table: it goes in this memo, not in SITE-3.md
+
+did:
+  - 0CEADC1, 0 UNCHECKED: tools/site-facts.js now FAILS on any typed number outside a span. The eighteen it counted were names and specimens, not measured figures: twelve rule numbers on the gotchas index now link to their rule in the Reader; six figures inside two gotchas' mock interfaces ("45,000 XOF", "12") are marked data-specimen, which the check skips and which says on the element what it is. Demonstrated by breaking it: with two unmarked, it named the page and failed
+  - 5C453D6, THE SPLIT: Comparison is the family head (the claim and what bounds it, the two pages as cards, what the comparison does not decide); Practices and Frameworks and languages are its left list, inside the Approach band, no sixth entry. Rows and captions moved word for word; the "read and left out" notes were divided between the two pages. Every link to Comparison still lands on it; the tour's comparison scene still opens it
+  - THE WALK: every link a reader can see on the 38 pages, from the front page, shortest route first (the hidden Breadcrumb landmark left out). All 38 pages reachable. It found three things, mended in their own commits:
+      0119a3f: the Use page said "Five ways in" over four cards (now four); its stack card named Build, Generate, Softanza and Other languages without linking them, so the AI builder and the implementer were 3 clicks where SITE-3 said 2 (now linked: 2)
+      db72e2d: Other languages said the Zig verifier was "designed and not built"; since 120171c its first stage is built. The sentence says so, says Windows only and that the browser build is not built, and does not say "one file" (your S6 ruling)
+  - SITE-3.md WAS NOT EDITED: the author stopped my edit of its walk table, and your answer put the table here
+  - Central's 14:06 rename NOTE (the language is Zane) is read; nothing of it is done; it waits for your read of piece E
+
+state:
+  the walk, 2026-11-05, clicks from the front page to the reader's page:
+    builds business software:            2  front page > Use > Web apps (a real run on a site this project does not own)
+    designs, or cares about UX:          1  front page > The grid, or > Comparison; Practices is 2
+    builds with AI:                      2  front page > Use > Generate (was 3 before 0119a3f)
+    ships where there is no screen:      2  front page > Use > Beyond screens
+    judges an application not their own: 2  front page > Try > Screenshots
+    designs a language:                  2  front page > Approach > Declared in Haro
+    implements StzZui elsewhere:         2  front page > Use > Other languages (was 3 before 0119a3f)
+  the five tour profiles: each 1 click from the front page (Present it to your team), 8 scenes, every scene opening a page that exists:
+    UX designer:       hook, comparison, grid, channels, refusal, web case, limits, next
+    Product designer:  hook, refusal, grid, web case, quick win, comparison, limits, next
+    Programmer:        hook, refusal, build, conformance, Haro, quick win, limits, next
+    AI builder:        hook, generate, refusal, law, channels, conformance, limits, next
+    Decision maker:    hook, cost, law, grid, web case, comparison, limits, next
+  the counts, 1280 by 800, screens below the bars. Columns: first example (a figure, a shot or a gotcha duel) / first sourced number / first button in the page body / first real terminal
+    Comparison:                 none / 1.1 / none / none (3.7 screens; was 14.8 as one page)
+    Practices:                  none / none / none / none (6.9 screens; a table of sourced claims, its figures are rule numbers)
+    Frameworks and languages:   none / none / none / none (12.0 screens)
+    Use (after the walk):       none / 2.6 / none / none (4.3 screens; its example is the four cards)
+  UI audit:          0 on 38 pages in Modern and Retro at 5c453d6; adopt and ports re-audited after the walk, 0 in both (a scoped run: the cross-page trail and menu checks saw those two only); strict, 0 interactive text under 7:1 every time. Strict mode's 18 px size findings (the menu at 16 px on every page) are as before and are not this piece's
+  375 wide:          no sideways scroll on Comparison, Practices, Frameworks and languages, Use, Other languages; footer outside the layout
+  gates:             site-shell ok (38 pages), site-facts ok (0 unchecked, now a failure above 0), pack verified, conformance 73 of 73
+
+waiting:
+  - (none new)
+
+next:
+  - me:      the rename series of your 14:06 NOTE, exactly as listed, once you have read and pushed piece E; every gate re-run; then stop. S2 after that
+  - central: read 0ceadc1..db72e2d, push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the walk counts clicks, not understanding. Nobody but the author has walked the site, and the tour has not been presented to a room
+```
+---
