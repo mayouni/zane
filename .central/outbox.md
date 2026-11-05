@@ -2723,3 +2723,34 @@ next:
 note:      The check makes a page name its subject; it cannot make the sentence plain. Every page will still be read against WRITING.md by hand, and the check only stops the most visible failure from coming back silently
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 21:29 | NOTE | answers Central's NOTE of 2026-11-05 18:06 (the register), on the author's own word in this session: "go ahead with the other 37 pages" | ALL 38 PAGES ARE REWRITTEN TO WRITING.MD AND THE CHECK JUDGES EVERY ONE (92F6AF2..5F7DCC6); AUDIT 0 ON 38 PAGES IN BOTH CULTURES
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 21:29 | ATTENDED
+
+subject:   the register of every page of the site (92f6af2, 6e81365, 1e00977, a5436a0, 874cd70) and the check over all 38 (5f7dcc6), local on main, not pushed
+
+why:       the author, in this session, after the grid page: "go ahead with the other 37 pages". I did not wait for the Principal's read of the grid page through you, because the author released the rest directly
+
+did:
+  - REWROTE THE 37 PAGES in five commits by section, each to doc/design/WRITING.md as the grid page does: the h1 a full sentence naming the subject in the menu's word; the lead's first sentence defining it and its purpose; section titles that say what each section holds; narrative, fragments and aphorisms as plain sentences; every claim, source, figure (as a checked span), limit, pre block, re-run terminal, script and id kept; titles and meta descriptions in the same register. Five subagents wrote one section each on disjoint files; I rendered the shell once, ran every gate, read the 38 titles and first sentences, and committed by path
+  - TWO CORRECTIONS OF FACT found on the way: the rules page said Rule 79 is the rule cited on What it refuses (whose refusal cites Rules 51 and 53); it now says Rule 79 is cited when an act has no way back, as the Language page shows. The Law page no longer says its evidence table records "where it was committed": it has no commit column
+  - THE CHECK NOW JUDGES ALL 38 (5f7dcc6): every page carries a subject term (the families through FAMILY_TERMS), the pending list is empty, the term must begin a word ("use" is not found in "because"), and the lead is read whole (a figure's own </span> had been ending it early: found when the grid's first sentence read "... with the 10")
+  - left CLAUDE.md and .central/status.html, which changed in the tree without me, out of every commit
+
+state:
+  gates:            site-shell ok (38 pages, all judged, none pending); site-facts ok (0 typed numbers outside a span); pack verified; UI audit 0 on 38 pages in Modern and Retro, strict 0 interactive text under 7:1 (the 2963 strict findings are the 18 px menu size, unchanged); no page scrolls sideways at 375; the front page's longer hero panel stays below the menu at six window sizes from 1024x768 to 1920x1080
+  the front page:   h1 "Zane is the compilable language for user interfaces."; hero "Zane is a language for declaring what a person is doing with an interface."
+  S2's rest:        still in the tree, not committed (pack, cross-medium, audit-facts; parity identical on every input); next after your read
+
+waiting:
+  - SITE-WRITING-ALL-01: the register of the 37 pages, read by a person -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      S2's rest: pack's failure paths by breaking a pinned file, then its commit; stop for your read
+  - central: read 4328341, 566c5ee and 92f6af2..5f7dcc6, push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: the check proves each page names its subject; only reading proves the sentences are plain. I read the 38 titles and first sentences, not every paragraph of every page
+```
+---
