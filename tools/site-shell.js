@@ -217,7 +217,7 @@ function list3(p, secs) {
   if (p.home || p.outside) return '';
   const f = familyOf(p);
   const own = secs && secs.length >= SECTION_MIN ? secs : null;
-  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
+  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}" title="${esc(x.label).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
   if (f) {
     const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>${q === p ? subs : ''}</li>`;
     return `<nav class="list3" aria-label="Pages of the family">
@@ -231,7 +231,7 @@ ${f.kids.map(li).join('\n')}
   <details open>
     <summary>On this page</summary>
     <ul>
-${own.map(x => `      <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}
+${own.map(x => `      <li><a href="#${x.id}" title="${esc(x.label).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}
     </ul>
   </details>
 </nav>`;

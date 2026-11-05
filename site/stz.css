@@ -185,26 +185,32 @@ nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent);
 .layout.has-list.sections-right > nav.list3 { grid-column: 2; grid-row: 1; }
 .layout.has-list main section { padding-left: 1.4rem; padding-right: 1.4rem; margin-left: -1.4rem; margin-right: -1.4rem; }
 .layout.has-list main .narrow, .layout.has-list main .wrap { padding: 0; max-width: none; margin: 0; }
+/* The list beside a page, drawn as plainly as an outline beside a document (the author, 2026-11-05: "dead simple like in github lateral menu
+   for the markdown docs with a strict line separating it from the content of the page"): no card, one thin line between it and the page,
+   one line per entry cut with an ellipsis (the whole title in the entry's tooltip), and NO SCROLL BAR OF ITS OWN ("a second vertical scroll
+   bar ... is forbidden"): one line per entry keeps the list shorter than the window, and on a window too short for it the list stops
+   following the page instead of scrolling inside itself. */
 nav.list3 {
-  align-self: start; position: sticky; top: calc(var(--bars-h, 6rem) + 1rem); margin: 2.6rem 0 0;
-  max-height: calc(100vh - var(--bars-h, 6rem) - 2rem); overflow-y: auto; overflow-x: hidden;
-  background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: .6rem 0;
+  align-self: start; position: sticky; top: calc(var(--bars-h, 6rem) + 1.5rem); margin: 2.6rem 0 0;
+  border-left: 1px solid var(--line); padding: 0 0 0 .9rem;
 }
+.layout.has-list:not(.sections-right) > nav.list3 { border-left: 0; border-right: 1px solid var(--line); padding: 0 .9rem 0 0; }
 nav.list3 ul { list-style: none; margin: 0; padding: 0; max-width: none; }
 nav.list3 li { margin: 0; }
-nav.list3 a { display: block; padding: .45rem 1rem; color: var(--ink); text-decoration: none;
-  border-left: 3px solid transparent; font-size: 1rem; line-height: 1.4; }
-nav.list3 a[aria-current] { font-weight: 800; border-left-color: var(--accent); text-decoration: underline; text-underline-offset: .22em; }
-/* the sections of a long page: a disclosure with the sections as its list; the entries of a family's current page nest one step in */
-nav.list3 summary { cursor: pointer; padding: .45rem 1rem; font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+nav.list3 a { display: block; padding: .28rem .6rem; color: var(--ink); text-decoration: none; font-size: 1rem; line-height: 1.5;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-radius: 6px; }
+nav.list3 a:hover { background: var(--tint); }
+nav.list3 a[aria-current] { font-weight: 700; background: var(--tint); }
+nav.list3 details > summary { cursor: pointer; padding: 0 .6rem .4rem; font-weight: 700; font-size: 1rem; color: var(--ink); }
 nav.list3 .sub { margin: 0 0 .3rem; }
-nav.list3 .sub a { padding-left: 1.8rem; font-size: 1rem; }
+nav.list3 .sub a { padding-left: 1.4rem; }
+@media (max-height: 640px) { nav.list3 { position: static; } }
 html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
 @media (max-width: 900px) {
   .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list.sections-right { grid-template-columns: minmax(0, 1fr); }
   .layout.has-list.sections-right > main, .layout.has-list.sections-right > nav.list3 { grid-column: auto; grid-row: auto; }
-  nav.list3 { position: static; margin: 1.4rem 0 0; max-height: none; }
+  nav.list3, .layout.has-list:not(.sections-right) > nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
 }
 
 /* ---- sections & prose ---- */
