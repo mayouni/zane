@@ -29,7 +29,7 @@ Three files, no dependencies, nothing to install:
 | `cli.js` | the command line: reads files, filters by level, formats findings. |
 | `envelope.js` | the family envelope: builds `{code, severity, message, span, cites, language}` findings and validates them against [the Diagnostic Contract's shape](../../doc/diagnostic-contract.schema.json). |
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
-| `parity.js` | the gate of the binary's stage S1 ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js`, byte for byte, on every fixture and a seeded corpus. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
+| `parity.js` | the gate of the binary's stages S1 and S2 ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js` on every fixture and a seeded corpus, and `zane conformance` against `conformance.js`, byte for byte. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
 
 It implements [the Zane language specification v1.5](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).

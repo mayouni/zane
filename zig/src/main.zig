@@ -1,16 +1,19 @@
 //! zane: the Zane verifier as one executable (doc/design/BINARY.md).
 //!
 //!   zane check <file.zane> [file.zane ...] [options]     the verifier, text or --json (the C2 envelope)
+//!   zane conformance [--level N] [--verbose]            the suite and its cross-checks, in one process
 //!   zane version                                       the law, the language, the contract, the build
 //!
-//! Stage S1 carries `check` and `version`. The output is byte for byte the output of tools/zane/cli.js, which
-//! tools/zane/parity.js proves on every fixture and on a seeded corpus. Exit codes: 0 clean, 1 violations found,
-//! 2 usage or read error.
+//! Stage S1 carries `check` and `version`; stage S2 adds `conformance` (conformance.zig). Each prints byte for byte
+//! what tools/zane/cli.js and tools/zane/conformance.js print, which tools/zane/parity.js proves. Exit codes: 0 clean
+//! or conforming, 1 violations or mismatches found, 2 usage or read error. The usage text is cli.js's, so that
+//! the two stay byte for byte the same; it names check only.
 
 const std = @import("std");
 const builtin = @import("builtin");
 const core = @import("core.zig");
 const contract_mod = @import("contract.zig");
+const conformance = @import("conformance.zig");
 
 const language_version = "1.5";
 
@@ -94,55 +97,6 @@ fn parseArgs(a: std.mem.Allocator, argv: []const []const u8) !Options {
     return o;
 }
 
-/// Any bytes as well-formed UTF-8, the way Node's readFileSync(file, 'utf8') reads them: the WHATWG decoder, where
-/// each maximal ill-formed subpart becomes one U+FFFD and the byte that ended it is read again.
-fn wellFormed(a: std.mem.Allocator, s: []const u8) ![]const u8 {
-    if (std.unicode.utf8ValidateSlice(s)) return s;
-    var out: std.ArrayList(u8) = .empty;
-    var i: usize = 0;
-    while (i < s.len) {
-        const b = s[i];
-        var need: usize = 0;
-        var lower: u8 = 0x80;
-        var upper: u8 = 0xBF;
-        switch (b) {
-            0x00...0x7F => {
-                try out.append(a, b);
-                i += 1;
-                continue;
-            },
-            0xC2...0xDF => need = 1,
-            0xE0...0xEF => {
-                need = 2;
-                if (b == 0xE0) lower = 0xA0;
-                if (b == 0xED) upper = 0x9F;
-            },
-            0xF0...0xF4 => {
-                need = 3;
-                if (b == 0xF0) lower = 0x90;
-                if (b == 0xF4) upper = 0x8F;
-            },
-            else => {
-                try out.appendSlice(a, "\xEF\xBF\xBD");
-                i += 1;
-                continue;
-            },
-        }
-        var j = i + 1;
-        var k: usize = 0;
-        while (k < need and j < s.len and s[j] >= lower and s[j] <= upper) : ({
-            j += 1;
-            k += 1;
-        }) {
-            lower = 0x80;
-            upper = 0xBF;
-        }
-        if (k == need) try out.appendSlice(a, s[i..j]) else try out.appendSlice(a, "\xEF\xBF\xBD");
-        i = j;
-    }
-    return out.toOwnedSlice(a);
-}
-
 /// A lone surrogate (WTF-8, ED A0..BF xx) printed as console.log prints it: U+FFFD.
 fn asText(a: std.mem.Allocator, s: []const u8) ![]const u8 {
     if (std.mem.indexOfScalar(u8, s, 0xED) == null) return s;
@@ -162,7 +116,7 @@ fn asText(a: std.mem.Allocator, s: []const u8) ![]const u8 {
 
 fn loadSymbols(a: std.mem.Allocator, path: []const u8) !core.Symbols {
     const data = try std.fs.cwd().readFileAlloc(a, path, 64 * 1024 * 1024);
-    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, .{});
+    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, contract_mod.js_parse);
     var s: core.Symbols = .{};
     if (root != .object) return s;
     const keys = [_][]const u8{ "entities", "actors", "state", "elements" };
@@ -206,6 +160,23 @@ pub fn main() !void {
 fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     const raw = try std.process.argsAlloc(a);
     const argv: []const []const u8 = if (raw.len > 0) raw[1..] else raw;
+    // conformance.js reads its own arguments: --level N, --verbose or -v, and ignores the rest
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "conformance")) {
+        var level: ?i64 = 4;
+        var verbose = false;
+        var i: usize = 1;
+        while (i < argv.len) : (i += 1) {
+            if (std.mem.eql(u8, argv[i], "--level")) {
+                i += 1;
+                level = parseJsInt(if (i < argv.len) argv[i] else null);
+            } else if (std.mem.eql(u8, argv[i], "--verbose") or std.mem.eql(u8, argv[i], "-v")) verbose = true;
+        }
+        if (level == null or level.? < 1 or level.? > 4) {
+            try err.print("--level must be 1..4\n", .{});
+            return 2;
+        }
+        return conformance.run(a, out, level.?, verbose);
+    }
     const o = try parseArgs(a, argv);
 
     if (o.command != null and std.mem.eql(u8, o.command.?, "version") and !o.help) return version(out);
@@ -258,7 +229,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
             try err.print("zane: cannot read {s}: {s}\n", .{ file, @errorName(e) });
             return 2;
         };
-        const diags = try core.verify(a, try wellFormed(a, raw_src), symbols);
+        const diags = try core.verify(a, try core.wellFormed(a, raw_src), symbols);
         for (diags) |d| {
             const m = contract.meta(d.id);
             const m_level: i64 = if (m.level == 0) 1 else m.level;
@@ -374,7 +345,7 @@ fn writeJsonReport(
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane (stage S1: check) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane (stage S2: check, conformance) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",
@@ -387,4 +358,5 @@ fn version(out: *std.Io.Writer) !u8 {
 
 test {
     _ = contract_mod;
+    _ = @import("schema.zig");
 }

@@ -11,6 +11,9 @@ const core = @import("core.zig");
 pub const violations_json = @embedFile("violations.json"); // conformance/violations.json, named in build.zig
 pub const rules_json = @embedFile("rules.json"); // constitution/rules.json
 
+/// JSON.parse keeps the last value of a repeated key; std.json refuses the document unless told to do the same.
+pub const js_parse: std.json.ParseOptions = .{ .duplicate_field_behavior = .use_last };
+
 pub const Meta = struct {
     severity: []const u8 = "error",
     level: i64 = 1,
@@ -23,6 +26,8 @@ pub const Meta = struct {
 
 pub const Contract = struct {
     by_id: std.StringHashMap(Meta),
+    /// the ids in the catalogue's own order
+    ids: []const []const u8,
     version: ?[]const u8,
     constitution: ?[]const u8,
 
@@ -67,8 +72,9 @@ fn textList(a: Allocator, v: ?std.json.Value) ![]const []const u8 {
 }
 
 pub fn loadContract(a: Allocator, data: []const u8) !Contract {
-    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, .{});
+    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, js_parse);
     var by_id = std.StringHashMap(Meta).init(a);
+    var ids: std.ArrayList([]const u8) = .empty;
     if (root == .object) {
         if (root.object.get("diagnostics")) |dv| if (dv == .array) for (dv.array.items) |d| {
             if (d != .object) continue;
@@ -85,6 +91,7 @@ pub fn loadContract(a: Allocator, data: []const u8) !Contract {
             m.rights = try textList(a, d.object.get("rights"));
             m.forbidden_patterns = try textList(a, d.object.get("forbidden_patterns"));
             try by_id.put(id, m);
+            try ids.append(a, id);
         };
     }
     var version: ?[]const u8 = null;
@@ -93,7 +100,7 @@ pub fn loadContract(a: Allocator, data: []const u8) !Contract {
         version = str(md.object.get("version"));
         constitution = str(md.object.get("constitution"));
     };
-    return .{ .by_id = by_id, .version = version, .constitution = constitution };
+    return .{ .by_id = by_id, .ids = try ids.toOwnedSlice(a), .version = version, .constitution = constitution };
 }
 
 fn isSetKey(k: []const u8) bool {
@@ -103,7 +110,7 @@ fn isSetKey(k: []const u8) bool {
 }
 
 pub fn loadLaw(a: Allocator, data: []const u8) !Law {
-    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, .{});
+    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, js_parse);
     var titles = std.StringHashMap([]const u8).init(a);
     var arts = std.StringHashMap(Article).init(a);
     if (root == .object) {

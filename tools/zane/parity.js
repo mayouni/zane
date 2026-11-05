@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 /* ==========================================================================
-   parity.js -- the gate of stage S1 (doc/design/BINARY.md section 5): the binary's `zane check` against
-   `node tools/zane/cli.js check`, byte for byte.
+   parity.js -- the gate of stages S1 and S2 (doc/design/BINARY.md section 5): the binary's `zane check` against
+   `node tools/zane/cli.js check`, and its `zane conformance` against `node tools/zane/conformance.js`, byte for byte.
 
      node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet]
 
@@ -16,6 +16,8 @@
       medium or a role swapped, an invalid byte inserted, a character the language lacks inserted (one outside
       the Basic Multilingual Plane among them), line endings changed, and every truncation of the smallest files.
       Both run them in batches; a batch that differs is split until the files are named.
+   4. THE SUITE. `zane conformance` against `node tools/zane/conformance.js` under every level, --verbose and -v,
+      and the bad levels; and the time each takes, in one process each, as a distribution.
 
    There are NO allowed differences. One that cannot be removed is written down as a named row and this check
    fails on any other, as haro/twin-expected.csv does; today the list is empty.
@@ -42,10 +44,10 @@ const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'conformance', 'mani
 const FIX = path.join(ROOT, 'conformance', 'fixtures');
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-parity-'));
 
-function run(cmd, argv) {
+function run(cmd, argv, script) {
   const t = process.hrtime.bigint();
   const r = cmd === 'js'
-    ? spawnSync(process.execPath, [CLI, ...argv], { cwd: ROOT, encoding: 'buffer', maxBuffer: 1 << 28 })
+    ? spawnSync(process.execPath, [script || CLI, ...argv], { cwd: ROOT, encoding: 'buffer', maxBuffer: 1 << 28 })
     : spawnSync(BIN, argv, { cwd: ROOT, encoding: 'buffer', maxBuffer: 1 << 28 });
   if (r.error) throw r.error;
   return { out: r.stdout, err: r.stderr, code: r.status, ms: Number(process.hrtime.bigint() - t) / 1e6 };
@@ -92,6 +94,17 @@ compare('all fixtures in one call, text', ['check', ...all, '--level', '4']); fi
 const argCases = [[], ['--help'], ['check'], ['check', all[0], '--level', '0'], ['check', all[0], '--level', 'x'],
   ['check', all[0], '--level', ' 3abc'], ['check', all[0], '--bogus'], ['frobnicate', all[0]], ['check', all[0], '--level']];
 for (const c of argCases) compare(`arguments [${c.join(' ')}]`, c);
+
+// ---- 4. the suite: zane conformance against conformance.js (run before the corpus, which loads the machine) ----
+const CONF = path.join(__dirname, 'conformance.js');
+const confCases = [[], ['--level', '1'], ['--level', '2'], ['--level', '3'], ['--level', '4'], ['--verbose'], ['-v', '--level', '2'],
+  ['--level', '0'], ['--level', '5'], ['--level', 'x'], ['--level'], ['--level', ' 3abc'], ['stray', '--level', '3']];
+const confTiming = { js: [], zane: [] };
+for (const c of confCases) {
+  const a = run('js', c, CONF), b = run('zane', ['conformance', ...c]);
+  if (!same(a, b)) differences.push(`conformance [${c.join(' ') || 'default'}]: ${firstDiff(a, b)}`);
+}
+for (let k = 0; k < 10; k++) { confTiming.js.push(run('js', [], CONF).ms); confTiming.zane.push(run('zane', ['conformance']).ms); }
 
 // ---- 3. the corpus --------------------------------------------------------------------------------------
 function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -165,10 +178,14 @@ if (kept > 40) console.log(`  ... and ${kept - 40} more`);
 console.log(`parity: ${path.relative(ROOT, BIN) || BIN} against tools/zane/cli.js`);
 console.log(`  fixtures     ${manifest.fixtures.length}, ${fixtureRuns} command lines`);
 console.log(`  arguments    ${argCases.length} command lines`);
+console.log(`  suite        ${confCases.length} command lines of zane conformance against conformance.js`);
 console.log(`  corpus       seed ${SEED}, ${corpus.length} inputs (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}), each in --json at level 4 and in text at level 2`);
 console.log(`  timing, one fixture per process, --json at level 4, wall time with process start:`);
 console.log(`    node cli.js  ${dist(timing.js)}`);
 console.log(`    zane         ${dist(timing.zane)}`);
+console.log(`  timing, the whole suite in one process, default level, wall time with process start:`);
+console.log(`    node conformance.js  ${dist(confTiming.js)}`);
+console.log(`    zane conformance     ${dist(confTiming.zane)}`);
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, and every exit code');
 process.exit(kept ? 1 : 0);

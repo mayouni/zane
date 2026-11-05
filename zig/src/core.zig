@@ -10,7 +10,7 @@
 //! conformance/signal.json, and `zane conformance` (stage S2) will check them against that data: a third
 //! evaluator that derived its tables from the data would agree with the data by construction.
 //!
-//! Domain of parity: well-formed UTF-8, which the caller makes of any bytes as Node does (main.zig, wellFormed).
+//! Domain of parity: well-formed UTF-8, which the caller makes of any bytes as Node does (wellFormed, below).
 //! Node holds a source as UTF-16, so a character outside the Basic Multilingual Plane is two code units there and
 //! two findings here, each subject a lone surrogate kept as WTF-8 for the writers to print as JavaScript does.
 
@@ -75,8 +75,8 @@ pub const media = [_]Medium{
 };
 
 /// Which semantic values a medium renders as nothing at all. Only the two channels with a shipped renderer.
-const SignalAbsence = struct { medium: []const u8, silent: []const []const u8 };
-const signal_absence = [_]SignalAbsence{
+pub const SignalAbsence = struct { medium: []const u8, silent: []const []const u8 };
+pub const signal_absence = [_]SignalAbsence{
     .{ .medium = "auditory", .silent = &.{"muted"} },
     .{ .medium = "voice", .silent = &.{"muted"} },
 };
@@ -707,6 +707,55 @@ fn check(a: Allocator, decls: []const Decl, symbols: ?Symbols, out: *std.ArrayLi
 // ---- the public surface ----------------------------------------------------------------------------------
 
 /// Verify one Zane source. Every allocation is made in `a`; pass an arena and free it once.
+/// Any bytes as well-formed UTF-8, the way Node's readFileSync(file, 'utf8') reads them: the WHATWG decoder, where
+/// each maximal ill-formed subpart becomes one U+FFFD and the byte that ended it is read again.
+pub fn wellFormed(a: Allocator, s: []const u8) ![]const u8 {
+    if (std.unicode.utf8ValidateSlice(s)) return s;
+    var out: std.ArrayList(u8) = .empty;
+    var i: usize = 0;
+    while (i < s.len) {
+        const b = s[i];
+        var need: usize = 0;
+        var lower: u8 = 0x80;
+        var upper: u8 = 0xBF;
+        switch (b) {
+            0x00...0x7F => {
+                try out.append(a, b);
+                i += 1;
+                continue;
+            },
+            0xC2...0xDF => need = 1,
+            0xE0...0xEF => {
+                need = 2;
+                if (b == 0xE0) lower = 0xA0;
+                if (b == 0xED) upper = 0x9F;
+            },
+            0xF0...0xF4 => {
+                need = 3;
+                if (b == 0xF0) lower = 0x90;
+                if (b == 0xF4) upper = 0x8F;
+            },
+            else => {
+                try out.appendSlice(a, "\xEF\xBF\xBD");
+                i += 1;
+                continue;
+            },
+        }
+        var j = i + 1;
+        var k: usize = 0;
+        while (k < need and j < s.len and s[j] >= lower and s[j] <= upper) : ({
+            j += 1;
+            k += 1;
+        }) {
+            lower = 0x80;
+            upper = 0xBF;
+        }
+        if (k == need) try out.appendSlice(a, s[i..j]) else try out.appendSlice(a, "\xEF\xBF\xBD");
+        i = j;
+    }
+    return out.toOwnedSlice(a);
+}
+
 /// Returns the diagnostics in source order: the lexer's and parser's first, then the checks'.
 pub fn verify(a: Allocator, source: []const u8, symbols: ?Symbols) ![]const Diag {
     var diags: std.ArrayList(Diag) = .empty;
