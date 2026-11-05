@@ -3,3 +3,5 @@ Thumbs.db
 *.log
 .claude/
 .central/runs/
+.zig-cache/
+zig-out/
