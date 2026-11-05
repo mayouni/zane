@@ -21,6 +21,9 @@
    Every page of the site is on a bar (SITE-3.md section 3.4): the check below fails a page the registry does not list, a
    page no bar lists, and a footer link to a page the bars do not list.
 
+   Every page names its subject (doc/design/WRITING.md): the check fails a page whose h1, or the first sentence of whose lead,
+   lacks the page's subject term, and a page that has no term and is not on the list still to be rewritten.
+
    A page that does not have the fences yet is migrated by --write from the markup the old site used.
    The pages outside the shell proper, the Reader and the UI audit tool, take the menu and the trail
    only; the rest of their markup is not touched.
@@ -53,7 +56,7 @@ const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'Sta
 const PAGES = [
   { file: 'index.html', home: true },
   { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true },
-  { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true },
+  { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true, term: 'grid' },
   { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true },
   { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true },
   { file: 'site/practices.html', section: 'approach', label: 'Practices', parent: 'site/positioning.html', rail: true },
@@ -86,6 +89,9 @@ const PAGES = [
   { file: 'site/quick-win.html', section: 'try', label: 'A quick win', rail: true }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
+/* The pages written before doc/design/WRITING.md, which the register check has not yet judged. Each is printed by name on every
+   run, and leaves this list when it is rewritten and gains its term. A page with no term and not on this list fails. */
+const WRITING_PENDING = PAGES.filter(p => p.file !== 'site/grid.html').map(p => p.file);
 const sec = id => SECTIONS.find(s => s.id === id);
 
 const rel = (from, to) => {
@@ -434,11 +440,42 @@ function checkBars(problems, notes) {
   }
 }
 
+/* ---- the register: each page names its subject (doc/design/WRITING.md) -------------------------------------------------- */
+/* The h1, and the first sentence of the lead (the page head's p.sub; on the front page, the hero's paragraph), each contain the page's
+   subject term, ignoring case. The check cannot judge narrative, teasing or fragments: WRITING.md says so, and reading does the rest. */
+function headOf(text) {
+  const h1 = /<h1\b[^>]*>([\s\S]*?)<\/h1>/.exec(text);
+  const head = /<header class="(?:page|hero)"[\s\S]*?<\/header>/.exec(text);
+  const lead = head && (/<p class="sub">([\s\S]*?)<\/p>/.exec(head[0]) || /<div class="panel">[\s\S]*?<p>([\s\S]*?)<\/p>/.exec(head[0]));
+  const first = lead ? (/^([\s\S]*?[.!?])(?=\s|$)/.exec(plain(lead[1])) || [null, plain(lead[1])])[1] : null;
+  return { h1: h1 ? plain(h1[1]) : null, first };
+}
+function checkWriting(problems, notes) {
+  const pending = [];
+  for (const p of PAGES) {
+    if (!p.term) {
+      if (WRITING_PENDING.includes(p.file)) pending.push(p.file);
+      else problems.push(`${p.file}: no subject term beside the menu (doc/design/WRITING.md section 2)`);
+      continue;
+    }
+    const file = path.join(ROOT, p.file);
+    if (!fs.existsSync(file)) continue;
+    const { h1, first } = headOf(fs.readFileSync(file, 'utf8'));
+    const term = p.term.toLowerCase();
+    if (!h1) problems.push(`${p.file}: no h1`);
+    else if (!h1.toLowerCase().includes(term)) problems.push(`${p.file}: the h1 does not name the page's subject ("${p.term}"): "${h1}"`);
+    if (!first) problems.push(`${p.file}: no lead`);
+    else if (!first.toLowerCase().includes(term)) problems.push(`${p.file}: the lead's first sentence does not name the page's subject ("${p.term}"): "${first}"`);
+  }
+  if (pending.length) notes.push(`NOTE the register check (doc/design/WRITING.md) has not yet judged ${pending.length} page(s), still to be rewritten: ${pending.join(', ')}`);
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
   const notes = [];
   checkBars(problems, notes);
+  checkWriting(problems, notes);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);
@@ -463,4 +500,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars };
+module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars, checkWriting };
