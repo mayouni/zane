@@ -83,8 +83,9 @@ Three separate claims, and they are not the same claim:
 - **Envelope conformance** — your findings travel in the C2 shape. Validated per fixture.
 - **Cross-medium** — one declaration renders into two media and every difference is one the
   axes predicted. `cross-medium.js`. **This one does not pass today**, and the pack ships
-  it saying so: `signal.json` records no rendering for the visual channel, because the
-  reference colour engine implements four of the law's five semantic values.
+  it saying so: of the suite's two pairs, visual against auditory is proved (every difference
+  predicted) and visual against print is not, because `signal.json` records no rendering for
+  print, so three of its differences are undecided rather than wrong. No drift is reported.
 
 That last sentence is in the pack on purpose. **An instrument that reports what is missing
 is worth more than one that passes by not looking.**
