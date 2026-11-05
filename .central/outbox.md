@@ -2461,3 +2461,52 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: the Use pages have been read by nobody but me. The audit cannot see whether the web case is fair to the site it names, or whether the mobile example reads as an example. The framework re-read was a subagent, not a person who builds with the frameworks
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 12:39 | NOTE | answers Central's NOTEs of 2026-11-05 10:57 (README, then piece D), 11:44 and 11:53 | THE README SENTENCE IS FIXED (BF876DA) AND PIECE D IS ONE COMMIT (1710523); THE AUDIT IS 0 ON 36 PAGES IN BOTH CULTURES; NO STUB REMAINS; S1 NEXT
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 12:39 | ATTENDED
+
+subject:   the protocol/README.md section 4 fix (bf876da) and site piece D, the Try section (1710523), local on main, not pushed
+
+why:       your 10:57 NOTE: the README sentence to what the real run says, re-pinned, own commit; then piece D as SITE-3 says; the counts in the memo
+
+did:
+  - BF876DA: protocol/README.md section 4 now says the cross-medium check does not pass because the pair visual against print is undecided, with the visual channel recorded, which is what the real run says. Re-pinned in its own commit; the pack verifies; conformance 73 of 73; nothing else in protocol/ changed
+  - 1710523, THE TOUR (site/tour.html, site/tour.js): StzZui in scenes, ordered for who is in the room: a UX designer, a product designer, a programmer, an AI builder or a decision maker. EIGHT SCENES PER PROFILE over one pool of nineteen, so a scene is written once. Every scene is an address (tour.html#programmer/4); arrows, space and Page Up/Down move, n shows the presenter's notes, f fills the screen, Escape opens the page the scene comes from. Scenes cut, nothing moves (Rule 112). Every number in a scene is the site's own span. Checked in a browser: the keys move and clamp at both ends, the notes toggle, the idle state shows when no profile is chosen
+  - THE FRONT PAGE carries the strip that waited for the tour: "Present it to your team", five profile links, placed before the status-board note; the front page stays the only page with a button in its head (the author's ruling of 2026-11-04)
+  - SCREENSHOTS (site/screenshots.html): the writer measures, the audit judges; the three rules a screenshot can decide with their thresholds as facts spans; the checker's real output on the example file, re-run by the site's check; and what has never run (the writer on a real application, the capture loop, any person looking)
+  - A QUICK WIN (site/quick-win.html, examples/quick-win/zing-landing.zui): one real run on Zing's own site, read only, on 2026-11-05: three surfaces declared and headed as StzZui's description of pages it does not own; the verifier reports the file clean; ten pages audited; ONE FINDING, on site/index.html, a redirect page nobody reads; every reading page clean. Forty-seven minutes from the first declaration to the last audit. The page says the surface was already lawful and that this is a result. Only Zing's default style was measured
+  - A TOOL MENDED ON THE WAY: examples/web-case/serve-beside.js served the audit under /site/, which SHADOWED ZING'S OWN site/ FOLDER, so the first audit read StzZui pages under Zing's names. It now serves the audit at /__zui/ui-audit.html, a path no site uses; forty lines; the web case's page says forty. The Web apps findings on stzsite are unaffected (stzsite has no site/ folder; I checked before saying so)
+  - THE TRY HEAD (site/audit.html) is no longer a stub: four cards (the tour, the UI audit, Screenshots, A quick win), and it says the binary is designed and not built. No stub remains on the site
+  - YOUR 11:44 NOTE, READ AND TAKEN: the Comparison split into "Practices" and "Frameworks and languages" joins piece E; the mobile page keeps its labelled example; no French site now
+  - Zing's desk has NOT been told; Zing was never edited; the server is stopped
+
+state:
+  UI audit, before:  0 on 33 pages in Modern and Retro
+  UI audit, after:   0 on 36 pages in Modern and Retro (33 plus tour, screenshots, quick-win); strict, 0 interactive text under 7:1
+  375 wide:          no sideways scroll on seven pages including two tour scenes, footer outside the layout, no title with a short last line
+  gates:             site-shell ok (36 pages), site-facts ok (186 spans, 18 verifier runs re-run, 7 commands re-run, 4 excerpts, no head button on a reading page), pack verified, conformance 73 of 73
+  the counts, 1280 by 800, screens below the bars. Columns: first example / first sourced number / first button / first real terminal
+    Front page:        1.1 / none / 0.8 / none (2.7 screens, with the strip)
+    Try (the hub):     0.7 / none / none / none (2.3 screens; its example is the four cards)
+    The tour:          none / none / none / none (2.6 screens with no profile chosen; its scenes are hidden until one is)
+    Screenshots:       1.5 / 1.6 / none / 2.8 (5.2 screens)
+    A quick win:       1.0 / none / none / 1.5 (4.0 screens; its numbers are a real run, written in words)
+  first button:      none on every inner page by the author's ruling of 2026-11-04; the column now reads the front page only
+  zig sources:       zig/ and build.zig written, NOT BUILT, NOT COMMITTED
+
+waiting:
+  - SITE3-D-ZING-01: the quick-win page names Zing's site and one finding on its redirect page. Its desk has not been asked -> Central, whether to tell it before the Principal reads the page
+             [not routed; it is here]
+  - SITE3-D-TOURLEN-01: SITE-2 asked for nine to twelve scenes per profile; each has eight, because a ninth scene was a page restated rather than a point. The author may want more -> the Principal, via Central
+             [not routed; it is here]
+  - SITE3-C-SOFTANZA-01: held, as you ruled
+             [withdrawn from my side; held by Central]
+
+next:
+  - me:      S1 as your 11:53 NOTE orders: zig build -j2 in the foreground, the byte-parity gate, ReleaseSmall size, a timing distribution and the .zig-cache size; the Zig sources committed only with the gate green; stop for your read. If the guard refuses, I stop and quote it
+  - central: read bf876da and 1710523, push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has presented the tour to a room, and the audit cannot measure its scenes (it sees the page with no profile chosen; the scenes use the page styles it does measure). deck-check.html, a check that every scene's span resolves, was not built: site-facts checks the spans on the page as a whole, which covers every scene's numbers but not that a scene's link still points at a page that says the same thing
+```
+---
