@@ -346,8 +346,19 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 .hero .panel .btn.primary:hover { filter: none; background: #ffe3ea; }
 [data-vibe="guardian"] .hero .panel .btn.primary { background: #46e07f; color: #060b07; border-color: #46e07f; }
 [data-vibe="guardian"] .hero .panel .btn.primary:hover { background: #7ee2ae; }
+/* The front page (the author, 2026-11-05): the menu lies over the photograph and lets a quarter of it through, and the photograph fills the window.
+   Measured on the file, cover-fitted at nine window sizes from 800x1000 to 2560x1440: the brightest pixel under the menu's top 76 px is
+   rgb(249,255,245), luminance 0.983, and a blur barely lowers it (0.945 at 8 px), so the bar's own opacity carries the contrast. The bar is 75% of
+   the menu colour and the menu's text is white: 7.0 to 1 in Modern and 9.4 in Retro at that pixel. */
+/* contrast: #FFFFFF | #241d49 at 75% over rgb(249,255,245) | 7.0 | the front page's menu over the photograph's brightest pixel, Modern */
+/* contrast: #FFFFFF | #060b07 at 75% over rgb(249,255,245) | 9.4 | the same, Retro */
+.front .bars { position: fixed; left: 0; right: 0; }
+.front nav.site { background: rgba(36, 29, 73, .75); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+[data-vibe="guardian"] .front nav.site { background: rgba(6, 11, 7, .75); }
+.front nav.site .brand, .front nav.site a:not(.brand) { color: #fff; opacity: 1; }
+.front .hero { min-height: 100svh; }
 @media (max-width: 760px) {
-  .hero { min-height: 0; background: var(--paper); }
+  .hero, .front .hero { min-height: 0; background: var(--paper); }
   .hero img { position: static; height: 46svh; min-height: 260px; }
   .hero .panel { position: static; width: auto; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
   .hero .panel h1, .hero .panel p { color: var(--ink); }
