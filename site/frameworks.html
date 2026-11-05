@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Frameworks and languages — each from its own page</title>
-<meta name="description" content="Zane beside React, SwiftUI, Jetpack Compose and Flutter, and beside the languages that describe an interface (task models, UIML, XForms, VoiceXML, SCXML): each row written from its own published page.">
+<title>Frameworks and languages — four UI frameworks and five description languages compared with Zane</title>
+<meta name="description" content="Four UI frameworks (React, SwiftUI, Jetpack Compose and Flutter) and five description languages (task models, UIML, XForms, VoiceXML and SCXML) compared with Zane. Each row is written from the framework's or language's own published page and states what Zane takes from it and what it adds.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="thinking.html">Approach</a><span class="sep">›</span><a href="positioning.html">Comparison</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Frameworks and languages</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Approach · Comparison · for people who build with a framework, or know the languages that describe an interface</p>
-    <h1>Four frameworks and five description languages, each read from its own page.</h1>
-    <p class="sub">What each decides and when, what Zane takes from it and what it adds. The framework rows were checked by a second reading of the projects' own documentation.</p>
+    <h1>Four UI frameworks build an interface and five description languages describe one, and this page compares each with Zane from its own published page.</h1>
+    <p class="sub">A UI framework builds the screen and a description language describes an interface in a notation tools can exchange, and this page states what each framework and language decides and when, what Zane takes from it and what Zane adds.
+    The comparison lets a developer see which decisions stay with the framework or the language and which checks a Zane declaration adds before a screen exists. The framework rows have been checked by a second reading of the projects' own documentation.</p>
   </div>
 </header>
 
@@ -60,8 +61,8 @@
 
 <section>
   <div class="narrow">
-    <h2 id="four-ui-frameworks">Four UI frameworks</h2>
-    <p>These build the screen. They are compared on what each says of itself, and they do not compete with a declaration: a surface declared in Zane could be built in any of them, and nothing here claims an integration that exists.</p>
+    <h2 id="four-ui-frameworks">The four UI frameworks that build the screen, compared with Zane</h2>
+    <p>The four frameworks build the screen. They are compared on what each says of itself, and they do not compete with a declaration: a surface declared in Zane could be built in any of them, and this page does not claim that any integration exists.</p>
     <table class="board position">
       <thead><tr><th>Name, and its page</th><th>What it decides, and when</th><th>What Zane takes</th><th>What Zane adds</th></tr></thead>
       <tbody>
@@ -69,13 +70,13 @@
           <td><b>React</b><br><a class="leaves" href="https://react.dev/learn" target="_blank" rel="noopener">react.dev</a></td>
           <td data-label="What it decides, and when">Presented as a way to build an app from components: JavaScript functions that return markup, nested, fed data as props and kept current by state. The page sets rules for writing a component (names, closed tags, where a hook may be called) and says nothing of accessibility.</td>
           <td data-label="What Zane takes">The habit of describing a screen from data and state, and not commanding it.</td>
-          <td data-label="What Zane adds">A declaration of what the person is doing, one level above the component tree. React documents lint rules for its own Rules of React; in what we read, none is about whether the person can leave or undo.</td>
+          <td data-label="What Zane adds">A declaration of what the person is doing, one level above the component tree. React documents lint rules for its own Rules of React; none of the cited pages is about whether the person can leave or undo.</td>
         </tr>
         <tr>
           <td><b>SwiftUI</b><br><a class="leaves" href="https://developer.apple.com/documentation/swiftui" target="_blank" rel="noopener">Apple documentation</a>, <a class="leaves" href="https://developer.apple.com/swiftui/get-started/" target="_blank" rel="noopener">get started</a></td>
           <td data-label="What it decides, and when">Described as declarative programming for an app's interface and behavior on every Apple platform: the developer writes the outcome wanted and SwiftUI builds the interface from it. (Apple's documentation pages build themselves in the browser, so this rests on its get-started page and its overview as search returns it.)</td>
           <td data-label="What Zane takes">Writing the outcome and not the steps; the idea that a view describes a state.</td>
-          <td data-label="What Zane adds">A statement of the intent behind the outcome, and a law that can refuse it. The SwiftUI pages we read describe no check of that kind; a WWDC session describes a separate accessibility audit that checks a rendered screen when tests run.</td>
+          <td data-label="What Zane adds">A statement of the intent behind the outcome, and a law that can refuse it. The cited SwiftUI pages describe no check of that kind; a WWDC session describes a separate accessibility audit that checks a rendered screen when tests run.</td>
         </tr>
         <tr>
           <td><b>Jetpack Compose</b><br><a class="leaves" href="https://developer.android.com/compose" target="_blank" rel="noopener">developer.android.com</a></td>
@@ -87,18 +88,18 @@
           <td><b>Flutter</b><br><a class="leaves" href="https://flutter.dev" target="_blank" rel="noopener">flutter.dev</a></td>
           <td data-label="What it decides, and when">Presented as an open-source framework for natively compiled apps on several platforms from one codebase, written in Dart. The front page does not say how an interface is described in it; its documentation describes the framework as declarative.</td>
           <td data-label="What Zane takes">One description carried to several platforms, which is the same ambition as one declaration for several channels.</td>
-          <td data-label="What Zane adds">A refusal when a promise cannot be carried: a verb a platform or channel lacks is refused by name. Flutter's documentation offers accessibility guidelines for widget tests (contrast, target size, labels); none that we found refuses a promise a platform cannot keep.</td>
+          <td data-label="What Zane adds">A refusal when a promise cannot be carried: a verb a platform or channel lacks is refused by name. Flutter's documentation offers accessibility guidelines for widget tests (contrast, target size, labels); none of the cited guidelines refuses a promise a platform cannot keep.</td>
         </tr>
       </tbody>
     </table>
-    <p class="caption"><b>Checked by a second reading of the projects' documentation.</b> A second reader, started with only these rows and the projects' own links, marked each cell as agreeing, overstated or wrong. It found one overstated cell (SwiftUI's, whose claims went past the pages that could be read) and found that each framework's own documentation ships accessibility or lint checks that the first wording left out; the cells now say so. It is not a person who builds with these frameworks. Apple's documentation pages render in the browser, so that row still rests on an overview and a search; Compose's "Kotlin functions" clause was not independently confirmed.</p>
+    <p class="caption"><b>Checked by a second reading of the projects' documentation.</b> A second reader, given only these rows and the projects' own links, marked each cell as agreeing, overstated or wrong. The second reader found one overstated cell, SwiftUI's, whose claims went past the pages that could be read. The second reader also found that each framework's own documentation ships accessibility or lint checks that the first wording left out, and the cells now say so. The second reader is not a person who builds with these frameworks. Apple's documentation pages render in the browser, so the SwiftUI row still rests on an overview and a search, and Compose's "Kotlin functions" clause is not independently confirmed.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="description-languages-old-and-new">Description languages, old and new</h2>
-    <p>These describe an interface, a form, a dialog or a state machine, in a notation tools can exchange. Two of them (VoiceXML, SCXML) come from a working group that also made the standards for speech; one (UIML) from a different body; the model-based work is the closest relative.</p>
+    <h2 id="description-languages-old-and-new">The description languages that describe an interface, from task models to SCXML</h2>
+    <p>The description languages describe an interface, a form, a dialog or a state machine, in a notation that tools can exchange. Two of them, VoiceXML and SCXML, come from a working group that also made the standards for speech, and one, UIML, comes from a different body. The model-based work is the closest relative of Zane.</p>
     <table class="board position">
       <thead><tr><th>Name, and its page</th><th>What it decides, and when</th><th>What Zane takes</th><th>What Zane adds</th></tr></thead>
       <tbody>
@@ -106,7 +107,7 @@
           <td><b>Task models and abstract interfaces</b><br><a class="leaves" href="https://www.w3.org/TR/2014/NOTE-task-models-20140408/" target="_blank" rel="noopener">W3C task models</a>, <a class="leaves" href="https://www.w3.org/TR/2014/NOTE-abstract-ui-20140408/" target="_blank" rel="noopener">abstract UI</a>, <a class="leaves" href="https://www.w3.org/2012/02/ctt" target="_blank" rel="noopener">ConcurTaskTrees</a></td>
           <td data-label="What it decides, and when">The nearest ancestors. ConcurTaskTrees is a notation for task models; the W3C working group's notes define task models and abstract interface models independent of platform. The group closed in 2014 and its notes are off the standards track.</td>
           <td data-label="What Zane takes">Describing the interface above the widget, in a form tools exchange.</td>
-          <td data-label="What Zane adds">In what we read, none of these states a law of rights as data, refuses a declaration by name, or ships a suite that any implementation can run. Zane also closes the channel axis to ten, with what each can carry.</td>
+          <td data-label="What Zane adds">None of the cited pages states a law of rights as data, refuses a declaration by name, or ships a suite that any implementation can run. Zane also closes the channel axis to ten, with what each can carry.</td>
         </tr>
         <tr>
           <td><b>UIML 4.0</b><br><a class="leaves" href="https://docs.oasis-open.org/uiml/v4.0/uiml-4.0.html" target="_blank" rel="noopener">OASIS</a></td>
@@ -139,12 +140,12 @@
 
 <section id="read-and-left-out">
   <div class="narrow">
-    <h2>Read and left out</h2>
+    <h2>The sources left out on purpose, and the parts that were not read</h2>
     <p><b>Left out on purpose.</b> ISO/IEC 24744 sometimes appears in lists of model-based approaches. Its published scope is a metamodel for defining software-engineering development methodologies, not user
-    interfaces, so it has no row. <a class="leaves" href="https://www.iso.org/standard/62644.html" target="_blank" rel="noopener">The standard's page at ISO</a>.</p>
+    interfaces, so it has no row. <a class="leaves" href="https://www.iso.org/standard/62644.html" target="_blank" rel="noopener">The standard's page at ISO</a> states that scope.</p>
     <p><b>Not read.</b> Apple's documentation pages build themselves in the browser, so the SwiftUI row rests on an overview and a search, as its cell says. The XForms, VoiceXML and SCXML
-    specifications are long, and were read through their abstracts and status sections.</p>
-    <p>A row that over-reads one of them should be corrected from the source.</p>
+    specifications are long, and they were read through their abstracts and status sections.</p>
+    <p>A row that over-reads one of these sources is corrected from the source.</p>
   </div>
 </section>
 </main>
