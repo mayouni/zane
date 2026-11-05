@@ -124,7 +124,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check payments.zane</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.13</span></pre>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.14</span></pre>
     <p class="caption"><b>That is real output, copied from a real run</b>, and this site's own check re-runs it: it fails if the
     page and the verifier ever disagree. The verifier ships in this repository and needs no toolchain beyond Node.
     <a href="conformance.html#status">The status board</a> says plainly what exists, what is designed and what is held.</p>
@@ -170,7 +170,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
     </figure>
     <p><b>Declare.</b> A <code>.zane</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
     declaration and <span data-fact="verbs">22</span> verbs, closed on purpose: a widget is a consequence of an intent, never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be made from that.</p>
-    <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.13</span>), and refuses what it forbids.
+    <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.14</span>), and refuses what it forbids.
     Every refusal cites the rule, article or right it rests on. <a href="refusal.html">See one, line by line.</a></p>
     <p><b>Project.</b> One declaration can be rendered in more than one channel (what the grammar and the law call a medium), and a verb a channel cannot carry is refused. That check is built; the media data is in
     <a href="../conformance/media.json"><code>conformance/media.json</code></a>.</p>

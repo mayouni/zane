@@ -17,7 +17,7 @@ amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
 a diagnostic that enforces a rule carries a binding. Bindings cite
-`constitution/rules.json` **v3.13**.
+`constitution/rules.json` **v3.14**.
 
 Not every diagnostic enforces a rule. Of the 37, 17 cite one or more rules, 8 cite an article and no
 rule, and 12 cite nothing. Fourteen of those 20 enforce the grammar (vocabularies, duplicates, fields,
