@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Other languages — implement StzZui and prove it agrees</title>
+<title>Other languages — implement Zane and prove it agrees</title>
 <meta name="description" content="The port recipe for another language or framework: pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences, and what you may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=29eb1a54">
+<link rel="stylesheet" href="stz.css?v=46d16794">
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 <nav class="site" aria-label="Main menu">
   <div class="wrap">
     <div class="menu">
-        <a class="brand" href="../index.html">StzZui</a>
+        <a class="brand" href="../index.html">Zane</a>
     <a href="thinking.html">Approach</a>
     <a href="how.html">Language</a>
     <a href="why.html">Law</a>
@@ -39,9 +39,9 @@
 <header class="page">
   <div class="narrow">
     <!-- shell:trail -->
-<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Other languages</span></nav>
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Other languages</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Use · for people who implement StzZui in another language</p>
+    <p class="kicker">Use · for people who implement Zane in another language</p>
     <h1>You do not adopt a library: you implement the language and run the fixtures.</h1>
     <p class="sub">A verifier in any language is a peer of the one in this repository. It reads the same pinned files, parses the same grammar, and reports the same diagnostics on the same fixtures, or the suite says which one disagreed. Here is the recipe, and the limits of what a pass lets you say.</p>
   </div>
@@ -73,7 +73,7 @@
     </ol>
     <pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
 
-The Zui protocol pack
+The Zane protocol pack
   law          v3.14 — 123 rules, 17 forbidden patterns
   language     v1.5 — 37 diagnostics
   axes         10 media, 5 semantic values
@@ -89,7 +89,7 @@ The Zui protocol pack
   <div class="narrow">
     <h2>What you may claim, and may not</h2>
 
-    <p><b>May:</b> "conforms to Zui v3.14 at level 2, verified against manifest &lt;hash&gt;", your own diagnostic codes in your own words, and your own language for the prose.</p>
+    <p><b>May:</b> "conforms to Zane v3.14 at level 2, verified against manifest &lt;hash&gt;", your own diagnostic codes in your own words, and your own language for the prose.</p>
     <p><b>May not:</b> extend a closed set. The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed; adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
     <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b>. The last one does not fully pass today, in this repository either: <a href="media.html">Channels</a> shows its real output, proved for one pair and not proved for another.</p>
   </div>

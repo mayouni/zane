@@ -113,7 +113,7 @@ function menu(p) {
   const menuOpen = p.outside === 'reader' ? '' : '    <div class="menu">\n';
   const menuClose = p.outside === 'reader' ? '' : '    </div>\n';
   const bar = `<nav class="${cls}" aria-label="Main menu">
-${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">StzZui</a>
+${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">Zane</a>
 ${links}
 ${menuClose}${wrapClose}</nav>`;
   const b = band(p);
@@ -139,7 +139,7 @@ function chain(p) {
 function trail(p) {
   if (p.home) return '';
   const s = sec(p.section);
-  const steps = [{ label: 'StzZui', to: 'index.html' }];
+  const steps = [{ label: 'Zane', to: 'index.html' }];
   const head = by.get(s.head);
   if (head !== p) steps.push({ label: head.label, to: head.file });
   if (p.parent) { const up = by.get(p.parent); if (up !== head) steps.push({ label: up.label, to: up.file }); }

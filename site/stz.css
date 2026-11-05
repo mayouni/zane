@@ -1,5 +1,5 @@
 /* ==========================================================================
-   stz.css — the StzZui site design system.
+   stz.css — the Zane site design system.
    Two lawful vibes (Article VI): curator (charter — midnight indigo,
    garnet rose, porcelain) and guardian (terminal — green phosphor on
    black, monospace). Deliberately distinct from StzWeb's teal-and-orange:
@@ -266,7 +266,7 @@ li { margin: .3rem 0; }
 /* a call to action: one per page, the first thing the reader can do */
 .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.4rem; }
 .cta-row .note { color: var(--muted); max-width: 32rem; margin: 0; }
-/* the pair: an established practice on the left, Zui on the right, the same case, both with their outcome */
+/* the pair: an established practice on the left, Zane on the right, the same case, both with their outcome */
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
 .pair > div { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.2rem;
   box-shadow: var(--shadow); min-width: 0; }

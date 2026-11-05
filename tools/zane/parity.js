@@ -168,7 +168,7 @@ console.log(`  arguments    ${argCases.length} command lines`);
 console.log(`  corpus       seed ${SEED}, ${corpus.length} inputs (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}), each in --json at level 4 and in text at level 2`);
 console.log(`  timing, one fixture per process, --json at level 4, wall time with process start:`);
 console.log(`    node cli.js  ${dist(timing.js)}`);
-console.log(`    zane          ${dist(timing.zane)}`);
+console.log(`    zane         ${dist(timing.zane)}`);
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, and every exit code');
 process.exit(kept ? 1 : 0);

@@ -1,4 +1,4 @@
-# The Zui Protocol Pack
+# The Zane Protocol Pack
 
 **What a participant downloads, pins, and can be held to.** **12 files, no runtime.**
 
@@ -49,7 +49,7 @@ the findings, the evidence ledger. They are worth reading and they are not the s
 > edition.**
 
 Vendor the twelve files, record `MANIFEST.json` beside them, and make
-`pack.js --check` a step in your build. Then *"conforms to Zui v3.14"* is a claim your CI
+`pack.js --check` a step in your build. Then *"conforms to Zane v3.14"* is a claim your CI
 can refute.
 
 This is not paranoia; it is this project's own history. A single trailing space added to a
@@ -92,12 +92,12 @@ is worth more than one that passes by not looking.**
 
 ## 5. What you may claim, and what you may not
 
-**May**: *"conforms to Zui v3.14 at level 2, verified against manifest `<hash>`."*
+**May**: *"conforms to Zane v3.14 at level 2, verified against manifest `<hash>`."*
 **May**: your own diagnostic codes, in your own words, in any language.
 **May not**: extend a closed set. The 22 verbs, the ten media, the five semantic values,
 the four enumerations and the ten declaration types are closed. **Adding to one is a
 language change or a constitutional amendment, not an implementation choice** — and an
-implementation that adds a verb is not a superset of Zui, it is a different language that
+implementation that adds a verb is not a superset of Zane, it is a different language that
 fails the fixtures.
 
 **Retired numbers are never reused.** Rule 79 means the same thing in ten years; diagnostic
@@ -156,7 +156,7 @@ The shapes available, with the cost each carries:
 
 | Option | Buys | Costs |
 |---|---|---|
-| a **URN** namespace, e.g. `urn:zui:law:3.14` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
+| a **URN** namespace, e.g. `urn:zane:law:3.14` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
 | a **domain** the artifacts resolve from | a real fetchable URL, versioned paths | someone owns and renews it forever; it dies with the payment |
 | a **DOI** per version | citable in literature, permanent | a registration agency, a fee, and a workflow per release |
 | **content addressing** — the manifest hash *is* the name | already true, costs nothing, cannot rot | unreadable, and says nothing about which edition is current |

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "The Zui Protocol Pack",
+    "title": "The Zane Protocol Pack",
     "version": "1.0",
     "generated": "by tools/zane/pack.js -- never hand-edited",
     "note": "Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.",

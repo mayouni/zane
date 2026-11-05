@@ -1,6 +1,6 @@
 # `zane` — the verifier
 
-**Checks Zui declarations against the constitution, before anything is
+**Checks Zane declarations against the constitution, before anything is
 rendered.** Zero dependencies, one runtime you already have.
 
 ```bash
@@ -31,7 +31,7 @@ Three files, no dependencies, nothing to install:
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
 | `parity.js` | the gate of the binary's stage S1 ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js`, byte for byte, on every fixture and a seeded corpus. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
 
-It implements [the Zui language specification v1.4](../../doc/language/README.md)
+It implements [the Zane language specification v1.5](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).
 
 ## Options
@@ -161,7 +161,7 @@ ladder, working as designed.
 ```html
 <script src="tools/zane/zane.js"></script>
 <script>
-  const findings = Zui.verify(sourceText);        // [{id, line, subject}, …]
+  const findings = Zane.verify(sourceText);        // [{id, line, subject}, …]
 </script>
 ```
 
@@ -173,7 +173,7 @@ Same core, same results — the browser page and the CI gate cannot disagree.
   it is `LOCATE` or `DISCOVER`. See
   [GRAMMAR.md §4](../../doc/language/GRAMMAR.md#4-intent-verbs).
 - **Declarations of other pillars are skipped whole**, by balanced-paren
-  scanning. A Zui verifier has no standing over `DEFINE ENTITY`.
+  scanning. A Zane verifier has no standing over `DEFINE ENTITY`.
 - **A UTF-8 BOM is consumed silently.** Editors on Windows add one routinely;
   a verifier that choked on it would be unusable there. (This was a real bug,
   found by running the tool rather than by reading it.)

@@ -3,7 +3,7 @@
    pack.js — the protocol pack's manifest, generated and verified.
 
    S13. What a participant downloads and pins, with a hash for every file, so
-   "we conform to Zui v3.11" is a checkable claim rather than a sentence in a
+   "we conform to Zane v3.14" is a checkable claim rather than a sentence in a
    README.
 
    THE POINT OF HASHING. A version number says which edition you meant. It does
@@ -128,7 +128,7 @@ function readmeClaims(v, pinnedCount) {
   claim('the diagnostic count',  /(\d+) diagnostics with severities/,   v.diagnostics);
   claim('the fixture count',     /(\d+) fixtures with known verdicts/,  v.fixtures);
   claim('the pinned-file count', /\*\*(\d+) files, no runtime/,         pinnedCount);
-  claim('the law version',       /conforms to Zui v(\S+?) at level/,    v.constitution);
+  claim('the law version',       /conforms to Zane v(\S+?) at level/,    v.constitution);
   return bad;
 }
 
@@ -140,7 +140,7 @@ function main(argv) {
   const v = versions();
   const manifest = {
     metadata: {
-      title: 'The Zui Protocol Pack',
+      title: 'The Zane Protocol Pack',
       version: '1.0',
       generated: 'by tools/zane/pack.js -- never hand-edited',
       note: 'Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.',
@@ -152,7 +152,7 @@ function main(argv) {
 
   const text = JSON.stringify(manifest, null, 2) + '\n';
 
-  console.log(`\nThe Zui protocol pack`);
+  console.log(`\nThe Zane protocol pack`);
   console.log(`  law          v${v.constitution} — ${v.rules} rules, ${v.forbiddenPatterns} forbidden patterns`);
   console.log(`  language     v${v.language} — ${v.diagnostics} diagnostics`);
   console.log(`  axes         ${v.media} media, ${v.signalValues} semantic values`);

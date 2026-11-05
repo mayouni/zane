@@ -1,6 +1,8 @@
-﻿# StzZui
+﻿# Zane
 
-**Zui is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 118 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
+*Zane is StzZui in the Softanza family: its formal name there. It was called Zui until 2026-11-05.*
+
+**Zane is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 118 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
 
 A Softanza project · Tunis · Niamey · Paris
 
@@ -14,7 +16,7 @@ Meanwhile the HCI and UI/UX community has largely stepped back from criticizing 
 
 That is what this repository holds.
 
-## What StzZui is
+## What Zane is
 
 Three things, strictly layered — the architecture inherited from a sibling project's Zui pillar (its interface specification v3.0):
 
@@ -31,8 +33,8 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 - **[The site](index.html)** — built for two readers, the developer and the UI community: [the case for a law](site/why.html), [the architecture in full](site/how.html) (including instruments still in design, honestly labeled), [the Gotchas](site/gotchas/index.html) — twelve interactive offenses beside their lawful twins, split into seven rule families — [the vibes exhibit](site/vibes.html) — one operator screen, one shared state, both cultures at once (Article VI) — and [the adoption contract](site/adopt.html).
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
 - **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
-- **[The language specification](doc/language/README.md)** — Zui v1.0: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). Honest throughout about what is specified versus what any implementation has reached.
-- **[The `zane` verifier](tools/zane/README.md)** — `node tools/zane/cli.js check file.zane`. Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 30 conformance fixtures.
+- **[The language specification](doc/language/README.md)** — Zane v1.5: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). Honest throughout about what is specified versus what any implementation has reached.
+- **[The `zane` verifier](tools/zane/README.md)** — `node tools/zane/cli.js check file.zane` (a `.zui` file, the former extension, is read the same way). Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 30 conformance fixtures.
 - **[The conformance suite](conformance/README.md)** — 30 `.zane` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; every violation fixture has a lawful twin.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the banking product, the i18n decisions, and the Refine evidence trails.
 - **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zane` language and compiler out of the reference implementation.
