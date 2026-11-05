@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "The Zui Diagnostic Contract",
-    "version": "1.8",
-    "lastUpdated": "2026-11-02",
+    "title": "The Zane Diagnostic Contract",
+    "version": "1.9",
+    "lastUpdated": "2026-11-05",
     "specification": "doc/language/VIOLATIONS.md",
     "constitution": "3.13",
-    "note": "Every diagnostic a conforming Zui implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused."
+    "note": "Every diagnostic a conforming Zane implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused. 1.9 (2026-11-05) renames the language from Zui to Zane: the envelope's language value is zane, and no id, severity, level or binding changed."
   },
   "levels": {
     "1": { "name": "Syntax", "requires": "the file alone", "decides": "the grammar parses; verbs, kinds and structure are well-formed" },
@@ -151,7 +151,7 @@
       "id": "UNSPECIFIED_DECLARATION",
       "severity": "warning",
       "level": 1,
-      "summary": "A .zui declaration kind outside the ten this language defines (WIDGET, USER).",
+      "summary": "A .zane declaration kind outside the ten this language defines (WIDGET, USER).",
       "decidable_from": ["kind"],
       "rules": [],
       "articles": ["intent"],
@@ -431,7 +431,7 @@
       "rights": [],
       "forbidden_patterns": [],
       "invariant": null,
-      "note": "Ruling D1, 2026-10-31. Each kind declares the fields DECLARATIONS.md lists for it, plus the four every kind carries (SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR). A TONE on a SCREEN or a PERSPECTIVE on a FORM is read by nothing and does nothing, and until this diagnostic the verifier said nothing, so the author believed it was honoured. That silence was the defect, and it is the gap ROLE_MISPLACED named in TONE and PERSPECTIVE when it closed its own. Generalised from ROLE_MISPLACED rather than replacing it: ROLE keeps its own id, because ids are stable forever, and FIELD_MISPLACED leaves ROLE to it so one defect is not reported twice. Only a known field is judged, and only one the verifier would otherwise ignore there: STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read on any kind, so they are not silent and are not judged. A name the grammar does not know is UNKNOWN_FIELD. WIDGET and USER are UNSPECIFIED_DECLARATION's and are not judged. The kind list comes from the declaration tables and is mirrored in the Haro declaration haro/zui.stzu, whose court refused this placement before the verifier did."
+      "note": "Ruling D1, 2026-10-31. Each kind declares the fields DECLARATIONS.md lists for it, plus the four every kind carries (SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR). A TONE on a SCREEN or a PERSPECTIVE on a FORM is read by nothing and does nothing, and until this diagnostic the verifier said nothing, so the author believed it was honoured. That silence was the defect, and it is the gap ROLE_MISPLACED named in TONE and PERSPECTIVE when it closed its own. Generalised from ROLE_MISPLACED rather than replacing it: ROLE keeps its own id, because ids are stable forever, and FIELD_MISPLACED leaves ROLE to it so one defect is not reported twice. Only a known field is judged, and only one the verifier would otherwise ignore there: STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read on any kind, so they are not silent and are not judged. A name the grammar does not know is UNKNOWN_FIELD. WIDGET and USER are UNSPECIFIED_DECLARATION's and are not judged. The kind list comes from the declaration tables and is mirrored in the Haro declaration haro/zane.stzu, whose court refused this placement before the verifier did."
     },
     {
       "id": "UNKNOWN_FIELD",

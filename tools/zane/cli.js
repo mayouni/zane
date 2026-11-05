@@ -203,7 +203,7 @@ function main(argv) {
       contract: contract ? { version: contract.version, constitution: contract.constitution } : null,
       files: opts.files,
       counts: { errors, warnings },
-      diagnostics: findings.map(f => toEnvelope(f, f.meta, 'zui'))
+      diagnostics: findings.map(f => toEnvelope(f, f.meta, 'zane'))
     }, null, 2));
     return errors > 0 ? 1 : 0;
   }

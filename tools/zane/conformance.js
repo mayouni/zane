@@ -150,7 +150,7 @@ function main(argv) {
     const perFixture = [];
     for (const d of raw) {
       envelopes++;
-      const env = toEnvelope({ ...d, file: fx.file }, metaOf.get(d.id), 'zui');
+      const env = toEnvelope({ ...d, file: fx.file }, metaOf.get(d.id), 'zane');
       perFixture.push(env);
       envelopeProblems.push(...validate(env, shape, `${fx.file} · ${d.id}`));
     }

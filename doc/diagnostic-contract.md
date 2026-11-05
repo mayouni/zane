@@ -3,10 +3,10 @@
 **Normative. Family-wide.** This is **C2** of the Softanza reference design: the
 envelope every court in the family speaks when it refuses.
 
-**Version**: **v1.2.0** · 2026-08-23 (v1.1.2 · 2026-08-21 · v1.1.1 · 2026-08-21 · v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
+**Version**: **v1.2.1** · 2026-11-05, editorial: the court that wrote `zui` is renamed Zane and writes `zane`; nothing else changed (v1.2.0 · 2026-08-23 · v1.1.2 · 2026-08-21 · v1.1.1 · 2026-08-21 · v1.1 · 2026-08-20 · v1.0 · 2026-08-08)
 **Machine-readable shape**: [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json)
 — that file is the shape a court validates against; this one governs it.
-**Extracted from**: the zui verifier's working practice —
+**Extracted from**: the Zane verifier's working practice (then called zui) —
 [`tools/zane/`](../tools/zane/README.md), [`conformance/violations.json`](../conformance/violations.json),
 [`doc/language/VIOLATIONS.md`](language/VIOLATIONS.md) — promoted from one court's
 convention to a versioned family artifact. Nothing in this promotion changed a
@@ -37,13 +37,13 @@ Every diagnostic a conforming court emits in machine form is one object:
   "code": "MISSING_UNDO",
   "severity": "error",
   "message": "An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.",
-  "span": { "file": "payments.zui", "line": 2 },
+  "span": { "file": "payments.zane", "line": 2 },
   "cites": ["rule:79", "article:reversibility", "right:reverse"],
-  "language": "zui"
+  "language": "zane"
 }
 ```
 
-Six fields. A court may add fields of its own — the zui court adds `level` (its
+Six fields. A court may add fields of its own — the Zane court adds `level` (its
 conformance level) and `subject` (the offending name) — but it may never omit,
 rename, or repurpose these six.
 
@@ -65,7 +65,7 @@ Normatively:
 - **A code is unique within its language.** Courts of different languages may
   collide without harm; `language` disambiguates.
 - **This contract allocates no codes.** Each court chooses and catalogs its own
-  — the zui court's catalog is `conformance/violations.json`. The envelope is
+  — the Zane court's catalog is `conformance/violations.json`. The envelope is
   family law; the codes are court law.
 
 ### 2.2 `severity` — the ladder
@@ -85,7 +85,7 @@ non-zero exactly when errors exist.
 
 Non-empty human prose, and nothing more. The message is never compared and never
 normative: a court phrases findings however its operators read best, in whatever
-language they read — the looseness the zui conformance suite already grants. The
+language they read — the looseness the Zane conformance suite already grants. The
 message *explains*; the code and the cites are what carry the law.
 
 ### 2.4 `span` — where
@@ -100,7 +100,7 @@ that can name a column needs no contract change to do so.
 ### 2.5 `cites[]` — the citation rule
 
 A cite is `kind:value`, where `kind` is one of `rule`, `article`, `right`,
-`pattern` — the four binding kinds the zui court already carries — and `value`
+`pattern` — the four binding kinds the Zane court already carries — and `value`
 is a stable identifier in the court's pinned instrument (`rule:79`,
 `article:reversibility`, `right:leave`, `pattern:layout-shift`).
 
@@ -109,7 +109,7 @@ Normatively:
 - **A diagnostic that enforces a provision of a pinned law must cite it.** A
   finding that cites is an instrument of law and can only be answered by fixing
   the artifact or amending the law with evidence; a finding that merely opines
-  gets negotiated in the hallway. This is the founding argument of the zui
+  gets negotiated in the hallway. This is the founding argument of the Zane
   court's diagnostics, stated once for the family.
 - **Cites reference stable identifiers, never prose** — rule numbers, article
   keys, right names, forbidden-pattern names. Titles and wording travel in
@@ -127,7 +127,7 @@ The lowercase identifier of the language being judged:
 ^[a-z][a-z0-9_]*$
 ```
 
-`zui` today; `zql`, `face`, `wflow` as their courts adopt the envelope. The
+`zane` today; `zui` is its former value, the same court before 2026-11-05, and stays valid until every emitter that wrote it has re-pinned (dropping it is a 2.0); `zql`, `face`, `wflow` as their courts adopt the envelope. The
 field names the language, and therefore the instrument in which the cites
 resolve.
 
@@ -231,7 +231,7 @@ Normatively:
 - **The key is `diagnostics`, and it is never omitted and never null.** A clean
   run emits `"diagnostics": []`. *Clean* and *no output* are different facts and
   a consumer must be able to tell them apart without guessing.
-- **A court may add outer keys of its own** — the zui court adds `level`,
+- **A court may add outer keys of its own** — the Zane court adds `level`,
   `contract`, `files` and `counts`. They are that court's, and no consumer may
   assume them of another court. They may not replace or rename `diagnostics`.
 - **Nothing else about the outer object is specified.** Ordering, grouping by
@@ -277,7 +277,7 @@ depth, may be a bare `true`, `false` or `null`. Strings, numbers, arrays and
 objects are unconstrained. This binds a court's own extension fields, which is
 where the exposure actually is — the six are strings, an integer and an array.
 
-**Known extensions (HF-12, ruled 2026-11-03).** The Haro court adds `why`, `todo` and `frames`, and the zui court adds `level` and `subject`. All
+**Known extensions (HF-12, ruled 2026-11-03).** The Haro court adds `why`, `todo` and `frames`, and the Zane court adds `level` and `subject`. All
 of them are extensions and none is a seventh contract field: `todo` stays an extension, because nothing in this family reads it and promoting it would oblige every
 court to emit it. It would be promoted, as a new minor version of this contract, if a second independent court emitted a `todo` or a consumer needed one.
 
@@ -349,7 +349,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zane/README.md) (`tools/zane/`) | `zui` | v1.2.0 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 57-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 40 diagnostics, 57 reports, clean |
+| [the Zane verifier](../tools/zane/README.md) (`tools/zane/`) | `zane` (`zui` until 2026-11-05) | v1.2.1 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 57-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 40 diagnostics, 57 reports, clean |
 
 ## 4. Governance
 
@@ -442,9 +442,9 @@ only thing that knows.
   adopting court at a time, each by its own repository's process.
 - **`col` is reserved, not attested.** No implementation emits it; it is in the
   envelope so that the first one to know a column needs no amendment.
-- **The zui catalog keeps its name and its version.**
-  `conformance/violations.json` — titled "The Zui Diagnostic Contract" — predates
-  this document and is a different artifact: it catalogs *the zui court's codes*
+- **The Zane catalog keeps its own name and version.**
+  `conformance/violations.json` — titled "The Zane Diagnostic Contract" ("The Zui Diagnostic Contract" until its 1.9) — predates
+  this document and is a different artifact: it catalogs *the Zane court's codes*
   (severities, levels, rule bindings); this document fixes *the envelope those
   codes travel in*. Neither governs the other.
 - **The outer shape was legislated from two courts, and one of them was this
@@ -475,7 +475,7 @@ only thing that knows.
   correction. Both were caught by somebody running the thing. **A normative home
   that accepts a number without the operation that produced it will keep doing
   this**, because the number always travels and the operation does not.
-- **This court renamed itself rather than legislating its own spelling.** `zui`
+- **This court renamed itself rather than legislating its own spelling.** `zui` (the Zane court's name then)
   emitted `findings` and now emits `diagnostics`, which is the contract's own
   word for the thing throughout. **That is a breaking change for any consumer
   reading `findings` from `zui check --json`**, announced as one, and nothing

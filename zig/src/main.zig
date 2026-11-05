@@ -363,7 +363,7 @@ fn writeJsonReport(
             try j(w, c);
         }
         try w.writeAll(if (cites.items.len == 0) "],\n" else "\n      ],\n");
-        try w.writeAll("      \"language\": \"zui\",\n");
+        try w.writeAll("      \"language\": \"zane\",\n");
         const lvl: i64 = if (f.meta.level == 0) 1 else f.meta.level;
         try w.print("      \"level\": {d},\n      \"subject\": ", .{lvl});
         if (f.diag.subject) |s| try j(w, s) else try w.writeAll("null");

@@ -11,7 +11,7 @@
     "rules": 123,
     "forbiddenPatterns": 17,
     "language": "1.4",
-    "refusalContract": "1.8",
+    "refusalContract": "1.9",
     "diagnostics": 37,
     "media": 10,
     "signalValues": 5,
@@ -51,20 +51,20 @@
     {
       "file": "conformance/violations.json",
       "role": "the refusal contract",
-      "bytes": 26249,
-      "sha256": "50ec24aa72185f0173ab461726e2e9fdfa009344f4d9db190669ab64317bcffa"
+      "bytes": 26395,
+      "sha256": "15ca340b24f2f5dac7a7c43ebbc3e2b7b436665b4ee280814bcd2d144e1e327e"
     },
     {
       "file": "doc/diagnostic-contract.md",
       "role": "the refusal contract",
-      "bytes": 27932,
-      "sha256": "93bbf76df9b1a8aaedcf1f2ed01f6f594ce575117878677c22174425b1aecb62"
+      "bytes": 28334,
+      "sha256": "d3fa30de3c8c938d82388a4e27385774736edb03e778ef6557c083129c43a5bd"
     },
     {
       "file": "doc/diagnostic-contract.schema.json",
       "role": "the refusal contract",
-      "bytes": 6767,
-      "sha256": "9f93b18a0254a3a389d79b9c1d1b60dbb2ff4ac414c3c650d6d14f0638456571"
+      "bytes": 6918,
+      "sha256": "de69beb94c6e0853919390053dc0ad756d9f0ee04b78fb9faeb968daf1c03fd9"
     },
     {
       "file": "conformance/media.json",
