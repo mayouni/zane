@@ -62,6 +62,9 @@ function validate(v, s, at) {
   }
 }
 validate(facts, schema, '$');
+/* 1.1 renamed the format from zui-audit-facts to zane-audit-facts and changed nothing else; a 1.0 file is read as it was */
+const PAIR = { 'zane-audit-facts': '1.1', 'zui-audit-facts': '1.0' };
+if (PAIR[facts.format] && facts.version !== PAIR[facts.format]) problems.push(`$.version: ${facts.format} is version ${PAIR[facts.format]}`);
 
 // ---- the arithmetic the schema cannot state
 const rel = (a, b) => Math.round(((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)) * 100) / 100;

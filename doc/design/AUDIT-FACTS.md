@@ -26,7 +26,7 @@ a null is "I do not know", and the audit treats them as different things.
 
 ## 2. The shape
 
-One file per screenshot, JSON, `format: "zui-audit-facts"`, `version: "1.0"`.
+One file per screenshot, JSON, `format: "zane-audit-facts"`, `version: "1.1"`. Version 1.1 (2026-11-05) renames the format from `zui-audit-facts` and changes nothing else; a 1.0 file, `format: "zui-audit-facts"`, `version: "1.0"`, is read the same way.
 
 **`capture`**, once per file:
 
