@@ -2,7 +2,7 @@
 
 *Zane is StzZui in the Softanza family: its formal name there. It was called Zui until 2026-11-05.*
 
-**Zane is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 118 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
+**Zane is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 123 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
 
 A Softanza project · Tunis · Niamey · Paris
 
@@ -22,8 +22,8 @@ Three things, strictly layered — the architecture inherited from a sibling pro
 
 | Layer | Artifact | Status |
 |---|---|---|
-| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**; spec extraction to `doc/language/` underway. Reference implementation: the reference implementation's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
-| **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.8.0, 118 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
+| **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**, specified in [`doc/language/`](doc/language/README.md) (v1.5). Reference implementation: the reference implementation's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
+| **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.14, 123 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
 | **3 · Rendering projections** | Per-medium consumers: business web (Zing, formerly StzWeb), the reference implementation's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
 The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces. And the law has a native habitat: the language. One declaration holds at three moments — checked at design time, linted in development, measured at runtime — with no framework to swap and no dependency to take.
@@ -34,8 +34,8 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
 - **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
 - **[The language specification](doc/language/README.md)** — Zane v1.5: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). Honest throughout about what is specified versus what any implementation has reached.
-- **[The `zane` verifier](tools/zane/README.md)** — `node tools/zane/cli.js check file.zane` (a `.zui` file, the former extension, is read the same way). Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 30 conformance fixtures.
-- **[The conformance suite](conformance/README.md)** — 30 `.zane` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; every violation fixture has a lawful twin.
+- **[The `zane` verifier](tools/zane/README.md)** — `node tools/zane/cli.js check file.zane` (a `.zui` file, the former extension, is read the same way). Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 73 conformance fixtures at level 4.
+- **[The conformance suite](conformance/README.md)** — 73 `.zane` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; 22 of them are lawful twins, the same declaration as a violation fixture with the defect repaired.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the banking product, the i18n decisions, and the Refine evidence trails.
 - **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zane` language and compiler out of the reference implementation.
 - **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zane` verifier to the educational showcase.
@@ -44,7 +44,7 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 
 A project consumes the constitution by **pinning a version** of `rules.json` — exactly as a runtime pins a conformance-fixtures file:
 
-- **Zing** (formerly StzWeb) — first conforming consumer. Its `zing check` lints declarations against the law and cites rule numbers; its site scores zero violations under the audit. Pinned at v3.8.
+- **Zing** (formerly StzWeb) — first conforming consumer. Its `zing check` lints declarations against the law and cites rule numbers; the UI audit, run on ten of its pages on 2026-11-05, found one finding, on a redirect page nobody reads ([A quick win](site/quick-win.html)). Its own pinning record names law v3.11.
 - **The reference implementation** — the Zui pillar's compiler already parses `INTENT_FLOW`, `FORM`, `WIZARD`, `WORLD_VIEW`, `INTERACTION`, `FEEDBACK`, `SCREEN`, `COMPONENT`, `NAV_GRAPH`, `VIBE`; its Interface Constitution derives from the same articles.
 - **Anything else** — the law is one JSON file with a stable schema. Load it, check against it, cite it.
 
