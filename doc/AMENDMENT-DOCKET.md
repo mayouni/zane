@@ -940,21 +940,24 @@ documented failure.
 - **The remarks.** 2026-11-05, on the front page's panel: *"the space to the right is not necessary! Space is a functional
   communication tool that we must use with care"*. And, on the next attempt, which had narrowed the panel around a two-line
   title: *"I'm tired of talking to you of visual equlibrium! the hero zone must be rectangyular and you have space : put the
-  title on one line and strech the text to the right!"*
+  title on one line and strech the text to the right!"*. And on the wide rectangle that followed: *"npw it is so larg and hides
+  the door! please think in terms of visual equilibrium : put the title on two lines if necessary and fix this mess"*
 - **The defect.** The hero panel was 48rem wide and its balanced title and line left a band of empty space beside them,
   about two fifths of the panel, which separated nothing and ranked nothing.
-- **The repair.** The hero's panel is a rectangle as wide as its title, which holds one line on any window wider than a phone
-  (its size follows the window); the line under the title fills that width. The first repair, a narrow panel around a balanced
-  two-line title, removed the empty band and made a tall box in a wide space: both were the same defect, space that did not
-  serve the content.
-- **What the two attempts teach.** Balance and fit are not ends in themselves. A text block takes the shape the available space
-  gives it: a wide hero over a wide photograph is a wide rectangle, a title on one line where the line fits.
+- **The repair.** The hero's panel is a rectangle on the left half of the photograph, and its right edge stops short of the
+  museum's door at the photograph's centre (measured against the door frame at seven window sizes, from 900 to 1920 wide). Inside
+  it the title takes two balanced lines sized from the panel's own width, so they fill it, and the text under it takes three even
+  lines. Three attempts came before it: a panel with an empty band beside its text, a tall narrow box, and a rectangle as wide as
+  a one-line title that covered the door.
+- **What the attempts teach.** Balance, fit and width are not ends in themselves, and none of them can be judged on the text
+  alone. A text over a picture takes its shape from the picture: it leaves the picture's subject visible, it fills the box it
+  is given, and its lines are even. The rule proposed below gains that clause.
 - **Tension, stated.** Rule 2 (*White Space Is Structural*) says white space is mandatory and that dense interfaces are
   errors. The remark is the other half of the same idea: space that separates or orders is required, and space that does
   neither is a defect too.
 - **Proposed amendment to Rule 2.** One clause and one avoid entry: *space is functional: it is present where it separates,
   groups or ranks, and absent where it says nothing. A box wider than what it holds, or an empty band beside a text, is a
-  defect.* Tier stays judgment.
+  defect; and a text set over a picture leaves the picture's subject in view.* Tier stays judgment.
 
 ### F-4 · The line under a hero title is part of the hero voice — *amendment to Rule 107, needs a ruling*
 
