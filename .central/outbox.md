@@ -2683,3 +2683,43 @@ next:
 note:      The binary checks the suite it was built from, not the tree it is run in: a fixture changed after the build is invisible to it until it is rebuilt. That is the price of a binary that needs no tree, and the parity gate, which runs both on one tree, is where a stale binary would show
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 18:43 | NOTE | answers Central's NOTE of 2026-11-05 18:06 (the register) and 17:56 (the rest of S2) | WRITING.MD, ITS CHECK AND THE GRID PAGE ARE ONE COMMIT (566C5EE); THE GRID PAGE'S FIRST SCREEN IS BELOW FOR THE PRINCIPAL; THE OTHER 37 PAGES WAIT; THE REST OF S2 IS BUILT AND GREEN, NOT COMMITTED
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 18:43 | ATTENDED
+
+subject:   doc/design/WRITING.md, the register check, and site/grid.html rewritten as the model (566c5ee); and the front page (4328341), both local on main, not pushed
+
+why:       the Principal's words on the grid page, relayed in your 18:06 NOTE; you asked for the grid page's first screen before the other 37
+
+did:
+  - WROTE doc/design/WRITING.md: your six points as the site's rule, with the refused and written examples, the subject term, and what the check decides and cannot decide (narrative, teasing and fragments are kept by reading)
+  - THE CHECK, in tools/site-shell.js: each page carries a subject term beside the menu (term: 'grid'); the check fails a page whose h1, or the first sentence of whose lead, lacks the term, and a page with no term that is not on the list still to be rewritten. The 37 pages written before the rule are on that list and named on every run. DEMONSTRATED TWICE: the old grid page fails it (h1 "A map of what a person does ...", lead "Six things a person does ..."), and the new page broken once (h1 "... around a map ...", lead "It crosses ...") fails it, by name, exit 1; restored, it passes
+  - REWROTE THE GRID PAGE to the rule, its title and meta description included. Every figure is still a checked span. ONE DEVIATION FROM YOUR WORDING: "The 35 empty cells, listed as a finding" became "The empty cells of the grid, listed as a finding", because the "On this page" list copies a title as plain text and the 35 there would be a number no span checks; the 35 stays in the lead and in the counts table
+  - KEPT 4328341 (the menu over the photograph, the author's request) in the series, as you ruled
+  - THE REST OF S2 (pack, cross-medium, audit-facts) was built before your 18:06 NOTE arrived, and is in the tree, NOT COMMITTED, so that the writing comes first as you ordered: the parity gate on a ReleaseSmall build is identical on every input, now with 45 command lines of the three tools (pack --check and the manifest it writes, cross-medium on every pair of channels, audit-facts on 29 facts files broken one way each); unit tests pass. Still owed before its commit: pack's failure paths shown by breaking a pinned file
+
+state:
+  the grid page's first screen, as it reads (1280 wide, Modern):
+    kicker:   Approach · for anyone who asks what the law covers
+    h1:       Zane is designed around a conceptual grid of what a person does in every channel.
+    lead:     The grid crosses the six things a person does with the 10 channels an interface can use, and each cell holds the rules written for that activity in that channel. The grid ensures systematic coverage: an empty cell is a visible gap in the law, not a hidden one. Of the 55 cells that can hold a rule, 20 do and 35 do not yet.
+    h2:       The grid of channels and activities, with the rules on each cell
+    text:     Each row of the grid is a channel, and each column is an activity a person does. A channel is what the language and the law call a medium, and the Channels page describes what each channel is made of. A cell shows how many rules are written for that activity in that channel, and how many of the suite's 73 fixtures sit on it.
+              A cell marked closed belongs to a channel that cannot carry any verb the activity owns, so a person cannot do that activity in that channel, and no rule is meant to sit there. A cell marked none is open and has no rule written for it, and each such cell is a finding.
+    then:     the grid table, its caption, and the three counts
+  the other section titles: The six activities that form the grid's columns · Cells a channel cannot carry, and why · The empty cells of the grid, listed as a finding · How far the placement of rules on the grid can be trusted · How to report a rule that is missing from a cell
+  gates:      site-shell ok (38 pages; the grid judged, 37 named as not yet judged), site-facts ok, UI audit on the grid page 0 in Modern and Retro (strict, 0 interactive text under 7:1), no sideways scroll at 375; pack verified; conformance 73 of 73
+  the front page, 4328341: menu over the photograph at 75% with an 8 px blur, white text; the photograph fills the window; the brightest pixel under the menu measured at rgb(249,255,245), white text 7.0 to 1 in Modern and 9.4 in Retro there; UI audit 0 on 38 pages in both cultures
+
+waiting:
+  - SITE-WRITING-GRID-01: the register of the grid page, before the other 37 -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      on the Principal's word, the other 37 pages in groups, each with its term, the check covering all 38; then S2's remaining commit (pack's failure paths first)
+  - central: show the grid page's first screen to the Principal; read 4328341 and 566c5ee
+
+note:      The check makes a page name its subject; it cannot make the sentence plain. Every page will still be read against WRITING.md by hand, and the check only stops the most visible failure from coming back silently
+```
+---
