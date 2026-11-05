@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A quick win — one real run on Zing, in under an hour</title>
-<meta name="description" content="One real run on a real site this project does not own, Zing, read only: three surfaces declared, the verifier run, the UI audit on ten pages, and what it found, which was almost nothing, said plainly.">
+<title>A quick win — one real run of Zane on the Zing site, in under an hour</title>
+<meta name="description" content="A quick win is one real run of Zane on a real site that this project does not own. The run on the Zing site, read only, declared three surfaces, ran the verifier and ran the UI audit on ten pages. It found one thing, and that thing is not a defect.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,8 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">A quick win</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Try · for anyone who wants to see what an afternoon buys</p>
-    <h1>One real run on a real site, in under an hour, and an honest result.</h1>
-    <p class="sub">The subject is Zing's own site, a framework in the same family and a site this project reads and does not own. The whole run, from the first declaration to the last audit, took forty-seven minutes on 5 November 2026, including mending a tool along the way. It found one thing, and that one is not a defect.</p>
+    <h1>A quick win is one real run of Zane on a real site, done in under an hour.</h1>
+    <p class="sub">A quick win is one short run of Zane on a real site, and it shows where that site stands against the law. It lets a team see what one afternoon of work tells it about a site. The subject of this run is Zing's own site: Zing is a framework in the same family, and this project reads its site and does not own it. The whole run, from the first declaration to the last audit, took forty-seven minutes on 5 November 2026, including the time to mend a tool. The run found one thing, and that thing is not a defect.</p>
   </div>
 </header>
 
@@ -53,10 +53,10 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#declare">1 · Declare three surfaces</a></li>
-      <li><a href="#run-the-verifier">2 · Run the verifier</a></li>
-      <li><a href="#audit-the-pages">3 · Audit the ten pages</a></li>
-      <li><a href="#what-it-shows">4 · What it shows, and what it does not</a></li>
+      <li><a href="#declare">1 · The three surfaces of the Zing site, declared in Zane</a></li>
+      <li><a href="#run-the-verifier">2 · The verifier's verdict on the declarations</a></li>
+      <li><a href="#audit-the-pages">3 · The UI audit of the ten pages of the Zing site</a></li>
+      <li><a href="#what-it-shows">4 · What the quick win shows, and what it does not show</a></li>
     </ul>
   </details>
 </nav>
@@ -65,9 +65,9 @@
 
 <section id="declare">
   <div class="narrow">
-    <h2>1 · Declare three surfaces</h2>
+    <h2>1 · The three surfaces of the Zing site, declared in Zane</h2>
 
-    <p>The main menu, the style select and the landing page, written in the language from the markup, by hand: <a href="../examples/quick-win/zing-landing.zane"><code>examples/quick-win/zing-landing.zane</code></a>. Its header says it is Zane's description of pages it does not own. The part that matters:</p>
+    <p>The run declares three surfaces of Zing's site: the main menu, the style select and the landing page. They are written in the language by hand, from the markup, in <a href="../examples/quick-win/zing-landing.zane"><code>examples/quick-win/zing-landing.zane</code></a>. The file's header says that it is Zane's description of pages that Zane does not own. The part of the file that matters is this declaration:</p>
 <pre class="excerpt" data-excerpt="examples/quick-win/zing-landing.zane"><span class="k">DEFINE INTERACTION</span> <span class="n">style_select</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>],
@@ -79,33 +79,33 @@
 
 <section class="alt" id="run-the-verifier">
   <div class="narrow">
-    <h2>2 · Run the verifier</h2>
+    <h2>2 · The verifier's verdict on the declarations</h2>
 
     <pre class="term" data-run="node tools/zane/cli.js check examples/quick-win/zing-landing.zane"><span class="dim">$ node tools/zane/cli.js check examples/quick-win/zing-landing.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.14</pre>
-    <p>Clean. A style switch that changes how the page looks, and nothing that is true, is a selection with a navigating role, which is how Zing built it.</p>
+    <p>The verifier finds the declarations clean. A style switch changes how the page looks and changes nothing that is true, so it is a selection with a navigating role, which is how Zing built it.</p>
   </div>
 </section>
 
 <section id="audit-the-pages">
   <div class="narrow">
-    <h2>3 · Audit the ten pages</h2>
+    <h2>3 · The UI audit of the ten pages of the Zing site</h2>
 
-    <p>Zing's site was served read only beside the audit with <a href="../examples/web-case/serve-beside.js"><code>serve-beside.js</code></a>, and the audit run on its front page and its nine pages under <code>site/</code>, in the default mode and in Zing's own default style. It reported <b>one finding</b>: the page at <code>site/index.html</code> has no trail and no bar marking it.
-    That page is a redirect to the front page, marked not to be indexed, with one sentence in it. No reader stays on it, so the finding is the audit measuring a page that is not one. <b>Every page a reader reads was clean.</b></p>
-    <p><b>A tool was mended on the way,</b> and that is part of the result. The first version of the serving script put the audit's own files under <code>/site/</code>, which shadowed Zing's own <code>site/</code> folder. It now serves the audit at <code>/__zane/ui-audit.html</code>, a path no site uses, and it is the version the web case's page links.</p>
+    <p>Zing's site was served read only beside the audit with <a href="../examples/web-case/serve-beside.js"><code>serve-beside.js</code></a>. The audit ran on its front page and on its nine pages under <code>site/</code>, in the default mode and in Zing's own default style. It reported <b>one finding</b>: the page at <code>site/index.html</code> has no trail and no bar that marks it.
+    That page is a redirect to the front page, is marked not to be indexed, and holds one sentence. No reader stays on it, so the finding is the audit measuring a page that is not a real page. <b>Every page that a reader reads was clean.</b></p>
+    <p><b>A tool was mended during the run,</b> and the repair is part of the result. The first version of the serving script put the audit's own files under <code>/site/</code>, which shadowed Zing's own <code>site/</code> folder. The script now serves the audit at <code>/__zane/ui-audit.html</code>, a path that no site uses, and the web case's page links this version.</p>
   </div>
 </section>
 
 <section class="alt" id="what-it-shows">
   <div class="narrow">
-    <h2>4 · What it shows, and what it does not</h2>
+    <h2>4 · What the quick win shows, and what it does not show</h2>
 
     <ul>
-      <li><b>The surface was already lawful</b> under what these checks can see. That is a result: an hour shows a team where it stands, and here it stands well. Zing's own page says it obeys the law it advertises, which is the likely reason.</li>
-      <li><b>For contrast:</b> on the Softanza site, <a href="web.html">the web case</a> found four real findings in the same kind of run.</li>
-      <li><b>Not run:</b> Zing's other style. The audit's style switch drives this site's styles, and Zing keeps its own choice under its own name, so only Zing's default was measured.</li>
-      <li><b>Nobody looked:</b> no person has judged these pages for this run; the audit measures size, contrast and the path, not whether the page is good.</li>
+      <li><b>The surface was already lawful</b> under what these checks can see. A clean result is still a result: an hour shows a team where it stands, and this site stands well. Zing's own page says that it obeys the law it advertises, which is the likely reason.</li>
+      <li><b>For comparison,</b> <a href="web.html">the web case</a> found four real findings on the Softanza site in the same kind of run.</li>
+      <li><b>Zing's other style was not run.</b> The audit's style switch drives this site's styles, and Zing keeps its own choice under its own name, so only Zing's default style was measured.</li>
+      <li><b>No person has looked at these pages for this run.</b> The audit measures size, contrast and the path, and it does not judge whether a page is good.</li>
     </ul>
   </div>
 </section>

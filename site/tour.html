@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The tour — Zane, presented to the people in the room</title>
-<meta name="description" content="A presentation of Zane in short scenes, ordered for who is in the room: a UX designer, a product designer, a programmer, an AI builder or a decision maker. Arrow keys move, n shows the notes, Escape opens the scene's page.">
+<title>The tour — a presentation of Zane in scenes, ordered for the people in the room</title>
+<meta name="description" content="The tour presents Zane in short scenes, in an order chosen for the person in the room: a UX designer, a product designer, a programmer, an AI builder or a decision maker. The arrow keys move between scenes, n shows the notes, and Escape opens the page that a scene comes from.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,8 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The tour</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Try · for presenting Zane to a team</p>
-    <h1>Present it in eight scenes, ordered for who is in the room.</h1>
-    <p class="sub">Choose a profile and the scenes follow in the order that profile needs. The arrow keys or the space bar move between scenes, <kbd>n</kbd> shows the presenter's notes, <kbd>f</kbd> fills the screen, and <kbd>Escape</kbd> opens the page a scene comes from. Every number in a scene is the same number as on the site.</p>
+    <h1>The tour presents Zane in eight scenes, ordered for the people in the room.</h1>
+    <p class="sub">The tour is a presentation of Zane in short scenes, for a presenter who shows Zane to a team. It lets a presenter show Zane in the order that the people in the room need: the presenter chooses a profile, and the scenes follow in that profile's order. The arrow keys or the space bar move between scenes, <kbd>n</kbd> shows the presenter's notes, <kbd>f</kbd> fills the screen, and <kbd>Escape</kbd> opens the page that a scene comes from. Every number in a scene is the same number as on the site.</p>
   </div>
 </header>
 
@@ -54,7 +54,7 @@
 
 <section id="choose">
   <div class="narrow">
-    <h2>Who is in the room?</h2>
+    <h2>The five profiles that the tour is ordered for</h2>
 
     <ul class="profiles">
       <li><a href="#ux/1">UX designer</a> <span class="note">8 scenes</span></li>
@@ -63,24 +63,24 @@
       <li><a href="#ai/1">AI builder</a> <span class="note">8 scenes</span></li>
       <li><a href="#decision/1">Decision maker</a> <span class="note">8 scenes</span></li>
     </ul>
-    <p>Each scene is an address: <code>tour.html#programmer/4</code> opens the fourth scene for a programmer, so a presenter can start anywhere and a link can be sent.</p>
+    <p>Each scene has its own address: <code>tour.html#programmer/4</code> opens the fourth scene for a programmer, so a presenter can start at any scene and can send a link to it.</p>
   </div>
 </section>
 
 <section class="alt" id="stage-section">
   <div class="narrow">
-    <h2 id="stage-heading">The stage</h2>
+    <h2 id="stage-heading">The stage, where the scenes of the tour are shown</h2>
     <div class="stage" id="stage" aria-live="polite">
-      <p class="stage-idle" id="stage-idle">Choose a profile above to begin.</p>
+      <p class="stage-idle" id="stage-idle">The tour begins when a profile above is chosen.</p>
 
       <article class="scene-card" id="scene-hook" data-scene="hook" data-page="thinking.html" hidden>
-        <h3 class="scene-title">An interface is what a person is doing, rendered.</h3>
-        <p>A person does not come to click a button. They come to find something, compare, act, confirm, and undo. Zane declares that, and treats every screen as a consequence of it.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Start from the person, not the screen. Ask the room what their users come to do, and write the verbs down.</aside>
+        <h3 class="scene-title">Zane starts from what a person is doing, and an interface renders it.</h3>
+        <p>A person does not come to an interface to click a button. A person comes to find something, to compare, to act, to confirm and to undo. Zane declares these activities and treats every screen as a consequence of them.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Start from the person and not from the screen. Ask the room what their users come to do, and write the verbs down.</aside>
       </article>
 
       <article class="scene-card" id="scene-refusal" data-scene="refusal" data-page="refusal.html" hidden>
-        <h3 class="scene-title">A flow you cannot leave is refused, by name.</h3>
+        <h3 class="scene-title">The verifier refuses a flow that a person cannot leave, and names the rule.</h3>
         <div class="scene">
 <pre class="shot"><span class="k">DEFINE WIZARD</span> <span class="n">account_opening</span> (
   <span class="k">SATISFIES</span> [<span class="s">UNDERSTAND, CONFIRM, ACT</span>],
@@ -95,110 +95,110 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     </div>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the last line of the output: the rule, the article and the right. Nothing has been drawn yet.</aside>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the last line of the output, which gives the rule, the article and the right. Nothing has been drawn at this point.</aside>
       </article>
 
       <article class="scene-card" id="scene-law" data-scene="law" data-page="rules.html" hidden>
-        <h3 class="scene-title">The law is a file, and every refusal cites it.</h3>
-        <p><span data-law="rules">123</span> rules under <span data-law="articles">7</span> articles, guaranteeing <span data-law="rights">6</span> rights. The tools load the same file the reader reads, so they cannot drift apart.</p>
-        <p>Honestly: only <span data-law="tier:machine">11</span> rules are refused by a machine today, and <span data-law="tier:judgment">80</span> need a person.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The honest number is the second one. Say it before someone asks.</aside>
+        <h3 class="scene-title">The law is one file, and every refusal cites a rule from it.</h3>
+        <p>The law holds <span data-law="rules">123</span> rules under <span data-law="articles">7</span> articles, and the rules guarantee <span data-law="rights">6</span> rights. The tools load the same file that the reader reads, so the tools and the text cannot drift apart.</p>
+        <p>Only <span data-law="tier:machine">11</span> rules are refused by a machine today, and <span data-law="tier:judgment">80</span> rules need a person's judgment.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The second number states the limit. Say it before someone asks.</aside>
       </article>
 
       <article class="scene-card" id="scene-grid" data-scene="grid" data-page="grid.html" hidden>
-        <h3 class="scene-title">A map of what a person does, across every channel.</h3>
-        <p>Six activities against <span data-fact="grid.media">10</span> channels. Of <span data-fact="grid.cellsLive">55</span> cells that can hold a rule, <span data-fact="grid.cellsWithRule">20</span> do and <span data-fact="grid.cellsNone">35</span> do not. <span data-fact="grid.channelsNoRule">5</span> channels have no rule written for them at all.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The empty cells are the finding. A practice that cannot show where it is silent cannot be checked.</aside>
+        <h3 class="scene-title">Zane is designed around a grid of what a person does in every channel.</h3>
+        <p>The grid crosses six activities with <span data-fact="grid.media">10</span> channels. Of the <span data-fact="grid.cellsLive">55</span> cells that can hold a rule, <span data-fact="grid.cellsWithRule">20</span> hold one and <span data-fact="grid.cellsNone">35</span> hold none. <span data-fact="grid.channelsNoRule">5</span> channels have no rule written for them at all.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The empty cells are the finding of the grid. A practice that cannot show where it is silent cannot be checked.</aside>
       </article>
 
       <article class="scene-card" id="scene-channels" data-scene="channels" data-page="media.html" hidden>
-        <h3 class="scene-title">A phone line cannot zoom.</h3>
-        <p>One declaration, many channels. A flow that promises ZOOM over a voice line is refused, because a voice cannot carry it, and the same flow on a screen is clean. <span data-fact="media.actAbsent">4</span> of the channels cannot carry an act at all.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> This is the scene for anyone shipping voice, print or an API: the refusal is of a promise, not of the channel.</aside>
+        <h3 class="scene-title">The law refuses a promise that a channel cannot carry, such as zoom on a phone line.</h3>
+        <p>One declaration can serve many channels. A flow that promises ZOOM over a voice line is refused, because a voice cannot carry it, and the same flow on a screen is clean. <span data-fact="media.actAbsent">4</span> of the channels cannot carry an act at all.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> This scene is for anyone who ships voice, print or an API. The law refuses a promise, and it does not refuse the channel.</aside>
       </article>
 
       <article class="scene-card" id="scene-compare" data-scene="compare" data-page="positioning.html" hidden>
-        <h3 class="scene-title">Beside heuristics, standards and frameworks, not instead of them.</h3>
-        <p>Heuristics and usability tests judge what only a person can judge. Accessibility standards and linters check a rendered page. Frameworks build the screen. None of those, in what we read, refuses a declaration for lacking what a person must be able to do, before a screen exists.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Be fair to the practices in the room. The claim is narrow and the page lists its sources.</aside>
+        <h3 class="scene-title">Zane works beside heuristics, standards and frameworks, and does not replace them.</h3>
+        <p>Heuristics and usability tests judge what only a person can judge. Accessibility standards and linters check a rendered page. Frameworks build the screen. In the sources this project read, none of these practices refuses a declaration, before a screen exists, for lacking what a person must be able to do.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Be fair to the practices in the room. The claim is narrow, and the comparison page lists its sources.</aside>
       </article>
 
       <article class="scene-card" id="scene-webcase" data-scene="webcase" data-page="web.html" hidden>
-        <h3 class="scene-title">On a real site: four findings, and the instrument's own limit.</h3>
-        <p>The Softanza site's navigation, read only: the verifier refused the author's own first declaration, and the audit found four pages with no labelled path. It also reported twenty-two contrast findings over a photograph, which are the audit's limit, not the site's, and the page says which is which.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Real runs, with their limits stated. That is the whole style of the project.</aside>
+        <h3 class="scene-title">A run on a real site found four real findings and showed a limit of the audit.</h3>
+        <p>The web case reads the navigation of the Softanza site and changes nothing. The verifier refused the author's own first declaration, and the audit found four pages with no labelled path. The audit also reported twenty-two contrast findings over a photograph. Those findings are a limit of the audit and not defects of the site, and the web case page says which findings are which.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Every case on the site is a real run, and each case states its limits. This is the style of the whole project.</aside>
       </article>
 
       <article class="scene-card" id="scene-quickwin" data-scene="quickwin" data-page="quick-win.html" hidden>
-        <h3 class="scene-title">On Zing, in forty-seven minutes: clean.</h3>
-        <p>Three surfaces declared, the verifier clean, ten pages audited, one finding on a redirect page that nobody reads. An hour tells a team where it stands.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> A clean result is a result. Do not apologise for it.</aside>
+        <h3 class="scene-title">A quick win on the Zing site took forty-seven minutes and found the site clean.</h3>
+        <p>The run declared three surfaces, found the declarations clean in the verifier, and audited ten pages. The audit reported one finding, on a redirect page that nobody reads. An hour of work tells a team where it stands.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> A clean result is still a result, so present it without apology.</aside>
       </article>
 
       <article class="scene-card" id="scene-build" data-scene="build" data-page="build.html" hidden>
-        <h3 class="scene-title">In CI, a refusal is an exit code.</h3>
-        <p>The verifier exits 1 on a refusal, 0 when clean and 2 on a usage error. That is all a build gate needs, and it needs Node and nothing else today.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For programmers: show the exit code, then the envelope a tool can read.</aside>
+        <h3 class="scene-title">In CI, the verifier reports a refusal as an exit code.</h3>
+        <p>The verifier exits 1 on a refusal, 0 when the declaration is clean and 2 on a usage error. A build gate needs nothing more, and today the verifier needs only Node.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For programmers, show the exit code first, and then the envelope that a tool can read.</aside>
       </article>
 
       <article class="scene-card" id="scene-generate" data-scene="generate" data-page="generate.html" hidden>
-        <h3 class="scene-title">A generator can be held to a grammar, and still be refused.</h3>
-        <p>A grammar file fixes the shape of a declaration (the <span data-fact="gbnf.kinds">10</span> kinds and their clauses), so a model cannot write one that does not parse. It cannot fix meaning: a flow with no exit is well formed and wrong, and only the court refuses it.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For AI builders: the grammar and the court are two different promises. Say which one they need.</aside>
+        <h3 class="scene-title">A grammar holds a generator to the shape of a declaration, and the court still judges its meaning.</h3>
+        <p>A grammar file fixes the shape of a declaration (the <span data-fact="gbnf.kinds">10</span> kinds and their clauses), so a model cannot write a declaration that does not parse. The grammar cannot fix meaning: a flow with no exit is well formed and wrong, and only the court refuses it.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For AI builders, the grammar and the court are two different promises. Say which promise they need.</aside>
       </article>
 
       <article class="scene-card" id="scene-conformance" data-scene="conformance" data-page="conformance.html" hidden>
-        <h3 class="scene-title">Agreement is proved by running the fixtures.</h3>
-        <p><span data-fact="fixtures.total">73</span> fixtures with known verdicts, and <span data-fact="pack.files">12</span> files pinned by hash. A verifier in any language is a peer, and the suite says which fixture disagreed.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> There is no library to adopt. That surprises people; let it.</aside>
+        <h3 class="scene-title">Agreement between verifiers is proved by running the fixtures.</h3>
+        <p>The suite holds <span data-fact="fixtures.total">73</span> fixtures with known verdicts, and <span data-fact="pack.files">12</span> files are pinned by hash. A verifier in any language is a peer, and the suite names each fixture on which a verifier disagrees.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Zane has no library to adopt. This fact surprises people, so state it and leave it without explanation.</aside>
       </article>
 
       <article class="scene-card" id="scene-haro" data-scene="haro" data-page="haro.html" hidden>
         <h3 class="scene-title">The language is also declared as data, and two courts are held to each other.</h3>
-        <p>A court forged from the declaration agrees with the hand-written verifier on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span> fixtures; the other <span data-fact="twin.differences">18</span> are named, and a ratchet fails on any other.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For the language people in the room. Skip it for everyone else.</aside>
+        <p>A court forged from the declaration agrees with the hand-written verifier on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span> fixtures. The other <span data-fact="twin.differences">18</span> fixtures are named, and a ratchet fails on any difference that is not named.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> This scene is for the language people in the room. Skip it for everyone else.</aside>
       </article>
 
       <article class="scene-card" id="scene-cost" data-scene="cost" data-page="adopt.html" hidden>
-        <h3 class="scene-title">What it costs today.</h3>
-        <p>Node and a browser, nothing to install, no library to adopt, no framework to change. A single file that needs neither is designed and not built. The work is writing declarations, by hand, for the surfaces that matter.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers: the cost is an afternoon per surface, and the honest risk is that most of the law still needs a reviewer.</aside>
+        <h3 class="scene-title">Using Zane today costs Node, a browser and the time to write declarations.</h3>
+        <p>Zane needs Node and a browser, and it needs nothing to install, no library to adopt and no framework to change. A single file that needs neither Node nor a browser is designed and not built. The work is writing declarations by hand for the surfaces that matter.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers, the cost is an afternoon per surface. The real risk is that most of the law still needs a reviewer.</aside>
       </article>
 
       <article class="scene-card" id="scene-limits" data-scene="limits" data-page="innovation.html" hidden>
-        <h3 class="scene-title">What is not shown.</h3>
-        <p><b>No study, no user, no foreign application run end to end.</b> The claims are structural and their evidence is the repository: files a reader can open and commands a reader can run. Nobody has perceived any channel for the grid.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Always end on the limits before the next step. It is what makes the rest believable.</aside>
+        <h3 class="scene-title">The project has not yet shown a study, a user or a foreign application.</h3>
+        <p><b>The project has run no study, has involved no user, and has run no foreign application end to end.</b> The claims are structural, and their evidence is the repository: files a reader can open and commands a reader can run. Nobody has perceived any channel to check the grid.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Always end on the limits before the next step. The limits make the rest believable.</aside>
       </article>
 
       <article class="scene-card" id="scene-next-ux" data-scene="next-ux" data-page="grid.html" hidden>
-        <h3 class="scene-title">Next, for a UX designer: the grid.</h3>
-        <p>Read where the law speaks and where it is silent, then file the next defect you see against a cell.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Leave them with the grid and the record a defect is filed as.</aside>
+        <h3 class="scene-title">The next step for a UX designer is to read the grid.</h3>
+        <p>The grid shows where the law speaks and where it is silent, and a UX designer files the next defect they see against one of its cells.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Leave the room with the grid and with the record that a defect is filed as.</aside>
       </article>
 
       <article class="scene-card" id="scene-next-product" data-scene="next-product" data-page="adopt.html" hidden>
-        <h3 class="scene-title">Next, for a product designer: your own surfaces.</h3>
-        <p>Pick three surfaces of a product you own, declare them, and run the verifier and the audit as the web case did.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Offer to do the first one together.</aside>
+        <h3 class="scene-title">The next step for a product designer is to declare the surfaces of their own product.</h3>
+        <p>A product designer picks three surfaces of a product they own, declares them, and runs the verifier and the audit on them as the web case did.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Offer to declare the first surface together.</aside>
       </article>
 
       <article class="scene-card" id="scene-next-programmer" data-scene="next-programmer" data-page="build.html" hidden>
-        <h3 class="scene-title">Next, for a programmer: put it in CI.</h3>
-        <p>Check a declaration of your own, then gate a build on its exit code.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The Build page has the commands.</aside>
+        <h3 class="scene-title">The next step for a programmer is to put the verifier in CI.</h3>
+        <p>A programmer checks a declaration of their own and then gates a build on the verifier's exit code.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The Build page lists the commands.</aside>
       </article>
 
       <article class="scene-card" id="scene-next-ai" data-scene="next-ai" data-page="generate.html" hidden>
-        <h3 class="scene-title">Next, for an AI builder: hold a generator to it.</h3>
-        <p>Give a generator the grammar, then the verifier's findings by rule number, and see what it fixes.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The Generate page has the loop.</aside>
+        <h3 class="scene-title">The next step for an AI builder is to hold a generator to the grammar and the verifier.</h3>
+        <p>An AI builder gives a generator the grammar, then gives it the verifier's findings by rule number, and sees what the generator fixes.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The Generate page describes the loop.</aside>
       </article>
 
       <article class="scene-card" id="scene-next-decision" data-scene="next-decision" data-page="conformance.html" hidden>
-        <h3 class="scene-title">Next, for a decision maker: the status board.</h3>
-        <p>What exists, what is designed and what is held, part by part, with where each stops.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the held rows: nothing is hidden there.</aside>
+        <h3 class="scene-title">The next step for a decision maker is to read the status board.</h3>
+        <p>The status board shows what exists, what is designed and what is held, part by part, and where each part stops.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the held rows, which show that nothing is hidden.</aside>
       </article>
       <div class="stage-controls" id="stage-controls" hidden>
         <button type="button" class="btn ghost" id="tour-prev">← Previous</button>

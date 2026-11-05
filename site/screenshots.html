@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Screenshots — judging an application you do not own</title>
-<meta name="description" content="The screenshot audit: a screenshot is reduced to facts and judged against the three rules a screenshot can decide, with every other rule reported as not audited and never as passed. Designed and checked; never run on a real application.">
+<title>Screenshots — the screenshot audit for an application you do not own</title>
+<meta name="description" content="The screenshot audit reduces a screenshot to facts and judges them against the three rules that a screenshot can decide. It reports every other rule as not audited and never as passed. The audit is designed and checked, and it has never been run on a real application.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,8 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Screenshots</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Try · for people who must judge an application they do not own</p>
-    <h1>A screenshot can decide three rules, and says so for every other one.</h1>
-    <p class="sub">An application you do not own has no source to read and often no page to serve. What remains is what it shows. The screenshot audit reduces a screenshot to measurements, judges them against the rules a picture can decide, and reports everything else as not audited. <b>It has never been run on a real application.</b></p>
+    <h1>The screenshot audit judges an application you do not own on the three rules that a screenshot can decide.</h1>
+    <p class="sub">The screenshot audit reduces a screenshot to measurements and judges them against the rules that a picture can decide, so that a person can audit an application whose source and pages are out of reach. An application you do not own has no source to read and often no page to serve, and only what it shows remains. The audit ensures that a rule a screenshot cannot decide is reported as not audited and never as passed. <b>The screenshot audit has never been run on a real application.</b></p>
   </div>
 </header>
 
@@ -53,10 +53,10 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#the-principle">The writer measures, the audit judges</a></li>
-      <li><a href="#what-it-decides">What it decides, and at what thresholds</a></li>
-      <li><a href="#a-run-on-the-example">A run, on the example file</a></li>
-      <li><a href="#what-has-never-run">What has never run</a></li>
+      <li><a href="#the-principle">How the work is split between a writer that measures and an audit that judges</a></li>
+      <li><a href="#what-it-decides">The rules that the screenshot audit decides, and their thresholds</a></li>
+      <li><a href="#a-run-on-the-example">A run of the checker on the example facts file</a></li>
+      <li><a href="#what-has-never-run">The parts of the screenshot audit that have never run</a></li>
     </ul>
   </details>
 </nav>
@@ -65,18 +65,18 @@
 
 <section id="the-principle">
   <div class="narrow">
-    <h2>The writer measures, the audit judges</h2>
+    <h2>How the work is split between a writer that measures and an audit that judges</h2>
 
-    <p>Two pieces, kept apart on purpose. A <b>writer</b> reads the screenshot and writes down what it measures: each line of text, its box, the luminances behind it, how sure the text recognition was. It decides nothing. The <b>audit</b> reads those facts and judges them against thresholds that live in one place.
-    A writer that also decided "this is too small" would put the law inside a tool that has never read it.</p>
-    <p>A field the writer could not measure is empty, never a guess and never zero: a zero luminance is black text, an empty one is "I do not know", and the audit treats them differently. The shape is
-    <a href="../doc/design/audit/facts.schema.json"><code>facts.schema.json</code></a>, the reasoning is <a href="../doc/design/AUDIT-FACTS.md"><code>AUDIT-FACTS.md</code></a>.</p>
+    <p>The screenshot audit has two pieces, which are kept apart on purpose. A <b>writer</b> reads the screenshot and writes down what it measures: each line of text, its box, the luminances behind it, and how sure the text recognition was. The writer decides nothing. The <b>audit</b> reads those facts and judges them against thresholds that are kept in one place.
+    A writer that also decided that a line is too small would put the law inside a tool that has never read the law.</p>
+    <p>A field that the writer could not measure is left empty, and it is never a guess and never zero. A zero luminance means black text, an empty luminance means that the value is not known, and the audit treats the two differently. The shape of the facts is in
+    <a href="../doc/design/audit/facts.schema.json"><code>facts.schema.json</code></a>, and the reasoning is in <a href="../doc/design/AUDIT-FACTS.md"><code>AUDIT-FACTS.md</code></a>.</p>
   </div>
 </section>
 
 <section class="alt" id="what-it-decides">
   <div class="narrow">
-    <h2>What it decides, and at what thresholds</h2>
+    <h2>The rules that the screenshot audit decides, and their thresholds</h2>
 
     <table class="board">
       <thead><tr><th>Rule</th><th>What is measured</th><th>Threshold</th></tr></thead>
@@ -86,16 +86,16 @@
         <tr><td>Every other rule</td><td>nothing</td><td><b>not audited</b>, never passed</td></tr>
       </tbody>
     </table>
-    <p>Two more thresholds keep it honest: text the recognition was less than <span data-fact="audit.minOcrScore">0.5</span> sure of is not judged, and a background that moves more than <span data-fact="audit.spreadLimit">0.25</span> toward the text at its worst end makes contrast <b>not decided</b>,
-    because a photograph behind text can be fine at its typical point and unreadable at its worst. That is the limit the <a href="../tools/ui-audit.html">UI audit</a> has on a page with a photograph, designed out here.</p>
+    <p>Two more thresholds keep the audit honest. Text that the recognition was less than <span data-fact="audit.minOcrScore">0.5</span> sure of is not judged. A background that moves more than <span data-fact="audit.spreadLimit">0.25</span> toward the text at its worst end makes contrast <b>not decided</b>,
+    because a photograph behind text can be readable at its typical point and unreadable at its worst. The <a href="../tools/ui-audit.html">UI audit</a> has this limit on a page with a photograph, and the screenshot audit is designed to avoid it.</p>
   </div>
 </section>
 
 <section id="a-run-on-the-example">
   <div class="narrow">
-    <h2>A run, on the example file</h2>
+    <h2>A run of the checker on the example facts file</h2>
 
-    <p>The checker reads a facts file, proves its shape and its arithmetic, and prints the decisions. Here on the example that ships with it, made by hand:</p>
+    <p>The checker reads a facts file, proves its shape and its arithmetic, and prints the decisions. The run below uses the example file that ships with the checker, which was made by hand:</p>
     <pre class="term" data-run="node doc/design/audit/check-facts.js doc/design/audit/example.facts.json"><span class="dim">$ node doc/design/audit/check-facts.js doc/design/audit/example.facts.json</span>
 3 lines found; text the OCR did not find is not audited
 
@@ -113,20 +113,20 @@ NOT AUDITED: every rule other than 62, 105, 107 (rule 105 only for its contrast 
 PROJECTED, NOT VERIFIED BY A PERSON (CENTRAL-PERCEPTGATE-01): nobody looked at the screenshot these facts describe.
 
 doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
-    <p>One line fails twice, one passes on contrast and cannot be decided on size, and one is never a pass because its background moves toward the text at the worst end. The checker prints, on every run, that nobody looked at the screenshot these facts describe.</p>
+    <p>One line fails twice. One line passes on contrast and cannot be decided on size. One line is never a pass, because its background moves toward the text at the worst end. The checker prints on every run that nobody looked at the screenshot these facts describe.</p>
   </div>
 </section>
 
 <section class="alt" id="what-has-never-run">
   <div class="narrow">
-    <h2>What has never run</h2>
+    <h2>The parts of the screenshot audit that have never run</h2>
 
     <ul>
-      <li><b>The writer, on a real application.</b> It belongs to another desk and runs on Ring++; it has not been run on a real application's screenshot, so this page shows the example file and not a real one.</li>
-      <li><b>The capture loop</b> that takes a screenshot of a running application is a separate thing and is not built.</li>
-      <li><b>No person has looked</b> at any screenshot the facts describe. The audit says so on every run, because perception is the last gate and no counter replaces it.</li>
+      <li><b>The writer has never run on a real application.</b> It belongs to another desk and runs on Ring++. It has not been run on a real application's screenshot, so this page shows the example file and not a real one.</li>
+      <li><b>The capture loop</b>, which takes a screenshot of a running application, is a separate part and is not built.</li>
+      <li><b>No person has looked</b> at any screenshot that the facts describe. The audit says so on every run, because perception is the last gate and no counter replaces it.</li>
     </ul>
-    <p>The same audit is the second half of <a href="mobile.html">the mobile workflow</a>, where a phone app has no page to measure.</p>
+    <p>The same audit forms the second half of <a href="mobile.html">the mobile workflow</a>, where a phone app has no page to measure.</p>
   </div>
 </section>
 
