@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gotchas · Forms — the conversation keeps its question on the table</title>
-<meta name="description" content="Two interactive offenses against forms as conversations: the accusatory error that blames you (Rule 40) and the placeholder label that vanishes mid-answer (Rule 28) — each beside its lawful twin.">
+<title>Forms — violations that blame the person or hide the question</title>
+<meta name="description" content="A form is a conversation in which the system asks a person questions. This page shows two violations of forms, the accusing error message that blames the person (Rule 40) and the placeholder label that vanishes during the answer (Rule 28), each beside its lawful twin.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../stz.css?v=9c520fe9">
 <link rel="stylesheet" href="../gotchas.css?v=84769739">
@@ -43,11 +43,11 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zane</a><span class="sep">›</span><a href="../why.html">Law</a><span class="sep">›</span><a href="./">What a violation feels like</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Forms</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Gotchas · the forms family</p>
-    <h1>The conversation</h1>
-    <p class="sub">A form is the system asking questions of a person. The two
-    offenses here poison the conversation from both sides: an error that
-    blames the person for the system's confusion, and a question that vanishes
-    the moment you start answering it.</p>
+    <h1>A form is a conversation in which the system asks a person questions.</h1>
+    <p class="sub">A form is the part of an interface through which the system asks a person for the information it needs.
+    The rules of forms keep the question visible while the person answers it, and they prevent the system from blaming the person for its own confusion.
+    The two violations on this page break the conversation from both sides: an error message that blames the person for the system's confusion, and a question that vanishes
+    as soon as the person starts to answer it.</p>
   </div>
 </header>
 
@@ -72,16 +72,16 @@
 
     <!-- INVALID INPUT -->
     <div class="gotcha" id="accuse">
-      <h2 id="1-invalid-input-rule-40-non-accusatory-p">1 · "Invalid input!" <a class="rule-chip" href="../../constitution/reader/#rule-40">Rule 40 · Non-Accusatory Pathfinding</a></h2>
-      <p class="lead">Type an incomplete email — say, <code>aminata@</code> — in
-      each and leave the field (<kbd>Tab</kbd> or click away).</p>
+      <h2 id="1-invalid-input-rule-40-non-accusatory-p">"Invalid input!": an error message that blames the person and does not say how to fix the entry <a class="rule-chip" href="../../constitution/reader/#rule-40">Rule 40 · Non-Accusatory Pathfinding</a></h2>
+      <p class="lead">Type an incomplete email address, for example <code>aminata@</code>, in
+      each field, then leave the field with <kbd>Tab</kbd> or by clicking elsewhere.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
             <label class="fldlabel" for="acc-bad">Email</label>
             <input class="fake-field" id="acc-bad" inputmode="email">
             <div class="slot"><span class="err" id="acc-bad-err" style="font-weight:800"></span></div>
-            <p class="quiet">Blames you, explains nothing, shouts in red.</p>
+            <p class="quiet">This message blames the person, explains nothing and shouts in red.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
@@ -89,28 +89,28 @@
             <label class="fldlabel" for="acc-good">Email</label>
             <input class="fake-field" id="acc-good" inputmode="email">
             <div class="slot"><span class="err" id="acc-good-err"></span></div>
-            <p class="quiet">States the system's requirement, with a verb that
-            fixes it. The error fades the moment you start correcting.</p>
+            <p class="quiet">This message states what the system requires, with a verb that
+            tells the person how to fix the entry. The message fades as soon as the person starts to correct the entry.</p>
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> the system failed to understand —
-      saying so, calmly, keeps dignity and momentum. Every error message must
-      contain a verb that tells the user how to move.</p>
+      <p class="why-line"><b>Why it is law:</b> the error is the system's failure to understand the entry, and a
+      message that says so calmly keeps the person's dignity and momentum. Every error message must
+      contain a verb that tells the person how to move forward.</p>
     </div>
 
     <!-- THE VANISHING LABEL -->
     <div class="gotcha" id="label">
-      <h2 id="2-the-vanishing-label-rule-28-forms-as-c">2 · The Vanishing Label <a class="rule-chip" href="../../constitution/reader/#rule-28">Rule 28 · Forms as Conversations</a></h2>
-      <p class="lead">Start typing in both fields. Now pretend the phone rang and
-      you came back two minutes later — what was the first field asking?</p>
+      <h2 id="2-the-vanishing-label-rule-28-forms-as-c">The Vanishing Label: a field whose question disappears when the person starts to answer it <a class="rule-chip" href="../../constitution/reader/#rule-28">Rule 28 · Forms as Conversations</a></h2>
+      <p class="lead">Start typing in both fields. Then suppose that the phone rang and
+      you came back two minutes later, and check whether each field still shows what it asks.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
             <input class="fake-field" placeholder="Beneficiary account (IBAN)" aria-label="Beneficiary account (IBAN)">
             <div class="slot"></div>
-            <p class="quiet">The placeholder was the label. You typed; it
-            vanished; the question is gone.</p>
+            <p class="quiet">The placeholder serves as the label. When the person types, the placeholder
+            vanishes, and the question vanishes with it.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
@@ -118,13 +118,13 @@
             <label class="fldlabel" for="lbl-good">Beneficiary account (IBAN)</label>
             <input class="fake-field" id="lbl-good">
             <div class="slot"></div>
-            <p class="quiet">The label lives above the field, always visible —
-            the conversation keeps its question on the table.</p>
+            <p class="quiet">The label sits above the field and is always visible, so
+            the conversation keeps its question in view.</p>
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> a form is the system asking;
-      hiding the question mid-answer turns conversation into interrogation.</p>
+      <p class="why-line"><b>Why it is law:</b> a form is the system asking a person questions, and a form that
+      hides its question during the answer turns the conversation into an interrogation.</p>
     </div>
 
   </div>

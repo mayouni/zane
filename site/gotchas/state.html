@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gotchas · State — nothing invisible, nothing final by ambush</title>
-<meta name="description" content="Two interactive offenses against visible state and reversibility: the filter nobody can see (Rule 82) and the double confirmation that trusts nobody (Rule 79) — each beside its lawful twin.">
+<title>State — violations that hide what the system knows or make an action final</title>
+<meta name="description" content="The state of an interface is what the system knows at a given moment, and the rules of state require that a person can see it and undo what the person did. This page shows two violations of state, the filter nobody can see (Rule 82) and the double confirmation that trusts nobody (Rule 79), each beside its lawful twin.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../stz.css?v=9c520fe9">
 <link rel="stylesheet" href="../gotchas.css?v=84769739">
@@ -43,11 +43,10 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zane</a><span class="sep">›</span><a href="../why.html">Law</a><span class="sep">›</span><a href="./">What a violation feels like</a><span class="sep">›</span><span class="here-crumb" aria-current="page">State</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Gotchas · the state family</p>
-    <h1>Nothing invisible, nothing final</h1>
-    <p class="sub">If the system knows something important, you must see it —
-    and what you did, you can undo. The two offenses here break each promise:
-    a filter that silently rewrites reality, and a deletion that interrogates
-    you twice instead of trusting you once.</p>
+    <h1>The state of an interface is what the system knows at a given moment, and a person must be able to see it and undo changes to it.</h1>
+    <p class="sub">State is what the system knows at a given moment, such as which filter is active, and the rules of state make every important part of it visible to the person.
+    The rules ensure that a person never draws a conclusion from a state the person cannot see, and that a person can undo what the person did.
+    The two violations on this page break each promise: a filter that silently changes what the table shows, and a deletion that questions the person twice instead of trusting the person once.</p>
   </div>
 </header>
 
@@ -72,16 +71,16 @@
 
     <!-- THE INVISIBLE FILTER -->
     <div class="gotcha" id="filter">
-      <h2 id="1-the-invisible-filter-rule-82-visible-s">1 · The Invisible Filter <a class="rule-chip" href="../../constitution/reader/#rule-82">Rule 82 · Visible State</a></h2>
-      <p class="lead">The boss asks: "why is revenue down?" It isn't. A filter
-      someone left on is hiding half the rows.</p>
+      <h2 id="1-the-invisible-filter-rule-82-visible-s">The Invisible Filter: a filter that hides rows without showing that it is active <a class="rule-chip" href="../../constitution/reader/#rule-82">Rule 82 · Visible State</a></h2>
+      <p class="lead">In this demo a manager asks why revenue is down. Revenue is not down: a filter
+      that someone left on hides half of the rows.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
             <div class="rowline"><b>Sales — August</b><span></span></div>
             <div id="filt-bad-rows"></div>
             <div class="rowline"><b>Total</b><b id="filt-bad-total"></b></div>
-            <p class="quiet">Looks complete, doesn't it? <button class="demo-btn" onclick="filtReveal()">Reveal the truth</button></p>
+            <p class="quiet">The table looks complete. <button class="demo-btn" onclick="filtReveal()">Reveal the truth</button></p>
             <div class="slot"><span id="filt-bad-reveal"></span></div>
           </div>
         </div>
@@ -91,28 +90,28 @@
               <span><span class="chip" id="filt-good-chip">filter: cash only ✕</span></span></div>
             <div id="filt-good-rows"></div>
             <div class="rowline"><b>Total <span class="quiet" id="filt-good-count"></span></b><b id="filt-good-total"></b></div>
-            <p class="quiet">Click the chip to clear the filter — state is always
-            visible, always dismissible.</p>
+            <p class="quiet">Click the chip to clear the filter. The state is always
+            visible, and the person can always dismiss it.</p>
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> a user who draws conclusions from
-      state they cannot see has been harmed by the interface. The checker names
-      it <code>INVISIBLE_STATE</code>; the same article obliges every norm to
-      carry a human-readable message.</p>
+      <p class="why-line"><b>Why it is law:</b> a person who draws conclusions from a
+      state the person cannot see has been harmed by the interface. The checker names
+      this violation <code>INVISIBLE_STATE</code>, and the same article requires every norm to
+      carry a message that a person can read.</p>
     </div>
 
     <!-- ARE YOU SURE? -->
     <div class="gotcha" id="sure">
-      <h2 id="2-are-you-sure-rule-79-the-undo-covenant">2 · "Are you sure?" <a class="rule-chip" href="../../constitution/reader/#rule-79">Rule 79 · The Undo Covenant</a></h2>
-      <p class="lead">One version interrogates you before trusting you. The other
-      trusts you first — and keeps a ten-second door open.</p>
+      <h2 id="2-are-you-sure-rule-79-the-undo-covenant">"Are you sure?": a deletion that asks for confirmation twice instead of offering undo <a class="rule-chip" href="../../constitution/reader/#rule-79">Rule 79 · The Undo Covenant</a></h2>
+      <p class="lead">Press Delete in both panes. The violation questions the person before it trusts the person. The lawful twin
+      trusts the person first and keeps the deletion reversible for ten seconds.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body" id="sure-bad-body">
             <div class="rowline"><span data-specimen>Invoice #204 — 45,000 XOF</span>
               <button class="demo-btn" onclick="sureBad()">Delete</button></div>
-            <p class="quiet">A real dialog will interrupt you. Twice.</p>
+            <p class="quiet">A real browser dialog interrupts the person twice.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
@@ -123,11 +122,11 @@
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> confirmation dialogs interrupt
-      always and trust never; undo trusts first and interrupts never. Deletion
-      happens instantly, visibly, and reversibly — dignity is a ten-second
-      window. The checker's cousin, <code>MISSING_UNDO</code>, refuses flows
-      that cannot say the way back.</p>
+      <p class="why-line"><b>Why it is law:</b> a confirmation dialog always interrupts
+      the person and never trusts the person, while undo trusts the person first and never interrupts. Under the law, a deletion
+      happens at once, visibly and reversibly, and the person keeps the dignity of a ten-second
+      window to undo it. A related diagnostic of the checker, <code>MISSING_UNDO</code>, refuses flows
+      that cannot state the way back.</p>
     </div>
 
   </div>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gotchas · Stillness — the frame holds still and tells the truth in time</title>
-<meta name="description" content="Two interactive offenses against stillness and honest time: the layout that shoves the reading (Rule 38) and the success message that lies (Rule 18) — each beside its lawful twin.">
+<title>Stillness — violations that move the frame or report success too early</title>
+<meta name="description" content="Stillness means that the frame of an interface does not move while a person reads, and that it reports a result only when the result is true. This page shows two violations of stillness, the layout that shoves the text being read (Rule 38) and the success message that lies (Rule 18), each beside its lawful twin.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../stz.css?v=9c520fe9">
 <link rel="stylesheet" href="../gotchas.css?v=84769739">
@@ -43,12 +43,11 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zane</a><span class="sep">›</span><a href="../why.html">Law</a><span class="sep">›</span><a href="./">What a violation feels like</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Stillness</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Gotchas · the stillness family</p>
-    <h1>The frame holds still</h1>
-    <p class="sub">Calm is a functional requirement, not an aesthetic. The two
-    offenses here attack it from both ends of time: content that shoves the
-    reading when it arrives, and feedback that announces success before the
-    system knew. Trigger both — then feel the lawful twins keep the world
-    still and honest.</p>
+    <h1>Stillness means that the frame of an interface holds still and reports a result only when it is true.</h1>
+    <p class="sub">Stillness is the property of an interface whose content does not move under a person's eyes and whose feedback does not announce a result before the system knows it.
+    Stillness lets a person keep their place while reading and trust what the interface reports, so it is a functional requirement and not an aesthetic choice.
+    The two violations on this page attack stillness from both ends of time: content that shoves the text being read when the content arrives, and feedback that announces success before the system knows the result.
+    Trigger both violations, then do the same things in the lawful twins, which keep the frame still and honest.</p>
   </div>
 </header>
 
@@ -73,58 +72,58 @@
 
     <!-- THE SHOVE -->
     <div class="gotcha" id="shove">
-      <h2 id="1-the-shove-rule-38-zero-displacement">1 · The Shove <a class="rule-chip" href="../../constitution/reader/#rule-38">Rule 38 · Zero Displacement</a></h2>
-      <p class="lead">You are reading. An error appears. Everything you were
-      reading jumps.</p>
+      <h2 id="1-the-shove-rule-38-zero-displacement">The Shove: an error message that pushes the text a person is reading <a class="rule-chip" href="../../constitution/reader/#rule-38">Rule 38 · Zero Displacement</a></h2>
+      <p class="lead">In this demo a person is reading a paragraph when an error message appears. Press each Submit button
+      and watch whether the paragraph moves.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
             <button class="demo-btn primary" onclick="shoveBad()">Submit the form</button>
             <div id="shove-bad-err"></div>
-            <p>The paragraph you were reading — watch it get shoved when the
-            error barges in above it.</p>
+            <p>This is the paragraph a person is reading. The error message
+            appears above it and shoves it down.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
           <div class="body">
             <button class="demo-btn primary" onclick="shoveGood()">Submit the form</button>
             <div class="slot"><span class="err err-ghost" id="shove-good-err">We need an amount before saving — add one above.</span></div>
-            <p>The same paragraph. The error's space was <em>reserved</em>; when
-            it arrives, nothing you were reading moves.</p>
+            <p>This is the same paragraph. The space for the error message is <em>reserved</em>,
+            so when the message appears, nothing the person is reading moves.</p>
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> layout shifts break the ocular
-      groove — the eye loses its place and the mind pays to find it again.
-      Reserved space keeps the world still. The declaration checker names this
+      <p class="why-line"><b>Why it is law:</b> a layout shift breaks the ocular
+      groove: the eye loses its place, and the mind spends effort to find it again.
+      Reserved space keeps the frame still. The declaration checker names this
       violation <code>LAYOUT_DISPLACEMENT</code>.</p>
     </div>
 
     <!-- THE LYING SUCCESS -->
     <div class="gotcha" id="liar">
-      <h2 id="2-the-lying-success-rule-18-the-speed-of">2 · The Lying Success <a class="rule-chip" href="../../constitution/reader/#rule-18">Rule 18 · The Speed of Thought</a></h2>
-      <p class="lead">Click both save buttons. One tells you what you want to
-      hear. Watch what it does four seconds later.</p>
+      <h2 id="2-the-lying-success-rule-18-the-speed-of">The Lying Success: a save message that reports success before the system confirms it <a class="rule-chip" href="../../constitution/reader/#rule-18">Rule 18 · The Speed of Thought</a></h2>
+      <p class="lead">Press both Save buttons. The violation reports success at once, and four seconds later it
+      reports what really happened.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
             <button class="demo-btn primary" onclick="liarBad(this)">Save</button>
             <div class="slot"><span id="liar-bad-out"></span></div>
-            <p class="quiet">"Success" before the system knew. Calm built on a
-            lie collects its debt with interest.</p>
+            <p class="quiet">This message reports success before the system knows the result. The calm it gives
+            is false, and it costs the person more when the truth arrives.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
           <div class="body">
             <button class="demo-btn primary" onclick="liarGood(this)">Save</button>
             <div class="slot"><span id="liar-good-out"></span></div>
-            <p class="quiet">Acknowledged within 100ms — honestly: <em>saving</em>
-            is not <em>saved</em>. Success is announced when it is true.</p>
+            <p class="quiet">The interface acknowledges the press within 100ms and says <em>saving</em>,
+            which is not <em>saved</em>. It announces success only when success is true.</p>
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> never show "Success" until the
-      execution is confirmed — a fake progress bar is a lie, and trust is the
+      <p class="why-line"><b>Why it is law:</b> an interface must not show "Success" until the
+      system confirms the execution. A fake progress bar is a lie, and trust is the
       only currency a business tool has.</p>
     </div>
 

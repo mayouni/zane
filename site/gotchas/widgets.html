@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gotchas · Widgets — honest affordances, sovereign keyboard</title>
-<meta name="description" content="Two interactive offenses against widget honesty: the card dressed as a button (Rule 119) and the div pretending to be one (Rule 80) — each beside its lawful twin.">
+<title>Widgets — violations that dress one widget as another</title>
+<meta name="description" content="A widget is an element of an interface that plays exactly one role: a card informs, a button acts, and both answer to the keyboard. This page shows two violations of widgets, the card dressed as a button (Rule 119) and the div that pretends to be a button (Rule 80), each beside its lawful twin.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../stz.css?v=9c520fe9">
 <link rel="stylesheet" href="../gotchas.css?v=84769739">
@@ -43,11 +43,11 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zane</a><span class="sep">›</span><a href="../why.html">Law</a><span class="sep">›</span><a href="./">What a violation feels like</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Widgets</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Gotchas · the widgets family</p>
-    <h1>Honest affordances</h1>
-    <p class="sub">Form follows role, and each widget plays exactly one: a card
-    informs, a button acts, and both answer to the keyboard. The two offenses
-    here dress widgets in each other's clothes — information wearing a
-    button's costume, and a "button" the keyboard cannot even reach.</p>
+    <h1>A widget is an element of an interface that plays exactly one role, and its form shows that role.</h1>
+    <p class="sub">A widget is an element such as a card or a button, and its form follows its one role: a card
+    informs, a button acts, and both answer to the keyboard.
+    The rules of widgets let a person tell what an element does by reading it, without pressing it, and let a person reach every action from the keyboard.
+    The two violations on this page dress widgets as each other: information that looks like a button, and a "button" that the keyboard cannot reach.</p>
   </div>
 </header>
 
@@ -72,9 +72,9 @@
 
     <!-- THE CARD THAT LIES -->
     <div class="gotcha" id="cardlie">
-      <h2 id="1-the-card-that-lies-rule-119-a-card-is">1 · The Card That Lies <a class="rule-chip" href="../../constitution/reader/#rule-119">Rule 119 · A Card Is Not a Button</a></h2>
-      <p class="lead">Three tiles, identically dressed. One navigates, two are
-      information. Find out which — the only way this screen allows: poke them.</p>
+      <h2 id="1-the-card-that-lies-rule-119-a-card-is">The Card That Lies: information tiles that look exactly like a navigation tile <a class="rule-chip" href="../../constitution/reader/#rule-119">Rule 119 · A Card Is Not a Button</a></h2>
+      <p class="lead">The violation shows three tiles that look the same. One tile navigates, and two tiles only give
+      information. This screen offers only one way to find out which tile navigates: press each tile.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
@@ -97,39 +97,39 @@
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> when everything might be
-      pressable, the operator must poke the interface to learn it — and an
-      interface learned by poking was never read. Born in the banking product, April 2026:
-      an autonomy ladder drawn as five clickable-looking cards.</p>
+      <p class="why-line"><b>Why it is law:</b> when every element might be
+      pressable, the operator must press the interface to learn it, and an
+      interface learned by pressing is never read. The rule comes from the banking product in April 2026,
+      where an autonomy ladder was drawn as five cards that looked clickable.</p>
     </div>
 
     <!-- THE DIV THAT PRETENDS -->
     <div class="gotcha" id="divbtn">
-      <h2 id="2-the-div-that-pretends-rule-80-keyboard">2 · The Div That Pretends <a class="rule-chip" href="../../constitution/reader/#rule-80">Rule 80 · Keyboard Sovereignty</a></h2>
-      <p class="lead">Two "buttons". Put your mouse away and try to reach them
+      <h2 id="2-the-div-that-pretends-rule-80-keyboard">The Div That Pretends: a "button" that the keyboard cannot reach <a class="rule-chip" href="../../constitution/reader/#rule-80">Rule 80 · Keyboard Sovereignty</a></h2>
+      <p class="lead">Each pane shows an Approve payment "button". Put the mouse away, try to reach each one
       with <kbd>Tab</kbd>, then press <kbd>Enter</kbd>.</p>
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body">
             <span class="fakebtn-div" onclick="divCount('bad')">Approve payment</span>
             <div class="slot"><span id="div-bad-out" class="quiet"></span></div>
-            <p class="quiet">It's a styled <code>&lt;div onclick&gt;</code>. Tab
-            skips straight past it — a keyboard operator simply cannot approve.</p>
+            <p class="quiet">This element is a styled <code>&lt;div onclick&gt;</code>. Tab
+            skips past it, so an operator who uses the keyboard cannot approve the payment.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
           <div class="body">
             <button class="demo-btn primary" onclick="divCount('good')">Approve payment</button>
             <div class="slot"><span id="div-good-out" class="quiet"></span></div>
-            <p class="quiet">A real <code>&lt;button&gt;</code>: focusable,
-            visible focus ring, <kbd>Enter</kbd> and <kbd>Space</kbd> just work.</p>
+            <p class="quiet">This element is a real <code>&lt;button&gt;</code>. It takes focus,
+            shows a visible focus ring, and responds to <kbd>Enter</kbd> and <kbd>Space</kbd>.</p>
           </div>
         </div>
       </div>
       <p class="why-line"><b>Why it is law:</b> the keyboard is the operator's
-      instrument; any critical act that requires the mouse demotes the expert —
-      and excludes some users entirely. Conforming linters flag mouse-only
-      clickables, <code>outline:none</code>, and positive tabindex.</p>
+      instrument. Any critical action that requires the mouse demotes the expert
+      and excludes some users entirely. Conforming linters flag clickable elements that only a mouse can use,
+      <code>outline:none</code>, and a positive tabindex.</p>
     </div>
 
   </div>
