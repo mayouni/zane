@@ -56,6 +56,8 @@ const PAGES = [
   { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true },
   { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true },
   { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true },
+  { file: 'site/practices.html', section: 'approach', label: 'Practices', parent: 'site/positioning.html', rail: true },
+  { file: 'site/frameworks.html', section: 'approach', label: 'Frameworks and languages', parent: 'site/positioning.html', rail: true },
   { file: 'site/innovation.html', section: 'approach', label: 'Claims', rail: true },
   { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
