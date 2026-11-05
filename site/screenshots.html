@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Screenshots — judging an application you do not own</title>
+<meta name="description" content="The screenshot audit: a screenshot is reduced to facts and judged against the three rules a screenshot can decide, with every other rule reported as not audited and never as passed. Designed and checked; never run on a real application.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a href="adopt.html">Use</a>
+    <a class="here" aria-current="true" href="audit.html">Try</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="audit.html">Try</a></li>
+    <li><a href="tour.html">The tour</a></li>
+    <li><a href="../tools/ui-audit.html">UI audit</a></li>
+    <li><a aria-current="page" href="screenshots.html">Screenshots</a></li>
+    <li><a href="quick-win.html">A quick win</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Screenshots</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Try · for people who must judge an application they do not own</p>
+    <h1>A screenshot can decide three rules, and says so for every other one.</h1>
+    <p class="sub">An application you do not own has no source to read and often no page to serve. What remains is what it shows. The screenshot audit reduces a screenshot to measurements, judges them against the rules a picture can decide, and reports everything else as not audited. <b>It has never been run on a real application.</b></p>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout has-list sections-right">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <details open>
+    <summary>On this page</summary>
+    <ul>
+      <li><a href="#the-principle">The writer measures, the audit judges</a></li>
+      <li><a href="#what-it-decides">What it decides, and at what thresholds</a></li>
+      <li><a href="#a-run-on-the-example">A run, on the example file</a></li>
+      <li><a href="#what-has-never-run">What has never run</a></li>
+    </ul>
+  </details>
+</nav>
+<!-- /shell:layout -->
+<main id="main">
+
+<section id="the-principle">
+  <div class="narrow">
+    <h2>The writer measures, the audit judges</h2>
+
+    <p>Two pieces, kept apart on purpose. A <b>writer</b> reads the screenshot and writes down what it measures: each line of text, its box, the luminances behind it, how sure the text recognition was. It decides nothing. The <b>audit</b> reads those facts and judges them against thresholds that live in one place.
+    A writer that also decided "this is too small" would put the law inside a tool that has never read it.</p>
+    <p>A field the writer could not measure is empty, never a guess and never zero: a zero luminance is black text, an empty one is "I do not know", and the audit treats them differently. The shape is
+    <a href="../doc/design/audit/facts.schema.json"><code>facts.schema.json</code></a>, the reasoning is <a href="../doc/design/AUDIT-FACTS.md"><code>AUDIT-FACTS.md</code></a>.</p>
+  </div>
+</section>
+
+<section class="alt" id="what-it-decides">
+  <div class="narrow">
+    <h2>What it decides, and at what thresholds</h2>
+
+    <table class="board">
+      <thead><tr><th>Rule</th><th>What is measured</th><th>Threshold</th></tr></thead>
+      <tbody>
+        <tr><td>Rules 62 and 105, contrast</td><td>the text colour against the background behind it, at the typical and at the worst end</td><td>at least <span data-fact="audit.contrastFloor">4.5</span> to 1, at the worst end</td></tr>
+        <tr><td>Rule 107, size</td><td>the height of the line box, from the scale the caller supplies</td><td>a floor of <span data-fact="audit.sizeFloorPt">12</span> points; a tall line box proves nothing about the font inside it</td></tr>
+        <tr><td>Every other rule</td><td>nothing</td><td><b>not audited</b>, never passed</td></tr>
+      </tbody>
+    </table>
+    <p>Two more thresholds keep it honest: text the recognition was less than <span data-fact="audit.minOcrScore">0.5</span> sure of is not judged, and a background that moves more than <span data-fact="audit.spreadLimit">0.25</span> toward the text at its worst end makes contrast <b>not decided</b>,
+    because a photograph behind text can be fine at its typical point and unreadable at its worst. That is the limit the <a href="../tools/ui-audit.html">UI audit</a> has on a page with a photograph, designed out here.</p>
+  </div>
+</section>
+
+<section id="a-run-on-the-example">
+  <div class="narrow">
+    <h2>A run, on the example file</h2>
+
+    <p>The checker reads a facts file, proves its shape and its arithmetic, and prints the decisions. Here on the example that ships with it, made by hand:</p>
+    <pre class="term" data-run="node doc/design/audit/check-facts.js doc/design/audit/example.facts.json"><span class="dim">$ node doc/design/audit/check-facts.js doc/design/audit/example.facts.json</span>
+3 lines found; text the OCR did not find is not audited
+
+L1 "Overdue balance"
+  contrast (rules 62, 105)  fail        2.85:1 is below 4.5:1
+  size floor (rule 107)     fail        the line box is 9 pt, so the font is at most that: below the 12 pt (16 CSS px) floor
+L2 "Account summary"
+  contrast (rules 62, 105)  pass        12.63:1 is at least 4.5:1, background uniform
+  size floor (rule 107)     not_decided a 18 pt line box does not show the font is large: line height can be generous around small text
+L3 "Quarterly results"
+  contrast (rules 62, 105)  not_decided 4.66:1 at the typical background but 2.59:1 at the worst end (background 0.1753 moved 0.18 toward the text colour): never a pass
+  size floor (rule 107)     not_decided a 18 pt line box does not show the font is large: line height can be generous around small text
+
+NOT AUDITED: every rule other than 62, 105, 107 (rule 105 only for its contrast half). A screenshot does not decide them, and "not audited" is not "passed".
+PROJECTED, NOT VERIFIED BY A PERSON (CENTRAL-PERCEPTGATE-01): nobody looked at the screenshot these facts describe.
+
+doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
+    <p>One line fails twice, one passes on contrast and cannot be decided on size, and one is never a pass because its background moves toward the text at the worst end. The checker prints, on every run, that nobody looked at the screenshot these facts describe.</p>
+  </div>
+</section>
+
+<section class="alt" id="what-has-never-run">
+  <div class="narrow">
+    <h2>What has never run</h2>
+
+    <ul>
+      <li><b>The writer, on a real application.</b> It belongs to another desk and runs on Ring++; it has not been run on a real application's screenshot, so this page shows the example file and not a real one.</li>
+      <li><b>The capture loop</b> that takes a screenshot of a running application is a separate thing and is not built.</li>
+      <li><b>No person has looked</b> at any screenshot the facts describe. The audit says so on every run, because perception is the last gate and no counter replaces it.</li>
+    </ul>
+    <p>The same audit is the second half of <a href="mobile.html">the mobile workflow</a>, where a phone app has no page to measure.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=57039fc5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+</body>
+</html>

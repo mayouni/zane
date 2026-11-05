@@ -1,0 +1,25 @@
+// StzZui's description of pages it does not own.
+//
+// The subject is the landing page of Zing (D:\GitHub\zing, index.html and site/*.html), read on 2026-11-05 and
+// never edited: its main menu, its style select, and the page itself. Written by hand from the markup; Zing's
+// own desk has not seen or agreed to this reading. It is the quick win of site/quick-win.html.
+
+DEFINE NAV_GRAPH zing_menu (
+  SATISFIES [LOCATE, DISCOVER, UNDERSTAND],
+  ALWAYS_REACHABLE [EXIT],
+  VISIBLE_STATE [current_page],
+  ACTOR reader
+)
+
+DEFINE INTERACTION style_select (
+  SATISFIES [SELECT],
+  ALWAYS_REACHABLE [UNDO, CANCEL],
+  ROLE navigate,
+  ACTOR reader
+)
+
+DEFINE SCREEN landing (
+  SATISFIES [UNDERSTAND, DISCOVER, READ],
+  ALWAYS_REACHABLE [EXIT],
+  ACTOR reader
+)

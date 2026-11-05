@@ -6,7 +6,7 @@
 <title>Web apps — a real site's navigation, declared and audited</title>
 <meta name="description" content="A workflow for a team with a web application in production, run on the navigation of a site this project does not own: declare its surfaces, run the verifier, run the UI audit on the live pages, place the findings on the grid, and what it yields today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=913238e0">
+<link rel="stylesheet" href="stz.css?v=0a11dfb2">
 </head>
 <body>
 
@@ -126,7 +126,7 @@ stzsite_menu.zui:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS
     <h2>Audit the live pages</h2>
 
     <p>The UI audit measures what a browser paints, and it reads pages through same-origin frames, so a site served from somewhere else cannot be audited from it. For a site you are only allowed to read, the smallest honest way past that is a read-only server that puts the other
-    folder and the audit on one origin: <a href="../examples/web-case/serve-beside.js"><code>examples/web-case/serve-beside.js</code></a>, thirty-six lines, binding the local machine only, answering GET only, writing nothing.</p>
+    folder and the audit on one origin: <a href="../examples/web-case/serve-beside.js"><code>examples/web-case/serve-beside.js</code></a>, forty lines, binding the local machine only, answering GET only, writing nothing.</p>
     <p>Run on six pages (the home page and the Platform, Vision, Learn, Reference and Zui pages), in the default mode, on 4 November 2026, it reported twenty-six findings. They are of two kinds, and only one is a finding about the site:</p>
     <ul>
       <li><b>Four findings on Rule 108, the path:</b> the Platform, Vision, Learn and Reference pages omit the visible trail, which the rule allows where an always-visible bar marks the page, but carry no labelled navigation landmark for the path. The Zui page carries one and is clean.</li>
@@ -150,7 +150,7 @@ stzsite_menu.zui:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS
     <h2>What this yields today, and where it stops</h2>
 
     <ul>
-      <li><b>Yields:</b> three surfaces declared by hand, one real refusal of the author's own reading and its fix; six pages audited with four findings the site's owner can verify; the cost, a few hours of reading and a thirty-six-line server.</li>
+      <li><b>Yields:</b> three surfaces declared by hand, one real refusal of the author's own reading and its fix; six pages audited with four findings the site's owner can verify; the cost, a few hours of reading and a forty-line server.</li>
       <li><b>Stops:</b> nothing reads a page into a declaration; the audit needs the other site served beside it; the audit cannot see through photographs, so a site with a hero image gets false findings or none; and the owner's agreement is not part of any of this.</li>
       <li><b>If a team's own application is the subject,</b> the same steps apply and the owner is the team: declare, run, serve the application beside the audit, place each finding on a cell.</li>
     </ul>

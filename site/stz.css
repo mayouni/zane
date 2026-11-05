@@ -373,6 +373,30 @@ table.gridmap .g-none { color: var(--muted); }
 table.gridmap .g-closed { color: var(--muted); background: var(--tint); font-style: italic; }
 table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; font: 1rem var(--sans); text-transform: none; letter-spacing: 0; }
 
+/* ---- the tour: one scene at a time, no motion between them (Rule 112) ---- */
+.profiles { list-style: none; padding: 0; margin: .8rem 0 1rem; display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; max-width: none; }
+.profiles a { font-weight: 700; }
+.profiles .note { color: var(--muted); font-size: 1rem; }
+.stage { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.6rem 2rem; box-shadow: var(--shadow);
+  min-height: calc(100vh - var(--bars-h, 6rem) - 6rem); display: flex; flex-direction: column; }
+.stage:fullscreen { min-height: 100vh; padding: 4rem 6rem; overflow: auto; background: var(--paper); }
+.stage-idle { color: var(--muted); }
+.scene-card { flex: 1 1 auto; }
+.scene-title { font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.15; margin: 0 0 1.1rem; text-wrap: balance; }
+.scene-card p { font-size: 1.35rem; max-width: 46rem; }
+.scene-notes { display: block; margin-top: 1.4rem; padding: .8rem 1rem; border-left: 3px solid var(--accent); background: var(--tint); max-width: 46rem; }
+.scene-notes[hidden] { display: none; }
+.stage-controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.stage-controls[hidden] { display: none; }
+.stage-count { color: var(--muted); font: 1rem var(--mono); margin-right: auto; }
+.btn.ghost { background: transparent; font: inherit; font-weight: 700; cursor: pointer; }
+.btn.ghost[aria-pressed="true"] { text-decoration: underline; text-underline-offset: .25em; }
+.btn.ghost:disabled { color: var(--muted); border-color: var(--line); cursor: default; }
+/* the front page's strip: present it to the people in the room */
+.present { margin: 1.4rem 0 0; padding: 1.1rem 1.3rem; border: 2px solid var(--accent-ink); border-radius: 10px; background: var(--card); }
+.present h2 { font-size: 1.35rem; margin: 0 0 .4rem; }
+.present p { margin: 0; }
+
 /* ---- stamp ---- */
 .stamp {
   background: var(--accent); color: var(--on-accent); padding: 1.3rem 1.5rem;

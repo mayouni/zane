@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The tour — StzZui, presented to the people in the room</title>
+<meta name="description" content="A presentation of StzZui in short scenes, ordered for who is in the room: a UX designer, a product designer, a programmer, an AI builder or a decision maker. Arrow keys move, n shows the notes, Escape opens the scene's page.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../index.html">StzZui</a>
+    <a href="thinking.html">Approach</a>
+    <a href="how.html">Language</a>
+    <a href="why.html">Law</a>
+    <a href="adopt.html">Use</a>
+    <a class="here" aria-current="true" href="audit.html">Try</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="audit.html">Try</a></li>
+    <li><a aria-current="page" href="tour.html">The tour</a></li>
+    <li><a href="../tools/ui-audit.html">UI audit</a></li>
+    <li><a href="screenshots.html">Screenshots</a></li>
+    <li><a href="quick-win.html">A quick win</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">StzZui</a><span class="sep">›</span><a href="audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The tour</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">Try · for presenting StzZui to a team</p>
+    <h1>Present it in eight scenes, ordered for who is in the room.</h1>
+    <p class="sub">Choose a profile and the scenes follow in the order that profile needs. The arrow keys or the space bar move between scenes, <kbd>n</kbd> shows the presenter's notes, <kbd>f</kbd> fills the screen, and <kbd>Escape</kbd> opens the page a scene comes from. Every number in a scene is the same number as on the site.</p>
+  </div>
+</header>
+
+<!-- shell:layout -->
+<div class="layout">
+<!-- /shell:layout -->
+<main id="main">
+
+<section id="choose">
+  <div class="narrow">
+    <h2>Who is in the room?</h2>
+
+    <ul class="profiles">
+      <li><a href="#ux/1">UX designer</a> <span class="note">8 scenes</span></li>
+      <li><a href="#product/1">Product designer</a> <span class="note">8 scenes</span></li>
+      <li><a href="#programmer/1">Programmer</a> <span class="note">8 scenes</span></li>
+      <li><a href="#ai/1">AI builder</a> <span class="note">8 scenes</span></li>
+      <li><a href="#decision/1">Decision maker</a> <span class="note">8 scenes</span></li>
+    </ul>
+    <p>Each scene is an address: <code>tour.html#programmer/4</code> opens the fourth scene for a programmer, so a presenter can start anywhere and a link can be sent.</p>
+  </div>
+</section>
+
+<section class="alt" id="stage-section">
+  <div class="narrow">
+    <h2 id="stage-heading">The stage</h2>
+    <div class="stage" id="stage" aria-live="polite">
+      <p class="stage-idle" id="stage-idle">Choose a profile above to begin.</p>
+
+      <article class="scene-card" id="scene-hook" data-scene="hook" data-page="thinking.html" hidden>
+        <h3 class="scene-title">An interface is what a person is doing, rendered.</h3>
+        <p>A person does not come to click a button. They come to find something, compare, act, confirm, and undo. StzZui declares that, and treats every screen as a consequence of it.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Start from the person, not the screen. Ask the room what their users come to do, and write the verbs down.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-refusal" data-scene="refusal" data-page="refusal.html" hidden>
+        <h3 class="scene-title">A flow you cannot leave is refused, by name.</h3>
+        <div class="scene">
+<pre class="shot"><span class="k">DEFINE WIZARD</span> <span class="n">account_opening</span> (
+  <span class="k">SATISFIES</span> [<span class="s">UNDERSTAND, CONFIRM, ACT</span>],
+  <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>],
+  <span class="k">STEPS</span> [<span class="s">identity, funding, review</span>],
+  <span class="k">ACTOR</span> <span class="s">applicant</span>
+)</pre>
+<pre class="term"><span class="dim">$ node tools/zui/cli.js check tour_account_opening.zui</span>
+tour_account_opening.zui:1  <span class="bad">error</span>  <span class="bad">TRAPPED_FLOW</span>  account_opening
+<span class="dim">    A multi-step flow has no reachable EXIT.</span>
+<span class="dim">    Rule 51 · The Cognitive Tunnel · Rule 53 · Interaction Lockdown · Article II · the right to leave</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    </div>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the last line of the output: the rule, the article and the right. Nothing has been drawn yet.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-law" data-scene="law" data-page="rules.html" hidden>
+        <h3 class="scene-title">The law is a file, and every refusal cites it.</h3>
+        <p><span data-law="rules">123</span> rules under <span data-law="articles">7</span> articles, guaranteeing <span data-law="rights">6</span> rights. The tools load the same file the reader reads, so they cannot drift apart.</p>
+        <p>Honestly: only <span data-law="tier:machine">11</span> rules are refused by a machine today, and <span data-law="tier:judgment">80</span> need a person.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The honest number is the second one. Say it before someone asks.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-grid" data-scene="grid" data-page="grid.html" hidden>
+        <h3 class="scene-title">A map of what a person does, across every channel.</h3>
+        <p>Six activities against <span data-fact="grid.media">10</span> channels. Of <span data-fact="grid.cellsLive">55</span> cells that can hold a rule, <span data-fact="grid.cellsWithRule">20</span> do and <span data-fact="grid.cellsNone">35</span> do not. <span data-fact="grid.channelsNoRule">5</span> channels have no rule written for them at all.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The empty cells are the finding. A practice that cannot show where it is silent cannot be checked.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-channels" data-scene="channels" data-page="media.html" hidden>
+        <h3 class="scene-title">A phone line cannot zoom.</h3>
+        <p>One declaration, many channels. A flow that promises ZOOM over a voice line is refused, because a voice cannot carry it, and the same flow on a screen is clean. <span data-fact="media.actAbsent">4</span> of the channels cannot carry an act at all.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> This is the scene for anyone shipping voice, print or an API: the refusal is of a promise, not of the channel.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-compare" data-scene="compare" data-page="positioning.html" hidden>
+        <h3 class="scene-title">Beside heuristics, standards and frameworks, not instead of them.</h3>
+        <p>Heuristics and usability tests judge what only a person can judge. Accessibility standards and linters check a rendered page. Frameworks build the screen. None of those, in what we read, refuses a declaration for lacking what a person must be able to do, before a screen exists.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Be fair to the practices in the room. The claim is narrow and the page lists its sources.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-webcase" data-scene="webcase" data-page="web.html" hidden>
+        <h3 class="scene-title">On a real site: four findings, and the instrument's own limit.</h3>
+        <p>The Softanza site's navigation, read only: the verifier refused the author's own first declaration, and the audit found four pages with no labelled path. It also reported twenty-two contrast findings over a photograph, which are the audit's limit, not the site's, and the page says which is which.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Real runs, with their limits stated. That is the whole style of the project.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-quickwin" data-scene="quickwin" data-page="quick-win.html" hidden>
+        <h3 class="scene-title">On Zing, in forty-seven minutes: clean.</h3>
+        <p>Three surfaces declared, the verifier clean, ten pages audited, one finding on a redirect page that nobody reads. An hour tells a team where it stands.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> A clean result is a result. Do not apologise for it.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-build" data-scene="build" data-page="build.html" hidden>
+        <h3 class="scene-title">In CI, a refusal is an exit code.</h3>
+        <p>The verifier exits 1 on a refusal, 0 when clean and 2 on a usage error. That is all a build gate needs, and it needs Node and nothing else today.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For programmers: show the exit code, then the envelope a tool can read.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-generate" data-scene="generate" data-page="generate.html" hidden>
+        <h3 class="scene-title">A generator can be held to a grammar, and still be refused.</h3>
+        <p>A grammar file fixes the shape of a declaration (the <span data-fact="gbnf.kinds">10</span> kinds and their clauses), so a model cannot write one that does not parse. It cannot fix meaning: a flow with no exit is well formed and wrong, and only the court refuses it.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For AI builders: the grammar and the court are two different promises. Say which one they need.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-conformance" data-scene="conformance" data-page="conformance.html" hidden>
+        <h3 class="scene-title">Agreement is proved by running the fixtures.</h3>
+        <p><span data-fact="fixtures.total">73</span> fixtures with known verdicts, and <span data-fact="pack.files">12</span> files pinned by hash. A verifier in any language is a peer, and the suite says which fixture disagreed.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> There is no library to adopt. That surprises people; let it.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-haro" data-scene="haro" data-page="haro.html" hidden>
+        <h3 class="scene-title">The language is also declared as data, and two courts are held to each other.</h3>
+        <p>A court forged from the declaration agrees with the hand-written verifier on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span> fixtures; the other <span data-fact="twin.differences">18</span> are named, and a ratchet fails on any other.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For the language people in the room. Skip it for everyone else.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-cost" data-scene="cost" data-page="adopt.html" hidden>
+        <h3 class="scene-title">What it costs today.</h3>
+        <p>Node and a browser, nothing to install, no library to adopt, no framework to change. A single file that needs neither is designed and not built. The work is writing declarations, by hand, for the surfaces that matter.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers: the cost is an afternoon per surface, and the honest risk is that most of the law still needs a reviewer.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-limits" data-scene="limits" data-page="innovation.html" hidden>
+        <h3 class="scene-title">What is not shown.</h3>
+        <p><b>No study, no user, no foreign application run end to end.</b> The claims are structural and their evidence is the repository: files a reader can open and commands a reader can run. Nobody has perceived any channel for the grid.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Always end on the limits before the next step. It is what makes the rest believable.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-next-ux" data-scene="next-ux" data-page="grid.html" hidden>
+        <h3 class="scene-title">Next, for a UX designer: the grid.</h3>
+        <p>Read where the law speaks and where it is silent, then file the next defect you see against a cell.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Leave them with the grid and the record a defect is filed as.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-next-product" data-scene="next-product" data-page="adopt.html" hidden>
+        <h3 class="scene-title">Next, for a product designer: your own surfaces.</h3>
+        <p>Pick three surfaces of a product you own, declare them, and run the verifier and the audit as the web case did.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Offer to do the first one together.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-next-programmer" data-scene="next-programmer" data-page="build.html" hidden>
+        <h3 class="scene-title">Next, for a programmer: put it in CI.</h3>
+        <p>Check a declaration of your own, then gate a build on its exit code.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The Build page has the commands.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-next-ai" data-scene="next-ai" data-page="generate.html" hidden>
+        <h3 class="scene-title">Next, for an AI builder: hold a generator to it.</h3>
+        <p>Give a generator the grammar, then the verifier's findings by rule number, and see what it fixes.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> The Generate page has the loop.</aside>
+      </article>
+
+      <article class="scene-card" id="scene-next-decision" data-scene="next-decision" data-page="conformance.html" hidden>
+        <h3 class="scene-title">Next, for a decision maker: the status board.</h3>
+        <p>What exists, what is designed and what is held, part by part, with where each stops.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the held rows: nothing is hidden there.</aside>
+      </article>
+      <div class="stage-controls" id="stage-controls" hidden>
+        <button type="button" class="btn ghost" id="tour-prev">← Previous</button>
+        <span class="stage-count" id="stage-count"></span>
+        <button type="button" class="btn ghost" id="tour-next">Next →</button>
+        <button type="button" class="btn ghost" id="tour-notes" aria-pressed="false">Notes</button>
+        <a class="stage-open" id="tour-open" href="#">Open this scene's page</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
+        <a href="../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="stz.js?v=57039fc5"></script>
+<script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+<script>window.TOUR_PROFILES = {"ux":["hook","compare","grid","channels","refusal","webcase","limits","next-ux"],"product":["hook","refusal","grid","webcase","quickwin","compare","limits","next-product"],"programmer":["hook","refusal","build","conformance","haro","quickwin","limits","next-programmer"],"ai":["hook","generate","refusal","law","channels","conformance","limits","next-ai"],"decision":["hook","cost","law","grid","webcase","compare","limits","next-decision"]}; window.TOUR_NAMES = {"ux":"UX designer","product":"Product designer","programmer":"Programmer","ai":"AI builder","decision":"Decision maker"};</script>
+<script src="tour.js?v=4e80dc32"></script>
+</body>
+</html>

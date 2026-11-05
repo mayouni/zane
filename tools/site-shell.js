@@ -34,7 +34,7 @@ const ROOT = path.join(__dirname, '..');
    ends so the hash is the same on every checkout. A changed file changes its address: nothing to remember, and a returning
    reader is never served an older stylesheet under a newer page. Written by --write, and the check fails on any page whose
    query differs from the file's hash. */
-const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js'];
+const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js', 'tour.js'];
 const assetHash = name => crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'site', name), 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 8);
 const ASSET_RE = new RegExp('((?:href|src)=")([^"?]*?(' + ASSETS.map(a => a.replace('.', '\\.')).join('|') + '))(?:\\?v=[0-9a-f]{8})?"', 'g');
 
@@ -76,9 +76,12 @@ const PAGES = [
   { file: 'site/generate.html', section: 'use', label: 'Generate', parent: 'site/stack.html', rail: true },
   { file: 'site/softanza.html', section: 'use', label: 'Softanza', parent: 'site/stack.html', rail: true },
   { file: 'site/ports.html', section: 'use', label: 'Other languages', parent: 'site/stack.html', rail: true },
-  { file: 'site/audit.html', section: 'try', label: 'Try', rail: true, stub: 'audit' },
+  { file: 'site/audit.html', section: 'try', label: 'Try', rail: true },
+  { file: 'site/tour.html', section: 'try', label: 'The tour', rail: true },
   /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
-  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' }
+  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' },
+  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true },
+  { file: 'site/quick-win.html', section: 'try', label: 'A quick win', rail: true }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 const sec = id => SECTIONS.find(s => s.id === id);
