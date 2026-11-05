@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Conformance — a claim your CI can refute</title>
-<meta name="description" content="What it means for a tool to conform to Zane: the same verdict as the reference on the fixtures, against a pinned pack of files. How to check it, what the check cannot say, and a status board of what exists, what is designed and what is held.">
+<title>Conformance — how a tool proves that it reads Zane as the reference does</title>
+<meta name="description" content="A tool conforms to Zane when it gives the reference verifier's verdict on every fixture of the suite, against a pinned pack of files. The page shows the two commands that check conformance, what a pass cannot prove, and a status board of what exists, what is designed and what is held.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -41,9 +41,10 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Conformance</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Language · for people who build a tool that reads Zane</p>
-    <h1>A claim to conform that your CI can refute.</h1>
-    <p class="sub">A tool conforms when it gives the reference's verdict on every one of <span data-fact="fixtures.total">73</span> fixtures, against a pack of
-    <span data-fact="pack.files">12</span> files pinned by hash. There is no library to adopt: agreement is proved by running the fixtures. This page shows the two commands,
+    <h1>Conformance is the proof that a tool gives the reference verifier's verdict on every fixture, and any CI can refute a false claim to it.</h1>
+    <p class="sub">A tool conforms to Zane when it gives the reference verifier's verdict on every fixture of the suite, and conformance is the test that lets the maker of a tool prove that agreement.
+    Conformance ensures that a claim to read Zane can be refuted by running two commands in any CI. The suite holds <span data-fact="fixtures.total">73</span> fixtures, judged against a pack of
+    <span data-fact="pack.files">12</span> files pinned by hash. There is no library to adopt, because agreement is proved by running the fixtures. This page shows the two commands,
     what they cannot say, and the status of every part of the system.</p>
   </div>
 </header>
@@ -54,11 +55,11 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#two-commands">Two commands</a></li>
-      <li><a href="#what-a-pass-does-not-prove">What a pass does not prove</a></li>
-      <li><a href="#status">Status, part by part</a></li>
-      <li><a href="#self-check">What this site checks about itself</a></li>
-      <li><a href="#not-claimed">What this site does not claim</a></li>
+      <li><a href="#two-commands">The two commands that check the pack and run the conformance suite</a></li>
+      <li><a href="#what-a-pass-does-not-prove">What a passing conformance run does not prove</a></li>
+      <li><a href="#status">The status of each part of the system, and where each part stops</a></li>
+      <li><a href="#self-check">The checks this site runs on itself, and the consumers of the law</a></li>
+      <li><a href="#not-claimed">The claims this site does not make</a></li>
     </ul>
   </details>
 </nav>
@@ -67,9 +68,9 @@
 
 <section>
   <div class="narrow">
-    <h2 id="two-commands">Two commands</h2>
-    <p>The first asks whether the bytes you hold are the pack you meant. A version number says which edition you intended; the hash says the bytes are that edition.
-    The second runs every fixture through the verifier and says which, if any, disagreed.</p>
+    <h2 id="two-commands">The two commands that check the pack and run the conformance suite</h2>
+    <p>The first command checks whether the bytes a person holds are the intended pack. A version number states which edition was intended, and the hash proves that the bytes are that edition.
+    The second command runs every fixture through the verifier and reports which fixtures, if any, disagree.</p>
 <pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
 
 The Zane protocol pack
@@ -93,22 +94,22 @@ Zane conformance — level 4
   pass 73 · fail 0 · skipped 0 (above level 4)
 
   <span class="good">conforms at level 4</span> — every fixture in the suite.</pre>
-    <p>Both outputs above are re-run by this site's own check, so they cannot drift from the tools.</p>
-    <p><b>What "level 4" says here.</b> The suite holds <span data-fact="fixtures.level1">12</span> fixtures at level one, <span data-fact="fixtures.level2">56</span> at level two,
-    <span data-fact="fixtures.level3">5</span> at level three and <span data-fact="fixtures.level4">0</span> at level four. A claim at level four means every fixture there is passes, and
-    the suite has none above level three, by design: a painted layout is the audit's to measure, not a declaration's. Read a level-four claim as a level-three claim.</p>
+    <p>This site's own check re-runs both outputs above, so the page cannot drift from the tools.</p>
+    <p><b>What "level 4" means here.</b> The suite holds <span data-fact="fixtures.level1">12</span> fixtures at level one, <span data-fact="fixtures.level2">56</span> at level two,
+    <span data-fact="fixtures.level3">5</span> at level three and <span data-fact="fixtures.level4">0</span> at level four. A claim at level four means that every fixture the suite holds passes.
+    By design, the suite holds no fixture above level three, because the audit measures a painted layout and a declaration does not. A reader should therefore read a level-four claim as a level-three claim.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-a-pass-does-not-prove">What a pass does not prove</h2>
+    <h2 id="what-a-pass-does-not-prove">What a passing conformance run does not prove</h2>
     <ul>
-      <li><b>It proves agreement, not rightness.</b> Two tools that refuse the same wrong thing pass together. The suite fixes what the law refuses; whether the law is right for a person is
-      the question of perception, and no person has perceived this site's media grid.</li>
-      <li><b>It covers what the fixtures cover.</b> <span data-fact="fixtures.unfixtured">3</span> diagnostics have no fixture, on purpose, each with its reason in the manifest: one is a painted layout, two are about recovering from a malformed file, which the language does not define. A tool can pass the suite and differ on them.</li>
-      <li><b>A twin proves a tool does not over-refuse.</b> The suite holds <span data-fact="fixtures.twins">22</span> lawful twins, files that differ from a refused one by one change. A tool that refuses everything fails them.</li>
-      <li><b>It does not make a port.</b> A tool states its level, pins the manifest, emits the <a href="refusal.html">refusal envelope</a>, and lists where it differs from the reference the way
+      <li><b>A pass proves agreement, not rightness.</b> Two tools that refuse the same wrong thing pass together. The suite fixes what the law refuses, and whether the law is right for a person is
+      a question of perception. No person has perceived this site's media grid.</li>
+      <li><b>A pass covers only what the fixtures cover.</b> <span data-fact="fixtures.unfixtured">3</span> diagnostics have no fixture on purpose, and the manifest gives the reason for each: one is about a painted layout, and two are about recovering from a malformed file, which the language does not define. A tool can pass the suite and differ on these diagnostics.</li>
+      <li><b>A twin proves that a tool does not over-refuse.</b> The suite holds <span data-fact="fixtures.twins">22</span> lawful twins, which are files that differ from a refused file by one change. A tool that refuses everything fails them.</li>
+      <li><b>A pass does not make a tool a port.</b> A port also states its level, pins the manifest, emits the <a href="refusal.html">refusal envelope</a>, and lists where it differs from the reference in the way that
       <a href="haro.html">the forged court</a> does.</li>
     </ul>
   </div>
@@ -116,9 +117,9 @@ Zane conformance — level 4
 
 <section id="status">
   <div class="narrow">
-    <h2>Status, part by part</h2>
-    <p>Every row says what the part is, one word for where it stands, and where it stops. <b>Exists</b>: built and run in this repository or named as run elsewhere. <b>Designed</b>: written down and
-    not built. <b>Held</b>: deliberately not advanced, awaiting a named reason.</p>
+    <h2>The status of each part of the system, and where each part stops</h2>
+    <p>Each row names a part, gives one word for its status, and says where the part stops. <b>Exists</b> means that the part is built and run in this repository, or named as run elsewhere. <b>Designed</b> means that the part is written down and
+    not built. <b>Held</b> means that the part is deliberately not advanced and awaits a named reason.</p>
     <table class="board">
       <thead><tr><th>Part</th><th>Status</th><th>Where it stops</th></tr></thead>
       <tbody>
@@ -149,35 +150,35 @@ Zane conformance — level 4
           <td>Not advanced until a product that ships in one of them is named.</td></tr>
       </tbody>
     </table>
-    <p>The rows are written by hand from the repository's files, not computed: the figures in them are checked, the statuses are not, so a status that is wrong will not fail a check.</p>
+    <p>The rows are written by hand from the repository's files and are not computed. The site checks the figures in the rows and does not check the statuses, so a wrong status does not fail a check.</p>
   </div>
 </section>
 
 <section class="alt" id="self-check">
   <div class="narrow">
-    <h2>What this site checks about itself</h2>
-    <p>This site tries to obey the law it publishes. Before each piece of it shipped, its author ran the <a href="../tools/ui-audit.html">UI audit</a> in both cultures and recorded the result with the commit;
-    <b>no gate enforces it yet</b>.</p>
-    <p>Press <kbd>F2</kbd>, or use the style select at the foot of any page, to switch culture and notice that your rights don't flex (Article VI).
-    <a href="gotchas/index.html">What a violation feels like</a> lets you commit each family of offence yourself, safely fenced, each beside its lawful twin, and
+    <h2>The checks this site runs on itself, and the consumers of the law</h2>
+    <p>This site aims to obey the law it publishes. Before each piece of the site shipped, its author ran the <a href="../tools/ui-audit.html">UI audit</a> in both cultures and recorded the result with the commit, but
+    <b>no gate enforces this audit yet</b>.</p>
+    <p>The <kbd>F2</kbd> key, or the style select at the foot of any page, switches the culture, and the rights of the person stay the same in both cultures (Article VI).
+    <a href="gotchas/index.html">What a violation feels like</a> lets a person commit each family of offence inside a safe fence, beside its lawful twin, and
     <a href="vibes.html">the two-cultures exhibit</a> renders one shared truth in both cultures at once.</p>
-    <p>The consumers, with their figures. The <b>reference implementation</b> is <a href="../tools/zane/README.md"><code>tools/zane</code></a>, and this site's own check
+    <p>The consumers of the law are named here with their figures. The <b>reference implementation</b> is <a href="../tools/zane/README.md"><code>tools/zane</code></a>, and this site's own check
     (<code>tools/site-facts.js</code>) re-runs it on <span data-fact="site.verifierRuns">18</span> declarations shown on these pages and fails if the page and the verifier ever disagree.
     <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>, the first conforming consumer, pins law v<span data-fact="zing.pinned">3.11</span> while this site
-    reads v<span data-law="version">3.14</span>; a re-pin has been asked of it.</p>
+    reads v<span data-law="version">3.14</span>, and Zing has been asked to re-pin.</p>
   </div>
 </section>
 
 <section id="not-claimed">
   <div class="narrow">
-    <h2>What this site does not claim</h2>
+    <h2>The claims this site does not make</h2>
     <ul>
-      <li><b>No person has perceived any channel</b> for the coverage grid; it is designed and measured, not verified by a person.</li>
+      <li><b>No person has perceived any channel</b> for the coverage grid, so the grid is designed and measured, and not verified by a person.</li>
       <li><b>The screenshot audit has never been run on a real application.</b></li>
       <li><b>The wider design, the Second Founding, is proposed, not ratified</b>, and nothing here rests on it.</li>
-      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal channels until a product that ships in one is named; other pillars; a usability toolset.</li>
+      <li><b>Held, not advanced:</b> the rules for haptic, luminous, signage, spatial and terminal channels are held until a product that ships in one of them is named, and other pillars and a usability toolset are held as well.</li>
     </ul>
-    <p>The stance is opinionated, openly: <b>business applications first</b>, operators and not explorers. Calm over power. Intent over mechanics. Visible over hidden. Undo is dignity.</p>
+    <p>The stance of the law is openly opinionated. It puts <b>business applications first</b> and serves operators rather than explorers. It prefers calm to power, intent to mechanics, and the visible to the hidden, and it treats undo as a matter of dignity.</p>
   </div>
 </section>
 </main>

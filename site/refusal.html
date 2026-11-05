@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What it refuses — the verifier's refusals</title>
-<meta name="description" content="A refusal names the line, the subject, the rule, the article and the right it rests on, in one envelope any tool can read. One real refusal, its lawful twin, and what the thirty-seven diagnostics can and cannot decide.">
+<title>What it refuses — how the verifier refuses a declaration, and on what grounds</title>
+<meta name="description" content="A refusal is the verifier's verdict on a declaration that breaks the law. It names the line, the subject, the rule, the article and the right it rests on, in one envelope any tool can read. The page shows one real refusal, its lawful twin, and what the thirty-seven diagnostics can and cannot decide.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -41,8 +41,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">What it refuses</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Language · what the verifier refuses</p>
-    <h1>A refusal names the line, the rule and the right it rests on.</h1>
-    <p class="sub">The verifier reads a declaration and either says <b>clean</b> or says <b>no</b>, and a no always carries its reasons. There are
+    <h1>A refusal is the verifier's verdict on a declaration that breaks the law, and it names the line, the rule and the right it rests on.</h1>
+    <p class="sub">A refusal is what the verifier returns instead of <b>clean</b> when a declaration breaks the law, and it states where the declaration is wrong, what is wrong and which rule forbids it.
+    Refusals ensure that a no always carries its reasons, so a person can trace every refusal back to the law. The verifier has
     <span data-law="diagnostics">37</span> diagnostics. This page shows one real refusal, its lawful twin, the envelope any tool can read, and what the
     diagnostics cannot decide.</p>
   </div>
@@ -54,10 +55,10 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#one-refusal-read-line-by-line">One refusal, read line by line</a></li>
-      <li><a href="#the-same-refusal-for-a-machine">The same refusal, for a machine</a></li>
-      <li><a href="#what-it-can-decide-by-what-it-needs-to-l">What it can decide, by what it needs to look at</a></li>
-      <li><a href="#what-a-refusal-does-not-always-cite">What a refusal does not always cite</a></li>
+      <li><a href="#one-refusal-read-line-by-line">One refusal of a declaration, explained line by line</a></li>
+      <li><a href="#the-same-refusal-for-a-machine">The same refusal as a JSON envelope that any tool can read</a></li>
+      <li><a href="#what-it-can-decide-by-what-it-needs-to-l">What the verifier can decide at each level, and what each level needs</a></li>
+      <li><a href="#what-a-refusal-does-not-always-cite">Diagnostics that cite no rule of the law, and why</a></li>
     </ul>
   </details>
 </nav>
@@ -66,8 +67,8 @@
 
 <section>
   <div class="narrow">
-    <h2 id="one-refusal-read-line-by-line">One refusal, read line by line</h2>
-    <p>A three-step account opening where the person can undo a step and cancel the step, but there is no way to leave the whole flow.</p>
+    <h2 id="one-refusal-read-line-by-line">One refusal of a declaration, explained line by line</h2>
+    <p>The declaration below describes a three-step account opening in which the person can undo a step and cancel the step, but has no way to leave the whole flow.</p>
     <div class="scene">
 <pre class="shot"><span class="c">// A three-step wizard. The person can undo and cancel, but not leave.</span>
 <span class="k">DEFINE WIZARD</span> <span class="n">account_opening</span> (
@@ -84,13 +85,13 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     </div>
     <ul>
-      <li><b>The line and the subject</b> (<code>account_opening.zane:2</code>, <code>account_opening</code>) say where, so an editor can jump to it.</li>
-      <li><b>The code</b> (<code>TRAPPED_FLOW</code>) is stable forever: a retired code is never reused, so a rule you wrote against it keeps its meaning.</li>
-      <li><b>The sentence</b> says what is wrong in terms of the declaration, not of any screen.</li>
-      <li><b>The citation</b> says why it is wrong: two rules of the law, the article they serve and the right of the person that is at stake.
-      A refusal that cannot say why is not issued.</li>
+      <li><b>The line and the subject</b> (<code>account_opening.zane:2</code>, <code>account_opening</code>) say where the defect is, so an editor can jump to it.</li>
+      <li><b>The code</b> (<code>TRAPPED_FLOW</code>) is stable forever. A retired code is never reused, so a rule written against a code keeps its meaning.</li>
+      <li><b>The sentence</b> says what is wrong in terms of the declaration, not in terms of any screen.</li>
+      <li><b>The citation</b> says why the declaration is wrong: it names two rules of the law, the article they serve, and the right of the person that is at stake.
+      The verifier issues no refusal that cannot say why.</li>
     </ul>
-    <p>Exit code 1 is all a CI gate needs. The same declaration with a way out is clean:</p>
+    <p>The verifier exits with code 1, which is all a CI gate needs. The same declaration with a way out is clean:</p>
     <div class="scene">
 <pre class="shot"><span class="c">// The same wizard with a way out.</span>
 <span class="k">DEFINE WIZARD</span> <span class="n">account_opening</span> (
@@ -102,15 +103,15 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening_exit.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.14</pre>
     </div>
-    <p>That pair is a <em>twin</em>: one change, one verdict flips. The suite holds <span data-fact="fixtures.twins">22</span> of them, so that the law is tested
-    against what it must allow as well as what it must refuse. The terminal output above is re-run by the site's own check, so it cannot drift from the verifier.</p>
+    <p>The two declarations form a <em>twin</em>: they differ by one change, and the verdict flips. The suite holds <span data-fact="fixtures.twins">22</span> twins, so that the law is tested
+    against what it must allow as well as against what it must refuse. The site's own check re-runs the terminal output above, so the page cannot drift from the verifier.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="the-same-refusal-for-a-machine">The same refusal, for a machine</h2>
-    <p>Every court in the family speaks one envelope when it refuses, so one CI step, one editor plugin or one dashboard can read all of them. With
+    <h2 id="the-same-refusal-for-a-machine">The same refusal as a JSON envelope that any tool can read</h2>
+    <p>Every court in the family writes its refusals in one envelope, so one CI step, one editor plugin or one dashboard can read all of them. With
     <code>--json</code> the refusal above is this object, which is the contract's <a href="../doc/diagnostic-contract.md">six fields</a> plus the level and the subject the
     Zane court adds:</p>
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening.zane --json</span>
@@ -124,16 +125,16 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
   "level": 2,
   "subject": "account_opening"
 }</pre>
-    <p>The shape is a JSON schema in <a href="../doc/diagnostic-contract.schema.json"><code>doc/diagnostic-contract.schema.json</code></a>; a court that emits it validates against that file.
-    Note the cites: the human text above names the article as a title, the envelope names it by its identifier.</p>
+    <p>The shape of the envelope is a JSON schema in <a href="../doc/diagnostic-contract.schema.json"><code>doc/diagnostic-contract.schema.json</code></a>, and a court that emits the envelope validates against that file.
+    The human text above names the article by its title, and the envelope names the same article by its identifier.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-it-can-decide-by-what-it-needs-to-l">What it can decide, by what it needs to look at</h2>
-    <p>A diagnostic belongs to a <b>level</b>, which is what the verifier must be given before it can decide. Below level 3 the declaration alone is enough.
-    Above it, the verifier needs facts a declaration does not hold, and without them it says nothing, never <b>clean</b>.</p>
+    <h2 id="what-it-can-decide-by-what-it-needs-to-l">What the verifier can decide at each level, and what each level needs</h2>
+    <p>Each diagnostic belongs to a <b>level</b>, and the level states what the verifier must be given before it can decide. Below level 3 the declaration alone is enough.
+    From level 3 upward, the verifier needs facts that a declaration does not hold, and without those facts it says nothing, and never says <b>clean</b>.</p>
     <table class="board">
       <thead><tr><th>Level</th><th>It needs</th><th>Diagnostics</th><th>Fixtures</th></tr></thead>
       <tbody>
@@ -143,23 +144,23 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
         <tr><td>4 · Painted</td><td>a rendered surface</td><td><span data-fact="diag.level4">1</span></td><td><span data-fact="fixtures.level4">0</span></td></tr>
       </tbody>
     </table>
-    <p>The fixtures counts are the files in the suite that exercise each level, so level 4 says what it is: a diagnostic is defined and nothing in the suite can yet
-    exercise it, because a rendered surface is not a file. The reference verifier stops at level 2 unless given a table.</p>
-    <p>The declaration cannot say whether a page <em>looks</em> right, or whether a person understood it. Those are the questions the audit measures after painting and
-    that only a person can answer; see <a href="how.html">the four steps</a>.</p>
+    <p>The fixture counts are the files in the suite that exercise each level. At level 4 a diagnostic is defined, and nothing in the suite can yet
+    exercise it, because a rendered surface is not a file. The reference verifier stops at level 2 unless it is given a table.</p>
+    <p>A declaration cannot say whether a page <em>looks</em> right, or whether a person understood it. The audit measures some of these questions after painting, and only a person can answer the rest;
+    <a href="how.html">the four steps</a> describe where each check applies.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-a-refusal-does-not-always-cite">What a refusal does not always cite</h2>
+    <h2 id="what-a-refusal-does-not-always-cite">Diagnostics that cite no rule of the law, and why</h2>
     <p>Of the <span data-law="diagnostics">37</span> diagnostics, <span data-fact="diag.citingRules">17</span> cite at least one rule, <span data-fact="diag.articleOnly">8</span> cite
-    an article but no rule, and <span data-fact="diag.citeNothing">12</span> cite nothing. The twelve are about the form of the file: a misspelling, a duplicate, a name or value
+    an article but no rule, and <span data-fact="diag.citeNothing">12</span> cite nothing. The twelve that cite nothing are about the form of the file: a misspelling, a duplicate, or a name or value
     that is not in a closed list.</p>
-    <p>They say the file is not a declaration yet, not that a person is harmed. The eight that cite only an article are places where the law states a principle and has
+    <p>These twelve say that the file is not yet a declaration, and they do not say that a person is harmed. The eight that cite only an article mark places where the law states a principle and has
     no rule narrow enough to point at.</p>
-    <p>That is an incomplete grounding, stated as a number rather than hidden. A diagnostic that cites a rule can be traced to its reasons; one that does not can only be trusted
-    as far as the grammar.</p>
+    <p>The grounding of the diagnostics is therefore incomplete, and this page states the gap as a number rather than hiding it. A diagnostic that cites a rule can be traced to its reasons, and a diagnostic that cites no rule
+    can be trusted only as far as the grammar.</p>
   </div>
 </section>
 </main>

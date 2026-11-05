@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why a law — the case, and where it is weak</title>
-<meta name="description" content="Why interface guidelines alone did not hold, what a law stored as data changes, the evidence from real builds that earned each recent rule, and what a law cannot do.">
+<title>Law — why Zane holds interfaces to a law, and where the case is weak</title>
+<meta name="description" content="The Zane law is a versioned file of rules for business interfaces, so that the recurring defects of interfaces can be refused by name. The page explains why guidelines alone did not hold, what a law stored as data changes, the builds that produced each recent rule, and what the law cannot do.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,8 +42,10 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Law</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Law · for people deciding whether a law is worth having</p>
-    <h1>Interfaces keep decaying in the same ways. A law can refuse them by name.</h1>
-    <p class="sub">The case in six steps, each with where to check it, and then where it is weak. The evidence is the author's own builds, recorded as they happened. There is no study,
+    <h1>The Zane law is a versioned file of rules that names the ways interfaces keep decaying, so that each one can be refused by name.</h1>
+    <p class="sub">The Zane law is a set of rules for business interfaces stored as one versioned file, and it exists so that the recurring defects of interfaces are refused by citation rather than argued about.
+    The law prevents a build from repeating an inherited convention that harms the person using the screen, because a tool or a reviewer can refuse the convention and cite the rule.
+    This page sets out the case for the law in six steps, says where each step can be checked, and then says where the case is weak. The evidence is the author's own builds, recorded as they happened. There is no study,
     and no one outside the project has applied the law to a product of theirs. Of its <span data-law="rules">123</span> rules, a machine can refuse <span data-law="tier:machine">11</span> today.</p>
   </div>
 </header>
@@ -54,13 +56,13 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#the-decay-you-already-know">The decay you already know</a></li>
-      <li><a href="#what-the-record-shows">What the record shows</a></li>
-      <li><a href="#what-changes-when-the-law-is-data">What changes when the law is data</a></li>
-      <li><a href="#what-a-law-cannot-do">What a law cannot do</a></li>
-      <li><a href="#the-story-a-year-of-building-with-ai">The story: a year of building with AI</a></li>
-      <li><a href="#evidence">The evidence</a></li>
-      <li><a href="#the-stance">The stance</a></li>
+      <li><a href="#the-decay-you-already-know">The inherited conventions that make interfaces decay</a></li>
+      <li><a href="#what-the-record-shows">Where the newest rules of the law come from</a></li>
+      <li><a href="#what-changes-when-the-law-is-data">What a law stored as data changes, and where to check each change</a></li>
+      <li><a href="#what-a-law-cannot-do">What the law cannot do</a></li>
+      <li><a href="#the-story-a-year-of-building-with-ai">The builds with AI from which the rules of the law were taken</a></li>
+      <li><a href="#evidence">The eight newest rules of the law and the defects that produced them</a></li>
+      <li><a href="#the-stance">The stance of the law, which puts business applications first</a></li>
     </ul>
   </details>
 </nav>
@@ -69,37 +71,37 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-decay-you-already-know">The decay you already know</h2>
-    <p>You have used this software. Small faint text you lean into. Buttons
-    labeled "OK" that do not say what they will do. A chat launcher floating
-    over the paragraph you were reading. A breadcrumb that shows where you came
-    from but not where you could go.</p>
-    <p>A table that scrolls sideways next to
-    twenty centimetres of empty page. A menu that lists a page as top-level
-    while the page's own path says it lives two levels deep.</p>
-    <p>None of this is new. These are <em>inherited conventions</em>: patterns copied
-    because they are everywhere, and kept because nothing in the process is required to refuse them.
-    Each one taxes the person using the screen, a little attention here, a little
-    confidence there, for hours every day.</p>
+    <h2 id="the-decay-you-already-know">The inherited conventions that make interfaces decay</h2>
+    <p>Most people have used software with the following defects. Its text is small and faint, so a person leans in to read it. Its buttons are
+    labelled "OK" and do not say what they will do. A chat launcher floats
+    over the paragraph a person is reading. A breadcrumb shows where a person came
+    from but not where the person could go.</p>
+    <p>A table scrolls sideways next to
+    twenty centimetres of empty page. A menu lists a page as top-level
+    while the page's own path says that it lives two levels deep.</p>
+    <p>These defects are not new. They are <em>inherited conventions</em>: patterns that teams copy
+    because they are everywhere, and keep because nothing in the process is required to refuse them.
+    Each convention costs the person using the screen a little attention or a little
+    confidence, for hours every day.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-the-record-shows">What the record shows</h2>
-    <p>The law in this project was not written in a seminar room. Its newest rules were extracted, defect by defect, from real applications built with AI assistance in 2026, each correction recorded when it was made and
-    kept only if it generalised and a reviewer could decide it yes or no. Rules 105 to 124 each come from such a defect, and the table further down names the newest eight.</p>
-    <p>The working thesis is a narrow one: in those builds, a generator reproduced the inherited conventions quickly and confidently, under an instruction to be careful, because nothing it was given had the standing to
-    refuse them. The only correction that keeps pace with a generator is a rule the generator can be made to check.</p>
-    <p class="limit"><b>Limit:</b> this is the record of one author's builds. It shows that these defects occurred and were corrected; it does not show how common they are in other teams' work.</p>
+    <h2 id="what-the-record-shows">Where the newest rules of the law come from</h2>
+    <p>The law in this project comes from building and not from a seminar room. Its newest rules were extracted, defect by defect, from real applications built with AI assistance in 2026. Each correction was recorded when it was made, and
+    it was kept only if it generalised and a reviewer could decide it yes or no. Rules 105 to 124 each come from such a defect, and the table further down names the newest eight.</p>
+    <p>The working thesis is narrow. In those builds, a generator reproduced the inherited conventions quickly and confidently, even under an instruction to be careful, because nothing it was given had the standing to
+    refuse them. The only correction that keeps pace with a generator is a rule that the generator can be made to check.</p>
+    <p class="limit"><b>Limit:</b> this record covers one author's builds. It shows that these defects occurred and were corrected, and it does not show how common they are in other teams' work.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-changes-when-the-law-is-data">What changes when the law is data</h2>
-    <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the Positioning page</a> says where each stops. What a guideline cannot do alone is say no to a build.
-    Storing the law as one versioned file changes that in five ways, and each one can be checked:</p>
+    <h2 id="what-changes-when-the-law-is-data">What a law stored as data changes, and where to check each change</h2>
+    <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the Positioning page</a> says where each one stops. A guideline alone cannot refuse a build.
+    Storing the law as one versioned file changes this in five ways, and each change can be checked:</p>
     <table class="board">
       <thead><tr><th>The claim</th><th>Where to check it</th></tr></thead>
       <tbody>
@@ -110,50 +112,50 @@
         <tr><td>Retired numbers are never reused, so a citation means the same for ever.</td><td><a href="rules.html#changes">How it changes</a>, and the lineage line in <code>rules.json</code>.</td></tr>
       </tbody>
     </table>
-    <p>The law also has a home that prose lacks: <b>a language</b>. Interfaces are declared in Zane, what the person is doing and what stays reachable, and the verifier refuses unlawful structure before anything is drawn,
-    while <a href="../tools/ui-audit.html">the UI audit</a> measures what was painted. <a href="how.html">The Language page</a> walks the four steps.</p>
+    <p>The law also has a home that prose lacks, which is <b>a language</b>. An interface is declared in Zane as what the person is doing and what stays reachable. The verifier refuses unlawful structure before anything is drawn,
+    and <a href="../tools/ui-audit.html">the UI audit</a> measures what was painted. <a href="how.html">The Language page</a> describes the four steps.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-a-law-cannot-do">What a law cannot do</h2>
+    <h2 id="what-a-law-cannot-do">What the law cannot do</h2>
     <ul>
-      <li><b>Most of it waits on a person.</b> Only <span data-law="tier:machine">11</span> of the <span data-law="rules">123</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> need a reviewer's judgment.</li>
-      <li><b>It does not tell you the page is pleasant.</b> The verifier checks a declaration and the audit checks what was painted. Whether a person finds it usable is for usability testing, which nothing here replaces.</li>
-      <li><b>It is not shown to be right for other teams.</b> No study, no user and no foreign application run end to end stand behind it, only this repository.</li>
-      <li><b>It has a stance.</b> Business applications first, below.</li>
+      <li><b>Most of the law waits on a person.</b> Only <span data-law="tier:machine">11</span> of the <span data-law="rules">123</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> need a reviewer's judgment.</li>
+      <li><b>The law does not say whether a page is pleasant.</b> The verifier checks a declaration and the audit checks what was painted. Usability testing decides whether a person finds the page usable, and nothing here replaces it.</li>
+      <li><b>The law is not shown to be right for other teams.</b> Only this repository stands behind it: no study, no user and no foreign application run end to end.</li>
+      <li><b>The law has a stance.</b> It puts business applications first, as the last section of this page explains.</li>
     </ul>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="the-story-a-year-of-building-with-ai">The story: a year of building with AI</h2>
-    <p class="lead">Every correction below was recorded at the moment it was made, then canonized only if it generalised and could be decided
-    yes or no by a reviewer.</p>
-    <p><b>the banking product</b> (April 2026) — a full agentic banking platform, built
-    and corrected screen by screen. Supervision tables where the same green
-    meant two different things two columns apart. Card-styled tiles you had
-    to poke to learn. Two stacked rows of identical tabs. A floating
-    assistant masking the very work it offered to help with.</p>
-    <p><b>A sibling project's i18n work</b> (May 2026) — languages added by forking templates,
-    leaving French screens full of untranslated jargon, until language became
-    data. <b>The Refine rebuild</b> (June 2026) — a 22-section homepage the
-    author judged unreadable, rebuilt under a reading budget.</p>
-    <p><b>The StzWeb site</b> (August 2026) — twelve rules, from Rule 105 through 116,
-    each canonized live from a defect the generator produced <em>while
+    <h2 id="the-story-a-year-of-building-with-ai">The builds with AI from which the rules of the law were taken</h2>
+    <p class="lead">Every correction below was recorded at the moment it was made, and it was canonized only if it generalised and a reviewer could decide it
+    yes or no.</p>
+    <p><b>The banking product</b> (April 2026) is a full agentic banking platform, built
+    and corrected screen by screen. In its supervision tables the same green
+    meant two different things two columns apart. Its card-styled tiles had
+    to be poked before a person could learn what they did. Its studio stacked two rows of identical tabs, and a floating
+    assistant masked the very work it offered to help with.</p>
+    <p>In <b>a sibling project's i18n work</b> (May 2026), languages were added by forking templates,
+    which left French screens full of untranslated jargon until language became
+    data. In <b>the Refine rebuild</b> (June 2026), a 22-section homepage that the
+    author judged unreadable was rebuilt under a reading budget.</p>
+    <p><b>The StzWeb site</b> (August 2026) produced twelve rules, from Rule 105 through 116,
+    and each was canonized live from a defect that the generator produced <em>while
     building the site that documents the law</em>. The audit tool then caught
     its own depth-calculation defect on its first run in this repository.
-    Nothing here is exempt, including the tooling.</p>
+    The law exempts nothing here, and that includes the tooling.</p>
   </div>
 </section>
 
 <section class="alt" id="evidence">
   <div class="narrow">
-    <h2>The evidence</h2>
-    <p class="lead">Each of the eight newest rules, the defect that earned it
-    a number, and where it was committed. The full trail, including what was
+    <h2>The eight newest rules of the law and the defects that produced them</h2>
+    <p class="lead">The table lists each of the eight newest rules and the defect that earned it
+    a number. The full trail, including what was
     deliberately <em>not</em> harvested, is in
     <a href="../doc/HARVEST-2026-08.md">the harvest record</a>.</p>
     <table class="evidence">
@@ -169,21 +171,21 @@
         <tr><td class="num"><a href="../constitution/reader/#rule-124">124</a></td><td>The Generator Ships a Working Thing</td><td>A sibling project's build culture: scaffolding presented as a deliverable — a target must open working</td></tr>
       </tbody>
     </table>
-    <p class="caption">Rules 105–116 have the same pedigree, one by one, from
+    <p class="caption">Rules 105–116 have the same origin, one by one, in
     the StzWeb corrections. Two unrelated projects independently produced the
-    small-faint-text defect — that convergence is itself evidence the rules
+    small-faint-text defect, and this convergence is evidence that the rules
     carry weight.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="the-stance">The stance</h2>
-    <p>Opinionated, and openly so: <b>business applications first</b>.
-    Operators, not explorers — people who use the same screens eight hours a
-    day under pressure, responsibility, and fatigue. Consumer-site delight is
-    out of jurisdiction; operator dignity is the whole of it. The law's own
-    preamble says it best:</p>
+    <h2 id="the-stance">The stance of the law, which puts business applications first</h2>
+    <p>The law is openly opinionated and puts <b>business applications first</b>.
+    It serves operators rather than explorers: people who use the same screens eight hours a
+    day under pressure, responsibility and fatigue. Delight on consumer sites is
+    outside its jurisdiction, and the dignity of the operator is its whole concern. The law's own
+    preamble states the stance in four sentences:</p>
     <blockquote class="preamble">
       Calm is productive. Stability is humane. Clarity is respectful.
       Undo is dignity.

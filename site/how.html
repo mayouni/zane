@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Language — what it is, step by step</title>
-<meta name="description" content="A declaration states what the person is doing, not the widgets; the law refuses what it forbids, by name, before anything is drawn. The four steps from a declaration to a measured page, and which of them exist today.">
+<title>Language — the Zane language, from a declaration to a measured page</title>
+<meta name="description" content="Zane is a language that declares what a person is doing on an interface, with no widget in it, and its verifier refuses by name what the law forbids before anything is drawn. The page shows the four steps from a declaration to a measured page and which of them exist today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -41,10 +41,11 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Language</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Language · for people who build or judge interfaces</p>
-    <h1>Say what the person is doing. The law refuses the rest, by name.</h1>
-    <p class="sub">A declaration states the intent of a surface in a closed vocabulary of <span data-fact="verbs">22</span> verbs and
-    <span data-fact="kinds">10</span> kinds of declaration, with no widget in it. This page walks the four steps from a declaration to a
-    measured page, and says which of them exist today and where each one stops.</p>
+    <h1>Zane is a language that declares what a person is doing on an interface, and its verifier refuses by name what the law forbids.</h1>
+    <p class="sub">The Zane language declares the intent of a surface in a closed vocabulary of <span data-fact="verbs">22</span> verbs and
+    <span data-fact="kinds">10</span> kinds of declaration, with no widget in it, so that a verifier can check the surface against the law before anything is drawn.
+    The language lets a person find a forbidden interface at design time, because the verifier refuses it and cites the rule it breaks.
+    This page describes the four steps from a declaration to a measured page, which of them exist today, and where each one stops.</p>
   </div>
 </header>
 
@@ -54,11 +55,11 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#a-guideline-cannot-fail-a-build">A guideline cannot fail a build</a></li>
-      <li><a href="#ninety-seconds">Ninety seconds of Zane</a></li>
-      <li><a href="#four-steps-and-which-of-them-exist">Four steps, and which of them exist</a></li>
-      <li><a href="#the-same-law-at-three-moments">The same law at three moments</a></li>
-      <li><a href="#what-exists-today-and-what-does-not">What exists today, and what does not</a></li>
+      <li><a href="#a-guideline-cannot-fail-a-build">How a declaration differs from a published guideline</a></li>
+      <li><a href="#ninety-seconds">A declaration refused by the verifier, and the same declaration corrected</a></li>
+      <li><a href="#four-steps-and-which-of-them-exist">The four steps from a declaration to a measured page, and which of them exist</a></li>
+      <li><a href="#the-same-law-at-three-moments">The same law applied at design time, in development and at runtime</a></li>
+      <li><a href="#what-exists-today-and-what-does-not">The parts of the language that exist today, and the parts that do not</a></li>
     </ul>
   </details>
 </nav>
@@ -67,15 +68,15 @@
 
 <section>
   <div class="narrow">
-    <h2 id="a-guideline-cannot-fail-a-build">A guideline cannot fail a build</h2>
-    <p>The practices you already use are good at what they do. They differ in when they speak and in whether anything can say no.</p>
+    <h2 id="a-guideline-cannot-fail-a-build">How a declaration differs from a published guideline</h2>
+    <p>The practices that teams already use are good at what they do. They differ from the law in the moment at which they apply and in whether anything can refuse a result.</p>
     <div class="pair">
       <div>
         <p class="lbl">A published guideline</p>
         <p>A widely used set of ten usability heuristics asks, among other things, that a person can always leave a state they did not mean to
         enter and take back what they did. The page presents them as broad rules of thumb, first developed for heuristic evaluation, in which reviewers judge
         an interface against them.</p>
-        <p>It names no pass or fail, so a review finds what a person can see and judge, and nothing in it refuses a build.</p>
+        <p>The heuristics name no pass or fail, so a review finds what a person can see and judge, and nothing in the heuristics refuses a build.</p>
         <p><a class="leaves" href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank" rel="noopener">The heuristics, at Nielsen Norman Group</a></p>
       </div>
       <div class="zane">
@@ -93,16 +94,16 @@ delete_invoice.zane:2  <span class="bad">error</span>  <span class="bad">MISSING
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
       </div>
     </div>
-    <p>Both are right. The heuristic judges what only a person can judge; the law refuses what a machine can see before a pixel exists.
-    This site does not claim the second replaces the first.</p>
+    <p>The heuristic and the law are both right. The heuristic judges what only a person can judge, and the law refuses what a machine can see before a pixel exists.
+    This site does not claim that the law replaces the heuristic.</p>
   </div>
 </section>
 
 <section class="alt" id="ninety-seconds">
   <div class="narrow">
-    <h2>Ninety seconds of Zane</h2>
-    <p class="lead">A payment approval, declared before a single pixel exists.
-    Note what is <em>absent</em>: no widgets, no layout, no framework.</p>
+    <h2>A declaration refused by the verifier, and the same declaration corrected</h2>
+    <p class="lead">The declaration below describes a payment approval before a single pixel exists.
+    It contains <em>no</em> widget, no layout and no framework.</p>
 <pre class="shot"><span class="c">// payments.zane — design phase, day one</span>
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>]      <span class="c">// interest → review → commitment</span>
@@ -116,24 +117,23 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
     <span class="dim">Rule 26 · The Back Button is Holy · Article IV · the right to leave</span>
 
 2 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
-    <p>The interface you were about to build has just been refused — at design
-    time, by structure, citing the law by number and title. Declare the way
-    back and it stands:</p>
+    <p>The verifier refuses this interface at design time, from its structure alone, and cites the law by number and title.
+    When the declaration states the way back, the verifier accepts it:</p>
 <pre class="shot"><span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check payments.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.14</span></pre>
-    <p class="caption"><b>That is real output, copied from a real run</b>, and this site's own check re-runs it: it fails if the
-    page and the verifier ever disagree. The verifier ships in this repository and needs no toolchain beyond Node.
-    <a href="conformance.html#status">The status board</a> says plainly what exists, what is designed and what is held.</p>
+    <p class="caption"><b>The output above is copied from a real run</b>, and this site's own check re-runs it and fails if the
+    page and the verifier disagree. The verifier ships in this repository and needs no toolchain beyond Node.
+    <a href="conformance.html#status">The status board</a> states what exists, what is designed and what is held.</p>
       </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="four-steps-and-which-of-them-exist">Four steps, and which of them exist</h2>
+    <h2 id="four-steps-and-which-of-them-exist">The four steps from a declaration to a measured page, and which of them exist</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 230" style="min-width:780px" role="img" aria-labelledby="pipe-t pipe-d">
@@ -165,23 +165,23 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
         <text class="dg-a" x="690" y="196" text-anchor="middle">exists</text>
       </svg>
       </div>
-      <figcaption>Solid outline: built and run in this repository. Dashed: the data exists and a check proves renderings differ only as the data predicts, but the renderers that
-      draw, speak or print live in other projects. <b>Not shown:</b> the person who looks at the result; no person has perceived any medium for this site's grid.</figcaption>
+      <figcaption>A solid outline marks a step that is built and run in this repository. A dashed outline marks a step whose data exists, with a check that proves renderings differ only as the data predicts,
+      while the renderers that draw, speak or print live in other projects. <b>Not shown:</b> the person who looks at the result. No person has perceived any medium for this site's grid.</figcaption>
     </figure>
     <p><b>Declare.</b> A <code>.zane</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
-    declaration and <span data-fact="verbs">22</span> verbs, closed on purpose: a widget is a consequence of an intent, never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be made from that.</p>
+    declaration and <span data-fact="verbs">22</span> verbs. The vocabulary is closed on purpose, because a widget is a consequence of an intent and never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be built from that data.</p>
     <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.14</span>), and refuses what it forbids.
-    Every refusal cites the rule, article or right it rests on. <a href="refusal.html">See one, line by line.</a></p>
-    <p><b>Project.</b> One declaration can be rendered in more than one channel (what the grammar and the law call a medium), and a verb a channel cannot carry is refused. That check is built; the media data is in
+    Every refusal cites the rule, article or right it rests on. <a href="refusal.html">The refusal page reads one refusal line by line.</a></p>
+    <p><b>Project.</b> One declaration can be rendered in more than one channel (what the grammar and the law call a medium), and a verb a channel cannot carry is refused. That check is built, and the media data is in
     <a href="../conformance/media.json"><code>conformance/media.json</code></a>.</p>
-    <p><b>Measure.</b> A declaration is not a page. <a href="../tools/ui-audit.html">The UI audit</a> measures what a browser actually paints: size, true contrast, the bars, the room
-    a block has, the menu against the tree.</p>
+    <p><b>Measure.</b> A declaration is not a page, so <a href="../tools/ui-audit.html">the UI audit</a> measures what a browser actually paints: the size of text, the true contrast, the bars, the room
+    a block has, and the menu against the tree.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="the-same-law-at-three-moments">The same law at three moments</h2>
+    <h2 id="the-same-law-at-three-moments">The same law applied at design time, in development and at runtime</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 240" style="min-width:780px" role="img" aria-labelledby="mom-t mom-d">
@@ -207,15 +207,15 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
         <text class="dg-s" x="660" y="208" text-anchor="middle">designed, never run</text>
       </svg>
       </div>
-      <figcaption>The same law, read from one file, holds at all three. <b>Not shown:</b> what happens between the moments, such as a generator that drifts from its declaration after design.
-      The audit for an application nobody on this project owns is designed and has not been run on a real one.</figcaption>
+      <figcaption>The same law, read from one file, applies at all three moments. <b>Not shown:</b> what happens between the moments, such as a generator that drifts from its declaration after design.
+      The audit for an application that nobody on this project owns is designed and has not been run on a real application.</figcaption>
     </figure>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-exists-today-and-what-does-not">What exists today, and what does not</h2>
+    <h2 id="what-exists-today-and-what-does-not">The parts of the language that exist today, and the parts that do not</h2>
     <ul>
       <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">37</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">73</span> fixtures that any implementation can prove it agrees with.</li>
       <li><b>Data, not renderers:</b> the media carriage and the signal vocabulary. The pieces that draw, speak or print are not part of this repository.</li>

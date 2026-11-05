@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The rules — one file, and how it changes</title>
-<meta name="description" content="What a rule in the constitution is made of, who can catch a violation of it today, and how the law changes: only from recorded evidence, with numbers that are never reused.">
+<title>The rules — what a rule of the law holds, and how the rules change</title>
+<meta name="description" content="A rule of the Zane law is one entry of a versioned file that states what to avoid, what to do instead, why, and what evidence earned it a number. The page shows what one rule holds, who can catch a violation of it today, and how the rules change: only from recorded evidence, with numbers that are never reused.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -42,9 +42,11 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="why.html">Law</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The rules</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Law · for people who review an interface and cite what it breaks</p>
-    <h1>A rule says what to avoid, what to do instead, why, and what earned it a number.</h1>
-    <p class="sub">The law is one versioned file: <span data-law="rules">123</span> rules in <span data-law="sets">31</span> sets under <span data-law="articles">7</span> articles, v<span data-law="version">3.14</span>.
-    This page shows what one rule holds, how many of them a machine can refuse today, and how the law changes, which is only from recorded evidence.</p>
+    <h1>A rule of the Zane law is one entry of a versioned file that says what to avoid, what to do instead, why, and what earned it a number.</h1>
+    <p class="sub">A rule is one entry of the file that holds the Zane law, and it states a defect to avoid and its remedy so that a reviewer or a tool can decide a case yes or no and cite it.
+    The rules let a reviewer name exactly what an interface breaks, by number and title, instead of arguing about taste.
+    The law holds <span data-law="rules">123</span> rules in <span data-law="sets">31</span> sets under <span data-law="articles">7</span> articles, at v<span data-law="version">3.14</span>.
+    This page shows what one rule holds, how many rules a machine can refuse today, and how the law changes, which happens only from recorded evidence.</p>
   </div>
 </header>
 
@@ -54,10 +56,10 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#one-rule-as-the-tools-load-it">One rule, as the tools load it</a></li>
-      <li><a href="#who-can-catch-a-violation-today">Who can catch a violation, today</a></li>
-      <li><a href="#rights-and-forbidden-patterns">Rights and forbidden patterns</a></li>
-      <li><a href="#changes">How it changes</a></li>
+      <li><a href="#one-rule-as-the-tools-load-it">The fields of one rule, as the tools load it</a></li>
+      <li><a href="#who-can-catch-a-violation-today">Who can catch a violation of each rule today</a></li>
+      <li><a href="#rights-and-forbidden-patterns">The operator rights and forbidden patterns that the rules serve</a></li>
+      <li><a href="#changes">How the rules of the law change</a></li>
     </ul>
   </details>
 </nav>
@@ -66,8 +68,8 @@
 
 <section>
   <div class="narrow">
-    <h2 id="one-rule-as-the-tools-load-it">One rule, as the tools load it</h2>
-    <p>Rule 79 is the one the verifier cited in <a href="refusal.html">What it refuses</a>. These are fields of its entry in the file, with the long solution text left out:</p>
+    <h2 id="one-rule-as-the-tools-load-it">The fields of one rule, as the tools load it</h2>
+    <p>Rule 79, The Undo Covenant, is the rule the verifier cites when an act has no way back, as <a href="how.html">the Language page</a> shows. The excerpt below shows fields of its entry in the file, with the long solution text left out:</p>
 <pre class="excerpt" data-excerpt="constitution/rules.json"><span class="s">"number"</span>: <span class="s">"79"</span>,
 <span class="s">"title"</span>: <span class="s">"The Undo Covenant"</span>,
 <span class="s">"avoid"</span>: [
@@ -79,10 +81,10 @@
 <span class="s">"enforcement"</span>: <span class="s">"machine"</span>,
 <span class="s">"evidence"</span>: <span class="s">"v1.3 practice addition; narrative constitution Art. IV."</span>,</pre>
     <ul>
-      <li><b>avoid</b> and a <b>solution</b> make it something a reviewer can decide yes or no.</li>
-      <li><b>why</b> and <b>derived_from</b> tie it to one of the <span data-law="articles">7</span> articles, here Reversibility, so a rule is a case of a principle and never a taste.</li>
-      <li><b>enforcement</b> says who can catch a violation today. Here it is <b>machine</b>: the verifier refuses a declaration with an act and no undo.</li>
-      <li><b>evidence</b> says what earned it a number. This one's is a general practice addition, not a defect recorded in a real build, which is a thinner pedigree; the file states it as it is.</li>
+      <li><b>avoid</b> and a <b>solution</b> make the rule something that a reviewer can decide yes or no.</li>
+      <li><b>why</b> and <b>derived_from</b> tie the rule to one of the <span data-law="articles">7</span> articles, here Reversibility, so that a rule is a case of a principle and never a matter of taste.</li>
+      <li><b>enforcement</b> says who can catch a violation today. Here the value is <b>machine</b>, because the verifier refuses a declaration that has an act and no undo.</li>
+      <li><b>evidence</b> says what earned the rule a number. The evidence for this rule is a general practice addition and not a defect recorded in a real build, which is a thinner origin, and the file states it as it is.</li>
     </ul>
     <p>Because every consumer loads the same file, the Reader that renders the rule, the verifier that refuses for it and the finding that cites it cannot drift apart.</p>
   </div>
@@ -90,7 +92,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="who-can-catch-a-violation-today">Who can catch a violation, today</h2>
+    <h2 id="who-can-catch-a-violation-today">Who can catch a violation of each rule today</h2>
     <p>Each rule declares one rung of an enforcement ladder, and rules climb as instruments are invented. The census is read from the file when the page loads.</p>
     <table class="board">
       <thead><tr><th>Rung</th><th>Rules</th><th>Share</th><th>Who catches it</th></tr></thead>
@@ -101,35 +103,35 @@
         <tr><td><b>judgment</b></td><td><span data-law="tier:judgment">80</span></td><td><span data-law-share="judgment">65%</span></td><td>A reviewer decides yes or no and cites the number.</td></tr>
       </tbody>
     </table>
-    <p>So most of the law waits on a person. That is the figure the project is built to move, and the page does not hide it: a rule that climbs a rung is the argument working, and one stuck at
-    <b>machine-later</b> is the law admitting an instrument is missing. These figures were typed by hand until August 2026 and had gone stale; they are computed now.</p>
+    <p>Most of the law therefore waits on a person. The project is built to move this figure, and the page does not hide it. A rule that climbs a rung shows the argument working, and a rule that stays at
+    <b>machine-later</b> shows that an instrument is missing. These figures were typed by hand until August 2026 and had gone stale, and they are now computed.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="rights-and-forbidden-patterns">Rights and forbidden patterns</h2>
-    <p>Across the rules the law guarantees <span data-law="rights">6</span> operator rights, each traceable to the rules that serve it, and it names <span data-law="forbidden">17</span> forbidden patterns outright,
-    for instance selection that silently executes and a flow with no exit. A refusal cites them: <i>the right to leave</i> in the verifier's output is one of the six.
+    <h2 id="rights-and-forbidden-patterns">The operator rights and forbidden patterns that the rules serve</h2>
+    <p>Across the rules, the law guarantees <span data-law="rights">6</span> operator rights, each traceable to the rules that serve it, and it names <span data-law="forbidden">17</span> forbidden patterns outright,
+    for instance a selection that silently executes and a flow with no exit. A refusal cites these rights and patterns, and <i>the right to leave</i> in the verifier's output is one of the six rights.
     <a href="../constitution/reader/index.html">The Reader lists all of them</a>.</p>
   </div>
 </section>
 
 <section class="alt" id="changes">
   <div class="narrow">
-    <h2>How it changes</h2>
-    <p>The seventh article is Amendment. In its own words the law grows only from evidence of real use, operator feedback and documented failure, and a trend or a developer's convenience is not a ground.
-    Removing a protection needs proof that the harm is gone. In practice a change goes like this:</p>
+    <h2>How the rules of the law change</h2>
+    <p>The seventh article of the law is Amendment. In its own words, the law grows only from evidence of real use, operator feedback and documented failure, and a trend or a developer's convenience is not a ground.
+    Removing a protection needs proof that the harm is gone. In practice, a change to the rules follows five steps:</p>
     <ol class="workflow">
       <li><b>A defect is recorded when it happens.</b> The newest rules were canonized from defects found while building real applications, and the <a href="why.html#evidence">evidence table</a> names the latest eight.</li>
-      <li><b>It is kept only if it generalises and can be decided yes or no.</b> A rule that a reviewer could only argue about does not get a number.</li>
-      <li><b>It is numbered and placed in a set.</b> Retired numbers (<span data-fact="law.retired">5</span> so far) and burned ones (<span data-fact="law.burned">2</span>) are never reused, so a citation means the same thing for ever.</li>
-      <li><b>The version moves and the pack's hash with it.</b> A consumer that pins the <a href="conformance.html">pack</a> sees the change as a different hash, and one trailing space in the file is a different hash too.</li>
-      <li><b>Its tier is stated, and may climb.</b> A rule declares who can catch it today and moves up when an instrument is invented: Rule 107 began as judgment and is now machine-checked, and Rule 62 became a tool rule once a runnable contrast check existed.</li>
+      <li><b>The defect is kept only if it generalises and can be decided yes or no.</b> A rule that a reviewer could only argue about does not get a number.</li>
+      <li><b>The rule is numbered and placed in a set.</b> Retired numbers (<span data-fact="law.retired">5</span> so far) and burned ones (<span data-fact="law.burned">2</span>) are never reused, so a citation means the same thing for ever.</li>
+      <li><b>The version of the law moves, and the pack's hash moves with it.</b> A consumer that pins the <a href="conformance.html">pack</a> sees the change as a different hash, and even one trailing space in the file gives a different hash.</li>
+      <li><b>The rule's tier is stated, and the tier may climb.</b> A rule declares who can catch it today and moves up when an instrument is invented: Rule 107 began as judgment and is now machine-checked, and Rule 62 became a tool rule once a runnable contrast check existed.</li>
     </ol>
     <p>The record of passes is in <a href="../doc/AMENDMENT-DOCKET.md">the amendment docket</a> and the lineage line of <a href="../constitution/rules.json"><code>rules.json</code></a>. The most recent change, to v<span data-law="version">3.14</span>,
-    is what allowed this site's navigation to have two horizontal levels.</p>
-    <p class="limit"><b>Limit:</b> this describes how the project's own law has changed, and it was ruled by the project. It is not a process that other teams have used, and nothing here shows that anyone outside it has proposed an amendment.</p>
+    allowed this site's navigation to have two horizontal levels.</p>
+    <p class="limit"><b>Limit:</b> this section describes how the project's own law has changed, and the project ruled every change. Other teams have not used this process, and nothing here shows that anyone outside the project has proposed an amendment.</p>
   </div>
 </section>
 </main>

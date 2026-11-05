@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Declared in Haro — the language as data</title>
-<meta name="description" content="Zane is written a second time as a declaration in Haro, from which a court and a decoder grammar are forged. The forged court is run against the same suite as the verifier; where the two differ, each difference is named, counted and held by a ratchet.">
+<title>Declared in Haro — the Zane language written as data in Haro</title>
+<meta name="description" content="Zane is declared a second time in Haro, a language for declaring languages, and a court and a decoder grammar are forged from that declaration. The forged court judges the same suite as the verifier, and each difference between the two is named, counted and held by a ratchet.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9c520fe9">
 </head>
@@ -41,10 +41,11 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Declared in Haro</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Language · for people who build languages and the tools around them</p>
-    <h1>The language is also written as data, and a court is made from it.</h1>
-    <p class="sub">Zane exists twice: as a hand-written verifier, and as a declaration in Haro, a language for declaring languages. A court forged from the declaration judges
-    the same <span data-fact="fixtures.total">73</span> fixtures. They agree on <span data-fact="twin.agree">55</span>; on the other <span data-fact="twin.differences">18</span> each difference
-    is named, and a ratchet fails if one is added or hidden.</p>
+    <h1>Zane is also declared as data in Haro, and a court forged from that declaration judges the same suite as the verifier.</h1>
+    <p class="sub">The Haro declaration is a second form of Zane, written in Haro, a language for declaring languages, and a court and a decoder grammar are forged from it.
+    The declaration lets a person compare two independent courts on the same files, so that every place where they disagree is named and counted.
+    The forged court judges the same <span data-fact="fixtures.total">73</span> fixtures as the hand-written verifier. The two courts agree on <span data-fact="twin.agree">55</span> fixtures, each of the other <span data-fact="twin.differences">18</span> differences
+    is named, and a ratchet fails if a difference is added or hidden.</p>
   </div>
 </header>
 
@@ -54,10 +55,10 @@
   <details open>
     <summary>On this page</summary>
     <ul>
-      <li><a href="#the-same-offence-declared">The same offence, declared</a></li>
-      <li><a href="#two-courts-one-suite">Two courts, one suite</a></li>
-      <li><a href="#where-the-two-differ-in-three-classes">Where the two differ, in three classes</a></li>
-      <li><a href="#a-grammar-a-generator-can-be-held-to">A grammar a generator can be held to</a></li>
+      <li><a href="#the-same-offence-declared">The trapped-flow offence written as one constraint in Haro</a></li>
+      <li><a href="#two-courts-one-suite">The verifier and the forged court, judging the same suite</a></li>
+      <li><a href="#where-the-two-differ-in-three-classes">The three classes of difference between the two courts</a></li>
+      <li><a href="#a-grammar-a-generator-can-be-held-to">The decoder grammar that holds a generator to the shape of a declaration</a></li>
     </ul>
   </details>
 </nav>
@@ -66,9 +67,9 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-same-offence-declared">The same offence, declared</h2>
-    <p>The verifier refused a wizard that cannot be left, citing two rules, an article and a right. In the declaration the same offence is one constraint: where it applies,
-    the condition that makes it an offence, the sentence, the stable code, and what it cites. It is written from the contract, and the court speaks that code.</p>
+    <h2 id="the-same-offence-declared">The trapped-flow offence written as one constraint in Haro</h2>
+    <p>On <a href="refusal.html">the refusal page</a>, the verifier refuses a wizard that cannot be left, and cites two rules, an article and a right. The Haro declaration writes the same offence as one constraint, which states where the constraint applies,
+    the condition that makes it an offence, the sentence, the stable code, and what it cites. The constraint is written from the contract, and the forged court reports the same code.</p>
 <pre class="excerpt" data-excerpt="haro/zane.stzu"><span class="k">DEFINE CONSTRAINT</span> <span class="n">trapped_flow_wizard</span> <span class="k">AS</span> (
   ON wizard, WHEN <span class="s">"not always_reachable contains exit"</span>,
   MESSAGE <span class="s">"{name} is multi-step and EXIT is not always reachable: a trapped flow is unconstitutional"</span>,
@@ -76,13 +77,13 @@
   CITES [<span class="s">"rule:51"</span>, <span class="s">"rule:53"</span>, <span class="s">"article:intent"</span>, <span class="s">"right:leave"</span>]
 ) RATIONALE <span class="s">"Rules 51, 53; level 2"</span></pre>
     <p>The <span data-fact="kinds">10</span> kinds, the <span data-fact="verbs">22</span> verbs and six closed vocabularies are declared the same way, from the pack's own data. The declaration does not replace the verifier.
-    It declares what the meta-language can carry, and counts what it cannot.</p>
+    It declares what the meta-language can carry, and it counts what the meta-language cannot carry.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="two-courts-one-suite">Two courts, one suite</h2>
+    <h2 id="two-courts-one-suite">The verifier and the forged court, judging the same suite</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 300" style="min-width:780px" role="img" aria-labelledby="two-t two-d">
@@ -111,17 +112,17 @@
         <line class="dg-line" x1="480" y1="220" x2="548" y2="170" marker-end="url(#two-ah)"/>
       </svg>
       </div>
-      <figcaption>The verifier runs in this repository's gates. The forged court runs through a judge that needs the Haro spike checked out beside it, so it is not one of them. <b>Not shown:</b> agreement on a
-      fixture is agreement with the file's expected verdict, which proves the two courts alike on it, not that the verdict is right for a person.</figcaption>
+      <figcaption>The verifier runs in this repository's gates. The forged court runs through a judge that needs the Haro spike checked out beside it, so the forged court is not one of this repository's gates. <b>Not shown:</b> agreement on a
+      fixture is agreement with the file's expected verdict. It proves that the two courts are alike on that fixture, and it does not prove that the verdict is right for a person.</figcaption>
     </figure>
-    <p><b>How the ratchet works.</b> Every fixture where the two differ is one row in <a href="../haro/twin-expected.csv"><code>haro/twin-expected.csv</code></a>, with the seam that explains it and
-    the class of difference. The judge fails if a row is missing, if a difference is not listed, or if the grammar file differs from what the forge writes now. Fixing a seam shrinks the file; nothing can grow it silently.</p>
+    <p><b>How the ratchet works.</b> Every fixture on which the two courts differ is one row in <a href="../haro/twin-expected.csv"><code>haro/twin-expected.csv</code></a>, with the seam that explains it and
+    the class of difference. The judge fails if a row is missing, if a difference is not listed, or if the grammar file differs from what the forge writes now. Fixing a seam shrinks the file, and nothing can grow the file silently.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="where-the-two-differ-in-three-classes">Where the two differ, in three classes</h2>
+    <h2 id="where-the-two-differ-in-three-classes">The three classes of difference between the two courts</h2>
     <table class="board">
       <thead><tr><th>Class</th><th>Files</th><th>What it means</th><th>Why, by seam</th></tr></thead>
       <tbody>
@@ -130,22 +131,22 @@
         <tr><td>Court only</td><td><span data-fact="twin.courtOnly">2</span></td><td>A lawful file the verifier accepts and the forged court refuses.</td><td>S9: a foreign pillar's declaration. S13: a field the verifier reads on any kind.</td></tr>
       </tbody>
     </table>
-    <p>The ten that the forged court does not refuse are the ones to read first: that class is where a court made from data would say <b>clean</b> to something the law forbids.
-    Four of them are warnings the verifier raises and the declaration does not declare.</p>
-    <p>Where a difference is a ruling rather than a defect, the declaration says so. The verifier keeps its warning for a named widget until Haro has a seat for severity; it ignores another
-    pillar's declarations where the forged court refuses them; and a declaration still needs no mandatory rationale in a <code>.zane</code> file. These were ruled by the author, and the page does not reopen them.</p>
+    <p>The ten files that the forged court does not refuse matter most, because in that class a court made from data would say <b>clean</b> to something the law forbids.
+    Four of them are warnings that the verifier raises and that the declaration does not declare.</p>
+    <p>Where a difference is a ruling rather than a defect, the declaration says so. The verifier keeps its warning for a named widget until Haro has a seat for severity. The verifier ignores another
+    pillar's declarations, which the forged court refuses. A declaration in a <code>.zane</code> file still needs no mandatory rationale. The author ruled on these three differences, and this page does not reopen them.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="a-grammar-a-generator-can-be-held-to">A grammar a generator can be held to</h2>
-    <p>The same declaration yields <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4046</span> bytes of GBNF, the notation grammar-constrained decoders read.
-    It fixes the shape of a declaration: the <span data-fact="gbnf.kinds">10</span> kinds, the clauses each kind may carry, and the lexical form.</p>
-    <p>It does not fix the verbs or the values, and it
-    cannot refuse an offence such as the wizard above, which is well formed and wrong. The court does that, so a generator held to the grammar still has to pass the verifier.
-    <a href="generate.html">The Generate page</a> shows the two together.</p>
-    <p>Nothing here states what Haro is for. That is the charter of the Haro project, and this page claims only what its own repository can run: the declaration, the judge, the ratchet and the grammar.</p>
+    <h2 id="a-grammar-a-generator-can-be-held-to">The decoder grammar that holds a generator to the shape of a declaration</h2>
+    <p>The same declaration yields <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4046</span> bytes of GBNF, which is the notation that grammar-constrained decoders read.
+    The grammar fixes the shape of a declaration: the <span data-fact="gbnf.kinds">10</span> kinds, the clauses each kind may carry, and the lexical form.</p>
+    <p>The grammar does not fix the verbs or the values, and it
+    cannot refuse an offence such as the wizard above, which is well formed and wrong. The court refuses such an offence, so a generator held to the grammar still has to pass the verifier.
+    <a href="generate.html">The Generate page</a> shows the grammar and the verifier together.</p>
+    <p>This page does not state what Haro is for, because that is the charter of the Haro project. This page claims only what its own repository can run: the declaration, the judge, the ratchet and the grammar.</p>
   </div>
 </section>
 </main>
