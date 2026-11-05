@@ -100,7 +100,7 @@ The Zui protocol pack
     <h2>Who has</h2>
 
     <p>The <b>reference</b> is the JavaScript verifier in this repository. <b>Zing</b>, a separate framework in the Softanza family, is described in its own pinning record as the first conforming consumer of the law, and pins law v<span data-fact="zing.pinned">3.11</span>.
-    This page states no conformance level for it: that is its own claim to make, and this site has not re-run its checker. A single-file verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a> and not built.</p>
+    This page states no conformance level for it: that is its own claim to make, and this site has not re-run its checker. A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>. Its first stage, the check, is built: it prints what the JavaScript prints, byte for byte, on every fixture and on a generated corpus (<code>tools/zui/parity.js</code>). It has run on Windows only, and the browser build is not built.</p>
     <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, not a record of one succeeding.</p>
   </div>
 </section>
