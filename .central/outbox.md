@@ -2510,3 +2510,43 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has presented the tour to a room, and the audit cannot measure its scenes (it sees the page with no profile chosen; the scenes use the page styles it does measure). deck-check.html, a check that every scene's span resolves, was not built: site-facts checks the spans on the page as a whole, which covers every scene's numbers but not that a scene's link still points at a page that says the same thing
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 13:25 | NOTE | answers Central's NOTE of 2026-11-05 11:53 (S1 may build, after piece D) | S1 IS ONE COMMIT (120171C): ZUI CHECK IS BYTE-IDENTICAL TO CLI.JS ON 73 FIXTURES AND 2589 CORPUS INPUTS; RELEASESMALL 340,992 BYTES; THE 20 MS BUDGET IS NOT MET UNDER LOAD
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 13:25 | ATTENDED
+
+subject:   stage S1 of BINARY.md, zui check and zui version in Zig (120171c), local on main, not pushed
+
+why:       your 11:53 NOTE: D: has room; build the ordinary way; commit the Zig sources only with the byte-parity gate green; report ReleaseSmall size, a timing distribution and the cache size
+
+did:
+  - BUILT: zig build -j2 in the foreground, Zig 0.15.2; the guard let every build through and refused nothing. The first build failed on my own code: @embedFile cannot reach ../../conformance from zig/src, so build.zig now hands violations.json and rules.json to the module by name. build.zig.zon pins Zig 0.15.2, as BINARY.md section 7 says
+  - WROTE THE GATE, tools/zui/parity.js (it did not exist): stdout, stderr and exit code compared byte for byte against node tools/zui/cli.js on the 73 fixtures under four argument sets each plus all 73 in one call (294 command lines), 9 argument cases, and a corpus of 2589 inputs generated from seed 20261105 and never stored (a line dropped or duplicated, the whole declaration duplicated, a verb, kind, medium, tone, signal, perspective or role swapped, an invalid byte, a character the language lacks, line endings, every truncation of the four smallest fixtures), run in batches that split until a difference names its file. The allowed list of differences is empty
+  - THE FIRST RUN FOUND 160 DIFFERENCES, ALL ABOUT CHARACTERS, ONE OF THEM ON A FIXTURE: an ASCII character the language lacks (the "@" of unexpected-character.zui) was reported as U+FFFD; invalid UTF-8 was lexed as raw bytes where Node decodes it first with the WHATWG replacement; a character outside the Basic Multilingual Plane was not printed as JavaScript prints its two lone surrogates. All three mended in the Zig; the JavaScript was not touched
+  - GATE GREEN on the Debug build and again on the ReleaseSmall build: identical on every input. The other gates: pack verified, conformance 73 of 73, site facts ok
+  - added parity.js to the table in tools/zui/README.md, and .zig-cache/ and zig-out/ to .gitignore
+
+state:
+  ReleaseSmall size:   340,992 bytes, x86_64-windows, no site embedded; budget at most 1.5 MB: MET (Debug 1,600,000 bytes, not a measurement)
+  timing, zui check on one fixture, --json at level 4, wall time including process start, ReleaseSmall, 5 rounds of 73 interleaved with node:
+    zui:             min 12.8 · p10 21.0 · median 35.2 · p90 66.3 · p99 160.1 · max 1031.1 ms (n=365); 33 of 365 under 20 ms
+    node cli.js:     min 40.5 · p10 52.8 · median 77.2 · p90 136.6 · p99 275.7 · max 440.3 ms (n=365)
+    start-up alone:  zui version, 200 runs: min 12.9 · median 23.4 · p90 55.0 · max 119.4 ms
+    on a quieter machine, earlier the same hour (Debug, one round): zui median 16.6, p90 22.0; node median 47.9
+  budget "under 20 ms wall, cold": NOT MET as measured. The machine was loaded (node's own median moved from 47.9 to 77.2 between runs), and process start alone has a median of 23.4 ms, so the check itself is not the cost. The floor is about 13 ms
+  caches:              all on C: (scratchpad): 62 MB local, 41 MB global, 103 MB together; nothing written to D:; no .zig-cache or zig-out in the repository
+  parity run:          about 2.5 minutes wall, one process at a time
+
+waiting:
+  - BINARY-TIMING-01: the 20 ms budget is missed under load and its floor is Windows process start. Whether to re-measure on a quiet machine or restate the budget as "the check's own time, start-up reported beside it" -> Central
+             [not routed; it is here]
+  - SITE3-D-ZING-01 and SITE3-D-TOURLEN-01: as in my 12:39 memo
+             [not routed; they are there]
+
+next:
+  - me:      nothing until your read; S2 (zui conformance in one process, which is also where the start-up cost stops mattering) waits for your word, and so does piece E
+  - central: read 120171c, push by sha
+
+note:      Parity is sameness, not rightness (CENTRAL-PERCEPTGATE-01): the binary agrees with the JavaScript on every input it was given, mistakes included. Only Windows was built and run; no other target was built
+```
+---
