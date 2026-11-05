@@ -6,7 +6,7 @@
 <title>The tour — a presentation of Zane in scenes, ordered for the people in the room</title>
 <meta name="description" content="The tour presents Zane in short scenes, in an order chosen for the person in the room: a UX designer, a product designer, a programmer, an AI builder or a decision maker. The arrow keys move between scenes, n shows the notes, and Escape opens the page that a scene comes from.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=9c520fe9">
+<link rel="stylesheet" href="stz.css?v=80bf2ea1">
 </head>
 <body>
 
@@ -75,7 +75,9 @@
 
       <article class="scene-card" id="scene-hook" data-scene="hook" data-page="thinking.html" hidden>
         <h3 class="scene-title">Zane starts from what a person is doing, and an interface renders it.</h3>
-        <p>A person does not come to an interface to click a button. A person comes to find something, to compare, to act, to confirm and to undo. Zane declares these activities and treats every screen as a consequence of them.</p>
+        <p>A person does not come to an interface to click a button.</p>
+        <p>A person comes to find something, to compare, to act, to confirm and to undo.</p>
+        <p>Zane declares these activities and treats every screen as a consequence of them.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Start from the person and not from the screen. Ask the room what their users come to do, and write the verbs down.</aside>
       </article>
 
@@ -100,74 +102,94 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
 
       <article class="scene-card" id="scene-law" data-scene="law" data-page="rules.html" hidden>
         <h3 class="scene-title">The law is one file, and every refusal cites a rule from it.</h3>
-        <p>The law holds <span data-law="rules">123</span> rules under <span data-law="articles">7</span> articles, and the rules guarantee <span data-law="rights">6</span> rights. The tools load the same file that the reader reads, so the tools and the text cannot drift apart.</p>
+        <p>The law holds <span data-law="rules">123</span> rules under <span data-law="articles">7</span> articles, and the rules guarantee <span data-law="rights">6</span> rights.</p>
+        <p>The tools load the same file that the reader reads, so the tools and the text cannot drift apart.</p>
         <p>Only <span data-law="tier:machine">11</span> rules are refused by a machine today, and <span data-law="tier:judgment">80</span> rules need a person's judgment.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> The second number states the limit. Say it before someone asks.</aside>
       </article>
 
       <article class="scene-card" id="scene-grid" data-scene="grid" data-page="grid.html" hidden>
         <h3 class="scene-title">Zane is designed around a grid of what a person does in every channel.</h3>
-        <p>The grid crosses six activities with <span data-fact="grid.media">10</span> channels. Of the <span data-fact="grid.cellsLive">55</span> cells that can hold a rule, <span data-fact="grid.cellsWithRule">20</span> hold one and <span data-fact="grid.cellsNone">35</span> hold none. <span data-fact="grid.channelsNoRule">5</span> channels have no rule written for them at all.</p>
+        <p>The grid crosses six activities with <span data-fact="grid.media">10</span> channels.</p>
+        <p>Of the <span data-fact="grid.cellsLive">55</span> cells that can hold a rule, <span data-fact="grid.cellsWithRule">20</span> hold one and <span data-fact="grid.cellsNone">35</span> hold none.</p>
+        <p><span data-fact="grid.channelsNoRule">5</span> channels have no rule written for them at all.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> The empty cells are the finding of the grid. A practice that cannot show where it is silent cannot be checked.</aside>
       </article>
 
       <article class="scene-card" id="scene-channels" data-scene="channels" data-page="media.html" hidden>
         <h3 class="scene-title">The law refuses a promise that a channel cannot carry, such as zoom on a phone line.</h3>
-        <p>One declaration can serve many channels. A flow that promises ZOOM over a voice line is refused, because a voice cannot carry it, and the same flow on a screen is clean. <span data-fact="media.actAbsent">4</span> of the channels cannot carry an act at all.</p>
+        <p>One declaration can serve many channels.</p>
+        <p>A flow that promises ZOOM over a voice line is refused, because a voice cannot carry it, and the same flow on a screen is clean.</p>
+        <p><span data-fact="media.actAbsent">4</span> of the channels cannot carry an act at all.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> This scene is for anyone who ships voice, print or an API. The law refuses a promise, and it does not refuse the channel.</aside>
       </article>
 
       <article class="scene-card" id="scene-compare" data-scene="compare" data-page="positioning.html" hidden>
         <h3 class="scene-title">Zane works beside heuristics, standards and frameworks, and does not replace them.</h3>
-        <p>Heuristics and usability tests judge what only a person can judge. Accessibility standards and linters check a rendered page. Frameworks build the screen. In the sources this project read, none of these practices refuses a declaration, before a screen exists, for lacking what a person must be able to do.</p>
+        <p>Heuristics and usability tests judge what only a person can judge.</p>
+        <p>Accessibility standards and linters check a rendered page.</p>
+        <p>Frameworks build the screen.</p>
+        <p>In the sources this project read, none of these practices refuses a declaration, before a screen exists, for lacking what a person must be able to do.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Be fair to the practices in the room. The claim is narrow, and the comparison page lists its sources.</aside>
       </article>
 
       <article class="scene-card" id="scene-webcase" data-scene="webcase" data-page="web.html" hidden>
         <h3 class="scene-title">A run on a real site found four real findings and showed a limit of the audit.</h3>
-        <p>The web case reads the navigation of the Softanza site and changes nothing. The verifier refused the author's own first declaration, and the audit found four pages with no labelled path. The audit also reported twenty-two contrast findings over a photograph. Those findings are a limit of the audit and not defects of the site, and the web case page says which findings are which.</p>
+        <p>The web case reads the navigation of the Softanza site and changes nothing.</p>
+        <p>The verifier refused the author's own first declaration, and the audit found four pages with no labelled path.</p>
+        <p>The audit also reported twenty-two contrast findings over a photograph.</p>
+        <p>Those findings are a limit of the audit and not defects of the site, and the web case page says which findings are which.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Every case on the site is a real run, and each case states its limits. This is the style of the whole project.</aside>
       </article>
 
       <article class="scene-card" id="scene-quickwin" data-scene="quickwin" data-page="quick-win.html" hidden>
         <h3 class="scene-title">A quick win on the Zing site took forty-seven minutes and found the site clean.</h3>
-        <p>The run declared three surfaces, found the declarations clean in the verifier, and audited ten pages. The audit reported one finding, on a redirect page that nobody reads. An hour of work tells a team where it stands.</p>
+        <p>The run declared three surfaces, found the declarations clean in the verifier, and audited ten pages.</p>
+        <p>The audit reported one finding, on a redirect page that nobody reads.</p>
+        <p>An hour of work tells a team where it stands.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> A clean result is still a result, so present it without apology.</aside>
       </article>
 
       <article class="scene-card" id="scene-build" data-scene="build" data-page="build.html" hidden>
         <h3 class="scene-title">In CI, the verifier reports a refusal as an exit code.</h3>
-        <p>The verifier exits 1 on a refusal, 0 when the declaration is clean and 2 on a usage error. A build gate needs nothing more, and today the verifier needs only Node.</p>
+        <p>The verifier exits 1 on a refusal, 0 when the declaration is clean and 2 on a usage error.</p>
+        <p>A build gate needs nothing more, and today the verifier needs only Node.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> For programmers, show the exit code first, and then the envelope that a tool can read.</aside>
       </article>
 
       <article class="scene-card" id="scene-generate" data-scene="generate" data-page="generate.html" hidden>
         <h3 class="scene-title">A grammar holds a generator to the shape of a declaration, and the court still judges its meaning.</h3>
-        <p>A grammar file fixes the shape of a declaration (the <span data-fact="gbnf.kinds">10</span> kinds and their clauses), so a model cannot write a declaration that does not parse. The grammar cannot fix meaning: a flow with no exit is well formed and wrong, and only the court refuses it.</p>
+        <p>A grammar file fixes the shape of a declaration (the <span data-fact="gbnf.kinds">10</span> kinds and their clauses), so a model cannot write a declaration that does not parse.</p>
+        <p>The grammar cannot fix meaning: a flow with no exit is well formed and wrong, and only the court refuses it.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> For AI builders, the grammar and the court are two different promises. Say which promise they need.</aside>
       </article>
 
       <article class="scene-card" id="scene-conformance" data-scene="conformance" data-page="conformance.html" hidden>
         <h3 class="scene-title">Agreement between verifiers is proved by running the fixtures.</h3>
-        <p>The suite holds <span data-fact="fixtures.total">73</span> fixtures with known verdicts, and <span data-fact="pack.files">12</span> files are pinned by hash. A verifier in any language is a peer, and the suite names each fixture on which a verifier disagrees.</p>
+        <p>The suite holds <span data-fact="fixtures.total">73</span> fixtures with known verdicts, and <span data-fact="pack.files">12</span> files are pinned by hash.</p>
+        <p>A verifier in any language is a peer, and the suite names each fixture on which a verifier disagrees.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Zane has no library to adopt. This fact surprises people, so state it and leave it without explanation.</aside>
       </article>
 
       <article class="scene-card" id="scene-haro" data-scene="haro" data-page="haro.html" hidden>
         <h3 class="scene-title">The language is also declared as data, and two courts are held to each other.</h3>
-        <p>A court forged from the declaration agrees with the hand-written verifier on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span> fixtures. The other <span data-fact="twin.differences">18</span> fixtures are named, and a ratchet fails on any difference that is not named.</p>
+        <p>A court forged from the declaration agrees with the hand-written verifier on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span> fixtures.</p>
+        <p>The other <span data-fact="twin.differences">18</span> fixtures are named, and a ratchet fails on any difference that is not named.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> This scene is for the language people in the room. Skip it for everyone else.</aside>
       </article>
 
       <article class="scene-card" id="scene-cost" data-scene="cost" data-page="adopt.html" hidden>
         <h3 class="scene-title">Using Zane today costs Node, a browser and the time to write declarations.</h3>
-        <p>Zane needs Node and a browser, and it needs nothing to install, no library to adopt and no framework to change. A single file that needs neither Node nor a browser is designed and not built. The work is writing declarations by hand for the surfaces that matter.</p>
+        <p>Zane needs Node and a browser, and it needs nothing to install, no library to adopt and no framework to change.</p>
+        <p>A single file that needs neither Node nor a browser is designed and not built.</p>
+        <p>The work is writing declarations by hand for the surfaces that matter.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers, the cost is an afternoon per surface. The real risk is that most of the law still needs a reviewer.</aside>
       </article>
 
       <article class="scene-card" id="scene-limits" data-scene="limits" data-page="innovation.html" hidden>
         <h3 class="scene-title">The project has not yet shown a study, a user or a foreign application.</h3>
-        <p><b>The project has run no study, has involved no user, and has run no foreign application end to end.</b> The claims are structural, and their evidence is the repository: files a reader can open and commands a reader can run. Nobody has perceived any channel to check the grid.</p>
+        <p><b>The project has run no study, has involved no user, and has run no foreign application end to end.</b> The claims are structural, and their evidence is the repository: files a reader can open and commands a reader can run.</p>
+        <p>Nobody has perceived any channel to check the grid.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Always end on the limits before the next step. The limits make the rest believable.</aside>
       </article>
 

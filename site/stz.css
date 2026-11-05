@@ -337,11 +337,11 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 /* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file) */
 .hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: #15110d; overflow: hidden; }
 .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-.hero .panel { position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; width: min(40rem, calc(100% - 2.8rem));
+.hero .panel { position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; width: min(48rem, calc(100% - 2.8rem));
   background: rgba(18, 20, 19, .80); color: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; }
-.hero .panel h1 { color: #fff; font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.12; margin: 0; }
-.hero .panel h1 span { display: block; }
-.hero .panel p { color: #fff; margin: .8rem 0 0; max-width: none; }
+/* the panel is wide enough, and the title small enough, for the title to take two balanced lines on a wide screen and three on a phone */
+.hero .panel h1 { color: #fff; font-size: clamp(1.9rem, 2.8vw, 2.4rem); line-height: 1.12; margin: 0; }
+.hero .panel p { color: #fff; margin: .8rem 0 0; max-width: none; text-wrap: balance; }
 .hero .panel .btn.primary { margin-top: 1.1rem; background: #fff; color: #7a1633; border-color: #fff; }
 .hero .panel .btn.primary:hover { filter: none; background: #ffe3ea; }
 [data-vibe="guardian"] .hero .panel .btn.primary { background: #46e07f; color: #060b07; border-color: #46e07f; }
@@ -362,6 +362,7 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
   .hero img { position: static; height: 46svh; min-height: 260px; }
   .hero .panel { position: static; width: auto; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
   .hero .panel h1, .hero .panel p { color: var(--ink); }
+  .hero .panel h1 { font-size: 1.6rem; }
   .hero .panel .btn.primary, [data-vibe="guardian"] .hero .panel .btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
 }
 .messages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.2rem 0 0; }
@@ -394,7 +395,13 @@ table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; f
 .stage-idle { color: var(--muted); }
 .scene-card { flex: 1 1 auto; }
 .scene-title { font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.15; margin: 0 0 1.1rem; text-wrap: balance; }
-.scene-card p { font-size: 1.35rem; max-width: 46rem; }
+.scene-card p { font-size: 1.35rem; max-width: 46rem; text-wrap: balance; }
+/* on a phone a scene's title fits in the lines the browser balances (six at most), and no line holds one word alone */
+@media (max-width: 760px) {
+  .stage { padding: 1.1rem 1.1rem; }
+  .scene-title { font-size: 1.3rem; }
+  .scene-card p { font-size: 1.1rem; }
+}
 .scene-notes { display: block; margin-top: 1.4rem; padding: .8rem 1rem; border-left: 3px solid var(--accent); background: var(--tint); max-width: 46rem; }
 .scene-notes[hidden] { display: none; }
 .stage-controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--line); }

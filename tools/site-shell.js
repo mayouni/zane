@@ -22,7 +22,8 @@
    page no bar lists, and a footer link to a page the bars do not list.
 
    Every page names its subject (doc/design/WRITING.md): the check fails a page whose h1, or the first sentence of whose lead,
-   lacks the page's subject term, and a page that has no term and is not on the list still to be rewritten.
+   lacks the page's subject term, and a page that has no term and is not on the list still to be rewritten. And no title places a
+   line break by hand: the check fails a heading that holds a <br> or a block, and a stz.css that stops balancing titles.
 
    A page that does not have the fences yet is migrated by --write from the markup the old site used.
    The pages outside the shell proper, the Reader and the UI audit tool, take the menu and the trail
@@ -475,12 +476,59 @@ function checkWriting(problems, notes) {
   if (pending.length) notes.push(`NOTE the register check (doc/design/WRITING.md) has not yet judged ${pending.length} page(s), still to be rewritten: ${pending.join(', ')}`);
 }
 
+/* ---- a title's line breaks belong to the browser (doc/design/WRITING.md) ----------------------------------------------------- */
+/* No h1, h2, h3 or .scene-title may hold a <br>, a block-level element, or a child that a rule of stz.css makes a block: each of
+   these places a line break by hand, and text-wrap: balance then balances each piece alone, never the whole title (the front
+   page's title broke as "Zane is the / compilable language / for user interfaces." for this reason, 2026-11-05). And stz.css
+   must still declare text-wrap: balance on h1, h2 and h3, and text-wrap: pretty on p. */
+const HEADING_RE = /<(h1|h2|h3)\b[^>]*>([\s\S]*?)<\/\1>|<(\w+)\b[^>]*class="[^"]*\bscene-title\b[^"]*"[^>]*>([\s\S]*?)<\/\3>/g;
+const BLOCK_TAGS = /<(div|p|ul|ol|li|section|article|aside|table|blockquote|pre|figure|header|footer|nav|h[1-6])\b/i;
+function cssRules() {
+  const css = fs.readFileSync(path.join(ROOT, 'site', 'stz.css'), 'utf8').replace(/\r\n/g, '\n').replace(/\/\*[\s\S]*?\*\//g, ' ');
+  const rules = [];
+  for (const m of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) rules.push({ selectors: m[1].split(',').map(s => s.trim()), body: m[2] });
+  return rules;
+}
+function checkBreaks(problems) {
+  const rules = cssRules();
+  /* the descendants of a heading that stz.css turns into a block: "h1 span", ".hero .panel h1 span", ".scene-title em" */
+  const blocking = [];
+  for (const r of rules) {
+    if (!/(^|;)\s*display\s*:\s*(block|flex|grid|table|list-item)\b/.test(r.body)) continue;
+    for (const s of r.selectors) {
+      const m = /(?:^|[\s>])(h1|h2|h3|\.scene-title)\s*>?\s*([a-z][a-z0-9]*|\.[\w-]+)$/i.exec(s);
+      if (m) blocking.push({ heading: m[1], child: m[2], selector: s });
+    }
+  }
+  const declares = (sel, prop) => rules.some(r => r.selectors.includes(sel) && new RegExp('(^|;)\\s*text-wrap\\s*:\\s*' + prop + '\\b').test(r.body));
+  for (const h of ['h1', 'h2', 'h3']) if (!declares(h, 'balance')) problems.push('site/stz.css: no rule declares text-wrap: balance on ' + h);
+  if (!declares('p', 'pretty')) problems.push('site/stz.css: no rule declares text-wrap: pretty on p');
+  for (const p of PAGES) {
+    const file = path.join(ROOT, p.file);
+    if (!fs.existsSync(file)) continue;
+    const text = fs.readFileSync(file, 'utf8').replace(/<(script|style)\b[\s\S]*?<\/\1>/g, ' ');
+    for (const m of text.matchAll(HEADING_RE)) {
+      const tag = m[1] || 'scene-title', inner = m[1] ? m[2] : m[4];
+      const name = '"' + plain(inner).slice(0, 70) + '"';
+      if (/<br\b/i.test(inner)) problems.push(p.file + ': the ' + tag + ' ' + name + ' holds a <br>: a line break placed by hand');
+      const b = BLOCK_TAGS.exec(inner);
+      if (b) problems.push(p.file + ': the ' + tag + ' ' + name + ' holds a <' + b[1] + '>, a block: a line break placed by hand');
+      for (const k of blocking) {
+        if (k.heading !== tag && !(k.heading === '.scene-title' && tag === 'scene-title')) continue;
+        const childRe = k.child.startsWith('.') ? new RegExp('<\\w+\\b[^>]*class="[^"]*\\b' + k.child.slice(1) + '\\b') : new RegExp('<' + k.child + '\\b', 'i');
+        if (childRe.test(inner)) problems.push(p.file + ': the ' + tag + ' ' + name + ' holds a ' + k.child + ' that stz.css makes a block ("' + k.selector + '"): a line break placed by hand');
+      }
+    }
+  }
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
   const notes = [];
   checkBars(problems, notes);
   checkWriting(problems, notes);
+  checkBreaks(problems);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);
@@ -505,4 +553,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars, checkWriting, headOf };
+module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars, checkWriting, checkBreaks, headOf };

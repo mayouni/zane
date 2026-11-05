@@ -23,6 +23,9 @@ time because it lived only in a promise, so it is written here and part of it is
    title that makes sense only after the page has been read.
 5. **Every page states its value** in one sentence that begins with what the thing ensures, prevents or lets a person do.
 6. **Limits stay**, written in the same plain register: *"Limit: nobody has heard a channel to check a cell."*
+7. **A title's line breaks belong to the browser, which balances them; the page never places one by hand.** A title holds no
+   `<br>` and no piece set as a block, and `node tools/site-shell.js` fails one that does (the front page's title once broke as
+   *"Zane is the / compilable language / for user interfaces."* for this reason).
 
 ## 2. The subject term
 
