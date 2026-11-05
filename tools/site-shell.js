@@ -227,7 +227,7 @@ ${own.map(x => `      <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n
   </details>
 </nav>`;
 }
-const REPO = 'https://github.com/mayouni/stzzui';
+const REPO = 'https://github.com/mayouni/zane';
 function footer(p) {
   const to = f => href(p.file, f);
   const pending = PAGES.find(q => q.pending);
@@ -273,7 +273,7 @@ function stub(p) {
     (the keyword in a declaration is <code>SURFACE_AS</code>, and the diagnostics say <em>medium</em>).
     A verb a channel cannot carry is refused by the verifier, and the signal vocabulary and the statuses that render as silence are in
     <a href="../conformance/signal.json"><code>conformance/signal.json</code></a>.</p>
-    <p>The instrument that checks that renderings differ only as that data predicts is <code>tools/zui/cross-medium.js</code>, and the map of where the law has
+    <p>The instrument that checks that renderings differ only as that data predicts is <code>tools/zane/cross-medium.js</code>, and the map of where the law has
     something to say, and where it is silent, is <code>doc/design/COVERAGE.md</code> in the repository.</p>`,
     h2b: 'What this site does not show yet',
     body2: `<p>The pages that present the channels, the coverage grid and its gaps, and the cross-channel proof are not written. Nobody has perceived any of these channels for this grid, so

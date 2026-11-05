@@ -7,7 +7,7 @@ envelope every court in the family speaks when it refuses.
 **Machine-readable shape**: [`diagnostic-contract.schema.json`](diagnostic-contract.schema.json)
 — that file is the shape a court validates against; this one governs it.
 **Extracted from**: the zui verifier's working practice —
-[`tools/zui/`](../tools/zui/README.md), [`conformance/violations.json`](../conformance/violations.json),
+[`tools/zane/`](../tools/zane/README.md), [`conformance/violations.json`](../conformance/violations.json),
 [`doc/language/VIOLATIONS.md`](language/VIOLATIONS.md) — promoted from one court's
 convention to a versioned family artifact. Nothing in this promotion changed a
 diagnostic's meaning or a verdict.
@@ -308,7 +308,7 @@ not enforced somewhere else, and nobody knows where the line is:
 | mechanism | where | reach |
 |---|---|---|
 | `additionalProperties: {"not": {"type": ["boolean","null"]}}` in the schema, at the root and at `definitions.report` | any court's own JSON Schema validator | **one level.** A boolean nested inside an extension object passes it |
-| `scalarsThatDoNotSurvive()` in `tools/zui/envelope.js`, wired into `validate()` and `validateReport()` | this court | **full depth**, because that is how far the defect reaches |
+| `scalarsThatDoNotSurvive()` in `tools/zane/envelope.js`, wired into `validate()` and `validateReport()` | this court | **full depth**, because that is how far the defect reaches |
 
 Proved by running it: an extension field `cached: true` is refused by both, a
 nested `meta.ok: null` by the scan alone, and the 50-fixture suite — 33
@@ -349,7 +349,7 @@ court's law, gated by each court's fixtures.
 
 | Court | `language` | Pins | Proof |
 |---|---|---|---|
-| [the zui verifier](../tools/zui/README.md) (`tools/zui/`) | `zui` | v1.2.0 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 57-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 40 diagnostics, 57 reports, clean |
+| [the zui verifier](../tools/zane/README.md) (`tools/zane/`) | `zui` | v1.2.0 | `--json` emits the object; the conformance runner validates every diagnostic **and every run's outer object** of the 57-fixture suite against the shape, and since v1.2.0 scans both to full depth for scalars that do not survive a round trip — 40 diagnostics, 57 reports, clean |
 
 ## 4. Governance
 

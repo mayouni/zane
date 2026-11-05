@@ -1,9 +1,9 @@
-//! The StzZui binary (doc/design/BINARY.md). One executable, `zui`, built from zig/src.
+//! The StzZui binary (doc/design/BINARY.md). One executable, `zane`, built from zig/src.
 //!
 //!   zig build -j2                              a debug build, which is never a measurement
 //!   zig build -j2 -Doptimize=ReleaseSmall      the build the size budget is read from
 //!   zig build -j2 test                         the unit tests
-//!   zig build -j2 run -- check x.zui           run it
+//!   zig build -j2 run -- check x.zane          run it
 //!
 //! The data it embeds (conformance/, constitution/) is read from this repository at build time.
 
@@ -19,12 +19,12 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     embedData(b, root);
-    const exe = b.addExecutable(.{ .name = "zui", .root_module = root });
+    const exe = b.addExecutable(.{ .name = "zane", .root_module = root });
     b.installArtifact(exe);
 
     const run = b.addRunArtifact(exe);
     if (b.args) |args| run.addArgs(args);
-    b.step("run", "Run zui").dependOn(&run.step);
+    b.step("run", "Run zane").dependOn(&run.step);
 
     const test_root = b.createModule(.{
         .root_source_file = b.path("zig/src/main.zig"),

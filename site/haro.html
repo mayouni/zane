@@ -6,7 +6,7 @@
 <title>Declared in Haro — the language as data</title>
 <meta name="description" content="StzZui is written a second time as a declaration in Haro, from which a court and a decoder grammar are forged. The forged court is run against the same suite as the verifier; where the two differ, each difference is named, counted and held by a ratchet.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -69,7 +69,7 @@
     <h2 id="the-same-offence-declared">The same offence, declared</h2>
     <p>The verifier refused a wizard that cannot be left, citing two rules, an article and a right. In the declaration the same offence is one constraint: where it applies,
     the condition that makes it an offence, the sentence, the stable code, and what it cites. It is written from the contract, and the court speaks that code.</p>
-<pre class="excerpt" data-excerpt="haro/zui.stzu"><span class="k">DEFINE CONSTRAINT</span> <span class="n">trapped_flow_wizard</span> <span class="k">AS</span> (
+<pre class="excerpt" data-excerpt="haro/zane.stzu"><span class="k">DEFINE CONSTRAINT</span> <span class="n">trapped_flow_wizard</span> <span class="k">AS</span> (
   ON wizard, WHEN <span class="s">"not always_reachable contains exit"</span>,
   MESSAGE <span class="s">"{name} is multi-step and EXIT is not always reachable: a trapped flow is unconstitutional"</span>,
   CODE <span class="s">"TRAPPED_FLOW"</span>,
@@ -87,7 +87,7 @@
       <div class="scroll">
       <svg viewBox="0 0 780 300" style="min-width:780px" role="img" aria-labelledby="two-t two-d">
         <title id="two-t">Two courts judging the same fixtures</title>
-        <desc id="two-d">The suite of fixtures sits at the left. Two arrows go to two courts: the hand-written verifier in tools/zui, and the court forged from the Haro declaration. From the two courts, one arrow goes to a result box: they agree on part of the fixtures and differ on the rest. Each difference is a named row, held by a ratchet.</desc>
+        <desc id="two-d">The suite of fixtures sits at the left. Two arrows go to two courts: the hand-written verifier in tools/zane, and the court forged from the Haro declaration. From the two courts, one arrow goes to a result box: they agree on part of the fixtures and differ on the rest. Each difference is a named row, held by a ratchet.</desc>
         <defs><marker id="two-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
         <rect class="dg-data" x="10" y="100" width="170" height="100" rx="10"/>
         <text class="dg-t" x="95" y="140" text-anchor="middle">The suite</text>
@@ -96,7 +96,7 @@
         <rect class="dg-live" x="250" y="20" width="230" height="100" rx="10"/>
         <text class="dg-t" x="365" y="58" text-anchor="middle">The verifier</text>
         <text class="dg-s" x="365" y="84" text-anchor="middle">hand-written, in</text>
-        <text class="dg-s" x="365" y="106" text-anchor="middle">tools/zui</text>
+        <text class="dg-s" x="365" y="106" text-anchor="middle">tools/zane</text>
         <rect class="dg-live" x="250" y="180" width="230" height="100" rx="10"/>
         <text class="dg-t" x="365" y="218" text-anchor="middle">The forged court</text>
         <text class="dg-s" x="365" y="244" text-anchor="middle">made from the Haro</text>
@@ -133,14 +133,14 @@
     <p>The ten that the forged court does not refuse are the ones to read first: that class is where a court made from data would say <b>clean</b> to something the law forbids.
     Four of them are warnings the verifier raises and the declaration does not declare.</p>
     <p>Where a difference is a ruling rather than a defect, the declaration says so. The verifier keeps its warning for a named widget until Haro has a seat for severity; it ignores another
-    pillar's declarations where the forged court refuses them; and a declaration still needs no mandatory rationale in a <code>.zui</code> file. These were ruled by the author, and the page does not reopen them.</p>
+    pillar's declarations where the forged court refuses them; and a declaration still needs no mandatory rationale in a <code>.zane</code> file. These were ruled by the author, and the page does not reopen them.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
     <h2 id="a-grammar-a-generator-can-be-held-to">A grammar a generator can be held to</h2>
-    <p>The same declaration yields <a href="../haro/zui.gbnf"><code>haro/zui.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4043</span> bytes of GBNF, the notation grammar-constrained decoders read.
+    <p>The same declaration yields <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4046</span> bytes of GBNF, the notation grammar-constrained decoders read.
     It fixes the shape of a declaration: the <span data-fact="gbnf.kinds">10</span> kinds, the clauses each kind may carry, and the lexical form.</p>
     <p>It does not fix the verbs or the values, and it
     cannot refuse an offence such as the wizard above, which is well formed and wrong. The court does that, so a generator held to the grammar still has to pass the verifier.
@@ -156,7 +156,7 @@
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

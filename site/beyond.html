@@ -6,7 +6,7 @@
 <title>Beyond screens — voice, sound and agents with no interface to see</title>
 <meta name="description" content="For conversational, voice-oriented and UI-less applications: four declarations run through the verifier, what each channel decides, the two rules for agent surfaces, and which cells of the grid have a rule and which do not.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -79,8 +79,8 @@
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">caller</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check check_balance.zui</span>
-check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check check_balance.zane</span>
+check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
 <span class="dim">    A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.</span>
 <span class="dim">    Rule 82 · Perceivable State · Article II</span>
 
@@ -104,8 +104,8 @@ check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">agent</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check agent_order.zui</span>
-agent_order.zui:5  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  place_order
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check agent_order.zane</span>
+agent_order.zane:5  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  place_order
 <span class="dim">    A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.</span>
 <span class="dim">    Rule 26 · The Back Button is Holy · Article IV · the right to leave</span>
 
@@ -122,8 +122,8 @@ agent_order.zui:5  <span class="bad">error</span>  <span class="bad">MISSING_CAN
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">agent</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check agent_order_fixed.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check agent_order_fixed.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.13</pre>
     </div>
     <p>Two rules are written for this channel and are judgment rules, so the verifier does not check them: <b>Rule 121</b>, the assistant never masks the work, and <b>Rule 124</b>, the generator ships a working thing. They are the only rules the law has for agent surfaces, and the grid below says why that is thin.</p>
   </div>
@@ -146,8 +146,8 @@ agent_order.zui:5  <span class="bad">error</span>  <span class="bad">MISSING_CAN
   <span class="k">ROLE</span> <span class="s">inert</span>,
   <span class="k">ACTOR</span> <span class="s">operator</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check chime.zui</span>
-chime.zui:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIVABLE</span>  muted in job_status on auditory
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check chime.zane</span>
+chime.zane:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIVABLE</span>  muted in job_status on auditory
 <span class="dim">    Every semantic status a surface declares renders as absence in the medium it declared.</span>
 <span class="dim">    Rule 82 · Perceivable State · Article III · the right to know</span>
 
@@ -161,7 +161,7 @@ chime.zui:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIVA
   <div class="narrow">
     <h2>A sign that also acts</h2>
 
-    <p>A fixed sign carries wayfinding, and almost nothing else. A declaration for a lobby screen that promises ACT on a sign draws four refusals: the verbs a sign cannot carry (ACT and EXIT) and the undo and cancel that an act owes. The suite's own <a href="../conformance/fixtures/verb-not-carried.zui">printed-ledger case</a> draws the same kind of refusals for a page that promises an act.
+    <p>A fixed sign carries wayfinding, and almost nothing else. A declaration for a lobby screen that promises ACT on a sign draws four refusals: the verbs a sign cannot carry (ACT and EXIT) and the undo and cancel that an act owes. The suite's own <a href="../conformance/fixtures/verb-not-carried.zane">printed-ledger case</a> draws the same kind of refusals for a page that promises an act.
     The channels that cannot carry most verbs are the fixed ones: print, signage, a lamp.</p>
   </div>
 </section>
@@ -184,7 +184,7 @@ chime.zui:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIVA
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

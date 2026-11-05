@@ -6,7 +6,7 @@
 <title>What it refuses — the verifier's refusals</title>
 <meta name="description" content="A refusal names the line, the subject, the rule, the article and the right it rests on, in one envelope any tool can read. One real refusal, its lawful twin, and what the thirty-seven diagnostics can and cannot decide.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -76,15 +76,15 @@
   <span class="k">STEPS</span> [<span class="s">identity, funding, review</span>],
   <span class="k">ACTOR</span> <span class="n">applicant</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check account_opening.zui</span>
-account_opening.zui:2  <span class="bad">error</span>  <span class="bad">TRAPPED_FLOW</span>  account_opening
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening.zane</span>
+account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPED_FLOW</span>  account_opening
     <span class="dim">A multi-step flow has no reachable EXIT.</span>
     <span class="dim">Rule 51 · The Cognitive Tunnel · Rule 53 · Interaction Lockdown · Article II · the right to leave</span>
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     </div>
     <ul>
-      <li><b>The line and the subject</b> (<code>account_opening.zui:2</code>, <code>account_opening</code>) say where, so an editor can jump to it.</li>
+      <li><b>The line and the subject</b> (<code>account_opening.zane:2</code>, <code>account_opening</code>) say where, so an editor can jump to it.</li>
       <li><b>The code</b> (<code>TRAPPED_FLOW</code>) is stable forever: a retired code is never reused, so a rule you wrote against it keeps its meaning.</li>
       <li><b>The sentence</b> says what is wrong in terms of the declaration, not of any screen.</li>
       <li><b>The citation</b> says why it is wrong: two rules of the law, the article they serve and the right of the person that is at stake.
@@ -99,8 +99,8 @@ account_opening.zui:2  <span class="bad">error</span>  <span class="bad">TRAPPED
   <span class="k">STEPS</span> [<span class="s">identity, funding, review</span>],
   <span class="k">ACTOR</span> <span class="n">applicant</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check account_opening_exit.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening_exit.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.13</pre>
     </div>
     <p>That pair is a <em>twin</em>: one change, one verdict flips. The suite holds <span data-fact="fixtures.twins">22</span> of them, so that the law is tested
     against what it must allow as well as what it must refuse. The terminal output above is re-run by the site's own check, so it cannot drift from the verifier.</p>
@@ -113,12 +113,12 @@ account_opening.zui:2  <span class="bad">error</span>  <span class="bad">TRAPPED
     <p>Every court in the family speaks one envelope when it refuses, so one CI step, one editor plugin or one dashboard can read all of them. With
     <code>--json</code> the refusal above is this object, which is the contract's <a href="../doc/diagnostic-contract.md">six fields</a> plus the level and the subject the
     Zui court adds:</p>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check account_opening.zui --json</span>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening.zane --json</span>
 {
   "code": "TRAPPED_FLOW",
   "severity": "error",
   "message": "A multi-step flow has no reachable EXIT.",
-  "span": { "file": "account_opening.zui", "line": 2 },
+  "span": { "file": "account_opening.zane", "line": 2 },
   "cites": ["rule:51", "rule:53", "article:intent", "right:leave"],
   "language": "zui",
   "level": 2,
@@ -170,7 +170,7 @@ account_opening.zui:2  <span class="bad">error</span>  <span class="bad">TRAPPED
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

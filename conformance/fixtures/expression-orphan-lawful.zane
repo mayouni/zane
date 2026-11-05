@@ -1,4 +1,4 @@
-// The lawful twin of expression-orphan.zui: the same signals, now traceable.
+// The lawful twin of expression-orphan.zane: the same signals, now traceable.
 // One line added, and the expression has something to refine.
 //
 // Expected: clean

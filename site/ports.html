@@ -6,7 +6,7 @@
 <title>Other languages — implement StzZui and prove it agrees</title>
 <meta name="description" content="The port recipe for another language or framework: pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences, and what you may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -65,13 +65,13 @@
     <h2>The recipe</h2>
 
     <ol class="workflow">
-      <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant; the hash says the bytes you hold are that edition. <span class="file">tools/zui/pack.js --check</span></li>
+      <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant; the hash says the bytes you hold are that edition. <span class="file">tools/zane/pack.js --check</span></li>
       <li><b>Implement the grammar</b> from <a href="../doc/language/GRAMMAR.md"><code>doc/language/GRAMMAR.md</code></a>: the ten kinds, the closed enumerations and the <span data-fact="verbs">22</span> verbs.</li>
       <li><b>Run the <span data-fact="fixtures.total">73</span> fixtures at the level you claim.</b> Compare by diagnostic id only, never by line number, wording or order. A fixture above your level is skipped and recorded, never failed.</li>
       <li><b>Emit the refusal envelope</b> (the six fields of <a href="refusal.html">What it refuses</a>) so one CI step can read any court.</li>
       <li><b>List your differences from the reference,</b> the way the twin ratchet does: each a named row, and a failure on any other. <a href="haro.html">Declared in Haro</a> shows one.</li>
     </ol>
-    <pre class="term" data-run="node tools/zui/pack.js --check"><span class="dim">$ node tools/zui/pack.js --check</span>
+    <pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
 
 The Zui protocol pack
   law          v3.13 — 123 rules, 17 forbidden patterns
@@ -100,7 +100,7 @@ The Zui protocol pack
     <h2>Who has</h2>
 
     <p>The <b>reference</b> is the JavaScript verifier in this repository. <b>Zing</b>, a separate framework in the Softanza family, is described in its own pinning record as the first conforming consumer of the law, and pins law v<span data-fact="zing.pinned">3.11</span>.
-    This page states no conformance level for it: that is its own claim to make, and this site has not re-run its checker. A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>. Its first stage, the check, is built: it prints what the JavaScript prints, byte for byte, on every fixture and on a generated corpus (<code>tools/zui/parity.js</code>). It has run on Windows only, and the browser build is not built.</p>
+    This page states no conformance level for it: that is its own claim to make, and this site has not re-run its checker. A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>. Its first stage, the check, is built: it prints what the JavaScript prints, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). It has run on Windows only, and the browser build is not built.</p>
     <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, not a record of one succeeding.</p>
   </div>
 </section>
@@ -113,7 +113,7 @@ The Zui protocol pack
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

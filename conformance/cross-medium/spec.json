@@ -9,12 +9,12 @@
   },
   "cases": [
     {
-      "file": "invoice-review.zui",
+      "file": "invoice-review.zane",
       "media": ["visual", "print"],
       "note": "The hardest honest pair. Print was included in the medium enumeration precisely because it has no time and no interaction -- if the model survives print, it is real. Both channels are parallel, persistent and high-bandwidth, so a reading-and-comparing flow should cross almost intact, and every place it does not must be in the matrix."
     },
     {
-      "file": "invoice-review.zui",
+      "file": "invoice-review.zane",
       "media": ["visual", "auditory"],
       "media_note": "The pair that actually shipped. Both channels have a real implementation, so this is the only case where a divergence could be checked against running code rather than against a table.",
       "note": "Serial versus parallel, transient versus persistent. SCAN, COMPARE, LOCATE and READ all degrade here, and muted renders as silence -- so this case exercises both matrices at once."

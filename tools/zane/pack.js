@@ -15,8 +15,8 @@
    is data and prose only, which is what makes an implementation in any language
    possible: agreement is proved by running the fixtures, not by linking code.
 
-   Usage:  node tools/zui/pack.js            write protocol/MANIFEST.json
-           node tools/zui/pack.js --check     verify without writing
+   Usage:  node tools/zane/pack.js            write protocol/MANIFEST.json
+           node tools/zane/pack.js --check     verify without writing
    Exit:   0 written or verified · 1 a file drifted or is missing · 2 setup
    ========================================================================== */
 
@@ -142,7 +142,7 @@ function main(argv) {
     metadata: {
       title: 'The Zui Protocol Pack',
       version: '1.0',
-      generated: 'by tools/zui/pack.js -- never hand-edited',
+      generated: 'by tools/zane/pack.js -- never hand-edited',
       note: 'Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.',
       hash: 'sha256 over LF-normalised content'
     },

@@ -6,7 +6,7 @@
 <title>A quick win — one real run on Zing, in under an hour</title>
 <meta name="description" content="One real run on a real site this project does not own, Zing, read only: three surfaces declared, the verifier run, the UI audit on ten pages, and what it found, which was almost nothing, said plainly.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -67,8 +67,8 @@
   <div class="narrow">
     <h2>1 · Declare three surfaces</h2>
 
-    <p>The main menu, the style select and the landing page, written in the language from the markup, by hand: <a href="../examples/quick-win/zing-landing.zui"><code>examples/quick-win/zing-landing.zui</code></a>. Its header says it is StzZui's description of pages it does not own. The part that matters:</p>
-<pre class="excerpt" data-excerpt="examples/quick-win/zing-landing.zui"><span class="k">DEFINE INTERACTION</span> <span class="n">style_select</span> (
+    <p>The main menu, the style select and the landing page, written in the language from the markup, by hand: <a href="../examples/quick-win/zing-landing.zane"><code>examples/quick-win/zing-landing.zane</code></a>. Its header says it is StzZui's description of pages it does not own. The part that matters:</p>
+<pre class="excerpt" data-excerpt="examples/quick-win/zing-landing.zane"><span class="k">DEFINE INTERACTION</span> <span class="n">style_select</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>],
   <span class="k">ROLE</span> <span class="s">navigate</span>,
@@ -81,8 +81,8 @@
   <div class="narrow">
     <h2>2 · Run the verifier</h2>
 
-    <pre class="term" data-run="node tools/zui/cli.js check examples/quick-win/zing-landing.zui"><span class="dim">$ node tools/zui/cli.js check examples/quick-win/zing-landing.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+    <pre class="term" data-run="node tools/zane/cli.js check examples/quick-win/zing-landing.zane"><span class="dim">$ node tools/zane/cli.js check examples/quick-win/zing-landing.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.13</pre>
     <p>Clean. A style switch that changes how the page looks, and nothing that is true, is a selection with a navigating role, which is how Zing built it.</p>
   </div>
 </section>
@@ -93,7 +93,7 @@
 
     <p>Zing's site was served read only beside the audit with <a href="../examples/web-case/serve-beside.js"><code>serve-beside.js</code></a>, and the audit run on its front page and its nine pages under <code>site/</code>, in the default mode and in Zing's own default style. It reported <b>one finding</b>: the page at <code>site/index.html</code> has no trail and no bar marking it.
     That page is a redirect to the front page, marked not to be indexed, with one sentence in it. No reader stays on it, so the finding is the audit measuring a page that is not one. <b>Every page a reader reads was clean.</b></p>
-    <p><b>A tool was mended on the way,</b> and that is part of the result. The first version of the serving script put the audit's own files under <code>/site/</code>, which shadowed Zing's own <code>site/</code> folder. It now serves the audit at <code>/__zui/ui-audit.html</code>, a path no site uses, and it is the version the web case's page links.</p>
+    <p><b>A tool was mended on the way,</b> and that is part of the result. The first version of the serving script put the audit's own files under <code>/site/</code>, which shadowed Zing's own <code>site/</code> folder. It now serves the audit at <code>/__zane/ui-audit.html</code>, a path no site uses, and it is the version the web case's page links.</p>
   </div>
 </section>
 
@@ -118,7 +118,7 @@
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

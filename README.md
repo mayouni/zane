@@ -32,11 +32,11 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
 - **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
 - **[The language specification](doc/language/README.md)** — Zui v1.0: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). Honest throughout about what is specified versus what any implementation has reached.
-- **[The `zui` verifier](tools/zui/README.md)** — `node tools/zui/cli.js check file.zui`. Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 30 conformance fixtures.
-- **[The conformance suite](conformance/README.md)** — 30 `.zui` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; every violation fixture has a lawful twin.
+- **[The `zane` verifier](tools/zane/README.md)** — `node tools/zane/cli.js check file.zane`. Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself. Zero dependencies; runs on Node or in a browser; passes all 30 conformance fixtures.
+- **[The conformance suite](conformance/README.md)** — 30 `.zane` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; every violation fixture has a lawful twin.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the banking product, the i18n decisions, and the Refine evidence trails.
-- **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zui` language and compiler out of the reference implementation.
-- **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zui` verifier to the educational showcase.
+- **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zane` language and compiler out of the reference implementation.
+- **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zane` verifier to the educational showcase.
 
 ## The consumer contract
 

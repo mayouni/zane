@@ -1,10 +1,10 @@
-// node haro/judge-zui-court.js  (needs rnxc and the Haro spike: RNXC, HARO_SPIKE)
-// Runs every StzZui fixture through the court forged from haro/zui.stzu and compares it with the
-// manifest. A .zui file is translated MECHANICALLY into the Commons shape (AS, lower_snake words,
+// node haro/judge-zane-court.js  (needs rnxc and the Haro spike: RNXC, HARO_SPIKE)
+// Runs every StzZui fixture through the court forged from haro/zane.stzu and compares it with the
+// manifest. A .zane file is translated MECHANICALLY into the Commons shape (AS, lower_snake words,
 // RATIONALE) -- nothing else is touched.
 //
-// A RATCHET: haro/twin-expected.csv lists every fixture on which the court and zui.js differ today
-// (fixture, what zui.js says, what the court says, the seam, a class). The run exits 1 on a difference
+// A RATCHET: haro/twin-expected.csv lists every fixture on which the court and zane.js differ today
+// (fixture, what zane.js says, what the court says, the seam, a class). The run exits 1 on a difference
 // that is NOT in the file, on a listed row whose values changed, and on a listed difference that now
 // agrees -- so the list shrinks only when someone deletes a row on purpose, and never grows by accident.
 // Exit 2: the court could not be forged.
@@ -13,11 +13,11 @@ const path = require('path');
 const os = require('os');
 const ROOT = path.join(__dirname, '..');
 const R = p => path.join(ROOT, p);
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zui-judge-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-judge-'));
 const { spawnSync } = require('child_process');
 const FX = R('conformance/fixtures');
 const man = require(R('conformance/manifest.json'));
-const Z = require(R('tools/zui/zui.js'));
+const Z = require(R('tools/zane/zane.js'));
 const SPIKE = process.env.HARO_SPIKE || 'D:/GitHub/ringpp/haro/spike';
 const OUT = path.join(TMP, 'court');
 const RNXC = process.env.RNXC || 'D:/ringpp/ringpp-win64/bin/rnxc.exe';
@@ -38,29 +38,29 @@ function translate(src) {
       : val.trim().toLowerCase() === val.trim() ? val : val;
     return pre + ws + key + ' ' + v;
   });
-  // close each declaration with RATIONALE. A .zui declaration carries none (D4, 2026-10-31), so the
-  // court is told so in words; the old text, "translated from a .zui fixture", was a reason the
+  // close each declaration with RATIONALE. A .zane declaration carries none (D4, 2026-10-31), so the
+  // court is told so in words; the old text, "translated from a .zane fixture", was a reason the
   // fixtures never gave.
   s = s.replace(/\)(\s*)(?=\n\s*DEFINE|\s*$)/g, ') RATIONALE "none given"$1');
   return s;
 }
 
 function run(file, verb) {
-  const r = spawnSync(RNXC, ['zui_court.ring', verb, file], { cwd: OUT, encoding: 'utf8' });
+  const r = spawnSync(RNXC, ['zane_court.ring', verb, file], { cwd: OUT, encoding: 'utf8' });
   return (r.stdout || '') + (r.stderr || '');
 }
 
 fs.mkdirSync(OUT, { recursive: true });
 {
-  const fg = spawnSync(RNXC, ['forge.ring', R('haro/zui.stzu'), OUT], { cwd: SPIKE, encoding: 'utf8' });
-  if (!/forged zui/.test(fg.stdout || '')) { console.error('forge failed:', fg.stdout, fg.stderr); process.exit(2); }
+  const fg = spawnSync(RNXC, ['forge.ring', R('haro/zane.stzu'), OUT], { cwd: SPIKE, encoding: 'utf8' });
+  if (!/forged zane/.test(fg.stdout || '')) { console.error('forge failed:', fg.stdout, fg.stderr); process.exit(2); }
   for (const f of fs.readdirSync(SPIKE)) if (/_lib\.ring$|world_stub\.ring$/.test(f)) fs.copyFileSync(path.join(SPIKE, f), path.join(OUT, f));
 }
 const rows = [];
 for (const f of man.fixtures) {
   const src = fs.readFileSync(path.join(FX, f.file), 'utf8');
   const tr = translate(src);
-  const tmp = path.join(TMP, f.file.replace(/\.zui$/, '.z'));
+  const tmp = path.join(TMP, f.file.replace(/\.zane$/, '.z'));
   fs.writeFileSync(tmp, tr);
   const raw = run(tmp, 'diagnose');
   let code = '(clean)', parsed = null;
@@ -69,7 +69,7 @@ for (const f of man.fixtures) {
     const d = parsed.diagnostics || [];
     code = d.length ? d[0].code : '(clean)';
   } catch (e) { code = 'UNREADABLE:' + raw.trim().slice(0, 80); }
-  // ground truth: what zui.js says on the original, with the fixture's own symbols
+  // ground truth: what zane.js says on the original, with the fixture's own symbols
   const truth = [...new Set(Z.verify(src, { symbols: f.symbols || null }).map(d => d.id))].sort();
   rows.push({ file: f.file, level: f.level, expect: f.expect_ids, truth, got: code, cites: (parsed && parsed.diagnostics && parsed.diagnostics[0] && parsed.diagnostics[0].cites) || null, msg: parsed && parsed.diagnostics && parsed.diagnostics[0] ? parsed.diagnostics[0].message : '' });
 }
@@ -106,46 +106,46 @@ fs.writeFileSync(path.join(__dirname, 'judge-rows.csv'), csv);
 
 // ---- the ratchet ---------------------------------------------------------------------------
 const says = ids => ids.length ? ids.join('+') : '(clean)';
-const current = new Map([...disagree, ...notcarried, ...lawfulBad].map(r => [r.file, { zuijs: says(r.truth), court: r.got }]));
+const current = new Map([...disagree, ...notcarried, ...lawfulBad].map(r => [r.file, { zanejs: says(r.truth), court: r.got }]));
 const listed = new Map();
 for (const line of fs.readFileSync(path.join(__dirname, 'twin-expected.csv'), 'utf8').split(/\r?\n/)) {
   if (line.startsWith('# baseline')) console.log('\n-- ' + line.slice(2));
   if (!line.trim() || line.startsWith('#') || line.startsWith('fixture,')) continue;
-  const [fixture, zuijs, court, seam, cls] = line.split(',');
-  listed.set(fixture, { zuijs, court, seam, cls });
+  const [fixture, zanejs, court, seam, cls] = line.split(',');
+  listed.set(fixture, { zanejs, court, seam, cls });
 }
 const problems = [];
 for (const r of rows) {
   const want = [...r.expect].sort();
   if (want.join('+') !== r.truth.join('+'))
-    problems.push(`zui.js says ${says(r.truth)} on ${r.file} and the manifest says ${says(want)}: the "zui.js says" column cannot be trusted until they agree`);
+    problems.push(`zane.js says ${says(r.truth)} on ${r.file} and the manifest says ${says(want)}: the "zane.js says" column cannot be trusted until they agree`);
 }
 for (const [file, c] of current) {
   const l = listed.get(file);
-  if (!l) problems.push(`NEW difference, not in twin-expected.csv: ${file}  zui.js ${c.zuijs}, court ${c.court}`);
-  else if (l.zuijs !== c.zuijs || l.court !== c.court)
-    problems.push(`CHANGED difference: ${file}  listed zui.js ${l.zuijs}, court ${l.court}; now zui.js ${c.zuijs}, court ${c.court}`);
+  if (!l) problems.push(`NEW difference, not in twin-expected.csv: ${file}  zane.js ${c.zanejs}, court ${c.court}`);
+  else if (l.zanejs !== c.zanejs || l.court !== c.court)
+    problems.push(`CHANGED difference: ${file}  listed zane.js ${l.zanejs}, court ${l.court}; now zane.js ${c.zanejs}, court ${c.court}`);
 }
 for (const [file, l] of listed) {
   if (!current.has(file)) problems.push(`listed difference now AGREES, delete its row: ${file} (${l.seam})`);
 }
 // ---- the grammar the forge writes, checked in so a page can link a file (SITE-GBNF-01) ---------------------
-// haro/zui.gbnf is what the forge writes from haro/zui.stzu, behind one header line naming the forge commit (the baseline of
+// haro/zane.gbnf is what the forge writes from haro/zane.stzu, behind one header line naming the forge commit (the baseline of
 // twin-expected.csv). The judge regenerates it on every run and fails if the checked-in copy differs; --write-gbnf rewrites it.
 // What it holds is the SHAPE of a declaration: the ten kinds, the clauses each takes, the lexical form. The verbs are an identifier
 // list and the semantic refusals stay the court's.
 {
   const baseline = fs.readFileSync(path.join(__dirname, 'twin-expected.csv'), 'utf8').split(/\r?\n/).find(l => l.startsWith('# baseline')) || '';
   const commit = (/ringpp commit ([0-9a-f]{7,40})/.exec(baseline) || [])[1] || 'unknown';
-  const made = fs.readFileSync(path.join(OUT, 'zui.gbnf'), 'utf8').replace(/\r\n/g, '\n');
-  const want = `# haro/zui.gbnf -- written by haro/judge-zui-court.js from the forge at ringpp commit ${commit}. The judge fails when this file differs from what the forge writes now.\n` + made;
-  const GBNF = path.join(__dirname, 'zui.gbnf');
-  if (process.argv.includes('--write-gbnf')) { fs.writeFileSync(GBNF, want); console.log(`\n-- wrote haro/zui.gbnf (${want.length} bytes, forge ${commit})`); }
+  const made = fs.readFileSync(path.join(OUT, 'zane.gbnf'), 'utf8').replace(/\r\n/g, '\n');
+  const want = `# haro/zane.gbnf -- written by haro/judge-zane-court.js from the forge at ringpp commit ${commit}. The judge fails when this file differs from what the forge writes now.\n` + made;
+  const GBNF = path.join(__dirname, 'zane.gbnf');
+  if (process.argv.includes('--write-gbnf')) { fs.writeFileSync(GBNF, want); console.log(`\n-- wrote haro/zane.gbnf (${want.length} bytes, forge ${commit})`); }
   else {
     const have = fs.existsSync(GBNF) ? fs.readFileSync(GBNF, 'utf8').replace(/\r\n/g, '\n') : null;
-    if (have === null) problems.push('haro/zui.gbnf is missing: run the judge with --write-gbnf');
-    else if (have !== want) problems.push('haro/zui.gbnf differs from the grammar the forge writes now: run the judge with --write-gbnf and read the difference');
-    else console.log(`\n-- haro/zui.gbnf matches the forge's output (${want.length} bytes, forge ${commit})`);
+    if (have === null) problems.push('haro/zane.gbnf is missing: run the judge with --write-gbnf');
+    else if (have !== want) problems.push('haro/zane.gbnf differs from the grammar the forge writes now: run the judge with --write-gbnf and read the difference');
+    else console.log(`\n-- haro/zane.gbnf matches the forge's output (${want.length} bytes, forge ${commit})`);
   }
 }
 const byClass = {};

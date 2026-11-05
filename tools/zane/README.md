@@ -1,14 +1,14 @@
-# `zui` — the verifier
+# `zane` — the verifier
 
 **Checks Zui declarations against the constitution, before anything is
 rendered.** Zero dependencies, one runtime you already have.
 
 ```bash
-node tools/zui/cli.js check payments.zui
+node tools/zane/cli.js check payments.zane
 ```
 
 ```
-payments.zui:2  error  MISSING_UNDO  approve_payment  [Rule 79 · The Undo Covenant · Article IV · the right to reverse]
+payments.zane:2  error  MISSING_UNDO  approve_payment  [Rule 79 · The Undo Covenant · Article IV · the right to reverse]
     An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2
@@ -25,11 +25,11 @@ Three files, no dependencies, nothing to install:
 
 | File | What it is |
 |---|---|
-| `zui.js` | the core: lexer, parser, checks. Pure functions over a string — no I/O. Runs in Node *and* in a browser (`window.Zui`). |
+| `zane.js` | the core: lexer, parser, checks. Pure functions over a string — no I/O. Runs in Node *and* in a browser (`window.Zane`). |
 | `cli.js` | the command line: reads files, filters by level, formats findings. |
 | `envelope.js` | the family envelope: builds `{code, severity, message, span, cites, language}` findings and validates them against [the Diagnostic Contract's shape](../../doc/diagnostic-contract.schema.json). |
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
-| `parity.js` | the gate of the binary's stage S1 ([BINARY.md](../../doc/design/BINARY.md) section 5): `zui check` against `cli.js`, byte for byte, on every fixture and a seeded corpus. Needs a built `zui` (`zig build -j2`, or `--bin PATH`). |
+| `parity.js` | the gate of the binary's stage S1 ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js`, byte for byte, on every fixture and a seeded corpus. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
 
 It implements [the Zui language specification v1.4](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).
@@ -37,7 +37,7 @@ and is measured against [the conformance suite](../../conformance/README.md).
 ## Options
 
 ```
-zui check <file.zui> [file.zui …]
+zane check <file.zane> [file.zane …]
 
   --level N        conformance level, 1-4 (default 2)
   --symbols FILE   JSON symbol table for Level 3 checks
@@ -53,7 +53,7 @@ what they need — undecidable is silence, never a pass.
 
 ```bash
 # Level 3, with the symbol table your host project knows
-node tools/zui/cli.js check src/**/*.zui --level 3 --symbols build/symbols.json
+node tools/zane/cli.js check src/**/*.zane --level 3 --symbols build/symbols.json
 ```
 
 where `symbols.json` is `{"entities": [...], "actors": [...], "state": [...], "elements": [...]}`.
@@ -92,11 +92,11 @@ by hand into a second file drifts from it, and this one did.
 ## Conformance
 
 ```bash
-node tools/zui/conformance.js --level 4
+node tools/zane/conformance.js --level 4
 ```
 
 ```
-Zui conformance — level 4
+Zane conformance — level 4
   spec         doc/language/ v1.4
   contract     violations.json v1.8 (constitution v3.13)
   envelope     diagnostic-contract v1.2.0 — 40 diagnostics and 57 reports, all conform
@@ -156,10 +156,10 @@ ladder, working as designed.
 
 ## In a browser
 
-`zui.js` has no Node dependencies and exports `window.Zui`:
+`zane.js` has no Node dependencies and exports `window.Zane`:
 
 ```html
-<script src="tools/zui/zui.js"></script>
+<script src="tools/zane/zane.js"></script>
 <script>
   const findings = Zui.verify(sourceText);        // [{id, line, subject}, …]
 </script>
@@ -185,7 +185,7 @@ Same core, same results — the browser page and the CI gate cannot disagree.
 ## Which implementation is this?
 
 One of possibly several, and deliberately so. The
-[M3 decision document](../../doc/decisions/M3-the-zui-verifier.md) left the
+[M3 decision document](../../doc/decisions/M3-the-zane-verifier.md) left the
 extract-versus-embed question open, and the conformance suite is what makes
 that safe: **any future implementation, in any language, proves agreement
 against the same 57 fixtures.** A Zig verifier living beside the reference implementation's compiler

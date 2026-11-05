@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 /* ==========================================================================
-   parity.js -- the gate of stage S1 (doc/design/BINARY.md section 5): the binary's `zui check` against
-   `node tools/zui/cli.js check`, byte for byte.
+   parity.js -- the gate of stage S1 (doc/design/BINARY.md section 5): the binary's `zane check` against
+   `node tools/zane/cli.js check`, byte for byte.
 
-     node tools/zui/parity.js [--bin PATH] [--seed N] [--per N] [--quiet]
+     node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet]
 
    1. THE FIXTURES. Every fixture of conformance/manifest.json, run by both under four argument sets (--json at
       level 4, text at level 4, text at the default level, --quiet at level 1), with the fixture's symbols when it
@@ -26,13 +26,13 @@
    ========================================================================== */
 const fs = require('fs'), path = require('path'), os = require('os');
 const { spawnSync } = require('child_process');
-const Z = require('./zui.js');
+const Z = require('./zane.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const CLI = path.join(__dirname, 'cli.js');
 const args = process.argv.slice(2);
 const opt = (name, dflt) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : dflt; };
-const BIN = path.resolve(opt('--bin', path.join(ROOT, 'zig-out', 'bin', process.platform === 'win32' ? 'zui.exe' : 'zui')));
+const BIN = path.resolve(opt('--bin', path.join(ROOT, 'zig-out', 'bin', process.platform === 'win32' ? 'zane.exe' : 'zane')));
 const SEED = +opt('--seed', 20261105);
 const PER = +opt('--per', 24);
 const QUIET = args.includes('--quiet');
@@ -40,7 +40,7 @@ if (!fs.existsSync(BIN)) { console.error(`parity: no binary at ${BIN} (zig build
 
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'conformance', 'manifest.json'), 'utf8'));
 const FIX = path.join(ROOT, 'conformance', 'fixtures');
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zui-parity-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-parity-'));
 
 function run(cmd, argv) {
   const t = process.hrtime.bigint();
@@ -57,16 +57,16 @@ function firstDiff(a, b) {
     let i = 0;
     while (i < a[k].length && i < b[k].length && a[k][i] === b[k][i]) i++;
     const show = buf => JSON.stringify(buf.slice(Math.max(0, i - 40), i + 40).toString('latin1'));
-    return `${k === 'out' ? 'stdout' : 'stderr'} differs at byte ${i}: js ${show(a[k])} / zui ${show(b[k])}`;
+    return `${k === 'out' ? 'stdout' : 'stderr'} differs at byte ${i}: js ${show(a[k])} / zane ${show(b[k])}`;
   }
-  return `exit code js ${a.code} / zui ${b.code}`;
+  return `exit code js ${a.code} / zane ${b.code}`;
 }
 
 const differences = [];
-const timing = { js: [], zui: [] };
+const timing = { js: [], zane: [] };
 function compare(label, argv, time) {
-  const a = run('js', argv), b = run('zui', argv);
-  if (time) { timing.js.push(a.ms); timing.zui.push(b.ms); }
+  const a = run('js', argv), b = run('zane', argv);
+  if (time) { timing.js.push(a.ms); timing.zane.push(b.ms); }
   if (!same(a, b)) differences.push(`${label}: ${firstDiff(a, b)}`);
   return same(a, b);
 }
@@ -97,7 +97,7 @@ for (const c of argCases) compare(`arguments [${c.join(' ')}]`, c);
 function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const rnd = mulberry32(SEED);
 const pick = xs => xs[Math.floor(rnd() * xs.length)];
-const VOCAB = [Z.INTENT_VERBS, Z.ZUI_KINDS, Z.MEDIA, Z.TONES, Z.SIGNALS, Z.PERSPECTIVES,
+const VOCAB = [Z.INTENT_VERBS, Z.ZANE_KINDS, Z.MEDIA, Z.TONES, Z.SIGNALS, Z.PERSPECTIVES,
   new Set(['inert', 'navigate', 'reversible', 'irreversible', 'proposal'])].map(s => [...s]);
 function swapWord(text) {
   const set = pick(VOCAB);
@@ -138,11 +138,11 @@ for (const s of smallest) {
 }
 const kinds = {};
 for (const c of corpus) { const k = c.name.includes('~cut') ? 'truncation' : c.name.split('~')[1].replace(/^\d+-/, ''); kinds[k] = (kinds[k] || 0) + 1; }
-corpus.forEach((c, i) => { c.file = path.join(TMP, String(i).padStart(5, '0') + '.zui'); fs.writeFileSync(c.file, c.data); });
+corpus.forEach((c, i) => { c.file = path.join(TMP, String(i).padStart(5, '0') + '.zane'); fs.writeFileSync(c.file, c.data); });
 
 function batch(items, extra, label) {
   const argv = ['check', ...items.map(c => c.file), ...extra];
-  const a = run('js', argv), b = run('zui', argv);
+  const a = run('js', argv), b = run('zane', argv);
   if (same(a, b)) return;
   if (items.length === 1) { differences.push(`corpus ${items[0].name} [${extra.join(' ')}] (${items[0].file}): ${firstDiff(a, b)}`); return; }
   const h = items.length >> 1;
@@ -162,13 +162,13 @@ const dist = xs => {
 const kept = differences.length;
 if (!QUIET || kept) for (const d of differences.slice(0, 40)) console.log('  DIFF ' + d);
 if (kept > 40) console.log(`  ... and ${kept - 40} more`);
-console.log(`parity: ${path.relative(ROOT, BIN) || BIN} against tools/zui/cli.js`);
+console.log(`parity: ${path.relative(ROOT, BIN) || BIN} against tools/zane/cli.js`);
 console.log(`  fixtures     ${manifest.fixtures.length}, ${fixtureRuns} command lines`);
 console.log(`  arguments    ${argCases.length} command lines`);
 console.log(`  corpus       seed ${SEED}, ${corpus.length} inputs (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}), each in --json at level 4 and in text at level 2`);
 console.log(`  timing, one fixture per process, --json at level 4, wall time with process start:`);
 console.log(`    node cli.js  ${dist(timing.js)}`);
-console.log(`    zui          ${dist(timing.zui)}`);
+console.log(`    zane          ${dist(timing.zane)}`);
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, and every exit code');
 process.exit(kept ? 1 : 0);

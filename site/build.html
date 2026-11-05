@@ -6,7 +6,7 @@
 <title>Build — put the law in a project and gate your CI</title>
 <meta name="description" content="Declare before you draw, pin the law as a hash, fail the build on a refusal, and measure what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -73,17 +73,17 @@
 <section>
   <div class="narrow">
     <h2 id="declare-before-you-draw">Declare before you draw</h2>
-    <p>Before wireframes harden, write the surface's <code>.zui</code> declaration: which intents it
+    <p>Before wireframes harden, write the surface's <code>.zane</code> declaration: which intents it
     satisfies, what stays always reachable. A few minutes of declaration replaces a meeting of taste:
     the design review reads <code>SATISFIES [SELECT, CONFIRM, ACT]</code> and asks one question,
     <em>is that what the operator is actually doing?</em>, instead of debating paddings.</p>
-<pre class="shot"><span class="c">// specs/checkout.zui — written at the whiteboard, checked at the desk</span>
+<pre class="shot"><span class="c">// specs/checkout.zane — written at the whiteboard, checked at the desk</span>
 <span class="k">DEFINE WIZARD</span> <span class="n">checkout</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check checkout.zui</span>
-checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  checkout
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check checkout.zane</span>
+checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  checkout
     <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
 
@@ -105,7 +105,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
     <p><b>A version says which edition you meant. A hash says the bytes you hold are that edition.</b> Vendor the
     files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
     proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
-<pre class="term"><span class="dim">$ node tools/zui/pack.js --check</span></pre>
+<pre class="term"><span class="dim">$ node tools/zane/pack.js --check</span></pre>
     <p>Then <em>conforms to Zui v<span data-law="version">3.13</span></em> is a claim your CI can refute. Numbers
     are stable forever: a retired number is never reused, so a finding that cites Rule 79 means the same thing in ten
     years. <a href="../protocol/README.md">The protocol pack</a> says what to vendor and what you may and may not claim.</p>
@@ -117,8 +117,8 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
     <h2 id="fail-the-build-on-a-refusal">Fail the build on a refusal</h2>
     <p>The verifier exits non-zero when any declaration is refused, and zero when there are only warnings. Run it
     over your specifications in CI:</p>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check specs/*.zui</span>
-<span class="dim">$ node tools/zui/cli.js check specs/*.zui --json</span>   <span class="dim"># for a machine to read</span></pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check specs/*.zane</span>
+<span class="dim">$ node tools/zane/cli.js check specs/*.zane --json</span>   <span class="dim"># for a machine to read</span></pre>
     <p>The contract names <span data-law="diagnostics">37</span> diagnostics at <span data-fact="diag.levels">4</span>
     conformance levels, and every finding carries the rule, article or right it rests on. The suite that proves any
     implementation agrees, <span data-fact="fixtures.total">73</span> fixtures with known verdicts, is in
@@ -175,7 +175,7 @@ checkout.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

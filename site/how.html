@@ -6,7 +6,7 @@
 <title>Language — what it is, step by step</title>
 <meta name="description" content="A declaration states what the person is doing, not the widgets; the law refuses what it forbids, by name, before anything is drawn. The four steps from a declaration to a measured page, and which of them exist today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -80,13 +80,13 @@
       </div>
       <div class="zui">
         <p class="lbl">The same idea, as a law</p>
-<pre class="shot"><span class="c">// delete_invoice.zui</span>
+<pre class="shot"><span class="c">// delete_invoice.zane</span>
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">delete_invoice</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check delete_invoice.zui</span>
-delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  delete_invoice
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check delete_invoice.zane</span>
+delete_invoice.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  delete_invoice
     <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
 
@@ -103,15 +103,15 @@ delete_invoice.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_
     <h2>Ninety seconds of Zui</h2>
     <p class="lead">A payment approval, declared before a single pixel exists.
     Note what is <em>absent</em>: no widgets, no layout, no framework.</p>
-<pre class="shot"><span class="c">// payments.zui — design phase, day one</span>
+<pre class="shot"><span class="c">// payments.zane — design phase, day one</span>
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>]      <span class="c">// interest → review → commitment</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
-payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  approve_payment
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check payments.zane</span>
+payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  approve_payment
     <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
-payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  approve_payment
+payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL</span>  approve_payment
     <span class="dim">A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.</span>
     <span class="dim">Rule 26 · The Back Button is Holy · Article IV · the right to leave</span>
 
@@ -123,8 +123,8 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check payments.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v<span data-law="version">3.13</span></pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check payments.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.13</span></pre>
     <p class="caption"><b>That is real output, copied from a real run</b>, and this site's own check re-runs it: it fails if the
     page and the verifier ever disagree. The verifier ships in this repository and needs no toolchain beyond Node.
     <a href="conformance.html#status">The status board</a> says plainly what exists, what is designed and what is held.</p>
@@ -138,7 +138,7 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
       <div class="scroll">
       <svg viewBox="0 0 780 230" style="min-width:780px" role="img" aria-labelledby="pipe-t pipe-d">
         <title id="pipe-t">Declare, refuse, project, measure</title>
-        <desc id="pipe-d">Four boxes in a row joined by arrows. Declare, a .zui file: exists. Refuse, the verifier in tools/zui: exists. Project, the channel data: data only, the renderers are elsewhere. Measure, the UI audit: exists.</desc>
+        <desc id="pipe-d">Four boxes in a row joined by arrows. Declare, a .zane file: exists. Refuse, the verifier in tools/zane: exists. Project, the channel data: data only, the renderers are elsewhere. Measure, the UI audit: exists.</desc>
         <defs><marker id="pipe-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
         <rect class="dg-live" x="10" y="20" width="160" height="70" rx="10"/>
         <rect class="dg-live" x="210" y="20" width="160" height="70" rx="10"/>
@@ -151,9 +151,9 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
         <text class="dg-t" x="290" y="62" text-anchor="middle">2 Refuse</text>
         <text class="dg-t" x="490" y="62" text-anchor="middle">3 Project</text>
         <text class="dg-t" x="690" y="62" text-anchor="middle">4 Measure</text>
-        <text class="dg-s" x="90" y="124" text-anchor="middle">a .zui file</text>
+        <text class="dg-s" x="90" y="124" text-anchor="middle">a .zane file</text>
         <text class="dg-s" x="90" y="146" text-anchor="middle">intent, no widget</text>
-        <text class="dg-s" x="290" y="124" text-anchor="middle">tools/zui</text>
+        <text class="dg-s" x="290" y="124" text-anchor="middle">tools/zane</text>
         <text class="dg-s" x="290" y="146" text-anchor="middle">the law, by name</text>
         <text class="dg-s" x="490" y="124" text-anchor="middle">media.json</text>
         <text class="dg-s" x="490" y="146" text-anchor="middle">what each carries</text>
@@ -168,7 +168,7 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
       <figcaption>Solid outline: built and run in this repository. Dashed: the data exists and a check proves renderings differ only as the data predicts, but the renderers that
       draw, speak or print live in other projects. <b>Not shown:</b> the person who looks at the result; no person has perceived any medium for this site's grid.</figcaption>
     </figure>
-    <p><b>Declare.</b> A <code>.zui</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
+    <p><b>Declare.</b> A <code>.zane</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
     declaration and <span data-fact="verbs">22</span> verbs, closed on purpose: a widget is a consequence of an intent, never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be made from that.</p>
     <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.13</span>), and refuses what it forbids.
     Every refusal cites the rule, article or right it rests on. <a href="refusal.html">See one, line by line.</a></p>
@@ -233,7 +233,7 @@ payments.zui:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCEL
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

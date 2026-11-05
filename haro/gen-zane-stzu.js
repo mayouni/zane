@@ -1,9 +1,9 @@
-// Generates haro/zui.stzu from the pack's own data:  node haro/gen-zui-stzu.js
+// Generates haro/zane.stzu from the pack's own data:  node haro/gen-zane-stzu.js
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const R = p => path.join(ROOT, p);
-const Z = require(R('tools/zui/zui.js'));
+const Z = require(R('tools/zane/zane.js'));
 const media = require(R('conformance/media.json'));
 const sig = require(R('conformance/signal.json'));
 const man = require(R('conformance/manifest.json'));
@@ -43,22 +43,22 @@ const rule = (n, ti) => ({ name: n, ti });
 // ------------------------------------------------------------------ header
 const specVer = (spec.match(/v(\d+\.\d+(?:\.\d+)?)/) || [])[1] || '1.3';
 const lawVer = rules.metadata ? (rules.metadata.version || rules.metadata.law_version) : rules.version;
-w('-- zui.stzu -- StzZui, declared as a Haro language');
+w('-- zane.stzu -- StzZui, declared as a Haro language');
 w('--');
 w('-- The first artifact of the re-declaration ruled on 2026-10-31. Written FROM the pack\'s own');
 w('-- data (conformance/media.json, signal.json, violations.json, doc/language/DECLARATIONS.md)');
 w('-- and judged by the stzu meta-court:');
-w('--     rnxc haro.ring zui.stzu       (ringpp/haro/spike)');
-w('-- The verifier (tools/zui/zui.js) is NOT changed and NOT replaced by this file. This file');
+w('--     rnxc haro.ring zane.stzu       (ringpp/haro/spike)');
+w('-- The verifier (tools/zane/zane.js) is NOT changed and NOT replaced by this file. This file');
 w('-- declares what the meta-language can carry; the SEAMS below count what it cannot.');
 w('--');
-w('-- Words are lower_snake here and UPPER in a .zui file (DISCOVER, SATISFIES): the meta-language');
+w('-- Words are lower_snake here and UPPER in a .zane file (DISCOVER, SATISFIES): the meta-language');
 w('-- reserves UPPER_SNAKE for its own keywords, and Z made the same trade ("a step is lower_snake');
 w('-- here where ZQL names it UPPER"). Case is the forge\'s printer to restore, not a declaration.');
 w('--');
 w('-- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (37):');
 w('--   S1  severity: every refusal a court speaks is an error. Five diagnostics are warnings in');
-w('--       zui.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,');
+w('--       zane.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,');
 w('--       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not');
 w('--       over-refuse. The exception is WIDGET and USER, see D2.');
 w('--   S2  cites: CLOSED for constraints at Haro v0.23 (ringpp 6611d18), 2026-11-02. Each constraint, and the');
@@ -75,47 +75,47 @@ w('--       declaration. It stays with the tool tier of the enforcement ladder.'
 w('--   S5  a universal field: SATISFIES, ALWAYS_REACHABLE, SIGNALS and ACTOR belong to every');
 w('--       kind and the meta-language has no "on every declaration", so they repeat on all ten.');
 w('--   S6  CLOSED 2026-11-01: the media matrix has 77 "absent" cells in media.json and the generator');
-w('--       emits one VERB_NOT_CARRIED constraint for each, derived from the data the way zui.js derives it.');
+w('--       emits one VERB_NOT_CARRIED constraint for each, derived from the data the way zane.js derives it.');
 w('--   S7  VIBE_STRIPS_RIGHT needs "a suppressed verb that ANY declaration guarantees": a join of');
 w('--       the values of one list against the lists of other declarations. I found no such form in the');
 w('--       condition language of 2026-10-31; that is not a proof that none can be made.');
 w('--   S8  ROLE_MISPLACED: a seat that exists on one kind only is, elsewhere, an unknown clause');
 w('--       and refuses as PARSE; the code and the sentence "a role belongs to an INTERACTION"');
 w('--       are lost.');
-w('--   S9  the multi-pillar file: zui.js ignores other pillars\' declarations silently; a');
+w('--   S9  the multi-pillar file: zane.js ignores other pillars\' declarations silently; a');
 w('--       declared language refuses what it does not know. Ruling needed (D3).');
 w('--   S10 RATIONALE: the Commons (stzu GRAMMAR, C6 3.8) makes RATIONALE mandatory on every');
-w('--       declaration of a language the forge makes; a .zui declaration has none. Adopting the');
-w('--       court means every .zui declaration says why. That is a language change, not a');
-w('--       translation. RULED 2026-10-31: .zui 1.3 gains no mandatory RATIONALE (D4); at the');
+w('--       declaration of a language the forge makes; a .zane declaration has none. Adopting the');
+w('--       court means every .zane declaration says why. That is a language change, not a');
+w('--       translation. RULED 2026-10-31: .zane 1.3 gains no mandatory RATIONALE (D4); at the');
 w('--       boundary a declaration with none reaches the court as "none given".');
 w('--   S11 codes: DUPLICATE_FIELD is refused as PARSE, DUPLICATE_DECLARATION as DUPLICATE_NAME and');
 w('--       FIELD_MISPLACED and UNKNOWN_FIELD as UNKNOWN_CLAUSE and UNEXPECTED_CHARACTER as PARSE. All are refused; the codes StzZui published are not');
 w('--       the ones spoken. Recorded in haro/twin-expected.csv as class other-code (same refusal, another');
 w('--       code), not fixed by renaming the court\'s codes.');
 w('--   S12 first refusal: the forged court\'s diagnose speaks the first refusal it meets;');
-w('--       zui.js reports every one. The collecting court exists (haro.ring all) and is not');
+w('--       zane.js reports every one. The collecting court exists (haro.ring all) and is not');
 w('--       what a forged court does yet.');
-w('--   S13 reads-anywhere fields: zui.js reads STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES on');
+w('--   S13 reads-anywhere fields: zane.js reads STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES on');
 w('--       any kind, so off their own kind it is not silent and FIELD_MISPLACED does not judge them');
 w('--       (D1, narrowed by ruling 2026-11-01). The court refuses them there as UNKNOWN_CLAUSE.');
-w('--   S14 guarantees read against the medium: zui.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in');
+w('--   S14 guarantees read against the medium: zane.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in');
 w('--       ALWAYS_REACHABLE as well as in SATISFIES. The 77 medium constraints read SATISFIES only, so the');
-w('--       court is silent on projection-print-promise.zui. Listed in twin-expected.csv, not yet generated.');
+w('--       court is silent on projection-print-promise.zane. Listed in twin-expected.csv, not yet generated.');
 w('--');
-w('-- DIVERGENCES from zui.js that this declaration makes by being closed (each is a ruling for');
+w('-- DIVERGENCES from zane.js that this declaration makes by being closed (each is a ruling for');
 w('-- the author, not a decision taken here):');
 w('--   D1  CLOSED at language v1.4 (2026-11-01). Fields are declared per kind from DECLARATIONS.md;');
-w('--       zui.js used to accept any field on any kind and ignore a misplaced TONE or PERSPECTIVE');
+w('--       zane.js used to accept any field on any kind and ignore a misplaced TONE or PERSPECTIVE');
 w('--       silently. It now refuses it as FIELD_MISPLACED (ROLE stays ROLE_MISPLACED), so court and');
 w('--       verifier agree on which placements are refused; only the code spoken differs (S11).');
-w('--   D2  WIDGET and USER are named and refused as errors; zui.js reports them as a warning.');
+w('--   D2  WIDGET and USER are named and refused as errors; zane.js reports them as a warning.');
 w('--       RULED 2026-10-31: the verifier keeps its warning, until Haro has a severity seat.');
 w('--   D3  other pillars\' kinds are refused, not ignored (S9). RULED 2026-10-31: the verifier ignores.');
-w('--   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zui 1.3 is unchanged and the');
+w('--   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zane 1.3 is unchanged and the');
 w('--       translator writes "none given"; RATIONALE stays mandatory in the agent\'s grammar.');
 w('--');
-w('-- MEASURED 2026-11-01 by haro/judge-zui-court.js: the 57 fixtures of conformance/manifest.json, each');
+w('-- MEASURED 2026-11-01 by haro/judge-zane-court.js: the 57 fixtures of conformance/manifest.json, each');
 w('-- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and');
 w('-- judged by the court forged from this file. 41 agree with the manifest (20 of them lawful twins');
 w('-- judged clean). 16 differ, and each is a named seam, one row each in haro/twin-expected.csv, which');
@@ -124,10 +124,10 @@ w('-- refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLA
 w('-- VIBE_STRIPS_RIGHT (S7), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.');
 
 w('');
-w('DEFINE LANGUAGE zui AS (');
+w('DEFINE LANGUAGE zane AS (');
 w(`  VERSION ${q('1.4')}, GRAMMAR ${q('1.4')},`);
 w(`  COURT ${q('conformance/manifest.json')},`);
-w(`  EXTENSION ${q('.zui')}`);
+w(`  EXTENSION ${q('.zane')}`);
 w(') RATIONALE "What a human is DOING, declared before anything is rendered: ten declaration kinds over twenty-two intent verbs, judged by a constitution -- the surface is a consequence and is never named"');
 w('');
 
@@ -162,7 +162,7 @@ for (const [n, t, d] of [
   ['step', 'name', 'One named step of a wizard'],
   ['state', 'name', 'One piece of state a navigation shows'],
   ['report', 'name', 'One piece of state a feedback or a moving vibe reports'],
-  ['entity', 'name', 'One entity a world view shows; the host world resolves it, and in zui.js an unresolved one is a warning (S1, S3)']
+  ['entity', 'name', 'One entity a world view shows; the host world resolves it, and in zane.js an unresolved one is a warning (S1, S3)']
 ]) {
   w(`DEFINE FORM ${n} AS (`);
   w(`  SEATS [value: ${t}]`);
@@ -278,7 +278,7 @@ CARRIED.add('DECORATIVE_ANIMATION');
 // ---- the media axis: the proof cells
 w('-- ---- the medium axis: every absent cell of the matrix (S6) ------------------------------');
 w('-- One constraint per (medium, verb) cell that media.json marks absent, derived the way');
-w('-- zui.js derives NOT_CARRIED: a medium whose default is "absent" keeps only its native and');
+w('-- zane.js derives NOT_CARRIED: a medium whose default is "absent" keeps only its native and');
 w('-- degraded verbs; any other medium loses its listed "absent" verbs.');
 w('');
 const anyKind = cond => KINDS.map(k => `(some ${k} where ${cond})`).join(' or ');
@@ -314,11 +314,11 @@ w('  MESSAGE "The ten kinds are INTENT_FLOW, FORM, WIZARD, SCREEN, COMPONENT, NA
 w('  NAMED [widget: "WIDGET names a rendering, and a declaration that needs to say card has stopped describing intent", user: "USER is not a kind this language defines"],');
 w('  CODES [widget: "UNSPECIFIED_DECLARATION", user: "UNSPECIFIED_DECLARATION"],');
 w(`  CITES [${citesOf.UNSPECIFIED_DECLARATION.map(q).join(', ')}]`);
-w(') RATIONALE "Two kinds the reference implementation recognises and the language does not define (D2). Warnings in zui.js; errors here"');
+w(') RATIONALE "Two kinds the reference implementation recognises and the language does not define (D2). Warnings in zane.js; errors here"');
 w('');
 CARRIED.add('UNSPECIFIED_DECLARATION');
 
-fs.writeFileSync(R('haro/zui.stzu'), out.join('\n') + '\n');
+fs.writeFileSync(R('haro/zane.stzu'), out.join('\n') + '\n');
 const all = contract.diagnostics.map(d => d.id);
 console.log('constraints', nCons, 'with CITES', nCited, 'lines', out.length);
 console.log('diagnostics', all.length, 'carried-by-declaration', all.filter(x => CARRIED.has(x)).length);

@@ -6,7 +6,7 @@
 <title>Web apps — a real site's navigation, declared and audited</title>
 <meta name="description" content="A workflow for a team with a web application in production, run on the navigation of a site this project does not own: declare its surfaces, run the verifier, run the UI audit on the live pages, place the findings on the grid, and what it yields today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -92,8 +92,8 @@
   <span class="k">ROLE</span> <span class="s">navigate</span>,
   <span class="k">ACTOR</span> <span class="s">reader</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check stzsite_menu.zui</span>
-stzsite_menu.zui:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS_WITHOUT_CONSEQUENCE</span>  navigate language_switch satisfies ACT
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check stzsite_menu.zane</span>
+stzsite_menu.zane:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS_WITHOUT_CONSEQUENCE</span>  navigate language_switch satisfies ACT
 <span class="dim">    A control promising to change nothing declares that it acts.</span>
 <span class="dim">    Rule 119 · A Card Is Not a Button · Rule 112 · Motion Reports, It Never Decorates · Rule 16 · Intentional Clicks · Article II</span>
 
@@ -113,10 +113,10 @@ stzsite_menu.zui:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS
   <span class="k">ROLE</span> <span class="s">navigate</span>,
   <span class="k">ACTOR</span> <span class="s">reader</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check stzsite_menu_fixed.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check stzsite_menu_fixed.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.13</pre>
     </div>
-    <p>The checked-in file is <a href="../examples/web-case/stzsite-navigation.zui"><code>examples/web-case/stzsite-navigation.zui</code></a>, with the third surface (the start page) and a header that says whose description it is.
+    <p>The checked-in file is <a href="../examples/web-case/stzsite-navigation.zane"><code>examples/web-case/stzsite-navigation.zane</code></a>, with the third surface (the start page) and a header that says whose description it is.
     Both runs above are re-run by this site's own check.</p>
   </div>
 </section>
@@ -166,7 +166,7 @@ stzsite_menu.zui:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

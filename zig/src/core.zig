@@ -1,13 +1,13 @@
-//! core.zig: the Zui verifier core, in Zig.
+//! core.zig: the Zane verifier core, in Zig.
 //!
-//! Lexer, parser and checks for the Zui language (doc/language/ v1.4), the third evaluator of the law
+//! Lexer, parser and checks for the Zane language (doc/language/ v1.4), the third evaluator of the law
 //! (doc/design/BINARY.md, stage S1). It is PURE: it takes a source string and an allocator and returns the
 //! diagnostics in source order. No file system, no clock, no network, no global state, so the same code
 //! compiles to a native executable and to wasm32-freestanding.
 //!
-//! It is written against the 73 fixtures and the grammar, and proved against tools/zui/zui.js by byte
-//! parity (tools/zui/parity.js). Its tables are written HERE, independently of conformance/media.json and
-//! conformance/signal.json, and `zui conformance` (stage S2) will check them against that data: a third
+//! It is written against the 73 fixtures and the grammar, and proved against tools/zane/zane.js by byte
+//! parity (tools/zane/parity.js). Its tables are written HERE, independently of conformance/media.json and
+//! conformance/signal.json, and `zane conformance` (stage S2) will check them against that data: a third
 //! evaluator that derived its tables from the data would agree with the data by construction.
 //!
 //! Domain of parity: well-formed UTF-8, which the caller makes of any bytes as Node does (main.zig, wellFormed).
@@ -30,7 +30,7 @@ pub const intent_verbs = [_][]const u8{
     "EXIT",
 };
 
-const zui_kinds = [_][]const u8{
+const zane_kinds = [_][]const u8{
     "INTENT_FLOW", "FORM",        "WIZARD",      "SCREEN",   "COMPONENT",
     "NAV_GRAPH",   "WORLD_VIEW",  "INTERACTION", "FEEDBACK", "VIBE",
 };
@@ -333,7 +333,7 @@ const Parser = struct {
                 }
 
                 // not ours, and not a near-miss we owe a warning for: skip it whole
-                if (!has(&zui_kinds, kind) and !has(&unspecified_kinds, kind)) {
+                if (!has(&zane_kinds, kind) and !has(&unspecified_kinds, kind)) {
                     if (isPunct(self.peek(), '(')) self.skipBalanced();
                     continue;
                 }
@@ -706,7 +706,7 @@ fn check(a: Allocator, decls: []const Decl, symbols: ?Symbols, out: *std.ArrayLi
 
 // ---- the public surface ----------------------------------------------------------------------------------
 
-/// Verify one Zui source. Every allocation is made in `a`; pass an arena and free it once.
+/// Verify one Zane source. Every allocation is made in `a`; pass an arena and free it once.
 /// Returns the diagnostics in source order: the lexer's and parser's first, then the checks'.
 pub fn verify(a: Allocator, source: []const u8, symbols: ?Symbols) ![]const Diag {
     var diags: std.ArrayList(Diag) = .empty;

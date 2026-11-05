@@ -3,9 +3,9 @@
 **What a participant downloads, pins, and can be held to.** **12 files, no runtime.**
 
 ```bash
-node tools/zui/pack.js --check     # do the bytes I have match the manifest?
-node tools/zui/conformance.js --level 4
-node tools/zui/cross-medium.js
+node tools/zane/pack.js --check     # do the bytes I have match the manifest?
+node tools/zane/conformance.js --level 4
+node tools/zane/cross-medium.js
 ```
 
 ---
@@ -69,7 +69,7 @@ catalogue two diagnostics behind the data, a spec whose own title lagged a versi
 |---|---|---|
 | 1 | the file alone | the grammar parses; unknown verbs, kinds, enumerations |
 | 2 | the file alone | **the honest target for a standalone verifier** — everything decidable from one declaration |
-| 3 | a symbol table you supply | entities, actors, state, elements — what a `.zui` file cannot know |
+| 3 | a symbol table you supply | entities, actors, state, elements — what a `.zane` file cannot know |
 | 4 | a rendered surface | what only a painted page reveals |
 
 Comparison is by **diagnostic id only** — never line numbers, message wording, ordering or

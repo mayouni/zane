@@ -6,7 +6,7 @@
 <title>Mobile apps — declare the screens, then judge a screenshot</title>
 <meta name="description" content="A workflow for a team with an iOS or Android application: there is no page to measure, so declare the screens and judge facts reduced from screenshots. What runs today, what has never run, and an example that is labelled as an example.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -64,8 +64,8 @@
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">customer</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check tap_to_pay.zui</span>
-tap_to_pay.zui:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPSE</span>  tap_to_pay
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check tap_to_pay.zane</span>
+tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPSE</span>  tap_to_pay
 <span class="dim">    Selection has become execution: SATISFIES holds SELECT and ACT without CONFIRM.</span>
 <span class="dim">    Rule 16 · Intentional Clicks · Article II</span>
 
@@ -78,8 +78,8 @@ tap_to_pay.zui:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_C
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">customer</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check tap_to_pay_confirmed.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check tap_to_pay_confirmed.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.13</pre>
     </div>
   </div>
 </section>
@@ -132,7 +132,7 @@ doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

@@ -6,7 +6,7 @@
 <title>Conformance — a claim your CI can refute</title>
 <meta name="description" content="What it means for a tool to conform to StzZui: the same verdict as the reference on the fixtures, against a pinned pack of files. How to check it, what the check cannot say, and a status board of what exists, what is designed and what is held.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -70,7 +70,7 @@
     <h2 id="two-commands">Two commands</h2>
     <p>The first asks whether the bytes you hold are the pack you meant. A version number says which edition you intended; the hash says the bytes are that edition.
     The second runs every fixture through the verifier and says which, if any, disagreed.</p>
-<pre class="term" data-run="node tools/zui/pack.js --check"><span class="dim">$ node tools/zui/pack.js --check</span>
+<pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
 
 The Zui protocol pack
   law          v3.13 — 123 rules, 17 forbidden patterns
@@ -81,9 +81,9 @@ The Zui protocol pack
   README       every count on the page matches the manifest
 
   <span class="good">verified</span> — every pinned file matches the manifest</pre>
-<pre class="term" data-run="node tools/zui/conformance.js"><span class="dim">$ node tools/zui/conformance.js</span>
+<pre class="term" data-run="node tools/zane/conformance.js"><span class="dim">$ node tools/zane/conformance.js</span>
 
-Zui conformance — level 4
+Zane conformance — level 4
   spec         doc/language/ v1.4
   contract     violations.json v1.8 (constitution v3.13)
   envelope     diagnostic-contract v1.2.0 — 56 diagnostics and 73 reports, all conform
@@ -161,7 +161,7 @@ Zui conformance — level 4
     <p>Press <kbd>F2</kbd>, or use the style select at the foot of any page, to switch culture and notice that your rights don't flex (Article VI).
     <a href="gotchas/index.html">What a violation feels like</a> lets you commit each family of offence yourself, safely fenced, each beside its lawful twin, and
     <a href="vibes.html">the two-cultures exhibit</a> renders one shared truth in both cultures at once.</p>
-    <p>The consumers, with their figures. The <b>reference implementation</b> is <a href="../tools/zui/README.md"><code>tools/zui</code></a>, and this site's own check
+    <p>The consumers, with their figures. The <b>reference implementation</b> is <a href="../tools/zane/README.md"><code>tools/zane</code></a>, and this site's own check
     (<code>tools/site-facts.js</code>) re-runs it on <span data-fact="site.verifierRuns">18</span> declarations shown on these pages and fails if the page and the verifier ever disagree.
     <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>, the first conforming consumer, pins law v<span data-fact="zing.pinned">3.11</span> while this site
     reads v<span data-law="version">3.13</span>; a re-pin has been asked of it.</p>
@@ -188,7 +188,7 @@ Zui conformance — level 4
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

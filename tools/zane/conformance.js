@@ -3,7 +3,7 @@
 /* ==========================================================================
    The conformance runner.
 
-     node tools/zui/conformance.js [--level N] [--verbose]
+     node tools/zane/conformance.js [--level N] [--verbose]
 
    Runs every fixture in conformance/manifest.json against the verifier and
    compares the SET OF DIAGNOSTIC IDS -- never line numbers, wording or
@@ -18,7 +18,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { verify } = require('./zui.js');
+const { verify } = require('./zane.js');
 const { toEnvelope, validate, validateReport, loadShape } = require('./envelope.js');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -48,7 +48,7 @@ function main(argv) {
   const mediaProblems = [];
   try {
     const spec = JSON.parse(fs.readFileSync(path.join(CONF, 'media.json'), 'utf8'));
-    const { MEDIA_CARRIAGE } = require('./zui.js');
+    const { MEDIA_CARRIAGE } = require('./zane.js');
     const specIds = spec.media.map(m => m.id).sort();
     const implIds = Object.keys(MEDIA_CARRIAGE).sort();
     if (specIds.join(',') !== implIds.join(',')) {
@@ -77,7 +77,7 @@ function main(argv) {
      prove they agree rather than trusting them to. */
   try {
     const sig = JSON.parse(fs.readFileSync(path.join(CONF, 'signal.json'), 'utf8'));
-    const { SIGNALS, SIGNAL_ABSENCE } = require('./zui.js');
+    const { SIGNALS, SIGNAL_ABSENCE } = require('./zane.js');
     const specVals = sig.values.map(v => v.id).sort().join(',');
     const implVals = [...SIGNALS].sort().join(',');
     if (specVals !== implVals) {
@@ -187,11 +187,11 @@ function main(argv) {
     }
   }
 
-  console.log(`\nZui conformance — level ${level}`);
+  console.log(`\nZane conformance — level ${level}`);
   console.log(`  spec         doc/language/ v${specVersion}`);
   console.log(`  contract     violations.json v${contract.metadata.version} (constitution v${contract.metadata.constitution})`);
   console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics and ${reports} reports, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
-  console.log(`  media        ${Object.keys(require('./zui.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
+  console.log(`  media        ${Object.keys(require('./zane.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
   console.log(`  catalogue    ${contract.diagnostics.length} diagnostics — ${specProblems.length ? specProblems.length + ' disagreements with VIOLATIONS.md' : 'contract agrees with VIOLATIONS.md'}`);
   console.log(`  fixtures     ${manifest.fixtures.length} total`);
   console.log(`  pass ${pass} · fail ${fail} · skipped ${skip} (above level ${level})`);

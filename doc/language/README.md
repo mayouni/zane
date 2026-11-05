@@ -141,7 +141,7 @@ The discipline this project exists to enforce applies first to itself, so:
 **No implementation is at Level 2 today.** the reference implementation parses the whole grammar and
 enforces four diagnostics; the ten named violations are specification everywhere
 and code nowhere. That was established by reading the source and is recorded in
-[the M3 decision document](../decisions/M3-the-zui-verifier.md) §1. This
+[the M3 decision document](../decisions/M3-the-zane-verifier.md) §1. This
 specification exists so the implementation has something to be written *against*,
 and the fixtures exist so agreement can be proved rather than asserted.
 

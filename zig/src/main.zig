@@ -1,10 +1,10 @@
-//! zui: the Zui verifier as one executable (doc/design/BINARY.md).
+//! zane: the Zane verifier as one executable (doc/design/BINARY.md).
 //!
-//!   zui check <file.zui> [file.zui ...] [options]     the verifier, text or --json (the C2 envelope)
-//!   zui version                                       the law, the language, the contract, the build
+//!   zane check <file.zane> [file.zane ...] [options]     the verifier, text or --json (the C2 envelope)
+//!   zane version                                       the law, the language, the contract, the build
 //!
-//! Stage S1 carries `check` and `version`. The output is byte for byte the output of tools/zui/cli.js, which
-//! tools/zui/parity.js proves on every fixture and on a seeded corpus. Exit codes: 0 clean, 1 violations found,
+//! Stage S1 carries `check` and `version`. The output is byte for byte the output of tools/zane/cli.js, which
+//! tools/zane/parity.js proves on every fixture and on a seeded corpus. Exit codes: 0 clean, 1 violations found,
 //! 2 usage or read error.
 
 const std = @import("std");
@@ -15,9 +15,9 @@ const contract_mod = @import("contract.zig");
 const language_version = "1.4";
 
 const usage =
-    \\zui — the Zui verifier
+    \\zane — the Zane verifier
     \\
-    \\  zui check <file.zui> [file.zui …] [options]
+    \\  zane check <file.zane> [file.zane …] [options]
     \\
     \\  --level N        conformance level, 1-4 (default 2)
     \\  --symbols FILE   JSON symbol table for Level 3 checks
@@ -195,7 +195,7 @@ pub fn main() !void {
     const err = &err_w.interface;
 
     const code = run(a, out, err) catch |e| blk: {
-        err.print("zui: {s}\n", .{@errorName(e)}) catch {};
+        err.print("zane: {s}\n", .{@errorName(e)}) catch {};
         break :blk @as(u8, 2);
     };
     out.flush() catch {};
@@ -215,20 +215,20 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
         return if (o.help) 0 else 2;
     }
     if (o.unknown) |u| {
-        try err.print("zui: unknown option {s}\n\n{s}\n", .{ u, usage });
+        try err.print("zane: unknown option {s}\n\n{s}\n", .{ u, usage });
         return 2;
     }
     if (!std.mem.eql(u8, o.command.?, "check")) {
-        try err.print("zui: unknown command \"{s}\"\n\n{s}\n", .{ o.command.?, usage });
+        try err.print("zane: unknown command \"{s}\"\n\n{s}\n", .{ o.command.?, usage });
         return 2;
     }
     if (o.files.items.len == 0) {
-        try err.print("zui: no files given\n\n{s}\n", .{usage});
+        try err.print("zane: no files given\n\n{s}\n", .{usage});
         return 2;
     }
     const level_opt = o.level;
     if (level_opt == null or level_opt.? < 1 or level_opt.? > 4) {
-        try err.print("zui: --level must be 1, 2, 3 or 4\n", .{});
+        try err.print("zane: --level must be 1, 2, 3 or 4\n", .{});
         return 2;
     }
     const level = level_opt.?;
@@ -237,7 +237,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     var contract_data: []const u8 = contract_mod.violations_json;
     if (o.contract) |p| {
         contract_data = std.fs.cwd().readFileAlloc(a, p, 64 * 1024 * 1024) catch |e| {
-            try err.print("zui: cannot read {s}: {s}\n", .{ p, @errorName(e) });
+            try err.print("zane: cannot read {s}: {s}\n", .{ p, @errorName(e) });
             return 2;
         };
     }
@@ -247,7 +247,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     var symbols: ?core.Symbols = null;
     if (o.symbols) |p| {
         symbols = loadSymbols(a, p) catch |e| {
-            try err.print("zui: cannot read symbols file {s}: {s}\n", .{ p, @errorName(e) });
+            try err.print("zane: cannot read symbols file {s}: {s}\n", .{ p, @errorName(e) });
             return 2;
         };
     }
@@ -255,7 +255,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     var findings: std.ArrayList(Finding) = .empty;
     for (o.files.items) |file| {
         const raw_src = std.fs.cwd().readFileAlloc(a, file, 256 * 1024 * 1024) catch |e| {
-            try err.print("zui: cannot read {s}: {s}\n", .{ file, @errorName(e) });
+            try err.print("zane: cannot read {s}: {s}\n", .{ file, @errorName(e) });
             return 2;
         };
         const diags = try core.verify(a, try wellFormed(a, raw_src), symbols);
@@ -290,7 +290,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     if (!o.quiet) {
         if (findings.items.len == 0) {
             if (contract.constitution) |c| {
-                try out.print("clean — {d} file(s), 0 violations at level {d} against Zui v{s}\n", .{ o.files.items.len, level, c });
+                try out.print("clean — {d} file(s), 0 violations at level {d} against Zane v{s}\n", .{ o.files.items.len, level, c });
             } else {
                 try out.print("clean — {d} file(s), 0 violations at level {d}\n", .{ o.files.items.len, level });
             }
@@ -374,7 +374,7 @@ fn writeJsonReport(
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zui (stage S1: check) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane (stage S1: check) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",

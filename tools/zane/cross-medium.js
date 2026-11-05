@@ -20,7 +20,7 @@
    A difference neither accounts for is drift, and it fails the run. That is
    the whole instrument, and it is why the matrices had to be data first.
 
-   Usage:  node tools/zui/cross-medium.js [spec.json] [--verbose]
+   Usage:  node tools/zane/cross-medium.js [spec.json] [--verbose]
    Exit:   0 every difference predicted · 1 unpredicted difference · 2 setup
    ========================================================================== */
 
@@ -28,7 +28,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { verify } = require('./zui.js');
+const { verify } = require('./zane.js');
 
 const ROOT = path.join(__dirname, '..', '..');
 const CONF = path.join(ROOT, 'conformance');

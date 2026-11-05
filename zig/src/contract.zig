@@ -2,7 +2,7 @@
 //!
 //! The severity, level and rule bindings of every diagnostic are LOADED from conformance/violations.json (embedded
 //! at build, or read from `--contract FILE`); they are not hardcoded in core.zig. The law (constitution/rules.json)
-//! gives every cited rule its title and every article its numeral. This is the same discipline as tools/zui/cli.js.
+//! gives every cited rule its title and every article its numeral. This is the same discipline as tools/zane/cli.js.
 
 const std = @import("std");
 const Allocator = std.mem.Allocator;

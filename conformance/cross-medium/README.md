@@ -6,8 +6,8 @@ shape, `media.json` records what a medium carries. **Nothing proved the sentence
 Second Founding rests on.**
 
 ```bash
-node tools/zui/cross-medium.js            # 0 proved · 1 not proved
-node tools/zui/cross-medium.js --verbose  # every difference, with its reason
+node tools/zane/cross-medium.js            # 0 proved · 1 not proved
+node tools/zane/cross-medium.js --verbose  # every difference, with its reason
 ```
 
 ## What it asserts, and what it deliberately does not
@@ -42,8 +42,8 @@ exists to make impossible.
 ## What it says today — the shipped pair is proved
 
 ```
-invoice-review.zui — visual vs print       3 undecided · 0 drift
-invoice-review.zui — visual vs auditory    5 predicted · 0 undecided · 0 drift
+invoice-review.zane — visual vs print       3 undecided · 0 drift
+invoice-review.zane — visual vs auditory    5 predicted · 0 undecided · 0 drift
 ```
 
 *(2026-08-17 to 2026-08-22 this read `4 predicted · 3 undecided` on the second
@@ -79,6 +79,6 @@ fill. **Do not close it by writing data.**
 
 ## Adding a case
 
-Put a **medium-free** `.zui` in this folder — declarations only, no `VIBE`, because the
+Put a **medium-free** `.zane` in this folder — declarations only, no `VIBE`, because the
 projection appends one and that is the claim under test — and add an entry to `spec.json`
 naming the file and two media. The declaration is never edited by the comparison.

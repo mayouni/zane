@@ -2,7 +2,7 @@
   "metadata": {
     "title": "The Zui Protocol Pack",
     "version": "1.0",
-    "generated": "by tools/zui/pack.js -- never hand-edited",
+    "generated": "by tools/zane/pack.js -- never hand-edited",
     "note": "Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.",
     "hash": "sha256 over LF-normalised content"
   },
@@ -27,8 +27,8 @@
     {
       "file": "doc/language/README.md",
       "role": "the language",
-      "bytes": 10195,
-      "sha256": "4633a73cd85637be01a2ad4aefc7e5b69c6029666f2a143279ae11485f363e63"
+      "bytes": 10196,
+      "sha256": "76cc26c484df820a428800d5b02e820a9c1b4b438e10b91388d7fb69d7ac3860"
     },
     {
       "file": "doc/language/GRAMMAR.md",
@@ -57,8 +57,8 @@
     {
       "file": "doc/diagnostic-contract.md",
       "role": "the refusal contract",
-      "bytes": 27927,
-      "sha256": "0fdca11ab4c75de7ca66f6e5b689b0b99d25be7622bcebf97e0661e1b812b896"
+      "bytes": 27932,
+      "sha256": "93bbf76df9b1a8aaedcf1f2ed01f6f594ce575117878677c22174425b1aecb62"
     },
     {
       "file": "doc/diagnostic-contract.schema.json",
@@ -75,20 +75,20 @@
     {
       "file": "conformance/signal.json",
       "role": "the axes",
-      "bytes": 20789,
-      "sha256": "3a1150c7c67e84afb2a972d9c1f7a647309ab28087cefed2380dd5ffeeeedce5"
+      "bytes": 20790,
+      "sha256": "3ed992d683523a9bd52379e56651d2ae8c2e6cc65d1a7cfbb8936470d5c4337c"
     },
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
-      "bytes": 19422,
-      "sha256": "0770143f41b68a7338e7dab221345f782ca45d78a11a2f29de712e1d156f5e07"
+      "bytes": 19507,
+      "sha256": "5cc55aed259ad0d2ac4cb709e9a10caf785c218e0c4bdd176409048f2c4fba87"
     },
     {
       "file": "conformance/cross-medium/spec.json",
       "role": "the proof",
-      "bytes": 1636,
-      "sha256": "4acc45eb6187fe97e05ea711703d5df5c658b1ed6829a8fd9d3879ea31657239"
+      "bytes": 1638,
+      "sha256": "80cde1fa574d268218ac986928f96cbb9333dcb9fbd71c2c409a6241d6a450f8"
     }
   ]
 }

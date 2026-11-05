@@ -6,7 +6,7 @@
 <title>Channels — one declaration, ten channels</title>
 <meta name="description" content="A channel is where a declaration is carried: a screen, a voice, a printed page, a machine reader. The ten channels by what each is made of, what each can carry, and what the proof of one declaration in two channels says and does not.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=0a11dfb2">
+<link rel="stylesheet" href="stz.css?v=29eb1a54">
 </head>
 <body>
 
@@ -167,8 +167,8 @@
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="n">caller</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check check_balance.zui</span>
-check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check check_balance.zane</span>
+check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
     <span class="dim">A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.</span>
     <span class="dim">Rule 82 · Perceivable State · Article II</span>
 
@@ -185,8 +185,8 @@ check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="n">caller</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zui/cli.js check check_balance_screen.zui</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zui v3.13</pre>
+<pre class="term"><span class="dim">$ node tools/zane/cli.js check check_balance_screen.zane</span>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.13</pre>
     </div>
     <p>Both runs are re-run by the site's own check. A refusal here is a refusal of a <em>promise</em>, not of the voice line: the declaration is lawful in a voice if it asks for what a voice can carry.</p>
   </div>
@@ -198,13 +198,13 @@ check_balance.zui:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_
     <p>The sentence the design rests on is <b>one declaration, many renderings, one law</b>. The instrument for it does not assert that two renderings match: they are irreducibly different. It asserts that <em>every difference
     between them is one the published data already predicted</em>.</p>
     <p>A difference the data accounts for is the model working; a difference it does not is drift, and fails the run. Run on the suite's two cases it says:</p>
-<pre class="term" data-run="node tools/zui/cross-medium.js"><span class="dim">$ node tools/zui/cross-medium.js</span>
+<pre class="term" data-run="node tools/zane/cross-medium.js"><span class="dim">$ node tools/zane/cross-medium.js</span>
 
 Cross-medium conformance — 2 case(s)
   media        10 enumerated, matrix v1.1
   signals      5 values, vocabulary v1.3
 
-  invoice-review.zui  —  visual vs print
+  invoice-review.zane  —  visual vs print
     intents      5 declared · 5 carried by both
     signals      3 declared
     differences  3 total · 0 predicted · 3 undecided · 0 drift
@@ -214,7 +214,7 @@ Cross-medium conformance — 2 case(s)
       signal muted: signal.json records no rendering for print, so this value is unproved rather than wrong
       signal warning: signal.json records no rendering for print, so this value is unproved rather than wrong
 
-  invoice-review.zui  —  visual vs auditory
+  invoice-review.zane  —  visual vs auditory
     intents      5 declared · 5 carried by both
     signals      3 declared
     differences  5 total · 5 predicted · 0 undecided · 0 drift
@@ -235,7 +235,7 @@ Cross-medium conformance — 2 case(s)
   <div class="narrow">
     <div class="bar">
       <div class="row">
-        <a class="leaves" href="https://github.com/mayouni/stzzui" target="_blank" rel="noopener">GitHub</a>
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
         <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>

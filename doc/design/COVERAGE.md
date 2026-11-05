@@ -52,7 +52,7 @@ medium and has no screen wording sits there.
 
 A cell is **closed** when its activity owns verbs and the medium marks every one of them absent. No
 rule can sit on a closed cell and none is meant to; the person cannot do that activity there at all.
-Eleven of the 60 medium cells are closed, derived from `media.json` the way `zui.js` derives
+Eleven of the 60 medium cells are closed, derived from `media.json` the way `zane.js` derives
 `NOT_CARRIED`:
 
 `understand × haptic` · `decide × haptic` · `decide × print` · `decide × luminous` · `decide × signage` ·
@@ -156,10 +156,10 @@ Closed cells (11) are not counted as gaps. Closed cells holding a rule: 0.
 The 34 empty cells are reached only by medium-free rules, and nobody had checked that those rules
 survive projection. D5 (the Principal's ruling, relayed by Central) forbids writing a rule for
 them until that is measured. So 14 fixtures were added, each applying a rule that already exists
-under a declared medium, and each read through both courts: `zui.js` and the court forged from
-`haro/zui.stzu`, judged on Haro v0.23 (ringpp 6611d18). **No rule, diagnostic or verifier changed.**
+under a declared medium, and each read through both courts: `zane.js` and the court forged from
+`haro/zane.stzu`, judged on Haro v0.23 (ringpp 6611d18). **No rule, diagnostic or verifier changed.**
 
-| fixture | rule | cell | zui.js | court | verdict |
+| fixture | rule | cell | zane.js | court | verdict |
 |---|---|---|---|---|---|
 | `projection-auditory-undo` and `-lawful` | 79 | recover x auditory | MISSING_UNDO, then clean | same | applies |
 | `projection-voice-select-act` and `-lawful` | 16 | decide x voice | SELECT_ACT_COLLAPSE, then clean | same | applies |
@@ -178,7 +178,7 @@ fixture and stayed quiet on the lawful twin, in both verifiers. It does not mean
 or read the result in that medium: **no one has perceived any of these fixtures, and the phase is
 reported as projected by instrument, not as verified by a person** (`CENTRAL-PERCEPTGATE-01`).
 
-**Differences this added: 1.** `projection-visual-trust` is `hidden-authority.zui` again, and the court
+**Differences this added: 1.** `projection-visual-trust` is `hidden-authority.zane` again, and the court
 is silent on it for the same reason (S3: the court has no actor model). It is in `haro/twin-expected.csv`
 with seam S3 and class `not-refused`; the ratchet lists 17 now, 16 before.
 
@@ -191,8 +191,8 @@ A gap records the cell, the rule and what failed. It is not a rule and proposes 
 
 | id | cell | rule | what failed |
 |---|---|---|---|
-| **PG-1** | perceive x print (and understand x print: Rule 112 is written for both) | 112 | `projection-print-motion-lawful.zui` is clean in both verifiers: a printed notice that declares `MOTION fade` and reports its state change is admitted. `media.json` says print "has no time", so no motion can occur on it. The rule is satisfied in a medium where it cannot apply, and nothing says so. |
-| **PG-2** **CLOSED** 2026-11-02 | recover x print, a closed cell | 79, 26 | A print flow that satisfies only `READ` and promises `ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]` was clean in `zui.js`: `NOT_CARRIED` was applied to `SATISFIES` only, so a guarantee print cannot keep was not read. **Closed by** one narrow change to the medium-axis block of `zui.js`, which now applies `NOT_CARRIED` to `ALWAYS_REACHABLE` as well and raises the same `VERB_NOT_CARRIED` with the same subject shape. No new diagnostic, no new level. Pinned by `projection-print-promise.zui` (`VERB_NOT_CARRIED`) and its lawful twin. No existing fixture changed its verdict (71 of 71 still passed before the two were added). The court is silent on the new fixture (seam S14, in `twin-expected.csv`). |
+| **PG-1** | perceive x print (and understand x print: Rule 112 is written for both) | 112 | `projection-print-motion-lawful.zane` is clean in both verifiers: a printed notice that declares `MOTION fade` and reports its state change is admitted. `media.json` says print "has no time", so no motion can occur on it. The rule is satisfied in a medium where it cannot apply, and nothing says so. |
+| **PG-2** **CLOSED** 2026-11-02 | recover x print, a closed cell | 79, 26 | A print flow that satisfies only `READ` and promises `ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]` was clean in `zane.js`: `NOT_CARRIED` was applied to `SATISFIES` only, so a guarantee print cannot keep was not read. **Closed by** one narrow change to the medium-axis block of `zane.js`, which now applies `NOT_CARRIED` to `ALWAYS_REACHABLE` as well and raises the same `VERB_NOT_CARRIED` with the same subject shape. No new diagnostic, no new level. Pinned by `projection-print-promise.zane` (`VERB_NOT_CARRIED`) and its lawful twin. No existing fixture changed its verdict (71 of 71 still passed before the two were added). The court is silent on the new fixture (seam S14, in `twin-expected.csv`). |
 
 PG-2 was ruled on 2026-11-02 (the Principal's word, relayed by Central): silence hiding an error, so the verifier
 changes, as D1's rule says it must. PG-1 was ruled **no change**: it hides no error, and rule 112, `media.json` and
@@ -237,7 +237,7 @@ medium-free, and the rule is stated to hold in every medium. Both are recorded i
 
 **One correction to the ruling's wording.** D6 describes this as the *recover* row: "an intent nobody can reach
 leaves the person stuck". That is the opposite direction from the check. `INTENT_ORPHAN` finds an **element with no
-intent**, not an **intent with no element**, and the fixture `intent-orphan.zui` shows it (`export_button` traces to
+intent**, not an **intent with no element**, and the fixture `intent-orphan.zane` shows it (`export_button` traces to
 nothing). The rule was written for the check as it is, and so sits on understand and decide. An intent no element
 carries is a real defect too; nothing checks it today, `UNRESOLVED_INTENT_FLOW` being a different thing, and no
 rule is proposed for it here.
