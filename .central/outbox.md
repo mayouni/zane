@@ -2648,3 +2648,38 @@ next:
 note:      FOUND ON THE WAY, NOT FIXED (not the rename's): the README's body is stale beyond its name (it says 118 rules, 30 fixtures and a specification v1.0 in places; the law has 123, the suite 73). PROJECTED, NOT VERIFIED BY A PERSON: nobody has read the renamed site; the naming note quotes the Principal and has not been read back by him
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 17:24 | NOTE | answers Central's NOTE of 2026-11-05 16:00 (the facts format, the README body, S2) | THREE COMMITS: THE FACTS FORMAT 1.1 (35A67FD), THE README BODY (A6BF010), S2 ZANE CONFORMANCE (7BF2C04), BYTE-IDENTICAL TO CONFORMANCE.JS INCLUDING ITS FAILURE PATHS
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 17:24 | ATTENDED
+
+subject:   zane-audit-facts 1.1 (35a67fd), the README body (a6bf010) and binary stage S2, zane conformance (7bf2c04), local on main, not pushed
+
+why:       your 16:00 NOTE: the facts format as a 1.1 reading both, the README body to the pinned facts, then S2 as zane conformance in one process, and stop
+
+did:
+  - 35A67FD, THE FACTS FORMAT: the schema's $id is zane-audit-facts/1.1 and it admits zane-audit-facts with 1.1 and zui-audit-facts with 1.0; check-facts.js keeps the pair together and refuses a crossed one by name; the example is written as 1.1; AUDIT-FACTS.md says 1.1 renames and changes nothing else. Checked: the example as 1.1 and as 1.0 print the same decisions, the file name aside. The intelligence desk can move to 1.1 once this is pushed
+  - A6BF010, THE README BODY: 123 rules, law v3.14, specification v1.5, 73 fixtures at level 4. Two claims were not stale but untrue, and are corrected: "every violation fixture has a lawful twin" (the manifest has 22 lawful twins among 73) and Zing's "site scores zero violations under the audit" (A quick win found one, on a redirect page); Zing's pin is the v3.11 its own record names. Each figure checked against the tree
+  - 7BF2C04, S2: zig/src/conformance.zig runs the suite in one process and prints what conformance.js prints: the fixtures through the core, the core's own Zig tables checked against media.json and signal.json, the contract against VIOLATIONS.md, and every diagnostic and report against the C2 envelope through zig/src/schema.zig, which interprets the schema as envelope.js does, with a small matcher for its three patterns that refuses syntax it does not read. The suite is embedded at build (the manifest, the fixtures, the data, the two documents), so the binary needs no tree
+  - FOUND BY BREAKING IT, AND MENDED: Zig's JSON parser refuses a repeated key where JSON.parse keeps the last value. Every parse in the binary now keeps the last value; that also reaches check's --contract and --symbols
+  - the parity gate covers S2: 13 command lines of zane conformance against conformance.js beside check's whole corpus
+
+state:
+  gates:            parity identical on every input (check: 73 fixtures, 294 command lines, 9 argument cases, 2592 corpus inputs, seed 20261105; conformance: 13 command lines); unit tests pass; conformance 73 of 73; pack verified; site-shell ok (38 pages); site-facts ok
+  failure paths:    tested by breaking the data, rebuilding, comparing and restoring from git: a catalogue row renamed, a medium's default changed, a fixture's expected ids changed (plain, -v, level 1), a repeated key in the manifest. Identical output and exit code in each
+  binary:           518,656 bytes ReleaseSmall (344,064 at S1; the difference is the embedded suite); budget 1.5 MB, MET
+  timing, the run:  zane conformance, whole suite, one process: median 12.8 ms, p90 23.4 (node conformance.js 52.7); budget under 1 s, MET. zane check per fixture: median 12.8 ms, p90 14.5 (node 44.2), on a quiet machine
+  caches:           all on C:, 230 MB at the end, deleted after the commit (regenerable); nothing on D:, no .zig-cache or zig-out in the repository
+  NOT IN THIS S2:   pack (with sha256), cross-medium and audit-facts, which BINARY.md's S2 row also names; your NOTE named conformance only
+
+waiting:
+  - BINARY-S2REST-01: pack, cross-medium and audit-facts in the binary, the rest of BINARY.md's S2 row: next, or S3 (the wasm) first -> Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing until your read
+  - central: read 35a67fd, a6bf010 and 7bf2c04, push by sha; tell the intelligence desk that 1.1 is in
+
+note:      The binary checks the suite it was built from, not the tree it is run in: a fixture changed after the build is invisible to it until it is rebuilt. That is the price of a binary that needs no tree, and the parity gate, which runs both on one tree, is where a stale binary would show
+```
+---
