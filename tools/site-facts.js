@@ -15,8 +15,8 @@
      - any span's fallback differs from the derived value,
      - a declaration shown on a page, with the terminal that checked it, no longer matches a real run of tools/zui/cli.js
        (the home page's "ninety seconds" and every pair like it).
-   A typed number outside a span is invisible to the first two; --unchecked counts them so they can
-   be driven to zero as the pages are rewritten.
+   A typed number outside a span is invisible to the first two, so it fails too (SITE-3 piece E): a rule's
+   number links to the rule, and a figure inside a mock interface is marked data-specimen.
    ========================================================================== */
 const fs = require('fs');
 const path = require('path');
@@ -264,11 +264,13 @@ function verifyStatuses(problems) {
   return n;
 }
 
-// ---- the typed numbers outside any span (informational) -----------------------------------------------------
+// ---- the typed numbers outside any span: none may remain (SITE-3 piece E) ------------------------------------
 function unchecked(html) {
   html = html.replace(/<a [^>]*#rule-\d+[^>]*>\d+<\/a>/g, ' ');
   /* a table drawn from its data by tools/site-grid.js is checked there, against the files that hold its figures */
   html = html.replace(/<!-- (grid|channels):table -->[\s\S]*?<!-- \/\1:table -->/g, ' ');
+  /* a figure inside a mock interface (the invoice a gotcha deletes, the tile it pokes) is a specimen, not a claim; it says so */
+  html = html.replace(/<([a-z0-9]+)\b[^>]*\sdata-specimen\b[^>]*>[^<]*<\/\1>/g, ' ');
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')
     .replace(/<([a-z0-9]+)\b[^>]*?\sdata-(law-share|law|fact)="[^"]*"[^>]*>[^<]*<\/\1>/g, ' ');
   t = t.replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/g, ' ');
@@ -331,7 +333,8 @@ function main(argv) {
   const ctas = verifyCtas(problems);
   console.log(`spans checked: ${spans}; wrong: ${bad}; verifier runs re-run: ${ninety}; commands re-run: ${commands}; status words checked: ${statuses}; buttons checked: ${ctas}; excerpts checked against their files: ${excerpts}`);
   console.log(`typed numbers outside a span, not checked: ${total} across ${per.length} page(s)${listUnchecked ? '' : ' (--unchecked lists them)'}`);
-  if (listUnchecked) per.forEach(l => console.log('  ' + l));
+  if (listUnchecked || total) per.forEach(l => console.log('  ' + l));
+  if (total) problems.push(`${total} typed number(s) outside a span: give each a data-fact or data-law span, a link to its rule, or, inside a mock interface, data-specimen`);
   if (problems.length) { problems.forEach(m => console.log('PROBLEM ' + m)); return 1; }
   console.log(write ? 'ok (facts.json written; nothing else to check against itself)' : 'site facts ok');
   return 0;

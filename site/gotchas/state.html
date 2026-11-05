@@ -110,14 +110,14 @@
       <div class="duel">
         <div class="pane offense"><div class="head">The offense</div>
           <div class="body" id="sure-bad-body">
-            <div class="rowline"><span>Invoice #204 — 45,000 XOF</span>
+            <div class="rowline"><span data-specimen>Invoice #204 — 45,000 XOF</span>
               <button class="demo-btn" onclick="sureBad()">Delete</button></div>
             <p class="quiet">A real dialog will interrupt you. Twice.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
           <div class="body" id="sure-good-body">
-            <div class="rowline" id="sure-good-row"><span>Invoice #204 — 45,000 XOF</span>
+            <div class="rowline" id="sure-good-row"><span data-specimen>Invoice #204 — 45,000 XOF</span>
               <button class="demo-btn" onclick="sureGood()">Delete</button></div>
             <div id="sure-good-toast"></div>
           </div>
@@ -199,7 +199,7 @@ function sureBad() {
 }
 function sureReset() {
   document.getElementById('sure-bad-body').innerHTML =
-    '<div class="rowline"><span>Invoice #204 — 45,000 XOF</span>' +
+    '<div class="rowline"><span data-specimen>Invoice #204 — 45,000 XOF</span>' +
     '<button class="demo-btn" onclick="sureBad()">Delete</button></div>' +
     '<p class="quiet">A real dialog will interrupt you. Twice.</p>';
 }
