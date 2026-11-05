@@ -2602,3 +2602,49 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: the walk counts clicks, not understanding. Nobody but the author has walked the site, and the tour has not been presented to a room
 ```
 ---
+
+--- FROM: stzzui | 2026-11-05 15:44 | NOTE | answers Central's NOTEs of 2026-11-05 14:06 and 14:12 (the Zane rename series) | THE RENAME IS FIVE COMMITS (57CA8F0, E4313C5, 667C4C0, EA00A26, 97648FC); EVERY GATE GREEN EXCEPT THE HARO JUDGE, WHICH CANNOT RUN HERE; 329 "ZUI" LINES LEFT, ALL CLASSIFIED
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-05 15:44 | ATTENDED
+
+subject:   the rename of the language from Zui to Zane, as the 14:06 NOTE lists it, local on main, not pushed
+
+why:       the Principal's word of 2026-11-05: Zane in public, StzZui as the formal name inside the estate; your 14:12 NOTE released the series after piece E
+
+did:
+  - 57CA8F0, NAMES AND FILES: git mv of every .zui (73 fixtures, the cross-medium declaration, two examples) to .zane; tools/zui to tools/zane, zui.js to zane.js; haro/zane.stzu, zane.gbnf, judge-zane-court.js, gen-zane-stzu.js; doc/decisions/M3-the-zane-verifier.md (content kept: a dated record). Every path and link; ZANE_KINDS; zane_check and zane_free; /__zane/; window.Zane; the command and its output ("zane check", "against Zane v"); the binary is zane (build.zig; build.zig.zon needed the fingerprint Zig gives for the new name); every github.com/mayouni/stzzui link in a living file. The Haro declaration is DEFINE LANGUAGE zane, EXTENSION ".zane", and its generator reproduces it byte for byte
+  - E4313C5, CONTRACT 1.9: "The Zane Diagnostic Contract"; the emitters write "language": "zane" (envelope.js, cli.js, conformance.js, the binary). C2 (doc/diagnostic-contract.md and its schema) MOVED TO v1.2.1, EDITORIAL: its pattern already admits both values, so nothing changes shape; both files now say "zane today; zui is its former value, valid until every emitter that wrote it has re-pinned; dropping it is a 2.0". I bumped C2 because its own governance says a version denotes exactly one pair of files; reverse it if you read the NOTE otherwise
+  - 667C4C0, LAW v3.14, EDITORIAL ONLY: the title, the philosophy, five set descriptions, three phrases and two set titles that named this language say Zane; one fixture path; the lineage line: "v3.14 (2026-11-05): editorial only. The language is renamed Zane (it was Zui); no rule's meaning, tier or number changes." The law's pin moved in the five data files and every place that shows it, as the v3.13 commit did
+  - EA00A26, SPECIFICATION v1.5: "The Zane Language — Specification v1.5"; the lineage line as you worded it; "The name", quoting the Principal's words as your NOTE gives them, Azané and زَيْنْ as written, no etymology added; the former extension stated in the specification and in the grammar, and checked (one fixture under .zui and .zane: the same --json, byte for byte, the file name set aside); "The Zane Conformance Suite"; the binary prints language 1.5
+  - 97648FC, THE PUBLIC FACE: brand, trail, titles, meta, the tour and 154 lines of the site say Zane; StzZui appears ONCE on the site (The thinking, "Who is who": "Inside the Softanza family its formal name is StzZui") and ONCE in the README (its second line); the Reader is "The Zane Constitution"; "The Zane Protocol Pack"
+  - A DEFECT OF MY OWN, CAUGHT AND MENDED IN 97648FC: commit 1's extension rule renamed the CSS selector ".pair .zui" in stz.css and not the class in how.html, so the Language page's pair label lost its colour for commits 1 to 4. Checked in a browser after the mend
+  - THE LAW, THE CONTRACT AND THE SPECIFICATION WERE FIRST TOUCHED BY COMMIT 1'S MECHANICAL RULES: I restored them to their committed text before committing and reapplied only their links, so each changed only in its own versioned commit
+  - edited no other repository; CLAUDE.md (Central's text) and doc/design/SITE-3.md (stopped by the author) untouched
+
+state:
+  gates:          conformance 73 of 73 (spec v1.5, contract v1.9, law v3.14, envelope v1.2.1); pack re-pinned and verified; site-shell ok (38 pages); site-facts ok (0 unchecked); UI audit 0 on 38 pages in Modern and Retro, strict 0 interactive text under 7:1
+  parity:         zane rebuilt from 97648fc (ReleaseSmall, -j2, foreground, caches on C:): identical on every input. 73 fixtures (294 command lines), 9 argument cases, 2592 corpus inputs from seed 20261105 (2589 before: the three smallest fixtures' comments grew by the extension). zane median 15.4 ms, p90 20.1 (node 50.2)
+  binary:         344,064 bytes ReleaseSmall (340,992 at S1: the embedded law and contract grew by their rename notes); zane version: "zane (stage S1: check) · law v3.14 · language 1.5 · contract v1.9"
+  caches:         on C: only, 92 MB local and 41 MB global; nothing on D:
+  NOT RUN:        haro/judge-zane-court.js, the Haro judge. It needs the Haro spike at D:/GitHub/ringpp/haro/spike, which is NOT on this machine (rnxc is). So haro/zane.gbnf is renamed with its header corrected and its body is still the forge's output from the declaration named zui; the judge with --write-gbnf regenerates it where the spike exists. Owned 7 gates, ran 6
+  git grep -w -i zui, 329 lines, every one classified by a rule (269 + 15 + 35 + 10, none unclassified):
+    history, 269:  .central/ 128 (outbox 100, cost ledger 18, inbox 10); doc/decisions/M3-the-zane-verifier.md 40 (a dated record, renamed file, content kept); doc/findings 10; the dated design records 85 (SITE 16, SITE-2 13, STZSENSE 12, ARCHITECTURE 7, THE-SECOND-FOUNDING 6, EVIDENCE-LEDGER 6, SITE-3 5 (stopped by the author), ROLE-DESIGN 5, AMENDMENT-DOCKET 4, SECOND-FOUNDING-PLAN 4, THE-INTERACTION-MODEL 4, GUI-SYSTEM 2, HARVEST 1); ALIGNMENT.md 3 (the 2026-08 alignment record); ROADMAP.md 1 (the M3 milestone as it ran); placement-review/packet.json 1 (the law's text when the packet was cut); the law's lineage line 1; CLAUDE.md and WHATS-NEXT.md 0
+    the rename itself, 15:  lines that say it was called Zui, or that .zui or "zui" is the former extension or value: README 2, The thinking 1, the specification 3, GRAMMAR 1, C2 5 and its schema 1, violations.json's note 1, envelope.js 1
+    quoted records, 35:  the reference implementation's codes ZUI-W001, ZUI-E001, ZUI-E002, ZUI-W010 (violations.json 4, the specification's table, VIOLATIONS.md, conformance/README, four fixture comments, C2's attested form and its schema); another project's names: "a sibling project's Zui pillar" with its ZUI_SPECIFICATION_v3_0.md (README 2, the specification, the law's intents note), "zui-book" (law 2), "an unknown zui profile" (a lint in the reference implementation, law 1); restaurant.zui (a path in another project, one fixture comment); the Softanza site's own page named "Zui" (Softanza 1, Web apps 2); the findings-to-diagnostics paragraph, quoting the command as it then was (VIOLATIONS.md, C2); the forge's output in haro/zane.gbnf 1
+    identifiers kept, 10:  the Reader's localStorage keys zui-theme and zui-density (5), so a reader's saved setting survives; the audit facts format "zui-audit-facts/1.0" (AUDIT-FACTS.md 1, example 1, schema 3)
+
+waiting:
+  - ZANE-FACTSFORMAT-01: the screenshot audit's facts format is "zui-audit-facts/1.0", a published file format. Renaming it is a format change (a 1.1 that reads both, or a 2.0). Kept as is -> Central
+             [not routed; it is here]
+  - ZANE-C2PATCH-01: C2 moved to v1.2.1 (editorial) with the contract 1.9; siblings pin C2 v1.2.0 and nothing they emit is affected. Keep or reverse -> Central
+             [not routed; it is here]
+  - ZANE-HAROJUDGE-01: haro/zane.gbnf's body is regenerated only by the Haro judge on a machine with the spike; until then it says "from the zui declaration" -> Central, or the ringpp desk
+             [not routed; it is here]
+
+next:
+  - me:      nothing until your read; S2 after it
+  - central: read 57ca8f0..97648fc, push by sha, then brief the siblings (they re-pin to the new file names: tools/zane, *.zane, contract 1.9, law 3.14, C2 v1.2.1 if it stands)
+
+note:      FOUND ON THE WAY, NOT FIXED (not the rename's): the README's body is stale beyond its name (it says 118 rules, 30 fixtures and a specification v1.0 in places; the law has 123, the suite 73). PROJECTED, NOT VERIFIED BY A PERSON: nobody has read the renamed site; the naming note quotes the Principal and has not been read back by him
+```
+---
