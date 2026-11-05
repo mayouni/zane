@@ -447,6 +447,15 @@ function checkBars(problems, notes) {
 /* The h1, and the first sentence of the lead (the head's p.sub or span.sub, as the Reader writes it; on the front page, the hero's paragraph), each contain the page's
    subject term, ignoring case. The check cannot judge narrative, teasing or fragments: WRITING.md says so, and reading does the rest. */
 function headOf(text) {
+  /* a hero zone (the front page's header.hero) holds a tagline and one line, and is exempt from the strict register (doc/design/WRITING.md
+     point 8): the page is judged on its first content section below the hero, its first title and the first paragraph */
+  if (/<header class="hero"/.test(text)) {
+    const sec = /<main\b[^>]*>[\s\S]*?<section\b[^>]*>([\s\S]*?)<\/section>/.exec(text);
+    const t = sec && /<(h1|h2)\b[^>]*>([\s\S]*?)<\/\1>/.exec(sec[1]);
+    const p = sec && /<p\b[^>]*>([\s\S]*?)<\/p>/.exec(sec[1]);
+    const f = p ? (/^([\s\S]*?[.!?])(?=\s|$)/.exec(plain(p[1])) || [null, plain(p[1])])[1] : null;
+    return { h1: t ? plain(t[2]) : null, first: f };
+  }
   const h1 = /<h1\b[^>]*>([\s\S]*?)<\/h1>/.exec(text);
   const head = /<header\b[^>]*>[\s\S]*?<\/header>/.exec(text);
   const lead = head && (/<(p|span) class="sub">([\s\S]*?)<\/\1>/.exec(head[0]) || /<div class="panel">[\s\S]*?<()p>([\s\S]*?)<\/p>/.exec(head[0]));

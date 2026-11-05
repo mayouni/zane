@@ -26,6 +26,10 @@ time because it lived only in a promise, so it is written here and part of it is
 7. **A title's line breaks belong to the browser, which balances them; the page never places one by hand.** A title holds no
    `<br>` and no piece set as a block, and `node tools/site-shell.js` fails one that does (the front page's title once broke as
    *"Zane is the / compilable language / for user interfaces."* for this reason).
+8. **A hero zone is exempt.** The front page's hero (the photograph and its panel) holds a short tagline and one line that does
+   not repeat it, in the Principal's words; the strict register begins below it, and the check judges the front page on its first
+   content section. The hero's title still keeps rule 7. Asked by the Principal on 2026-11-05: *"don't apply the strict sentence
+   style to the hero zones"*.
 
 ## 2. The subject term
 
@@ -44,6 +48,10 @@ stop followed by a space.
 **The list of pages still to be rewritten** (`WRITING_PENDING` in the same file) held the pages written before this rule, and
 each was printed by name on every run as a page the check had not yet judged. Since every page was rewritten on 2026-11-05 the
 list is empty, and a page added later has no way past the check except a term.
+
+**A page with a hero zone** (the front page) is judged on its first content section below the hero: its first title and the
+first sentence of its first paragraph. **The Reader's header is judged as it stands**: it is the page's head, in the strict register,
+and everything below it is rendered by script from `rules.json`, so skipping it would leave nothing to judge and exempt the page.
 
 **The check cannot judge narrative, teasing, fragments or aphorisms.** A sentence can contain the word *grid* and still be a
 riddle. Points 3 to 6 of section 1 are kept by reading the page, and the check does not replace that reading.

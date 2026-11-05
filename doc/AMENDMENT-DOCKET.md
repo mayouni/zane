@@ -885,3 +885,125 @@ The conformance suite is untouched and **no fixture changed its verdict** (73 of
 a landmark is missing); on the 15 pages of this site, 0 stayed 0. All conformance artifacts re-pinned to 3.13 after the suite was run.
 
 **Held, not refused:** one subject on one page (READINGDEPTH B3); a reason carrier for `ROLE irreversible` (ROLE-REASON-01); rules for haptic, luminous, signage, spatial and terminal.
+
+
+---
+
+## Pass 5 — proposed 2026-11-05: the author's look at the Zane site · *proposed, not ruled*
+
+**Status: proposed, not ruled. Nothing here is applied to `rules.json`.** The author asked, on 2026-11-05, that every remark
+made while looking at the site be documented so that it can be included in the Constitution: *"ALL THSE REMARKS MUST BE
+DOCUMENTED TO BE INCLUDED IN THE CONSTITUION"*. Each item below quotes the remark as written, states the defect, the repair
+the site received and the check that now holds it, and proposes what the law would say. The Principal rules each item through
+Central; a ruled item enters `rules.json` in the next minor version, with its evidence.
+
+**Why these belong in the law and not only in the site's own rules.** Every remark was made about a page that an AI produced
+while building this site under the Constitution, and every one names a defect the law does not yet forbid in words, or
+forbids in words that pull the other way. That is the evidence Article VII asks for: real use, a person's report, a
+documented failure.
+
+### F-1 · A title balances its own lines — *new rule candidate*
+
+- **The remarks.** 2026-11-04, on the old home page: *"'FEATURES' must be in the same line as the sentence and 'IS' must go on
+  the line after. Check that all the titles are esthetiucally equilibrated through lines"*. 2026-11-05, on the front page:
+  *"the issue of equilibrated text on a line again and again!"*
+- **The defect.** A title broke as *"Zane is the / compilable language / for user interfaces."*: a short first line beside a
+  wide empty panel. Its cause was a line break placed by hand (two spans set as blocks), which the browser's balancing could
+  not cross; and, once that was removed, a panel too narrow for the title's two lines.
+- **The repair and its check.** Titles are one element, balanced by the browser (`text-wrap: balance`); paragraphs use
+  `text-wrap: pretty`; the hero's panel is sized from the title's own width. `node tools/site-shell.js` refuses a title that
+  holds a `<br>` or a piece set as a block, and a stylesheet that stops balancing h1, h2 and h3.
+- **Proposed rule.** *A title breaks where its lines come out of even length, and nowhere else. No line of a title or a short
+  paragraph holds one word alone, and no break is placed by hand; the renderer balances the lines.* Derived from the calm
+  article (legibility). Tier: tool for the hand-placed break (the site's check), judgment for the evenness a person sees.
+
+### F-2 · A title says what it is — *new rule candidate*
+
+- **The remark.** 2026-11-05, on the grid page: *"i todl you befeore several time to avoid the narrative, sucinet, non
+  declarative style of writing. Here for example, you describe the grid without citing it, neither in the titles nor in the
+  text. use a dead simple clear descriptive full sentence from the kind : Zane is designed around a conceptual grid with ....
+  snusre systeatic coverage etc"*. And on the front page, the same day: *"The hero contains a duplication ... don't apply the
+  strict sentence style to the hero zones"*.
+- **The defect.** Titles written as metaphors, teasers and fragments (*"The rows of a person's day"*, *"The gap, as a
+  finding"*), leads that never named their subject, narrative (*"so it was measured"*), aphorisms. And, applied to a hero,
+  the strict register made the title and the line under it say the same thing twice.
+- **The repair and its check.** `doc/design/WRITING.md`; all 38 pages rewritten; `node tools/site-shell.js` refuses a page whose
+  title, or the first sentence of whose lead, does not name the page's subject. A hero zone holds a short tagline and one line
+  that does not repeat it, and is judged below it.
+- **Proposed rule.** *A page's title names its subject and says what it is, in one declarative sentence; the first sentence
+  under it says what the subject is for; a section title says what the section contains. A hero zone is the one exception: a
+  short tagline and one line that does not repeat it.* Derived from the intent article (a reader knows what a surface is for).
+  Tier: tool for the subject term, judgment for the register.
+
+### F-3 · Space says something, or it is not there — *amendment to Rule 2*
+
+- **The remark.** 2026-11-05, on the front page's panel: *"the space to the right is not necessary! Space is a functional
+  communication tool that we must use with care"*.
+- **The defect.** The hero panel was 48rem wide and its balanced title and line left a band of empty space beside them,
+  about two fifths of the panel, which separated nothing and ranked nothing.
+- **The repair.** The panel is as wide as its title (12 of the title's own em, measured from the title's balanced width) and
+  no wider; the space beside the title is now 6 to 8 px at every width.
+- **Tension, stated.** Rule 2 (*White Space Is Structural*) says white space is mandatory and that dense interfaces are
+  errors. The remark is the other half of the same idea: space that separates or orders is required, and space that does
+  neither is a defect too.
+- **Proposed amendment to Rule 2.** One clause and one avoid entry: *space is functional: it is present where it separates,
+  groups or ranks, and absent where it says nothing. A box wider than what it holds, or an empty band beside a text, is a
+  defect.* Tier stays judgment.
+
+### F-4 · The line under a hero title is part of the hero voice — *amendment to Rule 107, needs a ruling*
+
+- **The remarks.** 2026-11-05: *"the secondary text must be bigger!"*. And 2026-11-04, the other direction: *"the text of the
+  main titles are excessively big compared to normal text and other titles"*, and *"Generally the main text size is small and
+  some narratives are very dense in terms of text which does not help in reading"*.
+- **The repairs.** The page title came down to one step above the section titles (clamp to 2.5rem); the reading size went up
+  (1.25rem, a 42rem measure); the line under the hero title is 0.62 of the title, larger than the reading size.
+- **Tension, stated.** Rule 107 (*Hierarchy Is Not Miniaturization*) says three sizes suffice: a hero voice, a title voice and
+  one reading size. The line under the hero title is now a fourth size, between the hero voice and the reading size.
+- **Proposed amendment to Rule 107, for the Principal to choose.** Either (a) the hero voice is a pair, a title and the one
+  line under it, each larger than the reading size; or (b) the line under a hero title is set at the title voice, which keeps
+  three sizes. The site follows (a) today.
+
+### F-5 · The action follows understanding — *new rule candidate*
+
+- **The remarks.** 2026-11-04: *"there absolutely no meaning to a button that brings the reader to the section that it is right
+  under it !!!"*; and *"I find this call to action to be mis-placed! because it interrupts the logical flow fo reading and propose
+  an intrusive change of context"*. 2026-11-05, on the front page's button "See a refusal, line by line": *"the theme proposed in
+  the call to action is intrusive and dispruptive : obly after reading and understanding what the language is one can deal with
+  it. See how the Softanza site does and think of a button CTA"*.
+- **The defects.** A button that scrolled to the section beneath it; a call to action in the head of every reading page,
+  interrupting the reading; and an entry page whose one action asked the reader to judge a refusal before knowing what the
+  language is.
+- **The repairs and their check.** No button in the head of a reading page; the front page's actions are two plain buttons,
+  *Learn* (the language, first) and *Start* (the ways in), as the Softanza site has them. `node tools/site-facts.js` refuses a
+  primary button in the head of a reading page and a primary button that points into its own page.
+- **Proposed rule.** *An action follows understanding. A surface proposes an action only where the person can already tell what
+  it does and why they would take it: never in the head of a page that is read from top to bottom, never ahead of the
+  explanation the action depends on, and never as a control that only moves the reader to what is already below it. On an
+  entry surface the first action leads to understanding and the next to doing.* Derived from the intent and operator articles.
+  Relation, stated: Rule 90 (*One Action Per Screen*) asks for one clear next action and does not say when it may be asked for;
+  Rule 16 (*Intentional Clicks*) asks that a control look like one. This rule says when. Tier: tool for the two machine-checkable
+  cases (the site's check), judgment for the rest.
+
+### F-6 · Remarks that are evidence for existing rules, not new rules
+
+Each remark below is documented as evidence; the rule it supports already says enough.
+
+| date | remark, as written | defect | rule it supports | repair |
+|---|---|---|---|---|
+| 2026-11-04 | *"the arrows are not well painted and the text goes out of the box !!"* | a figure whose labels overflowed their boxes | Rule 2 (structure), Rule 107 (reading size) | the figure redrawn with text inside its shapes |
+| 2026-11-04 | *"there is no offset to the left of text !!!"* | text touching the page edge | Rule 2 | a 1.4rem gutter on every container |
+| 2026-11-04 | *"at the bottom the page turned to a mess !!!"* | the footer laid out inside the page's grid | Rule 2 (structure) | the layout closed before the footer, on every page |
+| 2026-11-04 | *"look at the e trancated from the coulum text !!!"* | a table cell clipping a letter | Rule 105 (the legibility floor), Rule 48 (tables) | the column no longer clips; tables scroll inside themselves on a phone |
+| 2026-11-04 | *"Move the 'On this page' submenu to the right of the page"* | the page's section list on the left, where the family lists are | Rule 24 (navigation as orientation) | the section list on the right; a family list stays on the left |
+| 2026-11-05 | *"the menu must be a bit transparent and the image dispalyed on the full visible browser suth as softanza site"* | a solid bar above the photograph | Rules 62 and 105 (contrast) bound it | the menu over the photograph at 75%, measured at 7.0 to 1 against the photograph's brightest pixel; recorded as a choice of style, not a rule |
+
+### What ruling this pass needs
+
+1. F-1, F-2, F-5: canonize as new rules (three numbers), or hold.
+2. F-3: amend Rule 2 by one clause and one avoid entry.
+3. F-4: choose (a) or (b) for Rule 107.
+4. F-6: add the remarks to the evidence of the rules named, or leave them in this docket.
+
+**Version arithmetic, if every item is ruled as proposed:** three rules canonized, two amended (2, 107), a handful of evidence
+lines added. *`rules.json` v3.14 → v3.15, minor.* No fixture would change its verdict: none of these is decided by the
+verifier, and the two tool-tier checks live in the site's own build.
