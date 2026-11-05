@@ -53,45 +53,47 @@ const SECTIONS = [
    of a section is named after the section; what the page is about is its kicker and its title. */
 const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'State'], ['widgets', 'Widgets'],
                   ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
+/* each family page's subject term (doc/design/WRITING.md section 2) */
+const FAMILY_TERMS = { stillness: 'still', forms: 'form', state: 'state', widgets: 'widget', reading: 'read', navigation: 'navigat', intelligence: 'intelligen' };
 const PAGES = [
-  { file: 'index.html', home: true },
-  { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true },
+  { file: 'index.html', home: true, term: 'Zane' },
+  { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true, term: 'approach' },
   { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true, term: 'grid' },
-  { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true },
-  { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true },
-  { file: 'site/practices.html', section: 'approach', label: 'Practices', parent: 'site/positioning.html', rail: true },
-  { file: 'site/frameworks.html', section: 'approach', label: 'Frameworks and languages', parent: 'site/positioning.html', rail: true },
-  { file: 'site/innovation.html', section: 'approach', label: 'Claims', rail: true },
-  { file: 'site/how.html', section: 'language', label: 'Language', rail: true },
-  { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true },
-  { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true },
-  { file: 'site/conformance.html', section: 'language', label: 'Conformance', rail: true },
-  { file: 'site/why.html', section: 'law', label: 'Law', rail: true },
-  { file: 'site/rules.html', section: 'law', label: 'The rules', rail: true },
-  { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', rail: true, outside: 'reader' },
-  { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true },
-  ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true })),
-  { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true },
-  { file: 'site/adopt.html', section: 'use', label: 'Use', rail: true },
-  { file: 'site/web.html', section: 'use', label: 'Web apps', rail: true },
-  { file: 'site/mobile.html', section: 'use', label: 'Mobile apps', rail: true },
-  { file: 'site/beyond.html', section: 'use', label: 'Beyond screens', rail: true },
-  { file: 'site/stack.html', section: 'use', label: 'Your stack', rail: true },
-  { file: 'site/build.html', section: 'use', label: 'Build', parent: 'site/stack.html', rail: true },
-  { file: 'site/generate.html', section: 'use', label: 'Generate', parent: 'site/stack.html', rail: true },
-  { file: 'site/softanza.html', section: 'use', label: 'Softanza', parent: 'site/stack.html', rail: true },
-  { file: 'site/ports.html', section: 'use', label: 'Other languages', parent: 'site/stack.html', rail: true },
-  { file: 'site/audit.html', section: 'try', label: 'Try', rail: true },
-  { file: 'site/tour.html', section: 'try', label: 'The tour', rail: true },
+  { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true, term: 'channel' },
+  { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true, term: 'compar' },
+  { file: 'site/practices.html', section: 'approach', label: 'Practices', parent: 'site/positioning.html', rail: true, term: 'practice' },
+  { file: 'site/frameworks.html', section: 'approach', label: 'Frameworks and languages', parent: 'site/positioning.html', rail: true, term: 'framework' },
+  { file: 'site/innovation.html', section: 'approach', label: 'Claims', rail: true, term: 'claim' },
+  { file: 'site/how.html', section: 'language', label: 'Language', rail: true, term: 'language' },
+  { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true, term: 'refus' },
+  { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true, term: 'Haro' },
+  { file: 'site/conformance.html', section: 'language', label: 'Conformance', rail: true, term: 'conform' },
+  { file: 'site/why.html', section: 'law', label: 'Law', rail: true, term: 'law' },
+  { file: 'site/rules.html', section: 'law', label: 'The rules', rail: true, term: 'rule' },
+  { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', rail: true, outside: 'reader', term: 'Reader' },
+  { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true, term: 'violation' },
+  ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true, term: FAMILY_TERMS[f] })),
+  { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true, term: 'culture' },
+  { file: 'site/adopt.html', section: 'use', label: 'Use', rail: true, term: 'use' },
+  { file: 'site/web.html', section: 'use', label: 'Web apps', rail: true, term: 'web' },
+  { file: 'site/mobile.html', section: 'use', label: 'Mobile apps', rail: true, term: 'mobile' },
+  { file: 'site/beyond.html', section: 'use', label: 'Beyond screens', rail: true, term: 'screen' },
+  { file: 'site/stack.html', section: 'use', label: 'Your stack', rail: true, term: 'stack' },
+  { file: 'site/build.html', section: 'use', label: 'Build', parent: 'site/stack.html', rail: true, term: 'build' },
+  { file: 'site/generate.html', section: 'use', label: 'Generate', parent: 'site/stack.html', rail: true, term: 'generat' },
+  { file: 'site/softanza.html', section: 'use', label: 'Softanza', parent: 'site/stack.html', rail: true, term: 'Softanza' },
+  { file: 'site/ports.html', section: 'use', label: 'Other languages', parent: 'site/stack.html', rail: true, term: 'other language' },
+  { file: 'site/audit.html', section: 'try', label: 'Try', rail: true, term: 'try' },
+  { file: 'site/tour.html', section: 'try', label: 'The tour', rail: true, term: 'tour' },
   /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
-  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool' },
-  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true },
-  { file: 'site/quick-win.html', section: 'try', label: 'A quick win', rail: true }
+  { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool', term: 'audit' },
+  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true, term: 'screenshot' },
+  { file: 'site/quick-win.html', section: 'try', label: 'A quick win', rail: true, term: 'quick win' }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 /* The pages written before doc/design/WRITING.md, which the register check has not yet judged. Each is printed by name on every
    run, and leaves this list when it is rewritten and gains its term. A page with no term and not on this list fails. */
-const WRITING_PENDING = PAGES.filter(p => p.file !== 'site/grid.html').map(p => p.file);
+const WRITING_PENDING = [];
 const sec = id => SECTIONS.find(s => s.id === id);
 
 const rel = (from, to) => {
@@ -441,13 +443,13 @@ function checkBars(problems, notes) {
 }
 
 /* ---- the register: each page names its subject (doc/design/WRITING.md) -------------------------------------------------- */
-/* The h1, and the first sentence of the lead (the page head's p.sub; on the front page, the hero's paragraph), each contain the page's
+/* The h1, and the first sentence of the lead (the head's p.sub or span.sub, as the Reader writes it; on the front page, the hero's paragraph), each contain the page's
    subject term, ignoring case. The check cannot judge narrative, teasing or fragments: WRITING.md says so, and reading does the rest. */
 function headOf(text) {
   const h1 = /<h1\b[^>]*>([\s\S]*?)<\/h1>/.exec(text);
-  const head = /<header class="(?:page|hero)"[\s\S]*?<\/header>/.exec(text);
-  const lead = head && (/<p class="sub">([\s\S]*?)<\/p>/.exec(head[0]) || /<div class="panel">[\s\S]*?<p>([\s\S]*?)<\/p>/.exec(head[0]));
-  const first = lead ? (/^([\s\S]*?[.!?])(?=\s|$)/.exec(plain(lead[1])) || [null, plain(lead[1])])[1] : null;
+  const head = /<header\b[^>]*>[\s\S]*?<\/header>/.exec(text);
+  const lead = head && (/<(p|span) class="sub">([\s\S]*?)<\/\1>/.exec(head[0]) || /<div class="panel">[\s\S]*?<()p>([\s\S]*?)<\/p>/.exec(head[0]));
+  const first = lead ? (/^([\s\S]*?[.!?])(?=\s|$)/.exec(plain(lead[2])) || [null, plain(lead[2])])[1] : null;
   return { h1: h1 ? plain(h1[1]) : null, first };
 }
 function checkWriting(problems, notes) {
@@ -462,10 +464,13 @@ function checkWriting(problems, notes) {
     if (!fs.existsSync(file)) continue;
     const { h1, first } = headOf(fs.readFileSync(file, 'utf8'));
     const term = p.term.toLowerCase();
+    /* the term begins a word, so "use" is not found inside "because"; a term is letters and spaces only */
+    if (!/^[a-z ]+$/.test(term)) problems.push(`${p.file}: the subject term "${p.term}" is not letters and spaces`);
+    const named = s => new RegExp('(^|[^a-z0-9])' + term, 'i').test(s);
     if (!h1) problems.push(`${p.file}: no h1`);
-    else if (!h1.toLowerCase().includes(term)) problems.push(`${p.file}: the h1 does not name the page's subject ("${p.term}"): "${h1}"`);
+    else if (!named(h1)) problems.push(`${p.file}: the h1 does not name the page's subject ("${p.term}"): "${h1}"`);
     if (!first) problems.push(`${p.file}: no lead`);
-    else if (!first.toLowerCase().includes(term)) problems.push(`${p.file}: the lead's first sentence does not name the page's subject ("${p.term}"): "${first}"`);
+    else if (!named(first)) problems.push(`${p.file}: the lead's first sentence does not name the page's subject ("${p.term}"): "${first}"`);
   }
   if (pending.length) notes.push(`NOTE the register check (doc/design/WRITING.md) has not yet judged ${pending.length} page(s), still to be rewritten: ${pending.join(', ')}`);
 }
@@ -500,4 +505,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars, checkWriting };
+module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars, checkWriting, headOf };

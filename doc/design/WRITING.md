@@ -33,12 +33,14 @@ check cannot disagree about what a page is called.
 ## 3. What the check decides, and what it cannot
 
 **`node tools/site-shell.js` fails** when a page's h1, or the first sentence of its lead, does not contain the page's subject
-term, ignoring case; and when a page has no term and is not on the list of pages still to be rewritten. The lead is the page
-head's `p.sub` (on the front page, the hero's paragraph); its first sentence ends at the first full stop followed by a space.
+term at the start of a word, ignoring case (so the term *use* is not found inside *because*); when a term is not made of
+letters and spaces; and when a page has no term and is not on the list of pages still to be rewritten. The lead is the page
+head's `p.sub` (the Reader's `span.sub`; on the front page, the hero's paragraph); its first sentence ends at the first full
+stop followed by a space.
 
-**The list of pages still to be rewritten** (`WRITING_PENDING` in the same file) holds the pages written before this rule. Each is
-printed by name on every run, as a page the check has not yet judged, and leaves the list when it is rewritten. A page on neither
-list fails.
+**The list of pages still to be rewritten** (`WRITING_PENDING` in the same file) held the pages written before this rule, and
+each was printed by name on every run as a page the check had not yet judged. Since every page was rewritten on 2026-11-05 the
+list is empty, and a page added later has no way past the check except a term.
 
 **The check cannot judge narrative, teasing, fragments or aphorisms.** A sentence can contain the word *grid* and still be a
 riddle. Points 3 to 6 of section 1 are kept by reading the page, and the check does not replace that reading.
