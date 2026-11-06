@@ -59,7 +59,11 @@ body {
   margin: 0; background: var(--paper); color: var(--ink);
   font: 1.25rem/1.75 var(--sans); -webkit-font-smoothing: antialiased;
 }
-a { color: var(--accent-ink); }
+/* a link is told by its colour and is underlined only under the pointer or the keyboard's focus: underlines and bold everywhere polluted
+   the page (the author, 2026-11-06: "hyperlinks are polluting the page with their intrusive underlines+bold ... let it change them on
+   mouse hover") */
+a { color: var(--accent-ink); text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 code, pre, kbd { font-family: var(--mono); }
 code { background: var(--card); border: 1px solid var(--line); border-radius: 4px;
@@ -80,18 +84,25 @@ nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem
 nav.site .menu { display: flex; align-items: center; gap: 1.2rem; flex: 1 1 auto; min-width: 0;
   overflow-x: auto; scrollbar-width: none; }
 nav.site .menu > * { flex: none; }
-nav.site .brand { font-weight: var(--black); font-size: 1.1rem; letter-spacing: .04em;
+/* the menu's words at a reading size (the author, 2026-11-06: "the menu bar texts are small!") */
+nav.site .brand { font-weight: var(--black); font-size: 1.3rem; letter-spacing: .04em;
   color: var(--accent-lite); text-decoration: none; text-transform: uppercase; }
-nav.site a:not(.brand) { color: var(--halo); text-decoration: none; font-size: 1rem; opacity: .9; }
+nav.site a:not(.brand) { color: var(--halo); text-decoration: none; font-size: 1.2rem; opacity: .9; }
+nav.site a:not(.brand):hover { text-decoration: none; }
 nav.site a:not(.brand):hover { opacity: 1; color: var(--accent-lite); }
 nav.site a.here { color: var(--accent-lite); opacity: 1; border-bottom: 2px solid var(--accent); }
-/* the style picker: a select at the right end of the footer (Rule 106 allows it: both states are options, the current one is shown) */
+/* GitHub and the style picker at the right of the top bar (the author, 2026-11-06); the picker is a select (Rule 106 allows it: both states
+   are options, the current one is shown) */
+nav.site .tools { display: flex; align-items: center; gap: 1.1rem; flex: none; margin-left: auto; }
+nav.site .tools .github { display: inline-flex; align-items: center; color: var(--halo); opacity: .9; }
+nav.site .tools .github:hover { opacity: 1; color: var(--accent-lite); }
+nav.site .tools .github svg { width: 1.6rem; height: 1.6rem; display: block; }
 .vibe-picker {
-  display: flex; align-items: center; gap: .5rem; margin-left: auto;
+  display: flex; align-items: center; gap: .5rem;
 }
-.vibe-picker label { color: var(--halo); opacity: .85; }
+.vibe-picker label { color: var(--halo); opacity: .85; font-size: 1.1rem; }
 .vibe-picker select {
-  font: 1rem var(--sans); color: var(--halo); background: rgba(0,0,0,.28);
+  font: 1.1rem var(--sans); color: var(--halo); background: rgba(0,0,0,.28);
   border: 1.5px solid rgba(234,231,246,.4); border-radius: 99px;
   padding: .3rem 1.6rem .3rem .8rem; cursor: pointer; min-height: 34px;
 }
@@ -157,7 +168,8 @@ header.page::after {
   -webkit-mask: url("assets/filigree.svg") right bottom / contain no-repeat; mask: url("assets/filigree.svg") right bottom / contain no-repeat;
 }
 header.page > .narrow { position: relative; z-index: 1; }
-[data-vibe="guardian"] header.page::after { opacity: .3; }
+/* none in Retro: a terminal carries no ornament (the author, 2026-11-06: "the graphity should not be added in the retro vibe!") */
+[data-vibe="guardian"] header.page::after { display: none; }
 @media (max-width: 1120px) { header.page::after { display: none; } }
 header.page .kicker { font: 1rem var(--mono); text-transform: uppercase; max-width: 50rem;
   letter-spacing: .12em; color: var(--muted); margin: 0 0 .7rem; }
@@ -186,7 +198,7 @@ nav.band ul { list-style: none; margin: 0 auto; padding: 0 1.4rem; max-width: 72
 nav.band li { margin: 0; flex: none; }
 /* no hover repaint: the pointer already becomes a hand, and a place the reader is not must not look like "here" (Rule 115) */
 nav.band a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none;
-  white-space: nowrap; font-size: 1rem; border-bottom: 3px solid transparent; }
+  white-space: nowrap; font-size: 1.1rem; border-bottom: 3px solid transparent; }
 nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent); }
 
 /* ---- level 3: a vertical list on the right, a page's family or its outline; a page without one takes the full width ---- */
@@ -213,11 +225,14 @@ nav.list3 {
 nav.list3 ul { list-style: none; margin: 0; padding: 0; max-width: none; }
 nav.list3 li { margin: 0; }
 nav.list3 a { display: block; padding: .3rem .6rem; color: var(--ink); text-decoration: none; font-size: 1.1rem; line-height: 1.5;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-radius: 6px; }
-nav.list3 a:hover { background: var(--tint); }
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* no background for the entry under the pointer or the one being read (the author, 2026-11-06: "avoid this bad habit of having a
+   background colour for the selected item and the hovered item"): the pointer turns an entry to the link colour, and the entry being read
+   is set in bold ink */
+nav.list3 a:hover { color: var(--accent-ink); text-decoration: none; }
 /* a page's own name in a family list wraps rather than be cut: it must read as the menu names that page (Rule 116); a section's entry keeps one line */
 nav.list3:not(.sections) > ul > li > a { white-space: normal; }
-nav.list3 a[aria-current] { font-weight: 700; background: var(--tint); }
+nav.list3 a[aria-current] { font-weight: 700; color: var(--ink); }
 /* the outline's heading is a label, not an entry: gray, normal weight and a step smaller, so it never reads as something to click
    (the author, 2026-11-06: "On this page seems like a clickable option in the menu") */
 nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: 400; font-size: 1rem; color: var(--muted); max-width: none; }
@@ -226,9 +241,6 @@ nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: 400
 nav.list3.sections { border-left: 0; padding-left: 0; }
 nav.list3.sections .outline-title { padding: 0; margin: 0 0 1rem; }
 nav.list3.sections > ul { border-left: 1px solid var(--line); padding-left: .9rem; }
-nav.list3.sections > ul + .outline-title { margin-top: 1.6rem; }
-/* a family's page names, listed on its head page, wrap rather than be cut, as they do in the family's own list */
-nav.list3.sections > ul > li > a { white-space: normal; }
 nav.list3 .sub { margin: 0 0 .3rem; }
 nav.list3 .sub a { padding-left: 1.4rem; }
 @media (max-height: 640px) { nav.list3 { position: static; } }
@@ -306,7 +318,7 @@ li { margin: .3rem 0; }
 
 /* a row of reader cards: one line each, and the link is the point */
 .readers .card p { margin-bottom: .7rem; }
-.readers .card .proof a { font-weight: 700; }
+
 
 /* ---- narration devices: the pair, the scene, the figure, the workflow, the one call to action ---- */
 /* a call to action: one per page, the first thing the reader can do */
@@ -433,7 +445,7 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 .messages .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.3rem; box-shadow: var(--shadow); }
 .messages h2 { font-size: 1.3rem; margin: 0 0 .4rem; }
 .messages p { margin: 0 0 .7rem; max-width: none; }
-.messages a { font-weight: 700; }
+
 .front-note { margin-top: 1.6rem; }
 
 /* ---- the grid: a table of counts, with a word in every cell, never a colour alone ---- */
@@ -450,7 +462,7 @@ table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; f
 
 /* ---- the tour: one scene at a time, no motion between them (Rule 112) ---- */
 .profiles { list-style: none; padding: 0; margin: .8rem 0 1rem; display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; max-width: none; }
-.profiles a { font-weight: 700; }
+
 .profiles .note { color: var(--muted); font-size: 1rem; }
 .stage { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.6rem 2rem; box-shadow: var(--shadow);
   min-height: calc(100vh - var(--bars-h, 6rem) - 6rem); display: flex; flex-direction: column; }

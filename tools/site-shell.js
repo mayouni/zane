@@ -113,6 +113,8 @@ const href = (from, to) => {
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 /* ---- the renderers --------------------------------------------------------------------------- */
+/* the GitHub mark, 16 units square, drawn in the bar's own colour */
+const GITHUB_MARK = 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z';
 function menu(p) {
   const cls = p.outside === 'reader' ? 'topnav' : 'site';
   const here = p.section;
@@ -122,22 +124,27 @@ function menu(p) {
   }).join('\n');
   const wrapOpen = p.outside === 'reader' ? '' : '  <div class="wrap">\n';
   const wrapClose = p.outside === 'reader' ? '' : '  </div>\n';
-  /* the links sit in their own row, which may scroll sideways on a narrow screen; the style select is in the footer (SITE-3.md 5.1) */
+  /* the links sit in their own row, which may scroll sideways on a narrow screen; GitHub and the style select stand at the bar's right
+     (the author, 2026-11-06: "Add Github icon to the right along with the combo of the vibe") */
   const row = p.outside === 'reader' ? '' : '    ';
   const menuOpen = p.outside === 'reader' ? '' : '    <div class="menu">\n';
   const menuClose = p.outside === 'reader' ? '' : '    </div>\n';
   const bar = `<nav class="${cls}" aria-label="Main menu">
 ${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">Zane</a>
 ${links}
-${menuClose}${wrapClose}</nav>`;
+${menuClose}${p.outside === 'reader' ? '' : `    <div class="tools">
+      <a class="github" href="${REPO}" aria-label="Zane on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="${GITHUB_MARK}"/></svg></a>
+      ${stylePicker()}
+    </div>
+`}${wrapClose}</nav>`;
   const b = band(p);
   if (p.outside === 'reader') return bar + (b ? '\n' + b : '');
   return `<div class="bars">\n${bar}${b ? '\n' + b : ''}\n</div>`;
 }
-/* Rule 106 (v3.13) allows the two-state control as a select: both states are options, the current one is the one shown. It is in the footer,
-   at the right (SITE-3.md 5.1), and stz.js binds it. */
+/* Rule 106 (v3.13) allows the two-state control as a select: both states are options, the current one is the one shown. It stands at the
+   right of the top bar, beside GitHub, and stz.js binds it; F2 flips it from the keyboard. */
 function stylePicker() {
-  return `<div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+  return `<div class="vibe-picker">
         <label for="vibe-select">Style</label>
         <select id="vibe-select">
           <option value="curator">Modern</option>
@@ -223,24 +230,15 @@ function sectionsOf(t) {
 }
 function list3(p, secs) {
   if (p.home || p.outside) return '';
-  const f = familyOf(p);
+  let f = familyOf(p);
   const own = secs && secs.length >= SECTION_MIN ? secs : null;
-  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
+  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
   if (f) {
     const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>${q === p ? subs : ''}</li>`;
-    /* a family's head is named in the band, not in its family's list, so its sections cannot hang under an entry of that list without
-       repeating the band's label on one screen: it shows its own outline, then its family, each under a label (Central, 2026-11-06) */
-    if (p === f.head) return `<nav class="list3 sections" aria-label="Sections of this page and pages of its family">
-${own ? `  <p class="outline-title">On this page</p>
-  <ul>
-${own.map(x => `    <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}
-  </ul>
-` : ''}  <p class="outline-title">In this family</p>
-  <ul>
-${f.kids.map(li).join('\n')}
-  </ul>
-</nav>`;
-    return `<nav class="list3" aria-label="Pages of the family">
+    /* a family's head shows its own outline and nothing more: its family's pages are what its body is about, and a second list beside
+       the outline was one more square of navigation to think about (the author, 2026-11-06). Its sections fall through to the plain outline. */
+    if (p === f.head) f = null;
+    else return `<nav class="list3" aria-label="Pages of the family">
   <ul>
 ${f.kids.map(li).join('\n')}
   </ul>
@@ -250,7 +248,7 @@ ${f.kids.map(li).join('\n')}
   return `<nav class="list3 sections" aria-label="Sections of this page">
   <p class="outline-title">On this page</p>
   <ul>
-${own.map(x => `    <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}
+${own.map(x => `    <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}
   </ul>
 </nav>`;
 }
@@ -262,11 +260,10 @@ function footer(p) {
   <div class="narrow">
     <div class="bar">
       <div class="row">
-${pending ? `        <a href="${to(pending.file)}">Reader</a>\n` : ''}        <a class="leaves" href="${REPO}" target="_blank" rel="noopener">GitHub</a>
-        <a href="${to('LICENSE')}">LICENSE</a>
+${pending ? `        <a href="${to(pending.file)}">Reader</a>\n` : ''}        <a href="${to('LICENSE')}">LICENSE</a>
       </div>
-      ${stylePicker()}
     </div>
+    <p class="fine">Zane is a Softanza project.</p>
     <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>`;
@@ -415,8 +412,8 @@ function apply(p, text) {
   if (!p.home && p.section) {
     const shown = [...SECTIONS.map(s => ['the main menu', s.label]), ...(bandOf(p.section) || []).map(q => ['the band', q.label])];
     const fam = familyOf(p);
-    if (fam && !p.outside) shown.push(...fam.kids.map(q => ['the family list', q.label]));
-    // the outline is drawn on its own, under the page's entry in its family's list, or, on a family's head, above its family's list
+    if (fam && !p.outside && p !== fam.head) shown.push(...fam.kids.map(q => ['the family list', q.label]));   // a family's head draws its outline only
+    // the outline is drawn on its own, or under the page's entry in its family's list
     if (secs && secs.length >= SECTION_MIN) shown.push(...secs.map(x => ['the outline', x.label]));
     const key = s => s.trim().toLowerCase().replace(/^the\s+/, '');
     shown.forEach((a, i) => shown.slice(i + 1).forEach(b => {
@@ -615,10 +612,29 @@ function checkLabels(problems) {
   }));
 }
 
+/* ---- no tooltips (the author, 2026-11-06: "avoid info bulles altogether because they complexify the reading by a volatile additional
+   layer! just make small expressive titles") ------------------------------------------------------------------------------------- */
+/* No element of a served page carries a title attribute, and a page holds one <title>, its own: an SVG names itself with <desc>, which a
+   screen reader reads and the pointer never shows. Scripts are read too, since they write markup. */
+function checkTooltips(problems) {
+  const files = new Set(['index.html', ...PAGES.map(p => p.file)]);
+  for (const f of files) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    let titles = 0;
+    fs.readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+      if (/<[a-zA-Z][^<>]*\stitle=["'$]/.test(line)) problems.push(f + ':' + (i + 1) + ' carries a title attribute, a tooltip: say it in the label instead');
+      titles += (line.match(/<title\b/g) || []).length;
+    });
+    if (titles > 1) problems.push(f + ' holds ' + titles + ' <title> elements: an SVG names itself with <desc>, which shows nothing on hover');
+  }
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
   const notes = [];
+  checkTooltips(problems);
   checkLabels(problems);
   checkBars(problems, notes);
   checkWriting(problems, notes);

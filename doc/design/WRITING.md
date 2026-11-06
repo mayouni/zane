@@ -38,6 +38,10 @@ time because it lived only in a promise, so it is written here and part of it is
    one level share a label, ignoring case; nor may one label appear twice among the navigation a page shows (the main menu, the
    band, the family list and the outline), ignoring case and a leading "The": an outline entry says what its section says. Ruled by the Principal on 2026-11-06: *"the same menu option in the main and submenu levels
    (like Try and then Try here)!!! This should never happen in our sites"*.
+11. **No tooltips.** No element carries a `title` attribute and a page holds one `<title>`, its own; an SVG names itself with `<desc>`.
+   What a tooltip would say goes into a short label that says it. `node tools/site-shell.js` fails on either, with the file and line.
+   Asked by the author on 2026-11-06: *"avoid info bulles altogether because they complexify the reading by a volatile additional
+   layer! just make small expressive titles"*.
 
 ## 2. The subject term
 

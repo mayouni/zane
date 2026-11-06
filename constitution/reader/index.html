@@ -361,8 +361,7 @@ footer ul { padding-left: 1.2rem; }
     <span><kbd>c</kbd> copy citation</span>
     <span><kbd>t</kbd> theme</span>
   </p>
-  <button class="fab" id="theme-btn"
-          title="Circadian theming, Set 15 — keyboard: t">
+  <button class="fab" id="theme-btn">
     <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor">
       <path d="M20.6 14.2A8.6 8.6 0 0 1 9.8 3.4a8.6 8.6 0 1 0 10.8 10.8z"/>
     </svg>
@@ -415,13 +414,13 @@ function ruleCard(rule, articles) {
   const anchor = 'rule-' + n;
   const badges = [];
   if (rule.enforcement === 'machine')
-    badges.push(`<a class="badge machine" href="#${anchor}" title="${esc(rule.lint || '')}">enforced by a conforming linter</a>`);
+    badges.push(`<a class="badge machine" href="#${anchor}">enforced by a conforming linter</a>`);
   else if (rule.enforcement === 'tool')
-    badges.push(`<a class="badge machine" href="../../tools/ui-audit.html" title="${esc(rule.lint || '')}">checked by the UI audit</a>`);
+    badges.push(`<a class="badge machine" href="../../tools/ui-audit.html">checked by the UI audit</a>`);
   else if (rule.enforcement === 'machine-later')
-    badges.push(`<span class="badge" title="Lintable, not yet linted — Article VII governs promotion.">on the enforcement ladder</span>`);
+    badges.push(`<span class="badge">on the enforcement ladder</span>`);
   if (rule.invariant)
-    badges.push(`<span class="badge invariant" title="This rule never flexes across vibes.">vibe-invariant</span>`);
+    badges.push(`<span class="badge invariant">vibe-invariant</span>`);
   const art = articles[rule.derived_from];
   const derive = art
     ? `<span class="derive">derives from <a href="#article-${esc(rule.derived_from)}">Article ${esc(art.numeral)} — ${esc(art.title)}</a>` +
