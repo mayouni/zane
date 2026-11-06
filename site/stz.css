@@ -143,7 +143,22 @@ header.page .crumbs .sep { color: var(--muted); opacity: 1; }
 header.page {
   background: var(--tint); color: var(--ink); padding: 2.6rem 0 2.2rem;
   border-bottom: 1px solid var(--line);
+  position: relative; overflow: hidden;
 }
+/* a filigree from the façade in the front page's photograph (the lozenge, the scrolls, a rosette, the roof's steps), drawn in thin
+   lines from the head's bottom-right corner (the author, 2026-11-06: "a graphity inspired from the main image ... clean lightweight
+   (vectorised) small filigran starting from the bottom right corner of the hero sections"). It is a mask, so it takes each culture's
+   accent; it sits in the empty band right of the text and leaves before it could reach the text. */
+header.page::after {
+  /* as wide as the space right of the text: the window, less the page's margin, the 50rem of kicker, title and lead, and a 3rem gap */
+  content: ""; position: absolute; right: 0; bottom: 0; aspect-ratio: 2 / 1; pointer-events: none;
+  width: min(30rem, calc(100vw - max(0rem, (100vw - 72rem) / 2) - 54.4rem));
+  background: var(--accent-ink); opacity: .22;
+  -webkit-mask: url("assets/filigree.svg") right bottom / contain no-repeat; mask: url("assets/filigree.svg") right bottom / contain no-repeat;
+}
+header.page > .narrow { position: relative; z-index: 1; }
+[data-vibe="guardian"] header.page::after { opacity: .3; }
+@media (max-width: 1120px) { header.page::after { display: none; } }
 header.page .kicker { font: 1rem var(--mono); text-transform: uppercase; max-width: 50rem;
   letter-spacing: .12em; color: var(--muted); margin: 0 0 .7rem; }
 /* a page's title is set in sentence case, never capitals over several lines, and its lead runs as wide as it does, so the head reads
