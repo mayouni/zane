@@ -116,13 +116,6 @@ function derive(prev) {
 
   put('site.verifierRuns', pairs().length, 'the declaration and terminal pairs on the site pages (re-run by this script)');
 
-  /* A figure about another repository carries that repository's figure, or the page does not make the claim. Zing's pin is read
-     from its own file when the sibling is reachable, and carried from the last facts.json when it is not, so a machine without
-     the sibling neither fails nor invents a value. */
-  const zingFile = path.join(ROOT, '..', 'zing', 'constitution', 'rules.json');
-  const zingSrc = 'zing/constitution/rules.json (a sibling repository: read when reachable, carried from the last facts.json when not)';
-  if (fs.existsSync(zingFile)) put('zing.pinned', JSON.parse(fs.readFileSync(zingFile, 'utf8')).metadata.version, zingSrc);
-  else if (prev && prev['zing.pinned'] !== undefined) put('zing.pinned', prev['zing.pinned'], zingSrc);
 
   const sorted = {}, sources = {};
   for (const k of Object.keys(f).sort()) { sorted[k] = f[k]; sources[k] = src[k]; }

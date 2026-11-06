@@ -88,8 +88,7 @@ const PAGES = [
   { file: 'site/tour.html', section: 'try', label: 'The tour', rail: true, term: 'tour' },
   /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
   { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool', term: 'audit' },
-  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true, term: 'screenshot' },
-  { file: 'site/quick-win.html', section: 'try', label: 'A quick win', rail: true, term: 'quick win' }
+  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true, term: 'screenshot' }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 /* The pages written before doc/design/WRITING.md, which the register check has not yet judged. Each is printed by name on every
@@ -245,7 +244,6 @@ function footer(p) {
     <div class="bar">
       <div class="row">
 ${pending ? `        <a href="${to(pending.file)}">Reader</a>\n` : ''}        <a class="leaves" href="${REPO}" target="_blank" rel="noopener">GitHub</a>
-        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="${to('LICENSE')}">LICENSE</a>
       </div>
       ${stylePicker()}
@@ -297,7 +295,7 @@ function stub(p) {
     <p>A colour it cannot read is reported as <em>not decided</em>, naming the colour, and never skipped.</p>`,
     h2b: 'Not here yet',
     body2: `<p>A second audit, for a screenshot of an application nobody on this project owns, is designed and its fact schema is written; it is described in
-    <code>doc/design/AUDIT-FACTS.md</code> in the repository. No real application's screenshot has been run through it. The tour, a worked quick win and a single-file build of the tools are planned and not built.</p>`
+    <code>doc/design/AUDIT-FACTS.md</code> in the repository. No real application's screenshot has been run through it. A single-file build of the tools is planned and not built.</p>`
   };
   return `<header class="page">
   <div class="narrow">
@@ -540,6 +538,26 @@ function checkBreaks(problems) {
   }
 }
 
+/* ---- the site does not name Zing (the Principal, 2026-11-06: "do not reference Zing in the Zane site") ------------------------- */
+/* Every file under site/, index.html and every page of the registry, comments and JSON included, in any case. The match is the
+   word, so "box-sizing" in the stylesheet is not one. */
+function checkNames(problems) {
+  const files = new Set(['index.html', ...PAGES.map(p => p.file)]);
+  (function all(dir) {
+    for (const e of fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
+      const q = path.posix.join(dir, e.name);
+      if (e.isDirectory()) all(q); else if (/\.(html|css|js|json|md|txt|svg)$/.test(e.name)) files.add(q);
+    }
+  })('site');
+  for (const f of files) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    fs.readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+      if (/\bzing\b/i.test(line)) problems.push(f + ':' + (i + 1) + ' names Zing: the Zane site does not name Zing');
+    });
+  }
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
@@ -547,6 +565,7 @@ function main(argv) {
   checkBars(problems, notes);
   checkWriting(problems, notes);
   checkBreaks(problems);
+  checkNames(problems);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);

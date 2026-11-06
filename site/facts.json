@@ -71,8 +71,7 @@
     "twin.notRefused": 10,
     "twin.otherCode": 6,
     "twin.seams": 8,
-    "verbs": 22,
-    "zing.pinned": "3.11"
+    "verbs": 22
   },
   "sources": {
     "audit.contrastFloor": "doc/design/audit/decides.json thresholds",
@@ -145,7 +144,6 @@
     "twin.notRefused": "haro/twin-expected.csv class column",
     "twin.otherCode": "haro/twin-expected.csv class column",
     "twin.seams": "haro/twin-expected.csv seam column",
-    "verbs": "constitution/rules.json intents.families",
-    "zing.pinned": "zing/constitution/rules.json (a sibling repository: read when reachable, carried from the last facts.json when not)"
+    "verbs": "constitution/rules.json intents.families"
   }
 }

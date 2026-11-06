@@ -30,7 +30,6 @@
     <li><a aria-current="page" href="tour.html">The tour</a></li>
     <li><a href="../tools/ui-audit.html">UI audit</a></li>
     <li><a href="screenshots.html">Screenshots</a></li>
-    <li><a href="quick-win.html">A quick win</a></li>
   </ul>
 </nav>
 </div>
@@ -142,13 +141,6 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Every case on the site is a real run, and each case states its limits. This is the style of the whole project.</aside>
       </article>
 
-      <article class="scene-card" id="scene-quickwin" data-scene="quickwin" data-page="quick-win.html" hidden>
-        <h3 class="scene-title">A quick win on the Zing site took forty-seven minutes and found the site clean.</h3>
-        <p>The run declared three surfaces, found the declarations clean in the verifier, and audited ten pages.</p>
-        <p>The audit reported one finding, on a redirect page that nobody reads.</p>
-        <p>An hour of work tells a team where it stands.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> A clean result is still a result, so present it without apology.</aside>
-      </article>
 
       <article class="scene-card" id="scene-build" data-scene="build" data-page="build.html" hidden>
         <h3 class="scene-title">In CI, the verifier reports a refusal as an exit code.</h3>
@@ -242,7 +234,6 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
     <div class="bar">
       <div class="row">
         <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
-        <a class="leaves" href="https://mayouni.github.io/zing/" target="_blank" rel="noopener">Zing</a>
         <a href="../LICENSE">LICENSE</a>
       </div>
       <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
@@ -260,7 +251,7 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
 
 <script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
-<script>window.TOUR_PROFILES = {"ux":["hook","compare","grid","channels","refusal","webcase","limits","next-ux"],"product":["hook","refusal","grid","webcase","quickwin","compare","limits","next-product"],"programmer":["hook","refusal","build","conformance","haro","quickwin","limits","next-programmer"],"ai":["hook","generate","refusal","law","channels","conformance","limits","next-ai"],"decision":["hook","cost","law","grid","webcase","compare","limits","next-decision"]}; window.TOUR_NAMES = {"ux":"UX designer","product":"Product designer","programmer":"Programmer","ai":"AI builder","decision":"Decision maker"};</script>
+<script>window.TOUR_PROFILES = {"ux":["hook","compare","grid","channels","refusal","webcase","limits","next-ux"],"product":["hook","refusal","grid","webcase","cost","compare","limits","next-product"],"programmer":["hook","refusal","law","build","conformance","haro","limits","next-programmer"],"ai":["hook","generate","refusal","law","channels","conformance","limits","next-ai"],"decision":["hook","cost","law","grid","webcase","compare","limits","next-decision"]}; window.TOUR_NAMES = {"ux":"UX designer","product":"Product designer","programmer":"Programmer","ai":"AI builder","decision":"Decision maker"};</script>
 <script src="tour.js?v=4e80dc32"></script>
 </body>
 </html>
