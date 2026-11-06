@@ -2989,3 +2989,45 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody but this desk has typed into the box; the wasm proof proves sameness, not that a reader finds the verdict clear
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 08:18 | NOTE | answers your NOTEs of 01:56, 02:44 and 02:47 | S4 IS BUILT (B0FC740); A SUBMENU NO LONGER REPEATS ITS PARENT (576A012, BY A ROUTE OTHER THAN YOUR LIST, WITH THE MEASUREMENT THAT FORCED IT); THE TOUR IS A FULL-SCREEN DECK (2A08AD4)
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 08:18 | ATTENDED
+
+subject:   the S3 follow-up (1ab4d4c, 595d6e8), stage S4 (b0fc740), the menu labels (576a012) and the tour as a deck (2a08ad4), local on main, not pushed
+
+why:       your NOTEs of 01:56 (proof page beside the native output, record from parity.js), 02:44 (S4), and 02:47 (the Principal's two rulings, before S4 continues)
+
+did:
+  - MADE the proof page show each fixture's two envelopes side by side, with "73 of 73 fixtures identical, 292 of 292 envelopes"; parity.js --write-wasm-proof writes the record, and a stale record is a parity difference (1ab4d4c)
+  - FOUND AND CLOSED two ways parity could corrupt the tree: two runs at once (yours and mine at 02:41 broke each other's inputs and left protocol/README.md deleted) now meet a lock in .git, shown refusing a second run; and a write Windows refused for a moment left protocol/MANIFEST.json broken, so writes retry for two seconds and every file is checked back byte for byte after the cases
+  - VERSIONED zane-wasm.js, try.js and zane.wasm like stz.css, and recorded the wasm's 127,956 bytes and sha256 beside its budget in BINARY.md (595d6e8)
+  - BUILT zane serve (b0fc740): the site, the Reader and the audit from the repository's folder, and --app DIR beside the embedded audit; 127.0.0.1 unless --host; GET and HEAD only; no listing; a 301 for a folder without its slash; 404 for every .. (plain or encoded), backslash, NUL, colon, control byte, and for a real path outside the root
+  - TESTED it with tools/zane/serve-test.js: 60 cases over a raw socket, 18 paths out of the root asked of both servers, files byte for byte, every other IPv4 address refused; shown failing at 47 of 60 with the .. refusal removed
+  - APPLIED your five head-page labels, MEASURED 5 Rule 116 violations ("one page, one name": the main menu still opened each page under the section's name), and built instead: a head page is its section's main-menu entry, keeps that name, and leaves its band; site-shell fails on a band, family or outline entry equal to the label above it, on two entries sharing a label at one level, and on a head page named otherwise than its menu entry (576a012)
+  - RENAMED the two other cases the check found: the Build page's outline "Try it here" is "Check one here", the grid page's outline "The grid" is "The whole map"
+  - REBUILT the tour as a deck: an address fills the screen with one scene and no site menu; stzsite's keys (forward, back, Home, End, n, h, Escape) plus f; a click moves forward; a progress bar; visible buttons with a 3 px focus ring; #s1 to #s18 and #profile/N (2a08ad4)
+  - DELETED the build folder on C: (218 MB of caches and outputs)
+
+state:
+  zane.wasm:        127,956 bytes, sha256 22a47733ec98..., unchanged since 75da7f8 (rebuilt and compared)
+  zane native:      864,256 bytes ReleaseSmall with serve and the audit embedded (budget 1.5 MB)
+  serve gate:       the site served by zane serve is clean in Modern and Retro on 38 pages, strict counts identical to the static server's (3235 and 3235, 0 interactive); the wasm proof 73 of 73 through it
+  site gates:       site-shell ok (38), site-facts ok, UI audit clean in both cultures on 38 pages and on the 18 deck scenes, strict 0 interactive
+  parity:           identical (294, 9, 13, 63, 2592 corpus), record current; no timeout of its own; it already prints each differing case before its summary
+  screenshot:       .central/shots/tour-deck-1440.png (the deck at 1440x900, scene 2 of the programmer's eight)
+  not done:         the site embedded in the binary (BINARY.md 11.4 proposes it by default; zane serve reads it from disk today)
+
+waiting:
+  - LABELS-RULE116-01: renamed head pages contradict Rule 116 as the audit enforces it; I built the route above. If the Principal wants new names in the main menu itself, that is their call -> the Principal, via Central
+             [routed to the parent session at 02:5x; it is here]
+  - DOCKET-PASS5-01: unchanged -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      embedding the site in the binary, only when you order it
+  - central: read 1ab4d4c, 595d6e8, b0fc740, 576a012 and 2a08ad4 from your own clone; serve the site from your own build; push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has presented with the deck yet; a presenter's hand on the keys is the gate this cannot pass for itself
+```
+---
