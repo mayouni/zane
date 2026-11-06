@@ -226,6 +226,9 @@ nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: 400
 nav.list3.sections { border-left: 0; padding-left: 0; }
 nav.list3.sections .outline-title { padding: 0; margin: 0 0 1rem; }
 nav.list3.sections > ul { border-left: 1px solid var(--line); padding-left: .9rem; }
+nav.list3.sections > ul + .outline-title { margin-top: 1.6rem; }
+/* a family's page names, listed on its head page, wrap rather than be cut, as they do in the family's own list */
+nav.list3.sections > ul > li > a { white-space: normal; }
 nav.list3 .sub { margin: 0 0 .3rem; }
 nav.list3 .sub a { padding-left: 1.4rem; }
 @media (max-height: 640px) { nav.list3 { position: static; } }

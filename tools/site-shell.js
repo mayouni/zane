@@ -228,6 +228,18 @@ function list3(p, secs) {
   const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
   if (f) {
     const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>${q === p ? subs : ''}</li>`;
+    /* a family's head is named in the band, not in its family's list, so its sections cannot hang under an entry of that list without
+       repeating the band's label on one screen: it shows its own outline, then its family, each under a label (Central, 2026-11-06) */
+    if (p === f.head) return `<nav class="list3 sections" aria-label="Sections of this page and pages of its family">
+${own ? `  <p class="outline-title">On this page</p>
+  <ul>
+${own.map(x => `    <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}
+  </ul>
+` : ''}  <p class="outline-title">In this family</p>
+  <ul>
+${f.kids.map(li).join('\n')}
+  </ul>
+</nav>`;
     return `<nav class="list3" aria-label="Pages of the family">
   <ul>
 ${f.kids.map(li).join('\n')}
@@ -404,8 +416,8 @@ function apply(p, text) {
     const shown = [...SECTIONS.map(s => ['the main menu', s.label]), ...(bandOf(p.section) || []).map(q => ['the band', q.label])];
     const fam = familyOf(p);
     if (fam && !p.outside) shown.push(...fam.kids.map(q => ['the family list', q.label]));
-    // the outline is drawn on its own, or under the page's entry in its family's list; a family's head shows its family, not its outline
-    if (secs && secs.length >= SECTION_MIN && (!fam || fam.kids.includes(p))) shown.push(...secs.map(x => ['the outline', x.label]));
+    // the outline is drawn on its own, under the page's entry in its family's list, or, on a family's head, above its family's list
+    if (secs && secs.length >= SECTION_MIN) shown.push(...secs.map(x => ['the outline', x.label]));
     const key = s => s.trim().toLowerCase().replace(/^the\s+/, '');
     shown.forEach((a, i) => shown.slice(i + 1).forEach(b => {
       if (key(a[1]) === key(b[1])) problems.push('"' + a[1] + '" in ' + a[0] + ' and "' + b[1] + '" in ' + b[0] + ' name the same thing on one page');
