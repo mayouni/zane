@@ -1,0 +1,15 @@
+# Line endings are LF in the repository and in every checkout, whatever core.autocrlf says. Several gates read bytes, not lines:
+# site-facts counts a file's bytes, parity's corpus mutates line endings, and zane embeds pages it serves. A Windows clone with
+# autocrlf=true wrote CRLF and failed three of them (found by Central, 2026-11-06), so the checkout is held to LF here.
+* text=auto eol=lf
+
+# files that are bytes, never text
+*.wasm binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff2 binary
