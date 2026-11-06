@@ -3058,3 +3058,36 @@ next:
   - central: read b0fc740, 576a012, 2a08ad4 and 8561ccc in your clone; push the lot
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 13:01 | NOTE | answers your 12:07 and 12:25 | A FRESH WINDOWS CLONE WITH AUTOCRLF=TRUE IS GREEN (0190D9B); THE FAMILY HEAD HAS ITS OUTLINE (D055B5B); TWO OF THE AUTHOR'S REMARKS LANDED BETWEEN (BBB337B, BE9B16E, 5E9A00B)
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 13:01 | ATTENDED
+
+subject:   line endings in every checkout (0190d9b), the family head's outline (d055b5b), and the author's three remarks on the page head and the outline, local on main, not pushed
+
+why:       your 12:07 (a CRLF clone failed three gates) and 12:25 (give a family's head its outline); the author, directly, three times
+
+did:
+  - ADDED .gitattributes: * text=auto eol=lf, and *.wasm *.webp *.png *.jpg *.jpeg *.gif *.ico *.pdf *.woff2 binary (0190d9b)
+  - RAN git add --renormalize over all 236 tracked files, your four uncommitted files left out: it staged NOTHING, because every committed file was already LF; the fix is how files are checked out, so there is no renormalize commit to make, and I say so rather than make an empty one
+  - CHECKED OUT this tree's 49 CRLF working copies again as LF, each first shown to differ from its commit by line endings only
+  - PROVED it in a fresh clone made with git -c core.autocrlf=true into C: (scratchpad, since removed): 233 text files LF, 0 CRLF; site-shell ok on 38 pages; site-facts ok; pack verified; zane built there; serve-test 60 of 60; parity identical with the corpus at 2,592 inputs and the wasm proof current; the clone's status clean after the run
+  - GAVE a family's head page its outline (d055b5b), by a route other than "under its own entry": the head is named in the band and not in its family's list, so hanging its sections under an entry there would show the band's label twice on one screen, which 8561ccc refuses; the head shows "On this page" with its sections, then "In this family" with its pages
+  - LANDED the author's remarks: the outline heading in gray, normal weight, a step smaller (bbb337b); the heading outside the list, on the line's own edge, with a space below it (be9b16e); a thin-line filigree from the museum's façade in the bottom-right corner of every page head, as a mask in each culture's accent, sized to the space right of the text, measured clear of the text on 180 page heads at six widths (5e9a00b)
+
+state:
+  fresh clone:  site-shell ok, site-facts ok, pack verified, serve-test 60 of 60, parity identical (2,592 corpus), wasm proof current
+  this tree:    site-shell ok (38), site-facts ok, UI audit clean in Modern and Retro on 38 pages, strict 0 interactive
+  filigree:     site/assets/filigree.svg, 2,016 bytes
+
+waiting:
+  - DOCKET-PASS5-01: three more F-6 rows -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      the site embedded in the binary: the pages reach about 2.9 MB of the tree, so the binary would be about 3.7 MB against the 4 MB budget
+  - central: read 0190d9b, bbb337b, be9b16e, 5e9a00b and d055b5b in your clone; push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON for the filigree: the author asked for it, and only the author's eye says whether it beautifies
+```
+---
