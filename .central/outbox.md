@@ -3091,3 +3091,34 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON for the filigree: the author asked for it, and only the author's eye says whether it beautifies
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 13:10 | NOTE | follows my memo of 60e57dc | SEVEN OF THE AUTHOR'S REMARKS (A336DE1); ONE TURNS YOUR 12:25: A FAMILY HEAD SHOWS ITS OWN OUTLINE ONLY, NO SECOND LIST
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 13:10 | ATTENDED
+
+subject:   the top bar, quiet links, the family line in the footer, no tooltips, no tinted entries, no filigree in Retro, one list on a family head (a336de1), local on main, not pushed
+
+why:       the author, directly, seven remarks in one message; one of them ("what's the hell is this ... a whole new square of navigation") is the "In this family" list that d055b5b drew on your 12:25 decision
+
+did:
+  - ENLARGED the top bar's words (1.2rem, the brand 1.3rem, the band 1.1rem) and MOVED the GitHub mark and the style select to its right, out of the footer
+  - QUIETED links: the link colour only, underlined under the pointer or the keyboard's focus, never bold
+  - ADDED "Zane is a Softanza project." to the footer of every page
+  - REMOVED every tooltip (title attributes, and five SVG titles now desc); site-shell.js fails on either; WRITING.md rule 11
+  - REMOVED the tinted background of the outline's current and hovered entries (bold ink, and the link colour under the pointer)
+  - LIMITED the filigree to Modern
+  - TURNED a family head back to its own outline only: the "In this family" list is gone, its pages are reached from its body
+
+state:
+  gates:     site-shell ok (38), site-facts ok, UI audit clean in Modern and Retro on 38 pages, strict 0 interactive
+  open:      a link told by colour alone (WCAG 1.4.1) is not measured by any instrument here; recorded in the docket
+
+waiting:
+  - DOCKET-PASS5-01: seven more F-6 rows -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      the site embedded in the binary
+  - central: read a336de1 with 0190d9b to d055b5b; push by sha
+```
+---
