@@ -7,7 +7,7 @@
   const out = document.getElementById('try-result'), button = form.querySelector('button');
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
   let zane;
-  try { zane = await ZaneWasm.load('zane.wasm'); } catch (e) {
+  try { zane = await ZaneWasm.load(form.dataset.wasm); } catch (e) {
     out.replaceChildren(el('p', 'try-verdict bad', 'The verifier could not load in this browser: ' + e.message + '.'));
     return;
   }

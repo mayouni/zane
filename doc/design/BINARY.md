@@ -128,7 +128,7 @@ keep the site honest while everything else is rebuilt, and they are the cheapest
 |---|---|---|
 | native binary, core and shell, no site embedded | **at most 1.5 MB**, `ReleaseSmall` | a verifier and a small server; the data embedded is about 250 KB (violations 26, media 9, signal 21, manifest 19, schema 7, plus the rules' file at 172 for `pack`) |
 | native binary with the site embedded | **at most 4 MB** | the site tree is 626 KB, of which the photograph is 382 KB; the Reader 203 KB; the language docs 50 KB; before any compression |
-| the wasm module | **at most 150 KB**, no data | tables only, no server |
+| the wasm module | **at most 150 KB**, no data | tables only, no server. **Measured 2026-11-06**: `site/zane.wasm`, `ReleaseSmall`, **127,956 bytes**, sha256 `22a47733ec98fb274fe9ad4de73459117ad304ded7c9a43497749efe10409cfa`, with the contract (26 KB) embedded; no imports |
 | `zane check` on one fixture | **under 20 ms** wall, cold, on this machine | the JavaScript's cost, including Node's own start, is the figure to beat; measured as a distribution, not a single run |
 | `zane conformance` | **under 1 s** | |
 

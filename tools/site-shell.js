@@ -38,9 +38,12 @@ const ROOT = path.join(__dirname, '..');
    ends so the hash is the same on every checkout. A changed file changes its address: nothing to remember, and a returning
    reader is never served an older stylesheet under a newer page. Written by --write, and the check fails on any page whose
    query differs from the file's hash. */
-const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js', 'tour.js'];
-const assetHash = name => crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'site', name), 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 8);
-const ASSET_RE = new RegExp('((?:href|src)=")([^"?]*?(' + ASSETS.map(a => a.replace('.', '\\.')).join('|') + '))(?:\\?v=[0-9a-f]{8})?"', 'g');
+const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js', 'tour.js', 'zane-wasm.js', 'try.js', 'zane.wasm'];
+/* a text asset is hashed with its line endings normalised, the wasm on its bytes; the wasm's address sits in a data-wasm attribute,
+   which the script that loads it reads, so a rebuilt wasm is never served from a stale cache */
+const assetHash = name => crypto.createHash('sha256').update(name.endsWith('.wasm') ? fs.readFileSync(path.join(ROOT, 'site', name))
+  : fs.readFileSync(path.join(ROOT, 'site', name), 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 8);
+const ASSET_RE = new RegExp('((?:href|src|data-wasm)=")([^"?]*?(' + ASSETS.map(a => a.replace('.', '\\.')).join('|') + '))(?:\\?v=[0-9a-f]{8})?"', 'g');
 
 /* ---- the structure --------------------------------------------------------------------------- */
 const SECTIONS = [
