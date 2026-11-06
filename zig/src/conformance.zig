@@ -56,7 +56,7 @@ fn addOnce(a: Allocator, list: *std.ArrayList([]const u8), s: []const u8) !void 
 }
 
 /// The specification's version, read from its heading as conformance.js reads it.
-fn specVersion(md: []const u8) []const u8 {
+pub fn specVersion(md: []const u8) []const u8 {
     var lines = std.mem.splitScalar(u8, md, '\n');
     while (lines.next()) |line| {
         var r = line;

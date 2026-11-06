@@ -2,10 +2,14 @@
 //!
 //!   zane check <file.zane> [file.zane ...] [options]     the verifier, text or --json (the C2 envelope)
 //!   zane conformance [--level N] [--verbose]            the suite and its cross-checks, in one process
+//!   zane pack [--check]                                the protocol pack's manifest, written or verified
+//!   zane cross-medium [spec.json] [--verbose]          one declaration, two renderings, one law
+//!   zane audit-facts [facts.json] [--rules 62,105]     the screenshot audit's facts and its decisions
 //!   zane version                                       the law, the language, the contract, the build
 //!
-//! Stage S1 carries `check` and `version`; stage S2 adds `conformance` (conformance.zig). Each prints byte for byte
-//! what tools/zane/cli.js and tools/zane/conformance.js print, which tools/zane/parity.js proves. Exit codes: 0 clean
+//! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`. Each
+//! prints byte for byte what its JavaScript prints (tools/zane/cli.js, conformance.js, pack.js, cross-medium.js and
+//! doc/design/audit/check-facts.js), which tools/zane/parity.js proves. Exit codes: 0 clean
 //! or conforming, 1 violations or mismatches found, 2 usage or read error. The usage text is cli.js's, so that
 //! the two stay byte for byte the same; it names check only.
 
@@ -14,6 +18,9 @@ const builtin = @import("builtin");
 const core = @import("core.zig");
 const contract_mod = @import("contract.zig");
 const conformance = @import("conformance.zig");
+const pack = @import("pack.zig");
+const crossmedium = @import("crossmedium.zig");
+const facts = @import("facts.zig");
 
 const language_version = "1.5";
 
@@ -177,6 +184,24 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
         }
         return conformance.run(a, out, level.?, verbose);
     }
+    // the other S2 commands, each reading its arguments as its script does
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "pack")) {
+        var check = false;
+        for (argv[1..]) |x| if (std.mem.eql(u8, x, "--check")) {
+            check = true;
+        };
+        return pack.run(a, out, err, check);
+    }
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "cross-medium")) {
+        var verbose = false;
+        var spec: ?[]const u8 = null;
+        for (argv[1..]) |x| {
+            if (std.mem.eql(u8, x, "--verbose")) verbose = true;
+            if (spec == null and !std.mem.startsWith(u8, x, "--")) spec = x;
+        }
+        return crossmedium.run(a, out, err, spec, verbose);
+    }
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "audit-facts")) return facts.run(a, out, argv[1..]);
     const o = try parseArgs(a, argv);
 
     if (o.command != null and std.mem.eql(u8, o.command.?, "version") and !o.help) return version(out);
@@ -345,7 +370,7 @@ fn writeJsonReport(
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane (stage S2: check, conformance) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane (stage S2: check, conformance, pack, cross-medium, audit-facts) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",
@@ -359,4 +384,5 @@ fn version(out: *std.Io.Writer) !u8 {
 test {
     _ = contract_mod;
     _ = @import("schema.zig");
+    _ = @import("js.zig");
 }

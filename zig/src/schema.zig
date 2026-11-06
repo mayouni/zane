@@ -50,7 +50,7 @@ const PatternParser = struct {
         while (self.i < self.p.len and self.p[self.i] != '|' and self.p[self.i] != ')') {
             const c = self.p[self.i];
             self.i += 1;
-            var node: Node = switch (c) {
+            const node: Node = switch (c) {
                 '^' => .bol,
                 '$' => .eol,
                 '.' => .any,
@@ -86,14 +86,33 @@ const PatternParser = struct {
                     piece.min = 0;
                     self.i += 1;
                 },
-                '{' => return error.UnsupportedPattern,
+                '{' => {
+                    // {n}, {n,} or {n,m}
+                    self.i += 1;
+                    const lo = try self.number();
+                    var hi = lo;
+                    if (self.i < self.p.len and self.p[self.i] == ',') {
+                        self.i += 1;
+                        hi = if (self.i < self.p.len and self.p[self.i] == '}') inf else try self.number();
+                    }
+                    if (self.i >= self.p.len or self.p[self.i] != '}' or hi < lo) return error.UnsupportedPattern;
+                    self.i += 1;
+                    piece.min = lo;
+                    piece.max = hi;
+                },
                 else => {},
             };
             if ((node == .bol or node == .eol) and (piece.min != 1 or piece.max != 1)) return error.UnsupportedPattern;
-            node = piece.node;
             try seq.append(self.a, piece);
         }
         return seq.toOwnedSlice(self.a);
+    }
+
+    fn number(self: *PatternParser) PatternError!u32 {
+        const start = self.i;
+        while (self.i < self.p.len and std.ascii.isDigit(self.p[self.i])) self.i += 1;
+        if (self.i == start) return error.UnsupportedPattern;
+        return std.fmt.parseInt(u32, self.p[start..self.i], 10) catch error.UnsupportedPattern;
     }
 
     fn class(self: *PatternParser) PatternError!Class {
@@ -407,4 +426,13 @@ test "the schema's own patterns" {
     try std.testing.expect(!try regexTest(a, lang, "Zane"));
     try std.testing.expect(try regexTest(a, "b", "abc"));
     try std.testing.expectError(error.UnsupportedPattern, regexTest(a, "\\d+", "1"));
+    // the facts schema's patterns
+    const sha = "^[0-9a-f]{64}$";
+    try std.testing.expect(try regexTest(a, sha, "bbf131a966299b3adb1900625d7957118556e7575e22de748970cf55208c9780"));
+    try std.testing.expect(!try regexTest(a, sha, "bbf131a966299b3adb1900625d7957118556e7575e22de748970cf55208c978"));
+    try std.testing.expect(!try regexTest(a, sha, "Bbf131a966299b3adb1900625d7957118556e7575e22de748970cf55208c9780"));
+    try std.testing.expect(try regexTest(a, "^L[0-9]+$", "L12"));
+    try std.testing.expect(!try regexTest(a, "^L[0-9]+$", "L"));
+    try std.testing.expect(try regexTest(a, "^a{2,}$", "aaaa"));
+    try std.testing.expect(!try regexTest(a, "^a{2,3}$", "aaaa"));
 }
