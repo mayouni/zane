@@ -393,12 +393,21 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 }
 
 /* ---- the front page (SITE-3.md section 2) ---- */
-/* The photograph is the National Museum of Niamey, provided by the author on 2026-11-04 (site/assets/niamey-national-museum.webp, 382,022 bytes,
-   sha256 bbf131a966299b3adb1900625d7957118556e7575e22de748970cf55208c9780). Its brightest pixel under the panel is pure white (read from the file in a
-   browser), so the panel is 80% of #121413: white text over it is 10.1 to 1 at the worst pixel. */
+/* The photograph is the National Museum of Niamey, provided by the author: by day for Modern (2026-11-04) and by night for Retro (2026-11-06:
+   "use this version for the retro vibe, while optimising the weights of the two images for better speed of display"). Each is WebP in widths
+   the browser chooses from, and both are lazy, so only the one the theme shows is fetched:
+     by day   1699 px 318,130 bytes (was 382,022), 1280 px 200,812, 800 px 94,424; quality 72, the door's detail unchanged to the eye
+     by night 1380 px 48,156 bytes, 800 px 24,680; quality 78, from the author's 156,449-byte JPEG
+   The brightest pixel under the panel is pure white by day (read from the file in a browser), so the panel is 80% of #121413: white text over
+   it is 10.1 to 1 at the worst pixel, and the night photograph is darker everywhere under the panel. */
 /* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file) */
 .hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: #15110d; overflow: hidden; }
 .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+/* Modern shows the museum by day, Retro by night; the night photograph's door stands left of its centre, so it is drawn from further left to
+   keep the door clear of the panel */
+.hero img.night { display: none; object-position: 12% 50%; }
+[data-vibe="guardian"] .hero img.day { display: none; }
+[data-vibe="guardian"] .hero img.night { display: block; }
 /* The hero's panel is a rectangle on the left half of the photograph, and it never covers the museum's door at the photograph's centre (the
    author, 2026-11-05: "now it is so large and hides the door! please think in terms of visual equilibrium: put the title on two lines if
    necessary"). Its right edge stops at the middle of the window, a rem short of it, and it is never wider than 36rem nor narrower than 22rem

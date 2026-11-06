@@ -39,7 +39,7 @@ function gridTable() {
   }).join('\n');
   return `<div class="scroll">
 <table class="gridmap">
-  <caption>The coverage grid: each channel, and what a person does there. A cell reads <b>rules written for it · fixtures on it</b>.</caption>
+  <caption>The coverage grid: each channel, and what a user does there. A cell reads <b>rules written for it · fixtures on it</b>.</caption>
   <thead><tr><th scope="col">Channel</th>${head}</tr></thead>
   <tbody>
 ${rows}

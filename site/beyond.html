@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Beyond screens — checking interfaces that have no screen</title>
-<meta name="description" content="Zane checks interfaces with no screen, such as a voice line, a status chime, an agent surface or a sign, against what a person must be able to do there. The page runs four declarations through the verifier, says what each channel decides, names the two rules for agent surfaces, and shows which cells of the grid have no rule.">
+<meta name="description" content="Zane checks interfaces with no screen, such as a voice line, a status chime, an agent surface or a sign, against what a user must be able to do there. The page runs four declarations through the verifier, says what each channel decides, names the two rules for agent surfaces, and shows which cells of the grid have no rule.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c10cca6e">
+<link rel="stylesheet" href="stz.css?v=d24d9f78">
 </head>
 <body>
 
@@ -51,8 +51,8 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Beyond screens</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · for conversational, voice and UI-less applications</p>
-    <h1>Zane checks interfaces with no screen, such as a voice line, a chime, a sign or an agent, against what a person must be able to do there.</h1>
-    <p class="sub">This page applies Zane to interfaces with no screen, such as a phone line, a status chime, an agent that a machine drives and a sign in a lobby, which still promise that a person can leave, can undo and can tell what state the interface is in.
+    <h1>Zane checks interfaces with no screen, such as a voice line, a chime, a sign or an agent, against what a user, a person or an agent, must be able to do there.</h1>
+    <p class="sub">This page applies Zane to interfaces with no screen, such as a phone line, a status chime, an agent that a machine drives and a sign in a lobby, which still promise that a user can leave, can undo and can tell what state the interface is in.
     The verifier ensures that a declaration for such an interface promises only what its channel can carry, and keeps the way out and the state within reach. The page runs four declarations for real and says what each channel decides.</p>
   </div>
 </header>
@@ -101,7 +101,7 @@ check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT
   <div class="narrow">
     <h2 data-outline="An agent">An agent surface that acts and offers no way to cancel</h2>
 
-    <p>An interface for an agent is an interface: the agent is the person at the other end, and the law about leaving and undoing applies to it as much as to anyone. The verifier refuses a flow that places orders and cannot be abandoned:</p>
+    <p>An interface for an agent is an interface: the agent is the user at the other end, and the law about leaving and undoing applies to it as much as to anyone. The verifier refuses a flow that places orders and cannot be abandoned:</p>
     <div class="scene">
 <pre class="shot"><span class="k">DEFINE VIBE</span> <span class="n">agent_api</span> (
   <span class="k">SURFACE_AS</span> <span class="s">machine</span>,

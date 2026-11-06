@@ -6,7 +6,7 @@
 <title>Law — why Zane holds interfaces to a law, and where the case is weak</title>
 <meta name="description" content="The Zane law is a versioned file of rules for business interfaces, so that the recurring defects of interfaces can be refused by name. The page explains why guidelines alone did not hold, what a law stored as data changes, the builds that produced each recent rule, and what the law cannot do.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c10cca6e">
+<link rel="stylesheet" href="stz.css?v=d24d9f78">
 </head>
 <body>
 
@@ -53,7 +53,7 @@
     <p class="kicker">Law · for people deciding whether a law is worth having</p>
     <h1>The Zane law is a versioned file of rules that names the ways interfaces keep decaying, so that each one can be refused by name.</h1>
     <p class="sub">The Zane law is a set of rules for business interfaces stored as one versioned file, and it exists so that the recurring defects of interfaces are refused by citation rather than argued about.
-    The law prevents a build from repeating an inherited convention that harms the person using the screen, because a tool or a reviewer can refuse the convention and cite the rule.
+    The law prevents a build from repeating an inherited convention that harms the user, a person or an agent, because a tool or a reviewer can refuse the convention and cite the rule.
     This page sets out the case for the law in six steps, says where each step can be checked, and then says where the case is weak. The evidence is the author's own builds, recorded as they happened. There is no study,
     and no one outside the project has applied the law to a product of theirs. Of its <span data-law="rules">123</span> rules, a machine can refuse <span data-law="tier:machine">11</span> today.</p>
   </div>
@@ -81,8 +81,8 @@
     <h2 id="the-decay-you-already-know" data-outline="The decay">The inherited conventions that make interfaces decay</h2>
     <p>Most people have used software with the following defects. Its text is small and faint, so a person leans in to read it. Its buttons are
     labelled "OK" and do not say what they will do. A chat launcher floats
-    over the paragraph a person is reading. A breadcrumb shows where a person came
-    from but not where the person could go.</p>
+    over the paragraph a person is reading. A breadcrumb shows where a user came
+    from but not where the user could go.</p>
     <p>A table scrolls sideways next to
     twenty centimetres of empty page. A menu lists a page as top-level
     while the page's own path says that it lives two levels deep.</p>
@@ -119,7 +119,7 @@
         <tr><td>Retired numbers are never reused, so a citation means the same for ever.</td><td><a href="rules.html#changes">How it changes</a>, and the lineage line in <code>rules.json</code>.</td></tr>
       </tbody>
     </table>
-    <p>The law also has a home that prose lacks, which is <b>a language</b>. An interface is declared in Zane as what the person is doing and what stays reachable. The verifier refuses unlawful structure before anything is drawn,
+    <p>The law also has a home that prose lacks, which is <b>a language</b>. An interface is declared in Zane as what the user is doing and what stays reachable. The verifier refuses unlawful structure before anything is drawn,
     and <a href="../tools/ui-audit.html">the UI audit</a> measures what was painted. <a href="how.html">The Language page</a> describes the four steps.</p>
   </div>
 </section>

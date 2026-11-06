@@ -6,7 +6,7 @@
 <title>Claims — five claims about what Zane adds, each with its instrument and its limit</title>
 <meta name="description" content="Zane makes five structural claims about what it adds. Each claim comes with the instrument that shows it and the limit that bounds it, and the page states what is not shown: no study, no user, and no foreign application run end to end.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c10cca6e">
+<link rel="stylesheet" href="stz.css?v=d24d9f78">
 </head>
 <body>
 
@@ -53,7 +53,7 @@
     <p class="kicker">Approach · for a decision maker weighing what is actually new</p>
     <h1>Zane makes five claims about what it adds, and each claim comes with the instrument that shows it and the limit that bounds it.</h1>
     <p class="sub">A claim on this page is a structural statement about what Zane adds, given with an instrument and a limit, so that a reader can test the claim rather than accept it. Each claim lets a reader run a command, or open a file or a page, to check it.
-    The claims are structural, and their only evidence is this repository. <b>There is no study, no user, and no application of anyone else's run end to end.</b> Each claim below says where a reader can see it and what limits it.</p>
+    The claims are structural, and their only evidence is this repository. <b>There is no study, no user, whether a person or an agent, and no application of anyone else's run end to end.</b> Each claim below says where a reader can see it and what limits it.</p>
   </div>
 </header>
 
@@ -79,13 +79,13 @@
     <h2 data-outline="How to read claims">How each claim is stated, and what the claims do not say</h2>
     <p>A claim of novelty costs nothing to make, and a claim with an instrument can be tested. Each of the five claims has a command, a file or a page that a reader can run or open, and a limit written beside it.</p>
     <p>The claims concern <em>structure</em>: how the pieces are arranged, and what a tool can therefore be
-    made to do. They do not claim that interfaces built this way are better for the people who use them. Nothing here measures that, and the practices that do measure it, usability testing above all, are not replaced (<a href="positioning.html">Comparison</a>).</p>
+    made to do. They do not claim that interfaces built this way are better for their users. Nothing here measures that, and the practices that do measure it, usability testing above all, are not replaced (<a href="positioning.html">Comparison</a>).</p>
   </div>
 </section>
 
 <section class="alt" id="claim-1-intent-not-widgets">
   <div class="narrow">
-    <h2 data-outline="Intent as the unit">The claim that the unit of declaration is what a person is doing</h2>
+    <h2 data-outline="Intent as the unit">The claim that the unit of declaration is what a user is doing</h2>
     <p><b>The claim.</b> A surface is declared by its intent, in a closed vocabulary of <span data-fact="verbs">22</span> verbs and <span data-fact="kinds">10</span> kinds of declaration, with no widget in it. A widget is a consequence of an intent and never a primitive.</p>
     <p><b>The instrument.</b> The instrument is the grammar and the verifier, with a suite of <span data-fact="fixtures.total">73</span> fixtures whose verdicts are known. <a href="how.html">The Language page</a> walks through the grammar, and <a href="refusal.html">What it refuses</a> runs the verifier.</p>
     <p class="limit"><b>Limit:</b> the vocabulary was closed by reasoning about interfaces, and it has been exercised on this project's own fixtures and sites. No team outside the project has declared one of its own products in it.</p>
@@ -108,7 +108,7 @@
     <p><b>The claim.</b> The verifier refuses by name a flow with no exit, an act with no undo and a promise that a channel cannot carry, from the declaration alone, before there is a screen to inspect.</p>
     <p><b>The instrument.</b> The instrument is the verifier and its suite: <span data-fact="fixtures.refused">46</span> of the <span data-fact="fixtures.total">73</span> fixtures are refusals, and <span data-fact="fixtures.twins">22</span> are lawful twins that differ from a refusal by one change, so that a tool which refuses everything fails. A reader runs the suite with
     <code>node tools/zane/conformance.js</code>.</p>
-    <p class="limit"><b>Limit:</b> the claim covers only what a declaration can decide. Measuring a painted layout belongs to the audit, so the suite holds <span data-fact="fixtures.level4">0</span> fixtures at the level of a rendered surface, by design. This claim does not decide whether a person finds the result usable.</p>
+    <p class="limit"><b>Limit:</b> the claim covers only what a declaration can decide. Measuring a painted layout belongs to the audit, so the suite holds <span data-fact="fixtures.level4">0</span> fixtures at the level of a rendered surface, by design. This claim does not decide whether a user finds the result usable.</p>
   </div>
 </section>
 
@@ -134,7 +134,7 @@
   <div class="narrow">
     <h2 data-outline="What is not shown">What the claims do not show: no study, no user and no foreign application</h2>
     <ul>
-      <li><b>No study.</b> Nothing here measures whether a person does better with an interface made this way.</li>
+      <li><b>No study.</b> Nothing here measures whether a user does better with an interface made this way.</li>
       <li><b>No user.</b> No person has perceived any channel for the grid, and only the project's own people have looked at the pages.</li>
       <li><b>No foreign application run end to end.</b> The one real application planned as a case belongs to another project and has not been run, and the screenshot audit has never been run on a real application. <a href="conformance.html#status">The status board</a> lists what exists, what is designed and what is held.</li>
     </ul>

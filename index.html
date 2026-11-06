@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zane — the compilable language for user interfaces</title>
-<meta name="description" content="Zane is a declarative, compilable language for user interfaces that states what a person is doing. Its law refuses a declaration that breaks a rule, and names the rule, before anything is drawn.">
+<meta name="description" content="Zane is a declarative, compilable language for user interfaces that states what a user is doing. Its law refuses a declaration that breaks a rule, and names the rule, before anything is drawn.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='system-ui' font-weight='900' font-size='22' text-anchor='middle' fill='%23e04a6e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="site/stz.css?v=c10cca6e">
+<link rel="stylesheet" href="site/stz.css?v=d24d9f78">
 </head>
 <body class="front">
 
@@ -37,11 +37,16 @@
 </div>
 <!-- /shell:menu -->
 
-<!-- The photograph is the National Museum of Niamey, provided by the author on 2026-11-04. It is read from site/assets/ and never from the author's
-     temporary folder; its size, its hash and the contrast of the text over it are recorded beside the rule in site/stz.css. -->
+<!-- The photograph is the National Museum of Niamey, by day in Modern and by night in Retro, both provided by the author (2026-11-04 and
+     2026-11-06). Each comes in widths the browser chooses from (srcset), and both are lazy, so a browser fetches only the one its theme shows.
+     Their sizes, hashes and the contrast of the text over them are recorded beside the rule in site/stz.css. -->
 <header class="hero">
-  <img src="site/assets/niamey-national-museum.webp" width="1699" height="926"
+  <img class="day" src="site/assets/niamey-national-museum.webp" width="1699" height="926" loading="lazy"
+       srcset="site/assets/niamey-national-museum-800.webp 800w, site/assets/niamey-national-museum-1280.webp 1280w, site/assets/niamey-national-museum.webp 1699w" sizes="(orientation: portrait) 183vh, 100vw"
        alt="The National Museum of Niamey: a white facade with blue geometric reliefs and a blue door, above terraced stone steps with blue flower pots.">
+  <img class="night" src="site/assets/niamey-national-museum-night.webp" width="1380" height="752" loading="lazy"
+       srcset="site/assets/niamey-national-museum-night-800.webp 800w, site/assets/niamey-national-museum-night.webp 1380w" sizes="(orientation: portrait) 183vh, 100vw"
+       alt="The National Museum of Niamey at night: the white facade with its blue reliefs under a deep blue sky, the lit door, and lanterns on the stone steps.">
   <div class="panel">
     <h1>The compilable language for user interfaces</h1>
     <p>Declare what a person or agent is doing, in Zane. A law refuses the rest, by name, before anything is drawn.</p>
@@ -54,7 +59,7 @@
   <div class="narrow">
     <div class="messages">
       <div class="card"><h2>A Zane declaration states intent, not widgets</h2>
-        <p>A Zane declaration states what a person comes to an interface to do: discover, compare, act and undo. The screen follows from the declaration.</p>
+        <p>A Zane declaration states what a user, a person or an agent, comes to an interface to do: discover, compare, act and undo. The screen follows from the declaration.</p>
         <a href="site/thinking.html">The thinking →</a></div>
       <div class="card"><h2>The law refuses a declaration and names the rule</h2>
         <p>The law refuses a flow with no exit or an act with no undo, and each refusal cites the rule, the article and the right that it rests on.</p>
@@ -63,7 +68,7 @@
         <p>One declaration can serve a screen, a voice, a printed page or a machine reader. The law refuses a declaration when its channel cannot carry a promise that the declaration makes.</p>
         <a href="site/media.html">The channels →</a></div>
       <div class="card"><h2>The grid shows what the law covers in every channel</h2>
-        <p>The grid crosses what a person does with every channel. It shows the rules on each cell that has one, and it draws the empty cells empty.</p>
+        <p>The grid crosses what a user does with every channel. It shows the rules on each cell that has one, and it draws the empty cells empty.</p>
         <a href="site/grid.html">The grid →</a></div>
       <div class="card"><h2>Zane compared with the practices you already use</h2>
         <p>The comparison sets Zane beside heuristics, accessibility standards, design systems, UI frameworks and description languages, and it reads each one from its own page.</p>

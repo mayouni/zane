@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forms — violations that blame the person or hide the question</title>
-<meta name="description" content="A form is a conversation in which the system asks a person questions. This page shows two violations of forms, the accusing error message that blames the person (Rule 40) and the placeholder label that vanishes during the answer (Rule 28), each beside its lawful twin.">
+<title>Forms — violations that blame the user or hide the question</title>
+<meta name="description" content="A form is a conversation in which the system asks a user questions. This page shows two violations of forms, the accusing error message that blames the user (Rule 40) and the placeholder label that vanishes during the answer (Rule 28), each beside its lawful twin.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../stz.css?v=c10cca6e">
+<link rel="stylesheet" href="../stz.css?v=d24d9f78">
 <link rel="stylesheet" href="../gotchas.css?v=84769739">
 </head>
 <body>
@@ -52,10 +52,10 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zane</a><span class="sep">›</span><a href="../why.html">Law</a><span class="sep">›</span><a href="./">What a violation feels like</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Forms</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Gotchas · the forms family</p>
-    <h1>A form is a conversation in which the system asks a person questions.</h1>
-    <p class="sub">A form is the part of an interface through which the system asks a person for the information it needs.
-    The rules of forms keep the question visible while the person answers it, and they prevent the system from blaming the person for its own confusion.
-    The two violations on this page break the conversation from both sides: an error message that blames the person for the system's confusion, and a question that vanishes
+    <h1>A form is a conversation in which the system asks questions of a user, a person or an agent.</h1>
+    <p class="sub">A form is the part of an interface through which the system asks a user for the information it needs.
+    The rules of forms keep the question in view while a person answers it, and they prevent the system from blaming the user for its own confusion.
+    The two violations on this page break the conversation from both sides: an error message that blames the user for the system's confusion, and a question that vanishes from sight
     as soon as the person starts to answer it.</p>
   </div>
 </header>
@@ -81,7 +81,7 @@
 
     <!-- INVALID INPUT -->
     <div class="gotcha" id="accuse">
-      <h2 id="1-invalid-input-rule-40-non-accusatory-p">"Invalid input!": an error message that blames the person and does not say how to fix the entry <a class="rule-chip" href="../../constitution/reader/#rule-40">Rule 40 · Non-Accusatory Pathfinding</a></h2>
+      <h2 id="1-invalid-input-rule-40-non-accusatory-p">"Invalid input!": an error message that blames the user and does not say how to fix the entry <a class="rule-chip" href="../../constitution/reader/#rule-40">Rule 40 · Non-Accusatory Pathfinding</a></h2>
       <p class="lead">Type an incomplete email address, for example <code>aminata@</code>, in
       each field, then leave the field with <kbd>Tab</kbd> or by clicking elsewhere.</p>
       <div class="duel">
@@ -90,7 +90,7 @@
             <label class="fldlabel" for="acc-bad">Email</label>
             <input class="fake-field" id="acc-bad" inputmode="email">
             <div class="slot"><span class="err" id="acc-bad-err" style="font-weight:800"></span></div>
-            <p class="quiet">This message blames the person, explains nothing and shouts in red.</p>
+            <p class="quiet">This message blames the user, explains nothing and shouts in red.</p>
           </div>
         </div>
         <div class="pane law"><div class="head">Under the law</div>
@@ -99,13 +99,13 @@
             <input class="fake-field" id="acc-good" inputmode="email">
             <div class="slot"><span class="err" id="acc-good-err"></span></div>
             <p class="quiet">This message states what the system requires, with a verb that
-            tells the person how to fix the entry. The message fades as soon as the person starts to correct the entry.</p>
+            tells the user how to fix the entry. The message fades as soon as the user starts to correct the entry.</p>
           </div>
         </div>
       </div>
       <p class="why-line"><b>Why it is law:</b> the error is the system's failure to understand the entry, and a
       message that says so calmly keeps the person's dignity and momentum. Every error message must
-      contain a verb that tells the person how to move forward.</p>
+      contain a verb that tells the user how to move forward.</p>
     </div>
 
     <!-- THE VANISHING LABEL -->
@@ -132,7 +132,7 @@
           </div>
         </div>
       </div>
-      <p class="why-line"><b>Why it is law:</b> a form is the system asking a person questions, and a form that
+      <p class="why-line"><b>Why it is law:</b> a form is the system asking a user questions, and a form that
       hides its question during the answer turns the conversation into an interrogation.</p>
     </div>
 

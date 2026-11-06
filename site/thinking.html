@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The approach — Zane starts an interface from what a person is doing</title>
-<meta name="description" content="Zane's approach starts an interface from a declaration of what the person is doing and treats every rendering as a consequence of it. The page explains the approach in eight parts: intent first, a closed set of verbs, rights and articles, one declaration with many renderings, sensors and actuators, culture, style as data, and the questions that are still open. Each part names the document it comes from.">
+<title>The approach — Zane starts an interface from what a user is doing</title>
+<meta name="description" content="Zane's approach starts an interface from a declaration of what the user is doing and treats every rendering as a consequence of it. The page explains the approach in eight parts: intent first, a closed set of verbs, rights and articles, one declaration with many renderings, sensors and actuators, culture, style as data, and the questions that are still open. Each part names the document it comes from.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c10cca6e">
+<link rel="stylesheet" href="stz.css?v=d24d9f78">
 </head>
 <body>
 
@@ -51,8 +51,8 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Approach</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Approach · for a designer who wants the reasoning</p>
-    <h1>Zane's approach declares what a person is doing, and treats every rendering as a consequence of that declaration.</h1>
-    <p class="sub">Zane's approach starts an interface from a declaration of what the person is doing, so that one law can be applied to that declaration in every channel. The approach lets a tool check whether a person can leave, undo and see where they are
+    <h1>Zane's approach declares what a user, a person or an agent, is doing, and treats every rendering as a consequence of that declaration.</h1>
+    <p class="sub">Zane's approach starts an interface from a declaration of what the user is doing, so that one law can be applied to that declaration in every channel. The approach lets a tool check whether a user can leave, undo and see where they are
     before anything has been drawn. This page explains the approach in eight parts: what it inverts, why the vocabulary is closed, what is unified and what stays different, and which questions are still open. Each part names the design
     document it comes from, and says when that document is a proposal and not a ruling.</p>
   </div>
@@ -80,9 +80,9 @@
 <section id="the-inversion">
   <div class="narrow">
     <h2 data-outline="Intent first">Why Zane declares intent first and treats rendering as a consequence</h2>
-    <p>Most UI frameworks begin from a physical assumption, such as screens, widgets and layouts, and try to infer what the person intends. Zane inverts this order. A person comes to an interface to discover, focus,
-    read, compare, select, act, confirm and understand what followed, and not to click a button. Zane declares what the person is doing, and the rendering follows from that declaration. <em>From the founding architecture, section 1.</em></p>
-    <p>This inversion makes correctness checkable. When the unit of declaration is a widget, a tool can check only the widget. When the unit of declaration is what the person is doing, a tool can check whether the person can leave, undo and see where they are,
+    <p>Most UI frameworks begin from a physical assumption, such as screens, widgets and layouts, and try to infer what the user intends. Zane inverts this order. A user comes to an interface to discover, focus,
+    read, compare, select, act, confirm and understand what followed, and not to click a button. Zane declares what the user is doing, and the rendering follows from that declaration. <em>From the founding architecture, section 1.</em></p>
+    <p>This inversion makes correctness checkable. When the unit of declaration is a widget, a tool can check only the widget. When the unit of declaration is what the user is doing, a tool can check whether the user can leave, undo and see where they are,
     before anything has been drawn. The architecture has three layers in a strict order, and each lower layer constrains the layers above it:</p>
     <figure class="figure">
             <svg viewBox="0 0 780 396" role="img" aria-labelledby="lay-t lay-d">
@@ -115,11 +115,11 @@
 <section class="alt" id="why-a-closed-set-of-verbs">
   <div class="narrow">
     <h2 data-outline="The closed verbs">Why the grammar has a closed set of verbs, shared among six activities</h2>
-    <p>The grammar has <span data-fact="verbs">22</span> verbs, and the set is closed on purpose: a new channel adds renderings and never adds verbs. Closure keeps the map of what a person can do in each channel finite, so that a gap is a count and not an opinion.
+    <p>The grammar has <span data-fact="verbs">22</span> verbs, and the set is closed on purpose: a new channel adds renderings and never adds verbs. Closure keeps the map of what a user can do in each channel finite, so that a gap is a count and not an opinion.
     <em>From the founding architecture, section 2.</em></p>
-    <p>The verbs are shared out once each among six activities. Each activity is a question a person asks, in the order a person meets an interface: <b>perceive</b> (whether something is there, and in what state), <b>understand</b>, <b>decide</b>, <b>act</b>,
+    <p>The verbs are shared out once each among six activities. Each activity is a question a user asks, in the order a user meets an interface: <b>perceive</b> (whether something is there, and in what state), <b>understand</b>, <b>decide</b>, <b>act</b>,
     <b>recover</b> and <b>trust</b>.</p>
-    <p>Two of the six activities, perceive and trust, own no verb. A person senses a state before using any verb, and trust is a property of every verb rather than a verb of its own.</p>
+    <p>Two of the six activities, perceive and trust, own no verb. A user senses a state before using any verb, and trust is a property of every verb rather than a verb of its own.</p>
     <p>This choice keeps the map true of a lamp, which has no READ verb and whose
     state a person still perceives across a room. <a href="grid.html">The grid page</a> draws the six activities against the ten channels and shows where the law has nothing to say.</p>
   </div>
@@ -129,7 +129,7 @@
   <div class="narrow">
     <h2 data-outline="Rights and articles">The rights the law guarantees, and the articles each rule derives from</h2>
     <p>Every rule in the constitution states why it exists, because a rule without a reason is a matter of taste. Each rule derives from one of <span data-law="articles">7</span> articles (Calm, Intent Over Mechanics, Visible State, Reversibility, Predictable Authority, Operator Primacy and Vibes, and Amendment),
-    and the law guarantees <span data-law="rights">6</span> rights to the person who uses the interface: the rights to understand, to reverse, to know, to leave, to act without fear, and to reach a human.</p>
+    and the law guarantees <span data-law="rights">6</span> rights to every user of the interface: the rights to understand, to reverse, to know, to leave, to act without fear, and to reach a human.</p>
     <p>A refusal cites the rule, the article and the right it rests on, so a review of the refusals is an audit.
     <a href="rules.html">The rules page</a> shows one rule as the tools load it, who can catch a violation of it today, and how the law changes.</p>
     <p>The law is deliberately narrow: it serves business applications first, for people who use the same screens for hours under pressure. Its stance is stated in four principles: <em>Calm over power, intent over mechanics, visible over hidden, undo is dignity.</em> A rule that needs an
@@ -140,7 +140,7 @@
 <section class="alt" id="one-declaration-many-renderings">
   <div class="narrow">
     <h2 data-outline="Across channels">What is unified across channels and what stays different in each channel</h2>
-    <p>The design rests on one sentence with three parts. <b>One declaration</b> states what the person is doing and what things mean, independent of channel, culture and technology. <b>Many renderings</b> carry that declaration on a screen, in sound, by voice, on a lamp, on a page, on a sign or through an actuator,
+    <p>The design rests on one sentence with three parts. <b>One declaration</b> states what the user is doing and what things mean, independent of channel, culture and technology. <b>Many renderings</b> carry that declaration on a screen, in sound, by voice, on a lamp, on a page, on a sign or through an actuator,
     and each rendering is genuinely different and does not pretend otherwise. <b>One law</b> states the invariant that every rendering must keep, and its court refuses a rendering that breaks it. <em>From the interaction model, section 3.</em></p>
     <p>The model states which parts are unified and which parts must stay separate. The intent, the meaning, the law, the refusal envelope and the question <em>what does this mean, and to whom</em> are unified.</p>
     <p>The way each channel serves an intent, the colour, timbre or word that carries a meaning,
@@ -208,7 +208,7 @@
 <section id="names">
   <div class="narrow">
     <h2 data-outline="The four names">The four names used on this site, and what each one names</h2>
-    <p>Four names appear on this site, and this section defines each one so that a stranger does not have to guess. <b>Zane</b> is the language and the project: declarations of what a person is doing, with their law, their verifier and their tools. Zane was called Zui until 5 November 2026. Inside the Softanza family its formal name is <b>StzZui</b>.</p>
+    <p>Four names appear on this site, and this section defines each one so that a stranger does not have to guess. <b>Zane</b> is the language and the project: declarations of what a user is doing, with their law, their verifier and their tools. Zane was called Zui until 5 November 2026. Inside the Softanza family its formal name is <b>StzZui</b>.</p>
     <p><b>Haro</b> is a language for declaring languages, and Zane is declared a second time in Haro. <b>Softanza</b> is the family of projects that all of this belongs to.</p>
     <p>The reasoning on this page comes from these documents, in this order: <a href="../doc/ARCHITECTURE.md">the founding architecture</a>, <a href="../doc/THE-INTERACTION-MODEL.md">the interaction model</a>, <a href="../doc/SENSORS-AND-ACTUATORS.md">sensors and actuators</a>,
     <a href="../doc/STZSENSE.md">stzSense</a>, <a href="../doc/GUI-SYSTEM.md">a GUI system, read by the law</a>, <a href="../doc/design/COVERAGE.md">the coverage map</a>, and, proposed and not ratified, <a href="../doc/THE-SECOND-FOUNDING.md">the Second Founding</a>.</p>

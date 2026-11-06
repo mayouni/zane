@@ -42,6 +42,10 @@ time because it lived only in a promise, so it is written here and part of it is
    What a tooltip would say goes into a short label that says it. `node tools/site-shell.js` fails on either, with the file and line.
    Asked by the author on 2026-11-06: *"avoid info bulles altogether because they complexify the reading by a volatile additional
    layer! just make small expressive titles"*.
+12. **Who acts through an interface is the user, a person or an agent.** Where the site names who declares, is served or is protected, it
+   says "the user" and makes clear once per page, at its first mention, that a user is a person or an agent; where a sentence is true only of
+   a human (sight, contrast, reading, motion, fatigue, a person's rights), it keeps "person", and the site's own readers stay people. Asked
+   by the author on 2026-11-06: *"Not only 'around a person' but around a user being person or agent, review this in all the site"*.
 
 ## 2. The subject term
 

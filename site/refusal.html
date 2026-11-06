@@ -6,7 +6,7 @@
 <title>What it refuses — how the verifier refuses a declaration, and on what grounds</title>
 <meta name="description" content="A refusal is the verifier's verdict on a declaration that breaks the law. It names the line, the subject, the rule, the article and the right it rests on, in one envelope any tool can read. The page shows one real refusal, its lawful twin, and what the thirty-seven diagnostics can and cannot decide.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c10cca6e">
+<link rel="stylesheet" href="stz.css?v=d24d9f78">
 </head>
 <body>
 
@@ -75,7 +75,7 @@
 <section>
   <div class="narrow">
     <h2 id="one-refusal-read-line-by-line" data-outline="Line by line">One refusal of a declaration, explained line by line</h2>
-    <p>The declaration below describes a three-step account opening in which the person can undo a step and cancel the step, but has no way to leave the whole flow.</p>
+    <p>The declaration below describes a three-step account opening in which the user, a person or an agent, can undo a step and cancel the step, but has no way to leave the whole flow.</p>
     <div class="scene">
 <pre class="shot"><span class="c">// A three-step wizard. The person can undo and cancel, but not leave.</span>
 <span class="k">DEFINE WIZARD</span> <span class="n">account_opening</span> (
@@ -95,7 +95,7 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
       <li><b>The line and the subject</b> (<code>account_opening.zane:2</code>, <code>account_opening</code>) say where the defect is, so an editor can jump to it.</li>
       <li><b>The code</b> (<code>TRAPPED_FLOW</code>) is stable forever. A retired code is never reused, so a rule written against a code keeps its meaning.</li>
       <li><b>The sentence</b> says what is wrong in terms of the declaration, not in terms of any screen.</li>
-      <li><b>The citation</b> says why the declaration is wrong: it names two rules of the law, the article they serve, and the right of the person that is at stake.
+      <li><b>The citation</b> says why the declaration is wrong: it names two rules of the law, the article they serve, and the right of the user that is at stake.
       The verifier issues no refusal that cannot say why.</li>
     </ul>
     <p>The verifier exits with code 1, which is all a CI gate needs. The same declaration with a way out is clean:</p>
@@ -164,7 +164,7 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
     <p>Of the <span data-law="diagnostics">37</span> diagnostics, <span data-fact="diag.citingRules">17</span> cite at least one rule, <span data-fact="diag.articleOnly">8</span> cite
     an article but no rule, and <span data-fact="diag.citeNothing">12</span> cite nothing. The twelve that cite nothing are about the form of the file: a misspelling, a duplicate, or a name or value
     that is not in a closed list.</p>
-    <p>These twelve say that the file is not yet a declaration, and they do not say that a person is harmed. The eight that cite only an article mark places where the law states a principle and has
+    <p>These twelve say that the file is not yet a declaration, and they do not say that a user is harmed. The eight that cite only an article mark places where the law states a principle and has
     no rule narrow enough to point at.</p>
     <p>The grounding of the diagnostics is therefore incomplete, and this page states the gap as a number rather than hiding it. A diagnostic that cites a rule can be traced to its reasons, and a diagnostic that cites no rule
     can be trusted only as far as the grammar.</p>

@@ -6,7 +6,7 @@
 <title>Frameworks and languages — four UI frameworks and five description languages compared with Zane</title>
 <meta name="description" content="Four UI frameworks (React, SwiftUI, Jetpack Compose and Flutter) and five description languages (task models, UIML, XForms, VoiceXML and SCXML) compared with Zane. Each row is written from the framework's or language's own published page and states what Zane takes from it and what it adds.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c10cca6e">
+<link rel="stylesheet" href="stz.css?v=d24d9f78">
 </head>
 <body>
 
@@ -79,7 +79,7 @@
           <td><b>React</b><br><a class="leaves" href="https://react.dev/learn" target="_blank" rel="noopener">react.dev</a></td>
           <td data-label="What it decides, and when">Presented as a way to build an app from components: JavaScript functions that return markup, nested, fed data as props and kept current by state. The page sets rules for writing a component (names, closed tags, where a hook may be called) and says nothing of accessibility.</td>
           <td data-label="What Zane takes">The habit of describing a screen from data and state, and not commanding it.</td>
-          <td data-label="What Zane adds">A declaration of what the person is doing, one level above the component tree. React documents lint rules for its own Rules of React; none of the cited pages is about whether the person can leave or undo.</td>
+          <td data-label="What Zane adds">A declaration of what the user, a person or an agent, is doing, one level above the component tree. React documents lint rules for its own Rules of React; none of the cited pages is about whether the user can leave or undo.</td>
         </tr>
         <tr>
           <td><b>SwiftUI</b><br><a class="leaves" href="https://developer.apple.com/documentation/swiftui" target="_blank" rel="noopener">Apple documentation</a>, <a class="leaves" href="https://developer.apple.com/swiftui/get-started/" target="_blank" rel="noopener">get started</a></td>
@@ -91,7 +91,7 @@
           <td><b>Jetpack Compose</b><br><a class="leaves" href="https://developer.android.com/compose" target="_blank" rel="noopener">developer.android.com</a></td>
           <td data-label="What it decides, and when">Android's recommended toolkit for native interfaces: Kotlin functions describe what the screen should look like, and it updates when state changes. Its course covers accessibility and testing beside layout, theming and state.</td>
           <td data-label="What Zane takes">Accessibility and testing placed beside the way a screen is built, not after it.</td>
-          <td data-label="What Zane adds">Compose documents accessibility checks that run in tests on a rendered interface (labels, contrast, touch-target size) and lint checks. Zane adds rules about what a person must be able to do, as data a tool can load before a screen exists.</td>
+          <td data-label="What Zane adds">Compose documents accessibility checks that run in tests on a rendered interface (labels, contrast, touch-target size) and lint checks. Zane adds rules about what a user must be able to do, as data a tool can load before a screen exists.</td>
         </tr>
         <tr>
           <td><b>Flutter</b><br><a class="leaves" href="https://flutter.dev" target="_blank" rel="noopener">flutter.dev</a></td>
@@ -122,13 +122,13 @@
           <td><b>UIML 4.0</b><br><a class="leaves" href="https://docs.oasis-open.org/uiml/v4.0/uiml-4.0.html" target="_blank" rel="noopener">OASIS</a></td>
           <td data-label="What it decides, and when">A vendor-neutral meta-language for a user interface, whose vocabulary of parts, properties and events is defined outside the specification (Committee Specification, 2009).</td>
           <td data-label="What Zane takes">A description that does not depend on one interface metaphor.</td>
-          <td data-label="What Zane adds">The law and the verifier. UIML describes an interface; Zane declares what the person must be able to do and refuses a declaration that does not allow it.</td>
+          <td data-label="What Zane adds">The law and the verifier. UIML describes an interface; Zane declares what the user must be able to do and refuses a declaration that does not allow it.</td>
         </tr>
         <tr>
           <td><b>XForms 1.1</b><br><a class="leaves" href="https://www.w3.org/TR/xforms11/" target="_blank" rel="noopener">W3C Recommendation, 2009</a></td>
           <td data-label="What it decides, and when">A W3C standard for forms written in XML and embedded in a host language, which keeps a form's presentation, purpose and data distinct.</td>
           <td data-label="What Zane takes">Separating purpose from presentation, which is the oldest form of the inversion Zane makes.</td>
-          <td data-label="What Zane adds">More than forms: any surface, any channel. Zane's purpose is stated as verbs a person does, and checked.</td>
+          <td data-label="What Zane adds">More than forms: any surface, any channel. Zane's purpose is stated as verbs a user does, and checked.</td>
         </tr>
         <tr>
           <td><b>VoiceXML 2.0 and 2.1</b><br><a class="leaves" href="https://www.w3.org/TR/voicexml20/" target="_blank" rel="noopener">VoiceXML 2.0</a> and <a class="leaves" href="https://www.w3.org/TR/voicexml21/" target="_blank" rel="noopener">VoiceXML 2.1</a></td>
