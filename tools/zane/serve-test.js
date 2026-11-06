@@ -5,8 +5,9 @@
 
      node tools/zane/serve-test.js --bin PATH [--port N]
 
-   It starts the binary twice, on a free port of 127.0.0.1: `zane serve` from this repository, then `zane serve --app` on a
-   small folder it makes, and asks each for paths whose answer is known. Every file is compared byte for byte with the file
+   It starts the binary three times, on free ports of 127.0.0.1: `zane serve` answering from the site embedded in it, `zane serve
+   --root` answering from this repository's folder, and `zane serve --app` on a small folder it makes, and asks each for paths whose
+   answer is known. The embedded site must answer as the folder does, and a file it does not embed must be 404. Every file is compared byte for byte with the file
    on disk. Every step out of the root, written plainly or percent-encoded, with a backslash or a NUL, must be 404; a method
    other than GET and HEAD must be 405; a folder without index.html must be 404 and never listed; and the server must not be
    reachable on any other address of this machine. A raw socket sends each request, so no client tidies a `..` away before
@@ -74,36 +75,45 @@ const OUT = ['/../README.md', '/site/../../README.md', '/%2e%2e/README.md', '/%2
   '/site/stz.css%00.html', '/%2e%2e', '/..', '/site/..', '/C:/Windows/win.ini', '/C:%5cWindows%5cwin.ini', '//etc/passwd', '/%zz'];
 
 (async () => {
-  // ---- the repository: the site, the Reader, the audit ----
-  let p = await start([], PORT);
+  // ---- the repository: the site, the Reader, the audit; from the binary itself, then from the folder ----
+  let p;
+  for (const [mode, argv, port] of [['embedded', [], PORT], ['from the folder', ['--root', ROOT], PORT + 2]]) {
+  p = await start(argv, port);
+  const PORT_ = port;
   try {
-    await file(PORT, '/', path.join(ROOT, 'index.html'), 'text/html');
-    await file(PORT, '/index.html', path.join(ROOT, 'index.html'), 'text/html');
-    await file(PORT, '/site/stz.css?v=1', path.join(ROOT, 'site', 'stz.css'), 'text/css');
-    await file(PORT, '/site/zane.wasm', path.join(ROOT, 'site', 'zane.wasm'), 'application/wasm');
-    await file(PORT, '/constitution/reader/', path.join(ROOT, 'constitution', 'reader', 'index.html'), 'text/html');
-    const moved = await ask(PORT, 'GET /constitution/reader HTTP/1.1');   // a folder without its slash is sent to the address with one
+    await file(PORT_, '/', path.join(ROOT, 'index.html'), 'text/html');
+    await file(PORT_, '/index.html', path.join(ROOT, 'index.html'), 'text/html');
+    await file(PORT_, '/site/stz.css?v=1', path.join(ROOT, 'site', 'stz.css'), 'text/css');
+    await file(PORT_, '/site/zane.wasm', path.join(ROOT, 'site', 'zane.wasm'), 'application/wasm');
+    await file(PORT_, '/constitution/reader/', path.join(ROOT, 'constitution', 'reader', 'index.html'), 'text/html');
+    const moved = await ask(PORT_, 'GET /constitution/reader HTTP/1.1');   // a folder without its slash is sent to the address with one
     expect('GET /constitution/reader', moved.status === 301 && moved.headers.location === '/constitution/reader/', `status ${moved.status}, location ${moved.headers.location}`);
-    await file(PORT, '/tools/ui-audit.html', path.join(ROOT, 'tools', 'ui-audit.html'), 'text/html');
-    await file(PORT, '/site/assets/niamey-national-museum.webp', path.join(ROOT, 'site', 'assets', 'niamey-national-museum.webp'), 'image/webp');
-    await file(PORT, '/doc/language/GRAMMAR.md', path.join(ROOT, 'doc', 'language', 'GRAMMAR.md'), 'text/plain');
-    await file(PORT, '/site/how%2Ehtml', path.join(ROOT, 'site', 'how.html'), 'text/html');
-    const h = await ask(PORT, 'HEAD /site/stz.css HTTP/1.1');
+    await file(PORT_, '/tools/ui-audit.html', path.join(ROOT, 'tools', 'ui-audit.html'), 'text/html');
+    await file(PORT_, '/site/assets/niamey-national-museum.webp', path.join(ROOT, 'site', 'assets', 'niamey-national-museum.webp'), 'image/webp');
+    await file(PORT_, '/doc/language/GRAMMAR.md', path.join(ROOT, 'doc', 'language', 'GRAMMAR.md'), 'text/plain');
+    await file(PORT_, '/site/how%2Ehtml', path.join(ROOT, 'site', 'how.html'), 'text/html');
+    const h = await ask(PORT_, 'HEAD /site/stz.css HTTP/1.1');
     expect('HEAD /site/stz.css', h.status === 200 && h.body.length === 0 && +h.headers['content-length'] === fs.statSync(path.join(ROOT, 'site', 'stz.css')).size,
       `status ${h.status}, body ${h.body.length}, content-length ${h.headers['content-length']}`);
-    for (const m of ['POST', 'PUT', 'DELETE', 'OPTIONS']) await status(PORT, `${m} /index.html HTTP/1.1`, 405);
-    await status(PORT, 'GET /site/ HTTP/1.1', 404);           // a folder without index.html: never listed
-    await status(PORT, 'GET /site/no-such-page.html HTTP/1.1', 404);
-    await status(PORT, 'GET /__zane/ui-audit.html HTTP/1.1', 404); // the audit's --app address is not served here
-    for (const u of OUT) await status(PORT, `GET ${u} HTTP/1.1`, 404);
+    for (const m of ['POST', 'PUT', 'DELETE', 'OPTIONS']) await status(PORT_, `${m} /index.html HTTP/1.1`, 405);
+    await status(PORT_, 'GET /site/ HTTP/1.1', 404);           // a folder without index.html: never listed
+    await status(PORT_, 'GET /site/no-such-page.html HTTP/1.1', 404);
+    await status(PORT_, 'GET /__zane/ui-audit.html HTTP/1.1', 404); // the audit's --app address is not served here
+    if (mode === 'embedded') {
+      // a file of the repository the build does not embed does not exist for the embedded server
+      await status(PORT_, 'GET /zig/src/main.zig HTTP/1.1', 404);
+      await status(PORT_, 'GET /CLAUDE.md HTTP/1.1', 404);
+    }
+    for (const u of OUT) await status(PORT_, `GET ${u} HTTP/1.1`, 404);
     // reachable on 127.0.0.1 only: every other IPv4 address of this machine refuses
     const others = Object.values(os.networkInterfaces()).flat().filter(n => n && n.family === 'IPv4' && !n.internal).map(n => n.address);
     for (const addr of others) {
-      const reached = await ask(PORT, 'GET / HTTP/1.1', addr).then(() => true, () => false);
+      const reached = await ask(PORT_, 'GET / HTTP/1.1', addr).then(() => true, () => false);
       expect(`GET / on ${addr}`, !reached, 'the server answered on an address other than 127.0.0.1');
     }
     if (!others.length) console.log('  bind         no other IPv4 address on this machine: the 127.0.0.1-only case was not exercised');
   } finally { p.kill(); }
+  }
 
   // ---- --app: another folder, read only, with the audit beside it ----
   const APP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-serve-app-'));
@@ -121,6 +131,6 @@ const OUT = ['/../README.md', '/site/../../README.md', '/%2e%2e/README.md', '/%2
   } finally { p.kill(); fs.rmSync(APP, { recursive: true, force: true }); }
 
   for (const f of failures) console.log('  FAIL ' + f);
-  console.log(`serve-test: ${cases - failures.length} of ${cases} cases hold (${OUT.length} paths out of the root, each asked of both servers)`);
+  console.log(`serve-test: ${cases - failures.length} of ${cases} cases hold (${OUT.length} paths out of the root, each asked of all three servers)`);
   process.exit(failures.length ? 1 : 0);
 })().catch(e => { console.error('serve-test: ' + e.message); process.exit(2); });

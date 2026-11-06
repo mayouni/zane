@@ -1,6 +1,7 @@
 //! `zane serve`: the site, the Reader and the UI audit from one executable, with no Node (doc/design/BINARY.md, stage S4).
 //!
-//!   zane serve [--root DIR] [--port N] [--host ADDR]     this repository's site, from DIR (default: the current folder)
+//!   zane serve [--port N] [--host ADDR]                  this repository's site, embedded in the binary at its build
+//!   zane serve --root DIR [--port N] [--host ADDR]       the same site, read from the folder DIR instead
 //!   zane serve --app DIR [--port N] [--host ADDR]        another site, read only, with the UI audit beside it at
 //!                                                        /__zane/ui-audit.html, so the audit can measure it on one origin
 //!
@@ -15,13 +16,15 @@
 
 const std = @import("std");
 const builtin = @import("builtin");
+/// The site, embedded at build (build.zig, siteModule): every file the pages reach, by its path from the repository's root.
+const site = @import("site");
 
 /// The UI audit, embedded, for --app: the binary serves it beside a site that is not this repository.
 const ui_audit = @embedFile("ui-audit.html");
 const audit_path = "/__zane/ui-audit.html";
 
 const Options = struct {
-    root: []const u8 = ".",
+    root: ?[]const u8 = null,
     app: ?[]const u8 = null,
     port: u16 = 8770,
     host: []const u8 = "127.0.0.1",
@@ -50,16 +53,24 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
             return 2;
         }
     }
-    const folder = o.app orelse o.root;
-    const root_real = std.fs.cwd().realpathAlloc(a, folder) catch {
-        try err.print("zane serve: cannot open the folder {s}\n", .{folder});
-        return 2;
+    // the files come from the binary itself, or from a folder the person named (--root for this site, --app for another)
+    var source: Source = .embedded;
+    if (o.app orelse o.root) |folder| {
+        const real = std.fs.cwd().realpathAlloc(a, folder) catch {
+            try err.print("zane serve: cannot open the folder {s}\n", .{folder});
+            return 2;
+        };
+        const dir = std.fs.cwd().openDir(real, .{}) catch {
+            try err.print("zane serve: cannot open the folder {s}\n", .{folder});
+            return 2;
+        };
+        source = .{ .disk = .{ .dir = dir, .real = real } };
+    }
+    defer if (source == .disk) source.disk.dir.close();
+    const where: []const u8 = switch (source) {
+        .disk => |d| d.real,
+        .embedded => try std.fmt.allocPrint(a, "the site embedded in this binary ({d} files)", .{site.files.len}),
     };
-    var root = std.fs.cwd().openDir(root_real, .{}) catch {
-        try err.print("zane serve: cannot open the folder {s}\n", .{folder});
-        return 2;
-    };
-    defer root.close();
 
     const address = std.net.Address.parseIp(o.host, o.port) catch {
         try err.print("zane serve: {s} is not an IP address\n", .{o.host});
@@ -72,9 +83,9 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
     defer server.deinit();
 
     if (o.app != null) {
-        try out.print("zane serve: {s}, read only, at http://{s}:{d}/ with the UI audit at http://{s}:{d}{s}\n", .{ root_real, o.host, o.port, o.host, o.port, audit_path });
+        try out.print("zane serve: {s}, read only, at http://{s}:{d}/ with the UI audit at http://{s}:{d}{s}\n", .{ where, o.host, o.port, o.host, o.port, audit_path });
     } else {
-        try out.print("zane serve: {s}, read only, at http://{s}:{d}/ (the site /index.html, the Reader /constitution/reader/, the audit /tools/ui-audit.html)\n", .{ root_real, o.host, o.port });
+        try out.print("zane serve: {s}, read only, at http://{s}:{d}/ (the site /index.html, the Reader /constitution/reader/, the audit /tools/ui-audit.html)\n", .{ where, o.host, o.port });
     }
     try out.flush();
 
@@ -83,13 +94,19 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
         defer conn.stream.close();
         var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
         defer arena.deinit();
-        handle(arena.allocator(), conn.stream, root, root_real, o.app != null) catch {};
+        handle(arena.allocator(), conn.stream, source, o.app != null) catch {};
     }
 }
 
+/// Where the files come from: a folder on disk (its real path, for the check that a file stays inside it), or the binary itself.
+const Source = union(enum) {
+    disk: struct { dir: std.fs.Dir, real: []const u8 },
+    embedded,
+};
+
 const Answer = struct { status: []const u8, type: []const u8 = "text/plain; charset=utf-8", body: []const u8, extra: []const u8 = "" };
 
-fn handle(a: std.mem.Allocator, stream: std.net.Stream, root: std.fs.Dir, root_real: []const u8, app: bool) !void {
+fn handle(a: std.mem.Allocator, stream: std.net.Stream, source: Source, app: bool) !void {
     // the request head, up to the blank line; a head over 16 KB is refused
     var buf: [16384]u8 = undefined;
     var n: usize = 0;
@@ -105,13 +122,13 @@ fn handle(a: std.mem.Allocator, stream: std.net.Stream, root: std.fs.Dir, root_r
     const target = parts.next() orelse "";
     const head = std.mem.eql(u8, method, "HEAD");
     if (!head and !std.mem.eql(u8, method, "GET")) return send(stream, .{ .status = "405 Method Not Allowed", .body = "GET and HEAD only\n", .extra = "Allow: GET, HEAD\r\n" }, false);
-    return send(stream, try answer(a, target, root, root_real, app), head);
+    return send(stream, try answer(a, target, source, app), head);
 }
 
 const not_found: Answer = .{ .status = "404 Not Found", .body = "not found\n" };
 
-/// What a GET of `target` answers: a file of the root, the embedded audit for --app, or 404.
-fn answer(a: std.mem.Allocator, target: []const u8, root: std.fs.Dir, root_real: []const u8, app: bool) !Answer {
+/// What a GET of `target` answers: a file of the source, the embedded audit for --app, or 404.
+fn answer(a: std.mem.Allocator, target: []const u8, source: Source, app: bool) !Answer {
     const raw = target[0 .. std.mem.indexOfAny(u8, target, "?#") orelse target.len];
     if (raw.len == 0 or raw[0] != '/') return not_found;
     for (raw) |c| if (c < 0x21 or c == 0x7f) return not_found; // a control byte in the address, never echoed into a header
@@ -130,20 +147,40 @@ fn answer(a: std.mem.Allocator, target: []const u8, root: std.fs.Dir, root_real:
     if (rel.len == 0 or path[path.len - 1] == '/') rel = if (rel.len == 0) "index.html" else try std.fmt.allocPrint(a, "{s}/index.html", .{rel});
     // a folder is answered by its index.html, and never listed; asked for without its slash, it is sent to the address with
     // one, so that the page's relative links resolve against the folder, as a static server does
-    const is_dir = blk: {
-        var d = root.openDir(rel, .{}) catch break :blk false;
-        d.close();
-        break :blk true;
+    const is_dir = switch (source) {
+        .disk => |d| blk: {
+            var sub = d.dir.openDir(rel, .{}) catch break :blk false;
+            sub.close();
+            break :blk true;
+        },
+        .embedded => embeddedFolder(rel),
     };
     if (is_dir) {
         if (path[path.len - 1] != '/') return .{ .status = "301 Moved Permanently", .body = "moved\n", .extra = try std.fmt.allocPrint(a, "Location: {s}/\r\n", .{raw}) };
         rel = try std.fmt.allocPrint(a, "{s}/index.html", .{rel});
     }
-    // the real path, links followed, must still be inside the root
-    const real = root.realpathAlloc(a, rel) catch return not_found;
-    if (!(real.len > root_real.len and std.mem.startsWith(u8, real, root_real) and (real[root_real.len] == '/' or real[root_real.len] == '\\'))) return not_found;
-    const body = root.readFileAlloc(a, rel, 256 * 1024 * 1024) catch return not_found;
+    const body = switch (source) {
+        .disk => |d| blk: {
+            // the real path, links followed, must still be inside the root
+            const real = d.dir.realpathAlloc(a, rel) catch return not_found;
+            if (!(real.len > d.real.len and std.mem.startsWith(u8, real, d.real) and (real[d.real.len] == '/' or real[d.real.len] == '\\'))) return not_found;
+            break :blk d.dir.readFileAlloc(a, rel, 256 * 1024 * 1024) catch return not_found;
+        },
+        // the embedded files are known by name: nothing outside them exists to be reached
+        .embedded => embeddedFile(rel) orelse return not_found,
+    };
     return .{ .status = "200 OK", .type = typeOf(rel), .body = body };
+}
+
+fn embeddedFile(rel: []const u8) ?[]const u8 {
+    for (site.files) |f| if (std.mem.eql(u8, f.path, rel)) return f.data;
+    return null;
+}
+
+/// An embedded folder is a path some embedded file sits under.
+fn embeddedFolder(rel: []const u8) bool {
+    for (site.files) |f| if (f.path.len > rel.len and std.mem.startsWith(u8, f.path, rel) and f.path[rel.len] == '/') return true;
+    return false;
 }
 
 /// Percent-decoding of a path: %XX becomes its byte; a malformed escape is an error.
