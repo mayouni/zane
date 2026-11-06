@@ -446,6 +446,28 @@ table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; f
 .btn.ghost { background: transparent; font: inherit; font-weight: 700; cursor: pointer; }
 .btn.ghost[aria-pressed="true"] { text-decoration: underline; text-underline-offset: .25em; }
 .btn.ghost:disabled { color: var(--muted); border-color: var(--line); cursor: default; }
+/* the tour as a deck (the Principal, 2026-11-06: "a diapo for full screen presentations", as stzsite's presentation mode): with an
+   address, one scene fills the screen and the site's menu, head and foot step aside; h brings the menu back over the scene. Without
+   one, the page lists the profiles and the deck stays closed. */
+body:not(.deck-on) #stage-section { display: none; }
+body.deck-on { overflow: hidden; }
+body.deck-on .bars, body.deck-on header.page, body.deck-on footer.site, body.deck-on #choose, body.deck-on #stage-heading { display: none; }
+body.deck-on.show-chrome .bars { display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 70; }
+body.deck-on .stage {
+  position: fixed; inset: 0; z-index: 60; margin: 0; border: 0; border-radius: 0; box-shadow: none; min-height: 0;
+  background: var(--paper); padding: clamp(1.4rem, 4vw, 3.5rem) clamp(1rem, 6vw, 6rem) 1.4rem; overflow-y: auto;
+  display: grid; grid-template-rows: 1fr auto; outline: none;
+}
+body.deck-on .scene-card { align-self: center; width: 100%; max-width: 74rem; margin: 0 auto; }
+body.deck-on .scene-title { font-size: clamp(2rem, 4.4vw, 4rem); line-height: 1.08; margin-bottom: 1.4rem; }
+body.deck-on .scene-card p { font-size: clamp(1.3rem, 2.2vw, 1.9rem); max-width: 60rem; }
+body.deck-on .scene-card .shot, body.deck-on .scene-card .term { font-size: clamp(1rem, 1.35vw, 1.3rem); }
+body.deck-on .scene-notes { font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 60rem; }
+body.deck-on .stage-controls { width: 100%; max-width: 74rem; margin: 1.2rem auto 0; }
+body.deck-on .stage-controls :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.deck-progress { display: none; }
+body.deck-on .deck-progress { display: block; position: fixed; left: 0; right: 0; bottom: 0; height: 4px; background: var(--line); z-index: 65; }
+.deck-progress .bar { height: 100%; width: 0; background: var(--accent); }
 /* the front page's strip: present it to the people in the room */
 .present { margin: 1.4rem 0 0; padding: 1.1rem 1.3rem; border: 2px solid var(--accent-ink); border-radius: 10px; background: var(--card); }
 .present h2 { font-size: 1.35rem; margin: 0 0 .4rem; }

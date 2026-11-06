@@ -115,6 +115,7 @@ function derive(prev) {
   put('audit.spreadLimit', d.thresholds.spread_limit, 'doc/design/audit/decides.json thresholds');
 
   put('site.verifierRuns', pairs().length, 'the declaration and terminal pairs on the site pages (re-run by this script)');
+  put('tour.scenes', (fs.readFileSync(path.join(ROOT, 'site', 'tour.html'), 'utf8').match(/class="scene-card"/g) || []).length, 'site/tour.html scene cards');
 
 
   const sorted = {}, sources = {};

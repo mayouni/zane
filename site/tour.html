@@ -6,7 +6,7 @@
 <title>The tour — a presentation of Zane in scenes, ordered for the people in the room</title>
 <meta name="description" content="The tour presents Zane in short scenes, in an order chosen for the person in the room: a UX designer, a product designer, a programmer, an AI builder or a decision maker. The arrow keys move between scenes, n shows the notes, and Escape opens the page that a scene comes from.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=fe87fff2">
+<link rel="stylesheet" href="stz.css?v=abe5a4ce">
 </head>
 <body>
 
@@ -61,16 +61,22 @@
       <li><a href="#programmer/1">Programmer</a> <span class="note">8 scenes</span></li>
       <li><a href="#ai/1">AI builder</a> <span class="note">8 scenes</span></li>
       <li><a href="#decision/1">Decision maker</a> <span class="note">8 scenes</span></li>
+      <li><a href="#s1">Every scene, in order</a> <span class="note"><span data-fact="tour.scenes">18</span> scenes</span></li>
     </ul>
-    <p>Each scene has its own address: <code>tour.html#programmer/4</code> opens the fourth scene for a programmer, so a presenter can start at any scene and can send a link to it.</p>
+    <p>Choosing a profile opens the tour as a deck: one scene fills the screen at a time, with no site menu. Each scene has its own address:
+    <code>tour.html#programmer/4</code> opens the fourth scene for a programmer and <code>tour.html#s4</code> the fourth of the whole deck, so a
+    presenter can start at any scene and can send a link to it.</p>
+    <p>In the deck, <kbd>→</kbd>, <kbd>↓</kbd>, <kbd>Page Down</kbd>, <kbd>Space</kbd> and <kbd>Enter</kbd> go forward, and <kbd>←</kbd>,
+    <kbd>↑</kbd>, <kbd>Page Up</kbd> and <kbd>Backspace</kbd> go back; <kbd>Home</kbd> and <kbd>End</kbd> jump to the first and the last scene.
+    <kbd>n</kbd> shows the presenter's notes, <kbd>h</kbd> shows the site's menu, <kbd>f</kbd> fills the whole screen, and <kbd>Escape</kbd> opens the
+    scene's own page. A click on a scene moves forward, and the buttons under each scene do the same for a person who does not use the keys.</p>
   </div>
 </section>
 
-<section class="alt" id="stage-section">
+<section id="stage-section">
   <div class="narrow">
-    <h2 id="stage-heading">The stage, where the scenes of the tour are shown</h2>
-    <div class="stage" id="stage" aria-live="polite">
-      <p class="stage-idle" id="stage-idle">The tour begins when a profile above is chosen.</p>
+    <h2 id="stage-heading">The deck, where the scenes of the tour are shown</h2>
+    <div class="stage" id="stage" aria-live="polite" tabindex="-1">
 
       <article class="scene-card" id="scene-hook" data-scene="hook" data-page="thinking.html" hidden>
         <h3 class="scene-title">Zane starts from what a person is doing, and an interface renders it.</h3>
@@ -214,13 +220,15 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
         <p>The status board shows what exists, what is designed and what is held, part by part, and where each part stops.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the held rows, which show that nothing is hidden.</aside>
       </article>
-      <div class="stage-controls" id="stage-controls" hidden>
-        <button type="button" class="btn ghost" id="tour-prev">← Previous</button>
+      <div class="stage-controls" id="stage-controls">
         <span class="stage-count" id="stage-count"></span>
+        <button type="button" class="btn ghost" id="tour-prev">← Previous</button>
         <button type="button" class="btn ghost" id="tour-next">Next →</button>
         <button type="button" class="btn ghost" id="tour-notes" aria-pressed="false">Notes</button>
         <a class="stage-open" id="tour-open" href="#">Open this scene's page</a>
+        <a class="stage-open" href="tour.html">Leave the deck</a>
       </div>
+      <div class="deck-progress" aria-hidden="true"><div class="bar" id="deck-bar"></div></div>
     </div>
   </div>
 </section>
@@ -252,6 +260,6 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
 <script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 <script>window.TOUR_PROFILES = {"ux":["hook","compare","grid","channels","refusal","webcase","limits","next-ux"],"product":["hook","refusal","grid","webcase","cost","compare","limits","next-product"],"programmer":["hook","refusal","law","build","conformance","haro","limits","next-programmer"],"ai":["hook","generate","refusal","law","channels","conformance","limits","next-ai"],"decision":["hook","cost","law","grid","webcase","compare","limits","next-decision"]}; window.TOUR_NAMES = {"ux":"UX designer","product":"Product designer","programmer":"Programmer","ai":"AI builder","decision":"Decision maker"};</script>
-<script src="tour.js?v=4e80dc32"></script>
+<script src="tour.js?v=6b29612b"></script>
 </body>
 </html>
