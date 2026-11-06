@@ -6,7 +6,7 @@
 <title>The approach — Zane starts an interface from what a person is doing</title>
 <meta name="description" content="Zane's approach starts an interface from a declaration of what the person is doing and treats every rendering as a consequence of it. The page explains the approach in eight parts: intent first, a closed set of verbs, rights and articles, one declaration with many renderings, sensors and actuators, culture, style as data, and the questions that are still open. Each part names the document it comes from.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c337dc22">
+<link rel="stylesheet" href="stz.css?v=5495a162">
 </head>
 <body>
 
@@ -76,8 +76,7 @@
     <p>This inversion makes correctness checkable. When the unit of declaration is a widget, a tool can check only the widget. When the unit of declaration is what the person is doing, a tool can check whether the person can leave, undo and see where they are,
     before anything has been drawn. The architecture has three layers in a strict order, and each lower layer constrains the layers above it:</p>
     <figure class="figure">
-      <div class="scroll">
-      <svg viewBox="0 0 780 396" style="min-width:780px" role="img" aria-labelledby="lay-t lay-d">
+            <svg viewBox="0 0 780 396" role="img" aria-labelledby="lay-t lay-d">
         <title id="lay-t">Three layers, the lower constraining the upper</title>
         <desc id="lay-d">Three stacked boxes. At the bottom the intent grammar: closed, finite, independent of channel, with twenty-two verbs. In the middle the constitution: non-negotiable and machine-checkable, as rules under seven articles. At the top the rendering projections: per channel and replaceable. Arrows point upward between the boxes: each layer constrains the one above.</desc>
         <defs><marker id="lay-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
@@ -98,7 +97,6 @@
         <line class="dg-line" x1="600" y1="146" x2="600" y2="112" marker-end="url(#lay-ah)"/>
         <text class="dg-a" x="620" y="134">constrains</text>
       </svg>
-      </div>
       <figcaption>The lower layer constrains the upper layer and never the reverse: no projection may define a new verb or bypass a rule. <b>Not shown:</b> most projections are not built in this project, because the channels' renderers live in other projects,
       and a layer constrains another only where a checker enforces it.</figcaption>
     </figure>

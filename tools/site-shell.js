@@ -515,10 +515,16 @@ function checkBreaks(problems) {
   const declares = (sel, prop) => rules.some(r => r.selectors.includes(sel) && new RegExp('(^|;)\\s*text-wrap\\s*:\\s*' + prop + '\\b').test(r.body));
   for (const h of ['h1', 'h2', 'h3']) if (!declares(h, 'balance')) problems.push('site/stz.css: no rule declares text-wrap: balance on ' + h);
   if (!declares('p', 'pretty')) problems.push('site/stz.css: no rule declares text-wrap: pretty on p');
+  /* a title is never set in capitals: over several lines they are hard to read (the author, 2026-11-06) */
+  for (const r of rules) if (/(^|;)\s*text-transform\s*:\s*uppercase\b/.test(r.body))
+    for (const s of r.selectors) if (/(^|[\s>])(h1|h2|h3|\.scene-title)$/.test(s)) problems.push('site/stz.css: "' + s + '" sets a title in capitals');
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);
     if (!fs.existsSync(file)) continue;
     const text = fs.readFileSync(file, 'utf8').replace(/<(script|style)\b[\s\S]*?<\/\1>/g, ' ');
+    /* a drawing scales to its column and never scrolls sideways (the author, 2026-11-06) */
+    if (/<svg\b[^>]*style="[^"]*min-width/.test(text)) problems.push(p.file + ': an svg holds a fixed min-width, so its column scrolls sideways');
+    if (/<div class="scroll">\s*<svg\b/.test(text)) problems.push(p.file + ': an svg sits in a scrolling wrapper: a drawing scales to its column');
     for (const m of text.matchAll(HEADING_RE)) {
       const tag = m[1] || 'scene-title', inner = m[1] ? m[2] : m[4];
       const name = '"' + plain(inner).slice(0, 70) + '"';

@@ -6,7 +6,7 @@
 <title>Language — the Zane language, from a declaration to a measured page</title>
 <meta name="description" content="Zane is a language that declares what a person is doing on an interface, with no widget in it, and its verifier refuses by name what the law forbids before anything is drawn. The page shows the four steps from a declaration to a measured page and which of them exist today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c337dc22">
+<link rel="stylesheet" href="stz.css?v=5495a162">
 </head>
 <body>
 
@@ -133,8 +133,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
   <div class="narrow">
     <h2 id="four-steps-and-which-of-them-exist" data-outline="The four steps">The four steps from a declaration to a measured page, and which of them exist</h2>
     <figure class="figure">
-      <div class="scroll">
-      <svg viewBox="0 0 780 230" style="min-width:780px" role="img" aria-labelledby="pipe-t pipe-d">
+            <svg viewBox="0 0 780 230" role="img" aria-labelledby="pipe-t pipe-d">
         <title id="pipe-t">Declare, refuse, project, measure</title>
         <desc id="pipe-d">Four boxes in a row joined by arrows. Declare, a .zane file: exists. Refuse, the verifier in tools/zane: exists. Project, the channel data: data only, the renderers are elsewhere. Measure, the UI audit: exists.</desc>
         <defs><marker id="pipe-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
@@ -162,7 +161,6 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
         <text class="dg-bad" x="490" y="196" text-anchor="middle">data only</text>
         <text class="dg-a" x="690" y="196" text-anchor="middle">exists</text>
       </svg>
-      </div>
       <figcaption>A solid outline marks a step that is built and run in this repository. A dashed outline marks a step whose data exists, with a check that proves renderings differ only as the data predicts,
       while the renderers that draw, speak or print live in other projects. <b>Not shown:</b> the person who looks at the result. No person has perceived any medium for this site's grid.</figcaption>
     </figure>
@@ -181,8 +179,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
   <div class="narrow">
     <h2 id="the-same-law-at-three-moments" data-outline="Three moments">The same law applied at design time, in development and at runtime</h2>
     <figure class="figure">
-      <div class="scroll">
-      <svg viewBox="0 0 780 240" style="min-width:780px" role="img" aria-labelledby="mom-t mom-d">
+            <svg viewBox="0 0 780 240" role="img" aria-labelledby="mom-t mom-d">
         <title id="mom-t">The law at design time, in development and at runtime</title>
         <desc id="mom-d">Three boxes joined by arrows. At design time the verifier checks the declaration. In development the build runs the pack check and the conformance suite. At runtime the UI audit measures the painted page. Under runtime a dashed box: the screenshot audit is designed and has never been run on a real application.</desc>
         <defs><marker id="mom-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
@@ -204,7 +201,6 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
         <text class="dg-s" x="660" y="186" text-anchor="middle">screenshot audit:</text>
         <text class="dg-s" x="660" y="208" text-anchor="middle">designed, never run</text>
       </svg>
-      </div>
       <figcaption>The same law, read from one file, applies at all three moments. <b>Not shown:</b> what happens between the moments, such as a generator that drifts from its declaration after design.
       The audit for an application that nobody on this project owns is designed and has not been run on a real application.</figcaption>
     </figure>
