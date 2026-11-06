@@ -174,17 +174,16 @@ nav.band a { display: inline-flex; align-items: center; min-height: 44px; color:
   white-space: nowrap; font-size: 1rem; border-bottom: 3px solid transparent; }
 nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent); }
 
-/* ---- level 3: a vertical list on the left, only where a page has a family, and then the page takes the full width ---- */
+/* ---- level 3: a vertical list on the right, a page's family or its outline; a page without one takes the full width ---- */
+/* every list beside a page sits on its right, the family list as the outline does (the author, 2026-11-06: "some lateral menus are
+   still in the left, move them to the right"): the text starts at the page's left edge, under the title */
 .layout { display: block; }
 .layout.has-list {
-  display: grid; grid-template-columns: 16rem minmax(0, 1fr); gap: 2rem;
+  display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 2rem;
   max-width: 72rem; margin: 0 auto; padding: 0 1.4rem;
 }
-.layout.has-list > main { min-width: 0; }
-/* "On this page" sits on the right of the page it lists; a family list (level 3) stays on the left */
-.layout.has-list.sections-right { grid-template-columns: minmax(0, 1fr) 16rem; }
-.layout.has-list.sections-right > main { grid-column: 1; grid-row: 1; }
-.layout.has-list.sections-right > nav.list3 { grid-column: 2; grid-row: 1; }
+.layout.has-list > main { min-width: 0; grid-column: 1; grid-row: 1; }
+.layout.has-list > nav.list3 { grid-column: 2; grid-row: 1; }
 .layout.has-list main section { padding-left: 1.4rem; padding-right: 1.4rem; margin-left: -1.4rem; margin-right: -1.4rem; }
 .layout.has-list main .narrow, .layout.has-list main .wrap { padding: 0; max-width: none; margin: 0; }
 /* The list beside a page, drawn as plainly as an outline beside a document (the author, 2026-11-05: "dead simple like in github lateral menu
@@ -196,7 +195,6 @@ nav.list3 {
   align-self: start; position: sticky; top: calc(var(--bars-h, 6rem) + 1.5rem); margin: 2.6rem 0 0;
   border-left: 1px solid var(--line); padding: 0 0 0 .9rem;
 }
-.layout.has-list:not(.sections-right) > nav.list3 { border-left: 0; border-right: 1px solid var(--line); padding: 0 .9rem 0 0; }
 nav.list3 ul { list-style: none; margin: 0; padding: 0; max-width: none; }
 nav.list3 li { margin: 0; }
 nav.list3 a { display: block; padding: .3rem .6rem; color: var(--ink); text-decoration: none; font-size: 1.1rem; line-height: 1.5;
@@ -213,15 +211,14 @@ nav.list3 .sub a { padding-left: 1.4rem; }
 html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
 @media (max-width: 900px) {
   .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .layout.has-list.sections-right { grid-template-columns: minmax(0, 1fr); }
-  .layout.has-list.sections-right > main, .layout.has-list.sections-right > nav.list3 { grid-column: auto; grid-row: auto; }
-  nav.list3, .layout.has-list:not(.sections-right) > nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
+  .layout.has-list > main, .layout.has-list > nav.list3 { grid-column: auto; grid-row: auto; }
+  nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
 }
 
 /* a page with a drawing gives the drawing its width before the outline: a drawing is never scaled under the legibility floor
    (Rule 105) and never scrolls sideways (Rule 14), so below the width where both fit, the outline goes above the text as on a narrow screen */
 @media (max-width: 1151px) {
-  .layout.has-list:has(figure.figure), .layout.has-list.sections-right:has(figure.figure) { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .layout.has-list:has(figure.figure) { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list:has(figure.figure) > main, .layout.has-list:has(figure.figure) > nav.list3 { grid-column: auto; grid-row: auto; }
   .layout.has-list:has(figure.figure) > nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
 }

@@ -395,9 +395,9 @@ function apply(p, text) {
   if (!p.home && fenceRe('trail').test(t)) fill('trail', trail(p));
   if (fenceRe('layout').test(t)) {
     const r = list3(p, secs);
-    /* the sections of a page sit on the right of it; a family of pages (level 3) keeps the left, as the Principal ruled for it */
-    const own = r && r.includes('class="list3 sections"');
-    fill('layout', `<div class="layout${r ? ' has-list' : ''}${own ? ' sections-right' : ''}">` + (r ? '\n' + r : ''));
+    /* every list beside a page sits on its right, a family of pages (level 3) as the sections of a page do: the earlier ruling that kept
+       a family on the left was turned by the author on 2026-11-06 ("some lateral menus are still in the left, move them to the right") */
+    fill('layout', `<div class="layout${r ? ' has-list' : ''}">` + (r ? '\n' + r : ''));
   }
   if (fenceRe('footer').test(t)) {
     fill('footer', footer(p));
