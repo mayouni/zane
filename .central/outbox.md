@@ -2952,3 +2952,40 @@ next:
 note:      if doc/design/SITE-3.md still says the family list is on the left, it is now behind the site; I did not edit it, by the author's earlier word
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 02:33 | NOTE | answers your 01:43 answer; closes S3 | S3 IS BUILT (75DA7F8): ZANE.WASM, 127,956 BYTES, NO IMPORTS, 292 OF 292 ENVELOPES IDENTICAL TO THE NATIVE BINARY IN A BROWSER, AND A "TRY IT" BOX ON THE BUILD PAGE
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 02:33 | ATTENDED
+
+subject:   the README's Zing lines (36f583b), two remarks of the author (7346c3d), and binary stage S3 (75da7f8), local on main, not pushed
+
+why:       your 01:43 answer: delete README.md:47, extend the check to README.md, then S3 as BINARY.md sets it out; the author: "avoid using 'implement' twice"
+
+did:
+  - DELETED README.md:47 and, found by the extended check, the name in the table cell at README.md:27; the check reads README.md; WRITING.md rule 9 says so
+  - REWROTE the Other languages title on the author's word: "Zane can be implemented in other languages by writing its verifier and running its fixtures, not by adopting a library." (7346c3d)
+  - MOVED the JSON report out of main.zig into zig/src/report.zig, so the executable and the wasm print one report from one code; parity identical after the move
+  - BUILT zig/src/wasm.zig for wasm32-freestanding: zane_alloc, zane_free, zane_check; no imports; an arena per call, no global state
+  - WROTE site/zane-wasm.js (the loader, no logic of the law), tools/zane/wasm-proof.js (the expected envelopes from the native binary, with the wasm's sha256, and a --check) and tools/zane/wasm-proof.html (the proof page, in the Try band)
+  - SHOWED the proof failing at 291 of 292 with one expected byte altered, naming the fixture, the level and the byte, then restored it
+  - ADDED a "try it" box to site/build.html: a declaration, a level, one action; every verdict comes from the wasm
+  - CORRECTED site/ports.html and the status line of doc/design/BINARY.md, which still said the browser build was not built
+
+state:
+  zane.wasm:      127,956 bytes ReleaseSmall, contract embedded (budget 150 KB); sha256 22a47733ec98...
+  wasm proof:     292 of 292 envelopes identical (73 fixtures x levels 1-4), 181 ms in the browser pane
+  native gates:   parity identical (294 fixture lines, 9 argument, 13 suite, 63 tool, 2592 corpus); zig build test 4 of 4
+  site gates:     site-shell ok (38 pages), site-facts ok, UI audit clean in Modern and Retro on 38 pages, strict 0 interactive text (2943 size findings, 23 more from the new page and box)
+  not run:        the corpus through the wasm (the proof runs the fixtures only); any browser engine but the pane's; any OS but Windows
+
+waiting:
+  - DOCKET-PASS5-01: unchanged, one more F-6 row (7346c3d) -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      S4 (the server) only when you order it
+  - central: read 36f583b, 7346c3d and 75da7f8 with bfe8c8c and 4495303; push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody but this desk has typed into the box; the wasm proof proves sameness, not that a reader finds the verdict clear
+```
+---
