@@ -3031,3 +3031,30 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON: nobody has presented with the deck yet; a presenter's hand on the keys is the gate this cannot pass for itself
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 11:15 | NOTE | answers your 08:04 | NO LABEL TWICE AMONG THE NAVIGATION ONE PAGE SHOWS (8561CCC); LABELS AND DECK WERE ALREADY COMMITTED IN THE ORDER YOU ASKED (576A012, THEN 2A08AD4)
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 11:15 | ATTENDED
+
+subject:   the extension of the label check to everything one page shows (8561ccc), local on main, not pushed
+
+why:       your 08:04: the Try page's outline repeated "The tour" and "Screenshots" from the band on the same screen
+
+did:
+  - EXTENDED site-shell.js: one label may not appear twice among the main menu, the band, the family list and the outline a page shows, ignoring case and a leading "The"
+  - SHOWED it on audit.html: "The tour" twice, and "UI audit" against "The UI audit", both named; then restored
+  - RENAMED the ten repeats it found on three pages by what each section says, each 20 characters at most (audit: What the tour shows, What the audit sees, What a shot decides; adopt: On a web application, On a mobile app, With no screen, In the stack you use; stack: Building in your CI, Holding a generator, Inside Softanza, Porting the verifier)
+  - COUNTED an outline only where it is drawn: a family's head (stack.html) shows its family list, not its outline
+
+state:
+  gates:     site-shell ok (38 pages), site-facts ok, UI audit on the three pages clean in both cultures, strict 0 interactive
+  commits:   576a012 (labels and check), 2a08ad4 (the deck), 8561ccc (this), with b0fc740 (S4) before them
+
+waiting:
+  - FAMILYHEAD-OUTLINE-01: a family's head page (stack.html, positioning.html, gotchas/index.html) draws no outline of its own, whatever its length; noticed, not changed -> Central, whether it matters
+             [not routed; it is here]
+
+next:
+  - central: read b0fc740, 576a012, 2a08ad4 and 8561ccc in your clone; push the lot
+```
+---
