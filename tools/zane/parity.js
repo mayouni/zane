@@ -5,7 +5,7 @@
    `node tools/zane/cli.js check`, and its `conformance`, `pack`, `cross-medium` and `audit-facts` against the
    scripts they replace (conformance.js, pack.js, cross-medium.js, doc/design/audit/check-facts.js), byte for byte.
 
-     node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet]
+     node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet] [--write-wasm-proof]
 
    1. THE FIXTURES. Every fixture of conformance/manifest.json, run by both under four argument sets (--json at
       level 4, text at level 4, text at the default level, --quiet at level 1), with the fixture's symbols when it
@@ -24,6 +24,9 @@
       absent and missing, the manifest missing, short an entry, long an entry, and a hash altered), `zane cross-medium` (the
       spec, --verbose, and generated specs pairing every channel), and `zane audit-facts` (the example, --rules, and
       facts files broken one way each: schema, pairing, arithmetic, and every branch of the two decisions).
+   6. THE WASM PROOF'S RECORD. tools/zane/wasm-proof.json, the envelopes this binary prints for every fixture at every
+      level with the sha256 of site/zane.wasm, which tools/zane/wasm-proof.html compares with the wasm in a browser.
+      --write-wasm-proof writes it; otherwise a record that no longer matches is a difference.
 
    There are NO allowed differences. One that cannot be removed is written down as a named row and this check
    fails on any other, as haro/twin-expected.csv does; today the list is empty.
@@ -46,9 +49,34 @@ const PER = +opt('--per', 24);
 const QUIET = args.includes('--quiet');
 if (!fs.existsSync(BIN)) { console.error(`parity: no binary at ${BIN} (zig build -j2, or --bin PATH)`); process.exit(2); }
 
+/* One run at a time in one tree. The pack's failure paths and the wasm proof's record write into the tree, so two runs at once
+   break each other's inputs: found 2026-11-06, when two overlapping runs left protocol/README.md deleted and made conformance.js
+   read a media.json the other run was holding broken. The lock is a file in .git holding the run's pid; a lock whose process is
+   gone is taken over, and a live one stops this run. */
+const GIT = path.join(ROOT, '.git');
+const LOCK = fs.existsSync(GIT) && fs.statSync(GIT).isDirectory() ? path.join(GIT, 'zane-parity.lock') : path.join(ROOT, '.zane-parity.lock');
+for (let tries = 0; ; tries++) {
+  try { fs.writeFileSync(LOCK, String(process.pid), { flag: 'wx' }); break; } catch (e) {
+    if (e.code !== 'EEXIST' || tries > 0) throw e;
+    const pid = +fs.readFileSync(LOCK, 'utf8');
+    let alive = false;
+    try { process.kill(pid, 0); alive = true; } catch (k) { alive = k.code === 'EPERM'; }
+    if (alive) { console.error(`parity: another run (pid ${pid}) holds ${path.relative(ROOT, LOCK)}; two runs in one tree break each other's inputs, so this one stops`); process.exit(2); }
+    fs.unlinkSync(LOCK);
+  }
+}
+process.on('exit', () => { try { if (fs.readFileSync(LOCK, 'utf8') === String(process.pid)) fs.unlinkSync(LOCK); } catch { /* already gone */ } });
+
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'conformance', 'manifest.json'), 'utf8'));
 const FIX = path.join(ROOT, 'conformance', 'fixtures');
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-parity-'));
+/* Windows may refuse a file for a moment after a process has used it (a scanner reading a file just written): EBUSY, EPERM, EACCES
+   or UNKNOWN. A write or a delete of a file of the tree is retried for up to two seconds before it fails (found 2026-11-06, when a
+   refused write left protocol/MANIFEST.json broken). */
+const pause = ms => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const firm = fn => { for (let i = 0; ; i++) { try { return fn(); } catch (e) { if (i >= 40 || !['EBUSY', 'EPERM', 'EACCES', 'UNKNOWN'].includes(e.code)) throw e; pause(50); } } };
+const put = (file, data) => firm(() => fs.writeFileSync(file, data));
+const drop = file => firm(() => fs.unlinkSync(file));
 
 function run(cmd, argv, script) {
   const t = process.hrtime.bigint();
@@ -126,35 +154,42 @@ compareTool('', PACK, 'pack', ['--check', 'stray']);
   const M = path.join(ROOT, 'protocol', 'MANIFEST.json'), keep = fs.readFileSync(M);
   try {
     const a = run('js', [], PACK); const wa = fs.readFileSync(M);
-    fs.writeFileSync(M, keep);
+    put(M, keep);
     const b = run('zane', ['pack']); const wb = fs.readFileSync(M);
     if (!same(a, b)) differences.push(`pack [write]: ${firstDiff(a, b)}`);
     if (!wa.equals(wb)) differences.push('pack [write]: the manifests written differ');
     toolRuns++;
-  } finally { fs.writeFileSync(M, keep); }
+  } finally { put(M, keep); }
 }
 { // the failure paths: break one input, run both on it (each on a freshly broken tree), compare what each printed and left behind, put it back
   const P = rel => path.join(ROOT, rel), MAN = 'protocol/MANIFEST.json', RD = 'protocol/README.md';
-  const edit = (rel, f) => fs.writeFileSync(P(rel), f(fs.readFileSync(P(rel), 'utf8')));
-  const editMan = f => { const m = JSON.parse(fs.readFileSync(P(MAN), 'utf8')); f(m); fs.writeFileSync(P(MAN), JSON.stringify(m, null, 2) + '\n'); };
+  const edit = (rel, f) => put(P(rel), f(fs.readFileSync(P(rel), 'utf8')));
+  const editMan = f => { const m = JSON.parse(fs.readFileSync(P(MAN), 'utf8')); f(m); put(P(MAN), JSON.stringify(m, null, 2) + '\n'); };
   const BOTH = [['--check'], []], CHECK = [['--check']];
   const CASES = [
     ['a pinned file changed', ['doc/language/VIOLATIONS.md'], () => edit('doc/language/VIOLATIONS.md', t => t + 'x\n'), BOTH],
     ['a pinned file in CRLF only', ['doc/language/GRAMMAR.md'], () => edit('doc/language/GRAMMAR.md', t => t.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n')), BOTH],
-    ['a pinned file missing', ['conformance/signal.json'], () => fs.unlinkSync(P('conformance/signal.json')), BOTH],
-    ['two pinned files missing', ['conformance/signal.json', 'doc/diagnostic-contract.md'], () => { fs.unlinkSync(P('conformance/signal.json')); fs.unlinkSync(P('doc/diagnostic-contract.md')); }, BOTH],
+    ['a pinned file missing', ['conformance/signal.json'], () => drop(P('conformance/signal.json')), BOTH],
+    ['two pinned files missing', ['conformance/signal.json', 'doc/diagnostic-contract.md'], () => { drop(P('conformance/signal.json')); drop(P('doc/diagnostic-contract.md')); }, BOTH],
     ['the README with a wrong count', [RD], () => edit(RD, t => t.replace(/(\d+) rules, 7 articles/, (m, k) => (+k + 1) + ' rules, 7 articles')), BOTH],
     ['the README without a count', [RD], () => edit(RD, t => t.replace(/(\d+) fixtures with known verdicts/, 'fixtures with known verdicts')), BOTH],
-    ['the README missing', [RD], () => fs.unlinkSync(P(RD)), BOTH],
-    ['the manifest missing', [MAN], () => fs.unlinkSync(P(MAN)), CHECK],
+    ['the README missing', [RD], () => drop(P(RD)), BOTH],
+    ['the manifest missing', [MAN], () => drop(P(MAN)), CHECK],
     ['the manifest short an entry', [MAN], () => editMan(m => { m.pinned = m.pinned.filter(e => e.file !== 'conformance/media.json'); }), CHECK],
     ['the manifest long an entry', [MAN], () => editMan(m => { m.pinned.push({ file: 'doc/gone.md', role: 'x', bytes: 1, sha256: '0' }); }), CHECK],
     ['a hash altered', [MAN], () => editMan(m => { m.pinned[0].sha256 = (m.pinned[0].sha256[0] === '0' ? '1' : '0') + m.pinned[0].sha256.slice(1); }), CHECK],
   ];
   const left = () => fs.existsSync(P(MAN)) ? fs.readFileSync(P(MAN)) : null;
+  /* every file a case breaks is read ONCE, before any case runs, and every restore writes those bytes back: a snapshot taken per
+     case would record a file an earlier case failed to put back as absent, and its restore would then delete it (found
+     2026-11-06, when protocol/README.md was left deleted). A file missing before the first case stops the block; a file not back
+     byte for byte after the last is a difference. */
+  const touched = [...new Set([MAN, ...CASES.flatMap(c => c[1])])];
+  const missing = touched.filter(f => !fs.existsSync(P(f)));
+  if (missing.length) { differences.push(`pack failure paths not run: ${missing.join(', ')} missing before the first case`); CASES.length = 0; }
+  const ORIGINAL = new Map(touched.filter(f => fs.existsSync(P(f))).map(f => [f, fs.readFileSync(P(f))]));
   for (const [name, files, breakIt, modes] of CASES) {
-    const keep = new Map([...files, MAN].map(f => [f, fs.existsSync(P(f)) ? fs.readFileSync(P(f)) : null]));
-    const restore = () => { for (const [f, b] of keep) if (b === null) { if (fs.existsSync(P(f))) fs.unlinkSync(P(f)); } else fs.writeFileSync(P(f), b); };
+    const restore = () => { for (const f of [...files, MAN]) put(P(f), ORIGINAL.get(f)); };
     try {
       for (const argv of modes) {
         breakIt(); const a = run('js', argv, PACK), wa = left(); restore();
@@ -165,6 +200,10 @@ compareTool('', PACK, 'pack', ['--check', 'stray']);
         toolRuns++;
       }
     } finally { restore(); }
+  }
+  for (const [f, b] of ORIGINAL) if (!fs.existsSync(P(f)) || !fs.readFileSync(P(f)).equals(b)) {
+    put(P(f), b);
+    differences.push(`pack failure paths: ${f} was not back byte for byte after the cases (written back now)`);
   }
 }
 compareTool('', XM, 'cross-medium', []);
@@ -286,6 +325,36 @@ for (let i = 0; i < corpus.length; i += B) {
   batch(corpus.slice(i, i + B), ['--level', '2']);
 }
 
+// ---- 6. the wasm proof's record: written from the binary under test, never typed ------------------------
+/* tools/zane/wasm-proof.html runs every fixture at every level through site/zane.wasm in a browser and compares with what this
+   binary prints for `check NAME --json --level N` (with the fixture's symbols). The record of those envelopes is made here: with
+   --write-wasm-proof it is written, and without it a record that no longer matches the binary or the wasm is a difference. */
+const PROOF = path.join(__dirname, 'wasm-proof.json'), WASM = path.join(ROOT, 'site', 'zane.wasm');
+let proofNote = 'site/zane.wasm absent: the wasm proof\'s record not checked';
+if (fs.existsSync(WASM)) {
+  const proofFixtures = manifest.fixtures.map(fx => {
+    const name = 'conformance/fixtures/' + fx.file;
+    const sym = [];
+    if (fx.symbols) { const s = path.join(TMP, fx.file + '.proof-symbols.json'); fs.writeFileSync(s, JSON.stringify(fx.symbols)); sym.push('--symbols', s); }
+    const expect = {};
+    for (const level of [1, 2, 3, 4]) expect[level] = run('zane', ['check', name, '--json', '--level', String(level), ...sym]).out.toString('utf8');
+    return { name, symbols: fx.symbols || null, source: fs.readFileSync(path.join(ROOT, name), 'utf8'), expect };
+  });
+  const wasmBytes = fs.readFileSync(WASM);
+  const record = {
+    about: 'Written by node tools/zane/parity.js --write-wasm-proof from the native binary; never edited by hand. tools/zane/wasm-proof.html runs the same sources through site/zane.wasm and compares.',
+    wasm: { file: 'site/zane.wasm', bytes: wasmBytes.length, sha256: require('crypto').createHash('sha256').update(wasmBytes).digest('hex') },
+    fixtures: proofFixtures
+  };
+  const text = JSON.stringify(record, null, 1) + '\n';
+  const what = `${proofFixtures.length} fixtures at 4 levels = ${proofFixtures.length * 4} envelopes, for zane.wasm ${record.wasm.sha256.slice(0, 12)} (${record.wasm.bytes} bytes)`;
+  if (args.includes('--write-wasm-proof')) { fs.writeFileSync(PROOF, text); proofNote = 'written -- ' + what; }
+  else if (!fs.existsSync(PROOF) || fs.readFileSync(PROOF, 'utf8').replace(/\r\n/g, '\n') !== text) {
+    differences.push('tools/zane/wasm-proof.json is stale against this binary or site/zane.wasm (run with --write-wasm-proof)');
+    proofNote = 'STALE';
+  } else proofNote = 'current -- ' + what;
+}
+
 // ---- the report -----------------------------------------------------------------------------------------
 const dist = xs => {
   const s = [...xs].sort((a, b) => a - b), q = p => s[Math.min(s.length - 1, Math.floor(p * s.length))];
@@ -300,6 +369,7 @@ console.log(`  arguments    ${argCases.length} command lines`);
 console.log(`  suite        ${confCases.length} command lines of zane conformance against conformance.js`);
 console.log(`  tools        ${toolRuns} command lines of zane pack, cross-medium and audit-facts against their scripts`);
 console.log(`  corpus       seed ${SEED}, ${corpus.length} inputs (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}), each in --json at level 4 and in text at level 2`);
+console.log(`  wasm proof   ${proofNote}`);
 console.log(`  timing, one fixture per process, --json at level 4, wall time with process start:`);
 console.log(`    node cli.js  ${dist(timing.js)}`);
 console.log(`    zane         ${dist(timing.zane)}`);

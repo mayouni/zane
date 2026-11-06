@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wasm proof — the verifier in this browser against the native binary</title>
-<meta name="description" content="The wasm proof runs every fixture of the Zane conformance suite at every level through the verifier compiled to WebAssembly, in this browser, and compares each envelope byte for byte with what the native binary printed for the same source.">
+<meta name="description" content="The wasm proof runs every fixture of the Zane conformance suite at every level through the verifier compiled to WebAssembly, in this browser, and shows each envelope beside the one the native binary printed for the same source, compared byte for byte.">
 <link rel="stylesheet" href="../../site/stz.css?v=fe87fff2">
 <style>
 #verdict { font-size: 1.3rem; font-weight: 700; margin: 0 0 .6rem; }
 #verdict.good { color: var(--c-good); }
 #verdict.bad { color: var(--c-bad); }
-#diffs { border-collapse: collapse; width: 100%; margin: 1rem 0; }
-#diffs th, #diffs td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
 #again { font: 700 1.125rem var(--sans); cursor: pointer; }
+#pairs details { border-bottom: 1px solid var(--line); padding: .5rem 0; }
+#pairs summary { cursor: pointer; font-size: 1.125rem; }
+/* the word says it, in ink: a summary is something a person clicks, held to 7:1, which the green and red of the verdict are not */
+#pairs summary .same, #pairs summary .diff { color: var(--ink); font-weight: 700; }
+#pairs .pair .term { max-width: none; width: auto; }
 </style>
 </head>
 <body>
@@ -56,16 +59,25 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" data-wasm="../../site/zane.wasm?v=22a47733">
 <section>
   <div class="narrow">
     <h2>The result of the proof in this browser</h2>
     <p id="verdict" role="status">Loading the wasm and the expected envelopes…</p>
     <p id="detail"></p>
-    <table id="diffs" hidden><thead><tr><th>Fixture</th><th>Level</th><th>First difference</th></tr></thead><tbody></tbody></table>
     <p><button type="button" class="btn primary" id="again" hidden>Run the proof again</button></p>
-    <p>The expected envelopes are written by <code>node tools/zane/wasm-proof.js --bin PATH</code>, which runs the native binary on the same
-    sources and records the sha256 of the wasm they were written for. The page says so when the wasm it loads is another build.</p>
+    <p>The expected envelopes are written by <code>node tools/zane/parity.js --write-wasm-proof</code>, from the native binary on the same
+    sources, never by hand, with the sha256 of the wasm they were written for. Run without the flag, the parity check fails when the
+    record no longer matches the binary or the wasm, and this page says so when the wasm it loads is another build.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Each fixture's envelope from the wasm beside the native binary's</h2>
+    <p>Each line below is one fixture. Opening it shows the envelope at level 4 from the wasm in this browser beside the one from
+    <code>zane check --json --level 4</code>; a fixture that differs at any level opens at the first level where it differs.</p>
+    <div id="pairs"></div>
     <p class="limit"><b>Limit:</b> the proof shows sameness, never rightness. Two builds that agree on every byte share every mistake of the
     verifier. The generated corpus that <code>tools/zane/parity.js</code> runs against the native binary is not run here.</p>
   </div>
@@ -94,46 +106,51 @@
 <!-- /shell:footer -->
 
 <script src="../../site/stz.js?v=bd48a372"></script>
-<script src="../../site/zane-wasm.js"></script>
+<script src="../../site/zane-wasm.js?v=ee0cc9aa"></script>
 <script>
 (async () => {
-  const verdict = document.getElementById('verdict'), detail = document.getElementById('detail');
-  const body = document.querySelector('#diffs tbody');
+  const verdict = document.getElementById('verdict'), detail = document.getElementById('detail'), pairs = document.getElementById('pairs');
+  const url = document.getElementById('main').dataset.wasm;
   const hex = async b => [...new Uint8Array(await crypto.subtle.digest('SHA-256', b))].map(x => x.toString(16).padStart(2, '0')).join('');
-  const [record, bytes] = await Promise.all([
-    fetch('wasm-proof.json').then(r => r.json()),
-    fetch('../../site/zane.wasm').then(r => r.arrayBuffer())
-  ]);
+  const [record, bytes] = await Promise.all([fetch('wasm-proof.json').then(r => r.json()), fetch(url).then(r => r.arrayBuffer())]);
   const sha = await hex(bytes);
-  const zane = await ZaneWasm.load('../../site/zane.wasm');
+  const zane = await ZaneWasm.load(url);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+  const side = (label, text) => { const d = el('div'); d.append(el('p', 'lbl', label), el('pre', 'term', text)); return d; };
   const firstDiff = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; };
   function run() {
-    body.textContent = '';
-    let same = 0, total = 0;
+    pairs.textContent = '';
+    let sameFx = 0, same = 0, total = 0;
     const t = performance.now();
-    for (const fx of record.fixtures) for (const level of [1, 2, 3, 4]) {
-      total++;
-      const got = zane.check(fx.name, fx.source, { level, symbols: fx.symbols });
-      const want = fx.expect[level];
-      if (got === want) { same++; continue; }
-      const i = got === null ? 0 : firstDiff(got, want);
-      const tr = document.createElement('tr');
-      for (const v of [fx.name.replace('conformance/fixtures/', ''), String(level),
-        got === null ? 'the wasm returned nothing' : `byte ${i}: wasm ${JSON.stringify(got.slice(i, i + 24))} / native ${JSON.stringify(want.slice(i, i + 24))}`]) {
-        const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+    for (const fx of record.fixtures) {
+      const got = {};
+      let bad = 0;
+      for (const level of [1, 2, 3, 4]) {
+        total++;
+        got[level] = zane.check(fx.name, fx.source, { level, symbols: fx.symbols });
+        if (got[level] === fx.expect[level]) same++; else if (!bad) bad = level;
       }
-      body.appendChild(tr);
+      if (!bad) sameFx++;
+      const show = bad || 4, w = got[show] === null ? '(the wasm returned nothing)' : got[show], n = fx.expect[show];
+      const d = el('details'), s = el('summary');
+      s.append(el('span', bad ? 'diff' : 'same', bad ? 'differs' : 'identical'),
+        document.createTextNode(` · ${fx.name.replace('conformance/fixtures/', '')} · ` +
+          (bad ? `first at level ${bad}, byte ${firstDiff(w, n)}` : 'at levels 1 to 4')));
+      const p = el('div', 'pair');
+      p.append(side(`The wasm, in this browser, level ${show}`, w), side(`zane check --json --level ${show}`, n));
+      p.lastChild.className = 'zane';
+      d.append(s, p);
+      if (bad) d.open = true;
+      pairs.append(d);
     }
-    const ms = performance.now() - t;
-    const ok = same === total && sha === record.wasm.sha256;
+    const ms = performance.now() - t, n = record.fixtures.length;
+    const ok = sameFx === n && sha === record.wasm.sha256;
     verdict.className = ok ? 'good' : 'bad';
-    verdict.textContent = `${same} of ${total} envelopes are identical to the native binary's` + (ok ? '.' : ': see below.');
-    detail.textContent = `${record.fixtures.length} fixtures at 4 levels each, run in ${ms.toFixed(0)} ms in this browser. The wasm is ${bytes.byteLength.toLocaleString('en')} bytes, sha256 ${sha.slice(0, 16)}…, and ` +
-      (sha === record.wasm.sha256 ? 'the expected envelopes were written for this build.' : `the expected envelopes were written for another build (${record.wasm.sha256.slice(0, 16)}…): regenerate them with tools/zane/wasm-proof.js.`) +
-      ` The native side was ${record.native}.`;
-    document.getElementById('diffs').hidden = same === total;
+    verdict.textContent = `${sameFx} of ${n} fixtures identical, ${same} of ${total} envelopes at four levels` + (ok ? '.' : ': see below.');
+    detail.textContent = `Run in ${ms.toFixed(0)} ms in this browser. The wasm is ${bytes.byteLength.toLocaleString('en')} bytes, sha256 ${sha.slice(0, 16)}…, and ` +
+      (sha === record.wasm.sha256 ? 'the expected envelopes were written for this build.' : `the expected envelopes were written for another build (${record.wasm.sha256.slice(0, 16)}…): run parity.js with --write-wasm-proof.`);
     document.getElementById('again').hidden = false;
-    window.__proof = { same, total, sha, expected: record.wasm.sha256, ms };
+    window.__proof = { fixtures: sameFx, of: n, same, total, sha, expected: record.wasm.sha256, ms };
   }
   document.getElementById('again').addEventListener('click', run);
   run();
