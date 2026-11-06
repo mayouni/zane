@@ -539,10 +539,10 @@ function checkBreaks(problems) {
 }
 
 /* ---- the site does not name Zing (the Principal, 2026-11-06: "do not reference Zing in the Zane site") ------------------------- */
-/* Every file under site/, index.html and every page of the registry, comments and JSON included, in any case. The match is the
-   word, so "box-sizing" in the stylesheet is not one. */
+/* Every file under site/, index.html, README.md (the repository's front page on GitHub, Central 2026-11-06) and every page of the
+   registry, comments and JSON included, in any case. The match is the word, so "box-sizing" in the stylesheet is not one. */
 function checkNames(problems) {
-  const files = new Set(['index.html', ...PAGES.map(p => p.file)]);
+  const files = new Set(['index.html', 'README.md', ...PAGES.map(p => p.file)]);
   (function all(dir) {
     for (const e of fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
       const q = path.posix.join(dir, e.name);

@@ -24,7 +24,7 @@ Three things, strictly layered — the architecture inherited from a sibling pro
 |---|---|---|
 | **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**, specified in [`doc/language/`](doc/language/README.md) (v1.5). Reference implementation: the reference implementation's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
 | **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.14, 123 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
-| **3 · Rendering projections** | Per-medium consumers: business web (Zing, formerly StzWeb), the reference implementation's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
+| **3 · Rendering projections** | Per-medium consumers: business web, the reference implementation's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
 The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces. And the law has a native habitat: the language. One declaration holds at three moments — checked at design time, linted in development, measured at runtime — with no framework to swap and no dependency to take.
 
@@ -44,7 +44,6 @@ The law is **data**. The reader renders it, linters load it, findings cite rule 
 
 A project consumes the constitution by **pinning a version** of `rules.json` — exactly as a runtime pins a conformance-fixtures file:
 
-- **Zing** (formerly StzWeb) — first conforming consumer. Its `zing check` lints declarations against the law and cites rule numbers; the UI audit, run on ten of its pages on 2026-11-05, found one finding, on a redirect page nobody reads ([A quick win](site/quick-win.html)). Its own pinning record names law v3.11.
 - **The reference implementation** — the Zui pillar's compiler already parses `INTENT_FLOW`, `FORM`, `WIZARD`, `WORLD_VIEW`, `INTERACTION`, `FEEDBACK`, `SCREEN`, `COMPONENT`, `NAV_GRAPH`, `VIBE`; its Interface Constitution derives from the same articles.
 - **Anything else** — the law is one JSON file with a stable schema. Load it, check against it, cite it.
 

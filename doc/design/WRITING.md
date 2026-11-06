@@ -30,8 +30,8 @@ time because it lived only in a promise, so it is written here and part of it is
    not repeat it, in the Principal's words; the strict register begins below it, and the check judges the front page on its first
    content section. The hero's title still keeps rule 7. Asked by the Principal on 2026-11-05: *"don't apply the strict sentence
    style to the hero zones"*.
-9. **The Zane site does not name Zing.** `node tools/site-shell.js` fails on the word in any page, comment or JSON file, with its
-   file and line. Ruled by the Principal on 2026-11-06: *"do not reference Zing in the Zane site"*.
+9. **The Zane site does not name Zing.** `node tools/site-shell.js` fails on the word in any page, comment or JSON file, and in
+   README.md, the repository's front page, with its file and line. Ruled by the Principal on 2026-11-06: *"do not reference Zing in the Zane site"*.
 
 ## 2. The subject term
 
