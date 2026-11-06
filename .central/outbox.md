@@ -3122,3 +3122,37 @@ next:
   - central: read a336de1 with 0190d9b to d055b5b; push by sha
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 13:41 | NOTE | answers 13:02, 13:13 and 13:15 | THE SITE IS EMBEDDED (5FF152C, 3,492,864 BYTES); THE BAR, THEME AND FILIGREE (115F977); THE USER ON EVERY PAGE, 112 OF 240, AND THE MUSEUM BY NIGHT IN RETRO (CAC3E98)
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 13:41 | ATTENDED
+
+subject:   the embedded site (5ff152c), the top bar and the filigree (115f977), the user revision and the night photograph (cac3e98), local on main, not pushed
+
+why:       your 13:02 (embed), 13:13 (filigree, GitHub, Theme) and 13:15 (the user; the bar at 548 px); the author, directly: "use this version for the retro vibe, while optimising the weights of the two images"
+
+did:
+  - EMBEDDED the site: build.zig makes a module of 216 files (the root's pages and site, constitution, tools, doc, conformance, protocol, haro, examples); zane serve answers from it by default, --root DIR from a folder, --app DIR as before; committed first because it was built and gated before your 13:13 arrived and touches none of its files
+  - MEASURED the embedded site's gate with the release binary copied alone into an empty folder outside the repository: UI audit clean in both cultures on 38 pages, strict counts identical to the disk's (3046, 3046), wasm proof 73 of 73 through it, serve-test 100 of 100 (embedded, folder, --app)
+  - BROUGHT the filigree back in Modern from a 62.4rem window (8rem floor), 150 to 424 px wide, 46 px or more clear of the text; screenshot .central/shots/head-bar-1085.png
+  - MADE the bar's right side "GitHub" then its mark, a thin rule and 1.5rem, then "Theme" (renamed on the conformance page too); the bar and the band wrap instead of scrolling: no overlap, no cut word, nothing past the window at 390, 548, 768, 1024, 1085, 1280, 1440
+  - REVISED person/people across 34 files with three agents on disjoint files, each sentence read: 112 became user, 0 agent, 128 stayed; the generated grid caption fixed in tools/site-grid.js; WRITING.md rule 12
+  - GAVE Retro the museum by night and lightened both photographs: srcset widths, lazy, so only the theme's photograph is fetched (measured); by day 318,130 bytes at 1699 px (was 382,022), 200,812 at 1280, 94,424 at 800; by night 48,156 and 24,680; the night door 32 to 255 px clear of the panel
+  - DELETED nothing I owe: the build folder on C: goes after this memo
+
+state:
+  binary:     ReleaseSmall 860,672 bytes before embedding, 3,492,864 after (budget 4 MB)
+  gates:      site-shell ok (38), site-facts ok, site-grid ok, parity identical, serve-test 100 of 100, UI audit clean in Modern and Retro
+  tally:      user 112 / agent 0 / stayed 128 of 240 (titles and meta descriptions included; your 243 counted attributes this count reads as part of their sentence)
+
+waiting:
+  - USER-WORDING-01: sentences the agents flagged as judgement calls, left as written: navigation's h1 ("lets a user, a person or an agent, move through it, and its geometry shows a person where they are"); mobile's "the user ... points, and money moves"; state's "the person keeps the dignity of a ten-second window"; how's "lets a person find a forbidden interface at design time" (the designer); thinking's six rights now "to every user" though "to act without fear" and "to reach a human" read as a human's -> the Principal
+             [not routed; it is here]
+  - DOCKET-PASS5-01: four more F-6 rows -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      S5 (site-facts and site-shell into the binary), on your order
+  - central: read 5ff152c, 115f977 and cac3e98 in your clone; push by sha
+```
+---
