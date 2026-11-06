@@ -110,6 +110,21 @@ nav.site .tools .github svg { width: 1.35rem; height: 1.35rem; display: block; }
 }
 .vibe-picker select:hover { border-color: var(--accent-lite); }
 .vibe-picker option { font-size: 1rem; color: var(--ink); background: var(--card); }
+/* the open list in the theme's own colours (the author, 2026-11-06: "the selected background of the combo should embrace the current theme
+   (retro or modern) not the standard browser theme (that ugly blue)"): a customizable select draws the list in the bar's colours and the
+   option under the pointer or the keyboard in the theme's accent; a browser without it keeps its native list */
+@supports (appearance: base-select) {
+  .vibe-picker select, .vibe-picker select::picker(select) { appearance: base-select; }
+  .vibe-picker select { display: inline-flex; align-items: center; gap: .5rem; }
+  .vibe-picker select::picker-icon { color: var(--halo); }
+  .vibe-picker select::picker(select) {
+    background: var(--deep); color: var(--halo); border: 1px solid rgba(234, 231, 246, .35); border-radius: 10px;
+    padding: .3rem; margin-top: .3rem; box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  }
+  .vibe-picker option { font: 1.1rem var(--sans); color: var(--halo); background: transparent; padding: .45rem .9rem; border-radius: 6px; }
+  .vibe-picker option:hover, .vibe-picker option:focus-visible { background: var(--accent); color: var(--on-accent); outline: none; }
+  .vibe-picker option:checked { font-weight: 700; }
+}
 footer.site .bar, footer .bar { display: flex; align-items: center; gap: 1.4rem;
   flex-wrap: wrap; justify-content: space-between; }
 
