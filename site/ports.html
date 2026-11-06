@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Other languages — implementing Zane in other languages and proving that it agrees</title>
-<meta name="description" content="Zane is implemented in other languages by writing a verifier that reads the same pinned files and passes the same fixtures. The page gives the port recipe (pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences) and says what a port may and may not claim.">
+<meta name="description" content="Zane can be implemented in other languages by writing a verifier that reads the same pinned files and passes the same fixtures. The page gives the port recipe (pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences) and says what a port may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=c4e6d70b">
 </head>
@@ -42,7 +42,7 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="adopt.html">Use</a><span class="sep">›</span><a href="stack.html">Your stack</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Other languages</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Use · for people who implement Zane in another language</p>
-    <h1>Zane is implemented in other languages by implementing its language and running its fixtures, not by adopting a library.</h1>
+    <h1>Zane can be implemented in other languages by writing its verifier and running its fixtures, not by adopting a library.</h1>
     <p class="sub">Porting Zane to other languages means writing a verifier that is a peer of the one in this repository: it reads the same pinned files, parses the same grammar, and reports the same diagnostics on the same fixtures.
     The fixture suite ensures that a port proves its agreement instead of asserting it, and the suite names any fixture on which the port disagrees. The page gives the recipe and the limits of what a pass lets you say.</p>
   </div>
