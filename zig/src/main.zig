@@ -5,6 +5,7 @@
 //!   zane pack [--check]                                the protocol pack's manifest, written or verified
 //!   zane cross-medium [spec.json] [--verbose]          one declaration, two renderings, one law
 //!   zane audit-facts [facts.json] [--rules 62,105]     the screenshot audit's facts and its decisions
+//!   zane serve [--root DIR | --app DIR] [--port N]     the site, the Reader and the audit, or another site beside the audit
 //!   zane version                                       the law, the language, the contract, the build
 //!
 //! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`; stage S3
@@ -23,6 +24,7 @@ const pack = @import("pack.zig");
 const crossmedium = @import("crossmedium.zig");
 const facts = @import("facts.zig");
 const report = @import("report.zig");
+const serve = @import("serve.zig");
 
 const language_version = "1.5";
 
@@ -186,6 +188,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
         return crossmedium.run(a, out, err, spec, verbose);
     }
     if (argv.len > 0 and std.mem.eql(u8, argv[0], "audit-facts")) return facts.run(a, out, argv[1..]);
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "serve")) return serve.run(a, out, err, argv[1..]);
     const o = try parseArgs(a, argv);
 
     if (o.command != null and std.mem.eql(u8, o.command.?, "version") and !o.help) return version(out);
@@ -274,7 +277,7 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane (stage S3: check, conformance, pack, cross-medium, audit-facts; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane (stage S4: check, conformance, pack, cross-medium, audit-facts, serve; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",
@@ -290,4 +293,5 @@ test {
     _ = @import("schema.zig");
     _ = @import("js.zig");
     _ = report;
+    _ = serve;
 }

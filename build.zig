@@ -65,6 +65,7 @@ fn embedData(b: *std.Build, m: *std.Build.Module) void {
     m.addAnonymousImport("spec.md", .{ .root_source_file = b.path("doc/language/README.md") });
     m.addAnonymousImport("facts.schema.json", .{ .root_source_file = b.path("doc/design/audit/facts.schema.json") });
     m.addAnonymousImport("decides.json", .{ .root_source_file = b.path("doc/design/audit/decides.json") });
+    m.addAnonymousImport("ui-audit.html", .{ .root_source_file = b.path("tools/ui-audit.html") });
     m.addImport("fixtures", folder(b, "conformance/fixtures"));
     m.addImport("crossmedium", folder(b, "conformance/cross-medium"));
 }
