@@ -53,8 +53,9 @@ const SECTIONS = [
   { id: 'use', label: 'Use', head: 'site/adopt.html' },
   { id: 'try', label: 'Try', head: 'site/audit.html' }
 ];
-/* A page's label is the one name it goes by in the menu, the rail and the trail (Rule 116). The head page
-   of a section is named after the section; what the page is about is its kicker and its title. */
+/* A page's label is the one name it goes by in the menu, the rail and the trail (Rule 116). The head page of a section is the section's
+   own entry in the main menu and takes its name; it is not repeated in the section's band, since a submenu never repeats its parent's
+   label (the Principal, 2026-11-06). */
 const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'State'], ['widgets', 'Widgets'],
                   ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
 /* each family page's subject term (doc/design/WRITING.md section 2) */
@@ -159,13 +160,14 @@ function trail(p) {
   const links = steps.map(x => `<a href="${href(p.file, x.to)}">${esc(x.label)}</a>`).join('<span class="sep">›</span>');
   return `<nav class="crumbs trail-hidden" aria-label="Breadcrumb">${links}<span class="sep">›</span><span class="here-crumb" aria-current="page">${esc(p.label)}</span></nav>`;
 }
-/* Level 2: the pages of a section, in one horizontal band under the menu, fixed with it. At most five (Rule 27). Drawn only where
-   a section has at least two pages; a band of one entry says nothing. Identical on every page of the section (Rule 115). */
+/* Level 2: the pages of a section other than its head page, in one horizontal band under the menu, fixed with it. At most five
+   (Rule 27). The head page is the main menu's entry and is not repeated here. Identical on every page of the section (Rule 115). */
+const isHead = p => SECTIONS.some(s => s.head === p.file);
 function bandOf(sectionId) {
-  const top = PAGES.filter(p => p.section === sectionId && p.rail && !p.parent);
-  return top.length >= 2 ? top : null;
+  const top = PAGES.filter(p => p.section === sectionId && p.rail && !p.parent && !isHead(p));
+  return top.length >= 1 ? top : null;
 }
-for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
+for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent && !SECTIONS.some(s => s.head === q.file)); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
 function band(p) {
   if (p.home || !p.section) return '';
   const top = bandOf(p.section);
@@ -393,6 +395,9 @@ function apply(p, text) {
   /* every entry of a page's outline fits one line in both cultures (the author, 2026-11-06): 20 characters at most, from the h2's data-outline */
   if (secs && secs.length >= SECTION_MIN) for (const x of secs) if (x.label.length > 20)
     problems.push('the outline entry "' + x.label + '" is ' + x.label.length + ' characters: give its h2 a data-outline of 20 at most');
+  /* an outline entry never repeats a label above it: its page's, or its section's in the main menu (WRITING.md rule 10) */
+  if (secs && secs.length >= SECTION_MIN) for (const x of secs) for (const up of [p.label, (SECTIONS.find(s => s.id === p.section) || {}).label])
+    if (up && x.label.trim().toLowerCase() === up.trim().toLowerCase()) problems.push('the outline entry "' + x.label + '" repeats the label "' + up + '" above it');
 
   /* ---- render ---- */
   const fill = (name, inner) => { t = t.replace(fenceRe(name), () => fence(name, inner)); };
@@ -563,10 +568,33 @@ function checkNames(problems) {
   }
 }
 
+/* ---- a submenu never repeats its parent's label (the Principal, 2026-11-06: "the same menu option in the main and submenu
+   levels (like Try and then Try here)!!! This should never happen in our sites") ------------------------------------------------ */
+/* A section's head page is the section's own entry in the main menu, so it must carry the section's label and stay out of the band.
+   Any other page may not carry its section's label nor its family head's, and no two entries at one level of the menus (the main
+   menu, a section's band, a family's list) may share a label; case is ignored, and a failure names both. */
+function checkLabels(problems) {
+  const same = (x, y) => x.trim().toLowerCase() === y.trim().toLowerCase();
+  const levels = new Map([['the main menu', SECTIONS.map(s => ({ name: s.label, what: 'the section ' + s.id }))]]);
+  for (const p of PAGES) {
+    if (!p.section) continue;
+    const s = SECTIONS.find(x => x.id === p.section);
+    if (s.head === p.file) { if (!same(p.label, s.label)) problems.push(`${p.file}: the head page of the section ${s.id} is called "${p.label}" and the main menu calls it "${s.label}": one page, one name (Rule 116)`); continue; }
+    if (same(p.label, s.label)) problems.push(`${p.file}: its label "${p.label}" repeats the label of its section, "${s.label}", one level up`);
+    if (p.parent && same(p.label, by.get(p.parent).label)) problems.push(`${p.file}: its label "${p.label}" repeats the label of ${p.parent}, one level up`);
+    const level = p.parent ? 'the list of ' + p.parent : p.rail ? 'the band of ' + p.section : null;
+    if (level) { if (!levels.has(level)) levels.set(level, []); levels.get(level).push({ name: p.label, what: p.file }); }
+  }
+  for (const [level, items] of levels) items.forEach((x, i) => items.slice(i + 1).forEach(y => {
+    if (same(x.name, y.name)) problems.push(`${x.what} and ${y.what} share the label "${x.name}" in ${level}`);
+  }));
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
   const notes = [];
+  checkLabels(problems);
   checkBars(problems, notes);
   checkWriting(problems, notes);
   checkBreaks(problems);
