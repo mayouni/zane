@@ -2888,3 +2888,40 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON until the author looks at 070c7a4: a headless screenshot of thinking.html shows the look, and only the author's eye closes it
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 01:42 | NOTE | answers your NOTE of 2026-11-06 01:06 (Zing) and closes S2 | THE ZANE SITE NAMES ZING NOWHERE (7F889C6, GREP 0, A CHECK KEEPS IT OUT); THE AUTHOR'S FOUR SPACE REMARKS LANDED FIRST (F40B6FA); S2 IS COMMITTED (26F440D)
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 01:42 | ATTENDED
+
+subject:   the Zing removal (7f889c6), the author's space remarks (f40b6fa) and S2's rest (26f440d), local on main, not pushed
+
+why:       the Principal: "do not reference Zing in the Zane site"; the author, directly, four remarks on space (below); your order put Zing before any S2 work
+
+did:
+  - REMOVED every naming of Zing: the footer link from the shell, site/quick-win.html with its band entry, its Try card, its UI audit list line and its tour scene, the first-consumer sentences and status row, site/facts.json's zing.pinned and the sibling read in tools/site-facts.js
+  - KEPT the tour at eight scenes per profile: product takes the cost scene and programmer the law scene in place of the quick win (measured: each profile shows its new scene)
+  - CLEANED two site pages outside site/ that named Zing: tools/ui-audit.html (a sentence) and the Reader (its linter wording), and build.html:125, which your count did not list
+  - ADDED checkNames to tools/site-shell.js: the word zing, any case, in index.html, every registry page and every file under site/, comments and JSON included, printed with file and line; shown failing at index.html:88 and site/why.html:204 with the footer link put back, then restored
+  - WROTE rule 9 in doc/design/WRITING.md, in your corrected words: "The Zane site does not name Zing."
+  - LANDED before it the author's remarks (f40b6fa): no sideways scroll on a drawing ("never use a horizontal scroll bar on an image or code snippet"), titles in sentence case and smaller ("the uppercase+bold on many lines making it hard to read"), two or four cards two to a row, and one background instead of alternating bands ("leaves holes in the page"); three new refusals in site-shell.js; four rows in Pass 5 F-6
+  - COMMITTED S2's rest (26f440d) after testing pack's failure paths: 11 broken inputs, 18 runs, the binary byte-identical to pack.js on each, and those cases now live in tools/zane/parity.js
+
+state:
+  zing count:    0 by word over index.html and site/ (grep -i '\bzing\b'); 2 by substring, both "box-sizing" in site/stz.css
+  site gates:    site-shell ok (37 pages), site-facts ok, UI audit clean in Modern and Retro on 37 pages, strict 0 interactive text in each (2920 size findings, pre-existing)
+  S2 gates:      parity identical (294 fixture lines, 9 argument lines, 13 suite lines, 63 tool lines, 2592 corpus inputs); zig build test 4 of 4; Windows only
+  outside site:  README.md:47, doc/design/SITE-2.md:174 and doc/design/SITE-3.md:153 still name Zing or quick-win.html; not the site, and SITE-3.md is the author's to leave
+
+waiting:
+  - CENTRAL-ZINGREACH-01: whether the ruling reaches README.md and the design documents -> Central
+             [not routed; it is here]
+  - DOCKET-PASS5-01: unchanged, now with four more F-6 rows -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      nothing queued; I wait for your read
+  - central: read f40b6fa, 7f889c6 and 26f440d; push by sha
+
+note:      LOCAL FACT ON YOUR COUNT: a substring check for "zing" would have refused the stylesheet for box-sizing, so the check matches the word; and a drawing below 857 px wide still shrinks under the legibility floor, named open in the docket
+```
+---
