@@ -16,7 +16,7 @@
        <!-- shell:menu --> ... <!-- /shell:menu -->      the two sticky bars (the menu and the band)
        <!-- shell:trail --> ... <!-- /shell:trail -->    the hidden Breadcrumb landmark
        <!-- shell:layout --> ... <!-- /shell:layout -->  the opening of the layout, holding the level-3 list where there is one
-       <!-- shell:footer --> ... <!-- /shell:footer -->  the footer: links, the style select, the licence line
+       <!-- shell:footer --> ... <!-- /shell:footer -->  the footer: links, the family line, the licence line
 
    Every page of the site is on a bar (SITE-3.md section 3.4): the check below fails a page the registry does not list, a
    page no bar lists, and a footer link to a page the bars do not list.
@@ -124,8 +124,9 @@ function menu(p) {
   }).join('\n');
   const wrapOpen = p.outside === 'reader' ? '' : '  <div class="wrap">\n';
   const wrapClose = p.outside === 'reader' ? '' : '  </div>\n';
-  /* the links sit in their own row, which may scroll sideways on a narrow screen; GitHub and the style select stand at the bar's right
-     (the author, 2026-11-06: "Add Github icon to the right along with the combo of the vibe") */
+  /* GitHub, its word then its mark, and the Theme select stand at the bar's right, apart from each other (the author, 2026-11-06: "Add
+     Github icon to the right along with the combo of the vibe"; "add the Github text left to the icon and separate it from the Style combo
+     (use Theme instead of Style)"); where the bar is too narrow for one row it wraps, and nothing scrolls or is cut */
   const row = p.outside === 'reader' ? '' : '    ';
   const menuOpen = p.outside === 'reader' ? '' : '    <div class="menu">\n';
   const menuClose = p.outside === 'reader' ? '' : '    </div>\n';
@@ -133,7 +134,7 @@ function menu(p) {
 ${wrapOpen}${menuOpen}${row}    <a class="brand" href="${href(p.file, 'index.html')}">Zane</a>
 ${links}
 ${menuClose}${p.outside === 'reader' ? '' : `    <div class="tools">
-      <a class="github" href="${REPO}" aria-label="Zane on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="${GITHUB_MARK}"/></svg></a>
+      <a class="github" href="${REPO}">GitHub <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="${GITHUB_MARK}"/></svg></a>
       ${stylePicker()}
     </div>
 `}${wrapClose}</nav>`;
@@ -141,11 +142,11 @@ ${menuClose}${p.outside === 'reader' ? '' : `    <div class="tools">
   if (p.outside === 'reader') return bar + (b ? '\n' + b : '');
   return `<div class="bars">\n${bar}${b ? '\n' + b : ''}\n</div>`;
 }
-/* Rule 106 (v3.13) allows the two-state control as a select: both states are options, the current one is the one shown. It stands at the
-   right of the top bar, beside GitHub, and stz.js binds it; F2 flips it from the keyboard. */
+/* Rule 106 (v3.13) allows the two-state control as a select: both states are options, the current one is the one shown. It is labelled
+   Theme, stands at the right of the top bar after GitHub, and stz.js binds it; F2 flips it from the keyboard. */
 function stylePicker() {
   return `<div class="vibe-picker">
-        <label for="vibe-select">Style</label>
+        <label for="vibe-select">Theme</label>
         <select id="vibe-select">
           <option value="curator">Modern</option>
           <option value="guardian">Retro</option>

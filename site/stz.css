@@ -79,10 +79,10 @@ kbd { border: 1px solid var(--muted); border-radius: 4px; padding: 0 .35em; font
 nav.site {
   background: var(--deep); color: var(--halo);
 }
-nav.site .wrap { display: flex; align-items: center; gap: 1.2rem; padding: .8rem 1.4rem; flex-wrap: nowrap; }
-/* the menu is one row that never wraps; where it is wider than the screen it scrolls on its own (Rule 27) */
-nav.site .menu { display: flex; align-items: center; gap: 1.2rem; flex: 1 1 auto; min-width: 0;
-  overflow-x: auto; scrollbar-width: none; }
+nav.site .wrap { display: flex; align-items: center; gap: .5rem 1.2rem; padding: .8rem 1.4rem; flex-wrap: wrap; }
+/* the menu holds one row where the window allows, and wraps its words where it does not: no word is cut and nothing scrolls sideways (the
+   author's screenshot at 548 px showed "Language" cut and "Approach" under the select); GitHub and Theme move to a row of their own first */
+nav.site .menu { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem 1.2rem; flex: 1 1 auto; min-width: 0; }
 nav.site .menu > * { flex: none; }
 /* the menu's words at a reading size (the author, 2026-11-06: "the menu bar texts are small!") */
 nav.site .brand { font-weight: var(--black); font-size: 1.3rem; letter-spacing: .04em;
@@ -93,10 +93,12 @@ nav.site a:not(.brand):hover { opacity: 1; color: var(--accent-lite); }
 nav.site a.here { color: var(--accent-lite); opacity: 1; border-bottom: 2px solid var(--accent); }
 /* GitHub and the style picker at the right of the top bar (the author, 2026-11-06); the picker is a select (Rule 106 allows it: both states
    are options, the current one is shown) */
-nav.site .tools { display: flex; align-items: center; gap: 1.1rem; flex: none; margin-left: auto; }
-nav.site .tools .github { display: inline-flex; align-items: center; color: var(--halo); opacity: .9; }
+nav.site .tools { display: flex; align-items: center; gap: 1.5rem; flex: none; margin-left: auto; }
+/* the word GitHub, then its mark, one link; a thin rule and space set it apart from the Theme select */
+nav.site .tools .github { display: inline-flex; align-items: center; gap: .45rem; color: var(--halo); opacity: .9;
+  padding-right: 1.5rem; border-right: 1px solid rgba(234, 231, 246, .35); }
 nav.site .tools .github:hover { opacity: 1; color: var(--accent-lite); }
-nav.site .tools .github svg { width: 1.6rem; height: 1.6rem; display: block; }
+nav.site .tools .github svg { width: 1.35rem; height: 1.35rem; display: block; }
 .vibe-picker {
   display: flex; align-items: center; gap: .5rem;
 }
@@ -170,7 +172,9 @@ header.page::after {
 header.page > .narrow { position: relative; z-index: 1; }
 /* none in Retro: a terminal carries no ornament (the author, 2026-11-06: "the graphity should not be added in the retro vibe!") */
 [data-vibe="guardian"] header.page::after { display: none; }
-@media (max-width: 1120px) { header.page::after { display: none; } }
+/* its width reaches the 8rem floor at a 62.4rem window (the 54.4rem of margin, text and gap, and 8rem), and it hides below that, phones
+   included (Central, 2026-11-06: the 1120 px rule hid it from the author's 1085 px window) */
+@media (max-width: 62.4rem) { header.page::after { display: none; } }
 header.page .kicker { font: 1rem var(--mono); text-transform: uppercase; max-width: 50rem;
   letter-spacing: .12em; color: var(--muted); margin: 0 0 .7rem; }
 /* a page's title is set in sentence case, never capitals over several lines, and its lead runs as wide as it does, so the head reads
@@ -194,7 +198,7 @@ footer.site code {
 .skip:focus { top: .6rem; }
 nav.band { background: var(--card); border-bottom: 1px solid var(--line); }
 nav.band ul { list-style: none; margin: 0 auto; padding: 0 1.4rem; max-width: 72rem;
-  display: flex; gap: 0 1.8rem; overflow-x: auto; scrollbar-width: none; }
+  display: flex; flex-wrap: wrap; gap: 0 1.8rem; }
 nav.band li { margin: 0; flex: none; }
 /* no hover repaint: the pointer already becomes a hand, and a place the reader is not must not look like "here" (Rule 115) */
 nav.band a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none;
