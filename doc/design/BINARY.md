@@ -1,6 +1,6 @@
 # One binary: StzZui without Node
 
-**Status**: design only, for Central's read. **No code is written until Central rules** (the NOTE of 2026-11-04 17:30 is the order). Written 2026-11-04 by the StzZui desk.
+**Status** (2026-11-06): **S1, S2 and S3 are built**; S4 to S6 are designed and not built. S3, the wasm: `zane.wasm` is 127,956 bytes at `ReleaseSmall` with the contract embedded (budget 150 KB), has no imports, and `tools/zane/wasm-proof.html` finds all 292 envelopes (73 fixtures at four levels) identical to the native binary's in a browser; the Build page carries the "try it" box. The native `ReleaseSmall` binary measured by Central is 813,056 bytes (budget 1.5 MB). Run on Windows only. Written 2026-11-04 by the StzZui desk as a design for Central's read; the rest of this document is that design.
 **The author's words** (typing kept): *"We should not depend on Node or any other thing! Provide our own sole binary that host everything alongwith a js alternative for whome wants the execution to happen solely in the browser (via a wasm prot of the main binary if you want)."*
 
 **What this changes about the site's honesty**: until the binary ships, the site says truthfully that the verifier needs Node (six pages say it today: the front page, Adopt, Build, Language, What it refuses and Conformance). When it ships, the pages say "one file". Nothing in this document changes what the site may say now.

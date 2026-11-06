@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wasm proof — the verifier in this browser against the native binary</title>
+<meta name="description" content="The wasm proof runs every fixture of the Zane conformance suite at every level through the verifier compiled to WebAssembly, in this browser, and compares each envelope byte for byte with what the native binary printed for the same source.">
+<link rel="stylesheet" href="../../site/stz.css?v=fe87fff2">
+<style>
+#verdict { font-size: 1.3rem; font-weight: 700; margin: 0 0 .6rem; }
+#verdict.good { color: var(--c-good); }
+#verdict.bad { color: var(--c-bad); }
+#diffs { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+#diffs th, #diffs td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+#again { font: 700 1.125rem var(--sans); cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../../index.html">Zane</a>
+    <a href="../../site/thinking.html">Approach</a>
+    <a href="../../site/how.html">Language</a>
+    <a href="../../site/why.html">Law</a>
+    <a href="../../site/adopt.html">Use</a>
+    <a class="here" aria-current="true" href="../../site/audit.html">Try</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="../../site/audit.html">Try</a></li>
+    <li><a href="../../site/tour.html">The tour</a></li>
+    <li><a href="../ui-audit.html">UI audit</a></li>
+    <li><a href="../../site/screenshots.html">Screenshots</a></li>
+    <li><a aria-current="page" href="wasm-proof.html">Wasm proof</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zane</a><span class="sep">›</span><a href="../../site/audit.html">Try</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Wasm proof</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">The proof · stage S3 of the binary, in your browser</p>
+    <h1>The wasm proof runs the conformance suite through the verifier compiled to WebAssembly, in this browser.</h1>
+    <p class="sub">The wasm proof runs every fixture at every level, 1 to 4, through <code>site/zane.wasm</code> and compares each envelope,
+    byte for byte, with what the native <code>zane</code> binary printed for the same source. It lets a person see, with only a browser,
+    that the two builds of one code print one report. Nothing leaves the page.</p>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="narrow">
+    <h2>The result of the proof in this browser</h2>
+    <p id="verdict" role="status">Loading the wasm and the expected envelopes…</p>
+    <p id="detail"></p>
+    <table id="diffs" hidden><thead><tr><th>Fixture</th><th>Level</th><th>First difference</th></tr></thead><tbody></tbody></table>
+    <p><button type="button" class="btn primary" id="again" hidden>Run the proof again</button></p>
+    <p>The expected envelopes are written by <code>node tools/zane/wasm-proof.js --bin PATH</code>, which runs the native binary on the same
+    sources and records the sha256 of the wasm they were written for. The page says so when the wasm it loads is another build.</p>
+    <p class="limit"><b>Limit:</b> the proof shows sameness, never rightness. Two builds that agree on every byte share every mistake of the
+    verifier. The generated corpus that <code>tools/zane/parity.js</code> runs against the native binary is not run here.</p>
+  </div>
+</section>
+</main>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a class="leaves" href="https://github.com/mayouni/zane" target="_blank" rel="noopener">GitHub</a>
+        <a href="../../LICENSE">LICENSE</a>
+      </div>
+      <div class="vibe-picker" title="Two equivalent interaction cultures, not a skin: the same truth, read another way (Article VI). Keyboard: F2">
+        <label for="vibe-select">Style</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="../../site/stz.js?v=bd48a372"></script>
+<script src="../../site/zane-wasm.js"></script>
+<script>
+(async () => {
+  const verdict = document.getElementById('verdict'), detail = document.getElementById('detail');
+  const body = document.querySelector('#diffs tbody');
+  const hex = async b => [...new Uint8Array(await crypto.subtle.digest('SHA-256', b))].map(x => x.toString(16).padStart(2, '0')).join('');
+  const [record, bytes] = await Promise.all([
+    fetch('wasm-proof.json').then(r => r.json()),
+    fetch('../../site/zane.wasm').then(r => r.arrayBuffer())
+  ]);
+  const sha = await hex(bytes);
+  const zane = await ZaneWasm.load('../../site/zane.wasm');
+  const firstDiff = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; };
+  function run() {
+    body.textContent = '';
+    let same = 0, total = 0;
+    const t = performance.now();
+    for (const fx of record.fixtures) for (const level of [1, 2, 3, 4]) {
+      total++;
+      const got = zane.check(fx.name, fx.source, { level, symbols: fx.symbols });
+      const want = fx.expect[level];
+      if (got === want) { same++; continue; }
+      const i = got === null ? 0 : firstDiff(got, want);
+      const tr = document.createElement('tr');
+      for (const v of [fx.name.replace('conformance/fixtures/', ''), String(level),
+        got === null ? 'the wasm returned nothing' : `byte ${i}: wasm ${JSON.stringify(got.slice(i, i + 24))} / native ${JSON.stringify(want.slice(i, i + 24))}`]) {
+        const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    }
+    const ms = performance.now() - t;
+    const ok = same === total && sha === record.wasm.sha256;
+    verdict.className = ok ? 'good' : 'bad';
+    verdict.textContent = `${same} of ${total} envelopes are identical to the native binary's` + (ok ? '.' : ': see below.');
+    detail.textContent = `${record.fixtures.length} fixtures at 4 levels each, run in ${ms.toFixed(0)} ms in this browser. The wasm is ${bytes.byteLength.toLocaleString('en')} bytes, sha256 ${sha.slice(0, 16)}…, and ` +
+      (sha === record.wasm.sha256 ? 'the expected envelopes were written for this build.' : `the expected envelopes were written for another build (${record.wasm.sha256.slice(0, 16)}…): regenerate them with tools/zane/wasm-proof.js.`) +
+      ` The native side was ${record.native}.`;
+    document.getElementById('diffs').hidden = same === total;
+    document.getElementById('again').hidden = false;
+    window.__proof = { same, total, sha, expected: record.wasm.sha256, ms };
+  }
+  document.getElementById('again').addEventListener('click', run);
+  run();
+})().catch(e => {
+  const v = document.getElementById('verdict');
+  v.className = 'bad';
+  v.textContent = 'The proof could not run: ' + e.message + '. It needs the repository served over HTTP, as the UI audit does.';
+});
+</script>
+</body>
+</html>

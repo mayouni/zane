@@ -4,6 +4,7 @@
 //!   zig build -j2 -Doptimize=ReleaseSmall      the build the size budget is read from
 //!   zig build -j2 test                         the unit tests
 //!   zig build -j2 run -- check x.zane          run it
+//!   zig build -j2 wasm -Doptimize=ReleaseSmall the browser build, zane.wasm (stage S3), copied to site/zane.wasm by hand
 //!
 //! The data it embeds (conformance/, constitution/) is read from this repository at build time.
 
@@ -35,6 +36,19 @@ pub fn build(b: *std.Build) void {
     const tests = b.addTest(.{ .root_module = test_root });
     const test_run = b.addRunArtifact(tests);
     b.step("test", "Run the unit tests").dependOn(&test_run.step);
+
+    // the browser build: the same core for wasm32-freestanding, behind the export surface of wasm.zig and nothing else
+    const wasm_root = b.createModule(.{
+        .root_source_file = b.path("zig/src/wasm.zig"),
+        .target = b.resolveTargetQuery(.{ .cpu_arch = .wasm32, .os_tag = .freestanding }),
+        .optimize = optimize,
+    });
+    wasm_root.addAnonymousImport("violations.json", .{ .root_source_file = b.path("conformance/violations.json") });
+    wasm_root.addAnonymousImport("rules.json", .{ .root_source_file = b.path("constitution/rules.json") });
+    const wasm = b.addExecutable(.{ .name = "zane", .root_module = wasm_root });
+    wasm.entry = .disabled;
+    wasm.rdynamic = true;
+    b.step("wasm", "Build zane.wasm").dependOn(&b.addInstallArtifact(wasm, .{}).step);
 }
 
 /// The contract, the law, the suite and the audit's facts schema live outside zig/src, which @embedFile cannot reach by

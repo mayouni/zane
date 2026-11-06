@@ -6,7 +6,7 @@
 <title>Build — putting the law into a project and failing the build on a refusal</title>
 <meta name="description" content="The build workflow puts Zane into a software project: the team declares each surface before drawing it, pins the law as a hash, fails the build on a refusal, and measures what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c4e6d70b">
+<link rel="stylesheet" href="stz.css?v=fe87fff2">
 </head>
 <body>
 
@@ -55,6 +55,7 @@
     <li><a aria-current="page" href="build.html">Build</a>
       <ul class="sub">
         <li><a href="#declare-before-you-draw" title="Writing a surface's declaration before drawing the surface">Declare first</a></li>
+        <li><a href="#try-it-here" title="Checking a declaration in this page, with nothing sent anywhere">Try it here</a></li>
         <li><a href="#pin-the-law-as-a-hash-not-only-a-version" title="Pinning the law as a hash, not only as a version">Pin the law</a></li>
         <li><a href="#fail-the-build-on-a-refusal" title="Making the CI build fail when the verifier refuses a declaration">Fail the build</a></li>
         <li><a href="#measure-the-paint" title="Measuring the painted page with the UI audit">Audit the page</a></li>
@@ -96,6 +97,36 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     declaration does not hold (the entities, the actors, the state, the elements of a surface) is skipped unless you
     hand it a symbol table with <code>--symbols</code>, and an undecidable check stays silent and is never a pass. A tool that computes that table
     from a host project is not built, as the last section says.</p>
+  </div>
+</section>
+
+<section id="try-it-here">
+  <div class="narrow">
+    <h2 data-outline="Try it here">Checking a declaration in this page, with nothing sent anywhere</h2>
+    <p>The box below checks a declaration with the verifier compiled to WebAssembly, in your browser. It lets a person try the
+    law on a surface of their own before installing anything, and nothing you type leaves the page. The verifier in the box is
+    built from the same Zig code as the <code>zane</code> binary, and <a href="../tools/zane/wasm-proof.html">the wasm proof</a>
+    shows that the two print the same report, byte for byte, on every fixture at every level.</p>
+    <form class="try" id="try-form">
+      <label for="try-source">A declaration in Zane</label>
+      <textarea id="try-source" spellcheck="false" rows="7">DEFINE WIZARD checkout (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [CANCEL, EXIT]
+)</textarea>
+      <div class="try-row">
+        <label for="try-level">Level</label>
+        <select id="try-level">
+          <option value="1">1</option>
+          <option value="2" selected>2, the default</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <button type="submit" class="btn primary" disabled>Check the declaration</button>
+      </div>
+      <div id="try-result" role="status" aria-live="polite"><p class="try-wait">The verifier is loading.</p></div>
+    </form>
+    <p class="limit"><b>Limit:</b> the box decides what one declaration can decide. A check at level three needs a symbol table,
+    which the box does not take, so it stays silent there, as the command line does without <code>--symbols</code>.</p>
   </div>
 </section>
 
@@ -193,5 +224,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
+<script src="zane-wasm.js"></script>
+<script src="try.js"></script>
 </body>
 </html>

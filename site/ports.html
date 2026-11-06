@@ -6,7 +6,7 @@
 <title>Other languages — implementing Zane in other languages and proving that it agrees</title>
 <meta name="description" content="Zane can be implemented in other languages by writing a verifier that reads the same pinned files and passes the same fixtures. The page gives the port recipe (pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences) and says what a port may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c4e6d70b">
+<link rel="stylesheet" href="stz.css?v=fe87fff2">
 </head>
 <body>
 
@@ -101,7 +101,7 @@ The Zane protocol pack
     <h2>Who has implemented Zane so far</h2>
 
     <p>The <b>reference</b> is the JavaScript verifier in this repository.
-    A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>. Its first stage, the check, is built, and it prints what the JavaScript verifier prints, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). The Zig check has run on Windows only, and the browser build is not built.</p>
+    A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>, and three of its stages are built. Its check, its suite and its pack, channel and facts tools print what the JavaScript tools print, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). Its browser build, <code>zane.wasm</code>, runs the suite in a browser, and <a href="../tools/zane/wasm-proof.html">the wasm proof</a> finds every envelope identical to the native binary's; the Build page uses it in <a href="build.html#try-it-here">a box</a>. The Zig verifier has run on Windows only, and its server is not built.</p>
     <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, and it is not a record of a stranger succeeding.</p>
   </div>
 </section>

@@ -7,7 +7,8 @@
 //!   zane audit-facts [facts.json] [--rules 62,105]     the screenshot audit's facts and its decisions
 //!   zane version                                       the law, the language, the contract, the build
 //!
-//! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`. Each
+//! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`; stage S3
+//! builds the same core for a browser (wasm.zig, the report in report.zig). Each
 //! prints byte for byte what its JavaScript prints (tools/zane/cli.js, conformance.js, pack.js, cross-medium.js and
 //! doc/design/audit/check-facts.js), which tools/zane/parity.js proves. Exit codes: 0 clean
 //! or conforming, 1 violations or mismatches found, 2 usage or read error. The usage text is cli.js's, so that
@@ -21,6 +22,7 @@ const conformance = @import("conformance.zig");
 const pack = @import("pack.zig");
 const crossmedium = @import("crossmedium.zig");
 const facts = @import("facts.zig");
+const report = @import("report.zig");
 
 const language_version = "1.5";
 
@@ -122,26 +124,8 @@ fn asText(a: std.mem.Allocator, s: []const u8) ![]const u8 {
 }
 
 fn loadSymbols(a: std.mem.Allocator, path: []const u8) !core.Symbols {
-    const data = try std.fs.cwd().readFileAlloc(a, path, 64 * 1024 * 1024);
-    const root = try std.json.parseFromSliceLeaky(std.json.Value, a, data, contract_mod.js_parse);
-    var s: core.Symbols = .{};
-    if (root != .object) return s;
-    const keys = [_][]const u8{ "entities", "actors", "state", "elements" };
-    inline for (keys) |k| {
-        if (root.object.get(k)) |v| if (v == .array) {
-            var list: std.ArrayList([]const u8) = .empty;
-            for (v.array.items) |it| if (it == .string) try list.append(a, it.string);
-            @field(s, k) = try list.toOwnedSlice(a);
-        };
-    }
-    return s;
+    return report.symbolsOf(a, try std.fs.cwd().readFileAlloc(a, path, 64 * 1024 * 1024));
 }
-
-const Finding = struct {
-    file: []const u8,
-    diag: core.Diag,
-    meta: contract_mod.Meta,
-};
 
 pub fn main() !void {
     var arena_state = std.heap.ArenaAllocator.init(std.heap.page_allocator);
@@ -248,29 +232,20 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
         };
     }
 
-    var findings: std.ArrayList(Finding) = .empty;
+    var findings: std.ArrayList(report.Finding) = .empty;
     for (o.files.items) |file| {
         const raw_src = std.fs.cwd().readFileAlloc(a, file, 256 * 1024 * 1024) catch |e| {
             try err.print("zane: cannot read {s}: {s}\n", .{ file, @errorName(e) });
             return 2;
         };
-        const diags = try core.verify(a, try core.wellFormed(a, raw_src), symbols);
-        for (diags) |d| {
-            const m = contract.meta(d.id);
-            const m_level: i64 = if (m.level == 0) 1 else m.level;
-            if (m_level > level) continue; // above the claimed level
-            try findings.append(a, .{ .file = file, .diag = d, .meta = m });
-        }
+        try report.collect(a, contract, file, raw_src, symbols, level, &findings);
     }
 
-    var errors: usize = 0;
-    for (findings.items) |f| if (std.mem.eql(u8, f.meta.severity, "error")) {
-        errors += 1;
-    };
+    const errors = report.errorCount(findings.items);
     const warnings = findings.items.len - errors;
 
     if (o.json) {
-        try writeJsonReport(a, out, o, contract, level, findings.items, errors, warnings);
+        try report.writeJson(a, out, o.files.items, contract, level, findings.items);
         return if (errors > 0) 1 else 0;
     }
 
@@ -297,80 +272,9 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     return if (errors > 0) 1 else 0;
 }
 
-/// JSON.stringify({level, contract, files, counts, diagnostics}, null, 2), written by hand.
-fn writeJsonReport(
-    a: std.mem.Allocator,
-    w: *std.Io.Writer,
-    o: Options,
-    contract: contract_mod.Contract,
-    level: i64,
-    findings: []const Finding,
-    errors: usize,
-    warnings: usize,
-) !void {
-    const j = contract_mod.writeJsonString;
-    try w.print("{{\n  \"level\": {d},\n", .{level});
-    try w.writeAll("  \"contract\": {");
-    var first = true;
-    if (contract.version) |v| {
-        try w.writeAll("\n    \"version\": ");
-        try j(w, v);
-        first = false;
-    }
-    if (contract.constitution) |c| {
-        try w.writeAll(if (first) "\n    \"constitution\": " else ",\n    \"constitution\": ");
-        try j(w, c);
-        first = false;
-    }
-    try w.writeAll(if (first) "},\n" else "\n  },\n");
-    try w.writeAll("  \"files\": [");
-    for (o.files.items, 0..) |f, i| {
-        try w.writeAll(if (i == 0) "\n    " else ",\n    ");
-        try j(w, f);
-    }
-    try w.writeAll(if (o.files.items.len == 0) "],\n" else "\n  ],\n");
-    try w.print("  \"counts\": {{\n    \"errors\": {d},\n    \"warnings\": {d}\n  }},\n", .{ errors, warnings });
-    try w.writeAll("  \"diagnostics\": [");
-    for (findings, 0..) |f, i| {
-        try w.writeAll(if (i == 0) "\n    {\n" else ",\n    {\n");
-        try w.writeAll("      \"code\": ");
-        try j(w, f.diag.id);
-        try w.writeAll(",\n      \"severity\": ");
-        try j(w, f.meta.severity);
-        try w.writeAll(",\n      \"message\": ");
-        const message: []const u8 = blk: {
-            if (f.meta.summary) |s| if (s.len > 0) break :blk s;
-            if (f.diag.subject) |s| if (s.len > 0) break :blk try std.fmt.allocPrint(a, "{s}: {s}", .{ f.diag.id, s });
-            break :blk f.diag.id;
-        };
-        try j(w, message);
-        try w.writeAll(",\n      \"span\": {\n        \"file\": ");
-        try j(w, f.file);
-        try w.print(",\n        \"line\": {d}\n      }},\n", .{f.diag.line});
-        // cites: rule:, article:, right:, pattern:
-        var cites: std.ArrayList([]const u8) = .empty;
-        for (f.meta.rules) |r| try cites.append(a, try std.fmt.allocPrint(a, "rule:{s}", .{r}));
-        for (f.meta.articles) |x| try cites.append(a, try std.fmt.allocPrint(a, "article:{s}", .{x}));
-        for (f.meta.rights) |x| try cites.append(a, try std.fmt.allocPrint(a, "right:{s}", .{x}));
-        for (f.meta.forbidden_patterns) |x| try cites.append(a, try std.fmt.allocPrint(a, "pattern:{s}", .{x}));
-        try w.writeAll("      \"cites\": [");
-        for (cites.items, 0..) |c, k| {
-            try w.writeAll(if (k == 0) "\n        " else ",\n        ");
-            try j(w, c);
-        }
-        try w.writeAll(if (cites.items.len == 0) "],\n" else "\n      ],\n");
-        try w.writeAll("      \"language\": \"zane\",\n");
-        const lvl: i64 = if (f.meta.level == 0) 1 else f.meta.level;
-        try w.print("      \"level\": {d},\n      \"subject\": ", .{lvl});
-        if (f.diag.subject) |s| try j(w, s) else try w.writeAll("null");
-        try w.writeAll("\n    }");
-    }
-    try w.writeAll(if (findings.len == 0) "]\n}\n" else "\n  ]\n}\n");
-}
-
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane (stage S2: check, conformance, pack, cross-medium, audit-facts) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane (stage S3: check, conformance, pack, cross-medium, audit-facts; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",
@@ -385,4 +289,5 @@ test {
     _ = contract_mod;
     _ = @import("schema.zig");
     _ = @import("js.zig");
+    _ = report;
 }

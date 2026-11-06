@@ -494,6 +494,25 @@ details.qa .a p { margin: .4rem 0; }
 .btn.ghost { color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.08); }
 header.page a.btn.primary { color: var(--btn-fg); }
+/* the "try it" box on the Build page: a declaration, a level, one action, and the verdict under it */
+form.try { margin: 1.2rem 0; }
+form.try label { display: block; font-weight: 700; margin: 0 0 .4rem; }
+form.try .try-row label { display: inline; margin: 0; }
+form.try textarea {
+  display: block; width: 100%; font: 1.125rem/1.55 var(--mono); color: var(--code-ink); background: var(--code-bg);
+  border: 1px solid var(--code-line); border-left: 4px solid var(--code-rule); border-radius: 8px; padding: .9rem 1.2rem; resize: vertical;
+}
+form.try .try-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; margin: .8rem 0 0; }
+form.try select { font: 1.125rem var(--sans); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: .45rem .7rem; }
+form.try button { font: 700 1.125rem var(--sans); cursor: pointer; }
+form.try button[disabled] { opacity: .6; cursor: wait; }
+#try-result { margin: 1rem 0 0; }
+#try-result p { margin: 0 0 .5rem; }
+#try-result .try-verdict { font-weight: 700; }
+#try-result .try-verdict.bad { color: var(--c-bad); }
+#try-result .try-verdict.good { color: var(--c-good); }
+#try-result ul { margin: 0; padding-left: 1.2rem; }
+#try-result li { margin: 0 0 .6rem; }
 /* ---- footer ---- */
 footer.site { background: var(--deep); color: var(--halo); padding: 2.2rem 0; margin-top: 3rem; }
 footer.site a { color: var(--halo); }

@@ -88,7 +88,9 @@ const PAGES = [
   { file: 'site/tour.html', section: 'try', label: 'The tour', rail: true, term: 'tour' },
   /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
   { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool', term: 'audit' },
-  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true, term: 'screenshot' }
+  { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true, term: 'screenshot' },
+  /* the wasm's proof page (stage S3 of the binary): a tool, framed as the UI audit is */
+  { file: 'tools/zane/wasm-proof.html', section: 'try', label: 'Wasm proof', rail: true, outside: 'tool', term: 'wasm' }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 /* The pages written before doc/design/WRITING.md, which the register check has not yet judged. Each is printed by name on every
