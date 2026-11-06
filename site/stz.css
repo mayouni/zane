@@ -206,6 +206,11 @@ nav.list3 a[aria-current] { font-weight: 700; background: var(--tint); }
 /* the outline's heading is a label, not an entry: gray, normal weight and a step smaller, so it never reads as something to click
    (the author, 2026-11-06: "On this page seems like a clickable option in the menu") */
 nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: 400; font-size: 1rem; color: var(--muted); max-width: none; }
+/* the outline's line starts under its heading, and the heading stands on the line's own edge with a space below it, outside the list,
+   so it is never taken for the first entry (the author, 2026-11-06: "push it slightly to the left at the same level of the vertical line") */
+nav.list3.sections { border-left: 0; padding-left: 0; }
+nav.list3.sections .outline-title { padding: 0; margin: 0 0 1rem; }
+nav.list3.sections > ul { border-left: 1px solid var(--line); padding-left: .9rem; }
 nav.list3 .sub { margin: 0 0 .3rem; }
 nav.list3 .sub a { padding-left: 1.4rem; }
 @media (max-height: 640px) { nav.list3 { position: static; } }
@@ -214,6 +219,8 @@ html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
   .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list > main, .layout.has-list > nav.list3 { grid-column: auto; grid-row: auto; }
   nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
+  nav.list3.sections { padding-left: 0; }
+  nav.list3.sections > ul { border-left: 0; padding-left: 0; }
 }
 
 /* a page with a drawing gives the drawing its width before the outline: a drawing is never scaled under the legibility floor
@@ -222,6 +229,7 @@ html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
   .layout.has-list:has(figure.figure) { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list:has(figure.figure) > main, .layout.has-list:has(figure.figure) > nav.list3 { grid-column: auto; grid-row: auto; }
   .layout.has-list:has(figure.figure) > nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
+  .layout.has-list:has(figure.figure) > nav.list3.sections > ul { border-left: 0; padding-left: 0; }
 }
 
 /* ---- sections & prose ---- */
