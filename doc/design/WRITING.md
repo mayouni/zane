@@ -35,7 +35,8 @@ time because it lived only in a promise, so it is written here and part of it is
 10. **A submenu never repeats its parent's label.** A section's head page is the section's own entry in the main menu and takes its
    name there and in its path (Rule 116: one page, one name), so it is left out of the section's band; no other entry of a band, a
    family's list or an outline carries its parent's label, and `node tools/site-shell.js` fails when one does, or when two entries at
-   one level share a label, ignoring case. Ruled by the Principal on 2026-11-06: *"the same menu option in the main and submenu levels
+   one level share a label, ignoring case; nor may one label appear twice among the navigation a page shows (the main menu, the
+   band, the family list and the outline), ignoring case and a leading "The": an outline entry says what its section says. Ruled by the Principal on 2026-11-06: *"the same menu option in the main and submenu levels
    (like Try and then Try here)!!! This should never happen in our sites"*.
 
 ## 2. The subject term

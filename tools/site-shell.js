@@ -398,6 +398,19 @@ function apply(p, text) {
   /* an outline entry never repeats a label above it: its page's, or its section's in the main menu (WRITING.md rule 10) */
   if (secs && secs.length >= SECTION_MIN) for (const x of secs) for (const up of [p.label, (SECTIONS.find(s => s.id === p.section) || {}).label])
     if (up && x.label.trim().toLowerCase() === up.trim().toLowerCase()) problems.push('the outline entry "' + x.label + '" repeats the label "' + up + '" above it');
+  /* no label twice among the navigation one page shows: the main menu, the band, the family list and the outline, ignoring case and
+     a leading "The" (Central, 2026-11-06, extending the Principal's ruling: the reader sees the same word twice, whatever the level) */
+  if (!p.home && p.section) {
+    const shown = [...SECTIONS.map(s => ['the main menu', s.label]), ...(bandOf(p.section) || []).map(q => ['the band', q.label])];
+    const fam = familyOf(p);
+    if (fam && !p.outside) shown.push(...fam.kids.map(q => ['the family list', q.label]));
+    // the outline is drawn on its own, or under the page's entry in its family's list; a family's head shows its family, not its outline
+    if (secs && secs.length >= SECTION_MIN && (!fam || fam.kids.includes(p))) shown.push(...secs.map(x => ['the outline', x.label]));
+    const key = s => s.trim().toLowerCase().replace(/^the\s+/, '');
+    shown.forEach((a, i) => shown.slice(i + 1).forEach(b => {
+      if (key(a[1]) === key(b[1])) problems.push('"' + a[1] + '" in ' + a[0] + ' and "' + b[1] + '" in ' + b[0] + ' name the same thing on one page');
+    }));
+  }
 
   /* ---- render ---- */
   const fill = (name, inner) => { t = t.replace(fenceRe(name), () => fence(name, inner)); };
