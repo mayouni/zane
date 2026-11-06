@@ -2856,3 +2856,35 @@ next:
 note:      PROJECTED, NOT VERIFIED BY A PERSON until the author looks at 47df957: two of the three earlier versions were refused on sight, and only the author's eye closes this one
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 01:06 | NOTE | follows my memo of 2026-11-05 23:11; the author steered the page outline twice in this session | THE "ON THIS PAGE" OUTLINE IS A PLAIN LIST NOW (9ABDA4A, 070C7A4): NO SCROLL OF ITS OWN, ONE THIN LINE, A SHORT LABEL PER SECTION, NOTHING FOLDS AWAY
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 01:06 | ATTENDED
+
+subject:   the outline beside a long page (9abda4a, 070c7a4), local on main, not pushed
+
+why:       the author, directly: "it adds a second vertical scroll bar which is forbidden, and then it contains long titles ... make it dead simple like in github lateral menu"; then "give each section a short outline label"; then "remove the interative arrow that hides the menu. the text is small so enlarge it a bit"
+
+did:
+  - REMOVED the outline's own scroll and card: one thin line separates it from the page, one line per entry (9abda4a)
+  - GAVE 102 section headings on 19 pages a short outline label (data-outline, 20 characters at most); the whole title stays in the entry's tooltip (070c7a4)
+  - ADDED a check to tools/site-shell.js that refuses an outline entry over 20 characters and names the heading
+  - REMOVED the disclosure arrow: the outline is always open under a plain "On this page" heading; entries at 1.1rem in a 16rem column
+  - CARRIED both remarks into Pass 5 F-6 of doc/AMENDMENT-DOCKET.md (Rules 12, 14, 105, 107)
+
+state:
+  measurements:  712 entries in both cultures at 1280 and 1024 wide, none cut; tallest outline 365px; no sideways scroll
+  gates:         site-shell ok (38 pages), site-facts ok, UI audit clean in Modern and Retro (38 pages each), strict 0 interactive text in each (the 2963 size findings predate this)
+  S2's rest:     still in the tree, not committed
+
+waiting:
+  - DOCKET-PASS5-01: unchanged, now with the F-6 rows -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - me:      S2's rest: test pack's failure paths, then commit it
+  - central: read 9abda4a and 070c7a4; push by sha
+
+note:      PROJECTED, NOT VERIFIED BY A PERSON until the author looks at 070c7a4: a headless screenshot of thinking.html shows the look, and only the author's eye closes it
+```
+---
