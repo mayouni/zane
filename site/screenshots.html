@@ -6,7 +6,7 @@
 <title>Screenshots — the screenshot audit for an application you do not own</title>
 <meta name="description" content="The screenshot audit reduces a screenshot to facts and judges them against the three rules that a screenshot can decide. It reports every other rule as not audited and never as passed. The audit is designed and checked, and it has never been run on a real application.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -50,22 +50,20 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#the-principle" title="How the work is split between a writer that measures and an audit that judges">How the work is split between a writer that measures and an audit that judges</a></li>
-      <li><a href="#what-it-decides" title="The rules that the screenshot audit decides, and their thresholds">The rules that the screenshot audit decides, and their thresholds</a></li>
-      <li><a href="#a-run-on-the-example" title="A run of the checker on the example facts file">A run of the checker on the example facts file</a></li>
-      <li><a href="#what-has-never-run" title="The parts of the screenshot audit that have never run">The parts of the screenshot audit that have never run</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#the-principle" title="How the work is split between a writer that measures and an audit that judges">Measure, then judge</a></li>
+    <li><a href="#what-it-decides" title="The rules that the screenshot audit decides, and their thresholds">Rules and thresholds</a></li>
+    <li><a href="#a-run-on-the-example" title="A run of the checker on the example facts file">A run on the example</a></li>
+    <li><a href="#what-has-never-run" title="The parts of the screenshot audit that have never run">What never ran</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section id="the-principle">
   <div class="narrow">
-    <h2>How the work is split between a writer that measures and an audit that judges</h2>
+    <h2 data-outline="Measure, then judge">How the work is split between a writer that measures and an audit that judges</h2>
 
     <p>The screenshot audit has two pieces, which are kept apart on purpose. A <b>writer</b> reads the screenshot and writes down what it measures: each line of text, its box, the luminances behind it, and how sure the text recognition was. The writer decides nothing. The <b>audit</b> reads those facts and judges them against thresholds that are kept in one place.
     A writer that also decided that a line is too small would put the law inside a tool that has never read the law.</p>
@@ -76,7 +74,7 @@
 
 <section class="alt" id="what-it-decides">
   <div class="narrow">
-    <h2>The rules that the screenshot audit decides, and their thresholds</h2>
+    <h2 data-outline="Rules and thresholds">The rules that the screenshot audit decides, and their thresholds</h2>
 
     <table class="board">
       <thead><tr><th>Rule</th><th>What is measured</th><th>Threshold</th></tr></thead>
@@ -93,7 +91,7 @@
 
 <section id="a-run-on-the-example">
   <div class="narrow">
-    <h2>A run of the checker on the example facts file</h2>
+    <h2 data-outline="A run on the example">A run of the checker on the example facts file</h2>
 
     <p>The checker reads a facts file, proves its shape and its arithmetic, and prints the decisions. The run below uses the example file that ships with the checker, which was made by hand:</p>
     <pre class="term" data-run="node doc/design/audit/check-facts.js doc/design/audit/example.facts.json"><span class="dim">$ node doc/design/audit/check-facts.js doc/design/audit/example.facts.json</span>
@@ -119,7 +117,7 @@ doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
 
 <section class="alt" id="what-has-never-run">
   <div class="narrow">
-    <h2>The parts of the screenshot audit that have never run</h2>
+    <h2 data-outline="What never ran">The parts of the screenshot audit that have never run</h2>
 
     <ul>
       <li><b>The writer has never run on a real application.</b> It belongs to another desk and runs on Ring++. It has not been run on a real application's screenshot, so this page shows the example file and not a real one.</li>
@@ -155,7 +153,7 @@ doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

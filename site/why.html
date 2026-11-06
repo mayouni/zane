@@ -6,7 +6,7 @@
 <title>Law — why Zane holds interfaces to a law, and where the case is weak</title>
 <meta name="description" content="The Zane law is a versioned file of rules for business interfaces, so that the recurring defects of interfaces can be refused by name. The page explains why guidelines alone did not hold, what a law stored as data changes, the builds that produced each recent rule, and what the law cannot do.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -53,25 +53,23 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#the-decay-you-already-know" title="The inherited conventions that make interfaces decay">The inherited conventions that make interfaces decay</a></li>
-      <li><a href="#what-the-record-shows" title="Where the newest rules of the law come from">Where the newest rules of the law come from</a></li>
-      <li><a href="#what-changes-when-the-law-is-data" title="What a law stored as data changes, and where to check each change">What a law stored as data changes, and where to check each change</a></li>
-      <li><a href="#what-a-law-cannot-do" title="What the law cannot do">What the law cannot do</a></li>
-      <li><a href="#the-story-a-year-of-building-with-ai" title="The builds with AI from which the rules of the law were taken">The builds with AI from which the rules of the law were taken</a></li>
-      <li><a href="#evidence" title="The eight newest rules of the law and the defects that produced them">The eight newest rules of the law and the defects that produced them</a></li>
-      <li><a href="#the-stance" title="The stance of the law, which puts business applications first">The stance of the law, which puts business applications first</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#the-decay-you-already-know" title="The inherited conventions that make interfaces decay">The decay</a></li>
+    <li><a href="#what-the-record-shows" title="Where the newest rules of the law come from">The record</a></li>
+    <li><a href="#what-changes-when-the-law-is-data" title="What a law stored as data changes, and where to check each change">Law as data</a></li>
+    <li><a href="#what-a-law-cannot-do" title="What the law cannot do">What it cannot do</a></li>
+    <li><a href="#the-story-a-year-of-building-with-ai" title="The builds with AI from which the rules of the law were taken">Built with AI</a></li>
+    <li><a href="#evidence" title="The eight newest rules of the law and the defects that produced them">The newest rules</a></li>
+    <li><a href="#the-stance" title="The stance of the law, which puts business applications first">The stance</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2 id="the-decay-you-already-know">The inherited conventions that make interfaces decay</h2>
+    <h2 id="the-decay-you-already-know" data-outline="The decay">The inherited conventions that make interfaces decay</h2>
     <p>Most people have used software with the following defects. Its text is small and faint, so a person leans in to read it. Its buttons are
     labelled "OK" and do not say what they will do. A chat launcher floats
     over the paragraph a person is reading. A breadcrumb shows where a person came
@@ -88,7 +86,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-the-record-shows">Where the newest rules of the law come from</h2>
+    <h2 id="what-the-record-shows" data-outline="The record">Where the newest rules of the law come from</h2>
     <p>The law in this project comes from building and not from a seminar room. Its newest rules were extracted, defect by defect, from real applications built with AI assistance in 2026. Each correction was recorded when it was made, and
     it was kept only if it generalised and a reviewer could decide it yes or no. Rules 105 to 124 each come from such a defect, and the table further down names the newest eight.</p>
     <p>The working thesis is narrow. In those builds, a generator reproduced the inherited conventions quickly and confidently, even under an instruction to be careful, because nothing it was given had the standing to
@@ -99,7 +97,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="what-changes-when-the-law-is-data">What a law stored as data changes, and where to check each change</h2>
+    <h2 id="what-changes-when-the-law-is-data" data-outline="Law as data">What a law stored as data changes, and where to check each change</h2>
     <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the Positioning page</a> says where each one stops. A guideline alone cannot refuse a build.
     Storing the law as one versioned file changes this in five ways, and each change can be checked:</p>
     <table class="board">
@@ -119,7 +117,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-a-law-cannot-do">What the law cannot do</h2>
+    <h2 id="what-a-law-cannot-do" data-outline="What it cannot do">What the law cannot do</h2>
     <ul>
       <li><b>Most of the law waits on a person.</b> Only <span data-law="tier:machine">11</span> of the <span data-law="rules">123</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> need a reviewer's judgment.</li>
       <li><b>The law does not say whether a page is pleasant.</b> The verifier checks a declaration and the audit checks what was painted. Usability testing decides whether a person finds the page usable, and nothing here replaces it.</li>
@@ -131,7 +129,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-story-a-year-of-building-with-ai">The builds with AI from which the rules of the law were taken</h2>
+    <h2 id="the-story-a-year-of-building-with-ai" data-outline="Built with AI">The builds with AI from which the rules of the law were taken</h2>
     <p class="lead">Every correction below was recorded at the moment it was made, and it was canonized only if it generalised and a reviewer could decide it
     yes or no.</p>
     <p><b>The banking product</b> (April 2026) is a full agentic banking platform, built
@@ -153,7 +151,7 @@
 
 <section class="alt" id="evidence">
   <div class="narrow">
-    <h2>The eight newest rules of the law and the defects that produced them</h2>
+    <h2 data-outline="The newest rules">The eight newest rules of the law and the defects that produced them</h2>
     <p class="lead">The table lists each of the eight newest rules and the defect that earned it
     a number. The full trail, including what was
     deliberately <em>not</em> harvested, is in
@@ -180,7 +178,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-stance">The stance of the law, which puts business applications first</h2>
+    <h2 id="the-stance" data-outline="The stance">The stance of the law, which puts business applications first</h2>
     <p>The law is openly opinionated and puts <b>business applications first</b>.
     It serves operators rather than explorers: people who use the same screens eight hours a
     day under pressure, responsibility and fatigue. Delight on consumer sites is
@@ -219,7 +217,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

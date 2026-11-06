@@ -6,7 +6,7 @@
 <title>Declared in Haro — the Zane language written as data in Haro</title>
 <meta name="description" content="Zane is declared a second time in Haro, a language for declaring languages, and a court and a decoder grammar are forged from that declaration. The forged court judges the same suite as the verifier, and each difference between the two is named, counted and held by a ratchet.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -52,22 +52,20 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#the-same-offence-declared" title="The trapped-flow offence written as one constraint in Haro">The trapped-flow offence written as one constraint in Haro</a></li>
-      <li><a href="#two-courts-one-suite" title="The verifier and the forged court, judging the same suite">The verifier and the forged court, judging the same suite</a></li>
-      <li><a href="#where-the-two-differ-in-three-classes" title="The three classes of difference between the two courts">The three classes of difference between the two courts</a></li>
-      <li><a href="#a-grammar-a-generator-can-be-held-to" title="The decoder grammar that holds a generator to the shape of a declaration">The decoder grammar that holds a generator to the shape of a declaration</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#the-same-offence-declared" title="The trapped-flow offence written as one constraint in Haro">One constraint</a></li>
+    <li><a href="#two-courts-one-suite" title="The verifier and the forged court, judging the same suite">Two courts</a></li>
+    <li><a href="#where-the-two-differ-in-three-classes" title="The three classes of difference between the two courts">Where they differ</a></li>
+    <li><a href="#a-grammar-a-generator-can-be-held-to" title="The decoder grammar that holds a generator to the shape of a declaration">The decoder grammar</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2 id="the-same-offence-declared">The trapped-flow offence written as one constraint in Haro</h2>
+    <h2 id="the-same-offence-declared" data-outline="One constraint">The trapped-flow offence written as one constraint in Haro</h2>
     <p>On <a href="refusal.html">the refusal page</a>, the verifier refuses a wizard that cannot be left, and cites two rules, an article and a right. The Haro declaration writes the same offence as one constraint, which states where the constraint applies,
     the condition that makes it an offence, the sentence, the stable code, and what it cites. The constraint is written from the contract, and the forged court reports the same code.</p>
 <pre class="excerpt" data-excerpt="haro/zane.stzu"><span class="k">DEFINE CONSTRAINT</span> <span class="n">trapped_flow_wizard</span> <span class="k">AS</span> (
@@ -83,7 +81,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="two-courts-one-suite">The verifier and the forged court, judging the same suite</h2>
+    <h2 id="two-courts-one-suite" data-outline="Two courts">The verifier and the forged court, judging the same suite</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 300" style="min-width:780px" role="img" aria-labelledby="two-t two-d">
@@ -122,7 +120,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="where-the-two-differ-in-three-classes">The three classes of difference between the two courts</h2>
+    <h2 id="where-the-two-differ-in-three-classes" data-outline="Where they differ">The three classes of difference between the two courts</h2>
     <table class="board">
       <thead><tr><th>Class</th><th>Files</th><th>What it means</th><th>Why, by seam</th></tr></thead>
       <tbody>
@@ -140,7 +138,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="a-grammar-a-generator-can-be-held-to">The decoder grammar that holds a generator to the shape of a declaration</h2>
+    <h2 id="a-grammar-a-generator-can-be-held-to" data-outline="The decoder grammar">The decoder grammar that holds a generator to the shape of a declaration</h2>
     <p>The same declaration yields <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, <span data-fact="haro.gbnfBytes">4046</span> bytes of GBNF, which is the notation that grammar-constrained decoders read.
     The grammar fixes the shape of a declaration: the <span data-fact="gbnf.kinds">10</span> kinds, the clauses each kind may carry, and the lexical form.</p>
     <p>The grammar does not fix the verbs or the values, and it
@@ -174,7 +172,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

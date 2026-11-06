@@ -207,7 +207,9 @@ function sectionsOf(t) {
     let id = own ? own[1] : lastSection;
     let out = m;
     if (!id) { id = slug(plain(inner), taken); out = '<h2' + attrs + ' id="' + id + '">' + inner + '</h2>'; }
-    list.push({ id, label: plain(inner) });
+    /* the outline shows the section's short label (data-outline on its h2), and the whole title in the entry's tooltip */
+    const short = /\sdata-outline="([^"]*)"/.exec(attrs);
+    list.push({ id, label: short ? short[1].replace(/&amp;/g, '&').replace(/&quot;/g, '"') : plain(inner), full: plain(inner) });
     lastSection = null;
     return out;
   });
@@ -217,7 +219,7 @@ function list3(p, secs) {
   if (p.home || p.outside) return '';
   const f = familyOf(p);
   const own = secs && secs.length >= SECTION_MIN ? secs : null;
-  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}" title="${esc(x.label).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
+  const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
   if (f) {
     const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>${q === p ? subs : ''}</li>`;
     return `<nav class="list3" aria-label="Pages of the family">
@@ -228,12 +230,10 @@ ${f.kids.map(li).join('\n')}
   }
   if (!own) return '';
   return `<nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-${own.map(x => `      <li><a href="#${x.id}" title="${esc(x.label).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+${own.map(x => `    <li><a href="#${x.id}" title="${esc(x.full).replace(/"/g, '&quot;')}">${esc(x.label)}</a></li>`).join('\n')}
+  </ul>
 </nav>`;
 }
 const REPO = 'https://github.com/mayouni/zane';
@@ -387,6 +387,9 @@ function apply(p, text) {
   /* ---- the sections of a page get ids, and the list is made from them ---- */
   let secs = [];
   if (!p.home && !p.outside) { const r = sectionsOf(t); t = r.text; secs = r.list; }
+  /* every entry of a page's outline fits one line in both cultures (the author, 2026-11-06): 20 characters at most, from the h2's data-outline */
+  if (secs && secs.length >= SECTION_MIN) for (const x of secs) if (x.label.length > 20)
+    problems.push('the outline entry "' + x.label + '" is ' + x.label.length + ' characters: give its h2 a data-outline of 20 at most');
 
   /* ---- render ---- */
   const fill = (name, inner) => { t = t.replace(fenceRe(name), () => fence(name, inner)); };

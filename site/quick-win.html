@@ -6,7 +6,7 @@
 <title>A quick win — one real run of Zane on the Zing site, in under an hour</title>
 <meta name="description" content="A quick win is one real run of Zane on a real site that this project does not own. The run on the Zing site, read only, declared three surfaces, ran the verifier and ran the UI audit on ten pages. It found one thing, and that thing is not a defect.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -50,22 +50,20 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#declare" title="1 · The three surfaces of the Zing site, declared in Zane">1 · The three surfaces of the Zing site, declared in Zane</a></li>
-      <li><a href="#run-the-verifier" title="2 · The verifier's verdict on the declarations">2 · The verifier's verdict on the declarations</a></li>
-      <li><a href="#audit-the-pages" title="3 · The UI audit of the ten pages of the Zing site">3 · The UI audit of the ten pages of the Zing site</a></li>
-      <li><a href="#what-it-shows" title="4 · What the quick win shows, and what it does not show">4 · What the quick win shows, and what it does not show</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#declare" title="1 · The three surfaces of the Zing site, declared in Zane">1 · Declare</a></li>
+    <li><a href="#run-the-verifier" title="2 · The verifier's verdict on the declarations">2 · Verify</a></li>
+    <li><a href="#audit-the-pages" title="3 · The UI audit of the ten pages of the Zing site">3 · Audit</a></li>
+    <li><a href="#what-it-shows" title="4 · What the quick win shows, and what it does not show">4 · What it shows</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section id="declare">
   <div class="narrow">
-    <h2>1 · The three surfaces of the Zing site, declared in Zane</h2>
+    <h2 data-outline="1 · Declare">1 · The three surfaces of the Zing site, declared in Zane</h2>
 
     <p>The run declares three surfaces of Zing's site: the main menu, the style select and the landing page. They are written in the language by hand, from the markup, in <a href="../examples/quick-win/zing-landing.zane"><code>examples/quick-win/zing-landing.zane</code></a>. The file's header says that it is Zane's description of pages that Zane does not own. The part of the file that matters is this declaration:</p>
 <pre class="excerpt" data-excerpt="examples/quick-win/zing-landing.zane"><span class="k">DEFINE INTERACTION</span> <span class="n">style_select</span> (
@@ -79,7 +77,7 @@
 
 <section class="alt" id="run-the-verifier">
   <div class="narrow">
-    <h2>2 · The verifier's verdict on the declarations</h2>
+    <h2 data-outline="2 · Verify">2 · The verifier's verdict on the declarations</h2>
 
     <pre class="term" data-run="node tools/zane/cli.js check examples/quick-win/zing-landing.zane"><span class="dim">$ node tools/zane/cli.js check examples/quick-win/zing-landing.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.14</pre>
@@ -89,7 +87,7 @@
 
 <section id="audit-the-pages">
   <div class="narrow">
-    <h2>3 · The UI audit of the ten pages of the Zing site</h2>
+    <h2 data-outline="3 · Audit">3 · The UI audit of the ten pages of the Zing site</h2>
 
     <p>Zing's site was served read only beside the audit with <a href="../examples/web-case/serve-beside.js"><code>serve-beside.js</code></a>. The audit ran on its front page and on its nine pages under <code>site/</code>, in the default mode and in Zing's own default style. It reported <b>one finding</b>: the page at <code>site/index.html</code> has no trail and no bar that marks it.
     That page is a redirect to the front page, is marked not to be indexed, and holds one sentence. No reader stays on it, so the finding is the audit measuring a page that is not a real page. <b>Every page that a reader reads was clean.</b></p>
@@ -99,7 +97,7 @@
 
 <section class="alt" id="what-it-shows">
   <div class="narrow">
-    <h2>4 · What the quick win shows, and what it does not show</h2>
+    <h2 data-outline="4 · What it shows">4 · What the quick win shows, and what it does not show</h2>
 
     <ul>
       <li><b>The surface was already lawful</b> under what these checks can see. A clean result is still a result: an hour shows a team where it stands, and this site stands well. Zing's own page says that it obeys the law it advertises, which is the likely reason.</li>
@@ -135,7 +133,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

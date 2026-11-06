@@ -6,7 +6,7 @@
 <title>Generate — holding an AI generator to the law with a grammar and a court</title>
 <meta name="description" content="The generate workflow holds an AI generator to the law through two layers: a grammar that fixes the shape of what the generator can write, and a court that refuses what the law forbids. The page says which layer holds what.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -55,11 +55,11 @@
     <li><a href="build.html">Build</a></li>
     <li><a aria-current="page" href="generate.html">Generate</a>
       <ul class="sub">
-        <li><a href="#a-declaration-the-grammar-allows-and-the" title="A declaration the grammar allows and the law refuses">A declaration the grammar allows and the law refuses</a></li>
-        <li><a href="#the-grammar-holds-the-shape" title="What the grammar fixes, what it does not hold, and how far it is checked">What the grammar fixes, what it does not hold, and how far it is checked</a></li>
-        <li><a href="#a-loop-you-can-run-today" title="A loop with an assistant that you can run today">A loop with an assistant that you can run today</a></li>
-        <li><a href="#feel-what-the-law-forbids-first" title="Pages that let you commit each violation before asking a generator to avoid it">Pages that let you commit each violation before asking a generator to avoid it</a></li>
-        <li><a href="#what-is-not-written" title="The part of the law for agents that is not written yet">The part of the law for agents that is not written yet</a></li>
+        <li><a href="#a-declaration-the-grammar-allows-and-the" title="A declaration the grammar allows and the law refuses">Grammar and law</a></li>
+        <li><a href="#the-grammar-holds-the-shape" title="What the grammar fixes, what it does not hold, and how far it is checked">The grammar</a></li>
+        <li><a href="#a-loop-you-can-run-today" title="A loop with an assistant that you can run today">A loop to run today</a></li>
+        <li><a href="#feel-what-the-law-forbids-first" title="Pages that let you commit each violation before asking a generator to avoid it">Feel it first</a></li>
+        <li><a href="#what-is-not-written" title="The part of the law for agents that is not written yet">Not written yet</a></li>
       </ul>
     </li>
     <li><a href="softanza.html">Softanza</a></li>
@@ -71,7 +71,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="a-declaration-the-grammar-allows-and-the">A declaration the grammar allows and the law refuses</h2>
+    <h2 id="a-declaration-the-grammar-allows-and-the" data-outline="Grammar and law">A declaration the grammar allows and the law refuses</h2>
     <p>An AI that is asked to build a business interface reproduces the habits it was trained on, politely and at machine speed.
     When a generator must declare intent first, the intent can be checked before anything is drawn. The declaration below uses
     only clauses that the language has, and the law still refuses the flow:</p>
@@ -94,7 +94,7 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="the-grammar-holds-the-shape">What the grammar fixes, what it does not hold, and how far it is checked</h2>
+    <h2 id="the-grammar-holds-the-shape" data-outline="The grammar">What the grammar fixes, what it does not hold, and how far it is checked</h2>
     <p>The language is declared in Haro, and from that declaration the forge writes a grammar that a decoder can be held to. The grammar is
     checked in as <a href="../haro/zane.gbnf"><code>haro/zane.gbnf</code></a>, a few kilobytes of GBNF, which is the notation that grammar-constrained
     decoders accept.</p>
@@ -112,7 +112,7 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
 
 <section>
   <div class="narrow">
-    <h2 id="a-loop-you-can-run-today">A loop with an assistant that you can run today</h2>
+    <h2 id="a-loop-you-can-run-today" data-outline="A loop to run today">A loop with an assistant that you can run today</h2>
     <p>With any capable assistant, you put the law in its context, instruct it to declare each surface in <code>.zane</code> before rendering it,
     run the verifier, and hand it the findings by rule number:</p>
 <pre class="term"><span class="p">You are building under the Zane Constitution (rules.json attached).</span>
@@ -127,7 +127,7 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="feel-what-the-law-forbids-first">Pages that let you commit each violation before asking a generator to avoid it</h2>
+    <h2 id="feel-what-the-law-forbids-first" data-outline="Feel it first">Pages that let you commit each violation before asking a generator to avoid it</h2>
     <p>The defects that a generator reproduces have rules behind them. <a href="gotchas/">What a violation feels like</a> lets you commit each
     family of offence yourself, safely fenced and beside its lawful twin, before you ask a model to avoid them.</p>
   </div>
@@ -135,7 +135,7 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
 
 <section>
   <div class="narrow">
-    <h2 id="what-is-not-written">The part of the law for agents that is not written yet</h2>
+    <h2 id="what-is-not-written" data-outline="Not written yet">The part of the law for agents that is not written yet</h2>
     <p>The law already says how an agent may act on an interface: the agent is a named actor under the same audit as a person, its output is a
     reviewable proposal, and what it produces is marked as machine-made. Two things are <b>not written</b>: the jurisdiction over the chat
     stream, and a surface that serves the law to an agent while it works. Both are unchanged and held, and nothing on this site advances them.</p>
@@ -166,7 +166,7 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

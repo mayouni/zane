@@ -6,7 +6,7 @@
 <title>The grid — the conceptual grid of what a person does in every channel</title>
 <meta name="description" content="Zane is designed around a conceptual grid that crosses the six things a person does with the channels an interface can use. Each cell holds the rules written for it, so an empty cell is a visible gap in the law. The page shows the grid, its empty cells, and how far the placement of the rules can be trusted.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -52,24 +52,22 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#the-grid" title="The grid of channels and activities, with the rules on each cell">The grid of channels and activities, with the rules on each cell</a></li>
-      <li><a href="#rows" title="The six activities that form the grid's columns">The six activities that form the grid's columns</a></li>
-      <li><a href="#closed" title="Cells a channel cannot carry, and why">Cells a channel cannot carry, and why</a></li>
-      <li><a href="#gaps" title="The empty cells of the grid, listed as a finding">The empty cells of the grid, listed as a finding</a></li>
-      <li><a href="#trust" title="How far the placement of rules on the grid can be trusted">How far the placement of rules on the grid can be trusted</a></li>
-      <li><a href="#practice" title="How to report a rule that is missing from a cell">How to report a rule that is missing from a cell</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#the-grid" title="The grid of channels and activities, with the rules on each cell">The grid</a></li>
+    <li><a href="#rows" title="The six activities that form the grid's columns">The six activities</a></li>
+    <li><a href="#closed" title="Cells a channel cannot carry, and why">Closed cells</a></li>
+    <li><a href="#gaps" title="The empty cells of the grid, listed as a finding">Empty cells</a></li>
+    <li><a href="#trust" title="How far the placement of rules on the grid can be trusted">Placement trust</a></li>
+    <li><a href="#practice" title="How to report a rule that is missing from a cell">Reporting a gap</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section id="the-grid">
   <div class="narrow">
-    <h2>The grid of channels and activities, with the rules on each cell</h2>
+    <h2 data-outline="The grid">The grid of channels and activities, with the rules on each cell</h2>
     <p>Each row of the grid is a channel, and each column is an activity a person does. A channel is what the language and the law call a medium, and <a href="media.html">the Channels page</a> describes what each channel is made of.
     A cell shows how many rules are written for that activity in that channel, and how many of the suite's <span data-fact="fixtures.total">73</span> fixtures sit on it.</p>
     <p>A cell marked <b>closed</b> belongs to a channel that cannot carry any verb the activity owns, so a person cannot do that activity in that channel, and no rule is meant to sit there.
@@ -110,7 +108,7 @@
 
 <section class="alt" id="rows">
   <div class="narrow">
-    <h2>The six activities that form the grid's columns</h2>
+    <h2 data-outline="The six activities">The six activities that form the grid's columns</h2>
     <p>The grid has six activities. Each activity is a question a person asks, in the order a person meets an interface, and no activity is named after a defect:</p>
     <table class="board">
       <thead><tr><th>Activity</th><th>The question</th><th>Verbs it owns</th></tr></thead>
@@ -131,7 +129,7 @@
 
 <section id="closed">
   <div class="narrow">
-    <h2>Cells a channel cannot carry, and why</h2>
+    <h2 data-outline="Closed cells">Cells a channel cannot carry, and why</h2>
     <p>A cell is closed when its activity owns verbs and the channel marks every one of those verbs absent. <span data-fact="grid.closed">11</span> cells of the grid are closed. They are derived from <code>media.json</code> in the way the verifier derives
     what a channel cannot carry: understand on haptic; decide on haptic, print, luminous and signage; act on print, luminous and signage; and recover on print, luminous and signage.</p>
     <p>Closed cells are not counted as gaps. <a href="media.html">The Channels page</a> shows what each channel is made of, and why it cannot carry these verbs.</p>
@@ -140,7 +138,7 @@
 
 <section class="alt" id="gaps">
   <div class="narrow">
-    <h2>The empty cells of the grid, listed as a finding</h2>
+    <h2 data-outline="Empty cells">The empty cells of the grid, listed as a finding</h2>
     <ul>
       <li><b>The law is written for a screen.</b> <span data-fact="grid.rulesOnVisual">94</span> of the <span data-fact="grid.rulesPlaced">121</span> placed rules are written for the screen, and
       <span data-fact="grid.rulesScreenOnly">89</span> of them are written for nothing else. <span data-fact="grid.rulesMediumFree">26</span> rules are stated without a channel, and <span data-fact="grid.rulesNamedOther">6</span> rules name another channel.</li>
@@ -155,7 +153,7 @@
 
 <section id="trust">
   <div class="narrow">
-    <h2>How far the placement of rules on the grid can be trusted</h2>
+    <h2 data-outline="Placement trust">How far the placement of rules on the grid can be trusted</h2>
     <p>The placement of the rules on the grid is one reader's first placement: each rule's activities are read from its title and its reason, and its channels from its wording. Another reader would move some rules, and the counts would move with them.</p>
     <p>The placement is measured, not changed. Two readers who had not seen the placement re-placed samples of rules, and the table below counts the placements on which they agree. The figures were measured on 3 November 2026 against the placement of that day.
     A ruling has since moved four rules, so the comparison scripts give other figures today, and the saved outputs are the record.</p>
@@ -175,7 +173,7 @@
 
 <section class="alt" id="practice">
   <div class="narrow">
-    <h2>How to report a rule that is missing from a cell</h2>
+    <h2 data-outline="Reporting a gap">How to report a rule that is missing from a cell</h2>
     <p>The grid supports a practice of six steps, and this site shows each step:</p>
     <ol class="workflow">
       <li><b>Declare the surface</b> in a <code>.zane</code> file: what the person is doing, and what stays always reachable. <a href="how.html">The Language page.</a></li>
@@ -221,7 +219,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

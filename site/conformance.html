@@ -6,7 +6,7 @@
 <title>Conformance — how a tool proves that it reads Zane as the reference does</title>
 <meta name="description" content="A tool conforms to Zane when it gives the reference verifier's verdict on every fixture of the suite, against a pinned pack of files. The page shows the two commands that check conformance, what a pass cannot prove, and a status board of what exists, what is designed and what is held.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -52,23 +52,21 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#two-commands" title="The two commands that check the pack and run the conformance suite">The two commands that check the pack and run the conformance suite</a></li>
-      <li><a href="#what-a-pass-does-not-prove" title="What a passing conformance run does not prove">What a passing conformance run does not prove</a></li>
-      <li><a href="#status" title="The status of each part of the system, and where each part stops">The status of each part of the system, and where each part stops</a></li>
-      <li><a href="#self-check" title="The checks this site runs on itself, and the consumers of the law">The checks this site runs on itself, and the consumers of the law</a></li>
-      <li><a href="#not-claimed" title="The claims this site does not make">The claims this site does not make</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#two-commands" title="The two commands that check the pack and run the conformance suite">Two commands</a></li>
+    <li><a href="#what-a-pass-does-not-prove" title="What a passing conformance run does not prove">Limits of a pass</a></li>
+    <li><a href="#status" title="The status of each part of the system, and where each part stops">Status board</a></li>
+    <li><a href="#self-check" title="The checks this site runs on itself, and the consumers of the law">Self-checks</a></li>
+    <li><a href="#not-claimed" title="The claims this site does not make">Not claimed</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2 id="two-commands">The two commands that check the pack and run the conformance suite</h2>
+    <h2 id="two-commands" data-outline="Two commands">The two commands that check the pack and run the conformance suite</h2>
     <p>The first command checks whether the bytes a person holds are the intended pack. A version number states which edition was intended, and the hash proves that the bytes are that edition.
     The second command runs every fixture through the verifier and reports which fixtures, if any, disagree.</p>
 <pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
@@ -103,7 +101,7 @@ Zane conformance — level 4
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-a-pass-does-not-prove">What a passing conformance run does not prove</h2>
+    <h2 id="what-a-pass-does-not-prove" data-outline="Limits of a pass">What a passing conformance run does not prove</h2>
     <ul>
       <li><b>A pass proves agreement, not rightness.</b> Two tools that refuse the same wrong thing pass together. The suite fixes what the law refuses, and whether the law is right for a person is
       a question of perception. No person has perceived this site's media grid.</li>
@@ -117,7 +115,7 @@ Zane conformance — level 4
 
 <section id="status">
   <div class="narrow">
-    <h2>The status of each part of the system, and where each part stops</h2>
+    <h2 data-outline="Status board">The status of each part of the system, and where each part stops</h2>
     <p>Each row names a part, gives one word for its status, and says where the part stops. <b>Exists</b> means that the part is built and run in this repository, or named as run elsewhere. <b>Designed</b> means that the part is written down and
     not built. <b>Held</b> means that the part is deliberately not advanced and awaits a named reason.</p>
     <table class="board">
@@ -156,7 +154,7 @@ Zane conformance — level 4
 
 <section class="alt" id="self-check">
   <div class="narrow">
-    <h2>The checks this site runs on itself, and the consumers of the law</h2>
+    <h2 data-outline="Self-checks">The checks this site runs on itself, and the consumers of the law</h2>
     <p>This site aims to obey the law it publishes. Before each piece of the site shipped, its author ran the <a href="../tools/ui-audit.html">UI audit</a> in both cultures and recorded the result with the commit, but
     <b>no gate enforces this audit yet</b>.</p>
     <p>The <kbd>F2</kbd> key, or the style select at the foot of any page, switches the culture, and the rights of the person stay the same in both cultures (Article VI).
@@ -171,7 +169,7 @@ Zane conformance — level 4
 
 <section id="not-claimed">
   <div class="narrow">
-    <h2>The claims this site does not make</h2>
+    <h2 data-outline="Not claimed">The claims this site does not make</h2>
     <ul>
       <li><b>No person has perceived any channel</b> for the coverage grid, so the grid is designed and measured, and not verified by a person.</li>
       <li><b>The screenshot audit has never been run on a real application.</b></li>
@@ -206,7 +204,7 @@ Zane conformance — level 4
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <title>Language — the Zane language, from a declaration to a measured page</title>
 <meta name="description" content="Zane is a language that declares what a person is doing on an interface, with no widget in it, and its verifier refuses by name what the law forbids before anything is drawn. The page shows the four steps from a declaration to a measured page and which of them exist today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -52,23 +52,21 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#a-guideline-cannot-fail-a-build" title="How a declaration differs from a published guideline">How a declaration differs from a published guideline</a></li>
-      <li><a href="#ninety-seconds" title="A declaration refused by the verifier, and the same declaration corrected">A declaration refused by the verifier, and the same declaration corrected</a></li>
-      <li><a href="#four-steps-and-which-of-them-exist" title="The four steps from a declaration to a measured page, and which of them exist">The four steps from a declaration to a measured page, and which of them exist</a></li>
-      <li><a href="#the-same-law-at-three-moments" title="The same law applied at design time, in development and at runtime">The same law applied at design time, in development and at runtime</a></li>
-      <li><a href="#what-exists-today-and-what-does-not" title="The parts of the language that exist today, and the parts that do not">The parts of the language that exist today, and the parts that do not</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#a-guideline-cannot-fail-a-build" title="How a declaration differs from a published guideline">Not a guideline</a></li>
+    <li><a href="#ninety-seconds" title="A declaration refused by the verifier, and the same declaration corrected">A refusal, corrected</a></li>
+    <li><a href="#four-steps-and-which-of-them-exist" title="The four steps from a declaration to a measured page, and which of them exist">The four steps</a></li>
+    <li><a href="#the-same-law-at-three-moments" title="The same law applied at design time, in development and at runtime">Three moments</a></li>
+    <li><a href="#what-exists-today-and-what-does-not" title="The parts of the language that exist today, and the parts that do not">What exists today</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="narrow">
-    <h2 id="a-guideline-cannot-fail-a-build">How a declaration differs from a published guideline</h2>
+    <h2 id="a-guideline-cannot-fail-a-build" data-outline="Not a guideline">How a declaration differs from a published guideline</h2>
     <p>The practices that teams already use are good at what they do. They differ from the law in the moment at which they apply and in whether anything can refuse a result.</p>
     <div class="pair">
       <div>
@@ -101,7 +99,7 @@ delete_invoice.zane:2  <span class="bad">error</span>  <span class="bad">MISSING
 
 <section class="alt" id="ninety-seconds">
   <div class="narrow">
-    <h2>A declaration refused by the verifier, and the same declaration corrected</h2>
+    <h2 data-outline="A refusal, corrected">A declaration refused by the verifier, and the same declaration corrected</h2>
     <p class="lead">The declaration below describes a payment approval before a single pixel exists.
     It contains <em>no</em> widget, no layout and no framework.</p>
 <pre class="shot"><span class="c">// payments.zane — design phase, day one</span>
@@ -133,7 +131,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
 
 <section>
   <div class="narrow">
-    <h2 id="four-steps-and-which-of-them-exist">The four steps from a declaration to a measured page, and which of them exist</h2>
+    <h2 id="four-steps-and-which-of-them-exist" data-outline="The four steps">The four steps from a declaration to a measured page, and which of them exist</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 230" style="min-width:780px" role="img" aria-labelledby="pipe-t pipe-d">
@@ -181,7 +179,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="the-same-law-at-three-moments">The same law applied at design time, in development and at runtime</h2>
+    <h2 id="the-same-law-at-three-moments" data-outline="Three moments">The same law applied at design time, in development and at runtime</h2>
     <figure class="figure">
       <div class="scroll">
       <svg viewBox="0 0 780 240" style="min-width:780px" role="img" aria-labelledby="mom-t mom-d">
@@ -215,7 +213,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
 
 <section>
   <div class="narrow">
-    <h2 id="what-exists-today-and-what-does-not">The parts of the language that exist today, and the parts that do not</h2>
+    <h2 id="what-exists-today-and-what-does-not" data-outline="What exists today">The parts of the language that exist today, and the parts that do not</h2>
     <ul>
       <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">37</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">73</span> fixtures that any implementation can prove it agrees with.</li>
       <li><b>Data, not renderers:</b> the media carriage and the signal vocabulary. The pieces that draw, speak or print are not part of this repository.</li>
@@ -250,7 +248,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <title>Use — four ways to use Zane on what you already have</title>
 <meta name="description" content="The Use section describes four ways to use Zane on an interface you already have: a web application, a mobile app, an interface with no screen, and your own stack. Each way says what Zane gives today and where it stops.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -51,37 +51,35 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#four-ways-in" title="The four ways to use Zane, one card for each">The four ways to use Zane, one card for each</a></li>
-      <li><a href="#you-have-a-web-application" title="Using Zane on a web application">Using Zane on a web application</a></li>
-      <li><a href="#you-have-a-mobile-app" title="Using Zane on a mobile app">Using Zane on a mobile app</a></li>
-      <li><a href="#your-interface-has-no-screen" title="Using Zane on an interface with no screen">Using Zane on an interface with no screen</a></li>
-      <li><a href="#you-choose-the-stack" title="Using Zane in the stack you choose">Using Zane in the stack you choose</a></li>
-      <li><a href="#what-every-way-shares" title="What the four ways to use Zane have in common">What the four ways to use Zane have in common</a></li>
-      <li><a href="#where-nothing-is-written-yet" title="Parts of the four ways that are not built or not run yet">Parts of the four ways that are not built or not run yet</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#four-ways-in" title="The four ways to use Zane, one card for each">Four ways in</a></li>
+    <li><a href="#you-have-a-web-application" title="Using Zane on a web application">Web apps</a></li>
+    <li><a href="#you-have-a-mobile-app" title="Using Zane on a mobile app">Mobile apps</a></li>
+    <li><a href="#your-interface-has-no-screen" title="Using Zane on an interface with no screen">No screen</a></li>
+    <li><a href="#you-choose-the-stack" title="Using Zane in the stack you choose">Your stack</a></li>
+    <li><a href="#what-every-way-shares" title="What the four ways to use Zane have in common">Shared by all four</a></li>
+    <li><a href="#where-nothing-is-written-yet" title="Parts of the four ways that are not built or not run yet">Not built yet</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section id="four-ways-in">
   <div class="narrow">
-    <h2>The four ways to use Zane, one card for each</h2>
+    <h2 data-outline="Four ways in">The four ways to use Zane, one card for each</h2>
 
     <div class="messages">
-      <div class="card"><h2 id="you-have-a-web-application">Using Zane on a web application</h2>
+      <div class="card"><h2 id="you-have-a-web-application" data-outline="Web apps">Using Zane on a web application</h2>
         <p>You declare the application's surfaces, run the verifier, and then run the UI audit on the live pages. The Web apps page works through a real case: the navigation of a site this project does not own.</p>
         <a href="web.html">Web apps →</a></div>
-      <div class="card"><h2 id="you-have-a-mobile-app">Using Zane on a mobile app</h2>
+      <div class="card"><h2 id="you-have-a-mobile-app" data-outline="Mobile apps">Using Zane on a mobile app</h2>
         <p>A mobile app has no page to measure. You declare its screens, reduce a screenshot to facts, and judge those facts. The Mobile apps page says what runs today and what has never run.</p>
         <a href="mobile.html">Mobile apps →</a></div>
-      <div class="card"><h2 id="your-interface-has-no-screen">Using Zane on an interface with no screen</h2>
+      <div class="card"><h2 id="your-interface-has-no-screen" data-outline="No screen">Using Zane on an interface with no screen</h2>
         <p>A voice line, a status chime and an agent that a machine drives are interfaces with no screen. The Beyond screens page says what the verifier decides in each channel and where the law is silent.</p>
         <a href="beyond.html">Beyond screens →</a></div>
-      <div class="card"><h2 id="you-choose-the-stack">Using Zane in the stack you choose</h2>
+      <div class="card"><h2 id="you-choose-the-stack" data-outline="Your stack">Using Zane in the stack you choose</h2>
         <p>You can <a href="build.html">build with Zane</a> in your CI, <a href="generate.html">make a generator declare intent</a> before it draws, <a href="softanza.html">vendor the law inside Softanza</a>, or <a href="ports.html">port Zane to another language</a>.</p>
         <a href="stack.html">Your stack →</a></div>
     </div>
@@ -91,7 +89,7 @@
 
 <section class="alt" id="what-every-way-shares">
   <div class="narrow">
-    <h2>What the four ways to use Zane have in common</h2>
+    <h2 data-outline="Shared by all four">What the four ways to use Zane have in common</h2>
 
     <ul>
       <li><b>All four ways use one law, stored as data.</b> The law holds <span data-law="rules">123</span> rules in one versioned file, v<span data-law="version">3.14</span>.</li>
@@ -104,7 +102,7 @@
 
 <section id="where-nothing-is-written-yet">
   <div class="narrow">
-    <h2>Parts of the four ways that are not built or not run yet</h2>
+    <h2 data-outline="Not built yet">Parts of the four ways that are not built or not run yet</h2>
 
     <ul>
       <li>The <b>screenshot audit</b> has a written fact schema and a checker, but no screenshot of a real application has been run through it, and no person has looked at one.</li>
@@ -139,7 +137,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

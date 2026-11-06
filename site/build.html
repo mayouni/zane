@@ -6,7 +6,7 @@
 <title>Build — putting the law into a project and failing the build on a refusal</title>
 <meta name="description" content="The build workflow puts Zane into a software project: the team declares each surface before drawing it, pins the law as a hash, fails the build on a refusal, and measures what the browser actually paints.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -54,12 +54,12 @@
   <ul>
     <li><a aria-current="page" href="build.html">Build</a>
       <ul class="sub">
-        <li><a href="#declare-before-you-draw" title="Writing a surface's declaration before drawing the surface">Writing a surface's declaration before drawing the surface</a></li>
-        <li><a href="#pin-the-law-as-a-hash-not-only-a-version" title="Pinning the law as a hash, not only as a version">Pinning the law as a hash, not only as a version</a></li>
-        <li><a href="#fail-the-build-on-a-refusal" title="Making the CI build fail when the verifier refuses a declaration">Making the CI build fail when the verifier refuses a declaration</a></li>
-        <li><a href="#measure-the-paint" title="Measuring the painted page with the UI audit">Measuring the painted page with the UI audit</a></li>
-        <li><a href="#amend-with-evidence" title="Proposing a new rule with evidence from your project">Proposing a new rule with evidence from your project</a></li>
-        <li><a href="#what-is-not-here-yet" title="Parts of the build workflow that are held or designed, not built">Parts of the build workflow that are held or designed, not built</a></li>
+        <li><a href="#declare-before-you-draw" title="Writing a surface's declaration before drawing the surface">Declare first</a></li>
+        <li><a href="#pin-the-law-as-a-hash-not-only-a-version" title="Pinning the law as a hash, not only as a version">Pin the law</a></li>
+        <li><a href="#fail-the-build-on-a-refusal" title="Making the CI build fail when the verifier refuses a declaration">Fail the build</a></li>
+        <li><a href="#measure-the-paint" title="Measuring the painted page with the UI audit">Audit the page</a></li>
+        <li><a href="#amend-with-evidence" title="Proposing a new rule with evidence from your project">Amend with evidence</a></li>
+        <li><a href="#what-is-not-here-yet" title="Parts of the build workflow that are held or designed, not built">Not built yet</a></li>
       </ul>
     </li>
     <li><a href="generate.html">Generate</a></li>
@@ -72,7 +72,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="declare-before-you-draw">Writing a surface's declaration before drawing the surface</h2>
+    <h2 id="declare-before-you-draw" data-outline="Declare first">Writing a surface's declaration before drawing the surface</h2>
     <p>Before wireframes harden, you write the surface's <code>.zane</code> declaration: which intents it
     satisfies, and what stays always reachable. A few minutes of declaration replace a meeting about taste:
     the design review reads <code>SATISFIES [SELECT, CONFIRM, ACT]</code> and asks one question,
@@ -101,7 +101,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="pin-the-law-as-a-hash-not-only-a-version">Pinning the law as a hash, not only as a version</h2>
+    <h2 id="pin-the-law-as-a-hash-not-only-a-version" data-outline="Pin the law">Pinning the law as a hash, not only as a version</h2>
     <p><b>A version says which edition you meant, and a hash proves that the bytes you hold are that edition.</b> You vendor the
     files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
     proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
@@ -114,7 +114,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section>
   <div class="narrow">
-    <h2 id="fail-the-build-on-a-refusal">Making the CI build fail when the verifier refuses a declaration</h2>
+    <h2 id="fail-the-build-on-a-refusal" data-outline="Fail the build">Making the CI build fail when the verifier refuses a declaration</h2>
     <p>The verifier exits non-zero when any declaration is refused, and it exits zero when there are only warnings. You run it
     over your specifications in CI:</p>
 <pre class="term"><span class="dim">$ node tools/zane/cli.js check specs/*.zane</span>
@@ -128,7 +128,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="measure-the-paint">Measuring the painted page with the UI audit</h2>
+    <h2 id="measure-the-paint" data-outline="Audit the page">Measuring the painted page with the UI audit</h2>
     <p>A declaration is not enough, because a page can be lawful on paper and unlawful in the browser. You serve your application and
     point <a href="../tools/ui-audit.html">the UI audit</a> at it, one path per line, on any same-origin pages, and nothing
     leaves your browser. The audit measures what static analysis cannot see: computed text sizes, true contrast against the
@@ -142,7 +142,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section>
   <div class="narrow">
-    <h2 id="amend-with-evidence">Proposing a new rule with evidence from your project</h2>
+    <h2 id="amend-with-evidence" data-outline="Amend with evidence">Proposing a new rule with evidence from your project</h2>
     <p>The law grows in one way only (Article VII): from real usage, operator feedback and documented failure. If your project hits a
     recurring defect that the law does not name, you record it as the law records its own defects: what happened, where, how it was
     corrected, why it generalizes, and whether a reviewer could decide it yes or no. Every rule carries an <code>evidence</code>
@@ -153,7 +153,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-is-not-here-yet">Parts of the build workflow that are held or designed, not built</h2>
+    <h2 id="what-is-not-here-yet" data-outline="Not built yet">Parts of the build workflow that are held or designed, not built</h2>
     <p>This section states each missing part as held or designed, and not as promised.</p>
     <ul>
       <li><b>Cross-pillar symbols are not computed.</b> The verifier accepts a symbol table that you supply, and building one from a host
@@ -192,7 +192,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <title>Beyond screens — checking interfaces that have no screen</title>
 <meta name="description" content="Zane checks interfaces with no screen, such as a voice line, a status chime, an agent surface or a sign, against what a person must be able to do there. The page runs four declarations through the verifier, says what each channel decides, names the two rules for agent surfaces, and shows which cells of the grid have no rule.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=c06bbe50">
+<link rel="stylesheet" href="stz.css?v=c337dc22">
 </head>
 <body>
 
@@ -51,23 +51,21 @@
 <!-- shell:layout -->
 <div class="layout has-list sections-right">
 <nav class="list3 sections" aria-label="Sections of this page">
-  <details open>
-    <summary>On this page</summary>
-    <ul>
-      <li><a href="#a-voice-line" title="A voice line that promises a verb a voice cannot carry">A voice line that promises a verb a voice cannot carry</a></li>
-      <li><a href="#an-agent" title="An agent surface that acts and offers no way to cancel">An agent surface that acts and offers no way to cancel</a></li>
-      <li><a href="#a-status-chime" title="A status chime whose every status renders as silence">A status chime whose every status renders as silence</a></li>
-      <li><a href="#a-sign" title="A sign that promises to act">A sign that promises to act</a></li>
-      <li><a href="#where-the-law-is-silent" title="Channels beyond the screen where the law has no rule">Channels beyond the screen where the law has no rule</a></li>
-    </ul>
-  </details>
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#a-voice-line" title="A voice line that promises a verb a voice cannot carry">A voice line</a></li>
+    <li><a href="#an-agent" title="An agent surface that acts and offers no way to cancel">An agent</a></li>
+    <li><a href="#a-status-chime" title="A status chime whose every status renders as silence">A status chime</a></li>
+    <li><a href="#a-sign" title="A sign that promises to act">A sign</a></li>
+    <li><a href="#where-the-law-is-silent" title="Channels beyond the screen where the law has no rule">Where law is silent</a></li>
+  </ul>
 </nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section id="a-voice-line">
   <div class="narrow">
-    <h2>A voice line that promises a verb a voice cannot carry</h2>
+    <h2 data-outline="A voice line">A voice line that promises a verb a voice cannot carry</h2>
 
     <p>A person who asks for a balance over the phone, in a flow that promises ZOOM, is promised something a voice cannot carry. The verifier refuses the promise, and it does not refuse the voice line:</p>
     <div class="scene">
@@ -92,7 +90,7 @@ check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT
 
 <section class="alt" id="an-agent">
   <div class="narrow">
-    <h2>An agent surface that acts and offers no way to cancel</h2>
+    <h2 data-outline="An agent">An agent surface that acts and offers no way to cancel</h2>
 
     <p>An interface for an agent is an interface: the agent is the person at the other end, and the law about leaving and undoing applies to it as much as to anyone. The verifier refuses a flow that places orders and cannot be abandoned:</p>
     <div class="scene">
@@ -132,7 +130,7 @@ agent_order.zane:5  <span class="bad">error</span>  <span class="bad">MISSING_CA
 
 <section id="a-status-chime">
   <div class="narrow">
-    <h2>A status chime whose every status renders as silence</h2>
+    <h2 data-outline="A status chime">A status chime whose every status renders as silence</h2>
 
     <p>A surface may declare a status that a channel renders as silence, and silence is the correct rendering of "waiting, inactive". The defect is narrower: when <em>every</em> status that a surface declares renders as nothing in the channel it declared, the surface promises a perceptible state and delivers none:</p>
     <div class="scene">
@@ -160,7 +158,7 @@ chime.zane:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIV
 
 <section class="alt" id="a-sign">
   <div class="narrow">
-    <h2>A sign that promises to act</h2>
+    <h2 data-outline="A sign">A sign that promises to act</h2>
 
     <p>A fixed sign carries wayfinding and almost nothing else. A declaration for a lobby screen that promises ACT on a sign draws four refusals, which concern the verbs a sign cannot carry (ACT and EXIT) and the undo and cancel that an act owes. The suite's own <a href="../conformance/fixtures/verb-not-carried.zane">printed-ledger case</a> draws the same kind of refusals for a page that promises an act.
     The fixed channels, such as print, signage and a lamp, are the channels that cannot carry most verbs.</p>
@@ -169,7 +167,7 @@ chime.zane:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIV
 
 <section id="where-the-law-is-silent">
   <div class="narrow">
-    <h2>Channels beyond the screen where the law has no rule</h2>
+    <h2 data-outline="Where law is silent">Channels beyond the screen where the law has no rule</h2>
 
     <p>On the grid, <span data-fact="grid.channelsNoRule">5</span> of the ten channels have no rule written for them at all (haptic, luminous, signage, spatial and terminal), and the voice, sound and machine channels have a rule on only a few cells. <a href="grid.html">The grid</a> draws this coverage and leaves the empty cells empty. The refusals above are real, and they are the
     checks that exist: a verb a channel cannot carry, a flow that cannot be left, and a status that renders as nothing. They are not a full account of what a good voice line or a good agent surface is.</p>
@@ -202,7 +200,7 @@ chime.zane:8  <span class="bad">error</span>  <span class="bad">SIGNAL_UNPERCEIV
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=57039fc5"></script>
+<script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>
