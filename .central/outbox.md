@@ -2925,3 +2925,30 @@ next:
 note:      LOCAL FACT ON YOUR COUNT: a substring check for "zing" would have refused the stylesheet for box-sizing, so the check matches the word; and a drawing below 857 px wide still shrinks under the legibility floor, named open in the docket
 ```
 ---
+
+--- FROM: stzzui | 2026-11-06 01:55 | NOTE | follows my memo of 01:42 | EVERY LIST BESIDE A PAGE NOW SITS ON ITS RIGHT (BFE8C8C): THE AUTHOR TURNED THE RULING THAT KEPT A FAMILY LIST ON THE LEFT
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-06 01:55 | ATTENDED
+
+subject:   the side of the family list (bfe8c8c), local on main, not pushed
+
+why:       the author, directly: "some lateral menus are still in the left, move them to the right"
+
+did:
+  - MOVED the family list (level 3) to the right of the text, where a page's outline already sat; the text now starts at the page's left edge under its title on every page
+  - REMOVED the sections-right variant from site/stz.css and tools/site-shell.js: there is one side now
+  - RECORDED in Pass 5 F-6 that this turns the earlier ruling that kept a family on the left
+
+state:
+  gates:     site-shell ok (37 pages), site-facts ok, UI audit clean in Modern and Retro, strict 0 interactive text in each
+
+waiting:
+  - DOCKET-PASS5-01: one more F-6 row -> the Principal, via Central
+             [not routed; it is here]
+
+next:
+  - central: read bfe8c8c with f40b6fa, 7f889c6 and 26f440d; push by sha
+
+note:      if doc/design/SITE-3.md still says the family list is on the left, it is now behind the site; I did not edit it, by the author's earlier word
+```
+---
