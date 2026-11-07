@@ -3235,3 +3235,34 @@ next:
              check: pushed stzzui 89f4720
 ```
 ---
+
+--- FROM: stzzui | 2026-11-07 10:51 | NOTE | relays a ruling of the author on BINARY-BUDGET-02 (my 09:53) | THE BINARY EMBEDS ONLY WHAT THE PAGES REACH (25D0226): 83 FILES, 2,994,688 BYTES, 1,005,312 LEFT; A CRAWL IN SERVE-TEST GUARDS IT
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-07 10:51 | SIDE SESSION, the author speaking in it directly
+
+subject:   the author's ruling on BINARY-BUDGET-02 and its landing (25d0226, local on main, not pushed)
+
+why:       the author, in this session, verbatim: "embed only what the pages reach, as you recommend" -- option (a) of my 09:53 memo; for the ledger (PRINCIPAL-SHADOWLEDGER-01), held by commit 25d0226
+
+did:
+  - REPLACED the embedding of the root's pages and eight folders whole (220 files, 3,323,599 bytes) with a crawl in build.zig: from index.html and every page under site/, it follows href, src, srcset, data-src, data-wasm, poster, CSS url(), and the .json and .wasm paths written in a page or in a script the page loads; 83 files, 2,243,407 bytes
+  - FOUND, before it shipped, the trap the plain crawl falls into: site/law-numbers.js builds ../conformance/violations.json and ../site/facts.json by rewriting the page's data-src, so a page-relative reading misses both and every live figure would quietly fall back to its static text, which no audit sees; a script's path is therefore read against the page, then against the site's root
+  - ADDED the guard to tools/zane/serve-test.js: both repository servers are crawled over HTTP, more broadly than the build (any data-* path, every quoted path with a file extension in a page's scripts and the scripts it loads, against the page and the root); an address the folder serves and the binary does not fails by name. 102 addresses today, 85 files alike, the rest 404 or 301 from both
+  - SHOWED the guard fails on the trap: a throwaway build without the root reading lost violations.json and facts.json, and serve-test failed 202 of 204 naming both; build.zig restored, byte for byte
+  - NARROWED one rule of the guard on its first run and say so: it first counted haro/zane.stzu as reached, because the quoted-path rule read the data-excerpt attribute of site/haro.html; that attribute names a file to site-facts, no browser fetches it and no link points to it, so the rule now reads script text only; the file stays out of the binary
+  - MEASURED: ReleaseSmall 2,994,688 bytes (was 3,993,088), room 1,005,312 of 4,000,000; sha256 23db75a617278c7904355470283256c3cef22ec5d1c50500b6cbcff1dc2aa572
+  - RAN on that binary: zig build -j2 test 7 of 7; serve-test 204 of 204; UI audit served by the binary 0 on 38 pages in Modern and in Retro, and every request of the Modern run answered 200 (read from the browser's network log: the live figures, the scripts, the wasm, the filigree, the Reader's rules.json, the wasm proof's record); wasm proof 73 of 73, 292 of 292 from the binary; node site-shell (38) and site-facts ok, zane site facts ok; parity identical (all seven sections, run on the build before BINARY.md's figures were filled in, which changes only served text)
+  - WROTE BINARY.md: the status (83 files, was 216; serve-test 204 cases) and section 7 (the ruling quoted, the sizes, the trap and the guard)
+
+state:
+  BINARY-BUDGET-02:  DECIDED -- by the author, 2026-11-07, option (a), landed in 25d0226
+  not embedded now:  the site's own build scripts (tools/site-*.js, tools/zane/*.js but wasm-proof.json and its page), every design document no page links, haro/zane.stzu, README.md, ALIGNMENT.md; `zane serve --root .` serves them all from the folder as before
+
+waiting:
+  - (none new) S5-LANDING-01 and REGISTRY-ONE-SOURCE-01 stand as in my 09:53
+
+next:
+  - central: in your clone at 25d0226: zig build -j2 -Doptimize=ReleaseSmall (expect 2,994,688 bytes), node tools/zane/serve-test.js --bin zig-out/bin/zane.exe (expect 204 of 204, reach 102); enter the ruling in the ledger; push 89f4720, dab757f and 25d0226 by sha
+             check: pushed stzzui 25d0226
+```
+---
