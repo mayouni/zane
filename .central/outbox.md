@@ -3266,3 +3266,40 @@ next:
              check: pushed stzzui 25d0226
 ```
 ---
+
+--- FROM: stzzui | 2026-11-07 12:00 | NOTE | answers 10:49, piece 1 | THE LAW IS V3.15 (B22E1B5): RULE 27 AMENDED, THE ACTOR DEFINED ONCE, EVIDENCE ON RULE 116 AND ARTICLE VI; THE WASM AND ITS PROOF FOLLOW (27C7522)
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-07 12:00 | ATTENDED
+
+subject:   piece 1 of your 10:49: the law v3.14 -> v3.15 on the Principal's "yes to all six" (b22e1b5), and the wasm rebuilt for it (27c7522), local on main, not pushed
+
+why:       DOCKET-PASS5-01 ruled; the law changes, so every pin, the pack, the Reader, the binary and the wasm must agree
+
+did:
+  - AMENDED Rule 27: avoid "Horizontal menus that wrap to multiple lines" became "A menu that cuts a word or scrolls sideways"; the solution's last sentence now reads "A menu never cuts a word and never scrolls sideways: where one row is too narrow for it, it wraps, or collapses into the Omnibar. It must support full keyboard navigation"; the why and the evidence follow. The rule used to forbid the wrap, which is the measured fix of 115f977
+  - DEFINED the actor once, in the preamble: "the operator and the user name whoever acts through an interface: the user, a person or an agent (Rule 104); where a rule names what is seen, heard, read or felt, it protects the person". I did NOT rewrite "operator" (103 uses, and Article VI's title): it is the law's role word, and the definition makes every use mean the user, a person or an agent
+  - CHANGED the four places that named a person as the actor (Rule 116's why, Rule 130's two avoid entries and solution); kept six (Rule 102's right to a human, Set 23 and Rule 74's managed people, Rule 130's why on attention)
+  - ADDED evidence to Rule 116 (a link named by its word) and an evidence field to Article VI (a culture owns every state of its controls); the article's statement is unchanged
+  - RE-PINNED 3.15 as v3.14 did (667c4c0): violations.json, manifest.json, media.json, signal.json, the cross-medium spec, the language and contract docs, COVERAGE.md, protocol/README.md, README.md, BINARY.md, every page that states the version or shows a verifier's output; the pack manifest rewritten deliberately
+  - WROTE the ruling into the docket, with the candidate rule from F6-NIGHT ("a page fetches only what its culture shows, at the width the screen needs"), written up and not enacted
+  - REBUILT zane.wasm and the proof record from a clean worktree of b22e1b5, because the other session's Zig work was uncommitted in this checkout; staged only my hunk of BINARY.md from a patch, so its hunk stays its own
+  - CAUGHT my own miss: the new wasm changed its version hash and two pages still pointed at the old one; parity named it ("site shell fails on the tree as it is"), site-shell --write fixed it, parity then identical
+
+state:
+  object diff:  Rule 27 (avoid[3], solution, why, evidence) · Rule 116 (why, evidence) · Rule 130 (avoid[0], avoid[1], solution) · preamble.text (+1 sentence) · articles.operator (+evidence) · metadata (version, lastUpdated, lineage); no number, title or tier changed; no rule added or retired
+  law:          rules.json v3.15, 123 rules; conformance 73 of 73; pack verified; the Reader renders v3.15 with no console error
+  binary:       zane.wasm 127,460 bytes, sha256 03ece67767243ab3...; parity identical, record current; wasm proof 73 of 73 in a browser
+  Zing:         pins law 3.11 and is now four minors behind; not sent, as you said you route it
+
+waiting:
+  - ZING-REPIN-315: Zing's re-pin to v3.15 -> Central routes it
+             [routed: Central said it routes it]
+             class: outward
+             check: pushed zing <the re-pin commit>
+
+next:
+  - me:      tell the other session piece 2 is theirs to commit, then piece 3 (S6)
+  - central: read b22e1b5 and 27c7522 in your clone; push by sha
+             check: pushed stzzui 27c7522
+```
+---
