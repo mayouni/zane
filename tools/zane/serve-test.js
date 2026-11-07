@@ -13,6 +13,12 @@
    reachable on any other address of this machine. A raw socket sends each request, so no client tidies a `..` away before
    the server sees it.
 
+   The binary embeds only what the pages reach (build.zig; the author, 2026-11-07). So both servers of the repository are also
+   crawled over HTTP from index.html and every page under site/, more broadly than the build crawls: every href, src, srcset,
+   poster, action and data-* value that is a path, every CSS url(), and every quoted path to a file in a page's scripts or in a script it
+   loads, read against the page and against the root. An address the folder serves and the binary does not is a failure: a page
+   would reach a file the binary left out.
+
    Exit 0 when every case holds, 1 when one does not, 2 when it cannot run.
    ========================================================================== */
 const fs = require('fs'), path = require('path'), os = require('os'), net = require('net');
@@ -53,6 +59,55 @@ function start(argv, port) {
     setTimeout(() => reject(new Error('zane serve did not start: ' + said)), 10000);
   });
 }
+
+/* ---- what the pages reach, crawled over HTTP ---- */
+const EXT = 'json|wasm|html|css|js|svg|webp|png|jpe?g|gif|ico|md|zane|txt|csv|gbnf|stzu|pdf';
+const PATHLIKE = new RegExp(`/|\\.(?:${EXT})$`);
+function refsOf(text, html) {
+  const out = [];
+  if (html) {
+    for (const m of text.matchAll(/\s(?:href|src|poster|action|data-[a-z-]+)\s*=\s*"([^"]*)"/g)) out.push(m[1]);
+    for (const m of text.matchAll(/\ssrcset\s*=\s*"([^"]*)"/g)) for (const c of m[1].split(',')) out.push(c.trim().split(/\s+/)[0]);
+  }
+  for (const m of text.matchAll(/url\(\s*['"]?([^'")]+)/g)) out.push(m[1].trim());
+  return out.filter(r => r && !/\s/.test(r) && PATHLIKE.test(r.replace(/[?#].*$/, '')));
+}
+const literalsOf = text => [...text.matchAll(new RegExp(`['"\`]([^'"\`\\s]+\\.(?:${EXT}))['"\`]`, 'g'))].map(m => m[1]);
+function resolveUrl(base, ref) {
+  if (/^(#|[a-z][a-z0-9+.-]*:|\/\/)/i.test(ref)) return null;
+  ref = ref.replace(/[?#].*$/, '');
+  if (!ref) return null;
+  const parts = ref.startsWith('/') ? [] : base.split('/').filter(Boolean);
+  for (const s of ref.split('/')) { if (!s || s === '.') continue; if (s === '..') { if (!parts.length) return null; parts.pop(); } else parts.push(s); }
+  return '/' + parts.join('/') + (ref.endsWith('/') && parts.length ? '/' : '');
+}
+async function crawl(port) {
+  const seen = new Map(), queue = [], scripts = new Map();
+  const want = u => { if (u && !seen.has(u)) { seen.set(u, null); queue.push(u); } };
+  want('/index.html');
+  (function walk(d) { for (const e of fs.readdirSync(path.join(ROOT, d), { withFileTypes: true })) { const q = d + '/' + e.name; if (e.isDirectory()) walk(q); else if (q.endsWith('.html')) want('/' + q); } })('site');
+  while (queue.length) {
+    const u = queue.shift();
+    const r = await ask(port, `GET ${u} HTTP/1.1`);
+    seen.set(u, r.status);
+    const html = /\.html$|\/$/.test(u), css = u.endsWith('.css');
+    if (r.status !== 200 || !(html || css)) continue;
+    const base = u.slice(0, u.lastIndexOf('/') + 1), text = r.body.toString('utf8');
+    for (const ref of refsOf(text, html)) want(resolveUrl(base, ref));
+    if (!html) continue;
+    // a quoted path counts where a fetch is written, in script text: an attribute such as data-excerpt names a file to a check, not to a browser
+    const lits = literalsOf([...text.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]).join('\n'));
+    for (const ref of refsOf(text, true)) {
+      const s = resolveUrl(base, ref);
+      if (!s || !s.endsWith('.js')) continue;
+      if (!scripts.has(s)) { const j = await ask(port, `GET ${s} HTTP/1.1`); scripts.set(s, j.status === 200 ? literalsOf(j.body.toString('utf8')) : []); }
+      lits.push(...scripts.get(s));
+    }
+    for (const l of lits) { want(resolveUrl(base, l)); want(resolveUrl('/', l)); }
+  }
+  return seen;
+}
+const crawled = {};
 
 const failures = [];
 let cases = 0;
@@ -100,10 +155,13 @@ const OUT = ['/../README.md', '/site/../../README.md', '/%2e%2e/README.md', '/%2
     await status(PORT_, 'GET /site/no-such-page.html HTTP/1.1', 404);
     await status(PORT_, 'GET /__zane/ui-audit.html HTTP/1.1', 404); // the audit's --app address is not served here
     if (mode === 'embedded') {
-      // a file of the repository the build does not embed does not exist for the embedded server
+      // a file of the repository the build does not embed does not exist for the embedded server: no page reaches these
       await status(PORT_, 'GET /zig/src/main.zig HTTP/1.1', 404);
       await status(PORT_, 'GET /CLAUDE.md HTTP/1.1', 404);
+      await status(PORT_, 'GET /tools/zane/parity.js HTTP/1.1', 404);
+      await status(PORT_, 'GET /tools/site-shell.js HTTP/1.1', 404);
     }
+    crawled[mode] = await crawl(PORT_);
     for (const u of OUT) await status(PORT_, `GET ${u} HTTP/1.1`, 404);
     // reachable on 127.0.0.1 only: every other IPv4 address of this machine refuses
     const others = Object.values(os.networkInterfaces()).flat().filter(n => n && n.family === 'IPv4' && !n.internal).map(n => n.address);
@@ -114,6 +172,17 @@ const OUT = ['/../README.md', '/site/../../README.md', '/%2e%2e/README.md', '/%2
     if (!others.length) console.log('  bind         no other IPv4 address on this machine: the 127.0.0.1-only case was not exercised');
   } finally { p.kill(); }
   }
+
+  // ---- every address the pages reach answers alike from the binary and from the folder ----
+  const emb = crawled.embedded, dir = crawled['from the folder'];
+  const reachedAll = [...new Set([...dir.keys(), ...emb.keys()])].sort();
+  let reachedOk = 0;
+  for (const u of reachedAll) {
+    const d = dir.has(u) ? dir.get(u) : 'not reached', e = emb.has(u) ? emb.get(u) : 'not reached';
+    expect(`reach ${u}`, d === e || (d !== 200 && e !== 200), `the folder answers ${d} and the binary ${e}: a page reaches a file the binary ${e === 200 ? 'has and the folder lacks' : 'does not embed'}`);
+    if (d === 200 && e === 200) reachedOk++;
+  }
+  console.log(`  reach        ${reachedAll.length} addresses the pages reach, crawled from both servers; ${reachedOk} files answered alike, the rest 404 or 301 from both`);
 
   // ---- --app: another folder, read only, with the audit beside it ----
   const APP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-serve-app-'));

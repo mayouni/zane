@@ -73,50 +73,173 @@ fn embedData(b: *std.Build, m: *std.Build.Module) void {
     m.addImport("crossmedium", folder(b, "conformance/cross-medium"));
 }
 
-/// The site `zane serve` answers from inside the binary: the root's pages and every file under the folders the pages reach, by
-/// their path from the repository's root, as a generated module `site` of `files` (path, data). Hidden files and folders are left
-/// out. BINARY.md section 7 budgets the binary with the site embedded at 4 MB.
-const site_roots = [_][]const u8{ "index.html", "LICENSE", "README.md", "ROADMAP.md", "ALIGNMENT.md" };
-const site_folders = [_][]const u8{ "site", "constitution", "tools", "doc", "conformance", "protocol", "haro", "examples" };
+/// The site `zane serve` answers from inside the binary: what the pages reach, and nothing more (the author, 2026-11-07: "embed only
+/// what the pages reach"), by path from the repository's root, as a generated module `site` of `files` (path, data). It used to be
+/// the root's pages and eight folders whole, which put the repository's own build scripts and design documents in the binary as
+/// text (BINARY.md section 7). The crawl starts at index.html and every page under site/, and follows:
+///   - from a page: the addresses in href, src, srcset, data-src, data-wasm and poster, every CSS url(), and every path to a .json
+///     or .wasm file written in the page or in a script the page loads, read against the page, then against the site's root
+///     (site/law-numbers.js makes ../conformance/violations.json out of the page's data-src="../constitution/rules.json");
+///   - from a stylesheet: its url()s.
+/// A Markdown, JSON or source file is served as text and its own links are not followed; a link to a folder is its index.html;
+/// a hidden file or folder is never reached. tools/zane/serve-test.js crawls the served site over HTTP, more broadly, and fails
+/// when a page reaches a file the folder serves and the binary does not. BINARY.md section 7 budgets the binary at 4 MB.
 fn siteModule(b: *std.Build) *std.Build.Module {
-    const wf = b.addWriteFiles();
-    var paths: std.ArrayList([]const u8) = .empty;
-    for (site_roots) |f| {
-        std.fs.cwd().access(b.pathFromRoot(f), .{}) catch continue;
-        paths.append(b.allocator, f) catch @panic("out of memory");
+    const a = b.allocator;
+    var reached = std.StringArrayHashMap(void).init(a);
+    var queue: std.ArrayList([]const u8) = .empty;
+    reach(&reached, &queue, "index.html");
+    var pages: std.ArrayList([]const u8) = .empty;
+    htmlUnder(b, "site", &pages);
+    for (pages.items) |p| reach(&reached, &queue, p);
+    var i: usize = 0;
+    while (i < queue.items.len) : (i += 1) {
+        const f = queue.items[i];
+        const html = std.mem.endsWith(u8, f, ".html");
+        if (!html and !std.mem.endsWith(u8, f, ".css")) continue;
+        const text = std.fs.cwd().readFileAlloc(a, b.pathFromRoot(f), 64 * 1024 * 1024) catch @panic("cannot read a page the site embeds");
+        const base = if (std.mem.lastIndexOfScalar(u8, f, '/')) |k| f[0..k] else "";
+        var refs: std.ArrayList([]const u8) = .empty;
+        urls(text, &refs);
+        for (refs.items) |r| if (resolve(b, base, r)) |x| reach(&reached, &queue, x);
+        if (!html) continue;
+        refs.clearRetainingCapacity();
+        attributes(text, &refs);
+        for (refs.items) |r| if (resolve(b, base, r)) |x| {
+            reach(&reached, &queue, x);
+            if (std.mem.endsWith(u8, x, ".js")) {
+                const js = std.fs.cwd().readFileAlloc(a, b.pathFromRoot(x), 64 * 1024 * 1024) catch @panic("cannot read a script the site embeds");
+                literals(b, base, js, &reached, &queue);
+            }
+        };
+        literals(b, base, text, &reached, &queue);
     }
-    for (site_folders) |top| {
-        var dir = std.fs.cwd().openDir(b.pathFromRoot(top), .{ .iterate = true }) catch continue;
-        defer dir.close();
-        var walker = dir.walk(b.allocator) catch @panic("out of memory");
-        defer walker.deinit();
-        while (walker.next() catch @panic("cannot walk a folder the site embeds")) |e| {
-            if (e.kind != .file) continue;
-            const rel = b.fmt("{s}/{s}", .{ top, e.path });
-            std.mem.replaceScalar(u8, rel, '\\', '/');
-            var hidden = false;
-            var parts = std.mem.splitScalar(u8, rel, '/');
-            while (parts.next()) |s| if (s.len > 0 and s[0] == '.') {
-                hidden = true;
-            };
-            if (!hidden) paths.append(b.allocator, rel) catch @panic("out of memory");
-        }
-    }
-    std.mem.sort([]const u8, paths.items, {}, struct {
+    const paths = a.dupe([]const u8, reached.keys()) catch @panic("out of memory");
+    std.mem.sort([]const u8, paths, {}, struct {
         fn lt(_: void, x: []const u8, y: []const u8) bool {
             return std.mem.lessThan(u8, x, y);
         }
     }.lt);
+    const wf = b.addWriteFiles();
     var src: std.ArrayList(u8) = .empty;
-    src.appendSlice(b.allocator, "// generated by build.zig: the site zane serve answers from the binary\npub const File = struct { path: []const u8, data: []const u8 };\npub const files = [_]File{\n") catch @panic("out of memory");
-    for (paths.items) |rel| {
+    src.appendSlice(a, "// generated by build.zig: the site zane serve answers from the binary, what its pages reach\npub const File = struct { path: []const u8, data: []const u8 };\npub const files = [_]File{\n") catch @panic("out of memory");
+    for (paths) |rel| {
         _ = wf.addCopyFile(b.path(rel), b.fmt("files/{s}", .{rel}));
-        src.appendSlice(b.allocator, b.fmt("    .{{ .path = \"{s}\", .data = @embedFile(\"files/{s}\") }},\n", .{ rel, rel })) catch @panic("out of memory");
+        src.appendSlice(a, b.fmt("    .{{ .path = \"{s}\", .data = @embedFile(\"files/{s}\") }},\n", .{ rel, rel })) catch @panic("out of memory");
     }
-    src.appendSlice(b.allocator, "};\n") catch @panic("out of memory");
+    src.appendSlice(a, "};\n") catch @panic("out of memory");
     return b.createModule(.{ .root_source_file = wf.add("site.zig", src.items) });
 }
 
+fn reach(reached: *std.StringArrayHashMap(void), queue: *std.ArrayList([]const u8), rel: []const u8) void {
+    const e = reached.getOrPut(rel) catch @panic("out of memory");
+    if (!e.found_existing) queue.append(reached.allocator, rel) catch @panic("out of memory");
+}
+
+fn htmlUnder(b: *std.Build, top: []const u8, out: *std.ArrayList([]const u8)) void {
+    var dir = std.fs.cwd().openDir(b.pathFromRoot(top), .{ .iterate = true }) catch return;
+    defer dir.close();
+    var walker = dir.walk(b.allocator) catch @panic("out of memory");
+    defer walker.deinit();
+    while (walker.next() catch @panic("cannot walk the site's pages")) |e| {
+        if (e.kind != .file or !std.mem.endsWith(u8, e.path, ".html")) continue;
+        const rel = b.fmt("{s}/{s}", .{ top, e.path });
+        std.mem.replaceScalar(u8, rel, '\\', '/');
+        out.append(b.allocator, rel) catch @panic("out of memory");
+    }
+}
+
+fn kindOf(b: *std.Build, rel: []const u8) ?std.fs.File.Kind {
+    const st = std.fs.cwd().statFile(b.pathFromRoot(if (rel.len == 0) "." else rel)) catch return null;
+    return st.kind;
+}
+
+/// An address read against the folder `base`, as a browser reads it: null for another site, a fragment of the page itself, a
+/// step above the root, a hidden file, or a file that does not exist.
+fn resolve(b: *std.Build, base: []const u8, ref0: []const u8) ?[]const u8 {
+    var ref = ref0;
+    if (ref.len == 0 or ref[0] == '#' or std.mem.startsWith(u8, ref, "//")) return null;
+    if (std.mem.indexOfScalar(u8, ref, ':')) |c| {
+        const slash = std.mem.indexOfScalar(u8, ref, '/') orelse ref.len;
+        if (c < slash) return null; // a scheme: http:, mailto:, data:, javascript:
+    }
+    if (std.mem.indexOfAny(u8, ref, "?#")) |k| ref = ref[0..k];
+    if (ref.len == 0) return null;
+    var parts: std.ArrayList([]const u8) = .empty;
+    if (ref[0] != '/') {
+        var it = std.mem.splitScalar(u8, base, '/');
+        while (it.next()) |s| if (s.len > 0) parts.append(b.allocator, s) catch @panic("out of memory");
+    }
+    var it = std.mem.splitScalar(u8, ref, '/');
+    while (it.next()) |s| {
+        if (s.len == 0 or std.mem.eql(u8, s, ".")) continue;
+        if (std.mem.eql(u8, s, "..")) {
+            if (parts.items.len == 0) return null;
+            _ = parts.pop();
+            continue;
+        }
+        if (s[0] == '.') return null;
+        parts.append(b.allocator, s) catch @panic("out of memory");
+    }
+    var rel: []const u8 = std.mem.join(b.allocator, "/", parts.items) catch @panic("out of memory");
+    if (ref[ref.len - 1] == '/' or kindOf(b, rel) == .directory) rel = if (rel.len == 0) "index.html" else b.fmt("{s}/index.html", .{rel});
+    return if (kindOf(b, rel) == .file) rel else null;
+}
+
+/// The values of href, src, srcset (each candidate), data-src, data-wasm and poster, each name preceded by white space.
+fn attributes(t: []const u8, out: *std.ArrayList([]const u8)) void {
+    const gpa = std.heap.page_allocator;
+    for ([_][]const u8{ "href", "src", "srcset", "data-src", "data-wasm", "poster" }) |name| {
+        var from: usize = 0;
+        while (std.mem.indexOfPos(u8, t, from, name)) |at| : (from = at + 1) {
+            if (at == 0 or !std.ascii.isWhitespace(t[at - 1])) continue;
+            var k = at + name.len;
+            while (k < t.len and t[k] == ' ') k += 1;
+            if (k >= t.len or t[k] != '=') continue;
+            k += 1;
+            while (k < t.len and t[k] == ' ') k += 1;
+            if (k >= t.len or t[k] != '"') continue;
+            const end = std.mem.indexOfScalarPos(u8, t, k + 1, '"') orelse continue;
+            const v = t[k + 1 .. end];
+            if (std.mem.eql(u8, name, "srcset")) {
+                var cands = std.mem.splitScalar(u8, v, ',');
+                while (cands.next()) |c| {
+                    var words = std.mem.tokenizeAny(u8, c, " \t\r\n");
+                    if (words.next()) |w| out.append(gpa, w) catch @panic("out of memory");
+                }
+            } else out.append(gpa, v) catch @panic("out of memory");
+        }
+    }
+}
+
+/// Every CSS url(...), quoted or not.
+fn urls(t: []const u8, out: *std.ArrayList([]const u8)) void {
+    var from: usize = 0;
+    while (std.mem.indexOfPos(u8, t, from, "url(")) |at| : (from = at + 1) {
+        var k = at + 4;
+        while (k < t.len and t[k] == ' ') k += 1;
+        if (k < t.len and (t[k] == '"' or t[k] == '\'')) k += 1;
+        const s = k;
+        while (k < t.len and t[k] != '"' and t[k] != '\'' and t[k] != ')') k += 1;
+        out.append(std.heap.page_allocator, std.mem.trim(u8, t[s..k], " ")) catch @panic("out of memory");
+    }
+}
+
+/// Every quoted path to a .json or .wasm file in a page or a script it loads, read against the page, then against the root.
+fn literals(b: *std.Build, base: []const u8, t: []const u8, reached: *std.StringArrayHashMap(void), queue: *std.ArrayList([]const u8)) void {
+    for ([_][]const u8{ ".json", ".wasm" }) |ext| {
+        var from: usize = 0;
+        while (std.mem.indexOfPos(u8, t, from, ext)) |at| : (from = at + 1) {
+            const close = at + ext.len;
+            if (close >= t.len or (t[close] != '"' and t[close] != '\'' and t[close] != '`')) continue;
+            var s = at;
+            while (s > 0 and t[s - 1] != t[close] and !std.ascii.isWhitespace(t[s - 1])) s -= 1;
+            if (s == 0 or t[s - 1] != t[close]) continue;
+            const v = t[s..close];
+            if (resolve(b, base, v) orelse resolve(b, "", v)) |x| reach(reached, queue, x);
+        }
+    }
+}
 /// Every file of one folder (conformance/fixtures, conformance/cross-medium) as a generated module: `files`, by name,
 /// each embedded.
 fn folder(b: *std.Build, rel: []const u8) *std.Build.Module {

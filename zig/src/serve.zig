@@ -1,6 +1,6 @@
 //! `zane serve`: the site, the Reader and the UI audit from one executable, with no Node (doc/design/BINARY.md, stage S4).
 //!
-//!   zane serve [--port N] [--host ADDR]                  this repository's site, embedded in the binary at its build
+//!   zane serve [--port N] [--host ADDR]                  this repository's site, what its pages reach, embedded at its build
 //!   zane serve --root DIR [--port N] [--host ADDR]       the same site, read from the folder DIR instead
 //!   zane serve --app DIR [--port N] [--host ADDR]        another site, read only, with the UI audit beside it at
 //!                                                        /__zane/ui-audit.html, so the audit can measure it on one origin
