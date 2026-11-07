@@ -3,7 +3,7 @@
     "title": "The Medium Enumeration and Capability Matrix",
     "version": "1.1",
     "lastUpdated": "2026-08-15",
-    "constitution": "3.14",
+    "constitution": "3.15",
     "specification": "doc/language/DECLARATIONS.md",
     "port": "render",
     "note": "The closed set of media a VIBE may project to. These classify the RENDER port only -- the channels by which a meaning reaches a person. Sensors (the sense port) and actuators (the actuate port) are not media: they render nothing, and reach a person only when something else renders them. The enumeration says which of the 22 intent verbs each medium can carry. Published as data because implementations consume it rather than read it -- the same reason violations.json exists. Media are described by PROPERTIES rather than enumerated by taste, so a new channel is classified rather than argued about. Ratified into the law at v3.9, when Rule 82 became Perceivable State: a rule that obliges perceivability in the declared medium needs a language that can declare one."

@@ -106,7 +106,7 @@ its rule, article, and operator right; the binding is also data, in
 carry rule numbers without hardcoding prose.
 
 A consumer pins a constitution version. This specification is written against
-**v3.14**. It said *v3.8.0* until 2026-08-16 — a version the law never had, since
+**v3.15**. It said *v3.8.0* until 2026-08-16 — a version the law never had, since
 the constitution carries no patch component.
 
 ## 4. Conformance levels

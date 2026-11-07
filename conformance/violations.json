@@ -4,7 +4,7 @@
     "version": "1.9",
     "lastUpdated": "2026-11-05",
     "specification": "doc/language/VIOLATIONS.md",
-    "constitution": "3.14",
+    "constitution": "3.15",
     "note": "Every diagnostic a conforming Zane implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused. 1.9 (2026-11-05) renames the language from Zui to Zane: the envelope's language value is zane, and no id, severity, level or binding changed."
   },
   "levels": {

@@ -162,7 +162,7 @@ nothing and reads the application directory; **no network access of any kind out
 
 ## 8. What is deliberately not in scope
 
-- **No new law, no new diagnostic, no new fixture.** The binary implements the language as the pack states it (language 1.5, contract 1.9, law 3.14 since the rename to Zane; 1.4, 1.8 and 3.13 when S1 was built) and changes none of it. A disagreement found on the way is reported, not fixed here.
+- **No new law, no new diagnostic, no new fixture.** The binary implements the language as the pack states it (language 1.5, contract 1.9, law 3.15 (3.14 at the rename to Zane); 1.4, 1.8 and 3.13 when S1 was built) and changes none of it. A disagreement found on the way is reported, not fixed here.
 - **No renderer**, no projection to any channel; the data is checked, nothing is drawn.
 - **No compiler of `.zane` into anything.** The language is checked, as today.
 - **No Haro court inside the binary** (section 10).

@@ -1043,3 +1043,37 @@ Each remark below is documented as evidence; the rule it supports already says e
 **Version arithmetic, if every item is ruled as proposed:** three rules canonized, two amended (2, 107), a handful of evidence
 lines added. *`rules.json` v3.14 → v3.15, minor.* No fixture would change its verdict: none of these is decided by the
 verifier, and the two tool-tier checks live in the site's own build.
+
+## RULED — 2026-11-07, Pass 5's F-6 rows sent as DOCKET-PASS5-01, `rules.json` **v3.14 → v3.15**
+
+The Principal, relayed by Central on 2026-11-07 10:49: *"yes to all six"*, on the six recommendations of DOCKET-PASS5-01
+(outbox, b7e103f). Pass 5's other items (F-1 to F-5) are not ruled by this answer and stay proposed.
+
+| row | ruling | where it landed |
+|---|---|---|
+| F6-FILIGREE | stays in the docket: an ornament is a culture's choice under Article VI | this docket only |
+| F6-NAMED-LINK | evidence for Rule 116 | Rule 116's evidence |
+| F6-BAR-WRAPS | Rule 27 amended: a menu never cuts a word and never scrolls sideways; where one row is too narrow, it wraps | Rule 27's avoid list, solution, why and evidence |
+| F6-NIGHT | the picture stays in the docket; the practice is a candidate rule, written up below and not enacted | below |
+| F6-USER | the law's prose names the actor as the user, a person or an agent, never where it names human perception | the preamble (one definition for every "operator" and "user"), Rule 116's why, Rule 130's avoid list and solution |
+| F6-THEME-LIST | evidence for Article VI: a culture owns every state of its controls, the open one included | Article VI gains an evidence field; its statement is unchanged |
+
+**What changed in the law, object by object.** Rule 27: two avoid entries (one replaced), the solution's last sentence, the why, the
+evidence. Rule 116: the why's first sentence, the evidence. Rule 130: two avoid entries and the solution's first sentence. The preamble:
+one sentence added. Article VI: an evidence field added. Metadata: version, lastUpdated, lineage. No rule's number, title or tier
+changes, no rule is added or retired, and no fixture changes its verdict (conformance 73 of 73).
+
+**Why "operator" was not rewritten.** The law says operator 103 times, and Article VI is titled *Operator Primacy*: it is the law's role
+word, not a description of a human. One definition in the preamble makes every use of it mean the user, a person or an agent, as Rule
+104's three beneficiaries already said, without rewriting a title. The 10 places where the law said person or people were read one by
+one: 4 named the actor and now say user; 6 stay, because they name reaching a human (the sixth right, Rule 102's why), the people an
+application manages (Set 23, Rule 74) or attention a person spends (Rule 130's why).
+
+### A candidate rule, written up and not enacted (from F6-NIGHT)
+
+**A page fetches only what its culture shows, at the width the screen needs.** An image, a font or a script that the active culture
+does not display is not fetched, and an image comes in widths the browser chooses from. *Avoid*: a second culture's picture fetched
+and hidden; one width for every screen. *Why*: what is fetched and not shown costs the person on a slow line, and costs nothing to
+avoid. *Evidence*: on the Zane site, the night photograph Retro shows is 48,156 bytes, and Modern's day photograph 318,130 at full
+width and 94,424 at 800 px; with both lazy, Modern fetched the day file only and Retro the night file only (cac3e98). *Open*: it
+is measured on one page of one site; it would want a second site before a ruling.
