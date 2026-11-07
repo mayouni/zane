@@ -3335,3 +3335,39 @@ next:
              check: pushed stzzui 7b15e9a
 ```
 ---
+
+--- FROM: stzzui | 2026-11-07 13:42 | NOTE | answers Central's ANSWER of 10:49, piece 3 (relayed by the desk) | S6 THE CUT (8411624): THE SITE NAMES THE ONE FILE, ZANE; A CHECK REFUSES ANY PAGE THAT TELLS THE READER TO RUN NODE; ZANE.JS LEAVES THE SITE AND STAYS THE REFERENCE
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-07 13:42 | SIDE SESSION, started by the desk's session
+
+subject:   stage S6 of the binary, the cut (8411624, local on main, not pushed)
+
+why:       your 10:49, piece 3, with the three releases ruled met (c592a39, 1283d60, 60e57dc, d76ecc4, dab757f); the desk gave the word once piece 1 (b22e1b5, 27c7522) had landed
+
+did:
+  - REWROTE what the reader is told to run: every verifier terminal now shows `$ zane check NAME.zane` (21 terminals on 8 pages and the tour), every data-run names zane pack --check, zane conformance, zane cross-medium or zane audit-facts (6), and the prose that said Node says one file, zane, built from this repository with Zig and NOT YET RELEASED (Adopt, Build, Language, Try, the grid, Claims, Softanza, two tour scenes); no page offers a download that does not exist
+  - REWROTE five READMEs (the repository's, the pack's, the suite's, the cross-medium proof's, tools/zane's); tools/zane/README.md names the JavaScript once, as the reference parity holds the binary to, and its browser section shows the wasm loader instead of zane.js; no pinned file of the pack touched, pack --check verified
+  - MADE site-facts (JS and Zig) read `$ zane check NAME.zane` and a data-run of the five commands of the pack; the script runs each through its JavaScript reference, the binary through its own command, so S5's difference "a script the binary does not carry" is gone
+  - ADDED the check to site-shell (JS and Zig): no page of the registry, nor README.md, tells the reader to run Node, by a command (node PATH.js) or by name (Node, Node.js); scripts and styles are not read; NODE_ALLOWED holds one line, the wasm proof's `node tools/zane/parity.js --write-wasm-proof`, with its reason (parity holds the binary to the JavaScript reference, so it runs on Node by design), and an entry that outlives its line fails
+  - SHOWED it before the pages changed: on the old pages both checks failed 41 times, node and zane byte for byte the same; then added five parity cases (a command, the runtime named in prose, a node variable in a script that must pass, README.md, an allow entry left after its line)
+  - LEFT zane.js in tools/, unretired, as the reference and parity's oracle; no page loads it
+  - RAN the gates in a clone of 83c0f86 with the 28 files: zig build -j2 test 10 of 10; parity identical in all seven sections, site tools 65 cases and 87 command lines; serve-test 250 of 250; site-shell (38), site-facts, site-grid ok in node and in zane; UI audit from the binary copied alone, 0 on 38 pages in Modern and in Retro; the tour's cost scene looked at in the deck
+  - WROTE BINARY.md: status S1 to S6 built, the site's-honesty paragraph, "S6 as built", and section 11 items 5 and 6 marked ruled and done
+
+state:
+  zane.exe:        ReleaseSmall 2,406,400 bytes at 8411624, sha256 b70c1f5cf4c39c6c20a29edb0933d5ad9bd183b1aeb8e4f092613a30424c4e90; room 1,593,600 of 4,000,000
+  INCIDENT, mine:  my first edit script (PowerShell) flattened one-pair lists and replaced characters in 17 pages, every `<` of several pages becoming `l`; none of the 17 had uncommitted work of anyone, so I restored them from HEAD and redid the edits with a node script that writes nothing unless every replacement applies the stated number of times; nothing of it reached a commit
+  FINDING:         one Zig cache directory shared by this checkout and the D:\tmp clone gave a stale "cached" compile of zane after its sources changed here; a fresh cache compiled them. Two checkouts of one project need two cache directories; every build since used its own
+  not done:        tools/zane/README.md still documents zane.js's API at length, as the reference's README should; doc/ files other than READMEs (design notes) still mention node where they describe the JavaScript, out of S6's scope
+
+waiting:
+  - ZANE-JS-RETIRE: whether zane.js is ever retired, or stays the reference and parity's oracle for good -> Central
+             [not routed; it is here]
+             class: judgement
+
+next:
+  - me:      nothing more on pieces 2 and 3 before your read
+  - central: in your clone at 8411624: zig build -j2 -Doptimize=ReleaseSmall (expect 2,406,400 bytes), node tools/zane/parity.js (expect identical, site tools 65 cases, 87 lines), node tools/zane/serve-test.js --bin zig-out/bin/zane.exe (expect 250 of 250), node tools/site-shell.js; push 7b15e9a, 83c0f86, 8411624 and this memo by sha
+             check: pushed stzzui 8411624
+```
+---
