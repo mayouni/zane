@@ -30,7 +30,7 @@ pub const intent_verbs = [_][]const u8{
     "EXIT",
 };
 
-const zane_kinds = [_][]const u8{
+pub const zane_kinds = [_][]const u8{
     "INTENT_FLOW", "FORM",        "WIZARD",      "SCREEN",   "COMPONENT",
     "NAV_GRAPH",   "WORLD_VIEW",  "INTERACTION", "FEEDBACK", "VIBE",
 };

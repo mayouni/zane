@@ -5,7 +5,7 @@
    `node tools/zane/cli.js check`, and its `conformance`, `pack`, `cross-medium` and `audit-facts` against the
    scripts they replace (conformance.js, pack.js, cross-medium.js, doc/design/audit/check-facts.js), byte for byte.
 
-     node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet] [--write-wasm-proof]
+     node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet] [--write-wasm-proof] [--only site] [--list-site]
 
    1. THE FIXTURES. Every fixture of conformance/manifest.json, run by both under four argument sets (--json at
       level 4, text at level 4, text at the default level, --quiet at level 1), with the fixture's symbols when it
@@ -27,6 +27,13 @@
    6. THE WASM PROOF'S RECORD. tools/zane/wasm-proof.json, the envelopes this binary prints for every fixture at every
       level with the sha256 of site/zane.wasm, which tools/zane/wasm-proof.html compares with the wasm in a browser.
       --write-wasm-proof writes it; otherwise a record that no longer matches is a difference.
+   7. THE SITE'S OWN TOOLS (stage S5). `zane site facts`, `zane site shell` and `zane site grid` against
+      tools/site-facts.js, site-shell.js and site-grid.js: on the tree as it is, in their --write modes (what each
+      wrote compared, then put back), and on the tree broken one input at a time, each break aimed at one check: both
+      must fail, print the same bytes and leave the same files, and the JavaScript's output must hold the check's own
+      words, so a case that fails for another reason is caught. Run FIRST; every file a case touches is read once
+      before any case and written back after each run, and a file not back byte for byte at the end is a difference.
+      --only site runs this section alone and names the six it skipped; --list-site prints one line per case.
 
    There are NO allowed differences. One that cannot be removed is written down as a named row and this check
    fails on any other, as haro/twin-expected.csv does; today the list is empty.
@@ -47,6 +54,9 @@ const BIN = path.resolve(opt('--bin', path.join(ROOT, 'zig-out', 'bin', process.
 const SEED = +opt('--seed', 20261105);
 const PER = +opt('--per', 24);
 const QUIET = args.includes('--quiet');
+const ONLY = opt('--only', null);
+const LIST_SITE = args.includes('--list-site');
+if (ONLY !== null && ONLY !== 'site') { console.error(`parity: --only takes "site", not "${ONLY}"`); process.exit(2); }
 if (!fs.existsSync(BIN)) { console.error(`parity: no binary at ${BIN} (zig build -j2, or --bin PATH)`); process.exit(2); }
 
 /* One run at a time in one tree. The pack's failure paths and the wasm proof's record write into the tree, so two runs at once
@@ -107,8 +117,151 @@ function compare(label, argv, time) {
   return same(a, b);
 }
 
+// ---- 7. this site's own tools (stage S5), run first ------------------------------------------------------
+const wall = {};
+let siteRuns = 0, siteCases = 0;
+const siteLines = [];
+{
+  const t0 = Date.now();
+  const P = rel => path.join(ROOT, rel);
+  const TOOL = { facts: P('tools/site-facts.js'), shell: P('tools/site-shell.js'), grid: P('tools/site-grid.js') };
+  const htmlUnder = d => { const out = []; const w = x => { for (const e of fs.readdirSync(P(x), { withFileTypes: true })) { const q = x + '/' + e.name; if (e.isDirectory()) w(q); else if (q.endsWith('.html')) out.push(q); } }; w(d); return out; };
+  /* every file the three tools write (the pages, site/facts.json) and every file a case breaks, read once; and the one file a case creates */
+  const KEEP = [...new Set(['index.html', ...htmlUnder('site'), ...htmlUnder('tools'), ...htmlUnder('constitution/reader'), 'site/facts.json',
+    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json'])];
+  const NEW = ['site/extra.html'];
+  const ALL = [...KEEP, ...NEW];
+  const missing = KEEP.filter(f => !fs.existsSync(P(f)));
+  const present = NEW.filter(f => fs.existsSync(P(f)));
+  if (missing.length || present.length) differences.push(`site tools not run: ${[...missing.map(f => f + ' missing'), ...present.map(f => f + ' present')].join(', ')} before the first case`);
+  else {
+    const ORIGINAL = new Map(KEEP.map(f => [f, fs.readFileSync(P(f))]));
+    const state = () => ALL.map(f => fs.existsSync(P(f)) ? fs.readFileSync(P(f)) : null);
+    const changed = (s0, s1) => ALL.filter((f, i) => s0[i] === null ? s1[i] !== null : s1[i] === null || !s0[i].equals(s1[i]));
+    const restore = () => { for (const [f, b] of ORIGINAL) if (!fs.existsSync(P(f)) || !fs.readFileSync(P(f)).equals(b)) put(P(f), b); for (const f of NEW) if (fs.existsSync(P(f))) drop(P(f)); };
+    const base = state();
+    const edit = (rel, fn) => { const t = fs.readFileSync(P(rel), 'utf8'); const u = fn(t); if (u === t) throw new Error(`the break changed nothing in ${rel}`); put(P(rel), u); };
+    const sub1 = (rel, re, to) => edit(rel, t => t.replace(re, to));
+    const before = (rel, marker, ins) => edit(rel, t => { const i = t.indexOf(marker); return i < 0 ? t : t.slice(0, i) + ins + t.slice(i); });
+    const gridCell = () => sub1('site/grid.html', /(<!-- grid:table -->[\s\S]*?<td class="g-has"><b>)(\d+)/, (m, k, n) => k + (+n + 1));
+    const channelsRow = () => sub1('site/media.html', /(<!-- channels:table -->[\s\S]*?<td>)(\d+)( of \d+<\/td>)/, (m, k, n, r) => k + (+n + 1) + r);
+    const placement = () => sub1('doc/design/coverage-placement.json', /("activities": ")PD(")/, '$1PDA$2');
+    const CHECK = [[]];
+    /* [tool, the break, how it is made, the command lines, 'pass' | 'fail' | 'any', the words of the check it aims at] */
+    const CASES = [
+      ['facts', 'the tree as it is', null, [[], ['--unchecked'], ['--write']], 'pass', ''],
+      ['facts', 'site/facts.json stale by one figure', () => sub1('site/facts.json', /("law\.rules": )(\d+)/, (m, k, n) => k + (+n + 1)), [[], ['--write']], 'fail', 'site/facts.json is stale: law.rules'],
+      ['facts', 'site/facts.json stale in its text only', () => sub1('site/facts.json', /\{\n  "_about"/, '{\n "_about"'), CHECK, 'fail', 'site/facts.json is stale: its text differs'],
+      ['facts', 'site/facts.json missing', () => drop(P('site/facts.json')), [[], ['--write']], 'fail', 'site/facts.json is missing'],
+      ['facts', 'a fact span reads a wrong figure', () => sub1('site/how.html', /(data-fact="[^"]*"[^>]*>)([^<]*)</, (m, k, v) => k + v + '9<'), CHECK, 'fail', 'and the tree says'],
+      ['facts', 'a span names a figure nothing derives', () => sub1('site/thinking.html', /data-fact="[^"]*"/, 'data-fact="no.such.figure"'), CHECK, 'fail', 'names a figure this script does not derive'],
+      ['facts', 'a law-share span reads a wrong share', () => sub1('site/rules.html', /(data-law-share="[^"]*">)(\d+)%/, (m, k, n) => k + (+n + 1) + '%'), CHECK, 'fail', 'law-share "'],
+      ['facts', 'a typed number outside any span', () => before('site/web.html', '</main>', '<p>We counted 4242 things.</p>\n'), [[], ['--unchecked']], 'fail', 'typed number(s) outside a span'],
+      ['facts', 'a verifier terminal differs from a real run', () => sub1('site/how.html', /(<pre class="term"><span class="dim">\$ node tools\/zane\/cli\.js check [^\n]*\n[^\n]*?)error/, '$1warning'), CHECK, 'fail', 'is not what a real run prints'],
+      ['facts', 'site/how.html loses its declaration and terminal pairs', () => sub1('site/how.html', /<pre class="shot">/g, '<pre class="shot plain">'), CHECK, 'fail', 'site/how.html: its pair has no declaration and terminal to verify'],
+      ['facts', 'an excerpt names a file that does not exist', () => sub1('site/haro.html', 'data-excerpt="haro/zane.stzu"', 'data-excerpt="haro/zane-gone.stzu"'), CHECK, 'fail', 'which does not exist'],
+      ['facts', 'an excerpt shows a line its file lacks', () => sub1('site/haro.html', /(<pre class="excerpt" data-excerpt="[^"]*">)/, '$1DEFINE NOTHING AT ALL\n'), CHECK, 'fail', 'shows a line the file does not contain'],
+      ['facts', 'a terminal names a command outside the pack', () => sub1('site/conformance.html', 'data-run="node tools/zane/pack.js --check"', 'data-run="node tools/other/pack.js --check"'), CHECK, 'fail', 'is not a pack command'],
+      ['facts', 'a terminal whose first line is not its command', () => sub1('site/conformance.html', '<span class="dim">$ node tools/zane/pack.js --check</span>', '<span class="dim">$ node tools/zane/pack.js --chek</span>'), CHECK, 'fail', 'is not that command'],
+      ['facts', 'a terminal differs from what its command prints', () => sub1('site/conformance.html', /(data-run="node tools\/zane\/conformance\.js">[\s\S]*?)level 4/, '$1level 3'), CHECK, 'fail', 'the terminal for "node tools/zane/conformance.js" is not what a real run prints'],
+      ['facts', 'the grid table drifts from its data', gridCell, CHECK, 'fail', 'the grid:table differs from the data'],
+      ['facts', 'the channels table drifts from its data', channelsRow, CHECK, 'fail', 'the channels:table differs from the data'],
+      ['facts', 'a status word that is not one of three', () => sub1('site/conformance.html', 'class="status exists">exists<', 'class="status maybe">maybe<'), CHECK, 'fail', 'is not one of exists, designed, held'],
+      ['facts', 'a status whose class disagrees with its word', () => sub1('site/conformance.html', 'class="status exists">exists<', 'class="status held">exists<'), CHECK, 'fail', 'so its mark would be wrong'],
+      ['facts', 'a primary button in the head of a reading page', () => sub1('site/why.html', '<header class="page">', '<header class="page"><a class="btn primary" href="adopt.html">Adopt</a>'), CHECK, 'fail', 'the head of a reading page carries a primary button'],
+      ['facts', 'a primary button that scrolls within its page', () => before('site/why.html', '</main>', '<a class="btn primary" href="#top">Up</a>\n'), CHECK, 'fail', 'scrolls within its own page'],
+      ['facts', 'a row added to haro/twin-expected.csv', () => edit('haro/twin-expected.csv', t => t.replace(/\n?$/, '\n') + 'parity-made.zane,(clean),X,S99,other-code\n'), CHECK, 'fail', 'twin.differences'],
+      ['facts', 'a rule placed on one more activity', placement, CHECK, 'fail', 'the grid:table differs from the data'],
+
+      ['shell', 'the tree as it is', null, [[], ['--write']], 'pass', ''],
+      ['shell', 'a menu edited inside its fence', () => sub1('site/why.html', /(<!-- shell:menu -->[\s\S]*?)>Approach</, '$1>Approch<'), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
+      ['shell', 'an asset address with a stale hash', () => sub1('site/why.html', /stz\.css\?v=[0-9a-f]{8}/, 'stz.css?v=00000000'), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
+      ['shell', 'an asset address with no hash', () => sub1('site/why.html', /stz\.js\?v=[0-9a-f]{8}/, 'stz.js'), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
+      ['shell', 'a page in CRLF', () => edit('site/web.html', t => t.replace(/\r?\n/g, '\r\n')), [[], ['--write']], 'any', ''],
+      ['shell', 'a page with a byte order mark', () => edit('site/web.html', t => '﻿' + t), [[], ['--write']], 'any', ''],
+      ['shell', 'a page with no menu, fenced or old', () => sub1('site/web.html', /<!-- shell:menu -->[\s\S]*?<!-- \/shell:menu -->/, ''), [[], ['--write']], 'fail', 'site/web.html: no top bar to replace'],
+      ['shell', 'a page in the old markup, migrated by --write', () => sub1('site/web.html', /<!-- shell:menu -->[\s\S]*?<!-- \/shell:menu -->/, '<nav class="site"><a href="x.html">old</a></nav>'), [[], ['--write']], 'fail', 'site/web.html: differs from the shell'],
+      ['shell', 'a page with no trail', () => sub1('site/web.html', /<!-- shell:trail -->[\s\S]*?<!-- \/shell:trail -->/, ''), CHECK, 'fail', 'site/web.html: no trail to replace'],
+      ['shell', 'a page with no footer', () => sub1('site/web.html', /<!-- shell:footer -->[\s\S]*?<!-- \/shell:footer -->/, ''), CHECK, 'fail', 'site/web.html: no footer to replace'],
+      ['shell', 'a layout fence under its old name', () => edit('site/web.html', t => t.replace('<!-- shell:layout -->', '<!-- shell:rail -->').replace('<!-- /shell:layout -->', '<!-- /shell:rail -->')), [[], ['--write']], 'fail', 'site/web.html: differs from the shell'],
+      ['shell', 'an h2 with no id, given one by --write', () => before('site/web.html', '</main>', '<section>\n<h2>A part added by parity &amp; more</h2>\n</section>\n'), [[], ['--write']], 'fail', 'site/web.html: differs from the shell'],
+      ['shell', 'a tooltip', () => before('site/web.html', '</main>', '<p title="a tooltip">x</p>\n'), CHECK, 'fail', 'carries a title attribute'],
+      ['shell', 'two <title> elements', () => before('site/web.html', '</main>', '<svg viewBox="0 0 1 1"><title>x</title></svg>\n'), CHECK, 'fail', '<title> elements'],
+      ['shell', 'an h1 that does not name its subject', () => sub1('site/web.html', /(<h1\b[^>]*>)[\s\S]*?(<\/h1>)/, '$1Something else entirely$2'), CHECK, 'fail', 'the h1 does not name'],
+      ['shell', 'a lead that does not name its subject', () => sub1('site/web.html', /(<p class="sub">)[\s\S]*?(<\/p>)/, '$1Nothing to see here. Truly.$2'), CHECK, 'fail', 'the lead\'s first sentence does not name'],
+      ['shell', 'a page with no lead', () => sub1('site/web.html', '<p class="sub">', '<p class="subtitle">'), CHECK, 'fail', 'site/web.html: no lead'],
+      ['shell', 'a title with a line break placed by hand', () => sub1('site/web.html', '</h2>', '<br>by hand</h2>'), CHECK, 'fail', 'holds a <br>'],
+      ['shell', 'a title holding a block', () => sub1('site/web.html', '</h2>', '<div>a block</div></h2>'), CHECK, 'fail', 'holds a <div>, a block'],
+      ['shell', 'stz.css stops balancing titles', () => edit('site/stz.css', t => t.replace(/text-wrap:\s*balance/g, 'text-wrap: wrap')), CHECK, 'fail', 'no rule declares text-wrap: balance'],
+      ['shell', 'stz.css sets a title in capitals', () => edit('site/stz.css', t => t + '\nh2 { text-transform: uppercase; }\n'), CHECK, 'fail', 'sets a title in capitals'],
+      ['shell', 'stz.css makes a child of a title a block', () => edit('site/stz.css', t => t + '\nh2 a { display: block; }\n'), CHECK, 'fail', 'that stz.css makes a block'],
+      ['shell', 'an svg with a fixed min-width', () => before('site/web.html', '</main>', '<svg style="min-width: 600px" viewBox="0 0 1 1"></svg>\n'), CHECK, 'fail', 'an svg holds a fixed min-width'],
+      ['shell', 'an svg in a scrolling wrapper', () => before('site/web.html', '</main>', '<div class="scroll"><svg viewBox="0 0 1 1"></svg></div>\n'), CHECK, 'fail', 'an svg sits in a scrolling wrapper'],
+      ['shell', 'the site names Zing', () => edit('site/stz.js', t => t + '\n// Zing\n'), CHECK, 'fail', 'names Zing'],
+      ['shell', 'an outline entry over twenty characters', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Three ways to try it out today"'), CHECK, 'fail', 'give its h2 a data-outline of 20 at most'],
+      ['shell', 'an outline entry repeating its page\'s label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Try"'), CHECK, 'fail', 'repeats the label "Try" above it'],
+      ['shell', 'an outline entry repeating a band label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Screenshots"'), CHECK, 'fail', 'name the same thing on one page'],
+      ['shell', 'a served page the registry does not list', () => put(P('site/extra.html'), '<!DOCTYPE html>\n<title>x</title>\n'), CHECK, 'fail', 'site/extra.html: a page the site serves that the registry does not list'],
+      ['shell', 'a registered page missing', () => drop(P('site/vibes.html')), [[], ['--write']], 'fail', 'site/vibes.html: missing'],
+
+      ['grid', 'the tree as it is', null, [[], ['--write']], 'pass', ''],
+      ['grid', 'a cell of the grid table drifted', gridCell, [[], ['--write']], 'fail', 'the grid:table differs from the data'],
+      ['grid', 'a row of the channels table drifted', channelsRow, [[], ['--write']], 'fail', 'the channels:table differs from the data'],
+      ['grid', 'a drifted cell on a page in CRLF', () => { gridCell(); edit('site/grid.html', t => t.replace(/\r?\n/g, '\r\n')); }, [[], ['--write']], 'fail', 'the grid:table differs from the data'],
+      ['grid', 'the grid fence gone', () => sub1('site/grid.html', '<!-- grid:table -->', '<!-- grid table -->'), CHECK, 'fail', 'no <!-- grid:table --> fence'],
+      ['grid', 'a rule placed on one more activity', placement, [[], ['--write']], 'fail', 'the grid:table differs from the data'],
+      ['grid', 'site/media.html missing', () => drop(P('site/media.html')), CHECK, 'fail', 'site/media.html: missing'],
+    ];
+    for (const [tool, name, breakIt, modes, expect, words] of CASES) {
+      siteCases++;
+      for (const argv of modes) {
+        const label = `site ${tool} [${argv.join(' ') || 'check'}] ${name}`;
+        try {
+          if (breakIt) breakIt();
+          const broken = state();
+          const a = run('js', argv, TOOL[tool]), wa = state(); restore();
+          if (breakIt) breakIt();
+          const b = run('zane', ['site', tool, ...argv]), wb = state(); restore();
+          siteRuns++;
+          if (!same(a, b)) differences.push(`${label}: ${firstDiff(a, b)}`);
+          else { const d = changed(wa, wb); if (d.length) differences.push(`${label}: the files left behind differ: ${d.join(', ')}`); }
+          const text = a.out.toString('utf8');
+          const checkMode = argv.length === 0;
+          if (expect === 'pass' && a.code !== 0) differences.push(`${label}: fails on the tree as it is (exit ${a.code})`);
+          if (expect === 'fail' && checkMode && a.code !== 1) differences.push(`${label}: the break did not fail the check (exit ${a.code})`);
+          if (expect === 'fail' && checkMode && !text.includes(words)) differences.push(`${label}: the check it aims at did not speak (no "${words}" in the output)`);
+          const said = words && text.split('\n').find(l => l.includes(words));
+          const wrote = changed(broken, wa);
+          siteLines.push(`    exit ${a.code}  ${label}${wrote.length ? '  [wrote ' + wrote.join(', ') + ']' : ''}${said ? '\n             ' + said.replace(/^PROBLEM /, '').slice(0, 150) : ''}`);
+        } catch (e) { differences.push(`${label}: ${e.message}`); restore(); }
+      }
+    }
+    restore();
+    const off = changed(base, state());
+    if (off.length) differences.push(`site tools: ${off.join(', ')} not back byte for byte after the cases`);
+  }
+  wall.site = Date.now() - t0;
+}
+const siteReport = () => {
+  if (LIST_SITE) siteLines.forEach(l => console.log(l));
+  console.log(`  site tools   ${siteCases} cases, ${siteRuns} command lines of zane site facts, shell and grid against tools/site-facts.js, site-shell.js and site-grid.js (the tree as it is, --write, and one break per check)`);
+};
+if (ONLY === 'site') {
+  const kept = differences.length;
+  for (const d of differences.slice(0, 40)) console.log('  DIFF ' + d);
+  console.log(`parity --only site: ${path.relative(ROOT, BIN) || BIN} against tools/site-facts.js, site-shell.js and site-grid.js`);
+  siteReport();
+  console.log(`  skipped      the fixtures, the arguments, the suite, the tools (pack, cross-medium, audit-facts), the corpus and the wasm proof's record (--only site)`);
+  console.log(`  wall time    site ${(wall.site / 1000).toFixed(1)} s`);
+  fs.rmSync(TMP, { recursive: true, force: true });
+  console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, every exit code and every file left behind');
+  process.exit(kept ? 1 : 0);
+}
+
 // ---- 1. the fixtures ------------------------------------------------------------------------------------
 let fixtureRuns = 0;
+let lap = Date.now();
+const done = k => { wall[k] = Date.now() - lap; lap = Date.now(); };
 for (const fx of manifest.fixtures) {
   const file = path.join('conformance', 'fixtures', fx.file);
   const sym = [];
@@ -124,11 +277,13 @@ const all = manifest.fixtures.map(f => path.join('conformance', 'fixtures', f.fi
 compare('all fixtures in one call, --json', ['check', ...all, '--json', '--level', '4']); fixtureRuns++;
 compare('all fixtures in one call, text', ['check', ...all, '--level', '4']); fixtureRuns++;
 
+done('fixtures');
 // ---- 2. the arguments -----------------------------------------------------------------------------------
 const argCases = [[], ['--help'], ['check'], ['check', all[0], '--level', '0'], ['check', all[0], '--level', 'x'],
   ['check', all[0], '--level', ' 3abc'], ['check', all[0], '--bogus'], ['frobnicate', all[0]], ['check', all[0], '--level']];
 for (const c of argCases) compare(`arguments [${c.join(' ')}]`, c);
 
+done('arguments');
 // ---- 4. the suite: zane conformance against conformance.js (run before the corpus, which loads the machine) ----
 const CONF = path.join(__dirname, 'conformance.js');
 const confCases = [[], ['--level', '1'], ['--level', '2'], ['--level', '3'], ['--level', '4'], ['--verbose'], ['-v', '--level', '2'],
@@ -140,6 +295,7 @@ for (const c of confCases) {
 }
 for (let k = 0; k < 10; k++) { confTiming.js.push(run('js', [], CONF).ms); confTiming.zane.push(run('zane', ['conformance']).ms); }
 
+done('suite');
 // ---- 5. the tools: pack, cross-medium, audit-facts ----
 let toolRuns = 0;
 function compareTool(label, script, sub, argv) {
@@ -264,6 +420,7 @@ compareTool('', FACTS, 'audit-facts', ['--rules', '62,999,', 'doc/design/audit/e
   }
 }
 
+done('tools');
 // ---- 3. the corpus --------------------------------------------------------------------------------------
 function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const rnd = mulberry32(SEED);
@@ -325,6 +482,7 @@ for (let i = 0; i < corpus.length; i += B) {
   batch(corpus.slice(i, i + B), ['--level', '2']);
 }
 
+done('corpus');
 // ---- 6. the wasm proof's record: written from the binary under test, never typed ------------------------
 /* tools/zane/wasm-proof.html runs every fixture at every level through site/zane.wasm in a browser and compares with what this
    binary prints for `check NAME --json --level N` (with the fixture's symbols). The record of those envelopes is made here: with
@@ -355,6 +513,7 @@ if (fs.existsSync(WASM)) {
   } else proofNote = 'current -- ' + what;
 }
 
+done('wasm proof');
 // ---- the report -----------------------------------------------------------------------------------------
 const dist = xs => {
   const s = [...xs].sort((a, b) => a - b), q = p => s[Math.min(s.length - 1, Math.floor(p * s.length))];
@@ -370,12 +529,14 @@ console.log(`  suite        ${confCases.length} command lines of zane conformanc
 console.log(`  tools        ${toolRuns} command lines of zane pack, cross-medium and audit-facts against their scripts`);
 console.log(`  corpus       seed ${SEED}, ${corpus.length} inputs (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}), each in --json at level 4 and in text at level 2`);
 console.log(`  wasm proof   ${proofNote}`);
+siteReport();
 console.log(`  timing, one fixture per process, --json at level 4, wall time with process start:`);
 console.log(`    node cli.js  ${dist(timing.js)}`);
 console.log(`    zane         ${dist(timing.zane)}`);
 console.log(`  timing, the whole suite in one process, default level, wall time with process start:`);
 console.log(`    node conformance.js  ${dist(confTiming.js)}`);
 console.log(`    zane conformance     ${dist(confTiming.zane)}`);
+console.log(`  wall time by section: ${Object.entries(wall).map(([k, ms]) => `${k} ${(ms / 1000).toFixed(1)} s`).join(' · ')}`);
 fs.rmSync(TMP, { recursive: true, force: true });
-console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, and every exit code');
+console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, every exit code, and every file the write modes left behind');
 process.exit(kept ? 1 : 0);

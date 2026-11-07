@@ -6,12 +6,14 @@
 //!   zane cross-medium [spec.json] [--verbose]          one declaration, two renderings, one law
 //!   zane audit-facts [facts.json] [--rules 62,105]     the screenshot audit's facts and its decisions
 //!   zane serve [--root DIR | --app DIR] [--port N]     the site, the Reader and the audit, or another site beside the audit
+//!   zane site facts|shell|grid [--write]               this site's own build checks, run from the repository's root
 //!   zane version                                       the law, the language, the contract, the build
 //!
 //! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`; stage S3
-//! builds the same core for a browser (wasm.zig, the report in report.zig). Each
-//! prints byte for byte what its JavaScript prints (tools/zane/cli.js, conformance.js, pack.js, cross-medium.js and
-//! doc/design/audit/check-facts.js), which tools/zane/parity.js proves. Exit codes: 0 clean
+//! builds the same core for a browser (wasm.zig, the report in report.zig); stage S4 adds serve; stage S5 adds site,
+//! this site's build checks (sitefacts.zig, siteshell.zig, sitegrid.zig, over the patterns of regex.zig). Each
+//! prints byte for byte what its JavaScript prints (tools/zane/cli.js, conformance.js, pack.js, cross-medium.js,
+//! doc/design/audit/check-facts.js, tools/site-facts.js, site-shell.js and site-grid.js), which tools/zane/parity.js proves. Exit codes: 0 clean
 //! or conforming, 1 violations or mismatches found, 2 usage or read error. The usage text is cli.js's, so that
 //! the two stay byte for byte the same; it names check only.
 
@@ -25,6 +27,9 @@ const crossmedium = @import("crossmedium.zig");
 const facts = @import("facts.zig");
 const report = @import("report.zig");
 const serve = @import("serve.zig");
+const sitefacts = @import("sitefacts.zig");
+const siteshell = @import("siteshell.zig");
+const sitegrid = @import("sitegrid.zig");
 
 const language_version = "1.5";
 
@@ -108,23 +113,6 @@ fn parseArgs(a: std.mem.Allocator, argv: []const []const u8) !Options {
     return o;
 }
 
-/// A lone surrogate (WTF-8, ED A0..BF xx) printed as console.log prints it: U+FFFD.
-fn asText(a: std.mem.Allocator, s: []const u8) ![]const u8 {
-    if (std.mem.indexOfScalar(u8, s, 0xED) == null) return s;
-    var out: std.ArrayList(u8) = .empty;
-    var i: usize = 0;
-    while (i < s.len) {
-        if (s[i] == 0xED and i + 2 < s.len and s[i + 1] >= 0xA0) {
-            try out.appendSlice(a, "\xEF\xBF\xBD");
-            i += 3;
-        } else {
-            try out.append(a, s[i]);
-            i += 1;
-        }
-    }
-    return out.toOwnedSlice(a);
-}
-
 fn loadSymbols(a: std.mem.Allocator, path: []const u8) !core.Symbols {
     return report.symbolsOf(a, try std.fs.cwd().readFileAlloc(a, path, 64 * 1024 * 1024));
 }
@@ -152,7 +140,14 @@ pub fn main() !void {
 
 fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     const raw = try std.process.argsAlloc(a);
-    const argv: []const []const u8 = if (raw.len > 0) raw[1..] else raw;
+    return dispatch(a, if (raw.len > 0) raw[1..] else raw, out, err);
+}
+
+/// One command line, without the program's name, to its command. `zane site facts` calls it to re-run the commands a
+/// page's terminal names, in this process, as tools/site-facts.js re-runs them with node.
+pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err: *std.Io.Writer) anyerror!u8 {
+    // this site's own build tools (stage S5): site facts, site shell, site grid
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "site")) return site(a, argv[1..], out, err);
     // conformance.js reads its own arguments: --level N, --verbose or -v, and ignores the rest
     if (argv.len > 0 and std.mem.eql(u8, argv[0], "conformance")) {
         var level: ?i64 = 4;
@@ -245,39 +240,42 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     }
 
     const errors = report.errorCount(findings.items);
-    const warnings = findings.items.len - errors;
 
     if (o.json) {
         try report.writeJson(a, out, o.files.items, contract, level, findings.items);
         return if (errors > 0) 1 else 0;
     }
 
-    for (findings.items) |f| {
-        const where = if (f.diag.line != 0) try std.fmt.allocPrint(a, "{s}:{d}", .{ f.file, f.diag.line }) else f.file;
-        const header = try std.fmt.allocPrint(a, "{s}  {s}  {s}  {s}", .{ where, f.meta.severity, f.diag.id, f.diag.subject orelse "" });
-        try out.print("{s}\n", .{try asText(a, contract_mod.trimJsEnd(header))});
-        if (f.meta.summary) |s| if (s.len > 0) try out.print("    {s}\n", .{s});
-        const cite = try contract_mod.citation(a, f.meta, law);
-        if (cite.len > 0) try out.print("    {s}\n", .{cite});
-    }
-
-    if (!o.quiet) {
-        if (findings.items.len == 0) {
-            if (contract.constitution) |c| {
-                try out.print("clean — {d} file(s), 0 violations at level {d} against Zane v{s}\n", .{ o.files.items.len, level, c });
-            } else {
-                try out.print("clean — {d} file(s), 0 violations at level {d}\n", .{ o.files.items.len, level });
-            }
-        } else {
-            try out.print("\n{d} error(s), {d} warning(s) across {d} file(s) at level {d}\n", .{ errors, warnings, o.files.items.len, level });
-        }
-    }
+    try report.writeText(a, out, o.files.items, contract, law, level, o.quiet, findings.items);
     return if (errors > 0) 1 else 0;
+}
+
+const site_usage =
+    \\zane site — this site's own build checks (stage S5)
+    \\
+    \\  zane site facts [--write] [--unchecked]   every figure on the site has a file (tools/site-facts.js)
+    \\  zane site shell [--write]                 the one definition of the site's navigation (tools/site-shell.js)
+    \\  zane site grid [--write]                  the two tables drawn from their data (tools/site-grid.js)
+    \\
+    \\Run from the repository's root: like zane pack, they read the tree they are run in.
+;
+
+fn site(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "facts")) return sitefacts.run(a, out, argv[1..]);
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "shell")) return siteshell.run(a, out, argv[1..]);
+    if (argv.len > 0 and std.mem.eql(u8, argv[0], "grid")) return sitegrid.run(a, out, argv[1..]);
+    if (argv.len > 0 and (std.mem.eql(u8, argv[0], "-h") or std.mem.eql(u8, argv[0], "--help"))) {
+        try out.print("{s}\n", .{site_usage});
+        return 0;
+    }
+    if (argv.len > 0) try err.print("zane: unknown site command \"{s}\"\n\n", .{argv[0]});
+    try err.print("{s}\n", .{site_usage});
+    return 2;
 }
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane (stage S4: check, conformance, pack, cross-medium, audit-facts, serve; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane (stage S5: check, conformance, pack, cross-medium, audit-facts, serve, site; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",
@@ -292,6 +290,7 @@ test {
     _ = contract_mod;
     _ = @import("schema.zig");
     _ = @import("js.zig");
+    _ = @import("regex.zig");
     _ = report;
     _ = serve;
 }

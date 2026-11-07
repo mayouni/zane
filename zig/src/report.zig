@@ -58,6 +58,57 @@ pub fn errorCount(findings: []const Finding) usize {
     return errors;
 }
 
+/// A lone surrogate (WTF-8, ED A0..BF xx) printed as console.log prints it: U+FFFD.
+pub fn asText(a: std.mem.Allocator, s: []const u8) ![]const u8 {
+    if (std.mem.indexOfScalar(u8, s, 0xED) == null) return s;
+    var out: std.ArrayList(u8) = .empty;
+    var i: usize = 0;
+    while (i < s.len) {
+        if (s[i] == 0xED and i + 2 < s.len and s[i + 1] >= 0xA0) {
+            try out.appendSlice(a, "\xEF\xBF\xBD");
+            i += 3;
+        } else {
+            try out.append(a, s[i]);
+            i += 1;
+        }
+    }
+    return out.toOwnedSlice(a);
+}
+
+/// The text report cli.js prints: one line per finding, its summary and its citation beneath, then the closing line
+/// unless `quiet`. Shared by `zane check` and `zane site facts`, which re-runs the verifier on the site's declarations.
+pub fn writeText(
+    a: std.mem.Allocator,
+    out: *std.Io.Writer,
+    files: []const []const u8,
+    contract: contract_mod.Contract,
+    law: ?contract_mod.Law,
+    level: i64,
+    quiet: bool,
+    findings: []const Finding,
+) !void {
+    const errors = errorCount(findings);
+    const warnings = findings.len - errors;
+    for (findings) |f| {
+        const where = if (f.diag.line != 0) try std.fmt.allocPrint(a, "{s}:{d}", .{ f.file, f.diag.line }) else f.file;
+        const header = try std.fmt.allocPrint(a, "{s}  {s}  {s}  {s}", .{ where, f.meta.severity, f.diag.id, f.diag.subject orelse "" });
+        try out.print("{s}\n", .{try asText(a, contract_mod.trimJsEnd(header))});
+        if (f.meta.summary) |s| if (s.len > 0) try out.print("    {s}\n", .{s});
+        const cite = try contract_mod.citation(a, f.meta, law);
+        if (cite.len > 0) try out.print("    {s}\n", .{cite});
+    }
+    if (quiet) return;
+    if (findings.len == 0) {
+        if (contract.constitution) |c| {
+            try out.print("clean — {d} file(s), 0 violations at level {d} against Zane v{s}\n", .{ files.len, level, c });
+        } else {
+            try out.print("clean — {d} file(s), 0 violations at level {d}\n", .{ files.len, level });
+        }
+    } else {
+        try out.print("\n{d} error(s), {d} warning(s) across {d} file(s) at level {d}\n", .{ errors, warnings, files.len, level });
+    }
+}
+
 /// JSON.stringify({level, contract, files, counts, diagnostics}, null, 2), written by hand.
 pub fn writeJson(
     a: std.mem.Allocator,

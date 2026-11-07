@@ -29,7 +29,7 @@ Three files, no dependencies, nothing to install:
 | `cli.js` | the command line: reads files, filters by level, formats findings. |
 | `envelope.js` | the family envelope: builds `{code, severity, message, span, cites, language}` findings and validates them against [the Diagnostic Contract's shape](../../doc/diagnostic-contract.schema.json). |
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
-| `parity.js` | the gate of the binary's stages S1 and S2 ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js` on every fixture and a seeded corpus, and `zane conformance` against `conformance.js`, byte for byte. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
+| `parity.js` | the gate of the binary's stages ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js` on every fixture and a seeded corpus, `zane conformance` against `conformance.js`, the other tools against their scripts, and, since S5, `zane site facts`, `site shell` and `site grid` against `tools/site-facts.js`, `site-shell.js` and `site-grid.js` on the tree, in their `--write` modes and on one break per check, byte for byte. `--only site` runs that last section alone and names what it skipped. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
 
 It implements [the Zane language specification v1.5](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).
