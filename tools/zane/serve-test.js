@@ -19,10 +19,16 @@
    loads, read against the page and against the root. An address the folder serves and the binary does not is a failure: a page
    would reach a file the binary left out.
 
+   The embedded text is stored as gzip (build.zig, zig/src/sitepack.zig). Every case above asks with no Accept-Encoding, so it is
+   answered inflated, byte for byte the file on disk; the gzip cases ask with it, and the body, gunzipped, must be the file on
+   disk again, with Content-Encoding: gzip and Vary: Accept-Encoding. A coding refused by q=0, or not offered, is answered
+   inflated; a file stored as it is (a photograph, the wasm) never carries Content-Encoding; a folder's files never do.
+
    Exit 0 when every case holds, 1 when one does not, 2 when it cannot run.
    ========================================================================== */
 const fs = require('fs'), path = require('path'), os = require('os'), net = require('net');
 const { spawn } = require('child_process');
+const zlib = require('zlib');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const args = process.argv.slice(2);
@@ -32,12 +38,12 @@ const PORT = +opt('--port', 8791);
 if (!BIN || !fs.existsSync(BIN)) { console.error('serve-test: --bin PATH names the zane binary'); process.exit(2); }
 
 /* one raw request, the answer split into status, headers and body */
-function ask(port, line, host = '127.0.0.1') {
+function ask(port, line, host = '127.0.0.1', extra = '') {
   return new Promise((resolve, reject) => {
     const s = net.connect(port, host);
     const chunks = [];
     s.setTimeout(5000, () => { s.destroy(); reject(new Error('timeout: ' + line)); });
-    s.on('connect', () => s.write(line + '\r\nHost: 127.0.0.1\r\n\r\n'));
+    s.on('connect', () => s.write(line + '\r\nHost: 127.0.0.1\r\n' + extra + '\r\n'));
     s.on('data', d => chunks.push(d));
     s.on('error', reject);
     s.on('end', () => {
@@ -154,6 +160,30 @@ const OUT = ['/../README.md', '/site/../../README.md', '/%2e%2e/README.md', '/%2
     await status(PORT_, 'GET /site/ HTTP/1.1', 404);           // a folder without index.html: never listed
     await status(PORT_, 'GET /site/no-such-page.html HTTP/1.1', 404);
     await status(PORT_, 'GET /__zane/ui-audit.html HTTP/1.1', 404); // the audit's --app address is not served here
+    // ---- Accept-Encoding: the embedded text is stored as gzip and sent as gzip only to a client that takes it ----
+    const GZ = 'Accept-Encoding: gzip, deflate, br\r\n';
+    for (const [url, disk] of [['/index.html', 'index.html'], ['/site/stz.css', 'site/stz.css'], ['/constitution/rules.json', 'constitution/rules.json'], ['/site/law-numbers.js', 'site/law-numbers.js']]) {
+      const want = fs.readFileSync(path.join(ROOT, disk));
+      for (const [label, extra] of [['gzip accepted', GZ], ['x-gzip accepted', 'Accept-Encoding: x-gzip\r\n'], ['gzip refused by q=0', 'Accept-Encoding: gzip;q=0, br\r\n'], ['no Accept-Encoding', ''], ['br only', 'Accept-Encoding: br\r\n']]) {
+        const r = await ask(PORT_, `GET ${url} HTTP/1.1`, '127.0.0.1', extra);
+        const zipped = r.headers['content-encoding'] === 'gzip';
+        const body = zipped ? zlib.gunzipSync(r.body) : r.body;
+        const shouldZip = mode === 'embedded' && /accepted/.test(label);
+        expect(`GET ${url} [${label}]`, r.status === 200 && zipped === shouldZip && body.equals(want) && +r.headers['content-length'] === r.body.length
+          && (mode !== 'embedded' || r.headers['vary'] === 'Accept-Encoding'),
+          `status ${r.status}, content-encoding ${r.headers['content-encoding']}, vary ${r.headers['vary']}, ${body.length} bytes against ${want.length}`);
+      }
+    }
+    for (const [url, disk] of [['/site/zane.wasm', 'site/zane.wasm'], ['/site/assets/niamey-national-museum-800.webp', 'site/assets/niamey-national-museum-800.webp']]) {
+      const r = await ask(PORT_, `GET ${url} HTTP/1.1`, '127.0.0.1', GZ);
+      expect(`GET ${url} [gzip accepted, stored as it is]`, r.status === 200 && !r.headers['content-encoding'] && r.body.equals(fs.readFileSync(path.join(ROOT, disk))),
+        `status ${r.status}, content-encoding ${r.headers['content-encoding']}`);
+    }
+    {
+      const g = await ask(PORT_, 'GET /site/stz.css HTTP/1.1', '127.0.0.1', GZ), h = await ask(PORT_, 'HEAD /site/stz.css HTTP/1.1', '127.0.0.1', GZ);
+      expect('HEAD /site/stz.css [gzip accepted]', h.status === 200 && h.body.length === 0 && h.headers['content-length'] === g.headers['content-length'] && h.headers['content-encoding'] === g.headers['content-encoding'],
+        `status ${h.status}, content-length ${h.headers['content-length']} against ${g.headers['content-length']}, content-encoding ${h.headers['content-encoding']}`);
+    }
     if (mode === 'embedded') {
       // a file of the repository the build does not embed does not exist for the embedded server: no page reaches these
       await status(PORT_, 'GET /zig/src/main.zig HTTP/1.1', 404);

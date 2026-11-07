@@ -291,6 +291,7 @@ test {
     _ = @import("schema.zig");
     _ = @import("js.zig");
     _ = @import("regex.zig");
+    _ = @import("gzip.zig");
     _ = report;
     _ = serve;
 }

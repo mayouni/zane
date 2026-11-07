@@ -9,13 +9,16 @@
 //! GET and HEAD only (405 otherwise); it lists no folder (a folder without index.html is 404); a path with a `..` segment,
 //! written plainly or percent-encoded, or holding a backslash or a NUL, is 404, and so is a file whose real path resolves
 //! outside the root; it writes nothing, anywhere, and makes no request of its own. One connection at a time, closed after
-//! each answer. The socket is read and written by `recvSome` and `sendAll` below, with Winsock's own recv and send on Windows:
+//! each answer. The embedded text files are stored as gzip (build.zig, sitepack.zig): a request that accepts gzip gets the
+//! stored stream with Content-Encoding: gzip, any other gets the file inflated by std (gzip.zig), and both carry Vary:
+//! Accept-Encoding; a folder's files (--root, --app) are sent as they are. The socket is read and written by `recvSome` and `sendAll` below, with Winsock's own recv and send on Windows:
 //! there, Zig 0.15's `Stream.read` calls ReadFile, which refuses an accepted socket (error 87), and `std.posix.send` needs
 //! libc (both found on the first runs). They are kept in this file alone, so a change of std.net touches nothing else
 //! (BINARY.md section 9).
 
 const std = @import("std");
 const builtin = @import("builtin");
+const gzip = @import("gzip.zig");
 /// The site, embedded at build (build.zig, siteModule): every file the pages reach, by its path from the repository's root.
 const site = @import("site");
 
@@ -69,7 +72,7 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
     defer if (source == .disk) source.disk.dir.close();
     const where: []const u8 = switch (source) {
         .disk => |d| d.real,
-        .embedded => try std.fmt.allocPrint(a, "the site embedded in this binary ({d} files)", .{site.files.len}),
+        .embedded => try std.fmt.allocPrint(a, "the site embedded in this binary ({d} files, {d} bytes stored in {d}, {d} of them as gzip)", .{ site.files.len, site.raw_bytes, site.stored_bytes, site.gzip_files }),
     };
 
     const address = std.net.Address.parseIp(o.host, o.port) catch {
@@ -122,13 +125,39 @@ fn handle(a: std.mem.Allocator, stream: std.net.Stream, source: Source, app: boo
     const target = parts.next() orelse "";
     const head = std.mem.eql(u8, method, "HEAD");
     if (!head and !std.mem.eql(u8, method, "GET")) return send(stream, .{ .status = "405 Method Not Allowed", .body = "GET and HEAD only\n", .extra = "Allow: GET, HEAD\r\n" }, false);
-    return send(stream, try answer(a, target, source, app), head);
+    return send(stream, try answer(a, target, source, app, acceptsGzip(buf[line_end..n])), head);
+}
+
+/// Whether the request's Accept-Encoding takes gzip: a coding gzip, x-gzip or *, without q=0 (RFC 9110 12.5.3). No header,
+/// or none of these, is a client that gets the file inflated.
+fn acceptsGzip(head: []const u8) bool {
+    var ok = false;
+    var lines = std.mem.splitSequence(u8, head, "\r\n");
+    while (lines.next()) |line| {
+        const colon = std.mem.indexOfScalar(u8, line, ':') orelse continue;
+        if (!std.ascii.eqlIgnoreCase(std.mem.trim(u8, line[0..colon], " \t"), "accept-encoding")) continue;
+        var codings = std.mem.splitScalar(u8, line[colon + 1 ..], ',');
+        while (codings.next()) |c| {
+            var params = std.mem.splitScalar(u8, c, ';');
+            const name = std.mem.trim(u8, params.first(), " \t");
+            if (!(std.ascii.eqlIgnoreCase(name, "gzip") or std.ascii.eqlIgnoreCase(name, "x-gzip") or std.mem.eql(u8, name, "*"))) continue;
+            var refused = false;
+            while (params.next()) |q| {
+                const v = std.mem.trim(u8, q, " \t");
+                if (v.len >= 2 and (v[0] == 'q' or v[0] == 'Q') and v[1] == '=') {
+                    refused = std.mem.trim(u8, v[2..], "0.").len == 0;
+                }
+            }
+            if (!refused) ok = true;
+        }
+    }
+    return ok;
 }
 
 const not_found: Answer = .{ .status = "404 Not Found", .body = "not found\n" };
 
 /// What a GET of `target` answers: a file of the source, the embedded audit for --app, or 404.
-fn answer(a: std.mem.Allocator, target: []const u8, source: Source, app: bool) !Answer {
+fn answer(a: std.mem.Allocator, target: []const u8, source: Source, app: bool, takes_gzip: bool) !Answer {
     const raw = target[0 .. std.mem.indexOfAny(u8, target, "?#") orelse target.len];
     if (raw.len == 0 or raw[0] != '/') return not_found;
     for (raw) |c| if (c < 0x21 or c == 0x7f) return not_found; // a control byte in the address, never echoed into a header
@@ -159,21 +188,25 @@ fn answer(a: std.mem.Allocator, target: []const u8, source: Source, app: bool) !
         if (path[path.len - 1] != '/') return .{ .status = "301 Moved Permanently", .body = "moved\n", .extra = try std.fmt.allocPrint(a, "Location: {s}/\r\n", .{raw}) };
         rel = try std.fmt.allocPrint(a, "{s}/index.html", .{rel});
     }
-    const body = switch (source) {
-        .disk => |d| blk: {
+    switch (source) {
+        .disk => |d| {
             // the real path, links followed, must still be inside the root
             const real = d.dir.realpathAlloc(a, rel) catch return not_found;
             if (!(real.len > d.real.len and std.mem.startsWith(u8, real, d.real) and (real[d.real.len] == '/' or real[d.real.len] == '\\'))) return not_found;
-            break :blk d.dir.readFileAlloc(a, rel, 256 * 1024 * 1024) catch return not_found;
+            return .{ .status = "200 OK", .type = typeOf(rel), .body = d.dir.readFileAlloc(a, rel, 256 * 1024 * 1024) catch return not_found };
         },
         // the embedded files are known by name: nothing outside them exists to be reached
-        .embedded => embeddedFile(rel) orelse return not_found,
-    };
-    return .{ .status = "200 OK", .type = typeOf(rel), .body = body };
+        .embedded => {
+            const f = embeddedFile(rel) orelse return not_found;
+            if (!f.gzip) return .{ .status = "200 OK", .type = typeOf(rel), .body = f.data };
+            if (takes_gzip) return .{ .status = "200 OK", .type = typeOf(rel), .body = f.data, .extra = "Content-Encoding: gzip\r\nVary: Accept-Encoding\r\n" };
+            return .{ .status = "200 OK", .type = typeOf(rel), .body = try gzip.inflate(a, f.data), .extra = "Vary: Accept-Encoding\r\n" };
+        },
+    }
 }
 
-fn embeddedFile(rel: []const u8) ?[]const u8 {
-    for (site.files) |f| if (std.mem.eql(u8, f.path, rel)) return f.data;
+fn embeddedFile(rel: []const u8) ?site.File {
+    for (site.files) |f| if (std.mem.eql(u8, f.path, rel)) return f;
     return null;
 }
 
@@ -239,6 +272,13 @@ fn sendAll(stream: std.net.Stream, bytes: []const u8) !void {
         if (rc == ws2.SOCKET_ERROR) return error.SendFailed;
         i += @intCast(rc);
     }
+}
+
+test "Accept-Encoding: gzip, x-gzip or *, unless q=0" {
+    const yes = [_][]const u8{ "\r\nAccept-Encoding: gzip", "\r\naccept-encoding: br, gzip;q=0.5", "\r\nAccept-Encoding: *", "\r\nAccept-Encoding: x-gzip", "\r\nAccept-Encoding: gzip, deflate, br, zstd" };
+    const no = [_][]const u8{ "", "\r\nAccept-Encoding: br, deflate", "\r\nAccept-Encoding: gzip;q=0", "\r\nAccept-Encoding: gzip; q=0.000", "\r\nAccept-Encoding: identity", "\r\nX-Accept-Encoding: gzip" };
+    for (yes) |h| try std.testing.expect(acceptsGzip(h));
+    for (no) |h| try std.testing.expect(!acceptsGzip(h));
 }
 
 test "decode refuses a malformed escape and decodes the rest" {
