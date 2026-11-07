@@ -3186,3 +3186,52 @@ next:
   - central: carry the six questions to the Principal; read c76873d, 0d7a45d and 4e73504; push by sha
 ```
 ---
+
+--- FROM: stzzui | 2026-11-07 09:53 | NOTE | answers 13:50 (S5 ordered) | S5 BUILT IN ONE PIECE (89F4720): ZANE SITE FACTS, SHELL AND GRID PRINT WHAT THEIR SCRIPTS PRINT; 60 BREAKS FAIL ALIKE; THE 4 MB BUDGET HAS 6,912 BYTES LEFT
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-07 09:53 | SIDE SESSION, started by the desk's session
+
+subject:   stage S5 of the binary: tools/site-facts.js, site-shell.js and site-grid.js as zane site facts, site shell and site grid (89f4720, local on main, not pushed)
+
+why:       your 13:50 ordered S5; the gate: the same checks fail on the same breakages, each shown; parity extended to both commands with their --write modes; zig build -j2 test, serve-test, site-shell, site-facts and the UI audit green
+
+did:
+  - BUILT zig/src/sitefacts.zig (722 lines), siteshell.zig (832) and sitegrid.zig (354): zane site facts [--write] [--unchecked], zane site shell [--write], zane site grid [--write]; run from the repository's root, they read and write the tree as the scripts do
+  - BUILT zig/src/regex.zig (867 lines, 2 unit tests): a backtracking matcher for the part of JavaScript's RegExp the scripts use, so each of their ~80 checks reads a page with its script's own pattern instead of a hand-made scanner; an unsupported pattern is refused, never approximated
+  - REPLACED every spawn with code: a page's verifier run goes to the core through report.writeText (moved out of main.zig, now shared with zane check), with the contract and the law read from the tree as cli.js reads them; a terminal's data-run goes to the binary's own command through main.dispatch (pack, conformance, cross-medium, audit-facts, check: all four names the site uses); coverage-count.js --json and site-grid.js became sitegrid.zig, with site-grid's --write carried too because site-facts spawns its check
+  - EXTENDED tools/zane/parity.js with section 7, run first: 60 cases, 81 command lines; the tree as it is, every --write mode with the files it wrote compared, and 57 broken trees (22 for facts, 29 for shell, 6 for grid), 55 of them aimed at one check each, the other two (a page in CRLF, a page with a byte order mark) passing alike; each aimed break must fail in both, print the same bytes, leave the same files, and the JavaScript's output must hold the aimed check's own words; every file is read once before the cases and must be back byte for byte after; --only site runs the section alone and names the six it skipped; --list-site prints each case with its exit code and the line it produced; every section now prints its wall time
+  - SHOWED the one seam that parity cannot show, by hand, once: contrast_floor 4.5 -> 9 in doc/design/audit/decides.json; both exit 1 on the stale figure and the span; only node also reports the two check-facts.js terminals (site/mobile.html, site/screenshots.html), because zane audit-facts checks the decides.json it was built with; file restored byte for byte
+  - MEASURED the size at the tree of 89f4720, ReleaseSmall x86_64-windows: 3,831,296 bytes with the site route cut out, 3,993,088 with it; S5's code is 161,792 bytes; trimming the message formatting (one runtime formatter, js.say) saved 13,312 and is in
+  - MEASURED speed, one run each, ReleaseSmall: site facts 160-208 ms (node about 15 s), site shell 114-147 ms (node 1.3 s), site grid 13-22 ms (node 1.7 s)
+  - RAN the gates on the committed binary: zig build -j2 test 7 of 7; parity identical in all seven sections (site 79.9 s, about 126 s by its sections); serve-test 100 of 100; node site-shell (38), site-facts, site-grid ok and the three zane site commands ok; UI audit served by the binary's embedded site, 0 on 38 pages in Modern and 0 in Retro
+  - WROTE BINARY.md: status S1 to S5, section 4 "S5 as built" with the four differences by design, section 7 the size and the room left
+  - DELETED the build caches on C: (scratchpad); zig-out stays, it is what parity and serve-test run
+
+state:
+  zane.exe:       ReleaseSmall 3,993,088 bytes, sha256 4fa1ab136c5194597e7e05394ecae027685a46eaa8c03f7ac74bbd85d507fda9; budget 4,000,000; room 6,912 (0.2%)
+  parity:         identical; site tools 60 cases, 81 command lines; the allowed list is still empty
+  differences by design (BINARY.md section 4, each named in the code where it lives):
+    (1) a terminal of zane conformance, cross-medium or audit-facts is compared with the binary's run, which uses the suite it was built with: shown above; parity never breaks an embedded file for this reason
+    (2) a data-run naming a script the binary does not carry (parity.js, serve-test.js) is reported, not run; no page names one
+    (3) the figure kinds is the core's table (10), not zane.js's; facts.json is byte for byte the same
+    (4) the page registry is written twice, site-shell.js and siteshell.zig; parity fails on any drift
+  not shown broken:  the checks only a registry edit can break (head-page name, a label repeated at one level, a page on no bar, a footer link, a term that is not letters), because breaking them means editing code; ported, and agreeing on the tree. A script crash (facts.json not JSON) prints a stack trace where zane prints one line: not compared
+  not run:           Linux and macOS; the UI audit ran with the browser pane's document hidden, so slowly; both runs completed and were read from the page's verdict
+
+waiting:
+  - BINARY-BUDGET-02: 6,912 bytes remain of the 4 MB budget at 89f4720; S5's code took 161,792 and its own sources and documents, embedded because the site embeds tools/ and doc/ whole, 24,064 more (parity.js alone is now 44,215 bytes of the binary). The next addition of any size breaks the budget. (a) embed only what the pages reach, not tools/ and doc/ whole: RECOMMENDED, the binary would stop carrying its own build scripts as text; (b) compress the embedded site; (c) raise the budget -> Central
+             [not routed; it is here]
+             class: judgement
+  - S5-LANDING-01: one piece or facts then shell: RECOMMEND one piece, as committed (89f4720); facts and shell share the matcher, report.writeText, dispatch and parity's section 7, so facts first would have carried half a section and a route to nothing. If Central wants two commits, I split 89f4720 mechanically -> Central
+             [not routed; it is here]
+             class: judgement
+  - REGISTRY-ONE-SOURCE-01: the page registry has two copies until site-shell.js retires (S6). Either it moves to one data file both read (it is then embedded too, against BINARY-BUDGET-02), or the copy stands with parity as its guard until S6. RECOMMEND the copy until S6 -> Central
+             [not routed; it is here]
+             class: judgement
+
+next:
+  - me:      nothing more on S5 before your read. Not mine and not done: zig/src/core.zig fails zig fmt --check at c95e922 already (unchanged by S5 but for one pub); coverage-count.js's text report (--grid, --cells) stays JavaScript
+  - central: in your clone at 89f4720: zig build -j2 -Doptimize=ReleaseSmall (expect 3,993,088 bytes), node tools/zane/parity.js (expect identical, site tools 60 cases, 81 lines), node tools/zane/parity.js --only site --list-site for the per-case table; push by sha; rule BINARY-BUDGET-02 before any new embedded byte
+             check: pushed stzzui 89f4720
+```
+---
