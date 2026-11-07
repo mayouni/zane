@@ -78,7 +78,7 @@
     <h2 id="two-commands" data-outline="Two commands">The two commands that check the pack and run the conformance suite</h2>
     <p>The first command checks whether the bytes a person holds are the intended pack. A version number states which edition was intended, and the hash proves that the bytes are that edition.
     The second command runs every fixture through the verifier and reports which fixtures, if any, disagree.</p>
-<pre class="term" data-run="node tools/zane/pack.js --check"><span class="dim">$ node tools/zane/pack.js --check</span>
+<pre class="term" data-run="zane pack --check"><span class="dim">$ zane pack --check</span>
 
 The Zane protocol pack
   law          v3.15 — 123 rules, 17 forbidden patterns
@@ -89,7 +89,7 @@ The Zane protocol pack
   README       every count on the page matches the manifest
 
   <span class="good">verified</span> — every pinned file matches the manifest</pre>
-<pre class="term" data-run="node tools/zane/conformance.js"><span class="dim">$ node tools/zane/conformance.js</span>
+<pre class="term" data-run="zane conformance"><span class="dim">$ zane conformance</span>
 
 Zane conformance — level 4
   spec         doc/language/ v1.5

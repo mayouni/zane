@@ -105,7 +105,7 @@
   <span class="k">STEPS</span> [<span class="s">identity, funding, review</span>],
   <span class="k">ACTOR</span> <span class="s">applicant</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check tour_account_opening.zane</span>
+<pre class="term"><span class="dim">$ zane check tour_account_opening.zane</span>
 tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">TRAPPED_FLOW</span>  account_opening
 <span class="dim">    A multi-step flow has no reachable EXIT.</span>
 <span class="dim">    Rule 51 · The Cognitive Tunnel · Rule 53 · Interaction Lockdown · Article II · the right to leave</span>
@@ -161,7 +161,7 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
       <article class="scene-card" id="scene-build" data-scene="build" data-page="build.html" hidden>
         <h3 class="scene-title">In CI, the verifier reports a refusal as an exit code.</h3>
         <p>The verifier exits 1 on a refusal, 0 when the declaration is clean and 2 on a usage error.</p>
-        <p>A build gate needs nothing more, and today the verifier needs only Node.</p>
+        <p>A build gate needs nothing more, and the verifier is one file, <code>zane</code>.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> For programmers, show the exit code first, and then the envelope that a tool can read.</aside>
       </article>
 
@@ -187,9 +187,9 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
       </article>
 
       <article class="scene-card" id="scene-cost" data-scene="cost" data-page="adopt.html" hidden>
-        <h3 class="scene-title">Using Zane today costs Node, a browser and the time to write declarations.</h3>
-        <p>Zane needs Node and a browser, and it needs nothing to install, no library to adopt and no framework to change.</p>
-        <p>A single file that needs neither Node nor a browser is designed and not built.</p>
+        <h3 class="scene-title">Using Zane today costs one file, a browser and the time to write declarations.</h3>
+        <p>Zane needs one file, <code>zane</code>, and a browser, and it needs no runtime to install, no library to adopt and no framework to change.</p>
+        <p>The file is built from this repository with Zig, and it is not yet released.</p>
         <p>The work is writing declarations by hand for the surfaces that matter.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers, the cost is an afternoon per surface. The real risk is that most of the law still needs a reviewer.</aside>
       </article>

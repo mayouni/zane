@@ -6,8 +6,8 @@ shape, `media.json` records what a medium carries. **Nothing proved the sentence
 Second Founding rests on.**
 
 ```bash
-node tools/zane/cross-medium.js            # 0 proved · 1 not proved
-node tools/zane/cross-medium.js --verbose  # every difference, with its reason
+zane cross-medium            # 0 proved · 1 not proved
+zane cross-medium --verbose  # every difference, with its reason
 ```
 
 ## What it asserts, and what it deliberately does not

@@ -3,9 +3,9 @@
 **What a participant downloads, pins, and can be held to.** **12 files, no runtime.**
 
 ```bash
-node tools/zane/pack.js --check     # do the bytes I have match the manifest?
-node tools/zane/conformance.js --level 4
-node tools/zane/cross-medium.js
+zane pack --check     # do the bytes I have match the manifest?
+zane conformance --level 4
+zane cross-medium
 ```
 
 ---
@@ -29,7 +29,7 @@ listed above.
 ## 2. What is in it
 
 12 files in five roles. `MANIFEST.json` carries the hash of each, and
-`pack.js --check` verifies the counts on this page against it — **this README's own numbers
+`zane pack --check` verifies the counts on this page against it — **this README's own numbers
 are checked, not typed and trusted.**
 
 | Role | Files | What it fixes |
@@ -49,7 +49,7 @@ the findings, the evidence ledger. They are worth reading and they are not the s
 > edition.**
 
 Vendor the twelve files, record `MANIFEST.json` beside them, and make
-`pack.js --check` a step in your build. Then *"conforms to Zane v3.15"* is a claim your CI
+`zane pack --check` a step in your build. Then *"conforms to Zane v3.15"* is a claim your CI
 can refute.
 
 This is not paranoia; it is this project's own history. A single trailing space added to a
@@ -58,7 +58,7 @@ drift recorded in `doc/EVIDENCE-LEDGER.md` came from something being **described
 than **checked** — a hand-typed census under a heading claiming it was computed, a prose
 catalogue two diagnostics behind the data, a spec whose own title lagged a version.
 
-**The manifest never regenerates itself.** `pack.js` writes it only when you run it without
+**The manifest never regenerates itself.** `zane pack` writes it only when you run it without
 `--check`, because a manifest that follows the tree automatically pins nothing.
 
 ## 4. Proving conformance

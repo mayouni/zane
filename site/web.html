@@ -101,7 +101,7 @@
   <span class="k">ROLE</span> <span class="s">navigate</span>,
   <span class="k">ACTOR</span> <span class="s">reader</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check stzsite_menu.zane</span>
+<pre class="term"><span class="dim">$ zane check stzsite_menu.zane</span>
 stzsite_menu.zane:10  <span class="bad">error</span>  <span class="bad">ROLE_ACTS_WITHOUT_CONSEQUENCE</span>  navigate language_switch satisfies ACT
 <span class="dim">    A control promising to change nothing declares that it acts.</span>
 <span class="dim">    Rule 119 · A Card Is Not a Button · Rule 112 · Motion Reports, It Never Decorates · Rule 16 · Intentional Clicks · Article II</span>
@@ -122,7 +122,7 @@ stzsite_menu.zane:10  <span class="bad">error</span>  <span class="bad">ROLE_ACT
   <span class="k">ROLE</span> <span class="s">navigate</span>,
   <span class="k">ACTOR</span> <span class="s">reader</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check stzsite_menu_fixed.zane</span>
+<pre class="term"><span class="dim">$ zane check stzsite_menu_fixed.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.15</pre>
     </div>
     <p>The checked-in file is <a href="../examples/web-case/stzsite-navigation.zane"><code>examples/web-case/stzsite-navigation.zane</code></a>, and it adds the third surface (the start page) and a header that says whose description it is.

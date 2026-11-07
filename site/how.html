@@ -93,7 +93,7 @@
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check delete_invoice.zane</span>
+<pre class="term"><span class="dim">$ zane check delete_invoice.zane</span>
 delete_invoice.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  delete_invoice
     <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
@@ -115,7 +115,7 @@ delete_invoice.zane:2  <span class="bad">error</span>  <span class="bad">MISSING
 <span class="k">DEFINE INTENT_FLOW</span> <span class="n">approve_payment</span> (
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>]      <span class="c">// interest → review → commitment</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check payments.zane</span>
+<pre class="term"><span class="dim">$ zane check payments.zane</span>
 payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  approve_payment
     <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
@@ -130,10 +130,10 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check payments.zane</span>
+<pre class="term"><span class="dim">$ zane check payments.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.15</span></pre>
     <p class="caption"><b>The output above is copied from a real run</b>, and this site's own check re-runs it and fails if the
-    page and the verifier disagree. The verifier ships in this repository and needs no toolchain beyond Node.
+    page and the verifier disagree. The verifier is one file, <code>zane</code>, built from this repository, and it needs nothing else to run.
     <a href="conformance.html#status">The status board</a> states what exists, what is designed and what is held.</p>
       </div>
 </section>

@@ -13,7 +13,8 @@
    This script derives every figure from the tree and fails when
      - site/facts.json differs from what the tree gives now,
      - any span's fallback differs from the derived value,
-     - a declaration shown on a page, with the terminal that checked it, no longer matches a real run of tools/zane/cli.js
+     - a declaration shown on a page, with the terminal that checked it ($ zane check NAME.zane), no longer matches a real run of
+       the verifier, here its JavaScript reference tools/zane/cli.js
        (the home page's "ninety seconds" and every pair like it).
    A typed number outside a span is invisible to the first two, so it fails too (SITE-3 piece E): a rule's
    number links to the rule, and a figure inside a mock interface is marked data-specimen.
@@ -143,7 +144,8 @@ const decode = s => s.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt
 
 // ---- every declaration and terminal pair on a page against a real run -----------------------------------------
 /* A page shows a declaration (<pre class="shot">) and, right after it, the terminal that checked it (<pre class="term">) whose first
-   line is "$ node tools/zane/cli.js check NAME.zane". This writes the declaration to NAME.zane, runs the verifier on it, and compares
+   line is "$ zane check NAME.zane" (S6: the site names the one file, never node). This writes the declaration to NAME.zane, runs the
+   verifier's JavaScript reference on it (tools/zane/cli.js, which tools/zane/parity.js proves prints what zane prints), and compares
    what it prints with what the page says, so "copied from a real run" is verified, not asserted. */
 function pairs() {
   const out = [];
@@ -153,7 +155,7 @@ function pairs() {
     let m;
     while ((m = re.exec(html))) {
       const lines = decode(m[2]).split('\n');
-      const cmd = /^\$\s*node tools\/zane\/cli\.js check (\S+\.zane)\s*$/.exec(lines[0]);
+      const cmd = /^\$\s*zane check (\S+\.zane)\s*$/.exec(lines[0]);
       if (!cmd) continue;                           /* a terminal that is not a verifier run is not claimed to be one */
       out.push({ page: p, file: cmd[1], declaration: decode(m[1]).replace(/\s+$/, '') + '\n', output: lines.slice(1).join('\n') });
     }
@@ -198,8 +200,11 @@ function verifyExcerpts(problems) {
 }
 
 // ---- a terminal that names its command is a real run of it ---------------------------------------------------
-/* <pre class="term" data-run="node tools/zane/conformance.js"> ... </pre>: the first line is "$ " and the command, the rest is what it
-   printed. Only the pack's own read-only commands (node tools/zane/...) are run; the output is compared with the page's. */
+/* <pre class="term" data-run="zane conformance"> ... </pre>: the first line is "$ " and the command, the rest is what it printed. Only
+   the binary's read-only commands of the pack are run (zane check, conformance, pack, cross-medium, audit-facts), each through its
+   JavaScript reference, which tools/zane/parity.js proves prints what zane prints; the output is compared with the page's. */
+const REFERENCE = { check: ['tools/zane/cli.js', 'check'], conformance: ['tools/zane/conformance.js'], pack: ['tools/zane/pack.js'],
+  'cross-medium': ['tools/zane/cross-medium.js'], 'audit-facts': ['doc/design/audit/check-facts.js'] };
 function verifyCommands(problems) {
   let n = 0;
   const norm = t => t.replace(/\r\n/g, '\n').split('\n').map(l => l.replace(/\s+$/, '')).join('\n').replace(/\n+$/, '');
@@ -209,11 +214,12 @@ function verifyCommands(problems) {
     let m;
     while ((m = re.exec(html))) {
       const cmd = decode(m[1]).split(/\s+/);
-      if (cmd[0] !== 'node' || !/^(tools\/zane\/[a-z-]+|doc\/design\/audit\/check-facts)\.js$/.test(cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (node tools/zane/NAME.js)`); continue; }
+      if (cmd[0] !== 'zane' || !Object.prototype.hasOwnProperty.call(REFERENCE, cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (zane check, conformance, pack, cross-medium or audit-facts)`); continue; }
       n++;
       const lines = decode(m[2]).split('\n');
       if (lines[0].replace(/^\$\s*/, '').trim() !== cmd.join(' ')) problems.push(`${p}: the first line of the terminal for "${cmd.join(' ')}" is not that command`);
-      const r = spawnSync(process.execPath, cmd.slice(1).map((a, i) => i === 0 ? R(a) : a), { cwd: R('.'), encoding: 'utf8' });
+      const [script, ...lead] = REFERENCE[cmd[1]];
+      const r = spawnSync(process.execPath, [R(script), ...lead, ...cmd.slice(2)], { cwd: R('.'), encoding: 'utf8' });
       const got = norm(r.stdout || ''), want = norm(lines.slice(1).join('\n'));
       if (got !== want) problems.push(`${p}: the terminal for "${cmd.join(' ')}" is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
     }

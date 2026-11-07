@@ -8,16 +8,15 @@
 //! when a status word is not one of three, and when a primary button sits in a reading page's head or scrolls within
 //! its own page.
 //!
-//! Where the script spawns a process, this calls the code: a page's verifier run goes to the core (report.zig) with the
-//! contract and the law read from the tree, as tools/zane/cli.js reads them; a terminal's `node tools/zane/NAME.js`
-//! goes to the binary's own command of that name (`zane pack`, `conformance`, `cross-medium`, `audit-facts`, `check`),
-//! which tools/zane/parity.js proves prints what the script prints; the coverage counts and the grid check are
-//! sitegrid.zig. Two differences follow, and are named rather than hidden:
-//!   - `zane conformance` and `zane cross-medium` check the suite they were BUILT with, where the scripts read the
-//!     tree: a terminal of theirs is compared with the binary's run, which equals the tree's only while the binary is
-//!     current (rebuild after changing the suite);
-//!   - a terminal naming a script the binary does not carry (tools/zane/parity.js, serve-test.js, ...) is reported as
-//!     one, where the script would run it with node. No page names one today.
+//! Where the script spawns a process, this calls the code: a page's verifier run (`$ zane check NAME.zane`, since S6) goes to
+//! the core (report.zig) with the contract and the law read from the tree, as tools/zane/cli.js reads them; a terminal's
+//! `data-run="zane COMMAND ..."` goes to the binary's own command through main.dispatch (check, conformance, pack,
+//! cross-medium, audit-facts), where the script runs that command's JavaScript reference, which tools/zane/parity.js proves
+//! prints the same; the coverage counts and the grid check are sitegrid.zig. One difference follows, named rather than
+//! hidden: `zane conformance`, `cross-medium` and `audit-facts` check the data they were BUILT with, where the references
+//! read the tree, so a terminal of theirs equals the tree's run only while the binary is current (rebuild after changing the
+//! suite). Until S6 a terminal named `node tools/zane/NAME.js`, and one naming a script the binary does not carry was a
+//! second difference; the five commands are now the only ones either side accepts.
 //! The figure `kinds` is the core's own table of declaration kinds, where the script reads zane.js's: the binary's
 //! verifier is the one this binary runs.
 //!
@@ -434,7 +433,7 @@ const Pair = struct { page: []const u8, file: []const u8, declaration: []const u
 fn pairs(a: Allocator, all: []const []const u8) ![]const Pair {
     var out: std.ArrayList(Pair) = .empty;
     const r = try re.compile(a, "<pre class=\"shot\">([\\s\\S]*?)<\\/pre>\\s*<pre class=\"term\">([\\s\\S]*?)<\\/pre>", "g");
-    const cmd = try re.compile(a, "^\\$\\s*node tools\\/zane\\/cli\\.js check (\\S+\\.zane)\\s*$", "");
+    const cmd = try re.compile(a, "^\\$\\s*zane check (\\S+\\.zane)\\s*$", "");
     for (all) |p| {
         const html = try lf(a, try readPage(a, p));
         var it = re.iterate(&r, html);
@@ -511,24 +510,14 @@ fn verifyExcerpts(a: Allocator, all: []const []const u8, problems: *List) !usize
 
 // ---- a terminal that names its command is a real run of it ------------------------------------------------------
 
-/// The binary's command for a pack script the terminal names, or null for a script it does not carry.
-fn commandOf(script: []const u8) ?[]const []const u8 {
-    const map = [_]struct { []const u8, []const []const u8 }{
-        .{ "tools/zane/cli.js", &.{} },
-        .{ "tools/zane/conformance.js", &.{"conformance"} },
-        .{ "tools/zane/pack.js", &.{"pack"} },
-        .{ "tools/zane/cross-medium.js", &.{"cross-medium"} },
-        .{ "doc/design/audit/check-facts.js", &.{"audit-facts"} },
-    };
-    for (map) |x| if (std.mem.eql(u8, x[0], script)) return x[1];
-    return null;
-}
+/// The commands of the pack a terminal may name: the binary's, run here through main.dispatch; site-facts.js runs their
+/// JavaScript references (cli.js, conformance.js, pack.js, cross-medium.js, check-facts.js).
+const pack_commands = [_][]const u8{ "check", "conformance", "pack", "cross-medium", "audit-facts" };
 
 fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize {
     var count: usize = 0;
     const r = try re.compile(a, "<pre class=\"term\" data-run=\"([^\"]+)\">([\\s\\S]*?)<\\/pre>", "g");
     const ws = try re.compile(a, "\\s+", "");
-    const pack_cmd = try re.compile(a, "^(tools\\/zane\\/[a-z-]+|doc\\/design\\/audit\\/check-facts)\\.js$", "");
     const prompt = try re.compile(a, "^\\$\\s*", "");
     for (all) |p| {
         const html = try lf(a, try readPage(a, p));
@@ -536,9 +525,12 @@ fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize
         while (it.next()) |m| {
             const named = m.get(html, 1).?;
             const cmd = try re.split(a, &ws, try decode(a, named));
-            const script = if (cmd.len > 1) cmd[1] else "";
-            if (!std.mem.eql(u8, cmd[0], "node") or !re.testIn(&pack_cmd, script)) {
-                try problems.append(a, try fmt(a, "{s}: data-run \"{s}\" is not a pack command (node tools/zane/NAME.js)", .{ p, named }));
+            var known = false;
+            if (cmd.len > 1) for (pack_commands) |c| if (std.mem.eql(u8, c, cmd[1])) {
+                known = true;
+            };
+            if (!std.mem.eql(u8, cmd[0], "zane") or !known) {
+                try problems.append(a, try fmt(a, "{s}: data-run \"{s}\" is not a pack command (zane check, conformance, pack, cross-medium or audit-facts)", .{ p, named }));
                 continue;
             }
             count += 1;
@@ -548,16 +540,9 @@ fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize
             const first = if (nl) |i| term[0..i] else term;
             if (!std.mem.eql(u8, re.trim(try re.replace(a, &prompt, first, "")), joined))
                 try problems.append(a, try fmt(a, "{s}: the first line of the terminal for \"{s}\" is not that command", .{ p, joined }));
-            const sub = commandOf(script) orelse {
-                try problems.append(a, try fmt(a, "{s}: the terminal for \"{s}\" names a script zane does not carry, so it is not re-run", .{ p, joined }));
-                continue;
-            };
-            var argv: List = .empty;
-            try argv.appendSlice(a, sub);
-            try argv.appendSlice(a, cmd[2..]);
             var o: std.Io.Writer.Allocating = .init(a);
             var e: std.Io.Writer.Allocating = .init(a);
-            _ = main_mod.dispatch(a, argv.items, &o.writer, &e.writer) catch {};
+            _ = main_mod.dispatch(a, cmd[1..], &o.writer, &e.writer) catch {};
             const got = try norm(a, o.written());
             const want = try norm(a, if (nl) |i| term[i + 1 ..] else "");
             if (!std.mem.eql(u8, got, want)) try problems.append(a, try fmt(a, "{s}: the terminal for \"{s}\" is not what a real run prints.\n--- the page\n{s}\n--- a real run\n{s}", .{ p, joined, want, got }));
@@ -565,7 +550,6 @@ fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize
     }
     return count;
 }
-
 // ---- the head of a reading page has no button --------------------------------------------------------------------
 
 fn verifyCtas(a: Allocator, all: []const []const u8, problems: *List) !usize {

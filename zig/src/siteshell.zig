@@ -732,6 +732,49 @@ fn checkNames(a: Allocator, problems: *List) !void {
     }
 }
 
+// ---- the site names the one file, never node (doc/design/BINARY.md, S6) ----------------------------------------------------------
+
+/// A line of a page that documents the JavaScript reference and may name Node, with the reason: site-shell.js's NODE_ALLOWED.
+const NodeAllowed = struct { file: []const u8, words: []const u8, reason: []const u8 };
+const node_allowed = [_]NodeAllowed{
+    .{ .file = "tools/zane/wasm-proof.html", .words = "node tools/zane/parity.js --write-wasm-proof", .reason = "parity.js holds the binary to its JavaScript reference, so it runs on Node by design; the proof page says what writes its record" },
+};
+
+fn newlinesOnly(a: Allocator, m: re.Match, t: []const u8) ![]const u8 {
+    const n = std.mem.count(u8, t[m.start..m.end], "\n");
+    const out = try a.alloc(u8, n);
+    @memset(out, '\n');
+    return out;
+}
+
+/// No page of the registry, and not README.md, tells the reader to run Node: a command (node PATH.js) or the runtime by name.
+fn checkNode(a: Allocator, problems: *List) !void {
+    var used = [_]bool{false} ** node_allowed.len;
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    try addOnce(a, &files, "README.md");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const node_re = try re.compile(a, "\\bnode\\s+[\\w./-]+\\.[cm]?js\\b|\\bNode(?:\\.js)?\\b", "");
+    const blocks = try re.compile(a, "<(script|style)\\b[\\s\\S]*?<\\/\\1>", "g");
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        const text = try re.replaceFn(a, &blocks, try core.wellFormed(a, try readFile(a, f)), a, newlinesOnly);
+        var it = std.mem.splitScalar(u8, text, '\n');
+        var i: usize = 0;
+        while (it.next()) |line| : (i += 1) {
+            const m = re.exec(&node_re, line, 0) orelse continue;
+            var allowed = false;
+            for (node_allowed, 0..) |x, k| if (std.mem.eql(u8, x.file, f) and std.mem.indexOf(u8, line, x.words) != null) {
+                used[k] = true;
+                allowed = true;
+                break;
+            };
+            if (!allowed) try problems.append(a, try fmt(a, "{s}:{d} tells the reader to run Node (\"{s}\"): the verifier is one file, zane (doc/design/BINARY.md, S6)", .{ f, i + 1, line[m.start..m.end] }));
+        }
+    }
+    for (node_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "NODE_ALLOWED: {s} \"{s}\" matches no line: the entry has outlived what it excused", .{ x.file, x.words }));
+}
+
 // ---- a submenu never repeats its parent's label (the Principal, 2026-11-06) ------------------------------------------
 
 fn checkLabels(a: Allocator, problems: *List) !void {
@@ -802,6 +845,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     try checkWriting(a, &problems);
     try checkBreaks(a, &problems);
     try checkNames(a, &problems);
+    try checkNode(a, &problems);
     var changed: usize = 0;
     for (&pages) |*p| {
         if (!exists(p.file)) {

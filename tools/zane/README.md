@@ -1,11 +1,16 @@
 # `zane` — the verifier
 
 **Checks Zane declarations against the constitution, before anything is
-rendered.** Zero dependencies, one runtime you already have.
+rendered.** One file, `zane`, and nothing to install beside it.
 
 ```bash
-node tools/zane/cli.js check payments.zane
+zane check payments.zane
 ```
+
+`zane` is built from this repository with Zig (`zig build -Doptimize=ReleaseSmall` puts it in
+`zig-out/bin/`; [doc/design/BINARY.md](../../doc/design/BINARY.md)). The JavaScript in this folder is its
+**reference**: `zane.js` and `cli.js` are what [`parity.js`](parity.js) holds the binary to, byte for byte, and
+`node tools/zane/cli.js check payments.zane` runs that reference with the same options and the same output.
 
 ```
 payments.zane:2  error  MISSING_UNDO  approve_payment  [Rule 79 · The Undo Covenant · Article IV · the right to reverse]
@@ -53,7 +58,7 @@ what they need — undecidable is silence, never a pass.
 
 ```bash
 # Level 3, with the symbol table your host project knows
-node tools/zane/cli.js check src/**/*.zane --level 3 --symbols build/symbols.json
+zane check src/**/*.zane --level 3 --symbols build/symbols.json
 ```
 
 where `symbols.json` is `{"entities": [...], "actors": [...], "state": [...], "elements": [...]}`.
@@ -92,7 +97,7 @@ by hand into a second file drifts from it, and this one did.
 ## Conformance
 
 ```bash
-node tools/zane/conformance.js --level 4
+zane conformance --level 4
 ```
 
 ```
@@ -156,16 +161,20 @@ ladder, working as designed.
 
 ## In a browser
 
-`zane.js` has no Node dependencies and exports `window.Zane`:
+The same core as `zane`, compiled to WebAssembly: `site/zane.wasm`, loaded by `site/zane-wasm.js`, which
+the Build page's try-it box uses and `wasm-proof.html` proves against the native binary:
 
 ```html
-<script src="tools/zane/zane.js"></script>
+<script src="site/zane-wasm.js"></script>
 <script>
-  const findings = Zane.verify(sourceText);        // [{id, line, subject}, …]
+  ZaneWasm.load('site/zane.wasm').then(z => {
+    const envelope = z.check('pay.zane', sourceText, { level: 2 });   // what `zane check pay.zane --json` prints
+  });
 </script>
 ```
 
-Same core, same results — the browser page and the CI gate cannot disagree.
+`zane.js` still runs in a browser as `window.Zane`, with no dependency, and no page of the site loads it: since
+stage S6 it is the reference the binary and the wasm are held to, not the route a reader takes.
 
 ## Implementation notes
 

@@ -74,7 +74,7 @@
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">customer</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check tap_to_pay.zane</span>
+<pre class="term"><span class="dim">$ zane check tap_to_pay.zane</span>
 tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAPSE</span>  tap_to_pay
 <span class="dim">    Selection has become execution: SATISFIES holds SELECT and ACT without CONFIRM.</span>
 <span class="dim">    Rule 16 · Intentional Clicks · Article II</span>
@@ -88,7 +88,7 @@ tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="s">customer</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check tap_to_pay_confirmed.zane</span>
+<pre class="term"><span class="dim">$ zane check tap_to_pay_confirmed.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.15</pre>
     </div>
   </div>
@@ -100,7 +100,7 @@ tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_
 
     <p>For an application with no page to read, a writer reduces a screenshot to <b>facts</b> (each line of text, its box and the luminances behind it), and an audit judges the facts. The audit decides three rules and nothing else: <b>Rules 62 and 105</b> for contrast against a floor, and <b>Rule 107</b> for the size of text. Every other rule reads
     <em>not audited</em>, never <em>passed</em>, and a measurement that could be wrong at its worst end (a photographic background) is never a pass. A script that needs nothing installed checks the shape of the facts file, its arithmetic and the decisions. Below, the script runs on the example file that ships with it, which is made by hand:</p>
-    <pre class="term" data-run="node doc/design/audit/check-facts.js doc/design/audit/example.facts.json"><span class="dim">$ node doc/design/audit/check-facts.js doc/design/audit/example.facts.json</span>
+    <pre class="term" data-run="zane audit-facts doc/design/audit/example.facts.json"><span class="dim">$ zane audit-facts doc/design/audit/example.facts.json</span>
 3 lines found; text the OCR did not find is not audited
 
 L1 "Overdue balance"

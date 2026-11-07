@@ -53,7 +53,7 @@
     <p class="kicker">Use · build · you ship business software</p>
     <h1>The build workflow puts the law into a project and makes the CI build fail when the verifier refuses a declaration.</h1>
     <p class="sub">The build workflow puts Zane into a software project: the team declares each surface before drawing it, pins the law as a hash, fails the build on a refusal,
-    and measures what the browser actually paints. The workflow prevents a declaration that the law refuses from passing the CI. Nothing in it needs more than Node and a browser.</p>
+    and measures what the browser actually paints. The workflow prevents a declaration that the law refuses from passing the CI. Nothing in it needs more than one file, <code>zane</code>, and a browser.</p>
   </div>
 </header>
 
@@ -92,15 +92,15 @@
   <span class="k">SATISFIES</span> [<span class="s">SELECT, CONFIRM, ACT</span>],
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>]
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check checkout.zane</span>
+<pre class="term"><span class="dim">$ zane check checkout.zane</span>
 checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO</span>  checkout
     <span class="dim">An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.</span>
     <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
     <p>The output above comes from a real run, and this site's own check re-runs it. The wizard has an exit and a way
-    to cancel, and the law still refuses it, because it acts and promises no undo. The verifier ships in this
-    repository and runs on Node alone. It reads its contract and its citations from the law rather than hardcoding
+    to cancel, and the law still refuses it, because it acts and promises no undo. The verifier is one file,
+    <code>zane</code>, built from this repository with Zig. It reads its contract and its citations from the law rather than hardcoding
     them.</p>
     <p><b>Level two, the default level, is what a declaration alone can decide.</b> A check that needs a fact a
     declaration does not hold (the entities, the actors, the state, the elements of a surface) is skipped unless you
@@ -145,7 +145,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     <p><b>A version says which edition you meant, and a hash proves that the bytes you hold are that edition.</b> You vendor the
     files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
     proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
-<pre class="term"><span class="dim">$ node tools/zane/pack.js --check</span></pre>
+<pre class="term"><span class="dim">$ zane pack --check</span></pre>
     <p>With this step, <em>conforms to Zane v<span data-law="version">3.15</span></em> becomes a claim that your CI can refute. Rule numbers
     are stable forever: a retired number is never reused, so a finding that cites Rule 79 means the same thing in ten
     years. <a href="../protocol/README.md">The protocol pack</a> says what to vendor and what you may and may not claim.</p>
@@ -157,8 +157,8 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     <h2 id="fail-the-build-on-a-refusal" data-outline="Fail the build">Making the CI build fail when the verifier refuses a declaration</h2>
     <p>The verifier exits non-zero when any declaration is refused, and it exits zero when there are only warnings. You run it
     over your specifications in CI:</p>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check specs/*.zane</span>
-<span class="dim">$ node tools/zane/cli.js check specs/*.zane --json</span>   <span class="dim"># for a machine to read</span></pre>
+<pre class="term"><span class="dim">$ zane check specs/*.zane</span>
+<span class="dim">$ zane check specs/*.zane --json</span>   <span class="dim"># for a machine to read</span></pre>
     <p>The contract names <span data-law="diagnostics">37</span> diagnostics at <span data-fact="diag.levels">4</span>
     conformance levels, and every finding carries the rule, article or right it rests on. The suite that proves any
     implementation agrees, <span data-fact="fixtures.total">73</span> fixtures with known verdicts, is in

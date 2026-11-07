@@ -128,7 +128,7 @@ const siteLines = [];
   const htmlUnder = d => { const out = []; const w = x => { for (const e of fs.readdirSync(P(x), { withFileTypes: true })) { const q = x + '/' + e.name; if (e.isDirectory()) w(q); else if (q.endsWith('.html')) out.push(q); } }; w(d); return out; };
   /* every file the three tools write (the pages, site/facts.json) and every file a case breaks, read once; and the one file a case creates */
   const KEEP = [...new Set(['index.html', ...htmlUnder('site'), ...htmlUnder('tools'), ...htmlUnder('constitution/reader'), 'site/facts.json',
-    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json'])];
+    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md'])];
   const NEW = ['site/extra.html'];
   const ALL = [...KEEP, ...NEW];
   const missing = KEEP.filter(f => !fs.existsSync(P(f)));
@@ -157,13 +157,13 @@ const siteLines = [];
       ['facts', 'a span names a figure nothing derives', () => sub1('site/thinking.html', /data-fact="[^"]*"/, 'data-fact="no.such.figure"'), CHECK, 'fail', 'names a figure this script does not derive'],
       ['facts', 'a law-share span reads a wrong share', () => sub1('site/rules.html', /(data-law-share="[^"]*">)(\d+)%/, (m, k, n) => k + (+n + 1) + '%'), CHECK, 'fail', 'law-share "'],
       ['facts', 'a typed number outside any span', () => before('site/web.html', '</main>', '<p>We counted 4242 things.</p>\n'), [[], ['--unchecked']], 'fail', 'typed number(s) outside a span'],
-      ['facts', 'a verifier terminal differs from a real run', () => sub1('site/how.html', /(<pre class="term"><span class="dim">\$ node tools\/zane\/cli\.js check [^\n]*\n[^\n]*?)error/, '$1warning'), CHECK, 'fail', 'is not what a real run prints'],
+      ['facts', 'a verifier terminal differs from a real run', () => sub1('site/how.html', /(<pre class="term"><span class="dim">\$ zane check [^\n]*\n[^\n]*?)error/, '$1warning'), CHECK, 'fail', 'is not what a real run prints'],
       ['facts', 'site/how.html loses its declaration and terminal pairs', () => sub1('site/how.html', /<pre class="shot">/g, '<pre class="shot plain">'), CHECK, 'fail', 'site/how.html: its pair has no declaration and terminal to verify'],
       ['facts', 'an excerpt names a file that does not exist', () => sub1('site/haro.html', 'data-excerpt="haro/zane.stzu"', 'data-excerpt="haro/zane-gone.stzu"'), CHECK, 'fail', 'which does not exist'],
       ['facts', 'an excerpt shows a line its file lacks', () => sub1('site/haro.html', /(<pre class="excerpt" data-excerpt="[^"]*">)/, '$1DEFINE NOTHING AT ALL\n'), CHECK, 'fail', 'shows a line the file does not contain'],
-      ['facts', 'a terminal names a command outside the pack', () => sub1('site/conformance.html', 'data-run="node tools/zane/pack.js --check"', 'data-run="node tools/other/pack.js --check"'), CHECK, 'fail', 'is not a pack command'],
-      ['facts', 'a terminal whose first line is not its command', () => sub1('site/conformance.html', '<span class="dim">$ node tools/zane/pack.js --check</span>', '<span class="dim">$ node tools/zane/pack.js --chek</span>'), CHECK, 'fail', 'is not that command'],
-      ['facts', 'a terminal differs from what its command prints', () => sub1('site/conformance.html', /(data-run="node tools\/zane\/conformance\.js">[\s\S]*?)level 4/, '$1level 3'), CHECK, 'fail', 'the terminal for "node tools/zane/conformance.js" is not what a real run prints'],
+      ['facts', 'a terminal names a command outside the pack', () => sub1('site/conformance.html', 'data-run="zane pack --check"', 'data-run="zane serve --port 8770"'), CHECK, 'fail', 'is not a pack command'],
+      ['facts', 'a terminal whose first line is not its command', () => sub1('site/conformance.html', '<span class="dim">$ zane pack --check</span>', '<span class="dim">$ zane pack --chek</span>'), CHECK, 'fail', 'is not that command'],
+      ['facts', 'a terminal differs from what its command prints', () => sub1('site/conformance.html', /(data-run="zane conformance">[\s\S]*?)level 4/, '$1level 3'), CHECK, 'fail', 'the terminal for "zane conformance" is not what a real run prints'],
       ['facts', 'the grid table drifts from its data', gridCell, CHECK, 'fail', 'the grid:table differs from the data'],
       ['facts', 'the channels table drifts from its data', channelsRow, CHECK, 'fail', 'the channels:table differs from the data'],
       ['facts', 'a status word that is not one of three', () => sub1('site/conformance.html', 'class="status exists">exists<', 'class="status maybe">maybe<'), CHECK, 'fail', 'is not one of exists, designed, held'],
@@ -201,6 +201,11 @@ const siteLines = [];
       ['shell', 'an outline entry over twenty characters', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Three ways to try it out today"'), CHECK, 'fail', 'give its h2 a data-outline of 20 at most'],
       ['shell', 'an outline entry repeating its page\'s label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Try"'), CHECK, 'fail', 'repeats the label "Try" above it'],
       ['shell', 'an outline entry repeating a band label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Screenshots"'), CHECK, 'fail', 'name the same thing on one page'],
+      ['shell', 'a page tells the reader to run node', () => before('site/web.html', '</main>', '<p>Run <code>node tools/zane/cli.js check x.zane</code>.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("node tools/zane/cli.js")'],
+      ['shell', 'a page names Node as what it needs', () => before('site/web.html', '</main>', '<p>It needs Node and a browser.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("Node")'],
+      ['shell', 'a variable named node in a script, not an instruction', () => before('site/web.html', '</main>', '<script>\nlet node = 1;\nnode = node + 1;\n</script>\n'), [[], ['--write']], 'pass', ''],
+      ['shell', 'README.md tells the reader to run node', () => edit('README.md', t => t + '\nRun `node tools/zane/cli.js check x.zane`.\n'), CHECK, 'fail', 'README.md:'],
+      ['shell', 'an allowed line gone, its entry left', () => sub1('tools/zane/wasm-proof.html', 'node tools/zane/parity.js --write-wasm-proof', 'tools/zane/parity.js with --write-wasm-proof'), CHECK, 'fail', 'matches no line: the entry has outlived what it excused'],
       ['shell', 'a served page the registry does not list', () => put(P('site/extra.html'), '<!DOCTYPE html>\n<title>x</title>\n'), CHECK, 'fail', 'site/extra.html: a page the site serves that the registry does not list'],
       ['shell', 'a registered page missing', () => drop(P('site/vibes.html')), [[], ['--write']], 'fail', 'site/vibes.html: missing'],
 

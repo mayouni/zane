@@ -173,7 +173,7 @@
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="n">caller</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check check_balance.zane</span>
+<pre class="term"><span class="dim">$ zane check check_balance.zane</span>
 check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
     <span class="dim">A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.</span>
     <span class="dim">Rule 82 · Perceivable State · Article II</span>
@@ -191,7 +191,7 @@ check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">CANCEL, EXIT</span>],
   <span class="k">ACTOR</span> <span class="n">caller</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check check_balance_screen.zane</span>
+<pre class="term"><span class="dim">$ zane check check_balance_screen.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.15</pre>
     </div>
     <p>The site's own check re-runs both runs. The refusal applies to the <em>promise</em> and not to the voice line: a declaration is lawful in a voice channel when it asks only for what a voice can carry.</p>
@@ -204,7 +204,7 @@ check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT
     <p>The design rests on the sentence <b>one declaration, many renderings, one law</b>. The instrument that tests this sentence does not assert that two renderings match, because two renderings are irreducibly different. It asserts that <em>every difference
     between them is one the published data already predicted</em>.</p>
     <p>A difference that the data accounts for shows the model working, and a difference that the data does not account for is drift and fails the run. On the suite's two cases the instrument reports:</p>
-<pre class="term" data-run="node tools/zane/cross-medium.js"><span class="dim">$ node tools/zane/cross-medium.js</span>
+<pre class="term" data-run="zane cross-medium"><span class="dim">$ zane cross-medium</span>
 
 Cross-medium conformance — 2 case(s)
   media        10 enumerated, matrix v1.1

@@ -591,6 +591,34 @@ function checkNames(problems) {
   }
 }
 
+/* ---- the site names the one file, never node (doc/design/BINARY.md, S6; Central's ANSWER of 2026-11-07 10:49) -------------------- */
+/* Since stage S6 the verifier is one file, zane: no page of the registry, and not README.md, tells the reader to run Node, neither as
+   a command (node PATH.js) nor by the runtime's name (Node, Node.js). Scripts and styles are not read, so a variable named node is not
+   an instruction. A page that documents the JavaScript reference may name it, one line at a time, in NODE_ALLOWED, each entry with
+   its reason; an entry that matches no line fails, so the list cannot outlive what it excuses. */
+const NODE_ALLOWED = [
+  { file: 'tools/zane/wasm-proof.html', words: 'node tools/zane/parity.js --write-wasm-proof',
+    reason: 'parity.js holds the binary to its JavaScript reference, so it runs on Node by design; the proof page says what writes its record' },
+];
+const NODE_RE = /\bnode\s+[\w./-]+\.[cm]?js\b|\bNode(?:\.js)?\b/;
+function checkNode(problems) {
+  const used = new Set();
+  const files = new Set(['index.html', 'README.md', ...PAGES.map(p => p.file)]);
+  for (const f of files) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const text = fs.readFileSync(file, 'utf8').replace(/<(script|style)\b[\s\S]*?<\/\1>/g, m => m.replace(/[^\n]/g, ''));
+    text.split('\n').forEach((line, i) => {
+      const m = NODE_RE.exec(line);
+      if (!m) return;
+      const k = NODE_ALLOWED.findIndex(x => x.file === f && line.includes(x.words));
+      if (k >= 0) { used.add(k); return; }
+      problems.push(f + ':' + (i + 1) + ' tells the reader to run Node ("' + m[0] + '"): the verifier is one file, zane (doc/design/BINARY.md, S6)');
+    });
+  }
+  NODE_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('NODE_ALLOWED: ' + x.file + ' "' + x.words + '" matches no line: the entry has outlived what it excused'); });
+}
+
 /* ---- a submenu never repeats its parent's label (the Principal, 2026-11-06: "the same menu option in the main and submenu
    levels (like Try and then Try here)!!! This should never happen in our sites") ------------------------------------------------ */
 /* A section's head page is the section's own entry in the main menu, so it must carry the section's label and stay out of the band.
@@ -641,6 +669,7 @@ function main(argv) {
   checkWriting(problems, notes);
   checkBreaks(problems);
   checkNames(problems);
+  checkNode(problems);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);

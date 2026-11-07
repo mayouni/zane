@@ -65,7 +65,7 @@ Level 4 has no fixtures, and the manifest says why in its `unfixtured` section:
 ## Running the suite
 
 ```bash
-node tools/zane/conformance.js --level 4
+zane conformance --level 4
 ```
 
 That runs [the verifier in this repository](../tools/zane/README.md) against

@@ -84,7 +84,7 @@
   <span class="k">STEPS</span> [<span class="s">identity, funding, review</span>],
   <span class="k">ACTOR</span> <span class="n">applicant</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening.zane</span>
+<pre class="term"><span class="dim">$ zane check account_opening.zane</span>
 account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPED_FLOW</span>  account_opening
     <span class="dim">A multi-step flow has no reachable EXIT.</span>
     <span class="dim">Rule 51 · The Cognitive Tunnel · Rule 53 · Interaction Lockdown · Article II · the right to leave</span>
@@ -107,7 +107,7 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
   <span class="k">STEPS</span> [<span class="s">identity, funding, review</span>],
   <span class="k">ACTOR</span> <span class="n">applicant</span>
 )</pre>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening_exit.zane</span>
+<pre class="term"><span class="dim">$ zane check account_opening_exit.zane</span>
 <span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.15</pre>
     </div>
     <p>The two declarations form a <em>twin</em>: they differ by one change, and the verdict flips. The suite holds <span data-fact="fixtures.twins">22</span> twins, so that the law is tested
@@ -121,7 +121,7 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
     <p>Every court in the family writes its refusals in one envelope, so one CI step, one editor plugin or one dashboard can read all of them. With
     <code>--json</code> the refusal above is this object, which is the contract's <a href="../doc/diagnostic-contract.md">six fields</a> plus the level and the subject the
     Zane court adds:</p>
-<pre class="term"><span class="dim">$ node tools/zane/cli.js check account_opening.zane --json</span>
+<pre class="term"><span class="dim">$ zane check account_opening.zane --json</span>
 {
   "code": "TRAPPED_FLOW",
   "severity": "error",
