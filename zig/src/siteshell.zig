@@ -775,6 +775,31 @@ fn checkNode(a: Allocator, problems: *List) !void {
     for (node_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "NODE_ALLOWED: {s} \"{s}\" matches no line: the entry has outlived what it excused", .{ x.file, x.words }));
 }
 
+// ---- a release the site offers has its notes in this repository (Central's ZANE-RELEASE-01, 2026-11-07) --------------------------
+
+/// A page of the registry, index.html or README.md that links a release, its page or one of its files, names a version for which
+/// doc/releases/v<version>.md exists.
+fn checkReleases(a: Allocator, problems: *List) !void {
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    try addOnce(a, &files, "README.md");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const release_re = try re.compile(a, "\\/releases\\/(?:tag|download)\\/v([0-9][0-9A-Za-z.-]*)", "g");
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        var it = std.mem.splitScalar(u8, try core.wellFormed(a, try readFile(a, f)), '\n');
+        var i: usize = 0;
+        while (it.next()) |line| : (i += 1) {
+            var ms = re.iterate(&release_re, line);
+            while (ms.next()) |m| {
+                const v = m.get(line, 1) orelse continue;
+                const notes = try fmt(a, "doc/releases/v{s}.md", .{v});
+                if (!exists(notes)) try problems.append(a, try fmt(a, "{s}:{d} links the release v{s} and {s} does not exist: a release the site offers has its notes in this repository", .{ f, i + 1, v, notes }));
+            }
+        }
+    }
+}
+
 // ---- a submenu never repeats its parent's label (the Principal, 2026-11-06) ------------------------------------------
 
 fn checkLabels(a: Allocator, problems: *List) !void {
@@ -846,6 +871,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     try checkBreaks(a, &problems);
     try checkNames(a, &problems);
     try checkNode(a, &problems);
+    try checkReleases(a, &problems);
     var changed: usize = 0;
     for (&pages) |*p| {
         if (!exists(p.file)) {

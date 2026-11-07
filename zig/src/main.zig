@@ -8,6 +8,7 @@
 //!   zane serve [--root DIR | --app DIR] [--port N]     the site, the Reader and the audit, or another site beside the audit
 //!   zane site facts|shell|grid [--write]               this site's own build checks, run from the repository's root
 //!   zane version                                       the law, the language, the contract, the build
+//!   zane --version                                     the release's version: zane 0.1.0
 //!
 //! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`; stage S3
 //! builds the same core for a browser (wasm.zig, the report in report.zig); stage S4 adds serve; stage S5 adds site,
@@ -30,6 +31,7 @@ const serve = @import("serve.zig");
 const sitefacts = @import("sitefacts.zig");
 const siteshell = @import("siteshell.zig");
 const sitegrid = @import("sitegrid.zig");
+const build_options = @import("build_options");
 
 const language_version = "1.5";
 
@@ -146,6 +148,12 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
 /// One command line, without the program's name, to its command. `zane site facts` calls it to re-run the commands a
 /// page's terminal names, in this process, as tools/site-facts.js re-runs them with node.
 pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err: *std.Io.Writer) anyerror!u8 {
+    // the release's version alone (Central's ZANE-RELEASE-01): build.zig.zon's, and no commit, since a release is built from
+    // its tag and a build from a source archive has no git to ask
+    if (argv.len == 1 and std.mem.eql(u8, argv[0], "--version")) {
+        try out.print("zane {s}\n", .{build_options.version});
+        return 0;
+    }
     // this site's own build tools (stage S5): site facts, site shell, site grid
     if (argv.len > 0 and std.mem.eql(u8, argv[0], "site")) return site(a, argv[1..], out, err);
     // conformance.js reads its own arguments: --level N, --verbose or -v, and ignores the rest
@@ -275,7 +283,8 @@ fn site(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane (stage S5: check, conformance, pack, cross-medium, audit-facts, serve, site; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zane {s} (stage S5: check, conformance, pack, cross-medium, audit-facts, serve, site; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+        build_options.version,
         contract.constitution orelse "?",
         language_version,
         contract.version orelse "?",

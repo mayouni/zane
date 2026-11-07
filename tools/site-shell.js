@@ -619,6 +619,25 @@ function checkNode(problems) {
   NODE_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('NODE_ALLOWED: ' + x.file + ' "' + x.words + '" matches no line: the entry has outlived what it excused'); });
 }
 
+/* ---- a release the site offers has its notes in this repository (Central's ZANE-RELEASE-01, 2026-11-07 19:43) ------------------ */
+/* A page of the registry, index.html or README.md that links a release, its page (.../releases/tag/vX) or one of its files
+   (.../releases/download/vX/...), names a version for which doc/releases/vX.md exists: the site offers no file whose hashes,
+   gates and build this repository does not state. */
+const RELEASE_RE = /\/releases\/(?:tag|download)\/v([0-9][0-9A-Za-z.-]*)/g;
+function checkReleases(problems) {
+  const files = new Set(['index.html', 'README.md', ...PAGES.map(p => p.file)]);
+  for (const f of files) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    fs.readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+      for (const m of line.matchAll(RELEASE_RE)) {
+        const notes = 'doc/releases/v' + m[1] + '.md';
+        if (!fs.existsSync(path.join(ROOT, notes))) problems.push(f + ':' + (i + 1) + ' links the release v' + m[1] + ' and ' + notes + ' does not exist: a release the site offers has its notes in this repository');
+      }
+    });
+  }
+}
+
 /* ---- a submenu never repeats its parent's label (the Principal, 2026-11-06: "the same menu option in the main and submenu
    levels (like Try and then Try here)!!! This should never happen in our sites") ------------------------------------------------ */
 /* A section's head page is the section's own entry in the main menu, so it must carry the section's label and stay out of the band.
@@ -670,6 +689,7 @@ function main(argv) {
   checkBreaks(problems);
   checkNames(problems);
   checkNode(problems);
+  checkReleases(problems);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);

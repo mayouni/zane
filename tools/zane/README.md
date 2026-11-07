@@ -7,8 +7,12 @@ rendered.** One file, `zane`, and nothing to install beside it.
 zane check payments.zane
 ```
 
+Version 0.1.0 is on [its release page](https://github.com/mayouni/zane/releases/tag/v0.1.0), one file for each
+system and `zane-0.1.0.wasm` for a browser, each file's hash in `SHA256SUMS`
+([doc/releases/v0.1.0.md](../../doc/releases/v0.1.0.md) says how to check one). `zane --version` names it.
 `zane` is built from this repository with Zig (`zig build -Doptimize=ReleaseSmall` puts it in
-`zig-out/bin/`; [doc/design/BINARY.md](../../doc/design/BINARY.md)). The JavaScript in this folder is its
+`zig-out/bin/`, and `zig build release` builds every published file into `zig-out/release/`;
+[doc/design/BINARY.md](../../doc/design/BINARY.md)). The JavaScript in this folder is its
 **reference**: `zane.js` and `cli.js` are what [`parity.js`](parity.js) holds the binary to, byte for byte, and
 `node tools/zane/cli.js check payments.zane` runs that reference with the same options and the same output.
 

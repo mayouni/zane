@@ -11,7 +11,7 @@
       level 4, text at level 4, text at the default level, --quiet at level 1), with the fixture's symbols when it
       has any. Standard output, standard error and the exit code must be identical, byte for byte.
    2. THE ARGUMENTS. A handful of command lines that are not a check: no command, help, an unknown option, a bad
-      level, no file. (`version` is not compared: it names the build, and the JavaScript has none.)
+      level, no file. (`version` and `--version` are not compared: they name the build, and the JavaScript has none.)
    3. THE CORPUS. A deterministic generator (the seed is the artefact, the corpus is run and never stored) makes
       mutations of the fixtures: a line dropped, a line or the whole declaration duplicated, a verb, a kind, a
       medium or a role swapped, an invalid byte inserted, a character the language lacks inserted (one outside
@@ -128,7 +128,7 @@ const siteLines = [];
   const htmlUnder = d => { const out = []; const w = x => { for (const e of fs.readdirSync(P(x), { withFileTypes: true })) { const q = x + '/' + e.name; if (e.isDirectory()) w(q); else if (q.endsWith('.html')) out.push(q); } }; w(d); return out; };
   /* every file the three tools write (the pages, site/facts.json) and every file a case breaks, read once; and the one file a case creates */
   const KEEP = [...new Set(['index.html', ...htmlUnder('site'), ...htmlUnder('tools'), ...htmlUnder('constitution/reader'), 'site/facts.json',
-    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md'])];
+    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md'])];
   const NEW = ['site/extra.html'];
   const ALL = [...KEEP, ...NEW];
   const missing = KEEP.filter(f => !fs.existsSync(P(f)));
@@ -205,6 +205,9 @@ const siteLines = [];
       ['shell', 'a page names Node as what it needs', () => before('site/web.html', '</main>', '<p>It needs Node and a browser.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("Node")'],
       ['shell', 'a variable named node in a script, not an instruction', () => before('site/web.html', '</main>', '<script>\nlet node = 1;\nnode = node + 1;\n</script>\n'), [[], ['--write']], 'pass', ''],
       ['shell', 'README.md tells the reader to run node', () => edit('README.md', t => t + '\nRun `node tools/zane/cli.js check x.zane`.\n'), CHECK, 'fail', 'README.md:'],
+      ['shell', 'a page links a release with no notes', () => before('site/web.html', '</main>', '<p><a href="https://github.com/mayouni/zane/releases/tag/v9.9.9">The release</a>.</p>\n'), CHECK, 'fail', 'links the release v9.9.9 and doc/releases/v9.9.9.md does not exist'],
+      ['shell', 'README.md links a file of a release with no notes', () => edit('README.md', t => t + '\n[zane](https://github.com/mayouni/zane/releases/download/v0.0.9/zane-0.0.9.wasm)\n'), CHECK, 'fail', 'README.md:'],
+      ['shell', 'the notes of the release the site offers missing', () => drop(P('doc/releases/v0.1.0.md')), CHECK, 'fail', 'doc/releases/v0.1.0.md does not exist'],
       ['shell', 'an allowed line gone, its entry left', () => sub1('tools/zane/wasm-proof.html', 'node tools/zane/parity.js --write-wasm-proof', 'tools/zane/parity.js with --write-wasm-proof'), CHECK, 'fail', 'matches no line: the entry has outlived what it excused'],
       ['shell', 'a served page the registry does not list', () => put(P('site/extra.html'), '<!DOCTYPE html>\n<title>x</title>\n'), CHECK, 'fail', 'site/extra.html: a page the site serves that the registry does not list'],
       ['shell', 'a registered page missing', () => drop(P('site/vibes.html')), [[], ['--write']], 'fail', 'site/vibes.html: missing'],

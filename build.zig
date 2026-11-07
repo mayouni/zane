@@ -5,24 +5,32 @@
 //!   zig build -j2 test                         the unit tests
 //!   zig build -j2 run -- check x.zane          run it
 //!   zig build -j2 wasm -Doptimize=ReleaseSmall the browser build, zane.wasm (stage S3), copied to site/zane.wasm by hand
+//!   zig build -j2 release                      every published file at ReleaseSmall, in zig-out/release, with SHA256SUMS
 //!
-//! The data it embeds (conformance/, constitution/) is read from this repository at build time.
+//! The data it embeds (conformance/, constitution/) is read from this repository at build time. The version is
+//! build.zig.zon's, and `zane --version` prints it.
 
 const std = @import("std");
+const version: []const u8 = @import("build.zig.zon").version;
+
+/// What `zig build release` publishes (Central's ZANE-RELEASE-01, 2026-11-07): one executable per target, named by version,
+/// architecture and system. Linux is musl and static; macOS is built here and never run here (BINARY.md section 11.7).
+const release_targets = [_]struct { name: []const u8, query: std.Target.Query }{
+    .{ .name = "x86_64-windows", .query = .{ .cpu_arch = .x86_64, .os_tag = .windows } },
+    .{ .name = "x86_64-linux", .query = .{ .cpu_arch = .x86_64, .os_tag = .linux, .abi = .musl } },
+    .{ .name = "aarch64-linux", .query = .{ .cpu_arch = .aarch64, .os_tag = .linux, .abi = .musl } },
+    .{ .name = "x86_64-macos", .query = .{ .cpu_arch = .x86_64, .os_tag = .macos } },
+    .{ .name = "aarch64-macos", .query = .{ .cpu_arch = .aarch64, .os_tag = .macos } },
+};
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const root = b.createModule(.{
-        .root_source_file = b.path("zig/src/main.zig"),
-        .target = target,
-        .optimize = optimize,
-    });
+    const options = b.addOptions();
+    options.addOption([]const u8, "version", version);
     const site = siteModule(b);
-    embedData(b, root);
-    root.addImport("site", site);
-    const exe = b.addExecutable(.{ .name = "zane", .root_module = root });
+    const exe = zaneExe(b, target, optimize, site, options);
     b.installArtifact(exe);
 
     const run = b.addRunArtifact(exe);
@@ -36,11 +44,64 @@ pub fn build(b: *std.Build) void {
     });
     embedData(b, test_root);
     test_root.addImport("site", site);
+    test_root.addOptions("build_options", options);
     const tests = b.addTest(.{ .root_module = test_root });
     const test_run = b.addRunArtifact(tests);
     b.step("test", "Run the unit tests").dependOn(&test_run.step);
 
     // the browser build: the same core for wasm32-freestanding, behind the export surface of wasm.zig and nothing else
+    const wasm = zaneWasm(b, optimize);
+    b.step("wasm", "Build zane.wasm").dependOn(&b.addInstallArtifact(wasm, .{}).step);
+
+    // the release: every target at ReleaseSmall whatever -Doptimize says, and SHA256SUMS written by zig/src/sums.zig, built for
+    // this machine, so the step runs no other program. Two clean builds in two fresh clones give the same SHA256SUMS: that is
+    // its gate, and doc/releases/ records each release's figures.
+    const release = b.step("release", "Build every published file at ReleaseSmall into zig-out/release, with SHA256SUMS");
+    const sums_tool = b.addExecutable(.{ .name = "sums", .root_module = b.createModule(.{
+        .root_source_file = b.path("zig/src/sums.zig"),
+        .target = b.graph.host,
+        .optimize = .ReleaseFast,
+    }) });
+    const sums = b.addRunArtifact(sums_tool);
+    const sums_file = sums.addOutputFileArg("SHA256SUMS");
+    const dest: std.Build.InstallDir = .{ .custom = "release" };
+    for (release_targets) |t| {
+        const rt = b.resolveTargetQuery(t.query);
+        const r = zaneExe(b, rt, .ReleaseSmall, site, options);
+        const name = b.fmt("zane-{s}-{s}{s}", .{ version, t.name, rt.result.exeFileExt() });
+        release.dependOn(&b.addInstallArtifact(r, .{
+            .dest_dir = .{ .override = dest },
+            .dest_sub_path = name,
+            .pdb_dir = .disabled,
+            .h_dir = .disabled,
+            .implib_dir = .disabled,
+        }).step);
+        sums.addArg(name);
+        sums.addFileArg(r.getEmittedBin());
+    }
+    const rw = zaneWasm(b, .ReleaseSmall);
+    const wasm_name = b.fmt("zane-{s}.wasm", .{version});
+    release.dependOn(&b.addInstallFileWithDir(rw.getEmittedBin(), dest, wasm_name).step);
+    sums.addArg(wasm_name);
+    sums.addFileArg(rw.getEmittedBin());
+    release.dependOn(&b.addInstallFileWithDir(sums_file, dest, "SHA256SUMS").step);
+}
+
+/// The executable for one target: main.zig, the data it embeds, the site it serves, and the version.
+fn zaneExe(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode, site: *std.Build.Module, options: *std.Build.Step.Options) *std.Build.Step.Compile {
+    const root = b.createModule(.{
+        .root_source_file = b.path("zig/src/main.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    embedData(b, root);
+    root.addImport("site", site);
+    root.addOptions("build_options", options);
+    return b.addExecutable(.{ .name = "zane", .root_module = root });
+}
+
+/// zane.wasm: the core for wasm32-freestanding, with the contract and the law it checks against.
+fn zaneWasm(b: *std.Build, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
     const wasm_root = b.createModule(.{
         .root_source_file = b.path("zig/src/wasm.zig"),
         .target = b.resolveTargetQuery(.{ .cpu_arch = .wasm32, .os_tag = .freestanding }),
@@ -51,7 +112,7 @@ pub fn build(b: *std.Build) void {
     const wasm = b.addExecutable(.{ .name = "zane", .root_module = wasm_root });
     wasm.entry = .disabled;
     wasm.rdynamic = true;
-    b.step("wasm", "Build zane.wasm").dependOn(&b.addInstallArtifact(wasm, .{}).step);
+    return wasm;
 }
 
 /// The contract, the law, the suite and the audit's facts schema live outside zig/src, which @embedFile cannot reach by

@@ -80,7 +80,14 @@
       <div class="card"><h2 id="screenshots" data-outline="What a shot decides">The screenshot audit, for an application you do not own</h2><p>The screenshot audit is for an application that nobody here owns. It reduces a screenshot to facts and judges them on the three rules that a screenshot can decide.</p><a href="screenshots.html">Screenshots →</a></div>
     </div>
     <p><a href="../tools/zane/wasm-proof.html">The wasm proof</a>, in the same band, runs the conformance suite through the verifier compiled to WebAssembly in your browser, and the Build page has <a href="build.html#try-it-here">a box</a> to check a declaration of your own the same way.</p>
-    <p>The verifier and a local server are one file, <code>zane</code>, built from this repository with Zig (<code>zane serve</code>, in <a href="../doc/design/BINARY.md">the binary's design</a>), and it has not been released. The file will appear on this page when it is released.</p>
+    <p>The verifier and a local server are one file, <code>zane</code> (<code>zane serve</code>, in <a href="../doc/design/BINARY.md">the binary's design</a>). Version 0.1.0 is on <a href="https://github.com/mayouni/zane/releases/tag/v0.1.0">its release page</a>, one file for each system:</p>
+    <ul>
+      <li>Windows: <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/zane-0.1.0-x86_64-windows.exe"><code>zane-0.1.0-x86_64-windows.exe</code></a></li>
+      <li>Linux on Intel or Arm: <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/zane-0.1.0-x86_64-linux"><code>zane-0.1.0-x86_64-linux</code></a> or <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/zane-0.1.0-aarch64-linux"><code>zane-0.1.0-aarch64-linux</code></a></li>
+      <li>macOS on Intel or Apple silicon: <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/zane-0.1.0-x86_64-macos"><code>zane-0.1.0-x86_64-macos</code></a> or <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/zane-0.1.0-aarch64-macos"><code>zane-0.1.0-aarch64-macos</code></a></li>
+      <li>A browser: <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/zane-0.1.0.wasm"><code>zane-0.1.0.wasm</code></a></li>
+    </ul>
+    <p>Each file's SHA-256 hash is in <a href="https://github.com/mayouni/zane/releases/download/v0.1.0/SHA256SUMS"><code>SHA256SUMS</code></a> beside it, and <a href="https://github.com/mayouni/zane/blob/v0.1.0/doc/releases/v0.1.0.md">the release notes</a> say how to check one. This page is served from inside the file, so it cannot carry that file's own hash. The files are not signed.</p>
   </div>
 </section>
 
