@@ -3371,3 +3371,53 @@ next:
              check: pushed stzzui 8411624
 ```
 ---
+
+--- FROM: stzzui | 2026-11-08 00:25 | NOTE | answers Central's ANSWER of 2026-11-07 19:43, ZANE-RELEASE-01 (relayed by the desk) | ZANE 0.1.0 PREPARED AT c7b7324: TWO FRESH CLONES GIVE ONE SHA256SUMS; WINDOWS RAN EVERY S6 GATE, LINUX x86_64 RAN UNDER WSL; THE AUDIT FINDS NO SECRET AND 10 HITS FOR THE PRINCIPAL
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-08 00:25 | SIDE SESSION, started by the desk's session
+
+subject:   zane v0.1.0, prepared and not published (c7b7324 the build, the next commit the notes, the audit and this memo; local on main, not pushed, no tag)
+
+why:       your 19:43 order, on the Principal's words 'release v0.1' and 'Make zane public'
+
+did:
+  - ADDED `zig build release` (build.zig): ReleaseSmall whatever -Doptimize says, into zig-out/release/: zane-0.1.0-x86_64-windows.exe, -x86_64-linux and -aarch64-linux (musl, static), -x86_64-macos, -aarch64-macos, zane-0.1.0.wasm, and SHA256SUMS written by zig/src/sums.zig, built for this machine, so the step runs no other program; the version is build.zig.zon's
+  - MADE `zane --version` print `zane 0.1.0`, with no commit: a release is built from its tag and a source archive has no git to ask; `zane version` now leads with it too; parity compares neither, as before
+  - BUILT the release in two fresh clones of c7b7324 at two different paths, one after the other, each with its own empty local and global Zig caches, -j2, 54 s and 52 s: SHA256SUMS identical; `sha256sum -c` under WSL reads every line OK; LF only
+  - RAN every S6 gate on clone A's zane-0.1.0-x86_64-windows.exe, in clone A: parity identical in all seven sections (73 fixtures, 294 lines; corpus 2,592 at seed 20261105; wasm record current; site tools 68 cases, 90 lines); serve-test 250 of 250; zig build test 10 of 10; zane site shell 38, site facts ok, site grid ok, pack verified, conformance level 4, cross-medium, audit-facts; UI audit 0 on 38 pages in Modern and in Retro, served by the file alone from a folder holding nothing else
+  - RAN zane-0.1.0-x86_64-linux under WSL (Ubuntu 26.04, WSL 2), from clone B: --version, conformance (level 4, 73 of 73), check over the 73 fixtures together in JSON at level 4 and text at levels 4 and 2, and each fixture alone; every output byte for byte the Windows file's
+  - FOUND zane-0.1.0.wasm byte for byte site/zane.wasm (03ece677...), which the wasm proof ran in a browser on 2026-11-07: 292 envelopes identical
+  - OFFERED the download where the pages said 'not yet released': Try (the release page, the six files by name and link, SHA256SUMS, the notes), Adopt, the tour's cost scene, README.md and tools/zane/README.md; BINARY.md's status says 0.1.0 is prepared
+  - ADDED the check to site-shell, in JS and in Zig: a page of the registry, index.html or README.md that links .../releases/tag/vX or .../releases/download/vX/... needs doc/releases/vX.md; three parity cases (a page with no notes, README.md linking a file, the notes missing), each failing in both with the same bytes
+  - WROTE doc/releases/v0.1.0.md: per file the bytes, the sha256 and RUN or built not run; law v3.15 (123 rules), contract v1.9, conformance level 4, the gates' figures, Zig 0.15.2, unsigned, how to check a hash on Windows (Get-FileHash, certutil), Linux (sha256sum -c) and macOS (shasum -a 256 -c, and xattr for the quarantine)
+  - SCANNED every commit for the audit (tools/public-audit.js: git log -p --all, the lines each commit adds and every message, 307 commits, 97,551 lines; every blob's size), cross-checked by git log -G; wrote doc/releases/PUBLIC-AUDIT.md
+  - PROVED the notes and the audit are not in the binary: rebuilt in this checkout with both present, SHA256SUMS identical to the clones'
+
+state:
+  SHA256SUMS:      96e1586dcd2549c90f9fb587252797774696b953621867274b01f6031d878a85  zane-0.1.0-aarch64-linux
+                   1037cc74b16f376861de0155cbc622e682cff181c8607e70fd5036f92bd63fa0  zane-0.1.0-aarch64-macos
+                   915a0329b9fa4b41d5a545dc97d362f6847baa437f858c95711d10245194fb0a  zane-0.1.0-x86_64-linux
+                   6825ad97dcabf88513c77f6550d6849dc40f233c598d5f37ee95447c39730c52  zane-0.1.0-x86_64-macos
+                   7bb4a0bd3cc126da66658d9168480e6d6190fc41c3e5d32c60d07eebc119fb81  zane-0.1.0-x86_64-windows.exe
+                   03ece67767243ab3037c44bf9731b801eb8c414d310d4a5078d1808a3c69859a  zane-0.1.0.wasm
+  the targets:     x86_64-windows RUN, every S6 gate; x86_64-linux RUN under WSL; wasm RUN in a browser (the same bytes as site/zane.wasm); aarch64-linux BUILT NOT RUN (no Arm machine, no emulator here, none installed); both macOS BUILT NOT RUN (no Mac)
+  the sizes:       windows 2,415,616 B, room 1,584,384 of 4,000,000; x86_64-linux 2,196,288; aarch64-linux 2,143,040; x86_64-macos 2,258,839; aarch64-macos 2,273,512; wasm 127,460
+  the audit:       0 secrets: 0 tokens or keys, 0 private keys, 0 .env files, 0 files over 5 MB (largest 1,898,779 B, a site screenshot in .central/shots). 10 HITS, each with commit and path in doc/releases/PUBLIC-AUDIT.md: 2 'password' lines that are prose, 1 e-mail address (noreply@anthropic.com, the co-author line of 250 commit messages), and 7 found by reading (.central/ tracked whole; CLAUDE.md and WHATS-NEXT.md tracked; repositories with no public remote named, stz-principal, bangalo, ringpp's private/next; one C:/Users path naming this machine's user, in .central/outbox.md at b656119; D:\ paths on 59 lines in 16 files; doc/prompts/ tracked; the Principal's words quoted as typed)
+  ZANE-RELEASE-PAGEHASH: DECIDED -- the pages carry no file's hash, against item 5's words: the binary embeds every page and every file a page links, so a page that held the binary's hash would change the hash it holds. The pages link SHA256SUMS and the release notes (by their GitHub address, which the binary does not embed), and say why; the hashes are in doc/releases/v0.1.0.md and SHA256SUMS
+  the UI audit, strict:  not a gate; it reports 3,083 findings in Modern (18 px for every text, 7:1 for every link and button)
+
+waiting:
+  - ZANE-PUBLIC-AUDIT: hits 4 to 10 of doc/releases/PUBLIC-AUDIT.md, whether each may go public with the history as it is: (a) .central/ whole, (b) CLAUDE.md and WHATS-NEXT.md, (c) the named private repositories, (d) the C:/Users path, (e) the D:\ paths, (f) doc/prompts/, (g) the Principal's words as typed -> the Principal, through Central
+             [not routed; it is here]
+             class: outward
+             check: Central's step e, mayouni/zane public, done only after this row is answered
+  - ZANE-DOWNLOAD-SEEN: site/audit.html at c7b7324, the section 'Three ways to try': read the download list once in Modern and once in Retro and say whether it reads well -> the Principal
+             [not routed; it is here]
+             class: perceptual
+
+next:
+  - me:      nothing more on ZANE-RELEASE-01 before your read; I push, tag, release and change nothing
+  - central: in your clone at the sha of this memo (or at c7b7324: the commit after it adds only files the binary does not embed): zig build -j2 release, SHA256SUMS identical to the state above; then the S6 gates on zig-out/release/zane-0.1.0-x86_64-windows.exe (node tools/zane/parity.js --bin it, expect identical, site tools 68 cases, 90 lines; node tools/zane/serve-test.js --bin it, expect 250 of 250); then your steps b to f
+             check: built stzzui c7b7324 with zig build release
+```
+---
