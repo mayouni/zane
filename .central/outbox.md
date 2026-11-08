@@ -3474,3 +3474,32 @@ next:
              check: committed stzzui 6462afa ZANE-MENU-LANDING-01
 ```
 ---
+
+--- FROM: stzzui | 2026-11-08 22:28 | NOTE | completes the NOTE of 22:00, ZANE-MENU-LANDING-01 | THE RELEASE BUILD RAN AT 6462afa ONCE THE MACHINE HAD THE HEADROOM; EVERY GATE HOLDS ON ITS WINDOWS FILE; ITS FILES STILL SAY 0.1.0 AND ARE NOT THE PUBLISHED 0.1.0
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-08 22:28 | SIDE SESSION, on the author's words in this session: "run the release build now"
+
+subject:   the release build of 6462afa, owed by the 22:00 NOTE
+
+why:       the guard had refused it with 0.6 GB free; at 22:17 17.1 GB was free
+
+did:
+  - BUILT the release at -j2 in this checkout at 6462afa, 29 s, with this desk's caches (not two fresh clones: reproducibility across clones was proved at c7b7324 and nothing in the build step changed)
+  - RAN on zig-out/release/zane-0.1.0-x86_64-windows.exe: parity identical in every section (site tools 75 cases, 99 lines); serve-test 250 of 250; conformance level 4, 77 of 77; site shell 38; pack verified
+  - FOUND zane-0.1.0.wasm byte for byte site/zane.wasm (9f01a29f...)
+
+state:
+  SHA256SUMS:      dfc4f8bd379d446a2498e6279e756c3854f46a66cc0b46057b19ef622dae525f  zane-0.1.0-aarch64-linux
+                   9a7e39b42a5b2f6cdd6c27ed037dcd009271cd9f5028cbba0abe495a489c7762  zane-0.1.0-aarch64-macos
+                   7ce54dfbd4fc3600877f1e938c8edd7d4e7942ef674b897cb5e016c2e498bfd7  zane-0.1.0-x86_64-linux
+                   8514198c2696eac97645c4db129c3a67542a4c6a1df00f167f27243665f59cdd  zane-0.1.0-x86_64-macos
+                   8331e936bcffd6f6445dee52ab4364b4000206a92d9bcc466b7d3cc3eba69044  zane-0.1.0-x86_64-windows.exe
+                   9f01a29fc89bbcaed74e5095f50f965ffa133a91c633aa852eb29488842f9f00  zane-0.1.0.wasm
+  sizes:           windows 2,449,408 B (under 4,000,000); x86_64-linux 2,229,056; aarch64-linux 2,175,808; x86_64-macos 2,293,322; aarch64-macos 2,308,104; wasm 134,440
+  the version:     build.zig.zon still says 0.1.0, so these files carry the published release's names and --version prints "zane 0.1.0" with other bytes; they must not be uploaded under v0.1.0. A v0.1.1 needs the version raised and doc/releases/v0.1.1.md written, which is yours and the Principal's to order
+
+next:
+  - central: decide v0.1.1; if yes, the version is raised here and the release built again in two fresh clones, as at c7b7324
+             check: built stzzui 6462afa with zig build release
+```
+---
