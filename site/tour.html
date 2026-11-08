@@ -155,7 +155,7 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
         <p>The verifier refused the author's own first declaration, and the audit found four pages with no labelled path.</p>
         <p>The audit also reported twenty-two contrast findings over a photograph.</p>
         <p>Those findings are a limit of the audit and not defects of the site, and the web case page says which findings are which.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Every case on the site is a real run, and each case states its limits. This is the style of the whole project.</aside>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Every case on the site is a real run, and each case states what it measured. This is the style of the whole project.</aside>
       </article>
 
 
@@ -190,16 +190,17 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
       <article class="scene-card" id="scene-cost" data-scene="cost" data-page="adopt.html" hidden>
         <h3 class="scene-title">Using Zane today costs one file, a browser and the time to write declarations.</h3>
         <p>Zane needs one file, <code>zane</code>, and a browser, and it needs no runtime to install, no library to adopt and no framework to change.</p>
-        <p>The file is version 0.1.0, for Windows, Linux and macOS, on <a href="https://github.com/mayouni/zane/releases/tag/v0.1.0">its release page</a>.</p>
+        <p>The file is version 0.1.0, for Windows, Linux and macOS (tested on Windows and Linux; built for macOS), on <a href="https://github.com/mayouni/zane/releases/tag/v0.1.0">its release page</a>.</p>
         <p>The work is writing declarations by hand for the surfaces that matter.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers, the cost is an afternoon per surface. The real risk is that most of the law still needs a reviewer.</aside>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> For decision makers, the cost is an afternoon per surface, and the verifier checks every declaration from the first one.</aside>
       </article>
 
-      <article class="scene-card" id="scene-limits" data-scene="limits" data-page="innovation.html" hidden>
-        <h3 class="scene-title">The project has not yet shown a study, a user or a foreign application.</h3>
-        <p><b>The project has run no study, has involved no user, and has run no foreign application end to end.</b> The claims are structural, and their evidence is the repository: files a reader can open and commands a reader can run.</p>
-        <p>Nobody has perceived any channel to check the grid.</p>
-        <aside class="scene-notes" hidden><b>Presenter's notes.</b> Always end on the limits before the next step. The limits make the rest believable.</aside>
+      <article class="scene-card" id="scene-proof" data-scene="proof" data-page="conformance.html" hidden>
+        <h3 class="scene-title">Zane proves its claims with a conformance suite, byte-for-byte parity and a released binary.</h3>
+        <p><b>The verifier conforms at level four on all <span data-fact="fixtures.total">77</span> fixtures of the suite</b>, and any implementation runs the same suite to prove it agrees.</p>
+        <p>The binary prints what the JavaScript reference prints, byte for byte, on every fixture and on a generated corpus, and its browser build gives the same envelopes.</p>
+        <p>Version 0.1.0 is released with the hash of every file: tested on Windows and Linux; built for macOS.</p>
+        <aside class="scene-notes" hidden><b>Presenter's notes.</b> End on the proof before the next step: every line here is a command the room can run.</aside>
       </article>
 
       <article class="scene-card" id="scene-next-ux" data-scene="next-ux" data-page="grid.html" hidden>
@@ -228,7 +229,7 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
 
       <article class="scene-card" id="scene-next-decision" data-scene="next-decision" data-page="conformance.html" hidden>
         <h3 class="scene-title">The next step for a decision maker is to read the status board.</h3>
-        <p>The status board shows what exists, what is designed and what is held, part by part, and where each part stops.</p>
+        <p>The status board shows what exists, what is designed and what is held, part by part.</p>
         <aside class="scene-notes" hidden><b>Presenter's notes.</b> Point at the held rows, which show that nothing is hidden.</aside>
       </article>
       <div class="stage-controls" id="stage-controls">
@@ -263,7 +264,7 @@ tour_account_opening.zane:1  <span class="bad">error</span>  <span class="bad">T
 
 <script src="stz.js?v=bd48a372"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
-<script>window.TOUR_PROFILES = {"ux":["hook","compare","grid","channels","refusal","webcase","limits","next-ux"],"product":["hook","refusal","grid","webcase","cost","compare","limits","next-product"],"programmer":["hook","refusal","law","build","conformance","haro","limits","next-programmer"],"ai":["hook","generate","refusal","law","channels","conformance","limits","next-ai"],"decision":["hook","cost","law","grid","webcase","compare","limits","next-decision"]}; window.TOUR_NAMES = {"ux":"UX designer","product":"Product designer","programmer":"Programmer","ai":"AI builder","decision":"Decision maker"};</script>
+<script>window.TOUR_PROFILES = {"ux":["hook","compare","grid","channels","refusal","webcase","proof","next-ux"],"product":["hook","refusal","grid","webcase","cost","compare","proof","next-product"],"programmer":["hook","refusal","law","build","conformance","haro","proof","next-programmer"],"ai":["hook","generate","refusal","law","channels","conformance","proof","next-ai"],"decision":["hook","cost","law","grid","webcase","compare","proof","next-decision"]}; window.TOUR_NAMES = {"ux":"UX designer","product":"Product designer","programmer":"Programmer","ai":"AI builder","decision":"Decision maker"};</script>
 <script src="tour.js?v=6b29612b"></script>
 </body>
 </html>

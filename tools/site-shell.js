@@ -644,6 +644,48 @@ function checkReleases(problems) {
   }
 }
 
+/* ---- a page states what Zane is and does (Central's ZANE-AFFIRM-01, 2026-11-08; doc/design/WRITING.md section 4) ---------------
+   The Principal, 2026-11-08: "Avoid this role of transparency that hurts the project image (negative markeing)!", after the ruling of
+   2026-10-13: "do not let the tendency to be transparent and fair make the statements elusive". No page of the registry, index.html
+   or README.md lists what the project has not done, shown, measured or perceived: the phrases below are refused in the text a reader
+   reads. Scripts, styles, comments, code samples (pre, code, and in README.md fenced and backticked code) and diagnostic names are
+   not read. AFFIRM_ALLOWED excuses one line at a time, each entry with its reason; an entry that matches no line fails. What is
+   unmeasured is recorded in doc/, doc/design/BINARY.md, the release notes and .central/, never on a page. */
+const AFFIRM_RE = /\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven)\b/i;
+const AFFIRM_ALLOWED = [
+  { file: 'site/gotchas/reading.html', words: 'not yet been articulated by your teams',
+    reason: 'the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel' },
+];
+const blank = m => m.replace(/[^\n]/g, '');
+function readable(f, text) {
+  if (f.endsWith('.md')) return text.replace(/```[\s\S]*?```/g, blank).replace(/`[^`\n]*`/g, blank).replace(/<!--[\s\S]*?-->/g, blank);
+  return text.replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, blank);
+}
+function checkAffirm(problems) {
+  const used = new Set();
+  const files = new Set(['index.html', 'README.md', ...PAGES.map(p => p.file)]);
+  for (const f of files) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    readable(f, fs.readFileSync(file, 'utf8')).split('\n').forEach((line, i) => {
+      /* a block opens a new sentence, so "Limit:" and "Not shown:" are judged at the start of each block of the line and of each sentence in it */
+      const blocks = line.split(/<(?:p|li|div|h[1-6]|td|th|dd|dt|br|tr|figcaption|blockquote|section|header)\b[^>]*>/i).map(s => plain(s.replace(/<[^>]*>/g, ' ')));
+      const said = [];
+      for (const b of blocks) {
+        const m = AFFIRM_RE.exec(b);
+        if (m) said.push(m[1]);
+        const lead = /(?:^|[.!?]\s)(Limit:|Not shown:)/.exec(b);
+        if (lead) said.push(lead[1]);
+      }
+      if (!said.length) return;
+      const k = AFFIRM_ALLOWED.findIndex(x => x.file === f && line.includes(x.words));
+      if (k >= 0) { used.add(k); return; }
+      problems.push(f + ':' + (i + 1) + ' says what the project lacks ("' + said.join('", "') + '"): a page states what Zane is and does (doc/design/WRITING.md section 4)');
+    });
+  }
+  AFFIRM_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('AFFIRM_ALLOWED: ' + x.file + ' "' + x.words + '" matches no line: the entry has outlived what it excused'); });
+}
+
 /* ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) ------------------------------------------
    "it's not logical to get the main title "Approach" then find it also as an option of it's cibling menus!!! you must add this as an
    issue that is statically checked in Zane". The main menu names each SECTION and links to its head page; the band under it opens on
@@ -715,6 +757,7 @@ function main(argv) {
   checkNames(problems);
   checkNode(problems);
   checkReleases(problems);
+  checkAffirm(problems);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);

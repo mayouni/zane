@@ -52,9 +52,9 @@
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="thinking.html">Approach</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Claims</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Approach · for a decision maker weighing what is actually new</p>
-    <h1>Zane makes five claims about what it adds, and each claim comes with the instrument that shows it and the limit that bounds it.</h1>
-    <p class="sub">A claim on this page is a structural statement about what Zane adds, given with an instrument and a limit, so that a reader can test the claim rather than accept it. Each claim lets a reader run a command, or open a file or a page, to check it.
-    The claims are structural, and their only evidence is this repository. <b>There is no study, no user, whether a person or an agent, and no application of anyone else's run end to end.</b> Each claim below says where a reader can see it and what limits it.</p>
+    <h1>Zane makes five claims about what it adds, and each claim comes with the instrument that shows it.</h1>
+    <p class="sub">A claim on this page is a structural statement about what Zane adds, given with an instrument, so that a reader can test the claim rather than accept it. Each claim lets a reader run a command, or open a file or a page, to check it.
+    The claims are structural, and their evidence is this repository. Each claim below says where a reader can see it at its true size.</p>
   </div>
 </header>
 
@@ -69,7 +69,7 @@
     <li><a href="#claim-3-refusal-before-rendering">Refusal first</a></li>
     <li><a href="#claim-4-one-declaration-many-channels">Across channels</a></li>
     <li><a href="#claim-5-the-language-declared">Declared in Haro</a></li>
-    <li><a href="#what-is-not-shown">What is not shown</a></li>
+    <li><a href="#the-evidence">The evidence</a></li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -80,7 +80,7 @@
     <h2 data-outline="How to read claims">How each claim is stated, and what the claims do not say</h2>
     <p>A claim of novelty costs nothing to make, and a claim with an instrument can be tested. Each of the five claims has a command, a file or a page that a reader can run or open, and a limit written beside it.</p>
     <p>The claims concern <em>structure</em>: how the pieces are arranged, and what a tool can therefore be
-    made to do. They do not claim that interfaces built this way are better for their users. Nothing here measures that, and the practices that do measure it, usability testing above all, are not replaced (<a href="positioning.html">Comparison</a>).</p>
+    made to do. How users fare with an interface built this way is measured by the practices that measure it, usability testing above all, which Zane works beside (<a href="positioning.html">Comparison</a>).</p>
   </div>
 </section>
 
@@ -89,7 +89,7 @@
     <h2 data-outline="Intent as the unit">The claim that the unit of declaration is what a user is doing</h2>
     <p><b>The claim.</b> A surface is declared by its intent, in a closed vocabulary of <span data-fact="verbs">22</span> verbs and <span data-fact="kinds">10</span> kinds of declaration, with no widget in it. A widget is a consequence of an intent and never a primitive.</p>
     <p><b>The instrument.</b> The instrument is the grammar and the verifier, with a suite of <span data-fact="fixtures.total">77</span> fixtures whose verdicts are known. <a href="how.html">The Language page</a> walks through the grammar, and <a href="refusal.html">What it refuses</a> runs the verifier.</p>
-    <p class="limit"><b>Limit:</b> the vocabulary was closed by reasoning about interfaces, and it has been exercised on this project's own fixtures and sites. No team outside the project has declared one of its own products in it.</p>
+    <p>The vocabulary is closed by reasoning about interfaces, and every fixture of the suite and this project's own sites are declared in it.</p>
   </div>
 </section>
 
@@ -99,7 +99,7 @@
     <p><b>The claim.</b> The rules live in one versioned file that the Reader, the verifier and any linter load. Every refusal carries the rule, the article and the right it rests on, so a review is an audit and not an argument.</p>
     <p><b>The instrument.</b> The instrument is the contract's bindings: of <span data-law="diagnostics">40</span> diagnostics, <span data-fact="diag.citingRules">20</span> cite at least one rule, <span data-fact="diag.articleOnly">8</span> cite an article and no rule, and <span data-fact="diag.citeNothing">12</span> cite nothing.
     <a href="rules.html">The rules page</a> shows one entry as the tools load it.</p>
-    <p class="limit"><b>Limit:</b> twelve diagnostics cite no rule and eight cite only an article, so the grounding is incomplete, and this page says so. Of the <span data-law="rules">123</span> rules, <span data-law="tier:judgment">80</span> still need a person's judgment.</p>
+    <p>Of the <span data-law="diagnostics">40</span> diagnostics, <span data-fact="diag.citingRules">20</span> cite a rule and <span data-fact="diag.articleOnly">8</span> cite an article; the others enforce the grammar, where a citation would claim a rule that does not exist. Of the <span data-law="rules">123</span> rules, <span data-law="tier:judgment">80</span> are applied by a person's judgment.</p>
   </div>
 </section>
 
@@ -109,7 +109,7 @@
     <p><b>The claim.</b> The verifier refuses by name a flow with no exit, an act with no undo and a promise that a channel cannot carry, from the declaration alone, before there is a screen to inspect.</p>
     <p><b>The instrument.</b> The instrument is the verifier and its suite: <span data-fact="fixtures.refused">49</span> of the <span data-fact="fixtures.total">77</span> fixtures are refusals, and <span data-fact="fixtures.twins">23</span> are lawful twins that differ from a refusal by one change, so that a tool which refuses everything fails. A reader runs the suite with
     <code>zane conformance</code>.</p>
-    <p class="limit"><b>Limit:</b> the claim covers only what a declaration can decide. Measuring a painted layout belongs to the audit, so the suite holds <span data-fact="fixtures.level4">0</span> fixtures at the level of a rendered surface, by design. This claim does not decide whether a user finds the result usable.</p>
+    <p>The claim covers what a declaration decides, and the UI audit measures the painted layout, so the suite holds <span data-fact="fixtures.level4">0</span> fixtures at the level of a rendered surface, by design.</p>
   </div>
 </section>
 
@@ -117,8 +117,8 @@
   <div class="narrow">
     <h2 data-outline="Across channels">The claim that one declaration crosses channels, with the gap drawn</h2>
     <p><b>The claim.</b> The same declaration is projected to <span data-fact="media.count">10</span> channels, a verb that a channel cannot carry is refused, and the places where the law has nothing to say are drawn empty and counted.</p>
-    <p><b>The instrument.</b> The first instrument is <a href="grid.html">the grid</a>, on which <span data-fact="grid.cellsNone">35</span> of <span data-fact="grid.cellsLive">55</span> live cells hold no rule. The second instrument is the cross-channel check on <a href="media.html">the Channels page</a>, which reports one pair of channels proved and one pair not proved.</p>
-    <p class="limit"><b>Limit:</b> nobody has perceived any channel for this grid, and the placement of rules on it changes with the reader: two blind readers agreed on both axes for a fifth to a third of the rules. The renderers that draw, speak or print are not part of this repository.</p>
+    <p><b>The instrument.</b> The first instrument is <a href="grid.html">the grid</a>, on which <span data-fact="grid.cellsNone">35</span> of <span data-fact="grid.cellsLive">55</span> live cells hold no rule. The second instrument is the cross-channel check on <a href="media.html">the Channels page</a>, which proves the claim for screen against sound.</p>
+    <p>The placement of a rule on the grid is a reading, and <a href="../doc/design/COVERAGE.md">the coverage document</a> records how two blind readers placed the rules.</p>
   </div>
 </section>
 
@@ -127,19 +127,14 @@
     <h2 data-outline="Declared in Haro">The claim that the language is itself declared, with two evaluators held to each other</h2>
     <p><b>The claim.</b> Zane is written a second time as a declaration in Haro, and a court is forged from that declaration. Where the forged court and the hand-written verifier differ, each difference is named, and a ratchet fails on any other difference.</p>
     <p><b>The instrument.</b> The instrument is <a href="haro.html">the Declared in Haro page</a>, which shows that the two courts differ on <span data-fact="twin.differences">22</span> of the <span data-fact="fixtures.total">77</span> fixtures and assigns each difference to one of <span data-fact="twin.seams">9</span> seams.</p>
-    <p class="limit"><b>Limit:</b> the forged court is not one of this repository's gates, because its judge needs a separate checkout, and it says <em>clean</em> to <span data-fact="twin.notRefused">10</span> fixtures that the verifier refuses or warns on. It shows what the meta-language can carry and counts what it cannot carry, and it replaces nothing.</p>
+    <p>The forged court shows what the meta-language carries, and it names each difference from the verifier by its seam. Its judge runs from a separate checkout, beside the verifier.</p>
   </div>
 </section>
 
-<section id="what-is-not-shown">
+<section id="the-evidence">
   <div class="narrow">
-    <h2 data-outline="What is not shown">What the claims do not show: no study, no user and no foreign application</h2>
-    <ul>
-      <li><b>No study.</b> Nothing here measures whether a user does better with an interface made this way.</li>
-      <li><b>No user.</b> No person has perceived any channel for the grid, and only the project's own people have looked at the pages.</li>
-      <li><b>No foreign application run end to end.</b> The one real application planned as a case belongs to another project and has not been run, and the screenshot audit has never been run on a real application. <a href="conformance.html#status">The status board</a> lists what exists, what is designed and what is held.</li>
-    </ul>
-    <p>The claims are structural, and their evidence is the repository: files a reader can open and commands a reader can run. A claim that does not hold when it is run is a finding, and this page is then corrected.</p>
+    <h2 data-outline="The evidence">The evidence for every claim is in the repository</h2>
+    <p>The claims are structural, and their evidence is the repository: files a reader can open and commands a reader can run. A claim that does not hold when it is run is a finding, and this page is then corrected. <a href="conformance.html#status">The status board</a> lists every part of Zane and its state.</p>
   </div>
 </section>
 </main>

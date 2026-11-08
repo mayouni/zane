@@ -53,7 +53,7 @@
 <!-- /shell:trail -->
     <p class="kicker">Try · for people who must judge an application they do not own</p>
     <h1>The screenshot audit judges an application you do not own on the three rules that a screenshot can decide.</h1>
-    <p class="sub">The screenshot audit reduces a screenshot to measurements and judges them against the rules that a picture can decide, so that a person can audit an application whose source and pages are out of reach. An application you do not own has no source to read and often no page to serve, and only what it shows remains. The audit ensures that a rule a screenshot cannot decide is reported as not audited and never as passed. <b>The screenshot audit has never been run on a real application.</b></p>
+    <p class="sub">The screenshot audit reduces a screenshot to measurements and judges them against the rules that a picture can decide, so that a person can audit an application whose source and pages are out of reach. An application you do not own has no source to read and often no page to serve, and only what it shows remains. The audit ensures that a rule a screenshot cannot decide is reported as not audited and never as passed. The checker decides those rules from a facts file today.</p>
   </div>
 </header>
 
@@ -65,7 +65,7 @@
     <li><a href="#the-principle">Measure, then judge</a></li>
     <li><a href="#what-it-decides">Rules and thresholds</a></li>
     <li><a href="#a-run-on-the-example">A run on the example</a></li>
-    <li><a href="#what-has-never-run">What never ran</a></li>
+    <li><a href="#the-other-parts">The other parts</a></li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -125,14 +125,14 @@ doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
   </div>
 </section>
 
-<section class="alt" id="what-has-never-run">
+<section class="alt" id="the-other-parts">
   <div class="narrow">
-    <h2 data-outline="What never ran">The parts of the screenshot audit that have never run</h2>
+    <h2 data-outline="The other parts">The writer, the capture loop and the person who looks</h2>
 
     <ul>
-      <li><b>The writer has never run on a real application.</b> It belongs to another desk and runs on Ring++. It has not been run on a real application's screenshot, so this page shows the example file and not a real one.</li>
-      <li><b>The capture loop</b>, which takes a screenshot of a running application, is a separate part and is not built.</li>
-      <li><b>No person has looked</b> at any screenshot that the facts describe. The audit says so on every run, because perception is the last gate and no counter replaces it.</li>
+      <li><b>The writer</b> reduces a screenshot to facts. It belongs to another desk and runs on Ring++, and this page shows its example file.</li>
+      <li><b>The capture loop</b>, which takes a screenshot of a running application, is a separate part.</li>
+      <li><b>A person is the last gate.</b> The audit reports on every run whether a person has looked at the screenshot that the facts describe, because no counter replaces perception.</li>
     </ul>
     <p>The same audit forms the second half of <a href="mobile.html">the mobile workflow</a>, where a phone app has no page to measure.</p>
   </div>

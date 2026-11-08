@@ -54,7 +54,7 @@
     <p class="kicker">Use · for a team with an iOS or Android application</p>
     <h1>Zane checks a mobile app through the declarations of its screens and a screenshot audit, because a mobile app has no page to measure.</h1>
     <p class="sub">The mobile workflow checks an iOS or Android application, which has no markup for the UI audit to read, with two tools: the language checks what the screens declare, and a screenshot audit judges facts reduced from an image against the three rules a screenshot can decide.
-    The workflow lets a team check the declared flows of a phone app, and it prevents a screenshot from passing a rule that a screenshot cannot decide. The language check runs today. <b>The screenshot audit has never been run on a real application.</b></p>
+    The workflow lets a team check the declared flows of a phone app, and it prevents a screenshot from passing a rule that a screenshot cannot decide. The language check and the checker of the facts file run today.</p>
   </div>
 </header>
 
@@ -124,14 +124,14 @@ doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
 
 <section id="what-runs-today">
   <div class="narrow">
-    <h2>Which parts of the mobile workflow run today, and which do not</h2>
+    <h2>Which parts of the mobile workflow run today, and what each part does</h2>
 
     <ul>
       <li><b>Two parts run today:</b> the verifier on a mobile flow's declaration, shown above, and the checker of the facts file with its three decisions.</li>
-      <li><b>One part has never run:</b> the writer that reduces a real screenshot to facts, on a real application. The capture loop is a separate part and is not built. This page therefore cannot show a real mobile run, and it says so rather than show a made-up one.</li>
-      <li><b>No person has looked at the screenshot.</b> The facts describe a screenshot that no person has looked at, and the checker prints that on every run.</li>
+      <li><b>The writer</b> reduces a screenshot to facts. It belongs to another desk and runs on Ring++, and the capture loop that takes the screenshot is a separate part.</li>
+      <li><b>A person is the last gate:</b> the checker reports, on every run, whether a person has looked at the screenshot that the facts describe.</li>
     </ul>
-    <p class="limit"><b>Limit:</b> a real case needs an application and its owner's agreement. Until someone names such an application, the second half of this workflow is designed and not run.</p>
+    <p>A real case starts with an application and its owner's agreement, and the whole workflow then runs on it.</p>
   </div>
 </section>
 

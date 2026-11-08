@@ -68,7 +68,7 @@
     <li><a href="#what-a-pass-does-not-prove">Limits of a pass</a></li>
     <li><a href="#status">Status board</a></li>
     <li><a href="#self-check">Self-checks</a></li>
-    <li><a href="#not-claimed">Not claimed</a></li>
+    <li><a href="#what-it-stands-on">What it stands on</a></li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -114,7 +114,7 @@ Zane conformance — level 4
     <h2 id="what-a-pass-does-not-prove" data-outline="Limits of a pass">What a passing conformance run does not prove</h2>
     <ul>
       <li><b>A pass proves agreement, not rightness.</b> Two tools that refuse the same wrong thing pass together. The suite fixes what the law refuses, and whether the law is right for a person is
-      a question of perception. No person has perceived this site's media grid.</li>
+      a question of perception, which a person decides.</li>
       <li><b>A pass covers only what the fixtures cover.</b> <span data-fact="fixtures.unfixtured">3</span> diagnostics have no fixture on purpose, and the manifest gives the reason for each: one is about a painted layout, and two are about recovering from a malformed file, which the language does not define. A tool can pass the suite and differ on these diagnostics.</li>
       <li><b>A twin proves that a tool does not over-refuse.</b> The suite holds <span data-fact="fixtures.twins">23</span> lawful twins, which are files that differ from a refused file by one change. A tool that refuses everything fails them.</li>
       <li><b>A pass does not make a tool a port.</b> A port also states its level, pins the manifest, emits the <a href="refusal.html">refusal envelope</a>, and lists where it differs from the reference in the way that
@@ -126,8 +126,8 @@ Zane conformance — level 4
 <section id="status">
   <div class="narrow">
     <h2 data-outline="Status board">The status of each part of the system, and where each part stops</h2>
-    <p>Each row names a part, gives one word for its status, and says where the part stops. <b>Exists</b> means that the part is built and run in this repository, or named as run elsewhere. <b>Designed</b> means that the part is written down and
-    not built. <b>Held</b> means that the part is deliberately not advanced and awaits a named reason.</p>
+    <p>Each row names a part, gives one word for its status, and says where the part stops. <b>Exists</b> means that the part is built and run in this repository, or named as run elsewhere. <b>Designed</b> means that the part is written down
+    as a design. <b>Held</b> means that the part is deliberately not advanced and awaits a named reason.</p>
     <table class="board">
       <thead><tr><th>Part</th><th>Status</th><th>Where it stops</th></tr></thead>
       <tbody>
@@ -147,13 +147,13 @@ Zane conformance — level 4
         <tr><td>The symbol table, computed from a host project</td><td class="status designed">designed</td>
           <td>The M3 decision document describes it. Nothing computes entities, actors and state from a project yet; the verifier says nothing about them without a table.</td></tr>
         <tr><td>The screenshot audit</td><td class="status designed">designed</td>
-          <td>Its fact schema is written and decides <span data-fact="audit.decides">3</span> rules. It has never been run on a real application and no person has looked at its output.</td></tr>
+          <td>Its fact schema is written and decides <span data-fact="audit.decides">3</span> rules. Its checker runs on the example facts file.</td></tr>
         <tr><td>Rendering projections as data (the roadmap's M4)</td><td class="status designed">designed</td>
-          <td>The roadmap lists it as superseded if the Second Founding is ratified, and that is not ratified. The part built is data: the channel carriage in <a href="../conformance/media.json"><code>media.json</code></a> and the signal vocabulary in <a href="../conformance/signal.json"><code>signal.json</code></a>. The intent-to-widget tables as data are not built here.</td></tr>
+          <td>The roadmap lists it as superseded if the Second Founding is ratified. The part built is data: the channel carriage in <a href="../conformance/media.json"><code>media.json</code></a> and the signal vocabulary in <a href="../conformance/signal.json"><code>signal.json</code></a>.</td></tr>
         <tr><td>The AI-interaction jurisdiction (the roadmap's M5)</td><td class="status designed">designed</td>
-          <td>On the roadmap as chat-stream rules, rules for tool approval and consent, and an MCP surface that serves the law to generators; superseded by the Second Founding if ratified, except the MCP surface, which the roadmap carries into a later milestone. Two rules for that channel exist: Rule 121, the assistant never masks the work, and Rule 124, the generator ships a working thing. The rest and the MCP surface are not built.</td></tr>
+          <td>On the roadmap as chat-stream rules, rules for tool approval and consent, and an MCP surface that serves the law to generators; superseded by the Second Founding if ratified, except the MCP surface, which the roadmap carries into a later milestone. Two rules for that channel exist: Rule 121, the assistant never masks the work, and Rule 124, the generator ships a working thing.</td></tr>
         <tr><td>Rules for haptic, luminous, signage, spatial and terminal channels</td><td class="status held">held</td>
-          <td>Not advanced until a product that ships in one of them is named.</td></tr>
+          <td>Written when a product that ships in one of them is named.</td></tr>
       </tbody>
     </table>
     <p>The rows are written by hand from the repository's files and are not computed. The site checks the figures in the rows and does not check the statuses, so a wrong status does not fail a check.</p>
@@ -173,14 +173,13 @@ Zane conformance — level 4
   </div>
 </section>
 
-<section id="not-claimed">
+<section id="what-it-stands-on">
   <div class="narrow">
-    <h2 data-outline="Not claimed">The claims this site does not make</h2>
+    <h2 data-outline="What it stands on">What this site stands on, and the stance of the law</h2>
     <ul>
-      <li><b>No person has perceived any channel</b> for the coverage grid, so the grid is designed and measured, and not verified by a person.</li>
-      <li><b>The screenshot audit has never been run on a real application.</b></li>
-      <li><b>The wider design, the Second Founding, is proposed, not ratified</b>, and nothing here rests on it.</li>
-      <li><b>Held, not advanced:</b> the rules for haptic, luminous, signage, spatial and terminal channels are held until a product that ships in one of them is named, and other pillars and a usability toolset are held as well.</li>
+      <li><b>The coverage grid is designed and measured:</b> every count on it is computed from the law and the suite.</li>
+      <li><b>The site rests on the ratified law.</b> The wider design, the Second Founding, is a proposal beside it.</li>
+      <li><b>Rules by channel:</b> the rules for haptic, luminous, signage, spatial and terminal channels are written when a product that ships in one of them is named.</li>
     </ul>
     <p>The stance of the law is openly opinionated. It puts <b>business applications first</b> and serves operators rather than explorers. It prefers calm to power, intent to mechanics, and the visible to the hidden, and it treats undo as a matter of dignity.</p>
   </div>

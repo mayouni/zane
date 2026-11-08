@@ -116,8 +116,8 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
     accepts and the court refuses. The grammar also does not hold anything that needs two clauses read together: the declaration above is
     well-formed. <b>Every refusal of meaning stays with the court.</b> The grammar narrows what a generator can say, and it does not make what the generator says lawful.</p>
     <p><b>The grammar is checked against its source:</b> the judge regenerates the file from the declaration on every run and fails if the checked-in copy
-    differs, so the file cannot drift from the forge. The grammar has not been run under a decoder in this repository: no model has been decoded
-    under it here, and the site does not claim that one has.</p>
+    differs, so the file cannot drift from the forge. The grammar is written for a decoder to constrain a model's output to declarations
+    the verifier can read.</p>
   </div>
 </section>
 
@@ -130,8 +130,7 @@ pick.zane:2  <span class="bad">error</span>  <span class="bad">SELECT_ACT_COLLAP
 <span class="p">Declare each surface in .zane before rendering it, and cite the rules you obeyed.</span>
 <span class="p">Here is the verifier's report on your last declaration. Fix every finding, by rule:</span>
 <span class="bad">pick.zane:2 error SELECT_ACT_COLLAPSE (Rule 16)</span></pre>
-    <p>This loop is a procedure, not a measured result: nobody has yet measured how many rounds a model needs under it, or whether the declared
-    surface and the rendered surface stay in step. The runtime half is <a href="../tools/ui-audit.html">the UI audit</a>, which measures
+    <p>This loop is a procedure: the model declares, the verifier refuses by name, and the model corrects until the declaration is lawful. The runtime half is <a href="../tools/ui-audit.html">the UI audit</a>, which measures
     what was actually painted.</p>
   </div>
 </section>

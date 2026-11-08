@@ -22,7 +22,8 @@ time because it lived only in a promise, so it is written here and part of it is
    narrative (*"we found"*, *"the story of"*, *"so it was measured"*), clipped fragments, aphorisms, closing one-liners, and a
    title that makes sense only after the page has been read.
 5. **Every page states its value** in one sentence that begins with what the thing ensures, prevents or lets a person do.
-6. **Limits stay**, written in the same plain register: *"Limit: nobody has heard a channel to check a cell."*
+6. **A claim is stated at its true size, affirmatively** (section 4). A page says what Zane is and does; it never lists what the
+   project lacks. This rule read *"Limits stay"* until 2026-11-08, and the Principal reversed it.
 7. **A title's line breaks belong to the browser, which balances them; the page never places one by hand.** A title holds no
    `<br>` and no piece set as a block, and `node tools/site-shell.js` fails one that does (the front page's title once broke as
    *"Zane is the / compilable language / for user interfaces."* for this reason).
@@ -77,3 +78,30 @@ and everything below it is rendered by script from `rules.json`, so skipping it 
 
 **The check cannot judge narrative, teasing, fragments or aphorisms.** A sentence can contain the word *grid* and still be a
 riddle. Points 3 to 6 of section 1 are kept by reading the page, and the check does not replace that reading.
+
+## 4. A page states what Zane is and does
+
+**The rule.** A public page states what Zane **is** and what it **does**, in affirmative sentences. No page lists what the project
+has not done, has not shown, has not measured, or what nobody has yet perceived: no *Limit:* paragraph, no *Not shown:* caption, no
+*not yet*, no *nobody has*.
+
+- **Affirmative is never inflated.** Nothing false is claimed. Where a sentence only said what is missing, it goes. Where it bounded
+  a claim, the claim is restated at its true size: *"The verifier checks the declaration"*, never *"No instrument here checks the
+  perception"*.
+- **The record of what is unmeasured stays where it already lives**: `doc/`, `doc/design/BINARY.md`, the release notes' table
+  of files, and `.central/`. It is not copied onto pages.
+- **Platform status reads affirmatively**: *"Tested on Windows and Linux; built for macOS."*
+
+**Evidence.** The Principal, 2026-11-08, on a screenshot of the tour's scene 7 of 8 (*"The project has not yet shown a study, a user
+or a foreign application. ... Nobody has perceived any channel to check the grid."*): *"Avoid this role of transparency that hurts the
+project image (negative markeing)! Generalise this issue on all Softanza project sistes because I raised this before but you seem to
+persist on it"*. The ruling before it, 2026-10-13, on another Softanza site: *"do not let the tendency to be transparent and fair make
+the statements elusive"*. Ordered by Central as ZANE-AFFIRM-01.
+
+**What the check decides.** `zane site shell` (and `node tools/site-shell.js`) fails a line of a page of the registry, of
+`index.html` or of `README.md` that holds *not yet*, *nobody has*, *no one has*, *never been*, *has not been*, *no person has*,
+*not run yet*, *not built*, *unverified* or *unproven*, or a sentence that opens on *Limit:* or *Not shown:*, ignoring case for the phrases. It does not
+read scripts, styles, comments or code samples (`pre`, `code`, and fenced or backticked code in Markdown), so a terminal that
+prints a real run is quoted as it is. Its allow list, `AFFIRM_ALLOWED`, excuses one line at a time with a reason, and fails when an
+entry no longer matches a line. The check cannot judge a lack stated in other words; reading does the rest, as for the register.
+On 2026-11-08, before the sweep, it refused 65 lines in 23 files.

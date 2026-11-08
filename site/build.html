@@ -71,7 +71,7 @@
         <li><a href="#fail-the-build-on-a-refusal">Fail the build</a></li>
         <li><a href="#measure-the-paint">Audit the page</a></li>
         <li><a href="#amend-with-evidence">Amend with evidence</a></li>
-        <li><a href="#what-is-not-here-yet">Not built yet</a></li>
+        <li><a href="#around-the-workflow">Around the workflow</a></li>
       </ul>
     </li>
     <li><a href="generate.html">Generate</a></li>
@@ -106,8 +106,8 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     them.</p>
     <p><b>Level two, the default level, is what a declaration alone can decide.</b> A check that needs a fact a
     declaration does not hold (the entities, the actors, the state, the elements of a surface) is skipped unless you
-    hand it a symbol table with <code>--symbols</code>, and an undecidable check stays silent and is never a pass. A tool that computes that table
-    from a host project is not built, as the last section says.</p>
+    hand it a symbol table with <code>--symbols</code>, and an undecidable check stays silent and is never a pass. The table comes from your project,
+    as the last section says.</p>
   </div>
 </section>
 
@@ -136,8 +136,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
       </div>
       <div id="try-result" role="status" aria-live="polite"><p class="try-wait">The verifier is loading.</p></div>
     </form>
-    <p class="limit"><b>Limit:</b> the box decides what one declaration can decide. A check at level three needs a symbol table,
-    which the box does not take, so it stays silent there, as the command line does without <code>--symbols</code>.</p>
+    <p>The box decides what one declaration decides. A check at level three reads a symbol table, which the command line takes with <code>--symbols</code>.</p>
   </div>
 </section>
 
@@ -195,17 +194,17 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-is-not-here-yet" data-outline="Not built yet">Parts of the build workflow that are held or designed, not built</h2>
-    <p>This section states each missing part as held or designed, and not as promised.</p>
+    <h2 id="around-the-workflow" data-outline="Around the workflow">The parts around the build workflow, and the state of each</h2>
+    <p>This section states each part around the workflow as it stands.</p>
     <ul>
-      <li><b>Cross-pillar symbols are not computed.</b> The verifier accepts a symbol table that you supply, and building one from a host
-      project's other pillars is the open half of level three, which is unchanged.</li>
+      <li><b>Cross-pillar symbols come from a table you supply.</b> The verifier reads it at level three, and your project's other
+      pillars are what it is built from.</li>
       <li><b>One violation belongs to the audit, not to the verifier.</b> <code>LAYOUT_DISPLACEMENT</code> is a fact about a painted
       page, so it has no fixture by design.</li>
-      <li><b>The AI-interaction jurisdiction is not written.</b> The law has no rules for the chat stream, and no endpoint serves the law to
-      an agent while it works. The <a href="../ROADMAP.md">roadmap</a> keeps the account.</li>
-      <li><b>The Second Founding is proposed, not ratified.</b> It argues for a wider design and its own rulings, and the law you pin is
-      the law described above, not that document.</li>
+      <li><b>The AI-interaction jurisdiction is on the roadmap.</b> Two rules of the law already govern a generator, and the
+      <a href="../ROADMAP.md">roadmap</a> keeps the account of the rest.</li>
+      <li><b>The Second Founding is a proposal.</b> It argues for a wider design and its own rulings, and the law you pin is
+      the law described above.</li>
     </ul>
   </div>
 </section>

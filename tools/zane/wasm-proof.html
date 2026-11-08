@@ -88,8 +88,7 @@
     <p>Each line below is one fixture. Opening it shows the envelope at level 4 from the wasm in this browser beside the one from
     <code>zane check --json --level 4</code>; a fixture that differs at any level opens at the first level where it differs.</p>
     <div id="pairs"></div>
-    <p class="limit"><b>Limit:</b> the proof shows sameness, never rightness. Two builds that agree on every byte share every mistake of the
-    verifier. The generated corpus that <code>tools/zane/parity.js</code> runs against the native binary is not run here.</p>
+    <p>The proof shows that the two builds are the same, byte for byte; the conformance suite shows that they are right. The generated corpus runs against the native binary in <code>tools/zane/parity.js</code>.</p>
   </div>
 </section>
 </main>

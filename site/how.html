@@ -68,7 +68,7 @@
     <li><a href="#ninety-seconds">A refusal, corrected</a></li>
     <li><a href="#four-steps-and-which-of-them-exist">The four steps</a></li>
     <li><a href="#the-same-law-at-three-moments">Three moments</a></li>
-    <li><a href="#what-exists-today-and-what-does-not">What exists today</a></li>
+    <li><a href="#what-exists-today">What exists today</a></li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -172,7 +172,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
         <text class="dg-a" x="690" y="196" text-anchor="middle">exists</text>
       </svg>
       <figcaption>A solid outline marks a step that is built and run in this repository. A dashed outline marks a step whose data exists, with a check that proves renderings differ only as the data predicts,
-      while the renderers that draw, speak or print live in other projects. <b>Not shown:</b> the person who looks at the result. No person has perceived any medium for this site's grid.</figcaption>
+      while the renderers that draw, speak or print are built in the projects that ship them.</figcaption>
     </figure>
     <p><b>Declare.</b> A <code>.zane</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
     declaration and <span data-fact="verbs">22</span> verbs. The vocabulary is closed on purpose, because a widget is a consequence of an intent and never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be built from that data.</p>
@@ -191,7 +191,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
     <figure class="figure">
             <svg viewBox="0 0 780 240" role="img" aria-labelledby="mom-t mom-d">
         <desc id="mom-t">The law at design time, in development and at runtime</desc>
-        <desc id="mom-d">Three boxes joined by arrows. At design time the verifier checks the declaration. In development the build runs the pack check and the conformance suite. At runtime the UI audit measures the painted page. Under runtime a dashed box: the screenshot audit is designed and has never been run on a real application.</desc>
+        <desc id="mom-d">Three boxes joined by arrows. At design time the verifier checks the declaration. In development the build runs the pack check and the conformance suite. At runtime the UI audit measures the painted page. Under runtime a dashed box: the screenshot audit, designed for an application you do not own.</desc>
         <defs><marker id="mom-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-arrow"/></marker></defs>
         <rect class="dg-live" x="10" y="20" width="220" height="110" rx="10"/>
         <rect class="dg-live" x="280" y="20" width="220" height="110" rx="10"/>
@@ -211,22 +211,21 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
         <text class="dg-s" x="660" y="186" text-anchor="middle">screenshot audit:</text>
         <text class="dg-s" x="660" y="208" text-anchor="middle">designed, never run</text>
       </svg>
-      <figcaption>The same law, read from one file, applies at all three moments. <b>Not shown:</b> what happens between the moments, such as a generator that drifts from its declaration after design.
-      The audit for an application that nobody on this project owns is designed and has not been run on a real application.</figcaption>
+      <figcaption>The same law, read from one file, applies at all three moments, and the screenshot audit is designed to carry it to an application you do not own.</figcaption>
     </figure>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-exists-today-and-what-does-not" data-outline="What exists today">The parts of the language that exist today, and the parts that do not</h2>
+    <h2 id="what-exists-today" data-outline="What exists today">The parts of the language that exist today, and what each one reads</h2>
     <ul>
       <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">40</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">77</span> fixtures that any implementation can prove it agrees with.</li>
-      <li><b>Data, not renderers:</b> the media carriage and the signal vocabulary. The pieces that draw, speak or print are not part of this repository.</li>
-      <li><b>Not built:</b> computing the facts a declaration does not hold (the entities, actors, state and elements of a surface) from a host project. The verifier accepts a table you supply and says nothing without one.</li>
-      <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal channels, until a product that ships in one is named.</li>
+      <li><b>Data for every channel:</b> the media carriage and the signal vocabulary, which the renderer of each channel reads.</li>
+      <li><b>Symbols you supply:</b> the facts a declaration does not hold (the entities, actors, state and elements of a surface) come from a table you give the verifier, which reads it at level three.</li>
+      <li><b>Rules by channel:</b> the rules for haptic, luminous, signage, spatial and terminal channels are written when a product that ships in one of them is named.</li>
     </ul>
-    <p>Every part, with where it stops, is on <a href="conformance.html#status">the status board</a>; how to prove a tool agrees is on <a href="conformance.html">Conformance</a>.</p>
+    <p>Every part, with its state, is on <a href="conformance.html#status">the status board</a>; how to prove a tool agrees is on <a href="conformance.html">Conformance</a>.</p>
   </div>
 </section>
 </main>

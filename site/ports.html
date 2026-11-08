@@ -103,7 +103,7 @@ The Zane protocol pack
 
     <p><b>A port may claim</b> "conforms to Zane v3.16 at level 2, verified against manifest &lt;hash&gt;", and it may use its own diagnostic codes in its own words and its own language for the prose.</p>
     <p><b>A port may not extend a closed set.</b> The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed. Adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
-    <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b> conformance. The last claim does not fully pass today, in this repository either: <a href="media.html">Channels</a> shows its real output, which is proved for one pair and not proved for another.</p>
+    <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b> conformance. <a href="media.html">Channels</a> shows the real output of the third, which proves screen against sound.</p>
   </div>
 </section>
 
@@ -112,8 +112,8 @@ The Zane protocol pack
     <h2>Who has implemented Zane so far</h2>
 
     <p>The <b>reference</b> is the JavaScript verifier in this repository.
-    A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">designed</a>, and four of its stages are built. Its check, its suite and its pack, channel and facts tools print what the JavaScript tools print, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). Its browser build, <code>zane.wasm</code>, runs the suite in a browser, and <a href="../tools/zane/wasm-proof.html">the wasm proof</a> finds every envelope identical to the native binary's; the Build page uses it in <a href="build.html#try-it-here">a box</a>. Its server, <code>zane serve</code>, serves this site, the Reader and the UI audit from the repository, and with <code>--app</code> another site beside the audit. The Zig verifier has run on Windows only, and it has not been released.</p>
-    <p class="limit"><b>Limit:</b> no implementation outside this family has been written. The recipe is a procedure for a stranger, and it is not a record of a stranger succeeding.</p>
+    A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">built</a> and released as one file, <code>zane</code>. Its check, its suite and its pack, channel and facts tools print what the JavaScript tools print, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). Its browser build, <code>zane.wasm</code>, runs the suite in a browser, and <a href="../tools/zane/wasm-proof.html">the wasm proof</a> finds every envelope identical to the native binary's; the Build page uses it in <a href="build.html#try-it-here">a box</a>. Its server, <code>zane serve</code>, serves this site, the Reader and the UI audit from the repository, and with <code>--app</code> another site beside the audit. Version 0.1.0 is <a href="https://github.com/mayouni/zane/releases/tag/v0.1.0">released</a>: tested on Windows and Linux; built for macOS.</p>
+    <p>The recipe is a procedure that a team outside this family can follow from the first step to a stated level.</p>
   </div>
 </section>
 

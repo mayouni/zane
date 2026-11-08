@@ -806,6 +806,71 @@ fn checkReleases(a: Allocator, problems: *List) !void {
     }
 }
 
+// ---- a page states what Zane is and does (Central's ZANE-AFFIRM-01, 2026-11-08; doc/design/WRITING.md section 4) -------
+// No page of the registry, index.html or README.md lists what the project lacks. Scripts, styles, comments and code samples are not
+// read; each block of a line is judged on its own, so "Limit:" and "Not shown:" are refused where a block opens on them.
+
+const AffirmAllowed = struct { file: []const u8, words: []const u8, reason: []const u8 };
+const affirm_allowed = [_]AffirmAllowed{
+    .{ .file = "site/gotchas/reading.html", .words = "not yet been articulated by your teams", .reason = "the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel" },
+};
+fn checkAffirm(a: Allocator, problems: *List) !void {
+    var used = [_]bool{false} ** affirm_allowed.len;
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    try addOnce(a, &files, "README.md");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const phrase = try re.compile(a, "\\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven)\\b", "i");
+    const lead = try re.compile(a, "(?:^|[.!?]\\s)(Limit:|Not shown:)", "");
+    const block = try re.compile(a, "<(?:p|li|div|h[1-6]|td|th|dd|dt|br|tr|figcaption|blockquote|section|header)\\b[^>]*>", "gi");
+    const tag = try re.compile(a, "<[^>]*>", "g");
+    const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+    const html_code = try re.compile(a, "<(script|style|pre|code)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const md_fence = try re.compile(a, "```[\\s\\S]*?```", "g");
+    const md_tick = try re.compile(a, "`[^`\\n]*`", "g");
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        var text = try core.wellFormed(a, try readFile(a, f));
+        if (std.mem.endsWith(u8, f, ".md")) {
+            text = try re.replaceFn(a, &md_fence, text, a, newlinesOnly);
+            text = try re.replaceFn(a, &md_tick, text, a, newlinesOnly);
+            text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
+        } else {
+            text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
+            text = try re.replaceFn(a, &html_code, text, a, newlinesOnly);
+        }
+        var it = std.mem.splitScalar(u8, text, '\n');
+        var i: usize = 0;
+        while (it.next()) |line| : (i += 1) {
+            var said: List = .empty;
+            var from: usize = 0;
+            var ms = re.iterate(&block, line);
+            var done = false;
+            while (!done) {
+                var end = line.len;
+                var next_from = line.len;
+                if (ms.next()) |m| {
+                    end = m.start;
+                    next_from = m.end;
+                } else done = true;
+                const seg = try plain(a, try re.replace(a, &tag, line[from..end], " "));
+                if (re.exec(&phrase, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
+                if (re.exec(&lead, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
+                from = next_from;
+            }
+            if (said.items.len == 0) continue;
+            var allowed = false;
+            for (affirm_allowed, 0..) |x, k| if (std.mem.eql(u8, x.file, f) and std.mem.indexOf(u8, line, x.words) != null) {
+                used[k] = true;
+                allowed = true;
+                break;
+            };
+            if (!allowed) try problems.append(a, try fmt(a, "{s}:{d} says what the project lacks (\"{s}\"): a page states what Zane is and does (doc/design/WRITING.md section 4)", .{ f, i + 1, try std.mem.join(a, "\", \"", said.items) }));
+        }
+    }
+    for (affirm_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "AFFIRM_ALLOWED: {s} \"{s}\" matches no line: the entry has outlived what it excused", .{ x.file, x.words }));
+}
+
 // ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) -------------------------
 // The site's menu, written as a Zane declaration (site/menu.zane, NAV_GRAPHs with LABEL, TARGET and ENTRIES), compared with
 // what the registry renders and read by the verifier itself (core.verify): MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST,
@@ -954,6 +1019,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     try checkNames(a, &problems);
     try checkNode(a, &problems);
     try checkReleases(a, &problems);
+    try checkAffirm(a, &problems);
     var changed: usize = 0;
     for (&pages) |*p| {
         if (!exists(p.file)) {
