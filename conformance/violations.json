@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "The Zane Diagnostic Contract",
-    "version": "1.9",
-    "lastUpdated": "2026-11-05",
+    "version": "1.10",
+    "lastUpdated": "2026-11-08",
     "specification": "doc/language/VIOLATIONS.md",
-    "constitution": "3.15",
-    "note": "Every diagnostic a conforming Zane implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused. 1.9 (2026-11-05) renames the language from Zui to Zane: the envelope's language value is zane, and no id, severity, level or binding changed."
+    "constitution": "3.16",
+    "note": "Every diagnostic a conforming Zane implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused. 1.9 (2026-11-05) renames the language from Zui to Zane: the envelope's language value is zane, and no id, severity, level or binding changed. 1.10 (2026-11-08) adds MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and MENU_LABEL_DUPLICATE, bound to Rule 116 as amended at v3.16, with the fields LABEL, TARGET and ENTRIES on NAV_GRAPH (language 1.6): 40 diagnostics."
   },
   "levels": {
     "1": { "name": "Syntax", "requires": "the file alone", "decides": "the grammar parses; verbs, kinds and structure are well-formed" },
@@ -484,6 +484,45 @@
       "forbidden_patterns": [],
       "invariant": null,
       "note": "Raised by the lexer at the line the string opened on, and the lexer stops there, since everything after an open quote is inside it. Usually followed by SYNTAX_ERROR for the declaration the string swallowed, and that is expected, not a duplicate: one says why the text ended, the other what the declaration lacks. A failure to read the file, so no law applies and the bindings are empty. Until contract 1.6 known only to the CLI's table of structural ids."
+    },
+    {
+      "id": "MENU_LABEL_REPEATS_PARENT",
+      "severity": "error",
+      "level": 2,
+      "summary": "A menu entry's label repeats the label of the entry it sits under.",
+      "decidable_from": ["NAV_GRAPH.LABEL", "NAV_GRAPH.ENTRIES"],
+      "rules": ["116"],
+      "articles": ["visible"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "A menu names a section at the parent level and the section's landing page as the first child, and no child label repeats its parent's.",
+      "note": "Language 1.6, law v3.16. The Principal, 2026-11-08, on the Zane site's own menu: it is not logical to read the main title in the main menu and find it again as one of its children. The section and its landing page are two things, so each has one name: the parent level names the section, the first child names the page. Labels compare ignoring ASCII case, the spaces around them and a leading 'The'. Raised at the child's LABEL. A child entry that names no declared NAV_GRAPH is not judged."
+    },
+    {
+      "id": "MENU_LANDING_NOT_FIRST",
+      "severity": "error",
+      "level": 2,
+      "summary": "A section with children does not list its landing surface first among them.",
+      "decidable_from": ["NAV_GRAPH.TARGET", "NAV_GRAPH.ENTRIES"],
+      "rules": ["116"],
+      "articles": ["visible"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "A menu names a section at the parent level and the section's landing page as the first child, and no child label repeats its parent's.",
+      "note": "Language 1.6, law v3.16. A section is a NAV_GRAPH with a TARGET and ENTRIES; its landing surface is the child whose TARGET is the section's own. Raised when no child leads there (the landing page left out of its band, which the Zane site did from 2026-11-06 to 2026-11-08) or when the child that does is not the first. A NAV_GRAPH with ENTRIES and no TARGET is a bar, such as a main menu, and has no landing to list. Raised at the section's ENTRIES."
+    },
+    {
+      "id": "MENU_LABEL_DUPLICATE",
+      "severity": "error",
+      "level": 2,
+      "summary": "Two entries at one level of a menu share a label.",
+      "decidable_from": ["NAV_GRAPH.LABEL", "NAV_GRAPH.ENTRIES"],
+      "rules": ["116"],
+      "articles": ["visible"],
+      "rights": [],
+      "forbidden_patterns": [],
+      "invariant": "No two siblings share a label.",
+      "note": "Language 1.6, law v3.16. Siblings are the ENTRIES of one NAV_GRAPH. Labels compare ignoring ASCII case, the spaces around them and a leading 'The', so 'Invoices' and 'The invoices' are one name. Raised at the later sibling's LABEL, naming the earlier one."
     }
   ]
 }

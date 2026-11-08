@@ -1,6 +1,6 @@
 # Diagnostics and the Law They Enforce
 
-**Normative.** Part of [the Zane Language Specification v1.5](README.md). The
+**Normative.** Part of [the Zane Language Specification v1.6](README.md). The
 machine-readable form of this document is
 [`conformance/violations.json`](../../conformance/violations.json) — that file is
 the contract; this one explains it.
@@ -17,9 +17,9 @@ amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
 a diagnostic that enforces a rule carries a binding. Bindings cite
-`constitution/rules.json` **v3.15**.
+`constitution/rules.json` **v3.16**.
 
-Not every diagnostic enforces a rule. Of the 37, 17 cite one or more rules, 8 cite an article and no
+Not every diagnostic enforces a rule. Of the 40, 20 cite one or more rules, 8 cite an article and no
 rule, and 12 cite nothing. Fourteen of those 20 enforce the grammar (vocabularies, duplicates, fields,
 parse failures) and three check declarations against each other; there the law has no rule, and a
 citation would claim one that does not exist. `ROLE_UNDECLARED` cites nothing on purpose (see below).
@@ -168,9 +168,57 @@ enforcement ladder's honest position.
 **Binds to** Rule 38 (Zero Displacement) · Article I · the Right to Act Without
 Fear · forbidden pattern `layout-shift`.
 
+## 3a. Three diagnostics of the menu, since v1.6
+
+All three are Level 2, decidable from the file alone. They read `LABEL`, `TARGET` and `ENTRIES` on `NAV_GRAPH` (see
+[DECLARATIONS.md](DECLARATIONS.md#nav_graph--how-surfaces-connect)) and bind Rule 116 as amended
+at v3.16: **a menu with levels names a section at the parent level and the section's landing
+page as the first child; no child label repeats its parent's; no two siblings share a label.**
+Labels compare ignoring ASCII case, the spaces around them and a leading `The`. An entry that
+names no declared `NAV_GRAPH` is not judged, since its label is not in the file.
+
+Ruled by the Principal on 2026-11-08, on the Zane site's own menu, whose band under *Approach*
+had lost its landing page: *"you must bring bakc the frist option but find an other lable for it
+that is different from the main option(Approach in our case) ... it's not logical to get the main
+title "Approach" then find it also as an option of it's cibling menus!!! you must add this as an
+issue that is statically checked in Zane"*.
+
+---
+
+**`MENU_LABEL_REPEATS_PARENT`** · error · Level 2
+> A child entry's `LABEL` equals the `LABEL` of the `NAV_GRAPH` whose `ENTRIES` hold it.
+
+The section and its landing page are two things, so each has one name. A reader who opens
+*Billing* and finds *Billing* again among its children cannot tell the section from the page.
+
+**Binds to** Rule 116 (The Menu Tells the Truth About the Tree) · Article III, Visible Over
+Hidden.
+
+---
+
+**`MENU_LANDING_NOT_FIRST`** · error · Level 2
+> A section — a `NAV_GRAPH` with a `TARGET` and `ENTRIES` — none of whose entries leads to
+> its `TARGET`, or whose entry that does is not the first.
+
+The child whose `TARGET` is the section's own is the section's landing surface, and the child
+level opens on it. A `NAV_GRAPH` with `ENTRIES` and no `TARGET` is a bar, such as the main
+menu, and has no landing to list.
+
+**Binds to** Rule 116 · Article III.
+
+---
+
+**`MENU_LABEL_DUPLICATE`** · error · Level 2
+> Two entries in one `ENTRIES` list carry the same `LABEL`.
+
+`Invoices` and `The invoices` are one name to a reader. Raised at the later entry, naming the
+earlier one.
+
+**Binds to** Rule 116 · Article III.
+
 ## 4. Grammar and reference diagnostics
 
-Beyond the ten, a conforming implementation raises these **twenty-seven**. The four marked ✅
+Beyond the ten and the three of §3a, a conforming implementation raises these **twenty-seven**. The four marked ✅
 ship in the reference implementation today, under the codes shown.
 
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
@@ -230,7 +278,7 @@ speaks where its silence *hides* an error; a field it already reads is not silen
 | **INTENT_FLOW, SCREEN, COMPONENT** | none |
 | **FORM** | `INTENT_FLOW` |
 | **WIZARD** | `STEPS` |
-| **NAV_GRAPH** | `VISIBLE_STATE` |
+| **NAV_GRAPH** | `VISIBLE_STATE`, `LABEL`, `TARGET`, `ENTRIES` |
 | **WORLD_VIEW** | `PERSPECTIVE`, `VISIBLE_ENTITIES` |
 | **INTERACTION** | `ROLE` |
 | **FEEDBACK** | `TONE`, `REPORTS`, `MOTION` |

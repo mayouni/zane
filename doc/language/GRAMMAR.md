@@ -1,7 +1,7 @@
 # The Zane Grammar
 
 **Normative.** Stated in EBNF for the first time — the reference implementation's specification is prose
-and tables. Part of [the Zane Language Specification v1.5](README.md).
+and tables. Part of [the Zane Language Specification v1.6](README.md).
 
 Notation: `=` defines, `|` alternates, `{ }` repeats zero or more, `[ ]` is
 optional, `" "` is a literal, `(* *)` is a comment.
@@ -54,12 +54,12 @@ ref-items       = identifier { "," identifier } [ "," ] ;
 ref-list-key    = "SATISFIES" | "ALWAYS_REACHABLE"
                 | "VISIBLE_ENTITIES" | "VISIBLE_STATE"
                 | "INTENT_FLOWS" | "STEPS" | "REPORTS"
-                | "SUPPRESSES" | "SIGNALS" ;
+                | "SUPPRESSES" | "SIGNALS" | "ENTRIES" ;
 
 kv-field        = kv-key value ;
 kv-key          = "INTENT_FLOW" | "PERSPECTIVE" | "TONE"
                 | "SURFACE_AS"  | "DENSITY"     | "MOTION"
-                | "ROLE"
+                | "ROLE"        | "LABEL"       | "TARGET"
                 | "ACTOR" ;
 value           = identifier | string | number | boolean ;
 ```

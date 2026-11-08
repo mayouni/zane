@@ -1077,3 +1077,28 @@ and hidden; one width for every screen. *Why*: what is fetched and not shown cos
 avoid. *Evidence*: on the Zane site, the night photograph Retro shows is 48,156 bytes, and Modern's day photograph 318,130 at full
 width and 94,424 at 800 px; with both lazy, Modern fetched the day file only and Retro the night file only (cac3e98). *Open*: it
 is measured on one page of one site; it would want a second site before a ruling.
+
+## RULED — 2026-11-08, ZANE-MENU-LANDING-01, `rules.json` **v3.15 → v3.16**
+
+The Principal, on a screenshot of `site/thinking.html` (the band under *Approach* read *The grid, Channels, Comparison, Claims*, its
+first slot empty), relayed by Central on 2026-11-08 11:18: *"You misutertood me when i told you to avoid dupplication of the main menu
+and the first option in the submenu you must bring bakc the frist option but find an other lable for it that is different from the
+main option(Approach in our case), be it "Intro" or any better experssive term! I need you to deal with menu strcture as a logical
+apsect, and i'ts not logical to get the main title "Approach" then find it also as an option of it's cibling menus!!! you must add this
+as an issue that is statically checked in Zane and notify all other sites to fix it!"*
+
+It reverses the reading of 2026-11-06, under which a section's head page took the section's name in the main menu and left the band.
+The reading that keeps Rule 116's *one page, one name*: the main menu's entry names the SECTION, the band's first entry names the
+section's LANDING PAGE; they are two things, so each keeps one name.
+
+**What changed in the law, object by object.** Rule 116: the fifth avoid entry extended (*"..., or a section called by its landing
+page's name"*), two avoid entries added (a section whose landing page is missing from the level under it or listed after the pages it
+leads to; a child carrying its parent's label, or two entries at one level carrying one label), one sentence added to the solution, the
+ruling added to the evidence. Metadata: version, lastUpdated, lineage. No rule's number, title or tier changes, no rule is added or
+retired, and no earlier fixture changes its verdict.
+
+**Where it is checked.** The language (1.6) lets a `NAV_GRAPH` state a menu: `LABEL`, `TARGET`, `ENTRIES`. `zane check` refuses
+`MENU_LABEL_REPEATS_PARENT`, `MENU_LANDING_NOT_FIRST` and `MENU_LABEL_DUPLICATE` (contract 1.10, 40 diagnostics), with one fixture
+each and a lawful one (77 fixtures). The site declares its own menu in `site/menu.zane`, and `zane site shell` refuses the same three
+there. Rule 116's tier stays *tool*: the verifier now decides three of its demands from a declaration, and the UI audit the rest on a
+painted page; whether that moves the tier is a ruling, not this desk's.

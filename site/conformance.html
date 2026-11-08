@@ -36,6 +36,7 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
+    <li><a href="how.html">The basics</a></li>
     <li><a href="refusal.html">What it refuses</a></li>
     <li><a href="haro.html">Declared in Haro</a></li>
     <li><a aria-current="page" href="conformance.html">Conformance</a></li>
@@ -52,7 +53,7 @@
     <p class="kicker">Language · for people who build a tool that reads Zane</p>
     <h1>Conformance is the proof that a tool gives the reference verifier's verdict on every fixture, and any CI can refute a false claim to it.</h1>
     <p class="sub">A tool conforms to Zane when it gives the reference verifier's verdict on every fixture of the suite, and conformance is the test that lets the maker of a tool prove that agreement.
-    Conformance ensures that a claim to read Zane can be refuted by running two commands in any CI. The suite holds <span data-fact="fixtures.total">73</span> fixtures, judged against a pack of
+    Conformance ensures that a claim to read Zane can be refuted by running two commands in any CI. The suite holds <span data-fact="fixtures.total">77</span> fixtures, judged against a pack of
     <span data-fact="pack.files">12</span> files pinned by hash. There is no library to adopt, because agreement is proved by running the fixtures. This page shows the two commands,
     what they cannot say, and the status of every part of the system.</p>
   </div>
@@ -81,10 +82,10 @@
 <pre class="term" data-run="zane pack --check"><span class="dim">$ zane pack --check</span>
 
 The Zane protocol pack
-  law          v3.15 — 123 rules, 17 forbidden patterns
-  language     v1.5 — 37 diagnostics
+  law          v3.16 — 123 rules, 17 forbidden patterns
+  language     v1.6 — 40 diagnostics
   axes         10 media, 5 semantic values
-  proof        73 fixtures + the cross-medium spec
+  proof        77 fixtures + the cross-medium spec
   pinned       12 files, sha256 over LF-normalised content
   README       every count on the page matches the manifest
 
@@ -92,17 +93,17 @@ The Zane protocol pack
 <pre class="term" data-run="zane conformance"><span class="dim">$ zane conformance</span>
 
 Zane conformance — level 4
-  spec         doc/language/ v1.5
-  contract     violations.json v1.9 (constitution v3.15)
-  envelope     diagnostic-contract v1.2.1 — 56 diagnostics and 73 reports, all conform
+  spec         doc/language/ v1.6
+  contract     violations.json v1.10 (constitution v3.16)
+  envelope     diagnostic-contract v1.2.1 — 59 diagnostics and 77 reports, all conform
   media        10 media — verifier agrees with media.json
-  catalogue    37 diagnostics — contract agrees with VIOLATIONS.md
-  fixtures     73 total
-  pass 73 · fail 0 · skipped 0 (above level 4)
+  catalogue    40 diagnostics — contract agrees with VIOLATIONS.md
+  fixtures     77 total
+  pass 77 · fail 0 · skipped 0 (above level 4)
 
   <span class="good">conforms at level 4</span> — every fixture in the suite.</pre>
     <p>This site's own check re-runs both outputs above, so the page cannot drift from the tools.</p>
-    <p><b>What "level 4" means here.</b> The suite holds <span data-fact="fixtures.level1">12</span> fixtures at level one, <span data-fact="fixtures.level2">56</span> at level two,
+    <p><b>What "level 4" means here.</b> The suite holds <span data-fact="fixtures.level1">12</span> fixtures at level one, <span data-fact="fixtures.level2">60</span> at level two,
     <span data-fact="fixtures.level3">5</span> at level three and <span data-fact="fixtures.level4">0</span> at level four. A claim at level four means that every fixture the suite holds passes.
     By design, the suite holds no fixture above level three, because the audit measures a painted layout and a declaration does not. A reader should therefore read a level-four claim as a level-three claim.</p>
   </div>
@@ -115,7 +116,7 @@ Zane conformance — level 4
       <li><b>A pass proves agreement, not rightness.</b> Two tools that refuse the same wrong thing pass together. The suite fixes what the law refuses, and whether the law is right for a person is
       a question of perception. No person has perceived this site's media grid.</li>
       <li><b>A pass covers only what the fixtures cover.</b> <span data-fact="fixtures.unfixtured">3</span> diagnostics have no fixture on purpose, and the manifest gives the reason for each: one is about a painted layout, and two are about recovering from a malformed file, which the language does not define. A tool can pass the suite and differ on these diagnostics.</li>
-      <li><b>A twin proves that a tool does not over-refuse.</b> The suite holds <span data-fact="fixtures.twins">22</span> lawful twins, which are files that differ from a refused file by one change. A tool that refuses everything fails them.</li>
+      <li><b>A twin proves that a tool does not over-refuse.</b> The suite holds <span data-fact="fixtures.twins">23</span> lawful twins, which are files that differ from a refused file by one change. A tool that refuses everything fails them.</li>
       <li><b>A pass does not make a tool a port.</b> A port also states its level, pins the manifest, emits the <a href="refusal.html">refusal envelope</a>, and lists where it differs from the reference in the way that
       <a href="haro.html">the forged court</a> does.</li>
     </ul>
@@ -130,19 +131,19 @@ Zane conformance — level 4
     <table class="board">
       <thead><tr><th>Part</th><th>Status</th><th>Where it stops</th></tr></thead>
       <tbody>
-        <tr><td>The law as data: <span data-law="rules">123</span> rules in v<span data-law="version">3.15</span></td><td class="status exists">exists</td>
+        <tr><td>The law as data: <span data-law="rules">123</span> rules in v<span data-law="version">3.16</span></td><td class="status exists">exists</td>
           <td>Only <span data-law="tier:machine">11</span> rules are refused by a conforming compiler today; <span data-law="tier:judgment">80</span> wait on a person's judgment.</td></tr>
         <tr><td>The grammar, the verifier and the refusal contract</td><td class="status exists">exists</td>
-          <td><span data-law="diagnostics">37</span> diagnostics, decided from a file at levels one and two. Level three needs a symbol table that you supply.</td></tr>
+          <td><span data-law="diagnostics">40</span> diagnostics, decided from a file at levels one and two. Level three needs a symbol table that you supply.</td></tr>
         <tr><td>The conformance suite and the pack</td><td class="status exists">exists</td>
-          <td><span data-fact="fixtures.total">73</span> fixtures and <span data-fact="pack.files">12</span> pinned files. Nothing at level four.</td></tr>
+          <td><span data-fact="fixtures.total">77</span> fixtures and <span data-fact="pack.files">12</span> pinned files. Nothing at level four.</td></tr>
         <tr><td>The Reader</td><td class="status exists">exists</td><td>Renders the law from the same file. It does not judge anything.</td></tr>
         <tr><td>The UI audit</td><td class="status exists">exists</td>
           <td>Measures six rules on a page a browser paints, same-origin only. It cannot say whether anyone found the page pleasant. <a href="../tools/ui-audit.html">Run it</a>.</td></tr>
         <tr><td>The channel data and the cross-channel check</td><td class="status exists">exists</td>
           <td><span data-fact="media.count">10</span> channels, and a proof that renderings differ only as the data predicts. The renderers that draw, speak or print are in other projects.</td></tr>
         <tr><td>The forged court in Haro, and the decoder grammar</td><td class="status exists">exists</td>
-          <td>Judges the suite and agrees on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">73</span>. Its judge needs the Haro spike, so it is not one of the gates. See <a href="haro.html">Declared in Haro</a>.</td></tr>
+          <td>Judges the suite and agrees on <span data-fact="twin.agree">55</span> of <span data-fact="fixtures.total">77</span>. Its judge needs the Haro spike, so it is not one of the gates. See <a href="haro.html">Declared in Haro</a>.</td></tr>
         <tr><td>The symbol table, computed from a host project</td><td class="status designed">designed</td>
           <td>The M3 decision document describes it. Nothing computes entities, actors and state from a project yet; the verifier says nothing about them without a table.</td></tr>
         <tr><td>The screenshot audit</td><td class="status designed">designed</td>

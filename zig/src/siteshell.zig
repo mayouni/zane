@@ -4,7 +4,7 @@
 //! It checks that every page carries exactly the shell rendered here (the main menu and the band, the hidden trail,
 //! the opening of the layout with its level-3 list, the footer, and the assets' addresses with the hash of their
 //! content), and with --write renders it into every page. Beside that, the checks of site-shell.js, in its order:
-//! no tooltip, one name per page and no label twice at one level, every page on a bar, every page naming its subject
+//! no tooltip, the menu declared in site/menu.zane and read by the verifier (Rule 116 at v3.16), every page on a bar, every page naming its subject
 //! (doc/design/WRITING.md), no line break placed by hand in a title, and no word "Zing" on the site.
 //!
 //! THE REGISTRY BELOW IS A SECOND COPY of the one in tools/site-shell.js (SECTIONS, FAMILIES, PAGES). Until the
@@ -47,6 +47,8 @@ const Page = struct {
     section: ?[]const u8 = null,
     label: []const u8 = "",
     parent: ?[]const u8 = null,
+    /// a family's head stands in the band under the family's name, and opens the family's list under its own label
+    family: ?[]const u8 = null,
     rail: bool = false,
     outside: Outside = .none,
     term: []const u8,
@@ -56,21 +58,21 @@ fn fam(comptime f: []const u8, comptime label: []const u8, comptime term: []cons
 }
 const pages = [_]Page{
     .{ .file = "index.html", .home = true, .term = "Zane" },
-    .{ .file = "site/thinking.html", .section = "approach", .label = "Approach", .rail = true, .term = "approach" },
+    .{ .file = "site/thinking.html", .section = "approach", .label = "Reasoning", .rail = true, .term = "reason" },
     .{ .file = "site/grid.html", .section = "approach", .label = "The grid", .rail = true, .term = "grid" },
     .{ .file = "site/media.html", .section = "approach", .label = "Channels", .rail = true, .term = "channel" },
-    .{ .file = "site/positioning.html", .section = "approach", .label = "Comparison", .rail = true, .term = "compar" },
+    .{ .file = "site/positioning.html", .section = "approach", .family = "Comparison", .label = "Overview", .rail = true, .term = "overview" },
     .{ .file = "site/practices.html", .section = "approach", .label = "Practices", .parent = "site/positioning.html", .rail = true, .term = "practice" },
     .{ .file = "site/frameworks.html", .section = "approach", .label = "Frameworks and languages", .parent = "site/positioning.html", .rail = true, .term = "framework" },
     .{ .file = "site/innovation.html", .section = "approach", .label = "Claims", .rail = true, .term = "claim" },
-    .{ .file = "site/how.html", .section = "language", .label = "Language", .rail = true, .term = "language" },
+    .{ .file = "site/how.html", .section = "language", .label = "The basics", .rail = true, .term = "basic" },
     .{ .file = "site/refusal.html", .section = "language", .label = "What it refuses", .rail = true, .term = "refus" },
     .{ .file = "site/haro.html", .section = "language", .label = "Declared in Haro", .rail = true, .term = "Haro" },
     .{ .file = "site/conformance.html", .section = "language", .label = "Conformance", .rail = true, .term = "conform" },
-    .{ .file = "site/why.html", .section = "law", .label = "Law", .rail = true, .term = "law" },
+    .{ .file = "site/why.html", .section = "law", .label = "The case", .rail = true, .term = "case" },
     .{ .file = "site/rules.html", .section = "law", .label = "The rules", .rail = true, .term = "rule" },
     .{ .file = "constitution/reader/index.html", .section = "law", .label = "The Reader", .rail = true, .outside = .reader, .term = "Reader" },
-    .{ .file = "site/gotchas/index.html", .section = "law", .label = "What a violation feels like", .rail = true, .term = "violation" },
+    .{ .file = "site/gotchas/index.html", .section = "law", .family = "What a violation feels like", .label = "All families", .rail = true, .term = "famil" },
     fam("stillness", "Stillness", "still"),
     fam("forms", "Forms", "form"),
     fam("state", "State", "state"),
@@ -79,16 +81,16 @@ const pages = [_]Page{
     fam("navigation", "Navigation", "navigat"),
     fam("intelligence", "Intelligence", "intelligen"),
     .{ .file = "site/vibes.html", .section = "law", .label = "Two cultures, one truth", .rail = true, .term = "culture" },
-    .{ .file = "site/adopt.html", .section = "use", .label = "Use", .rail = true, .term = "use" },
+    .{ .file = "site/adopt.html", .section = "use", .label = "Ways in", .rail = true, .term = "ways in" },
     .{ .file = "site/web.html", .section = "use", .label = "Web apps", .rail = true, .term = "web" },
     .{ .file = "site/mobile.html", .section = "use", .label = "Mobile apps", .rail = true, .term = "mobile" },
     .{ .file = "site/beyond.html", .section = "use", .label = "Beyond screens", .rail = true, .term = "screen" },
-    .{ .file = "site/stack.html", .section = "use", .label = "Your stack", .rail = true, .term = "stack" },
+    .{ .file = "site/stack.html", .section = "use", .family = "Your stack", .label = "Overview", .rail = true, .term = "overview" },
     .{ .file = "site/build.html", .section = "use", .label = "Build", .parent = "site/stack.html", .rail = true, .term = "build" },
     .{ .file = "site/generate.html", .section = "use", .label = "Generate", .parent = "site/stack.html", .rail = true, .term = "generat" },
     .{ .file = "site/softanza.html", .section = "use", .label = "Softanza", .parent = "site/stack.html", .rail = true, .term = "Softanza" },
     .{ .file = "site/ports.html", .section = "use", .label = "Other languages", .parent = "site/stack.html", .rail = true, .term = "other language" },
-    .{ .file = "site/audit.html", .section = "try", .label = "Try", .rail = true, .term = "try" },
+    .{ .file = "site/audit.html", .section = "try", .label = "Three ways", .rail = true, .term = "three way" },
     .{ .file = "site/tour.html", .section = "try", .label = "The tour", .rail = true, .term = "tour" },
     .{ .file = "tools/ui-audit.html", .section = "try", .label = "UI audit", .rail = true, .outside = .tool, .term = "audit" },
     .{ .file = "site/screenshots.html", .section = "try", .label = "Screenshots", .rail = true, .term = "screenshot" },
@@ -103,11 +105,12 @@ const GITHUB_MARK = "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.
 const SECTION_MIN = 4;
 
 comptime {
-    // Rule 27: a band holds five entries at most; site-shell.js throws when the registry breaks it, here the build fails
+    // Rules 27 and 120: a band holds five entries at most, its head page among them; site-shell.js throws when the registry breaks
+    // it, here the build fails
     @setEvalBranchQuota(20000);
     for (sections) |s| {
         var k = 0;
-        for (pages) |q| if (q.section != null and std.mem.eql(u8, q.section.?, s.id) and q.rail and q.parent == null and !isHeadFile(q.file)) {
+        for (pages) |q| if (q.section != null and std.mem.eql(u8, q.section.?, s.id) and q.rail and q.parent == null) {
             k += 1;
         };
         if (k > 5) @compileError("Rule 27: the band of " ++ s.id ++ " has more than five entries");
@@ -232,23 +235,26 @@ fn trail(a: Allocator, p: *const Page) ![]const u8 {
     const s = sec(p.section).?;
     const Step = struct { label: []const u8, to: []const u8 };
     var steps: std.ArrayList(Step) = .empty;
+    // Zane, the section under its own name (where the main menu links), the family under its name, then the page under its own
     try steps.append(a, .{ .label = "Zane", .to = "index.html" });
-    const head = byFile(s.head).?;
-    if (head != p) try steps.append(a, .{ .label = head.label, .to = head.file });
-    if (p.parent) |pf| {
-        const up = byFile(pf).?;
-        if (up != head) try steps.append(a, .{ .label = up.label, .to = up.file });
-    }
+    try steps.append(a, .{ .label = s.label, .to = s.head });
+    const up: ?*const Page = if (p.parent) |pf| byFile(pf).? else if (p.family != null) p else null;
+    if (up) |u| try steps.append(a, .{ .label = u.family.?, .to = u.file });
     var links: List = .empty;
     for (steps.items) |x| try links.append(a, try fmt(a, "<a href=\"{s}\">{s}</a>", .{ try href(a, p.file, x.to), try esc(a, x.label) }));
     return fmt(a, "<nav class=\"crumbs trail-hidden\" aria-label=\"Breadcrumb\">{s}<span class=\"sep\">›</span><span class=\"here-crumb\" aria-current=\"page\">{s}</span></nav>", .{ try std.mem.join(a, "<span class=\"sep\">›</span>", links.items), try esc(a, p.label) });
 }
 
-/// Level 2: the pages of a section other than its head page, five at most (Rule 27); none is null.
+/// Level 2: the pages of a section, the head page first, the section's landing under its own label (Rule 116 at v3.16); five at
+/// most (Rules 27, 120); none is null. A family's head stands here under the family's name.
 fn bandOf(a: Allocator, section: ?[]const u8) !?[]const *const Page {
     var top: std.ArrayList(*const Page) = .empty;
+    for (&pages) |*q| if (eqlOpt(q.section, section) and q.rail and q.parent == null and isHeadFile(q.file)) try top.append(a, q);
     for (&pages) |*q| if (eqlOpt(q.section, section) and q.rail and q.parent == null and !isHeadFile(q.file)) try top.append(a, q);
     return if (top.items.len >= 1) top.items else null;
+}
+fn bandLabel(q: *const Page) []const u8 {
+    return q.family orelse q.label;
 }
 fn band(a: Allocator, p: *const Page) ![]const u8 {
     if (p.home or p.section == null) return "";
@@ -257,17 +263,19 @@ fn band(a: Allocator, p: *const Page) ![]const u8 {
     for (top) |q| {
         const on = q == p or (p.parent != null and byFile(p.parent.?) == q);
         const cur = if (on) (if (q == p) " aria-current=\"page\"" else " aria-current=\"true\"") else "";
-        try items.append(a, try fmt(a, "    <li><a{s} href=\"{s}\">{s}</a></li>", .{ cur, try href(a, p.file, q.file), try esc(a, q.label) }));
+        try items.append(a, try fmt(a, "    <li><a{s} href=\"{s}\">{s}</a></li>", .{ cur, try href(a, p.file, q.file), try esc(a, bandLabel(q)) }));
     }
     return fmt(a, "<nav class=\"band\" aria-label=\"Pages of the section\">\n  <ul>\n{s}\n  </ul>\n</nav>", .{try std.mem.join(a, "\n", items.items)});
 }
 
-const Family = struct { head: *const Page, kids: []const *const Page };
+/// a family's list opens on its head page, under the page's own label, then its pages (Rule 116 at v3.16)
+const Family = struct { head: *const Page, kids: []const *const Page, list: []const *const Page };
 fn familyOf(a: Allocator, p: *const Page) !?Family {
     const head = if (p.parent) |pf| byFile(pf).? else p;
-    var kids: std.ArrayList(*const Page) = .empty;
-    for (&pages) |*q| if (q.parent != null and std.mem.eql(u8, q.parent.?, head.file)) try kids.append(a, q);
-    return if (kids.items.len > 0) .{ .head = head, .kids = kids.items } else null;
+    var list: std.ArrayList(*const Page) = .empty;
+    try list.append(a, head);
+    for (&pages) |*q| if (q.parent != null and std.mem.eql(u8, q.parent.?, head.file)) try list.append(a, q);
+    return if (list.items.len > 1) .{ .head = head, .kids = list.items[1..], .list = list.items } else null;
 }
 
 const Taken = std.StringHashMap(void);
@@ -349,7 +357,7 @@ fn sectionsOf(a: Allocator, t: []const u8) !Sections {
 
 fn list3(a: Allocator, p: *const Page, secs: []const Sec) ![]const u8 {
     if (p.home or p.outside != .none) return "";
-    var f = try familyOf(a, p);
+    const f = try familyOf(a, p);
     const own: ?[]const Sec = if (secs.len >= SECTION_MIN) secs else null;
     var subs: []const u8 = "";
     if (own) |o| {
@@ -358,12 +366,10 @@ fn list3(a: Allocator, p: *const Page, secs: []const Sec) ![]const u8 {
         subs = try fmt(a, "\n      <ul class=\"sub\">\n{s}\n      </ul>\n    ", .{try std.mem.join(a, "\n", li.items)});
     }
     if (f) |family| {
-        // a family's head shows its own outline and nothing more
-        if (p == family.head) f = null else {
-            var li: List = .empty;
-            for (family.kids) |q| try li.append(a, try fmt(a, "    <li><a{s} href=\"{s}\">{s}</a>{s}</li>", .{ if (q == p) " aria-current=\"page\"" else "", try href(a, p.file, q.file), try esc(a, q.label), if (q == p) subs else "" }));
-            return fmt(a, "<nav class=\"list3\" aria-label=\"Pages of the family\">\n  <ul>\n{s}\n  </ul>\n</nav>", .{try std.mem.join(a, "\n", li.items)});
-        }
+        // the same list on every page of the family, its head's included, the page's outline nested under its own entry
+        var li: List = .empty;
+        for (family.list) |q| try li.append(a, try fmt(a, "    <li><a{s} href=\"{s}\">{s}</a>{s}</li>", .{ if (q == p) " aria-current=\"page\"" else "", try href(a, p.file, q.file), try esc(a, q.label), if (q == p) subs else "" }));
+        return fmt(a, "<nav class=\"list3\" aria-label=\"Pages of the family\">\n  <ul>\n{s}\n  </ul>\n</nav>", .{try std.mem.join(a, "\n", li.items)});
     }
     const o = own orelse return "";
     var li: List = .empty;
@@ -483,7 +489,7 @@ fn apply(a: Allocator, p: *const Page, text: []const u8) !Applied {
     };
     // an outline entry never repeats a label above it: its page's, or its section's in the main menu
     if (outlined) for (secs) |x| {
-        const ups = [_]?[]const u8{ p.label, if (sec(p.section)) |s| s.label else null };
+        const ups = [_]?[]const u8{ p.label, if (sec(p.section)) |s| s.label else null, p.family, if (p.parent) |pf| byFile(pf).?.family else null };
         for (ups) |up_opt| {
             const up = up_opt orelse continue;
             if (up.len == 0) continue;
@@ -495,8 +501,8 @@ fn apply(a: Allocator, p: *const Page, text: []const u8) !Applied {
         const Shown = struct { where: []const u8, label: []const u8 };
         var shown: std.ArrayList(Shown) = .empty;
         for (sections) |s| try shown.append(a, .{ .where = "the main menu", .label = s.label });
-        if (try bandOf(a, p.section)) |top| for (top) |q| try shown.append(a, .{ .where = "the band", .label = q.label });
-        if (try familyOf(a, p)) |f| if (p.outside == .none and p != f.head) for (f.kids) |q| try shown.append(a, .{ .where = "the family list", .label = q.label });
+        if (try bandOf(a, p.section)) |top| for (top) |q| try shown.append(a, .{ .where = "the band", .label = bandLabel(q) });
+        if (try familyOf(a, p)) |f| if (p.outside == .none) for (f.list) |q| try shown.append(a, .{ .where = "the family list", .label = q.label });
         if (outlined) for (secs) |x| try shown.append(a, .{ .where = "the outline", .label = x.label });
         const the = try re.compile(a, "^the\\s+", "");
         var keys = try a.alloc([]const u8, shown.items.len);
@@ -800,39 +806,115 @@ fn checkReleases(a: Allocator, problems: *List) !void {
     }
 }
 
-// ---- a submenu never repeats its parent's label (the Principal, 2026-11-06) ------------------------------------------
+// ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) -------------------------
+// The site's menu, written as a Zane declaration (site/menu.zane, NAV_GRAPHs with LABEL, TARGET and ENTRIES), compared with
+// what the registry renders and read by the verifier itself (core.verify): MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST,
+// MENU_LABEL_DUPLICATE. --write writes it. The same text as menuDecl in tools/site-shell.js.
 
-fn checkLabels(a: Allocator, problems: *List) !void {
-    const Item = struct { name: []const u8, what: []const u8 };
-    const Level = struct { name: []const u8, items: std.ArrayList(Item) };
-    var levels: std.ArrayList(Level) = .empty;
-    var main_level: Level = .{ .name = "the main menu", .items = .empty };
-    for (sections) |s| try main_level.items.append(a, .{ .name = s.label, .what = try fmt(a, "the section {s}", .{s.id}) });
-    try levels.append(a, main_level);
-    for (pages) |p| {
-        const s = sec(p.section) orelse continue;
-        if (std.mem.eql(u8, s.head, p.file)) {
-            if (!std.mem.eql(u8, try lowerTrim(a, p.label), try lowerTrim(a, s.label))) try problems.append(a, try fmt(a, "{s}: the head page of the section {s} is called \"{s}\" and the main menu calls it \"{s}\": one page, one name (Rule 116)", .{ p.file, s.id, p.label, s.label }));
-            continue;
-        }
-        if (std.mem.eql(u8, try lowerTrim(a, p.label), try lowerTrim(a, s.label))) try problems.append(a, try fmt(a, "{s}: its label \"{s}\" repeats the label of its section, \"{s}\", one level up", .{ p.file, p.label, s.label }));
-        if (p.parent) |pf| if (std.mem.eql(u8, try lowerTrim(a, p.label), try lowerTrim(a, byFile(pf).?.label))) try problems.append(a, try fmt(a, "{s}: its label \"{s}\" repeats the label of {s}, one level up", .{ p.file, p.label, pf }));
-        const level: ?[]const u8 = if (p.parent) |pf| try fmt(a, "the list of {s}", .{pf}) else if (p.rail) try fmt(a, "the band of {s}", .{p.section.?}) else null;
-        if (level) |l| {
-            var found: ?*Level = null;
-            for (levels.items) |*x| if (std.mem.eql(u8, x.name, l)) {
-                found = x;
-            };
-            if (found == null) {
-                try levels.append(a, .{ .name = l, .items = .empty });
-                found = &levels.items[levels.items.len - 1];
-            }
-            try found.?.items.append(a, .{ .name = p.label, .what = p.file });
+const MENU_FILE = "site/menu.zane";
+/// a page's surface name: the path without .html, /index, and its first folder (site, tools/zane, tools, constitution), / and - as _
+fn surf(a: Allocator, file: []const u8) ![]const u8 {
+    var s = file;
+    if (std.mem.endsWith(u8, s, ".html")) s = s[0 .. s.len - 5];
+    if (std.mem.endsWith(u8, s, "/index")) s = s[0 .. s.len - 6];
+    for ([_][]const u8{ "site/", "tools/zane/", "tools/", "constitution/" }) |pre| if (std.mem.startsWith(u8, s, pre)) {
+        s = s[pre.len..];
+        break;
+    };
+    const out = try a.dupe(u8, s);
+    for (out) |*c| if (c.* == '/' or c.* == '-') {
+        c.* = '_';
+    };
+    return out;
+}
+fn menuDecl(a: Allocator) ![]const u8 {
+    var out: List = .empty;
+    try out.appendSlice(a, &.{
+        "// site/menu.zane: the Zane site's own menu, declared in Zane (language 1.6; Rule 116 at v3.16).",
+        "// Written by `zane site shell --write` from the registry of tools/site-shell.js. `zane site shell` fails when this file differs",
+        "// from the registry, and refuses in it what `zane check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and",
+        "// MENU_LABEL_DUPLICATE. The main menu names each section; the band under a section opens on its landing page.",
+        "",
+        "DEFINE NAV_GRAPH main_menu (",
+        "  SATISFIES [LOCATE],",
+    });
+    var ids: List = .empty;
+    for (sections) |s| try ids.append(a, s.id);
+    try out.append(a, try fmt(a, "  ENTRIES [{s}]", .{try std.mem.join(a, ", ", ids.items)}));
+    try out.append(a, ")");
+    for (sections) |s| {
+        const band_pages = (try bandOf(a, s.id)) orelse &[_]*const Page{};
+        var kids: List = .empty;
+        for (band_pages) |q| try kids.append(a, if (q.family != null) try fmt(a, "{s}_family", .{try surf(a, q.file)}) else try surf(a, q.file));
+        try menuNode(a, &out, s.id, s.label, s.head, kids.items);
+        for (band_pages) |q| {
+            const fy = try familyOf(a, q);
+            if (q.family != null and fy != null) {
+                var fk: List = .empty;
+                for (fy.?.list) |x| try fk.append(a, try surf(a, x.file));
+                try menuNode(a, &out, try fmt(a, "{s}_family", .{try surf(a, q.file)}), q.family.?, q.file, fk.items);
+                for (fy.?.list) |x| try out.append(a, try menuLeaf(a, x));
+                try out.append(a, "");
+            } else try out.append(a, try menuLeaf(a, q));
         }
     }
-    for (levels.items) |lv| for (lv.items.items, 0..) |x, i| for (lv.items.items[i + 1 ..]) |y| {
-        if (std.mem.eql(u8, try lowerTrim(a, x.name), try lowerTrim(a, y.name))) try problems.append(a, try fmt(a, "{s} and {s} share the label \"{s}\" in {s}", .{ x.what, y.what, x.name, lv.name }));
-    };
+    // the lines joined, a run of blank lines kept as one, and one newline at the end
+    var text: std.ArrayList(u8) = .empty;
+    var blank = false;
+    for (out.items, 0..) |line, i| {
+        if (line.len == 0) {
+            if (blank) continue;
+            blank = true;
+        } else blank = false;
+        if (i > 0) try text.append(a, '\n');
+        try text.appendSlice(a, line);
+    }
+    var body = text.items;
+    while (body.len > 0 and body[body.len - 1] == '\n') body = body[0 .. body.len - 1];
+    return fmt(a, "{s}\n", .{body});
+}
+fn menuNode(a: Allocator, out: *List, name: []const u8, label: []const u8, to: []const u8, kids: []const []const u8) !void {
+    try out.appendSlice(a, &.{
+        "",
+        try fmt(a, "DEFINE NAV_GRAPH {s} (", .{name}),
+        try fmt(a, "  LABEL \"{s}\",", .{label}),
+        try fmt(a, "  TARGET {s},", .{try surf(a, to)}),
+        try fmt(a, "  ENTRIES [{s}]", .{try std.mem.join(a, ", ", kids)}),
+        ")",
+    });
+}
+fn menuLeaf(a: Allocator, q: *const Page) ![]const u8 {
+    const s = try surf(a, q.file);
+    return fmt(a, "DEFINE NAV_GRAPH {s} (LABEL \"{s}\", TARGET {s})", .{ s, q.label, s });
+}
+/// a subject as Node prints it: a lone surrogate (kept as WTF-8 by core) becomes U+FFFD
+fn printable(a: Allocator, s: []const u8) ![]const u8 {
+    var out: std.ArrayList(u8) = .empty;
+    var i: usize = 0;
+    while (i < s.len) {
+        if (s[i] == 0xED and i + 2 < s.len and s[i + 1] >= 0xA0) {
+            try out.appendSlice(a, "\xEF\xBF\xBD");
+            i += 3;
+        } else {
+            try out.append(a, s[i]);
+            i += 1;
+        }
+    }
+    return out.items;
+}
+fn checkMenu(a: Allocator, out: *std.Io.Writer, problems: *List, write: bool) !void {
+    const want = try menuDecl(a);
+    const have: ?[]const u8 = if (exists(MENU_FILE)) try core.wellFormed(a, try readFile(a, MENU_FILE)) else null;
+    if (have == null or !std.mem.eql(u8, have.?, want)) {
+        if (write) {
+            try std.fs.cwd().writeFile(.{ .sub_path = MENU_FILE, .data = want });
+            try out.writeAll("wrote  " ++ MENU_FILE ++ "\n");
+        } else try problems.append(a, if (have == null) MENU_FILE ++ ": missing (run with --write)" else MENU_FILE ++ ": differs from the menu this file renders (run with --write)");
+    }
+    const text = if (write or have == null) want else have.?;
+    for (try core.verify(a, text, null)) |d| {
+        if (d.subject) |s| try problems.append(a, try fmt(a, "{s}:{d}: {s} {s}", .{ MENU_FILE, d.line, d.id, try printable(a, s) })) else try problems.append(a, try fmt(a, "{s}:{d}: {s}", .{ MENU_FILE, d.line, d.id }));
+    }
 }
 
 // ---- no tooltips (the author, 2026-11-06) ----------------------------------------------------------------------------
@@ -865,7 +947,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     };
     var problems: List = .empty;
     try checkTooltips(a, &problems);
-    try checkLabels(a, &problems);
+    try checkMenu(a, out, &problems, write);
     try checkBars(a, &problems);
     try checkWriting(a, &problems);
     try checkBreaks(a, &problems);

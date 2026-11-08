@@ -1,7 +1,7 @@
-# The Zane Language — Specification v1.5
+# The Zane Language — Specification v1.6
 
 **Status**: normative for the language; honest about implementations
-**Date**: 2026-08-06, revised 2026-11-05
+**Date**: 2026-08-06, revised 2026-11-08
 **Home**: this repository, where the language and its constitution live (inside the Softanza family its formal name is StzZui)
 **Reference implementation**: a sibling platform's compiler — a consumer, not the owner
 
@@ -16,7 +16,10 @@ surface declares controls and no promises. **v1.4** (2026-11-01, ruling D1 of 20
 adds `FIELD_MISPLACED`: a known field on a kind that does not declare it, which every
 earlier version ignored in silence. No field and no value is added; a file that carried
 such a field was lawful at v1.3 and is not at v1.4. **v1.5** (2026-11-05) renames the language from Zui to
-Zane and changes nothing else: no field, value, diagnostic or verdict.
+Zane and changes nothing else: no field, value, diagnostic or verdict. **v1.6** (2026-11-08) lets a `NAV_GRAPH`
+state a menu with levels: `LABEL`, `TARGET` and `ENTRIES`, with `MENU_LABEL_REPEATS_PARENT`,
+`MENU_LANDING_NOT_FIRST` and `MENU_LABEL_DUPLICATE`, which bind Rule 116 as amended at v3.16. A file
+lawful at v1.5 that carries none of the three fields is lawful at v1.6.
 
 **The name.** The language was called Zui until 2026-11-05. The Principal named it Zane, in these words:
 
@@ -106,7 +109,7 @@ its rule, article, and operator right; the binding is also data, in
 carry rule numbers without hardcoding prose.
 
 A consumer pins a constitution version. This specification is written against
-**v3.15**. It said *v3.8.0* until 2026-08-16 — a version the law never had, since
+**v3.16**. It said *v3.8.0* until 2026-08-16 — a version the law never had, since
 the constitution carries no patch component.
 
 ## 4. Conformance levels

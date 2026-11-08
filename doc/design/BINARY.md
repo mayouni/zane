@@ -16,7 +16,7 @@ compiled to wasm** runs everything that needs no file system, in a browser, with
 
 ```
  zane check payments.zane                  # the verifier, text or --json (the C2 envelope)
- zane conformance [--level N]             # the 73 fixtures and the contract's cross-checks
+ zane conformance [--level N]             # the fixtures and the contract's cross-checks
  zane pack --check                        # the bytes you hold against the manifest
  zane cross-medium                        # renderings differ only as the data predicts
  zane audit-facts file.facts.json         # the screenshot audit's facts file: shape, arithmetic, decisions

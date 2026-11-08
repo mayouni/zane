@@ -102,6 +102,11 @@ w('--       (D1, narrowed by ruling 2026-11-01). The court refuses them there as
 w('--   S14 guarantees read against the medium: zane.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in');
 w('--       ALWAYS_REACHABLE as well as in SATISFIES. The 77 medium constraints read SATISFIES only, so the');
 w('--       court is silent on projection-print-promise.zane. Listed in twin-expected.csv, not yet generated.');
+w('--   S15 the menu (language 1.6, 2026-11-08): LABEL, TARGET and ENTRIES on NAV_GRAPH, and the three menu checks');
+w('--       (MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST, MENU_LABEL_DUPLICATE), are not declared here: the seats');
+w('--       are missing, and each check reads one declaration against the declarations its ENTRIES name, a join S7');
+w('--       found no form for. The court is expected to refuse the three fields as UNKNOWN_CLAUSE; the four rows in');
+w('--       twin-expected.csv are that expectation, written without running the judge.');
 w('--');
 w('-- DIVERGENCES from zane.js that this declaration makes by being closed (each is a ruling for');
 w('-- the author, not a decision taken here):');

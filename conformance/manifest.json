@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "The Zane Conformance Suite",
-    "version": "1.3",
-    "lastUpdated": "2026-11-01",
+    "version": "1.4",
+    "lastUpdated": "2026-11-08",
     "specification": "doc/language/README.md",
     "diagnostics": "conformance/violations.json",
-    "constitution": "3.15",
+    "constitution": "3.16",
     "comparison": "A run passes a fixture when the set of diagnostic ids it reports, filtered to the levels the implementation claims, equals expect_ids exactly. Line numbers, message wording, ordering and severity phrasing are NOT compared -- an implementation may phrase its prose in any language its operator reads.",
     "levels_note": "A fixture whose level exceeds the implementation's claimed level is SKIPPED, not failed. An implementation reports the level it satisfies; the suite records it."
   },
@@ -554,6 +554,36 @@
       "level": 2,
       "expect_ids": [],
       "note": "Lawful twin of projection-print-promise.zane."
+    },
+    {
+      "file": "menu-lawful.zane",
+      "level": 2,
+      "expect_ids": [],
+      "note": "Language 1.6, Rule 116 at v3.16: a menu with levels, lawfully. The main menu names the section, the section's band lists its landing page first under a label of its own, and no two siblings share a label."
+    },
+    {
+      "file": "menu-label-repeats-parent.zane",
+      "level": 2,
+      "expect_ids": [
+        "MENU_LABEL_REPEATS_PARENT"
+      ],
+      "note": "The landing page first in its band, under its section's own label, in other case."
+    },
+    {
+      "file": "menu-landing-not-first.zane",
+      "level": 2,
+      "expect_ids": [
+        "MENU_LANDING_NOT_FIRST"
+      ],
+      "note": "The landing page in its band under a label of its own, second."
+    },
+    {
+      "file": "menu-label-duplicate.zane",
+      "level": 2,
+      "expect_ids": [
+        "MENU_LABEL_DUPLICATE"
+      ],
+      "note": "Two siblings named 'Invoices' and 'The invoices': one name, once a leading 'The' and case are ignored."
     }
   ],
   "unfixtured": [

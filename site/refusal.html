@@ -36,6 +36,7 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
+    <li><a href="how.html">The basics</a></li>
     <li><a aria-current="page" href="refusal.html">What it refuses</a></li>
     <li><a href="haro.html">Declared in Haro</a></li>
     <li><a href="conformance.html">Conformance</a></li>
@@ -53,7 +54,7 @@
     <h1>A refusal is the verifier's verdict on a declaration that breaks the law, and it names the line, the rule and the right it rests on.</h1>
     <p class="sub">A refusal is what the verifier returns instead of <b>clean</b> when a declaration breaks the law, and it states where the declaration is wrong, what is wrong and which rule forbids it.
     Refusals ensure that a no always carries its reasons, so a person can trace every refusal back to the law. The verifier has
-    <span data-law="diagnostics">37</span> diagnostics. This page shows one real refusal, its lawful twin, the envelope any tool can read, and what the
+    <span data-law="diagnostics">40</span> diagnostics. This page shows one real refusal, its lawful twin, the envelope any tool can read, and what the
     diagnostics cannot decide.</p>
   </div>
 </header>
@@ -108,9 +109,9 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
   <span class="k">ACTOR</span> <span class="n">applicant</span>
 )</pre>
 <pre class="term"><span class="dim">$ zane check account_opening_exit.zane</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.15</pre>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v3.16</pre>
     </div>
-    <p>The two declarations form a <em>twin</em>: they differ by one change, and the verdict flips. The suite holds <span data-fact="fixtures.twins">22</span> twins, so that the law is tested
+    <p>The two declarations form a <em>twin</em>: they differ by one change, and the verdict flips. The suite holds <span data-fact="fixtures.twins">23</span> twins, so that the law is tested
     against what it must allow as well as against what it must refuse. The site's own check re-runs the terminal output above, so the page cannot drift from the verifier.</p>
   </div>
 </section>
@@ -146,7 +147,7 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
       <thead><tr><th>Level</th><th>It needs</th><th>Diagnostics</th><th>Fixtures</th></tr></thead>
       <tbody>
         <tr><td>1 · Form</td><td>nothing but the file</td><td><span data-fact="diag.level1">10</span></td><td><span data-fact="fixtures.level1">12</span></td></tr>
-        <tr><td>2 · Local meaning</td><td>nothing but the file</td><td><span data-fact="diag.level2">22</span></td><td><span data-fact="fixtures.level2">56</span></td></tr>
+        <tr><td>2 · Local meaning</td><td>nothing but the file</td><td><span data-fact="diag.level2">25</span></td><td><span data-fact="fixtures.level2">60</span></td></tr>
         <tr><td>3 · Across the surface</td><td>a symbol table you supply: entities, actors, state</td><td><span data-fact="diag.level3">4</span></td><td><span data-fact="fixtures.level3">5</span></td></tr>
         <tr><td>4 · Painted</td><td>a rendered surface</td><td><span data-fact="diag.level4">1</span></td><td><span data-fact="fixtures.level4">0</span></td></tr>
       </tbody>
@@ -161,7 +162,7 @@ account_opening.zane:2  <span class="bad">error</span>  <span class="bad">TRAPPE
 <section class="alt">
   <div class="narrow">
     <h2 id="what-a-refusal-does-not-always-cite" data-outline="Uncited diagnostics">Diagnostics that cite no rule of the law, and why</h2>
-    <p>Of the <span data-law="diagnostics">37</span> diagnostics, <span data-fact="diag.citingRules">17</span> cite at least one rule, <span data-fact="diag.articleOnly">8</span> cite
+    <p>Of the <span data-law="diagnostics">40</span> diagnostics, <span data-fact="diag.citingRules">20</span> cite at least one rule, <span data-fact="diag.articleOnly">8</span> cite
     an article but no rule, and <span data-fact="diag.citeNothing">12</span> cite nothing. The twelve that cite nothing are about the form of the file: a misspelling, a duplicate, or a name or value
     that is not in a closed list.</p>
     <p>These twelve say that the file is not yet a declaration, and they do not say that a user is harmed. The eight that cite only an article mark places where the law states a principle and has

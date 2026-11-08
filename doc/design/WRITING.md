@@ -32,12 +32,18 @@ time because it lived only in a promise, so it is written here and part of it is
    style to the hero zones"*.
 9. **The Zane site does not name Zing.** `node tools/site-shell.js` fails on the word in any page, comment or JSON file, and in
    README.md, the repository's front page, with its file and line. Ruled by the Principal on 2026-11-06: *"do not reference Zing in the Zane site"*.
-10. **A submenu never repeats its parent's label.** A section's head page is the section's own entry in the main menu and takes its
-   name there and in its path (Rule 116: one page, one name), so it is left out of the section's band; no other entry of a band, a
-   family's list or an outline carries its parent's label, and `node tools/site-shell.js` fails when one does, or when two entries at
-   one level share a label, ignoring case; nor may one label appear twice among the navigation a page shows (the main menu, the
-   band, the family list and the outline), ignoring case and a leading "The": an outline entry says what its section says. Ruled by the Principal on 2026-11-06: *"the same menu option in the main and submenu levels
-   (like Try and then Try here)!!! This should never happen in our sites"*.
+10. **A submenu never repeats its parent's label, and a section's landing page comes first in it under a name of its own.** The main
+   menu names the SECTION (*Approach*) and leads to its head page; the band under it opens on that head page, the section's LANDING,
+   under the page's own label (*Reasoning*), which its title, its first sentence and its path use; the kicker keeps the section's name.
+   A family works the same way one level down: its head stands in the band under the family's name (*Comparison*) and opens the
+   family's list under its own (*Overview*). A section and its landing page are two things, so each has one name (Rule 116 at v3.16).
+   No entry of a band, a family's list or an outline carries its parent's label, no two entries at one level share one, and no label
+   appears twice among the navigation a page shows (the main menu, the band, the family list and the outline), ignoring case and a
+   leading "The". The menu is declared in Zane in `site/menu.zane`, and `node tools/site-shell.js` refuses it with the verifier's own
+   `MENU_LABEL_REPEATS_PARENT`, `MENU_LANDING_NOT_FIRST` and `MENU_LABEL_DUPLICATE`. Ruled by the Principal on 2026-11-06: *"the same
+   menu option in the main and submenu levels (like Try and then Try here)!!! This should never happen in our sites"*; and on 2026-11-08,
+   reversing the reading that had left the landing page out of the band: *"you must bring bakc the frist option but find an other lable
+   for it that is different from the main option(Approach in our case), be it "Intro" or any better experssive term!"*.
 11. **No tooltips.** No element carries a `title` attribute and a page holds one `<title>`, its own; an SVG names itself with `<desc>`.
    What a tooltip would say goes into a short label that says it. `node tools/site-shell.js` fails on either, with the file and line.
    Asked by the author on 2026-11-06: *"avoid info bulles altogether because they complexify the reading by a volatile additional

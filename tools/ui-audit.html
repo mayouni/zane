@@ -65,6 +65,7 @@ td.issue { color: #a33422; font-weight: 700; }
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
+    <li><a href="../site/audit.html">Three ways</a></li>
     <li><a href="../site/tour.html">The tour</a></li>
     <li><a aria-current="page" href="ui-audit.html">UI audit</a></li>
     <li><a href="../site/screenshots.html">Screenshots</a></li>
@@ -127,10 +128,11 @@ td.issue { color: #a33422; font-weight: 700; }
         same, and only the highlight may move.</p>
         <span class="proof"><a href="../constitution/reader/#rule-115">read the rule</a></span></div>
       <div class="card"><h3>Rule 116 · The Menu Tells the Truth About the Tree</h3>
-        <p>Every main-menu entry must be a top-level page, and it must call that page by
-        the name that the page's own path uses. The audit reads each page's path. A page
-        that the path puts under a parent may not stand beside that parent as an equal, and
-        a page that the menu names differently from its path is one page with two names.</p>
+        <p>Every main-menu entry must be a top-level page, or a section that leads to its
+        landing page, and it must use the name that the page's own path uses. The audit reads
+        each page's path. A page that the path puts under a parent may not stand beside that
+        parent as an equal, a page that the menu names differently from its path is one page
+        with two names, and a landing page called by its section's name repeats its parent.</p>
         <span class="proof"><a href="../constitution/reader/#rule-116">read the rule</a></span></div>
       <div class="card"><h3>Running the audit in both vibes</h3>
         <p>Modern and Retro have different palettes, so a page can be lawful in one vibe
@@ -449,36 +451,45 @@ function barsOf(doc, win, label) {
 
 /* Rule 116: the menu is a claim about the structure. Every entry in the main
    menu must be a top-level page -- if a page's own path puts it under a
-   parent, the menu cannot stand it beside that parent as an equal. */
+   parent, the menu cannot stand it beside that parent as an equal.
+   Since v3.16 an entry of the main menu may name a SECTION and lead to the
+   section's landing page, which its path then places one level under the
+   section: "Zane > Approach > Reasoning". Such an entry is judged against the
+   section's step in that path (one section, one name), and the landing page
+   may not carry the section's own label (no child repeats its parent's). */
 function auditMenuDepth(menus, trails) {
   const out = [];
-  const depthOf = href => {
-    const t = trails.find(x => x.href === href);
-    if (!t) return null;
-    const h = t.steps.find(s => s.here);
-    return h ? h.depth : null;                /* 0 = root, 1 = top level */
-  };
-  const nameOf = href => {
-    const t = trails.find(x => x.href === href);
-    const h = t && t.steps.find(s => s.here);
-    return h ? h.label : null;
-  };
+  const trailOf = href => trails.find(x => x.href === href) || null;
+  const key = s => s.trim().toLowerCase().replace(/^the\s+/, '');
   menus.forEach(m => {
     m.items.forEach(it => {
-      const d = depthOf(it.href);
-      if (d !== null && d > 1) {
+      const t = trailOf(it.href);
+      const h = t && t.steps.find(s => s.here);
+      if (!h) return;
+      const section = t.steps.find(s => s.depth === 1 && !s.here && s.href === it.href);
+      if (h.depth === 2 && section) {
+        if (section.label !== it.label)
+          out.push({ page: m.label, where: 'nav[aria-label="Main"]', text: it.label,
+                     issues: 'the menu calls this section "' + it.label + '" and its landing page\'s path calls it "'
+                           + section.label + '" — one section, one name [Rule 116]' });
+        if (key(h.label) === key(it.label))
+          out.push({ page: m.label, where: 'nav[aria-label="Main"]', text: it.label,
+                     issues: 'the landing page of the section "' + it.label + '" is called "' + h.label
+                           + '", its section\'s own name — a child never repeats its parent\'s label [Rule 116]' });
+        return;
+      }
+      if (h.depth > 1) {
         out.push({ page: m.label, where: 'nav[aria-label="Main"]', text: it.label,
                    issues: 'the menu offers "' + it.label + '" as a top-level page, but its own '
-                         + 'path puts it ' + d + ' levels deep — a menu may not flatten the '
+                         + 'path puts it ' + h.depth + ' levels deep — a menu may not flatten the '
                          + 'hierarchy it describes [Rule 116]' });
         return;
       }
       /* the same page, called two things */
-      const n = nameOf(it.href);
-      if (n && n !== it.label) {
+      if (h.label !== it.label) {
         out.push({ page: m.label, where: 'nav[aria-label="Main"]', text: it.label,
                    issues: 'the menu calls this page "' + it.label + '" and its own path calls it "'
-                         + n + '" — one page, one name [Rule 116]' });
+                         + h.label + '" — one page, one name [Rule 116]' });
       }
     });
   });

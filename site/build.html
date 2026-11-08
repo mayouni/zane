@@ -36,6 +36,7 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
+    <li><a href="adopt.html">Ways in</a></li>
     <li><a href="web.html">Web apps</a></li>
     <li><a href="mobile.html">Mobile apps</a></li>
     <li><a href="beyond.html">Beyond screens</a></li>
@@ -61,6 +62,7 @@
 <div class="layout has-list">
 <nav class="list3" aria-label="Pages of the family">
   <ul>
+    <li><a href="stack.html">Overview</a></li>
     <li><a aria-current="page" href="build.html">Build</a>
       <ul class="sub">
         <li><a href="#declare-before-you-draw">Declare first</a></li>
@@ -116,7 +118,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     law on a surface of their own before installing anything, and nothing you type leaves the page. The verifier in the box is
     built from the same Zig code as the <code>zane</code> binary, and <a href="../tools/zane/wasm-proof.html">the wasm proof</a>
     shows that the two print the same report, byte for byte, on every fixture at every level.</p>
-    <form class="try" id="try-form" data-wasm="zane.wasm?v=03ece677">
+    <form class="try" id="try-form" data-wasm="zane.wasm?v=9f01a29f">
       <label for="try-source">A declaration in Zane</label>
       <textarea id="try-source" spellcheck="false" rows="7">DEFINE WIZARD checkout (
   SATISFIES [SELECT, CONFIRM, ACT],
@@ -146,7 +148,7 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     files the protocol manifest names (the law, the language documents, the refusal contract, the two axes and the
     proof), record <code>protocol/MANIFEST.json</code> beside them, and make one command a step of your build:</p>
 <pre class="term"><span class="dim">$ zane pack --check</span></pre>
-    <p>With this step, <em>conforms to Zane v<span data-law="version">3.15</span></em> becomes a claim that your CI can refute. Rule numbers
+    <p>With this step, <em>conforms to Zane v<span data-law="version">3.16</span></em> becomes a claim that your CI can refute. Rule numbers
     are stable forever: a retired number is never reused, so a finding that cites Rule 79 means the same thing in ten
     years. <a href="../protocol/README.md">The protocol pack</a> says what to vendor and what you may and may not claim.</p>
   </div>
@@ -159,9 +161,9 @@ checkout.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_UNDO<
     over your specifications in CI:</p>
 <pre class="term"><span class="dim">$ zane check specs/*.zane</span>
 <span class="dim">$ zane check specs/*.zane --json</span>   <span class="dim"># for a machine to read</span></pre>
-    <p>The contract names <span data-law="diagnostics">37</span> diagnostics at <span data-fact="diag.levels">4</span>
+    <p>The contract names <span data-law="diagnostics">40</span> diagnostics at <span data-fact="diag.levels">4</span>
     conformance levels, and every finding carries the rule, article or right it rests on. The suite that proves any
-    implementation agrees, <span data-fact="fixtures.total">73</span> fixtures with known verdicts, is in
+    implementation agrees, <span data-fact="fixtures.total">77</span> fixtures with known verdicts, is in
     <a href="../conformance/README.md"><code>conformance/</code></a>.</p>
   </div>
 </section>

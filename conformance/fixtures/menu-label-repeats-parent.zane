@@ -1,0 +1,23 @@
+// The section's landing page is back in its band, first, but under the
+// section's own name: the reader reads "Billing" in the main menu and finds
+// "billing" again as one of its children. Case does not make it another name.
+// The Principal, 2026-11-08: "it's not logical to get the main title ... then
+// find it also as an option of it's cibling menus".
+//
+// Expected: MENU_LABEL_REPEATS_PARENT
+
+DEFINE NAV_GRAPH main_menu (
+  SATISFIES [LOCATE],
+  ENTRIES [billing, reports]
+)
+
+DEFINE NAV_GRAPH billing (
+  LABEL "Billing",
+  TARGET billing_home,
+  ENTRIES [billing_overview, invoices, payments]
+)
+DEFINE NAV_GRAPH billing_overview (LABEL "billing", TARGET billing_home)
+DEFINE NAV_GRAPH invoices (LABEL "Invoices", TARGET invoice_list)
+DEFINE NAV_GRAPH payments (LABEL "Payments", TARGET payment_list)
+
+DEFINE NAV_GRAPH reports (LABEL "Reports", TARGET report_list)

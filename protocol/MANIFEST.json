@@ -7,52 +7,52 @@
     "hash": "sha256 over LF-normalised content"
   },
   "versions": {
-    "constitution": "3.15",
+    "constitution": "3.16",
     "rules": 123,
     "forbiddenPatterns": 17,
-    "language": "1.5",
-    "refusalContract": "1.9",
-    "diagnostics": 37,
+    "language": "1.6",
+    "refusalContract": "1.10",
+    "diagnostics": 40,
     "media": 10,
     "signalValues": 5,
-    "fixtures": 73
+    "fixtures": 77
   },
   "pinned": [
     {
       "file": "constitution/rules.json",
       "role": "the law",
-      "bytes": 173962,
-      "sha256": "9ad36e1bf714dafe01a813eb22eb75c7e77ff385f2d197c50403f4605cf3cdf6"
+      "bytes": 176299,
+      "sha256": "0fb7532bb61d1ab38285a9f6f731b48d6ede62753f9aad48e33fddbad284a2c0"
     },
     {
       "file": "doc/language/README.md",
       "role": "the language",
-      "bytes": 11290,
-      "sha256": "d17029f1b5b209b5b4ba1ae6cb4a22be6e9b47e6fa746afaaa373cf1a0e3ab64"
+      "bytes": 11597,
+      "sha256": "b164d15c90ff1a06f8e99c2d16000dc830a6d7765486c5d323faaddfe317c1d3"
     },
     {
       "file": "doc/language/GRAMMAR.md",
       "role": "the language",
-      "bytes": 6420,
-      "sha256": "ea4139cc25b8b4f35a4bd39e4f020640f06e249a536a7c1715eaaa17e597d538"
+      "bytes": 6466,
+      "sha256": "a4b78c5f2d22359b78699616775a572408155268d32382708651a857671671c2"
     },
     {
       "file": "doc/language/DECLARATIONS.md",
       "role": "the language",
-      "bytes": 13708,
-      "sha256": "f0afcba5bb8d2713808228134d1db749f7d8a55776a4690e78fa336feda2b3af"
+      "bytes": 16445,
+      "sha256": "71783281881c92f12708a31ca7c873ffcc81e2d23c1f52677c1bc47a5027ee19"
     },
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
-      "bytes": 19619,
-      "sha256": "30089e43765947c4cb44e91d57a3b3d0890893c69469c40193c6742c5939da17"
+      "bytes": 21892,
+      "sha256": "75edfebb9734c970de4dc8dfdd963af8649cccba521db6150f00842927728f45"
     },
     {
       "file": "conformance/violations.json",
       "role": "the refusal contract",
-      "bytes": 26395,
-      "sha256": "80490221dc00117745f46e5901eaeefd019e5051b29e9db4d8e62c9c73623ee1"
+      "bytes": 29295,
+      "sha256": "618ffd6774d846d50005f2c5ce5da476fa16008b3b8efa6b5c6c12b93d533808"
     },
     {
       "file": "doc/diagnostic-contract.md",
@@ -70,25 +70,25 @@
       "file": "conformance/media.json",
       "role": "the axes",
       "bytes": 8823,
-      "sha256": "fb002d2988a1950354d97a639c06cd07cfabfbf394c3ae01ac3126984ed9523e"
+      "sha256": "462350e9ca8e5d616a2d75eb515550aca42378a96005b6752fef15f02a72f19e"
     },
     {
       "file": "conformance/signal.json",
       "role": "the axes",
       "bytes": 20790,
-      "sha256": "5eebe8319ca3089ab6281cc1749e28dd49d0212c2c947d6fbaadc2f703cbe0cb"
+      "sha256": "0556052d4f7f164052d90a377f3a8709e022ff4a520f7f689868d21624c56e01"
     },
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
-      "bytes": 19509,
-      "sha256": "729bb263c577517783cd95f676032b8587181c831c21305e8db95fecc0408a72"
+      "bytes": 20537,
+      "sha256": "241def2de4ee56f80f4c7665deb396d9eb91956300ccf6c2f2130a7ed4bb4025"
     },
     {
       "file": "conformance/cross-medium/spec.json",
       "role": "the proof",
       "bytes": 1638,
-      "sha256": "8c45a87335206a5760440888069e293c704428823d0fabe88bda99d79d552e52"
+      "sha256": "b940da49b431a961c7e8200b93cf0f34bb793a05616725c6eb5493c7f69984b4"
     }
   ]
 }

@@ -36,10 +36,10 @@ const UNSPECIFIED_KINDS = new Set(['WIDGET', 'USER']);
 
 const REF_LIST_KEYS = new Set([
   'SATISFIES', 'ALWAYS_REACHABLE', 'VISIBLE_ENTITIES', 'VISIBLE_STATE',
-  'INTENT_FLOWS', 'STEPS', 'REPORTS', 'SUPPRESSES', 'SIGNALS'
+  'INTENT_FLOWS', 'STEPS', 'REPORTS', 'SUPPRESSES', 'SIGNALS', 'ENTRIES'
 ]);
 const KV_KEYS = new Set([
-  'INTENT_FLOW', 'PERSPECTIVE', 'TONE', 'SURFACE_AS', 'DENSITY', 'MOTION', 'ACTOR', 'ROLE'
+  'INTENT_FLOW', 'PERSPECTIVE', 'TONE', 'SURFACE_AS', 'DENSITY', 'MOTION', 'ACTOR', 'ROLE', 'LABEL', 'TARGET'
 ]);
 
 const PERSPECTIVES = new Set(['top_down', 'isometric', 'first_person', 'side_scroll']);
@@ -347,7 +347,7 @@ const KIND_FIELDS = {
   WIZARD:      ['STEPS'],
   SCREEN:      [],
   COMPONENT:   [],
-  NAV_GRAPH:   ['VISIBLE_STATE'],
+  NAV_GRAPH:   ['VISIBLE_STATE', 'LABEL', 'TARGET', 'ENTRIES'],
   WORLD_VIEW:  ['PERSPECTIVE', 'VISIBLE_ENTITIES'],
   INTERACTION: ['ROLE'],
   FEEDBACK:    ['TONE', 'REPORTS', 'MOTION'],
@@ -682,6 +682,57 @@ function check(decls, symbols) {
         line: 0,
         subject: `${interactions.length} INTERACTION${interactions.length === 1 ? '' : 's'}, no ROLE`
       });
+    }
+  }
+
+  /* -- Level 2, file-wide: the menu (Rule 116, v3.16; language v1.6) ---
+        A menu with levels is NAV_GRAPHs naming one another: an entry carries
+        its LABEL, the surface it leads to (TARGET) and its child entries
+        (ENTRIES, in the order the menu shows them). Fields stay flat; a level
+        is a reference, never a nested declaration. An entry with a TARGET and
+        ENTRIES is a section: the child that leads to the section's own TARGET
+        is its landing surface. An entry with ENTRIES and no TARGET is a bar
+        (the main menu), which has no landing.
+
+        The Principal, 2026-11-08: the main menu names the SECTION, the first
+        entry of its band names the section's LANDING PAGE, and it is not
+        logical to find the section's title again as one of its children. So:
+        a child's label never repeats its parent's, siblings never share a
+        label, and a section lists its landing surface first. Labels compare
+        ignoring ASCII case, the spaces around them and a leading "The".
+
+        An entry naming no declared NAV_GRAPH is not judged: its label is not
+        in the file, and the check is silent there rather than guessing. */
+
+  {
+    const graphs = new Map();
+    for (const d of decls) if (d.kind === 'NAV_GRAPH' && d.name !== null && !graphs.has(d.name)) graphs.set(d.name, d);
+    const key = s => s.replace(/^[ \t\r\n]+|[ \t\r\n]+$/g, '').replace(/[A-Z]/g, c => c.toLowerCase()).replace(/^the[ \t\r\n]+/, '');
+    for (const d of decls) {
+      if (d.kind !== 'NAV_GRAPH') continue;
+      const entries = d.fieldIndex.get('ENTRIES');
+      if (!entries || entries.kind !== 'list' || entries.items.length === 0) continue;
+      const label = d.name || '(unnamed)';
+      const kids = entries.items.map(it => {
+        const g = graphs.get(it.v) || null;
+        const lf = g ? g.fieldIndex.get('LABEL') : null;
+        return { name: it.v, decl: g, label: lf && lf.kind === 'value' ? lf.value : null, line: lf ? lf.line : it.line };
+      });
+      const own = valueOf(d, 'LABEL');
+      if (own !== null) for (const k of kids) {
+        if (k.label !== null && key(k.label) === key(own)) out.push({ id: 'MENU_LABEL_REPEATS_PARENT', line: k.line, subject: `"${k.label}" of ${k.name} repeats "${own}" of ${label}` });
+      }
+      kids.forEach((k, j) => {
+        if (k.label === null) return;
+        const i = kids.findIndex((x, n) => n < j && x.label !== null && key(x.label) === key(k.label));
+        if (i >= 0) out.push({ id: 'MENU_LABEL_DUPLICATE', line: k.line, subject: `"${k.label}" of ${k.name} and "${kids[i].label}" of ${kids[i].name} in ENTRIES of ${label}` });
+      });
+      const target = valueOf(d, 'TARGET');
+      if (target !== null) {
+        const at = kids.findIndex(k => k.decl && valueOf(k.decl, 'TARGET') === target);
+        if (at < 0) out.push({ id: 'MENU_LANDING_NOT_FIRST', line: entries.line, subject: `no entry of ${label} leads to ${target}, its TARGET` });
+        else if (at > 0) out.push({ id: 'MENU_LANDING_NOT_FIRST', line: entries.line, subject: `${kids[at].name} leads to ${target}, the TARGET of ${label}, and is entry ${at + 1} of ${kids.length}` });
+      }
     }
   }
 

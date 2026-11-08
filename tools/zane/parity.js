@@ -128,7 +128,7 @@ const siteLines = [];
   const htmlUnder = d => { const out = []; const w = x => { for (const e of fs.readdirSync(P(x), { withFileTypes: true })) { const q = x + '/' + e.name; if (e.isDirectory()) w(q); else if (q.endsWith('.html')) out.push(q); } }; w(d); return out; };
   /* every file the three tools write (the pages, site/facts.json) and every file a case breaks, read once; and the one file a case creates */
   const KEEP = [...new Set(['index.html', ...htmlUnder('site'), ...htmlUnder('tools'), ...htmlUnder('constitution/reader'), 'site/facts.json',
-    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md'])];
+    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md', 'site/menu.zane'])];
   const NEW = ['site/extra.html'];
   const ALL = [...KEEP, ...NEW];
   const missing = KEEP.filter(f => !fs.existsSync(P(f)));
@@ -208,6 +208,13 @@ const siteLines = [];
       ['shell', 'a page links a release with no notes', () => before('site/web.html', '</main>', '<p><a href="https://github.com/mayouni/zane/releases/tag/v9.9.9">The release</a>.</p>\n'), CHECK, 'fail', 'links the release v9.9.9 and doc/releases/v9.9.9.md does not exist'],
       ['shell', 'README.md links a file of a release with no notes', () => edit('README.md', t => t + '\n[zane](https://github.com/mayouni/zane/releases/download/v0.0.9/zane-0.0.9.wasm)\n'), CHECK, 'fail', 'README.md:'],
       ['shell', 'the notes of the release the site offers missing', () => drop(P('doc/releases/v0.1.0.md')), CHECK, 'fail', 'doc/releases/v0.1.0.md does not exist'],
+      ['shell', 'the menu declaration missing', () => drop(P('site/menu.zane')), [[], ['--write']], 'fail', 'site/menu.zane: missing'],
+      ['shell', 'the menu declaration edited away from the registry', () => sub1('site/menu.zane', '(LABEL "Channels",', '(LABEL "Media",'), [[], ['--write']], 'fail', 'site/menu.zane: differs from the menu'],
+      ['shell', 'a landing label repeating its section', () => sub1('site/menu.zane', '(LABEL "Reasoning",', '(LABEL "approach",'), CHECK, 'fail', 'MENU_LABEL_REPEATS_PARENT'],
+      ['shell', 'a family landing repeating its family', () => sub1('site/menu.zane', '(LABEL "Overview", TARGET positioning)', '(LABEL "The comparison", TARGET positioning)'), CHECK, 'fail', 'MENU_LABEL_REPEATS_PARENT'],
+      ['shell', 'a landing page second in its band', () => sub1('site/menu.zane', 'ENTRIES [thinking, grid,', 'ENTRIES [grid, thinking,'), CHECK, 'fail', 'MENU_LANDING_NOT_FIRST'],
+      ['shell', 'a landing page left out of its band', () => sub1('site/menu.zane', 'ENTRIES [thinking, grid,', 'ENTRIES [grid,'), CHECK, 'fail', 'no entry of approach leads to thinking'],
+      ['shell', 'two siblings sharing a label', () => sub1('site/menu.zane', '(LABEL "Channels",', '(LABEL "Grid",'), CHECK, 'fail', 'MENU_LABEL_DUPLICATE'],
       ['shell', 'an allowed line gone, its entry left', () => sub1('tools/zane/wasm-proof.html', 'node tools/zane/parity.js --write-wasm-proof', 'tools/zane/parity.js with --write-wasm-proof'), CHECK, 'fail', 'matches no line: the entry has outlived what it excused'],
       ['shell', 'a served page the registry does not list', () => put(P('site/extra.html'), '<!DOCTYPE html>\n<title>x</title>\n'), CHECK, 'fail', 'site/extra.html: a page the site serves that the registry does not list'],
       ['shell', 'a registered page missing', () => drop(P('site/vibes.html')), [[], ['--write']], 'fail', 'site/vibes.html: missing'],

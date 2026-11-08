@@ -1,4 +1,4 @@
-# baseline: Haro spike at ringpp commit 6611d18 (v0.23, remote private/next). 18 differences: the 16 of the first baseline, none moved, plus projection-visual-trust.zane (D5), which is hidden-authority.zane again under SURFACE_AS visual, plus projection-print-promise.zane (PG-2, seam S14).
+# baseline: Haro spike at ringpp commit 6611d18 (v0.23, remote private/next). 18 differences: the 16 of the first baseline, none moved, plus projection-visual-trust.zane (D5), which is hidden-authority.zane again under SURFACE_AS visual, plus projection-print-promise.zane (PG-2, seam S14). 2026-11-08: 22 rows, the 18 measured at 6611d18 plus the four menu fixtures of language 1.6 (seam S15), WRITTEN BY EXPECTATION AND NOT JUDGED: the judge needs the Haro spike, and it was not run.
 # reproduce: git -C D:/GitHub/ringpp archive 6611d18 haro/spike | tar -x -C D:/tmp/haro-v23, then HARO_SPIKE=D:/tmp/haro-v23/haro/spike node haro/judge-zane-court.js
 fixture,zanejs_says,court_says,seam,class
 duplicate-field.zane,DUPLICATE_FIELD,PARSE,S11,other-code
@@ -19,3 +19,7 @@ projection-print-promise.zane,VERB_NOT_CARRIED,(clean),S14,not-refused
 vibe-strips-right.zane,VIBE_STRIPS_RIGHT,(clean),S7,not-refused
 foreign-pillar-ignored.zane,(clean),UNKNOWN_KIND,S9,court-only
 field-misplaced-read-anywhere.zane,(clean),UNKNOWN_CLAUSE,S13,court-only
+menu-lawful.zane,(clean),UNKNOWN_CLAUSE,S15,court-only
+menu-label-repeats-parent.zane,MENU_LABEL_REPEATS_PARENT,UNKNOWN_CLAUSE,S15,other-code
+menu-landing-not-first.zane,MENU_LANDING_NOT_FIRST,UNKNOWN_CLAUSE,S15,other-code
+menu-label-duplicate.zane,MENU_LABEL_DUPLICATE,UNKNOWN_CLAUSE,S15,other-code

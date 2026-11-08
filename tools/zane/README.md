@@ -40,7 +40,7 @@ Three files, no dependencies, nothing to install:
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
 | `parity.js` | the gate of the binary's stages ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js` on every fixture and a seeded corpus, `zane conformance` against `conformance.js`, the other tools against their scripts, and, since S5, `zane site facts`, `site shell` and `site grid` against `tools/site-facts.js`, `site-shell.js` and `site-grid.js` on the tree, in their `--write` modes and on one break per check, byte for byte. `--only site` runs that last section alone and names what it skipped. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
 
-It implements [the Zane language specification v1.5](../../doc/language/README.md)
+It implements [the Zane language specification v1.6](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).
 
 ## Options
@@ -131,7 +131,8 @@ contract held 22, through three law versions, with nothing to notice.
 
 ## What it enforces, and what it does not
 
-**36 of the 37 diagnostics** in the contract. Six of the ten named violations
+**39 of the 40 diagnostics** in the contract, the three menu checks of language 1.6 among them
+(`MENU_LABEL_REPEATS_PARENT`, `MENU_LANDING_NOT_FIRST`, `MENU_LABEL_DUPLICATE`, Rule 116). Six of the ten named violations
 are decidable from a single declaration and are enforced by default:
 `SELECT_ACT_COLLAPSE`, `READ_ACT_COLLAPSE`, `MISSING_UNDO`, `MISSING_CANCEL`,
 `TRAPPED_FLOW`, `DECORATIVE_ANIMATION` — plus the grammar checks, all **four**

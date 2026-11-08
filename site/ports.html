@@ -36,6 +36,7 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
+    <li><a href="adopt.html">Ways in</a></li>
     <li><a href="web.html">Web apps</a></li>
     <li><a href="mobile.html">Mobile apps</a></li>
     <li><a href="beyond.html">Beyond screens</a></li>
@@ -61,6 +62,7 @@
 <div class="layout has-list">
 <nav class="list3" aria-label="Pages of the family">
   <ul>
+    <li><a href="stack.html">Overview</a></li>
     <li><a href="build.html">Build</a></li>
     <li><a href="generate.html">Generate</a></li>
     <li><a href="softanza.html">Softanza</a></li>
@@ -77,17 +79,17 @@
     <ol class="workflow">
       <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant, and the hash proves that the bytes you hold are that edition. <span class="file">tools/zane/pack.js --check</span></li>
       <li><b>Implement the grammar</b> from <a href="../doc/language/GRAMMAR.md"><code>doc/language/GRAMMAR.md</code></a>: the ten kinds, the closed enumerations and the <span data-fact="verbs">22</span> verbs.</li>
-      <li><b>Run the <span data-fact="fixtures.total">73</span> fixtures at the level you claim.</b> Compare by diagnostic id only, never by line number, wording or order. A fixture above your level is skipped and recorded, never failed.</li>
+      <li><b>Run the <span data-fact="fixtures.total">77</span> fixtures at the level you claim.</b> Compare by diagnostic id only, never by line number, wording or order. A fixture above your level is skipped and recorded, never failed.</li>
       <li><b>Emit the refusal envelope</b> (the six fields of <a href="refusal.html">What it refuses</a>) so that one CI step can read any court.</li>
       <li><b>List your differences from the reference,</b> as the twin ratchet does: each difference is a named row, and any other difference is a failure. <a href="haro.html">Declared in Haro</a> shows one such list.</li>
     </ol>
     <pre class="term" data-run="zane pack --check"><span class="dim">$ zane pack --check</span>
 
 The Zane protocol pack
-  law          v3.15 — 123 rules, 17 forbidden patterns
-  language     v1.5 — 37 diagnostics
+  law          v3.16 — 123 rules, 17 forbidden patterns
+  language     v1.6 — 40 diagnostics
   axes         10 media, 5 semantic values
-  proof        73 fixtures + the cross-medium spec
+  proof        77 fixtures + the cross-medium spec
   pinned       12 files, sha256 over LF-normalised content
   README       every count on the page matches the manifest
 
@@ -99,7 +101,7 @@ The Zane protocol pack
   <div class="narrow">
     <h2>What a port may claim, and what it may not claim</h2>
 
-    <p><b>A port may claim</b> "conforms to Zane v3.15 at level 2, verified against manifest &lt;hash&gt;", and it may use its own diagnostic codes in its own words and its own language for the prose.</p>
+    <p><b>A port may claim</b> "conforms to Zane v3.16 at level 2, verified against manifest &lt;hash&gt;", and it may use its own diagnostic codes in its own words and its own language for the prose.</p>
     <p><b>A port may not extend a closed set.</b> The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed. Adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
     <p>Three claims are separate: <b>conformance</b> (the fixtures agree), <b>envelope conformance</b> (your findings travel in the family's shape), and <b>cross-channel</b> conformance. The last claim does not fully pass today, in this repository either: <a href="media.html">Channels</a> shows its real output, which is proved for one pair and not proved for another.</p>
   </div>

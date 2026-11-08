@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Language — the Zane language, from a declaration to a measured page</title>
+<title>The basics — the Zane language, from a declaration to a measured page</title>
 <meta name="description" content="Zane is a language that declares what a user is doing on an interface, with no widget in it, and its verifier refuses by name what the law forbids before anything is drawn. The page shows the four steps from a declaration to a measured page and which of them exist today.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=dedd529f">
@@ -36,6 +36,7 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
+    <li><a aria-current="page" href="how.html">The basics</a></li>
     <li><a href="refusal.html">What it refuses</a></li>
     <li><a href="haro.html">Declared in Haro</a></li>
     <li><a href="conformance.html">Conformance</a></li>
@@ -47,11 +48,11 @@
 <header class="page">
   <div class="narrow">
     <!-- shell:trail -->
-<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Language</span></nav>
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The basics</span></nav>
 <!-- /shell:trail -->
     <p class="kicker">Language · for people who build or judge interfaces</p>
-    <h1>Zane is a language that declares what a user, a person or an agent, is doing on an interface, and its verifier refuses by name what the law forbids.</h1>
-    <p class="sub">The Zane language declares the intent of a surface in a closed vocabulary of <span data-fact="verbs">22</span> verbs and
+    <h1>The basics of Zane are a language that declares what a user, a person or an agent, is doing on an interface, and a verifier that refuses by name what the law forbids.</h1>
+    <p class="sub">In its basics, the Zane language declares the intent of a surface in a closed vocabulary of <span data-fact="verbs">22</span> verbs and
     <span data-fact="kinds">10</span> kinds of declaration, with no widget in it, so that a verifier can check the surface against the law before anything is drawn.
     The language lets a designer find a forbidden interface at design time, because the verifier refuses it and cites the rule it breaks.
     This page describes the four steps from a declaration to a measured page, which of them exist today, and where each one stops.</p>
@@ -131,7 +132,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
   <span class="k">ALWAYS_REACHABLE</span> [<span class="s">UNDO, CANCEL</span>]
 )</pre>
 <pre class="term"><span class="dim">$ zane check payments.zane</span>
-<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.15</span></pre>
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zane v<span data-law="version">3.16</span></pre>
     <p class="caption"><b>The output above is copied from a real run</b>, and this site's own check re-runs it and fails if the
     page and the verifier disagree. The verifier is one file, <code>zane</code>, built from this repository, and it needs nothing else to run.
     <a href="conformance.html#status">The status board</a> states what exists, what is designed and what is held.</p>
@@ -175,7 +176,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
     </figure>
     <p><b>Declare.</b> A <code>.zane</code> file says which intents a surface satisfies and what stays always reachable. There are <span data-fact="kinds">10</span> kinds of
     declaration and <span data-fact="verbs">22</span> verbs. The vocabulary is closed on purpose, because a widget is a consequence of an intent and never a primitive. The language is also <a href="haro.html">declared as data</a>, and a court can be built from that data.</p>
-    <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.15</span>), and refuses what it forbids.
+    <p><b>Refuse.</b> The verifier reads the declaration against the law, which is data (<span data-law="rules">123</span> rules, v<span data-law="version">3.16</span>), and refuses what it forbids.
     Every refusal cites the rule, article or right it rests on. <a href="refusal.html">The refusal page reads one refusal line by line.</a></p>
     <p><b>Project.</b> One declaration can be rendered in more than one channel (what the grammar and the law call a medium), and a verb a channel cannot carry is refused. That check is built, and the media data is in
     <a href="../conformance/media.json"><code>conformance/media.json</code></a>.</p>
@@ -220,7 +221,7 @@ payments.zane:2  <span class="bad">error</span>  <span class="bad">MISSING_CANCE
   <div class="narrow">
     <h2 id="what-exists-today-and-what-does-not" data-outline="What exists today">The parts of the language that exist today, and the parts that do not</h2>
     <ul>
-      <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">37</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">73</span> fixtures that any implementation can prove it agrees with.</li>
+      <li><b>Exists:</b> the grammar and the verifier (<span data-law="diagnostics">40</span> diagnostics), the law as data, the UI audit, and a suite of <span data-fact="fixtures.total">77</span> fixtures that any implementation can prove it agrees with.</li>
       <li><b>Data, not renderers:</b> the media carriage and the signal vocabulary. The pieces that draw, speak or print are not part of this repository.</li>
       <li><b>Not built:</b> computing the facts a declaration does not hold (the entities, actors, state and elements of a surface) from a host project. The verifier accepts a table you supply and says nothing without one.</li>
       <li><b>Held, not advanced:</b> rules for haptic, luminous, signage, spatial and terminal channels, until a product that ships in one is named.</li>

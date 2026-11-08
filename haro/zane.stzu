@@ -57,6 +57,11 @@
 --   S14 guarantees read against the medium: zane.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in
 --       ALWAYS_REACHABLE as well as in SATISFIES. The 77 medium constraints read SATISFIES only, so the
 --       court is silent on projection-print-promise.zane. Listed in twin-expected.csv, not yet generated.
+--   S15 the menu (language 1.6, 2026-11-08): LABEL, TARGET and ENTRIES on NAV_GRAPH, and the three menu checks
+--       (MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST, MENU_LABEL_DUPLICATE), are not declared here: the seats
+--       are missing, and each check reads one declaration against the declarations its ENTRIES name, a join S7
+--       found no form for. The court is expected to refuse the three fields as UNKNOWN_CLAUSE; the four rows in
+--       twin-expected.csv are that expectation, written without running the judge.
 --
 -- DIVERGENCES from zane.js that this declaration makes by being closed (each is a ruling for
 -- the author, not a decision taken here):

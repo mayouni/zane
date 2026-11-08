@@ -19,7 +19,7 @@ agrees, because agreement is proved by **running the fixtures**, never by sharin
 
 A Zig verifier, a Python linter, a Rust language server and the JavaScript verifier in this
 repository are peers. Each reads the same JSON, parses the same grammar, and reports the
-same diagnostic ids on the same 73 fixtures — or it does not conform, and the suite says
+same diagnostic ids on the same 77 fixtures — or it does not conform, and the suite says
 which fixture disagreed.
 
 **The pack is therefore the whole standard.** Everything else in this repository — the
@@ -36,9 +36,9 @@ are checked, not typed and trusted.**
 |---|---|---|
 | **the law** | `constitution/rules.json` | 123 rules, 7 articles, 6 rights, 17 forbidden patterns — the semantic layer every diagnostic cites |
 | **the language** | `doc/language/` — README, GRAMMAR, DECLARATIONS, VIOLATIONS | the grammar in EBNF, the ten declaration types, the four closed enumerations, and every diagnostic bound to the rule it enforces |
-| **the refusal contract** | `conformance/violations.json`, `doc/diagnostic-contract.md` + `.schema.json` | 37 diagnostics with severities, levels and bindings; and the envelope every finding travels in, `{code, severity, message, span, cites, language}`, carried in one object under `diagnostics` -- never a top-level array |
+| **the refusal contract** | `conformance/violations.json`, `doc/diagnostic-contract.md` + `.schema.json` | 40 diagnostics with severities, levels and bindings; and the envelope every finding travels in, `{code, severity, message, span, cites, language}`, carried in one object under `diagnostics` -- never a top-level array |
 | **the axes** | `conformance/media.json`, `conformance/signal.json` | the ten media with their properties and per-verb carriage; the five semantic values with what each channel renders them as |
-| **the proof** | `conformance/manifest.json`, `conformance/cross-medium/spec.json` | 73 fixtures with known verdicts at levels one to three (level four holds none by design: a painted layout is the audit's, not a declaration's); and the cross-medium cases |
+| **the proof** | `conformance/manifest.json`, `conformance/cross-medium/spec.json` | 77 fixtures with known verdicts at levels one to three (level four holds none by design: a painted layout is the audit's, not a declaration's); and the cross-medium cases |
 
 **Prose that explains rather than binds is not pinned** — `doc/THE-SECOND-FOUNDING.md`,
 the findings, the evidence ledger. They are worth reading and they are not the standard.
@@ -49,11 +49,11 @@ the findings, the evidence ledger. They are worth reading and they are not the s
 > edition.**
 
 Vendor the twelve files, record `MANIFEST.json` beside them, and make
-`zane pack --check` a step in your build. Then *"conforms to Zane v3.15"* is a claim your CI
+`zane pack --check` a step in your build. Then *"conforms to Zane v3.16"* is a claim your CI
 can refute.
 
 This is not paranoia; it is this project's own history. A single trailing space added to a
-title inside `rules.json` leaves the version at v3.15 and changes the law's bytes. Every
+title inside `rules.json` leaves the version at v3.16 and changes the law's bytes. Every
 drift recorded in `doc/EVIDENCE-LEDGER.md` came from something being **described** rather
 than **checked** — a hand-typed census under a heading claiming it was computed, a prose
 catalogue two diagnostics behind the data, a spec whose own title lagged a version.
@@ -92,7 +92,7 @@ is worth more than one that passes by not looking.**
 
 ## 5. What you may claim, and what you may not
 
-**May**: *"conforms to Zane v3.15 at level 2, verified against manifest `<hash>`."*
+**May**: *"conforms to Zane v3.16 at level 2, verified against manifest `<hash>`."*
 **May**: your own diagnostic codes, in your own words, in any language.
 **May not**: extend a closed set. The 22 verbs, the ten media, the five semantic values,
 the four enumerations and the ten declaration types are closed. **Adding to one is a
@@ -156,7 +156,7 @@ The shapes available, with the cost each carries:
 
 | Option | Buys | Costs |
 |---|---|---|
-| a **URN** namespace, e.g. `urn:zane:law:3.15` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
+| a **URN** namespace, e.g. `urn:zane:law:3.16` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
 | a **domain** the artifacts resolve from | a real fetchable URL, versioned paths | someone owns and renews it forever; it dies with the payment |
 | a **DOI** per version | citable in literature, permanent | a registration agency, a fee, and a workflow per release |
 | **content addressing** — the manifest hash *is* the name | already true, costs nothing, cannot rot | unreadable, and says nothing about which edition is current |

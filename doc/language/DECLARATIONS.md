@@ -1,6 +1,6 @@
 # The Ten Declaration Types
 
-**Normative.** Part of [the Zane Language Specification v1.5](README.md). Syntax is
+**Normative.** Part of [the Zane Language Specification v1.6](README.md). Syntax is
 in [GRAMMAR.md](GRAMMAR.md); diagnostics are in [VIOLATIONS.md](VIOLATIONS.md).
 
 ---
@@ -109,12 +109,59 @@ A part of a surface with its own intent. Not a widget: a component declares
 
 ### `NAV_GRAPH` — how surfaces connect
 
-Screen-to-screen routing.
+Screen-to-screen routing, and since v1.6 **a menu with levels**: one `NAV_GRAPH` per menu entry,
+each naming its children. A level is a reference to other declarations, never a nested one (§6).
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
 | `SATISFIES` | verb list | no | typically `[LOCATE]` or `[DISCOVER]` |
 | `VISIBLE_STATE` | identifier list | no | state the navigation itself must show |
+| `LABEL` | string | no | the entry's label, the one name the menu shows for it (v1.6) |
+| `TARGET` | identifier | no | the surface the entry leads to (v1.6) |
+| `ENTRIES` | identifier list | no | the entry's children, other `NAV_GRAPH`s, in the order the menu shows them (v1.6) |
+
+**A section is an entry with a `TARGET` and `ENTRIES`.** Its **landing surface** is the child whose
+`TARGET` is the section's own: the page the section leads to, listed among the section's children.
+An entry with `ENTRIES` and no `TARGET` is a **bar**, such as the main menu, and has no landing. An
+entry with no `ENTRIES` is a leaf.
+
+The law (Rule 116, v3.16) makes three demands of a menu with levels, and `zane check` refuses each
+by name ([VIOLATIONS.md §3a](VIOLATIONS.md#3a-three-diagnostics-of-the-menu-since-v16)):
+
+| Refused | When |
+|---|---|
+| `MENU_LABEL_REPEATS_PARENT` | a child's `LABEL` equals its parent's: the parent level names the section, the child names a page |
+| `MENU_LANDING_NOT_FIRST` | a section none of whose `ENTRIES` leads to its `TARGET`, or whose entry that does is not the first |
+| `MENU_LABEL_DUPLICATE` | two entries of one `ENTRIES` list share a `LABEL` |
+
+Labels are compared ignoring ASCII case, the spaces around them and a leading `The`, so `"The
+invoices"` and `"Invoices"` are one name. An entry of `ENTRIES` that names no `NAV_GRAPH` declared
+in the file is not judged: its label is not in the file, and the verifier is silent there rather
+than guessing. Neither `TARGET` nor `ENTRIES` is resolved against the surfaces of the system; that
+is a cross-pillar question and no diagnostic asks it yet.
+
+```zane
+DEFINE NAV_GRAPH main_menu (
+  SATISFIES [LOCATE],
+  ENTRIES [billing, reports]
+)
+
+DEFINE NAV_GRAPH billing (
+  LABEL "Billing",
+  TARGET billing_home,
+  ENTRIES [billing_overview, invoices, payments]
+)
+DEFINE NAV_GRAPH billing_overview (LABEL "Overview", TARGET billing_home)
+DEFINE NAV_GRAPH invoices (LABEL "Invoices", TARGET invoice_list)
+DEFINE NAV_GRAPH payments (LABEL "Payments", TARGET payment_list)
+
+DEFINE NAV_GRAPH reports (LABEL "Reports", TARGET report_list)
+```
+
+The main menu says *Billing*; the band under it opens on *Overview*, the page *Billing* leads to,
+then *Invoices* and *Payments*. This is `conformance/fixtures/menu-lawful.zane`. The Zane site
+declares its own menu the same way, in `site/menu.zane`, which `zane site shell` writes from the
+site's registry and checks with these three diagnostics.
 
 ### `WORLD_VIEW` — a spatial surface
 
@@ -268,7 +315,8 @@ names the stratum family rather than the field.
 - **Name a rendering.** No `WIDGET`, no layout, no colour. A declaration that
   needs to say "card" has stopped describing intent. `SIGNALS` is not an exception:
   it names the *meaning* a rendering must carry, and never the rendering.
-- **Nest.** Fields hold scalars and identifier lists. (GRAMMAR §2.)
+- **Nest.** Fields hold scalars and identifier lists. (GRAMMAR §2.) A menu's levels are
+  `NAV_GRAPH`s that name one another in `ENTRIES`, not declarations inside declarations.
 - **Invent a verb.** The 22 are closed. (GRAMMAR §4.)
 - **Collapse intents.** `SELECT` with `ACT` and no `CONFIRM`, or `READ` with
   `ACT`, are structural errors — see [VIOLATIONS.md](VIOLATIONS.md).

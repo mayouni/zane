@@ -3,7 +3,7 @@
     "title": "The Cross-Medium Conformance Suite",
     "version": "1.0",
     "lastUpdated": "2026-08-17",
-    "constitution": "3.15",
+    "constitution": "3.16",
     "specification": "doc/THE-INTERACTION-MODEL.md section 7",
     "note": "One declaration, two renderings, one law -- S13b, the keystone. The assertion is NOT that the two renderings match: they are irreducibly different, and pretending otherwise would promise portability the model cannot deliver. The assertion is that EVERY difference between them is one media.json or signal.json already predicted. A difference the data accounts for is the model working; a difference it does not account for is drift, and it fails the run."
   },

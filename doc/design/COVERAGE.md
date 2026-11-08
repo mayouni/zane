@@ -1,7 +1,7 @@
 # The coverage grid
 
 **What this is.** A map of what the law covers, drawn from what a person does with an interface
-and not from the issues found so far. It was drawn on the 122 rules of `constitution/rules.json` at v3.11 and is kept current at v3.15 (123 rules, after D6)
+and not from the issues found so far. It was drawn on the 122 rules of `constitution/rules.json` at v3.11 and is kept current at v3.16 (123 rules, after D6)
 and the fixtures of `conformance/manifest.json` (57 when the grid was drawn, 71 after the projection fixtures of D5) on that map, counts the cells that have a rule and
 the cells that have none, and defines the record a discovered issue is filed as, so that it lands on
 a cell.

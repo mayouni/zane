@@ -53,42 +53,45 @@ const SECTIONS = [
   { id: 'use', label: 'Use', head: 'site/adopt.html' },
   { id: 'try', label: 'Try', head: 'site/audit.html' }
 ];
-/* A page's label is the one name it goes by in the menu, the rail and the trail (Rule 116). The head page of a section is the section's
-   own entry in the main menu and takes its name; it is not repeated in the section's band, since a submenu never repeats its parent's
-   label (the Principal, 2026-11-06). */
+/* A page's label is the one name it goes by in the band, the family list, the trail and its title (Rule 116). A section and its landing
+   page are two things, so each has one name (Rule 116 at v3.16; the Principal, 2026-11-08: "you must bring bakc the frist option but find
+   an other lable for it that is different from the main option(Approach in our case)"): the main menu names the SECTION, by its label
+   above, and links to its head page; the band opens on that head page, the section's landing, under the page's own label. A family works
+   the same way one level down: its head page stands in the band under the family's name (`family`), and opens the family's list under
+   its own label. The menu these make is declared in Zane, in site/menu.zane, and refused by the checks `zane check` makes. */
 const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'State'], ['widgets', 'Widgets'],
                   ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
 /* each family page's subject term (doc/design/WRITING.md section 2) */
 const FAMILY_TERMS = { stillness: 'still', forms: 'form', state: 'state', widgets: 'widget', reading: 'read', navigation: 'navigat', intelligence: 'intelligen' };
 const PAGES = [
   { file: 'index.html', home: true, term: 'Zane' },
-  { file: 'site/thinking.html', section: 'approach', label: 'Approach', rail: true, term: 'approach' },
+  { file: 'site/thinking.html', section: 'approach', label: 'Reasoning', rail: true, term: 'reason' },
   { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true, term: 'grid' },
   { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true, term: 'channel' },
-  { file: 'site/positioning.html', section: 'approach', label: 'Comparison', rail: true, term: 'compar' },
+  { file: 'site/positioning.html', section: 'approach', family: 'Comparison', label: 'Overview', rail: true, term: 'overview' },
   { file: 'site/practices.html', section: 'approach', label: 'Practices', parent: 'site/positioning.html', rail: true, term: 'practice' },
   { file: 'site/frameworks.html', section: 'approach', label: 'Frameworks and languages', parent: 'site/positioning.html', rail: true, term: 'framework' },
   { file: 'site/innovation.html', section: 'approach', label: 'Claims', rail: true, term: 'claim' },
-  { file: 'site/how.html', section: 'language', label: 'Language', rail: true, term: 'language' },
+  { file: 'site/how.html', section: 'language', label: 'The basics', rail: true, term: 'basic' },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true, term: 'refus' },
   { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true, term: 'Haro' },
   { file: 'site/conformance.html', section: 'language', label: 'Conformance', rail: true, term: 'conform' },
-  { file: 'site/why.html', section: 'law', label: 'Law', rail: true, term: 'law' },
+  { file: 'site/why.html', section: 'law', label: 'The case', rail: true, term: 'case' },
   { file: 'site/rules.html', section: 'law', label: 'The rules', rail: true, term: 'rule' },
   { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', rail: true, outside: 'reader', term: 'Reader' },
-  { file: 'site/gotchas/index.html', section: 'law', label: 'What a violation feels like', rail: true, term: 'violation' },
+  { file: 'site/gotchas/index.html', section: 'law', family: 'What a violation feels like', label: 'All families', rail: true, term: 'famil' },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true, term: FAMILY_TERMS[f] })),
   { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true, term: 'culture' },
-  { file: 'site/adopt.html', section: 'use', label: 'Use', rail: true, term: 'use' },
+  { file: 'site/adopt.html', section: 'use', label: 'Ways in', rail: true, term: 'ways in' },
   { file: 'site/web.html', section: 'use', label: 'Web apps', rail: true, term: 'web' },
   { file: 'site/mobile.html', section: 'use', label: 'Mobile apps', rail: true, term: 'mobile' },
   { file: 'site/beyond.html', section: 'use', label: 'Beyond screens', rail: true, term: 'screen' },
-  { file: 'site/stack.html', section: 'use', label: 'Your stack', rail: true, term: 'stack' },
+  { file: 'site/stack.html', section: 'use', family: 'Your stack', label: 'Overview', rail: true, term: 'overview' },
   { file: 'site/build.html', section: 'use', label: 'Build', parent: 'site/stack.html', rail: true, term: 'build' },
   { file: 'site/generate.html', section: 'use', label: 'Generate', parent: 'site/stack.html', rail: true, term: 'generat' },
   { file: 'site/softanza.html', section: 'use', label: 'Softanza', parent: 'site/stack.html', rail: true, term: 'Softanza' },
   { file: 'site/ports.html', section: 'use', label: 'Other languages', parent: 'site/stack.html', rail: true, term: 'other language' },
-  { file: 'site/audit.html', section: 'try', label: 'Try', rail: true, term: 'try' },
+  { file: 'site/audit.html', section: 'try', label: 'Three ways', rail: true, term: 'three way' },
   { file: 'site/tour.html', section: 'try', label: 'The tour', rail: true, term: 'tour' },
   /* outside the shell proper: the UI audit tool and the Reader keep their own pages and styles and take the menu, the band and the trail (the tool also the footer) */
   { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool', term: 'audit' },
@@ -161,28 +164,31 @@ function chain(p) {
 function trail(p) {
   if (p.home) return '';
   const s = sec(p.section);
-  const steps = [{ label: 'Zane', to: 'index.html' }];
-  const head = by.get(s.head);
-  if (head !== p) steps.push({ label: head.label, to: head.file });
-  if (p.parent) { const up = by.get(p.parent); if (up !== head) steps.push({ label: up.label, to: up.file }); }
+  /* Zane, the section under its own name (where the main menu links), the family under its name, then the page under its own */
+  const steps = [{ label: 'Zane', to: 'index.html' }, { label: s.label, to: s.head }];
+  const up = p.parent ? by.get(p.parent) : p.family ? p : null;
+  if (up) steps.push({ label: up.family, to: up.file });
   const links = steps.map(x => `<a href="${href(p.file, x.to)}">${esc(x.label)}</a>`).join('<span class="sep">›</span>');
   return `<nav class="crumbs trail-hidden" aria-label="Breadcrumb">${links}<span class="sep">›</span><span class="here-crumb" aria-current="page">${esc(p.label)}</span></nav>`;
 }
-/* Level 2: the pages of a section other than its head page, in one horizontal band under the menu, fixed with it. At most five
-   (Rule 27). The head page is the main menu's entry and is not repeated here. Identical on every page of the section (Rule 115). */
+/* Level 2: the pages of a section, in one horizontal band under the menu, fixed with it, the head page first: the section's landing,
+   under its own label (Rule 116 at v3.16). At most five (Rules 27, 120). Identical on every page of the section (Rule 115). A family's
+   head stands here under the family's name. */
 const isHead = p => SECTIONS.some(s => s.head === p.file);
+const bandLabel = q => q.family || q.label;
 function bandOf(sectionId) {
-  const top = PAGES.filter(p => p.section === sectionId && p.rail && !p.parent && !isHead(p));
+  const top = PAGES.filter(p => p.section === sectionId && p.rail && !p.parent);
+  top.sort((x, y) => (isHead(y) ? 1 : 0) - (isHead(x) ? 1 : 0));
   return top.length >= 1 ? top : null;
 }
-for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent && !SECTIONS.some(s => s.head === q.file)); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
+for (const sct of SECTIONS) { const t = PAGES.filter(q => q.section === sct.id && q.rail && !q.parent); if (t.length > 5) throw new Error('Rule 27: the band of ' + sct.id + ' has ' + t.length + ' entries, five at most'); }
 function band(p) {
   if (p.home || !p.section) return '';
   const top = bandOf(p.section);
   if (!top) return '';
   const items = top.map(q => {
     const on = q === p || (p.parent && by.get(p.parent) === q);
-    return `    <li><a${on ? ' aria-current="' + (q === p ? 'page' : 'true') + '"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a></li>`;
+    return `    <li><a${on ? ' aria-current="' + (q === p ? 'page' : 'true') + '"' : ''} href="${href(p.file, q.file)}">${esc(bandLabel(q))}</a></li>`;
   }).join('\n');
   return `<nav class="band" aria-label="Pages of the section">
   <ul>
@@ -193,10 +199,11 @@ ${items}
 /* Level 3: a vertical list on the left, where a page has a family or four or more sections; the page then takes the full width.
    The sections are the page's own h2, read from the page by this file, which gives each one an id when it has none, so the list cannot
    disagree with the page (SITE-3.md section 4). Where a page is in a family, the family is the list and its sections nest under its entry. */
+/* a family's list opens on its head page, under the page's own label, then its pages (Rule 116 at v3.16) */
 function familyOf(p) {
   const head = p.parent ? by.get(p.parent) : p;
   const kids = PAGES.filter(q => q.parent === head.file);
-  return kids.length ? { head, kids } : null;
+  return kids.length ? { head, kids, list: [head, ...kids] } : null;
 }
 const SECTION_MIN = 4;
 const slug = (text, taken) => {
@@ -231,17 +238,16 @@ function sectionsOf(t) {
 }
 function list3(p, secs) {
   if (p.home || p.outside) return '';
-  let f = familyOf(p);
+  const f = familyOf(p);
   const own = secs && secs.length >= SECTION_MIN ? secs : null;
   const subs = own ? `\n      <ul class="sub">\n${own.map(x => `        <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')}\n      </ul>\n    ` : '';
   if (f) {
     const li = q => `    <li><a${q === p ? ' aria-current="page"' : ''} href="${href(p.file, q.file)}">${esc(q.label)}</a>${q === p ? subs : ''}</li>`;
-    /* a family's head shows its own outline and nothing more: its family's pages are what its body is about, and a second list beside
-       the outline was one more square of navigation to think about (the author, 2026-11-06). Its sections fall through to the plain outline. */
-    if (p === f.head) f = null;
-    else return `<nav class="list3" aria-label="Pages of the family">
+    /* the family's list is the same on every page of the family, its head's included, and the outline of the page nests under the page's
+       own entry: one list, never a second one beside the outline (the author, 2026-11-06: "one more square of navigation to think about") */
+    return `<nav class="list3" aria-label="Pages of the family">
   <ul>
-${f.kids.map(li).join('\n')}
+${f.list.map(li).join('\n')}
   </ul>
 </nav>`;
   }
@@ -406,14 +412,14 @@ function apply(p, text) {
   if (secs && secs.length >= SECTION_MIN) for (const x of secs) if (x.label.length > 20)
     problems.push('the outline entry "' + x.label + '" is ' + x.label.length + ' characters: give its h2 a data-outline of 20 at most');
   /* an outline entry never repeats a label above it: its page's, or its section's in the main menu (WRITING.md rule 10) */
-  if (secs && secs.length >= SECTION_MIN) for (const x of secs) for (const up of [p.label, (SECTIONS.find(s => s.id === p.section) || {}).label])
+  if (secs && secs.length >= SECTION_MIN) for (const x of secs) for (const up of [p.label, (SECTIONS.find(s => s.id === p.section) || {}).label, p.family, p.parent ? by.get(p.parent).family : undefined])
     if (up && x.label.trim().toLowerCase() === up.trim().toLowerCase()) problems.push('the outline entry "' + x.label + '" repeats the label "' + up + '" above it');
   /* no label twice among the navigation one page shows: the main menu, the band, the family list and the outline, ignoring case and
      a leading "The" (Central, 2026-11-06, extending the Principal's ruling: the reader sees the same word twice, whatever the level) */
   if (!p.home && p.section) {
-    const shown = [...SECTIONS.map(s => ['the main menu', s.label]), ...(bandOf(p.section) || []).map(q => ['the band', q.label])];
+    const shown = [...SECTIONS.map(s => ['the main menu', s.label]), ...(bandOf(p.section) || []).map(q => ['the band', bandLabel(q)])];
     const fam = familyOf(p);
-    if (fam && !p.outside && p !== fam.head) shown.push(...fam.kids.map(q => ['the family list', q.label]));   // a family's head draws its outline only
+    if (fam && !p.outside) shown.push(...fam.list.map(q => ['the family list', q.label]));
     // the outline is drawn on its own, or under the page's entry in its family's list
     if (secs && secs.length >= SECTION_MIN) shown.push(...secs.map(x => ['the outline', x.label]));
     const key = s => s.trim().toLowerCase().replace(/^the\s+/, '');
@@ -638,26 +644,45 @@ function checkReleases(problems) {
   }
 }
 
-/* ---- a submenu never repeats its parent's label (the Principal, 2026-11-06: "the same menu option in the main and submenu
-   levels (like Try and then Try here)!!! This should never happen in our sites") ------------------------------------------------ */
-/* A section's head page is the section's own entry in the main menu, so it must carry the section's label and stay out of the band.
-   Any other page may not carry its section's label nor its family head's, and no two entries at one level of the menus (the main
-   menu, a section's band, a family's list) may share a label; case is ignored, and a failure names both. */
-function checkLabels(problems) {
-  const same = (x, y) => x.trim().toLowerCase() === y.trim().toLowerCase();
-  const levels = new Map([['the main menu', SECTIONS.map(s => ({ name: s.label, what: 'the section ' + s.id }))]]);
-  for (const p of PAGES) {
-    if (!p.section) continue;
-    const s = SECTIONS.find(x => x.id === p.section);
-    if (s.head === p.file) { if (!same(p.label, s.label)) problems.push(`${p.file}: the head page of the section ${s.id} is called "${p.label}" and the main menu calls it "${s.label}": one page, one name (Rule 116)`); continue; }
-    if (same(p.label, s.label)) problems.push(`${p.file}: its label "${p.label}" repeats the label of its section, "${s.label}", one level up`);
-    if (p.parent && same(p.label, by.get(p.parent).label)) problems.push(`${p.file}: its label "${p.label}" repeats the label of ${p.parent}, one level up`);
-    const level = p.parent ? 'the list of ' + p.parent : p.rail ? 'the band of ' + p.section : null;
-    if (level) { if (!levels.has(level)) levels.set(level, []); levels.get(level).push({ name: p.label, what: p.file }); }
+/* ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) ------------------------------------------
+   "it's not logical to get the main title "Approach" then find it also as an option of it's cibling menus!!! you must add this as an
+   issue that is statically checked in Zane". The main menu names each SECTION and links to its head page; the band under it opens on
+   that head page, the section's LANDING, under a label of its own; a family's head stands in the band under the family's name and opens
+   the family's list under its own. The site's menu is written here as a Zane declaration, site/menu.zane (NAV_GRAPHs with LABEL, TARGET
+   and ENTRIES, language 1.6), which the check compares with what this file renders and reads with the verifier itself: a child label
+   repeating its parent's is MENU_LABEL_REPEATS_PARENT, a section whose landing is missing or not first MENU_LANDING_NOT_FIRST, two
+   siblings sharing a label MENU_LABEL_DUPLICATE, ignoring case and a leading "The". --write writes the file. */
+const MENU_FILE = 'site/menu.zane';
+const surf = file => file.replace(/\.html$/, '').replace(/\/index$/, '').replace(/^(site|tools\/zane|tools|constitution)\//, '').replace(/[\/-]/g, '_');
+function menuDecl() {
+  const out = ['// site/menu.zane: the Zane site\'s own menu, declared in Zane (language 1.6; Rule 116 at v3.16).',
+    '// Written by `zane site shell --write` from the registry of tools/site-shell.js. `zane site shell` fails when this file differs',
+    '// from the registry, and refuses in it what `zane check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and',
+    '// MENU_LABEL_DUPLICATE. The main menu names each section; the band under a section opens on its landing page.', '',
+    'DEFINE NAV_GRAPH main_menu (', '  SATISFIES [LOCATE],', '  ENTRIES [' + SECTIONS.map(s => s.id).join(', ') + ']', ')'];
+  const leaf = q => `DEFINE NAV_GRAPH ${surf(q.file)} (LABEL "${q.label}", TARGET ${surf(q.file)})`;
+  const node = (name, label, to, kids) => ['', `DEFINE NAV_GRAPH ${name} (`, `  LABEL "${label}",`, `  TARGET ${surf(to)},`, `  ENTRIES [${kids.join(', ')}]`, ')'];
+  for (const s of SECTIONS) {
+    const band = bandOf(s.id) || [];
+    out.push(...node(s.id, s.label, s.head, band.map(q => q.family ? surf(q.file) + '_family' : surf(q.file))));
+    for (const q of band) {
+      const fam = familyOf(q);
+      if (q.family && fam) { out.push(...node(surf(q.file) + '_family', q.family, q.file, fam.list.map(x => surf(x.file)))); fam.list.forEach(x => out.push(leaf(x))); out.push(''); }
+      else out.push(leaf(q));
+    }
   }
-  for (const [level, items] of levels) items.forEach((x, i) => items.slice(i + 1).forEach(y => {
-    if (same(x.name, y.name)) problems.push(`${x.what} and ${y.what} share the label "${x.name}" in ${level}`);
-  }));
+  return out.join('\n').replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n');
+}
+function checkMenu(problems, write) {
+  const file = path.join(ROOT, MENU_FILE);
+  const want = menuDecl();
+  const have = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
+  if (have !== want) {
+    if (write) { fs.writeFileSync(file, want); console.log('wrote  ' + MENU_FILE); }
+    else problems.push(MENU_FILE + (have === null ? ': missing (run with --write)' : ': differs from the menu this file renders (run with --write)'));
+  }
+  const text = write || have === null ? want : have;
+  for (const d of require('./zane/zane.js').verify(text)) problems.push(`${MENU_FILE}:${d.line}: ${d.id}${d.subject === null ? '' : ' ' + d.subject}`);
 }
 
 /* ---- no tooltips (the author, 2026-11-06: "avoid info bulles altogether because they complexify the reading by a volatile additional
@@ -683,7 +708,7 @@ function main(argv) {
   const problems = [];
   const notes = [];
   checkTooltips(problems);
-  checkLabels(problems);
+  checkMenu(problems, write);
   checkBars(problems, notes);
   checkWriting(problems, notes);
   checkBreaks(problems);
@@ -714,4 +739,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menu, trail, band, list3, footer, checkBars, checkWriting, checkBreaks, headOf };
+module.exports = { SECTIONS, PAGES, menuDecl, menu, trail, band, list3, footer, checkBars, checkWriting, checkBreaks, headOf };

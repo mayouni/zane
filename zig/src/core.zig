@@ -1,11 +1,11 @@
 //! core.zig: the Zane verifier core, in Zig.
 //!
-//! Lexer, parser and checks for the Zane language (doc/language/ v1.5), the third evaluator of the law
+//! Lexer, parser and checks for the Zane language (doc/language/ v1.6), the third evaluator of the law
 //! (doc/design/BINARY.md, stage S1). It is PURE: it takes a source string and an allocator and returns the
 //! diagnostics in source order. No file system, no clock, no network, no global state, so the same code
 //! compiles to a native executable and to wasm32-freestanding.
 //!
-//! It is written against the 73 fixtures and the grammar, and proved against tools/zane/zane.js by byte
+//! It is written against the fixtures and the grammar, and proved against tools/zane/zane.js by byte
 //! parity (tools/zane/parity.js). Its tables are written HERE, independently of conformance/media.json and
 //! conformance/signal.json, and `zane conformance` (stage S2) will check them against that data: a third
 //! evaluator that derived its tables from the data would agree with the data by construction.
@@ -41,8 +41,9 @@ const unspecified_kinds = [_][]const u8{ "WIDGET", "USER" };
 const ref_list_keys = [_][]const u8{
     "SATISFIES", "ALWAYS_REACHABLE", "VISIBLE_ENTITIES", "VISIBLE_STATE", "INTENT_FLOWS",
     "STEPS",     "REPORTS",          "SUPPRESSES",       "SIGNALS",
+    "ENTRIES",
 };
-const kv_keys = [_][]const u8{ "INTENT_FLOW", "PERSPECTIVE", "TONE", "SURFACE_AS", "DENSITY", "MOTION", "ACTOR", "ROLE" };
+const kv_keys = [_][]const u8{ "INTENT_FLOW", "PERSPECTIVE", "TONE", "SURFACE_AS", "DENSITY", "MOTION", "ACTOR", "ROLE", "LABEL", "TARGET" };
 
 const perspectives = [_][]const u8{ "top_down", "isometric", "first_person", "side_scroll" };
 const tones = [_][]const u8{ "celebratory", "cautionary", "critical", "neutral", "informational" };
@@ -89,7 +90,7 @@ pub const kind_fields = [_]KindFields{
     .{ .kind = "WIZARD", .fields = &.{"STEPS"} },
     .{ .kind = "SCREEN", .fields = &.{} },
     .{ .kind = "COMPONENT", .fields = &.{} },
-    .{ .kind = "NAV_GRAPH", .fields = &.{"VISIBLE_STATE"} },
+    .{ .kind = "NAV_GRAPH", .fields = &.{ "VISIBLE_STATE", "LABEL", "TARGET", "ENTRIES" } },
     .{ .kind = "WORLD_VIEW", .fields = &.{ "PERSPECTIVE", "VISIBLE_ENTITIES" } },
     .{ .kind = "INTERACTION", .fields = &.{"ROLE"} },
     .{ .kind = "FEEDBACK", .fields = &.{ "TONE", "REPORTS", "MOTION" } },
@@ -689,6 +690,62 @@ fn check(a: Allocator, decls: []const Decl, symbols: ?Symbols, out: *std.ArrayLi
         }
     }
 
+    // -- level 2, file-wide: the menu (Rule 116, v3.16; language v1.6) --
+    // A menu with levels is NAV_GRAPHs naming one another: LABEL, TARGET and ENTRIES. An entry with a TARGET and ENTRIES is
+    // a section, and the child leading to its TARGET is its landing surface; one with ENTRIES and no TARGET is a bar. A child
+    // naming no declared NAV_GRAPH is not judged.
+    {
+        const Kid = struct { name: []const u8, decl: ?Decl, label: ?[]const u8, line: u32 };
+        for (decls) |d| {
+            if (!std.mem.eql(u8, d.kind, "NAV_GRAPH")) continue;
+            const entries = d.index("ENTRIES") orelse continue;
+            if (entries.kind != .list or entries.items.len == 0) continue;
+            const label: []const u8 = d.name orelse "(unnamed)";
+            var kids: std.ArrayList(Kid) = .empty;
+            for (entries.items) |it| {
+                var g: ?Decl = null;
+                for (decls) |x| if (std.mem.eql(u8, x.kind, "NAV_GRAPH") and x.name != null and std.mem.eql(u8, x.name.?, it.v)) {
+                    g = x;
+                    break;
+                };
+                var kid = Kid{ .name = it.v, .decl = g, .label = null, .line = it.line };
+                if (g) |gd| if (gd.index("LABEL")) |lf| {
+                    kid.line = lf.line;
+                    if (lf.kind == .value) kid.label = lf.value;
+                };
+                try kids.append(a, kid);
+            }
+            if (d.valueOf("LABEL")) |own| {
+                const own_key = try menuKey(a, own);
+                for (kids.items) |k| if (k.label) |kl| {
+                    if (std.mem.eql(u8, try menuKey(a, kl), own_key)) try c.add("MENU_LABEL_REPEATS_PARENT", k.line, try c.fmt("\"{s}\" of {s} repeats \"{s}\" of {s}", .{ kl, k.name, own, label }));
+                };
+            }
+            for (kids.items, 0..) |k, j| {
+                const kl = k.label orelse continue;
+                const kk = try menuKey(a, kl);
+                for (kids.items[0..j]) |x| if (x.label) |xl| {
+                    if (std.mem.eql(u8, try menuKey(a, xl), kk)) {
+                        try c.add("MENU_LABEL_DUPLICATE", k.line, try c.fmt("\"{s}\" of {s} and \"{s}\" of {s} in ENTRIES of {s}", .{ kl, k.name, xl, x.name, label }));
+                        break;
+                    }
+                };
+            }
+            if (d.valueOf("TARGET")) |target| {
+                var at: ?usize = null;
+                for (kids.items, 0..) |k, n| if (k.decl) |kd| if (kd.valueOf("TARGET")) |kt| if (std.mem.eql(u8, kt, target)) {
+                    at = n;
+                    break;
+                };
+                if (at == null) {
+                    try c.add("MENU_LANDING_NOT_FIRST", entries.line, try c.fmt("no entry of {s} leads to {s}, its TARGET", .{ label, target }));
+                } else if (at.? > 0) {
+                    try c.add("MENU_LANDING_NOT_FIRST", entries.line, try c.fmt("{s} leads to {s}, the TARGET of {s}, and is entry {d} of {d}", .{ kids.items[at.?].name, target, label, at.? + 1, kids.items.len }));
+                }
+            }
+        }
+    }
+
     // -- level 3, file-wide --
     if (symbols) |s| {
         if (s.elements) |els| {
@@ -702,6 +759,20 @@ fn check(a: Allocator, decls: []const Decl, symbols: ?Symbols, out: *std.ArrayLi
             for (st) |x| if (!symHas(shown.items, x)) try c.add("INVISIBLE_STATE", 0, x);
         }
     }
+}
+
+/// A menu label as Rule 116 compares it: the spaces around it gone, ASCII letters in lower case, and a leading "the" followed
+/// by spaces dropped with those spaces. The same as the JavaScript reference's key(), which is ASCII-only for this reason.
+fn menuKey(a: Allocator, s: []const u8) ![]const u8 {
+    const t = std.mem.trim(u8, s, " \t\r\n");
+    const low = try a.alloc(u8, t.len);
+    for (t, 0..) |ch, i| low[i] = if (ch >= 'A' and ch <= 'Z') ch + 32 else ch;
+    if (low.len > 3 and std.mem.startsWith(u8, low, "the") and (low[3] == ' ' or low[3] == '\t' or low[3] == '\r' or low[3] == '\n')) {
+        var i: usize = 3;
+        while (i < low.len and (low[i] == ' ' or low[i] == '\t' or low[i] == '\r' or low[i] == '\n')) i += 1;
+        return low[i..];
+    }
+    return low;
 }
 
 // ---- the public surface ----------------------------------------------------------------------------------
