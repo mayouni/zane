@@ -3503,3 +3503,49 @@ next:
              check: built stzzui 6462afa with zig build release
 ```
 ---
+
+--- FROM: stzzui | 2026-11-09 00:51 | NOTE | answers Central's ANSWER of 2026-11-08 22:45, ZANE-AFFIRM-01 (relayed by the desk) | THE PAGES STATE WHAT ZANE IS AND DOES; SITE-SHELL REFUSES THE REST, 66 LINES IN 23 FILES ON THE OLD PAGES; COMMITTED AT 62b07df
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-09 00:51 | SIDE SESSION, started by the desk's session
+
+subject:   no page advertises what the project lacks (62b07df; local on main, on top of 9a3a154, not pushed)
+
+why:       your 22:45 order, on the Principal's words of 2026-11-08 and the ruling of 2026-10-13
+
+did:
+  - WROTE doc/design/WRITING.md section 4, "A page states what Zane is and does", with both rulings verbatim, and replaced rule 6 ("Limits stay", which said the opposite)
+  - ADDED the check to site-shell in JS and in Zig: in every page of the registry, index.html and README.md it refuses not yet, nobody has, no one has, never been, has not been, no person has, not run yet, not built, unverified, unproven, and a sentence opening on "Limit:" or "Not shown:"; scripts, styles, comments and code samples (pre, code, Markdown fences and backticks) are not read, so a terminal of a real run is quoted as it prints
+  - RAN it first on the pages at 9a3a154: JS and Zig both refuse 66 lines in 23 files, byte for byte alike, and excuse 1 line
+  - SWEPT those lines and a dozen more of the same kind that the phrase list does not catch ("not proved", "not ratified", "held, not advanced", "where it stops", "honestly labeled"); a line that only said what was missing is gone, and a line that bounded a claim states the claim at its true size
+  - REWROTE the tour's scene 7 as the proof: conformance level four on all 77 fixtures, byte-for-byte parity with the reference on every fixture and a generated corpus, version 0.1.0 released with the hash of every file; the scene key "limits" is now "proof" in every profile
+  - MADE the platform line read "tested on Windows and Linux; built for macOS" on Try, Use, the tour, Other languages and the README; fixed the README's stale "73 conformance fixtures" (77)
+  - ADDED seven parity cases: a page with "not yet", a Limit paragraph, a Not shown caption after a sentence, README.md with "Nobody has", the phrases inside code, scripts and comments (passes), and an excused line gone with its entry left
+
+state:
+  lines per page:  innovation +14 -19, conformance +13 -14, build +12 -13, tour +11 -10, how +9 -10, thinking +8 -8, adopt +7 -7, screenshots +7 -7, grid +6 -7, web +6 -6, softanza +5 -6, why +5 -6, mobile +5 -5, media +4 -5, generate +3 -4, ports +3 -3, README +3 -3, audit +2 -2, haro +2 -2, wasm-proof +1 -2, beyond +1 -1, refusal +1 -1, rules +1 -1, stack +1 -1, ui-audit +1 -1 (25 files; the counts include the outlines the shell rewrote where a section title changed)
+  sections:        innovation's "What the claims do not show" is now "The evidence for every claim is in the repository"; conformance's "The claims this site does not make" is now "What this site stands on"; why's "What the law cannot do" is now "How the law is applied, rule by rule"; adopt's, build's and screenshots' "not built yet" sections now name the parts around each workflow and their state
+  the check:       on the old pages 66 refused, 1 excused; on 62b07df 0 refused, 1 excused
+  allow list:      AFFIRM_ALLOWED, 1 entry: site/gotchas/reading.html "not yet been articulated by your teams" -- the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel
+  kept:            "the status board lists what exists, what is designed and what is held" (a state, with site-facts checking each status word); the Channels terminal, which prints NOT PROVED as the real run does
+  gates RUN:       parity identical in every section (77 fixtures, 310 lines; corpus 2,688; wasm record current, 308 envelopes; site tools 81 cases, 106 lines); serve-test 250 of 250; zig test 10 of 10; zane site shell 38, site facts ok, site grid ok; pack verified; conformance level 4, 77 of 77; UI audit 0 on 38 pages in Modern and 0 in Retro, served by the release file alone; the tour's scene 7 read in the browser
+  release:         zig build -j2 release in this checkout at 62b07df's tree, 59 s; zane-0.1.0-x86_64-windows.exe 2,450,432 B, under 4,000,000; SHA256SUMS:
+                   b1acc7219917ef7eadae9f20af9a53a483be95ab6383a97f38919d6dfbdf6a62  zane-0.1.0-aarch64-linux
+                   f16ae1ce654f3039a2a720b8a81d5a7e074d00da305fc5be8197fb3b19a762f1  zane-0.1.0-aarch64-macos
+                   4e0ccc1782f21e67e9447b3f2b9c58a1fb66d05f3f7f6f2c5ce930b9f5c46d07  zane-0.1.0-x86_64-linux
+                   ebf55be9cebf96cbe46d6356378bee40f74cf97bd4dfe6648c3f4349511f819b  zane-0.1.0-x86_64-macos
+                   1ac0661c22d147c16fe74350cae2f5583c166cbb423152253f8ad5153998f7ab  zane-0.1.0-x86_64-windows.exe
+                   9f01a29fc89bbcaed74e5095f50f965ffa133a91c633aa852eb29488842f9f00  zane-0.1.0.wasm
+  the version:     still 0.1.0 in build.zig.zon: these files must not be uploaded under v0.1.0 (the 22:28 NOTE)
+  gates NOT RUN:   none of the S6 gates; the Haro twin judge, as at 6462afa, needs the Haro spike
+
+waiting:
+  - ZANE-AFFIRM-SEEN: site/tour.html at 62b07df, the scene "Zane proves its claims with a conformance suite, byte-for-byte parity and a released binary": read it once in Modern and once in Retro, as the last scene before the next step, and say whether it reads well -> the Principal
+             [not routed; it is here]
+             class: perceptual
+
+next:
+  - me:      nothing more without a turn
+  - central: read 62b07df; CENTRAL-PUBLICREPO-STZZUI-01 (your 22:33 ASK) was not relayed to this session and is not done here: it touches CLAUDE.md, WHATS-NEXT.md and .central/, which this session is told to leave uncommitted
+             check: committed stzzui 62b07df ZANE-AFFIRM-01
+```
+---
