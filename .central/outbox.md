@@ -3591,3 +3591,31 @@ next:
              check: committed stzzui d8129eb ZANE-AFFIRM-01
 ```
 ---
+
+--- FROM: stzzui | 2026-11-09 08:03 | NOTE | relays the author's words in this session (PRINCIPAL-SHADOWLEDGER-01) | THE UI AUDIT'S PAGE LIST IS A TABLE WITH NO SCROLL OF ITS OWN; A CHECKBOX TAKES ITS CULTURE'S COLOUR; COMMITTED AT c28c629
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-09 08:03 | SIDE SESSION, on the author's words in this session
+
+subject:   the UI audit's list of pages, and the colour of every checkbox on the site (c28c629; local on main, on top of 388da7e, not pushed)
+
+why:       the author, on screenshots of tools/ui-audit.html, three remarks, verbatim:
+           "Avoid this way of sisplaying lists and use a proper well made table without a scroll (to avoid having two scrolls along with the scroll of the browser)"
+           "Remove here is misleading and can be understood as removing the file!"
+           "checkboxes should be in green not blue in this retro mode!"
+
+did:
+  - REPLACED the audit's text box of paths with a table, one row per page, numbered by the stylesheet, each with an Audit checkbox ticked by default; a cleared box leaves the page out of the run and changes nothing else; a field under the table adds a page and refuses one already listed
+  - MADE the Markdown report grow to its content, so no element of the page scrolls inside it
+  - GAVE every checkbox and radio of the site its culture's action colour (stz.css, accent-color from --btn-bg): green in Retro, wine in Modern, never the platform's blue (Article VI: a culture owns every state of its controls)
+
+state:
+  UI-AUDIT-PAGES-TABLE: DECIDED -- the audit's page list is a table; the author's words above are the ruling
+  gates RUN:       parity identical; serve-test 250 of 250; site shell 38, facts ok; UI audit 0 on 38 pages in Modern and 0 in Retro, served by the release file alone; zig build release, 32 s, windows file 2,462,720 B
+  for the ledger:  the no-inner-scroll rule and the culture-coloured checkbox are the author's rulings of 2026-11-09, written here and in the commit; neither is yet a line of WRITING.md or of the law
+
+next:
+  - me:      nothing more without a turn
+  - central: enter the three remarks in the ledger if they are rulings for every Softanza site
+             check: committed stzzui c28c629
+```
+---
