@@ -7,7 +7,8 @@
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
   "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
-  "E": "addenda relayed by Central after the sweeps, read in .central/inbox.md (the line cut again, 2026-11-09 15:31)"
+  "E": "addenda relayed by Central after the sweeps, read in .central/inbox.md (the line cut again, 2026-11-09 15:31)",
+  "F": "the repositories themselves (M1b, 2026-11-09): zin at cc98126, refine (no git; files), zing at e2573a9 and zing-studio at 95f36de, the product repositories (organizium and its variants, the restaurant app, orgdesk, zindara, zin-one, zin-website, zin-prototypes, ringface) and the estate sites (stzsite, harobanda, ayouni, lookout, ringserv, ringflex, microring, stz-observer and others); each record cites its file:line or commit"
  },
  "causes": {
   "T": "Type sized by convention, not for reading",
@@ -89,12 +90,13 @@
    "n": "Z001",
    "sweep": "C14",
    "also": [
-    "D19"
+    "D19",
+    "F2-01"
    ],
    "cause": "W",
    "date": "<=2026-06",
    "project": "refine",
-   "source": "refine memory: site-reading-experience.md",
+   "source": "refine memory: site-reading-experience.md; `REDESIGN_BRIEF.md:5-7`, `:26-29`; refine memory: site-reading-experience.md:10",
    "words": "[paraphrase] About 22 subsections lose the reader (\"the reader forgets the main messages\"); paragraphs of 700-1000 characters read as walls.",
    "wrong": "Too many sections, walls of text",
    "required": "~10-12 sections, general to specific, a lead and a \"read more\"",
@@ -123,6 +125,102 @@
   },
   {
    "n": "Z003",
+   "sweep": "F4-58",
+   "also": [],
+   "cause": "W",
+   "date": "2026-04-17",
+   "project": "zin",
+   "source": "zin-one@4029acc",
+   "words": "[paraphrase] the user's own edits re-applied to a workshop document: an acronym set to its official French form; \"120 minutes, exactement\" became \"approximativement\" in the overview",
+   "wrong": "a wrong acronym; an exactness the live event cannot keep",
+   "required": "the official term; the true size of the claim",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z004",
+   "sweep": "F4-57",
+   "also": [],
+   "cause": "W",
+   "date": "2026-04-22",
+   "project": "zin",
+   "source": "zin-one@7e52c5f",
+   "words": "\"I want to test any part and grasp its meaning immediately without thinking about what I should have done before\" (given as reviewer feedback)",
+   "wrong": "a tutorial ordered by what the product provides",
+   "required": "12 atomic, value-led units",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z005",
+   "sweep": "F2-09",
+   "also": [],
+   "cause": "W",
+   "date": "2026-06",
+   "project": "refine",
+   "source": "`CLAUDE.md:1583-1586`",
+   "words": "\"guide them as a light in a dark forest and show them the road, while keeping the same clarity, rigor, conciseness and intellectual fairness\"",
+   "wrong": "The manifesto's narration was hard to follow for programmers facing a vocabulary whose focus keeps shifting.",
+   "required": "An on-ramp (\"Start here\"), a glossary that pins each shifting term to one meaning, and a one-line signpost under every chapter heading.",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z006",
+   "sweep": "F3-10",
+   "also": [],
+   "cause": "W",
+   "date": "2026-06",
+   "project": "zing-studio",
+   "source": "zing-studio:zing_kickoff_prompt.md:110,118,123",
+   "words": "\"NEVER use the word \"substrate\" anywhere.\" / \"NEVER pitch with marketing platitudes.\"",
+   "wrong": "jargon and platitudes in pitch and site copy",
+   "required": "plain, direct words for professional developers",
+   "sense": "sight (reading)",
+   "ruling": "kickoff hard constraints 1, 6",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z007",
+   "sweep": "F2-04",
+   "also": [],
+   "cause": "W",
+   "date": "2026-06-12",
+   "project": "refine",
+   "source": "`REDESIGN_BRIEF.md:69-70`; `REDESIGN_INVENTORY.md:99-102`; refine memory: site-reading-experience.md:14",
+   "words": "[paraphrase] \"Show the IDE strongly\", through annotated UI snippets that explain the UI and the programmer experience, not abstract prose; one honest IDE view, \"show it once, large\".",
+   "wrong": "The product was described in prose, or shown through five small IDE views.",
+   "required": "One large, annotated IDE view.",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z008",
+   "sweep": "F4-22",
+   "also": [],
+   "cause": "W",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:restaurant-app-stzapp/EXPERIENCES-ACTEURS.md:3-4",
+   "words": "[paraphrase] \"Réécriture des expériences par acteur (demande de Mansour, 3 juillet 2026) : pour chacun, le cas d'usage complet tel qu'il se vit, et comment la solution y répond, écran par écran\"",
+   "wrong": "experiences written from the solution's side",
+   "required": "each actor's lived case first, screen by screen",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z009",
    "sweep": "B03",
    "also": [],
    "cause": "W",
@@ -138,7 +236,39 @@
    "repeat": false
   },
   {
-   "n": "Z004",
+   "n": "Z010",
+   "sweep": "F3-23",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@b5503ad",
+   "words": "[paraphrase] the author: \"Style\" is more expressive than \"Register\" for the picker (linguistics jargon; operators ask for \"the old style\")",
+   "wrong": "picker labelled \"Register\"",
+   "required": "the control says Style (Modern / Retro)",
+   "sense": "sight (reading)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z011",
+   "sweep": "F3-34",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-06",
+   "project": "zing-studio",
+   "source": "zing-studio@1684b8f; zing-studio:docs/ZING_PX_DESIGN_v0_2.md:20-31",
+   "words": "[paraphrase] \"the author's language correction\": the interface is in English; multilingualism is designed, not assumed",
+   "wrong": "IDE chrome authored in French (the pilot's language), translated by 285 inline ternaries",
+   "required": "English source with a French catalog; no concatenation; layouts that grow (min-width, wrapping rows); locale formatting",
+   "sense": "sight (reading)",
+   "ruling": "PX 1.3",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z012",
    "sweep": "B04",
    "also": [],
    "cause": "W",
@@ -154,13 +284,31 @@
    "repeat": false
   },
   {
-   "n": "Z005",
-   "sweep": "C33",
+   "n": "Z013",
+   "sweep": "F4-63",
    "also": [],
+   "cause": "W",
+   "date": "2026-08-16",
+   "project": "softanza",
+   "source": "ringface@b7b3858",
+   "words": "[paraphrase; Central's commit] \"scrolling prose destroys the reader's mental model\"",
+   "wrong": "messages as scrolling prose",
+   "required": "messages open WHY/DID/NEXT, detail in a grid",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z014",
+   "sweep": "C33",
+   "also": [
+    "F4-64"
+   ],
    "cause": "W",
    "date": "2026-08-17",
    "project": "softanza",
-   "source": "softanza memory: notebook-message-style.md",
+   "source": "softanza memory: notebook-message-style.md; ringface@e5370e0",
    "words": "\"eye comfort is not a luxury when text is a structure\"",
    "wrong": "Chat messages as scrolling prose and telegraphic fragments",
    "required": "A fixed, spaced memo layout; full clauses",
@@ -170,7 +318,55 @@
    "repeat": false
   },
   {
-   "n": "Z006",
+   "n": "Z015",
+   "sweep": "F4-65",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-17",
+   "project": "softanza",
+   "source": "ringface@39f869b",
+   "words": "[paraphrase] \"real output exposed four weaknesses the author named\"",
+   "wrong": "why before subject; fragment did-lines; mixed state rows; bare codes",
+   "required": "subject before why; full clauses; named entities; readable task ids",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z016",
+   "sweep": "F4-66",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-17",
+   "project": "softanza",
+   "source": "ringface@0712c71",
+   "words": "[paraphrase] \"block collides with blocking for the non-native reader\"",
+   "wrong": "a term misread by a non-native reader",
+   "required": "\"memo\" everywhere",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z017",
+   "sweep": "F5-106",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-18",
+   "project": "stz-observer",
+   "source": "stz-observer@7228adb",
+   "words": "\"make the installer able to update\" -- where, and how? (the author, reading DO NEXT)",
+   "wrong": "an action with no place, no shape, no session to open",
+   "required": "where, how, state, and the prompt to paste with a copy button",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z018",
    "sweep": "B05",
    "also": [],
    "cause": "W",
@@ -186,7 +382,39 @@
    "repeat": true
   },
   {
-   "n": "Z007",
+   "n": "Z019",
+   "sweep": "F5-91",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-22",
+   "project": "ringserv",
+   "source": "ringserv@3ee58de",
+   "words": "[paraphrase] \"EASE OF USE AND ABSENCE OF JARGON ARE A KEY DIFFERENTIATOR OF THE SOFTANZA PROJECT\", a standing rule, not a note about one paragraph",
+   "wrong": "the front page's \"honest limits\" in project-invented terms",
+   "required": "plain sections: what it means for you, what to do",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z020",
+   "sweep": "F5-93",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-22",
+   "project": "ringserv",
+   "source": "ringserv@d8c37ef",
+   "words": "[paraphrase] the hero was long and dense, \"a paragraph wearing a headline's clothes\"",
+   "wrong": "a definition paragraph as the hero",
+   "required": "a one-line headline and three short sentences",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z021",
    "sweep": "A24",
    "also": [],
    "cause": "W",
@@ -202,7 +430,39 @@
    "repeat": ""
   },
   {
-   "n": "Z008",
+   "n": "Z022",
+   "sweep": "F5-100",
+   "also": [],
+   "cause": "W",
+   "date": "2026-08-26",
+   "project": "ringserv",
+   "source": "ringserv@49439b7; ringserv:site/style.css:103",
+   "words": "[paraphrase] the menu named concepts (\"One model\", \"Q&A\") where ring++'s names a job its tool does at every stop",
+   "wrong": "concept words in the menu",
+   "required": "Start here, Build, Deploy, Monitor, Blog",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z023",
+   "sweep": "F5-44",
+   "also": [],
+   "cause": "W",
+   "date": "2026-09-14",
+   "project": "harobanda",
+   "source": "harobanda@5bc80bb",
+   "words": "\"When you say 'add a service', tell me how and where... Do not assume I know the internals of the system.\"",
+   "wrong": "a tutorial step in one imperative sentence hid five things",
+   "required": "every step names file, place, paste, expected answer and undo",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z024",
    "sweep": "C35",
    "also": [],
    "cause": "W",
@@ -218,7 +478,7 @@
    "repeat": false
   },
   {
-   "n": "Z009",
+   "n": "Z025",
    "sweep": "C36",
    "also": [],
    "cause": "W",
@@ -234,13 +494,15 @@
    "repeat": false
   },
   {
-   "n": "Z010",
+   "n": "Z026",
    "sweep": "C43",
-   "also": [],
+   "also": [
+    "F5-50"
+   ],
    "cause": "W",
    "date": "2026-09-27",
    "project": "harobanda",
-   "source": "harobanda memory: explain-by-what-it-does.md",
+   "source": "harobanda memory: explain-by-what-it-does.md; harobanda@aacbc9b; harobanda:site/PEDAGOGY.md:88",
    "words": "\"not anyone has the ability to get the link between a metaphoric concept and the practical thing of a technology\"",
    "wrong": "\"the court\" defined as \"the judge of the grammar\": a metaphor explained by a metaphor",
    "required": "Explain each term by what it does; explicit words (\"disks\", not \"storage it mounts\")",
@@ -250,7 +512,23 @@
    "repeat": false
   },
   {
-   "n": "Z011",
+   "n": "Z027",
+   "sweep": "F5-49",
+   "also": [],
+   "cause": "W",
+   "date": "2026-09-27",
+   "project": "harobanda",
+   "source": "harobanda@b78c813",
+   "words": "[paraphrase] tagline \"An operating system you write down -- and that judges whether it kept its word\" replaced by the author's choice",
+   "wrong": "a dangling clause; \"kept its word\" left the reader guessing",
+   "required": "\"You describe the whole computer in one text file. It boots exactly that, and checks every boot against the file.\"",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z028",
    "sweep": "C49",
    "also": [],
    "cause": "W",
@@ -266,7 +544,7 @@
    "repeat": true
   },
   {
-   "n": "Z012",
+   "n": "Z029",
    "sweep": "A44",
    "also": [
     "C50"
@@ -284,7 +562,7 @@
    "repeat": ""
   },
   {
-   "n": "Z013",
+   "n": "Z030",
    "sweep": "B31",
    "also": [],
    "cause": "W",
@@ -300,7 +578,7 @@
    "repeat": false
   },
   {
-   "n": "Z014",
+   "n": "Z031",
    "sweep": "C51",
    "also": [],
    "cause": "W",
@@ -316,15 +594,32 @@
    "repeat": true
   },
   {
-   "n": "Z015",
+   "n": "Z032",
+   "sweep": "F5-05",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-01",
+   "project": "stzsite",
+   "source": "stzsite:JOURNAL.md:92; stzsite@47d012685",
+   "words": "[paraphrase] the first release \"told the story and missed the reach of a unified computational platform\"; a site for Softanza must reflect its depth the way Wolfram's reflects its language",
+   "wrong": "pages narrated the project instead of showing what it does",
+   "required": "show the platform by its outputs: the areas, each with a run example",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z033",
    "sweep": "A47",
    "also": [
-    "B32"
+    "B32",
+    "F5-22"
    ],
    "cause": "W",
    "date": "2026-10-03",
    "project": "stzsite",
-   "source": "softanza/memos/2026-10-03.md:527",
+   "source": "softanza/memos/2026-10-03.md:527; stzsite@03318455d; stzsite:JOURNAL.md:1010",
    "words": "\"examples must be everywhere in the site ... a practical technology, not only a deep conceptual innovation\"",
    "wrong": "pages described without runnable examples",
    "required": "an example on every page",
@@ -334,7 +629,23 @@
    "repeat": ""
   },
   {
-   "n": "Z016",
+   "n": "Z034",
+   "sweep": "F5-15",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:12",
+   "words": "\"The Teaching page is confusing: goal, mechanism, concepts; is the Tutor a program or a person?\"",
+   "wrong": "the page never said what a teacher does nor what the tutor is",
+   "required": "one flow under Learn that states the proposition first",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z035",
    "sweep": "B33",
    "also": [],
    "cause": "W",
@@ -350,7 +661,23 @@
    "repeat": false
   },
   {
-   "n": "Z017",
+   "n": "Z036",
+   "sweep": "F5-23",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-08",
+   "project": "stzsite",
+   "source": "stzsite@cd7cb7e2b; stzsite:JOURNAL.md:1551",
+   "words": "\"crafter\" says the culture the background image carries and what they think of programming -- not maker, not builder",
+   "wrong": "the hero said \"Makers\"",
+   "required": "\"The Software Crafters Platform of the AI Age\"",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z037",
    "sweep": "A54",
    "also": [
     "C64"
@@ -368,13 +695,15 @@
    "repeat": ""
   },
   {
-   "n": "Z018",
+   "n": "Z038",
    "sweep": "C63",
-   "also": [],
+   "also": [
+    "F5-25"
+   ],
    "cause": "W",
    "date": "2026-10-14",
    "project": "ayouni",
-   "source": "ayouni memory: ai-model-ai-agent-terms.md",
+   "source": "ayouni memory: ai-model-ai-agent-terms.md; stzsite@9fb8a153e",
    "words": "[paraphrase] Say \"AI model\" / \"AI agent\" where bare \"model\" or \"agent\" could take another sense.",
    "wrong": "Ambiguous bare terms",
    "required": "Precise terms at first use",
@@ -384,7 +713,7 @@
    "repeat": true
   },
   {
-   "n": "Z019",
+   "n": "Z039",
    "sweep": "C65",
    "also": [],
    "cause": "W",
@@ -400,13 +729,15 @@
    "repeat": true
   },
   {
-   "n": "Z020",
+   "n": "Z040",
    "sweep": "C66",
-   "also": [],
+   "also": [
+    "F5-118"
+   ],
    "cause": "W",
    "date": "2026-10-14",
    "project": "an NGO platform (client)",
-   "source": "client memory (an NGO platform): prototypes.md",
+   "source": "client memory (an NGO platform): prototypes.md; ngo-platform:output/fabrication/prototypes/_source/LISEZMOI.md:57",
    "words": "« On est à Niamey, pas dans la Silicon Valley ! »",
    "wrong": "Truncated American-style labels (« Vous êtes : », « À faire : », « Précédent »)",
    "required": "Complete labels in everyday French",
@@ -416,7 +747,7 @@
    "repeat": true
   },
   {
-   "n": "Z021",
+   "n": "Z041",
    "sweep": "C67",
    "also": [],
    "cause": "W",
@@ -432,7 +763,7 @@
    "repeat": true
   },
   {
-   "n": "Z022",
+   "n": "Z042",
    "sweep": "C73",
    "also": [],
    "cause": "W",
@@ -448,7 +779,7 @@
    "repeat": true
   },
   {
-   "n": "Z023",
+   "n": "Z043",
    "sweep": "C74",
    "also": [],
    "cause": "W",
@@ -464,7 +795,39 @@
    "repeat": true
   },
   {
-   "n": "Z024",
+   "n": "Z044",
+   "sweep": "F5-24",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-14",
+   "project": "stzsite",
+   "source": "stzsite@0b2072299; stzsite:JOURNAL.md:2071",
+   "words": "[paraphrase] define the platform by what it does, not by who it is for",
+   "wrong": "the hero line defined the platform by its audience",
+   "required": "\"The Governed Software Platform of the AI Age\" in every place the line appears",
+   "sense": "reading",
+   "ruling": "COVER-02",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z045",
+   "sweep": "F5-116",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-14",
+   "project": "an NGO platform (client)",
+   "source": "ngo-platform:output/fabrication/prototypes/_source/LISEZMOI.md:48",
+   "words": "[paraphrase] never a turn of phrase that could pass for a property of the system: a sentence about today's delay, alone under a title, made readers believe the platform would work that way",
+   "wrong": "a description of the current situation read as the product's behaviour",
+   "required": "three labelled lines per card: Situation actuelle, Ce que vous allez faire, Résultat attendu",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z046",
    "sweep": "C76",
    "also": [],
    "cause": "W",
@@ -480,7 +843,7 @@
    "repeat": true
   },
   {
-   "n": "Z025",
+   "n": "Z047",
    "sweep": "C83",
    "also": [],
    "cause": "W",
@@ -496,7 +859,7 @@
    "repeat": true
   },
   {
-   "n": "Z026",
+   "n": "Z048",
    "sweep": "C84",
    "also": [],
    "cause": "W",
@@ -512,15 +875,32 @@
    "repeat": false
   },
   {
-   "n": "Z027",
+   "n": "Z049",
+   "sweep": "F5-77",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-17",
+   "project": "ayouni",
+   "source": "ayouni:DECISIONS.md:63; ayouni@6ed1ee7",
+   "words": "\"The cover does not cite Softanza anywhere and does not say what is it and for whome!!!\"",
+   "wrong": "a back cover that named neither the subject nor the reader",
+   "required": "title on top, \"What Softanza is\", \"Who it is for\", the author presented",
+   "sense": "sight, reading",
+   "ruling": "COVER-06",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z050",
    "sweep": "A69",
    "also": [
-    "C85"
+    "C85",
+    "F5-65"
    ],
    "cause": "W",
    "date": "2026-10-18",
    "project": "harobanda",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1340; softanza/memos/2026-11-07.md:529",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1340; softanza/memos/2026-11-07.md:529; harobanda@ba3d7e3",
    "words": "the menu word is BLOG, not 'Positions' ('not usual as a main menu option')",
    "wrong": "an unusual main-menu word",
    "required": "menu words visitors expect",
@@ -530,7 +910,7 @@
    "repeat": true
   },
   {
-   "n": "Z028",
+   "n": "Z051",
    "sweep": "C86",
    "also": [],
    "cause": "W",
@@ -546,15 +926,16 @@
    "repeat": true
   },
   {
-   "n": "Z029",
+   "n": "Z052",
    "sweep": "A71",
    "also": [
-    "B38"
+    "B38",
+    "F5-39"
    ],
    "cause": "W",
    "date": "2026-10-19",
    "project": "stzsite",
-   "source": "softanza/memos/2026-10-19.md:402",
+   "source": "softanza/memos/2026-10-19.md:402; stzsite@e021d5c7b; stzsite@d915da1c8",
    "words": "[paraphrase] \"the author judged the first area pass a reproduction rather than a value-added narration ... the class pages ... opened on a cryptic line and a Q/QQ table\"",
    "wrong": "pages that copied the source and opened cryptically",
    "required": "an introduction with expressive examples",
@@ -564,7 +945,7 @@
    "repeat": true
   },
   {
-   "n": "Z030",
+   "n": "Z053",
    "sweep": "C89",
    "also": [],
    "cause": "W",
@@ -580,7 +961,7 @@
    "repeat": false
   },
   {
-   "n": "Z031",
+   "n": "Z054",
    "sweep": "A73",
    "also": [
     "B40"
@@ -598,7 +979,7 @@
    "repeat": true
   },
   {
-   "n": "Z032",
+   "n": "Z055",
    "sweep": "A75",
    "also": [],
    "cause": "W",
@@ -614,7 +995,7 @@
    "repeat": true
   },
   {
-   "n": "Z033",
+   "n": "Z056",
    "sweep": "A76",
    "also": [
     "B42"
@@ -632,7 +1013,23 @@
    "repeat": true
   },
   {
-   "n": "Z034",
+   "n": "Z057",
+   "sweep": "F4-32",
+   "also": [],
+   "cause": "W",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@3bd2c19",
+   "words": "[paraphrase] after the author's third look: \"the user guide before the programmer guide ... one report slide, the two chart slides from one script at one zoom ... a leaner installation slide\"",
+   "wrong": "the deck led with the maker's view",
+   "required": "the user's order, one zoom, fewer technical slides",
+   "sense": "read",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z058",
    "sweep": "C93",
    "also": [],
    "cause": "W",
@@ -648,7 +1045,7 @@
    "repeat": true
   },
   {
-   "n": "Z035",
+   "n": "Z059",
    "sweep": "D30",
    "also": [
     "A83"
@@ -666,7 +1063,7 @@
    "repeat": true
   },
   {
-   "n": "Z036",
+   "n": "Z060",
    "sweep": "D37",
    "also": [
     "A90"
@@ -684,7 +1081,7 @@
    "repeat": false
   },
   {
-   "n": "Z037",
+   "n": "Z061",
    "sweep": "D50",
    "also": [
     "A93",
@@ -703,7 +1100,7 @@
    "repeat": true
   },
   {
-   "n": "Z038",
+   "n": "Z062",
    "sweep": "C106",
    "also": [],
    "cause": "W",
@@ -719,13 +1116,15 @@
    "repeat": false
   },
   {
-   "n": "Z039",
+   "n": "Z063",
    "sweep": "C107",
-   "also": [],
+   "also": [
+    "F5-120"
+   ],
    "cause": "W",
    "date": "2026-11-06",
    "project": "an NGO platform (client)",
-   "source": "client memory (an NGO platform): style-livrables-client.md",
+   "source": "client memory (an NGO platform): style-livrables-client.md; ngo-platform:output/livraisons/LISEZMOI.md:22",
    "words": "« le tableau ne doit pas être coupé en deux pages, mets-le sur une seule »",
    "wrong": "A table split across pages; a long introduction; \"3 minutes\" reading time",
    "required": "Table on one page; intro of 3-4 lines; reading time never under 5 min",
@@ -735,7 +1134,7 @@
    "repeat": true
   },
   {
-   "n": "Z040",
+   "n": "Z064",
    "sweep": "D68",
    "also": [],
    "cause": "W",
@@ -751,7 +1150,7 @@
    "repeat": false
   },
   {
-   "n": "Z041",
+   "n": "Z065",
    "sweep": "D85",
    "also": [
     "A104"
@@ -769,7 +1168,7 @@
    "repeat": false
   },
   {
-   "n": "Z042",
+   "n": "Z066",
    "sweep": "A105",
    "also": [
     "B48"
@@ -787,16 +1186,33 @@
    "repeat": true
   },
   {
-   "n": "Z043",
+   "n": "Z067",
+   "sweep": "F5-82",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-09 12:02",
+   "project": "lookout",
+   "source": "lookout@85b8d3b",
+   "words": "\"this part is dense and worth writing elsewhere\" (on the footer)",
+   "wrong": "the feed's verification details in the footer",
+   "required": "an About page \"The feed\"; the footer keeps one line",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z068",
    "sweep": "C136",
    "also": [
     "A128",
-    "B68"
+    "B68",
+    "F5-85"
    ],
    "cause": "W",
    "date": "2026-11-09 13:48",
    "project": "lookout",
-   "source": "softanza/mailbox/lookout.md:1057",
+   "source": "softanza/mailbox/lookout.md:1057; lookout@8b3e588",
    "words": "\"Avoid dense writings like this in such situations. people today don't have time to read. this is also better for agents to grasp.\"",
    "wrong": "Dense paragraphs on Why",
    "required": "A lead line and labelled points; narration for introductions",
@@ -806,7 +1222,7 @@
    "repeat": true
   },
   {
-   "n": "Z044",
+   "n": "Z069",
    "sweep": "D94",
    "also": [
     "A134"
@@ -824,7 +1240,7 @@
    "repeat": false
   },
   {
-   "n": "Z045",
+   "n": "Z070",
    "sweep": "C02",
    "also": [],
    "cause": "W",
@@ -840,7 +1256,39 @@
    "repeat": false
   },
   {
-   "n": "Z046",
+   "n": "Z071",
+   "sweep": "F2-07",
+   "also": [],
+   "cause": "P",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1702-1710`, `:1768-1770`",
+   "words": "\"all the elements of the IDE, including graphics\" (what \"the user described\")",
+   "wrong": "Dark mode was patchy. Hard-coded hex left status chips as \"a bright light-purple stain\", white panels glared, and SVG glyphs disappeared.",
+   "required": "Every element is themed through variables, graphics included, and verified in both themes at design time.",
+   "sense": "sight (colour)",
+   "ruling": "PX §50",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z072",
+   "sweep": "F2-08",
+   "also": [],
+   "cause": "P",
+   "date": "2026-06 (<=2026-06-23)",
+   "project": "refine",
+   "source": "`CLAUDE.md:742-751`",
+   "words": "[paraphrase] One of \"three asks\": \"fix the white-widget rule\".",
+   "wrong": "`--card` was undefined, so about 37 widgets rendered transparent on the grey workspace, and their fallbacks rendered cream in dark mode.",
+   "required": "Every widget has a paper surface and a `--line` stroke on the grey canvas, in both themes (`--card: var(--bg-paper)`).",
+   "sense": "sight",
+   "ruling": "CLAUDE.md constraint #9 / PX §44",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z073",
    "sweep": "B01",
    "also": [],
    "cause": "P",
@@ -856,7 +1304,39 @@
    "repeat": false
   },
   {
-   "n": "Z047",
+   "n": "Z074",
+   "sweep": "F4-18",
+   "also": [],
+   "cause": "P",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:46-47, 65; restaurant-app:restaurant-app-stzapp/www/index.html:204-212",
+   "words": "[paraphrase] \"Le ＋ (FAB) ne bouge jamais\"; during the guides it \"sautait en bas à gauche\"",
+   "wrong": "the add button jumped during guides (a utility class changed its positioning)",
+   "required": "a fixed, memorable position with a light ring",
+   "sense": "sight+touch",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z075",
+   "sweep": "F5-107",
+   "also": [],
+   "cause": "P",
+   "date": "2026-08-07",
+   "project": "ringflex",
+   "source": "ringflex@75cfcbf; ringflex@ae213ee",
+   "words": "[paraphrase] the author's verdict on the workflow diagrams: \"scrambled and aggressive\"; not satisfied after two rounds of tuning",
+   "wrong": "a generic layouter crossed the page with edges to shared endings",
+   "required": "a domain layout: the happy path on one line, endings duplicated beside their source",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z076",
    "sweep": "A01",
    "also": [
     "C31"
@@ -874,7 +1354,7 @@
    "repeat": ""
   },
   {
-   "n": "Z048",
+   "n": "Z077",
    "sweep": "A02",
    "also": [],
    "cause": "P",
@@ -890,7 +1370,7 @@
    "repeat": ""
   },
   {
-   "n": "Z049",
+   "n": "Z078",
    "sweep": "A03",
    "also": [],
    "cause": "P",
@@ -906,7 +1386,7 @@
    "repeat": ""
   },
   {
-   "n": "Z050",
+   "n": "Z079",
    "sweep": "A04",
    "also": [],
    "cause": "P",
@@ -922,7 +1402,23 @@
    "repeat": ""
   },
   {
-   "n": "Z051",
+   "n": "Z080",
+   "sweep": "F4-23",
+   "also": [],
+   "cause": "P",
+   "date": "2026-08-19",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app@f321dbb",
+   "words": "« Mansour a repéré « Apr�sCoupure » dans le flux de l'Atelier »",
+   "wrong": "a broken-encoding name shown in the live feed, accepted by the server",
+   "required": "reject invalid UTF-8 at the door; never show a replacement character",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z081",
    "sweep": "A13",
    "also": [],
    "cause": "P",
@@ -938,7 +1434,7 @@
    "repeat": ""
   },
   {
-   "n": "Z052",
+   "n": "Z082",
    "sweep": "A14",
    "also": [],
    "cause": "P",
@@ -954,7 +1450,23 @@
    "repeat": true
   },
   {
-   "n": "Z053",
+   "n": "Z083",
+   "sweep": "F5-104",
+   "also": [],
+   "cause": "P",
+   "date": "2026-08-22",
+   "project": "microring",
+   "source": "microring@e369a90",
+   "words": "[paraphrase] the pump and the button were invisible on the author's machine; \"the defect the author circled in red\"; pin labels readable \"as asked\"",
+   "wrong": "custom elements that failed to upgrade rendered as empty space, no error",
+   "required": "every part drawn by the page; labels 13 px bold with a halo",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z084",
    "sweep": "A20",
    "also": [],
    "cause": "P",
@@ -970,7 +1482,7 @@
    "repeat": ""
   },
   {
-   "n": "Z054",
+   "n": "Z085",
    "sweep": "A21",
    "also": [],
    "cause": "P",
@@ -986,7 +1498,7 @@
    "repeat": true
   },
   {
-   "n": "Z055",
+   "n": "Z086",
    "sweep": "A22",
    "also": [],
    "cause": "P",
@@ -1002,7 +1514,7 @@
    "repeat": ""
   },
   {
-   "n": "Z056",
+   "n": "Z087",
    "sweep": "A23",
    "also": [],
    "cause": "P",
@@ -1018,7 +1530,7 @@
    "repeat": ""
   },
   {
-   "n": "Z057",
+   "n": "Z088",
    "sweep": "A25",
    "also": [],
    "cause": "P",
@@ -1034,7 +1546,7 @@
    "repeat": ""
   },
   {
-   "n": "Z058",
+   "n": "Z089",
    "sweep": "A26",
    "also": [],
    "cause": "P",
@@ -1050,7 +1562,7 @@
    "repeat": true
   },
   {
-   "n": "Z059",
+   "n": "Z090",
    "sweep": "A28",
    "also": [],
    "cause": "P",
@@ -1066,7 +1578,7 @@
    "repeat": ""
   },
   {
-   "n": "Z060",
+   "n": "Z091",
    "sweep": "A29",
    "also": [],
    "cause": "P",
@@ -1082,7 +1594,7 @@
    "repeat": ""
   },
   {
-   "n": "Z061",
+   "n": "Z092",
    "sweep": "B08",
    "also": [],
    "cause": "P",
@@ -1098,7 +1610,7 @@
    "repeat": false
   },
   {
-   "n": "Z062",
+   "n": "Z093",
    "sweep": "B09",
    "also": [],
    "cause": "P",
@@ -1114,7 +1626,7 @@
    "repeat": true
   },
   {
-   "n": "Z063",
+   "n": "Z094",
    "sweep": "A30",
    "also": [
     "B11"
@@ -1132,7 +1644,7 @@
    "repeat": true
   },
   {
-   "n": "Z064",
+   "n": "Z095",
    "sweep": "A31",
    "also": [
     "B10"
@@ -1150,7 +1662,7 @@
    "repeat": true
   },
   {
-   "n": "Z065",
+   "n": "Z096",
    "sweep": "A32",
    "also": [
     "B12"
@@ -1168,7 +1680,7 @@
    "repeat": ""
   },
   {
-   "n": "Z066",
+   "n": "Z097",
    "sweep": "A33",
    "also": [],
    "cause": "P",
@@ -1184,7 +1696,7 @@
    "repeat": ""
   },
   {
-   "n": "Z067",
+   "n": "Z098",
    "sweep": "A34",
    "also": [
     "B13"
@@ -1202,7 +1714,7 @@
    "repeat": true
   },
   {
-   "n": "Z068",
+   "n": "Z099",
    "sweep": "A35",
    "also": [],
    "cause": "P",
@@ -1218,7 +1730,7 @@
    "repeat": ""
   },
   {
-   "n": "Z069",
+   "n": "Z100",
    "sweep": "A36",
    "also": [
     "B14"
@@ -1236,7 +1748,7 @@
    "repeat": true
   },
   {
-   "n": "Z070",
+   "n": "Z101",
    "sweep": "A37",
    "also": [
     "B15"
@@ -1254,7 +1766,7 @@
    "repeat": true
   },
   {
-   "n": "Z071",
+   "n": "Z102",
    "sweep": "A40",
    "also": [
     "B22"
@@ -1272,7 +1784,7 @@
    "repeat": ""
   },
   {
-   "n": "Z072",
+   "n": "Z103",
    "sweep": "A41",
    "also": [],
    "cause": "P",
@@ -1288,7 +1800,7 @@
    "repeat": ""
   },
   {
-   "n": "Z073",
+   "n": "Z104",
    "sweep": "A42",
    "also": [],
    "cause": "P",
@@ -1304,7 +1816,7 @@
    "repeat": ""
   },
   {
-   "n": "Z074",
+   "n": "Z105",
    "sweep": "A43",
    "also": [],
    "cause": "P",
@@ -1320,7 +1832,23 @@
    "repeat": true
   },
   {
-   "n": "Z075",
+   "n": "Z106",
+   "sweep": "F5-45",
+   "also": [],
+   "cause": "P",
+   "date": "2026-09-15",
+   "project": "harobanda",
+   "source": "harobanda@8861cb8",
+   "words": "[paraphrase] found by the author doing lesson 6: the script printed `exit 0` directly under JUDGED: FAIL",
+   "wrong": "the screen said success under a refusal",
+   "required": "the real exit status printed and returned",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z107",
    "sweep": "C42",
    "also": [],
    "cause": "P",
@@ -1336,7 +1864,7 @@
    "repeat": true
   },
   {
-   "n": "Z076",
+   "n": "Z108",
    "sweep": "B43",
    "also": [],
    "cause": "P",
@@ -1352,7 +1880,39 @@
    "repeat": false
   },
   {
-   "n": "Z077",
+   "n": "Z109",
+   "sweep": "F4-28",
+   "also": [],
+   "cause": "P",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@d6966e7; orgdesk:app/web/app.css:54-56",
+   "words": "[paraphrase] after the author's second look: \"every band keeps its grid row so a hidden ribbon no longer collapses the view\"",
+   "wrong": "hiding the ribbon collapsed the view",
+   "required": "each band keeps its row",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z110",
+   "sweep": "F5-109",
+   "also": [],
+   "cause": "P",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@2f6a162; orgdesk@b74f941",
+   "words": "[paraphrase] after the author's first look: the report and documentation pages scrolled as a whole and a block's label overlapped a table; plain line icons beside every ribbon command",
+   "wrong": "overlap; the document scrolling as a whole",
+   "required": "pages contained and centred; the tool's own icons; a ribbon that folds",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z111",
    "sweep": "B45",
    "also": [],
    "cause": "P",
@@ -1368,7 +1928,7 @@
    "repeat": false
   },
   {
-   "n": "Z078",
+   "n": "Z112",
    "sweep": "B46",
    "also": [],
    "cause": "P",
@@ -1384,7 +1944,7 @@
    "repeat": true
   },
   {
-   "n": "Z079",
+   "n": "Z113",
    "sweep": "D42",
    "also": [],
    "cause": "P",
@@ -1400,7 +1960,7 @@
    "repeat": false
   },
   {
-   "n": "Z080",
+   "n": "Z114",
    "sweep": "D44",
    "also": [],
    "cause": "P",
@@ -1416,7 +1976,7 @@
    "repeat": false
   },
   {
-   "n": "Z081",
+   "n": "Z115",
    "sweep": "D45",
    "also": [],
    "cause": "P",
@@ -1432,7 +1992,7 @@
    "repeat": false
   },
   {
-   "n": "Z082",
+   "n": "Z116",
    "sweep": "D82",
    "also": [
     "A102"
@@ -1450,7 +2010,23 @@
    "repeat": true
   },
   {
-   "n": "Z083",
+   "n": "Z117",
+   "sweep": "F5-81",
+   "also": [],
+   "cause": "P",
+   "date": "2026-11-09 11:57",
+   "project": "lookout",
+   "source": "lookout@121abe6; lookout@dfd5b16",
+   "words": "[paraphrase] the author drew the radar's labels: each slice's number just outside the circle, its name running outward; top and bottom labels just clear of the circle on one line",
+   "wrong": "labels placed by the layout, crossing into the circle",
+   "required": "the placement as drawn; plain text, a step lighter grey",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z118",
    "sweep": "B06",
    "also": [],
    "cause": "P",
@@ -1466,7 +2042,7 @@
    "repeat": false
   },
   {
-   "n": "Z084",
+   "n": "Z119",
    "sweep": "B07",
    "also": [],
    "cause": "P",
@@ -1482,7 +2058,7 @@
    "repeat": true
   },
   {
-   "n": "Z085",
+   "n": "Z120",
    "sweep": "B21",
    "also": [],
    "cause": "P",
@@ -1498,7 +2074,7 @@
    "repeat": false
   },
   {
-   "n": "Z086",
+   "n": "Z121",
    "sweep": "C01",
    "also": [],
    "cause": "P",
@@ -1514,7 +2090,7 @@
    "repeat": false
   },
   {
-   "n": "Z087",
+   "n": "Z122",
    "sweep": "C05",
    "also": [],
    "cause": "N",
@@ -1530,13 +2106,15 @@
    "repeat": false
   },
   {
-   "n": "Z088",
+   "n": "Z123",
    "sweep": "C09",
-   "also": [],
+   "also": [
+    "F1-11"
+   ],
    "cause": "N",
    "date": "2026-04",
    "project": "zin",
-   "source": "zin memory: feedback_zinbank_ui_polish.md",
+   "source": "zin memory: feedback_zinbank_ui_polish.md; zin@66ccef6",
    "words": "[paraphrase] When there are two levels of tabs, the second level is vertical so it is not confused with the first.",
    "wrong": "Two horizontal tab rows read as one level",
    "required": "Second level vertical",
@@ -1546,13 +2124,95 @@
    "repeat": false
   },
   {
-   "n": "Z089",
-   "sweep": "C17",
+   "n": "Z124",
+   "sweep": "F1-06",
    "also": [],
+   "cause": "N",
+   "date": "2026-04-24",
+   "project": "zin",
+   "source": "zin@15d5bba",
+   "words": "\"User feedback: `zin achieved` should surface those early milestones too, not start at the AI SDK.\"",
+   "wrong": "the first 58 sessions sat in a separate table under the list and read as context",
+   "required": "one timeline: the six early phases first, then the numbered milestones",
+   "sense": "see",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z125",
+   "sweep": "F4-56",
+   "also": [],
+   "cause": "N",
+   "date": "2026-04-24",
+   "project": "zin",
+   "source": "zin-one@15d5bba",
+   "words": "[paraphrase] \"User feedback: `zin achieved` should surface those early milestones too, not start at the AI SDK\"",
+   "wrong": "58 sessions of work shown in a separate table that read as context",
+   "required": "one Achievements timeline in the console",
+   "sense": "read (terminal)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z126",
+   "sweep": "F1-07",
+   "also": [],
+   "cause": "N",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin@65dd415",
+   "words": "[paraphrase, French kept] \"L'utilisateur a raison : la position est dans UN sous-onglet, pas dans la boite parente.\"",
+   "wrong": "the whole parent section of the navigation map wore the gold \"current\" halo",
+   "required": "mark only the deepest current entry (the exact sub-tab); a parent with sub-tabs is never marked",
+   "sense": "see",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z127",
+   "sweep": "F4-38",
+   "also": [],
+   "cause": "N",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@65dd415",
+   "words": "[paraphrase] « L'utilisateur a raison : la position est dans UN sous-onglet, pas dans la boîte parente. »",
+   "wrong": "the whole module envelope was marked \"Ici\"",
+   "required": "mark the deepest current sub-tab, never the envelope",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z128",
+   "sweep": "F2-10",
+   "also": [],
+   "cause": "N",
+   "date": "2026-07 (<=2026-07-12)",
+   "project": "refine",
+   "source": "`CLAUDE.md:2423-2442`",
+   "words": "[paraphrase] The author asked for a critical review of the book's didactic flow \"to world-class editor standards (Manning/Apress)\". His recorded decisions: promote chapters 13, 14, 18 and 19, merge the three stubs into one chapter, and divide the book into five parts.",
+   "wrong": "The book read as \"two books wearing one cover\": treatise chapters joined to flat essays, no part structure, and no figures in 60k words.",
+   "required": "Five parts, a uniform close for each chapter, and figures and listings at the beats of the argument.",
+   "sense": "reading (document layout)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z129",
+   "sweep": "C17",
+   "also": [
+    "F4-02"
+   ],
    "cause": "N",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:19-21; restaurant-app:restaurant-app-stzapp/www/index.html:29-30",
    "words": "[paraphrase] v5.1: a sheet is an overlay, not a navigation; opening one must never change the screen, and closing it returns where the user was.",
    "wrong": "Opening a sheet moved the user to another screen",
    "required": "Overlays keep the user's place",
@@ -1562,13 +2222,15 @@
    "repeat": false
   },
   {
-   "n": "Z090",
+   "n": "Z130",
    "sweep": "C19",
-   "also": [],
+   "also": [
+    "F4-03"
+   ],
    "cause": "N",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:22-25; restaurant-app:kb/enseignements.html:37; restaurant-app:restaurant-app-stzapp/www/index.html:191-199",
    "words": "[paraphrase] v7.1: the bottom navigation stays at the bottom on every screen size -- \"jamais de menu en haut\" (the move to top tabs at >=760 px removed).",
    "wrong": "Navigation jumped to the top on wide screens",
    "required": "One navigation position",
@@ -1578,13 +2240,15 @@
    "repeat": false
   },
   {
-   "n": "Z091",
+   "n": "Z131",
    "sweep": "D10",
-   "also": [],
+   "also": [
+    "F3-18"
+   ],
    "cause": "N",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:1194",
+   "source": "constitution/rules.json:1194; zing@8425042 (fix 2)",
    "words": "[paraphrase] the constitution's pages carried a trail and the top-level pages did not, so orientation depended on depth",
    "wrong": "navigation aid present on some pages only",
    "required": "the same orientation on every page",
@@ -1594,13 +2258,15 @@
    "repeat": false
   },
   {
-   "n": "Z092",
+   "n": "Z132",
    "sweep": "D11",
-   "also": [],
+   "also": [
+    "F3-31"
+   ],
    "cause": "N",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:1212",
+   "source": "constitution/rules.json:1212; zing@12c358e",
    "words": "[paraphrase] the Constitution index showed \"StzWeb > The Constitution\" and stopped, hiding the three pages under it",
    "wrong": "path omitted a level",
    "required": "the path shows every depth",
@@ -1610,13 +2276,15 @@
    "repeat": false
   },
   {
-   "n": "Z093",
+   "n": "Z133",
    "sweep": "D12",
-   "also": [],
+   "also": [
+    "F3-32"
+   ],
    "cause": "N",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:1341",
+   "source": "constitution/rules.json:1341; zing@367b7d0, zing@8e4a0df",
    "words": "[paraphrase] \"Gotchas\" stood in the main menu beside \"Constitution\" although it is inside it; the menu said Why, Story while the path said Why StzWeb, The Story",
    "wrong": "the menu misrepresented the tree; one page had two names",
    "required": "one name per page, each entry at its level",
@@ -1626,7 +2294,7 @@
    "repeat": false
   },
   {
-   "n": "Z094",
+   "n": "Z134",
    "sweep": "D13",
    "also": [],
    "cause": "N",
@@ -1642,7 +2310,7 @@
    "repeat": false
   },
   {
-   "n": "Z095",
+   "n": "Z135",
    "sweep": "C40",
    "also": [],
    "cause": "N",
@@ -1658,13 +2326,15 @@
    "repeat": false
   },
   {
-   "n": "Z096",
+   "n": "Z136",
    "sweep": "C47",
-   "also": [],
+   "also": [
+    "F5-58"
+   ],
    "cause": "N",
    "date": "2026-09-29",
    "project": "harobanda",
-   "source": "harobanda memory: site-page-scale.md",
+   "source": "harobanda memory: site-page-scale.md; harobanda@252b40a; harobanda@ae04541",
    "words": "[paraphrase] The author moved the security pages twice in a day on reading them; pages are filed by what they are about; a section strip stays on one line at 1280 and 1024px.",
    "wrong": "Placement by what pages were written for; 12.5-screen page",
    "required": "Pages of 2.5-4 screens, filed by subject",
@@ -1674,7 +2344,7 @@
    "repeat": false
   },
   {
-   "n": "Z097",
+   "n": "Z137",
    "sweep": "B25",
    "also": [],
    "cause": "N",
@@ -1690,7 +2360,7 @@
    "repeat": false
   },
   {
-   "n": "Z098",
+   "n": "Z138",
    "sweep": "B29",
    "also": [],
    "cause": "N",
@@ -1706,7 +2376,39 @@
    "repeat": true
   },
   {
-   "n": "Z099",
+   "n": "Z139",
+   "sweep": "F5-10",
+   "also": [],
+   "cause": "N",
+   "date": "2026-10-02",
+   "project": "stzsite",
+   "source": "stzsite@fbf4c340e; stzsite:JOURNAL.md:650",
+   "words": "[paraphrase] a page one level below a page of the section's path shows its level in a vertical bar on the left; \"a site has the main menu and two submenu levels, never more\"",
+   "wrong": "the third level had no place (rows of chips)",
+   "required": "a left bar per family; never a fourth menu level",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z140",
+   "sweep": "F5-21",
+   "also": [],
+   "cause": "N",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:19",
+   "words": "\"On stzString's page nothing says where you are or how to go back\"",
+   "wrong": "a class page with no path",
+   "required": "a pinned path Learn > Reference > String > stzString",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z141",
    "sweep": "A49",
    "also": [],
    "cause": "N",
@@ -1722,15 +2424,16 @@
    "repeat": ""
   },
   {
-   "n": "Z100",
+   "n": "Z142",
    "sweep": "A50",
    "also": [
-    "C56"
+    "C56",
+    "F5-63"
    ],
    "cause": "N",
    "date": "2026-10-13",
    "project": "harobanda",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1274",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1274; harobanda@b565545",
    "words": "[paraphrase] his rule: a parallel capability joins the section of its kind, never a new menu entry, and \"a section's name must not promise more than its pages keep\"",
    "wrong": "a seventh menu entry for one capability",
    "required": "six sections; names sized to their content",
@@ -1740,13 +2443,15 @@
    "repeat": ""
   },
   {
-   "n": "Z101",
+   "n": "Z143",
    "sweep": "A55",
-   "also": [],
+   "also": [
+    "F5-64"
+   ],
    "cause": "N",
    "date": "2026-10-14",
    "project": "harobanda",
-   "source": "softanza/memos/2026-10-14.md:184; softanza/dashboard/CONCLUSIONS.md:1280",
+   "source": "softanza/memos/2026-10-14.md:184; softanza/dashboard/CONCLUSIONS.md:1280; harobanda@f7b4a08; harobanda:site/styles.css:112",
    "words": "[paraphrase; whether the author asked for it or only approved the push is not stated] the section strip stays on screen under the menu, current entry underlined",
    "wrong": "the second bar scrolled away",
    "required": "second level fixed on scroll",
@@ -1756,13 +2461,15 @@
    "repeat": ""
   },
   {
-   "n": "Z102",
+   "n": "Z144",
    "sweep": "A60",
-   "also": [],
+   "also": [
+    "F5-28"
+   ],
    "cause": "N",
    "date": "2026-10-15",
    "project": "stzsite",
-   "source": "softanza/prompts/52-stzzui-reading-site-depth.md:14-18; softanza/dashboard/CONCLUSIONS.md:1300; softanza/memos/2026-10-15.md:419",
+   "source": "softanza/prompts/52-stzzui-reading-site-depth.md:14-18; softanza/dashboard/CONCLUSIONS.md:1300; softanza/memos/2026-10-15.md:419; stzsite:doc/STRUCTURE-2026-10-15.md:3; stzsite@9f8437897",
    "words": "\"This kind of deep menu options is not good for readability and for the reader to make a knowledgeable mental model of the site content.\" (on a screenshot)",
    "wrong": "three stacked navigation rows; a second row of nine wrapping onto two lines",
    "required": "a navigation the reader can model",
@@ -1772,16 +2479,33 @@
    "repeat": true
   },
   {
-   "n": "Z103",
+   "n": "Z145",
+   "sweep": "F5-73",
+   "also": [],
+   "cause": "N",
+   "date": "2026-10-15",
+   "project": "ayouni",
+   "source": "ayouni:DECISIONS.md:21; ayouni@5142938",
+   "words": "\"the AYOUNI logo shoud lbe written as it's svg logo anywhere ... and the books sites must allow going back to tha ayouni press main page\"",
+   "wrong": "a raster logo; readers with no way back to the house",
+   "required": "the SVG logo linked home in every reader",
+   "sense": "sight",
+   "ruling": "HOUSE-15",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z146",
    "sweep": "A61",
    "also": [
     "B35",
-    "D24"
+    "D24",
+    "F5-29"
    ],
    "cause": "N",
    "date": "2026-10-16",
    "project": "stzsite",
-   "source": "softanza/prompts/53-stzzui-author-four-levels.md:12-15; softanza/memos/2026-10-16.md:26",
+   "source": "softanza/prompts/53-stzzui-author-four-levels.md:12-15; softanza/memos/2026-10-16.md:26; stzsite:doc/STRUCTURE-2026-10-16.md:3; stzsite@128dc1b03; stzsite:assets/css/site.css:689",
    "words": "\"Why did you remove the second horizontal menu bar? Like that we lose a level. ... no more than 5, short labels.\"",
    "wrong": "the fix for A60 replaced the second bar with a rail and lost a level",
    "required": "four levels: top menu, fixed second bar, left bar, right bar; at most five short labels",
@@ -1791,15 +2515,16 @@
    "repeat": true
   },
   {
-   "n": "Z104",
+   "n": "Z147",
    "sweep": "A62",
    "also": [
-    "D25"
+    "D25",
+    "F5-30"
    ],
    "cause": "N",
    "date": "2026-10-16",
    "project": "stzsite",
-   "source": "softanza/prompts/54-stzzui-trail-only-where-needed.md:15-16; softanza/dashboard/CONCLUSIONS.md:1318",
+   "source": "softanza/prompts/54-stzzui-trail-only-where-needed.md:15-16; softanza/dashboard/CONCLUSIONS.md:1318; stzsite@19002de00",
    "words": "\"The path should not be present in the case where only 3 levels are there (unnecessary duplication), just where it is needed\"",
    "wrong": "breadcrumb repeating the menu and the second bar",
    "required": "a trail only where a level is not already visible",
@@ -1809,7 +2534,7 @@
    "repeat": ""
   },
   {
-   "n": "Z105",
+   "n": "Z148",
    "sweep": "C80",
    "also": [],
    "cause": "N",
@@ -1825,7 +2550,23 @@
    "repeat": false
   },
   {
-   "n": "Z106",
+   "n": "Z149",
+   "sweep": "F5-31",
+   "also": [],
+   "cause": "N",
+   "date": "2026-10-16",
+   "project": "stzsite",
+   "source": "stzsite@19a2fff2b; stzsite:assets/css/site.css:782",
+   "words": "[paraphrase] the front page offers a door per reader, each to an umbrella page; Reference is for programmers and agents, Platform for general readers",
+   "wrong": "nine journeys and an area's reference inside Platform",
+   "required": "six reader pages; each area's reference its own page under Reference",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z150",
    "sweep": "C82",
    "also": [],
    "cause": "N",
@@ -1841,15 +2582,16 @@
    "repeat": false
   },
   {
-   "n": "Z107",
+   "n": "Z151",
    "sweep": "A70",
    "also": [
-    "C87"
+    "C87",
+    "F5-66"
    ],
    "cause": "N",
    "date": "2026-10-19",
    "project": "harobanda",
-   "source": "softanza/memos/2026-11-07.md:530; softanza/dashboard/CONCLUSIONS.md:1358",
+   "source": "softanza/memos/2026-11-07.md:530; softanza/dashboard/CONCLUSIONS.md:1358; harobanda@4ec89c6; harobanda:site/styles.css:125",
    "words": "[paraphrase] \"the Blog keeps no second menu bar: its posts are a list, not a sequence\"",
    "wrong": "a second bar on the blog",
    "required": "posts as a list",
@@ -1859,13 +2601,15 @@
    "repeat": true
   },
   {
-   "n": "Z108",
+   "n": "Z152",
    "sweep": "C88",
-   "also": [],
+   "also": [
+    "F5-67"
+   ],
    "cause": "N",
    "date": "2026-10-19",
    "project": "harobanda",
-   "source": "harobanda memory: site-cloud-pages.md",
+   "source": "harobanda memory: site-cloud-pages.md; harobanda@1bbb44b; harobanda@4b0a815",
    "words": "[paraphrase] Fifth correction: a page's bottom Next link goes to the next page of its strip (The cloud's Next still pointed at the old page).",
    "wrong": "Stale Next link",
    "required": "Next follows the strip",
@@ -1875,7 +2619,7 @@
    "repeat": false
   },
   {
-   "n": "Z109",
+   "n": "Z153",
    "sweep": "C91",
    "also": [],
    "cause": "N",
@@ -1891,7 +2635,7 @@
    "repeat": true
   },
   {
-   "n": "Z110",
+   "n": "Z154",
    "sweep": "D27",
    "also": [],
    "cause": "N",
@@ -1907,7 +2651,7 @@
    "repeat": true
   },
   {
-   "n": "Z111",
+   "n": "Z155",
    "sweep": "D29",
    "also": [],
    "cause": "N",
@@ -1923,7 +2667,7 @@
    "repeat": false
   },
   {
-   "n": "Z112",
+   "n": "Z156",
    "sweep": "D48",
    "also": [],
    "cause": "N",
@@ -1939,7 +2683,7 @@
    "repeat": false
   },
   {
-   "n": "Z113",
+   "n": "Z157",
    "sweep": "D35",
    "also": [
     "A88"
@@ -1957,7 +2701,7 @@
    "repeat": true
   },
   {
-   "n": "Z114",
+   "n": "Z158",
    "sweep": "D36",
    "also": [
     "A89"
@@ -1975,7 +2719,7 @@
    "repeat": false
   },
   {
-   "n": "Z115",
+   "n": "Z159",
    "sweep": "D38",
    "also": [
     "A91"
@@ -1993,7 +2737,7 @@
    "repeat": false
   },
   {
-   "n": "Z116",
+   "n": "Z160",
    "sweep": "A98",
    "also": [
     "B47"
@@ -2011,7 +2755,7 @@
    "repeat": true
   },
   {
-   "n": "Z117",
+   "n": "Z161",
    "sweep": "D67",
    "also": [],
    "cause": "N",
@@ -2027,16 +2771,18 @@
    "repeat": true
   },
   {
-   "n": "Z118",
+   "n": "Z162",
    "sweep": "D70",
    "also": [
     "A100",
-    "C105"
+    "C105",
+    "F3-37",
+    "F5-68"
    ],
    "cause": "N",
    "date": "2026-11-06 02:47",
    "project": "stzzui",
-   "source": ".central/inbox.md:3648, doc/design/WRITING.md:44, commit 576a012",
+   "source": ".central/inbox.md:3648, doc/design/WRITING.md:44, commit 576a012; zing-studio:.central/inbox.md:899; harobanda@06a7ab0",
    "words": "\"the same menu option in the main and submenu levels (like Try and then Try here)!!! This should never happen in our sites. Find an other label for all the cases in the site\"",
    "wrong": "a submenu repeated its parent's label",
    "required": "a different label at each level",
@@ -2046,16 +2792,19 @@
    "repeat": true
   },
   {
-   "n": "Z119",
+   "n": "Z163",
    "sweep": "D89",
    "also": [
     "A106",
-    "C108"
+    "C108",
+    "F3-38",
+    "F5-69",
+    "F5-79"
    ],
    "cause": "N",
    "date": "2026-11-08",
    "project": "stzzui",
-   "source": ".central/inbox.md:3804, doc/AMENDMENT-DOCKET.md:1084, constitution/rules.json:1341, doc/design/WRITING.md:46, commit 6462afa",
+   "source": ".central/inbox.md:3804, doc/AMENDMENT-DOCKET.md:1084, constitution/rules.json:1341, doc/design/WRITING.md:46, commit 6462afa; zing-studio:.central/inbox.md:929; harobanda@5841735; ayouni:DECISIONS.md:28; ayouni@ff672b7",
    "words": "\"You misutertood me when i told you to avoid dupplication of the main menu and the first option in the submenu you must bring bakc the frist option but find an other lable for it...\"",
    "wrong": "the fix for D70 removed the landing page from the band, leaving its first slot empty",
    "required": "landing page first in the band, under its own label",
@@ -2065,7 +2814,7 @@
    "repeat": true
   },
   {
-   "n": "Z120",
+   "n": "Z164",
    "sweep": "C120",
    "also": [
     "A114",
@@ -2084,7 +2833,7 @@
    "repeat": false
   },
   {
-   "n": "Z121",
+   "n": "Z165",
    "sweep": "C137",
    "also": [
     "A129"
@@ -2102,15 +2851,17 @@
    "repeat": true
   },
   {
-   "n": "Z122",
+   "n": "Z166",
    "sweep": "C10",
    "also": [
-    "D20"
+    "D20",
+    "F1-12",
+    "F4-45"
    ],
    "cause": "F",
    "date": "2026-04",
    "project": "zin",
-   "source": "zin memory: feedback_zinbank_card_role_unification.md",
+   "source": "zin memory: feedback_zinbank_card_role_unification.md; zin@d6b4d37; zin-one@d6b4d37",
    "words": "[paraphrase] Cards are read-only indicators, never buttons; repetitive records are a table, not a card grid; a decorative pipeline strip must look plainly non-clickable.",
    "wrong": "Card-buttons, card grids for tabular data, a strip that looked clickable",
    "required": "One form per function: card = info, button = action, table = records",
@@ -2120,13 +2871,31 @@
    "repeat": false
   },
   {
-   "n": "Z123",
-   "sweep": "C21",
+   "n": "Z167",
+   "sweep": "F1-08",
    "also": [],
+   "cause": "F",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin@6b6d0c7",
+   "words": "[paraphrase, French kept] \"L'utilisateur a raison : le suivi actif n'est pas un statut signaletique.\"",
+   "wrong": "the \"navigation is being tracked\" halo was green, the colour reserved for healthy / valid: a sixth colour meaning beside the strict five",
+   "required": "the tracking cue in the neutral slate; green keeps its one status meaning",
+   "sense": "see",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z168",
+   "sweep": "C21",
+   "also": [
+    "F4-04"
+   ],
    "cause": "F",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:31-33",
    "words": "[paraphrase] v7.2: big filled green buttons for an exclusive choice \"n'étaient pas ergonomiques\"; use a segmented control; never a row of filled buttons.",
    "wrong": "Row of filled buttons for a choice",
    "required": "Segmented control / chips",
@@ -2136,13 +2905,15 @@
    "repeat": false
   },
   {
-   "n": "Z124",
+   "n": "Z169",
    "sweep": "C24",
-   "also": [],
+   "also": [
+    "F4-05"
+   ],
    "cause": "F",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:52-53",
    "words": "[paraphrase] v9: guide words rewritten without ambiguity -- \"Quitter\" (quit the app?) became \"Fermer le guide\"; \"en bas à droite\" became \"bouton en surbrillance : touchez-le\".",
    "wrong": "Ambiguous control and instruction words",
    "required": "Labels that say exactly what they act on",
@@ -2152,13 +2923,15 @@
    "repeat": false
   },
   {
-   "n": "Z125",
+   "n": "Z170",
    "sweep": "C25",
-   "also": [],
+   "also": [
+    "F4-06"
+   ],
    "cause": "F",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:43-45; restaurant-app:restaurant-app-stzapp/www/index.html:86-88",
    "words": "[paraphrase] v10.1/v11: the \"Et maintenant ?\" card in soft teal, the green guide highlight and a blue assistant bubble were confused with real green or KPI elements; meta/help layers take a neutral dashed style, highlight in magenta.",
    "wrong": "Help layers in action colours",
    "required": "Help never wears an accent colour",
@@ -2168,13 +2941,15 @@
    "repeat": true
   },
   {
-   "n": "Z126",
+   "n": "Z171",
    "sweep": "D02",
-   "also": [],
+   "also": [
+    "F3-14"
+   ],
    "cause": "F",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:983",
+   "source": "constitution/rules.json:983; zing@553a026",
    "words": "[paraphrase] the reader's mode pills were labelled with states (\"Dense view\"), and the author could not tell what a click would do",
    "wrong": "a control labelled with a state, not an act",
    "required": "the button's label is the verb it performs",
@@ -2184,7 +2959,55 @@
    "repeat": false
   },
   {
-   "n": "Z127",
+   "n": "Z172",
+   "sweep": "F3-16",
+   "also": [],
+   "cause": "F",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@8712776",
+   "words": "[paraphrase] \"Three faults in one control, all named by the author\": \"vibe\" a mood word, \"curator\" names a state, \"Switch ... F2\" splits the verb from its key",
+   "wrong": "the button \"Switch vibe: curator (F2)\"",
+   "required": "the button names its target in plain words, verb and key adjacent",
+   "sense": "sight",
+   "ruling": "Rule 106, Rule 80",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z173",
+   "sweep": "F3-17",
+   "also": [],
+   "cause": "F",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@8425042 (fix 1)",
+   "words": "[paraphrase] from \"the author's walkthrough\": links to GitHub and raw JSON looked like internal links; ringscript.org did not resolve",
+   "wrong": "external links unmarked; one dead link",
+   "required": "an arrow, a new tab, the destination named in the link",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z174",
+   "sweep": "F3-21",
+   "also": [],
+   "cause": "F",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@8425042 (fix 4)",
+   "words": "[paraphrase] the vibe switch was a button inside the navigation",
+   "wrong": "a mode control posing as a navigation item",
+   "required": "a small labelled picker out of the navigation (moved into the bottom bar the same day, Z207)",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z175",
    "sweep": "A08",
    "also": [
     "D14"
@@ -2202,13 +3025,15 @@
    "repeat": ""
   },
   {
-   "n": "Z128",
+   "n": "Z176",
    "sweep": "A15",
-   "also": [],
+   "also": [
+    "F5-102"
+   ],
    "cause": "F",
    "date": "2026-08-22",
    "project": "ringserv",
-   "source": "softanza/dashboard/CONCLUSIONS.md:398",
+   "source": "softanza/dashboard/CONCLUSIONS.md:398; ringserv@c5c5628",
    "words": "[paraphrase] panel correction from the author: the page's stop control killed the panel process, leaving nothing to start again",
    "wrong": "a stop button that removes the only thing able to restart",
    "required": "a state chip plus one Start/Stop toggle; the surface stays resident",
@@ -2218,7 +3043,7 @@
    "repeat": ""
   },
   {
-   "n": "Z129",
+   "n": "Z177",
    "sweep": "A17",
    "also": [],
    "cause": "F",
@@ -2234,7 +3059,7 @@
    "repeat": ""
   },
   {
-   "n": "Z130",
+   "n": "Z178",
    "sweep": "A18",
    "also": [],
    "cause": "F",
@@ -2250,7 +3075,7 @@
    "repeat": true
   },
   {
-   "n": "Z131",
+   "n": "Z179",
    "sweep": "A19",
    "also": [],
    "cause": "F",
@@ -2266,7 +3091,7 @@
    "repeat": true
   },
   {
-   "n": "Z132",
+   "n": "Z180",
    "sweep": "A27",
    "also": [],
    "cause": "F",
@@ -2282,7 +3107,39 @@
    "repeat": ""
   },
   {
-   "n": "Z133",
+   "n": "Z181",
+   "sweep": "F5-08",
+   "also": [],
+   "cause": "F",
+   "date": "2026-10-02",
+   "project": "stzsite",
+   "source": "stzsite@3a4522dda; stzsite:JOURNAL.md:466",
+   "words": "[paraphrase] the word \"Present\" read as a gift or as \"now\"; the menu over the photograph needs a slightly darker band; the Offering section's first page named for what it holds",
+   "wrong": "a menu word with two readings; menu letters weak over the photo",
+   "required": "a screen-on-its-stand icon with a tooltip and screen-reader name; a 30% band; \"Audiences\"",
+   "sense": "sight, reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z182",
+   "sweep": "F5-13",
+   "also": [],
+   "cause": "F",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:9; stzsite@8fb789aca",
+   "words": "\"A link to an external page needs a symbol, and opens in a new tab\"",
+   "wrong": "4,185 GitHub links looked like internal links",
+   "required": "an arrow in its own colour on every link that leaves the site",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z183",
    "sweep": "C69",
    "also": [],
    "cause": "F",
@@ -2298,7 +3155,7 @@
    "repeat": false
   },
   {
-   "n": "Z134",
+   "n": "Z184",
    "sweep": "C72",
    "also": [],
    "cause": "F",
@@ -2314,7 +3171,23 @@
    "repeat": false
   },
   {
-   "n": "Z135",
+   "n": "Z185",
+   "sweep": "F5-117",
+   "also": [],
+   "cause": "F",
+   "date": "2026-10-14",
+   "project": "an NGO platform (client)",
+   "source": "ngo-platform:output/fabrication/prototypes/_source/LISEZMOI.md:61",
+   "words": "[paraphrase] always say which side one speaks from: before or with the platform, the example or reality (\"Hors connexion\" read as the user's own connection), the prototype or the platform, who \"we\" is",
+   "wrong": "words with two possible referents",
+   "required": "« Réseau dans l'exemple : hors connexion »; a note under each prototype-only button",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z186",
    "sweep": "D23",
    "also": [
     "A58"
@@ -2332,7 +3205,7 @@
    "repeat": true
   },
   {
-   "n": "Z136",
+   "n": "Z187",
    "sweep": "C81",
    "also": [],
    "cause": "F",
@@ -2348,13 +3221,31 @@
    "repeat": false
   },
   {
-   "n": "Z137",
-   "sweep": "A66",
+   "n": "Z188",
+   "sweep": "F5-36",
    "also": [],
+   "cause": "F",
+   "date": "2026-10-16",
+   "project": "stzsite",
+   "source": "stzsite@19a2fff2b",
+   "words": "[paraphrase] the hook titles lose the arrow added the same day: on this site the arrow marks a link that leaves the site",
+   "wrong": "one mark for two meanings (internal hook, external link)",
+   "required": "the arrow kept for external links only",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z189",
+   "sweep": "A66",
+   "also": [
+    "F5-78"
+   ],
    "cause": "F",
    "date": "2026-10-17",
    "project": "ayouni",
-   "source": "softanza/memos/2026-10-17.md:29",
+   "source": "softanza/memos/2026-10-17.md:29; ayouni@4d66b82",
    "words": "[paraphrase] the author saw both the chapter cards and the text contents and asked that the toggle show only one",
    "wrong": "a toggle that showed both views at once",
    "required": "an exclusive view toggle",
@@ -2364,7 +3255,7 @@
    "repeat": true
   },
   {
-   "n": "Z138",
+   "n": "Z190",
    "sweep": "A82",
    "also": [],
    "cause": "F",
@@ -2380,7 +3271,7 @@
    "repeat": ""
   },
   {
-   "n": "Z139",
+   "n": "Z191",
    "sweep": "C94",
    "also": [],
    "cause": "F",
@@ -2396,7 +3287,7 @@
    "repeat": true
   },
   {
-   "n": "Z140",
+   "n": "Z192",
    "sweep": "C95",
    "also": [],
    "cause": "F",
@@ -2412,7 +3303,7 @@
    "repeat": true
   },
   {
-   "n": "Z141",
+   "n": "Z193",
    "sweep": "C98",
    "also": [],
    "cause": "F",
@@ -2428,7 +3319,7 @@
    "repeat": true
   },
   {
-   "n": "Z142",
+   "n": "Z194",
    "sweep": "D40",
    "also": [],
    "cause": "F",
@@ -2444,7 +3335,7 @@
    "repeat": false
   },
   {
-   "n": "Z143",
+   "n": "Z195",
    "sweep": "D31",
    "also": [
     "A84"
@@ -2462,7 +3353,7 @@
    "repeat": false
   },
   {
-   "n": "Z144",
+   "n": "Z196",
    "sweep": "D72",
    "also": [],
    "cause": "F",
@@ -2478,7 +3369,7 @@
    "repeat": false
   },
   {
-   "n": "Z145",
+   "n": "Z197",
    "sweep": "D83",
    "also": [
     "A103"
@@ -2496,7 +3387,7 @@
    "repeat": false
   },
   {
-   "n": "Z146",
+   "n": "Z198",
    "sweep": "B61",
    "also": [],
    "cause": "F",
@@ -2512,7 +3403,7 @@
    "repeat": true
   },
   {
-   "n": "Z147",
+   "n": "Z199",
    "sweep": "D92",
    "also": [
     "C111"
@@ -2530,7 +3421,7 @@
    "repeat": false
   },
   {
-   "n": "Z148",
+   "n": "Z200",
    "sweep": "C113",
    "also": [
     "A109"
@@ -2548,7 +3439,7 @@
    "repeat": true
   },
   {
-   "n": "Z149",
+   "n": "Z201",
    "sweep": "C123",
    "also": [
     "A117",
@@ -2567,13 +3458,32 @@
    "repeat": true
   },
   {
-   "n": "Z150",
-   "sweep": "C06",
+   "n": "Z202",
+   "sweep": "F2-11",
    "also": [],
+   "cause": "M",
+   "date": "<=2026-06",
+   "project": "refine",
+   "source": "refine memory: site-visual-identity.md:60-61; `site/research.html:180`",
+   "words": "[paraphrase] \"Per author instruction, titles do NOT link to raw `.md`\"",
+   "wrong": "The paper titles on the research page linked to raw Markdown spec files.",
+   "required": "No link until polished HTML or PDF editions exist.",
+   "sense": "sight (navigation)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z203",
+   "sweep": "C06",
+   "also": [
+    "F1-13",
+    "F4-44"
+   ],
    "cause": "M",
    "date": "2026-04",
    "project": "zin",
-   "source": "zin memory: feedback_zinbank_dsi_owns_agentic.md",
+   "source": "zin memory: feedback_zinbank_dsi_owns_agentic.md; zin@3dbf61d; zin-one@3dbf61d",
    "words": "[paraphrase] End users and clients must see applications only -- no \"agent\", \"IA\" or \"composition\" in their interface; the agentic layer is the IT department's.",
    "wrong": "Internal technical vocabulary and screens shown to every role",
    "required": "Navigation and words filtered by role",
@@ -2583,13 +3493,31 @@
    "repeat": false
   },
   {
-   "n": "Z151",
-   "sweep": "D06",
+   "n": "Z204",
+   "sweep": "F3-09",
    "also": [],
+   "cause": "M",
+   "date": "2026-06",
+   "project": "zing-studio",
+   "source": "zing-studio:zing_kickoff_prompt.md:104,121; zing-studio:CLAUDE.md:614,657",
+   "words": "\"Every spec / page / position document ends with an \"Honest boundaries\" section that names what the document does NOT do\"",
+   "wrong": "[ruling] pages claiming more than shipped. This rule later produced the negative-marketing defect",
+   "required": "an Honest boundaries section on every commercial page. SUPERSEDED on public pages by PRINCIPAL-AFFIRM-01 (Z173), yet still a definition-of-done line in zing-studio:CLAUDE.md:657",
+   "sense": "sight (reading)",
+   "ruling": "kickoff rule 3 and hard constraint 4",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z205",
+   "sweep": "D06",
+   "also": [
+    "F3-24"
+   ],
    "cause": "M",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:718",
+   "source": "constitution/rules.json:718; zing@d43da79",
    "words": "[paraphrase] the front page's loudest block announced the version and rule count; the second call to action read \"Watch three runtimes agree\"",
    "wrong": "first screen spoke to insiders",
    "required": "first screen answers what it is, who it is for, what to do next",
@@ -2599,7 +3527,39 @@
    "repeat": false
   },
   {
-   "n": "Z152",
+   "n": "Z206",
+   "sweep": "F3-33",
+   "also": [],
+   "cause": "M",
+   "date": "2026-08-05",
+   "project": "stzweb-site",
+   "source": "zing@1ef019d (then 466dc5f, a169c79)",
+   "words": "[paraphrase] \"per author corrections\": Zin is a different project; the \"Zin proves, Zing ships\" line is withdrawn everywhere",
+   "wrong": "public copy positioning the site against an unrelated private project",
+   "required": "the line removed from the Q&A, captions, README, VISION",
+   "sense": "sight (reading)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z207",
+   "sweep": "F5-103",
+   "also": [],
+   "cause": "M",
+   "date": "2026-08-07",
+   "project": "ringscript",
+   "source": "ringscript@f6f0069",
+   "words": "[paraphrase] reworked on the author's direction: the data page drops the \"not a race against JavaScript\" framing and the \"ledger\" term, answers positively",
+   "wrong": "a page framed against a rival, an internal term",
+   "required": "\"Working with data\", placed after the didactic pages; GitHub links carry the GitHub mark",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z208",
    "sweep": "C30",
    "also": [],
    "cause": "M",
@@ -2615,7 +3575,23 @@
    "repeat": false
   },
   {
-   "n": "Z153",
+   "n": "Z209",
+   "sweep": "F5-99",
+   "also": [],
+   "cause": "M",
+   "date": "2026-08-23",
+   "project": "ringserv",
+   "source": "ringserv@48e6d7c",
+   "words": "[paraphrase] the CI badge comes off the readme at the author's request",
+   "wrong": "a red status badge on the front page",
+   "required": "the badge removed; CI's tab reports",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z210",
    "sweep": "A38",
    "also": [
     "B20"
@@ -2633,13 +3609,31 @@
    "repeat": ""
   },
   {
-   "n": "Z154",
-   "sweep": "C48",
+   "n": "Z211",
+   "sweep": "F5-57",
    "also": [],
+   "cause": "M",
+   "date": "2026-09-28",
+   "project": "harobanda",
+   "source": "harobanda@165567c; harobanda:site/DIAGRAMS.md:84",
+   "words": "[paraphrase] the author asked for diagram 3 to be drawn again without \"every exchange recorded\"",
+   "wrong": "a picture claimed what nothing records",
+   "required": "the label removed in a redraw",
+   "sense": "reading",
+   "ruling": "DOC-2",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z212",
+   "sweep": "C48",
+   "also": [
+    "F5-59"
+   ],
    "cause": "M",
    "date": "2026-09-29",
    "project": "harobanda",
-   "source": "harobanda memory: site-realworld-claims.md",
+   "source": "harobanda memory: site-realworld-claims.md; harobanda@7a6c20e",
    "words": "\"I don't want to overestimate the realworld use in this young age of the project. it must stay somewhere just to cite the realworld roots of it\"",
    "wrong": "\"Two proofs\" section overclaimed deployments",
    "required": "Roots, not proofs",
@@ -2649,13 +3643,15 @@
    "repeat": false
   },
   {
-   "n": "Z155",
+   "n": "Z213",
    "sweep": "A46",
-   "also": [],
+   "also": [
+    "F5-06"
+   ],
    "cause": "M",
    "date": "2026-10-01",
    "project": "stzsite",
-   "source": "softanza/mailbox/stzsite.md:45",
+   "source": "softanza/mailbox/stzsite.md:45; stzsite@ecc1733ab; stzsite:JOURNAL.md:123",
    "words": "[paraphrase] \"the author ruled no Ring on the site\"",
    "wrong": "the retired language named on public pages",
    "required": "no mention of Ring",
@@ -2665,13 +3661,15 @@
    "repeat": ""
   },
   {
-   "n": "Z156",
+   "n": "Z214",
    "sweep": "B30",
-   "also": [],
+   "also": [
+    "F5-07"
+   ],
    "cause": "M",
    "date": "2026-10-01",
    "project": "stzsite",
-   "source": "stzlib memory: feedback_softanza_not_state_of_the_art.md",
+   "source": "stzlib memory: feedback_softanza_not_state_of_the_art.md; stzsite@9c11a4604; stzsite:JOURNAL.md:250",
    "words": "\"Il ne faut pas mettre Wolfram en avant même avant Softanza comme ça\" / \"il ne faut pas parler de cette innovation comme si cela était l'état de l'art aujourd'hui !\"",
    "wrong": "a competitor opened a Softanza sentence; a proposal stated as industry fact",
    "required": "attribute every differentiator to Softanza",
@@ -2681,7 +3679,7 @@
    "repeat": false
   },
   {
-   "n": "Z157",
+   "n": "Z215",
    "sweep": "B34",
    "also": [],
    "cause": "M",
@@ -2697,7 +3695,7 @@
    "repeat": false
   },
   {
-   "n": "Z158",
+   "n": "Z216",
    "sweep": "C53",
    "also": [],
    "cause": "M",
@@ -2713,7 +3711,39 @@
    "repeat": false
   },
   {
-   "n": "Z159",
+   "n": "Z217",
+   "sweep": "F5-16",
+   "also": [],
+   "cause": "M",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:13",
+   "words": "\"Zin is not to be named; its innovations are Softanza's ... Teaching versus Pedagogy hides the proposition\"",
+   "wrong": "a sibling project named 166 times; a page written as the design's history",
+   "required": "the name gone and refused by the build",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z218",
+   "sweep": "F5-18",
+   "also": [],
+   "cause": "M",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:15",
+   "words": "\"IsAChar() instead of IsChar() is a detour around a host-language collision; it should not be the norm in examples\"",
+   "wrong": "a host-language workaround shown as the norm",
+   "required": "examples show the natural name and say what they ran as",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z219",
    "sweep": "A48",
    "also": [],
    "cause": "M",
@@ -2729,16 +3759,17 @@
    "repeat": ""
   },
   {
-   "n": "Z160",
+   "n": "Z220",
    "sweep": "A51",
    "also": [
     "C55",
-    "D22"
+    "D22",
+    "F5-61"
    ],
    "cause": "M",
    "date": "2026-10-13",
    "project": "harobanda",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1275; softanza/memos/2026-10-13.md:778; softanza/memos/2026-11-07.md:507-509",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1275; softanza/memos/2026-10-13.md:778; softanza/memos/2026-11-07.md:507-509; harobanda@8ba6b83",
    "words": "\"do not let the tendency to be transparent and fair make the statements elusive\"",
    "wrong": "\"It is not a real-time operating system\" -- true and misleading",
    "required": "say affirmatively what Harobanda is (the host for one)",
@@ -2748,15 +3779,16 @@
    "repeat": true
   },
   {
-   "n": "Z161",
+   "n": "Z221",
    "sweep": "A53",
    "also": [
-    "C58"
+    "C58",
+    "F5-60"
    ],
    "cause": "M",
    "date": "2026-10-13",
    "project": "harobanda",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1275; softanza/memos/2026-11-07.md:528",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1275; softanza/memos/2026-11-07.md:528; harobanda@10a84e3",
    "words": "[paraphrase] \"nothing should be related to Ring\" on the public pages (MicroRing becomes MicroHaro)",
    "wrong": "public pages named the Ring lineage",
    "required": "no Ring on public pages",
@@ -2766,7 +3798,7 @@
    "repeat": true
   },
   {
-   "n": "Z162",
+   "n": "Z222",
    "sweep": "C60",
    "also": [],
    "cause": "M",
@@ -2782,7 +3814,7 @@
    "repeat": true
   },
   {
-   "n": "Z163",
+   "n": "Z223",
    "sweep": "C61",
    "also": [],
    "cause": "M",
@@ -2798,7 +3830,23 @@
    "repeat": true
   },
   {
-   "n": "Z164",
+   "n": "Z224",
+   "sweep": "F5-26",
+   "also": [],
+   "cause": "M",
+   "date": "2026-10-15",
+   "project": "stzsite",
+   "source": "stzsite@b9193f659; stzsite:JOURNAL.md:2271",
+   "words": "[paraphrase] no edition, tier, assistance or price is offered that the author has not given in words",
+   "wrong": "enterprise edition, dedicated assistance and assurance wording on five pages",
+   "required": "one open edition under MIT; anything beyond marked as to come",
+   "sense": "reading",
+   "ruling": "HOUSE-12",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z225",
    "sweep": "A65",
    "also": [],
    "cause": "M",
@@ -2814,15 +3862,32 @@
    "repeat": true
   },
   {
-   "n": "Z165",
+   "n": "Z226",
+   "sweep": "F5-33",
+   "also": [],
+   "cause": "M",
+   "date": "2026-10-16",
+   "project": "stzsite",
+   "source": "stzsite@19a2fff2b",
+   "words": "[paraphrase] the home page no longer says how its illustration was made",
+   "wrong": "the page explained the making of its own picture",
+   "required": "the line removed",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z227",
    "sweep": "A72",
    "also": [
-    "B39"
+    "B39",
+    "F5-40"
    ],
    "cause": "M",
    "date": "2026-10-19",
    "project": "stzsite",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1371",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1371; stzsite@7adc748dc",
    "words": "[paraphrase] the retired runtime's forced spellings (End_, Get_) not shown; a promise sits under the line that printed it",
    "wrong": "code samples showing runtime artefacts; promises collected at the end",
    "required": "clean spellings; output under its line",
@@ -2832,13 +3897,15 @@
    "repeat": true
   },
   {
-   "n": "Z166",
+   "n": "Z228",
    "sweep": "A74",
-   "also": [],
+   "also": [
+    "F5-41"
+   ],
    "cause": "M",
    "date": "2026-10-20",
    "project": "stzsite",
-   "source": "softanza/memos/2026-10-20.md:82-90",
+   "source": "softanza/memos/2026-10-20.md:82-90; stzsite@114c8ffc9",
    "words": "[paraphrase] four corrections on the calendar reference page: a split line, a folded form still listed, a message about an implementation detail, a wrong generated sentence",
    "wrong": "a code line wrapped; an internal note shown; a generated sentence wrong",
    "required": "lines never split; plain reader-facing wording",
@@ -2848,13 +3915,18 @@
    "repeat": ""
   },
   {
-   "n": "Z167",
+   "n": "Z229",
    "sweep": "A77",
-   "also": [],
+   "also": [
+    "F4-34",
+    "F4-35",
+    "F4-36",
+    "F5-115"
+   ],
    "cause": "M",
    "date": "2026-10-22",
    "project": "zindara",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1436; softanza/mailbox/zindara.md:149",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1436; softanza/mailbox/zindara.md:149; zindara@e2a8652; zindara@e9d3196; zindara:CHARTER.md:172; zindara@66f3d7f; zindara@e9d3196; zindara@e2a8652; zindara@b7ef7ab",
    "words": "\"Campus works for me. Show the report's table first and fold the proof cells behind a link.\" (and two defects found in use: the page looked blocked; 'Passed' over a written report)",
    "wrong": "proof cells before the result; a page frozen by a 165 s call on load",
    "required": "the table first, details folded",
@@ -2864,7 +3936,23 @@
    "repeat": ""
   },
   {
-   "n": "Z168",
+   "n": "Z230",
+   "sweep": "F4-25",
+   "also": [],
+   "cause": "M",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@2f6a162; same evidence:67-68",
+   "words": "[paraphrase] \"French only for now (the language selector hidden, the setting kept)\"",
+   "wrong": "a selector offering an unfinished language",
+   "required": "show only the language that is ready",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z231",
    "sweep": "A81",
    "also": [],
    "cause": "M",
@@ -2880,7 +3968,7 @@
    "repeat": true
   },
   {
-   "n": "Z169",
+   "n": "Z232",
    "sweep": "C90",
    "also": [],
    "cause": "M",
@@ -2896,7 +3984,23 @@
    "repeat": true
   },
   {
-   "n": "Z170",
+   "n": "Z233",
+   "sweep": "F5-113",
+   "also": [],
+   "cause": "M",
+   "date": "2026-10-30",
+   "project": "ringpp",
+   "source": "ringpp@5bb32f0; ringpp@dc274ba",
+   "words": "[paraphrase] at the author's word: Ring++ is not a call to move from Ring; then: told objectively as part of Softanza's history, Haro explained, not in focus",
+   "wrong": "a \"Moving from Ring\" page and menu entry; a hero calling Ring programmers",
+   "required": "the page removed; \"Softanza's move from Ring: faster, checked, one binary\"",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z234",
    "sweep": "D41",
    "also": [],
    "cause": "M",
@@ -2912,7 +4016,7 @@
    "repeat": true
   },
   {
-   "n": "Z171",
+   "n": "Z235",
    "sweep": "D57",
    "also": [],
    "cause": "M",
@@ -2928,7 +4032,7 @@
    "repeat": true
   },
   {
-   "n": "Z172",
+   "n": "Z236",
    "sweep": "D69",
    "also": [
     "A99"
@@ -2946,16 +4050,18 @@
    "repeat": false
   },
   {
-   "n": "Z173",
+   "n": "Z237",
    "sweep": "D90",
    "also": [
     "A107",
-    "C109"
+    "C109",
+    "F3-39",
+    "F5-70"
    ],
    "cause": "M",
    "date": "2026-11-08",
    "project": "stzzui",
-   "source": ".central/inbox.md:3867, doc/design/WRITING.md:96, commit 62b07df",
+   "source": ".central/inbox.md:3867, doc/design/WRITING.md:96, commit 62b07df; zing-studio:.central/inbox.md:939; harobanda@824ef06",
    "words": "\"Avoid this role of transparency that hurts the project image (negative markeing)! Generalise this issue on all Softanza project sistes because I raised this before but you seem to persist on it\"",
    "wrong": "the tour's scene listed what the project had not shown",
    "required": "affirmative statements of what Zane is and does",
@@ -2965,13 +4071,15 @@
    "repeat": true
   },
   {
-   "n": "Z174",
+   "n": "Z238",
    "sweep": "A108",
-   "also": [],
+   "also": [
+    "F5-80"
+   ],
    "cause": "M",
    "date": "2026-11-08..09",
    "project": "ayouni",
-   "source": "softanza/dashboard/zane-ui-corpus-2026-11-09.md:38-42; softanza/mailbox/ayouni.md:126-139",
+   "source": "softanza/dashboard/zane-ui-corpus-2026-11-09.md:38-42; softanza/mailbox/ayouni.md:126-139; ayouni@4890405; ayouni@4d59d39",
    "words": "\"yes as recommended, and push the ledger\"; \"yes to both as recommended\" (rulings on Central's recommendation)",
    "wrong": "chapter \"limit\" sections and the stage word \"absent\" read as a list of absences",
    "required": "sections retitled affirmatively (\"Where it stands\": Built, Designed, Next)",
@@ -2981,15 +4089,16 @@
    "repeat": true
   },
   {
-   "n": "Z175",
+   "n": "Z239",
    "sweep": "B72",
    "also": [
-    "A130"
+    "A130",
+    "F5-84"
    ],
    "cause": "M",
    "date": "2026-11-09",
    "project": "lookout",
-   "source": "stzlib memory: feedback_adopter_view.md",
+   "source": "stzlib memory: feedback_adopter_view.md; lookout@9c3222f",
    "words": "\"why are you proposing Softanza related subjects to others who would adopt the solution?!\" / \"the bar ... seems like a normal part of the current page\"",
    "wrong": "host subjects offered to adopters; preview indistinguishable from the page",
    "required": "top-level page, value first, preview inside a mock site",
@@ -2999,7 +4108,7 @@
    "repeat": false
   },
   {
-   "n": "Z176",
+   "n": "Z240",
    "sweep": "B75",
    "also": [],
    "cause": "M",
@@ -3015,7 +4124,7 @@
    "repeat": false
   },
   {
-   "n": "Z177",
+   "n": "Z241",
    "sweep": "C116",
    "also": [
     "A112",
@@ -3034,13 +4143,15 @@
    "repeat": true
   },
   {
-   "n": "Z178",
+   "n": "Z242",
    "sweep": "C13",
-   "also": [],
+   "also": [
+    "F2-02"
+   ],
    "cause": "T",
    "date": "<=2026-06",
    "project": "refine",
-   "source": "refine memory: site-reading-experience.md",
+   "source": "refine memory: site-reading-experience.md; `REDESIGN_BRIEF.md:64-65`",
    "words": "[paraphrase] The author had to zoom to 120% to read the site; never small text that also has weak colour; body ~18px.",
    "wrong": "Small, faint body text",
    "required": "Readable size and strong contrast",
@@ -3050,13 +4161,31 @@
    "repeat": true
   },
   {
-   "n": "Z179",
-   "sweep": "C27",
+   "n": "Z243",
+   "sweep": "F2-05",
    "also": [],
+   "cause": "T",
+   "date": "2026-06-12",
+   "project": "refine",
+   "source": "`REDESIGN_BRIEF.md:87-89`",
+   "words": "[paraphrase] The logo \"renders small for its height -- likely internal transparent padding ... Never tiny.\"",
+   "wrong": "The logo PNG's padding made the mark render small.",
+   "required": "A tight lockup, or the mark plus a typeset wordmark. Since the rebuild: the mark at 38 px and the name at 23 px (`site/refine.css:104-105`).",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z244",
+   "sweep": "C27",
+   "also": [
+    "F3-12"
+   ],
    "cause": "T",
    "date": "2026-08-01",
    "project": "stzweb-site",
-   "source": "stzweb-site memory: cli-visual-expressiveness.md",
+   "source": "stzweb-site memory: cli-visual-expressiveness.md; zing@11fda94",
    "words": "[paraphrase] Output with mid-word wraps at column 0, unspaced blocks or barely visible colours reads as broken software.",
    "wrong": "Unwrapped CLI lines, dim ANSI colours",
    "required": "Wrap to terminal width with hanging indents, blank lines between blocks, bright colours",
@@ -3066,15 +4195,16 @@
    "repeat": false
   },
   {
-   "n": "Z180",
+   "n": "Z245",
    "sweep": "D01",
    "also": [
-    "C28"
+    "C28",
+    "F3-13"
    ],
    "cause": "T",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:1855",
+   "source": "constitution/rules.json:1855; zing@ca5be8f",
    "words": "[paraphrase] the author saw that the framework's own site shipped small, low-contrast muted text",
    "wrong": "muted text too small and too faint",
    "required": "a legibility floor for size and contrast",
@@ -3084,13 +4214,15 @@
    "repeat": false
   },
   {
-   "n": "Z181",
+   "n": "Z246",
    "sweep": "D03",
-   "also": [],
+   "also": [
+    "F3-15"
+   ],
    "cause": "T",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:540",
+   "source": "constitution/rules.json:540; zing@67e0a8e",
    "words": "[paraphrase] the site's emphasis boxes shrank their text inside a coloured frame",
    "wrong": "emphasis made by shrinking text",
    "required": "three sizes; the frame does the emphasis, the text keeps the reading size",
@@ -3100,7 +4232,7 @@
    "repeat": false
   },
   {
-   "n": "Z182",
+   "n": "Z247",
    "sweep": "C29",
    "also": [],
    "cause": "T",
@@ -3116,7 +4248,7 @@
    "repeat": true
   },
   {
-   "n": "Z183",
+   "n": "Z248",
    "sweep": "B17",
    "also": [],
    "cause": "T",
@@ -3132,7 +4264,7 @@
    "repeat": true
   },
   {
-   "n": "Z184",
+   "n": "Z249",
    "sweep": "A39",
    "also": [],
    "cause": "T",
@@ -3148,7 +4280,7 @@
    "repeat": true
   },
   {
-   "n": "Z185",
+   "n": "Z250",
    "sweep": "B23",
    "also": [],
    "cause": "T",
@@ -3164,7 +4296,7 @@
    "repeat": true
   },
   {
-   "n": "Z186",
+   "n": "Z251",
    "sweep": "C34",
    "also": [],
    "cause": "T",
@@ -3180,7 +4312,7 @@
    "repeat": true
   },
   {
-   "n": "Z187",
+   "n": "Z252",
    "sweep": "C38",
    "also": [],
    "cause": "T",
@@ -3196,13 +4328,15 @@
    "repeat": true
   },
   {
-   "n": "Z188",
+   "n": "Z253",
    "sweep": "C46",
-   "also": [],
+   "also": [
+    "F5-54"
+   ],
    "cause": "T",
    "date": "2026-09-28",
    "project": "harobanda",
-   "source": "harobanda memory: stzzui-no-size-for-importance.md",
+   "source": "harobanda memory: stzzui-no-size-for-importance.md; harobanda@062f34e; harobanda:site/styles.css:415",
    "words": "\"the text should be smaller\"",
    "wrong": "Footer at body size",
    "required": "Footer one size, 14px, in ink, not muted",
@@ -3212,15 +4346,17 @@
    "repeat": false
   },
   {
-   "n": "Z189",
+   "n": "Z254",
    "sweep": "A45",
    "also": [
-    "B24"
+    "B24",
+    "F5-01",
+    "F5-02"
    ],
    "cause": "T",
    "date": "2026-10-01",
    "project": "stzsite",
-   "source": "softanza/memos/2026-10-01.md:427",
+   "source": "softanza/memos/2026-10-01.md:427; stzsite@a89e7365b; stzsite:JOURNAL.md:271; stzsite:JOURNAL.md:304; stzsite@c51001631; stzsite:assets/css/site.css:7",
    "words": "[paraphrase] \"the author ruled the text too small, the in-page jumps disorienting, the sub-menu misplaced, and asked that the Zui constitution be read and applied\"",
    "wrong": "small text; anchor menus; misplaced sub-menu",
    "required": "19 px reading size; navigation as a tree; no anchor jumps",
@@ -3230,7 +4366,7 @@
    "repeat": true
   },
   {
-   "n": "Z190",
+   "n": "Z255",
    "sweep": "B27",
    "also": [],
    "cause": "T",
@@ -3246,7 +4382,7 @@
    "repeat": true
   },
   {
-   "n": "Z191",
+   "n": "Z256",
    "sweep": "C59",
    "also": [],
    "cause": "T",
@@ -3262,7 +4398,7 @@
    "repeat": true
   },
   {
-   "n": "Z192",
+   "n": "Z257",
    "sweep": "C70",
    "also": [],
    "cause": "T",
@@ -3278,13 +4414,32 @@
    "repeat": true
   },
   {
-   "n": "Z193",
-   "sweep": "A79",
+   "n": "Z258",
+   "sweep": "F5-72",
    "also": [],
+   "cause": "T",
+   "date": "2026-10-15",
+   "project": "ayouni",
+   "source": "ayouni:DECISIONS.md:21; ayouni@5142938",
+   "words": "\"again for text size and readbaility: see how Apress text is reasable while our's is not (at 100% zoom in my browser)\"",
+   "wrong": "house pages too small and pale at 100% zoom",
+   "required": "20 px body in Georgia, 14 px minimum label, darker ink",
+   "sense": "reading",
+   "ruling": "HOUSE-15",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z259",
+   "sweep": "A79",
+   "also": [
+    "F4-31",
+    "F5-112"
+   ],
    "cause": "T",
    "date": "2026-10-24",
    "project": "orgdesk",
-   "source": "softanza/memos/2026-10-24.md:200",
+   "source": "softanza/memos/2026-10-24.md:200; orgdesk@12552be; orgdesk@12552be",
    "words": "[paraphrase] \"never two screenshots on one slide; add a slide with a screen of the printing on many A4 sheets; enlarge the screens so their text reads; fewer slides, especially the technical ones\"",
    "wrong": "two screens per slide, unreadable text",
    "required": "one screen per slide at full width",
@@ -3294,7 +4449,7 @@
    "repeat": true
   },
   {
-   "n": "Z194",
+   "n": "Z260",
    "sweep": "D46",
    "also": [],
    "cause": "T",
@@ -3310,7 +4465,7 @@
    "repeat": true
   },
   {
-   "n": "Z195",
+   "n": "Z261",
    "sweep": "D47",
    "also": [],
    "cause": "T",
@@ -3326,7 +4481,7 @@
    "repeat": false
   },
   {
-   "n": "Z196",
+   "n": "Z262",
    "sweep": "D33",
    "also": [
     "A86"
@@ -3344,7 +4499,7 @@
    "repeat": true
   },
   {
-   "n": "Z197",
+   "n": "Z263",
    "sweep": "D55",
    "also": [],
    "cause": "T",
@@ -3360,7 +4515,7 @@
    "repeat": true
   },
   {
-   "n": "Z198",
+   "n": "Z264",
    "sweep": "D62",
    "also": [],
    "cause": "T",
@@ -3376,7 +4531,7 @@
    "repeat": true
   },
   {
-   "n": "Z199",
+   "n": "Z265",
    "sweep": "D64",
    "also": [],
    "cause": "T",
@@ -3392,7 +4547,7 @@
    "repeat": true
   },
   {
-   "n": "Z200",
+   "n": "Z266",
    "sweep": "D75",
    "also": [],
    "cause": "T",
@@ -3408,7 +4563,7 @@
    "repeat": true
   },
   {
-   "n": "Z201",
+   "n": "Z267",
    "sweep": "B51",
    "also": [],
    "cause": "T",
@@ -3424,7 +4579,7 @@
    "repeat": true
   },
   {
-   "n": "Z202",
+   "n": "Z268",
    "sweep": "C114",
    "also": [
     "A110"
@@ -3442,13 +4597,18 @@
    "repeat": true
   },
   {
-   "n": "Z203",
+   "n": "Z269",
    "sweep": "C03",
-   "also": [],
+   "also": [
+    "F3-01",
+    "F3-02",
+    "F3-03",
+    "F3-04"
+   ],
    "cause": "T",
    "date": "undated",
    "project": "zing",
-   "source": "zing memory: zing-working-discipline.md",
+   "source": "zing memory: zing-working-discipline.md; zing-studio:zing_kickoff_prompt.md:126,134; zing-studio:zing_kickoff_prompt.md:127-128; zing-studio:zing_kickoff_prompt.md:132; zing-studio:zing_kickoff_prompt.md:133",
    "words": "[paraphrase] PX discipline for the IDE chrome: 12px font floor, actions at the right edge of the one sublevel bar, no tooltips (status bar instead), colour is semantic only, numbers black, no yellow.",
    "wrong": "Earlier chrome had sub-floor fonts, tooltips and decorative colour",
    "required": "A fixed chrome discipline",
@@ -3458,7 +4618,71 @@
    "repeat": false
   },
   {
-   "n": "Z204",
+   "n": "Z270",
+   "sweep": "F4-01",
+   "also": [],
+   "cause": "L",
+   "date": "2026-02-08",
+   "project": "organizium",
+   "source": "organizium:stzweb/doc/zui-rules-93-99.md:101 (organizium@0ec7e82)",
+   "words": "[paraphrase] \"No ghost resize (removed per feedback)\" -- the enforcement checklist of rules 93-99 records the removal",
+   "wrong": "an invisible (\"ghost\") resize affordance on the assistant panel",
+   "required": "no hidden resize handle; the panel's width set by rule 89 (25-70 %)",
+   "sense": "sight+touch",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z271",
+   "sweep": "F1-01",
+   "also": [],
+   "cause": "L",
+   "date": "2026-03-25",
+   "project": "zin",
+   "source": "zin@edb9e0e",
+   "words": "[paraphrase] \"Major layout restructure per user feedback\": the data grid and the diagrams move to the centre workspace, the console alone at the bottom, collapsible zones become tabs",
+   "wrong": "data grid at the bottom, diagrams in a side panel, content in collapsible zones",
+   "required": "one centre workspace with three modes (Code, Data, Diagram); console alone at the bottom; a reference panel with Stats and Guide only",
+   "sense": "see",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z272",
+   "sweep": "F1-02",
+   "also": [],
+   "cause": "L",
+   "date": "2026-03-25",
+   "project": "zin",
+   "source": "zin@70b7ef2",
+   "words": "[paraphrase] \"all user-requested features\": the right panel \"now TABBED ... (not vertical scroll)\"; panels resizable and maximizable",
+   "wrong": "the right panel was one long vertical scroll of sections",
+   "required": "tabs instead of an inner scroll; any panel can fill the screen",
+   "sense": "see",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z273",
+   "sweep": "F4-60",
+   "also": [],
+   "cause": "L",
+   "date": "2026-03-25",
+   "project": "zin",
+   "source": "zin-one@70b7ef2",
+   "words": "[paraphrase] \"all user-requested features\": \"Right panel now TABBED: Mapping, Diagrams, Guide, Stats (not vertical scroll)\"",
+   "wrong": "panel content stacked in an inner vertical scroll",
+   "required": "tabs",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z274",
    "sweep": "C07",
    "also": [],
    "cause": "L",
@@ -3474,13 +4698,15 @@
    "repeat": false
   },
   {
-   "n": "Z205",
+   "n": "Z275",
    "sweep": "C22",
-   "also": [],
+   "also": [
+    "F4-07"
+   ],
    "cause": "L",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:48-49; restaurant-app:restaurant-app-stzapp/www/index.html:120-121",
    "words": "[paraphrase] v8: zero horizontal scroll -- every list table replaced by flex rows: \"listes de données = .lrow flex, jamais <table>\".",
    "wrong": "Tables forced sideways scroll at 360 px",
    "required": "No sideways scroll on a phone",
@@ -3490,13 +4716,15 @@
    "repeat": true
   },
   {
-   "n": "Z206",
+   "n": "Z276",
    "sweep": "C26",
-   "also": [],
+   "also": [
+    "F4-08"
+   ],
    "cause": "L",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:21, 49, 54; restaurant-app:restaurant-app-stzapp/www/index.html:1065",
    "words": "[paraphrase] v10: with a popup open the page behind is frozen (no second scroll bar); v11: euro amounts overflowing KPI tiles, help condensed to one sentence, scroll back to top on each screen change, filters wrap with no sideways scroll.",
    "wrong": "Two scrolls at once, overflow, long help",
    "required": "One scroll, contained values, one-sentence help",
@@ -3506,13 +4734,63 @@
    "repeat": true
   },
   {
-   "n": "Z207",
-   "sweep": "D05",
+   "n": "Z277",
+   "sweep": "F4-15",
    "also": [],
+   "cause": "L",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:17; restaurant-app:restaurant-app-stzapp/www/index.html:1050",
+   "words": "[paraphrase] \"Filtres contextuels par défaut -- jamais « tout » d'emblée (cette semaine, les reçues...)\"",
+   "wrong": "lists opened on everything, burying what the task needs",
+   "required": "a contextual default filter",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z278",
+   "sweep": "F4-19",
+   "also": [],
+   "cause": "L",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:50-51",
+   "words": "[paraphrase] \"État toujours visible ... chips TEST/PROD (TEST, pas « TRAIN ») ... bouton refusé désactivé visiblement, jamais caché\"",
+   "wrong": "mode named in jargon; refused actions hidden",
+   "required": "mode chip in plain words; refused buttons shown disabled",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z279",
+   "sweep": "F4-21",
+   "also": [],
+   "cause": "L",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:53",
+   "words": "[paraphrase] \"Bulle du coach déplaçable, jamais sur l'élément visé\"",
+   "wrong": "the guide's bubble covered the control it pointed at",
+   "required": "a movable bubble placed off its target",
+   "sense": "sight+touch",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z280",
+   "sweep": "D05",
+   "also": [
+    "F3-25"
+   ],
    "cause": "L",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:1000",
+   "source": "constitution/rules.json:1000; zing@18aac10",
    "words": "[paraphrase] the style picker floated bottom-right over the text of every page",
    "wrong": "a control floating over the reading",
    "required": "the control sits in the bottom bar",
@@ -3522,13 +4800,15 @@
    "repeat": false
   },
   {
-   "n": "Z208",
+   "n": "Z281",
    "sweep": "D09",
-   "also": [],
+   "also": [
+    "F3-30"
+   ],
    "cause": "L",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:753",
+   "source": "constitution/rules.json:753; zing@a0ba214",
    "words": "[paraphrase] the tutorial's terminal transcript scrolled sideways inside a 48rem column on a 1490 px window, with about 700 px unused on each side",
    "wrong": "an inner sideways scroll while the page had room",
    "required": "a block takes the page's width before any scrollbar",
@@ -3538,7 +4818,23 @@
    "repeat": false
   },
   {
-   "n": "Z209",
+   "n": "Z282",
+   "sweep": "F3-22",
+   "also": [],
+   "cause": "L",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@d764714",
+   "words": "[paraphrase] \"The author ran the tool on the published site and got 72 violations\" quoting GitHub's 404 page, twelve times",
+   "wrong": "the audit measured a 404 page silently",
+   "required": "resolve against the site root, refuse non-200 pages with \"HTTP 404 -- nothing audited\", export the report as Markdown",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z283",
    "sweep": "A09",
    "also": [
     "D17",
@@ -3557,7 +4853,7 @@
    "repeat": ""
   },
   {
-   "n": "Z210",
+   "n": "Z284",
    "sweep": "A11",
    "also": [],
    "cause": "L",
@@ -3573,7 +4869,71 @@
    "repeat": ""
   },
   {
-   "n": "Z211",
+   "n": "Z285",
+   "sweep": "F5-94",
+   "also": [],
+   "cause": "L",
+   "date": "2026-08-22",
+   "project": "ringserv",
+   "source": "ringserv@d8c37ef",
+   "words": "[paraphrase] horizontal scrollbars on code blocks of the live site",
+   "wrong": "comment-laden lines over 100 characters",
+   "required": "widest line 64 characters, checked by script",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z286",
+   "sweep": "F5-43",
+   "also": [],
+   "cause": "L",
+   "date": "2026-09-12",
+   "project": "harobanda",
+   "source": "harobanda@cbd9ebc",
+   "words": "[paraphrase] the author's first run of the image script from a cmd window showed nothing for three minutes",
+   "wrong": "a console that stayed blank while the run was stopped",
+   "required": "the log streamed to the screen",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z287",
+   "sweep": "F5-46",
+   "also": [],
+   "cause": "L",
+   "date": "2026-09-20",
+   "project": "harobanda",
+   "source": "harobanda@7933a2e; harobanda@f64633e; harobanda:site/styles.css:112",
+   "words": "[paraphrase] the current page was marked by colour alone, which the author could not see; he asked for bold, then a line under it",
+   "wrong": "current position by colour alone",
+   "required": "bold and a 2 px rule under the current entry, an amendment to the rule",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z288",
+   "sweep": "F5-48",
+   "also": [],
+   "cause": "L",
+   "date": "2026-09-20",
+   "project": "harobanda",
+   "source": "harobanda@3f28602",
+   "words": "[paraphrase] the author's rule, \"absolute\": no image may show a horizontal bar, ever",
+   "wrong": "diagrams in a sideways scroller on a phone",
+   "required": "a narrow redrawn variant of every diagram",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z289",
    "sweep": "C39",
    "also": [],
    "cause": "L",
@@ -3589,13 +4949,15 @@
    "repeat": false
   },
   {
-   "n": "Z212",
+   "n": "Z290",
    "sweep": "C44",
-   "also": [],
+   "also": [
+    "F5-51"
+   ],
    "cause": "L",
    "date": "2026-09-27",
    "project": "harobanda",
-   "source": "harobanda memory: no-sideways-code.md",
+   "source": "harobanda memory: no-sideways-code.md; harobanda@093c4c8",
    "words": "\"never use horizontal scrollbars with code snippets\"",
    "wrong": "README \"Try it\" block scrolled sideways (asked twice)",
    "required": "Code lines <=64 characters, wrapped",
@@ -3605,7 +4967,39 @@
    "repeat": true
   },
   {
-   "n": "Z213",
+   "n": "Z291",
+   "sweep": "F5-04",
+   "also": [],
+   "cause": "L",
+   "date": "2026-10-01",
+   "project": "stzsite",
+   "source": "stzsite:assets/css/site.css:482",
+   "words": "[paraphrase] the scroll arrow nudges gently downward, \"the one motion on the site\", still under reduced motion",
+   "wrong": "a full-screen hero gave no sign that the page continues",
+   "required": "one budgeted motion that says the page goes on",
+   "sense": "sight, motion",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z292",
+   "sweep": "F5-20",
+   "also": [],
+   "cause": "L",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:18; stzsite:JOURNAL.md:1152",
+   "words": "\"The search field is impractical; it should find classes, methods, descriptions and code in examples, quickly and visually, always as category > class > method\"",
+   "wrong": "a filter that hid rows of the current page only",
+   "required": "search across pages, shown as category > class > method",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z293",
    "sweep": "C62",
    "also": [],
    "cause": "L",
@@ -3621,7 +5015,7 @@
    "repeat": true
   },
   {
-   "n": "Z214",
+   "n": "Z294",
    "sweep": "C68",
    "also": [],
    "cause": "L",
@@ -3637,7 +5031,7 @@
    "repeat": false
   },
   {
-   "n": "Z215",
+   "n": "Z295",
    "sweep": "C79",
    "also": [],
    "cause": "L",
@@ -3653,13 +5047,15 @@
    "repeat": true
   },
   {
-   "n": "Z216",
+   "n": "Z296",
    "sweep": "B41",
-   "also": [],
+   "also": [
+    "F5-42"
+   ],
    "cause": "L",
    "date": "2026-10-20",
    "project": "stzsite",
-   "source": "stzlib memory: feedback_example_style_site.md",
+   "source": "stzlib memory: feedback_example_style_site.md; stzsite@5abb2fba2; stzsite:assets/css/site.css:862",
    "words": "[paraphrase] two code snippets are never side by side; a code line is never split; NEVER a horizontal bar on a code snippet",
    "wrong": "side-by-side snippets; scrolling code boxes",
    "required": "one column; lines at most 72 chars, laid out, never scrolled",
@@ -3669,7 +5065,55 @@
    "repeat": false
   },
   {
-   "n": "Z217",
+   "n": "Z297",
+   "sweep": "F4-37",
+   "also": [],
+   "cause": "L",
+   "date": "2026-10-22",
+   "project": "zindara",
+   "source": "zindara@b7ef7ab; zindara:CHARTER.md:183",
+   "words": "\"it worked for me for now, but I'm not satisfied with the performance (actions take many seconds, leaving the UI unreactive) and the whole UX experience.\"",
+   "wrong": "actions of many seconds with an unreactive interface",
+   "required": "recorded as a debt owed back (CHARTER section 16)",
+   "sense": "touch (latency)",
+   "ruling": "ZINDARA-UX-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z298",
+   "sweep": "F4-33",
+   "also": [],
+   "cause": "L",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@3bd2c19",
+   "words": "[paraphrase] \"the clear-filters button is pressed while a filter is active and the ribbon follows each keystroke, so filtering is visible\"",
+   "wrong": "an active filter left no visible state",
+   "required": "the control shows the filter's state as it is typed",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z299",
+   "sweep": "F5-111",
+   "also": [],
+   "cause": "L",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@3bd2c19",
+   "words": "[paraphrase] after the author's third look: the clear-filters button pressed while a filter is active, the ribbon following each keystroke, so filtering is visible",
+   "wrong": "an active filter with no visible state",
+   "required": "the button shows the active filter",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z300",
    "sweep": "A80",
    "also": [
     "B44"
@@ -3687,7 +5131,7 @@
    "repeat": ""
   },
   {
-   "n": "Z218",
+   "n": "Z301",
    "sweep": "C99",
    "also": [],
    "cause": "L",
@@ -3703,7 +5147,7 @@
    "repeat": false
   },
   {
-   "n": "Z219",
+   "n": "Z302",
    "sweep": "D61",
    "also": [],
    "cause": "L",
@@ -3719,7 +5163,7 @@
    "repeat": true
   },
   {
-   "n": "Z220",
+   "n": "Z303",
    "sweep": "D63",
    "also": [],
    "cause": "L",
@@ -3735,7 +5179,7 @@
    "repeat": true
   },
   {
-   "n": "Z221",
+   "n": "Z304",
    "sweep": "D78",
    "also": [],
    "cause": "L",
@@ -3751,7 +5195,7 @@
    "repeat": false
   },
   {
-   "n": "Z222",
+   "n": "Z305",
    "sweep": "D84",
    "also": [],
    "cause": "L",
@@ -3767,7 +5211,7 @@
    "repeat": true
   },
   {
-   "n": "Z223",
+   "n": "Z306",
    "sweep": "B49",
    "also": [],
    "cause": "L",
@@ -3783,7 +5227,7 @@
    "repeat": true
   },
   {
-   "n": "Z224",
+   "n": "Z307",
    "sweep": "D91",
    "also": [
     "C110"
@@ -3801,7 +5245,7 @@
    "repeat": true
   },
   {
-   "n": "Z225",
+   "n": "Z308",
    "sweep": "C118",
    "also": [
     "B64"
@@ -3819,13 +5263,32 @@
    "repeat": false
   },
   {
-   "n": "Z226",
-   "sweep": "C11",
+   "n": "Z309",
+   "sweep": "F1-03",
    "also": [],
+   "cause": "E",
+   "date": "2026-03-30",
+   "project": "zin",
+   "source": "zin@bfcbc0e (after zin@7a5dce5 added the colours)",
+   "words": "[paraphrase] \"Simplify audit.bat output: minimal colors, clean layout matching user spec\"",
+   "wrong": "green PASS, red FAIL and yellow warnings painted over the whole report",
+   "required": "minimal colour, the layout the author specified",
+   "sense": "see",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z310",
+   "sweep": "C11",
+   "also": [
+    "F1-09",
+    "F4-42"
+   ],
    "cause": "E",
    "date": "2026-04",
    "project": "zin",
-   "source": "zin memory: feedback_zinbank_color_palette_unification.md",
+   "source": "zin memory: feedback_zinbank_color_palette_unification.md; zin@66ccef6; zin-one@893e695",
    "words": "[paraphrase] Two colour families only: five semantic statuses and one neutral grey for metadata; no colour per agent or per channel -- that is noise.",
    "wrong": "One colour per channel/agent",
    "required": "Colour carries status meaning only",
@@ -3835,13 +5298,15 @@
    "repeat": false
   },
   {
-   "n": "Z227",
+   "n": "Z311",
    "sweep": "C12",
-   "also": [],
+   "also": [
+    "F1-10"
+   ],
    "cause": "E",
    "date": "2026-04",
    "project": "zin",
-   "source": "zin memory: feedback_zinbank_color_economy.md",
+   "source": "zin memory: feedback_zinbank_color_economy.md; zin@66ccef6; zin@0851cc0",
    "words": "[paraphrase] One column per table carries colour, the actionable-status column; all others plain text. Promoted to a constitutional principle.",
    "wrong": "Several coloured columns per row, same green meaning different things",
    "required": "Colour economy: one coloured column",
@@ -3851,7 +5316,39 @@
    "repeat": true
   },
   {
-   "n": "Z228",
+   "n": "Z312",
+   "sweep": "F1-05",
+   "also": [],
+   "cause": "E",
+   "date": "2026-04-01",
+   "project": "zin",
+   "source": "zin:doc/design/CONSOLE_OUTPUT_DESIGN.md:43-51 (document \"Author: Mansour Ayouni + Claude\", line 5); zin@8664c2f, zin@8a6d99b",
+   "words": "[paraphrase] Decision: no decorative colours; \"If you can't explain what semantic role a color serves, use gray\"",
+   "wrong": "twelve layers painted in twelve colours that repeated and said nothing the layer name did not",
+   "required": "every colour maps to one role in a table; layers in gray, the name in bold carries identity",
+   "sense": "see",
+   "ruling": "session 41",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z313",
+   "sweep": "F4-39",
+   "also": [],
+   "cause": "E",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@6b6d0c7",
+   "words": "[paraphrase] « L'utilisateur a raison : le suivi actif n'est pas un statut signalétique »",
+   "wrong": "a green halo (the \"healthy\" status colour) used for \"navigation is tracked\"",
+   "required": "neutral slate for a non-status hint; five status colours only",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z314",
    "sweep": "C15",
    "also": [],
    "cause": "E",
@@ -3867,13 +5364,15 @@
    "repeat": false
   },
   {
-   "n": "Z229",
+   "n": "Z315",
    "sweep": "C23",
-   "also": [],
+   "also": [
+    "F4-10"
+   ],
    "cause": "E",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:34-36; restaurant-app:restaurant-app-stzapp/www/index.html:196",
    "words": "[paraphrase] v8/v10: nav icons as monochrome pure glyphs; no decorative icon or emoji in front of a clear label (\"le texte suffit\").",
    "wrong": "Emoji before labels, greyscale-filtered emoji",
    "required": "Text alone, or a plain glyph when an icon is really needed",
@@ -3883,13 +5382,31 @@
    "repeat": false
   },
   {
-   "n": "Z230",
-   "sweep": "D07",
+   "n": "Z316",
+   "sweep": "F4-20",
    "also": [],
+   "cause": "E",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:26-29",
+   "words": "[paraphrase] \"Dataviz 3 couleurs avec légende -- vert clair normal / bleu profond focus / rouge critique. Magenta réservé au projecteur des guides ... Le graphique se place en bas de l'écran, pas en haut\"",
+   "wrong": "colour spent freely in charts; chart first on the screen",
+   "required": "three meanings with a legend; chart after the action",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z317",
+   "sweep": "D07",
+   "also": [
+    "F3-29"
+   ],
    "cause": "E",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:1017",
+   "source": "constitution/rules.json:1017; zing@9d1d5fc",
    "words": "[paraphrase] the reader scrolled smoothly when a set was chosen from its menu",
    "wrong": "animation nobody asked for between a click and its answer",
    "required": "motion only to report; the jump is instant",
@@ -3899,7 +5416,39 @@
    "repeat": false
   },
   {
-   "n": "Z231",
+   "n": "Z318",
+   "sweep": "F5-108",
+   "also": [],
+   "cause": "E",
+   "date": "2026-08-07",
+   "project": "ringflex",
+   "source": "ringflex@0c29259",
+   "words": "[paraphrase] \"it took the author looking to catch it\": every ending coloured by its declared outcome, eleven loud orange nodes on a healthy diagram",
+   "wrong": "colour spent on declared outcomes",
+   "required": "colour for analyser verdicts only; nodes white by default",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z319",
+   "sweep": "F4-67",
+   "also": [],
+   "cause": "E",
+   "date": "2026-08-12",
+   "project": "ringface",
+   "source": "ringface@1e063c1; ringface:docs/language/GRAMMAR.md:126-156",
+   "words": "[paraphrase] \"Three decisions ratified by the author\": every ACTION CALLS a flow; LIST is the only repetition, AS TABLE is presentation; RF-C1 one PRIMARY per visibility scope, RF-C2 every LIST declares an EMPTY, RF-C3 every SHEET declares a CANCEL",
+   "wrong": "(a ruling, not a correction) screens with several primaries, lists without empty state, sheets without exit",
+   "required": "one primary per visible scope; an empty sentence; a cancel",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z320",
    "sweep": "A07",
    "also": [],
    "cause": "E",
@@ -3915,7 +5464,23 @@
    "repeat": ""
   },
   {
-   "n": "Z232",
+   "n": "Z321",
+   "sweep": "F5-95",
+   "also": [],
+   "cause": "E",
+   "date": "2026-08-22",
+   "project": "ringserv",
+   "source": "ringserv@6eb70f2; ringserv@57ccb60; ringserv:site/style.css:14",
+   "words": "[paraphrase] blue is every developer tool's colour; a project's accent should be a signature; then \"diminish the blue\"",
+   "wrong": "a blue site; atoms in syntax blue everywhere",
+   "required": "violet leads; the gradient in exactly three places",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z322",
    "sweep": "C37",
    "also": [],
    "cause": "E",
@@ -3931,7 +5496,7 @@
    "repeat": true
   },
   {
-   "n": "Z233",
+   "n": "Z323",
    "sweep": "C41",
    "also": [],
    "cause": "E",
@@ -3947,13 +5512,15 @@
    "repeat": false
   },
   {
-   "n": "Z234",
+   "n": "Z324",
    "sweep": "B26",
-   "also": [],
+   "also": [
+    "F5-03"
+   ],
    "cause": "E",
    "date": "2026-10-01",
    "project": "stzsite",
-   "source": "stzlib memory: feedback_site_navigation_law.md",
+   "source": "stzlib memory: feedback_site_navigation_law.md; stzsite@c51001631; stzsite:assets/css/site.css:461",
    "words": "[paraphrase] decoration (gradients, glides, a covered photo) competed with the content",
    "wrong": "smooth scroll, transitions, hover motion; a bar covering a hero photo",
    "required": "no animation while navigating; a bar holds its own space",
@@ -3963,7 +5530,7 @@
    "repeat": false
   },
   {
-   "n": "Z235",
+   "n": "Z325",
    "sweep": "C54",
    "also": [],
    "cause": "E",
@@ -3979,16 +5546,17 @@
    "repeat": true
   },
   {
-   "n": "Z236",
+   "n": "Z326",
    "sweep": "A64",
    "also": [
     "B37",
-    "D26"
+    "D26",
+    "F5-37"
    ],
    "cause": "E",
    "date": "2026-10-16",
    "project": "stzsite",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1315; softanza/mailbox/stzzui.md:2180",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1315; softanza/mailbox/stzzui.md:2180; stzsite@7b6063ea4; stzsite:assets/css/site.css:5",
    "words": "[paraphrase] the author asked for the Compass artifacts' style: a light tint under the page head and a light shadow under cards",
    "wrong": "a purple style unlike the estate's other pages",
    "required": "the Compass look, resting tint and shadow never used as emphasis",
@@ -3998,7 +5566,23 @@
    "repeat": ""
   },
   {
-   "n": "Z237",
+   "n": "Z327",
+   "sweep": "F4-30",
+   "also": [],
+   "cause": "E",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@d6966e7",
+   "words": "[paraphrase] \"the chart on a white page\"",
+   "wrong": "the chart drawn on a tinted page",
+   "required": "white paper for the chart",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z328",
    "sweep": "C92",
    "also": [],
    "cause": "E",
@@ -4014,7 +5598,7 @@
    "repeat": true
   },
   {
-   "n": "Z238",
+   "n": "Z329",
    "sweep": "C96",
    "also": [],
    "cause": "E",
@@ -4030,7 +5614,7 @@
    "repeat": true
   },
   {
-   "n": "Z239",
+   "n": "Z330",
    "sweep": "C100",
    "also": [],
    "cause": "E",
@@ -4046,7 +5630,7 @@
    "repeat": false
   },
   {
-   "n": "Z240",
+   "n": "Z331",
    "sweep": "D28",
    "also": [],
    "cause": "E",
@@ -4062,7 +5646,7 @@
    "repeat": false
   },
   {
-   "n": "Z241",
+   "n": "Z332",
    "sweep": "D76",
    "also": [],
    "cause": "E",
@@ -4078,7 +5662,7 @@
    "repeat": false
   },
   {
-   "n": "Z242",
+   "n": "Z333",
    "sweep": "D79",
    "also": [],
    "cause": "E",
@@ -4094,7 +5678,7 @@
    "repeat": false
   },
   {
-   "n": "Z243",
+   "n": "Z334",
    "sweep": "D80",
    "also": [],
    "cause": "E",
@@ -4110,7 +5694,7 @@
    "repeat": false
   },
   {
-   "n": "Z244",
+   "n": "Z335",
    "sweep": "B62",
    "also": [],
    "cause": "E",
@@ -4126,7 +5710,7 @@
    "repeat": true
   },
   {
-   "n": "Z245",
+   "n": "Z336",
    "sweep": "C122",
    "also": [
     "A116",
@@ -4145,7 +5729,7 @@
    "repeat": true
   },
   {
-   "n": "Z246",
+   "n": "Z337",
    "sweep": "C128",
    "also": [
     "A121"
@@ -4163,7 +5747,23 @@
    "repeat": true
   },
   {
-   "n": "Z247",
+   "n": "Z338",
+   "sweep": "F4-59",
+   "also": [],
+   "cause": "S",
+   "date": "2026-03-25",
+   "project": "zin",
+   "source": "zin-one@edb9e0e",
+   "words": "[paraphrase] \"Major layout restructure per user feedback\": three left tabs instead of collapsible zones, data grid and diagrams moved to the centre, console alone at the bottom, right panel Stats and Guide only",
+   "wrong": "content in side and bottom zones far from the work",
+   "required": "the work in the centre, references at the sides",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z339",
    "sweep": "C08",
    "also": [],
    "cause": "S",
@@ -4179,13 +5779,15 @@
    "repeat": false
   },
   {
-   "n": "Z248",
+   "n": "Z340",
    "sweep": "D08",
-   "also": [],
+   "also": [
+    "F3-28"
+   ],
    "cause": "S",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:736",
+   "source": "constitution/rules.json:736; zing@04524fd",
    "words": "[paraphrase] the Platforms page floated its status pills, so each landed in a different place as the window changed size",
    "wrong": "labels detached from their subject",
    "required": "a label follows its subject",
@@ -4195,7 +5797,7 @@
    "repeat": false
   },
   {
-   "n": "Z249",
+   "n": "Z341",
    "sweep": "A16",
    "also": [],
    "cause": "S",
@@ -4211,7 +5813,23 @@
    "repeat": ""
   },
   {
-   "n": "Z250",
+   "n": "Z342",
+   "sweep": "F5-98",
+   "also": [],
+   "cause": "S",
+   "date": "2026-08-23",
+   "project": "ringserv",
+   "source": "ringserv@eceed02",
+   "words": "[paraphrase] the panel snapshot was very large",
+   "wrong": "a 1163 px picture at full column width",
+   "required": "33rem centred, \"a window, not a wall\"",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z343",
    "sweep": "B19",
    "also": [],
    "cause": "S",
@@ -4227,7 +5845,23 @@
    "repeat": true
   },
   {
-   "n": "Z251",
+   "n": "Z344",
+   "sweep": "F5-09",
+   "also": [],
+   "cause": "S",
+   "date": "2026-10-02",
+   "project": "stzsite",
+   "source": "stzsite:JOURNAL.md:679; stzsite:assets/css/site.css:557",
+   "words": "[paraphrase] the author found the page with the bar boxed in the menus' width, with wide empty margins on a large screen",
+   "wrong": "layout capped at the menu box on a 1855 px screen",
+   "required": "layout to 1680 px, bar under a fifth of the width, prose kept at its measure",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z345",
    "sweep": "C77",
    "also": [],
    "cause": "S",
@@ -4243,7 +5877,23 @@
    "repeat": true
   },
   {
-   "n": "Z252",
+   "n": "Z346",
+   "sweep": "F4-24",
+   "also": [],
+   "cause": "S",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@2f6a162; orgdesk:docs/evidence/oc2/OC2_TO_OC5_RESULTS_2026-10-24.md:62-75",
+   "words": "[paraphrase] after the author's first look: the report and documentation pages \"contained in their own scrolling area and centred (the document used to scroll as a whole, and the block's label overlapped a table)\"",
+   "wrong": "page-wide scroll; a label over a table",
+   "required": "a contained, centred reading column",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z347",
    "sweep": "C101",
    "also": [],
    "cause": "S",
@@ -4259,7 +5909,7 @@
    "repeat": true
   },
   {
-   "n": "Z253",
+   "n": "Z348",
    "sweep": "D43",
    "also": [],
    "cause": "S",
@@ -4275,7 +5925,7 @@
    "repeat": false
   },
   {
-   "n": "Z254",
+   "n": "Z349",
    "sweep": "D56",
    "also": [],
    "cause": "S",
@@ -4291,7 +5941,7 @@
    "repeat": false
   },
   {
-   "n": "Z255",
+   "n": "Z350",
    "sweep": "D58",
    "also": [],
    "cause": "S",
@@ -4307,7 +5957,7 @@
    "repeat": true
   },
   {
-   "n": "Z256",
+   "n": "Z351",
    "sweep": "D60",
    "also": [],
    "cause": "S",
@@ -4323,7 +5973,7 @@
    "repeat": true
   },
   {
-   "n": "Z257",
+   "n": "Z352",
    "sweep": "D65",
    "also": [],
    "cause": "S",
@@ -4339,7 +5989,7 @@
    "repeat": true
   },
   {
-   "n": "Z258",
+   "n": "Z353",
    "sweep": "D73",
    "also": [],
    "cause": "S",
@@ -4355,16 +6005,17 @@
    "repeat": true
   },
   {
-   "n": "Z259",
+   "n": "Z354",
    "sweep": "C124",
    "also": [
     "A119",
-    "B50"
+    "B50",
+    "F5-89"
    ],
    "cause": "S",
    "date": "2026-11-09 12:43",
    "project": "lookout",
-   "source": "lookout commit 507fbd8; softanza/mailbox/lookout.md:796",
+   "source": "lookout commit 507fbd8; softanza/mailbox/lookout.md:796; lookout@2eac19c; lookout@dfa0b4d; lookout@507fbd8; lookout@6a3b9e9",
    "words": "\"use the wider space of the page ... we are in a sort of workstation site, not a tight textual web site\"",
    "wrong": "A 1240 px frame left half of a 1900 px screen empty (\"you have space, why don't you use it?\")",
    "required": "Use the wide screen",
@@ -4374,7 +6025,7 @@
    "repeat": false
   },
   {
-   "n": "Z260",
+   "n": "Z355",
    "sweep": "C125",
    "also": [],
    "cause": "S",
@@ -4390,7 +6041,7 @@
    "repeat": true
   },
   {
-   "n": "Z261",
+   "n": "Z356",
    "sweep": "C126",
    "also": [
     "A120",
@@ -4410,7 +6061,7 @@
    "repeat": true
   },
   {
-   "n": "Z262",
+   "n": "Z357",
    "sweep": "C127",
    "also": [],
    "cause": "S",
@@ -4426,7 +6077,7 @@
    "repeat": true
   },
   {
-   "n": "Z263",
+   "n": "Z358",
    "sweep": "C129",
    "also": [
     "A122"
@@ -4444,7 +6095,7 @@
    "repeat": false
   },
   {
-   "n": "Z264",
+   "n": "Z359",
    "sweep": "C131",
    "also": [
     "A124"
@@ -4462,7 +6113,7 @@
    "repeat": true
   },
   {
-   "n": "Z265",
+   "n": "Z360",
    "sweep": "C135",
    "also": [
     "A127"
@@ -4480,7 +6131,7 @@
    "repeat": false
   },
   {
-   "n": "Z266",
+   "n": "Z361",
    "sweep": "C140",
    "also": [
     "A135",
@@ -4500,13 +6151,79 @@
    "repeat": true
   },
   {
-   "n": "Z267",
-   "sweep": "C20",
+   "n": "Z362",
+   "sweep": "F4-61",
    "also": [],
+   "cause": "I",
+   "date": "<=2026-03-16 (file date)",
+   "project": "zin",
+   "source": "zin-prototypes:zincode-v17.html:2704; zin-prototypes:v17-parts/patch-v17-fixes.js:296-309",
+   "words": "\"Intelligence model panel removed per user request\"",
+   "wrong": "a right-hand model panel on the CLI surface",
+   "required": "the CLI surface without it",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z363",
+   "sweep": "F3-05",
+   "also": [],
+   "cause": "I",
+   "date": "2026-06",
+   "project": "zing-studio",
+   "source": "zing-studio:zing_kickoff_prompt.md:129",
+   "words": "\"Lists must allow a table view\"",
+   "wrong": "collections shown only as cards",
+   "required": "every collection offers a table view; cards supplementary",
+   "sense": "sight",
+   "ruling": "kickoff PX 8",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z364",
+   "sweep": "F3-06",
+   "also": [],
+   "cause": "I",
+   "date": "2026-06",
+   "project": "zing-studio",
+   "source": "zing-studio:zing_kickoff_prompt.md:130",
+   "words": "\"AI prompts only in the AI tab on the right panel (no scattered prompts)\"",
+   "wrong": "\"ask AI\" affordances repeated in toolbars, workspaces, menus",
+   "required": "one place for AI: the AI tab of the right panel",
+   "sense": "sight",
+   "ruling": "kickoff PX 8",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z365",
+   "sweep": "F2-03",
+   "also": [],
+   "cause": "I",
+   "date": "2026-06-12",
+   "project": "refine",
+   "source": "`REDESIGN_INVENTORY.md:120-124`",
+   "words": "[paraphrase] Leave behind \"corner-tick detailing, hairline-grid backgrounds, many small labels\"; an adoption ladder, a 6-step workflow and a week-by-week timeline \"all coexisted -- pick one\".",
+   "wrong": "Ornament drew nothing, and one message appeared in three devices.",
+   "required": "Drop the ornament and keep one device per message.",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z366",
+   "sweep": "C20",
+   "also": [
+    "F4-11"
+   ],
    "cause": "I",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:27-28; restaurant-app:restaurant-app-stzapp/www/index.html:149",
    "words": "[paraphrase] v7.1: charts in popups must be expressive, not decorative: labelled grid, values, dates, last point accented.",
    "wrong": "Decorative sparklines",
    "required": "Charts that state values",
@@ -4516,13 +6233,31 @@
    "repeat": false
   },
   {
-   "n": "Z268",
-   "sweep": "D04",
+   "n": "Z367",
+   "sweep": "F4-13",
    "also": [],
+   "cause": "I",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/enseignements.html:26-29; restaurant-app:kb/agents/REGLES-UX.md:9-11",
+   "words": "« Un restaurateur n'a pas le temps de regarder plusieurs secondes un écran encombré. Il doit avoir une action claire dans chaque écran. » (signed jointly by the client and the Principal as \"la directive fondatrice de l'UX\")",
+   "wrong": "screens showing all data at once",
+   "required": "one clear action per screen; only the data the task needs; details on demand",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z368",
+   "sweep": "D04",
+   "also": [
+    "F3-26"
+   ],
    "cause": "I",
    "date": "2026-08-03",
    "project": "stzweb-site",
-   "source": "constitution/rules.json:558",
+   "source": "constitution/rules.json:558; zing@93e6761",
    "words": "[paraphrase] the front page numbered its sections 01-08 with nothing stacked under them",
    "wrong": "zero-padded numbers as ornament",
    "required": "numbers align a column or are absent",
@@ -4532,7 +6267,7 @@
    "repeat": false
   },
   {
-   "n": "Z269",
+   "n": "Z369",
    "sweep": "A05",
    "also": [
     "C32"
@@ -4550,7 +6285,7 @@
    "repeat": ""
   },
   {
-   "n": "Z270",
+   "n": "Z370",
    "sweep": "A06",
    "also": [
     "D15"
@@ -4568,7 +6303,7 @@
    "repeat": ""
   },
   {
-   "n": "Z271",
+   "n": "Z371",
    "sweep": "A10",
    "also": [],
    "cause": "I",
@@ -4584,7 +6319,7 @@
    "repeat": true
   },
   {
-   "n": "Z272",
+   "n": "Z372",
    "sweep": "A12",
    "also": [
     "D16"
@@ -4602,13 +6337,63 @@
    "repeat": true
   },
   {
-   "n": "Z273",
-   "sweep": "C45",
+   "n": "Z373",
+   "sweep": "F5-105",
    "also": [],
+   "cause": "I",
+   "date": "2026-08-18",
+   "project": "stz-observer",
+   "source": "stz-observer@961ea10",
+   "words": "[paraphrase] the author pointed at one free-text hint on the page and asked which source of truth it came from",
+   "wrong": "a hint from no source: a second answer to \"what is next\"",
+   "required": "the page reads the queues; the gap measured",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z374",
+   "sweep": "F5-97",
+   "also": [],
+   "cause": "I",
+   "date": "2026-08-23",
+   "project": "ringserv",
+   "source": "ringserv@af9dc33",
+   "words": "[paraphrase] the home page was too long: nine sections grown one per request, three duplicating pages that exist",
+   "wrong": "13 screens of home page",
+   "required": "one paragraph and a button for anything with its own page; 8 screens",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z375",
+   "sweep": "F5-101",
+   "also": [],
+   "cause": "I",
+   "date": "2026-08-26",
+   "project": "ringserv",
+   "source": "ringserv@c588d98",
+   "words": "[paraphrase] two corrections: reading pages do not belong in a lifecycle menu; the panel screenshot on three pages is wallpaper",
+   "wrong": "the menu grown by promotion; one picture three times",
+   "required": "five stops; the picture on two pages",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z376",
+   "sweep": "C45",
+   "also": [
+    "F5-56"
+   ],
    "cause": "I",
    "date": "2026-09-28",
    "project": "harobanda",
-   "source": "harobanda memory: no-decorative-ornament.md",
+   "source": "harobanda memory: no-decorative-ornament.md; harobanda@036681a",
    "words": "\"it just adds visual noise and semantic confusion. go back to what we had.\"",
    "wrong": "Niger-museum relief motifs spent semantic colours as decoration",
    "required": "Every mark and colour means something; empty space is deliberate",
@@ -4618,7 +6403,39 @@
    "repeat": true
   },
   {
-   "n": "Z274",
+   "n": "Z377",
+   "sweep": "F5-52",
+   "also": [],
+   "cause": "I",
+   "date": "2026-09-28",
+   "project": "harobanda",
+   "source": "harobanda@062f34e",
+   "words": "\"the footer in internal pages should not replicate the description of the name of harobanda\"",
+   "wrong": "the name's story in 18 footers",
+   "required": "the logo alone; the story on the home page",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z378",
+   "sweep": "F5-53",
+   "also": [],
+   "cause": "I",
+   "date": "2026-09-28",
+   "project": "harobanda",
+   "source": "harobanda@062f34e",
+   "words": "\"the link to glossary of concepts exists in the content so why add it here?!\"",
+   "wrong": "the glossary link in every footer and in the content",
+   "required": "the link in the content only",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z379",
    "sweep": "B28",
    "also": [],
    "cause": "I",
@@ -4634,13 +6451,95 @@
    "repeat": false
   },
   {
-   "n": "Z275",
-   "sweep": "A57",
+   "n": "Z380",
+   "sweep": "F5-11",
    "also": [],
+   "cause": "I",
+   "date": "2026-10-02",
+   "project": "stzsite",
+   "source": "stzsite@bba7345ba; stzsite:JOURNAL.md:509",
+   "words": "[paraphrase] remove the table of all lanes once it had left the menu: each area's page carries its rated lanes",
+   "wrong": "a summary table repeating every area page",
+   "required": "the table and its generation removed",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z381",
+   "sweep": "F5-12",
+   "also": [],
+   "cause": "I",
+   "date": "2026-10-02..03",
+   "project": "stzsite",
+   "source": "stzsite@c422f1adb; stzsite@5bd8ee607; stzsite:JOURNAL.md:806; stzsite:doc/DOCUMENTATION-DESIGN.md:143",
+   "words": "[paraphrase] the author \"corrected a general misunderstanding\": a ...Q() name is a syntax detail, not another method; then the same for CS, U and every extension",
+   "wrong": "the reference listed one method up to 16 times under its forms",
+   "required": "a method listed once, its extensions shown on its row",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z382",
+   "sweep": "F5-14",
+   "also": [],
+   "cause": "I",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:10,16; stzsite@8562fd00d",
+   "words": "\"stz2DList, stzList2D and the like are ONE class under several names; one entry, everywhere; and the same for methods and functions\"",
+   "wrong": "46 alias classes and 4,043 alias methods each had an entry",
+   "required": "one entry under the main name, the others cited",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z383",
+   "sweep": "F5-17",
+   "also": [],
+   "cause": "I",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:14; stzsite@8fb789aca",
+   "words": "\"`@@()` is for showing a list; a number or a string is shown with `?` alone\"",
+   "wrong": "6,852 examples wrapped a scalar in a list printer",
+   "required": "the plain form for non-lists",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z384",
+   "sweep": "F5-19",
+   "also": [],
+   "cause": "I",
+   "date": "2026-10-03",
+   "project": "stzsite",
+   "source": "stzsite:doc/SITE-PLAN-2026-10-03.md:17",
+   "words": "\"The extension paragraph at the top of every reference page is annoying\"",
+   "wrong": "one 60-word paragraph repeated on 3,126 pages",
+   "required": "one line; each extension letter carries its meaning as a title",
+   "sense": "reading",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z385",
+   "sweep": "A57",
+   "also": [
+    "F5-75"
+   ],
    "cause": "I",
    "date": "2026-10-15",
    "project": "ayouni",
-   "source": "softanza/memos/2026-10-15.md:298",
+   "source": "softanza/memos/2026-10-15.md:298; ayouni@ee7477a",
    "words": "[paraphrase] \"the author counted the logo four times on one page, wanted its dot red, asked for a zoom icon on the cover, and ruled the larger cover type not good\"",
    "wrong": "logo repeated (builder bug); larger cover type",
    "required": "one logo, red dot, zoomable cover",
@@ -4650,13 +6549,15 @@
    "repeat": ""
   },
   {
-   "n": "Z276",
+   "n": "Z386",
    "sweep": "A59",
-   "also": [],
+   "also": [
+    "F5-27"
+   ],
    "cause": "I",
    "date": "2026-10-15",
    "project": "stzsite",
-   "source": "softanza/memos/2026-10-15.md:96",
+   "source": "softanza/memos/2026-10-15.md:96; stzsite@180a0df6c; stzsite:JOURNAL.md:2218",
    "words": "[paraphrase] \"the author said the offer page contains many duplications\"",
    "wrong": "the invitation stood in the page and again in the footer",
    "required": "each thing said once",
@@ -4666,13 +6567,31 @@
    "repeat": ""
   },
   {
-   "n": "Z277",
-   "sweep": "A63",
+   "n": "Z387",
+   "sweep": "F5-71",
    "also": [],
+   "cause": "I",
+   "date": "2026-10-15",
+   "project": "ayouni",
+   "source": "ayouni:DECISIONS.md:20; ayouni@1307fd4",
+   "words": "\"the home page should be redesigned to get better visibility of the books covers and to cnetralise the information you dupplicated between the books sections\"",
+   "wrong": "small covers; the same sentences under each book",
+   "required": "large covers first; invitation, agents' files and licence once each",
+   "sense": "sight",
+   "ruling": "HOUSE-14",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z388",
+   "sweep": "A63",
+   "also": [
+    "F5-35"
+   ],
    "cause": "I",
    "date": "2026-10-16",
    "project": "stzsite",
-   "source": "softanza/memos/2026-10-16.md:53",
+   "source": "softanza/memos/2026-10-16.md:53; stzsite@19a2fff2b; stzsite:assets/css/site.css:717",
    "words": "[paraphrase] \"the first page was very long and mostly duplicated the site; the domains repeated their names in a grid and then in small widgets, and must show Softanza's richness in a clean orthogonal grid\"",
    "wrong": "a long front page; the same names in two widgets",
    "required": "a short front page; one orthogonal grid",
@@ -4682,7 +6601,23 @@
    "repeat": true
   },
   {
-   "n": "Z278",
+   "n": "Z389",
+   "sweep": "F4-27",
+   "also": [],
+   "cause": "I",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@2f6a162; same evidence:72-73",
+   "words": "[paraphrase] \"the empty breadcrumb hidden until a selection\"; Ctrl+S saves",
+   "wrong": "an empty trail drawn on screen",
+   "required": "no ink until there is a selection",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z390",
    "sweep": "C97",
    "also": [],
    "cause": "I",
@@ -4698,7 +6633,7 @@
    "repeat": true
   },
   {
-   "n": "Z279",
+   "n": "Z391",
    "sweep": "D53",
    "also": [
     "A95",
@@ -4717,7 +6652,7 @@
    "repeat": false
   },
   {
-   "n": "Z280",
+   "n": "Z392",
    "sweep": "D66",
    "also": [],
    "cause": "I",
@@ -4733,7 +6668,7 @@
    "repeat": false
   },
   {
-   "n": "Z281",
+   "n": "Z393",
    "sweep": "D81",
    "also": [],
    "cause": "I",
@@ -4749,7 +6684,7 @@
    "repeat": true
   },
   {
-   "n": "Z282",
+   "n": "Z394",
    "sweep": "B53",
    "also": [],
    "cause": "I",
@@ -4765,7 +6700,7 @@
    "repeat": true
   },
   {
-   "n": "Z283",
+   "n": "Z395",
    "sweep": "B69",
    "also": [
     "A131",
@@ -4784,7 +6719,7 @@
    "repeat": true
   },
   {
-   "n": "Z284",
+   "n": "Z396",
    "sweep": "C117",
    "also": [
     "B52",
@@ -4803,7 +6738,7 @@
    "repeat": false
   },
   {
-   "n": "Z285",
+   "n": "Z397",
    "sweep": "C138",
    "also": [
     "A132",
@@ -4823,7 +6758,71 @@
    "repeat": true
   },
   {
-   "n": "Z286",
+   "n": "Z398",
+   "sweep": "F2-06",
+   "also": [],
+   "cause": "B",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1683-1686`",
+   "words": "\"a rigorous architectural feeling\" (the result \"the user described\")",
+   "wrong": "The IDE's zone boundaries were left to background contrast and whitespace.",
+   "required": "A two-tier line vocabulary: `--line-strong` (#b8c1c8) at zone edges (header, session bar, activity bar, each pane) and `--line` (#d4dadf) inside zones.",
+   "sense": "sight",
+   "ruling": "PX §49",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z399",
+   "sweep": "F1-04",
+   "also": [],
+   "cause": "B",
+   "date": "2026-04-01",
+   "project": "zin",
+   "source": "zin:doc/design/CONSOLE_OUTPUT_DESIGN.md:83 (zin@7b74469)",
+   "words": "\"this makes reading possible and should be enforced by the template/information system, not left to hasard!!!\"",
+   "wrong": "double blank lines in some commands, none in others",
+   "required": "every section element owns its own spacing; callers never add blank lines; exactly one blank between sections",
+   "sense": "see",
+   "ruling": "session 41",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z400",
+   "sweep": "F4-16",
+   "also": [],
+   "cause": "B",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:37-39",
+   "words": "[paraphrase] form grammar: titled groups, one field per line; the add row \"a la même hauteur que les lignes existantes (63 px, bordure pointillée)\"; missing required field = red frame + message",
+   "wrong": "a ragged add row; missing fields with no mark",
+   "required": "one row height; visible invalid state",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z401",
+   "sweep": "F3-19",
+   "also": [],
+   "cause": "B",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@8425042 (fix 3)",
+   "words": "[paraphrase] the reader's toolbar did not share the content column: a phantom gutter on wide screens",
+   "wrong": "search bar and set list starting on different lines",
+   "required": "toolbar on the content column, measured at 1600 px",
+   "sense": "sight (layout)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z402",
    "sweep": "B16",
    "also": [],
    "cause": "B",
@@ -4839,7 +6838,7 @@
    "repeat": true
   },
   {
-   "n": "Z287",
+   "n": "Z403",
    "sweep": "B18",
    "also": [],
    "cause": "B",
@@ -4855,7 +6854,23 @@
    "repeat": true
   },
   {
-   "n": "Z288",
+   "n": "Z404",
+   "sweep": "F5-55",
+   "also": [],
+   "cause": "B",
+   "date": "2026-09-28",
+   "project": "harobanda",
+   "source": "harobanda@c0b50b6",
+   "words": "\"in the footer of internal pages add A Softanza Project (MIT). By: Mansour Ayouni (c) 2026. To the right and if screen is small (mobile) under the logo\"",
+   "wrong": "no credit beside the internal footer's logo",
+   "required": "credits right-aligned to the content edge; under the logo at 640 px and below",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z405",
    "sweep": "C52",
    "also": [],
    "cause": "B",
@@ -4871,15 +6886,16 @@
    "repeat": true
   },
   {
-   "n": "Z289",
+   "n": "Z406",
    "sweep": "A52",
    "also": [
-    "C57"
+    "C57",
+    "F5-62"
    ],
    "cause": "B",
    "date": "2026-10-13",
    "project": "harobanda",
-   "source": "softanza/dashboard/CONCLUSIONS.md:1275; softanza/memos/2026-10-13.md:782",
+   "source": "softanza/dashboard/CONCLUSIONS.md:1275; softanza/memos/2026-10-13.md:782; harobanda@62f72b3",
    "words": "[paraphrase] \"the pages on one level keep an equilibrium and the site has no third sublevel\"",
    "wrong": "a capability page with chapters, unlike its siblings",
    "required": "one shape per level, three sections",
@@ -4889,13 +6905,15 @@
    "repeat": ""
   },
   {
-   "n": "Z290",
+   "n": "Z407",
    "sweep": "C71",
-   "also": [],
+   "also": [
+    "F5-119"
+   ],
    "cause": "B",
    "date": "2026-10-14",
    "project": "an NGO platform (client)",
-   "source": "client memory (an NGO platform): prototypes.md",
+   "source": "client memory (an NGO platform): prototypes.md; ngo-platform:output/fabrication/prototypes/_source/LISEZMOI.md:94",
    "words": "[paraphrase] The top step bar always holds on one line at any resolution; under 900 px the other boxes lose their titles.",
    "wrong": "Step bar wrapping",
    "required": "One line always",
@@ -4905,7 +6923,7 @@
    "repeat": true
   },
   {
-   "n": "Z291",
+   "n": "Z408",
    "sweep": "C78",
    "also": [],
    "cause": "B",
@@ -4921,7 +6939,39 @@
    "repeat": true
   },
   {
-   "n": "Z292",
+   "n": "Z409",
+   "sweep": "F5-34",
+   "also": [],
+   "cause": "B",
+   "date": "2026-10-16",
+   "project": "stzsite",
+   "source": "stzsite@19a2fff2b; stzsite:assets/css/site.css:774",
+   "words": "[paraphrase] the hero's arrow is smaller, on the panel's right, and points at a section that exists",
+   "wrong": "a large arrow at the panel's left pointing at a removed anchor",
+   "required": "a 36 px arrow at the right, to a live section",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z410",
+   "sweep": "F5-38",
+   "also": [],
+   "cause": "B",
+   "date": "2026-10-16",
+   "project": "stzsite",
+   "source": "stzsite@7b6063ea4",
+   "words": "[paraphrase] the two areas without a picture must get one",
+   "wrong": "two empty cells in the grid of 28 pictures",
+   "required": "a picture for GUI and for Binary formats, the second captioned as a plan",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z411",
    "sweep": "D49",
    "also": [],
    "cause": "B",
@@ -4937,7 +6987,7 @@
    "repeat": true
   },
   {
-   "n": "Z293",
+   "n": "Z412",
    "sweep": "D32",
    "also": [
     "A85"
@@ -4955,7 +7005,7 @@
    "repeat": false
   },
   {
-   "n": "Z294",
+   "n": "Z413",
    "sweep": "D52",
    "also": [
     "A94",
@@ -4974,7 +7024,7 @@
    "repeat": true
   },
   {
-   "n": "Z295",
+   "n": "Z414",
    "sweep": "C119",
    "also": [
     "A113",
@@ -4993,7 +7043,7 @@
    "repeat": true
   },
   {
-   "n": "Z296",
+   "n": "Z415",
    "sweep": "C121",
    "also": [
     "A115",
@@ -5012,16 +7062,17 @@
    "repeat": true
   },
   {
-   "n": "Z297",
+   "n": "Z416",
    "sweep": "C130",
    "also": [
     "A123",
-    "B66"
+    "B66",
+    "F5-88"
    ],
    "cause": "B",
    "date": "2026-11-09 13:26",
    "project": "lookout",
-   "source": "softanza/mailbox/lookout.md:909",
+   "source": "softanza/mailbox/lookout.md:909; lookout@7cdaea5",
    "words": "\"how many times I told you to avoid this ugly word taking its own line!!!\"",
    "wrong": "\"it\" alone again, on a chart label the morning's fix missed",
    "required": "Balance on by default for every text block, never a list of kinds",
@@ -5031,13 +7082,15 @@
    "repeat": true
   },
   {
-   "n": "Z298",
+   "n": "Z417",
    "sweep": "E01",
-   "also": [],
+   "also": [
+    "F5-90"
+   ],
    "cause": "B",
    "date": "2026-11-09 15:31",
    "project": "lookout",
-   "source": ".central/inbox.md:4050 (relayed by the Lookout desk)",
+   "source": ".central/inbox.md:4050 (relayed by the Lookout desk); lookout@0265f12",
    "words": "\"the same issue of text and space and bad line cuts AGAIN and AGAIN and AGAIN!!!!!!!!!!\"",
    "wrong": "the title \"AI changes every week. Softanza hears what concerns it the same week.\" broke as \"AI changes every / week. Softanza / hears what concerns / it the same week.\": the title held to 20 characters while its column had room (S), balancing ran across both sentences (B), and earlier the paragraph under it shrank with the window to fit the hero (T)",
    "required": "a break never crosses a sentence in a title; a title takes its column's width; reading text never shrinks to fit, display text and spacing give way first",
@@ -5047,13 +7100,63 @@
    "repeat": true
   },
   {
-   "n": "Z299",
-   "sweep": "C18",
+   "n": "Z418",
+   "sweep": "F4-55",
    "also": [],
+   "cause": "X",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@24c8422",
+   "words": "[paraphrase] « L'utilisateur avait construit ... un système de navigation riche que j'avais perdu de vue »",
+   "wrong": "the user's navigation map, history and toasts lost and replaced by the session's own components",
+   "required": "restore the user's system; delete the competing ones",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z419",
+   "sweep": "F3-07",
+   "also": [],
+   "cause": "X",
+   "date": "2026-06",
+   "project": "zing-studio",
+   "source": "zing-studio:zing_kickoff_prompt.md:131",
+   "words": "\"Record creation via fullscreen modal popups\"",
+   "wrong": "inline creation forms wedged into the workspace",
+   "required": "the \"New ...\" action on the bar opens a full-screen modal",
+   "sense": "sight",
+   "ruling": "kickoff PX 8",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z420",
+   "sweep": "F3-08",
+   "also": [],
+   "cause": "X",
+   "date": "2026-06",
+   "project": "zing-studio",
+   "source": "zing-studio:zing_kickoff_prompt.md:135",
+   "words": "\"This is an IDE -- respect IDE standards while enhancing them, don't pollute with strange choices\"",
+   "wrong": "chrome invented to look clever",
+   "required": "familiar IDE parts kept; novelty only for capability",
+   "sense": "sight",
+   "ruling": "kickoff PX 8",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z421",
+   "sweep": "C18",
+   "also": [
+    "F4-09"
+   ],
    "cause": "X",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/sources.html:69; restaurant-app:restaurant-app-stzapp/www/index.html:37",
    "words": "[paraphrase] v6 put details on demand (curve and KPIs folded); v7, after a reference design was supplied, made the home curve and indicators PERMANENT and the app bar deep-coloured instead of white.",
    "wrong": "Same day: folded then permanent; white bar then deep bar",
    "required": "Follow the supplied reference",
@@ -5063,7 +7166,39 @@
    "repeat": true
   },
   {
-   "n": "Z300",
+   "n": "Z422",
+   "sweep": "F4-14",
+   "also": [],
+   "cause": "X",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:restaurant-app-stzapp/www/index.html:412, 216-217",
+   "words": "« la feuille reste ANCRÉE EN BAS (demande de Mansour), centrée horizontalement »",
+   "wrong": "sheets that became full-screen or centred depending on the screen",
+   "required": "every sheet a bottom sheet anchored at the bottom whatever its height, capped at 92vh",
+   "sense": "sight+touch",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z423",
+   "sweep": "F4-17",
+   "also": [],
+   "cause": "X",
+   "date": "2026-07-03",
+   "project": "a restaurant app (client)",
+   "source": "restaurant-app:kb/agents/REGLES-UX.md:40-42; restaurant-app:kb/enseignements.html (Undo over Confirm row)",
+   "words": "[paraphrase] \"Undo plutôt que confirm -- toast pleine largeur, bouton Annuler, barre de progression 10 s, y compris pour le destructif\"",
+   "wrong": "browser confirm() dialogs",
+   "required": "an undo toast for every action",
+   "sense": "sight+touch",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z424",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -5079,13 +7214,127 @@
    "repeat": false
   },
   {
-   "n": "Z301",
-   "sweep": "A56",
+   "n": "Z425",
+   "sweep": "F3-20",
    "also": [],
+   "cause": "X",
+   "date": "2026-08-04",
+   "project": "stzweb-site",
+   "source": "zing@8425042 (fix 3)",
+   "words": "[paraphrase] scrollbars wore the operating system's chrome",
+   "wrong": "platform scrollbar in both vibes",
+   "required": "scrollbars in the site's own palette (site/stz.css:32-40)",
+   "sense": "sight (colour)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z426",
+   "sweep": "F3-27",
+   "also": [],
+   "cause": "X",
+   "date": "2026-08-05",
+   "project": "stzweb-site",
+   "source": "zing@5abb1c4, zing@16ae07d",
+   "words": "[paraphrase] \"The author's word returns\": vibe is the framework's own term, \"register was my import\"",
+   "wrong": "the author's coined term replaced by the agent's",
+   "required": "vibe in the law, the site and the data; the control alone says Style",
+   "sense": "sight (reading)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z427",
+   "sweep": "F3-35",
+   "also": [],
+   "cause": "X",
+   "date": "2026-08-06",
+   "project": "zing-studio",
+   "source": "zing-studio@704b70f; zing-studio:docs/ZING_PX_DESIGN_v0_2.md:113",
+   "words": "[paraphrase] \"by the author's decision\": the report sheet stays paper in both themes; the first migration made it theme-aware, \"that was wrong\"",
+   "wrong": "the print-simulation sheet went dark with the chrome",
+   "required": "`--paper*` tokens declared once and never overridden by the dark theme",
+   "sense": "sight (colour)",
+   "ruling": "PX 4.3.1",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z428",
+   "sweep": "F3-36",
+   "also": [],
+   "cause": "X",
+   "date": "2026-08-12",
+   "project": "zing-studio",
+   "source": "zing:docs/decisions/connections.md:11-32; zing-studio:docs/ZING_FACET_MODEL_v0_2.md:149",
+   "words": "[paraphrase] \"The author reversed it on 2026-08-12\": the Connections facet of his June corpus had been cut from the Studio's facet rail in an agent session (zing-studio@01609aa)",
+   "wrong": "a facet the author designed removed without his decision",
+   "required": "the facet restored; the cut recorded as a reversal",
+   "sense": "sight (IDE rail)",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z429",
+   "sweep": "F5-92",
+   "also": [],
+   "cause": "X",
+   "date": "2026-08-22",
+   "project": "ringserv",
+   "source": "ringserv@5454abd",
+   "words": "[paraphrase] the native confirm() on Stop server is obtrusive: it freezes the page, looks like an error and speaks in the browser's voice",
+   "wrong": "a browser popup",
+   "required": "the question inline where the button was",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z430",
+   "sweep": "F5-96",
+   "also": [],
+   "cause": "X",
+   "date": "2026-08-22",
+   "project": "ringserv",
+   "source": "ringserv@4528687; ringserv@badef77",
+   "words": "[paraphrase] the author's order: the site must be the identical child of the RingScript site",
+   "wrong": "a site of its own shape",
+   "required": "the father site's bones, pages and Q&A form",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z431",
+   "sweep": "F5-47",
+   "also": [],
+   "cause": "X",
+   "date": "2026-09-20",
+   "project": "harobanda",
+   "source": "harobanda@7933a2e",
+   "words": "[paraphrase] dark mode is gone: light only, one image per figure",
+   "wrong": "a dark theme and its toggle nobody asked for",
+   "required": "color-scheme light; dark variants deleted",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z432",
+   "sweep": "A56",
+   "also": [
+    "F5-74"
+   ],
    "cause": "X",
    "date": "2026-10-15",
    "project": "ayouni",
-   "source": "softanza/memos/2026-10-15.md:213",
+   "source": "softanza/memos/2026-10-15.md:213; ayouni:DECISIONS.md:21; ayouni@662ddf1",
    "words": "\"bring back the Softanza cover ... just ensure the background is white\"",
    "wrong": "redesigned cover",
    "required": "the first design, on white",
@@ -5095,13 +7344,15 @@
    "repeat": ""
   },
   {
-   "n": "Z302",
+   "n": "Z433",
    "sweep": "C75",
-   "also": [],
+   "also": [
+    "F5-114"
+   ],
    "cause": "X",
    "date": "2026-10-15",
    "project": "ringpp",
-   "source": "ringpp memory: no-viewer-tabs-from-tests.md",
+   "source": "ringpp memory: no-viewer-tabs-from-tests.md; ringpp@8a77040",
    "words": "\"The tests of the Graphiz samples open so many tabs in my browser and disrupts my work\"",
    "wrong": "Test runs opened every SVG in his browser",
    "required": "Tests write, never open a viewer",
@@ -5111,13 +7362,31 @@
    "repeat": false
   },
   {
-   "n": "Z303",
-   "sweep": "B36",
+   "n": "Z434",
+   "sweep": "F5-76",
    "also": [],
+   "cause": "X",
+   "date": "2026-10-15",
+   "project": "ayouni",
+   "source": "ayouni@0919e57",
+   "words": "[paraphrase] the print icon in the books reader should open the book's PDF, not a page generated in the runtime",
+   "wrong": "the browser's generated print of the reader page",
+   "required": "the print button opens the typeset PDF",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z435",
+   "sweep": "B36",
+   "also": [
+    "F5-32"
+   ],
    "cause": "X",
    "date": "2026-10-16",
    "project": "stzsite",
-   "source": "stzlib memory: feedback_announce_every_visible_change.md",
+   "source": "stzlib memory: feedback_announce_every_visible_change.md; stzsite@19a2fff2b; stzsite:assets/css/site.css:690",
    "words": "\"why did you make Start with a coloured background? don't change things without notifying me. bring it back like it was.\"",
    "wrong": "an unasked visible change; a filled entry read as the active page",
    "required": "menu entries plain; name every visible change in the report",
@@ -5127,7 +7396,55 @@
    "repeat": false
   },
   {
-   "n": "Z304",
+   "n": "Z436",
+   "sweep": "F4-26",
+   "also": [],
+   "cause": "X",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@2f6a162; same evidence:70-72; orgdesk:app/web/app.css:66-68",
+   "words": "[paraphrase] \"plain line icons beside every ribbon command, the tool's own (no vendor's), and a ribbon that folds from a toggle ... a double click on a tab or Ctrl+F1\"",
+   "wrong": "a text-only ribbon that could not fold, unlike the office tools it imitates",
+   "required": "the familiar ribbon behaviour",
+   "sense": "sight+touch",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z437",
+   "sweep": "F4-29",
+   "also": [],
+   "cause": "X",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@d6966e7; orgdesk:app/web/app.css:58-74",
+   "words": "[paraphrase] \"the ribbon in the word processor's form (flat large buttons, icon above a wrapped label, groups titled below, wrapping instead of scrolling)\"",
+   "wrong": "an invented ribbon that scrolled",
+   "required": "the house pattern of the word processor; wrap, never scroll",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z438",
+   "sweep": "F5-110",
+   "also": [],
+   "cause": "X",
+   "date": "2026-10-24",
+   "project": "orgdesk",
+   "source": "orgdesk@d6966e7",
+   "words": "[paraphrase] after the author's second look: a hidden ribbon collapsed the view; the ribbon in the word processor's form",
+   "wrong": "bands without fixed grid rows",
+   "required": "every band keeps its row; flat large buttons, icon above a wrapped label",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": false,
+   "repeat": true
+  },
+  {
+   "n": "Z439",
    "sweep": "D34",
    "also": [
     "A87"
@@ -5145,7 +7462,7 @@
    "repeat": false
   },
   {
-   "n": "Z305",
+   "n": "Z440",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -5161,7 +7478,7 @@
    "repeat": true
   },
   {
-   "n": "Z306",
+   "n": "Z441",
    "sweep": "D54",
    "also": [
     "A96"
@@ -5179,7 +7496,7 @@
    "repeat": false
   },
   {
-   "n": "Z307",
+   "n": "Z442",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -5195,7 +7512,7 @@
    "repeat": false
   },
   {
-   "n": "Z308",
+   "n": "Z443",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -5211,7 +7528,7 @@
    "repeat": true
   },
   {
-   "n": "Z309",
+   "n": "Z444",
    "sweep": "D93",
    "also": [
     "C112"
@@ -5229,16 +7546,33 @@
    "repeat": true
   },
   {
-   "n": "Z310",
+   "n": "Z445",
+   "sweep": "F5-83",
+   "also": [],
+   "cause": "X",
+   "date": "2026-11-09 13:14",
+   "project": "lookout",
+   "source": "lookout@835c83d",
+   "words": "\"use the same SOFTANZA logo we used in the Softanza site and add to it the word Radar\"",
+   "wrong": "a separate brand for the site",
+   "required": "the Softanza wordmark plus RADAR",
+   "sense": "sight",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z446",
    "sweep": "C132",
    "also": [
     "B56",
-    "D99"
+    "D99",
+    "F5-87"
    ],
    "cause": "X",
    "date": "2026-11-09 13:29",
    "project": "lookout",
-   "source": "lookout commit 33bdcab",
+   "source": "lookout commit 33bdcab; lookout@33bdcab",
    "words": "\"this navigation system is not ours! put the filter in the top right, and use the same 'On this page' submenu we used in the Zane website\"",
    "wrong": "An invented left steering column",
    "required": "Zane's own right-hand outline",
@@ -5248,13 +7582,15 @@
    "repeat": true
   },
   {
-   "n": "Z311",
+   "n": "Z447",
    "sweep": "C16",
-   "also": [],
+   "also": [
+    "F4-12"
+   ],
    "cause": "H",
    "date": "2026-07-03",
    "project": "a restaurant app (client)",
-   "source": "client memory (a restaurant app): iteration1-livrables.md",
+   "source": "client memory (a restaurant app): iteration1-livrables.md; restaurant-app:kb/agents/REGLES-UX.md:17-18",
    "words": "[paraphrase] v5, from a real phone: alerts open the item directly, never a list; horizontal overflow eradicated; touch targets 48-62 px; Android Back intercepted.",
    "wrong": "Deep links landed on lists; sideways overflow; small targets",
    "required": "Direct links, no overflow, thumb-sized targets",
@@ -5264,16 +7600,17 @@
    "repeat": false
   },
   {
-   "n": "Z312",
+   "n": "Z448",
    "sweep": "C134",
    "also": [
     "A126",
-    "B63"
+    "B63",
+    "F5-86"
    ],
    "cause": "H",
    "date": "2026-11-09 13:43",
    "project": "lookout",
-   "source": "softanza/mailbox/lookout.md:992",
+   "source": "softanza/mailbox/lookout.md:992; lookout@6a8a0b1",
    "words": "\"did you think how this hover feature would work on a mobile phone?! Notify this within the solution/rule to Zui/Zane\"",
    "wrong": "Hover-only information; a tap jumped straight to the page",
    "required": "First tap selects and shows; second tap opens; 44 px targets; \"tap\" in the words",
@@ -5397,6 +7734,242 @@
    "project": "",
    "source": ".central/inbox.md:3914",
    "words": "\"what makes my fatigue in all my projects is never the more complex technical challenges: it's always UI! ... I made Zane to resolve this and end this chaos of arbitrary things you make each time although I prevented you.\""
+  }
+ ],
+ "candidates": [
+  {
+   "sweep": "F2-12",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1364-1367`, `:1391-1397`",
+   "words": "[paraphrase] \"This is the third time the discipline has been written down with the same intent\"; the earlier 13 px facet-sub \"was a violation\".",
+   "cause": "T",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-13",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1436-1439`",
+   "words": "[paraphrase] A collection shown as cards only \"has been violated repeatedly in past prototype iterations\".",
+   "cause": "I",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-14",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1476-1481`",
+   "words": "[paraphrase] \"violated repeatedly -- mostly when a designer trying for visual quiet has dropped a widget's background\"",
+   "cause": "F",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-15",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1495-1501`, `:1556-1558`",
+   "words": "[paraphrase] \"The temptation to add a second paragraph is real and recurrent\"",
+   "cause": "I",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-16",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1081-1087`",
+   "words": "[paraphrase] \"The user clicks; nothing happens; the user concludes the IDE is broken.\"",
+   "cause": "L",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-17",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1056-1061`",
+   "words": "[paraphrase] A second, inline tab row duplicated the sublevel bar: \"a real bug visible to users\".",
+   "cause": "N",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-18",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:960-965`",
+   "words": "[paraphrase] The earlier uses of purple on buttons \"have been converted to green\".",
+   "cause": "F",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-19",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1956-1960`, `:2001-2009`",
+   "words": "[paraphrase] \"The previous habit of styling KPI numbers in brown/orange/purple was decoration\"; captions at 10 px and chart sub-labels at 9 px.",
+   "cause": "E",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-20",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:212-215` against `:1010-1023`",
+   "words": "[paraphrase] The icon-only activity bar, 48 px wide, was replaced: \"fifteen-plus facets with abstract glyphs need labels\".",
+   "cause": "L",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-21",
+   "date": "<=2026-06-23",
+   "project": "refine",
+   "source": "`docs/REFINE_PX_DESIGN_v0_19.md:1128-1137`",
+   "words": "[paraphrase] The session indicator inside the workspace, with a clay-green left accent, was \"retired\".",
+   "cause": "F",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-22",
+   "date": "<=2026-06",
+   "project": "refine",
+   "source": "`CLAUDE.md:494-498`",
+   "words": "[paraphrase] The guided strip's \"Switch to Standard\" button \"was removed because the three-button dial in the top-right already provides level switching\".",
+   "cause": "I",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F2-23",
+   "date": "2026-06",
+   "project": "refine",
+   "source": "`CLAUDE.md:808-817`, `:851-857`",
+   "words": "[paraphrase] \"Code editor not following dark mode\"; in dark mode the tour panel \"blended into the cool-dark IDE\".",
+   "cause": "P",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F3-11",
+   "date": "2026-08-01",
+   "project": "stzweb-site",
+   "source": "zing@4c3cbed",
+   "words": "[paraphrase] the suggested commands failed in Windows PowerShell 5.1 (\"Le jeton « && » n'est pas un séparateur d'instruction valide\", quoted from a French system)",
+   "cause": "X",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-40",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@9aa2e33",
+   "words": "[paraphrase; commit names no speaker] a 1.6-1.8 s pulse \"saute trop à l'œil et finit par distraire\"",
+   "cause": "E",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-41",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@d0f6f4e",
+   "words": "[paraphrase; no speaker] a disc with each section's first letter \"répète le libellé d'à côté\"; gold competed with the current step",
+   "cause": "I",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-43",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@91e8b0d; zin-one@0851cc0",
+   "words": "[paraphrase; no speaker] a status keeps its colour only when there is something to look at: an empty bucket is muted",
+   "cause": "E",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-46",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@70aeaa4",
+   "words": "[paraphrase; no speaker] the \"Proposé\" column fill was \"beaucoup trop saturé ... l'œil le lit comme un highlight signalétique\"",
+   "cause": "E",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-47",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@b758f4e; zin-one@801af32",
+   "words": "[paraphrase; no speaker] three redundant \"Retour\" buttons removed, then removed \"à nouveau\" after a wholesale copy brought them back",
+   "cause": "N",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-48",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@2cd1268",
+   "words": "[paraphrase; no speaker] the \"X filtres actifs / Réinitialiser\" badge is \"bruit visuel sans valeur ajoutée\" -- the selectors already show their state",
+   "cause": "I",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-49",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@ad83ced",
+   "words": "[paraphrase; no speaker] a \"Voir\" per row \"suggère à tort qu'une nouvelle fenêtre va s'ouvrir\" while it only refreshes the detail panel",
+   "cause": "F",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-50",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@c42fead; zin-one@87c01e0",
+   "words": "[paraphrase; no speaker] \"Le titre seul au-dessus du vide donnait l'impression d'un bug\"; then \"L'italique et la bordure pointillée étaient des signes visuels sans nécessité\"",
+   "cause": "L",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-51",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@9449a24; zin-one@a4d3421; zin-one@8207a04; zin-one@b305b8c",
+   "words": "[paraphrase; no speaker] the Studio banner shortened: \"one line, no justification ... Une phrase suffit pour délimiter le périmètre\"",
+   "cause": "W",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-52",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@c6ca204",
+   "words": "[paraphrase; no speaker] the workspace scroll gave \"quasi aucune indication visuelle que les barres du haut et du bas étaient fixes\"",
+   "cause": "L",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-53",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@62b9fa7",
+   "words": "[paraphrase; no speaker] the logout message claimed unconfirmed work would be lost, which this console never holds",
+   "cause": "W",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-54",
+   "date": "2026-05-03",
+   "project": "zin",
+   "source": "zin-one@619ce71; zin-one@553b6f7",
+   "words": "[paraphrase; no speaker] \"Convention universelle des dialogues : Enter = action primaire, Esc = annuler\"; Enter did nothing",
+   "cause": "X",
+   "why": "the source does not name or quote the Principal"
+  },
+  {
+   "sweep": "F4-62",
+   "date": "<=2026-03-16 (file date)",
+   "project": "zin",
+   "source": "zin-prototypes:v17-parts/patch-v17-fixes.js:2-3, 52-296",
+   "words": "[paraphrase; no speaker] \"11 visual bug fixes\": buttons not centred, code tabbing, diagram backgrounds and width, double-click preview, content cut on zoom, native scrollbars, a tiny CLI, text not wrapping, a missing rail toggle",
+   "cause": "P",
+   "why": "the source does not name or quote the Principal"
   }
  ]
 }

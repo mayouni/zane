@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en" data-vibe="modern">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zane design system: the principles shown</title>
+<meta name="description" content="Each principle of Zane's design system shown as a live sample, the lawful one beside the offending one, with the rule it follows.">
+<style>
+/* The tokens of DESIGN-SYSTEM.md section 4.2, written once. This page is set with them and with nothing else, so it is itself a
+   sample of the system. Fixed tokens first, then each culture's. */
+:root {
+  --size-small: 1.125rem; --size-reading: 1.3125rem; --size-lead: 1.5rem; --size-section: 1.75rem; --size-title: 2.125rem;
+  --weight-regular: 400; --weight-strong: 800; --leading-reading: 1.7; --leading-title: 1.2;
+  --measure-min: 60ch; --measure-max: 75ch;
+  --space-1: .5rem; --space-2: 1rem; --space-3: 2rem; --space-4: 4rem; --gutter: 1.4rem;
+  --hairline: 1px; --ring: 2px; --target-phone: 48px; --target: 24px; --motion-report: 150ms;
+}
+[data-vibe="modern"] {
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --paper: #f4f3f9; --surface: #fdfcff; --ink: #211d33; --ink-2: #3f3b55; --line: #c9c4dc; --edge: #77728f;
+  --link: #7a1633; --action: #7a1633; --on-action: #ffffff; --focus: #e04a6e;
+  --success: #17583f; --success-tint: #e3f2ea; --warning: #6b4a00; --warning-tint: #fbf0d4; --danger: #8e1f13; --danger-tint: #fbe5e1;
+  --info: #1d4f78; --info-tint: #e2edf7; --muted: #4a4661; --muted-tint: #ebe9f1; --meta: #4a4661;
+  --radius: 8px; --shadow: 0 1px 2px rgba(33,29,51,.04), 0 6px 18px rgba(33,29,51,.06);
+}
+[data-vibe="retro"] {
+  --font: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --paper: #060b07; --surface: #0b120d; --ink: #cfe0cf; --ink-2: #b4c9b5; --line: #2c4532; --edge: #6f9a77;
+  --link: #46e07f; --action: #46e07f; --on-action: #060b07; --focus: #7ee2ae;
+  --success: #7ee2ae; --success-tint: #0e2418; --warning: #e6c987; --warning-tint: #241d0b; --danger: #ff9d8a; --danger-tint: #2a110d;
+  --info: #9fd2f5; --info-tint: #0c1c26; --muted: #a9b9ab; --muted-tint: #141d16; --meta: #a9b9ab;
+  --radius: 0; --shadow: none;
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body { margin: 0; background: var(--paper); color: var(--ink); font: var(--weight-regular) var(--size-reading)/var(--leading-reading) var(--font);
+  text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; line-height: var(--leading-title); font-weight: var(--weight-strong); margin: 0; }
+h1 { font-size: var(--size-title); }
+h2 { font-size: var(--size-section); margin: 0 0 var(--space-2); }
+h3 { font-size: var(--size-reading); margin: 0 0 var(--space-1); }
+p, li { max-width: var(--measure-max); }
+p { margin: 0 0 var(--space-2); }
+a { color: var(--link); text-decoration: underline; text-underline-offset: .18em; text-decoration-thickness: from-font; }
+:focus-visible { outline: var(--ring) solid var(--focus); outline-offset: 2px; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--action); }
+.frame-page { max-width: 80rem; margin: 0 auto; padding: 0 var(--gutter); }
+
+/* page head: kicker, a one-sentence title, a lead; the culture select sits in the head's own row, beside the title it changes */
+header.head { padding: var(--space-4) 0 var(--space-3); }
+.kicker { font-size: var(--size-small); color: var(--ink-2); margin: 0 0 var(--space-1); }
+.lead { font-size: var(--size-lead); max-width: var(--measure-max); margin: var(--space-2) 0 0; }
+.culture { display: flex; gap: var(--space-1); align-items: center; margin-top: var(--space-3); font-size: var(--size-small); }
+.culture select { font: inherit; font-size: var(--size-small); color: var(--ink); background: var(--surface); border: var(--hairline) solid var(--edge);
+  border-radius: var(--radius); min-height: var(--target-phone); padding: 0 var(--space-2); accent-color: var(--action); }
+.culture select option { color: var(--ink); background: var(--surface); }
+
+/* the reading column and the outline at its right (an outline by default on a page of three or more sections) */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+@media (min-width: 1100px) { .layout { grid-template-columns: minmax(0, 1fr) 15rem; } nav.outline { order: 2; } }
+nav.outline h2 { font-size: var(--size-small); font-weight: var(--weight-regular); color: var(--ink-2); margin: 0 0 var(--space-1); }
+nav.outline ol { list-style: none; margin: 0; padding: 0; }
+nav.outline li { margin: 0; }
+nav.outline a { display: block; padding: .35rem 0; font-size: var(--size-small); text-decoration: none; min-height: var(--target-phone); }
+@media (min-width: 1100px) { nav.outline { position: sticky; top: var(--space-3); align-self: start; } nav.outline a { min-height: var(--target); padding: .15rem 0; } }
+
+main section.principle { margin: 0 0 var(--space-4); }
+.statement { font-size: var(--size-reading); }
+.why { color: var(--ink-2); }
+
+/* the sample frame: a window drawn as a window (its strip and edge draw something real), holding live HTML */
+.pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); margin: var(--space-3) 0 var(--space-2); }
+@media (min-width: 900px) { .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pair.wide { grid-template-columns: minmax(0, 1fr); } }
+figure.sample { margin: 0; }
+.window { border: var(--hairline) solid var(--edge); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.window .strip { font-size: var(--size-small); color: var(--ink-2); padding: .3rem var(--space-2); border-bottom: var(--hairline) solid var(--line); }
+.window .stage { padding: var(--space-3) var(--space-2); }
+figcaption { margin-top: var(--space-1); font-size: var(--size-small); }
+.tag { display: inline-block; font-size: var(--size-small); line-height: 1.3; padding: .1rem .55rem; border: var(--hairline) solid; border-radius: var(--radius); }
+.tag.ok { color: var(--success); background: var(--success-tint); border-color: var(--success); }
+.tag.bad { color: var(--danger); background: var(--danger-tint); border-color: var(--danger); }
+.tag.info { color: var(--info); background: var(--info-tint); border-color: var(--info); }
+.btn { font: inherit; font-size: var(--size-reading); min-height: var(--target-phone); padding: 0 1.1rem; border-radius: var(--radius);
+  border: var(--hairline) solid var(--action); background: var(--action); color: var(--on-action); cursor: pointer; white-space: nowrap; }
+.btn.quiet { background: transparent; color: var(--link); }
+footer.foot { font-size: var(--size-small); color: var(--ink-2); padding: var(--space-3) 0 var(--space-4); }
+
+/* ---- the offending samples: each one breaks exactly the principle it stands beside, and nothing else ---- */
+.x-small { font-size: .875rem; color: #9b97ad; line-height: 1.4; }
+[data-vibe="retro"] .x-small { color: #4d6a52; }
+.x-stretch { display: flex; justify-content: space-between; align-items: center; width: 100%; border: var(--hairline) solid var(--edge);
+  border-radius: var(--radius); padding: var(--space-2); }
+.x-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem; }
+.x-cards > div { border: 2px solid var(--action); border-radius: var(--radius); padding: .5rem; font-weight: var(--weight-strong); font-size: var(--size-small); }
+.x-rules p { border-bottom: var(--hairline) solid var(--edge); padding-bottom: .4rem; margin-bottom: .4rem; }
+.x-loud { font-weight: var(--weight-strong); background: var(--warning-tint); color: var(--link); text-decoration: underline 3px; }
+.x-red { background: var(--danger-tint); color: var(--danger); border: 2px solid var(--danger); padding: .4rem .6rem; margin: 0 0 .4rem; font-weight: var(--weight-strong); }
+.x-cut { max-width: 9ch; font-size: var(--size-section); font-weight: var(--weight-strong); line-height: var(--leading-title); text-wrap: balance; }
+.ok-title span { display: block; text-wrap: balance; }
+.ok-title { font-size: var(--size-section); font-weight: var(--weight-strong); line-height: var(--leading-title); }
+.seg { display: inline-flex; border: var(--hairline) solid var(--edge); border-radius: var(--radius); overflow: hidden; }
+.seg label { display: inline-flex; align-items: center; min-height: var(--target-phone); padding: 0 var(--space-2); cursor: pointer; }
+.seg input { position: absolute; opacity: 0; }
+.seg label:has(input:checked) { background: var(--action); color: var(--on-action); }
+.seg label:has(input:focus-visible) { outline: var(--ring) solid var(--focus); outline-offset: -2px; }
+.band { display: flex; flex-wrap: wrap; gap: var(--space-2); font-size: var(--size-small); }
+.band .here { font-weight: var(--weight-strong); }
+.menu { font-weight: var(--weight-strong); margin: 0 0 var(--space-1); }
+.x-scroll { height: 7.5rem; overflow: auto; border: var(--hairline) solid var(--edge); padding: .4rem .6rem; font-size: var(--size-small); }
+.x-tip { position: relative; display: inline-block; color: var(--link); text-decoration: underline dotted; cursor: help; }
+.x-tip .bubble { display: none; position: absolute; left: 0; bottom: 130%; width: 14rem; background: var(--ink); color: var(--paper);
+  padding: .4rem .6rem; border-radius: var(--radius); font-size: .85rem; }
+.x-tip:hover .bubble { display: block; }
+.status { font-size: var(--size-small); color: var(--ink-2); margin-top: var(--space-1); }
+.x-tiny a { font-size: .8rem; margin-right: .2rem; }
+.targets { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.targets a { display: inline-flex; align-items: center; min-height: var(--target-phone); padding: 0 var(--space-1); }
+.x-platform { accent-color: #1a73e8; }   /* the blue a browser draws when no culture sets the colour (the system's own accent varies by machine) */
+table.records { border-collapse: collapse; font-size: var(--size-small); width: auto; }
+table.records th { text-align: left; color: var(--ink-2); font-weight: var(--weight-regular); border-bottom: var(--hairline) solid var(--line); padding: .2rem 1rem .2rem 0; }
+table.records td { padding: .25rem 1rem .25rem 0; }
+.cta { display: inline-flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; border: var(--hairline) solid var(--edge); border-radius: var(--radius);
+  padding: var(--space-2); }
+.cta p { margin: 0; max-width: 40ch; }
+ul.points { padding-left: 1.2rem; margin: 0; }
+ul.points li { margin: 0 0 var(--space-1); }
+svg text { fill: var(--ink); font: var(--size-small) var(--font); }
+svg .wire { stroke: var(--ink-2); stroke-width: 2; fill: none; }
+svg .node { fill: var(--surface); stroke: var(--edge); stroke-width: 1.5; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="frame-page">
+<header class="head">
+  <p class="kicker">Zane · the design system (ZANE-DESIGN-01)</p>
+  <h1>Each principle of Zane's design system is shown here as a live sample, the lawful one beside the offending one.</h1>
+  <p class="lead">This page holds thirteen pairs of real interface samples, one pair for each principle of <a href="DESIGN-SYSTEM.md">the design system</a>.
+    Each caption cites the rule the lawful sample follows and the corrections in <a href="corpus/CORPUS.md">the corpus</a> that the offending one repeats.</p>
+  <div class="culture">
+    <label for="vibe">Culture</label>
+    <select id="vibe"><option value="modern">Modern</option><option value="retro">Retro</option></select>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="outline" aria-labelledby="outline-h">
+  <h2 id="outline-h">On this page</h2>
+  <ol>
+    <li><a href="#t">Type set for reading</a></li>
+    <li><a href="#s">Width from the content</a></li>
+    <li><a href="#i">Lines that draw</a></li>
+    <li><a href="#e">One emphasis</a></li>
+    <li><a href="#b">Balanced lines</a></li>
+    <li><a href="#f">One shape, one meaning</a></li>
+    <li><a href="#n">The menu is the tree</a></li>
+    <li><a href="#l">One flow, one scroll</a></li>
+    <li><a href="#h">Every input</a></li>
+    <li><a href="#w">Words for the reader</a></li>
+    <li><a href="#m">The reader's page</a></li>
+    <li><a href="#p">The painted result</a></li>
+    <li><a href="#x">Decided stays decided</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section class="principle" id="t">
+  <h2>Every text is set for reading</h2>
+  <p class="statement">Reading text is 21 px, secondary text is never under 18 px, and every text stands at 7:1 against what is under it.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">Order 2026-114</div><div class="stage">
+      <p>The order ships on Thursday.</p><p style="font-size:var(--size-small);color:var(--ink-2);margin:0">Placed by the Niamey office on 4 November.</p>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rule 105: secondary text is quieter by tone, not by size.</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">Order 2026-114</div><div class="stage">
+      <p>The order ships on Thursday.</p><p class="x-small" style="margin:0">Placed by the Niamey office on 4 November.</p>
+    </div></div><figcaption><span class="tag bad">Offending</span> 14 px in pale grey: "the critical legibility error the whole world makes" (Z242-Z269).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="s">
+  <h2>Width belongs to the content</h2>
+  <p class="statement">A box is as wide as what it holds, and its control sits beside the words it acts on; the width left over stays empty.</p>
+  <div class="pair wide">
+    <figure class="sample"><div class="window"><div class="strip">A wide screen</div><div class="stage">
+      <div class="cta"><p>Watch the notices that concern your project.</p><button class="btn" type="button">Add the bar</button></div>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Width Belongs to the Content (proposed amendment 2).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">A wide screen</div><div class="stage">
+      <div class="x-stretch"><span>Watch the notices that concern your project.</span><button class="btn" type="button">Add the bar</button></div>
+    </div></div><figcaption><span class="tag bad">Offending</span> "you are not obliged to stretch it" (Z361, ZANE-SPACEMEANING-01).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="i">
+  <h2>A line or a box draws something real</h2>
+  <p class="statement">Space groups the points of a list; a border appears only where it draws a table, a field, a drawing or a window.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">What you get</div><div class="stage">
+      <ul class="points"><li><strong>Signals.</strong> The week's notices for your project.</li><li><strong>Trends.</strong> What rises across a month.</li><li><strong>A bar.</strong> One line for your own site.</li></ul>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rule 2: white space is structural.</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">What you get</div><div class="stage">
+      <div class="x-cards"><div>Signals</div><div>Trends</div><div>A bar</div></div>
+      <div class="x-rules" style="margin-top:.5rem"><p>The week's notices.</p><p>What rises across a month.</p><p>One line for your site.</p></div>
+    </div></div><figcaption><span class="tag bad">Offending</span> "many squares, each attracting attention" and "horizontal lines everywhere" (Z395, Z397).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="e">
+  <h2>One emphasis per element, one critical element per view</h2>
+  <p class="statement">A link is told by one cue, and a page singles out one thing that is wrong.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">Status</div><div class="stage">
+      <p class="tag bad" style="display:block;width:fit-content;margin:0 0 var(--space-2)">The nightly backup failed.</p>
+      <p style="margin:0">Read <a href="#e">the backup log</a> for the cause.</p>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rules 3, 87 and 118; proposed amendment 4.</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">Status</div><div class="stage">
+      <p class="x-red">The nightly backup failed.</p><p class="x-red">Two certificates expire in 30 days.</p>
+      <p style="margin:0">Read <a href="#e" class="x-loud">the backup log</a> for the cause.</p>
+    </div></div><figcaption><span class="tag bad">Offending</span> "two red divs one under the other" and "underline + bold is over focus" (Z320, Z336).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="b">
+  <h2>Balance is on by default</h2>
+  <p class="statement">Each sentence of a title is balanced on its own, and no line carries the end of one sentence into the next.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">A front page</div><div class="stage">
+      <p class="ok-title" style="margin:0"><span>AI changes every week.</span> <span>Softanza hears what concerns it the same week.</span></p>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Balance Is On by Default (proposed amendment 5).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">A front page</div><div class="stage">
+      <p class="x-cut" style="margin:0">AI changes every week. Softanza hears what concerns it the same week.</p>
+    </div></div><figcaption><span class="tag bad">Offending</span> "bad line cuts AGAIN and AGAIN and AGAIN" (Z417).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="f">
+  <h2>One shape, one meaning</h2>
+  <p class="statement">A two-state control shows both states, and a control's word says what it does to the item.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">The book</div><div class="stage">
+      <div class="seg" role="radiogroup" aria-label="Chapters shown">
+        <label><input type="radio" name="f-ok" checked> Every chapter</label><label><input type="radio" name="f-ok"> The spine only</label></div>
+      <p style="margin:var(--space-2) 0 0"><label><input type="checkbox" checked> Audit this page</label></p>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rule 106 and Rule 119 (proposed amendment 8).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">The book</div><div class="stage">
+      <button class="btn quiet" type="button">Show every chapter</button>
+      <p style="margin:var(--space-2) 0 0"><button class="btn quiet" type="button">Remove</button></p>
+    </div></div><figcaption><span class="tag bad">Offending</span> a toggle named for the other state; "Remove" read as deleting the file (Z186, Z199).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="n">
+  <h2>The menu is the tree</h2>
+  <p class="statement">A section's landing page comes first in its band, under a name of its own.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">Menu, then band</div><div class="stage">
+      <p class="menu">Approach</p><div class="band"><span class="here">Reasoning</span><span>The grid</span><span>Comparison</span></div>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rule 116 at v3.16.</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">Menu, then band</div><div class="stage">
+      <p class="menu">Try</p><div class="band"><span class="here">Try</span><span>Build</span><span>Audit</span></div>
+    </div></div><figcaption><span class="tag bad">Offending</span> "like Try and then Try here" (Z162).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="l">
+  <h2>Everything is on the page, with one scroll</h2>
+  <p class="statement">What a control does is written in the page, and a list grows with the page instead of scrolling inside it.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">The audit</div><div class="stage">
+      <table class="records"><thead><tr><th scope="col">Page</th><th scope="col">Findings</th></tr></thead>
+        <tbody><tr><td>/index.html</td><td>0</td></tr><tr><td>/site/how.html</td><td>0</td></tr><tr><td>/site/why.html</td><td>2</td></tr></tbody></table>
+      <p class="status">Run the audit: reads every listed page in both cultures.</p>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rules 110 and 114 (proposed amendment 6).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">The audit</div><div class="stage">
+      <div class="x-scroll">/index.html<br>/site/how.html<br>/site/why.html<br>/site/adopt.html<br>/site/build.html<br>/site/media.html<br>/site/tour.html</div>
+      <p class="status"><span class="x-tip">Run<span class="bubble">Reads every listed page in both cultures.</span></span></p>
+    </div></div><figcaption><span class="tag bad">Offending</span> a second scroll bar and an info bubble (Z304, Z307).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="h">
+  <h2>Every input reaches everything</h2>
+  <p class="statement">A target is 48 px tall on a phone, and nothing is reachable only by hovering.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">A phone</div><div class="stage">
+      <div class="targets"><a href="#h">Signals</a><a href="#h">Trends</a><a href="#h">About</a></div>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Rule 69 (proposed amendment 7).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">A phone</div><div class="stage">
+      <p class="x-tiny" style="margin:0"><a href="#h">Signals</a><a href="#h">Trends</a><a href="#h">About</a></p>
+    </div></div><figcaption><span class="tag bad">Offending</span> "did you think how this hover feature would work on a mobile phone?!" (Z448).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="w">
+  <h2>Words serve the reader</h2>
+  <p class="statement">A title names its subject in a full declarative sentence.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">A page title</div><div class="stage">
+      <h3>Zane is designed around a conceptual grid of what a person does in every channel.</h3>
+    </div></div><figcaption><span class="tag ok">Lawful</span> WRITING.md rule 1; proposed amendment 11.</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">A page title</div><div class="stage">
+      <h3>A map of what a person does, across every channel, with the empty cells left empty.</h3>
+    </div></div><figcaption><span class="tag bad">Offending</span> "you describe the grid without citing it" (Z061).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="m">
+  <h2>The page speaks for its reader</h2>
+  <p class="statement">A public page states what the project is and does, at its true size.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">The download</div><div class="stage">
+      <p style="margin:0">Tested on Windows and Linux; built for macOS.</p>
+    </div></div><figcaption><span class="tag ok">Lawful</span> PRINCIPAL-AFFIRM-01; Rule 111 (proposed amendment 11).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">The download</div><div class="stage">
+      <p style="margin:0">Not yet tested on macOS; nobody has run it there.</p>
+    </div></div><figcaption><span class="tag bad">Offending</span> "this role of transparency that hurts the project image" (Z237).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="p">
+  <h2>The painted page is the instrument</h2>
+  <p class="statement">A label clears the line it names, which only a look at the drawn result can confirm.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">A diagram</div><div class="stage">
+      <svg viewBox="0 0 320 110" width="100%" role="img"><desc>Two nodes joined by a line, its label above the line.</desc>
+        <rect class="node" x="6" y="60" width="80" height="40" rx="6"/><rect class="node" x="234" y="60" width="80" height="40" rx="6"/>
+        <line class="wire" x1="86" y1="80" x2="234" y2="80"/><text x="160" y="62" text-anchor="middle">approves</text></svg>
+    </div></div><figcaption><span class="tag ok">Lawful</span> CENTRAL-PERCEPTGATE-01; proposed amendment 12.</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">A diagram</div><div class="stage">
+      <svg viewBox="0 0 320 110" width="100%" role="img"><desc>Two nodes joined by a line, its label drawn across the line.</desc>
+        <rect class="node" x="6" y="60" width="80" height="40" rx="6"/><rect class="node" x="234" y="60" width="80" height="40" rx="6"/>
+        <line class="wire" x1="86" y1="80" x2="234" y2="80"/><text x="160" y="86" text-anchor="middle">approves</text></svg>
+    </div></div><figcaption><span class="tag bad">Offending</span> names laid on wires while every test was green (Z071-Z121).</figcaption></figure>
+  </div>
+</section>
+
+<section class="principle" id="x">
+  <h2>Decided stays decided</h2>
+  <p class="statement">A checkbox takes its culture's colour; no state of a control is left to the platform.</p>
+  <div class="pair">
+    <figure class="sample"><div class="window"><div class="strip">A form</div><div class="stage">
+      <label><input type="checkbox" checked> Include the archived signals</label>
+    </div></div><figcaption><span class="tag ok">Lawful</span> Article VI (proposed amendment 10).</figcaption></figure>
+    <figure class="sample"><div class="window"><div class="strip">A form</div><div class="stage">
+      <label><input class="x-platform" type="checkbox" checked> Include the archived signals</label>
+    </div></div><figcaption><span class="tag bad">Offending</span> "checkboxes should be in green not blue in this retro mode!" (Z444).</figcaption></figure>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="foot">Zane is <a href="https://mayouni.github.io/stzsite/">a Softanza project</a>. © 2020-<span id="year">2026</span> Mansour Ayouni. Released under the <a href="../../LICENSE">MIT licence</a>.</footer>
+</div>
+<script>
+// the culture select: the page's whole look changes through the tokens, and nothing else
+(function () {
+  var root = document.documentElement, sel = document.getElementById('vibe');
+  try { var v = localStorage.getItem('zane-samples-vibe'); if (v) { root.dataset.vibe = v; sel.value = v; } } catch (e) {}
+  sel.addEventListener('change', function () { root.dataset.vibe = sel.value; try { localStorage.setItem('zane-samples-vibe', sel.value); } catch (e) {} });
+  document.getElementById('year').textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>

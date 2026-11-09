@@ -64,6 +64,11 @@ function render(f) {
   L.push('## Requests and general statements', '', 'Requests add something rather than correct a defect; they are kept because later corrections refer to them. The general statements name the whole class.', '');
   L.push('| sweep record | date | project | words | source |', '|---|---|---|---|---|');
   for (const r of c.requests.concat(c.statements)) L.push('| ' + [r.sweep, r.date, r.project, r.words, r.source].map(cell).join(' | ') + ' |');
+  if (c.candidates && c.candidates.length) {
+    L.push('', '## Candidates, not counted', '', c.candidates.length + ' records from the repositories look like answered remarks, but their source does not name or quote the Principal, so they are kept here and left out of every count.', '');
+    L.push('| sweep record | date | project | words | root cause, if counted | source |', '|---|---|---|---|---|---|');
+    for (const r of c.candidates) L.push('| ' + [r.sweep, r.date, r.project, r.words, r.cause, r.source].map(cell).join(' | ') + ' |');
+  }
   return L.join('\n') + '\n';
 }
 
