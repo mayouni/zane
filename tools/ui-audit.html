@@ -6,13 +6,28 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=dedd529f">
+<link rel="stylesheet" href="../site/stz.css?v=35fa60d3">
 <style>
+/* the report grows to its content: the browser's scroll is the only one on the page (the author, 2026-11-09) */
 textarea {
-  width: 100%; min-height: 8.5rem; font: 1rem var(--mono); color: var(--ink);
+  width: 100%; font: 1rem var(--mono); color: var(--ink);
   background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-  padding: .8rem 1rem; resize: vertical;
+  padding: .8rem 1rem; resize: none; overflow: hidden;
 }
+/* the pages to audit: a table, numbered by the stylesheet, never a box that scrolls inside the page */
+table.pages { counter-reset: row; }
+table.pages tbody tr { counter-increment: row; }
+table.pages td.n::before { content: counter(row); }
+table.pages .n { width: 4.5rem; color: var(--muted); }
+table.pages .act { width: 6rem; }
+table.pages td { vertical-align: middle; }
+table.pages .act { text-align: center; }
+.take { width: 18px; height: 18px; cursor: pointer; }
+.run.quiet { background: transparent; color: var(--ink); border-color: var(--line); }
+#add-page label { font-weight: 700; }
+#add-path { font: 1rem var(--mono); color: var(--ink); background: var(--card); border: 1px solid var(--line);
+  border-radius: 8px; padding: .55rem .8rem; flex: 1 1 16rem; min-width: 0; }
+#add-note { color: var(--muted); }
 .verdict { border-radius: 10px; padding: 1rem 1.2rem; margin: 1.4rem 0; font-weight: 700; }
 .verdict.clean { background: #dcefe2; color: #14503a; border: 2px solid #1d6b4f; }
 .verdict.dirty { background: #f5dcd2; color: #7c2d1e; border: 2px solid #a33422; }
@@ -141,46 +156,57 @@ td.issue { color: #a33422; font-weight: 700; }
     </div>
 
     <h2 style="margin-top:2.5rem">The list of pages that the audit reads</h2>
-    <p class="lead">The list holds one path per line, relative to the site root. Your own
-    project's screens can be added to the list in the same way.</p>
-    <textarea id="pages" spellcheck="false">/index.html
-/site/why.html
-/site/how.html
-/site/refusal.html
-/site/haro.html
-/site/conformance.html
-/site/rules.html
-/site/gotchas/index.html
-/site/gotchas/stillness.html
-/site/gotchas/forms.html
-/site/gotchas/state.html
-/site/gotchas/widgets.html
-/site/gotchas/reading.html
-/site/gotchas/navigation.html
-/site/gotchas/intelligence.html
-/site/vibes.html
-/site/positioning.html
-/site/practices.html
-/site/frameworks.html
-/site/thinking.html
-/site/grid.html
-/site/innovation.html
-/site/adopt.html
-/site/ports.html
-/site/softanza.html
-/site/stack.html
-/site/beyond.html
-/site/mobile.html
-/site/web.html
-/site/build.html
-/site/generate.html
-/site/media.html
-/site/audit.html
-/site/screenshots.html
-/site/tour.html
-/constitution/reader/index.html
-/tools/ui-audit.html
-/tools/zane/wasm-proof.html</textarea>
+    <p class="lead">The table lists one page per row, by its path from the site root. Your own
+    project's screens are added with the field under the table. A page whose Audit box is cleared is left out of the run; the page itself is never changed.</p>
+    <table id="pages" class="pages">
+      <thead><tr><th scope="col" class="n">Row</th><th scope="col">Page, from the site root</th><th scope="col" class="act">Audit</th></tr></thead>
+      <tbody>
+        <tr><td class="n"></td><td class="where">/index.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /index.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/why.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/why.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/how.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/how.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/refusal.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/refusal.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/haro.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/haro.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/conformance.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/conformance.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/rules.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/rules.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/index.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/index.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/stillness.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/stillness.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/forms.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/forms.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/state.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/state.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/widgets.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/widgets.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/reading.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/reading.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/navigation.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/navigation.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/gotchas/intelligence.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/gotchas/intelligence.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/vibes.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/vibes.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/positioning.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/positioning.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/practices.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/practices.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/frameworks.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/frameworks.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/thinking.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/thinking.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/grid.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/grid.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/innovation.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/innovation.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/adopt.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/adopt.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/ports.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/ports.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/softanza.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/softanza.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/stack.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/stack.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/beyond.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/beyond.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/mobile.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/mobile.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/web.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/web.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/build.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/build.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/generate.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/generate.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/media.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/media.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/audit.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/audit.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/screenshots.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/screenshots.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/site/tour.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /site/tour.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/constitution/reader/index.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /constitution/reader/index.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/tools/ui-audit.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /tools/ui-audit.html"></td></tr>
+        <tr><td class="n"></td><td class="where">/tools/zane/wasm-proof.html</td><td class="act"><input type="checkbox" class="take" checked aria-label="Audit /tools/zane/wasm-proof.html"></td></tr>
+      </tbody>
+    </table>
+    <form id="add-page" class="controls">
+      <label for="add-path">Add a page</label>
+      <input id="add-path" type="text" spellcheck="false" autocomplete="off" placeholder="/your/page.html">
+      <button type="submit" class="run quiet">Add</button>
+      <span id="add-note"></span>
+    </form>
     <div class="controls">
       <button class="run" id="run">Run the audit</button>
       <label class="opt"><input type="checkbox" id="strict">
@@ -688,8 +714,11 @@ function buildMarkdown(findings, pages, vibe) {
   lines.push('', '_Measured in the browser: computed size and true contrast against the '
     + 'composited background, SVG text rescaled by its viewBox._');
   const md = lines.join('\n');
-  $('#markdown').value = md;
+  const box = $('#markdown');
+  box.value = md;
   $('#export').hidden = false;
+  box.style.height = 'auto';
+  box.style.height = box.scrollHeight + 'px';   /* the report shows whole, with no scroll of its own */
   return md;
 }
 
@@ -707,8 +736,29 @@ $('#copy-md').addEventListener('click', async () => {
 
 $('#root-note').textContent = 'Paths resolve against this site root: ' + SITE_ROOT;
 
+/* the pages to audit: the rows of the table whose Audit box is ticked; a row is added with the field under the table. Clearing a
+   box leaves a page out of the run and changes nothing else (the author, 2026-11-09: "Remove here is misleading") */
+const listedPages = () => [...document.querySelectorAll('#pages tbody td.where')].map(td => td.textContent.trim()).filter(Boolean);
+const pageList = () => [...document.querySelectorAll('#pages tbody tr')].filter(tr => tr.querySelector('input.take').checked)
+  .map(tr => tr.querySelector('td.where').textContent.trim()).filter(Boolean);
+$('#add-page').addEventListener('submit', e => {
+  e.preventDefault();
+  const field = $('#add-path'), note = $('#add-note');
+  let path = field.value.trim();
+  if (!path) return;
+  if (!path.startsWith('/')) path = '/' + path;
+  if (listedPages().includes(path)) { note.textContent = path + ' is already in the table'; return; }
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td class="n"></td><td class="where"></td><td class="act"><input type="checkbox" class="take" checked></td>';
+  tr.querySelector('td.where').textContent = path;
+  tr.querySelector('input').setAttribute('aria-label', 'Audit ' + path);
+  $('#pages tbody').appendChild(tr);
+  field.value = '';
+  note.textContent = path + ' added';
+});
+
 $('#run').addEventListener('click', async () => {
-  const pages = $('#pages').value.split('\n').map(s => s.trim()).filter(Boolean);
+  const pages = pageList();
   const strict = $('#strict').checked;
   const verdict = $('#verdict'), results = $('#results'), progress = $('#progress');
   $('#run').disabled = true;

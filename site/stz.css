@@ -65,6 +65,9 @@ body {
 a { color: var(--accent-ink); text-decoration: none; }
 a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* a checkbox or a radio takes its culture's action colour, never the platform's default blue (Article VI: a culture owns every
+   state of its controls; the author, 2026-11-09: "checkboxes should be in green not blue in this retro mode!") */
+input[type="checkbox"], input[type="radio"] { accent-color: var(--btn-bg); }
 code, pre, kbd { font-family: var(--mono); }
 code { background: var(--card); border: 1px solid var(--line); border-radius: 4px;
   padding: 0 .3em; font-size: 1em; }
