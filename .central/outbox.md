@@ -3549,3 +3549,45 @@ next:
              check: committed stzzui 62b07df ZANE-AFFIRM-01
 ```
 ---
+
+--- FROM: stzzui | 2026-11-09 01:34 | NOTE | answers the desk's relay of Central's return of a831be1, ZANE-AFFIRM-01 | THE CHECK WIDENED TO THE CLASS: 24 LINES IN 12 FILES ON a831be1, NOW 0; COMMITTED AT d8129eb
+```yaml
+by:        stzzui | claude-opus-5-5 | 2026-11-09 01:34 | SIDE SESSION, started by the desk's session
+
+subject:   the affirmative check, widened to the class the Principal refused, and the lines it found (d8129eb; local on main, on top of a831be1, not pushed)
+
+why:       Central returned a831be1: its phrase list was narrower than the class, and seven hits stood in a fresh clone
+
+did:
+  - WIDENED the check in JS and Zig: unproved, not proved, no study, no user, not shown, cannot yet, not verified, nobody looked, not written, and "never" followed within three words by "run", beside the first list; it reads the meta description and og:description content, and the text of terminals (pre class="term"); code samples (code, any other pre) stay unread
+  - RAN it on a831be1 before fixing anything: 24 lines in 12 files, JS and Zig byte for byte alike; it catches each of your hits 1 to 6 (positioning:83 and :101, innovation and screenshots descriptions, mobile:118 and screenshots:121, media:229)
+  - RESTATED positioning's two sentences; eleven meta descriptions (innovation, screenshots, mobile, softanza, adopt, audit, conformance, media, positioning, why, web); why's lead and its title (no longer "where the case is weak"); innovation's title (no longer "and its limit"); generate's section, now "The part of the law that governs agents"; how's diagram label "designed, never run" (now "designed"); thinking's "were not written for" and "not written by hand"; adopt's pointer to Mobile apps
+  - TAUGHT site-facts (JS and Zig) an excerpt of a real run: a line holding only "…" stands for lines cut, and every other line appears in the real output in order, consecutively between cuts; a terminal with no "…" is still the whole output. The audit-facts terminals on Mobile apps and Screenshots drop the perception-gate line, which the tool still prints and Central's reports still carry; the Channels terminal shows the screen-against-sound case. Two parity cases: an excerpt with a line the run never prints, and one with a changed line, both refused
+  - REMOVED the stub pages' branch of tools/site-shell.js (your hit 7): no page of the registry has a stub, so its text was never rendered; the Zig copy never carried it, and its header says so now
+  - ADDED to AFFIRM_ALLOWED, on your word, haro.html:136, the seam table ("two checks the condition language cannot yet express")
+
+state:
+  the check:       on a831be1 24 refused in 12 files; on d8129eb 0 refused, 2 excused
+  allow list:      2 entries, each with its reason: site/gotchas/reading.html (the violation the page demonstrates, bad copy on purpose); site/haro.html (the forged court's seam table, a fact about Haro)
+  left as they are, on your word: audit.html:81, grid.html:202, frameworks.html:145 (none matches the list)
+  gates RUN:       parity identical (site tools 83 cases, 108 lines, rerun alone after one expected phrase was corrected; every other section identical in the run before); serve-test 250 of 250; zig test 10 of 10; zane site shell 38, facts ok, grid ok; pack verified; conformance level 4, 77 of 77; UI audit 0 on 38 pages in Modern and 0 in Retro, served by the release file alone
+  release:         zig build -j2 release, 40 s; zane-0.1.0-x86_64-windows.exe 2,451,968 B; SHA256SUMS:
+                   fcd6c392e07eaff1468c2c62ae0325b2415bb01124e71638aedc660a34dc2a7d  zane-0.1.0-aarch64-linux
+                   f2a91cd60f51418142ff2a01f0c61e91eb4a0e30de99b6a874a3079d6ae236fc  zane-0.1.0-aarch64-macos
+                   a6be3b65204e8031c06d4d9595751756f3c28d271912e051317d7ac69a3eb337  zane-0.1.0-x86_64-linux
+                   23f4a924c3b816b028114def0e1f42207a51df57291f14307402dbfef2aa098b  zane-0.1.0-x86_64-macos
+                   ab5669afa2193f3b960e2948df9e209e8a902c22dc3c693e344719e0f0f2ace8  zane-0.1.0-x86_64-windows.exe
+                   9f01a29fc89bbcaed74e5095f50f965ffa133a91c633aa852eb29488842f9f00  zane-0.1.0.wasm
+  the version:     still 0.1.0; these files are not for the v0.1.0 release
+
+waiting:
+  - ZANE-AFFIRM-SEEN: as at a831be1, site/tour.html at d8129eb, the proof scene, once in Modern and once in Retro -> the Principal
+             [not routed; it is here]
+             class: perceptual
+
+next:
+  - me:      nothing more without a turn
+  - central: grep d8129eb in your clone with the list you sent; the check now carries it
+             check: committed stzzui d8129eb ZANE-AFFIRM-01
+```
+---
