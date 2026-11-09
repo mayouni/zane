@@ -6,7 +6,8 @@
   "B": "the stzlib desk's memory folder (232 files), read whole on 2026-11-09",
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
-  "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps"
+  "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
+  "E": "addenda relayed by Central after the sweeps, read in .central/inbox.md (the line cut again, 2026-11-09 15:31)"
  },
  "causes": {
   "T": "Type sized by convention, not for reading",
@@ -5031,6 +5032,22 @@
   },
   {
    "n": "Z298",
+   "sweep": "E01",
+   "also": [],
+   "cause": "B",
+   "date": "2026-11-09 15:31",
+   "project": "lookout",
+   "source": ".central/inbox.md:4050 (relayed by the Lookout desk)",
+   "words": "\"the same issue of text and space and bad line cuts AGAIN and AGAIN and AGAIN!!!!!!!!!!\"",
+   "wrong": "the title \"AI changes every week. Softanza hears what concerns it the same week.\" broke as \"AI changes every / week. Softanza / hears what concerns / it the same week.\": the title held to 20 characters while its column had room (S), balancing ran across both sentences (B), and earlier the paragraph under it shrank with the window to fit the hero (T)",
+   "required": "a break never crosses a sentence in a title; a title takes its column's width; reading text never shrinks to fit, display text and spacing give way first",
+   "sense": "see (reading)",
+   "ruling": "ZANE-LINEBALANCE-01 and ZANE-SPACEMEANING-01 (the same family)",
+   "verbatim": true,
+   "repeat": true
+  },
+  {
+   "n": "Z299",
    "sweep": "C18",
    "also": [],
    "cause": "X",
@@ -5046,7 +5063,7 @@
    "repeat": true
   },
   {
-   "n": "Z299",
+   "n": "Z300",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -5062,7 +5079,7 @@
    "repeat": false
   },
   {
-   "n": "Z300",
+   "n": "Z301",
    "sweep": "A56",
    "also": [],
    "cause": "X",
@@ -5078,7 +5095,7 @@
    "repeat": ""
   },
   {
-   "n": "Z301",
+   "n": "Z302",
    "sweep": "C75",
    "also": [],
    "cause": "X",
@@ -5094,7 +5111,7 @@
    "repeat": false
   },
   {
-   "n": "Z302",
+   "n": "Z303",
    "sweep": "B36",
    "also": [],
    "cause": "X",
@@ -5110,7 +5127,7 @@
    "repeat": false
   },
   {
-   "n": "Z303",
+   "n": "Z304",
    "sweep": "D34",
    "also": [
     "A87"
@@ -5128,7 +5145,7 @@
    "repeat": false
   },
   {
-   "n": "Z304",
+   "n": "Z305",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -5144,7 +5161,7 @@
    "repeat": true
   },
   {
-   "n": "Z305",
+   "n": "Z306",
    "sweep": "D54",
    "also": [
     "A96"
@@ -5162,7 +5179,7 @@
    "repeat": false
   },
   {
-   "n": "Z306",
+   "n": "Z307",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -5178,7 +5195,7 @@
    "repeat": false
   },
   {
-   "n": "Z307",
+   "n": "Z308",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -5194,7 +5211,7 @@
    "repeat": true
   },
   {
-   "n": "Z308",
+   "n": "Z309",
    "sweep": "D93",
    "also": [
     "C112"
@@ -5212,7 +5229,7 @@
    "repeat": true
   },
   {
-   "n": "Z309",
+   "n": "Z310",
    "sweep": "C132",
    "also": [
     "B56",
@@ -5231,7 +5248,7 @@
    "repeat": true
   },
   {
-   "n": "Z310",
+   "n": "Z311",
    "sweep": "C16",
    "also": [],
    "cause": "H",
@@ -5247,7 +5264,7 @@
    "repeat": false
   },
   {
-   "n": "Z311",
+   "n": "Z312",
    "sweep": "C134",
    "also": [
     "A126",

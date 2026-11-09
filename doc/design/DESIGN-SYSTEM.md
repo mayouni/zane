@@ -9,7 +9,7 @@ froms semantics"*. Ruled first on this desk: PRINCIPAL-ZANEFIRST-01.
 
 **What this is.** Four things, in order:
 
-1. **The corpus**: every UI correction the Principal made in every project, 311 of them, each with its source, classified by the
+1. **The corpus**: every UI correction the Principal made in every project, 312 of them, each with its source, classified by the
    root cause that produced it ([`corpus/CORPUS.md`](corpus/CORPUS.md), generated from [`corpus/corpus.json`](corpus/corpus.json)).
 2. **The theory** under each root cause, old and current, cited.
 3. **The design system**: page archetypes, components and tokens, what the generator may vary and what it may not, every rule
@@ -52,14 +52,14 @@ fix covered a list of element kinds, and the defect came back that afternoon on 
 
 ## 2. The corpus
 
-**311 distinct corrections, made in 20 projects between April and November 2026.** 167 quote the Principal's own words; 144 are a
+**312 distinct corrections, made in 20 projects between April and November 2026.** 168 quote the Principal's own words; 144 are a
 session's paraphrase, marked as such. 117 more records were the same remark relayed in another file and are listed under the record
-they repeat. **148 of the 311 name an earlier correction of the same defect**, and 16 carry the Principal's own words of repetition
+they repeat. **149 of the 312 name an earlier correction of the same defect**, and 17 carry the Principal's own words of repetition
 or fatigue: *"I told you a thousand times"* (Z187), *"as usual: text is very small and unreadable!!!"* (Z184), *"the issue of
 equilibrated text on a line again and again!"* (Z294), *"I'm tired of talking to you of visual equlibrium!"* (Z255), *"don't go back
 to the card UI system in small screens ... This is the power of dogmatic influence you got from your training data."* (Z272), *"how
 many times I told you to avoid this ugly word taking its own line!!!"* (Z297). The pace rose month by month, 48 in August,
-81 in October and 112 in the first nine days of November, 38 of them on 2026-11-09 alone.
+81 in October and 113 in the first nine days of November, 39 of them on 2026-11-09 alone: the last, *"bad line cuts AGAIN and AGAIN and AGAIN!!!!!!!!!!"* (Z298), came at 15:31 that day.
 
 **Sources.** Four read-only sweeps on 2026-11-09, merged and classified by hand, beside Central's compiled corpus (softanza
 614d795): softanza's memos, conclusions, mailboxes and perception law; the stzlib desk's memory (232 files); every other project's
@@ -67,15 +67,15 @@ memory and Lookout's rulings of the day; and this repository's docket, harvest, 
 the sweep each record came from and every record are in [`corpus/CORPUS.md`](corpus/CORPUS.md).
 
 **Classified by root cause, not by symptom.** A root cause is the default that produced the defect: the thing the generator does
-when nothing stops it. Thirteen causes cover all 311, in five groups:
+when nothing stops it. Thirteen causes cover all 312, in five groups:
 
 | group | root cause | corrections | projects | name an earlier one |
 |---|---|---|---|---|
-| **Perception**: the eye groups by space, size and contrast before it reads (98) | **T** Type sized by convention, not for reading | 26 | 12 | 20 |
+| **Perception**: the eye groups by space, size and contrast before it reads (99) | **T** Type sized by convention, not for reading | 26 | 12 | 20 |
 | | **S** Width taken from the container; space treated as filler | 20 | 6 | 12 |
 | | **I** Ink and boxes that draw nothing | 19 | 9 | 9 |
 | | **E** Emphasis added, never budgeted | 21 | 8 | 8 |
-| | **B** Balance left to chance | 12 | 5 | 10 |
+| | **B** Balance left to chance | 13 | 5 | 11 |
 | **Meaning**: a form and a place each mean one thing (63) | **F** One form carrying two meanings | 28 | 10 | 11 |
 | | **N** Navigation that does not mirror the tree | 35 | 10 | 12 |
 | **Presence**: what matters is on the page, for every input (24) | **L** What matters is hidden, volatile or scrolled inside the page | 22 | 11 | 10 |
@@ -85,11 +85,11 @@ when nothing stops it. Thirteen causes cover all 311, in five groups:
 | **Fidelity**: the painted result and the decisions already made are what count (53) | **P** The model is checked, not the paint | 41 | 4 | 14 |
 | | **X** A decision already made is replaced by a default | 12 | 7 | 5 |
 
-**What the counts say.** Type and balance repeat the most: 20 of 26 type corrections and 10 of 12 balance corrections name an earlier
+**What the counts say.** Type and balance repeat the most: 20 of 26 type corrections and 11 of 13 balance corrections name an earlier
 one, because a reading size or a balanced line is undone every time the text or the template changes. Words for the writer is the
 largest class and spans twelve projects. Ink, space and emphasis together (60) are one family the Lookout desk named in a sentence:
 *"the generator reads free space as a defect to fill and a border as a neutral way to make sections."* Touch has two records
-because touch was rarely tested, not because touch is right: Z311 found a hover design ruled four times that day on a desktop only.
+because touch was rarely tested, not because touch is right: Z312 found a hover design ruled four times that day on a desktop only.
 
 **Rulings that point opposite ways, and how the system reconciles them** (a system that picks one side re-opens the other):
 
@@ -120,8 +120,9 @@ for text (1.4.3, 1.4.6). Rank is carried pre-attentively by weight, colour and p
 so nothing requires shrinking to rank.
 **The principle.** *Every text is set for reading.* Six sizes and no others; nothing below the small size (18 px); every text at
 7:1 against what is painted under it; rank by weight, position and the next size up, never by shrinking or greying. A title is at
-most 1.7 times the reading size, so a heading never shouts.
-**Checks**: K01 TYPE_SCALE, K02 TEXT_CONTRAST.
+most 1.7 times the reading size, so a heading never shouts. **Reading text never shrinks to fit a layout**: when room runs out,
+spacing and display text give way first, and the reading size holds (Z298).
+**Checks**: K01 TYPE_SCALE (at every width, so a size that scales with the window fails), K02 TEXT_CONTRAST.
 
 ### S · Width taken from the container; space treated as filler (20)
 
@@ -139,7 +140,8 @@ edge of a 1900 px box costs every use.
 measure, 60 to 75 characters; a box takes its content's width plus its padding; width beyond that stays the page's background,
 on the side away from where reading starts. A control sits beside the content it acts on. The space between two groups is at least
 twice the largest space inside either, so space alone says what belongs together. Reading text starts at the frame's start edge,
-never centred inside a wider frame.
+never centred inside a wider frame. **A width is never a fixed number chosen to look right at one size**: a title takes its
+column's width, and a text block its measure (Z298, a title held to 20 characters).
 **Checks**: K03 MEASURE, K04 BOX_FILL, K05 CONTROL_NEAR, K06 GROUP_RATIO.
 
 ### I · Ink and boxes that draw nothing (19)
@@ -172,17 +174,18 @@ no other. Data colour has the five semantic values of Rule 118 and one neutral, 
 state the user caused, and never accompanies navigation.
 **Checks**: K08 ONE_EMPHASIS, K09 PALETTE, K10 ONE_CRITICAL.
 
-### B · Balance left to chance (12)
+### B · Balance left to chance (13)
 
 **The default.** Line breaks fall where the width happens to end, or are placed by hand and outlive their text; rows of controls
 wrap with one item alone. **Evidence**: Z294, Z295, Z297 above; *"the page still have space move the last combo on the same line as
-the others"* (Z296); *"'spatial equilibrium' ... they represent the same logical level"* (Z287).
+the others"* (Z296); *"'spatial equilibrium' ... they represent the same logical level"* (Z287). Radar's title *"AI changes every week. Softanza hears what concerns it the same week."* broke as *"AI changes every / week. Softanza / hears what concerns / it the same week."* for three reasons at once: the title was held to 20 characters while its column had room, balancing ran across both sentences, and the paragraph under it had shrunk with the window to fit the hero (Z298).
 **Theory.** The eye reads a figure as a whole and prefers the simplest, most regular one (the Gestalt law of Prägnanz; Arnheim
 1954 on visual balance); a short last line is the typographer's widow, refused for that reason (Bringhurst 1992). Browsers balance
 lines natively (CSS Text Level 4, `text-wrap: balance` and `pretty`), so the rule costs nothing when it is on by default.
 **The principle.** *Balance is on for every text block, by default*, never for a list of element kinds: the last line of any block
-is at least a third of its widest line, and a heading carries no break placed by hand. A row of controls that wraps comes out in
-rows of equal size.
+is at least a third of its widest line, and a heading carries no break placed by hand. **A line never holds the end of one
+sentence and the start of the next in a title**: each sentence of a title is balanced on its own. A row of controls that wraps
+comes out in rows of equal size.
 **Checks**: K11 BALANCE, K12 ROW_FULL.
 
 ### F · One form carrying two meanings (28)
@@ -241,7 +244,7 @@ what is missing and where to create it.
 ### H · A pointer is assumed (2)
 
 **The default.** The design is made and judged with a mouse on a desktop. **Evidence**: *"did you think how this hover feature would
-work on a mobile phone?!"* (Z311, after four rulings of the same feature on a desktop); a restaurant app's touch targets, overflow
+work on a mobile phone?!"* (Z312, after four rulings of the same feature on a desktop); a restaurant app's touch targets, overflow
 and back button, found on a real phone (2026-07-03).
 **Theory.** A thumb's target needs about 9 mm (Parhi, Karlson and Bederson 2006); WCAG sets 24 by 24 CSS pixels as the minimum
 (2.5.8) and 44 by 44 as the enhanced level (2.5.5), which is also the platforms' own figure. Most phone use is one-handed (Hoober
@@ -307,10 +310,10 @@ a person can open, and the perception is recorded with its verdict.
 
 **The default.** The generator's own default overrides a decision the house already made: the platform's blue, a pattern invented
 instead of the house's, a sibling site copied blindly, the author's text rewritten, a change nobody asked for. **Evidence**: *"the
-selected background of the combo should embrace the current theme ... not the standard browser them (that ugly blue)"* (Z306);
-*"checkboxes should be in green not blue in this retro mode!"* (Z308); *"this navigation system is not ours!"* (Z309); *"why did you
-make Start with a coloured background? don't change things without notifying me"* (Z302); *"I never asked you to make the labels
-of the slices clickable!!!"* (Z307); *"bring back this same text"* (Z305).
+selected background of the combo should embrace the current theme ... not the standard browser them (that ugly blue)"* (Z307);
+*"checkboxes should be in green not blue in this retro mode!"* (Z309); *"this navigation system is not ours!"* (Z310); *"why did you
+make Start with a coloured background? don't change things without notifying me"* (Z303); *"I never asked you to make the labels
+of the slices clickable!!!"* (Z308); *"bring back this same text"* (Z306).
 **Theory.** Users need to feel in control of the interface, not managed by it (Shneiderman 1987, rule 7; Nielsen 1994, heuristic 3).
 Expertise rests on spatial and visual stability: a control that moves or changes look resets what the user learned (Scarr,
 Cockburn, Gutwin and Quinn 2011).
@@ -328,11 +331,11 @@ applies first to the Zane site (milestones 2 and 3) and is written so a generato
 
 | | principle | bounds |
 |---|---|---|
-| T | Every text is set for reading | six sizes; floor 18 px; 7:1; a title at most 1.7 times the reading size |
-| S | Width belongs to the content | measure 60-75 characters; a box at most a third empty; a control beside its content; between-group space at least twice the inside space |
+| T | Every text is set for reading | six sizes; floor 18 px; 7:1; a title at most 1.7 times the reading size; reading text never shrinks to fit |
+| S | Width belongs to the content | measure 60-75 characters; a box at most a third empty; a control beside its content; between-group space at least twice the inside space; a title takes its column |
 | I | A line or a box draws something real | lines only on tables, fields, drawings, focus, samples and code |
 | E | One emphasis per element, one critical element per view | five semantic colours and one neutral for data; motion only reports |
-| B | Balance is on by default | last line at least a third of the widest; control rows equal |
+| B | Balance is on by default | last line at least a third of the widest; no line crosses a sentence in a title; control rows equal |
 | F | One shape, one meaning | four shapes; containers never react |
 | N | The menu is the tree | five entries a bar; landing first under its own label; outline on pages of three or more sections |
 | L | Everything is on the page, with one scroll | no tooltip; no hover-only content; no inner scroll; feedback within 100 ms |
@@ -461,7 +464,7 @@ runs at 375, 768, 1085, 1440 and 1900 px in Modern and in Retro.
 | K08 ONE_EMPHASIS | every text element | more than one of strong weight, underline, accent colour and fill beyond its shape's own | E, F | new |
 | K09 PALETTE | every computed colour, including `accent-color`, the open select and the focus ring | a colour outside the culture's tokens | E, X | new |
 | K10 ONE_CRITICAL | the view | more than one element in `--danger` | E | new |
-| K11 BALANCE | every text block | the last line shorter than a third of the widest; a break placed by hand in a heading | B | the heading check exists in site-shell; the measure is new |
+| K11 BALANCE | every text block | the last line shorter than a third of the widest; a rendered line of a title that holds the end of one sentence and the start of the next; a break placed by hand in a heading | B | the heading check exists in site-shell; the measure is new |
 | K12 ROW_FULL | every wrapped row of controls | rows that differ by more than one item | B | new |
 | K13 ONE_SCROLL | every element | anything but the document scrolls, either way | L | sideways scroll with room exists (Rule 114); the rest is new |
 | K14 NO_FLOAT | fixed and absolute elements | one covers text and is not a bar holding its own space | L | the bars check exists; the overlap is new |
@@ -484,19 +487,19 @@ F-1 to F-5) are folded in where they belong.
 
 | # | rule | the change | evidence |
 |---|---|---|---|
-| 1 | 105 The Legibility Floor | the floor becomes 18 px for every text, and 7:1 for every text including control labels; rank by the token scale, never by shrinking | T, 26 corrections in 12 projects (Z178-Z203) |
-| 2 | new, Article I | **Width Belongs to the Content**: measure 60-75 characters; a box at most a third empty; a control beside its content (ZANE-SPACEMEANING-01; docket F-3) | S, 20 (Z247-Z266) |
+| 1 | 105 The Legibility Floor | the floor becomes 18 px for every text, and 7:1 for every text including control labels; rank by the token scale, never by shrinking; reading text never shrinks to fit a layout | T, 26 corrections in 12 projects (Z178-Z203) |
+| 2 | new, Article I | **Width Belongs to the Content**: measure 60-75 characters; a box at most a third empty; a control beside its content; a title takes its column, never a fixed character count (ZANE-SPACEMEANING-01; docket F-3) | S, 20 (Z247-Z266) |
 | 3 | 2 White Space Is Structural | **space groups and a line draws something real**: the gap between groups at least twice the gap inside; borders only where they draw (ZANE-NOLINES-01, ZANE-READINGLEVELS-01) | I, 19 (Z267-Z285), and S |
 | 4 | new, Article I | **One Emphasis per Element, One Critical per View** (ZANE-ONEEMPHASIS-01; Rules 3, 87, 118 cross-cited) | E, 21 (Z226-Z246) |
-| 5 | new, Article I | **Balance Is On by Default**, never for a list of element kinds; control rows equal (docket F-1; ZANE-LINEBALANCE-01; ZANE-CONTROLROW-01) | B, 12 (Z286-Z297) |
+| 5 | new, Article I | **Balance Is On by Default**, never for a list of element kinds; no line crosses a sentence in a title; control rows equal (docket F-1; ZANE-LINEBALANCE-01; ZANE-CONTROLROW-01) | B, 13 (Z286-Z298) |
 | 6 | 114 Room Before Scrollbars | widened to **One Scroll**: nothing scrolls inside the page in either direction; a sheet freezes the page under it | L, the scroll records (Z210, Z212, Z219, Z220, Z224) |
-| 7 | 69 The Hand Is Not a Mouse | **every hover has a tap path; no content only on hover; no tooltip** (ZANE-TOUCHTWIN-01; WRITING.md rule 11 enters the law) | H and L (Z221, Z311) |
+| 7 | 69 The Hand Is Not a Mouse | **every hover has a tap path; no content only on hover; no tooltip** (ZANE-TOUCHTWIN-01; WRITING.md rule 11 enters the law) | H and L (Z221, Z312) |
 | 8 | 119 A Card Is Not a Button | widened to **One Shape, One Meaning**: four shapes; a container never reacts; one fill, one meaning (ZANE-ONELINK-01) | F, 28 (Z122-Z149) |
 | 9 | 108, 115, 116 | the trail check reads any path line, a kicker included (ZANE-TRAIL-KICKER-01); an outline by default on pages of three or more sections (ZANE-OUTLINE-01) | N, 35 (Z087-Z121) |
-| 10 | Article VI, as a rule of tier `tool` | **A Culture Owns Its Defaults**: no state of any control is left to the platform | X (Z306, Z308) and Article VI's own evidence |
+| 10 | Article VI, as a rule of tier `tool` | **A Culture Owns Its Defaults**: no state of any control is left to the platform | X (Z307, Z309) and Article VI's own evidence |
 | 11 | 111 The Stranger's First Screen | the README order for a front page and a landing; affirmative voice on every public surface (PRINCIPAL-AFFIRM-01; docket F-2, F-4, F-5) | M, 28 (Z150-Z177), and W, 45 (Z001-Z045) |
 | 12 | 125 Sound Corroborates | sound plays at its true rate and in step with its picture within the ITU-R BT.1359 window | P, the four sound records (Z047-Z050) |
-| 13 | Article VII | **a correction enters the law as its cause, bounded on both sides, with a check on the painted result by default for every element** | the chains of section 1; 148 of 311 corrections name an earlier one |
+| 13 | Article VII | **a correction enters the law as its cause, bounded on both sides, with a check on the painted result by default for every element** | the chains of section 1; 149 of 312 corrections name an earlier one |
 
 ## 7. What the Principal decides before milestone 2
 
@@ -517,7 +520,7 @@ One question with four parts; each part names the system's recommendation.
 UI audit and to site-shell in JS and Zig with parity, and shows each new check failing on today's pages first, with the count.
 **Milestone 3** rewrites the site on the archetypes: a Why section first in the main menu, the front page and every landing in the
 README's order, and every concept shown as a live sample, the lawful beside the offending, citing its rule. The Why section states
-the problem from this corpus: 311 corrections in 20 projects, 148 of them naming an earlier one.
+the problem from this corpus: 312 corrections in 20 projects, 149 of them naming an earlier one.
 
 ## 9. Sources
 
