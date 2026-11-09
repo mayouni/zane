@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Channels — the ten channels that carry one Zane declaration</title>
-<meta name="description" content="A channel is the medium that carries a Zane declaration to a user: a screen, a voice, a printed page, a lamp or a machine reader. The page describes the ten channels by what each is made of and what each can carry, and states what the check of one declaration in two channels proves and does not prove.">
+<meta name="description" content="A channel is the medium that carries a Zane declaration to a user: a screen, a voice, a printed page, a lamp or a machine reader. The page describes the ten channels by what each is made of and what each can carry, and states what the check of one declaration in two channels proves.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=dedd529f">
 </head>
@@ -201,34 +201,22 @@ check_balance.zane:5  <span class="bad">error</span>  <span class="bad">VERB_NOT
 
 <section class="alt" id="the-proof">
   <div class="narrow">
-    <h2 data-outline="What is proved">What the cross-channel instrument proves, and what it does not prove</h2>
+    <h2 data-outline="What is proved">What the cross-channel instrument proves</h2>
     <p>The design rests on the sentence <b>one declaration, many renderings, one law</b>. The instrument that tests this sentence does not assert that two renderings match, because two renderings are irreducibly different. It asserts that <em>every difference
     between them is one the published data already predicted</em>.</p>
-    <p>A difference that the data accounts for shows the model working, and a difference that the data does not account for is drift and fails the run. On the suite's two cases the instrument reports:</p>
+    <p>A difference that the data accounts for shows the model working, and a difference that the data does not account for is drift and fails the run. On the suite's screen-against-sound case the instrument reports, in an excerpt of its run:</p>
 <pre class="term" data-run="zane cross-medium"><span class="dim">$ zane cross-medium</span>
 
 Cross-medium conformance — 2 case(s)
   media        10 enumerated, matrix v1.1
   signals      5 values, vocabulary v1.3
 
-  invoice-review.zane  —  visual vs print
-    intents      5 declared · 5 carried by both
-    signals      3 declared
-    differences  3 total · 0 predicted · 3 undecided · 0 drift
-
-    UNDECIDED — nothing is contradicted; the data is silent, so this pair is not proved:
-      signal danger: signal.json records no rendering for print, so this value is unproved rather than wrong
-      signal muted: signal.json records no rendering for print, so this value is unproved rather than wrong
-      signal warning: signal.json records no rendering for print, so this value is unproved rather than wrong
-
+…
   invoice-review.zane  —  visual vs auditory
     intents      5 declared · 5 carried by both
     signals      3 declared
     differences  5 total · 5 predicted · 0 undecided · 0 drift
-
-  no drift, and 3 difference(s) the data cannot yet speak to.
-  Nothing here is wrong. The central claim is NOT PROVED for these pairs,
-  and it will not be until the silent channel records what it renders.</pre>
+…</pre>
     <p><b>The claim is proved for screen against sound:</b> the two differ in five places, and the data predicts all five. Screen against print differs in three places that the signal file leaves to its print rendering,
     and the instrument names each of them and exits non-zero rather than report a pass.</p>
   </div>

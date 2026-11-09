@@ -514,6 +514,48 @@ fn verifyExcerpts(a: Allocator, all: []const []const u8, problems: *List) !usize
 /// JavaScript references (cli.js, conformance.js, pack.js, cross-medium.js, check-facts.js).
 const pack_commands = [_][]const u8{ "check", "conformance", "pack", "cross-medium", "audit-facts" };
 
+/// sameRun in site-facts.js: a line holding only "…" stands for lines cut; every other line appears in the real output, in order and,
+/// between two cuts, on consecutive lines. With no "…" the page is the whole output.
+fn sameRun(a: Allocator, want: []const u8, got: []const u8) !bool {
+    const ell = "\xE2\x80\xA6";
+    var w: List = .empty;
+    var wi = std.mem.splitScalar(u8, want, '\n');
+    var cut = false;
+    while (wi.next()) |l| {
+        try w.append(a, l);
+        if (std.mem.eql(u8, re.trim(l), ell)) cut = true;
+    }
+    if (!cut) return std.mem.eql(u8, want, got);
+    var g: List = .empty;
+    var gi = std.mem.splitScalar(u8, got, '\n');
+    while (gi.next()) |l| try g.append(a, l);
+    var at: usize = 0;
+    var start: usize = 0;
+    var k: usize = 0;
+    while (k <= w.items.len) : (k += 1) {
+        if (k < w.items.len and !std.mem.eql(u8, re.trim(w.items[k]), ell)) continue;
+        const c = w.items[start..k];
+        start = k + 1;
+        if (c.len == 0) continue;
+        var found: ?usize = null;
+        var i = at;
+        while (i + c.len <= g.items.len) : (i += 1) {
+            var all_eq = true;
+            for (c, 0..) |l, off| if (!std.mem.eql(u8, g.items[i + off], l)) {
+                all_eq = false;
+                break;
+            };
+            if (all_eq) {
+                found = i;
+                break;
+            }
+        }
+        const f = found orelse return false;
+        at = f + c.len;
+    }
+    return true;
+}
+
 fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize {
     var count: usize = 0;
     const r = try re.compile(a, "<pre class=\"term\" data-run=\"([^\"]+)\">([\\s\\S]*?)<\\/pre>", "g");
@@ -545,7 +587,7 @@ fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize
             _ = main_mod.dispatch(a, cmd[1..], &o.writer, &e.writer) catch {};
             const got = try norm(a, o.written());
             const want = try norm(a, if (nl) |i| term[i + 1 ..] else "");
-            if (!std.mem.eql(u8, got, want)) try problems.append(a, try fmt(a, "{s}: the terminal for \"{s}\" is not what a real run prints.\n--- the page\n{s}\n--- a real run\n{s}", .{ p, joined, want, got }));
+            if (!try sameRun(a, want, got)) try problems.append(a, try fmt(a, "{s}: the terminal for \"{s}\" is not what a real run prints.\n--- the page\n{s}\n--- a real run\n{s}", .{ p, joined, want, got }));
         }
     }
     return count;

@@ -100,8 +100,10 @@ the statements elusive"*. Ordered by Central as ZANE-AFFIRM-01.
 
 **What the check decides.** `zane site shell` (and `node tools/site-shell.js`) fails a line of a page of the registry, of
 `index.html` or of `README.md` that holds *not yet*, *nobody has*, *no one has*, *never been*, *has not been*, *no person has*,
-*not run yet*, *not built*, *unverified* or *unproven*, or a sentence that opens on *Limit:* or *Not shown:*, ignoring case for the phrases. It does not
-read scripts, styles, comments or code samples (`pre`, `code`, and fenced or backticked code in Markdown), so a terminal that
-prints a real run is quoted as it is. Its allow list, `AFFIRM_ALLOWED`, excuses one line at a time with a reason, and fails when an
+*not run yet*, *not built*, *unverified*, *unproven*, *unproved*, *not proved*, *no study*, *no user*, *not shown*, *cannot yet*,
+*not verified*, *nobody looked*, *not written*, or *never* followed within three words by *run*, or a sentence that opens on *Limit:*,
+ignoring case for the phrases. It reads the page's text, its terminals (`pre class="term"`, what a run shows the reader) and its
+description (`meta name="description"` and `og:description`, what a search or a link preview shows); it does not read scripts,
+styles, comments or code samples (`code`, any other `pre`, and fenced or backticked code in Markdown). Its allow list, `AFFIRM_ALLOWED`, excuses one line at a time with a reason, and fails when an
 entry no longer matches a line. The check cannot judge a lack stated in other words; reading does the rest, as for the register.
 On 2026-11-08, before the sweep, it refused 65 lines in 23 files.

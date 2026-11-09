@@ -200,6 +200,25 @@ function verifyExcerpts(problems) {
 }
 
 // ---- a terminal that names its command is a real run of it ---------------------------------------------------
+/* A terminal may show an excerpt of a real run (ZANE-AFFIRM-01, 2026-11-09): a line holding only "…" stands for lines cut, and every
+   other line appears in the real output, in the same order and, between two cuts, on consecutive lines. A terminal with no "…" is
+   the whole output, as before. Nothing is invented on a page; what a run records for its desk need not be shown to its reader. */
+function sameRun(want, got) {
+  const w = want.split('\n');
+  if (!w.some(l => l.trim() === '…')) return want === got;
+  const g = got.split('\n');
+  const chunks = [[]];
+  for (const l of w) { if (l.trim() === '…') chunks.push([]); else chunks[chunks.length - 1].push(l); }
+  let at = 0;
+  for (const c of chunks) {
+    if (!c.length) continue;
+    let found = -1;
+    for (let i = at; i + c.length <= g.length; i++) if (c.every((l, k) => g[i + k] === l)) { found = i; break; }
+    if (found < 0) return false;
+    at = found + c.length;
+  }
+  return true;
+}
 /* <pre class="term" data-run="zane conformance"> ... </pre>: the first line is "$ " and the command, the rest is what it printed. Only
    the binary's read-only commands of the pack are run (zane check, conformance, pack, cross-medium, audit-facts), each through its
    JavaScript reference, which tools/zane/parity.js proves prints what zane prints; the output is compared with the page's. */
@@ -221,7 +240,7 @@ function verifyCommands(problems) {
       const [script, ...lead] = REFERENCE[cmd[1]];
       const r = spawnSync(process.execPath, [R(script), ...lead, ...cmd.slice(2)], { cwd: R('.'), encoding: 'utf8' });
       const got = norm(r.stdout || ''), want = norm(lines.slice(1).join('\n'));
-      if (got !== want) problems.push(`${p}: the terminal for "${cmd.join(' ')}" is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
+      if (!sameRun(want, got)) problems.push(`${p}: the terminal for "${cmd.join(' ')}" is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
     }
   }
   return n;

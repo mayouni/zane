@@ -9,9 +9,8 @@
 //!
 //! THE REGISTRY BELOW IS A SECOND COPY of the one in tools/site-shell.js (SECTIONS, FAMILIES, PAGES). Until the
 //! JavaScript is retired, a page added to one is added to the other, in the same commit; tools/zane/parity.js fails on
-//! any difference between the two runs, which is how a copy that drifts is caught. Two branches of the script are not
-//! carried, because no page of the registry reaches them: the stub pages (`stub`) and the footer's Reader link
-//! (`pending`).
+//! any difference between the two runs, which is how a copy that drifts is caught. One branch of the script is not
+//! carried, because no page of the registry reaches it: the footer's Reader link (`pending`).
 //!
 //! It reads and writes the tree it is run in: run it from the repository's root.
 
@@ -812,6 +811,7 @@ fn checkReleases(a: Allocator, problems: *List) !void {
 
 const AffirmAllowed = struct { file: []const u8, words: []const u8, reason: []const u8 };
 const affirm_allowed = [_]AffirmAllowed{
+    .{ .file = "site/haro.html", .words = "two checks the condition language cannot yet express", .reason = "a technical table of the forged court: the seam column names what Haro's condition language expresses, a fact about Haro and not a lack of Zane (Central, 2026-11-09)" },
     .{ .file = "site/gotchas/reading.html", .words = "not yet been articulated by your teams", .reason = "the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel" },
 };
 fn checkAffirm(a: Allocator, problems: *List) !void {
@@ -820,12 +820,15 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
     try addOnce(a, &files, "index.html");
     try addOnce(a, &files, "README.md");
     for (pages) |p| try addOnce(a, &files, p.file);
-    const phrase = try re.compile(a, "\\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven)\\b", "i");
-    const lead = try re.compile(a, "(?:^|[.!?]\\s)(Limit:|Not shown:)", "");
+    const phrase = try re.compile(a, "\\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven|unproved|not proved|no study|no user|not shown|cannot yet|not verified|nobody looked|not written|never(?:\\W+\\w+){0,3}?\\W+run)\\b", "i");
+    const lead = try re.compile(a, "(?:^|[.!?]\\s)(Limit:)", "");
+    const meta = try re.compile(a, "<meta\\b[^>]*\\b(?:name=\"description\"|property=\"og:description\")[^>]*>", "g");
+    const content = try re.compile(a, "\\bcontent=\"([^\"]*)\"", "");
     const block = try re.compile(a, "<(?:p|li|div|h[1-6]|td|th|dd|dt|br|tr|figcaption|blockquote|section|header)\\b[^>]*>", "gi");
     const tag = try re.compile(a, "<[^>]*>", "g");
     const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
-    const html_code = try re.compile(a, "<(script|style|pre|code)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const html_code = try re.compile(a, "<(script|style|code)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const html_pre = try re.compile(a, "<pre\\b(?![^>]*\\bterm\\b)[^>]*>[\\s\\S]*?<\\/pre>", "g");
     const md_fence = try re.compile(a, "```[\\s\\S]*?```", "g");
     const md_tick = try re.compile(a, "`[^`\\n]*`", "g");
     for (files.items) |f| {
@@ -838,11 +841,20 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
         } else {
             text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
             text = try re.replaceFn(a, &html_code, text, a, newlinesOnly);
+            text = try re.replaceFn(a, &html_pre, text, a, newlinesOnly);
         }
         var it = std.mem.splitScalar(u8, text, '\n');
         var i: usize = 0;
         while (it.next()) |line| : (i += 1) {
             var said: List = .empty;
+            var metas = re.iterate(&meta, line);
+            while (metas.next()) |mm| {
+                const tagtext = line[mm.start..mm.end];
+                const c = re.exec(&content, tagtext, 0) orelse continue;
+                const seg = try plain(a, c.get(tagtext, 1).?);
+                if (re.exec(&phrase, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
+                if (re.exec(&lead, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
+            }
             var from: usize = 0;
             var ms = re.iterate(&block, line);
             var done = false;

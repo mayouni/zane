@@ -276,98 +276,6 @@ ${pending ? `        <a href="${to(pending.file)}">Reader</a>\n` : ''}        <a
 </footer>`;
 }
 
-/* ---- the stubs: two pages that exist only so that the menu leads somewhere true -------------------- */
-function stub(p) {
-  const s = p.stub === 'thinking' ? {
-    kicker: 'Approach · being built',
-    title: 'The thinking behind an intent-driven interface',
-    sub: 'This section holds the reasoning, the grid of what an interface must let a person do, and the comparison with what already exists. The essay is being written; what exists today is the documents it will draw on.',
-    h2: 'The design documents',
-    body: `<p>The reasoning is written in the repository. In the order a reader would take them:
-    <a href="../doc/ARCHITECTURE.md">the founding architecture</a> (intent before widgets, three layers);
-    <a href="../doc/THE-INTERACTION-MODEL.md">the interaction model</a> (one declaration, many renderings, one law);
-    <a href="../doc/SENSORS-AND-ACTUATORS.md">sensors and actuators</a> (what the closed vocabulary survives);
-    <a href="../doc/STZSENSE.md">stzSense</a> (how style is declared);
-    <a href="../doc/GUI-SYSTEM.md">a GUI system, read by the law</a>;
-    <a href="../doc/design/COVERAGE.md">the coverage map</a> (where the law speaks and where it is silent).</p>
-    <p>One more is proposed and not ratified: <a href="../doc/THE-SECOND-FOUNDING.md">the Second Founding</a>, the wider design. Nothing on this site rests on it.</p>
-    <p>What is already on the site: <a href="positioning.html">the comparison</a> with the practices a reader already uses.</p>`,
-    h2b: 'What this site does not show yet',
-    body2: `<p>The essay, the coverage grid as a page, and the claims with their limits are not written. The grid is designed and measured and not verified by a person.</p>`
-  } : p.stub === 'media' ? {
-    kicker: 'Channels · being built',
-    title: 'One declaration, ten channels',
-    sub: 'This section is being built. What exists today is data and instruments in the repository; this page names them and says what the site does not yet show. A channel is what the language and the law call a medium.',
-    h2: 'What exists today',
-    body: `<p>The ten channels a declaration can name, and what each carries, are published as data in <a href="../conformance/media.json"><code>conformance/media.json</code></a>
-    (the keyword in a declaration is <code>SURFACE_AS</code>, and the diagnostics say <em>medium</em>).
-    A verb a channel cannot carry is refused by the verifier, and the signal vocabulary and the statuses that render as silence are in
-    <a href="../conformance/signal.json"><code>conformance/signal.json</code></a>.</p>
-    <p>The instrument that checks that renderings differ only as that data predicts is <code>tools/zane/cross-medium.js</code>, and the map of where the law has
-    something to say, and where it is silent, is <code>doc/design/COVERAGE.md</code> in the repository.</p>`,
-    h2b: 'What this site does not show yet',
-    body2: `<p>The pages that present the channels, the coverage grid and its gaps, and the cross-channel proof are not written. Nobody has perceived any of these channels for this grid, so
-    the grid is designed and measured and not verified by a person.</p>`
-  } : {
-    kicker: 'Try · things to run',
-    title: 'Run it on an interface and see what it finds',
-    sub: 'The audit measures what an interface actually paints, not what its source declares: computed size, true contrast, the trail, the room a block has, and the menu against the tree.',
-    h2: 'The UI audit',
-    body: `<p>It runs in a browser on any same-origin interface and reports, for each finding, the rule it rests on. It measures Rules 105, 107, 108, 114, 115 and 116.
-    <a href="../tools/ui-audit.html">Open the UI audit</a>.</p>
-    <p>A colour it cannot read is reported as <em>not decided</em>, naming the colour, and never skipped.</p>`,
-    h2b: 'Not here yet',
-    body2: `<p>A second audit, for a screenshot of an application nobody on this project owns, is designed and its fact schema is written; it is described in
-    <code>doc/design/AUDIT-FACTS.md</code> in the repository. No real application's screenshot has been run through it. A single-file build of the tools is planned and not built.</p>`
-  };
-  return `<header class="page">
-  <div class="narrow">
-    <!-- shell:trail --><!-- /shell:trail -->
-    <p class="kicker">${s.kicker}</p>
-    <h1>${s.title}</h1>
-    <p class="sub">${s.sub}</p>
-  </div>
-</header>
-
-<section>
-  <div class="narrow">
-    <h2>${s.h2}</h2>
-    ${s.body}
-  </div>
-</section>
-
-<section class="alt">
-  <div class="narrow">
-    <h2>${s.h2b}</h2>
-    ${s.body2}
-  </div>
-</section>`;
-}
-function stubPage(p) {
-  const s = { thinking: 'Approach — the thinking behind an intent-driven interface', media: 'Channels — one declaration, ten channels' }[p.stub] || 'Try — run it on an interface';
-  return `<!DOCTYPE html>
-<html lang="en" data-vibe="curator">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${s}</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css">
-</head>
-<body>
-
-<!-- shell:menu --><!-- /shell:menu -->
-
-${stub(p)}
-
-<!-- shell:footer --><!-- /shell:footer -->
-
-<script src="stz.js"></script>
-</body>
-</html>
-`;
-}
-
 /* ---- applying the shell to a page's text ------------------------------------------------------- */
 const fence = (name, inner) => `<!-- shell:${name} -->\n${inner}\n<!-- /shell:${name} -->`;
 const fenceRe = name => new RegExp(`<!-- shell:${name} -->[\\s\\S]*?<!-- /shell:${name} -->`);
@@ -651,15 +559,20 @@ function checkReleases(problems) {
    reads. Scripts, styles, comments, code samples (pre, code, and in README.md fenced and backticked code) and diagnostic names are
    not read. AFFIRM_ALLOWED excuses one line at a time, each entry with its reason; an entry that matches no line fails. What is
    unmeasured is recorded in doc/, doc/design/BINARY.md, the release notes and .central/, never on a page. */
-const AFFIRM_RE = /\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven)\b/i;
+const AFFIRM_RE = /\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven|unproved|not proved|no study|no user|not shown|cannot yet|not verified|nobody looked|not written|never(?:\W+\w+){0,3}?\W+run)\b/i;
+/* the description a search engine or a link preview shows is read as the page's text */
+const META_RE = /<meta\b[^>]*\b(?:name="description"|property="og:description")[^>]*>/g;
 const AFFIRM_ALLOWED = [
+  { file: 'site/haro.html', words: 'two checks the condition language cannot yet express',
+    reason: 'a technical table of the forged court: the seam column names what Haro\'s condition language expresses, a fact about Haro and not a lack of Zane (Central, 2026-11-09)' },
   { file: 'site/gotchas/reading.html', words: 'not yet been articulated by your teams',
     reason: 'the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel' },
 ];
 const blank = m => m.replace(/[^\n]/g, '');
 function readable(f, text) {
   if (f.endsWith('.md')) return text.replace(/```[\s\S]*?```/g, blank).replace(/`[^`\n]*`/g, blank).replace(/<!--[\s\S]*?-->/g, blank);
-  return text.replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, blank);
+  /* a terminal (pre class="term") is read, since it shows the reader what a run prints; a declaration or another code sample is not */
+  return text.replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style|code)\b[\s\S]*?<\/\1>/g, blank).replace(/<pre\b(?![^>]*\bterm\b)[^>]*>[\s\S]*?<\/pre>/g, blank);
 }
 function checkAffirm(problems) {
   const used = new Set();
@@ -668,13 +581,14 @@ function checkAffirm(problems) {
     const file = path.join(ROOT, f);
     if (!fs.existsSync(file)) continue;
     readable(f, fs.readFileSync(file, 'utf8')).split('\n').forEach((line, i) => {
-      /* a block opens a new sentence, so "Limit:" and "Not shown:" are judged at the start of each block of the line and of each sentence in it */
+      /* a block opens a new sentence, so "Limit:" is judged at the start of each block of the line and of each sentence in it */
+      const metas = [...line.matchAll(META_RE)].map(m => (/\bcontent="([^"]*)"/.exec(m[0]) || [])[1]).filter(x => x !== undefined).map(plain);
       const blocks = line.split(/<(?:p|li|div|h[1-6]|td|th|dd|dt|br|tr|figcaption|blockquote|section|header)\b[^>]*>/i).map(s => plain(s.replace(/<[^>]*>/g, ' ')));
       const said = [];
-      for (const b of blocks) {
+      for (const b of [...metas, ...blocks]) {
         const m = AFFIRM_RE.exec(b);
         if (m) said.push(m[1]);
-        const lead = /(?:^|[.!?]\s)(Limit:|Not shown:)/.exec(b);
+        const lead = /(?:^|[.!?]\s)(Limit:)/.exec(b);
         if (lead) said.push(lead[1]);
       }
       if (!said.length) return;
@@ -762,10 +676,8 @@ function main(argv) {
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);
     let text;
-    if (!fs.existsSync(file)) {
-      if (p.stub && write) text = stubPage(p);
-      else { problems.push(`${p.file}: missing`); continue; }
-    } else text = fs.readFileSync(file, 'utf8');
+    if (!fs.existsSync(file)) { problems.push(`${p.file}: missing`); continue; }
+    text = fs.readFileSync(file, 'utf8');
     const crlf = text.includes('\r\n');
     const bom = text.charCodeAt(0) === 0xFEFF;
     const r = apply(p, bom ? text.slice(1) : text);
