@@ -6,9 +6,9 @@
 <title>Frameworks and languages — four UI frameworks and five description languages compared with Zane</title>
 <meta name="description" content="Four UI frameworks (React, SwiftUI, Jetpack Compose and Flutter) and five description languages (task models, UIML, XForms, VoiceXML and SCXML) compared with Zane. Each row is written from the framework's or language's own published page and states what Zane takes from it and what it adds.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=35fa60d3">
+<link rel="stylesheet" href="stz.css?v=ca9a78d2">
 </head>
-<body>
+<body data-archetype="article">
 
 <!-- shell:menu -->
 <div class="bars">
@@ -64,7 +64,13 @@
   <ul>
     <li><a href="positioning.html">Overview</a></li>
     <li><a href="practices.html">Practices</a></li>
-    <li><a aria-current="page" href="frameworks.html">Frameworks and languages</a></li>
+    <li><a aria-current="page" href="frameworks.html">Frameworks and languages</a>
+      <ul class="sub">
+        <li><a href="#four-ui-frameworks">UI frameworks</a></li>
+        <li><a href="#description-languages-old-and-new">UI languages</a></li>
+        <li><a href="#read-and-left-out">Sources set aside</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -72,7 +78,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="four-ui-frameworks">The four UI frameworks that build the screen, compared with Zane</h2>
+    <h2 id="four-ui-frameworks" data-outline="UI frameworks">The four UI frameworks that build the screen, compared with Zane</h2>
     <p>The four frameworks build the screen. They are compared on what each says of itself, and they do not compete with a declaration: a surface declared in Zane could be built in any of them, and this page does not claim that any integration exists.</p>
     <table class="board position">
       <thead><tr><th>Name, and its page</th><th>What it decides, and when</th><th>What Zane takes</th><th>What Zane adds</th></tr></thead>
@@ -109,7 +115,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="description-languages-old-and-new">The description languages that describe an interface, from task models to SCXML</h2>
+    <h2 id="description-languages-old-and-new" data-outline="UI languages">The description languages that describe an interface, from task models to SCXML</h2>
     <p>The description languages describe an interface, a form, a dialog or a state machine, in a notation that tools can exchange. Two of them, VoiceXML and SCXML, come from a working group that also made the standards for speech, and one, UIML, comes from a different body. The model-based work is the closest relative of Zane.</p>
     <table class="board position">
       <thead><tr><th>Name, and its page</th><th>What it decides, and when</th><th>What Zane takes</th><th>What Zane adds</th></tr></thead>
@@ -151,7 +157,7 @@
 
 <section id="read-and-left-out">
   <div class="narrow">
-    <h2>The sources left out on purpose, and the parts that were not read</h2>
+    <h2 data-outline="Sources set aside">The sources left out on purpose, and the parts that were not read</h2>
     <p><b>Left out on purpose.</b> ISO/IEC 24744 sometimes appears in lists of model-based approaches. Its published scope is a metamodel for defining software-engineering development methodologies, not user
     interfaces, so it has no row. <a class="leaves" href="https://www.iso.org/standard/62644.html" target="_blank" rel="noopener">The standard's page at ISO</a> states that scope.</p>
     <p><b>Not read.</b> Apple's documentation pages build themselves in the browser, so the SwiftUI row rests on an overview and a search, as its cell says. The XForms, VoiceXML and SCXML

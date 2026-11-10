@@ -1,131 +1,154 @@
 /* ==========================================================================
-   stz.css — the Zane site design system.
-   Two lawful vibes (Article VI): curator (charter — midnight indigo,
-   garnet rose, porcelain) and guardian (terminal — green phosphor on
-   black, monospace). Deliberately distinct from StzWeb's teal-and-orange:
-   two Softanza projects, two liveries, one law.
-   The pages that link this file obey the constitution they describe:
-   no external requests, no animation, stable layout, keyboard-sovereign.
+   stz.css — the Zane site, set on Zane's design system (doc/design/DESIGN-SYSTEM.md, ZANE-DESIGN-01 M2).
+   Every size, space and colour below comes from a token, and the tokens are written once, here. Two cultures (Article VI):
+   Modern (curator: midnight indigo, garnet, porcelain) and Retro (guardian: green phosphor on black, monospace). A culture
+   sets its colours, its font, its radius and its shadow, under the same names and meanings; it never sets a size or a space.
+   `zane site shell` refuses a size or a colour written outside these blocks (K01, K09), and the UI audit reads the painted
+   page against checks K01 to K22. The pages that link this file obey the constitution they describe: no external requests,
+   no animation, stable layout, keyboard-sovereign.
    ========================================================================== */
 :root {
-  --deep: #241d49; --deep-2: #181239; --accent: #e04a6e;
-  --halo: #eae7f6; --paper: #f4f3f9; --ink: #211d33;
-  --muted: #4a4661; --line: #d8d4e6; --card: #fdfcff;
-  --accent-ink: #8f1d3d; --accent-lite: #ff8fa8;
-  --on-accent: #1c0710; --ok: #1d6b4f;
-  /* contrast: #FFFFFF | #7A1633 | 10.6 | the primary button's label on its ground, Modern (SITE-3.md 5.3: 7:1 or more) */
-  --btn-bg: #7a1633; --btn-fg: #ffffff;
-  --code-bg: #fdfcff; --code-ink: #211d33; --code-line: #d8d4e6; --code-rule: #8f1d3d;
-  --c-comment: #5a5578; --c-key: #8f1d3d; --c-str: #7a4a00; --c-name: #1d5f8c;
-  --c-dim: #4a4661; --c-bad: #a33422; --c-good: #1d6b4f; --c-prompt: #211d33;
-  --tint: #ebe8f5;               /* the band under the page head: a paper tone, not an emphasis */
-  --shadow: 0 1px 2px rgba(33,29,51,.04), 0 6px 18px rgba(33,29,51,.06);   /* the one resting shadow (Rule 10) */
-  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --black: 900;
+  /* type: six sizes and no others (section 9 (a): "21 px everywhere"); 18 px is the floor for every text, the footer included */
+  --size-small: 1.125rem; --size-reading: 1.3125rem; --size-lead: 1.5rem; --size-section: 1.75rem; --size-title: 2.125rem;
+  --size-hero: 2.6rem;
+  --weight-regular: 400; --weight-strong: 800;
+  --leading-reading: 1.7; --leading-title: 1.2;
+  /* space: inside a component, between items, between groups, between regions; and the gutter of every container */
+  --space-1: .5rem; --space-2: 1rem; --space-3: 2rem; --space-4: 4rem; --gutter: 1.4rem;
+  /* form, touch, motion, chrome */
+  --hairline: 1px; --ring: 2px; --target-phone: 48px; --target: 24px; --motion-report: 150ms; --motion-nav: 0ms; --bar-height: 3rem;
+}
+/* a culture's tokens hold on the page and on any element that sets the culture (an exhibit shows both at once, Article VI) */
+:root, [data-vibe="curator"] {
+  /* ---- Modern: colour (chrome, then the five semantic values and the neutral), font, radius, shadow ---- */
+  /* contrast: #211D33 | #F4F3F9 | 15.2 | reading text on the page, Modern */
+  --paper: #f4f3f9; --surface: #fdfcff; --ink: #211d33; --ink-2: #4a4661; --line: #d8d4e6; --edge: #7a7593;
+  /* contrast: #8F1D3D | #F4F3F9 | 8.3 | a link on the page, Modern */
+  --link: #8f1d3d;
+  /* contrast: #FFFFFF | #7A1633 | 10.6 | the primary action's label on its ground, Modern */
+  --action: #7a1633; --on-action: #ffffff; --focus: #e04a6e;
+  /* the bar the menu and the footer stand on, and the photograph's panel: the culture's own surface (added in M2, section 6.2) */
+  /* contrast: #FFFFFF | #241D49 | 14.9 | the menu's words on the bar, Modern */
+  --bar: #241d49; --on-bar: #ffffff;
+  --success: #17583f; --warning: #6b4a00; --danger: #8e1f13; --info: #1d4f78; --muted: #4a4661; --meta: #4a4661;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* the reading measure: about 60 to 75 characters of running text in this culture's font (K03 measures the painted line) */
+  --measure-min: 27em; --measure-max: 33em;
+  --radius: 8px; --shadow: 0 1px 2px rgba(33,29,51,.04), 0 6px 18px rgba(33,29,51,.06);
+}
+/* the names the pages and the older rules still read, each an alias of a token above, with no value of its own; declared on every
+   element that sets a culture, because an alias is resolved where it is declared */
+:root, [data-vibe] {
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --deep: var(--bar); --deep-2: var(--bar); --halo: var(--on-bar); --accent: var(--focus); --accent-ink: var(--link);
+  --accent-lite: var(--on-bar); --on-accent: var(--on-action); --ok: var(--success); --card: var(--surface);
+  --btn-bg: var(--action); --btn-fg: var(--on-action); --tint: color-mix(in srgb, var(--ink) 5%, var(--paper));
+  --code-bg: var(--surface); --code-ink: var(--ink); --code-line: var(--line); --code-rule: var(--edge);
+  /* code is highlighted in four roles drawn from the tokens (section 9 (d)): a comment, a keyword, a string, a verdict */
+  --c-comment: var(--ink-2); --c-key: var(--link); --c-str: var(--meta); --c-name: var(--ink); --c-dim: var(--ink-2);
+  --c-bad: var(--danger); --c-good: var(--success); --c-prompt: var(--ink-2);
+  --black: var(--weight-strong);
 }
 [data-vibe="guardian"] {
-  --deep: #060b07; --deep-2: #030603; --accent: #46e07f;
-  --halo: #bcd9c0; --paper: #060b07; --ink: #cfe0cf;
-  --muted: #8fa992; --line: #1e2f22; --card: #0b120d;
-  --accent-ink: #46e07f; --accent-lite: #46e07f;
-  --on-accent: #060b07; --ok: #7ee2ae;
-  /* contrast: #060B07 | #46E07F | 11.6 | the primary button's label on its ground, Retro */
-  --btn-bg: #46e07f; --btn-fg: #060b07;
-  --tint: #0b120d; --shadow: none;   /* a terminal does not float cards */
-  /* in Retro a code block is what a terminal is: the culture is the exhibit */
-  --code-bg: #0b120d; --code-ink: #cfe0cf; --code-line: #1e2f22; --code-rule: #46e07f;
-  --c-comment: #9a93c0; --c-key: #ff8fa8; --c-str: #e6c987; --c-name: #9fd8c0;
-  --c-dim: #7d8f85; --c-bad: #ff9d8a; --c-good: #7ee2ae; --c-prompt: #5cc296;
+  /* ---- Retro ---- */
+  /* contrast: #CFE0CF | #060B07 | 15.1 | reading text on the page, Retro */
+  --paper: #060b07; --surface: #0b120d; --ink: #cfe0cf; --ink-2: #b4c9b5; --line: #2c4532; --edge: #6f9a77;
+  --link: #46e07f; --action: #46e07f; --on-action: #060b07; --focus: #7ee2ae;
+  --bar: #030603; --on-bar: #cfe0cf;
+  --success: #7ee2ae; --warning: #e6c987; --danger: #ff9d8a; --info: #9fd2f5; --muted: #a9b9ab; --meta: #a9b9ab;
+  --font: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  /* a monospaced letter is wider, so the same 60 to 75 characters take more ems */
+  --measure-min: 33em; --measure-max: 40em;
+  --radius: 0; --shadow: none;
 }
-[data-vibe="guardian"] body { font-family: var(--mono); }
 [data-vibe="guardian"] h1, [data-vibe="guardian"] h2 { letter-spacing: 0; }
-[data-vibe="guardian"] .stamp { background: transparent; border: 2px solid var(--accent); }
+[data-vibe="guardian"] .stamp { background: transparent; }
 [data-vibe="guardian"] .stamp * { color: var(--accent) !important; }
-[data-vibe="guardian"] .card { box-shadow: none; }
 
 * { box-sizing: border-box; }
 /* scrollbars belong to the page, not to the operating system */
-* { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+html, * { scrollbar-color: var(--edge) var(--paper); scrollbar-width: thin; }
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: var(--line); border-radius: 99px;
   border: 3px solid var(--paper);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-2); }
 /* navigation arrives at once: motion is never decoration (Rule 112) */
 body {
   margin: 0; background: var(--paper); color: var(--ink);
-  font: 1.25rem/1.75 var(--sans); -webkit-font-smoothing: antialiased;
+  font: var(--size-reading)/var(--leading-reading) var(--font); -webkit-font-smoothing: antialiased; text-wrap: pretty;
 }
-/* a link is told by its colour and is underlined only under the pointer or the keyboard's focus: underlines and bold everywhere polluted
-   the page (the author, 2026-11-06: "hyperlinks are polluting the page with their intrusive underlines+bold ... let it change them on
-   mouse hover") */
-a { color: var(--accent-ink); text-decoration: none; }
-a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* a link in running text carries the plain underline at rest, at normal weight (section 9 (b), the Principal 2026-11-09: "Underlined
+   always"; a cue that exists only under the pointer does not exist on a phone); a link in a bar, a list or a table is the word alone,
+   its place saying it is navigation */
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: from-font; text-underline-offset: .18em; }
+nav a, .board a, table a { text-decoration: none; }
+nav a:hover, .board a:hover, table a:hover { text-decoration: underline; }
+:focus-visible { outline: var(--ring) solid var(--focus); outline-offset: 2px; }
 /* a checkbox or a radio takes its culture's action colour, never the platform's default blue (Article VI: a culture owns every
    state of its controls; the author, 2026-11-09: "checkboxes should be in green not blue in this retro mode!") */
-input[type="checkbox"], input[type="radio"] { accent-color: var(--btn-bg); }
+input[type="checkbox"], input[type="radio"], input[type="range"], progress { accent-color: var(--action); }
 code, pre, kbd { font-family: var(--mono); }
-code { background: var(--card); border: 1px solid var(--line); border-radius: 4px;
+[data-vibe="guardian"] code, [data-vibe="guardian"] pre, [data-vibe="guardian"] kbd { font-family: var(--font); }
+code { background: var(--surface); border: var(--hairline) solid var(--line); border-radius: 4px;
   padding: 0 .3em; font-size: 1em; }
-kbd { border: 1px solid var(--muted); border-radius: 4px; padding: 0 .35em; font-size: 1em; }
-.wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.4rem; }
+kbd { border: var(--hairline) solid var(--edge); border-radius: 4px; padding: 0 .35em; font-size: 1em; }
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter); }
 /* one container for the bars, the head and the page, so everything shares a left edge; prose keeps its own measure (p, ul, .lead) */
-.narrow { max-width: 72rem; margin: 0 auto; padding: 0 1.4rem; }
+.narrow { max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter); }
 
 /* ---- nav ---- */
 /* the main menu and the section's band stick together under the top of the screen */
 .bars { position: sticky; top: 0; z-index: 10; }
 nav.site {
-  background: var(--deep); color: var(--halo);
+  background: var(--bar); color: var(--on-bar);
 }
-nav.site .wrap { display: flex; align-items: center; gap: .5rem 1.2rem; padding: .8rem 1.4rem; flex-wrap: wrap; }
+nav.site .wrap { display: flex; align-items: center; gap: var(--space-1) 1.2rem; padding: .6rem var(--gutter); flex-wrap: wrap; min-height: var(--bar-height); }
 /* the menu holds one row where the window allows, and wraps its words where it does not: no word is cut and nothing scrolls sideways (the
    author's screenshot at 548 px showed "Language" cut and "Approach" under the select); GitHub and Theme move to a row of their own first */
 nav.site .menu { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem 1.2rem; flex: 1 1 auto; min-width: 0; }
 nav.site .menu > * { flex: none; }
 /* the menu's words at a reading size (the author, 2026-11-06: "the menu bar texts are small!") */
-nav.site .brand { font-weight: var(--black); font-size: 1.3rem; letter-spacing: .04em;
-  color: var(--accent-lite); text-decoration: none; text-transform: uppercase; }
-nav.site a:not(.brand) { color: var(--halo); text-decoration: none; font-size: 1.2rem; opacity: .9; }
+nav.site .brand { font-weight: var(--weight-strong); font-size: var(--size-reading); letter-spacing: .04em;
+  color: var(--on-bar); text-decoration: none; text-transform: uppercase; }
+nav.site a:not(.brand) { color: var(--on-bar); text-decoration: none; font-size: var(--size-reading); display: inline-flex; align-items: center; min-height: var(--target-phone); }
 nav.site a:not(.brand):hover { text-decoration: none; }
-nav.site a:not(.brand):hover { opacity: 1; color: var(--accent-lite); }
-nav.site a.here { color: var(--accent-lite); opacity: 1; border-bottom: 2px solid var(--accent); }
+nav.site a:not(.brand):hover { text-decoration: underline; }
+nav.site a.here { font-weight: var(--weight-strong); }
 /* GitHub and the style picker at the right of the top bar (the author, 2026-11-06); the picker is a select (Rule 106 allows it: both states
    are options, the current one is shown) */
 nav.site .tools { display: flex; align-items: center; gap: 1.5rem; flex: none; margin-left: auto; }
 /* the word GitHub, then its mark, one link; a thin rule and space set it apart from the Theme select */
-nav.site .tools .github { display: inline-flex; align-items: center; gap: .45rem; color: var(--halo); opacity: .9;
-  padding-right: 1.5rem; border-right: 1px solid rgba(234, 231, 246, .35); }
-nav.site .tools .github:hover { opacity: 1; color: var(--accent-lite); }
+nav.site .tools .github { display: inline-flex; align-items: center; gap: .45rem; color: var(--on-bar); padding-right: 1.5rem;
+  border-right: var(--hairline) solid color-mix(in srgb, var(--on-bar) 35%, transparent); }
+nav.site .tools .github:hover { text-decoration: underline; }
 nav.site .tools .github svg { width: 1.35rem; height: 1.35rem; display: block; }
 .vibe-picker {
   display: flex; align-items: center; gap: .5rem;
 }
-.vibe-picker label { color: var(--halo); opacity: .85; font-size: 1.1rem; }
+.vibe-picker label { color: var(--on-bar); font-size: var(--size-small); }
 .vibe-picker select {
-  font: 1.1rem var(--sans); color: var(--halo); background: rgba(0,0,0,.28);
-  border: 1.5px solid rgba(234,231,246,.4); border-radius: 99px;
-  padding: .3rem 1.6rem .3rem .8rem; cursor: pointer; min-height: 34px;
+  font: var(--size-small) var(--font); color: var(--on-bar); background: var(--bar);
+  border: var(--hairline) solid color-mix(in srgb, var(--on-bar) 45%, transparent); border-radius: 99px;
+  padding: .3rem 1.6rem .3rem .8rem; cursor: pointer; min-height: var(--target-phone);
 }
-.vibe-picker select:hover { border-color: var(--accent-lite); }
-.vibe-picker option { font-size: 1rem; color: var(--ink); background: var(--card); }
+.vibe-picker select:hover { border-color: var(--on-bar); }
+.vibe-picker option { font-size: var(--size-small); color: var(--ink); background: var(--surface); }
 /* the open list in the theme's own colours (the author, 2026-11-06: "the selected background of the combo should embrace the current theme
    (retro or modern) not the standard browser theme (that ugly blue)"): a customizable select draws the list in the bar's colours and the
    option under the pointer or the keyboard in the theme's accent; a browser without it keeps its native list */
 @supports (appearance: base-select) {
   .vibe-picker select, .vibe-picker select::picker(select) { appearance: base-select; }
   .vibe-picker select { display: inline-flex; align-items: center; gap: .5rem; }
-  .vibe-picker select::picker-icon { color: var(--halo); }
+  .vibe-picker select::picker-icon { color: var(--on-bar); }
   .vibe-picker select::picker(select) {
-    background: var(--deep); color: var(--halo); border: 1px solid rgba(234, 231, 246, .35); border-radius: 10px;
-    padding: .3rem; margin-top: .3rem; box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    background: var(--bar); color: var(--on-bar); border: var(--hairline) solid color-mix(in srgb, var(--on-bar) 35%, transparent); border-radius: 10px;
+    padding: .3rem; margin-top: .3rem; box-shadow: var(--shadow);
   }
-  .vibe-picker option { font: 1.1rem var(--sans); color: var(--halo); background: transparent; padding: .45rem .9rem; border-radius: 6px; }
-  .vibe-picker option:hover, .vibe-picker option:focus-visible { background: var(--accent); color: var(--on-accent); outline: none; }
+  .vibe-picker option { font: var(--size-small) var(--font); color: var(--on-bar); background: transparent; padding: .45rem .9rem; border-radius: 6px; }
+  .vibe-picker option:hover, .vibe-picker option:focus-visible { background: var(--action); color: var(--on-action); outline: none; }
   .vibe-picker option:checked { font-weight: 700; }
 }
 footer.site .bar, footer .bar { display: flex; align-items: center; gap: 1.4rem;
@@ -133,19 +156,19 @@ footer.site .bar, footer .bar { display: flex; align-items: center; gap: 1.4rem;
 
 /* links that leave for another environment say so */
 a.leaves::after {
-  content: " ↗"; font-size: .9em; opacity: .8;
+  content: " ↗"; font-size: 1em;
 }
 
 /* ---- breadcrumbs: a visible trail back (Rule 25) ---- */
 .crumbs {
   display: flex; flex-wrap: wrap; align-items: center; gap: .15rem;
-  font: 1rem var(--mono); margin: 0 0 1.8rem; padding: 0;
+  font: var(--size-small) var(--font); margin: 0 0 1.8rem; padding: 0;
 }
 .crumbs a, .crumbs .here-crumb {
   display: inline-flex; align-items: center; padding: .3rem .9rem;
   border-radius: 99px; text-decoration: none; white-space: nowrap;
-  background: rgba(234, 231, 246, .08);
-  border: 1px solid rgba(234, 231, 246, .28); color: var(--halo);
+  background: transparent;
+  border: var(--hairline) solid var(--line); color: var(--link); min-height: var(--target);
 }
 /* No hover repaint (Rule 115). The pointer already becomes a hand; repainting
    a step in the current-position colour would say "you are here" about a place
@@ -154,10 +177,10 @@ a.leaves::after {
 /* one depth of the path, holding every page that lives at it */
 .crumbs .level { display: inline-flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
 .crumbs .here-crumb {
-  color: var(--accent-lite); border-color: var(--accent-lite);
-  background: rgba(224, 74, 110, .16);
+  color: var(--ink); border-color: var(--edge);
+  background: transparent;
 }
-.crumbs .sep { color: var(--halo); opacity: .5; padding: 0 .1rem; }
+.crumbs .sep { color: var(--ink-2); padding: 0 .1rem; }
 /* visually hidden, still a navigation landmark for assistive technology (Rules 60, 104, 108) */
 .trail-hidden {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
@@ -168,12 +191,11 @@ header.page .crumbs a, header.page .crumbs .here-crumb {
   background: transparent; border-color: var(--line); color: var(--accent-ink);
 }
 header.page .crumbs .here-crumb { color: var(--ink); border-color: var(--accent); }
-header.page .crumbs .sep { color: var(--muted); opacity: 1; }
+header.page .crumbs .sep { color: var(--ink-2); }
 
 /* ---- page hero (smaller than the front-door poster) ---- */
 header.page {
   background: var(--tint); color: var(--ink); padding: 2.6rem 0 2.2rem;
-  border-bottom: 1px solid var(--line);
   position: relative; overflow: hidden;
 }
 /* a filigree from the façade in the front page's photograph (the lozenge, the scrolls, a rosette, the roof's steps), drawn in thin
@@ -184,7 +206,7 @@ header.page::after {
   /* as wide as the space right of the text: the window, less the page's margin, the 50rem of kicker, title and lead, and a 3rem gap */
   content: ""; position: absolute; right: 0; bottom: 0; aspect-ratio: 2 / 1; pointer-events: none;
   width: min(30rem, calc(100vw - max(0rem, (100vw - 72rem) / 2) - 54.4rem));
-  background: var(--accent-ink); opacity: .22;
+  background: var(--link); opacity: .22;
   -webkit-mask: url("assets/filigree.svg") right bottom / contain no-repeat; mask: url("assets/filigree.svg") right bottom / contain no-repeat;
 }
 header.page > .narrow { position: relative; z-index: 1; }
@@ -193,35 +215,35 @@ header.page > .narrow { position: relative; z-index: 1; }
 /* its width reaches the 8rem floor at a 62.4rem window (the 54.4rem of margin, text and gap, and 8rem), and it hides below that, phones
    included (Central, 2026-11-06: the 1120 px rule hid it from the author's 1085 px window) */
 @media (max-width: 62.4rem) { header.page::after { display: none; } }
-header.page .kicker { font: 1rem var(--mono); text-transform: uppercase; max-width: 50rem;
-  letter-spacing: .12em; color: var(--muted); margin: 0 0 .7rem; }
+header.page .kicker { font: var(--size-small) var(--mono); text-transform: uppercase; max-width: 50rem;
+  letter-spacing: .12em; color: var(--ink-2); margin: 0 0 .7rem; }
 /* a page's title is set in sentence case, never capitals over several lines, and its lead runs as wide as it does, so the head reads
    as one block with no hole beside the text (the author, 2026-11-06) */
 header.page h1 {
-  margin: 0; font-weight: var(--black); max-width: 50rem;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.2; letter-spacing: -.005em;
-  color: var(--accent-ink);
+  margin: 0; font-weight: var(--weight-strong); max-width: 50rem;
+  font-size: var(--size-title); line-height: var(--leading-title); letter-spacing: -.005em;
+  color: var(--ink);
 }
-header.page .sub { color: var(--ink); font-size: 1.3rem; max-width: 50rem; margin: 1.2rem 0 0; }
-header.page a:not(.brand) { color: var(--accent-ink); }
-header.page code { background: var(--card); border-color: var(--line); color: var(--ink); }
+header.page .sub { color: var(--ink); font-size: var(--size-lead); max-width: 50rem; margin: 1.2rem 0 0; }
+header.page a:not(.brand) { color: var(--link); }
+header.page code { background: var(--surface); border-color: var(--line); color: var(--ink); }
 footer.site code {
-  background: rgba(0, 0, 0, .25); border-color: transparent; color: var(--halo);
+  background: transparent; border-color: color-mix(in srgb, var(--on-bar) 35%, transparent); color: var(--on-bar);
 }
 
 /* ---- the band: level 2, horizontal, fixed under the menu, at most five entries, the same on every page of its section
    (Rules 27, 115, 120) ---- */
-.skip { position: absolute; left: .6rem; top: -4rem; background: var(--card); color: var(--ink);
-  border: 2px solid var(--accent); border-radius: 8px; padding: .5rem .9rem; z-index: 20; }
+.skip { position: absolute; left: .6rem; top: -4rem; background: var(--surface); color: var(--ink);
+  border: var(--ring) solid var(--focus); border-radius: var(--radius); padding: .5rem .9rem; z-index: 20; }
 .skip:focus { top: .6rem; }
-nav.band { background: var(--card); border-bottom: 1px solid var(--line); }
-nav.band ul { list-style: none; margin: 0 auto; padding: 0 1.4rem; max-width: 72rem;
+nav.band { background: var(--surface); border-bottom: var(--hairline) solid var(--line); }
+nav.band ul { list-style: none; margin: 0 auto; padding: 0 var(--gutter); max-width: 72rem;
   display: flex; flex-wrap: wrap; gap: 0 1.8rem; }
 nav.band li { margin: 0; flex: none; }
 /* no hover repaint: the pointer already becomes a hand, and a place the reader is not must not look like "here" (Rule 115) */
-nav.band a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none;
-  white-space: nowrap; font-size: 1.1rem; border-bottom: 3px solid transparent; }
-nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent); }
+nav.band a { display: inline-flex; align-items: center; min-height: var(--target-phone); color: var(--ink); text-decoration: none;
+  white-space: nowrap; font-size: var(--size-small); border-bottom: 3px solid transparent; }
+nav.band a[aria-current] { font-weight: var(--weight-strong); border-bottom-color: var(--link); }
 
 /* ---- level 3: a vertical list on the right, a page's family or its outline; a page without one takes the full width ---- */
 /* every list beside a page sits on its right, the family list as the outline does (the author, 2026-11-06: "some lateral menus are
@@ -229,7 +251,7 @@ nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent);
 .layout { display: block; }
 .layout.has-list {
   display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 2rem;
-  max-width: 72rem; margin: 0 auto; padding: 0 1.4rem;
+  max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter);
 }
 .layout.has-list > main { min-width: 0; grid-column: 1; grid-row: 1; }
 .layout.has-list > nav.list3 { grid-column: 2; grid-row: 1; }
@@ -242,27 +264,27 @@ nav.band a[aria-current] { font-weight: 800; border-bottom-color: var(--accent);
    following the page instead of scrolling inside itself. */
 nav.list3 {
   align-self: start; position: sticky; top: calc(var(--bars-h, 6rem) + 1.5rem); margin: 2.6rem 0 0;
-  border-left: 1px solid var(--line); padding: 0 0 0 .9rem;
+  border-left: var(--hairline) solid var(--line); padding: 0 0 0 .9rem;
 }
 nav.list3 ul { list-style: none; margin: 0; padding: 0; max-width: none; }
 nav.list3 li { margin: 0; }
-nav.list3 a { display: block; padding: .3rem .6rem; color: var(--ink); text-decoration: none; font-size: 1.1rem; line-height: 1.5;
+nav.list3 a { display: block; padding: .3rem .6rem; color: var(--ink); text-decoration: none; font-size: var(--size-small); line-height: 1.5; min-height: var(--target);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* no background for the entry under the pointer or the one being read (the author, 2026-11-06: "avoid this bad habit of having a
    background colour for the selected item and the hovered item"): the pointer turns an entry to the link colour, and the entry being read
    is set in bold ink */
-nav.list3 a:hover { color: var(--accent-ink); text-decoration: none; }
+nav.list3 a:hover { color: var(--link); text-decoration: underline; }
 /* a page's own name in a family list wraps rather than be cut: it must read as the menu names that page (Rule 116); a section's entry keeps one line */
 nav.list3:not(.sections) > ul > li > a { white-space: normal; }
-nav.list3 a[aria-current] { font-weight: 700; color: var(--ink); }
+nav.list3 a[aria-current] { font-weight: var(--weight-strong); color: var(--ink); }
 /* the outline's heading is a label, not an entry: gray, normal weight and a step smaller, so it never reads as something to click
    (the author, 2026-11-06: "On this page seems like a clickable option in the menu") */
-nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: 400; font-size: 1rem; color: var(--muted); max-width: none; }
+nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: var(--weight-regular); font-size: var(--size-small); color: var(--ink-2); max-width: none; }
 /* the outline's line starts under its heading, and the heading stands on the line's own edge with a space below it, outside the list,
    so it is never taken for the first entry (the author, 2026-11-06: "push it slightly to the left at the same level of the vertical line") */
 nav.list3.sections { border-left: 0; padding-left: 0; }
 nav.list3.sections .outline-title { padding: 0; margin: 0 0 1rem; }
-nav.list3.sections > ul { border-left: 1px solid var(--line); padding-left: .9rem; }
+nav.list3.sections > ul { border-left: var(--hairline) solid var(--line); padding-left: .9rem; }
 nav.list3 .sub { margin: 0 0 .3rem; }
 nav.list3 .sub a { padding-left: 1.4rem; }
 @media (max-height: 640px) { nav.list3 { position: static; } }
@@ -270,7 +292,7 @@ html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
 @media (max-width: 900px) {
   .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list > main, .layout.has-list > nav.list3 { grid-column: auto; grid-row: auto; }
-  nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
+  nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: var(--hairline) solid var(--line); padding: .8rem 0 0; }
   nav.list3.sections { padding-left: 0; }
   nav.list3.sections > ul { border-left: 0; padding-left: 0; }
 }
@@ -280,7 +302,7 @@ html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
 @media (max-width: 1151px) {
   .layout.has-list:has(figure.figure) { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list:has(figure.figure) > main, .layout.has-list:has(figure.figure) > nav.list3 { grid-column: auto; grid-row: auto; }
-  .layout.has-list:has(figure.figure) > nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: 1px solid var(--line); padding: .8rem 0 0; }
+  .layout.has-list:has(figure.figure) > nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: var(--hairline) solid var(--line); padding: .8rem 0 0; }
   .layout.has-list:has(figure.figure) > nav.list3.sections > ul { border-left: 0; padding-left: 0; }
 }
 
@@ -292,14 +314,16 @@ main > section:last-of-type { padding-bottom: 2.8rem; }
 /* every section sits on the page's own background: an alternating band left holes beside the outline and broke the reading flow
    (the author, 2026-11-06); a section is told from the next by its title and the space before it */
 h2 {
-  font-weight: var(--black); letter-spacing: -.01em; line-height: 1.25;
-  font-size: clamp(1.3rem, 2.2vw, 1.6rem); margin: 0 0 .6rem; color: var(--ink);
+  font-weight: var(--weight-strong); letter-spacing: -.01em; line-height: var(--leading-title);
+  font-size: var(--size-section); margin: 0 0 .6rem; color: var(--ink);
 }
-h2 .num { color: var(--accent-ink); }
-h3 { font-size: 1.125rem; font-weight: 800; margin: 1.8rem 0 .4rem; color: var(--ink); }
-.lead { color: var(--muted); max-width: 46rem; margin: 0 0 1.6rem; }
-p { max-width: 42rem; margin: 0 0 1.15em; text-wrap: pretty; }
-ul, ol { max-width: 40rem; }
+h2 .num { color: var(--link); }
+h3 { font-size: var(--size-reading); font-weight: var(--weight-strong); margin: 1.8rem 0 .4rem; color: var(--ink); }
+.lead { color: var(--ink-2); max-width: var(--measure-max); margin: 0 0 1.6rem; }
+p { max-width: var(--measure-max); margin: 0 0 1.15em; text-wrap: pretty; }
+ul, ol { max-width: var(--measure-max); }
+li, dd, figcaption, td, th, blockquote { text-wrap: pretty; }
+main p, main li, main dd, main figcaption, main td, main blockquote, .lead, header.page .sub { text-wrap: balance; }
 li { margin-bottom: .45em; }
 /* a title is balanced across its lines, never a word left alone on the last one */
 h1, h2, h3, .kicker { text-wrap: balance; }
@@ -307,35 +331,32 @@ li { margin: .3rem 0; }
 
 /* ---- code shots & terminals: a light panel as wide as its content needs, wrapping rather than scrolling ---- */
 .shot, .term, .excerpt {
-  background: var(--code-bg); color: var(--code-ink); border: 1px solid var(--code-line); border-left: 4px solid var(--code-rule);
-  border-radius: 8px; padding: .9rem 1.2rem; font: 1rem/1.55 var(--mono); margin: 1.2rem 0;
+  background: var(--surface); color: var(--ink); border: var(--hairline) solid var(--line);
+  border-radius: var(--radius); padding: .9rem 1.2rem; font: var(--size-small)/1.55 var(--mono); margin: 1.2rem 0;
   width: fit-content; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; box-shadow: none;
 }
-.term { border-left-color: var(--c-dim); }
-.excerpt { border-left-color: var(--c-name); }
-.shot .c, .excerpt .c { color: var(--c-comment); }
-.shot .k, .excerpt .k { color: var(--c-key); font-weight: 700; }
-.shot .s, .excerpt .s { color: var(--c-str); }
-.shot .n, .excerpt .n { color: var(--c-name); }
-.term .p { color: var(--c-prompt); }
-.term .cmd { color: var(--code-ink); font-weight: 700; }
-.term .dim { color: var(--c-dim); }
-.term .bad { color: var(--c-bad); font-weight: 700; }
-.term .good { color: var(--c-good); font-weight: 700; }
+.shot .c, .excerpt .c { color: var(--ink-2); font-style: italic; }
+.shot .k, .excerpt .k { color: var(--link); }
+.shot .s, .excerpt .s { color: var(--meta); }
+.shot .n, .excerpt .n { color: var(--ink); }
+.term .p { color: var(--ink-2); }
+.term .cmd { color: var(--ink); }
+.term .dim { color: var(--ink-2); }
+.term .bad { color: var(--danger); }
+.term .good { color: var(--success); }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.4rem; }
-.caption { color: var(--muted); margin-top: .8rem; max-width: 46rem; }
+.caption { color: var(--ink-2); margin-top: .8rem; max-width: var(--measure-max); }
 
 /* ---- cards & grids ---- */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
 .card {
-  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-  padding: 1.1rem 1.3rem; box-shadow: var(--shadow);
+  padding: 0;
   min-width: 0;                      /* a grid child may shrink */
   overflow-wrap: anywhere;           /* nothing leaves its frame */
 }
-.card h3 { margin: 0 0 .4rem; font-size: 1.1rem; line-height: 1.3; color: var(--accent-ink); }
-.card p { margin: 0; color: var(--muted); }
-.card .proof { display: block; margin-top: .6rem; font: 1rem var(--mono);
+.card h3 { margin: 0 0 .4rem; font-size: var(--size-reading); line-height: 1.3; color: var(--ink); }
+.card p { margin: 0; color: var(--ink); }
+.card .proof { display: block; margin-top: .6rem; font: var(--size-small) var(--mono);
   overflow-wrap: anywhere; word-break: break-word; }
 
 /* a row of reader cards: one line each, and the link is the point */
@@ -345,13 +366,12 @@ li { margin: .3rem 0; }
 /* ---- narration devices: the pair, the scene, the figure, the workflow, the one call to action ---- */
 /* a call to action: one per page, the first thing the reader can do */
 .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.4rem; }
-.cta-row .note { color: var(--muted); max-width: 32rem; margin: 0; }
+.cta-row .note { color: var(--ink-2); max-width: 32rem; margin: 0; }
 /* the pair: an established practice on the left, Zane on the right, the same case, both with their outcome */
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
-.pair > div { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.2rem;
-  box-shadow: var(--shadow); min-width: 0; }
-.pair .lbl { font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0; }
-.pair .zane .lbl { color: var(--accent-ink); }
+.pair > div { min-width: 0; }
+.pair .lbl { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); margin: 0; }
+.pair .zane .lbl { color: var(--ink); }
 .pair p { margin: .5rem 0 0; max-width: none; }
 .pair .shot, .pair .term { margin: .7rem 0 0; }
 @media (max-width: 860px) { .pair { grid-template-columns: minmax(0, 1fr); } }
@@ -360,53 +380,55 @@ li { margin: .3rem 0; }
 .scene .shot, .scene .term { margin-bottom: 0; }
 .scene .term { margin-top: .6rem; }
 /* the figure: an inline drawing in both cultures, with a caption that says what it does not show */
-figure.figure { margin: 1.6rem 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-  padding: 1rem .8rem; box-shadow: var(--shadow); }
+figure.figure { margin: 1.6rem 0; background: var(--surface); border: var(--hairline) solid var(--line); border-radius: var(--radius);
+  padding: 1rem .8rem; }
 /* a drawing scales to its column and never scrolls sideways (the author, 2026-11-06) */
 figure.figure svg { display: block; width: 100%; max-width: 56rem; height: auto; }
-figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46rem; padding: 0 .4rem; }
-.dg-box { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
-.dg-live { fill: var(--card); stroke: var(--c-good); stroke-width: 2; }
-.dg-data { fill: var(--card); stroke: var(--c-str); stroke-width: 2; stroke-dasharray: 6 4; }
-.dg-held { fill: var(--card); stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 2 4; }
-.dg-refused { fill: var(--card); stroke: var(--c-bad); stroke-width: 2; }
-.dg-line { stroke: var(--muted); stroke-width: 1.8; fill: none; }
-.dg-arrow { fill: var(--muted); }
-.dg-t { font: 700 17px var(--sans); fill: var(--ink); }
-.dg-s { font: 16px var(--mono); fill: var(--muted); }
-.dg-a { font: 700 16px var(--mono); fill: var(--accent-ink); }
-.dg-bad { font: 700 16px var(--mono); fill: var(--c-bad); }
+figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: var(--measure-max); padding: 0 .4rem; }
+.dg-box { fill: var(--surface); stroke: var(--edge); stroke-width: 1.5; }
+.dg-live { fill: var(--surface); stroke: var(--success); stroke-width: 2; }
+.dg-data { fill: var(--surface); stroke: var(--info); stroke-width: 2; stroke-dasharray: 6 4; }
+.dg-held { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 2 4; }
+.dg-refused { fill: var(--surface); stroke: var(--danger); stroke-width: 2; }
+.dg-line { stroke: var(--ink-2); stroke-width: 1.8; fill: none; }
+.dg-arrow { fill: var(--ink-2); }
+.dg-t { font: var(--weight-strong) var(--size-small) var(--sans); fill: var(--ink); }
+.dg-s { font: var(--size-small) var(--mono); fill: var(--ink-2); }
+.dg-a { font: var(--weight-strong) var(--size-small) var(--mono); fill: var(--link); }
+.dg-bad { font: var(--weight-strong) var(--size-small) var(--mono); fill: var(--danger); }
 /* the workflow: numbered real steps, each with the file it touches */
 .workflow { counter-reset: step; list-style: none; padding: 0; max-width: none; margin: 1.4rem 0; }
 .workflow > li { counter-increment: step; position: relative; margin: 0 0 0 1.1rem; padding: 0 0 1.3rem 2rem;
-  border-left: 2px solid var(--line); max-width: 46rem; }
-.workflow > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  max-width: var(--measure-max); }
+.workflow > li:last-child { padding-bottom: 0; }
 .workflow > li::before { content: counter(step); position: absolute; left: -1.05rem; top: 0; width: 2rem; height: 2rem;
-  border-radius: 50%; background: var(--card); border: 2px solid var(--accent); color: var(--accent-ink);
-  font: 700 1rem var(--mono); display: flex; align-items: center; justify-content: center; }
-.workflow .file { font: 1rem var(--mono); color: var(--muted); }
+  border-radius: 50%; background: transparent; color: var(--ink);
+  font: var(--weight-strong) var(--size-small) var(--mono); display: flex; align-items: center; justify-content: center; }
+.workflow .file { font: var(--size-small) var(--mono); color: var(--ink-2); }
 /* a status row: what exists, what is designed, what is held, each by a word and a mark, never by colour alone */
-.board { width: 100%; border-collapse: collapse; margin: 1.2rem 0; background: var(--card); }
-.board th, .board td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: break-word; }
+.board { width: 100%; border-collapse: collapse; margin: 1.2rem 0; }
+.board th, .board td { text-align: left; padding: .55rem .8rem; border-bottom: var(--hairline) solid var(--line); vertical-align: top; overflow-wrap: break-word; }
 .board td:first-child { min-width: 7.5rem; }
-.board th { color: var(--muted); font-size: 1rem; }
-.status { font: 700 1rem var(--mono); white-space: nowrap; }
+.board th { color: var(--ink-2); font-size: var(--size-small); font-weight: var(--weight-strong); }
+.status { font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
 .status.exists::before { content: "\25CF\00a0"; }
 .status.designed::before { content: "\25D0\00a0"; }
 .status.held::before { content: "\25CB\00a0"; }
 
 /* a plain table on a phone scrolls inside itself and never widens the page (Rule 114 measures this at 1280, where it has room) */
-@media (max-width: 860px) { table.board:not(.position), table.evidence { display: block; overflow-x: auto; } }
+@media (max-width: 860px) {
+  table.board th, table.board td, table.evidence th, table.evidence td, table.gridmap th, table.gridmap td { overflow-wrap: anywhere; white-space: normal; min-width: 4ch; }
+}
 /* a table of four columns that reads as cards on a phone */
 .board.position { table-layout: fixed; }
 .board.position th:first-child, .board.position td:first-child { width: 14rem; }
 @media (max-width: 860px) {
   .board.position, .board.position tbody, .board.position tr, .board.position td { display: block; width: auto; }
   .board.position thead { display: none; }
-  .board.position tr { border: 1px solid var(--line); border-radius: 10px; margin: 0 0 1rem; padding: .4rem .2rem; }
+  .board.position tr { border-bottom: var(--hairline) solid var(--line); margin: 0 0 1rem; padding: .4rem .2rem; }
   .board.position td { border: 0; padding: .35rem .8rem; }
   .board.position td:first-child { width: auto; }
-  .board.position td::before { content: attr(data-label); display: block; font: 700 1rem var(--mono); color: var(--muted); }
+  .board.position td::before { content: attr(data-label); display: block; font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); }
   .board.position td:first-child::before { content: none; }
 }
 
@@ -419,7 +441,7 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
    The brightest pixel under the panel is pure white by day (read from the file in a browser), so the panel is 80% of #121413: white text over
    it is 10.1 to 1 at the worst pixel, and the night photograph is darker everywhere under the panel. */
 /* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file) */
-.hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: #15110d; overflow: hidden; }
+.hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: var(--bar); overflow: hidden; }
 .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 /* Modern shows the museum by day, Retro by night; the night photograph's door stands left of its centre, so it is drawn from further left to
    keep the door clear of the panel */
@@ -435,17 +457,14 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
    text must be bigger!"). On a phone the panel is not drawn and the title wraps as text. */
 .hero .panel { position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; container-type: inline-size;
   width: max(22rem, min(36rem, calc(50vw - max(1.4rem, 4vw) - 1rem))); box-sizing: border-box;
-  background: rgba(18, 20, 19, .80); color: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; }
-.hero .panel h1 { color: #fff; font-size: clamp(1.4rem, 8cqi, 2.6rem); line-height: 1.12; margin: 0; }
-[data-vibe="guardian"] .hero .panel h1 { font-size: clamp(1.3rem, 6.9cqi, 2.3rem); }
-.hero .panel p { color: #fff; margin: .7rem 0 0; max-width: none; font-size: clamp(1.25rem, 5cqi, 1.65rem); line-height: 1.45; text-wrap: balance; }
+  background: color-mix(in srgb, var(--bar) 82%, transparent); color: var(--on-bar); border-radius: 14px; padding: 1.5rem 1.8rem; }
+.hero .panel h1 { color: var(--on-bar); font-size: var(--size-hero); line-height: 1.12; margin: 0; }
+.hero .panel p { color: var(--on-bar); margin: .7rem 0 0; max-width: none; font-size: var(--size-lead); line-height: 1.45; text-wrap: balance; }
 /* One action, named for the page it opens, and that page explains the language before anything is asked of the reader (the author: a call to
    action that asks for a commitment before the reader knows what the language is "is intrusive and disruptive"; and "we don't have a Learn
    page nor Start one!") */
-.hero .panel .btn.primary { margin-top: 1.2rem; background: #fff; color: #1c1830; border-color: #fff; border-radius: 999px; padding: .6rem 1.6rem; font-weight: 700; }
-.hero .panel .btn.primary:hover { filter: none; background: #ece9f7; }
-[data-vibe="guardian"] .hero .panel .btn.primary { background: #46e07f; color: #060b07; border-color: #46e07f; }
-[data-vibe="guardian"] .hero .panel .btn.primary:hover { background: #7ee2ae; }
+.hero .panel .btn.primary { margin-top: 1.2rem; background: var(--on-bar); color: var(--bar); border-color: var(--on-bar); border-radius: 999px; padding: .6rem 1.6rem; font-weight: var(--weight-strong); }
+.hero .panel .btn.primary:hover { filter: none; text-decoration: underline; }
 /* The front page (the author, 2026-11-05): the menu lies over the photograph and lets a quarter of it through, and the photograph fills the window.
    Measured on the file, cover-fitted at nine window sizes from 800x1000 to 2560x1440: the brightest pixel under the menu's top 76 px is
    rgb(249,255,245), luminance 0.983, and a blur barely lowers it (0.945 at 8 px), so the bar's own opacity carries the contrast. The bar is 75% of
@@ -453,9 +472,8 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
 /* contrast: #FFFFFF | #241d49 at 75% over rgb(249,255,245) | 7.0 | the front page's menu over the photograph's brightest pixel, Modern */
 /* contrast: #FFFFFF | #060b07 at 75% over rgb(249,255,245) | 9.4 | the same, Retro */
 .front .bars { position: fixed; left: 0; right: 0; }
-.front nav.site { background: rgba(36, 29, 73, .75); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-[data-vibe="guardian"] .front nav.site { background: rgba(6, 11, 7, .75); }
-.front nav.site .brand, .front nav.site a:not(.brand) { color: #fff; opacity: 1; }
+.front nav.site { background: color-mix(in srgb, var(--bar) 75%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.front nav.site .brand, .front nav.site a:not(.brand) { color: var(--on-bar); }
 .front .hero { min-height: 100svh; }
 /* on a narrow window the line under the title has three lines or more, and is balanced so that none ends alone */
 @media (max-width: 900px) { .hero .panel p { text-wrap: balance; } }
@@ -465,57 +483,56 @@ figure.figure figcaption { color: var(--muted); margin-top: .7rem; max-width: 46
   .hero .panel { position: static; width: auto; max-width: none; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
   .hero .panel h1, .hero .panel p { color: var(--ink); max-width: none; }
   .hero .panel, [data-vibe="guardian"] .hero .panel { width: auto; }
-  .hero .panel h1, [data-vibe="guardian"] .hero .panel h1 { font-size: 1.6rem; }
-  .hero .panel p { font-size: 1.3rem; text-wrap: balance; }
-  .hero .panel .btn.primary, [data-vibe="guardian"] .hero .panel .btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
+  .hero .panel h1 { font-size: var(--size-title); }
+  .hero .panel p { font-size: var(--size-lead); text-wrap: balance; }
+  .hero .panel .btn.primary { background: var(--action); color: var(--on-action); border-color: var(--action); }
 }
-.messages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.2rem 0 1.6rem; }
+.messages { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3) var(--space-4); margin: 2.2rem 0 1.6rem; }
+@media (min-width: 1085px) { :root:not([data-vibe="guardian"]) .messages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* two or four cards go two to a row, so no row is left with a hole (the author, 2026-11-06) */
-.messages:has(> :nth-child(2):last-child), .messages:has(> :nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (max-width: 860px) { .messages, .messages:has(> :nth-child(2):last-child), .messages:has(> :nth-child(4):last-child) { grid-template-columns: minmax(0, 1fr); } }
-.messages .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.3rem; box-shadow: var(--shadow); }
-.messages h2 { font-size: 1.3rem; margin: 0 0 .4rem; }
+.messages .card { padding: 0; }
+.messages h2 { font-size: var(--size-lead); margin: 0 0 .4rem; }
 .messages p { margin: 0 0 .7rem; max-width: none; }
 
 .front-note { margin-top: 1.6rem; }
 
 /* ---- the grid: a table of counts, with a word in every cell, never a colour alone ---- */
-.scroll { overflow-x: auto; }
-table.gridmap { width: 100%; border-collapse: collapse; margin: 1.2rem 0 .6rem; background: var(--card); }
-table.gridmap caption { text-align: left; color: var(--muted); padding: 0 0 .6rem; caption-side: top; }
-table.gridmap th, table.gridmap td { border: 1px solid var(--line); padding: .45rem .6rem; text-align: center; vertical-align: middle; }
-table.gridmap thead th { font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
-table.gridmap tbody th { text-align: left; font: 700 1rem var(--mono); white-space: nowrap; }
-table.gridmap .g-has b { color: var(--accent-ink); font-size: 1.1rem; }
-table.gridmap .g-none { color: var(--muted); }
-table.gridmap .g-closed { color: var(--muted); background: var(--tint); font-style: italic; }
-table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; font: 1rem var(--sans); text-transform: none; letter-spacing: 0; }
+.scroll { overflow: visible; }
+table.gridmap { width: 100%; border-collapse: collapse; margin: 1.2rem 0 .6rem; }
+table.gridmap caption { text-align: left; color: var(--ink-2); padding: 0 0 .6rem; caption-side: top; }
+table.gridmap th, table.gridmap td { border: var(--hairline) solid var(--line); padding: .45rem .6rem; text-align: center; vertical-align: middle; }
+table.gridmap thead th { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); }
+table.gridmap tbody th { text-align: left; font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
+table.gridmap .g-has b { color: var(--ink); font-size: var(--size-reading); }
+table.gridmap .g-none { color: var(--ink-2); }
+table.gridmap .g-closed { color: var(--ink-2); font-style: italic; }
+table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; font: var(--size-small) var(--font); }
 
 /* ---- the tour: one scene at a time, no motion between them (Rule 112) ---- */
 .profiles { list-style: none; padding: 0; margin: .8rem 0 1rem; display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; max-width: none; }
 
-.profiles .note { color: var(--muted); font-size: 1rem; }
-.stage { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.6rem 2rem; box-shadow: var(--shadow);
+.profiles .note { color: var(--ink-2); font-size: var(--size-small); }
+.stage { padding: 1.6rem 0;
   min-height: calc(100vh - var(--bars-h, 6rem) - 6rem); display: flex; flex-direction: column; }
 .stage:fullscreen { min-height: 100vh; padding: 4rem 6rem; overflow: auto; background: var(--paper); }
-.stage-idle { color: var(--muted); }
+.stage-idle { color: var(--ink-2); }
 .scene-card { flex: 1 1 auto; }
-.scene-title { font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.15; margin: 0 0 1.1rem; text-wrap: balance; }
-.scene-card p { font-size: 1.35rem; max-width: 46rem; text-wrap: balance; }
+.scene-title { font-size: var(--size-title); line-height: var(--leading-title); margin: 0 0 1.1rem; text-wrap: balance; }
+.scene-card p { font-size: var(--size-lead); max-width: var(--measure-max); text-wrap: balance; }
 /* on a phone a scene's title fits in the lines the browser balances (six at most), and no line holds one word alone */
 @media (max-width: 760px) {
-  .stage { padding: 1.1rem 1.1rem; }
-  .scene-title { font-size: 1.3rem; }
-  .scene-card p { font-size: 1.1rem; }
+  .stage { padding: 1.1rem 0; }
+  .scene-title { font-size: var(--size-section); }
+  .scene-card p { font-size: var(--size-reading); }
 }
-.scene-notes { display: block; margin-top: 1.4rem; padding: .8rem 1rem; border-left: 3px solid var(--accent); background: var(--tint); max-width: 46rem; }
+.scene-notes { display: block; margin-top: 1.4rem; color: var(--ink-2); max-width: var(--measure-max); }
 .scene-notes[hidden] { display: none; }
-.stage-controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.stage-controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; margin-top: var(--space-3); }
 .stage-controls[hidden] { display: none; }
-.stage-count { color: var(--muted); font: 1rem var(--mono); margin-right: auto; }
-.btn.ghost { background: transparent; font: inherit; font-weight: 700; cursor: pointer; }
+.stage-count { color: var(--ink-2); font: var(--size-small) var(--font); margin-right: auto; }
+.btn.ghost { background: transparent; font: inherit; font-weight: var(--weight-strong); cursor: pointer; }
 .btn.ghost[aria-pressed="true"] { text-decoration: underline; text-underline-offset: .25em; }
-.btn.ghost:disabled { color: var(--muted); border-color: var(--line); cursor: default; }
+.btn.ghost:disabled { color: var(--ink-2); border-color: var(--line); cursor: default; }
 /* the tour as a deck (the Principal, 2026-11-06: "a diapo for full screen presentations", as stzsite's presentation mode): with an
    address, one scene fills the screen and the site's menu, head and foot step aside; h brings the menu back over the scene. Without
    one, the page lists the profiles and the deck stays closed. */
@@ -529,94 +546,94 @@ body.deck-on .stage {
   display: grid; grid-template-rows: 1fr auto; outline: none;
 }
 body.deck-on .scene-card { align-self: center; width: 100%; max-width: 74rem; margin: 0 auto; }
-body.deck-on .scene-title { font-size: clamp(2rem, 4.4vw, 4rem); line-height: 1.08; margin-bottom: 1.4rem; }
-body.deck-on .scene-card p { font-size: clamp(1.3rem, 2.2vw, 1.9rem); max-width: 60rem; }
-body.deck-on .scene-card .shot, body.deck-on .scene-card .term { font-size: clamp(1rem, 1.35vw, 1.3rem); }
-body.deck-on .scene-notes { font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 60rem; }
+body.deck-on .scene-title { font-size: var(--size-hero); line-height: var(--leading-title); margin-bottom: 1.4rem; }
+body.deck-on .scene-card p { font-size: var(--size-lead); max-width: var(--measure-max); }
+body.deck-on .scene-card .shot, body.deck-on .scene-card .term { font-size: var(--size-reading); }
+body.deck-on .scene-notes { font-size: var(--size-reading); max-width: var(--measure-max); }
 body.deck-on .stage-controls { width: 100%; max-width: 74rem; margin: 1.2rem auto 0; }
-body.deck-on .stage-controls :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+body.deck-on .stage-controls :focus-visible { outline: var(--ring) solid var(--focus); outline-offset: 3px; }
 .deck-progress { display: none; }
 body.deck-on .deck-progress { display: block; position: fixed; left: 0; right: 0; bottom: 0; height: 4px; background: var(--line); z-index: 65; }
-.deck-progress .bar { height: 100%; width: 0; background: var(--accent); }
+.deck-progress .bar { height: 100%; width: 0; background: var(--link); }
 /* the front page's strip: present it to the people in the room */
-.present { margin: 1.4rem 0 0; padding: 1.1rem 1.3rem; border: 2px solid var(--accent-ink); border-radius: 10px; background: var(--card); }
-.present h2 { font-size: 1.35rem; margin: 0 0 .4rem; }
+.present { margin: var(--space-3) 0 0; }
+.present h2 { font-size: var(--size-lead); margin: 0 0 .4rem; }
 .present p { margin: 0; }
 
 /* ---- stamp ---- */
 .stamp {
-  background: var(--accent); color: var(--on-accent); padding: 1.3rem 1.5rem;
+  background: var(--action); color: var(--on-action); padding: 1.3rem 1.5rem;
   text-decoration: none; display: block; max-width: 22rem;
 }
-.stamp .big { font-weight: var(--black); text-transform: uppercase;
-  font-size: 1.6rem; line-height: 1.05; color: var(--on-accent); display: block; }
-.stamp .small { font: 1rem var(--mono); color: var(--on-accent); margin-top: .7rem; display: block; }
+.stamp .big { font-weight: var(--weight-strong);
+  font-size: var(--size-section); line-height: 1.05; color: var(--on-action); display: block; }
+.stamp .small { font: var(--size-small) var(--font); color: var(--on-action); margin-top: .7rem; display: block; }
 .stamp:hover { filter: brightness(1.05); }
 
 /* ---- steps (tutorial) ---- */
 .step { margin: 2.6rem 0; }
 .step .step-head { display: flex; align-items: baseline; gap: .8rem; margin-bottom: .6rem; }
 .step .step-num {
-  font: 700 1rem var(--mono); color: var(--accent-ink); background: var(--card);
-  border: 2px solid var(--accent); border-radius: 8px; padding: .15rem .6rem; white-space: nowrap;
+  font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); white-space: nowrap;
 }
-.step h2 { margin: 0; font-size: 1.25rem; }
+.step h2 { margin: 0; font-size: var(--size-lead); }
 .law-note {
-  border-left: 3px solid var(--accent); background: var(--card);
-  border-radius: 0 8px 8px 0; padding: .8rem 1.1rem;
-  color: var(--muted); margin: 1rem 0; max-width: 46rem;
+  color: var(--ink-2); margin: 1rem 0; max-width: var(--measure-max);
 }
-.law-note b { color: var(--accent-ink); }
+.law-note b { color: var(--ink); }
 .law-note, .caption, .lead { overflow-wrap: anywhere; }
 
 /* ---- q&a ---- */
-details.qa { border: 1px solid var(--line); border-radius: 10px; background: var(--card);
-  margin: .7rem 0; max-width: 48rem; }
-details.qa summary { cursor: pointer; font-weight: 700; padding: .8rem 1.1rem; }
-details.qa summary:hover { color: var(--accent-ink); }
-details.qa .a { padding: 0 1.1rem .9rem; color: var(--ink); }
+details.qa { margin: var(--space-2) 0; max-width: var(--measure-max); }
+details.qa summary { cursor: pointer; font-weight: var(--weight-strong); padding: .3rem 0; min-height: var(--target); }
+details.qa summary:hover { text-decoration: underline; }
+details.qa .a { padding: 0 0 .9rem; color: var(--ink); }
 details.qa .a p { margin: .4rem 0; }
 
 /* ---- buttons & next pointer ---- */
 .btn {
-  display: inline-block; text-decoration: none; font-weight: 700;
-  padding: .65rem 1.2rem; border-radius: 8px; border: 2px solid var(--accent);
+  display: inline-flex; align-items: center; text-decoration: none; font-weight: var(--weight-strong); min-height: var(--target-phone);
+  padding: .4rem 1.2rem; border-radius: var(--radius); border: var(--ring) solid var(--action);
 }
-.btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
-.btn.ghost { color: var(--accent-ink); }
-.btn.primary:hover { filter: brightness(1.08); }
-header.page a.btn.primary { color: var(--btn-fg); }
+.btn.primary { background: var(--action); color: var(--on-action); border-color: var(--action); }
+.btn.ghost { color: var(--link); }
+.btn.primary:hover { text-decoration: underline; }
+header.page a.btn.primary { color: var(--on-action); }
 /* the "try it" box on the Build page: a declaration, a level, one action, and the verdict under it */
 form.try { margin: 1.2rem 0; }
-form.try label { display: block; font-weight: 700; margin: 0 0 .4rem; }
+form.try label { display: block; font-weight: var(--weight-strong); margin: 0 0 .4rem; }
 form.try .try-row label { display: inline; margin: 0; }
 form.try textarea {
-  display: block; width: 100%; font: 1.125rem/1.55 var(--mono); color: var(--code-ink); background: var(--code-bg);
-  border: 1px solid var(--code-line); border-left: 4px solid var(--code-rule); border-radius: 8px; padding: .9rem 1.2rem; resize: vertical;
+  display: block; width: 100%; font: var(--size-small)/1.55 var(--mono); color: var(--ink); background: var(--surface);
+  border: var(--hairline) solid var(--edge); border-radius: var(--radius); padding: .9rem 1.2rem; resize: vertical;
 }
 form.try .try-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; margin: .8rem 0 0; }
-form.try select { font: 1.125rem var(--sans); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: .45rem .7rem; }
-form.try button { font: 700 1.125rem var(--sans); cursor: pointer; }
+form.try select { font: var(--size-small) var(--font); color: var(--ink); background: var(--surface); border: var(--hairline) solid var(--edge); border-radius: var(--radius); padding: .45rem .7rem; min-height: var(--target-phone); }
+form.try button { font: var(--weight-strong) var(--size-small) var(--font); cursor: pointer; }
 form.try button[disabled] { opacity: .6; cursor: wait; }
 #try-result { margin: 1rem 0 0; }
 #try-result p { margin: 0 0 .5rem; }
-#try-result .try-verdict { font-weight: 700; }
-#try-result .try-verdict.bad { color: var(--c-bad); }
-#try-result .try-verdict.good { color: var(--c-good); }
+#try-result .try-verdict { font-weight: var(--weight-strong); }
+#try-result .try-verdict.bad { color: var(--danger); }
+#try-result .try-verdict.good { color: var(--success); }
 #try-result ul { margin: 0; padding-left: 1.2rem; }
 #try-result li { margin: 0 0 .6rem; }
 /* ---- footer ---- */
-footer.site { background: var(--deep); color: var(--halo); padding: 2.2rem 0; margin-top: 3rem; }
-footer.site a { color: var(--halo); }
-footer.site a:hover { color: var(--accent-lite); }
-footer.site .fine { font: 1rem var(--mono); opacity: .75; margin-top: 1rem; }
+footer.site { background: var(--bar); color: var(--on-bar); padding: 2.2rem 0; margin-top: var(--space-4); }
+footer.site a { color: var(--on-bar); display: inline-flex; align-items: center; min-height: var(--target); }
+footer.site .fine { font: var(--size-small) var(--font); margin-top: 1rem; }
 footer.site .row { display: flex; flex-wrap: wrap; gap: 1.6rem; }
 footer.site .bar { display: flex; align-items: center; gap: 1.4rem;
   flex-wrap: wrap; justify-content: space-between; }
 
+/* a link that stands alone on its line is a target, not a word in a sentence: 24 px, and 48 px on a phone (K17) */
+p > a:only-child, li > a:only-child, td > a:only-child, .card > a, footer.site a { display: inline-flex; align-items: center; min-height: var(--target); }
 @media (max-width: 760px) {
+  p > a:only-child, li > a:only-child, td > a:only-child, .card > a, footer.site a, nav.list3 a, details.qa summary, .btn, button, select { min-height: var(--target-phone); }
+  nav.site .brand { display: inline-flex; align-items: center; min-height: var(--target-phone); flex-basis: 100%; }
+  nav.site .menu a:not(.brand) { min-width: var(--target-phone); justify-content: center; }
   /* the fixed stack is kept (Rule 120) and is lighter now that the style select has left the bar */
-  nav.site .wrap { padding: .25rem 1.4rem; }
+  nav.site .wrap { padding: .25rem var(--gutter); }
   nav.site .menu { gap: 1rem; }
-  nav.band a { min-height: 36px; }
+  nav.band a { min-height: var(--target-phone); }
 }

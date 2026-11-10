@@ -6,9 +6,9 @@
 <title>Other languages — implementing Zane in other languages and proving that it agrees</title>
 <meta name="description" content="Zane can be implemented in other languages by writing a verifier that reads the same pinned files and passes the same fixtures. The page gives the port recipe (pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences) and says what a port may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=35fa60d3">
+<link rel="stylesheet" href="stz.css?v=ca9a78d2">
 </head>
-<body>
+<body data-archetype="article">
 
 <!-- shell:menu -->
 <div class="bars">
@@ -66,7 +66,13 @@
     <li><a href="build.html">Build</a></li>
     <li><a href="generate.html">Generate</a></li>
     <li><a href="softanza.html">Softanza</a></li>
-    <li><a aria-current="page" href="ports.html">Other languages</a></li>
+    <li><a aria-current="page" href="ports.html">Other languages</a>
+      <ul class="sub">
+        <li><a href="#the-recipe">The recipe</a></li>
+        <li><a href="#what-you-may-claim">What a port claims</a></li>
+        <li><a href="#who-has-done-it">Implementations</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -74,7 +80,7 @@
 
 <section id="the-recipe">
   <div class="narrow">
-    <h2>The recipe for implementing Zane in another language</h2>
+    <h2 data-outline="The recipe">The recipe for implementing Zane in another language</h2>
 
     <ol class="workflow">
       <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant, and the hash proves that the bytes you hold are that edition. <span class="file">tools/zane/pack.js --check</span></li>
@@ -99,7 +105,7 @@ The Zane protocol pack
 
 <section class="alt" id="what-you-may-claim">
   <div class="narrow">
-    <h2>What a port may claim, and what it may not claim</h2>
+    <h2 data-outline="What a port claims">What a port may claim, and what it may not claim</h2>
 
     <p><b>A port may claim</b> "conforms to Zane v3.16 at level 2, verified against manifest &lt;hash&gt;", and it may use its own diagnostic codes in its own words and its own language for the prose.</p>
     <p><b>A port may not extend a closed set.</b> The verbs, the channels, the semantic values, the enumerations and the ten kinds of declaration are closed. Adding to one is a language change or a constitutional amendment, and an implementation that adds a verb is a different language that fails the fixtures.</p>
@@ -109,7 +115,7 @@ The Zane protocol pack
 
 <section id="who-has-done-it">
   <div class="narrow">
-    <h2>Who has implemented Zane so far</h2>
+    <h2 data-outline="Implementations">Who has implemented Zane so far</h2>
 
     <p>The <b>reference</b> is the JavaScript verifier in this repository.
     A verifier in Zig, with a browser build, is <a href="../doc/design/BINARY.md">built</a> and released as one file, <code>zane</code>. Its check, its suite and its pack, channel and facts tools print what the JavaScript tools print, byte for byte, on every fixture and on a generated corpus (<code>tools/zane/parity.js</code>). Its browser build, <code>zane.wasm</code>, runs the suite in a browser, and <a href="../tools/zane/wasm-proof.html">the wasm proof</a> finds every envelope identical to the native binary's; the Build page uses it in <a href="build.html#try-it-here">a box</a>. Its server, <code>zane serve</code>, serves this site, the Reader and the UI audit from the repository, and with <code>--app</code> another site beside the audit. Version 0.1.0 is <a href="https://github.com/mayouni/zane/releases/tag/v0.1.0">released</a>: tested on Windows and Linux; built for macOS.</p>

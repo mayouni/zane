@@ -104,6 +104,18 @@ const by = new Map(PAGES.map(p => [p.file, p]));
    run, and leaves this list when it is rewritten and gains its term. A page with no term and not on this list fails. */
 const WRITING_PENDING = [];
 const sec = id => SECTIONS.find(s => s.id === id);
+/* Every page declares its archetype (doc/design/DESIGN-SYSTEM.md section 6.5, K21 ARCHETYPE) on its <body>, as data-archetype; the
+   registry decides it: the front page; a section's or a family's first page is a landing; the Reader, the rules and the conformance
+   page are references; the tour is the deck; a tool is a tool; every other page is an article. */
+const REFERENCES = ['site/rules.html', 'constitution/reader/index.html', 'site/conformance.html'];
+function archetypeOf(p) {
+  if (p.home) return 'front';
+  if (p.outside === 'tool') return 'tool';
+  if (REFERENCES.includes(p.file)) return 'reference';
+  if (p.file === 'site/tour.html') return 'deck';
+  if (SECTIONS.some(s => s.head === p.file) || p.family) return 'landing';
+  return 'article';
+}
 
 const rel = (from, to) => {
   const r = path.posix.relative(path.posix.dirname(from), to);
@@ -205,7 +217,8 @@ function familyOf(p) {
   const kids = PAGES.filter(q => q.parent === head.file);
   return kids.length ? { head, kids, list: [head, ...kids] } : null;
 }
-const SECTION_MIN = 4;
+/* an outline by default on every page of three or more sections (K18 NAV_TREE; ZANE-OUTLINE-01) */
+const SECTION_MIN = 3;
 const slug = (text, taken) => {
   let base = text.toLowerCase().replace(/&[a-z#0-9]+;/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40).replace(/-+$/, '') || 'section';
   let id = base, n = 2;
@@ -349,6 +362,9 @@ function apply(p, text) {
   if (fenceRe('footer').test(t)) {
     fill('footer', footer(p));
   }
+  /* ---- the page declares its archetype on its body (K21) ---- */
+  if (!/<body\b/.test(t)) problems.push('no <body> to carry the archetype');
+  else t = t.replace(/<body\b([^>]*)>/, (m, attrs) => '<body' + attrs.replace(/\s+data-archetype="[^"]*"/, '') + ' data-archetype="' + archetypeOf(p) + '">');
   /* ---- the assets carry the hash of their own content, so a returning reader is served the stylesheet that matches the page ---- */
   t = t.replace(ASSET_RE, (m, attr, url, name) => `${attr}${url}?v=${assetHash(name)}"`);
   return { text: t, problems };
@@ -659,6 +675,68 @@ function checkTooltips(problems) {
   }
 }
 
+/* ---- the system's tokens, read in the stylesheets (doc/design/DESIGN-SYSTEM.md section 6.2; K01, K09, K15) -------------------------
+   Every size and every colour of site/stz.css and site/gotchas.css comes from a token: a font-size or a font shorthand names
+   var(--size-...) (or inherit, or 1em, the size of its parent), and a colour literal (#hex, rgb(), hsl()) appears only where a token is
+   defined, in a rule of :root or [data-vibe=...] or in a custom property. A rule between the comments offense:start and offense:end
+   dresses an offending demo on purpose and is not read. No rule makes a :hover reach another element, which would exist only under a
+   pointer (K15 NO_HOVER_ONLY). Comments are blanked, so the line of each finding is the line in the file. */
+const SHEETS = ['site/stz.css', 'site/gotchas.css'];
+function checkSheets(problems) {
+  for (const f of SHEETS) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    let css = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+    /* the offending demos, blanked line for line, then the comments */
+    css = css.replace(/\/\*\s*offense:start\s*\*\/[\s\S]*?\/\*\s*offense:end\s*\*\//g, blank).replace(/\/\*[\s\S]*?\*\//g, blank);
+    const lineAt = i => css.slice(0, i).split('\n').length;
+    for (const m of css.matchAll(/([^{}]*)\{([^{}]*)\}/g)) {
+      const sel = m[1].trim().replace(/\s+/g, ' '), body = m[2], at = m.index + m[1].length + 1;
+      if (/^@/.test(sel)) continue;
+      const tokenRule = sel.split(',').every(s => /^(:root|\[data-vibe(="[\w-]+")?\]|html\[data-vibe(="[\w-]+")?\])$/.test(s.trim()));
+      for (const d of body.matchAll(/(^|;)\s*([\w-]+)\s*:\s*([^;]*)/g)) {
+        const prop = d[2], val = d[3].trim(), line = lineAt(at + d.index + d[0].indexOf(prop, d[1].length));
+        if (prop.startsWith('--')) continue;
+        if (prop === 'font-size' && !/^(var\(--size-[\w-]+\)|inherit|1em)$/.test(val))
+          problems.push(f + ':' + line + ' "' + sel + '" sets font-size ' + val + ', not a size token (K01 TYPE_SCALE)');
+        if (prop === 'font' && /\d(px|rem|em|pt|%)/.test(val.replace(/\/\s*[\d.]+/, '')) && !/var\(--size-/.test(val))
+          problems.push(f + ':' + line + ' "' + sel + '" sets a font size in its font shorthand, not a size token (K01 TYPE_SCALE)');
+        if (!tokenRule && /#[0-9a-f]{3,8}\b|\b(rgba?|hsla?)\(/i.test(val))
+          problems.push(f + ':' + line + ' "' + sel + '" writes the colour ' + (/#[0-9a-f]{3,8}\b|\b(rgba?|hsla?)\([^)]*\)/i.exec(val)[0]) + ' in ' + prop + ', not a colour token (K09 PALETTE)');
+      }
+      for (const s of sel.split(',').map(x => x.trim())) {
+        if (/:hover\s*[>+~ ]\s*\S/.test(s)) problems.push(f + ':' + lineAt(m.index + m[0].indexOf(s)) + ' "' + s + '" makes a :hover reach another element, which exists only under a pointer (K15 NO_HOVER_ONLY)');
+      }
+    }
+  }
+}
+
+/* ---- what the pages owe milestone 3 (K19, K20): counted and named on every run, never silently skipped ---------------------------------
+   K19: a paragraph of the registry's pages holds at most 70 words (a lead line and points replace a dense paragraph). K20: every section
+   of an article page holds a sample frame (figure.sample) citing a rule number. Milestone 3 rewrites the pages, and these become
+   failures then; until it does, each run prints how many paragraphs and sections are owed, page by page. */
+function checkOwed(notes) {
+  const words = [], samples = [];
+  for (const p of PAGES) {
+    const file = path.join(ROOT, p.file);
+    if (!fs.existsSync(file)) continue;
+    const text = readable(p.file, fs.readFileSync(file, 'utf8'));
+    let long = 0;
+    for (const m of text.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)) if (plain(m[1]).split(/\s+/).filter(Boolean).length > 70) long++;
+    if (long) words.push(p.file + ' ' + long);
+    if (archetypeOf(p) === 'article') {
+      const main = (/<main\b[^>]*>([\s\S]*)<\/main>/.exec(text) || [null, ''])[1];
+      const secs = main.split(/<section\b/).slice(1);
+      const without = secs.filter(s => !/<figure\b[^>]*class="[^"]*\bsample\b/.test(s)).length;
+      if (without) samples.push(p.file + ' ' + without);
+    }
+  }
+  const sum = l => l.reduce((n, x) => n + +x.split(' ').pop(), 0);
+  notes.push('NOTE K19 REGISTER, owed by milestone 3: ' + sum(words) + ' paragraph(s) over 70 words on ' + words.length + ' page(s)' + (words.length ? ': ' + words.join(', ') : ''));
+  notes.push('NOTE K20 SAMPLE, owed by milestone 3: ' + sum(samples) + ' section(s) of article pages without a sample frame on ' + samples.length + ' page(s)' + (samples.length ? ': ' + samples.join(', ') : ''));
+  notes.push('NOTE K21 ARCHETYPE reads each page\'s declaration; the order of an archetype\'s regions is read from milestone 3');
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
@@ -672,6 +750,8 @@ function main(argv) {
   checkNode(problems);
   checkReleases(problems);
   checkAffirm(problems);
+  checkSheets(problems);
+  checkOwed(notes);
   let changed = 0;
   for (const p of PAGES) {
     const file = path.join(ROOT, p.file);
@@ -694,4 +774,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { SECTIONS, PAGES, menuDecl, menu, trail, band, list3, footer, checkBars, checkWriting, checkBreaks, headOf };
+module.exports = { SECTIONS, PAGES, archetypeOf, checkSheets, menuDecl, menu, trail, band, list3, footer, checkBars, checkWriting, checkBreaks, headOf };

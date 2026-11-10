@@ -6,34 +6,25 @@
 <title>Two cultures, one truth — the interaction cultures of Article VI, side by side</title>
 <meta name="description" content="An interaction culture, which the law calls a vibe, changes how an interface looks and never what it shows or the rights it keeps (Article VI). The exhibit renders one operator screen in both cultures at once from one shared state, and lists what a culture may change and what it never changes.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23e04a6e' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=35fa60d3">
+<link rel="stylesheet" href="stz.css?v=ca9a78d2">
 <style>
-/* Scoped curator variables: a pane forces its vibe whatever the page wears.
-   (Guardian's scoped block already lives in stz.css; curator is the :root
-   default, so it needs restating for the pane that must not flip.) */
-[data-vibe="curator"] {
-  --deep: #241d49; --deep-2: #181239; --accent: #e04a6e;
-  --halo: #eae7f6; --paper: #f4f3f9; --ink: #211d33;
-  --muted: #4a4661; --line: #d8d4e6; --card: #fdfcff;
-  --accent-ink: #8f1d3d; --accent-lite: #ff8fa8;
-  --on-accent: #1c0710; --ok: #1d6b4f;
-}
+/* a pane forces its culture whatever the page wears: stz.css restates each culture's tokens on any element that sets it */
 .exhibit { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
   gap: 1.2rem; margin-top: 1rem; align-items: start; }
 .vibe-pane { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-.vibe-pane .pane-head { background: var(--deep); color: var(--halo);
-  font: 700 1rem var(--mono); text-transform: uppercase; letter-spacing: .08em;
+.vibe-pane .pane-head { background: var(--bar); color: var(--on-bar);
+  font: var(--weight-strong) var(--size-small) var(--mono); text-transform: uppercase; letter-spacing: .08em;
   padding: .4rem .9rem; }
 .vibe-pane .screen { background: var(--paper); color: var(--ink);
-  font: 1.125rem/1.7 var(--sans); padding: 1rem 1.2rem; }
+  font: var(--size-reading)/var(--leading-reading) var(--font); padding: 1rem 1.2rem; }
 .vibe-pane[data-vibe="guardian"] .screen { font-family: var(--mono); }
 .scr-title { display: flex; justify-content: space-between; align-items: baseline;
   gap: 1rem; flex-wrap: wrap; font-weight: 800; margin-bottom: .4rem; }
 .rowline { display: flex; justify-content: space-between; gap: 1rem; align-items: center;
   border-bottom: 1px solid var(--line); padding: .35rem 0; }
-.chip { font: 1rem var(--mono); background: none; border: 1px solid var(--accent-ink);
+.chip { font: var(--size-small) var(--mono); background: none; border: 1px solid var(--accent-ink);
   color: var(--accent-ink); border-radius: 99px; padding: .05rem .55rem; cursor: pointer; }
-.demo-btn { font: 700 1rem var(--sans); cursor: pointer; border-radius: 7px;
+.demo-btn { font: var(--weight-strong) var(--size-small) var(--sans); cursor: pointer; border-radius: 7px;
   border: 1.5px solid var(--muted); background: var(--paper); color: var(--ink);
   padding: .3rem .8rem; }
 .vibe-pane[data-vibe="guardian"] .demo-btn, .vibe-pane[data-vibe="guardian"] .chip { font-family: var(--mono); }
@@ -41,9 +32,9 @@
 .slot-toast { min-height: 3.6rem; padding-top: .7rem; }   /* reserved — Rule 38 */
 .toast { background: var(--deep); color: var(--halo); border: 1px solid var(--line);
   border-radius: 8px; padding: .55rem 1rem; display: flex; align-items: center; gap: .9rem; }
-.toast button { font: 700 1rem var(--sans); background: var(--accent); color: var(--on-accent);
+.toast button { font: var(--weight-strong) var(--size-small) var(--sans); background: var(--accent); color: var(--on-accent);
   border: none; border-radius: 6px; padding: .25rem .7rem; cursor: pointer; }
-.toast .bar { flex: 1 1 3rem; height: 4px; background: rgba(255,255,255,.25);
+.toast .bar { flex: 1 1 3rem; height: 4px; background: color-mix(in srgb, var(--on-bar) 25%, transparent);
   border-radius: 2px; overflow: hidden; }
 .toast .bar i { display: block; height: 100%; background: var(--accent); }
 .quiet { color: var(--muted); }
@@ -51,7 +42,7 @@
 .flexgrid .card ul { margin: .4rem 0 0; padding-left: 1.2rem; }
 </style>
 </head>
-<body>
+<body data-archetype="article">
 
 <!-- shell:menu -->
 <div class="bars">
@@ -105,13 +96,21 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#the-exhibit">One screen, twice</a></li>
+    <li><a href="#what-may-flex-and-what-never-does">What may change</a></li>
+    <li><a href="#vibes-in-the-wild">Elsewhere</a></li>
+  </ul>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section>
   <div class="wrap">
-    <h2 id="the-exhibit">One operator screen rendered in both cultures at once</h2>
+    <h2 id="the-exhibit" data-outline="One screen, twice">One operator screen rendered in both cultures at once</h2>
     <p class="lead">A person can clear the filter, delete an invoice and undo the deletion in either
     pane, and the other pane follows instantly. The <kbd>F2</kbd> key flips
     the culture of the page around this exhibit, but the exhibit itself does
@@ -145,7 +144,7 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2 id="what-may-flex-and-what-never-does">What a culture may change, and what it never changes</h2>
+    <h2 id="what-may-flex-and-what-never-does" data-outline="What may change">What a culture may change, and what it never changes</h2>
     <div class="flexgrid">
       <div class="card"><h3>What the vibe owns</h3>
         <ul>
@@ -174,7 +173,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="vibes-in-the-wild">Where the two cultures appear outside this exhibit</h2>
+    <h2 id="vibes-in-the-wild" data-outline="Elsewhere">Where the two cultures appear outside this exhibit</h2>
     <p>Every page of this site carries the culture picker in its footer, and the
     <kbd>F2</kbd> key flips the culture from the keyboard, which serves the
     operators who never touch the mouse.

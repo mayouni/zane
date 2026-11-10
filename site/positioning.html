@@ -6,9 +6,9 @@
 <title>Overview of the comparison — Zane beside the practices, frameworks and languages a team already uses</title>
 <meta name="description" content="The comparison places Zane beside seven established practices, four UI frameworks and five description languages, and states what Zane takes from each and what it adds. Each row is written from the source's own published page, and this page states the claim and the sources it rests on.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=35fa60d3">
+<link rel="stylesheet" href="stz.css?v=ca9a78d2">
 </head>
-<body>
+<body data-archetype="landing">
 
 <!-- shell:menu -->
 <div class="bars">
@@ -63,7 +63,13 @@
 <div class="layout has-list">
 <nav class="list3" aria-label="Pages of the family">
   <ul>
-    <li><a aria-current="page" href="positioning.html">Overview</a></li>
+    <li><a aria-current="page" href="positioning.html">Overview</a>
+      <ul class="sub">
+        <li><a href="#the-claim-and-what-bounds-it">The claim</a></li>
+        <li><a href="#the-two-pages">The two pages</a></li>
+        <li><a href="#what-this-does-not-decide">Corrections</a></li>
+      </ul>
+    </li>
     <li><a href="practices.html">Practices</a></li>
     <li><a href="frameworks.html">Frameworks and languages</a></li>
   </ul>
@@ -73,7 +79,7 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-claim-and-what-bounds-it">The claim the comparison makes, and the limits of its sources</h2>
+    <h2 id="the-claim-and-what-bounds-it" data-outline="The claim">The claim the comparison makes, and the limits of its sources</h2>
     <p>Practices for judging an interface after it exists are well established, and so are the frameworks and languages for building or describing one. The pages listed here were read on 4 November 2026, and none of them gives
     an account of what an interface must let a user, a person or an agent, do across a set of channels, such that a machine can refuse a declaration for lacking it before the interface exists.</p>
     <p>Zane offers such an account: six
@@ -86,7 +92,7 @@
 
 <section class="alt" id="the-two-pages">
   <div class="narrow">
-    <h2>The two pages of the comparison: practices, and frameworks and languages</h2>
+    <h2 data-outline="The two pages">The two pages of the comparison: practices, and frameworks and languages</h2>
     <div class="messages">
       <div class="card"><h3>Practices</h3><p>Heuristic review, WCAG, design systems, design tokens, component libraries, accessibility linters and usability testing: what each decides, and when.</p><a href="practices.html">Practices →</a></div>
       <div class="card"><h3>Frameworks and languages</h3><p>React, SwiftUI, Jetpack Compose and Flutter, which build the screen; and the languages that describe one, from task models to SCXML.</p><a href="frameworks.html">Frameworks and languages →</a></div>
@@ -96,7 +102,7 @@
 
 <section id="what-this-does-not-decide">
   <div class="narrow">
-    <h2>What the comparison does not decide, and how a row is corrected</h2>
+    <h2 data-outline="Corrections">What the comparison does not decide, and how a row is corrected</h2>
     <p>The comparison does not say that Zane is better. It says where each practice, framework and language stops, as each describes itself, and where a declaration, a law held as data and a suite
     add a different kind of thing. Each team decides whether that is useful to it.</p>
     <p>A row that over-reads its source is corrected from that source, and each page names what it read and how far.</p>

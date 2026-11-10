@@ -6,9 +6,9 @@
 <title>Mobile apps — checking a mobile app through its declared screens and its screenshots</title>
 <meta name="description" content="The mobile workflow checks an iOS or Android application, which has no page to measure, by checking the declarations of its screens and judging facts reduced from its screenshots. The page says what runs today and what each part does, and its example is labelled as an example.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=35fa60d3">
+<link rel="stylesheet" href="stz.css?v=ca9a78d2">
 </head>
-<body>
+<body data-archetype="article">
 
 <!-- shell:menu -->
 <div class="bars">
@@ -59,13 +59,21 @@
 </header>
 
 <!-- shell:layout -->
-<div class="layout">
+<div class="layout has-list">
+<nav class="list3 sections" aria-label="Sections of this page">
+  <p class="outline-title">On this page</p>
+  <ul>
+    <li><a href="#an-example-not-an-app">A payment flow</a></li>
+    <li><a href="#the-screenshot-audit">The screenshot audit</a></li>
+    <li><a href="#what-runs-today">The workflow</a></li>
+  </ul>
+</nav>
 <!-- /shell:layout -->
 <main id="main">
 
 <section id="an-example-not-an-app">
   <div class="narrow">
-    <h2>A made-up example of a mobile payment flow, checked by the verifier</h2>
+    <h2 data-outline="A payment flow">A made-up example of a mobile payment flow, checked by the verifier</h2>
 
     <p class="limit"><b>This case is made up.</b> No mobile application was chosen, and none has been run through the screenshot audit. The flow below is a typical one-tap payment, written to show what the verifier decides about the declaration of a mobile flow. This case is not a finding about anybody's product.</p>
     <p>A phone screen that pays on one tap turns selection into execution: the person points, and money moves. In the language this flow is a selection that acts without a confirmation, and the verifier refuses it:</p>
@@ -97,7 +105,7 @@ tap_to_pay.zane:1  <span class="bad">error</span>  <span class="bad">SELECT_ACT_
 
 <section class="alt" id="the-screenshot-audit">
   <div class="narrow">
-    <h2>The screenshot audit and the three rules it decides</h2>
+    <h2 data-outline="The screenshot audit">The screenshot audit and the three rules it decides</h2>
 
     <p>For an application with no page to read, a writer reduces a screenshot to <b>facts</b> (each line of text, its box and the luminances behind it), and an audit judges the facts. The audit decides three rules and nothing else: <b>Rules 62 and 105</b> for contrast against a floor, and <b>Rule 107</b> for the size of text. Every other rule reads
     <em>not audited</em>, never <em>passed</em>, and a measurement that could be wrong at its worst end (a photographic background) is never a pass. A script that needs nothing installed checks the shape of the facts file, its arithmetic and the decisions. Below, the script runs on the example file that ships with it, which is made by hand:</p>
@@ -124,7 +132,7 @@ doc/design/audit/example.facts.json: valid; 3 line(s)</pre>
 
 <section id="what-runs-today">
   <div class="narrow">
-    <h2>Which parts of the mobile workflow run today, and what each part does</h2>
+    <h2 data-outline="The workflow">Which parts of the mobile workflow run today, and what each part does</h2>
 
     <ul>
       <li><b>Two parts run today:</b> the verifier on a mobile flow's declaration, shown above, and the checker of the facts file with its three decisions.</li>

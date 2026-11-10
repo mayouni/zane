@@ -6,7 +6,7 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=35fa60d3">
+<link rel="stylesheet" href="../site/stz.css?v=ca9a78d2">
 <style>
 /* the report grows to its content: the browser's scroll is the only one on the page (the author, 2026-11-09) */
 textarea {
@@ -52,7 +52,7 @@ td.issue { color: #a33422; font-weight: 700; }
 #progress { color: var(--muted); }
 </style>
 </head>
-<body>
+<body data-archetype="tool">
 
 <!-- shell:menu -->
 <div class="bars">
@@ -212,6 +212,10 @@ td.issue { color: #a33422; font-weight: 700; }
       <label class="opt"><input type="checkbox" id="strict">
         <span>Strict: also report text that clears the floor but still reads small (16–17px), and interactive text under 7:1</span></label>
       <span id="progress"></span>
+    </div>
+    <div class="controls">
+      <label class="opt"><input type="checkbox" id="system">
+        <span>System: also read Zane's design system, checks K01 to K22 of doc/design/DESIGN-SYSTEM.md, at five widths (375, 768, 1085, 1440 and 1900 px) in both cultures</span></label>
     </div>
     <p class="caption">The floor is <b>16px</b> (Rule 105), and this site reads at
     <b>18px</b>. When Strict is unchecked, the audit reports only text that breaks the
@@ -689,6 +693,325 @@ function loadAndAudit(entry, strict) {
   });
 }
 
+/* ==========================================================================
+   Zane's design system, read on the painted page: checks K01 to K22 of doc/design/DESIGN-SYSTEM.md section 7.
+   Each check reads EVERY element that has the property it judges, never a list of element kinds; the run repeats at five widths
+   (375, 768, 1085, 1440, 1900 px) in both cultures, and a finding seen more than once is reported once, with where it was seen.
+   K18 to K21 read the files and live in site-shell; K15 is read here on the stylesheets as well.
+   ========================================================================== */
+const SYS_WIDTHS = [375, 768, 1085, 1440, 1900];
+const SYS_CULTURES = [['curator', 'Modern'], ['guardian', 'Retro']];
+const SYS_SIZES = [18, 21, 24, 28, 34];       /* --size-small, -reading, -lead, -section, -title, in px */
+const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the front page's hero only */
+const SYS_CHECKS = {
+  K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
+  K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL'
+};
+const sysName = el => {
+  const cls = (typeof el.className === 'string' && el.className.trim()) ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : '';
+  return el.tagName.toLowerCase() + cls;
+};
+const ownText = el => [...el.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join('').replace(/\s+/g, ' ').trim();
+const shown = (el, win) => { const cs = win.getComputedStyle(el); return cs.display !== 'none' && cs.visibility !== 'hidden' && +cs.opacity !== 0; };
+const INLINE = /^(inline|inline-block|contents)$/;
+/* the boxes of the lines of a block whose children are all inline: one entry per line, its left and right */
+function lineBoxes(el, doc) {
+  const r = doc.createRange(); r.selectNodeContents(el);
+  const lines = [];
+  for (const b of r.getClientRects()) {
+    if (b.width < 1 || b.height < 1) continue;
+    const l = lines.find(x => Math.abs(x.top - b.top) < Math.max(3, b.height / 2));
+    if (l) { l.left = Math.min(l.left, b.left); l.right = Math.max(l.right, b.right); }
+    else lines.push({ top: b.top, left: b.left, right: b.right });
+  }
+  return lines.sort((a, b) => a.top - b.top);
+}
+function allInline(el, win) { return [...el.children].every(c => INLINE.test(win.getComputedStyle(c).display) || c.tagName === 'BR'); }
+/* the caret position of a character offset in an element's text */
+function rectAt(el, doc, offset) {
+  const w = doc.createTreeWalker(el, 4); let n, seen = 0;
+  while ((n = w.nextNode())) {
+    const len = n.textContent.length;
+    if (offset < seen + len) { const r = doc.createRange(); r.setStart(n, offset - seen); r.setEnd(n, offset - seen + 1); return r.getBoundingClientRect(); }
+    seen += len;
+  }
+  return null;
+}
+const cssColor = (win, el, prop) => readColor(win.getComputedStyle(el)[prop]);
+const sameColor = (a, b) => a && b && Math.abs(a.r - b.r) < 2 && Math.abs(a.g - b.g) < 2 && Math.abs(a.b - b.b) < 2;
+function boxPaint(el, win) {
+  const cs = win.getComputedStyle(el);
+  const sides = ['Top', 'Right', 'Bottom', 'Left'].filter(s => parseFloat(cs['border' + s + 'Width']) > 0 && cs['border' + s + 'Style'] !== 'none'
+    && (readColor(cs['border' + s + 'Color']).color || { a: 0 }).a > 0.05);
+  const bg = readColor(cs.backgroundColor).color;
+  const parentBg = el.parentElement ? backgroundOf(el.parentElement, win) : null;
+  const fill = bg && bg.a > 0.05 && !(parentBg && !parentBg.unreadable && sameColor(composite(bg, parentBg), parentBg));
+  return { sides, fill, cs };
+}
+/* the stylesheets' rules, read once per page; a cross-origin sheet cannot be read and is said */
+function sheetRules(doc) {
+  const out = [];
+  for (const s of doc.styleSheets) {
+    let rules; try { rules = s.cssRules; } catch (e) { continue; }
+    const walk = list => { for (const r of list) { if (r.selectorText) out.push({ sel: r.selectorText, sheet: (s.href || 'inline').replace(/[?#].*$/, '').replace(/^.*\/(?=[^/]+$)/, '') }); else if (r.cssRules) walk(r.cssRules); } };
+    walk(rules);
+  }
+  return out;
+}
+/* layout shifts since the page started, read from the frame's own record */
+function layoutShifts(win) {
+  return new Promise(resolve => {
+    const got = [];
+    try {
+      const po = new win.PerformanceObserver(list => got.push(...list.getEntries()));
+      po.observe({ type: 'layout-shift', buffered: true });
+      setTimeout(() => { po.disconnect(); resolve(got.filter(e => !e.hadRecentInput)); }, 60);
+    } catch (e) { resolve(null); }
+  });
+}
+
+async function auditSystem(doc, win, label, width) {
+  const out = [];
+  const add = (check, el, text, issue, page) => out.push({ page: page || label, check, where: typeof el === 'string' ? el : sysName(el), text: (text || '').slice(0, 44), issues: issue });
+  const body = doc.body, phone = width <= 760, vw = win.innerWidth;
+  /* an offending demo (a gotcha's red pane, a sample marked as the offending one) breaks the law on purpose and is not judged */
+  const all = [...body.querySelectorAll('*')].filter(el => shown(el, win) && !el.closest('.offense, [data-offending]'));
+  const texty = all.filter(el => ownText(el).length >= 3 && !el.closest('script, style, noscript, desc, title, template'));
+  const token = name => win.getComputedStyle(doc.documentElement).getPropertyValue(name).trim();
+
+  /* K01, K02: every text node's size and its contrast against what is painted under it */
+  for (const el of texty) {
+    const cs = win.getComputedStyle(el);
+    let size = parseFloat(cs.fontSize);
+    const svg = el.ownerSVGElement;
+    if (svg) { const box = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal; if (vb && vb.width && box.width) size *= box.width / vb.width; }
+    const hero = !!el.closest('.hero');
+    if (size < SYS_SIZES[0] - 0.5) add('K01', el, ownText(el), 'size ' + size.toFixed(1) + 'px, under the 18 px floor [K01 TYPE_SCALE; Rule 105]');
+    else if (!svg && !(hero && size <= SYS_HERO_MAX + 0.5) && !SYS_SIZES.some(s => Math.abs(s - size) <= 0.6))
+      add('K01', el, ownText(el), 'size ' + size.toFixed(1) + 'px is none of the six sizes (18, 21, 24, 28, 34 px; the hero to 41.6) [K01 TYPE_SCALE]');
+    const bg = backgroundOf(el, win), fr = readColor(cs.color);
+    if (bg.unreadable || fr.state !== 'ok') continue;
+    let fg = fr.color; if (fg.a < 1) fg = composite(fg, bg);
+    const ratio = contrast(fg, bg);
+    if (ratio < 7) add('K02', el, ownText(el), 'contrast ' + ratio.toFixed(2) + ':1, under 7:1 [K02 TEXT_CONTRAST]');
+  }
+
+  /* K03 MEASURE and K11 BALANCE: blocks of running text, read by their rendered lines */
+  const canvas = doc.createElement('canvas').getContext('2d');
+  for (const el of all.filter(e => /^(P|LI|DD|FIGCAPTION|H1|H2|H3|BLOCKQUOTE)$/.test(e.tagName) || e.classList.contains('lead') || e.classList.contains('sub'))) {
+    if (el.closest('nav, table, pre, svg, button, select') || !allInline(el, win)) continue;
+    const text = el.textContent.replace(/\s+/g, ' ').trim();
+    if (text.length < 12) continue;
+    const lines = lineBoxes(el, doc);
+    if (lines.length < 2) continue;
+    const widths = lines.map(l => l.right - l.left), widest = Math.max(...widths), last = widths[widths.length - 1];
+    if (last < widest / 3) add('K11', el, text, 'the last line is ' + Math.round(last) + 'px against a widest of ' + Math.round(widest) + 'px, under a third [K11 BALANCE]');
+    if (/^H[1-3]$/.test(el.tagName)) {
+      for (const m of text.matchAll(/[.!?](\s+)(?=\S)/g)) {
+        const raw = el.textContent; const idx = raw.replace(/\s+/g, ' ').trim() === raw ? m.index : null;
+        if (idx === null) continue;
+        const a = rectAt(el, doc, idx), b = rectAt(el, doc, idx + 1 + m[1].length);
+        if (a && b && Math.abs(a.top - b.top) < 3) add('K11', el, text, 'a rendered line holds the end of one sentence and the start of the next [K11 BALANCE]');
+      }
+    }
+    if (width >= 768 && !/^H[1-3]$/.test(el.tagName) && !el.closest('.hero, .pane, .vibe-pane, .window')) {
+      const cs = win.getComputedStyle(el);
+      canvas.font = [cs.fontStyle, cs.fontWeight, cs.fontSize, cs.fontFamily].join(' ');
+      const avg = canvas.measureText(text).width / text.length;
+      const cpl = Math.round(widest / avg);
+      if (cpl > 75) add('K03', el, text, 'about ' + cpl + ' characters a line, over 75 [K03 MEASURE]');
+      else if (cpl < 45 && lines.length >= 3) add('K03', el, text, 'about ' + cpl + ' characters a line, under 45 [K03 MEASURE]');
+    }
+  }
+
+  /* K04 BOX_FILL and K07 LINE_DRAWS: what a box or a line claims */
+  const LINE_OK = 'table, thead, tbody, tfoot, tr, th, td, input, select, textarea, button, .btn, .tag, .status, pre, code, kbd, figure, svg, img, nav, nav *, [role="button"], hr.draws, .window, .window *, .pane, .pane *, .vibe-pane, .vibe-pane *';
+  for (const el of all) {
+    if (el === body || el === doc.documentElement || el.closest('svg')) continue;
+    const p = boxPaint(el, win);
+    const r = el.getBoundingClientRect();
+    if (p.sides.length && !el.matches(LINE_OK)) add('K07', el, ownText(el) || el.textContent.trim(), 'a ' + (p.sides.length === 4 ? 'box' : p.sides.join('/').toLowerCase() + ' line') + ' around something that is not a table, a field, a drawing, a code block, a sample or a bar [K07 LINE_DRAWS]');
+    if (el.tagName === 'HR' && !el.matches('.draws')) add('K07', el, '', 'a rule between blocks: space separates groups [K07 LINE_DRAWS]');
+    if ((p.sides.length === 4 || p.fill) && r.width > 160 && r.width < 0.95 * vw && !el.matches('table, thead, tbody, tr, th, td, input, select, textarea, button, .btn, .tag, nav, nav *, img, svg, canvas, video, iframe, .pane, .pane *, .vibe-pane, .vibe-pane *, .window, .window > .strip')) {
+      const cs = p.cs, inner = r.width - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth);
+      const rg = doc.createRange(); rg.selectNodeContents(el);
+      let lo = Infinity, hi = -Infinity;
+      for (const b of rg.getClientRects()) { if (b.width < 1) continue; lo = Math.min(lo, b.left); hi = Math.max(hi, b.right); }
+      el.querySelectorAll('img, svg, canvas, video, input, select, button, textarea, iframe').forEach(x => { const b = x.getBoundingClientRect(); if (b.width) { lo = Math.min(lo, b.left); hi = Math.max(hi, b.right); } });
+      if (hi > lo && inner > 0) {
+        const empty = 1 - (hi - lo) / inner;
+        if (empty > 1 / 3) add('K04', el, el.textContent.trim(), Math.round(empty * 100) + '% of its width is empty: a box is as wide as what it holds [K04 BOX_FILL]');
+      }
+    }
+  }
+
+  /* K05 CONTROL_NEAR: a control on the same row as the words it acts on sits beside them */
+  for (const c of all.filter(e => e.matches('button, .btn, select, input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"])') && !e.closest('nav, table, form.controls'))) {
+    const box = c.closest('p, li, form, .controls, .cta, div, section'); if (!box) continue;
+    const cr = c.getBoundingClientRect(); let gap = null;
+    const rg = doc.createRange(); rg.selectNodeContents(box);
+    for (const b of rg.getClientRects()) {
+      if (b.width < 1 || b.bottom < cr.top || b.top > cr.bottom) continue;
+      if (b.left >= cr.left - 1 && b.right <= cr.right + 1) continue;          /* the control's own label */
+      const g = b.right <= cr.left ? cr.left - b.right : b.left >= cr.right ? b.left - cr.right : 0;
+      gap = gap === null ? g : Math.min(gap, g);
+    }
+    if (gap !== null && gap > 64) add('K05', c, c.textContent.trim() || c.value || '', Math.round(gap) + 'px from the words it acts on, over 4rem [K05 CONTROL_NEAR]');
+  }
+
+  /* K06 GROUP_RATIO: a title belongs with what follows it, so the space above it is at least twice the space below */
+  for (const h of all.filter(e => /^H[2-3]$/.test(e.tagName) && !e.closest('nav, .window, .hero'))) {
+    const prev = h.previousElementSibling, next = h.nextElementSibling;
+    if (!prev || !next || !shown(prev, win) || !shown(next, win)) continue;
+    const above = h.getBoundingClientRect().top - prev.getBoundingClientRect().bottom, below = next.getBoundingClientRect().top - h.getBoundingClientRect().bottom;
+    if (below > 0 && above < 2 * below - 1) add('K06', h, h.textContent.trim(), Math.round(above) + 'px above the title and ' + Math.round(below) + 'px below it: the space above is owed twice the space below [K06 GROUP_RATIO]');
+  }
+
+  /* K08 ONE_EMPHASIS: one emphasis per element; a link's own is its colour and its underline */
+  for (const el of texty.filter(e => !e.closest('nav, pre, code, h1, h2, h3, button, .btn, .tag, th, svg'))) {
+    if (/^(P|LI|DIV|SECTION|TD|DD|FIGCAPTION|LABEL)$/.test(el.tagName)) continue;
+    const cs = win.getComputedStyle(el), ps = el.parentElement && win.getComputedStyle(el.parentElement); if (!ps) continue;
+    const cues = [];
+    if ((+cs.fontWeight || 400) >= 700 && (+ps.fontWeight || 400) < 700) cues.push('strong weight');
+    if (/underline/.test(cs.textDecorationLine)) cues.push('underline');
+    if (!sameColor(readColor(cs.color).color, readColor(ps.color).color)) cues.push('colour');
+    if (boxPaint(el, win).fill) cues.push('fill');
+    const extra = el.tagName === 'A' ? cues.filter(c => c !== 'underline' && c !== 'colour') : cues;
+    if (el.tagName === 'A' ? extra.length >= 1 : extra.length >= 2) add('K08', el, ownText(el), (el.tagName === 'A' ? 'a link carrying ' : '') + extra.join(' + ') + (el.tagName === 'A' ? ' beyond its colour and underline' : ' at once') + ' [K08 ONE_EMPHASIS]');
+  }
+
+  /* K09 PALETTE: no state of a control is left to the platform */
+  for (const el of all.filter(e => e.matches('input[type="checkbox"], input[type="radio"], input[type="range"], progress, meter'))) {
+    if (win.getComputedStyle(el).accentColor === 'auto') add('K09', el, el.getAttribute('aria-label') || '', 'its colour is the platform\'s (accent-color: auto), not the culture\'s [K09 PALETTE]');
+  }
+  if (win.getComputedStyle(doc.documentElement).scrollbarColor === 'auto') add('K09', 'html', '', 'the scrollbar wears the platform\'s colours (scrollbar-color: auto) [K09 PALETTE]', '(the site)');
+
+  /* K10 ONE_CRITICAL: one element in --danger per view */
+  const danger = token('--danger');
+  if (!danger) add('K10', ':root', '', 'not decided: no --danger token is declared, so the critical element cannot be counted [K10 ONE_CRITICAL]', '(the site)');
+  else {
+    const probe = doc.createElement('span'); probe.style.color = 'var(--danger)'; body.appendChild(probe);
+    const dz = readColor(win.getComputedStyle(probe).color).color; probe.remove();
+    const crit = texty.filter(e => !e.closest('.window, .pane, pre, code, figure.sample') && (sameColor(readColor(win.getComputedStyle(e).color).color, dz) || sameColor(readColor(win.getComputedStyle(e).backgroundColor).color, dz)));
+    const tops = crit.filter(e => !crit.some(o => o !== e && o.contains(e)));
+    if (tops.length > 1) add('K10', '(the view)', tops.map(e => ownText(e)).join(' / '), tops.length + ' elements in --danger in one view: one critical element per view [K10 ONE_CRITICAL]');
+  }
+
+  /* K12 ROW_FULL: a wrapped row of controls comes out in equal rows */
+  for (const box of all.filter(e => { const cs = win.getComputedStyle(e); return /flex/.test(cs.display) && cs.flexWrap === 'wrap' && e.children.length >= 3; })) {
+    const kids = [...box.children].filter(k => shown(k, win) && !k.matches('.brand') && k.matches('a, button, .btn, select, input, label, .chip, [role="button"]'));
+    if (kids.length < 3 || kids.length < box.children.length - 1) continue;
+    const rows = [];
+    kids.forEach(k => { const b = k.getBoundingClientRect(); const r = rows.find(x => b.top < x.bottom - 2 && b.bottom > x.top + 2); if (r) { r.n++; r.top = Math.min(r.top, b.top); r.bottom = Math.max(r.bottom, b.bottom); } else rows.push({ top: b.top, bottom: b.bottom, n: 1 }); });
+    if (rows.length > 1 && Math.max(...rows.map(r => r.n)) - Math.min(...rows.map(r => r.n)) > 1)
+      add('K12', box, kids.map(k => k.textContent.trim()).join(' · '), 'rows of ' + rows.map(r => r.n).join(' + ') + ' controls: a wrapped row comes out in equal rows [K12 ROW_FULL]');
+  }
+
+  /* K13 ONE_SCROLL: on a page only the document scrolls; in an application, no scroll inside a scroll */
+  const app = body.dataset.archetype === 'application';
+  for (const el of all) {
+    if (el === body) continue;
+    const cs = win.getComputedStyle(el);
+    const y = /auto|scroll/.test(cs.overflowY) && el.scrollHeight > el.clientHeight + 2, x = /auto|scroll/.test(cs.overflowX) && el.scrollWidth > el.clientWidth + 2;
+    if (!x && !y) continue;
+    const inner = app && [...all].some(o => o !== el && o.contains(el) && /auto|scroll/.test(win.getComputedStyle(o).overflowY) && o.scrollHeight > o.clientHeight + 2);
+    if (!app || inner || x) add('K13', el, el.textContent.trim(), 'scrolls ' + (x && y ? 'both ways' : x ? 'sideways' : 'down') + ' inside the page: one scroll [K13 ONE_SCROLL]');
+  }
+
+  /* K14 NO_FLOAT: nothing fixed or absolute covers words it does not hold */
+  const words = texty.map(e => ({ e, r: e.getBoundingClientRect() })).filter(x => x.r.width && x.r.bottom > 0 && x.r.top < win.innerHeight);
+  for (const el of all.filter(e => /^(fixed|absolute)$/.test(win.getComputedStyle(e).position))) {
+    const r = el.getBoundingClientRect(); if (r.width < 2 || r.height < 2 || r.bottom <= 0 || r.top >= win.innerHeight || r.right <= 0 || r.left >= vw) continue;
+    const hit = words.find(w => {
+      if (el.contains(w.e) || w.e.contains(el) || !(w.r.left < r.right && w.r.right > r.left && w.r.top < r.bottom && w.r.bottom > r.top)) return false;
+      const x = (Math.max(w.r.left, r.left) + Math.min(w.r.right, r.right)) / 2, y = (Math.max(w.r.top, r.top) + Math.min(w.r.bottom, r.bottom)) / 2;
+      const top = doc.elementFromPoint(x, y);
+      return !!top && (top === el || el.contains(top)) && !w.e.contains(top);
+    });
+    if (hit) add('K14', el, ownText(hit.e), 'a ' + win.getComputedStyle(el).position + ' element covers words it does not hold [K14 NO_FLOAT]');
+  }
+
+  /* K15 NO_HOVER_ONLY and K16 SHAPE, on the stylesheets: a :hover that changes another element; a container that reacts around a link */
+  for (const rule of sheetRules(doc)) {
+    for (const s of rule.sel.split(',').map(x => x.trim())) {
+      if (/:hover\s*([>+~ ]\s*)[^\s]/.test(s) && !/:hover\s*$/.test(s)) add('K15', rule.sheet, s, 'a :hover rule that changes another element: the reveal exists only under a pointer [K15 NO_HOVER_ONLY]', '(stylesheet ' + rule.sheet + ')');
+      else if (/:hover\s*$/.test(s)) {
+        let hits = []; try { hits = [...doc.querySelectorAll(s.replace(/:hover\s*$/, '') || '*')]; } catch (e) { hits = []; }
+        const c = hits.find(h => !h.matches('a, button, input, select, textarea, label, summary, [role="button"], [role="tab"]') && h.querySelector('a, button'));
+        if (c) add('K16', rule.sheet, s, 'a container that reacts under the pointer around a link or a button: a container never reacts [K16 SHAPE]', '(stylesheet ' + rule.sheet + ')');
+      }
+    }
+  }
+  all.filter(e => e.hasAttribute('title')).forEach(e => add('K15', e, e.getAttribute('title'), 'a title attribute: a tooltip [K15 NO_HOVER_ONLY]'));
+  for (const el of all.filter(e => win.getComputedStyle(e).cursor === 'pointer')) {
+    if (el.closest('a, button, input, select, textarea, label, summary, [role="button"], [role="tab"], [role="link"]')) continue;
+    add('K16', el, ownText(el) || el.textContent.trim(), 'a pointer on something that is not a link, a button or a field [K16 SHAPE]');
+  }
+
+  /* K17 TARGET: 48 px on a phone, 24 px elsewhere; a link inside a sentence is exempt, as WCAG 2.5.8 exempts it */
+  const min = phone ? 48 : 24;
+  for (const el of all.filter(e => e.matches('a[href], button, input:not([type="hidden"]), select, textarea, summary, [role="button"]'))) {
+    if (el.tagName === 'A' && INLINE.test(win.getComputedStyle(el).display) && el.parentElement && ownText(el.parentElement).length > 0 && !el.closest('nav')) continue;
+    let up = el.parentElement, hidden = false;
+    while (up && !hidden) { const b = up.getBoundingClientRect(); hidden = b.width <= 1 && b.height <= 1 && win.getComputedStyle(up).overflow === 'hidden'; up = up.parentElement; }
+    if (hidden) continue;
+    let r = el.getBoundingClientRect();
+    const lab = el.closest('label') || (el.id && doc.querySelector('label[for="' + el.id + '"]'));
+    if (lab && /^(INPUT)$/.test(el.tagName)) { const l = lab.getBoundingClientRect(); r = { width: Math.max(r.width, l.width), height: Math.max(r.height, l.height) }; }
+    if (r.width && (r.width < min || r.height < min)) add('K17', el, el.textContent.trim() || el.getAttribute('aria-label') || el.value || '', Math.round(r.width) + ' by ' + Math.round(r.height) + 'px, under ' + min + ' by ' + min + ' [K17 TARGET]');
+  }
+
+  /* K22 LAYOUT_STILL: nothing moved because something else appeared, grew or went */
+  const shifts = await layoutShifts(win);
+  if (shifts && shifts.length) {
+    const total = shifts.reduce((s, e) => s + e.value, 0);
+    if (total > 0.01) {
+      const src = shifts.flatMap(e => (e.sources || []).map(s => s.node && s.node.nodeType === 1 ? sysName(s.node) : '')).filter(Boolean);
+      add('K22', src[0] || '(the page)', [...new Set(src)].slice(0, 3).join(', '), 'the layout moved by ' + total.toFixed(3) + ' (layout shift) while the page loaded [K22 LAYOUT_STILL]');
+    }
+  }
+  return out;
+}
+
+/* one frame at one width in one culture */
+function loadSystemFrame(entry, width, culture) {
+  const path = resolvePath(entry);
+  return new Promise(resolve => {
+    try { localStorage.setItem('stzzui-vibe', culture); } catch (e) { /* storage may be blocked */ }
+    const frame = document.createElement('iframe');
+    frame.style.cssText = 'width:' + width + 'px;height:' + (width <= 760 ? 812 : 900) + 'px;position:fixed;left:-99999px;top:0;border:0';
+    frame.src = path + (path.includes('?') ? '&' : '?') + 'audit=' + Date.now();
+    let done = false;
+    const finish = () => {
+      if (done) return; done = true;
+      setTimeout(async () => {
+        let out;
+        try { out = await auditSystem(frame.contentDocument, frame.contentWindow, entry, width); }
+        catch (e) { out = [{ page: entry, check: '--', where: '(unreadable)', text: e.message, issues: 'the audit needs same-origin HTTP' }]; }
+        frame.remove(); resolve(out);
+      }, 700);
+    };
+    frame.onload = finish; setTimeout(finish, 6000);
+    document.body.appendChild(frame);
+  });
+}
+/* a finding seen at several widths or in both cultures is one finding, with where it was seen */
+function mergeSystem(found) {
+  const by = new Map();
+  for (const f of found) {
+    const key = [f.page, f.check, f.where, f.text, f.issues.replace(/[\d.]+(px|%|:1)?/g, '#')].join('\u0001');
+    const x = by.get(key);
+    if (x) { if (!x.at.includes(f.at)) x.at.push(f.at); } else by.set(key, { ...f, at: [f.at] });
+  }
+  const where = at => {
+    const per = SYS_CULTURES.map(([, name]) => [name, SYS_WIDTHS.filter(w => at.includes(w + ' ' + name))]).filter(([, ws]) => ws.length);
+    const said = per.map(([name, ws]) => (ws.length === SYS_WIDTHS.length ? 'every width' : ws.join(', ') + ' px') + ' in ' + name);
+    return per.length === SYS_CULTURES.length && per.every(([, ws]) => ws.length === SYS_WIDTHS.length) ? 'every width, both cultures' : said.join('; ');
+  };
+  return [...by.values()].map(f => ({ ...f, issues: f.issues + ' (at ' + where(f.at) + ')' }));
+}
+
 const $ = s => document.querySelector(s);
 
 function buildMarkdown(findings, pages, vibe) {
@@ -701,14 +1024,15 @@ function buildMarkdown(findings, pages, vibe) {
     '- **style**: ' + vibe,
     '- **pages audited**: ' + pages.length,
     '- **violations**: ' + findings.length,
+    ...(findings.some(f => f.check) ? ['- **by check**: ' + Object.keys(SYS_CHECKS).map(k => k + ' ' + findings.filter(f => f.check === k).length).join(', ')] : []),
     '- **run**: ' + stamp + ' UTC',
     ''
   ];
   if (!findings.length) {
     lines.push('**Clean** — every text node meets the reading floor and the contrast it owes, every page shows the whole path it sits on, nothing scrolls sideways with room to spare, and no menu flattens or renames what the tree already says.');
   } else {
-    lines.push('| page | element | text | violation |', '|---|---|---|---|');
-    findings.forEach(f => lines.push('| `' + esc(f.page) + '` | `' + esc(f.where) + '` | '
+    lines.push('| page | check | element | text | violation |', '|---|---|---|---|---|');
+    findings.forEach(f => lines.push('| `' + esc(f.page) + '` | ' + (f.check || '') + ' | `' + esc(f.where) + '` | '
       + esc(f.text) + ' | ' + esc(f.issues) + ' |'));
   }
   lines.push('', '_Measured in the browser: computed size and true contrast against the '
@@ -775,6 +1099,17 @@ $('#run').addEventListener('click', async () => {
   all.push(...auditTrailConsistency(TRAILS));   /* Rule 115, once every trail is known */
   all.push(...auditBarPersistence(PAGEBARS));   /* Rule 115, each bar on the pages it lists */
   all.push(...auditMenuDepth(MENUS, TRAILS));   /* Rule 116, the menu against the tree */
+  if ($('#system').checked) {
+    let saved = null; try { saved = localStorage.getItem('stzzui-vibe'); } catch (e) { /* storage may be blocked */ }
+    const found = [];
+    const steps = pages.length * SYS_WIDTHS.length * SYS_CULTURES.length; let step = 0;
+    for (const page of pages) for (const [culture, name] of SYS_CULTURES) for (const w of SYS_WIDTHS) {
+      progress.textContent = 'system ' + (++step) + ' of ' + steps + ' — ' + page + ' at ' + w + ' px, ' + name;
+      (await loadSystemFrame(page, w, culture)).forEach(x => found.push({ ...x, at: w + ' ' + name }));
+    }
+    try { if (saved === null) localStorage.removeItem('stzzui-vibe'); else localStorage.setItem('stzzui-vibe', saved); } catch (e) { /* storage may be blocked */ }
+    all.push(...mergeSystem(found));
+  }
   progress.textContent = '';
   $('#run').disabled = false;
 

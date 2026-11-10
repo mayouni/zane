@@ -19,7 +19,7 @@ after reading milestone 1 the Principal asked that it show rather than describe 
    [`corpus/corpus.json`](corpus/corpus.json)), with the theory under each cause, cited.
 3. **The predecessors**: Zin's design system, Refine's PX design and Zing's PX discipline, set beside this one: what each decided,
    where they agree and differ, and what Zane takes (section 5).
-4. **The design system**: seven archetypes, twenty-five components, 43 tokens, four shapes, what the generator may vary and what it may
+4. **The design system**: seven archetypes, twenty-five components, 45 tokens, four shapes, what the generator may vary and what it may
    not, for sight, touch and hearing (section 6), each principle **shown live**, lawful beside offending, on
    [the samples page](design-system-samples.html).
 5. **Twenty-two checks** that read every rule on the rendered page (section 7).
@@ -548,7 +548,7 @@ negative marketing the Principal later refused (Z237); PRINCIPAL-AFFIRM-01 repla
 |---|---|---|
 | archetypes | 6 page archetypes | 7: the **application** joins them (Refine, Zing) |
 | components | 21 | 25: **pane**, **view bar**, **status line** and **dialog** join them |
-| tokens | 42 per culture | 43: `--bar-height` joins them; `--target-phone` rises from 44 to 48 px |
+| tokens | 42 per culture | 45: `--bar-height` joins them; `--target-phone` rises from 44 to 48 px; milestone 2 adds `--bar` and `--on-bar` (section 6.2) |
 | a culture | colour, font, radius, shadow | and its interaction vocabulary (Zin's vibe) |
 | checks | 21 | 22: K22 LAYOUT_STILL (Zin's zero displacement); K13 reads nested scroll; K17 reads 48 px; K09 reads scrollbars |
 | component rules | | the notice's four parts and its undo grace; the table's numbers, row and selection; the figure's chart and diagram grammar; the field's widths and visible value; the dialog's Enter and Esc; the deepest entry alone marked |
@@ -577,7 +577,7 @@ application built with Zane, whose shell it takes from Refine and Zing (section 
 | P | The painted page is the instrument | five widths, two cultures; a perception recorded | 4, 6 |
 | X | Decided stays decided | no platform default; house components; changes named | 3, 4 |
 
-### 6.2 Tokens: 43 per culture, 19 of which a culture may set
+### 6.2 Tokens: 45 per culture, 23 of which a culture may set
 
 Every value the stylesheet uses comes from a token. **Fixed** tokens hold in both cultures; **culture** tokens are set by Modern and
 Retro (Article VI), always under the same name and meaning. A culture also sets its interaction vocabulary, as Zin's vibes do:
@@ -593,16 +593,17 @@ Retro is keyboard-first with instant feedback, Modern pointer-first; every input
 | | `--size-hero` | up to 2.6rem: the front page's hero only | fixed | T |
 | | `--weight-regular`, `--weight-strong` | 400 and the heading weight; no third | fixed | E |
 | | `--leading-reading`, `--leading-title` | 1.7 and 1.2 | fixed | T |
-| | `--measure-min`, `--measure-max` | 60ch and 75ch | fixed | S |
+| | `--measure-min`, `--measure-max` | about 60 and 75 characters of running text, fixed in characters and stated in em by each culture for its font: 27em and 33em in Modern, 33em and 40em in Retro, whose monospaced letters are wider (a `ch` is the width of a zero, so 75ch would hold about 85 proportional letters; K03 measures the painted line) | culture | S |
 | | `--font` | sans (Modern), mono (Retro) | culture | — |
 | space (5) | `--space-1` to `--space-4` | .5rem inside a component, 1rem between items, 2rem between groups, 4rem between regions | fixed | S, I |
 | | `--gutter` | 1.4rem from any container's edge to its text | fixed | S |
-| colour: chrome (10) | `--paper`, `--surface` | the page; the frame of a sample or a code block | culture | E |
+| colour: chrome (12) | `--paper`, `--surface` | the page; the frame of a sample or a code block | culture | E |
 | | `--ink`, `--ink-2` | text; secondary text, still 7:1 | culture | T |
 | | `--line`, `--edge` | a hairline that draws (tables, drawings); a field's edge, 3:1 | culture | I, F |
 | | `--link` | navigation | culture | F |
 | | `--action`, `--on-action` | the one primary action of a view, and its label at 7:1 | culture | F |
 | | `--focus` | the focus ring | culture | H |
+| | `--bar`, `--on-bar` | the surface the menu and the footer stand on, and the front page's photograph panel, with the words on it; added in milestone 2, because each culture's identity lives in its bar (Modern's indigo, Retro's terminal black) and no token above can be both | culture | E |
 | colour: data (6) | `--success`, `--warning`, `--danger`, `--info`, `--muted` | Rule 118's five semantic values | culture | E |
 | | `--meta` | the one neutral for channels, types and categories | culture | E |
 | form (4) | `--hairline`, `--ring` | 1 px; 2 px | fixed | I, H |

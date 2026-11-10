@@ -128,7 +128,7 @@ const siteLines = [];
   const htmlUnder = d => { const out = []; const w = x => { for (const e of fs.readdirSync(P(x), { withFileTypes: true })) { const q = x + '/' + e.name; if (e.isDirectory()) w(q); else if (q.endsWith('.html')) out.push(q); } }; w(d); return out; };
   /* every file the three tools write (the pages, site/facts.json) and every file a case breaks, read once; and the one file a case creates */
   const KEEP = [...new Set(['index.html', ...htmlUnder('site'), ...htmlUnder('tools'), ...htmlUnder('constitution/reader'), 'site/facts.json',
-    'site/stz.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md', 'site/menu.zane'])];
+    'site/stz.css', 'site/gotchas.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md', 'site/menu.zane'])];
   const NEW = ['site/extra.html'];
   const ALL = [...KEEP, ...NEW];
   const missing = KEEP.filter(f => !fs.existsSync(P(f)));
@@ -226,6 +226,16 @@ const siteLines = [];
       ['shell', 'an allowed line gone, its entry left', () => sub1('tools/zane/wasm-proof.html', 'node tools/zane/parity.js --write-wasm-proof', 'tools/zane/parity.js with --write-wasm-proof'), CHECK, 'fail', 'matches no line: the entry has outlived what it excused'],
       ['shell', 'a served page the registry does not list', () => put(P('site/extra.html'), '<!DOCTYPE html>\n<title>x</title>\n'), CHECK, 'fail', 'site/extra.html: a page the site serves that the registry does not list'],
       ['shell', 'a registered page missing', () => drop(P('site/vibes.html')), [[], ['--write']], 'fail', 'site/vibes.html: missing'],
+      // the design system's tokens (ZANE-DESIGN-01 M2: K01, K09, K15 on the stylesheets; K21 on every page; K19, K20 counted)
+      ['shell', 'a font size outside the tokens', () => edit('site/stz.css', t => t + '\nh2.extra { font-size: 1.4rem; }\n'), CHECK, 'fail', 'not a size token (K01 TYPE_SCALE)'],
+      ['shell', 'a font size in a font shorthand', () => edit('site/stz.css', t => t + '\n.extra {\n  color: var(--ink);\n  font: 700 15px/1.2 var(--sans);\n}\n'), CHECK, 'fail', 'in its font shorthand, not a size token (K01 TYPE_SCALE)'],
+      ['shell', 'a colour outside the tokens', () => edit('site/stz.css', t => t + '\n.extra { border: 1px solid rgba(1, 2, 3, .5); }\n'), CHECK, 'fail', 'not a colour token (K09 PALETTE)'],
+      ['shell', 'a colour defined in a token block', () => edit('site/stz.css', t => t + '\n:root { --extra: #123456; }\n[data-vibe="guardian"] { --extra: #654321; }\n'), [['--write']], 'pass', ''],
+      ['shell', 'an offending demo fenced, not read', () => edit('site/gotchas.css', t => t + '\n/* offense:start */\n.extra { color: #123456; font-size: 3px; }\n/* offense:end */\n'), [['--write']], 'pass', ''],
+      ['shell', 'a hover that reaches another element', () => edit('site/gotchas.css', t => t + '\n.extra:hover .tip { display: block; }\n'), CHECK, 'fail', 'makes a :hover reach another element'],
+      ['shell', 'a page without its archetype', () => sub1('site/web.html', ' data-archetype="article"', ''), [[], ['--write']], 'fail', 'site/web.html: differs from the shell'],
+      ['shell', 'a long paragraph, counted for milestone 3', () => before('site/web.html', '</main>', '<p>' + 'word '.repeat(80) + '</p>\n'), [[], ['--write']], 'pass', ''],
+      ['shell', 'an article section with a sample frame', () => sub1('site/web.html', '<section', '<section><figure class="sample">x</figure></section>\n<section'), [[], ['--write']], 'pass', ''],
 
       ['grid', 'the tree as it is', null, [[], ['--write']], 'pass', ''],
       ['grid', 'a cell of the grid table drifted', gridCell, [[], ['--write']], 'fail', 'the grid:table differs from the data'],

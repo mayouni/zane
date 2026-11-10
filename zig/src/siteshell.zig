@@ -101,7 +101,8 @@ const pages = [_]Page{
 const assets = [_][]const u8{ "stz.css", "stz.js", "gotchas.css", "law-numbers.js", "tour.js", "zane-wasm.js", "try.js", "zane.wasm" };
 const REPO = "https://github.com/mayouni/zane";
 const GITHUB_MARK = "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z";
-const SECTION_MIN = 4;
+/// an outline by default on every page of three or more sections (K18 NAV_TREE; ZANE-OUTLINE-01)
+const SECTION_MIN = 3;
 
 comptime {
     // Rules 27 and 120: a band holds five entries at most, its head page among them; site-shell.js throws when the registry breaks
@@ -125,6 +126,19 @@ fn sec(id: ?[]const u8) ?*const Section {
     for (&sections) |*s| if (std.mem.eql(u8, s.id, x)) return s;
     return null;
 }
+/// Every page declares its archetype on its <body> (doc/design/DESIGN-SYSTEM.md section 6.5, K21 ARCHETYPE): the front page; a
+/// section's or a family's first page is a landing; the Reader, the rules and the conformance page are references; the tour is the deck;
+/// a tool is a tool; every other page is an article. The same decision as archetypeOf in tools/site-shell.js.
+const references = [_][]const u8{ "site/rules.html", "constitution/reader/index.html", "site/conformance.html" };
+fn archetypeOf(p: *const Page) []const u8 {
+    if (p.home) return "front";
+    if (p.outside == .tool) return "tool";
+    for (references) |r| if (std.mem.eql(u8, r, p.file)) return "reference";
+    if (std.mem.eql(u8, p.file, "site/tour.html")) return "deck";
+    if (isHeadFile(p.file) or p.family != null) return "landing";
+    return "article";
+}
+
 fn isHeadFile(file: []const u8) bool {
     for (sections) |s| if (std.mem.eql(u8, s.head, file)) return true;
     return false;
@@ -519,6 +533,12 @@ fn apply(a: Allocator, p: *const Page, text: []const u8) !Applied {
         t = try fill(a, t, "layout", try fmt(a, "<div class=\"layout{s}\">{s}{s}", .{ if (r.len > 0) " has-list" else "", if (r.len > 0) "\n" else "", r }));
     }
     if (try hasFence(a, t, "footer")) t = try fill(a, t, "footer", try footer(a, p));
+    // ---- the page declares its archetype on its body (K21) ----
+    const body_re = try re.compile(a, "<body\\b([^>]*)>", "");
+    if (re.exec(&body_re, t, 0)) |bm| {
+        const attrs = try re.sub(a, bm.get(t, 1).?, "\\s+data-archetype=\"[^\"]*\"", "", "");
+        t = try std.mem.concat(a, u8, &.{ t[0..bm.start], try fmt(a, "<body{s} data-archetype=\"{s}\">", .{ attrs, archetypeOf(p) }), t[bm.end..] });
+    } else try problems.append(a, "no <body> to carry the archetype");
     // ---- the assets carry the hash of their own content ----
     var alts: List = .empty;
     for (assets) |x| try alts.append(a, try std.mem.replaceOwned(u8, a, x, ".", "\\."));
@@ -1015,6 +1035,140 @@ fn checkTooltips(a: Allocator, problems: *List) !void {
     }
 }
 
+// ---- the system's tokens, read in the stylesheets (doc/design/DESIGN-SYSTEM.md section 6.2; K01, K09, K15) ---------------
+// Every size and every colour of site/stz.css and site/gotchas.css comes from a token; a rule between the comments offense:start and
+// offense:end dresses an offending demo and is not read; no rule makes a :hover reach another element. The same as checkSheets in
+// tools/site-shell.js, finding for finding.
+
+const sheets = [_][]const u8{ "site/stz.css", "site/gotchas.css" };
+fn lineAt(s: []const u8, i: usize) usize {
+    return std.mem.count(u8, s[0..i], "\n") + 1;
+}
+fn checkSheets(a: Allocator, problems: *List) !void {
+    const offense = try re.compile(a, "\\/\\*\\s*offense:start\\s*\\*\\/[\\s\\S]*?\\/\\*\\s*offense:end\\s*\\*\\/", "g");
+    const comment = try re.compile(a, "\\/\\*[\\s\\S]*?\\*\\/", "g");
+    const rule = try re.compile(a, "([^{}]*)\\{([^{}]*)\\}", "g");
+    const decl = try re.compile(a, "(^|;)\\s*([\\w-]+)\\s*:\\s*([^;]*)", "g");
+    const token_sel = try re.compile(a, "^(:root|\\[data-vibe(=\"[\\w-]+\")?\\]|html\\[data-vibe(=\"[\\w-]+\")?\\])$", "");
+    const size_ok = try re.compile(a, "^(var\\(--size-[\\w-]+\\)|inherit|1em)$", "");
+    const line_height = try re.compile(a, "\\/\\s*[\\d.]+", "");
+    const has_len = try re.compile(a, "\\d(px|rem|em|pt|%)", "");
+    const size_var = try re.compile(a, "var\\(--size-", "");
+    const colour = try re.compile(a, "#[0-9a-f]{3,8}\\b|\\b(rgba?|hsla?)\\(", "i");
+    const colour_word = try re.compile(a, "#[0-9a-f]{3,8}\\b|\\b(rgba?|hsla?)\\([^)]*\\)", "i");
+    const hover = try re.compile(a, ":hover\\s*[>+~ ]\\s*\\S", "");
+    for (sheets) |f| {
+        if (!exists(f)) continue;
+        var css: []const u8 = try std.mem.replaceOwned(u8, a, try core.wellFormed(a, try readFile(a, f)), "\r\n", "\n");
+        css = try re.replaceFn(a, &offense, css, a, newlinesOnly);
+        css = try re.replaceFn(a, &comment, css, a, newlinesOnly);
+        var rules = re.iterate(&rule, css);
+        while (rules.next()) |m| {
+            const raw_sel = m.get(css, 1).?;
+            const body = m.get(css, 2).?;
+            const sel = re.trim(try re.sub(a, raw_sel, "\\s+", "g", " "));
+            if (std.mem.startsWith(u8, sel, "@")) continue;
+            const at = m.start + raw_sel.len + 1;
+            var token_rule = true;
+            var sel_parts = std.mem.splitScalar(u8, sel, ',');
+            while (sel_parts.next()) |s| if (re.exec(&token_sel, re.trim(s), 0) == null) {
+                token_rule = false;
+            };
+            var ds = re.iterate(&decl, body);
+            while (ds.next()) |d| {
+                const lead = d.get(body, 1).?;
+                const prop = d.get(body, 2).?;
+                const val = re.trim(d.get(body, 3).?);
+                const whole = body[d.start..d.end];
+                const line = lineAt(css, at + d.start + (std.mem.indexOfPos(u8, whole, lead.len, prop) orelse lead.len));
+                if (std.mem.startsWith(u8, prop, "--")) continue;
+                if (std.mem.eql(u8, prop, "font-size") and re.exec(&size_ok, val, 0) == null)
+                    try problems.append(a, try fmt(a, "{s}:{d} \"{s}\" sets font-size {s}, not a size token (K01 TYPE_SCALE)", .{ f, line, sel, val }));
+                if (std.mem.eql(u8, prop, "font") and re.exec(&has_len, try re.replace(a, &line_height, val, ""), 0) != null and re.exec(&size_var, val, 0) == null)
+                    try problems.append(a, try fmt(a, "{s}:{d} \"{s}\" sets a font size in its font shorthand, not a size token (K01 TYPE_SCALE)", .{ f, line, sel }));
+                if (!token_rule and re.exec(&colour, val, 0) != null) {
+                    const w = re.exec(&colour_word, val, 0).?;
+                    try problems.append(a, try fmt(a, "{s}:{d} \"{s}\" writes the colour {s} in {s}, not a colour token (K09 PALETTE)", .{ f, line, sel, val[w.start..w.end], prop }));
+                }
+            }
+            var hs = std.mem.splitScalar(u8, sel, ',');
+            while (hs.next()) |s0| {
+                const s = re.trim(s0);
+                if (re.exec(&hover, s, 0) != null) {
+                    const whole = css[m.start..m.end];
+                    const off = std.mem.indexOf(u8, whole, s) orelse 0;
+                    try problems.append(a, try fmt(a, "{s}:{d} \"{s}\" makes a :hover reach another element, which exists only under a pointer (K15 NO_HOVER_ONLY)", .{ f, lineAt(css, m.start + off), s }));
+                }
+            }
+        }
+    }
+}
+
+// ---- what the pages owe milestone 3 (K19, K20), counted and named on every run (checkOwed in tools/site-shell.js) ---------
+
+fn readable(a: Allocator, f: []const u8, text0: []const u8) ![]const u8 {
+    var text = text0;
+    if (std.mem.endsWith(u8, f, ".md")) {
+        const md_fence = try re.compile(a, "```[\\s\\S]*?```", "g");
+        const md_tick = try re.compile(a, "`[^`\\n]*`", "g");
+        const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+        text = try re.replaceFn(a, &md_fence, text, a, newlinesOnly);
+        text = try re.replaceFn(a, &md_tick, text, a, newlinesOnly);
+        return re.replaceFn(a, &comments, text, a, newlinesOnly);
+    }
+    const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+    const html_code = try re.compile(a, "<(script|style|code)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const html_pre = try re.compile(a, "<pre\\b(?![^>]*\\bterm\\b)[^>]*>[\\s\\S]*?<\\/pre>", "g");
+    text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
+    text = try re.replaceFn(a, &html_code, text, a, newlinesOnly);
+    return re.replaceFn(a, &html_pre, text, a, newlinesOnly);
+}
+fn checkOwed(a: Allocator, notes: *List) !void {
+    var words: List = .empty;
+    var samples: List = .empty;
+    var words_n: usize = 0;
+    var samples_n: usize = 0;
+    const para = try re.compile(a, "<p\\b[^>]*>([\\s\\S]*?)<\\/p>", "g");
+    const main_re = try re.compile(a, "<main\\b[^>]*>([\\s\\S]*)<\\/main>", "");
+    const section_re = try re.compile(a, "<section\\b", "g");
+    const sample_re = try re.compile(a, "<figure\\b[^>]*class=\"[^\"]*\\bsample\\b", "");
+    for (&pages) |*p| {
+        if (!exists(p.file)) continue;
+        const text = try readable(a, p.file, try core.wellFormed(a, try readFile(a, p.file)));
+        var long: usize = 0;
+        var ps = re.iterate(&para, text);
+        while (ps.next()) |m| {
+            const pl = try plain(a, m.get(text, 1).?);
+            var n: usize = 0;
+            var it = std.mem.tokenizeAny(u8, pl, " \t\r\n");
+            while (it.next()) |_| n += 1;
+            if (n > 70) long += 1;
+        }
+        if (long > 0) {
+            try words.append(a, try fmt(a, "{s} {d}", .{ p.file, long }));
+            words_n += long;
+        }
+        if (std.mem.eql(u8, archetypeOf(p), "article")) {
+            const main = if (re.exec(&main_re, text, 0)) |m| m.get(text, 1).? else "";
+            var without: usize = 0;
+            var starts: std.ArrayList(usize) = .empty;
+            var ss = re.iterate(&section_re, main);
+            while (ss.next()) |m| try starts.append(a, m.end);
+            for (starts.items, 0..) |s, i| {
+                const end = if (i + 1 < starts.items.len) starts.items[i + 1] - "<section".len else main.len;
+                if (re.exec(&sample_re, main[s..end], 0) == null) without += 1;
+            }
+            if (without > 0) {
+                try samples.append(a, try fmt(a, "{s} {d}", .{ p.file, without }));
+                samples_n += without;
+            }
+        }
+    }
+    try notes.append(a, try fmt(a, "NOTE K19 REGISTER, owed by milestone 3: {d} paragraph(s) over 70 words on {d} page(s){s}{s}", .{ words_n, words.items.len, if (words.items.len > 0) ": " else "", try std.mem.join(a, ", ", words.items) }));
+    try notes.append(a, try fmt(a, "NOTE K20 SAMPLE, owed by milestone 3: {d} section(s) of article pages without a sample frame on {d} page(s){s}{s}", .{ samples_n, samples.items.len, if (samples.items.len > 0) ": " else "", try std.mem.join(a, ", ", samples.items) }));
+    try notes.append(a, "NOTE K21 ARCHETYPE reads each page's declaration; the order of an archetype's regions is read from milestone 3");
+}
+
 // ---- the run ------------------------------------------------------------------------------------------------------
 
 pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
@@ -1032,6 +1186,9 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     try checkNode(a, &problems);
     try checkReleases(a, &problems);
     try checkAffirm(a, &problems);
+    try checkSheets(a, &problems);
+    var notes: List = .empty;
+    try checkOwed(a, &notes);
     var changed: usize = 0;
     for (&pages) |*p| {
         if (!exists(p.file)) {
@@ -1053,6 +1210,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
             } else try problems.append(a, try fmt(a, "{s}: differs from the shell this file renders (run with --write)", .{p.file}));
         }
     }
+    for (notes.items) |m| try out.writeAll(try fmt(a, "{s}\n", .{m}));
     if (problems.items.len > 0) {
         for (problems.items) |m| try out.writeAll(try fmt(a, "PROBLEM {s}\n", .{m}));
         return 1;
