@@ -35,8 +35,9 @@ const sections = [_]Section{
     .{ .id = "approach", .label = "Approach", .head = "site/thinking.html" },
     .{ .id = "language", .label = "Language", .head = "site/how.html" },
     .{ .id = "law", .label = "Law", .head = "site/why.html" },
-    .{ .id = "use", .label = "Use", .head = "site/adopt.html" },
-    .{ .id = "try", .label = "Try", .head = "site/audit.html" },
+    // Adopt and Demo, not Use and Try (the Principal, 2026-11-10; ZANE-MENU-USETRY-01); the ids stay
+    .{ .id = "use", .label = "Adopt", .head = "site/adopt.html" },
+    .{ .id = "try", .label = "Demo", .head = "site/audit.html" },
 };
 
 const Outside = enum { none, reader, tool };

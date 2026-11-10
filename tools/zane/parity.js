@@ -201,7 +201,7 @@ const siteLines = [];
       ['shell', 'an svg in a scrolling wrapper', () => before('site/web.html', '</main>', '<div class="scroll"><svg viewBox="0 0 1 1"></svg></div>\n'), CHECK, 'fail', 'an svg sits in a scrolling wrapper'],
       ['shell', 'the site names Zing', () => edit('site/stz.js', t => t + '\n// Zing\n'), CHECK, 'fail', 'names Zing'],
       ['shell', 'an outline entry over twenty characters', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Three ways to try it out today"'), CHECK, 'fail', 'give its h2 a data-outline of 20 at most'],
-      ['shell', 'an outline entry repeating its page\'s label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Try"'), CHECK, 'fail', 'repeats the label "Try" above it'],
+      ['shell', 'an outline entry repeating its page\'s label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Demo"'), CHECK, 'fail', 'repeats the label "Demo" above it'],
       ['shell', 'an outline entry repeating a band label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Screenshots"'), CHECK, 'fail', 'name the same thing on one page'],
       ['shell', 'a page tells the reader to run node', () => before('site/web.html', '</main>', '<p>Run <code>node tools/zane/cli.js check x.zane</code>.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("node tools/zane/cli.js")'],
       ['shell', 'a page names Node as what it needs', () => before('site/web.html', '</main>', '<p>It needs Node and a browser.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("Node")'],

@@ -50,8 +50,10 @@ const SECTIONS = [
   { id: 'approach', label: 'Approach', head: 'site/thinking.html' },
   { id: 'language', label: 'Language', head: 'site/how.html' },
   { id: 'law', label: 'Law', head: 'site/why.html' },
-  { id: 'use', label: 'Use', head: 'site/adopt.html' },
-  { id: 'try', label: 'Try', head: 'site/audit.html' }
+  /* Adopt and Demo, not Use and Try (the Principal, 2026-11-10: "Use and Try are very simular lettting the navigation be cofusing";
+     ruled "Adopt / Demo", ZANE-MENU-USETRY-01); the ids stay, so every path and every reference holds */
+  { id: 'use', label: 'Adopt', head: 'site/adopt.html' },
+  { id: 'try', label: 'Demo', head: 'site/audit.html' }
 ];
 /* A page's label is the one name it goes by in the band, the family list, the trail and its title (Rule 116). A section and its landing
    page are two things, so each has one name (Rule 116 at v3.16; the Principal, 2026-11-08: "you must bring bakc the frist option but find

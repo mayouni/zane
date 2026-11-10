@@ -64,7 +64,7 @@ DEFINE NAV_GRAPH gotchas_intelligence (LABEL "Intelligence", TARGET gotchas_inte
 DEFINE NAV_GRAPH vibes (LABEL "Two cultures, one truth", TARGET vibes)
 
 DEFINE NAV_GRAPH use (
-  LABEL "Use",
+  LABEL "Adopt",
   TARGET adopt,
   ENTRIES [adopt, web, mobile, beyond, stack_family]
 )
@@ -85,7 +85,7 @@ DEFINE NAV_GRAPH softanza (LABEL "Softanza", TARGET softanza)
 DEFINE NAV_GRAPH ports (LABEL "Other languages", TARGET ports)
 
 DEFINE NAV_GRAPH try (
-  LABEL "Try",
+  LABEL "Demo",
   TARGET audit,
   ENTRIES [audit, tour, ui_audit, screenshots, wasm_proof]
 )
