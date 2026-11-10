@@ -118,6 +118,14 @@ function derive(prev) {
   put('site.verifierRuns', pairs().length, 'the declaration and terminal pairs on the site pages (re-run by this script)');
   put('tour.scenes', (fs.readFileSync(path.join(ROOT, 'site', 'tour.html'), 'utf8').match(/class="scene-card"/g) || []).length, 'site/tour.html scene cards');
 
+  /* the corpus of the Principal's UI corrections (doc/design/DESIGN-SYSTEM.md section 3), which the Why section cites */
+  const corpus = json('doc/design/corpus/corpus.json');
+  put('corpus.corrections', corpus.records.length, 'doc/design/corpus/corpus.json records');
+  put('corpus.projects', new Set(corpus.records.map(r => r.project)).size, 'doc/design/corpus/corpus.json records, their projects');
+  put('corpus.repeats', corpus.records.filter(r => r.repeat === true).length, 'doc/design/corpus/corpus.json records that name an earlier one');
+  put('corpus.causes', Object.keys(corpus.causes).length, 'doc/design/corpus/corpus.json causes');
+  put('corpus.oneDay', corpus.records.filter(r => String(r.date).startsWith('2026-11-09')).length, 'doc/design/corpus/corpus.json records of 2026-11-09');
+
 
   const sorted = {}, sources = {};
   for (const k of Object.keys(f).sort()) { sorted[k] = f[k]; sources[k] = src[k]; }

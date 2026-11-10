@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The case — why Zane holds interfaces to a law</title>
-<meta name="description" content="The Zane law is a versioned file of rules for business interfaces, so that the recurring defects of interfaces can be refused by name. The page explains why guidelines alone did not hold, what a law stored as data changes, the builds that produced each recent rule, and how the law is applied.">
+<title>Why — the problem Zane answers</title>
+<meta name="description" content="Zane exists because building interfaces with AI assistants produced the same defects again and again, after explicit instruction. This page states the problem, what it cost in the author's own corrections, the decision to resolve it from first principles, the state of interfaces built with AI, and what Zane does about it.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=f72a31f3">
+<link rel="stylesheet" href="stz.css?v=9be102ce">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -19,9 +19,9 @@
   <div class="wrap">
     <div class="menu">
         <a class="brand" href="../index.html">Zane</a>
-    <a href="thinking.html">Approach</a>
+    <a class="here" aria-current="true" href="why.html">Why</a>
     <a href="how.html">Language</a>
-    <a class="here" aria-current="true" href="why.html">Law</a>
+    <a href="rules.html">Law</a>
     <a href="adopt.html">Adopt</a>
     <a href="audit.html">Demo</a>
     </div>
@@ -39,11 +39,10 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
-    <li><a aria-current="page" href="why.html">The case</a></li>
-    <li><a href="rules.html">The rules</a></li>
-    <li><a href="../constitution/reader/index.html">The Reader</a></li>
-    <li><a href="gotchas/">What a violation feels like</a></li>
-    <li><a href="vibes.html">Two cultures, one truth</a></li>
+    <li><a aria-current="page" href="why.html">The problem</a></li>
+    <li><a href="thinking.html">Reasoning</a></li>
+    <li><a href="positioning.html">Comparison</a></li>
+    <li><a href="innovation.html">Claims</a></li>
   </ul>
 </nav>
 </div>
@@ -52,14 +51,11 @@
 <header class="page">
   <div class="narrow">
     <!-- shell:trail -->
-<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="why.html">Law</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The case</span></nav>
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="why.html">Why</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The problem</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Law · for people deciding whether a law is worth having</p>
-    <h1>The case for the Zane law is that a versioned file of rules names the ways interfaces keep decaying, so that each one can be refused by name.</h1>
-    <p class="sub">The case for the Zane law starts from what it is: a set of rules for business interfaces stored as one versioned file, which exists so that the recurring defects of interfaces are refused by citation rather than argued about.
-    The law prevents a build from repeating an inherited convention that harms the user, a person or an agent, because a tool or a reviewer can refuse the convention and cite the rule.
-    This page sets out the case for the law in six steps and says where each step can be checked. The evidence is the author's own builds, recorded as they happened.
-    Of its <span data-law="rules">123</span> rules, a machine refuses <span data-law="tier:machine">11</span> by itself.</p>
+    <p class="kicker">Why · the problem Zane answers</p>
+    <h1>The problem Zane answers is that interfaces built with AI assistants repeat the same defects, even after explicit instruction.</h1>
+    <p class="sub">The problem is measured on the author's own work: <span data-fact="corpus.corrections">455</span> corrections of interfaces in <span data-fact="corpus.projects">26</span> projects, <span data-fact="corpus.repeats">164</span> of them a defect that had been corrected before. This page states the problem, its cost, the decision taken, the state of interfaces built with AI, and what Zane does about it.</p>
   </div>
 </header>
 
@@ -68,11 +64,12 @@
 <nav class="list3 sections" aria-label="Sections of this page">
   <p class="outline-title">On this page</p>
   <ul>
-    <li><a href="#the-decay-you-already-know">The decay</a></li>
-    <li><a href="#what-the-record-shows">The record</a></li>
-    <li><a href="#what-changes-when-the-law-is-data">Law as data</a></li>
-    <li><a href="#how-the-law-applies">How it applies</a></li>
-    <li><a href="#the-story-a-year-of-building-with-ai">Built with AI</a></li>
+    <li><a href="#defects-return">Defects return</a></li>
+    <li><a href="#the-cost">The cost</a></li>
+    <li><a href="#first-principles">First principles</a></li>
+    <li><a href="#the-wider-state">The wider state</a></li>
+    <li><a href="#what-zane-does">What Zane does</a></li>
+    <li><a href="#law-as-data">Law as data</a></li>
     <li><a href="#evidence">The newest rules</a></li>
     <li><a href="#the-stance">The stance</a></li>
   </ul>
@@ -82,37 +79,88 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-decay-you-already-know" data-outline="The decay">The inherited conventions that make interfaces decay</h2>
-    <p>Most people have used software with the following defects. Its text is small and faint, so a person leans in to read it. Its buttons are
-    labelled "OK" and do not say what they will do. A chat launcher floats
-    over the paragraph a person is reading. A breadcrumb shows where a user came
-    from but not where the user could go.</p>
-    <p>A table scrolls sideways next to
-    twenty centimetres of empty page. A menu lists a page as top-level
-    while the page's own path says that it lives two levels deep.</p>
-    <p>These defects are not new. They are <em>inherited conventions</em>: patterns that teams copy
-    because they are everywhere, and keep because nothing in the process is required to refuse them.
-    Each convention costs the person using the screen a little attention or a little
-    confidence, for hours every day.</p>
-  </div>
-</section>
-
-<section class="alt">
-  <div class="narrow">
-    <h2 id="what-the-record-shows" data-outline="The record">Where the newest rules of the law come from</h2>
-    <p>The law in this project comes from building and not from a seminar room. Its newest rules were extracted, defect by defect, from real applications built with AI assistance in 2026. Each correction was recorded when it was made, and
-    it was kept only if it generalised and a reviewer could decide it yes or no. Rules 105 to 124 each come from such a defect, and the table further down names the newest eight.</p>
-    <p>The working thesis is narrow. In those builds, a generator reproduced the inherited conventions quickly and confidently, even under an instruction to be careful, because nothing it was given had the standing to
-    refuse them. The only correction that keeps pace with a generator is a rule that the generator can be made to check.</p>
-    <p>This record covers one author's builds, and it shows each defect as it occurred and how it was corrected.</p>
+    <h2 id="defects-return" data-outline="Defects return">The same interface defects return after every instruction</h2>
+    <p>An AI model builds an interface from the interfaces it learned from. It reproduces their conventions: small grey text for what matters less, boxes and rules to make sections, a width stretched to fill the screen, a word left alone on the last line of a title.</p>
+    <p>It does so with no intention. The corpus is what the model knows, so an instruction corrects one page and the convention returns on the next. The author named the cost in these words:</p>
+    <blockquote class="preamble">"what makes my fatigue in all my projects is never the more complex technical challenges: it's always UI!"<footer>— the author of Zane, 2026-11-09</footer></blockquote>
+    <div class="samples">
+      <figure class="sample"><div class="window"><div class="strip">An order</div><div class="view">
+        <p>The order ships on Thursday.</p><p style="font-size:var(--size-small);color:var(--ink-2)">Placed by the Niamey office.</p>
+      </div></div><figcaption><span class="tag ok">Lawful</span> Secondary text is quieter by tone and keeps the reading floor (Rule 105).</figcaption></figure>
+      <figure class="sample" data-offending><div class="window"><div class="strip">An order</div><div class="view">
+        <p>The order ships on Thursday.</p><p class="x-small">Placed by the Niamey office.</p>
+      </div></div><figcaption><span class="tag bad">Offending</span> Small grey text to mean "less important", the defect the author corrected most often.</figcaption></figure>
+    </div>
+    <div class="samples">
+      <figure class="sample"><div class="window"><div class="strip">A title</div><div class="view">
+        <p class="sample-title"><span>AI changes every week.</span> <span>Softanza hears what concerns it the same week.</span></p>
+      </div></div><figcaption><span class="tag ok">Lawful</span> Each sentence of a title is balanced on its own (Balance Is On by Default, proposed).</figcaption></figure>
+      <figure class="sample" data-offending><div class="window"><div class="strip">A title</div><div class="view">
+        <p class="x-cut">AI changes every week. Softanza hears what concerns it the same week.</p>
+      </div></div><figcaption><span class="tag bad">Offending</span> A title held to a fixed width and cut across its sentences.</figcaption></figure>
+    </div>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-changes-when-the-law-is-data" data-outline="Law as data">What a law stored as data changes, and where to check each change</h2>
-    <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the Positioning page</a> says where each one stops. A guideline alone cannot refuse a build.
-    Storing the law as one versioned file changes this in five ways, and each change can be checked:</p>
+    <h2 id="the-cost" data-outline="The cost">What the defects cost, counted in the corpus of corrections</h2>
+    <p>The corpus gathers every UI correction the author made, from the memory of each project and from the repositories themselves: <span data-fact="corpus.corrections">455</span> corrections of something a person sees, touches or hears, in <span data-fact="corpus.projects">26</span> projects, from February to November 2026.</p>
+    <ul>
+      <li><b>Repeated.</b> <span data-fact="corpus.repeats">164</span> corrections fix a defect that had been corrected before, in the same project or in another.</li>
+      <li><b>Concentrated.</b> On 9 November 2026 alone the author made <span data-fact="corpus.oneDay">42</span> corrections on two sites.</li>
+      <li><b>Classified.</b> Every correction belongs to one of <span data-fact="corpus.causes">13</span> root causes: the default the generator follows when nothing stops it.</li>
+    </ul>
+    <p>The corpus also keeps the author's words of repetition: <em>"I told you a thousand times"</em>, <em>"as usual: text is very small and unreadable!!!"</em>, <em>"how many times I told you to avoid this ugly word taking its own line!!!"</em>. Time, effort and patience went to corrections that a rule could have made once.</p>
+    <p>Every record, with its source, is in <a href="../doc/design/corpus/CORPUS.md">the corpus</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="first-principles" data-outline="First principles">The decision to resolve the problem from first principles</h2>
+    <p>The author decided to resolve the problem as everything in Softanza is resolved: from first principles. A correction stored as a symptom moves the defect to the next page; a rule stated as its cause, bounded on both sides and checked on the painted page, ends it.</p>
+    <p>The design system rests on six laws of perception, attention, action and language, each measured long before these sites existed:</p>
+    <ul>
+      <li><b>Grouping comes before reading.</b> The eye groups what is near, alike or enclosed before it reads a word.</li>
+      <li><b>Every visible difference is read as a meaning.</b> A difference that means nothing is noise.</li>
+      <li><b>Attention and memory are scarce.</b> Emphasis is a budget, and a choice costs time.</li>
+      <li><b>Acting is a loop that closes through what is perceived.</b> A shape tells what can be done, and the page shows what happened.</li>
+      <li><b>Language is cooperative.</b> A reader expects as much as is needed, plainly said.</li>
+      <li><b>The senses have floors.</b> Below a size, a contrast or a target, reading and touching fail.</li>
+    </ul>
+    <p><a href="../doc/design/DESIGN-SYSTEM.md">The design system</a> derives its principles from these laws, and <a href="../doc/design/design-system-samples.html">the samples page</a> shows each one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="the-wider-state" data-outline="The wider state">Interfaces built with AI carry the same defects into everyday software</h2>
+    <p>The author observes the same defects beyond these projects. AI tools, Claude Desktop among them, the tool the author uses, and the tools that share their interface style are themselves built with AI, and they carry the conventions of the corpus into the software people use every day.</p>
+    <p>UI and UX specialists have stayed silent about it. Graphical interaction is entering a crisis, and the corpus above is the author's evidence for it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="what-zane-does" data-outline="What Zane does">What Zane does about the problem</h2>
+    <p>Zane turns each correction into something a machine can refuse. An interface is declared as what the user is doing; <a href="refusal.html">the verifier refuses</a> an unlawful declaration before anything is drawn and cites the rule; <a href="../tools/ui-audit.html">the UI audit</a> measures the painted page against the design system's checks.</p>
+    <div class="samples wide">
+      <figure class="sample"><div class="window"><div class="strip">A wide screen</div><div class="view">
+        <div class="sample-cta"><p>Watch the notices that concern your project.</p><button type="button" class="btn primary">Add the bar</button></div>
+      </div></div><figcaption><span class="tag ok">Lawful</span> The box is as wide as what it holds; the audit's K04 reads it.</figcaption></figure>
+      <figure class="sample" data-offending><div class="window"><div class="strip">A wide screen</div><div class="view">
+        <div class="x-stretch"><p style="margin:0">Watch the notices that concern your project.</p><button type="button" class="btn primary">Add the bar</button></div>
+      </div></div><figcaption><span class="tag bad">Offending</span> "you are not obliged to stretch it": the box takes the screen and its button drifts away.</figcaption></figure>
+    </div>
+    <p><a href="how.html">The Language section</a> shows the four steps, <a href="rules.html">the Law section</a> holds the rules, and <a href="audit.html">the Demo section</a> runs them.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="law-as-data" data-outline="Law as data">What a law stored as data changes, and where to check each change</h2>
+    <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the comparison</a> says where each one stops. Storing the law as one versioned file lets a build be refused, and each consequence can be checked:</p>
     <table class="board">
       <thead><tr><th>The claim</th><th>Where to check it</th></tr></thead>
       <tbody>
@@ -120,82 +168,36 @@
         <tr><td>A finding cites a rule, an article and a right, so a review is an audit and not an argument.</td><td><a href="refusal.html">What it refuses</a>.</td></tr>
         <tr><td>A consumer pins a version and a hash, so conformance is a fact about a build.</td><td><a href="conformance.html">Conformance</a>.</td></tr>
         <tr><td>An amendment needs documented evidence, never fashion (Article VII).</td><td><a href="rules.html#changes">How it changes</a>.</td></tr>
-        <tr><td>Retired numbers are never reused, so a citation means the same for ever.</td><td><a href="rules.html#changes">How it changes</a>, and the lineage line in <code>rules.json</code>.</td></tr>
       </tbody>
     </table>
-    <p>The law also has a home that prose lacks, which is <b>a language</b>. An interface is declared in Zane as what the user is doing and what stays reachable. The verifier refuses unlawful structure before anything is drawn,
-    and <a href="../tools/ui-audit.html">the UI audit</a> measures what was painted. <a href="how.html">The Language page</a> describes the four steps.</p>
+    <p>Of the <span data-law="rules">123</span> rules, a conforming compiler refuses <span data-law="tier:machine">11</span> by itself, and a reviewer applies <span data-law="tier:judgment">80</span> with the law's own words in hand.</p>
   </div>
 </section>
 
-<section class="alt">
-  <div class="narrow">
-    <h2 id="how-the-law-applies" data-outline="How it applies">How the law is applied, rule by rule</h2>
-    <ul>
-      <li><b>A conforming compiler refuses <span data-law="tier:machine">11</span> of the <span data-law="rules">123</span> rules by itself</b>, and a reviewer applies <span data-law="tier:judgment">80</span> with the law's own words in hand.</li>
-      <li><b>The law judges structure, and usability testing judges the experience.</b> The verifier checks a declaration and the audit checks what was painted; usability testing decides whether a person finds the page usable, and the law works beside it.</li>
-      <li><b>The law has a stance.</b> It puts business applications first, as the last section of this page explains.</li>
-    </ul>
-  </div>
-</section>
-
-<section>
-  <div class="narrow">
-    <h2 id="the-story-a-year-of-building-with-ai" data-outline="Built with AI">The builds with AI from which the rules of the law were taken</h2>
-    <p class="lead">Every correction below was recorded at the moment it was made, and it was canonized only if it generalised and a reviewer could decide it
-    yes or no.</p>
-    <p><b>The banking product</b> (April 2026) is a full agentic banking platform, built
-    and corrected screen by screen. In its supervision tables the same green
-    meant two different things two columns apart. Its card-styled tiles had
-    to be poked before a person could learn what they did. Its studio stacked two rows of identical tabs, and a floating
-    assistant masked the very work it offered to help with.</p>
-    <p>In <b>a sibling project's i18n work</b> (May 2026), languages were added by forking templates,
-    which left French screens full of untranslated jargon until language became
-    data. In <b>the Refine rebuild</b> (June 2026), a 22-section homepage that the
-    author judged unreadable was rebuilt under a reading budget.</p>
-    <p><b>The StzWeb site</b> (August 2026) produced twelve rules, from Rule 105 through 116,
-    and each was canonized live from a defect that the generator produced <em>while
-    building the site that documents the law</em>. The audit tool then caught
-    its own depth-calculation defect on its first run in this repository.
-    The law exempts nothing here, and that includes the tooling.</p>
-  </div>
-</section>
-
-<section class="alt" id="evidence">
+<section id="evidence">
   <div class="narrow">
     <h2 data-outline="The newest rules">The eight newest rules of the law and the defects that produced them</h2>
-    <p class="lead">The table lists each of the eight newest rules and the defect that earned it
-    a number. The full trail, including what was
-    deliberately <em>not</em> harvested, is in
-    <a href="../doc/HARVEST-2026-08.md">the harvest record</a>.</p>
+    <p class="lead">Each of the eight newest rules came from a defect recorded while a real application was built with AI. The full trail is in <a href="../doc/HARVEST-2026-08.md">the harvest record</a>.</p>
     <table class="evidence">
       <thead><tr><th>Rule</th><th>The law</th><th>The defect that earned it</th></tr></thead>
       <tbody>
-        <tr><td class="num"><a href="../constitution/reader/#rule-117">117</a></td><td>One Column Carries the Colour</td><td>the banking product's supervision tables: green meant "agent healthy" in column 1 and "low drift" in column 8</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-117">117</a></td><td>One Column Carries the Colour</td><td>the banking product's supervision tables: green meant "agent healthy" in one column and "low drift" in another</td></tr>
         <tr><td class="num"><a href="../constitution/reader/#rule-118">118</a></td><td>Two Families of Colour</td><td>That product: per-agent and per-channel palettes grew without bound and signified nothing</td></tr>
         <tr><td class="num"><a href="../constitution/reader/#rule-119">119</a></td><td>A Card Is Not a Button</td><td>That product: an autonomy ladder drawn as five clickable-looking cards instead of a table</td></tr>
         <tr><td class="num"><a href="../constitution/reader/#rule-120">120</a></td><td>The Second Level Turns</td><td>the banking product's studio: two stacked horizontal tab rows, hierarchy indistinguishable at a glance</td></tr>
         <tr><td class="num"><a href="../constitution/reader/#rule-121">121</a></td><td>The Assistant Never Masks the Work</td><td>That product: a floating agent with a permanent label covering the interface it served</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-122">122</a></td><td>Language Is Data</td><td>That project: languages added by forking templates; French UIs full of untranslated jargon</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-122">122</a></td><td>Language Is Data</td><td>That project: languages added by forking templates; French interfaces full of untranslated jargon</td></tr>
         <tr><td class="num"><a href="../constitution/reader/#rule-123">123</a></td><td>The Reading Arc</td><td>Refine: a 22-subsection homepage judged "text-heavy, dense, poor for onboarding"</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-124">124</a></td><td>The Generator Ships a Working Thing</td><td>A sibling project's build culture: scaffolding presented as a deliverable&nbsp;— a target must open working</td></tr>
+        <tr><td class="num"><a href="../constitution/reader/#rule-124">124</a></td><td>The Generator Ships a Working Thing</td><td>A sibling project's build culture: scaffolding presented as a deliverable</td></tr>
       </tbody>
     </table>
-    <p class="caption">Rules 105–116 have the same origin, one by one, in
-    the StzWeb corrections. Two unrelated projects independently produced the
-    small-faint-text defect, and this convergence is evidence that the rules
-    carry weight.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
     <h2 id="the-stance" data-outline="The stance">The stance of the law, which puts business applications first</h2>
-    <p>The law is openly opinionated and puts <b>business applications first</b>.
-    It serves operators rather than explorers: people who use the same screens eight hours a
-    day under pressure, responsibility and fatigue. Delight on consumer sites is
-    outside its jurisdiction, and the dignity of the operator is its whole concern. The law's own
-    preamble states the stance in four sentences:</p>
+    <p>The law is openly opinionated and puts <b>business applications first</b>. It serves operators: people who use the same screens eight hours a day under pressure, responsibility and fatigue. The dignity of the operator is its whole concern, and its preamble states the stance in four sentences:</p>
     <blockquote class="preamble">
       Calm is productive. Stability is humane. Clarity is respectful.
       Undo is dignity.

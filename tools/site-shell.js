@@ -49,9 +49,13 @@ const ASSET_RE = new RegExp('((?:href|src|data-wasm)=")([^"?]*?(' + ASSETS.map(a
 
 /* ---- the structure --------------------------------------------------------------------------- */
 const SECTIONS = [
-  { id: 'approach', label: 'Approach', head: 'site/thinking.html' },
+  /* Why comes first (ZANE-DESIGN-01 M3 pass 1; the Principal, 2026-11-10: "there is still no "Why" page as I requested"). Five
+     entries at most (Rule 27), so the section Approach is dissolved: its reasoning, comparison and claims join Why, the grid and the
+     channels join Language, and Conformance joins Law; every path stays. The Why section's landing is why.html, the file whose name it
+     says, under a label of its own (Rule 116 at v3.16); The case it held is merged into it. */
+  { id: 'whyzane', label: 'Why', head: 'site/why.html' },
   { id: 'language', label: 'Language', head: 'site/how.html' },
-  { id: 'law', label: 'Law', head: 'site/why.html' },
+  { id: 'law', label: 'Law', head: 'site/rules.html' },
   /* Adopt and Demo, not Use and Try (the Principal, 2026-11-10: "Use and Try are very simular lettting the navigation be cofusing";
      ruled "Adopt / Demo", ZANE-MENU-USETRY-01); the ids stay, so every path and every reference holds */
   { id: 'use', label: 'Adopt', head: 'site/adopt.html' },
@@ -69,23 +73,23 @@ const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'Sta
 const FAMILY_TERMS = { stillness: 'still', forms: 'form', state: 'state', widgets: 'widget', reading: 'read', navigation: 'navigat', intelligence: 'intelligen' };
 const PAGES = [
   { file: 'index.html', home: true, term: 'Zane' },
-  { file: 'site/thinking.html', section: 'approach', label: 'Reasoning', rail: true, term: 'reason' },
-  { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true, term: 'grid' },
-  { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true, term: 'channel' },
-  { file: 'site/positioning.html', section: 'approach', family: 'Comparison', label: 'Overview', rail: true, term: 'overview' },
-  { file: 'site/practices.html', section: 'approach', label: 'Practices', parent: 'site/positioning.html', rail: true, term: 'practice' },
-  { file: 'site/frameworks.html', section: 'approach', label: 'Frameworks and languages', parent: 'site/positioning.html', rail: true, term: 'framework' },
-  { file: 'site/innovation.html', section: 'approach', label: 'Claims', rail: true, term: 'claim' },
+  { file: 'site/why.html', section: 'whyzane', label: 'The problem', rail: true, term: 'problem' },
+  { file: 'site/thinking.html', section: 'whyzane', label: 'Reasoning', rail: true, term: 'reason' },
+  { file: 'site/positioning.html', section: 'whyzane', family: 'Comparison', label: 'Overview', rail: true, term: 'overview' },
+  { file: 'site/practices.html', section: 'whyzane', label: 'Practices', parent: 'site/positioning.html', rail: true, term: 'practice' },
+  { file: 'site/frameworks.html', section: 'whyzane', label: 'Frameworks and languages', parent: 'site/positioning.html', rail: true, term: 'framework' },
+  { file: 'site/innovation.html', section: 'whyzane', label: 'Claims', rail: true, term: 'claim' },
   { file: 'site/how.html', section: 'language', label: 'The basics', rail: true, term: 'basic' },
   { file: 'site/refusal.html', section: 'language', label: 'What it refuses', rail: true, term: 'refus' },
+  { file: 'site/grid.html', section: 'language', label: 'The grid', rail: true, term: 'grid' },
+  { file: 'site/media.html', section: 'language', label: 'Channels', rail: true, term: 'channel' },
   { file: 'site/haro.html', section: 'language', label: 'Declared in Haro', rail: true, term: 'Haro' },
-  { file: 'site/conformance.html', section: 'language', label: 'Conformance', rail: true, term: 'conform' },
-  { file: 'site/why.html', section: 'law', label: 'The case', rail: true, term: 'case' },
   { file: 'site/rules.html', section: 'law', label: 'The rules', rail: true, term: 'rule' },
   { file: 'constitution/reader/index.html', section: 'law', label: 'The Reader', rail: true, outside: 'reader', term: 'Reader' },
   { file: 'site/gotchas/index.html', section: 'law', family: 'What a violation feels like', label: 'All families', rail: true, term: 'famil' },
   ...FAMILIES.map(([f, label]) => ({ file: `site/gotchas/${f}.html`, section: 'law', label, parent: 'site/gotchas/index.html', rail: true, term: FAMILY_TERMS[f] })),
   { file: 'site/vibes.html', section: 'law', label: 'Two cultures, one truth', rail: true, term: 'culture' },
+  { file: 'site/conformance.html', section: 'law', label: 'Conformance', rail: true, term: 'conform' },
   { file: 'site/adopt.html', section: 'use', label: 'Ways in', rail: true, term: 'ways in' },
   { file: 'site/web.html', section: 'use', label: 'Web apps', rail: true, term: 'web' },
   { file: 'site/mobile.html', section: 'use', label: 'Mobile apps', rail: true, term: 'mobile' },

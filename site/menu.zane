@@ -5,17 +5,16 @@
 
 DEFINE NAV_GRAPH main_menu (
   SATISFIES [LOCATE],
-  ENTRIES [approach, language, law, use, try]
+  ENTRIES [whyzane, language, law, use, try]
 )
 
-DEFINE NAV_GRAPH approach (
-  LABEL "Approach",
-  TARGET thinking,
-  ENTRIES [thinking, grid, media, positioning_family, innovation]
+DEFINE NAV_GRAPH whyzane (
+  LABEL "Why",
+  TARGET why,
+  ENTRIES [why, thinking, positioning_family, innovation]
 )
+DEFINE NAV_GRAPH why (LABEL "The problem", TARGET why)
 DEFINE NAV_GRAPH thinking (LABEL "Reasoning", TARGET thinking)
-DEFINE NAV_GRAPH grid (LABEL "The grid", TARGET grid)
-DEFINE NAV_GRAPH media (LABEL "Channels", TARGET media)
 
 DEFINE NAV_GRAPH positioning_family (
   LABEL "Comparison",
@@ -31,19 +30,19 @@ DEFINE NAV_GRAPH innovation (LABEL "Claims", TARGET innovation)
 DEFINE NAV_GRAPH language (
   LABEL "Language",
   TARGET how,
-  ENTRIES [how, refusal, haro, conformance]
+  ENTRIES [how, refusal, grid, media, haro]
 )
 DEFINE NAV_GRAPH how (LABEL "The basics", TARGET how)
 DEFINE NAV_GRAPH refusal (LABEL "What it refuses", TARGET refusal)
+DEFINE NAV_GRAPH grid (LABEL "The grid", TARGET grid)
+DEFINE NAV_GRAPH media (LABEL "Channels", TARGET media)
 DEFINE NAV_GRAPH haro (LABEL "Declared in Haro", TARGET haro)
-DEFINE NAV_GRAPH conformance (LABEL "Conformance", TARGET conformance)
 
 DEFINE NAV_GRAPH law (
   LABEL "Law",
-  TARGET why,
-  ENTRIES [why, rules, reader, gotchas_family, vibes]
+  TARGET rules,
+  ENTRIES [rules, reader, gotchas_family, vibes, conformance]
 )
-DEFINE NAV_GRAPH why (LABEL "The case", TARGET why)
 DEFINE NAV_GRAPH rules (LABEL "The rules", TARGET rules)
 DEFINE NAV_GRAPH reader (LABEL "The Reader", TARGET reader)
 
@@ -62,6 +61,7 @@ DEFINE NAV_GRAPH gotchas_navigation (LABEL "Navigation", TARGET gotchas_navigati
 DEFINE NAV_GRAPH gotchas_intelligence (LABEL "Intelligence", TARGET gotchas_intelligence)
 
 DEFINE NAV_GRAPH vibes (LABEL "Two cultures, one truth", TARGET vibes)
+DEFINE NAV_GRAPH conformance (LABEL "Conformance", TARGET conformance)
 
 DEFINE NAV_GRAPH use (
   LABEL "Adopt",

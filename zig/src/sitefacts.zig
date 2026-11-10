@@ -262,6 +262,28 @@ fn derive(a: Allocator, verifier_runs: usize) !Facts {
     try f.int("site.verifierRuns", n(verifier_runs), "the declaration and terminal pairs on the site pages (re-run by this script)");
     const tour = try core.wellFormed(a, try readFile(a, "site/tour.html"));
     try f.int("tour.scenes", n(std.mem.count(u8, tour, "class=\"scene-card\"")), "site/tour.html scene cards");
+
+    // the corpus of the Principal's UI corrections (doc/design/DESIGN-SYSTEM.md section 3), which the Why section cites
+    const corpus = try parse(a, "doc/design/corpus/corpus.json");
+    const records = js.items(js.get(corpus, "records"));
+    var projects = std.StringHashMap(void).init(a);
+    var repeats: usize = 0;
+    var one_day: usize = 0;
+    for (records) |r| {
+        if (js.get(r, "project")) |p| if (p == .string) try projects.put(p.string, {});
+        if (js.get(r, "repeat")) |x| if (x == .bool and x.bool) {
+            repeats += 1;
+        };
+        if (js.get(r, "date")) |day| if (day == .string and std.mem.startsWith(u8, day.string, "2026-11-09")) {
+            one_day += 1;
+        };
+    }
+    const causes = js.get(corpus, "causes");
+    try f.int("corpus.corrections", n(records.len), "doc/design/corpus/corpus.json records");
+    try f.int("corpus.projects", n(projects.count()), "doc/design/corpus/corpus.json records, their projects");
+    try f.int("corpus.repeats", n(repeats), "doc/design/corpus/corpus.json records that name an earlier one");
+    try f.int("corpus.causes", n(if (causes) |c| (if (c == .object) c.object.count() else 0) else 0), "doc/design/corpus/corpus.json causes");
+    try f.int("corpus.oneDay", n(one_day), "doc/design/corpus/corpus.json records of 2026-11-09");
     return f;
 }
 

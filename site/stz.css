@@ -32,7 +32,7 @@
   --bar: #241d49; --on-bar: #ffffff;
   /* contrast: #FF9FB5 | #241D49 | 8.1 | the brand on the bar, Modern */
   --brand: #ff9fb5;
-  --success: #17583f; --warning: #6b4a00; --danger: #8e1f13; --info: #1d4f78; --muted: #4a4661; --meta: #4a4661;
+  --success: #145036; --warning: #6b4a00; --danger: #8e1f13; --info: #1d4f78; --muted: #4a4661; --meta: #4a4661;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* the reading measure: about 60 to 75 characters of running text in this culture's font (K03 measures the painted line) */
   --measure-min: 27em; --measure-max: 33em;
@@ -94,6 +94,7 @@ nav a:hover, .board a:hover, table a:hover { text-decoration: underline; }
 /* a checkbox or a radio takes its culture's action colour, never the platform's default blue (Article VI: a culture owns every
    state of its controls; the author, 2026-11-09: "checkboxes should be in green not blue in this retro mode!") */
 input[type="checkbox"], input[type="radio"], input[type="range"], progress { accent-color: var(--action); }
+button, input, select, textarea { font: inherit; }
 code, pre, kbd { font-family: var(--mono); }
 [data-vibe="guardian"] code, [data-vibe="guardian"] pre, [data-vibe="guardian"] kbd { font-family: var(--font); }
 code { background: var(--surface); border: var(--hairline) solid var(--line); border-radius: 4px;
@@ -739,6 +740,32 @@ form.try button[disabled] { opacity: .6; cursor: wait; }
 #try-result .try-verdict.good { color: var(--success); }
 #try-result ul { margin: 0; padding-left: 1.2rem; }
 #try-result li { margin: 0 0 .6rem; }
+/* ---- the sample frame: a live UI sample in a window, the lawful one beside the offending one, each citing its rule (DESIGN-SYSTEM.md
+   section 6.4; M3 item 3). The frame draws a window, so its edge and its title strip are lines that draw something (K07). ---- */
+.samples { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); margin: var(--space-3) 0; max-width: 60rem; }
+@media (min-width: 900px) { .samples { grid-template-columns: repeat(2, minmax(0, 1fr)); } .samples.wide { grid-template-columns: minmax(0, 1fr); } }
+figure.sample { margin: 0; min-width: 0; }
+.window { border: var(--hairline) solid var(--edge); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.window .strip { font-size: var(--size-small); color: var(--ink-2); padding: .3rem var(--space-2); border-bottom: var(--hairline) solid var(--line); }
+.window .view { padding: var(--space-3) var(--space-2); }
+.window .view p { margin: 0 0 var(--space-1); }
+figure.sample figcaption { margin-top: var(--space-1); font-size: var(--size-small); max-width: none; }
+.tag { display: inline-block; font-size: var(--size-small); line-height: 1.3; padding: .1rem .55rem; border: var(--hairline) solid; border-radius: var(--radius); }
+.tag.ok { color: var(--success); background: color-mix(in srgb, var(--success) 12%, var(--paper)); border-color: var(--success); }
+.tag.bad { color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, var(--paper)); border-color: var(--danger); }
+.sample-cta { display: inline-flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; border: var(--hairline) solid var(--edge);
+  border-radius: var(--radius); padding: var(--space-2); }
+.sample-cta p { margin: 0; max-width: 40ch; }
+.sample-title { font-size: var(--size-section); font-weight: var(--weight-strong); line-height: var(--leading-title); margin: 0; }
+.sample-title span { display: block; text-wrap: balance; }
+/* offense:start */
+/* the offending samples: each breaks the one principle it stands beside, and these are the only rules of this file that may */
+.x-small { font-size: 14px; color: #9b97ad; line-height: 1.4; }
+[data-vibe="guardian"] .x-small { color: #4d6a52; }
+.x-stretch { display: flex; justify-content: space-between; align-items: center; width: 100%; border: 1px solid #77728f; border-radius: 8px; padding: 1rem; }
+.x-cut { max-width: 9ch; font-size: 1.75rem; font-weight: 800; line-height: 1.2; text-wrap: balance; margin: 0; }
+/* offense:end */
+
 /* ---- footer ---- */
 footer.site { background: var(--bar); color: var(--on-bar); padding: 2.2rem 0; margin-top: var(--space-4); }
 footer.site a { color: var(--on-bar); display: inline-flex; align-items: center; min-height: var(--target); }
@@ -752,7 +779,10 @@ p > a:only-child, li > a:only-child, td > a:only-child, .card > a, footer.site a
 @media (max-width: 760px) {
   p > a:only-child, li > a:only-child, td > a:only-child, .card > a, footer.site a, nav.list3 a, details.qa summary, .btn, button, select { min-height: var(--target-phone); }
   nav.site .brand { display: inline-flex; align-items: center; min-height: var(--target-phone); flex-basis: 100%; }
+  nav.site .menu { display: grid; grid-template-columns: repeat(3, max-content); justify-content: start; }
+  nav.site .menu .brand { grid-column: 1 / -1; }
   nav.site .menu a:not(.brand) { min-width: var(--target-phone); justify-content: center; }
+  td > a:only-child { min-width: var(--target-phone); justify-content: center; }
   /* the fixed stack is kept (Rule 120) and is lighter now that the style select has left the bar */
   nav.site .wrap { padding: .25rem var(--gutter); }
   nav.site .menu { gap: 1rem; }

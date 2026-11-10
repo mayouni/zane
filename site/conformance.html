@@ -6,7 +6,7 @@
 <title>Conformance — how a tool proves that it reads Zane as the reference does</title>
 <meta name="description" content="A tool conforms to Zane when it gives the reference verifier's verdict on every fixture of the suite, against a pinned pack of files. The page shows the two commands that check conformance, what a pass proves, and a status board of what exists, what is designed and what is held.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=f72a31f3">
+<link rel="stylesheet" href="stz.css?v=9be102ce">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -19,9 +19,9 @@
   <div class="wrap">
     <div class="menu">
         <a class="brand" href="../index.html">Zane</a>
-    <a href="thinking.html">Approach</a>
-    <a class="here" aria-current="true" href="how.html">Language</a>
-    <a href="why.html">Law</a>
+    <a href="why.html">Why</a>
+    <a href="how.html">Language</a>
+    <a class="here" aria-current="true" href="rules.html">Law</a>
     <a href="adopt.html">Adopt</a>
     <a href="audit.html">Demo</a>
     </div>
@@ -39,9 +39,10 @@
 </nav>
 <nav class="band" aria-label="Pages of the section">
   <ul>
-    <li><a href="how.html">The basics</a></li>
-    <li><a href="refusal.html">What it refuses</a></li>
-    <li><a href="haro.html">Declared in Haro</a></li>
+    <li><a href="rules.html">The rules</a></li>
+    <li><a href="../constitution/reader/index.html">The Reader</a></li>
+    <li><a href="gotchas/">What a violation feels like</a></li>
+    <li><a href="vibes.html">Two cultures, one truth</a></li>
     <li><a aria-current="page" href="conformance.html">Conformance</a></li>
   </ul>
 </nav>
@@ -51,9 +52,9 @@
 <header class="page">
   <div class="narrow">
     <!-- shell:trail -->
-<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="how.html">Language</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Conformance</span></nav>
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="rules.html">Law</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Conformance</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Language · for people who build a tool that reads Zane</p>
+    <p class="kicker">Law · for people who build a tool that reads Zane</p>
     <h1>Conformance is the proof that a tool gives the reference verifier's verdict on every fixture, and any CI can refute a false claim to it.</h1>
     <p class="sub">A tool conforms to Zane when it gives the reference verifier's verdict on every fixture of the suite, and conformance is the test that lets the maker of a tool prove that agreement.
     Conformance ensures that a claim to read Zane can be refuted by running two commands in any CI. The suite holds <span data-fact="fixtures.total">77</span> fixtures, judged against a pack of
