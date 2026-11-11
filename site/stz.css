@@ -405,11 +405,25 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
   border-radius: 50%; background: transparent; color: var(--ink);
   font: var(--weight-strong) var(--size-small) var(--mono); display: flex; align-items: center; justify-content: center; }
 .workflow .file { font: var(--size-small) var(--mono); color: var(--ink-2); }
-/* a status row: what exists, what is designed, what is held, each by a word and a mark, never by colour alone */
-.board { width: 100%; border-collapse: collapse; margin: 1.2rem 0; }
-.board th, .board td { text-align: left; padding: .55rem .8rem; border-bottom: var(--hairline) solid var(--line); vertical-align: top; overflow-wrap: break-word; }
-.board td:first-child { min-width: 7.5rem; }
-.board th { color: var(--ink-2); font-size: var(--size-small); font-weight: var(--weight-strong); }
+/* the table component (section 6.4): a table looks like a table, never like running text (the Principal, 2026-11-11, on site/grid.html:
+   "do not let table look like normal text, give them normal-classic but clean and beautiful themes to look like a table"). A frame
+   on the culture's surface, the header row on a tint with a firmer rule under it, a hairline between rows, figures in tabular
+   numerals; every value a token, so Modern and Retro each draw it in their own colours, radius included. A status row says what
+   exists, what is designed, what is held, each by a word and a mark, never by colour alone. */
+.board, table.evidence { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.6rem 0;
+  background: var(--surface); border: var(--hairline) solid var(--line); border-radius: var(--radius);
+  font-variant-numeric: tabular-nums; }
+.board th, .board td, table.evidence th, table.evidence td { text-align: left; padding: .7rem 1rem; vertical-align: top;
+  overflow-wrap: break-word; border-bottom: var(--hairline) solid var(--line); }
+.board tbody tr:last-child > *, table.evidence tbody tr:last-child > * { border-bottom: 0; }
+.board td:first-child, table.evidence td:first-child { min-width: 7.5rem; }
+.board thead th, table.evidence thead th { background: var(--tint); color: var(--ink); font-size: var(--size-small);
+  font-weight: var(--weight-strong); border-bottom: var(--ring) solid var(--edge); vertical-align: bottom; }
+/* each heading's tint reaches one pixel over its neighbour, so no seam shows between the cells of the header row */
+.board thead th:not(:last-child), table.evidence thead th:not(:last-child) { box-shadow: 1px 0 0 0 var(--tint); }
+.board thead th:first-child, table.evidence thead th:first-child { border-top-left-radius: var(--radius); }
+.board thead th:last-child, table.evidence thead th:last-child { border-top-right-radius: var(--radius); }
+.board tbody th, table.evidence tbody th { font-weight: var(--weight-strong); }
 .status { font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
 .status.exists::before { content: "\25CF\00a0"; }
 .status.designed::before { content: "\25D0\00a0"; }
@@ -498,10 +512,10 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
 
 /* ---- the grid: a table of counts, with a word in every cell, never a colour alone ---- */
 .scroll { overflow: visible; }
-table.gridmap { width: 100%; border-collapse: collapse; margin: 1.2rem 0 .6rem; }
+table.gridmap { width: 100%; border-collapse: collapse; margin: 1.2rem 0 .6rem; background: var(--surface); font-variant-numeric: tabular-nums; }
 table.gridmap caption { text-align: left; color: var(--ink-2); padding: 0 0 .6rem; caption-side: top; }
 table.gridmap th, table.gridmap td { border: var(--hairline) solid var(--line); padding: .45rem .6rem; text-align: center; vertical-align: middle; }
-table.gridmap thead th { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); }
+table.gridmap thead th { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink); background: var(--tint); border-bottom: var(--ring) solid var(--edge); }
 table.gridmap tbody th { text-align: left; font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
 table.gridmap .g-has b { color: var(--ink); font-size: var(--size-reading); }
 table.gridmap .g-none { color: var(--ink-2); }
