@@ -212,26 +212,21 @@ fn menu(a: Allocator, p: *const Page) ![]const u8 {
         const on = eqlOpt(s.id, p.section);
         try links.append(a, try fmt(a, "    <a{s} href=\"{s}\">{s}</a>", .{ if (on) " class=\"here\" aria-current=\"true\"" else "", try href(a, p.file, s.head), s.label }));
     }
-    const tools = if (reader) "" else try fmt(a,
+    // The Reader carries the same bar as every page, in the same markup (ZANE-READER-MENUPOS-01, K23 BAR_ALIGN); its tools hold GitHub
+    // alone, since the Reader's theme is its own light and dark, switched in its footer bar.
+    const picker = if (reader) "" else try fmt(a, "\n      {s}", .{stylePicker});
+    const tools = try fmt(a,
         \\    <div class="tools">
-        \\      <a class="github" href="{s}">GitHub <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="{s}"/></svg></a>
-        \\      {s}
+        \\      <a class="github" href="{s}">GitHub <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="{s}"/></svg></a>{s}
         \\    </div>
         \\
-    , .{ REPO, GITHUB_MARK, stylePicker });
-    const bar = try fmt(a, "<nav class=\"{s}\" aria-label=\"Main menu\">\n{s}{s}{s}    <a class=\"brand\" href=\"{s}\">Zane</a>\n{s}\n{s}{s}{s}</nav>", .{
-        if (reader) "topnav" else "site",
-        if (reader) "" else "  <div class=\"wrap\">\n",
-        if (reader) "" else "    <div class=\"menu\">\n",
-        if (reader) "" else "    ",
+    , .{ REPO, GITHUB_MARK, picker });
+    const bar = try fmt(a, "<nav class=\"site\" aria-label=\"Main menu\">\n  <div class=\"wrap\">\n    <div class=\"menu\">\n        <a class=\"brand\" href=\"{s}\">Zane</a>\n{s}\n    </div>\n{s}  </div>\n</nav>", .{
         try href(a, p.file, "index.html"),
         try std.mem.join(a, "\n", links.items),
-        if (reader) "" else "    </div>\n",
         tools,
-        if (reader) "" else "  </div>\n",
     });
     const b = try band(a, p);
-    if (reader) return if (b.len > 0) fmt(a, "{s}\n{s}", .{ bar, b }) else bar;
     return fmt(a, "<div class=\"bars\">\n{s}{s}{s}\n</div>", .{ bar, if (b.len > 0) "\n" else "", b });
 }
 const stylePicker =

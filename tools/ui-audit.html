@@ -706,8 +706,31 @@ const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the 
 const SYS_CHECKS = {
   K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
   K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
-  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL'
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN'
 };
+/* K23 BAR_ALIGN: the menu and the band stand at the same place on every page (ZANE-READER-MENUPOS-01; the Principal, 2026-11-10: "the menue
+   bar in this page must keep it's position as the other pages and not move to the left"). Each frame records where its brand and its band's
+   first entry start; once every page is read, a page whose edge differs from the one most pages share, at the same width and culture, fails.
+   The finding is one line per page and edge, and it names each place it differs, since the gap grows with the width. */
+const SYS_EDGES = [];
+function auditBarAlign(edges) {
+  const miss = new Map();
+  for (const at of [...new Set(edges.map(e => e.at))]) {
+    const here = edges.filter(e => e.at === at);
+    for (const key of ['brand', 'band']) {
+      const xs = here.filter(e => e[key] !== null);
+      const count = {}; xs.forEach(e => { count[e[key]] = (count[e[key]] || 0) + 1; });
+      const common = +Object.keys(count).sort((p, q) => count[q] - count[p])[0];
+      xs.filter(e => Math.abs(e[key] - common) > 1).forEach(e => {
+        const id = e.page + '\u0001' + key;
+        if (!miss.has(id)) miss.set(id, { page: e.page, key, list: [] });
+        miss.get(id).list.push(at + ': ' + e[key] + ' px against ' + common);
+      });
+    }
+  }
+  return [...miss.values()].map(m => ({ page: m.page, check: 'K23', where: m.key === 'brand' ? 'nav a.brand' : 'nav.band a', text: '',
+    issues: (m.key === 'brand' ? 'the brand' : 'the band\'s first entry') + ' does not start where every other page starts it (' + m.list.join('; ') + ') [K23 BAR_ALIGN]' }));
+}
 const sysName = el => {
   const cls = (typeof el.className === 'string' && el.className.trim()) ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : '';
   return el.tagName.toLowerCase() + cls;
@@ -987,7 +1010,11 @@ function loadSystemFrame(entry, width, culture) {
       if (done) return; done = true;
       setTimeout(async () => {
         let out;
-        try { out = await auditSystem(frame.contentDocument, frame.contentWindow, entry, width); }
+        try {
+          out = await auditSystem(frame.contentDocument, frame.contentWindow, entry, width);
+          const d = frame.contentDocument, x = el => el ? Math.round(el.getBoundingClientRect().left) : null;
+          SYS_EDGES.push({ page: entry, at: width + ' ' + (SYS_CULTURES.find(c => c[0] === culture) || ['', culture])[1], brand: x(d.querySelector('nav a.brand')), band: x(d.querySelector('nav.band a')) });
+        }
         catch (e) { out = [{ page: entry, check: '--', where: '(unreadable)', text: e.message, issues: 'the audit needs same-origin HTTP' }]; }
         frame.remove(); resolve(out);
       }, 700);
@@ -1103,12 +1130,14 @@ $('#run').addEventListener('click', async () => {
     let saved = null; try { saved = localStorage.getItem('stzzui-vibe'); } catch (e) { /* storage may be blocked */ }
     const found = [];
     const steps = pages.length * SYS_WIDTHS.length * SYS_CULTURES.length; let step = 0;
+    SYS_EDGES.length = 0;
     for (const page of pages) for (const [culture, name] of SYS_CULTURES) for (const w of SYS_WIDTHS) {
       progress.textContent = 'system ' + (++step) + ' of ' + steps + ' — ' + page + ' at ' + w + ' px, ' + name;
       (await loadSystemFrame(page, w, culture)).forEach(x => found.push({ ...x, at: w + ' ' + name }));
     }
     try { if (saved === null) localStorage.removeItem('stzzui-vibe'); else localStorage.setItem('stzzui-vibe', saved); } catch (e) { /* storage may be blocked */ }
     all.push(...mergeSystem(found));
+    all.push(...auditBarAlign(SYS_EDGES));   /* K23, once every page is read, after the merge: it names each width itself */
   }
   progress.textContent = '';
   $('#run').disabled = false;
