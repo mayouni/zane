@@ -581,6 +581,9 @@ function checkReleases(problems) {
    unmeasured is recorded in doc/, doc/design/BINARY.md, the release notes and .central/, never on a page. */
 const AFFIRM_RE = /\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven|unproved|not proved|no study|no user|not shown|cannot yet|not verified|nobody looked|not written|never(?:\W+\w+){0,3}?\W+run)\b/i;
 /* the description a search engine or a link preview shows is read as the page's text */
+/* and no public page names the retired language: Haro is every project's runtime, and its public text names no other language (the
+   Principal, 2026-11-09, PRINCIPAL-NORING-01) */
+const RETIRED_RE = /\b(Ring(?:\+\+)?)(?![A-Za-z0-9_+])/;
 const META_RE = /<meta\b[^>]*\b(?:name="description"|property="og:description")[^>]*>/g;
 const AFFIRM_ALLOWED = [
   { file: 'site/haro.html', words: 'two checks the condition language cannot yet express',
@@ -605,12 +608,15 @@ function checkAffirm(problems) {
       const metas = [...line.matchAll(META_RE)].map(m => (/\bcontent="([^"]*)"/.exec(m[0]) || [])[1]).filter(x => x !== undefined).map(plain);
       const blocks = line.split(/<(?:p|li|div|h[1-6]|td|th|dd|dt|br|tr|figcaption|blockquote|section|header)\b[^>]*>/i).map(s => plain(s.replace(/<[^>]*>/g, ' ')));
       const said = [];
+      let retired = null;
       for (const b of [...metas, ...blocks]) {
+        if (!retired) { const r = RETIRED_RE.exec(b); if (r) retired = r[1]; }
         const m = AFFIRM_RE.exec(b);
         if (m) said.push(m[1]);
         const lead = /(?:^|[.!?]\s)(Limit:)/.exec(b);
         if (lead) said.push(lead[1]);
       }
+      if (retired) problems.push(f + ':' + (i + 1) + ' names the retired language ("' + retired + '"): Haro is the runtime, and a public page names no other language (PRINCIPAL-NORING-01)');
       if (!said.length) return;
       const k = AFFIRM_ALLOWED.findIndex(x => x.file === f && line.includes(x.words));
       if (k >= 0) { used.add(k); return; }

@@ -838,6 +838,8 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
     for (pages) |p| try addOnce(a, &files, p.file);
     const phrase = try re.compile(a, "\\b(not yet|nobody has|no one has|never been|has not been|no person has|not run yet|not built|unverified|unproven|unproved|not proved|no study|no user|not shown|cannot yet|not verified|nobody looked|not written|never(?:\\W+\\w+){0,3}?\\W+run)\\b", "i");
     const lead = try re.compile(a, "(?:^|[.!?]\\s)(Limit:)", "");
+    // and no public page names the retired language (PRINCIPAL-NORING-01): the same pattern as RETIRED_RE in tools/site-shell.js
+    const retired_re = try re.compile(a, "\\b(Ring(?:\\+\\+)?)(?![A-Za-z0-9_+])", "");
     const meta = try re.compile(a, "<meta\\b[^>]*\\b(?:name=\"description\"|property=\"og:description\")[^>]*>", "g");
     const content = try re.compile(a, "\\bcontent=\"([^\"]*)\"", "");
     const block = try re.compile(a, "<(?:p|li|div|h[1-6]|td|th|dd|dt|br|tr|figcaption|blockquote|section|header)\\b[^>]*>", "gi");
@@ -863,11 +865,15 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
         var i: usize = 0;
         while (it.next()) |line| : (i += 1) {
             var said: List = .empty;
+            var retired: ?[]const u8 = null;
             var metas = re.iterate(&meta, line);
             while (metas.next()) |mm| {
                 const tagtext = line[mm.start..mm.end];
                 const c = re.exec(&content, tagtext, 0) orelse continue;
                 const seg = try plain(a, c.get(tagtext, 1).?);
+                if (retired == null) {
+                    if (re.exec(&retired_re, seg, 0)) |m| retired = m.get(seg, 1).?;
+                }
                 if (re.exec(&phrase, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
                 if (re.exec(&lead, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
             }
@@ -882,10 +888,14 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
                     next_from = m.end;
                 } else done = true;
                 const seg = try plain(a, try re.replace(a, &tag, line[from..end], " "));
+                if (retired == null) {
+                    if (re.exec(&retired_re, seg, 0)) |m| retired = m.get(seg, 1).?;
+                }
                 if (re.exec(&phrase, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
                 if (re.exec(&lead, seg, 0)) |m| try said.append(a, m.get(seg, 1).?);
                 from = next_from;
             }
+            if (retired) |w| try problems.append(a, try fmt(a, "{s}:{d} names the retired language (\"{s}\"): Haro is the runtime, and a public page names no other language (PRINCIPAL-NORING-01)", .{ f, i + 1, w }));
             if (said.items.len == 0) continue;
             var allowed = false;
             for (affirm_allowed, 0..) |x, k| if (std.mem.eql(u8, x.file, f) and std.mem.indexOf(u8, line, x.words) != null) {
