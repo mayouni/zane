@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why — the problem Zane answers</title>
-<meta name="description" content="Zane exists because building interfaces with AI assistants produced the same defects again and again, after explicit instruction. This page states the problem, what it cost in the author's own corrections, the decision to resolve it from first principles, the state of interfaces built with AI, and what Zane does about it.">
+<title>Why — the problem behind Zane, and Softanza's answer</title>
+<meta name="description" content="Zane exists because, over years of building software with AI assistants across many projects, the interface was always the hardest, most nerve-wracking and most costly part, and the part where AI is least capable. This page tells that problem, what it cost, why AI falls short there, and Softanza's answer: technology rethought from first principles, a system-design approach to intent-driven UI, and a compiled language that masters the interface and governs it, for people and for agents.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="stz.css?v=9be102ce">
 <!-- shell:vibe -->
@@ -40,6 +40,7 @@
 <nav class="band" aria-label="Pages of the section">
   <ul>
     <li><a aria-current="page" href="why.html">The problem</a></li>
+    <li><a href="case.html">The case</a></li>
     <li><a href="thinking.html">Reasoning</a></li>
     <li><a href="positioning.html">Comparison</a></li>
     <li><a href="innovation.html">Claims</a></li>
@@ -53,9 +54,9 @@
     <!-- shell:trail -->
 <nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../index.html">Zane</a><span class="sep">›</span><a href="why.html">Why</a><span class="sep">›</span><span class="here-crumb" aria-current="page">The problem</span></nav>
 <!-- /shell:trail -->
-    <p class="kicker">Why · the problem Zane answers</p>
-    <h1>The problem Zane answers is that interfaces built with AI assistants repeat the same defects, even after explicit instruction.</h1>
-    <p class="sub">The problem is measured on the author's own work: <span data-fact="corpus.corrections">455</span> corrections of interfaces in <span data-fact="corpus.projects">26</span> projects, <span data-fact="corpus.repeats">164</span> of them a defect that had been corrected before. This page states the problem, its cost, the decision taken, the state of interfaces built with AI, and what Zane does about it.</p>
+    <p class="kicker">Why · the problem behind Zane, and Softanza's answer</p>
+    <h1>Zane exists for one problem: the interface was always the hardest part of building software with AI, and Softanza answers it from first principles.</h1>
+    <p class="sub">The author of Zane met the problem over years of projects built with AI assistants, and counted it: <span data-fact="corpus.corrections">456</span> corrections of interfaces in <span data-fact="corpus.projects">26</span> projects, <span data-fact="corpus.repeats">165</span> of them a defect corrected before. Softanza answers it with a system-design approach to intent-driven UI and a compiled language that governs the interface, for people and for agents.</p>
   </div>
 </header>
 
@@ -64,14 +65,13 @@
 <nav class="list3 sections" aria-label="Sections of this page">
   <p class="outline-title">On this page</p>
   <ul>
-    <li><a href="#defects-return">Defects return</a></li>
+    <li><a href="#the-hard-part">The hard part</a></li>
     <li><a href="#the-cost">The cost</a></li>
+    <li><a href="#why-ai-falls-short">Why AI falls short</a></li>
     <li><a href="#first-principles">First principles</a></li>
-    <li><a href="#the-wider-state">The wider state</a></li>
-    <li><a href="#what-zane-does">What Zane does</a></li>
-    <li><a href="#law-as-data">Law as data</a></li>
-    <li><a href="#evidence">The newest rules</a></li>
-    <li><a href="#the-stance">The stance</a></li>
+    <li><a href="#system-design">System design</a></li>
+    <li><a href="#compiled-language">A compiled language</a></li>
+    <li><a href="#where-next">Where next</a></li>
   </ul>
 </nav>
 <!-- /shell:layout -->
@@ -79,9 +79,14 @@
 
 <section>
   <div class="narrow">
-    <h2 id="defects-return" data-outline="Defects return">The same interface defects return after every instruction</h2>
-    <p>An AI model builds an interface from the interfaces it learned from. It reproduces their conventions: small grey text for what matters less, boxes and rules to make sections, a width stretched to fill the screen, a word left alone on the last line of a title.</p>
-    <p>It does so with no intention. The corpus is what the model knows, so an instruction corrects one page and the convention returns on the next. The author named the cost in these words:</p>
+    <h2 id="the-hard-part" data-outline="The hard part">The interface was the hard part of every project built with AI</h2>
+    <p>The author of Zane has built software with AI assistants for years, across many projects: business applications, a programming environment, public sites and products made for clients. In every one of them, the interface was the hardest part to get right.</p>
+    <ul>
+      <li><b>The most nerve-wracking part.</b> A defect in the interface is seen at once, by every user, and the same defect came back after it was corrected.</li>
+      <li><b>The most costly part.</b> The time went to correcting what a person sees, touches or hears, far more than to the logic behind it.</li>
+      <li><b>The part where AI is least capable.</b> An assistant that solves a hard technical problem still sets a reading text too small, stretches a box across the screen, or cuts a title across its sentences.</li>
+    </ul>
+    <p>The author named it in these words:</p>
     <blockquote class="preamble">"what makes my fatigue in all my projects is never the more complex technical challenges: it's always UI!"<footer>— the author of Zane, 2026-11-09</footer></blockquote>
     <div class="samples">
       <figure class="sample"><div class="window"><div class="strip">An order</div><div class="view">
@@ -91,6 +96,27 @@
         <p>The order ships on Thursday.</p><p class="x-small">Placed by the Niamey office.</p>
       </div></div><figcaption><span class="tag bad">Offending</span> Small grey text to mean "less important", the defect the author corrected most often.</figcaption></figure>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="the-cost" data-outline="The cost">What the interface cost, counted in the author's own corrections</h2>
+    <p>The corpus gathers every correction of an interface the author made, from the memory of each project and from the repositories themselves: <span data-fact="corpus.corrections">456</span> corrections in <span data-fact="corpus.projects">26</span> projects, from February to November 2026.</p>
+    <ul>
+      <li><b>Repeated.</b> <span data-fact="corpus.repeats">165</span> corrections fix a defect that had been corrected before, in the same project or in another.</li>
+      <li><b>Concentrated.</b> On 9 November 2026 alone the author made <span data-fact="corpus.oneDay">42</span> corrections on two sites.</li>
+      <li><b>Classified.</b> Every correction belongs to one of <span data-fact="corpus.causes">13</span> root causes: the default an assistant follows when nothing stops it.</li>
+    </ul>
+    <p>The corpus also keeps the author's words of repetition: <em>"I told you a thousand times"</em>, <em>"as usual: text is very small and unreadable!!!"</em>, <em>"how many times I told you to avoid this ugly word taking its own line!!!"</em>. Every record, with its source, is in <a href="../doc/design/corpus/CORPUS.md">the corpus</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="why-ai-falls-short" data-outline="Why AI falls short">Why the interface is where an AI assistant is least capable</h2>
+    <p>An assistant builds an interface from the interfaces it learned from, and it reproduces their conventions with no intention: small grey text for what matters less, boxes and rules to make sections, a width stretched to fill the screen. An instruction corrects one page, and the convention returns on the next, because the corpus is what the assistant knows.</p>
+    <p>An assistant also checks what it can read, the structure of the page, and a defect of the interface lives in what is painted: its size, its place, its line, its balance. A page can pass every test and still be wrong to the eye.</p>
     <div class="samples">
       <figure class="sample"><div class="window"><div class="strip">A title</div><div class="view">
         <p class="sample-title"><span>AI changes every week.</span> <span>Softanza hears what concerns it the same week.</span></p>
@@ -99,27 +125,14 @@
         <p class="x-cut">AI changes every week. Softanza hears what concerns it the same week.</p>
       </div></div><figcaption><span class="tag bad">Offending</span> A title held to a fixed width and cut across its sentences.</figcaption></figure>
     </div>
+    <p>The same defects reach everyday software: AI tools, Claude Desktop among them, are built with AI and carry the conventions of the corpus into the interfaces people use every day. UI and UX specialists have stayed silent about it, and graphical interaction is entering a crisis.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="the-cost" data-outline="The cost">What the defects cost, counted in the corpus of corrections</h2>
-    <p>The corpus gathers every UI correction the author made, from the memory of each project and from the repositories themselves: <span data-fact="corpus.corrections">455</span> corrections of something a person sees, touches or hears, in <span data-fact="corpus.projects">26</span> projects, from February to November 2026.</p>
-    <ul>
-      <li><b>Repeated.</b> <span data-fact="corpus.repeats">164</span> corrections fix a defect that had been corrected before, in the same project or in another.</li>
-      <li><b>Concentrated.</b> On 9 November 2026 alone the author made <span data-fact="corpus.oneDay">42</span> corrections on two sites.</li>
-      <li><b>Classified.</b> Every correction belongs to one of <span data-fact="corpus.causes">13</span> root causes: the default the generator follows when nothing stops it.</li>
-    </ul>
-    <p>The corpus also keeps the author's words of repetition: <em>"I told you a thousand times"</em>, <em>"as usual: text is very small and unreadable!!!"</em>, <em>"how many times I told you to avoid this ugly word taking its own line!!!"</em>. Time, effort and patience went to corrections that a rule could have made once.</p>
-    <p>Every record, with its source, is in <a href="../doc/design/corpus/CORPUS.md">the corpus</a>.</p>
-  </div>
-</section>
-
-<section>
-  <div class="narrow">
-    <h2 id="first-principles" data-outline="First principles">The decision to resolve the problem from first principles</h2>
-    <p>The author decided to resolve the problem as everything in Softanza is resolved: from first principles. A correction stored as a symptom moves the defect to the next page; a rule stated as its cause, bounded on both sides and checked on the painted page, ends it.</p>
+    <h2 id="first-principles" data-outline="First principles">Softanza's mission: technology rethought from first principles</h2>
+    <p>Softanza, the family of projects Zane belongs to, rethinks technology from first principles: it starts from what is true of the problem, not from the conventions that grew around it. Zane applies this to the interface. A correction stored as a symptom moves the defect to the next page; a rule stated as its cause, bounded on both sides and checked on the painted page, ends it.</p>
     <p>The design system rests on six laws of perception, attention, action and language, each measured long before these sites existed:</p>
     <ul>
       <li><b>Grouping comes before reading.</b> The eye groups what is near, alike or enclosed before it reads a word.</li>
@@ -135,16 +148,21 @@
 
 <section>
   <div class="narrow">
-    <h2 id="the-wider-state" data-outline="The wider state">Interfaces built with AI carry the same defects into everyday software</h2>
-    <p>The author observes the same defects beyond these projects. AI tools, Claude Desktop among them, the tool the author uses, and the tools that share their interface style are themselves built with AI, and they carry the conventions of the corpus into the software people use every day.</p>
-    <p>UI and UX specialists have stayed silent about it. Graphical interaction is entering a crisis, and the corpus above is the author's evidence for it.</p>
+    <h2 id="system-design" data-outline="System design">A system-design approach to intent-driven UI</h2>
+    <p>Zane treats the interface as a system to design, not a screen to draw. A designer declares what the user is doing: discovering, comparing, acting, undoing. The widgets follow from that intent, and they are never where the design starts.</p>
+    <ul>
+      <li><b>One declaration, many channels.</b> The same declaration serves a screen, a voice line or an agent, and <a href="media.html">each channel</a> carries the verbs it can.</li>
+      <li><b>One vocabulary, closed.</b> The design system gives the generator a fixed set of sizes, spaces, shapes and components, so an interface is composed from parts that are already lawful.</li>
+      <li><b>One law, at every moment.</b> The declaration is checked at design time, linted in development and measured at runtime.</li>
+    </ul>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-zane-does" data-outline="What Zane does">What Zane does about the problem</h2>
-    <p>Zane turns each correction into something a machine can refuse. An interface is declared as what the user is doing; <a href="refusal.html">the verifier refuses</a> an unlawful declaration before anything is drawn and cites the rule; <a href="../tools/ui-audit.html">the UI audit</a> measures the painted page against the design system's checks.</p>
+    <h2 id="compiled-language" data-outline="A compiled language">A compiled language that masters the interface and governs it, for people and for agents</h2>
+    <p>Zane is a language that compiles. Its law is one versioned file of <span data-law="rules">123</span> rules, and <a href="refusal.html">the verifier refuses</a> an unlawful declaration before anything is drawn, citing the rule it breaks. <a href="../tools/ui-audit.html">The UI audit</a> then measures the painted page against the design system's checks.</p>
+    <p>The user of an interface is a person or an agent. The same structure a person sees is readable by an agent: landmarks, one title, headings in order, labelled fields. Zane governs both, so an interface that serves people also serves the agents that act for them.</p>
     <div class="samples wide">
       <figure class="sample"><div class="window"><div class="strip">A wide screen</div><div class="view">
         <div class="sample-cta"><p>Watch the notices that concern your project.</p><button type="button" class="btn primary">Add the bar</button></div>
@@ -153,56 +171,17 @@
         <div class="x-stretch"><p style="margin:0">Watch the notices that concern your project.</p><button type="button" class="btn primary">Add the bar</button></div>
       </div></div><figcaption><span class="tag bad">Offending</span> "you are not obliged to stretch it": the box takes the screen and its button drifts away.</figcaption></figure>
     </div>
-    <p><a href="how.html">The Language section</a> shows the four steps, <a href="rules.html">the Law section</a> holds the rules, and <a href="audit.html">the Demo section</a> runs them.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="law-as-data" data-outline="Law as data">What a law stored as data changes, and where to check each change</h2>
-    <p>Guidelines in prose are good at what they do, and <a href="positioning.html">the comparison</a> says where each one stops. Storing the law as one versioned file lets a build be refused, and each consequence can be checked:</p>
-    <table class="board">
-      <thead><tr><th>The claim</th><th>Where to check it</th></tr></thead>
-      <tbody>
-        <tr><td>The Reader that shows the law and the verifier that refuses for it load the same file, so they cannot drift apart.</td><td><a href="../constitution/reader/index.html">The Reader</a>, and <a href="rules.html">one rule as the tools load it</a>.</td></tr>
-        <tr><td>A finding cites a rule, an article and a right, so a review is an audit and not an argument.</td><td><a href="refusal.html">What it refuses</a>.</td></tr>
-        <tr><td>A consumer pins a version and a hash, so conformance is a fact about a build.</td><td><a href="conformance.html">Conformance</a>.</td></tr>
-        <tr><td>An amendment needs documented evidence, never fashion (Article VII).</td><td><a href="rules.html#changes">How it changes</a>.</td></tr>
-      </tbody>
-    </table>
-    <p>Of the <span data-law="rules">123</span> rules, a conforming compiler refuses <span data-law="tier:machine">11</span> by itself, and a reviewer applies <span data-law="tier:judgment">80</span> with the law's own words in hand.</p>
-  </div>
-</section>
-
-<section id="evidence">
-  <div class="narrow">
-    <h2 data-outline="The newest rules">The eight newest rules of the law and the defects that produced them</h2>
-    <p class="lead">Each of the eight newest rules came from a defect recorded while a real application was built with AI. The full trail is in <a href="../doc/HARVEST-2026-08.md">the harvest record</a>.</p>
-    <table class="evidence">
-      <thead><tr><th>Rule</th><th>The law</th><th>The defect that earned it</th></tr></thead>
-      <tbody>
-        <tr><td class="num"><a href="../constitution/reader/#rule-117">117</a></td><td>One Column Carries the Colour</td><td>the banking product's supervision tables: green meant "agent healthy" in one column and "low drift" in another</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-118">118</a></td><td>Two Families of Colour</td><td>That product: per-agent and per-channel palettes grew without bound and signified nothing</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-119">119</a></td><td>A Card Is Not a Button</td><td>That product: an autonomy ladder drawn as five clickable-looking cards instead of a table</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-120">120</a></td><td>The Second Level Turns</td><td>the banking product's studio: two stacked horizontal tab rows, hierarchy indistinguishable at a glance</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-121">121</a></td><td>The Assistant Never Masks the Work</td><td>That product: a floating agent with a permanent label covering the interface it served</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-122">122</a></td><td>Language Is Data</td><td>That project: languages added by forking templates; French interfaces full of untranslated jargon</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-123">123</a></td><td>The Reading Arc</td><td>Refine: a 22-subsection homepage judged "text-heavy, dense, poor for onboarding"</td></tr>
-        <tr><td class="num"><a href="../constitution/reader/#rule-124">124</a></td><td>The Generator Ships a Working Thing</td><td>A sibling project's build culture: scaffolding presented as a deliverable</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section>
-  <div class="narrow">
-    <h2 id="the-stance" data-outline="The stance">The stance of the law, which puts business applications first</h2>
-    <p>The law is openly opinionated and puts <b>business applications first</b>. It serves operators: people who use the same screens eight hours a day under pressure, responsibility and fatigue. The dignity of the operator is its whole concern, and its preamble states the stance in four sentences:</p>
-    <blockquote class="preamble">
-      Calm is productive. Stability is humane. Clarity is respectful.
-      Undo is dignity.
-      <footer>— The Zane Constitution, preamble</footer>
-    </blockquote>
+    <h2 id="where-next" data-outline="Where next">Where to go from here</h2>
+    <ul>
+      <li><a href="case.html">The case</a> sets out why a law stored as data is worth having, and the rules the builds with AI produced.</li>
+      <li><a href="thinking.html">Reasoning</a>, <a href="positioning.html">Comparison</a> and <a href="innovation.html">Claims</a> give the reasoning, the practices beside Zane and what is new.</li>
+      <li><a href="how.html">The Language section</a> shows the four steps, <a href="rules.html">the Law section</a> holds the rules, and <a href="audit.html">the Demo section</a> runs them.</li>
+    </ul>
   </div>
 </section>
 

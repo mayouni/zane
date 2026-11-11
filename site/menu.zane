@@ -11,9 +11,10 @@ DEFINE NAV_GRAPH main_menu (
 DEFINE NAV_GRAPH whyzane (
   LABEL "Why",
   TARGET why,
-  ENTRIES [why, thinking, positioning_family, innovation]
+  ENTRIES [why, case, thinking, positioning_family, innovation]
 )
 DEFINE NAV_GRAPH why (LABEL "The problem", TARGET why)
+DEFINE NAV_GRAPH case (LABEL "The case", TARGET case)
 DEFINE NAV_GRAPH thinking (LABEL "Reasoning", TARGET thinking)
 
 DEFINE NAV_GRAPH positioning_family (

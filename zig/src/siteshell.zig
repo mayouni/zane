@@ -61,6 +61,8 @@ fn fam(comptime f: []const u8, comptime label: []const u8, comptime term: []cons
 const pages = [_]Page{
     .{ .file = "index.html", .home = true, .term = "Zane" },
     .{ .file = "site/why.html", .section = "whyzane", .label = "The problem", .rail = true, .term = "problem" },
+    // The case stands apart from The problem (the Principal, 2026-11-11)
+    .{ .file = "site/case.html", .section = "whyzane", .label = "The case", .rail = true, .term = "case" },
     .{ .file = "site/thinking.html", .section = "whyzane", .label = "Reasoning", .rail = true, .term = "reason" },
     .{ .file = "site/positioning.html", .section = "whyzane", .family = "Comparison", .label = "Overview", .rail = true, .term = "overview" },
     .{ .file = "site/practices.html", .section = "whyzane", .label = "Practices", .parent = "site/positioning.html", .rail = true, .term = "practice" },
