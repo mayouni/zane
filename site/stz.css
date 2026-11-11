@@ -348,7 +348,22 @@ li { margin: .3rem 0; }
 .caption { color: var(--ink-2); margin-top: .8rem; max-width: var(--measure-max); }
 
 /* ---- cards & grids ---- */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
+/* cells of at least 20rem, so a cell holds a reading line of 45 characters or more (K03), as many to a row as fit; a last row with fewer cells widens them to fill it, so no row has a hole */
+.grid { display: flex; flex-wrap: wrap; }
+.grid > .card { flex: 1 1 20rem; }
+/* the card grid (section 6.4): peer cards show their grid, so the reader sees at once how the regions are laid out (the Principal,
+   2026-11-11, on site/adopt.html: "make the 4 zone in a grid (gray stroke) so the reader can eaisly recognize their layout"; K25
+   GRID_SHOWN). One thin line in --line around the grid and between its cells: each cell draws an outline, and the gap between cells is
+   that line's own width, so two neighbours share one line rather than drawing two boxes with a space between them. Stacked on a phone,
+   the line between cells stays. The line frames a real cell, so it is a line that draws something (Width Belongs to the Content holds:
+   the cell is as wide as its column, and its text uses that width). A last card left alone on its row takes the whole row, so no row
+   has a hole. Every value is a token, so each culture draws it in its own colour. */
+.grid, .messages { gap: var(--hairline); }
+.grid > .card, .messages > .card { padding: var(--space-2) 1.4rem 1.2rem; outline: var(--hairline) solid var(--line); }
+.messages > .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+/* a cell's text uses its column's width, as its neighbours' does: balancing a short paragraph would end its lines far short of the
+   column, a third shorter than the cell beside it (the screenshot of the same day) */
+.grid > .card p, .messages > .card p { text-wrap: pretty; max-width: var(--measure-max); }
 .card {
   padding: 0;
   min-width: 0;                      /* a grid child may shrink */
@@ -501,10 +516,9 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
   .hero .panel p { font-size: var(--size-lead); text-wrap: balance; }
   .hero .panel .btn.primary { background: var(--action); color: var(--on-action); border-color: var(--action); }
 }
-.messages { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3) var(--space-4); margin: 2.2rem 0 1.6rem; }
+.messages { display: grid; grid-template-columns: minmax(0, 1fr); margin: 2.2rem 0 1.6rem; }
 @media (min-width: 1085px) { :root:not([data-vibe="guardian"]) .messages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* two or four cards go two to a row, so no row is left with a hole (the author, 2026-11-06) */
-.messages .card { padding: 0; }
 .messages h2 { font-size: var(--size-lead); margin: 0 0 .4rem; }
 .messages p { margin: 0 0 .7rem; max-width: none; }
 

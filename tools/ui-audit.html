@@ -6,7 +6,7 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=773b07b8">
+<link rel="stylesheet" href="../site/stz.css?v=564943fa">
 <style>
 /* the report grows to its content: the browser's scroll is the only one on the page (the author, 2026-11-09) */
 textarea {
@@ -257,7 +257,7 @@ td.issue { color: #a33422; font-weight: 700; }
 </footer>
 <!-- /shell:footer -->
 
-<script src="../site/stz.js?v=a67745f4"></script>
+<script src="../site/stz.js?v=8f9b25e5"></script>
 <script>
 'use strict';
 /* ==========================================================================
@@ -706,7 +706,7 @@ const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the 
 const SYS_CHECKS = {
   K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
   K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
-  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM'
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN'
 };
 /* K23 BAR_ALIGN: the menu and the band stand at the same place on every page (ZANE-READER-MENUPOS-01; the Principal, 2026-11-10: "the menue
    bar in this page must keep it's position as the other pages and not move to the left"). Each frame records where its brand and its band's
@@ -983,6 +983,25 @@ async function auditSystem(doc, win, label, width) {
     const lab = el.closest('label') || (el.id && doc.querySelector('label[for="' + el.id + '"]'));
     if (lab && /^(INPUT)$/.test(el.tagName)) { const l = lab.getBoundingClientRect(); r = { width: Math.max(r.width, l.width), height: Math.max(r.height, l.height) }; }
     if (r.width && (r.width < min || r.height < min)) add('K17', el, el.textContent.trim() || el.getAttribute('aria-label') || el.value || '', Math.round(r.width) + ' by ' + Math.round(r.height) + 'px, under ' + min + ' by ' + min + ' [K17 TARGET]');
+  }
+
+  /* K25 GRID_SHOWN: peer regions laid out in a grid show the grid. A grid whose children are peers (the same element and class, each with
+     its own heading) draws a line around every cell, shared between neighbours, so the reader sees how the regions are laid out (the
+     Principal, 2026-11-11, on site/adopt.html: "make the 4 zone in a grid (gray stroke) so the reader can eaisly recognize their layout.
+     notify zui/zane for sutch visuall issue"). The line frames a real cell, so it is the line K07 allows, not a box around nothing. */
+  const drawsAround = c => {
+    const cs = win.getComputedStyle(c);
+    const out = cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0 && (readColor(cs.outlineColor).color || { a: 0 }).a > 0.05;
+    return out || boxPaint(c, win).sides.length === 4;
+  };
+  for (const el of all) {
+    const lay = win.getComputedStyle(el);
+    if (!(/grid/.test(lay.display) || (/flex/.test(lay.display) && lay.flexWrap === 'wrap')) || el.closest('nav, table, form, .layout > *:not(main), .samples, figure.sample, .window, .pane, .vibe-pane') || el.matches('.layout')) continue;
+    const kids = [...el.children].filter(k => k.getBoundingClientRect().width > 0);
+    if (kids.length < 2 || !kids.every(k => k.tagName === kids[0].tagName && k.className === kids[0].className && k.querySelector('h2, h3, h4'))) continue;
+    const bare = kids.filter(k => !drawsAround(k));
+    if (bare.length) add('K25', el, kids.map(k => (k.querySelector('h2, h3, h4').textContent || '').trim().slice(0, 20)).join(' | '),
+      kids.length + ' peer regions laid out in a grid, ' + bare.length + ' with no line around them: the reader cannot see the layout [K25 GRID_SHOWN]');
   }
 
   /* K22 LAYOUT_STILL: nothing moved because something else appeared, grew or went */

@@ -7,7 +7,7 @@
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
   "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
-  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges, both 2026-11-11)",
+  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges, both 2026-11-11)",
   "F": "the repositories themselves (M1b, 2026-11-09): zin at cc98126, refine (no git; files), zing at e2573a9 and zing-studio at 95f36de, the product repositories (organizium and its variants, the restaurant app, orgdesk, zindara, zin-one, zin-website, zin-prototypes, ringface) and the estate sites (stzsite, harobanda, ayouni, lookout, ringserv, ringflex, microring, stz-observer and others); each record cites its file:line or commit"
  },
  "causes": {
@@ -6823,6 +6823,22 @@
   },
   {
    "n": "Z402",
+   "sweep": "E06",
+   "also": [],
+   "cause": "I",
+   "date": "2026-11-11 13:17",
+   "project": "stzzui",
+   "source": "softanza mailbox/stzzui.md 2026-11-11 13:17 (Central's order ZANE-CARDGRID-01, with the Principal's screenshot of site/adopt.html at 33dd474, gray lines drawn by hand around and between the four cards)",
+   "words": "\"make the 4 zone in a grid (gray stroke) so the reader can eaisly recognize their layout. notify zui/zane for sutch visuall issue\"",
+   "wrong": "four peer cards laid out two by two with nothing drawn around or between them, so the reader had to infer the layout from space alone; the first card's paragraph, balanced, ended its lines a third short of its column",
+   "required": "one thin line in --line around the grid and between its cells, shared by neighbours, in both cultures and stacked on a phone; cells whose text uses their width alike; K25 GRID_SHOWN",
+   "sense": "see (layout)",
+   "ruling": "ZANE-CARDGRID-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z403",
    "sweep": "F2-06",
    "also": [],
    "cause": "B",
@@ -6838,7 +6854,7 @@
    "repeat": false
   },
   {
-   "n": "Z403",
+   "n": "Z404",
    "sweep": "F1-04",
    "also": [],
    "cause": "B",
@@ -6854,7 +6870,7 @@
    "repeat": false
   },
   {
-   "n": "Z404",
+   "n": "Z405",
    "sweep": "F4-16",
    "also": [],
    "cause": "B",
@@ -6870,7 +6886,7 @@
    "repeat": false
   },
   {
-   "n": "Z405",
+   "n": "Z406",
    "sweep": "F3-19",
    "also": [],
    "cause": "B",
@@ -6886,7 +6902,7 @@
    "repeat": false
   },
   {
-   "n": "Z406",
+   "n": "Z407",
    "sweep": "B16",
    "also": [],
    "cause": "B",
@@ -6902,7 +6918,7 @@
    "repeat": true
   },
   {
-   "n": "Z407",
+   "n": "Z408",
    "sweep": "B18",
    "also": [],
    "cause": "B",
@@ -6918,7 +6934,7 @@
    "repeat": true
   },
   {
-   "n": "Z408",
+   "n": "Z409",
    "sweep": "F5-55",
    "also": [],
    "cause": "B",
@@ -6934,7 +6950,7 @@
    "repeat": false
   },
   {
-   "n": "Z409",
+   "n": "Z410",
    "sweep": "C52",
    "also": [],
    "cause": "B",
@@ -6950,7 +6966,7 @@
    "repeat": true
   },
   {
-   "n": "Z410",
+   "n": "Z411",
    "sweep": "A52",
    "also": [
     "C57",
@@ -6969,7 +6985,7 @@
    "repeat": ""
   },
   {
-   "n": "Z411",
+   "n": "Z412",
    "sweep": "C71",
    "also": [
     "F5-119"
@@ -6987,7 +7003,7 @@
    "repeat": true
   },
   {
-   "n": "Z412",
+   "n": "Z413",
    "sweep": "C78",
    "also": [],
    "cause": "B",
@@ -7003,7 +7019,7 @@
    "repeat": true
   },
   {
-   "n": "Z413",
+   "n": "Z414",
    "sweep": "F5-34",
    "also": [],
    "cause": "B",
@@ -7019,7 +7035,7 @@
    "repeat": false
   },
   {
-   "n": "Z414",
+   "n": "Z415",
    "sweep": "F5-38",
    "also": [],
    "cause": "B",
@@ -7035,7 +7051,7 @@
    "repeat": false
   },
   {
-   "n": "Z415",
+   "n": "Z416",
    "sweep": "D49",
    "also": [],
    "cause": "B",
@@ -7051,7 +7067,7 @@
    "repeat": true
   },
   {
-   "n": "Z416",
+   "n": "Z417",
    "sweep": "D32",
    "also": [
     "A85"
@@ -7069,7 +7085,7 @@
    "repeat": false
   },
   {
-   "n": "Z417",
+   "n": "Z418",
    "sweep": "D52",
    "also": [
     "A94",
@@ -7088,7 +7104,7 @@
    "repeat": true
   },
   {
-   "n": "Z418",
+   "n": "Z419",
    "sweep": "C119",
    "also": [
     "A113",
@@ -7107,7 +7123,7 @@
    "repeat": true
   },
   {
-   "n": "Z419",
+   "n": "Z420",
    "sweep": "C121",
    "also": [
     "A115",
@@ -7126,7 +7142,7 @@
    "repeat": true
   },
   {
-   "n": "Z420",
+   "n": "Z421",
    "sweep": "C130",
    "also": [
     "A123",
@@ -7146,7 +7162,7 @@
    "repeat": true
   },
   {
-   "n": "Z421",
+   "n": "Z422",
    "sweep": "E01",
    "also": [
     "F5-90"
@@ -7164,7 +7180,7 @@
    "repeat": true
   },
   {
-   "n": "Z422",
+   "n": "Z423",
    "sweep": "F4-55",
    "also": [],
    "cause": "X",
@@ -7180,7 +7196,7 @@
    "repeat": false
   },
   {
-   "n": "Z423",
+   "n": "Z424",
    "sweep": "F3-07",
    "also": [],
    "cause": "X",
@@ -7196,7 +7212,7 @@
    "repeat": false
   },
   {
-   "n": "Z424",
+   "n": "Z425",
    "sweep": "F3-08",
    "also": [],
    "cause": "X",
@@ -7212,7 +7228,7 @@
    "repeat": false
   },
   {
-   "n": "Z425",
+   "n": "Z426",
    "sweep": "C18",
    "also": [
     "F4-09"
@@ -7230,7 +7246,7 @@
    "repeat": true
   },
   {
-   "n": "Z426",
+   "n": "Z427",
    "sweep": "F4-14",
    "also": [],
    "cause": "X",
@@ -7246,7 +7262,7 @@
    "repeat": false
   },
   {
-   "n": "Z427",
+   "n": "Z428",
    "sweep": "F4-17",
    "also": [],
    "cause": "X",
@@ -7262,7 +7278,7 @@
    "repeat": false
   },
   {
-   "n": "Z428",
+   "n": "Z429",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -7278,7 +7294,7 @@
    "repeat": false
   },
   {
-   "n": "Z429",
+   "n": "Z430",
    "sweep": "F3-20",
    "also": [],
    "cause": "X",
@@ -7294,7 +7310,7 @@
    "repeat": false
   },
   {
-   "n": "Z430",
+   "n": "Z431",
    "sweep": "F3-27",
    "also": [],
    "cause": "X",
@@ -7310,7 +7326,7 @@
    "repeat": true
   },
   {
-   "n": "Z431",
+   "n": "Z432",
    "sweep": "F3-35",
    "also": [],
    "cause": "X",
@@ -7326,7 +7342,7 @@
    "repeat": false
   },
   {
-   "n": "Z432",
+   "n": "Z433",
    "sweep": "F3-36",
    "also": [],
    "cause": "X",
@@ -7342,7 +7358,7 @@
    "repeat": false
   },
   {
-   "n": "Z433",
+   "n": "Z434",
    "sweep": "F5-92",
    "also": [],
    "cause": "X",
@@ -7358,7 +7374,7 @@
    "repeat": false
   },
   {
-   "n": "Z434",
+   "n": "Z435",
    "sweep": "F5-96",
    "also": [],
    "cause": "X",
@@ -7374,7 +7390,7 @@
    "repeat": false
   },
   {
-   "n": "Z435",
+   "n": "Z436",
    "sweep": "F5-47",
    "also": [],
    "cause": "X",
@@ -7390,7 +7406,7 @@
    "repeat": false
   },
   {
-   "n": "Z436",
+   "n": "Z437",
    "sweep": "A56",
    "also": [
     "F5-74"
@@ -7408,7 +7424,7 @@
    "repeat": ""
   },
   {
-   "n": "Z437",
+   "n": "Z438",
    "sweep": "C75",
    "also": [
     "F5-114"
@@ -7426,7 +7442,7 @@
    "repeat": false
   },
   {
-   "n": "Z438",
+   "n": "Z439",
    "sweep": "F5-76",
    "also": [],
    "cause": "X",
@@ -7442,7 +7458,7 @@
    "repeat": false
   },
   {
-   "n": "Z439",
+   "n": "Z440",
    "sweep": "B36",
    "also": [
     "F5-32"
@@ -7460,7 +7476,7 @@
    "repeat": false
   },
   {
-   "n": "Z440",
+   "n": "Z441",
    "sweep": "F4-26",
    "also": [],
    "cause": "X",
@@ -7476,7 +7492,7 @@
    "repeat": false
   },
   {
-   "n": "Z441",
+   "n": "Z442",
    "sweep": "F4-29",
    "also": [],
    "cause": "X",
@@ -7492,7 +7508,7 @@
    "repeat": false
   },
   {
-   "n": "Z442",
+   "n": "Z443",
    "sweep": "F5-110",
    "also": [],
    "cause": "X",
@@ -7508,7 +7524,7 @@
    "repeat": true
   },
   {
-   "n": "Z443",
+   "n": "Z444",
    "sweep": "D34",
    "also": [
     "A87"
@@ -7526,7 +7542,7 @@
    "repeat": false
   },
   {
-   "n": "Z444",
+   "n": "Z445",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -7542,7 +7558,7 @@
    "repeat": true
   },
   {
-   "n": "Z445",
+   "n": "Z446",
    "sweep": "D54",
    "also": [
     "A96"
@@ -7560,7 +7576,7 @@
    "repeat": false
   },
   {
-   "n": "Z446",
+   "n": "Z447",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -7576,7 +7592,7 @@
    "repeat": false
   },
   {
-   "n": "Z447",
+   "n": "Z448",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -7592,7 +7608,7 @@
    "repeat": true
   },
   {
-   "n": "Z448",
+   "n": "Z449",
    "sweep": "D93",
    "also": [
     "C112"
@@ -7610,7 +7626,7 @@
    "repeat": true
   },
   {
-   "n": "Z449",
+   "n": "Z450",
    "sweep": "F5-83",
    "also": [],
    "cause": "X",
@@ -7626,7 +7642,7 @@
    "repeat": false
   },
   {
-   "n": "Z450",
+   "n": "Z451",
    "sweep": "C132",
    "also": [
     "B56",
@@ -7646,7 +7662,7 @@
    "repeat": true
   },
   {
-   "n": "Z451",
+   "n": "Z452",
    "sweep": "C16",
    "also": [
     "F4-12"
@@ -7664,7 +7680,7 @@
    "repeat": false
   },
   {
-   "n": "Z452",
+   "n": "Z453",
    "sweep": "C134",
    "also": [
     "A126",
