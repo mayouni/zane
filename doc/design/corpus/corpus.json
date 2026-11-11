@@ -7,7 +7,7 @@
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
   "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
-  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09), and given in the desk's own chat (tables drawn like running text, 2026-11-11)",
+  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges, both 2026-11-11)",
   "F": "the repositories themselves (M1b, 2026-11-09): zin at cc98126, refine (no git; files), zing at e2573a9 and zing-studio at 95f36de, the product repositories (organizium and its variants, the restaurant app, orgdesk, zindara, zin-one, zin-website, zin-prototypes, ringface) and the estate sites (stzsite, harobanda, ayouni, lookout, ringserv, ringflex, microring, stz-observer and others); each record cites its file:line or commit"
  },
  "causes": {
@@ -6200,6 +6200,22 @@
   },
   {
    "n": "Z365",
+   "sweep": "E05",
+   "also": [],
+   "cause": "S",
+   "date": "2026-11-11",
+   "project": "stzzui",
+   "source": "the Principal in the stzzui desk's chat, with a screenshot of site/grid.html and the free width beside its table marked",
+   "words": "\"when space is available stretch the tables to be more readable. it's the same think we stated for code snippets when they need more space and to avoid horizontal bars. in both cases, they should not be restricted to the test left and right limits. remind Zui/Zane of this\"",
+   "wrong": "a table held to the text column wrapped every cell onto three and four lines while the width beside it stood empty; code blocks were held to the same edges",
+   "required": "a table or a code block takes the room its content needs: past the text's edges into the free room beside it (the outline's column where the outline is not beside it, then the page's margin), up to the window less the gutter; it wraps only past that and never scrolls; K24 WIDE_ROOM",
+   "sense": "see (width)",
+   "ruling": "",
+   "verbatim": true,
+   "repeat": true
+  },
+  {
+   "n": "Z366",
    "sweep": "F4-61",
    "also": [],
    "cause": "I",
@@ -6215,7 +6231,7 @@
    "repeat": false
   },
   {
-   "n": "Z366",
+   "n": "Z367",
    "sweep": "F3-05",
    "also": [],
    "cause": "I",
@@ -6231,7 +6247,7 @@
    "repeat": false
   },
   {
-   "n": "Z367",
+   "n": "Z368",
    "sweep": "F3-06",
    "also": [],
    "cause": "I",
@@ -6247,7 +6263,7 @@
    "repeat": false
   },
   {
-   "n": "Z368",
+   "n": "Z369",
    "sweep": "F2-03",
    "also": [],
    "cause": "I",
@@ -6263,7 +6279,7 @@
    "repeat": false
   },
   {
-   "n": "Z369",
+   "n": "Z370",
    "sweep": "C20",
    "also": [
     "F4-11"
@@ -6281,7 +6297,7 @@
    "repeat": false
   },
   {
-   "n": "Z370",
+   "n": "Z371",
    "sweep": "F4-13",
    "also": [],
    "cause": "I",
@@ -6297,7 +6313,7 @@
    "repeat": false
   },
   {
-   "n": "Z371",
+   "n": "Z372",
    "sweep": "D04",
    "also": [
     "F3-26"
@@ -6315,7 +6331,7 @@
    "repeat": false
   },
   {
-   "n": "Z372",
+   "n": "Z373",
    "sweep": "A05",
    "also": [
     "C32"
@@ -6333,7 +6349,7 @@
    "repeat": ""
   },
   {
-   "n": "Z373",
+   "n": "Z374",
    "sweep": "A06",
    "also": [
     "D15"
@@ -6351,7 +6367,7 @@
    "repeat": ""
   },
   {
-   "n": "Z374",
+   "n": "Z375",
    "sweep": "A10",
    "also": [],
    "cause": "I",
@@ -6367,7 +6383,7 @@
    "repeat": true
   },
   {
-   "n": "Z375",
+   "n": "Z376",
    "sweep": "A12",
    "also": [
     "D16"
@@ -6385,7 +6401,7 @@
    "repeat": true
   },
   {
-   "n": "Z376",
+   "n": "Z377",
    "sweep": "F5-105",
    "also": [],
    "cause": "I",
@@ -6401,7 +6417,7 @@
    "repeat": false
   },
   {
-   "n": "Z377",
+   "n": "Z378",
    "sweep": "F5-97",
    "also": [],
    "cause": "I",
@@ -6417,7 +6433,7 @@
    "repeat": false
   },
   {
-   "n": "Z378",
+   "n": "Z379",
    "sweep": "F5-101",
    "also": [],
    "cause": "I",
@@ -6433,7 +6449,7 @@
    "repeat": true
   },
   {
-   "n": "Z379",
+   "n": "Z380",
    "sweep": "C45",
    "also": [
     "F5-56"
@@ -6451,7 +6467,7 @@
    "repeat": true
   },
   {
-   "n": "Z380",
+   "n": "Z381",
    "sweep": "F5-52",
    "also": [],
    "cause": "I",
@@ -6467,7 +6483,7 @@
    "repeat": false
   },
   {
-   "n": "Z381",
+   "n": "Z382",
    "sweep": "F5-53",
    "also": [],
    "cause": "I",
@@ -6483,7 +6499,7 @@
    "repeat": false
   },
   {
-   "n": "Z382",
+   "n": "Z383",
    "sweep": "B28",
    "also": [],
    "cause": "I",
@@ -6499,7 +6515,7 @@
    "repeat": false
   },
   {
-   "n": "Z383",
+   "n": "Z384",
    "sweep": "F5-11",
    "also": [],
    "cause": "I",
@@ -6515,7 +6531,7 @@
    "repeat": true
   },
   {
-   "n": "Z384",
+   "n": "Z385",
    "sweep": "F5-12",
    "also": [],
    "cause": "I",
@@ -6531,7 +6547,7 @@
    "repeat": false
   },
   {
-   "n": "Z385",
+   "n": "Z386",
    "sweep": "F5-14",
    "also": [],
    "cause": "I",
@@ -6547,7 +6563,7 @@
    "repeat": false
   },
   {
-   "n": "Z386",
+   "n": "Z387",
    "sweep": "F5-17",
    "also": [],
    "cause": "I",
@@ -6563,7 +6579,7 @@
    "repeat": false
   },
   {
-   "n": "Z387",
+   "n": "Z388",
    "sweep": "F5-19",
    "also": [],
    "cause": "I",
@@ -6579,7 +6595,7 @@
    "repeat": false
   },
   {
-   "n": "Z388",
+   "n": "Z389",
    "sweep": "A57",
    "also": [
     "F5-75"
@@ -6597,7 +6613,7 @@
    "repeat": ""
   },
   {
-   "n": "Z389",
+   "n": "Z390",
    "sweep": "A59",
    "also": [
     "F5-27"
@@ -6615,7 +6631,7 @@
    "repeat": ""
   },
   {
-   "n": "Z390",
+   "n": "Z391",
    "sweep": "F5-71",
    "also": [],
    "cause": "I",
@@ -6631,7 +6647,7 @@
    "repeat": false
   },
   {
-   "n": "Z391",
+   "n": "Z392",
    "sweep": "A63",
    "also": [
     "F5-35"
@@ -6649,7 +6665,7 @@
    "repeat": true
   },
   {
-   "n": "Z392",
+   "n": "Z393",
    "sweep": "F4-27",
    "also": [],
    "cause": "I",
@@ -6665,7 +6681,7 @@
    "repeat": false
   },
   {
-   "n": "Z393",
+   "n": "Z394",
    "sweep": "C97",
    "also": [],
    "cause": "I",
@@ -6681,7 +6697,7 @@
    "repeat": true
   },
   {
-   "n": "Z394",
+   "n": "Z395",
    "sweep": "D53",
    "also": [
     "A95",
@@ -6700,7 +6716,7 @@
    "repeat": false
   },
   {
-   "n": "Z395",
+   "n": "Z396",
    "sweep": "D66",
    "also": [],
    "cause": "I",
@@ -6716,7 +6732,7 @@
    "repeat": false
   },
   {
-   "n": "Z396",
+   "n": "Z397",
    "sweep": "D81",
    "also": [],
    "cause": "I",
@@ -6732,7 +6748,7 @@
    "repeat": true
   },
   {
-   "n": "Z397",
+   "n": "Z398",
    "sweep": "B53",
    "also": [],
    "cause": "I",
@@ -6748,7 +6764,7 @@
    "repeat": true
   },
   {
-   "n": "Z398",
+   "n": "Z399",
    "sweep": "B69",
    "also": [
     "A131",
@@ -6767,7 +6783,7 @@
    "repeat": true
   },
   {
-   "n": "Z399",
+   "n": "Z400",
    "sweep": "C117",
    "also": [
     "B52",
@@ -6786,7 +6802,7 @@
    "repeat": false
   },
   {
-   "n": "Z400",
+   "n": "Z401",
    "sweep": "C138",
    "also": [
     "A132",
@@ -6806,7 +6822,7 @@
    "repeat": true
   },
   {
-   "n": "Z401",
+   "n": "Z402",
    "sweep": "F2-06",
    "also": [],
    "cause": "B",
@@ -6822,7 +6838,7 @@
    "repeat": false
   },
   {
-   "n": "Z402",
+   "n": "Z403",
    "sweep": "F1-04",
    "also": [],
    "cause": "B",
@@ -6838,7 +6854,7 @@
    "repeat": false
   },
   {
-   "n": "Z403",
+   "n": "Z404",
    "sweep": "F4-16",
    "also": [],
    "cause": "B",
@@ -6854,7 +6870,7 @@
    "repeat": false
   },
   {
-   "n": "Z404",
+   "n": "Z405",
    "sweep": "F3-19",
    "also": [],
    "cause": "B",
@@ -6870,7 +6886,7 @@
    "repeat": false
   },
   {
-   "n": "Z405",
+   "n": "Z406",
    "sweep": "B16",
    "also": [],
    "cause": "B",
@@ -6886,7 +6902,7 @@
    "repeat": true
   },
   {
-   "n": "Z406",
+   "n": "Z407",
    "sweep": "B18",
    "also": [],
    "cause": "B",
@@ -6902,7 +6918,7 @@
    "repeat": true
   },
   {
-   "n": "Z407",
+   "n": "Z408",
    "sweep": "F5-55",
    "also": [],
    "cause": "B",
@@ -6918,7 +6934,7 @@
    "repeat": false
   },
   {
-   "n": "Z408",
+   "n": "Z409",
    "sweep": "C52",
    "also": [],
    "cause": "B",
@@ -6934,7 +6950,7 @@
    "repeat": true
   },
   {
-   "n": "Z409",
+   "n": "Z410",
    "sweep": "A52",
    "also": [
     "C57",
@@ -6953,7 +6969,7 @@
    "repeat": ""
   },
   {
-   "n": "Z410",
+   "n": "Z411",
    "sweep": "C71",
    "also": [
     "F5-119"
@@ -6971,7 +6987,7 @@
    "repeat": true
   },
   {
-   "n": "Z411",
+   "n": "Z412",
    "sweep": "C78",
    "also": [],
    "cause": "B",
@@ -6987,7 +7003,7 @@
    "repeat": true
   },
   {
-   "n": "Z412",
+   "n": "Z413",
    "sweep": "F5-34",
    "also": [],
    "cause": "B",
@@ -7003,7 +7019,7 @@
    "repeat": false
   },
   {
-   "n": "Z413",
+   "n": "Z414",
    "sweep": "F5-38",
    "also": [],
    "cause": "B",
@@ -7019,7 +7035,7 @@
    "repeat": false
   },
   {
-   "n": "Z414",
+   "n": "Z415",
    "sweep": "D49",
    "also": [],
    "cause": "B",
@@ -7035,7 +7051,7 @@
    "repeat": true
   },
   {
-   "n": "Z415",
+   "n": "Z416",
    "sweep": "D32",
    "also": [
     "A85"
@@ -7053,7 +7069,7 @@
    "repeat": false
   },
   {
-   "n": "Z416",
+   "n": "Z417",
    "sweep": "D52",
    "also": [
     "A94",
@@ -7072,7 +7088,7 @@
    "repeat": true
   },
   {
-   "n": "Z417",
+   "n": "Z418",
    "sweep": "C119",
    "also": [
     "A113",
@@ -7091,7 +7107,7 @@
    "repeat": true
   },
   {
-   "n": "Z418",
+   "n": "Z419",
    "sweep": "C121",
    "also": [
     "A115",
@@ -7110,7 +7126,7 @@
    "repeat": true
   },
   {
-   "n": "Z419",
+   "n": "Z420",
    "sweep": "C130",
    "also": [
     "A123",
@@ -7130,7 +7146,7 @@
    "repeat": true
   },
   {
-   "n": "Z420",
+   "n": "Z421",
    "sweep": "E01",
    "also": [
     "F5-90"
@@ -7148,7 +7164,7 @@
    "repeat": true
   },
   {
-   "n": "Z421",
+   "n": "Z422",
    "sweep": "F4-55",
    "also": [],
    "cause": "X",
@@ -7164,7 +7180,7 @@
    "repeat": false
   },
   {
-   "n": "Z422",
+   "n": "Z423",
    "sweep": "F3-07",
    "also": [],
    "cause": "X",
@@ -7180,7 +7196,7 @@
    "repeat": false
   },
   {
-   "n": "Z423",
+   "n": "Z424",
    "sweep": "F3-08",
    "also": [],
    "cause": "X",
@@ -7196,7 +7212,7 @@
    "repeat": false
   },
   {
-   "n": "Z424",
+   "n": "Z425",
    "sweep": "C18",
    "also": [
     "F4-09"
@@ -7214,7 +7230,7 @@
    "repeat": true
   },
   {
-   "n": "Z425",
+   "n": "Z426",
    "sweep": "F4-14",
    "also": [],
    "cause": "X",
@@ -7230,7 +7246,7 @@
    "repeat": false
   },
   {
-   "n": "Z426",
+   "n": "Z427",
    "sweep": "F4-17",
    "also": [],
    "cause": "X",
@@ -7246,7 +7262,7 @@
    "repeat": false
   },
   {
-   "n": "Z427",
+   "n": "Z428",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -7262,7 +7278,7 @@
    "repeat": false
   },
   {
-   "n": "Z428",
+   "n": "Z429",
    "sweep": "F3-20",
    "also": [],
    "cause": "X",
@@ -7278,7 +7294,7 @@
    "repeat": false
   },
   {
-   "n": "Z429",
+   "n": "Z430",
    "sweep": "F3-27",
    "also": [],
    "cause": "X",
@@ -7294,7 +7310,7 @@
    "repeat": true
   },
   {
-   "n": "Z430",
+   "n": "Z431",
    "sweep": "F3-35",
    "also": [],
    "cause": "X",
@@ -7310,7 +7326,7 @@
    "repeat": false
   },
   {
-   "n": "Z431",
+   "n": "Z432",
    "sweep": "F3-36",
    "also": [],
    "cause": "X",
@@ -7326,7 +7342,7 @@
    "repeat": false
   },
   {
-   "n": "Z432",
+   "n": "Z433",
    "sweep": "F5-92",
    "also": [],
    "cause": "X",
@@ -7342,7 +7358,7 @@
    "repeat": false
   },
   {
-   "n": "Z433",
+   "n": "Z434",
    "sweep": "F5-96",
    "also": [],
    "cause": "X",
@@ -7358,7 +7374,7 @@
    "repeat": false
   },
   {
-   "n": "Z434",
+   "n": "Z435",
    "sweep": "F5-47",
    "also": [],
    "cause": "X",
@@ -7374,7 +7390,7 @@
    "repeat": false
   },
   {
-   "n": "Z435",
+   "n": "Z436",
    "sweep": "A56",
    "also": [
     "F5-74"
@@ -7392,7 +7408,7 @@
    "repeat": ""
   },
   {
-   "n": "Z436",
+   "n": "Z437",
    "sweep": "C75",
    "also": [
     "F5-114"
@@ -7410,7 +7426,7 @@
    "repeat": false
   },
   {
-   "n": "Z437",
+   "n": "Z438",
    "sweep": "F5-76",
    "also": [],
    "cause": "X",
@@ -7426,7 +7442,7 @@
    "repeat": false
   },
   {
-   "n": "Z438",
+   "n": "Z439",
    "sweep": "B36",
    "also": [
     "F5-32"
@@ -7444,7 +7460,7 @@
    "repeat": false
   },
   {
-   "n": "Z439",
+   "n": "Z440",
    "sweep": "F4-26",
    "also": [],
    "cause": "X",
@@ -7460,7 +7476,7 @@
    "repeat": false
   },
   {
-   "n": "Z440",
+   "n": "Z441",
    "sweep": "F4-29",
    "also": [],
    "cause": "X",
@@ -7476,7 +7492,7 @@
    "repeat": false
   },
   {
-   "n": "Z441",
+   "n": "Z442",
    "sweep": "F5-110",
    "also": [],
    "cause": "X",
@@ -7492,7 +7508,7 @@
    "repeat": true
   },
   {
-   "n": "Z442",
+   "n": "Z443",
    "sweep": "D34",
    "also": [
     "A87"
@@ -7510,7 +7526,7 @@
    "repeat": false
   },
   {
-   "n": "Z443",
+   "n": "Z444",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -7526,7 +7542,7 @@
    "repeat": true
   },
   {
-   "n": "Z444",
+   "n": "Z445",
    "sweep": "D54",
    "also": [
     "A96"
@@ -7544,7 +7560,7 @@
    "repeat": false
   },
   {
-   "n": "Z445",
+   "n": "Z446",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -7560,7 +7576,7 @@
    "repeat": false
   },
   {
-   "n": "Z446",
+   "n": "Z447",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -7576,7 +7592,7 @@
    "repeat": true
   },
   {
-   "n": "Z447",
+   "n": "Z448",
    "sweep": "D93",
    "also": [
     "C112"
@@ -7594,7 +7610,7 @@
    "repeat": true
   },
   {
-   "n": "Z448",
+   "n": "Z449",
    "sweep": "F5-83",
    "also": [],
    "cause": "X",
@@ -7610,7 +7626,7 @@
    "repeat": false
   },
   {
-   "n": "Z449",
+   "n": "Z450",
    "sweep": "C132",
    "also": [
     "B56",
@@ -7630,7 +7646,7 @@
    "repeat": true
   },
   {
-   "n": "Z450",
+   "n": "Z451",
    "sweep": "C16",
    "also": [
     "F4-12"
@@ -7648,7 +7664,7 @@
    "repeat": false
   },
   {
-   "n": "Z451",
+   "n": "Z452",
    "sweep": "C134",
    "also": [
     "A126",

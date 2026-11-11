@@ -257,7 +257,7 @@ td.issue { color: #a33422; font-weight: 700; }
 </footer>
 <!-- /shell:footer -->
 
-<script src="../site/stz.js?v=bd48a372"></script>
+<script src="../site/stz.js?v=a67745f4"></script>
 <script>
 'use strict';
 /* ==========================================================================
@@ -706,7 +706,7 @@ const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the 
 const SYS_CHECKS = {
   K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
   K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
-  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN'
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM'
 };
 /* K23 BAR_ALIGN: the menu and the band stand at the same place on every page (ZANE-READER-MENUPOS-01; the Principal, 2026-11-10: "the menue
    bar in this page must keep it's position as the other pages and not move to the left"). Each frame records where its brand and its band's
@@ -994,6 +994,38 @@ async function auditSystem(doc, win, label, width) {
       add('K22', src[0] || '(the page)', [...new Set(src)].slice(0, 3).join(', '), 'the layout moved by ' + total.toFixed(3) + ' (layout shift) while the page loaded [K22 LAYOUT_STILL]');
     }
   }
+
+  /* K24 WIDE_ROOM: a table or a code block that spans the text column and wraps its content while room is free beside it fails; it is not
+     held to the text's edges (the Principal, 2026-11-11: "when space is available stretch the tables to be more readable ... they should
+     not be restricted to the test left and right limits"). The room is the window less the gutter, less the outline where the outline
+     stands beside the block; a block in a cell of a pair or a grid keeps its cell. */
+  {
+    const rem = parseFloat(win.getComputedStyle(doc.documentElement).fontSize) || 16;
+    const gutter = (parseFloat(win.getComputedStyle(doc.documentElement).getPropertyValue('--gutter')) || 1.4) * rem;
+    const page = doc.documentElement.clientWidth, outline = doc.querySelector('.layout.has-list > nav.list3');
+    const inner = box => { const s = win.getComputedStyle(box), b = box.getBoundingClientRect();
+      return { left: b.left + parseFloat(s.paddingLeft), right: b.right - parseFloat(s.paddingRight) }; };
+    for (const el of doc.querySelectorAll('main table, main pre, main .shot, main .term, main .excerpt')) {
+      if (el.closest('.samples, figure.sample, .window, .pane, .vibe-pane, .offense, [data-offending]') || el.parentElement.closest('main pre, main table')) continue;
+      const r = el.getBoundingClientRect();
+      if (!r.width) continue;
+      const room = inner(el.parentElement), col = inner(el.closest('.narrow, .wrap, main'));
+      if (Math.abs(room.left - col.left) > 2 || Math.abs(room.right - col.right) > 2) continue;
+      const kept = el.style.cssText;
+      el.style.maxWidth = 'none'; el.style.width = 'max-content'; el.style.marginLeft = '0';
+      const natural = el.getBoundingClientRect().width;
+      el.style.cssText = kept;
+      if (natural <= r.width + 2) continue;
+      let right = page - gutter;
+      if (outline) {
+        const o = outline.getBoundingClientRect();
+        if (o.left > r.left && (win.getComputedStyle(outline).position === 'sticky' || (o.bottom > r.top && o.top < r.bottom))) right = Math.min(right, o.left - 2 * rem);
+      }
+      const free = Math.max(0, right - r.right) + Math.max(0, r.left - gutter);
+      if (free > 24) add('K24', el, ownText(el) || el.textContent.trim(), 'wraps its content while ' + Math.round(free) + ' px are free beside it: a table or a code block takes the room it needs [K24 WIDE_ROOM]');
+    }
+  }
+
   return out;
 }
 
