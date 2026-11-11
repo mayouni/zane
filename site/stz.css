@@ -30,6 +30,8 @@
   /* the bar the menu and the footer stand on, and the photograph's panel: the culture's own surface (added in M2, section 6.2) */
   /* contrast: #FFFFFF | #241D49 | 14.9 | the menu's words on the bar, Modern */
   --bar: #241d49; --on-bar: #ffffff;
+  /* contrast: #FF9FB5 | #241D49 | 8.1 | the brand on the bar, Modern */
+  --brand: #ff9fb5;
   --success: #17583f; --warning: #6b4a00; --danger: #8e1f13; --info: #1d4f78; --muted: #4a4661; --meta: #4a4661;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* the reading measure: about 60 to 75 characters of running text in this culture's font (K03 measures the painted line) */
@@ -55,6 +57,8 @@
   --paper: #060b07; --surface: #0b120d; --ink: #cfe0cf; --ink-2: #b4c9b5; --line: #2c4532; --edge: #6f9a77;
   --link: #46e07f; --action: #46e07f; --on-action: #060b07; --focus: #7ee2ae;
   --bar: #030603; --on-bar: #cfe0cf;
+  /* contrast: #46E07F | #030603 | 11.9 | the brand on the bar, Retro */
+  --brand: #46e07f;
   --success: #7ee2ae; --warning: #e6c987; --danger: #ff9d8a; --info: #9fd2f5; --muted: #a9b9ab; --meta: #a9b9ab;
   --font: ui-monospace, "Cascadia Mono", Consolas, monospace;
   /* a monospaced letter is wider, so the same 60 to 75 characters take more ems */
@@ -112,11 +116,23 @@ nav.site .menu { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem
 nav.site .menu > * { flex: none; }
 /* the menu's words at a reading size (the author, 2026-11-06: "the menu bar texts are small!") */
 nav.site .brand { font-weight: var(--weight-strong); font-size: var(--size-reading); letter-spacing: .04em;
-  color: var(--on-bar); text-decoration: none; text-transform: uppercase; }
+  color: var(--brand); text-decoration: none; text-transform: uppercase; }
 nav.site a:not(.brand) { color: var(--on-bar); text-decoration: none; font-size: var(--size-reading); display: inline-flex; align-items: center; min-height: var(--target-phone); }
 nav.site a:not(.brand):hover { text-decoration: none; }
 nav.site a:not(.brand):hover { text-decoration: underline; }
+/* the brand is set in a colour of its own, --brand, so the entry of the section the reader is in, bold in the bar's white, never reads as
+   a second brand; the brand also stands apart from the entries by a space of its own (the Principal, 2026-11-11: "first and second menu
+   options have the same focus them so we don't know where we are! fix this visually and put same space between the ZANE option and the
+   others"; then "i don't like replicating the same undrline for menu and submenu! use color for the world ZANE this resolves the issue
+   (keeping the bold wite to the other options)") */
 nav.site a.here { font-weight: var(--weight-strong); }
+/* in Retro a monospaced bold is barely bolder than its regular, so the current section is set in reverse video, the terminal's own mark of
+   a selection: the bar's colour on a band of the bar's light, at regular weight, one emphasis (K08) (the Principal, 2026-11-11: "In retro
+   the focus with the bold white is not recognisable!") */
+[data-vibe="guardian"] nav.site a.here { font-weight: var(--weight-regular); color: var(--bar); background: var(--on-bar);
+  padding: 0 .4em; min-height: 0; line-height: 1.5; }
+@media (max-width: 760px) { [data-vibe="guardian"] nav.site a.here { min-height: var(--target-phone); } }
+nav.site .menu > .brand { margin-right: var(--space-3); }
 /* GitHub and the style picker at the right of the top bar (the author, 2026-11-06); the picker is a select (Rule 106 allows it: both states
    are options, the current one is shown) */
 nav.site .tools { display: flex; align-items: center; gap: 1.5rem; flex: none; margin-left: auto; }
@@ -207,7 +223,9 @@ header.page::after {
   content: ""; position: absolute; right: 0; bottom: 0; aspect-ratio: 2 / 1; pointer-events: none;
   width: min(30rem, calc(100vw - max(0rem, (100vw - 72rem) / 2) - 54.4rem));
   background: var(--link); opacity: .22;
-  -webkit-mask: url("assets/filigree.svg") right bottom / contain no-repeat; mask: url("assets/filigree.svg") right bottom / contain no-repeat;
+  /* the drawing of assets/filigree.svg, inlined: a page opened from the disk refuses a mask read from another file */
+  --filigree: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 210' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg%3E%3Cpath d='M250 150 L360 40 L470 150 L360 260 Z'/%3E%3Cpath d='M275 150 L360 65 L445 150 L360 235 Z'/%3E%3Cpath d='M300 150 L360 90 L420 150 L360 210 Z'/%3E%3Cpath d='M346 150 L360 136 L374 150 L360 164 Z'/%3E%3C/g%3E%3Cg%3E%3Cpath d='M250 150 H236'/%3E%3Ccircle cx='231' cy='150' r='3.4'/%3E%3Cpath d='M226 132 H186 A12 12 0 1 1 186 108 A7 7 0 1 1 186 122 A3 3 0 1 1 186 116'/%3E%3Cpath d='M226 168 H186 A12 12 0 1 0 186 192 A7 7 0 1 0 186 178 A3 3 0 1 0 186 184'/%3E%3Cpath d='M226 150 H204'/%3E%3C/g%3E%3Cg opacity='.75'%3E%3Cpath d='M112 182 Q138 160 164 182'/%3E%3Cpath d='M138 171 V184'/%3E%3Ccircle cx='138' cy='190' r='3.6'/%3E%3C/g%3E%3Cg opacity='.6'%3E%3Ccircle cx='86' cy='92' r='20'/%3E%3Ccircle cx='86' cy='92' r='3'/%3E%3Cpath d='M86 92 Q92 82 86 72 Q80 82 86 92'/%3E%3Cpath d='M86 92 Q92 82 86 72 Q80 82 86 92' transform='rotate(60 86 92)'/%3E%3Cpath d='M86 92 Q92 82 86 72 Q80 82 86 92' transform='rotate(120 86 92)'/%3E%3Cpath d='M86 92 Q92 82 86 72 Q80 82 86 92' transform='rotate(180 86 92)'/%3E%3Cpath d='M86 92 Q92 82 86 72 Q80 82 86 92' transform='rotate(240 86 92)'/%3E%3Cpath d='M86 92 Q92 82 86 72 Q80 82 86 92' transform='rotate(300 86 92)'/%3E%3C/g%3E%3Cg opacity='.45'%3E%3Cpath d='M8 210 V200 L13 192 L18 200 V210 M26 210 V200 L31 192 L36 200 V210 M44 210 V200 L49 192 L54 200 V210 M62 210 V200 L67 192 L72 200 V210 M80 210 V200 L85 192 L90 200 V210 M98 210 V200 L103 192 L108 200 V210'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask: var(--filigree) right bottom / contain no-repeat; mask: var(--filigree) right bottom / contain no-repeat;
 }
 header.page > .narrow { position: relative; z-index: 1; }
 /* none in Retro: a terminal carries no ornament (the author, 2026-11-06: "the graphity should not be added in the retro vibe!") */
@@ -512,6 +530,7 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
 /* contrast: #FFFFFF | #060b07 at 75% over rgb(249,255,245) | 9.4 | the same, Retro */
 .front .bars { position: fixed; left: 0; right: 0; }
 .front nav.site { background: color-mix(in srgb, var(--bar) 75%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+/* on the front page the bar is translucent over the photograph, and no entry is current, so the brand keeps the bar's white (K02) */
 .front nav.site .brand, .front nav.site a:not(.brand) { color: var(--on-bar); }
 .front .hero { min-height: 100svh; }
 /* on a narrow window the line under the title has three lines or more, and is balanced so that none ends alone */

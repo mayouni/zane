@@ -19,7 +19,7 @@ after reading milestone 1 the Principal asked that it show rather than describe 
    [`corpus/corpus.json`](corpus/corpus.json)), with the theory under each cause, cited.
 3. **The predecessors**: Zin's design system, Refine's PX design and Zing's PX discipline, set beside this one: what each decided,
    where they agree and differ, and what Zane takes (section 5).
-4. **The design system**: seven archetypes, twenty-six components, 45 tokens, four shapes, what the generator may vary and what it may
+4. **The design system**: seven archetypes, twenty-six components, 46 tokens, four shapes, what the generator may vary and what it may
    not, for sight, touch and hearing (section 6), each principle **shown live**, lawful beside offending, on
    [the samples page](design-system-samples.html).
 5. **Twenty-two checks** that read every rule on the rendered page (section 7).
@@ -583,7 +583,7 @@ application built with Zane, whose shell it takes from Refine and Zing (section 
 | P | The painted page is the instrument | five widths, two cultures; a perception recorded | 4, 6 |
 | X | Decided stays decided | no platform default; house components; changes named | 3, 4 |
 
-### 6.2 Tokens: 45 per culture, 23 of which a culture may set
+### 6.2 Tokens: 46 per culture, 24 of which a culture may set
 
 Every value the stylesheet uses comes from a token. **Fixed** tokens hold in both cultures; **culture** tokens are set by Modern and
 Retro (Article VI), always under the same name and meaning. A culture also sets its interaction vocabulary, as Zin's vibes do:
@@ -603,12 +603,13 @@ Retro is keyboard-first with instant feedback, Modern pointer-first; every input
 | | `--font` | sans (Modern), mono (Retro) | culture | — |
 | space (5) | `--space-1` to `--space-4` | .5rem inside a component, 1rem between items, 2rem between groups, 4rem between regions | fixed | S, I |
 | | `--gutter` | 1.4rem from any container's edge to its text | fixed | S |
-| colour: chrome (12) | `--paper`, `--surface` | the page; the frame of a sample or a code block | culture | E |
+| colour: chrome (13) | `--paper`, `--surface` | the page; the frame of a sample or a code block | culture | E |
 | | `--ink`, `--ink-2` | text; secondary text, still 7:1 | culture | T |
 | | `--line`, `--edge` | a hairline that draws (tables, drawings); a field's edge, 3:1 | culture | I, F |
 | | `--link` | navigation | culture | F |
 | | `--action`, `--on-action` | the one primary action of a view, and its label at 7:1 | culture | F |
 | | `--focus` | the focus ring | culture | H |
+| | `--brand` | the brand's word on the bar, apart from the bar's entries, at 7:1 or more; added after milestone 2 (the Principal, 2026-11-11: "use color for the world ZANE") | culture | N |
 | | `--bar`, `--on-bar` | the surface the menu and the footer stand on, and the front page's photograph panel, with the words on it; added in milestone 2, because each culture's identity lives in its bar (Modern's indigo, Retro's terminal black) and no token above can be both | culture | E |
 | colour: data (6) | `--success`, `--warning`, `--danger`, `--info`, `--muted` | Rule 118's five semantic values | culture | E |
 | | `--meta` | the one neutral for channels, types and categories | culture | E |
@@ -637,7 +638,7 @@ A container (a section, a row, a sample frame) is none of the four and never cha
 
 | component | what it is for | its rules | closes |
 |---|---|---|---|
-| **bar** | the main menu | brand, then at most five entries with a visible rule between them and space after the brand; the theme select and GitHub at the right | N, B |
+| **bar** | the main menu | brand, then at most five entries with a visible rule between them and a space of its own after the brand (`--space-3`, beyond the entries' gap); the brand in `--brand`, so the current section's entry, bold in the bar's white (in Retro, in reverse video: a monospaced bold is barely bolder), never reads as a second brand; the theme select and GitHub at the right | N, B |
 | **band** | a section's pages | horizontal, fixed under the bar, apart from the bar by place, size and weight; the landing first under its own label; only the deepest current entry is marked | N |
 | **side list** | a family's pages, or the page's outline | on the left, under the brand, its line on the side of the text; the page's head stays on the top menu's container (Z367); the text beside the list, and every block in it, shares one left edge (Z366); its heading in `--ink-2`, regular weight, apart by space; an outline by default on pages of three or more sections | N, F |
 | **trail** | the path, where a level is not already shown | only then | N, I |
