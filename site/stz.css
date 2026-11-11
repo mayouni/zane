@@ -289,7 +289,9 @@ nav.list3 a[aria-current] { font-weight: var(--weight-strong); color: var(--ink)
 nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: var(--weight-regular); font-size: var(--size-small); color: var(--ink-2); max-width: none; }
 /* the outline's line starts under its heading, and the heading stands on the line's own edge with a space below it, outside the list,
    so it is never taken for the first entry (the author, 2026-11-06: "push it slightly to the left at the same level of the vertical line") */
-nav.list3.sections { border-left: 0; padding-left: 0; }
+/* the outline draws one line, its list's, on the side of the text: the frame's own line is cleared on that same side (the Principal,
+   2026-11-11: "why two lines right to the 'On this page' section???") */
+nav.list3.sections { border-right: 0; padding-right: 0; }
 nav.list3.sections .outline-title { padding: 0; margin: 0 0 1rem; }
 nav.list3.sections > ul { border-right: var(--hairline) solid var(--line); padding-right: .9rem; }
 nav.list3 .sub { margin: 0 0 .3rem; }
@@ -300,7 +302,7 @@ html { scroll-padding-top: calc(var(--bars-h, 6rem) + .5rem); }
   .layout.has-list { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .layout.has-list > main, .layout.has-list > nav.list3 { grid-column: auto; grid-row: auto; }
   nav.list3 { position: static; margin: 1.4rem 0 0; border: 0; border-top: var(--hairline) solid var(--line); padding: .8rem 0 0; }
-  nav.list3.sections { padding-left: 0; }
+  nav.list3.sections { padding-right: 0; }
   nav.list3.sections > ul { border-right: 0; padding-right: 0; }
 }
 
