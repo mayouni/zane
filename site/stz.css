@@ -355,9 +355,10 @@ li { margin: .3rem 0; }
 .caption { color: var(--ink-2); margin-top: .8rem; max-width: var(--measure-max); }
 
 /* ---- cards & grids ---- */
-/* cells of at least 20rem, so a cell holds a reading line of 45 characters or more (K03), as many to a row as fit; a last row with fewer cells widens them to fill it, so no row has a hole */
+/* cells of at least seven tenths of the culture's shortest measure, so a cell holds a reading line of 45 characters or more in either
+   culture's face, the wider monospaced one included (K03), as many to a row as fit; a last row with fewer cells widens them to fill it, so no row has a hole */
 .grid { display: flex; flex-wrap: wrap; }
-.grid > .card { flex: 1 1 20rem; }
+.grid > .card { flex: 1 1 calc(var(--measure-min) * .7); }
 /* the card grid (section 6.4): peer cards show their grid, so the reader sees at once how the regions are laid out (the Principal,
    2026-11-11, on site/adopt.html: "make the 4 zone in a grid (gray stroke) so the reader can eaisly recognize their layout"; K25
    GRID_SHOWN). One thin line in --line around the grid and between its cells: each cell draws an outline, and the gap between cells is
