@@ -37,9 +37,9 @@
     };
     mark(); window.addEventListener('scroll', mark, { passive: true }); window.addEventListener('resize', mark);
   }
-  /* A table or a code block is not held to the text's left and right edges: when its content needs more than the column, it takes the
-     room that is free beside it, first to the right (into the outline's column wherever the outline does not stand beside it), then to
-     the left (into the page's margin), up to the window less the gutter; it wraps only past that, and never scrolls sideways (the
+  /* A table or a code block is not held to the text's right edge: when its content needs more than the column, it takes the room free
+     to its right, into the page's margin, up to the window less the gutter, and keeps the left edge every block on the page shares
+     (ZANE-LEFTEDGE-01: the outline stands on the left, so the right is free); it wraps only past that, and never scrolls sideways (the
      Principal, 2026-11-11: "when space is available stretch the tables to be more readable. it's the same think we stated for code
      snippets when they need more space and to avoid horizontal bars. in both cases, they should not be restricted to the test left and
      right limits"; K24 WIDE_ROOM in tools/ui-audit.html). A sample frame keeps its own size. */
@@ -70,12 +70,9 @@
         const beside = o.left > r0.left && (getComputedStyle(outline).position === 'sticky' || (o.bottom > r0.top && o.top < r0.bottom));
         if (beside) right = Math.min(right, o.left - 2 * rem);
       }
-      let width = Math.max(r0.width, Math.min(natural, right - r0.left));
-      const extra = Math.max(0, Math.min(natural - width, r0.left - gutter));
-      width += extra;
+      const width = Math.max(r0.width, Math.min(natural, right - r0.left));
       if (width <= r0.width + 1) return;
       el.style.maxWidth = 'none'; el.style.width = Math.floor(width) + 'px';
-      if (extra) el.style.marginLeft = -Math.floor(extra) + 'px';
     });
   }
   /* A cell of a card grid fills its width as its neighbours do, and its last line still holds at least a third of its widest: the text

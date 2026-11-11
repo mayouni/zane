@@ -358,8 +358,9 @@ function apply(p, text) {
   if (!p.home && fenceRe('trail').test(t)) fill('trail', trail(p));
   if (fenceRe('layout').test(t)) {
     const r = list3(p, secs);
-    /* every list beside a page sits on its right, a family of pages (level 3) as the sections of a page do: the earlier ruling that kept
-       a family on the left was turned by the author on 2026-11-06 ("some lateral menus are still in the left, move them to the right") */
+    /* every list beside a page sits on its left, a family of pages (level 3) as the sections of a page do, so every block on the page
+       shares one left edge and a wide one grows to the right (the Principal, 2026-11-11, ZANE-LEFTEDGE-01, turning the ruling of
+       2026-11-06 that had moved the lists to the right); the list comes first in the markup, as it comes first on the screen */
     fill('layout', `<div class="layout${r ? ' has-list' : ''}">` + (r ? '\n' + r : ''));
   }
   if (fenceRe('footer').test(t)) {
