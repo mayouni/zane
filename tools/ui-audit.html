@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-vibe="curator">
 <head>
 <meta charset="UTF-8">
@@ -6,7 +6,7 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=9d248f85">
+<link rel="stylesheet" href="../site/stz.css?v=457442cc">
 <style>
 /* the report grows to its content: the browser's scroll is the only one on the page (the author, 2026-11-09) */
 textarea {
@@ -112,48 +112,56 @@ td.issue { color: #a33422; font-weight: 700; }
 <section>
   <div class="wrap">
     <h2>The rules that the audit enforces</h2>
-    <div class="grid">
-      <div class="card"><h3>Rule 105 · The Legibility Floor</h3>
-        <p>Main reading text is at least 1rem, and it is never lighter than 4.5:1 against
-        its background. A ratio of 3:1 is allowed only for genuinely large text, which is
-        ≥24px, or ≥18.66px when bold. A color that carries meaning must also carry contrast.</p>
-        <span class="proof"><a href="../constitution/reader/#rule-105">read the rule</a></span></div>
-      <div class="card"><h3>Rule 107 · Hierarchy Is Not Miniaturization</h3>
-        <p>Three sizes are enough: a hero size, a title size and one reading size. The
-        audit flags anything below the floor, whatever its role: captions, labels, badges,
-        footers and SVG text, whose rendered size is computed from the viewBox scale.</p>
-        <span class="proof"><a href="../constitution/reader/#rule-107">read the rule</a></span></div>
-      <div class="card"><h3>Rule 108 · The Trail Is Always Shown</h3>
-        <p>Every page must carry a breadcrumb that is marked as one
-        (<code>nav[aria-label="Breadcrumb"]</code>) and whose first step returns to the
-        root. Every step must be reachable except the one the reader is standing on. The
-        site root is the only page that is exempt, and the audit reports the exemption
-        instead of staying silent.</p>
-        <span class="proof"><a href="../constitution/reader/#rule-108">read the rule</a></span></div>
-      <div class="card"><h3>Rule 114 · Room Before Scrollbars</h3>
-        <p>The audit flags a block that scrolls sideways whenever the block would have
-        fitted if the layout had given it the page's spare width. Scrolling is lawful only
-        when the page itself has run out of width. The audit measures this at 1280px,
-        which is the width at which it renders each page.</p>
-        <span class="proof"><a href="../constitution/reader/#rule-114">read the rule</a></span></div>
-      <div class="card"><h3>Rule 115 · The Path Shows Every Depth</h3>
-        <p>A path names every level of the branch it sits on, both the levels above and
-        the levels below, so that the whole branch is visible from any page in it. The audit
-        compares the paths of every page that names another page: the paths must read the
-        same, and only the highlight may move.</p>
-        <span class="proof"><a href="../constitution/reader/#rule-115">read the rule</a></span></div>
-      <div class="card"><h3>Rule 116 · The Menu Tells the Truth About the Tree</h3>
-        <p>Every main-menu entry must be a top-level page, or a section that leads to its
-        landing page, and it must use the name that the page's own path uses. The audit reads
-        each page's path. A page that the path puts under a parent may not stand beside that
-        parent as an equal, a page that the menu names differently from its path is one page
-        with two names, and a landing page called by its section's name repeats its parent.</p>
-        <span class="proof"><a href="../constitution/reader/#rule-116">read the rule</a></span></div>
-      <div class="card"><h3>Running the audit in both vibes</h3>
-        <p>Modern and Retro have different palettes, so a page can be lawful in one vibe
-        and unlawful in the other. The audit reports the vibe that the site is currently
-        in, so run it once in each vibe (press <kbd>F2</kbd>, or use the Style picker).</p></div>
-    </div>
+    <!-- one table of sections, read from top to bottom, with no column headings: each rule's title on the header's tint, a link to it in the
+         Reader, then its paragraph across the whole width (the Principal, 2026-11-11: "use a system of clean enlarged table with a rule in each
+         section all made vertically", then "the columns titles are not necessary. just make a table of sections") -->
+    <table class="board rules-audited">
+      <tbody>
+        <tr><th scope="col"><a href="../constitution/reader/#rule-105">Rule 105 · The Legibility Floor</a></th></tr>
+        <tr><td>Main reading text is at least 1rem, and it is never lighter than 4.5:1 against
+          its background. A ratio of 3:1 is allowed only for genuinely large text, which is
+          ≥24px, or ≥18.66px when bold. A color that carries meaning must also carry contrast.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th scope="col"><a href="../constitution/reader/#rule-107">Rule 107 · Hierarchy Is Not Miniaturization</a></th></tr>
+        <tr><td>Three sizes are enough: a hero size, a title size and one reading size. The
+          audit flags anything below the floor, whatever its role: captions, labels, badges,
+          footers and SVG text, whose rendered size is computed from the viewBox scale.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th scope="col"><a href="../constitution/reader/#rule-108">Rule 108 · The Trail Is Always Shown</a></th></tr>
+        <tr><td>Every page must carry a breadcrumb that is marked as one
+          (<code>nav[aria-label="Breadcrumb"]</code>) and whose first step returns to the
+          root. Every step must be reachable except the one the reader is standing on. The
+          site root is the only page that is exempt, and the audit reports the exemption
+          instead of staying silent.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th scope="col"><a href="../constitution/reader/#rule-114">Rule 114 · Room Before Scrollbars</a></th></tr>
+        <tr><td>The audit flags a block that scrolls sideways whenever the block would have
+          fitted if the layout had given it the page's spare width. Scrolling is lawful only
+          when the page itself has run out of width. The audit measures this at 1280px,
+          which is the width at which it renders each page.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th scope="col"><a href="../constitution/reader/#rule-115">Rule 115 · The Path Shows Every Depth</a></th></tr>
+        <tr><td>A path names every level of the branch it sits on, both the levels above and
+          the levels below, so that the whole branch is visible from any page in it. The audit
+          compares the paths of every page that names another page: the paths must read the
+          same, and only the highlight may move.</td></tr>
+      </tbody>
+      <tbody>
+        <tr><th scope="col"><a href="../constitution/reader/#rule-116">Rule 116 · The Menu Tells the Truth About the Tree</a></th></tr>
+        <tr><td>Every main-menu entry must be a top-level page, or a section that leads to its
+          landing page, and it must use the name that the page's own path uses. The audit reads
+          each page's path. A page that the path puts under a parent may not stand beside that
+          parent as an equal, a page that the menu names differently from its path is one page
+          with two names, and a landing page called by its section's name repeats its parent.</td></tr>
+      </tbody>
+    </table>
+    <p>Modern and Retro have different palettes, so a page can be lawful in one vibe
+    and unlawful in the other. The audit reports the vibe that the site is currently
+    in, so run it once in each vibe (press <kbd>F2</kbd>, or use the Style picker).</p>
 
     <h2 style="margin-top:2.5rem">The list of pages that the audit reads</h2>
     <p class="lead">The table lists one page per row, by its path from the site root. Your own

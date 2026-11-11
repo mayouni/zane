@@ -427,6 +427,19 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
 .board thead th:first-child, table.evidence thead th:first-child { border-top-left-radius: var(--radius); }
 .board thead th:last-child, table.evidence thead th:last-child { border-top-right-radius: var(--radius); }
 .board tbody th, table.evidence tbody th { font-weight: var(--weight-strong); }
+/* the UI audit's rules: a table of sections, one per rule, read from top to bottom with no column headings. Each section opens on its
+   title, drawn as the table's header row is (the tint, the firmer rule under it), and its paragraph follows across the whole width */
+table.rules-audited th { text-transform: none; letter-spacing: normal; color: var(--ink); background: var(--tint);
+  font-size: var(--size-lead); line-height: 1.3; padding: .8rem 1.2rem; border-bottom: var(--ring) solid var(--edge); }
+table.rules-audited tbody + tbody th { border-top: var(--hairline) solid var(--line); }
+table.rules-audited tbody:first-child th { border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); }
+table.rules-audited td { font-size: var(--size-reading); padding: 1rem 1.2rem 1.2rem; }
+table.rules-audited + p { max-width: var(--measure-min); text-wrap: balance; }
+@media (max-width: 560px) {
+  table.rules-audited th { font-size: var(--size-reading); padding: .7rem .9rem; }
+  table.rules-audited td { padding: .8rem .9rem 1rem; }
+  table.rules-audited + p { text-wrap: pretty; }
+}
 .status { font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
 .status.exists::before { content: "\25CF\00a0"; }
 .status.designed::before { content: "\25D0\00a0"; }
