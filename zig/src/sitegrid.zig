@@ -250,13 +250,14 @@ fn gridTable(a: Allocator) anyerror![]const u8 {
         try o.writeAll(try js.fmt(a, "    <tr><th scope=\"row\">{s}</th>", .{if (col == 0) "any channel" else try esc(a, c)}));
         for (0..6) |act| {
             const i = g.at(act, col);
+            // the word of an empty cell and the fixtures' count each sit in a span (tools/site-grid.js says why)
             if (g.closed[i]) {
-                try o.writeAll("<td class=\"g-closed\">closed</td>");
+                try o.writeAll("<td class=\"g-closed\"><span class=\"word\">closed</span></td>");
             } else if (g.rules[i] > 0) {
-                try o.writeAll(try js.fmt(a, "<td class=\"g-has\"><b>{d}</b> · {d}</td>", .{ g.rules[i], g.fixtures[i] }));
+                try o.writeAll(try js.fmt(a, "<td class=\"g-has\"><b>{d}</b> <span class=\"fix\">· {d}</span></td>", .{ g.rules[i], g.fixtures[i] }));
             } else if (g.fixtures[i] > 0) {
-                try o.writeAll(try js.fmt(a, "<td class=\"g-none\">none · {d}</td>", .{g.fixtures[i]}));
-            } else try o.writeAll("<td class=\"g-none\">none</td>");
+                try o.writeAll(try js.fmt(a, "<td class=\"g-none\"><span class=\"word\">none</span> <span class=\"fix\">· {d}</span></td>", .{g.fixtures[i]}));
+            } else try o.writeAll("<td class=\"g-none\"><span class=\"word\">none</span></td>");
         }
         try o.writeAll("</tr>");
     }
