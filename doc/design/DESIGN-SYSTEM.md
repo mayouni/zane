@@ -310,7 +310,10 @@ reflow without scrolling in two dimensions (1.4.10). One scroll gesture with two
 **The principle.** *Everything is on the page, in one flow, with one scroll.* No tooltip; no content shown only on hover; nothing
 scrolls inside the page; nothing floats over the reading; every act shows its result in the page within 100 ms; an empty list says
 what is missing and where to create it.
-**Checks**: K13 ONE_SCROLL, K14 NO_FLOAT, K15 NO_HOVER_ONLY.
+**One flow means one column of reading**: what can be read one part after another is set in the page's vertical flow, never in
+columns side by side; only peers in a grid (K25) and samples compared side by side share a row (the Principal, 2026-11-12: *"we said it
+so many times : avoid colomnar layout for what can be set in a normal vertical flow"*).
+**Checks**: K13 ONE_SCROLL, K14 NO_FLOAT, K15 NO_HOVER_ONLY, K26 ONE_FLOW.
 
 ### H · A pointer is assumed (2)
 
@@ -730,8 +733,9 @@ runs at 375, 768, 1085, 1440 and 1900 px in Modern and in Retro.
 | K23 BAR_ALIGN | the brand and the band's first entry on every page | an edge that differs from the one most pages share at the same width and culture (ZANE-READER-MENUPOS-01) | N | new |
 | K24 WIDE_ROOM | every table and code block that spans the text column | it wraps its content while more than 24 px are free to its right: the window less the gutter, less the outline where the outline stands beside it; the left edge is never room (Z365, Z366) | S | new |
 | K25 GRID_SHOWN | every grid or wrapping row whose children are peers (the same element and class, each with its own heading) | a cell with no line around it (Z404) | I | new |
+| K26 ONE_FLOW | every grid or flex row holding two or more regions of running text (a paragraph, a list or a code block, 120 characters or more) | the regions sit side by side and are not peers; navigation, tables, forms, the page's layout and sample frames are not read | L | new |
 
-**Twenty checks are new and five extend checks that exist.** None of them is a list of element kinds: each reads every element
+**Twenty-one checks are new and five extend checks that exist.** None of them is a list of element kinds: each reads every element
 that has the property it judges.
 
 ## 8. Law amendments the system implies (proposed, not applied)
@@ -756,6 +760,7 @@ F-1 to F-5) are folded in where they belong.
 | 12 | 125 Sound Corroborates | sound plays at its true rate and in step with its picture within the ITU-R BT.1359 window | P, the four sound records (Z076-Z079) |
 | 13 | Article VII | **a correction enters the law as its cause, bounded on both sides, with a check on the painted result by default for every element** | the chains of section 1; 164 of 455 corrections name an earlier one |
 | 14 | new, Article II | **The Application Shell**: panes in the directional flow, each scrolling by itself and never one inside another; a view bar per view; a status line in the layout as the one channel for what a control does; dialogs only for creating and for irreversible acts (Refine, Zing, section 5) | L, the nested-scroll and status-line records (Z309, Z310, Z311), S (Z357) |
+| 15 | new, Article I | **One Flow**: what can be read one part after another is set in the page's vertical flow, never in columns side by side; a row of regions is for peers in a grid (amendment 3) and for samples compared; running text fills its measure, its last line held to a third of its widest (the Principal, 2026-11-12, in this desk's chat: *"we said it so many times : avoid colomnar layout for what can be set in a normal vertical flow"*, *"the snalsot shows also a bad use of space"*, *"check it everywhere and ntify it to the constituin"*) | L, the records that set code and panels in one column (two code snippets never side by side; one primary axis, no side-by-side panels), and S |
 
 ## 9. Decided by the Principal
 

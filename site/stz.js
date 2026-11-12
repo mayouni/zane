@@ -75,9 +75,10 @@
       el.style.maxWidth = 'none'; el.style.width = Math.floor(width) + 'px';
     });
   }
-  /* A cell of a card grid fills its width as its neighbours do, and its last line still holds at least a third of its widest: the text
-     is laid out to the full width, then narrowed only as far as the last line needs (ZANE-CARDGRID-01: a balanced paragraph ended its
-     lines a third short of its column beside a neighbour that filled its own; K11 BALANCE measures the last line). */
+  /* Running text fills its measure, and its last line still holds at least a third of its widest: the text is laid out to the full
+     width, then narrowed only as far as the last line needs (ZANE-CARDGRID-01: a balanced paragraph ended its lines a third short of its
+     column beside a neighbour that filled its own; the Principal, 2026-11-12: "a bad use of space"; K11 BALANCE measures the last line).
+     A sample frame keeps the text its sample shows. */
   const lines = p => {
     const r = document.createRange(); r.selectNodeContents(p);
     const by = new Map();
@@ -86,24 +87,31 @@
   };
   const shortLast = w => w.length > 1 && w[w.length - 1] < Math.max(...w) / 3;
   function mend() {
-    document.querySelectorAll('.messages > .card p, .grid > .card p').forEach(p => {
-      p.style.maxWidth = '';
+    document.querySelectorAll('main p, main li, main dd, main figcaption, main blockquote, header.page .sub, .grid > .card p, .messages > .card p, .pair p').forEach(p => {
+      if (p.closest(KEEP) || p.closest('pre, table, nav')) return;
+      p.style.maxWidth = ''; p.style.textWrap = '';
       if (!shortLast(lines(p))) return;
       /* the widest width that mends the last line, read from the full width down, so the text gives up as little width as it can */
       const full = Math.floor(p.getBoundingClientRect().width);
       let best = 0;
-      for (let w = full - 4; w >= full * 0.7 && !best; w -= 4) {
+      const step = Math.max(4, Math.round(full * 0.02));
+      for (let w = full - step; w >= full * 0.7 && !best; w -= step) {
         p.style.maxWidth = w + 'px';
         if (!shortLast(lines(p))) best = w;
       }
-      p.style.maxWidth = best ? best + 'px' : '';
+      /* a paragraph no narrowing can mend is balanced instead: its lines are evened, and none is left short */
+      if (best) p.style.maxWidth = best + 'px'; else { p.style.maxWidth = ''; p.style.textWrap = 'balance'; }
     });
   }
   let queued = false;
-  const again = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; widen(); mend(); }); } };
+  /* a timer, not an animation frame: a page held off screen (the UI audit's frames) runs no animation frame and would keep its first layout */
+  const again = () => { if (!queued) { queued = true; setTimeout(() => { queued = false; widen(); mend(); }, 30); } };
   widen(); mend(); window.addEventListener('load', () => { widen(); mend(); }); window.addEventListener('resize', again);
   /* a culture changes the font, and the width a line needs with it */
   new MutationObserver(again).observe(html, { attributes: true, attributeFilter: ['data-vibe'] });
+  /* a page that writes its text after it loads (a result, a run's output) is laid out again when it does */
+  const body = document.querySelector('main') || document.body;
+  if (body) new MutationObserver(again).observe(body, { childList: true, subtree: true, characterData: true });
   document.addEventListener('keydown', e => {
     if (e.key === 'F2') {
       e.preventDefault();

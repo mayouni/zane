@@ -350,7 +350,11 @@ h3 { font-size: var(--size-reading); font-weight: var(--weight-strong); margin: 
 p { max-width: var(--measure-max); margin: 0 0 1.15em; text-wrap: pretty; }
 ul, ol { max-width: var(--measure-max); }
 li, dd, figcaption, td, th, blockquote { text-wrap: pretty; }
-main p, main li, main dd, main figcaption, main td, main blockquote, .lead, header.page .sub { text-wrap: balance; }
+/* running text fills its measure: balancing a paragraph of a few lines ends every line short of the column and leaves its right side
+   empty (the Principal, 2026-11-12, on site/how.html: "the snalsot shows also a bad use of space"); site/stz.js then narrows a paragraph
+   only as far as its last line needs to hold a third of its widest (K11). A title and a table cell stay balanced. */
+main p, main li, main dd, main figcaption, main blockquote, .lead, header.page .sub { text-wrap: pretty; }
+main td { text-wrap: balance; }
 li { margin-bottom: .45em; }
 /* a title is balanced across its lines, never a word left alone on the last one */
 h1, h2, h3, .kicker { text-wrap: balance; }
@@ -410,14 +414,15 @@ li { margin: .3rem 0; }
 /* a call to action: one per page, the first thing the reader can do */
 .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.4rem; }
 .cta-row .note { color: var(--ink-2); max-width: 32rem; margin: 0; }
-/* the pair: an established practice on the left, Zane on the right, the same case, both with their outcome */
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
-.pair > div { min-width: 0; }
+/* the pair: an established practice, then Zane, the same case, both with their outcome, one after the other in the page's flow and
+   never in two columns: what can be read in one vertical flow is not set side by side (the Principal, 2026-11-12, on site/how.html: "we
+   said it so many times : avoid colomnar layout for what can be set in a normal vertical flow"; K26 ONE_FLOW) */
+.pair { display: block; margin: 1.4rem 0; }
+.pair > div + div { margin-top: var(--space-3); }
 .pair .lbl { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); margin: 0; }
 .pair .zane .lbl { color: var(--ink); }
-.pair p { margin: .5rem 0 0; max-width: none; }
+.pair p { margin: .5rem 0 0; }
 .pair .shot, .pair .term { margin: .7rem 0 0; }
-@media (max-width: 860px) { .pair { grid-template-columns: minmax(0, 1fr); } }
 /* the scene: one worked example that runs, with its caption */
 .scene { margin: 1.6rem 0; }
 .scene .shot, .scene .term { margin-bottom: 0; }
