@@ -159,9 +159,21 @@
     document.querySelectorAll('pre.term').forEach(p => { if (!p.closest(KEEP)) hang(p); });
   };
   code();
+  /* A dash never starts a line: the space before it binds it to the word before it (the Principal, 2026-11-12: "You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!").
+     The pages' source writes that space as a no-break space, and the shell refuses a breakable one; text a page writes after it loads is
+     bound here. Code, terminals and fields keep their text. */
+  const SIGN = /(^|\S)[ \t\r\n]+([\u2014\u2013])(?=\s)/g;
+  function bind(root) {
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement && n.parentElement.closest('pre, code, script, style, textarea') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    for (let n = w.nextNode(); n; n = w.nextNode()) {
+      const t = n.nodeValue;
+      if (/[\u2014\u2013]/.test(t)) { const u = t.replace(SIGN, '$1\u00a0$2'); if (u !== t) n.nodeValue = u; }
+    }
+  }
+  bind(document.body);
   let queued = false;
   /* a timer, not an animation frame: a page held off screen (the UI audit's frames) runs no animation frame and would keep its first layout */
-  const again = () => { if (!queued) { queued = true; setTimeout(() => { queued = false; code(); widen(); mend(); }, 30); } };
+  const again = () => { if (!queued) { queued = true; setTimeout(() => { queued = false; bind(document.body); code(); widen(); mend(); }, 30); } };
   widen(); mend(); window.addEventListener('load', () => { widen(); mend(); }); window.addEventListener('resize', again);
   /* a culture changes the font, and the width a line needs with it */
   new MutationObserver(again).observe(html, { attributes: true, attributeFilter: ['data-vibe'] });

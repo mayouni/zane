@@ -921,6 +921,44 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
     for (affirm_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "AFFIRM_ALLOWED: {s} \"{s}\" matches no line: the entry has outlived what it excused", .{ x.file, x.words }));
 }
 
+// ---- a dash never starts a line (the Principal, 2026-11-12): the same check as checkDashes in tools/site-shell.js ----
+fn checkDashes(a: Allocator, problems: *List) !void {
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+    const hidden = try re.compile(a, "<(script|style|code|pre|textarea)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const tag = try re.compile(a, "<[^>]*>", "g");
+    const block = try re.compile(a, "<\\/?(?:p|li|td|th|tr|footer|header|div|h[1-6]|blockquote|figcaption|figure|dd|dt|dl|br|ul|ol|table|thead|tbody|caption|section|article|main|nav|aside|body)\\b[^>]*>", "gi");
+    const inline_dash = try re.compile(a, "([^\\s\x01])[ \\t]+(—|–)(?=\\s|$)", "");
+    const first_dash = try re.compile(a, "^[ \\t]*(—|–)(?=\\s|$)", "");
+    for (files.items) |f| {
+        if (!std.mem.endsWith(u8, f, ".html") or !exists(f)) continue;
+        const raw = try core.wellFormed(a, try readFile(a, f));
+        const b = std.mem.indexOf(u8, raw, "<body") orelse continue;
+        var head: List = .empty;
+        for (raw[0..b]) |ch| if (ch == '\n') try head.append(a, "\n");
+        var body = try re.replaceFn(a, &comments, raw[b..], a, newlinesOnly);
+        body = try re.replaceFn(a, &hidden, body, a, newlinesOnly);
+        const text = try std.mem.concat(a, u8, &.{ try std.mem.join(a, "", head.items), body });
+        var it = std.mem.splitScalar(u8, text, '\n');
+        var i: usize = 0;
+        var before: u8 = 0x01;
+        while (it.next()) |line| : (i += 1) {
+            const flat = try re.replace(a, &tag, try re.replace(a, &block, line, "\x01"), "");
+            var w: ?[]const u8 = null;
+            if (re.exec(&inline_dash, flat, 0)) |m| {
+                w = m.get(flat, 2).?;
+            } else if (before != 0x01) {
+                if (re.exec(&first_dash, flat, 0)) |m| w = m.get(flat, 1).?;
+            }
+            if (w) |d| try problems.append(a, try fmt(a, "{s}:{d} lets a dash start a line (\"{s}\"): the space before a dash is a no-break space (&nbsp;), so the dash stays with the word before it", .{ f, i + 1, d }));
+            const last = std.mem.trimRight(u8, flat, " \t\r");
+            if (last.len > 0) before = last[last.len - 1];
+        }
+    }
+}
+
 // ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) -------------------------
 // The site's menu, written as a Zane declaration (site/menu.zane, NAV_GRAPHs with LABEL, TARGET and ENTRIES), compared with
 // what the registry renders and read by the verifier itself (core.verify): MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST,
@@ -1204,6 +1242,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     try checkNode(a, &problems);
     try checkReleases(a, &problems);
     try checkAffirm(a, &problems);
+    try checkDashes(a, &problems);
     try checkSheets(a, &problems);
     var notes: List = .empty;
     try checkOwed(a, &notes);

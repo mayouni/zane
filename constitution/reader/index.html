@@ -381,12 +381,12 @@ footer ul { padding-left: 1.2rem; }
 <footer>
   <h2>The rules of the law that the Reader itself obeys</h2>
   <ul>
-    <li><b>Calm Over Power</b> — nothing moves unless the person moves it, and the page makes no external
+    <li><b>Calm Over Power</b>&nbsp;— nothing moves unless the person moves it, and the page makes no external
         requests, fetches no fonts and runs no trackers. The page works offline once it is loaded.</li>
-    <li><b>Keyboard Sovereignty (Rule 80)</b> — everything on the page is reachable without a mouse.</li>
-    <li><b>Visible State (Rule 82)</b> — search matches, active modes and enforcement
+    <li><b>Keyboard Sovereignty (Rule 80)</b>&nbsp;— everything on the page is reachable without a mouse.</li>
+    <li><b>Visible State (Rule 82)</b>&nbsp;— search matches, active modes and enforcement
         status are always shown, and never implied.</li>
-    <li><b>Zero Displacement (Rule 38)</b> — filtering never shifts what a person is reading sideways.</li>
+    <li><b>Zero Displacement (Rule 38)</b>&nbsp;— filtering never shifts what a person is reading sideways.</li>
   </ul>
   <div class="bar">
   <p class="keys" aria-label="Keyboard shortcuts" style="margin:0">
@@ -424,6 +424,18 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 let META = null;
+/* A dash never starts a line: the space before it binds it to the word before it (the Principal, 2026-11-12: "You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!").
+   The pages' source writes that space as a no-break space, and the shell refuses a breakable one; text a page writes after it loads is
+   bound here. Code, terminals and fields keep their text. */
+const SIGN = /(^|\S)[ \t\r\n]+([\u2014\u2013])(?=\s)/g;
+function bind(root) {
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement && n.parentElement.closest('pre, code, script, style, textarea') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  for (let n = w.nextNode(); n; n = w.nextNode()) {
+    const t = n.nodeValue;
+    if (/[\u2014\u2013]/.test(t)) { const u = t.replace(SIGN, '$1\u00a0$2'); if (u !== t) n.nodeValue = u; }
+  }
+}
+
 
 /* the bars' height, so the toolbar, the set list and an anchor stand below the bars at every width (as site/stz.js does on every page) */
 const BARS = document.querySelector('.bars');
@@ -729,6 +741,7 @@ fetch('../rules.json', { cache: 'no-cache' })   /* revalidate: never show a stal
   .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
   .then(data => {
     render(data);
+    bind(document.body);
     document.querySelectorAll('section.set, h2.section').forEach(s => spy.observe(s));
   })
   .catch(err => {

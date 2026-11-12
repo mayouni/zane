@@ -22,7 +22,7 @@ after reading milestone 1 the Principal asked that it show rather than describe 
 4. **The design system**: seven archetypes, twenty-six components, 46 tokens, four shapes, what the generator may vary and what it may
    not, for sight, touch and hearing (section 6), each principle **shown live**, lawful beside offending, on
    [the samples page](design-system-samples.html).
-5. **Twenty-two checks** that read every rule on the rendered page (section 7).
+5. **Twenty-eight checks** that read every rule on the rendered page (section 7).
 6. **The law amendments** the system implies, proposed under Article VII with the corpus as evidence, not applied (section 8), and
    the four decisions the Principal ruled (section 9).
 
@@ -254,7 +254,12 @@ lines natively (CSS Text Level 4, `text-wrap: balance` and `pretty`), so the rul
 is at least a third of its widest line, and a heading carries no break placed by hand. **A line never holds the end of one
 sentence and the start of the next in a title**: each sentence of a title is balanced on its own. A row of controls that wraps
 comes out in rows of equal size.
-**Checks**: K11 BALANCE, K12 ROW_FULL.
+**No line starts with a sign.** A dash stays with the word before it, and so does a closing sign (; : ! ? » %): the space before it
+is a no-break space, in the source and in every text a page writes later; a dash that opens a block (a table cell's mark, the
+attribution of a quote) is in its place (the Principal, 2026-11-12, on a title of the Harobanda site: *"You can't cut on the -
+separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future
+sites!"*; and the French typography of the corpus, no sign alone at the start of a line).
+**Checks**: K11 BALANCE, K12 ROW_FULL, K28 LINE_START; and in the files, the shell refuses a breakable space before a dash.
 
 ### F · One form carrying two meanings (37)
 
@@ -737,8 +742,9 @@ runs at 375, 768, 1085, 1440 and 1900 px in Modern and in Retro.
 | K25 GRID_SHOWN | every grid or wrapping row whose children are peers (the same element and class, each with its own heading) | a cell with no line around it (Z404) | I | new |
 | K26 ONE_FLOW | every grid or flex row holding two or more regions of running text (a paragraph, a list or a code block, 120 characters or more) | the regions sit side by side and are not peers; navigation, tables, forms, the page's layout and sample frames are not read | L | new |
 | K27 CODE_HANG | every rendered line of a code or terminal block | a line that starts at the block's edge while it does not start a line of the source: a wrapped line gone back to the edge | L, B | new |
+| K28 LINE_START | every rendered line of running text, on any site | a line that starts with a dash or a closing sign (; : ! ? » %) that followed a word and a space | B | new |
 
-**Twenty-two checks are new and five extend checks that exist.** None of them is a list of element kinds: each reads every element
+**Twenty-three checks are new and five extend checks that exist.** None of them is a list of element kinds: each reads every element
 that has the property it judges.
 
 ## 8. Law amendments the system implies (proposed, not applied)
@@ -765,6 +771,7 @@ F-1 to F-5) are folded in where they belong.
 | 14 | new, Article II | **The Application Shell**: panes in the directional flow, each scrolling by itself and never one inside another; a view bar per view; a status line in the layout as the one channel for what a control does; dialogs only for creating and for irreversible acts (Refine, Zing, section 5) | L, the nested-scroll and status-line records (Z309, Z310, Z311), S (Z357) |
 | 15 | new, Article I | **One Flow**: what can be read one part after another is set in the page's vertical flow, never in columns side by side; a row of regions is for peers in a grid (amendment 3) and for samples compared; running text fills its measure, its last line held to a third of its widest (the Principal, 2026-11-12, in this desk's chat: *"we said it so many times : avoid colomnar layout for what can be set in a normal vertical flow"*, *"the snalsot shows also a bad use of space"*, *"check it everywhere and ntify it to the constituin"*) | L, the records that set code and panels in one column (two code snippets never side by side; one primary axis, no side-by-side panels), and S |
 | 16 | new, Article I | **Code Reads as Code**: code is coloured in four roles from the culture's tokens, a keyword, a string or listed value, a comment, a verdict, given by rule and never by hand; a code line too long for its block hangs under its own indentation and never wraps back to the block's edge (the Principal, 2026-11-12, in this desk's chat: *"theme of code should be more professionnal with keywords coloring so the code is read easily"*, *"adjust strings or long lines that does not fit beautifully in the layout"*, *"generalise this issue and fix in the constitution"*) | L, B, and section 9 (d) |
+| 17 | new, Article I | **No Line Starts with a Sign**: a dash and every closing sign stay with the word before them, bound by a no-break space in the source and in every text written later; a generator writes them so, the build refuses a breakable space before a dash, and the painted page is read for a line that starts with one (K28); for every site, current and future (the Principal, 2026-11-12, on the Harobanda site: *"You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!"*) | B, the line-cut records |
 
 ## 9. Decided by the Principal
 

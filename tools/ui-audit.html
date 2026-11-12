@@ -234,7 +234,7 @@ td.issue { color: #a33422; font-weight: 700; }
     but smaller than the reading size and is worth knowing about before it spreads.</p>
     <p class="caption" id="root-note"></p>
 
-    <div class="verdict idle" id="verdict">Ready — press <b>Run the audit</b>.</div>
+    <div class="verdict idle" id="verdict">Ready&nbsp;— press <b>Run the audit</b>.</div>
     <div id="results"></div>
 
     <div id="export" hidden>
@@ -268,7 +268,7 @@ td.issue { color: #a33422; font-weight: 700; }
 </footer>
 <!-- /shell:footer -->
 
-<script src="../site/stz.js?v=beb095a2"></script>
+<script src="../site/stz.js?v=2934cb9d"></script>
 <script>
 'use strict';
 /* ==========================================================================
@@ -717,7 +717,7 @@ const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the 
 const SYS_CHECKS = {
   K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
   K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
-  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN', K26: 'ONE_FLOW', K27: 'CODE_HANG'
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN', K26: 'ONE_FLOW', K27: 'CODE_HANG', K28: 'LINE_START'
 };
 /* K23 BAR_ALIGN: the menu and the band stand at the same place on every page (ZANE-READER-MENUPOS-01; the Principal, 2026-11-10: "the menue
    bar in this page must keep it's position as the other pages and not move to the left"). Each frame records where its brand and its band's
@@ -1063,6 +1063,33 @@ async function auditSystem(doc, win, label, width) {
       }
     }
     if (broken) add('K27', pre, pre.textContent.trim().slice(0, 40), broken + ' wrapped line(s) start at the block\'s edge: a code line too long for its block hangs under its own indentation [K27 CODE_HANG]');
+  }
+
+  /* K28 LINE_START: no rendered line starts with a dash or a closing sign (; : ! ? » %): each stays with the word before it (the Principal, 2026-11-12: "You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!";
+     and the French typography of the corpus: no sign alone at the start of a line). A sign that follows a space is read where it is
+     painted: when the word before it ends a line above it, the sign starts a line. Code, terminals and samples are not read. */
+  {
+    const SIGNS = /[—–;:!?»%]/;
+    const tw = doc.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+    const flagged = new Set();
+    for (let n = tw.nextNode(); n; n = tw.nextNode()) {
+      const el = n.parentElement;
+      if (!el || flagged.has(el) || el.closest('pre, code, script, style, textarea, .samples, figure.sample, .window, .pane, .vibe-pane, .offense, [data-offending]') || !el.getClientRects().length) continue;
+      const t = n.nodeValue;
+      for (let i = 1; i < t.length; i++) {
+        if (!SIGNS.test(t[i]) || !/\s/.test(t[i - 1])) continue;
+        let j = i - 1; while (j >= 0 && /\s/.test(t[j])) j--;
+        if (j < 0) continue;
+        const r1 = doc.createRange(); r1.setStart(n, j); r1.setEnd(n, j + 1);
+        const r2 = doc.createRange(); r2.setStart(n, i); r2.setEnd(n, i + 1);
+        const a1 = r1.getBoundingClientRect(), a2 = r2.getBoundingClientRect();
+        if (a1.width && a2.width && a2.top >= a1.bottom - 2) {
+          flagged.add(el);
+          add('K28', el, ownText(el) || t.trim(), 'a line starts with "' + t[i] + '": a dash or a closing sign stays with the word before it [K28 LINE_START]');
+          break;
+        }
+      }
+    }
   }
 
   /* K22 LAYOUT_STILL: nothing moved because something else appeared, grew or went */

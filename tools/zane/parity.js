@@ -218,6 +218,7 @@ const siteLines = [];
       ['shell', 'a landing page second in its band', () => sub1('site/menu.zane', 'ENTRIES [thinking, grid,', 'ENTRIES [grid, thinking,'), CHECK, 'fail', 'MENU_LANDING_NOT_FIRST'],
       ['shell', 'a landing page left out of its band', () => sub1('site/menu.zane', 'ENTRIES [thinking, grid,', 'ENTRIES [grid,'), CHECK, 'fail', 'no entry of approach leads to thinking'],
       ['shell', 'two siblings sharing a label', () => sub1('site/menu.zane', '(LABEL "Channels",', '(LABEL "Grid",'), CHECK, 'fail', 'MENU_LABEL_DUPLICATE'],
+      ['shell', 'a dash that can start a line', () => before('site/web.html', '</main>', '<p>One part of a sentence — and its other part.</p>\n'), CHECK, 'fail', 'lets a dash start a line'],
       ['shell', 'a page names the retired language', () => before('site/mobile.html', '</main>', '<p>The writer runs on Ring++.</p>\n'), CHECK, 'fail', 'names the retired language ("Ring++")'],
       ['shell', 'a page says what is not yet done', () => before('site/web.html', '</main>', '<p>The importer is not yet written.</p>\n'), CHECK, 'fail', 'says what the project lacks ("not yet")'],
       ['shell', 'a Limit paragraph', () => before('site/web.html', '</main>', '<p class="limit"><b>Limit:</b> it covers one site.</p>\n'), CHECK, 'fail', 'says what the project lacks ("Limit:")'],

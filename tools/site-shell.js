@@ -639,6 +639,38 @@ function checkAffirm(problems) {
   AFFIRM_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('AFFIRM_ALLOWED: ' + x.file + ' "' + x.words + '" matches no line: the entry has outlived what it excused'); });
 }
 
+/* ---- a dash never starts a line (the Principal, 2026-11-12: "You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!") ----------------
+   In the body of every page of the registry and of index.html, outside comments, scripts, styles, code, pre and textarea, a dash (an em
+   or an en dash between spaces) is bound to the word before it by a no-break space; a breakable space before it lets the browser start a
+   line with the dash. site/stz.js binds the text a page writes after it loads; the UI audit's K28 LINE_START reads the painted page. */
+/* a block's tags mark where a line may begin anyway (\u0001); an inline tag is nothing. A dash after a word and a breakable space, on the same
+   line of the source or first on the next one, can start a rendered line; a dash that opens a block (a table cell's mark, the attribution
+   of a quote) is in its place. */
+const DASH_BLOCK = /<\/?(?:p|li|td|th|tr|footer|header|div|h[1-6]|blockquote|figcaption|figure|dd|dt|dl|br|ul|ol|table|thead|tbody|caption|section|article|main|nav|aside|body)\b[^>]*>/gi;
+const DASH_INLINE = /([^\s\u0001])[ \t]+(—|–)(?=\s|$)/;
+const DASH_FIRST = /^[ \t]*(—|–)(?=\s|$)/;
+function checkDashes(problems) {
+  const files = new Set(['index.html', ...PAGES.map(p => p.file)]);
+  for (const f of files) {
+    if (!f.endsWith('.html')) continue;
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const raw = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+    const b = raw.indexOf('<body');
+    if (b < 0) continue;
+    const text = blank(raw.slice(0, b)) + raw.slice(b).replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style|code|pre|textarea)\b[\s\S]*?<\/\1>/g, blank);
+    let before = '\u0001';
+    text.split('\n').forEach((line, i) => {
+      const flat = line.replace(DASH_BLOCK, '\u0001').replace(/<[^>]*>/g, '');
+      const inl = DASH_INLINE.exec(flat), first = DASH_FIRST.exec(flat);
+      const w = inl ? inl[2] : first && before !== '\u0001' ? first[1] : null;
+      if (w) problems.push(f + ':' + (i + 1) + ' lets a dash start a line ("' + w + '"): the space before a dash is a no-break space (&nbsp;), so the dash stays with the word before it');
+      const last = flat.replace(/\s+$/, '');
+      if (last) before = last[last.length - 1];
+    });
+  }
+}
+
 /* ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) ------------------------------------------
    "it's not logical to get the main title "Approach" then find it also as an option of it's cibling menus!!! you must add this as an
    issue that is statically checked in Zane". The main menu names each SECTION and links to its head page; the band under it opens on
@@ -773,6 +805,7 @@ function main(argv) {
   checkNode(problems);
   checkReleases(problems);
   checkAffirm(problems);
+  checkDashes(problems);
   checkSheets(problems);
   checkOwed(notes);
   let changed = 0;
