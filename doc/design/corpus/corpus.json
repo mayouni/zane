@@ -7,7 +7,7 @@
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
   "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
-  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges; a wide block breaking the left edge; the page head moved off the menu's container; a Why page that held the case; two lines beside the outline; the filigree missing from a page opened from the disk; the brand and the current entry alike, all 2026-11-11; columns where one flow reads, a balanced paragraph short of its measure, code coloured by hand and wrapped back to the edge, all 2026-11-12)",
+  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges; a wide block breaking the left edge; the page head moved off the menu's container; a Why page that held the case; two lines beside the outline; the filigree missing from a page opened from the disk; the brand and the current entry alike, all 2026-11-11; columns where one flow reads, a balanced paragraph short of its measure, code coloured by hand and wrapped back to the edge, a title cut before its dash, all 2026-11-12)",
   "F": "the repositories themselves (M1b, 2026-11-09): zin at cc98126, refine (no git; files), zing at e2573a9 and zing-studio at 95f36de, the product repositories (organizium and its variants, the restaurant app, orgdesk, zindara, zin-one, zin-website, zin-prototypes, ringface) and the estate sites (stzsite, harobanda, ayouni, lookout, ringserv, ringflex, microring, stz-observer and others); each record cites its file:line or commit"
  },
  "causes": {
@@ -7325,6 +7325,22 @@
   },
   {
    "n": "Z432",
+   "sweep": "E16",
+   "also": [],
+   "cause": "B",
+   "date": "2026-11-12",
+   "project": "stzzui",
+   "source": "the Principal in the stzzui desk's chat, with a screenshot of a title of the Harobanda site",
+   "words": "\"It happens in Harobanda site but Zane is concerned: the same issue of text positioning on several lines! You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!\"",
+   "wrong": "a title broken before its dash, \"governed applications / — and the floor a\", the dash opening a line; 33 such dashes on 11 pages of this site could do the same",
+   "required": "a dash and every closing sign stay with the word before them: a no-break space in the source and in text written later, refused by the build, read on the painted page by K28 LINE_START, for every site",
+   "sense": "see (line)",
+   "ruling": "ZANE-LINESTART-01",
+   "verbatim": true,
+   "repeat": true
+  },
+  {
+   "n": "Z433",
    "sweep": "F4-55",
    "also": [],
    "cause": "X",
@@ -7340,7 +7356,7 @@
    "repeat": false
   },
   {
-   "n": "Z433",
+   "n": "Z434",
    "sweep": "F3-07",
    "also": [],
    "cause": "X",
@@ -7356,7 +7372,7 @@
    "repeat": false
   },
   {
-   "n": "Z434",
+   "n": "Z435",
    "sweep": "F3-08",
    "also": [],
    "cause": "X",
@@ -7372,7 +7388,7 @@
    "repeat": false
   },
   {
-   "n": "Z435",
+   "n": "Z436",
    "sweep": "C18",
    "also": [
     "F4-09"
@@ -7390,7 +7406,7 @@
    "repeat": true
   },
   {
-   "n": "Z436",
+   "n": "Z437",
    "sweep": "F4-14",
    "also": [],
    "cause": "X",
@@ -7406,7 +7422,7 @@
    "repeat": false
   },
   {
-   "n": "Z437",
+   "n": "Z438",
    "sweep": "F4-17",
    "also": [],
    "cause": "X",
@@ -7422,7 +7438,7 @@
    "repeat": false
   },
   {
-   "n": "Z438",
+   "n": "Z439",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -7438,7 +7454,7 @@
    "repeat": false
   },
   {
-   "n": "Z439",
+   "n": "Z440",
    "sweep": "F3-20",
    "also": [],
    "cause": "X",
@@ -7454,7 +7470,7 @@
    "repeat": false
   },
   {
-   "n": "Z440",
+   "n": "Z441",
    "sweep": "F3-27",
    "also": [],
    "cause": "X",
@@ -7470,7 +7486,7 @@
    "repeat": true
   },
   {
-   "n": "Z441",
+   "n": "Z442",
    "sweep": "F3-35",
    "also": [],
    "cause": "X",
@@ -7486,7 +7502,7 @@
    "repeat": false
   },
   {
-   "n": "Z442",
+   "n": "Z443",
    "sweep": "F3-36",
    "also": [],
    "cause": "X",
@@ -7502,7 +7518,7 @@
    "repeat": false
   },
   {
-   "n": "Z443",
+   "n": "Z444",
    "sweep": "F5-92",
    "also": [],
    "cause": "X",
@@ -7518,7 +7534,7 @@
    "repeat": false
   },
   {
-   "n": "Z444",
+   "n": "Z445",
    "sweep": "F5-96",
    "also": [],
    "cause": "X",
@@ -7534,7 +7550,7 @@
    "repeat": false
   },
   {
-   "n": "Z445",
+   "n": "Z446",
    "sweep": "F5-47",
    "also": [],
    "cause": "X",
@@ -7550,7 +7566,7 @@
    "repeat": false
   },
   {
-   "n": "Z446",
+   "n": "Z447",
    "sweep": "A56",
    "also": [
     "F5-74"
@@ -7568,7 +7584,7 @@
    "repeat": ""
   },
   {
-   "n": "Z447",
+   "n": "Z448",
    "sweep": "C75",
    "also": [
     "F5-114"
@@ -7586,7 +7602,7 @@
    "repeat": false
   },
   {
-   "n": "Z448",
+   "n": "Z449",
    "sweep": "F5-76",
    "also": [],
    "cause": "X",
@@ -7602,7 +7618,7 @@
    "repeat": false
   },
   {
-   "n": "Z449",
+   "n": "Z450",
    "sweep": "B36",
    "also": [
     "F5-32"
@@ -7620,7 +7636,7 @@
    "repeat": false
   },
   {
-   "n": "Z450",
+   "n": "Z451",
    "sweep": "F4-26",
    "also": [],
    "cause": "X",
@@ -7636,7 +7652,7 @@
    "repeat": false
   },
   {
-   "n": "Z451",
+   "n": "Z452",
    "sweep": "F4-29",
    "also": [],
    "cause": "X",
@@ -7652,7 +7668,7 @@
    "repeat": false
   },
   {
-   "n": "Z452",
+   "n": "Z453",
    "sweep": "F5-110",
    "also": [],
    "cause": "X",
@@ -7668,7 +7684,7 @@
    "repeat": true
   },
   {
-   "n": "Z453",
+   "n": "Z454",
    "sweep": "D34",
    "also": [
     "A87"
@@ -7686,7 +7702,7 @@
    "repeat": false
   },
   {
-   "n": "Z454",
+   "n": "Z455",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -7702,7 +7718,7 @@
    "repeat": true
   },
   {
-   "n": "Z455",
+   "n": "Z456",
    "sweep": "D54",
    "also": [
     "A96"
@@ -7720,7 +7736,7 @@
    "repeat": false
   },
   {
-   "n": "Z456",
+   "n": "Z457",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -7736,7 +7752,7 @@
    "repeat": false
   },
   {
-   "n": "Z457",
+   "n": "Z458",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -7752,7 +7768,7 @@
    "repeat": true
   },
   {
-   "n": "Z458",
+   "n": "Z459",
    "sweep": "D93",
    "also": [
     "C112"
@@ -7770,7 +7786,7 @@
    "repeat": true
   },
   {
-   "n": "Z459",
+   "n": "Z460",
    "sweep": "F5-83",
    "also": [],
    "cause": "X",
@@ -7786,7 +7802,7 @@
    "repeat": false
   },
   {
-   "n": "Z460",
+   "n": "Z461",
    "sweep": "C132",
    "also": [
     "B56",
@@ -7806,7 +7822,7 @@
    "repeat": true
   },
   {
-   "n": "Z461",
+   "n": "Z462",
    "sweep": "C16",
    "also": [
     "F4-12"
@@ -7824,7 +7840,7 @@
    "repeat": false
   },
   {
-   "n": "Z462",
+   "n": "Z463",
    "sweep": "C134",
    "also": [
     "A126",
