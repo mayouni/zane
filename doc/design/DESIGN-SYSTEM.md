@@ -624,7 +624,9 @@ Retro is keyboard-first with instant feedback, Modern pointer-first; every input
 
 The two stylesheets declare **20 distinct font sizes** today (`site/stz.css` and `site/gotchas.css`) and the tokens allow six. Code
 highlighting has four roles drawn from these tokens and adds no hue (decided, section 9 (d)): a comment in `--ink-2`, a keyword in
-`--link`, a string in `--meta`, a verdict in `--success` or `--danger`.
+`--link`, a string or a listed value in `--info` (it was `--meta`, too near the text's own grey to be told apart; the Principal,
+2026-11-12: *"theme of code should be more professionnal with keywords coloring so the code is read easily"*), a verdict in
+`--success` or `--danger`. The roles are given by rule, from the text, to every block, never by hand.
 
 ### 6.3 Four shapes, four meanings
 
@@ -652,7 +654,7 @@ A container (a section, a row, a sample frame) is none of the four and never cha
 | **points** | a list that explains | a lead line, then items, each a strong label and one sentence | W, I |
 | **table** | records and comparisons | drawn as a table, never as running text: a frame on `--surface`, the header row on `--tint` with a firmer rule in `--edge` under it, a hairline between rows (Z204); the room its content needs to the right of the text's column, into the page's margin, up to the window less the gutter, wrapping only past that, its left edge the text's (Z365, Z366); a header row; the thing, then its state, then the action ("Nothing" when none); never scrolls; the action column goes last; numbers in ink, right-aligned, in tabular figures; a click anywhere on a row opens the item; the selected row marked by ink and an edge, never a tint | I, L, N |
 | **sample frame** | a live UI sample | a frame drawn as a browser or an application window, holding real HTML; lawful and offending side by side when they compare; a caption that cites the rule number and states the verdict with a state tag | W, M, P |
-| **code block**, **terminal block** | code and runs | `--surface`, sized to the content, lines written to 72 characters; a line longer than the column takes the room free to its right, as a table does, its left edge the text's (Z365, Z366), and wraps only past that, never scrolling | L, S |
+| **code block**, **terminal block** | code and runs | `--surface`, sized to the content, lines written to 72 characters; every keyword, string, listed value and comment in its role, read from the text by rule; each source line set apart, the part of a line too long for its block hanging under that line's own indentation and two columns further, never back at the block's edge, the line's spaces kept so copied code is the code (K27); a line longer than the column takes the room free to its right, as a table does, its left edge the text's (Z365, Z366), and wraps only past that, never scrolling | L, S |
 | **figure** | a drawing or a chart | scales to the column; labels at `--size-small` or more; named by `<desc>`; a chart has units on every axis and at most seven colour categories, every mark bound to data; a diagram keeps a closed set of shapes and arrows, labels every arrow that crosses a phase, uses red only for a breach and marks a selection by an outline | T, L, P |
 | **button**, **link**, **tag**, **field** | the four shapes of section 6.3 | as there; a field is as wide as what it holds, in three widths, every input of one height, and an active filter shows its value | F, S |
 | **notice** | the result of an act | a line in the page's flow, in a semantic colour, in space reserved for it, appearing within 100 ms; a refusal, an error or an empty state says what happened, why, what to do next and where to learn more, and a refusal shows its source's message, line and caret; an undoable act offers its undo for a visible grace period | L |
@@ -734,8 +736,9 @@ runs at 375, 768, 1085, 1440 and 1900 px in Modern and in Retro.
 | K24 WIDE_ROOM | every table and code block that spans the text column | it wraps its content while more than 24 px are free to its right: the window less the gutter, less the outline where the outline stands beside it; the left edge is never room (Z365, Z366) | S | new |
 | K25 GRID_SHOWN | every grid or wrapping row whose children are peers (the same element and class, each with its own heading) | a cell with no line around it (Z404) | I | new |
 | K26 ONE_FLOW | every grid or flex row holding two or more regions of running text (a paragraph, a list or a code block, 120 characters or more) | the regions sit side by side and are not peers; navigation, tables, forms, the page's layout and sample frames are not read | L | new |
+| K27 CODE_HANG | every rendered line of a code or terminal block | a line that starts at the block's edge while it does not start a line of the source: a wrapped line gone back to the edge | L, B | new |
 
-**Twenty-one checks are new and five extend checks that exist.** None of them is a list of element kinds: each reads every element
+**Twenty-two checks are new and five extend checks that exist.** None of them is a list of element kinds: each reads every element
 that has the property it judges.
 
 ## 8. Law amendments the system implies (proposed, not applied)
@@ -761,6 +764,7 @@ F-1 to F-5) are folded in where they belong.
 | 13 | Article VII | **a correction enters the law as its cause, bounded on both sides, with a check on the painted result by default for every element** | the chains of section 1; 164 of 455 corrections name an earlier one |
 | 14 | new, Article II | **The Application Shell**: panes in the directional flow, each scrolling by itself and never one inside another; a view bar per view; a status line in the layout as the one channel for what a control does; dialogs only for creating and for irreversible acts (Refine, Zing, section 5) | L, the nested-scroll and status-line records (Z309, Z310, Z311), S (Z357) |
 | 15 | new, Article I | **One Flow**: what can be read one part after another is set in the page's vertical flow, never in columns side by side; a row of regions is for peers in a grid (amendment 3) and for samples compared; running text fills its measure, its last line held to a third of its widest (the Principal, 2026-11-12, in this desk's chat: *"we said it so many times : avoid colomnar layout for what can be set in a normal vertical flow"*, *"the snalsot shows also a bad use of space"*, *"check it everywhere and ntify it to the constituin"*) | L, the records that set code and panels in one column (two code snippets never side by side; one primary axis, no side-by-side panels), and S |
+| 16 | new, Article I | **Code Reads as Code**: code is coloured in four roles from the culture's tokens, a keyword, a string or listed value, a comment, a verdict, given by rule and never by hand; a code line too long for its block hangs under its own indentation and never wraps back to the block's edge (the Principal, 2026-11-12, in this desk's chat: *"theme of code should be more professionnal with keywords coloring so the code is read easily"*, *"adjust strings or long lines that does not fit beautifully in the layout"*, *"generalise this issue and fix in the constitution"*) | L, B, and section 9 (d) |
 
 ## 9. Decided by the Principal
 

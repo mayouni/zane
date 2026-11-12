@@ -6,7 +6,7 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=77fbca4e">
+<link rel="stylesheet" href="../site/stz.css?v=88e19b72">
 <style>
 /* the report grows to its content: the browser's scroll is the only one on the page (the author, 2026-11-09) */
 textarea {
@@ -257,7 +257,7 @@ td.issue { color: #a33422; font-weight: 700; }
 </footer>
 <!-- /shell:footer -->
 
-<script src="../site/stz.js?v=0f47f8a4"></script>
+<script src="../site/stz.js?v=beb095a2"></script>
 <script>
 'use strict';
 /* ==========================================================================
@@ -706,7 +706,7 @@ const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the 
 const SYS_CHECKS = {
   K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
   K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
-  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN', K26: 'ONE_FLOW'
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN', K26: 'ONE_FLOW', K27: 'CODE_HANG'
 };
 /* K23 BAR_ALIGN: the menu and the band stand at the same place on every page (ZANE-READER-MENUPOS-01; the Principal, 2026-11-10: "the menue
    bar in this page must keep it's position as the other pages and not move to the left"). Each frame records where its brand and its band's
@@ -1020,6 +1020,38 @@ async function auditSystem(doc, win, label, width) {
     const r = kids.map(k => k.getBoundingClientRect());
     const side = r.some((x, i) => r.some((y, j) => j > i && Math.abs(x.left - y.left) > 8 && x.top < y.bottom && y.top < x.bottom));
     if (side) add('K26', el, ownText(kids[0]) || kids[0].textContent.trim(), kids.length + ' regions of running text set side by side: what can be read in one vertical flow is not set in columns [K26 ONE_FLOW]');
+  }
+
+  /* K27 CODE_HANG: a code line too long for its block wraps under its own indentation and two columns further, never back at the
+     block's left edge, where it would read as a line of its own (the Principal, 2026-11-12, on site/haro.html: "adjust strings or long
+     lines that does not fit beautifully in the layout"). Each rendered line of a code block is read: one that starts at the block's
+     edge while it does not start a line of the source fails. */
+  for (const pre of all.filter(e => e.matches('pre.shot, pre.excerpt, pre.term') && !e.closest('.samples, figure.sample, .window, .pane, .vibe-pane'))) {
+    const s = win.getComputedStyle(pre), left = pre.getBoundingClientRect().left + parseFloat(s.paddingLeft) + parseFloat(s.borderLeftWidth);
+    const starts = new Set();
+    const walker = doc.createTreeWalker(pre, NodeFilter.SHOW_TEXT);
+    let atStart = true, broken = 0, block = null;
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      /* a source line is a line of the text, or a block of its own (.ln) when the page sets each line apart */
+      const ln = n.parentElement && n.parentElement.closest('.ln');
+      if (ln !== block) { block = ln; if (ln) atStart = true; }
+      const text = n.textContent;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        if (ch === '\n') { atStart = true; continue; }
+        if (ch === ' ' || ch === '\t') continue;
+        const r = doc.createRange(); r.setStart(n, i); r.setEnd(n, i + 1);
+        const b = r.getBoundingClientRect();
+        if (!b.width) continue;
+        const top = Math.round(b.top);
+        if (!starts.has(top)) {
+          starts.add(top);
+          if (!atStart && Math.abs(b.left - left) < 2) broken++;
+        }
+        atStart = false;
+      }
+    }
+    if (broken) add('K27', pre, pre.textContent.trim().slice(0, 40), broken + ' wrapped line(s) start at the block\'s edge: a code line too long for its block hangs under its own indentation [K27 CODE_HANG]');
   }
 
   /* K22 LAYOUT_STILL: nothing moved because something else appeared, grew or went */

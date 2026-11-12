@@ -103,9 +103,65 @@
       if (best) p.style.maxWidth = best + 'px'; else { p.style.maxWidth = ''; p.style.textWrap = 'balance'; }
     });
   }
+  /* Code reads as code: a declaration's keywords, its strings and listed values, and its comments, each in its role (site/stz.css),
+     read from the text by rule, so no block is coloured by hand and none is left grey; and each source line is set apart, so the part
+     of a line too long for its block hangs under its own indentation (K27 CODE_HANG). A terminal keeps the marks it was written with. */
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const tokens = /("(?:[^"\\]|\\.)*")|(\/\/.*$|(?:^|(?<=\s))#.*$)|(\[)|(\])|\b([A-Z][A-Z0-9_]+)\b/g;
+  function paint(pre) {
+    if (pre.querySelector(':scope > .ln')) return;
+    const text = pre.textContent.replace(/\n$/, '');
+    const declaration = /\bDEFINE\b/.test(text);
+    let depth = 0;
+    pre.innerHTML = text.split('\n').map(line => {
+      let out = '', last = 0, m;
+      tokens.lastIndex = 0;
+      while ((m = tokens.exec(line))) {
+        out += esc(line.slice(last, m.index)); last = tokens.lastIndex;
+        if (m[1]) out += '<span class="s">' + esc(m[1]) + '</span>';
+        else if (m[2]) out += '<span class="c">' + esc(m[2]) + '</span>';
+        else if (m[3]) { depth++; out += '['; }
+        else if (m[4]) { depth = Math.max(0, depth - 1); out += ']'; }
+        else out += declaration ? '<span class="' + (depth ? 's' : 'k') + '">' + m[5] + '</span>' : m[5];
+      }
+      out += esc(line.slice(last));
+      return '<span class="ln" style="--ind:' + line.match(/^ */)[0].length + '">' + out + '</span>';
+    }).join('');
+  }
+  function hang(pre) {
+    if (pre.querySelector(':scope > .ln') || !pre.textContent.includes('\n')) return;
+    const lines = [document.createElement('span')];
+    const put = (parents, text) => {
+      let host = lines[lines.length - 1];
+      for (const p of parents) {
+        let last = host.lastChild;
+        if (!(last && last.__from === p)) { last = p.cloneNode(false); last.__from = p; host.appendChild(last); }
+        host = last;
+      }
+      host.appendChild(document.createTextNode(text));
+    };
+    const walk = (node, parents) => {
+      for (const ch of [...node.childNodes]) {
+        if (ch.nodeType === 3) ch.textContent.split('\n').forEach((part, k) => {
+          if (k) lines.push(document.createElement('span'));
+          if (part) put(parents, part);
+        });
+        else if (ch.nodeType === 1) walk(ch, [...parents, ch]);
+      }
+    };
+    walk(pre, []);
+    if (lines.length > 1 && !lines[lines.length - 1].textContent) lines.pop();
+    lines.forEach(ln => { ln.className = 'ln'; ln.style.setProperty('--ind', ln.textContent.match(/^ */)[0].length); });
+    pre.replaceChildren(...lines);
+  }
+  const code = () => {
+    document.querySelectorAll('pre.shot, pre.excerpt').forEach(p => { if (!p.closest(KEEP)) paint(p); });
+    document.querySelectorAll('pre.term').forEach(p => { if (!p.closest(KEEP)) hang(p); });
+  };
+  code();
   let queued = false;
   /* a timer, not an animation frame: a page held off screen (the UI audit's frames) runs no animation frame and would keep its first layout */
-  const again = () => { if (!queued) { queued = true; setTimeout(() => { queued = false; widen(); mend(); }, 30); } };
+  const again = () => { if (!queued) { queued = true; setTimeout(() => { queued = false; code(); widen(); mend(); }, 30); } };
   widen(); mend(); window.addEventListener('load', () => { widen(); mend(); }); window.addEventListener('resize', again);
   /* a culture changes the font, and the width a line needs with it */
   new MutationObserver(again).observe(html, { attributes: true, attributeFilter: ['data-vibe'] });

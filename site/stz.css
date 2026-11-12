@@ -47,7 +47,7 @@
   --btn-bg: var(--action); --btn-fg: var(--on-action); --tint: color-mix(in srgb, var(--ink) 5%, var(--paper));
   --code-bg: var(--surface); --code-ink: var(--ink); --code-line: var(--line); --code-rule: var(--edge);
   /* code is highlighted in four roles drawn from the tokens (section 9 (d)): a comment, a keyword, a string, a verdict */
-  --c-comment: var(--ink-2); --c-key: var(--link); --c-str: var(--meta); --c-name: var(--ink); --c-dim: var(--ink-2);
+  --c-comment: var(--ink-2); --c-key: var(--link); --c-str: var(--info); --c-name: var(--ink); --c-dim: var(--ink-2);
   --c-bad: var(--danger); --c-good: var(--success); --c-prompt: var(--ink-2);
   --black: var(--weight-strong);
 }
@@ -366,10 +366,18 @@ li { margin: .3rem 0; }
   border-radius: var(--radius); padding: .9rem 1.2rem; font: var(--size-small)/1.55 var(--mono); margin: 1.2rem 0;
   width: fit-content; max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; box-shadow: none;
 }
-.shot .c, .excerpt .c { color: var(--ink-2); font-style: italic; }
-.shot .k, .excerpt .k { color: var(--link); }
-.shot .s, .excerpt .s { color: var(--meta); }
-.shot .n, .excerpt .n { color: var(--ink); }
+/* code reads as code (section 9 (d), four roles; the Principal, 2026-11-12: "theme of code should be more professionnal with keywords
+   coloring so the code is read easily"): site/stz.js gives every keyword, string, value and comment its role, by rule and never by hand,
+   in the culture's colours: a keyword in --c-key, a string or a listed value in --c-str, a comment in --c-comment, a name in ink */
+.shot .c, .excerpt .c { color: var(--c-comment); font-style: italic; }
+.shot .k, .excerpt .k { color: var(--c-key); }
+.shot .s, .excerpt .s { color: var(--c-str); }
+.shot .n, .excerpt .n { color: var(--c-name); }
+/* each source line stands apart, and the part of a line too long for its block hangs under that line's own indentation and two columns
+   further, never back at the block's edge, where it would read as a line of its own; the line keeps its spaces, so code copied from the
+   page is the code (the Principal, 2026-11-12: "adjust strings or long lines that does not fit beautifully in the layout"; K27 CODE_HANG) */
+.shot .ln, .excerpt .ln, .term .ln { display: block; min-height: 1lh;
+  padding-left: calc((var(--ind, 0) + 2) * 1ch); text-indent: calc((var(--ind, 0) + 2) * -1ch); }
 .term .p { color: var(--ink-2); }
 .term .cmd { color: var(--ink); }
 .term .dim { color: var(--ink-2); }
