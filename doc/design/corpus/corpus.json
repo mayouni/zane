@@ -7,7 +7,7 @@
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
   "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
-  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges; a wide block breaking the left edge; the page head moved off the menu's container; a Why page that held the case; two lines beside the outline; the filigree missing from a page opened from the disk; the brand and the current entry alike, all 2026-11-11)",
+  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges; a wide block breaking the left edge; the page head moved off the menu's container; a Why page that held the case; two lines beside the outline; the filigree missing from a page opened from the disk; the brand and the current entry alike, all 2026-11-11; columns where one flow reads, a balanced paragraph short of its measure, code coloured by hand and wrapped back to the edge, all 2026-11-12)",
   "F": "the repositories themselves (M1b, 2026-11-09): zin at cc98126, refine (no git; files), zing at e2573a9 and zing-studio at 95f36de, the product repositories (organizium and its variants, the restaurant app, orgdesk, zindara, zin-one, zin-website, zin-prototypes, ringface) and the estate sites (stzsite, harobanda, ayouni, lookout, ringserv, ringflex, microring, stz-observer and others); each record cites its file:line or commit"
  },
  "causes": {
@@ -5360,6 +5360,22 @@
   },
   {
    "n": "Z315",
+   "sweep": "E13",
+   "also": [],
+   "cause": "L",
+   "date": "2026-11-12",
+   "project": "stzzui",
+   "source": "the Principal in the stzzui desk's chat, with a screenshot of site/how.html, a guideline and the law set in two columns",
+   "words": "\"we said it so many times : avoid colomnar layout for what can be set in a normal vertical flow\"",
+   "wrong": "a published guideline and the same idea as a law set side by side in two columns, prose beside code, both squeezed, where they read one after the other",
+   "required": "what can be read one part after another is set in the page's vertical flow; a row of regions only for peers in a grid and for samples compared; K26 ONE_FLOW",
+   "sense": "see (layout)",
+   "ruling": "ZANE-ONEFLOW-01",
+   "verbatim": true,
+   "repeat": true
+  },
+  {
+   "n": "Z316",
    "sweep": "F1-03",
    "also": [],
    "cause": "E",
@@ -5375,7 +5391,7 @@
    "repeat": false
   },
   {
-   "n": "Z316",
+   "n": "Z317",
    "sweep": "C11",
    "also": [
     "F1-09",
@@ -5394,7 +5410,7 @@
    "repeat": false
   },
   {
-   "n": "Z317",
+   "n": "Z318",
    "sweep": "C12",
    "also": [
     "F1-10"
@@ -5412,7 +5428,7 @@
    "repeat": true
   },
   {
-   "n": "Z318",
+   "n": "Z319",
    "sweep": "F1-05",
    "also": [],
    "cause": "E",
@@ -5428,7 +5444,7 @@
    "repeat": false
   },
   {
-   "n": "Z319",
+   "n": "Z320",
    "sweep": "F4-39",
    "also": [],
    "cause": "E",
@@ -5444,7 +5460,7 @@
    "repeat": true
   },
   {
-   "n": "Z320",
+   "n": "Z321",
    "sweep": "C15",
    "also": [],
    "cause": "E",
@@ -5460,7 +5476,7 @@
    "repeat": false
   },
   {
-   "n": "Z321",
+   "n": "Z322",
    "sweep": "C23",
    "also": [
     "F4-10"
@@ -5478,7 +5494,7 @@
    "repeat": false
   },
   {
-   "n": "Z322",
+   "n": "Z323",
    "sweep": "F4-20",
    "also": [],
    "cause": "E",
@@ -5494,7 +5510,7 @@
    "repeat": false
   },
   {
-   "n": "Z323",
+   "n": "Z324",
    "sweep": "D07",
    "also": [
     "F3-29"
@@ -5512,7 +5528,7 @@
    "repeat": false
   },
   {
-   "n": "Z324",
+   "n": "Z325",
    "sweep": "F5-108",
    "also": [],
    "cause": "E",
@@ -5528,7 +5544,7 @@
    "repeat": false
   },
   {
-   "n": "Z325",
+   "n": "Z326",
    "sweep": "F4-67",
    "also": [],
    "cause": "E",
@@ -5544,7 +5560,7 @@
    "repeat": false
   },
   {
-   "n": "Z326",
+   "n": "Z327",
    "sweep": "A07",
    "also": [],
    "cause": "E",
@@ -5560,7 +5576,7 @@
    "repeat": ""
   },
   {
-   "n": "Z327",
+   "n": "Z328",
    "sweep": "F5-95",
    "also": [],
    "cause": "E",
@@ -5576,7 +5592,7 @@
    "repeat": false
   },
   {
-   "n": "Z328",
+   "n": "Z329",
    "sweep": "C37",
    "also": [],
    "cause": "E",
@@ -5592,7 +5608,7 @@
    "repeat": true
   },
   {
-   "n": "Z329",
+   "n": "Z330",
    "sweep": "C41",
    "also": [],
    "cause": "E",
@@ -5608,7 +5624,7 @@
    "repeat": false
   },
   {
-   "n": "Z330",
+   "n": "Z331",
    "sweep": "B26",
    "also": [
     "F5-03"
@@ -5626,7 +5642,7 @@
    "repeat": false
   },
   {
-   "n": "Z331",
+   "n": "Z332",
    "sweep": "C54",
    "also": [],
    "cause": "E",
@@ -5642,7 +5658,7 @@
    "repeat": true
   },
   {
-   "n": "Z332",
+   "n": "Z333",
    "sweep": "A64",
    "also": [
     "B37",
@@ -5662,7 +5678,7 @@
    "repeat": ""
   },
   {
-   "n": "Z333",
+   "n": "Z334",
    "sweep": "F4-30",
    "also": [],
    "cause": "E",
@@ -5678,7 +5694,7 @@
    "repeat": false
   },
   {
-   "n": "Z334",
+   "n": "Z335",
    "sweep": "C92",
    "also": [],
    "cause": "E",
@@ -5694,7 +5710,7 @@
    "repeat": true
   },
   {
-   "n": "Z335",
+   "n": "Z336",
    "sweep": "C96",
    "also": [],
    "cause": "E",
@@ -5710,7 +5726,7 @@
    "repeat": true
   },
   {
-   "n": "Z336",
+   "n": "Z337",
    "sweep": "C100",
    "also": [],
    "cause": "E",
@@ -5726,7 +5742,7 @@
    "repeat": false
   },
   {
-   "n": "Z337",
+   "n": "Z338",
    "sweep": "D28",
    "also": [],
    "cause": "E",
@@ -5742,7 +5758,7 @@
    "repeat": false
   },
   {
-   "n": "Z338",
+   "n": "Z339",
    "sweep": "D76",
    "also": [],
    "cause": "E",
@@ -5758,7 +5774,7 @@
    "repeat": false
   },
   {
-   "n": "Z339",
+   "n": "Z340",
    "sweep": "D79",
    "also": [],
    "cause": "E",
@@ -5774,7 +5790,7 @@
    "repeat": false
   },
   {
-   "n": "Z340",
+   "n": "Z341",
    "sweep": "D80",
    "also": [],
    "cause": "E",
@@ -5790,7 +5806,7 @@
    "repeat": false
   },
   {
-   "n": "Z341",
+   "n": "Z342",
    "sweep": "B62",
    "also": [],
    "cause": "E",
@@ -5806,7 +5822,7 @@
    "repeat": true
   },
   {
-   "n": "Z342",
+   "n": "Z343",
    "sweep": "C122",
    "also": [
     "A116",
@@ -5825,7 +5841,7 @@
    "repeat": true
   },
   {
-   "n": "Z343",
+   "n": "Z344",
    "sweep": "C128",
    "also": [
     "A121"
@@ -5843,7 +5859,7 @@
    "repeat": true
   },
   {
-   "n": "Z344",
+   "n": "Z345",
    "sweep": "F4-59",
    "also": [],
    "cause": "S",
@@ -5859,7 +5875,7 @@
    "repeat": false
   },
   {
-   "n": "Z345",
+   "n": "Z346",
    "sweep": "C08",
    "also": [],
    "cause": "S",
@@ -5875,7 +5891,7 @@
    "repeat": false
   },
   {
-   "n": "Z346",
+   "n": "Z347",
    "sweep": "D08",
    "also": [
     "F3-28"
@@ -5893,7 +5909,7 @@
    "repeat": false
   },
   {
-   "n": "Z347",
+   "n": "Z348",
    "sweep": "A16",
    "also": [],
    "cause": "S",
@@ -5909,7 +5925,7 @@
    "repeat": ""
   },
   {
-   "n": "Z348",
+   "n": "Z349",
    "sweep": "F5-98",
    "also": [],
    "cause": "S",
@@ -5925,7 +5941,7 @@
    "repeat": false
   },
   {
-   "n": "Z349",
+   "n": "Z350",
    "sweep": "B19",
    "also": [],
    "cause": "S",
@@ -5941,7 +5957,7 @@
    "repeat": true
   },
   {
-   "n": "Z350",
+   "n": "Z351",
    "sweep": "F5-09",
    "also": [],
    "cause": "S",
@@ -5957,7 +5973,7 @@
    "repeat": false
   },
   {
-   "n": "Z351",
+   "n": "Z352",
    "sweep": "C77",
    "also": [],
    "cause": "S",
@@ -5973,7 +5989,7 @@
    "repeat": true
   },
   {
-   "n": "Z352",
+   "n": "Z353",
    "sweep": "F4-24",
    "also": [],
    "cause": "S",
@@ -5989,7 +6005,7 @@
    "repeat": false
   },
   {
-   "n": "Z353",
+   "n": "Z354",
    "sweep": "C101",
    "also": [],
    "cause": "S",
@@ -6005,7 +6021,7 @@
    "repeat": true
   },
   {
-   "n": "Z354",
+   "n": "Z355",
    "sweep": "D43",
    "also": [],
    "cause": "S",
@@ -6021,7 +6037,7 @@
    "repeat": false
   },
   {
-   "n": "Z355",
+   "n": "Z356",
    "sweep": "D56",
    "also": [],
    "cause": "S",
@@ -6037,7 +6053,7 @@
    "repeat": false
   },
   {
-   "n": "Z356",
+   "n": "Z357",
    "sweep": "D58",
    "also": [],
    "cause": "S",
@@ -6053,7 +6069,7 @@
    "repeat": true
   },
   {
-   "n": "Z357",
+   "n": "Z358",
    "sweep": "D60",
    "also": [],
    "cause": "S",
@@ -6069,7 +6085,7 @@
    "repeat": true
   },
   {
-   "n": "Z358",
+   "n": "Z359",
    "sweep": "D65",
    "also": [],
    "cause": "S",
@@ -6085,7 +6101,7 @@
    "repeat": true
   },
   {
-   "n": "Z359",
+   "n": "Z360",
    "sweep": "D73",
    "also": [],
    "cause": "S",
@@ -6101,7 +6117,7 @@
    "repeat": true
   },
   {
-   "n": "Z360",
+   "n": "Z361",
    "sweep": "C124",
    "also": [
     "A119",
@@ -6121,7 +6137,7 @@
    "repeat": false
   },
   {
-   "n": "Z361",
+   "n": "Z362",
    "sweep": "C125",
    "also": [],
    "cause": "S",
@@ -6137,7 +6153,7 @@
    "repeat": true
   },
   {
-   "n": "Z362",
+   "n": "Z363",
    "sweep": "C126",
    "also": [
     "A120",
@@ -6157,7 +6173,7 @@
    "repeat": true
   },
   {
-   "n": "Z363",
+   "n": "Z364",
    "sweep": "C127",
    "also": [],
    "cause": "S",
@@ -6173,7 +6189,7 @@
    "repeat": true
   },
   {
-   "n": "Z364",
+   "n": "Z365",
    "sweep": "C129",
    "also": [
     "A122"
@@ -6191,7 +6207,7 @@
    "repeat": false
   },
   {
-   "n": "Z365",
+   "n": "Z366",
    "sweep": "C131",
    "also": [
     "A124"
@@ -6209,7 +6225,7 @@
    "repeat": true
   },
   {
-   "n": "Z366",
+   "n": "Z367",
    "sweep": "C135",
    "also": [
     "A127"
@@ -6227,7 +6243,7 @@
    "repeat": false
   },
   {
-   "n": "Z367",
+   "n": "Z368",
    "sweep": "C140",
    "also": [
     "A135",
@@ -6247,7 +6263,7 @@
    "repeat": true
   },
   {
-   "n": "Z368",
+   "n": "Z369",
    "sweep": "E05",
    "also": [],
    "cause": "S",
@@ -6263,7 +6279,7 @@
    "repeat": true
   },
   {
-   "n": "Z369",
+   "n": "Z370",
    "sweep": "E07",
    "also": [],
    "cause": "S",
@@ -6279,7 +6295,7 @@
    "repeat": true
   },
   {
-   "n": "Z370",
+   "n": "Z371",
    "sweep": "E08",
    "also": [],
    "cause": "S",
@@ -6295,7 +6311,23 @@
    "repeat": true
   },
   {
-   "n": "Z371",
+   "n": "Z372",
+   "sweep": "E14",
+   "also": [],
+   "cause": "S",
+   "date": "2026-11-12",
+   "project": "stzzui",
+   "source": "the Principal in the stzzui desk's chat, with the same screenshot, the short lines of a paragraph marked",
+   "words": "\"the snalsot shows also a bad use of space\"",
+   "wrong": "a paragraph balanced over three lines ended them at 500 to 528 px of a 693 px measure, the column's right side left empty beside a title that ran its full width",
+   "required": "running text fills its measure, narrowed only as far as its last line needs to hold a third of its widest, balanced only where no narrowing mends it",
+   "sense": "see (width)",
+   "ruling": "ZANE-ONEFLOW-01",
+   "verbatim": true,
+   "repeat": true
+  },
+  {
+   "n": "Z373",
    "sweep": "F4-61",
    "also": [],
    "cause": "I",
@@ -6311,7 +6343,7 @@
    "repeat": false
   },
   {
-   "n": "Z372",
+   "n": "Z374",
    "sweep": "F3-05",
    "also": [],
    "cause": "I",
@@ -6327,7 +6359,7 @@
    "repeat": false
   },
   {
-   "n": "Z373",
+   "n": "Z375",
    "sweep": "F3-06",
    "also": [],
    "cause": "I",
@@ -6343,7 +6375,7 @@
    "repeat": false
   },
   {
-   "n": "Z374",
+   "n": "Z376",
    "sweep": "F2-03",
    "also": [],
    "cause": "I",
@@ -6359,7 +6391,7 @@
    "repeat": false
   },
   {
-   "n": "Z375",
+   "n": "Z377",
    "sweep": "C20",
    "also": [
     "F4-11"
@@ -6377,7 +6409,7 @@
    "repeat": false
   },
   {
-   "n": "Z376",
+   "n": "Z378",
    "sweep": "F4-13",
    "also": [],
    "cause": "I",
@@ -6393,7 +6425,7 @@
    "repeat": false
   },
   {
-   "n": "Z377",
+   "n": "Z379",
    "sweep": "D04",
    "also": [
     "F3-26"
@@ -6411,7 +6443,7 @@
    "repeat": false
   },
   {
-   "n": "Z378",
+   "n": "Z380",
    "sweep": "A05",
    "also": [
     "C32"
@@ -6429,7 +6461,7 @@
    "repeat": ""
   },
   {
-   "n": "Z379",
+   "n": "Z381",
    "sweep": "A06",
    "also": [
     "D15"
@@ -6447,7 +6479,7 @@
    "repeat": ""
   },
   {
-   "n": "Z380",
+   "n": "Z382",
    "sweep": "A10",
    "also": [],
    "cause": "I",
@@ -6463,7 +6495,7 @@
    "repeat": true
   },
   {
-   "n": "Z381",
+   "n": "Z383",
    "sweep": "A12",
    "also": [
     "D16"
@@ -6481,7 +6513,7 @@
    "repeat": true
   },
   {
-   "n": "Z382",
+   "n": "Z384",
    "sweep": "F5-105",
    "also": [],
    "cause": "I",
@@ -6497,7 +6529,7 @@
    "repeat": false
   },
   {
-   "n": "Z383",
+   "n": "Z385",
    "sweep": "F5-97",
    "also": [],
    "cause": "I",
@@ -6513,7 +6545,7 @@
    "repeat": false
   },
   {
-   "n": "Z384",
+   "n": "Z386",
    "sweep": "F5-101",
    "also": [],
    "cause": "I",
@@ -6529,7 +6561,7 @@
    "repeat": true
   },
   {
-   "n": "Z385",
+   "n": "Z387",
    "sweep": "C45",
    "also": [
     "F5-56"
@@ -6547,7 +6579,7 @@
    "repeat": true
   },
   {
-   "n": "Z386",
+   "n": "Z388",
    "sweep": "F5-52",
    "also": [],
    "cause": "I",
@@ -6563,7 +6595,7 @@
    "repeat": false
   },
   {
-   "n": "Z387",
+   "n": "Z389",
    "sweep": "F5-53",
    "also": [],
    "cause": "I",
@@ -6579,7 +6611,7 @@
    "repeat": false
   },
   {
-   "n": "Z388",
+   "n": "Z390",
    "sweep": "B28",
    "also": [],
    "cause": "I",
@@ -6595,7 +6627,7 @@
    "repeat": false
   },
   {
-   "n": "Z389",
+   "n": "Z391",
    "sweep": "F5-11",
    "also": [],
    "cause": "I",
@@ -6611,7 +6643,7 @@
    "repeat": true
   },
   {
-   "n": "Z390",
+   "n": "Z392",
    "sweep": "F5-12",
    "also": [],
    "cause": "I",
@@ -6627,7 +6659,7 @@
    "repeat": false
   },
   {
-   "n": "Z391",
+   "n": "Z393",
    "sweep": "F5-14",
    "also": [],
    "cause": "I",
@@ -6643,7 +6675,7 @@
    "repeat": false
   },
   {
-   "n": "Z392",
+   "n": "Z394",
    "sweep": "F5-17",
    "also": [],
    "cause": "I",
@@ -6659,7 +6691,7 @@
    "repeat": false
   },
   {
-   "n": "Z393",
+   "n": "Z395",
    "sweep": "F5-19",
    "also": [],
    "cause": "I",
@@ -6675,7 +6707,7 @@
    "repeat": false
   },
   {
-   "n": "Z394",
+   "n": "Z396",
    "sweep": "A57",
    "also": [
     "F5-75"
@@ -6693,7 +6725,7 @@
    "repeat": ""
   },
   {
-   "n": "Z395",
+   "n": "Z397",
    "sweep": "A59",
    "also": [
     "F5-27"
@@ -6711,7 +6743,7 @@
    "repeat": ""
   },
   {
-   "n": "Z396",
+   "n": "Z398",
    "sweep": "F5-71",
    "also": [],
    "cause": "I",
@@ -6727,7 +6759,7 @@
    "repeat": false
   },
   {
-   "n": "Z397",
+   "n": "Z399",
    "sweep": "A63",
    "also": [
     "F5-35"
@@ -6745,7 +6777,7 @@
    "repeat": true
   },
   {
-   "n": "Z398",
+   "n": "Z400",
    "sweep": "F4-27",
    "also": [],
    "cause": "I",
@@ -6761,7 +6793,7 @@
    "repeat": false
   },
   {
-   "n": "Z399",
+   "n": "Z401",
    "sweep": "C97",
    "also": [],
    "cause": "I",
@@ -6777,7 +6809,7 @@
    "repeat": true
   },
   {
-   "n": "Z400",
+   "n": "Z402",
    "sweep": "D53",
    "also": [
     "A95",
@@ -6796,7 +6828,7 @@
    "repeat": false
   },
   {
-   "n": "Z401",
+   "n": "Z403",
    "sweep": "D66",
    "also": [],
    "cause": "I",
@@ -6812,7 +6844,7 @@
    "repeat": false
   },
   {
-   "n": "Z402",
+   "n": "Z404",
    "sweep": "D81",
    "also": [],
    "cause": "I",
@@ -6828,7 +6860,7 @@
    "repeat": true
   },
   {
-   "n": "Z403",
+   "n": "Z405",
    "sweep": "B53",
    "also": [],
    "cause": "I",
@@ -6844,7 +6876,7 @@
    "repeat": true
   },
   {
-   "n": "Z404",
+   "n": "Z406",
    "sweep": "B69",
    "also": [
     "A131",
@@ -6863,7 +6895,7 @@
    "repeat": true
   },
   {
-   "n": "Z405",
+   "n": "Z407",
    "sweep": "C117",
    "also": [
     "B52",
@@ -6882,7 +6914,7 @@
    "repeat": false
   },
   {
-   "n": "Z406",
+   "n": "Z408",
    "sweep": "C138",
    "also": [
     "A132",
@@ -6902,7 +6934,7 @@
    "repeat": true
   },
   {
-   "n": "Z407",
+   "n": "Z409",
    "sweep": "E10",
    "also": [],
    "cause": "I",
@@ -6918,7 +6950,7 @@
    "repeat": true
   },
   {
-   "n": "Z408",
+   "n": "Z410",
    "sweep": "E06",
    "also": [],
    "cause": "I",
@@ -6934,7 +6966,7 @@
    "repeat": false
   },
   {
-   "n": "Z409",
+   "n": "Z411",
    "sweep": "F2-06",
    "also": [],
    "cause": "B",
@@ -6950,7 +6982,7 @@
    "repeat": false
   },
   {
-   "n": "Z410",
+   "n": "Z412",
    "sweep": "F1-04",
    "also": [],
    "cause": "B",
@@ -6966,7 +6998,7 @@
    "repeat": false
   },
   {
-   "n": "Z411",
+   "n": "Z413",
    "sweep": "F4-16",
    "also": [],
    "cause": "B",
@@ -6982,7 +7014,7 @@
    "repeat": false
   },
   {
-   "n": "Z412",
+   "n": "Z414",
    "sweep": "F3-19",
    "also": [],
    "cause": "B",
@@ -6998,7 +7030,7 @@
    "repeat": false
   },
   {
-   "n": "Z413",
+   "n": "Z415",
    "sweep": "B16",
    "also": [],
    "cause": "B",
@@ -7014,7 +7046,7 @@
    "repeat": true
   },
   {
-   "n": "Z414",
+   "n": "Z416",
    "sweep": "B18",
    "also": [],
    "cause": "B",
@@ -7030,7 +7062,7 @@
    "repeat": true
   },
   {
-   "n": "Z415",
+   "n": "Z417",
    "sweep": "F5-55",
    "also": [],
    "cause": "B",
@@ -7046,7 +7078,7 @@
    "repeat": false
   },
   {
-   "n": "Z416",
+   "n": "Z418",
    "sweep": "C52",
    "also": [],
    "cause": "B",
@@ -7062,7 +7094,7 @@
    "repeat": true
   },
   {
-   "n": "Z417",
+   "n": "Z419",
    "sweep": "A52",
    "also": [
     "C57",
@@ -7081,7 +7113,7 @@
    "repeat": ""
   },
   {
-   "n": "Z418",
+   "n": "Z420",
    "sweep": "C71",
    "also": [
     "F5-119"
@@ -7099,7 +7131,7 @@
    "repeat": true
   },
   {
-   "n": "Z419",
+   "n": "Z421",
    "sweep": "C78",
    "also": [],
    "cause": "B",
@@ -7115,7 +7147,7 @@
    "repeat": true
   },
   {
-   "n": "Z420",
+   "n": "Z422",
    "sweep": "F5-34",
    "also": [],
    "cause": "B",
@@ -7131,7 +7163,7 @@
    "repeat": false
   },
   {
-   "n": "Z421",
+   "n": "Z423",
    "sweep": "F5-38",
    "also": [],
    "cause": "B",
@@ -7147,7 +7179,7 @@
    "repeat": false
   },
   {
-   "n": "Z422",
+   "n": "Z424",
    "sweep": "D49",
    "also": [],
    "cause": "B",
@@ -7163,7 +7195,7 @@
    "repeat": true
   },
   {
-   "n": "Z423",
+   "n": "Z425",
    "sweep": "D32",
    "also": [
     "A85"
@@ -7181,7 +7213,7 @@
    "repeat": false
   },
   {
-   "n": "Z424",
+   "n": "Z426",
    "sweep": "D52",
    "also": [
     "A94",
@@ -7200,7 +7232,7 @@
    "repeat": true
   },
   {
-   "n": "Z425",
+   "n": "Z427",
    "sweep": "C119",
    "also": [
     "A113",
@@ -7219,7 +7251,7 @@
    "repeat": true
   },
   {
-   "n": "Z426",
+   "n": "Z428",
    "sweep": "C121",
    "also": [
     "A115",
@@ -7238,7 +7270,7 @@
    "repeat": true
   },
   {
-   "n": "Z427",
+   "n": "Z429",
    "sweep": "C130",
    "also": [
     "A123",
@@ -7258,7 +7290,7 @@
    "repeat": true
   },
   {
-   "n": "Z428",
+   "n": "Z430",
    "sweep": "E01",
    "also": [
     "F5-90"
@@ -7276,7 +7308,23 @@
    "repeat": true
   },
   {
-   "n": "Z429",
+   "n": "Z431",
+   "sweep": "E15",
+   "also": [],
+   "cause": "B",
+   "date": "2026-11-12",
+   "project": "stzzui",
+   "source": "the Principal in the stzzui desk's chat, with a screenshot of site/haro.html's constraint, a wrapped string marked",
+   "words": "\"1. theme of code should be more professionnal with keywords coloring so the code is read easily 2. adjust strings or long lines that does not fit beautifully in the layout 3. generalise this issue and fix in the constitution\"",
+   "wrong": "code coloured by hand, two keywords of nine, strings in the text's own grey; a line too long for its block wrapped back to the block's edge and read as a line of its own",
+   "required": "every keyword, string, value and comment in its role by rule; a wrapped line hanging under its own indentation; K27 CODE_HANG",
+   "sense": "see (code)",
+   "ruling": "ZANE-CODEREAD-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z432",
    "sweep": "F4-55",
    "also": [],
    "cause": "X",
@@ -7292,7 +7340,7 @@
    "repeat": false
   },
   {
-   "n": "Z430",
+   "n": "Z433",
    "sweep": "F3-07",
    "also": [],
    "cause": "X",
@@ -7308,7 +7356,7 @@
    "repeat": false
   },
   {
-   "n": "Z431",
+   "n": "Z434",
    "sweep": "F3-08",
    "also": [],
    "cause": "X",
@@ -7324,7 +7372,7 @@
    "repeat": false
   },
   {
-   "n": "Z432",
+   "n": "Z435",
    "sweep": "C18",
    "also": [
     "F4-09"
@@ -7342,7 +7390,7 @@
    "repeat": true
   },
   {
-   "n": "Z433",
+   "n": "Z436",
    "sweep": "F4-14",
    "also": [],
    "cause": "X",
@@ -7358,7 +7406,7 @@
    "repeat": false
   },
   {
-   "n": "Z434",
+   "n": "Z437",
    "sweep": "F4-17",
    "also": [],
    "cause": "X",
@@ -7374,7 +7422,7 @@
    "repeat": false
   },
   {
-   "n": "Z435",
+   "n": "Z438",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -7390,7 +7438,7 @@
    "repeat": false
   },
   {
-   "n": "Z436",
+   "n": "Z439",
    "sweep": "F3-20",
    "also": [],
    "cause": "X",
@@ -7406,7 +7454,7 @@
    "repeat": false
   },
   {
-   "n": "Z437",
+   "n": "Z440",
    "sweep": "F3-27",
    "also": [],
    "cause": "X",
@@ -7422,7 +7470,7 @@
    "repeat": true
   },
   {
-   "n": "Z438",
+   "n": "Z441",
    "sweep": "F3-35",
    "also": [],
    "cause": "X",
@@ -7438,7 +7486,7 @@
    "repeat": false
   },
   {
-   "n": "Z439",
+   "n": "Z442",
    "sweep": "F3-36",
    "also": [],
    "cause": "X",
@@ -7454,7 +7502,7 @@
    "repeat": false
   },
   {
-   "n": "Z440",
+   "n": "Z443",
    "sweep": "F5-92",
    "also": [],
    "cause": "X",
@@ -7470,7 +7518,7 @@
    "repeat": false
   },
   {
-   "n": "Z441",
+   "n": "Z444",
    "sweep": "F5-96",
    "also": [],
    "cause": "X",
@@ -7486,7 +7534,7 @@
    "repeat": false
   },
   {
-   "n": "Z442",
+   "n": "Z445",
    "sweep": "F5-47",
    "also": [],
    "cause": "X",
@@ -7502,7 +7550,7 @@
    "repeat": false
   },
   {
-   "n": "Z443",
+   "n": "Z446",
    "sweep": "A56",
    "also": [
     "F5-74"
@@ -7520,7 +7568,7 @@
    "repeat": ""
   },
   {
-   "n": "Z444",
+   "n": "Z447",
    "sweep": "C75",
    "also": [
     "F5-114"
@@ -7538,7 +7586,7 @@
    "repeat": false
   },
   {
-   "n": "Z445",
+   "n": "Z448",
    "sweep": "F5-76",
    "also": [],
    "cause": "X",
@@ -7554,7 +7602,7 @@
    "repeat": false
   },
   {
-   "n": "Z446",
+   "n": "Z449",
    "sweep": "B36",
    "also": [
     "F5-32"
@@ -7572,7 +7620,7 @@
    "repeat": false
   },
   {
-   "n": "Z447",
+   "n": "Z450",
    "sweep": "F4-26",
    "also": [],
    "cause": "X",
@@ -7588,7 +7636,7 @@
    "repeat": false
   },
   {
-   "n": "Z448",
+   "n": "Z451",
    "sweep": "F4-29",
    "also": [],
    "cause": "X",
@@ -7604,7 +7652,7 @@
    "repeat": false
   },
   {
-   "n": "Z449",
+   "n": "Z452",
    "sweep": "F5-110",
    "also": [],
    "cause": "X",
@@ -7620,7 +7668,7 @@
    "repeat": true
   },
   {
-   "n": "Z450",
+   "n": "Z453",
    "sweep": "D34",
    "also": [
     "A87"
@@ -7638,7 +7686,7 @@
    "repeat": false
   },
   {
-   "n": "Z451",
+   "n": "Z454",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -7654,7 +7702,7 @@
    "repeat": true
   },
   {
-   "n": "Z452",
+   "n": "Z455",
    "sweep": "D54",
    "also": [
     "A96"
@@ -7672,7 +7720,7 @@
    "repeat": false
   },
   {
-   "n": "Z453",
+   "n": "Z456",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -7688,7 +7736,7 @@
    "repeat": false
   },
   {
-   "n": "Z454",
+   "n": "Z457",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -7704,7 +7752,7 @@
    "repeat": true
   },
   {
-   "n": "Z455",
+   "n": "Z458",
    "sweep": "D93",
    "also": [
     "C112"
@@ -7722,7 +7770,7 @@
    "repeat": true
   },
   {
-   "n": "Z456",
+   "n": "Z459",
    "sweep": "F5-83",
    "also": [],
    "cause": "X",
@@ -7738,7 +7786,7 @@
    "repeat": false
   },
   {
-   "n": "Z457",
+   "n": "Z460",
    "sweep": "C132",
    "also": [
     "B56",
@@ -7758,7 +7806,7 @@
    "repeat": true
   },
   {
-   "n": "Z458",
+   "n": "Z461",
    "sweep": "C16",
    "also": [
     "F4-12"
@@ -7776,7 +7824,7 @@
    "repeat": false
   },
   {
-   "n": "Z459",
+   "n": "Z462",
    "sweep": "C134",
    "also": [
     "A126",
