@@ -404,6 +404,8 @@ fn footer(a: Allocator, p: *const Page) ![]const u8 {
 
 // ---- applying the shell to a page's text --------------------------------------------------------------------------
 
+/// the one line that sets the reader's culture before the first paint, the same text as VIBE_EARLY in tools/site-shell.js
+const vibe_early = "<script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>";
 fn fence(a: Allocator, name: []const u8, inner: []const u8) ![]const u8 {
     return fmt(a, "<!-- shell:{s} -->\n{s}\n<!-- /shell:{s} -->", .{ name, inner, name });
 }
@@ -535,6 +537,16 @@ fn apply(a: Allocator, p: *const Page, text: []const u8) !Applied {
         const attrs = try re.sub(a, bm.get(t, 1).?, "\\s+data-archetype=\"[^\"]*\"", "", "");
         t = try std.mem.concat(a, u8, &.{ t[0..bm.start], try fmt(a, "<body{s} data-archetype=\"{s}\">", .{ attrs, archetypeOf(p) }), t[bm.end..] });
     } else try problems.append(a, "no <body> to carry the archetype");
+    // ---- the culture is set before the page is painted (the Principal, 2026-11-12); the same step as in tools/site-shell.js ----
+    if (p.outside != .reader) {
+        if (!try hasFence(a, t, "vibe")) {
+            const link_re = try re.compile(a, "<link rel=\"stylesheet\" href=\"[^\"]*stz\\.css[^\"]*\">", "");
+            if (re.exec(&link_re, t, 0)) |lm| {
+                t = try std.mem.concat(a, u8, &.{ t[0..lm.end], "\n", try fence(a, "vibe", ""), t[lm.end..] });
+            } else try problems.append(a, "no stylesheet link to set the culture after");
+        }
+        if (try hasFence(a, t, "vibe")) t = try fill(a, t, "vibe", vibe_early);
+    }
     // ---- the assets carry the hash of their own content ----
     var alts: List = .empty;
     for (assets) |x| try alts.append(a, try std.mem.replaceOwned(u8, a, x, ".", "\\."));

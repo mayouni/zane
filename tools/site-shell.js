@@ -38,6 +38,8 @@ const ROOT = path.join(__dirname, '..');
    ends so the hash is the same on every checkout. A changed file changes its address: nothing to remember, and a returning
    reader is never served an older stylesheet under a newer page. Written by --write, and the check fails on any page whose
    query differs from the file's hash. */
+/* the one line that sets the reader's culture before the first paint, the same text as vibe_early in zig/src/siteshell.zig */
+const VIBE_EARLY = "<script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>";
 const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js', 'tour.js', 'zane-wasm.js', 'try.js', 'zane.wasm'];
 /* a text asset is hashed with its line endings normalised, the wasm on its bytes; the wasm's address sits in a data-wasm attribute,
    which the script that loads it reads, so a rebuilt wasm is never served from a stale cache */
@@ -369,6 +371,17 @@ function apply(p, text) {
   /* ---- the page declares its archetype on its body (K21) ---- */
   if (!/<body\b/.test(t)) problems.push('no <body> to carry the archetype');
   else t = t.replace(/<body\b([^>]*)>/, (m, attrs) => '<body' + attrs.replace(/\s+data-archetype="[^"]*"/, '') + ' data-archetype="' + archetypeOf(p) + '">');
+  /* ---- the culture is set before the page is painted: the reader's choice is read in the head, so a page opened in Retro never shows
+     Modern first (the Principal, 2026-11-12: "when a page is clicked in the menu in retro the modern them is displayed slightly before
+     the retro them is establsihed!!"); site/stz.js, at the end of the page, binds the select and keeps the choice ---- */
+  if (p.outside !== 'reader') {
+    if (!fenceRe('vibe').test(t)) {
+      const lk = /<link rel="stylesheet" href="[^"]*stz\.css[^"]*">/.exec(t);
+      if (!lk) problems.push('no stylesheet link to set the culture after');
+      else t = t.slice(0, lk.index + lk[0].length) + '\n' + fence('vibe', '') + t.slice(lk.index + lk[0].length);
+    }
+    if (fenceRe('vibe').test(t)) fill('vibe', VIBE_EARLY);
+  }
   /* ---- the assets carry the hash of their own content, so a returning reader is served the stylesheet that matches the page ---- */
   t = t.replace(ASSET_RE, (m, attr, url, name) => `${attr}${url}?v=${assetHash(name)}"`);
   return { text: t, problems };

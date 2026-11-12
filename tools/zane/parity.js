@@ -176,6 +176,7 @@ const siteLines = [];
       ['facts', 'a rule placed on one more activity', placement, CHECK, 'fail', 'the grid:table differs from the data'],
 
       ['shell', 'the tree as it is', null, [[], ['--write']], 'pass', ''],
+      ['shell', 'a culture line edited inside its fence', () => sub1('site/why.html', "==='guardian')document", "==='curator')document"), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
       ['shell', 'a menu edited inside its fence', () => sub1('site/why.html', /(<!-- shell:menu -->[\s\S]*?)>Approach</, '$1>Approch<'), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
       ['shell', 'an asset address with a stale hash', () => sub1('site/why.html', /stz\.css\?v=[0-9a-f]{8}/, 'stz.css?v=00000000'), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
       ['shell', 'an asset address with no hash', () => sub1('site/why.html', /stz\.js\?v=[0-9a-f]{8}/, 'stz.js'), [[], ['--write']], 'fail', 'site/why.html: differs from the shell'],
