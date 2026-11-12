@@ -6,7 +6,7 @@
 <title>Other languages — implementing Zane in other languages and proving that it agrees</title>
 <meta name="description" content="Zane can be implemented in other languages by writing a verifier that reads the same pinned files and passes the same fixtures. The page gives the port recipe (pin the pack by hash, implement the grammar, run the fixtures at the level you claim, emit the envelope, list your differences) and says what a port may and may not claim.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=88e19b72">
+<link rel="stylesheet" href="stz.css?v=f72a31f3">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -87,7 +87,7 @@
 
     <ol class="workflow">
       <li><b>Vendor the pack and pin its hash.</b> A version number says which edition you meant, and the hash proves that the bytes you hold are that edition. <span class="file">tools/zane/pack.js --check</span></li>
-      <li><b>Implement the grammar</b> from <a href="../doc/language/GRAMMAR.md"><code>doc/language/GRAMMAR.md</code></a>: the ten kinds, the closed enumerations and the <span data-fact="verbs">22</span> verbs.</li>
+      <li><b>Implement the grammar</b> from <a href="../doc/language/GRAMMAR.md"><code>doc/<wbr>language/<wbr>GRAMMAR.md</code></a>: the ten kinds, the closed enumerations and the <span data-fact="verbs">22</span> verbs.</li>
       <li><b>Run the <span data-fact="fixtures.total">77</span> fixtures at the level you claim.</b> Compare by diagnostic id only, never by line number, wording or order. A fixture above your level is skipped and recorded, never failed.</li>
       <li><b>Emit the refusal envelope</b> (the six fields of <a href="refusal.html">What it refuses</a>) so that one CI step can read any court.</li>
       <li><b>List your differences from the reference,</b> as the twin ratchet does: each difference is a named row, and any other difference is a failure. <a href="haro.html">Declared in Haro</a> shows one such list.</li>

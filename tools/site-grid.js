@@ -26,14 +26,16 @@ function gridTable() {
   const g = JSON.parse(r.stdout).grid;
   const cell = {};
   for (const c of g.cells) cell[c.activity + '|' + c.column] = c;
-  /* a row per channel and a column per activity, so the table fits the page beside its left list */
+  /* a row per channel and a column per activity, so the table fits the page beside its left list. The word of an empty cell and
+     the fixtures' count each sit in a span, so that on a narrow window the word gives way to its mark and the count takes its own
+     line (site/stz.css, "the grid under width pressure"; the table component, doc/design/DESIGN-SYSTEM.md section 6.4) */
   const head = g.activities.map(a => `<th scope="col">${esc(a)}</th>`).join('');
   const rows = g.columns.map(c => {
     const tds = g.activities.map(a => {
       const x = cell[a + '|' + c];
-      if (x.closed) return '<td class="g-closed">closed</td>';
-      if (x.rules > 0) return `<td class="g-has"><b>${x.rules}</b> · ${x.fixtures}</td>`;
-      return `<td class="g-none">${x.fixtures > 0 ? 'none · ' + x.fixtures : 'none'}</td>`;
+      if (x.closed) return '<td class="g-closed"><span class="word">closed</span></td>';
+      if (x.rules > 0) return `<td class="g-has"><b>${x.rules}</b> <span class="fix">· ${x.fixtures}</span></td>`;
+      return `<td class="g-none"><span class="word">none</span>${x.fixtures > 0 ? ' <span class="fix">· ' + x.fixtures + '</span>' : ''}</td>`;
     }).join('');
     return `    <tr><th scope="row">${c === 'any' ? 'any channel' : esc(c)}</th>${tds}</tr>`;
   }).join('\n');

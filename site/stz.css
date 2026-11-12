@@ -97,7 +97,10 @@ input[type="checkbox"], input[type="radio"], input[type="range"], progress { acc
 code, pre, kbd { font-family: var(--mono); }
 [data-vibe="guardian"] code, [data-vibe="guardian"] pre, [data-vibe="guardian"] kbd { font-family: var(--font); }
 code { background: var(--surface); border: var(--hairline) solid var(--line); border-radius: 4px;
-  padding: 0 .3em; font-size: 1em; }
+  padding: 0 .3em; font-size: 1em; overflow-wrap: break-word; }
+/* a name in code that is longer than the whole line wraps inside itself rather than widening the page; one that fits a line moves to it whole;
+   in a table cell it wraps as its cell does */
+td code, th code { overflow-wrap: inherit; }
 kbd { border: var(--hairline) solid var(--edge); border-radius: 4px; padding: 0 .35em; font-size: 1em; }
 .wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter); }
 /* one container for the bars, the head and the page, so everything shares a left edge; prose keeps its own measure (p, ul, .lead) */
@@ -480,14 +483,28 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
 .board thead th:first-child, table.evidence thead th:first-child { border-top-left-radius: var(--radius); }
 .board thead th:last-child, table.evidence thead th:last-child { border-top-right-radius: var(--radius); }
 .board tbody th, table.evidence tbody th { font-weight: var(--weight-strong); }
+/* the UI audit's rules: a table of sections, one per rule, read from top to bottom with no column headings. Each section opens on its
+   title, drawn as the table's header row is (the tint, the firmer rule under it), and its paragraph follows across the whole width */
+table.rules-audited th { text-transform: none; letter-spacing: normal; color: var(--ink); background: var(--tint);
+  font-size: var(--size-lead); line-height: 1.3; padding: .8rem 1.2rem; border-bottom: var(--ring) solid var(--edge); }
+table.rules-audited tbody + tbody th { border-top: var(--hairline) solid var(--line); }
+table.rules-audited tbody:first-child th { border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); }
+table.rules-audited td { font-size: var(--size-reading); padding: 1rem 1.2rem 1.2rem; }
+table.rules-audited + p { max-width: var(--measure-min); text-wrap: balance; }
+@media (max-width: 560px) {
+  table.rules-audited th { font-size: var(--size-reading); padding: .7rem .9rem; }
+  table.rules-audited td { padding: .8rem .9rem 1rem; }
+  table.rules-audited + p { text-wrap: pretty; }
+}
 .status { font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
 .status.exists::before { content: "\25CF\00a0"; }
 .status.designed::before { content: "\25D0\00a0"; }
 .status.held::before { content: "\25CB\00a0"; }
 
-/* a plain table on a phone scrolls inside itself and never widens the page (Rule 114 measures this at 1280, where it has room) */
+/* a plain table on a phone wraps inside its cells and never widens the page (Rule 114 measures this at 1280, where it has room); the
+   two tables of counts and properties keep their words whole and give way by their own order instead (the grid, below) */
 @media (max-width: 860px) {
-  table.board th, table.board td, table.evidence th, table.evidence td, table.gridmap th, table.gridmap td { overflow-wrap: anywhere; white-space: normal; min-width: 4ch; }
+  table.board th, table.board td, table.evidence th, table.evidence td { overflow-wrap: anywhere; white-space: normal; min-width: 4ch; }
 }
 /* a table of four columns that reads as cards on a phone */
 .board.position { table-layout: fixed; }
@@ -567,7 +584,8 @@ figure.figure figcaption { color: var(--ink-2); margin-top: .7rem; max-width: va
 .front-note { margin-top: 1.6rem; }
 
 /* ---- the grid: a table of counts, with a word in every cell, never a colour alone ---- */
-.scroll { overflow: visible; }
+/* the wrapper is the room the table is measured against: each table below changes its form by the width it is given, not the window's */
+.scroll { overflow: visible; container-type: inline-size; }
 table.gridmap { width: 100%; border-collapse: collapse; margin: 1.2rem 0 .6rem; background: var(--surface); font-variant-numeric: tabular-nums; }
 table.gridmap caption { text-align: left; color: var(--ink-2); padding: 0 0 .6rem; caption-side: top; }
 table.gridmap th, table.gridmap td { border: var(--hairline) solid var(--line); padding: .45rem .6rem; text-align: center; vertical-align: middle; }
@@ -577,6 +595,39 @@ table.gridmap .g-has b { color: var(--ink); font-size: var(--size-reading); }
 table.gridmap .g-none { color: var(--ink-2); }
 table.gridmap .g-closed { color: var(--ink-2); font-style: italic; }
 table.gridmap.channels td, table.gridmap.channels thead th { text-align: left; font: var(--size-small) var(--font); }
+
+/* The two tables under width pressure (Rule 129; the table component, doc/design/DESIGN-SYSTEM.md section 6.4). A table keeps its grid,
+   never scrolls and never turns into cards; its words stay whole. Each form starts where the one above it no longer fits its room in
+   the wider culture, Retro's monospace, with a few pixels to spare (measured 2026-11-11 on the painted page, windows 300 to 1100 px:
+   the whole grid needs 721 px of room; the channels need 983, then 889, 774, 670, 544 and 429 as each column goes, and 304 at the last).
+   The coverage grid is a matrix: every column is one kind of count, so it keeps all six. Under 740 px of room its headings turn on
+   their side, a cell's fixtures take a line of their own, and the word of an empty cell gives way to the classical mark of a table
+   of figures, a dash for none and a cross for closed; the caption gives the key, and the word stays in the page for a reader that
+   reads the markup. */
+@container (max-width: 740px) {
+  table.gridmap:not(.channels) th, table.gridmap:not(.channels) td { padding: .4rem .2rem; }
+  table.gridmap:not(.channels) tbody th { white-space: normal; padding-left: .5rem; }
+  table.gridmap:not(.channels) thead th + th { writing-mode: vertical-rl; writing-mode: sideways-lr; text-align: left; vertical-align: bottom; padding: .6rem .2rem; }
+  table.gridmap:not(.channels) td, table.gridmap:not(.channels) .g-has b { font-size: var(--size-small); }
+  table.gridmap .fix { display: block; }
+  table.gridmap .word { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  table.gridmap .g-none::before { content: "\2014"; content: "\2014" / ""; }
+  table.gridmap .g-closed::before { content: "\00d7"; content: "\00d7" / ""; }
+  table.gridmap:not(.channels) caption::after { content: " Here \2014  stands for none, and \00d7  for closed."; }
+}
+/* The table of channels holds nine properties of different kinds, so it sheds them, the least needed first: how much a glance takes
+   in, attention, order, whether the rendering stays, whether it alone is a whole interface, whether it can be withdrawn. The channel,
+   what it is, and the verbs it cannot carry, which is what the properties decide, stay at every width. */
+@container (max-width: 1010px) { table.gridmap.channels tr > :nth-child(6) { display: none; } }
+@container (max-width: 915px) { table.gridmap.channels tr > :nth-child(5) { display: none; } }
+@container (max-width: 795px) { table.gridmap.channels tr > :nth-child(4) { display: none; } }
+@container (max-width: 690px) { table.gridmap.channels tr > :nth-child(3) { display: none; } }
+@container (max-width: 560px) { table.gridmap.channels tr > :nth-child(8) { display: none; } }
+@container (max-width: 445px) {
+  table.gridmap.channels tr > :nth-child(7) { display: none; }
+  table.gridmap.channels th, table.gridmap.channels td { padding: .4rem .35rem; }
+}
 
 /* ---- the tour: one scene at a time, no motion between them (Rule 112) ---- */
 .profiles { list-style: none; padding: 0; margin: .8rem 0 1rem; display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; max-width: none; }
