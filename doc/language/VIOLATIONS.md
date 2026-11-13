@@ -1,6 +1,6 @@
 # Diagnostics and the Law They Enforce
 
-**Normative.** Part of [the Zane Language Specification v1.6](README.md). The
+**Normative.** Part of [the Zayn Language Specification v1.7](README.md). The
 machine-readable form of this document is
 [`conformance/violations.json`](../../conformance/violations.json) — that file is
 the contract; this one explains it.
@@ -17,7 +17,7 @@ amending the constitution with evidence.
 
 That is the difference between a linter and an instrument of law, and it is why
 a diagnostic that enforces a rule carries a binding. Bindings cite
-`constitution/rules.json` **v3.16**.
+`constitution/rules.json` **v3.17**.
 
 Not every diagnostic enforces a rule. Of the 40, 20 cite one or more rules, 8 cite an article and no
 rule, and 12 cite nothing. Fourteen of those 20 enforce the grammar (vocabularies, duplicates, fields,
@@ -121,7 +121,7 @@ forbidden pattern `decorative-animation`.
 
 ### Level 3 — needs a symbol table
 
-These three need facts a `.zane` file does not contain. A standalone verifier may
+These three need facts a `.zayn` file does not contain. A standalone verifier may
 **accept the symbol table as an input** rather than compute it; the reference implementation supplies it
 natively from the other pillars.
 
@@ -177,11 +177,11 @@ page as the first child; no child label repeats its parent's; no two siblings sh
 Labels compare ignoring ASCII case, the spaces around them and a leading `The`. An entry that
 names no declared `NAV_GRAPH` is not judged, since its label is not in the file.
 
-Ruled by the Principal on 2026-11-08, on the Zane site's own menu, whose band under *Approach*
+Ruled by the Principal on 2026-11-08, on the Zayn site's own menu, whose band under *Approach*
 had lost its landing page: *"you must bring bakc the frist option but find an other lable for it
 that is different from the main option(Approach in our case) ... it's not logical to get the main
 title "Approach" then find it also as an option of it's cibling menus!!! you must add this as an
-issue that is statically checked in Zane"*.
+issue that is statically checked in Zayn"*.
 
 ---
 
@@ -224,7 +224,7 @@ ship in the reference implementation today, under the codes shown.
 | Diagnostic | Sev. | Level | Meaning | Ref. impl. |
 |---|---|---|---|---|
 | `UNKNOWN_INTENT` | error | 1 | a verb in `SATISFIES`/`ALWAYS_REACHABLE` is not one of the 22 | ❌ |
-| `UNSPECIFIED_DECLARATION` | warning | 1 | a `.zane` declaration kind outside the ten (`WIDGET`, `USER`) | ❌ |
+| `UNSPECIFIED_DECLARATION` | warning | 1 | a `.zayn` declaration kind outside the ten (`WIDGET`, `USER`) | ❌ |
 | `DUPLICATE_FIELD` | error | 1 | a field key appears twice in one declaration | ❌ |
 | `DUPLICATE_DECLARATION` | error | 1 | two declarations share a kind and a name | ❌ |
 | `INTENT_FLOW_NO_SATISFIES` | warning | 2 | an `INTENT_FLOW` declares no intents | ✅ `ZUI-W001` |
@@ -251,7 +251,7 @@ ship in the reference implementation today, under the codes shown.
 | `UNEXPECTED_CHARACTER` | error | 1 | a character the lexer has no token for | ❌ |
 | `UNTERMINATED_STRING` | error | 1 | a string is opened and the file ends before it closes | ❌ |
 
-**The last seventeen are `zane`-verifier-only**, and the ❌ column means the *reference
+**The last seventeen are `zayn`-verifier-only**, and the ❌ column means the *reference
 implementation* (`parser.zig`, inside a consumer platform) does not raise them — not that
 nothing does. `UNKNOWN_MEDIUM` and `VERB_NOT_CARRIED` arrived when `SURFACE_AS` closed to
 ten media; `UNKNOWN_SIGNAL`, `EXPRESSION_ORPHAN` and `SIGNAL_UNPERCEIVABLE` arrived with
@@ -263,7 +263,7 @@ the first expression stratum.
 reads as a declaration that was honoured. That silence is a gap in `TONE` and `PERSPECTIVE`,
 not a precedent."* The gap stayed open for the other fields until **v1.4 (2026-11-01,
 ruling D1 of 2026-10-31)**. It surfaced when the language was declared as a Haro language
-(`haro/zane.stzu`): the court forged from that declaration refused a `TONE` or a `PERSPECTIVE`
+(`haro/zayn.stzu`): the court forged from that declaration refused a `TONE` or a `PERSPECTIVE`
 on a `SCREEN` while the verifier said nothing, so an author believed a field was working
 that nothing read.
 
@@ -288,7 +288,7 @@ speaks where its silence *hides* an error; a field it already reads is not silen
 carrying it is multi-step, `TRAPPED_FLOW`), `INTENT_FLOW` (resolved wherever it appears,
 `UNRESOLVED_INTENT_FLOW`), `VISIBLE_STATE` and `VISIBLE_ENTITIES` (collected file-wide). A
 `STEPS` on a `SCREEN` is therefore not `FIELD_MISPLACED`. The Haro court refuses all four off
-their kind; that difference is a named seam in `haro/zane.stzu`, not a disagreement about the law.
+their kind; that difference is a named seam in `haro/zayn.stzu`, not a disagreement about the law.
 
 Three more edges, stated so they are not rediscovered. **`ROLE` is left to `ROLE_MISPLACED`**,
 which keeps its own id because ids are stable forever, so one defect is never reported
@@ -341,7 +341,7 @@ per-control count would be a requirement wearing a warning's clothes. Roles are 
 
 **What it cannot see, stated because the number will be read as if it could**: an author who
 declares no `INTERACTION` at all. This counts *roles per interaction*; *interactions per
-control* is the deeper under-declaration, and `.zane` has no control primitive to count
+control* is the deeper under-declaration, and `.zayn` has no control primitive to count
 against.
 
 `ROLE_PROMISE_BROKEN` is scoped away from `MISSING_UNDO` for the same reason — it fires
@@ -367,7 +367,7 @@ two.
 
 ◐ the reference implementation's `ZUI-W010` resolves the **cross-pillar** direction — `INTENT_FLOWS`
 references written in other pillars' files, checked against flow names harvested
-from `.zane`. The Zane-local direction specified here (a `FORM` whose `INTENT_FLOW`
+from `.zayn`. The Zayn-local direction specified here (a `FORM` whose `INTENT_FLOW`
 names nothing) is not checked today.
 
 `UNRESOLVED_ENTITY` is Level 3 and notable as a **gap in the reference
@@ -381,7 +381,7 @@ Not normative, but conformance is easier to prove when implementations agree.
 Recommended: one finding per line, machine-parseable first, prose after.
 
 ```
-payments.zane:2  error  MISSING_UNDO  approve_payment
+payments.zayn:2  error  MISSING_UNDO  approve_payment
     An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.
     Rule 79 · The Undo Covenant · Article IV · the right to reverse
 ```

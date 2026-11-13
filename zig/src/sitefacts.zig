@@ -1,4 +1,4 @@
-//! sitefacts.zig: `zane site facts [--write] [--unchecked]`, every figure on the site has a file, or it is not on the
+//! sitefacts.zig: `zayn site facts [--write] [--unchecked]`, every figure on the site has a file, or it is not on the
 //! page: tools/site-facts.js in Zig, printing what it prints (doc/design/BINARY.md, S5; doc/design/SITE.md section 4).
 //!
 //! It derives every figure from the tree and fails when site/facts.json differs from it, when a span's fallback differs
@@ -8,19 +8,19 @@
 //! when a status word is not one of three, and when a primary button sits in a reading page's head or scrolls within
 //! its own page.
 //!
-//! Where the script spawns a process, this calls the code: a page's verifier run (`$ zane check NAME.zane`, since S6) goes to
-//! the core (report.zig) with the contract and the law read from the tree, as tools/zane/cli.js reads them; a terminal's
-//! `data-run="zane COMMAND ..."` goes to the binary's own command through main.dispatch (check, conformance, pack,
-//! cross-medium, audit-facts), where the script runs that command's JavaScript reference, which tools/zane/parity.js proves
+//! Where the script spawns a process, this calls the code: a page's verifier run (`$ zayn check NAME.zayn`, since S6) goes to
+//! the core (report.zig) with the contract and the law read from the tree, as tools/zayn/cli.js reads them; a terminal's
+//! `data-run="zayn COMMAND ..."` goes to the binary's own command through main.dispatch (check, conformance, pack,
+//! cross-medium, audit-facts), where the script runs that command's JavaScript reference, which tools/zayn/parity.js proves
 //! prints the same; the coverage counts and the grid check are sitegrid.zig. One difference follows, named rather than
-//! hidden: `zane conformance`, `cross-medium` and `audit-facts` check the data they were BUILT with, where the references
+//! hidden: `zayn conformance`, `cross-medium` and `audit-facts` check the data they were BUILT with, where the references
 //! read the tree, so a terminal of theirs equals the tree's run only while the binary is current (rebuild after changing the
-//! suite). Until S6 a terminal named `node tools/zane/NAME.js`, and one naming a script the binary does not carry was a
+//! suite). Until S6 a terminal named `node tools/zayn/NAME.js`, and one naming a script the binary does not carry was a
 //! second difference; the five commands are now the only ones either side accepts.
-//! The figure `kinds` is the core's own table of declaration kinds, where the script reads zane.js's: the binary's
+//! The figure `kinds` is the core's own table of declaration kinds, where the script reads zayn.js's: the binary's
 //! verifier is the one this binary runs.
 //!
-//! It reads the tree it is run in, like `zane pack`: run it from the repository's root.
+//! It reads the tree it is run in, like `zayn pack`: run it from the repository's root.
 
 const std = @import("std");
 const Allocator = std.mem.Allocator;
@@ -122,7 +122,7 @@ fn derive(a: Allocator, verifier_runs: usize) !Facts {
         while (it.next()) |e| verbs += js.items(js.get(e.value_ptr.*, "verbs")).len;
     };
     try f.int("verbs", n(verbs), "constitution/rules.json intents.families");
-    try f.int("kinds", n(core.zane_kinds.len), "tools/zane/zane.js ZANE_KINDS");
+    try f.int("kinds", n(core.zayn_kinds.len), "tools/zayn/zayn.js ZAYN_KINDS");
 
     const v = try parse(a, "conformance/violations.json");
     const diags = js.items(js.get(v, "diagnostics"));
@@ -162,7 +162,7 @@ fn derive(a: Allocator, verifier_runs: usize) !Facts {
     var twins: usize = 0;
     var refused: usize = 0;
     for (fixtures) |x| {
-        if (std.mem.endsWith(u8, try js.string(a, js.get(x, "file")), "-lawful.zane")) twins += 1;
+        if (std.mem.endsWith(u8, try js.string(a, js.get(x, "file")), "-lawful.zayn")) twins += 1;
         if (js.items(js.get(x, "expect_ids")).len > 0) refused += 1;
     }
     try f.int("fixtures.total", n(fixtures.len), "conformance/manifest.json fixtures");
@@ -193,8 +193,8 @@ fn derive(a: Allocator, verifier_runs: usize) !Facts {
     try f.int("pack.files", n(js.items(js.get(try parse(a, "protocol/MANIFEST.json"), "pinned")).len), "protocol/MANIFEST.json pinned");
     try f.int("signals.count", n(js.items(js.get(try parse(a, "conformance/signal.json"), "values")).len), "conformance/signal.json values");
 
-    const stzu = try core.wellFormed(a, try readFile(a, "haro/zane.stzu"));
-    try f.int("haro.constraints", n(re.count(&try re.compile(a, "^DEFINE CONSTRAINT ", "gm"), stzu)), "haro/zane.stzu (DEFINE CONSTRAINT)");
+    const stzu = try core.wellFormed(a, try readFile(a, "haro/zayn.stzu"));
+    try f.int("haro.constraints", n(re.count(&try re.compile(a, "^DEFINE CONSTRAINT ", "gm"), stzu)), "haro/zayn.stzu (DEFINE CONSTRAINT)");
     const csv_text = try core.wellFormed(a, try readFile(a, "haro/twin-expected.csv"));
     var csv: List = .empty;
     for (try re.split(a, &try re.compile(a, "\\r?\\n", ""), csv_text)) |l| {
@@ -220,10 +220,10 @@ fn derive(a: Allocator, verifier_runs: usize) !Facts {
         };
         try f.int(try fmt(a, "twin.{s}", .{kn[1]}), n(c), "haro/twin-expected.csv class column");
     }
-    const gbnf_bytes: u64 = if (std.fs.cwd().statFile("haro/zane.gbnf")) |st| st.size else |_| 0;
-    try f.int("haro.gbnfBytes", @intCast(gbnf_bytes), "haro/zane.gbnf");
-    const gb = try core.wellFormed(a, try readFile(a, "haro/zane.gbnf"));
-    try f.int("gbnf.kinds", n(re.count(&try re.compile(a, "^decl_[A-Z_]+ ::=", "gm"), gb)), "haro/zane.gbnf (decl_* productions)");
+    const gbnf_bytes: u64 = if (std.fs.cwd().statFile("haro/zayn.gbnf")) |st| st.size else |_| 0;
+    try f.int("haro.gbnfBytes", @intCast(gbnf_bytes), "haro/zayn.gbnf");
+    const gb = try core.wellFormed(a, try readFile(a, "haro/zayn.gbnf"));
+    try f.int("gbnf.kinds", n(re.count(&try re.compile(a, "^decl_[A-Z_]+ ::=", "gm"), gb)), "haro/zayn.gbnf (decl_* productions)");
 
     const g = try grid.coverage(a);
     const cc = "doc/design/coverage-count.js";
@@ -433,7 +433,7 @@ const Pair = struct { page: []const u8, file: []const u8, declaration: []const u
 fn pairs(a: Allocator, all: []const []const u8) ![]const Pair {
     var out: std.ArrayList(Pair) = .empty;
     const r = try re.compile(a, "<pre class=\"shot\">([\\s\\S]*?)<\\/pre>\\s*<pre class=\"term\">([\\s\\S]*?)<\\/pre>", "g");
-    const cmd = try re.compile(a, "^\\$\\s*zane check (\\S+\\.zane)\\s*$", "");
+    const cmd = try re.compile(a, "^\\$\\s*zayn check (\\S+\\.zayn)\\s*$", "");
     for (all) |p| {
         const html = try lf(a, try readPage(a, p));
         var it = re.iterate(&r, html);
@@ -571,8 +571,8 @@ fn verifyCommands(a: Allocator, all: []const []const u8, problems: *List) !usize
             if (cmd.len > 1) for (pack_commands) |c| if (std.mem.eql(u8, c, cmd[1])) {
                 known = true;
             };
-            if (!std.mem.eql(u8, cmd[0], "zane") or !known) {
-                try problems.append(a, try fmt(a, "{s}: data-run \"{s}\" is not a pack command (zane check, conformance, pack, cross-medium or audit-facts)", .{ p, named }));
+            if (!std.mem.eql(u8, cmd[0], "zayn") or !known) {
+                try problems.append(a, try fmt(a, "{s}: data-run \"{s}\" is not a pack command (zayn check, conformance, pack, cross-medium or audit-facts)", .{ p, named }));
                 continue;
             }
             count += 1;

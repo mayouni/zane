@@ -1,9 +1,9 @@
 /* ==========================================================================
-   stz.css — the Zane site, set on Zane's design system (doc/design/DESIGN-SYSTEM.md, ZANE-DESIGN-01 M2).
+   stz.css — the Zayn site, set on Zayn's design system (doc/design/DESIGN-SYSTEM.md, ZANE-DESIGN-01 M2).
    Every size, space and colour below comes from a token, and the tokens are written once, here. Two cultures (Article VI):
    Modern (curator: midnight indigo, garnet, porcelain) and Retro (guardian: green phosphor on black, monospace). A culture
    sets its colours, its font, its radius and its shadow, under the same names and meanings; it never sets a size or a space.
-   `zane site shell` refuses a size or a colour written outside these blocks (K01, K09), and the UI audit reads the painted
+   `zayn site shell` refuses a size or a colour written outside these blocks (K01, K09), and the UI audit reads the painted
    page against checks K01 to K22. The pages that link this file obey the constitution they describe: no external requests,
    no animation, stable layout, keyboard-sovereign.
    ========================================================================== */
@@ -125,8 +125,8 @@ nav.site a:not(.brand):hover { text-decoration: none; }
 nav.site a:not(.brand):hover { text-decoration: underline; }
 /* the brand is set in a colour of its own, --brand, so the entry of the section the reader is in, bold in the bar's white, never reads as
    a second brand; the brand also stands apart from the entries by a space of its own (the Principal, 2026-11-11: "first and second menu
-   options have the same focus them so we don't know where we are! fix this visually and put same space between the ZANE option and the
-   others"; then "i don't like replicating the same undrline for menu and submenu! use color for the world ZANE this resolves the issue
+   options have the same focus them so we don't know where we are! fix this visually and put same space between the ZAYN option and the
+   others"; then "i don't like replicating the same undrline for menu and submenu! use color for the world ZAYN this resolves the issue
    (keeping the bold wite to the other options)") */
 nav.site a.here { font-weight: var(--weight-strong); }
 /* in Retro a monospaced bold is barely bolder than its regular, so the current section is set in reverse video, the terminal's own mark of
@@ -425,13 +425,13 @@ li { margin: .3rem 0; }
 /* a call to action: one per page, the first thing the reader can do */
 .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.4rem; }
 .cta-row .note { color: var(--ink-2); max-width: 32rem; margin: 0; }
-/* the pair: an established practice, then Zane, the same case, both with their outcome, one after the other in the page's flow and
+/* the pair: an established practice, then Zayn, the same case, both with their outcome, one after the other in the page's flow and
    never in two columns: what can be read in one vertical flow is not set side by side (the Principal, 2026-11-12, on site/how.html: "we
    said it so many times : avoid colomnar layout for what can be set in a normal vertical flow"; K26 ONE_FLOW) */
 .pair { display: block; margin: 1.4rem 0; }
 .pair > div + div { margin-top: var(--space-3); }
 .pair .lbl { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); margin: 0; }
-.pair .zane .lbl { color: var(--ink); }
+.pair .zayn .lbl { color: var(--ink); }
 .pair p { margin: .5rem 0 0; }
 .pair .shot, .pair .term { margin: .7rem 0 0; }
 /* the scene: one worked example that runs, with its caption */

@@ -1,23 +1,23 @@
-# `zane` — the verifier
+# `zayn` — the verifier
 
-**Checks Zane declarations against the constitution, before anything is
-rendered.** One file, `zane`, and nothing to install beside it.
+**Checks Zayn declarations against the constitution, before anything is
+rendered.** One file, `zayn`, and nothing to install beside it.
 
 ```bash
-zane check payments.zane
+zayn check payments.zayn
 ```
 
-Version 0.1.0 is on [its release page](https://github.com/mayouni/zane/releases/tag/v0.1.0), one file for each
+Version 0.1.0 is on [its release page](https://github.com/mayouni/zayn/releases/tag/v0.1.0), one file for each
 system and `zane-0.1.0.wasm` for a browser, each file's hash in `SHA256SUMS`
-([doc/releases/v0.1.0.md](../../doc/releases/v0.1.0.md) says how to check one). `zane --version` names it.
-`zane` is built from this repository with Zig (`zig build -Doptimize=ReleaseSmall` puts it in
+([doc/releases/v0.1.0.md](../../doc/releases/v0.1.0.md) says how to check one). `zayn --version` names it.
+`zayn` is built from this repository with Zig (`zig build -Doptimize=ReleaseSmall` puts it in
 `zig-out/bin/`, and `zig build release` builds every published file into `zig-out/release/`;
 [doc/design/BINARY.md](../../doc/design/BINARY.md)). The JavaScript in this folder is its
-**reference**: `zane.js` and `cli.js` are what [`parity.js`](parity.js) holds the binary to, byte for byte, and
-`node tools/zane/cli.js check payments.zane` runs that reference with the same options and the same output.
+**reference**: `zayn.js` and `cli.js` are what [`parity.js`](parity.js) holds the binary to, byte for byte, and
+`node tools/zayn/cli.js check payments.zayn` runs that reference with the same options and the same output.
 
 ```
-payments.zane:2  error  MISSING_UNDO  approve_payment  [Rule 79 · The Undo Covenant · Article IV · the right to reverse]
+payments.zayn:2  error  MISSING_UNDO  approve_payment  [Rule 79 · The Undo Covenant · Article IV · the right to reverse]
     An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.
 
 1 error(s), 0 warning(s) across 1 file(s) at level 2
@@ -34,19 +34,19 @@ Three files, no dependencies, nothing to install:
 
 | File | What it is |
 |---|---|
-| `zane.js` | the core: lexer, parser, checks. Pure functions over a string — no I/O. Runs in Node *and* in a browser (`window.Zane`). |
+| `zayn.js` | the core: lexer, parser, checks. Pure functions over a string — no I/O. Runs in Node *and* in a browser (`window.Zayn`). |
 | `cli.js` | the command line: reads files, filters by level, formats findings. |
 | `envelope.js` | the family envelope: builds `{code, severity, message, span, cites, language}` findings and validates them against [the Diagnostic Contract's shape](../../doc/diagnostic-contract.schema.json). |
 | `conformance.js` | the suite runner — proves this implementation against [the fixtures](../../conformance/). |
-| `parity.js` | the gate of the binary's stages ([BINARY.md](../../doc/design/BINARY.md) section 5): `zane check` against `cli.js` on every fixture and a seeded corpus, `zane conformance` against `conformance.js`, the other tools against their scripts, and, since S5, `zane site facts`, `site shell` and `site grid` against `tools/site-facts.js`, `site-shell.js` and `site-grid.js` on the tree, in their `--write` modes and on one break per check, byte for byte. `--only site` runs that last section alone and names what it skipped. Needs a built `zane` (`zig build -j2`, or `--bin PATH`). |
+| `parity.js` | the gate of the binary's stages ([BINARY.md](../../doc/design/BINARY.md) section 5): `zayn check` against `cli.js` on every fixture and a seeded corpus, `zayn conformance` against `conformance.js`, the other tools against their scripts, and, since S5, `zayn site facts`, `site shell` and `site grid` against `tools/site-facts.js`, `site-shell.js` and `site-grid.js` on the tree, in their `--write` modes and on one break per check, byte for byte. `--only site` runs that last section alone and names what it skipped. Needs a built `zayn` (`zig build -j2`, or `--bin PATH`). |
 
-It implements [the Zane language specification v1.6](../../doc/language/README.md)
+It implements [the Zayn language specification v1.7](../../doc/language/README.md)
 and is measured against [the conformance suite](../../conformance/README.md).
 
 ## Options
 
 ```
-zane check <file.zane> [file.zane …]
+zayn check <file.zayn> [file.zayn …]
 
   --level N        conformance level, 1-4 (default 2)
   --symbols FILE   JSON symbol table for Level 3 checks
@@ -62,7 +62,7 @@ what they need — undecidable is silence, never a pass.
 
 ```bash
 # Level 3, with the symbol table your host project knows
-zane check src/**/*.zane --level 3 --symbols build/symbols.json
+zayn check src/**/*.zayn --level 3 --symbols build/symbols.json
 ```
 
 where `symbols.json` is `{"entities": [...], "actors": [...], "state": [...], "elements": [...]}`.
@@ -101,11 +101,11 @@ by hand into a second file drifts from it, and this one did.
 ## Conformance
 
 ```bash
-zane conformance --level 4
+zayn conformance --level 4
 ```
 
 ```
-Zane conformance — level 4
+Zayn conformance — level 4
   spec         doc/language/ v1.4
   contract     violations.json v1.8 (constitution v3.13)
   envelope     diagnostic-contract v1.2.0 — 40 diagnostics and 57 reports, all conform
@@ -166,19 +166,19 @@ ladder, working as designed.
 
 ## In a browser
 
-The same core as `zane`, compiled to WebAssembly: `site/zane.wasm`, loaded by `site/zane-wasm.js`, which
+The same core as `zayn`, compiled to WebAssembly: `site/zayn.wasm`, loaded by `site/zayn-wasm.js`, which
 the Build page's try-it box uses and `wasm-proof.html` proves against the native binary:
 
 ```html
-<script src="site/zane-wasm.js"></script>
+<script src="site/zayn-wasm.js"></script>
 <script>
-  ZaneWasm.load('site/zane.wasm').then(z => {
-    const envelope = z.check('pay.zane', sourceText, { level: 2 });   // what `zane check pay.zane --json` prints
+  ZaynWasm.load('site/zayn.wasm').then(z => {
+    const envelope = z.check('pay.zayn', sourceText, { level: 2 });   // what `zayn check pay.zayn --json` prints
   });
 </script>
 ```
 
-`zane.js` still runs in a browser as `window.Zane`, with no dependency, and no page of the site loads it: since
+`zayn.js` still runs in a browser as `window.Zayn`, with no dependency, and no page of the site loads it: since
 stage S6 it is the reference the binary and the wasm are held to, not the route a reader takes.
 
 ## Implementation notes
@@ -187,7 +187,7 @@ stage S6 it is the reference the binary and the wasm are held to, not the route 
   it is `LOCATE` or `DISCOVER`. See
   [GRAMMAR.md §4](../../doc/language/GRAMMAR.md#4-intent-verbs).
 - **Declarations of other pillars are skipped whole**, by balanced-paren
-  scanning. A Zane verifier has no standing over `DEFINE ENTITY`.
+  scanning. A Zayn verifier has no standing over `DEFINE ENTITY`.
 - **A UTF-8 BOM is consumed silently.** Editors on Windows add one routinely;
   a verifier that choked on it would be unusable there. (This was a real bug,
   found by running the tool rather than by reading it.)
@@ -199,7 +199,7 @@ stage S6 it is the reference the binary and the wasm are held to, not the route 
 ## Which implementation is this?
 
 One of possibly several, and deliberately so. The
-[M3 decision document](../../doc/decisions/M3-the-zane-verifier.md) left the
+[M3 decision document](../../doc/decisions/M3-the-zayn-verifier.md) left the
 extract-versus-embed question open, and the conformance suite is what makes
 that safe: **any future implementation, in any language, proves agreement
 against the same 57 fixtures.** A Zig verifier living beside the reference implementation's compiler

@@ -3,7 +3,7 @@
 /* ==========================================================================
    The conformance runner.
 
-     node tools/zane/conformance.js [--level N] [--verbose]
+     node tools/zayn/conformance.js [--level N] [--verbose]
 
    Runs every fixture in conformance/manifest.json against the verifier and
    compares the SET OF DIAGNOSTIC IDS -- never line numbers, wording or
@@ -18,7 +18,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { verify } = require('./zane.js');
+const { verify } = require('./zayn.js');
 const { toEnvelope, validate, validateReport, loadShape } = require('./envelope.js');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -48,7 +48,7 @@ function main(argv) {
   const mediaProblems = [];
   try {
     const spec = JSON.parse(fs.readFileSync(path.join(CONF, 'media.json'), 'utf8'));
-    const { MEDIA_CARRIAGE } = require('./zane.js');
+    const { MEDIA_CARRIAGE } = require('./zayn.js');
     const specIds = spec.media.map(m => m.id).sort();
     const implIds = Object.keys(MEDIA_CARRIAGE).sort();
     if (specIds.join(',') !== implIds.join(',')) {
@@ -77,7 +77,7 @@ function main(argv) {
      prove they agree rather than trusting them to. */
   try {
     const sig = JSON.parse(fs.readFileSync(path.join(CONF, 'signal.json'), 'utf8'));
-    const { SIGNALS, SIGNAL_ABSENCE } = require('./zane.js');
+    const { SIGNALS, SIGNAL_ABSENCE } = require('./zayn.js');
     const specVals = sig.values.map(v => v.id).sort().join(',');
     const implVals = [...SIGNALS].sort().join(',');
     if (specVals !== implVals) {
@@ -108,7 +108,7 @@ function main(argv) {
   let specVersion = '(unreadable)';
   try {
     const rm = fs.readFileSync(path.join(__dirname, '..', '..', 'doc', 'language', 'README.md'), 'utf8');
-    const mm = rm.match(/^#\s+The Zane Language\s+—\s+Specification\s+v(\S+)/m);
+    const mm = rm.match(/^#\s+The Zayn Language\s+—\s+Specification\s+v(\S+)/m);
     if (mm) specVersion = mm[1];
   } catch (e) { /* reported as (unreadable) rather than guessed */ }
 
@@ -150,7 +150,7 @@ function main(argv) {
     const perFixture = [];
     for (const d of raw) {
       envelopes++;
-      const env = toEnvelope({ ...d, file: fx.file }, metaOf.get(d.id), 'zane');
+      const env = toEnvelope({ ...d, file: fx.file }, metaOf.get(d.id), 'zayn');
       perFixture.push(env);
       envelopeProblems.push(...validate(env, shape, `${fx.file} · ${d.id}`));
     }
@@ -187,11 +187,11 @@ function main(argv) {
     }
   }
 
-  console.log(`\nZane conformance — level ${level}`);
+  console.log(`\nZayn conformance — level ${level}`);
   console.log(`  spec         doc/language/ v${specVersion}`);
   console.log(`  contract     violations.json v${contract.metadata.version} (constitution v${contract.metadata.constitution})`);
   console.log(`  envelope     diagnostic-contract v${shape.version} — ${envelopes} diagnostics and ${reports} reports, ${envelopeProblems.length ? envelopeProblems.length + ' nonconforming' : 'all conform'}`);
-  console.log(`  media        ${Object.keys(require('./zane.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
+  console.log(`  media        ${Object.keys(require('./zayn.js').MEDIA_CARRIAGE).length} media — ${mediaProblems.length ? mediaProblems.length + ' disagreements with media.json' : 'verifier agrees with media.json'}`);
   console.log(`  catalogue    ${contract.diagnostics.length} diagnostics — ${specProblems.length ? specProblems.length + ' disagreements with VIOLATIONS.md' : 'contract agrees with VIOLATIONS.md'}`);
   console.log(`  fixtures     ${manifest.fixtures.length} total`);
   console.log(`  pass ${pass} · fail ${fail} · skipped ${skip} (above level ${level})`);

@@ -1,11 +1,11 @@
-# Zane's design system, from first principles
+# Zayn's design system, from first principles
 
 **Status: a study, milestones 1 and 1b of ZANE-DESIGN-01, published on the Principal's word ("4 roles; publish", 2026-11-09).
 No page, rule, check or stylesheet of the site changed with it; milestone 2 (the system as code) builds on it.** Ordered by Central on
 2026-11-09 14:30, on two requests of the Principal that day: *"rethink the problem from first principles, learn from the fundamental
 theories made in the HCI domain, old and current, and especially from the TONS of issues we get not only on this project but IN EVERY
 PROJECT involving UI we made together!!!"*, and *"the site needs a deep rewriting to adopt a didactic visual illystrated style with
-accurate samples of UIs and issue color and froms semantics"*. Ruled first on this desk: PRINCIPAL-ZANEFIRST-01. Milestone 1b added
+accurate samples of UIs and issue color and froms semantics"*. Ruled first on this desk: PRINCIPAL-ZAYNFIRST-01. Milestone 1b added
 the repositories themselves to the corpus and set Zin's, Refine's and Zing's design systems beside this one, on the Principal's
 question *"did you included the d/github/zin , ../refine and other repos of real world projects (and also /zing) to the corupus???"*;
 after reading milestone 1 the Principal asked that it show rather than describe and go deeper into first principles, which sections
@@ -18,7 +18,7 @@ after reading milestone 1 the Principal asked that it show rather than describe 
    classified by the root cause that produced it (sections 3 and 4; [`corpus/CORPUS.md`](corpus/CORPUS.md), generated from
    [`corpus/corpus.json`](corpus/corpus.json)), with the theory under each cause, cited.
 3. **The predecessors**: Zin's design system, Refine's PX design and Zing's PX discipline, set beside this one: what each decided,
-   where they agree and differ, and what Zane takes (section 5).
+   where they agree and differ, and what Zayn takes (section 5).
 4. **The design system**: seven archetypes, twenty-six components, 46 tokens, four shapes, what the generator may vary and what it may
    not, for sight, touch and hearing (section 6), each principle **shown live**, lawful beside offending, on
    [the samples page](design-system-samples.html).
@@ -40,11 +40,11 @@ under the Principal's eye, and each fix answered the last remark and caused the 
 | "you have space, why don't you use it?" (a 1240 px frame on a 1900 px screen) | widened the frame to 1760 px | cards stretched to 150-character lines |
 | "making best use of the space does not mean creating divs as large as this" | set a reading width, centred in the frame | an empty band on the left |
 | (the band) | added a steering column on the left | "this navigation system is not ours!" |
-| (the steering column) | moved to Zane's outline on the right | the filters moved to the top left |
+| (the steering column) | moved to Zayn's outline on the right | the filters moved to the top left |
 | "well done! but again you fail at understanding space" | sized the box to its content | (closed) |
 
 The same day, a hover on the radar became a tooltip, a reading panel, a tooltip, a plain tooltip, an info bar and then a phone
-behaviour; separators were added, thickened and removed everywhere; links became bold, then lost the bold. The Zane site shows the
+behaviour; separators were added, thickened and removed everywhere; links became bold, then lost the bold. The Zayn site shows the
 same chains: the hero panel was too wide, then a tall narrow box, then a box that hid the museum's door (Z352, Z353, Z354); a
 repeated menu label was "fixed" by deleting the landing page, which the Principal then had to restore (Z162, Z163); a line-balance
 fix covered a list of element kinds, and the defect came back that afternoon on a kind not in the list (Z421, Z423).
@@ -153,8 +153,8 @@ was rarely tested, not because touch is right: Z455 found a hover design ruled f
 | a smaller footer (harobanda, 2026-09-28) against 18 px or more everywhere (Lookout, 2026-11-09) | the footer is secondary, never unreadable | the footer is set at the small size, which is the floor (18 px), in plain weight and secondary ink |
 | "do not overestimate the realworld use" (Z215) against "never undersell" (Z223, Z240) | a claim at its true size | affirmative sentences, nothing inflated (PRINCIPAL-AFFIRM-01) |
 | all modules greyed in the menu, then a menu adapted to the role (an NGO platform, 10-17 and 11-02) | the menu tells the truth about what this user can reach | the menu shows what the role can use (the later ruling) |
-| links coloured with an underline on hover (Zane, 2026-11-06) against the browser's plain underline (Lookout, 2026-11-09) | a link is found without effort, with one emphasis | **decided** (section 9, (b)): a link in running text carries the plain underline at rest; a cue that appears only on hover does not exist on a phone |
-| a second level drawn vertically (Zin, 2026-04, Z123) against a horizontal band fixed under the bar (stzsite 2026-10-16, Zane 2026-11-04) | the two levels must never read as one | the later rulings hold for a site: a horizontal band; Zin's reason is kept, the band differs from the bar in place, size and weight |
+| links coloured with an underline on hover (Zayn, 2026-11-06) against the browser's plain underline (Lookout, 2026-11-09) | a link is found without effort, with one emphasis | **decided** (section 9, (b)): a link in running text carries the plain underline at rest; a cue that appears only on hover does not exist on a phone |
+| a second level drawn vertically (Zin, 2026-04, Z123) against a horizontal band fixed under the bar (stzsite 2026-10-16, Zayn 2026-11-04) | the two levels must never read as one | the later rulings hold for a site: a horizontal band; Zin's reason is kept, the band differs from the bar in place, size and weight |
 | "never two scrolls at once" (Z309, Z310) against a workstation whose panes scroll (Z357; Refine's and Zing's shells) | the reader never meets a scroll inside a scroll | on a page, only the document scrolls; in an application, each pane scrolls by itself and no scrolling region sits inside another (section 6.5) |
 | a control beside its content (Z364) against every action at the right edge of the IDE's one sub-level bar (Zing, 2026-06, Z272) | a control is found where the act applies | an item's action sits beside the item; a view's actions sit in the view's own bar, which is never wider than the view |
 | "Honest boundaries" at the end of every document (Zing Studio, 2026-06, Z207) against "this role of transparency that hurts the project image" (Z240) | a claim at its true size | the later ruling holds on every public page (PRINCIPAL-AFFIRM-01); the bounds live in the repository's own documents |
@@ -408,30 +408,30 @@ asked for is named in the report before it ships; the author's words are kept as
 
 ## 5. The predecessors: Zin's design system, Refine's PX design and Zing's PX discipline
 
-Zane's system is the fourth attempt in this estate, not the first. Each predecessor decided much that still holds, and each also
-fixed values that later corrections overruled. This section sets each one beside Zane's system: what it decided, where the two agree,
-where they differ and why, and what Zane takes. A decision of a predecessor that Zane contradicts is named with the corpus evidence
-for the change; where the corpus has no evidence against it, Zane adopts it.
+Zayn's system is the fourth attempt in this estate, not the first. Each predecessor decided much that still holds, and each also
+fixed values that later corrections overruled. This section sets each one beside Zayn's system: what it decided, where the two agree,
+where they differ and why, and what Zayn takes. A decision of a predecessor that Zayn contradicts is named with the corpus evidence
+for the change; where the corpus has no evidence against it, Zayn adopts it.
 
 ### 5.1 Zin's design system
 
 **What it is.** Zin, the Principal's platform, states its design system in five places: the Zui specification v3.0 (the intent
-grammar Zane inherits), the Interface Constitution with severities, the multi-sensory token extension
+grammar Zayn inherits), the Interface Constitution with severities, the multi-sensory token extension
 (`doc/design/ZIN_DESIGN_SYSTEM_TRANSVERSE.md`), the tokens its compiler writes for each project, and the banking demo's stylesheet.
 Its centre is **the closed intent grammar**, 22 verbs in six families, from which every widget follows, and **an Interface
 Constitution of numbered rules**, each derived from a system article: one vertical reading flow, zero displacement, undo within a
 visible grace period, keyboard sovereignty, visible state, predictable authority, business time, calm density, and twelve forbidden
-patterns. Zane's law is its descendant: Articles I to VII and the rules on zero displacement (38), undo (79), keyboard sovereignty (80),
-perceivable state (82) and predictable authority (83) carry Zin's decisions under Zane's numbers.
+patterns. Zayn's law is its descendant: Articles I to VII and the rules on zero displacement (38), undo (79), keyboard sovereignty (80),
+perceivable state (82) and predictable authority (83) carry Zin's decisions under Zayn's numbers.
 
 **Where the two agree.** Colour carries meaning, never decoration, and the banking demo's five statuses are exactly Rule 118's; six
-type sizes and a spacing scale whose steps Zane keeps; motion reports and never decorates; a 2 px focus ring that may not be removed;
+type sizes and a spacing scale whose steps Zayn keeps; motion reports and never decorates; a 2 px focus ring that may not be removed;
 selection never acts; words in the reader's vocabulary, never the implementation's; one dominant reading flow; amendment only by
 evidence of real, recurring harm; a closed vocabulary the generator may not extend.
 
-**Where they differ, and why Zane departs.**
+**Where they differ, and why Zayn departs.**
 
-| subject | Zin | Zane | the evidence for Zane's value |
+| subject | Zin | Zayn | the evidence for Zayn's value |
 |---|---|---|---|
 | reading size | 16 px in the tokens, 15 px in the banking demo, 20 px only in the kitchen | 21 px everywhere | section 9 (a); Z245, Z251, Z253, Z263, Z271 |
 | smallest size | 12 px; the banking demo's commonest is 11.7 px | 18 px | section 9 (c); Z251, Z253, Z266 |
@@ -446,11 +446,11 @@ evidence of real, recurring harm; a closed vocabulary the generator may not exte
 | motion | pulsing halos and a 420 ms zoom while Zin's own limit is 200 ms | 150 ms to report a change the user made; nothing pulses | Z320, Z326, Z327; Zin's own Article I |
 | sound | a chime confirms a successful act | sound corroborates a state already visible and never acknowledges a click | Rule 125, from the sound plane's corrections (Z076 to Z079) |
 | the console | ASCII only (Z121) | the box-drawing glyphs are Softanza's display system | Z431, the later ruling |
-| a culture | a vibe changes density, navigation, feedback and input, "not a theme" | a culture changes colour, font, radius and shadow, and **now also its interaction vocabulary** (below); never a size, a space or a meaning | Article VI; Zane takes Zin's broader reading |
+| a culture | a vibe changes density, navigation, feedback and input, "not a theme" | a culture changes colour, font, radius and shadow, and **now also its interaction vocabulary** (below); never a size, a space or a meaning | Article VI; Zayn takes Zin's broader reading |
 
-**What Zane takes from Zin.** Twelve decisions enter the system, each in the place named:
+**What Zayn takes from Zin.** Twelve decisions enter the system, each in the place named:
 
-1. **Nothing moves the layout** (Zane Rule 38): an error appears in space reserved for it, a button never moves, a placeholder has the
+1. **Nothing moves the layout** (Zayn Rule 38): an error appears in space reserved for it, a button never moves, a placeholder has the
    final geometry, the scrollbar gutter is reserved. A new check, K22 LAYOUT_STILL.
 2. **An active filter is always visible**, by the control showing its value (Rule 82); the `field` component.
 3. **Selection never acts** (Article II), and **Cancel is reachable from every confirmation**, Enter for the primary action and Esc to
@@ -473,7 +473,7 @@ evidence of real, recurring harm; a closed vocabulary the generator may not exte
 **What the corpus overrules in Zin**: the sizes and contrasts above; tooltips and hover cards; cards for reading; nested and sideways
 scroll; pulsing motion; boxes that mark structure (Z403, Z336); the ASCII-only console. Zin's compiler also designs more checking than
 it runs: its specification lists ten violations (INTENT_ORPHAN, MISSING_UNDO, DECORATIVE_ANIMATION and others) and two design
-checks run today. Zane's verifier and the checks of section 7 are where those designs are carried out.
+checks run today. Zayn's verifier and the checks of section 7 are where those designs are carried out.
 
 ### 5.2 Refine's PX design
 
@@ -490,9 +490,9 @@ primary action; colour is semantic; one form, one meaning; one explanation per v
 result; a sheet over a frozen page; a concept shown, not described; plain words defined once; the reading leading of 1.7 and the
 button radius of 8 px.
 
-**Where they differ, and why Zane departs.**
+**Where they differ, and why Zayn departs.**
 
-| subject | Refine | Zane | the evidence for Zane's value |
+| subject | Refine | Zayn | the evidence for Zayn's value |
 |---|---|---|---|
 | reading size | the IDE's body 14 px; the site's 18 px | 21 px | Z245 (the Principal zoomed Refine's own site to 120%), Z271 |
 | smallest size | 11.5 to 14 px in the IDE; 9.5 px labels on the site | 18 px | Z251, Z253, Z263, Z266 |
@@ -505,7 +505,7 @@ button radius of 8 px.
 | scroll | panes and site ribbons scroll on their own, sideways included; smooth scrolling | panes in the application archetype only, never nested, never sideways; navigation is instant | Z305, Z309, Z310, Z326 |
 | site cards | react to the pointer like links | a container never reacts | Z168, Z203 |
 
-**What Zane takes from Refine.**
+**What Zayn takes from Refine.**
 
 1. **The application archetype** (section 6.5): the directional flow, one view bar per view holding its sub-views at the start and its
    actions at the end, content directly under the bar.
@@ -529,20 +529,20 @@ button radius of 8 px.
 June 2026 brief and "carried over from Refine", governs the IDE: a 12 px floor, actions at the right edge of the one sub-level bar, no
 tooltips with a status bar instead, colour for meaning only, numbers in ink with tabular figures, no yellow, every colour a token,
 light and dark first-class, a creation dialog, AI in one place, localisation by design, and refusals shown as the source's own
-message, line and caret (Z272). Zing's site, the former StzWeb, obeys Zane's law, whose Rules 105 to 116 were born on it in August
+message, line and caret (Z272). Zing's site, the former StzWeb, obeys Zayn's law, whose Rules 105 to 116 were born on it in August
 2026.
 
 **Where the two agree.** Rank without shrinking; no tooltips; colour for meaning; every value a token; tables over cards; controls
 that grow with their label and rows that wrap; no decorative motion; nothing floats over the reading.
 
-**Where they differ, and why Zane departs.** Zing's 12 px floor is below every later ruling, its own parent's included (Refine's site
+**Where they differ, and why Zayn departs.** Zing's 12 px floor is below every later ruling, its own parent's included (Refine's site
 had moved to 18 px, Z245), so it is read as **superseded in its value and kept in its principle**: size never ranks. The Studio ranks
 secondary text by greying it, 68 times at 3.4 to 3.6:1, the defect Z253 names. Its status bar is fed by the pointer only, with no tap
 path (Z455), and its panes scroll inside a page that does not (Z305, Z310). The site's hero reaches 4.6 times the reading size (Z264),
 and its reader still carries tooltips (Z307). The brief's "Honest boundaries" on every commercial page (Z207) is the origin of the
 negative marketing the Principal later refused (Z240); PRINCIPAL-AFFIRM-01 replaces it.
 
-**What Zane takes from Zing.**
+**What Zayn takes from Zing.**
 
 1. **The application shell** (with Refine's), and in it **the status line as the one channel for what a control does**, a strip in the
    layout and never a floating layer, reachable by hover, focus and a first tap; Lookout arrived at the same "info bar" after four
@@ -569,9 +569,9 @@ negative marketing the Principal later refused (Z240); PRINCIPAL-AFFIRM-01 repla
 
 ## 6. The design system
 
-The system serves Zane's bounded domain: intent-driven interfaces for business applications and the sites that explain them. It
-applies first to the Zane site (milestones 2 and 3) and is written so a generator can follow it on any Softanza site and in any
-application built with Zane, whose shell it takes from Refine and Zing (section 5).
+The system serves Zayn's bounded domain: intent-driven interfaces for business applications and the sites that explain them. It
+applies first to the Zayn site (milestones 2 and 3) and is written so a generator can follow it on any Softanza site and in any
+application built with Zayn, whose shell it takes from Refine and Zing (section 5).
 
 ### 6.1 Thirteen principles, one per cause
 
@@ -617,7 +617,7 @@ Retro is keyboard-first with instant feedback, Modern pointer-first; every input
 | | `--link` | navigation | culture | F |
 | | `--action`, `--on-action` | the one primary action of a view, and its label at 7:1 | culture | F |
 | | `--focus` | the focus ring | culture | H |
-| | `--brand` | the brand's word on the bar, apart from the bar's entries, at 7:1 or more; added after milestone 2 (the Principal, 2026-11-11: "use color for the world ZANE") | culture | N |
+| | `--brand` | the brand's word on the bar, apart from the bar's entries, at 7:1 or more; added after milestone 2 (the Principal, 2026-11-11: "use color for the world ZAYN") | culture | N |
 | | `--bar`, `--on-bar` | the surface the menu and the footer stand on, and the front page's photograph panel, with the words on it; added in milestone 2, because each culture's identity lives in its bar (Modern's indigo, Retro's terminal black) and no token above can be both | culture | E |
 | colour: data (6) | `--success`, `--warning`, `--danger`, `--info`, `--muted` | Rule 118's five semantic values | culture | E |
 | | `--meta` | the one neutral for channels, types and categories | culture | E |
@@ -678,13 +678,13 @@ application's screen, taken from Refine's directional flow and Zing's shell (sec
 
 | archetype | pages | order of regions |
 |---|---|---|
-| **front** | `index.html` | hero; one sentence on what Zane is; why it exists; what it is, in a table; what is here, as links |
+| **front** | `index.html` | hero; one sentence on what Zayn is; why it exists; what it is, in a table; what is here, as links |
 | **landing** | each section's first page | page head; the same four steps at the section's scale; the section's pages in a table, one line each |
 | **article** | a concept page | page head; outline (three or more sections); for each section: a statement, a sample frame (lawful beside offending), points |
 | **reference** | the Reader, rules, conformance | page head; one table |
 | **tool** | the UI audit, Try, Build | page head; controls in the page's flow, beside what they act on; a notice; the result as a table |
 | **deck** | the tour | slides |
-| **application** | a product built with Zane: an IDE, a console, a business tool | the bar (the mode); panes in the directional flow (the item on the left, the workspace, the context on the right), each view under its view bar; the status line at the foot; dialogs over a frozen page. Persistent chrome has a ceiling, paid for on every look (Refine). On a phone the panes become successive screens, never a second scroll |
+| **application** | a product built with Zayn: an IDE, a console, a business tool | the bar (the mode); panes in the directional flow (the item on the left, the workspace, the context on the right), each view under its view bar; the status line at the foot; dialogs over a frozen page. Persistent chrome has a ceiling, paid for on every look (Refine). On a phone the panes become successive screens, never a second scroll |
 
 ### 6.6 What the generator may vary, and what it may not
 
@@ -709,7 +709,7 @@ application's screen, taken from Refine's directional flow and Zing's shell (sec
 
 ## 7. The checks: every rule read on the painted page
 
-The UI audit (`tools/ui-audit.html`) reads the rendered page and site-shell (`node tools/site-shell.js`, and `zane site shell`)
+The UI audit (`tools/ui-audit.html`) reads the rendered page and site-shell (`node tools/site-shell.js`, and `zayn site shell`)
 reads the files. Milestone 2 builds the new checks and shows each one failing on today's pages first, with its count. Every check
 runs at 375, 768, 1085, 1440 and 1900 px in Modern and in Retro.
 
@@ -785,10 +785,10 @@ words, and the system above is written to them:
 
 The question as it was put:
 
-- (a) The reading size: 20 px, the Zane site's size since 2026-11-04, or 21 px, Lookout's since 2026-11-09 (PRINCIPAL-READSIZE-01,
+- (a) The reading size: 20 px, the Zayn site's size since 2026-11-04, or 21 px, Lookout's since 2026-11-09 (PRINCIPAL-READSIZE-01,
   already routed). The token holds whichever is ruled.
 - (b) A link in running text: the browser's plain underline at rest (recommended: it does not depend on hover, which a phone does
-  not have, and it is Lookout's latest ruling), or the colour at rest and the underline under the pointer (the Zane site's ruling of
+  not have, and it is Lookout's latest ruling), or the colour at rest and the underline under the pointer (the Zayn site's ruling of
   2026-11-06).
 - (c) The footer at the 18 px floor, replacing harobanda's smaller footer of 2026-09-28 (recommended: one floor everywhere).
 - (d) Code highlighting from the tokens, four roles (comment, keyword, string, verdict) instead of today's eight hues

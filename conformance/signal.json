@@ -3,7 +3,7 @@
     "title": "The SIGNAL Vocabulary",
     "version": "1.3",
     "lastUpdated": "2026-08-23",
-    "constitution": "3.16",
+    "constitution": "3.17",
     "stratum": "SIGNAL",
     "specification": "doc/THE-SECOND-FOUNDING.md section 5",
     "note": "SIGNAL is the expression stratum for a meaning bound to a perceptible quality -- colour in the visual channel, timbre in the auditory one, waveform in haptics. This file publishes the vocabulary as data for the same reason media.json exists: implementations consume it rather than read it, and two channels of one semantic system had already drifted apart before anyone could see it in a diff. EXTRACTED, NOT DESIGNED: every value and every meaning below is quoted from Rule 118, which is the law of record. Where this file records something the law does not say, it says so."
@@ -193,7 +193,7 @@
     ]
   },
   "honestBoundaries": [
-    "This file records the SIGNAL vocabulary; it does not yet make it DECLARABLE. Nothing in the .zane grammar names a semantic value, so no diagnostic can be raised from this file today. Closing a language field is a language change and is the author's ruling to make -- the same gate SURFACE_AS passed through before media.json could be enforced.",
+    "This file records the SIGNAL vocabulary; it does not yet make it DECLARABLE. Nothing in the .zayn grammar names a semantic value, so no diagnostic can be raised from this file today. Closing a language field is a language change and is the author's ruling to make -- the same gate SURFACE_AS passed through before media.json could be enforced.",
     "THREE of the ten media record a rendering -- visual, auditory and voice -- because three have been built, and as of 2026-08-23 all three ANSWER rather than merely appear: each carries rendersAsAbsence, so each is decidable. The other seven are absent rather than empty: print, luminous and signage all carry SIGNAL in principle and none has an instrument, so a cross-medium pair naming one of them stays UNDECIDED, correctly.",
     "THE CONSTITUTION STILL HAS NO PRECEDENCE MECHANISM, and that is unchanged by v3.11. The four conflicts were settled by amending both rules so they no longer overlap -- not by deciding which wins, because nothing in the law can decide that. Rule 118 is invariant: true and Rule 3 is not, which looks like precedence and is not: invariant means 'never flexes across vibes', the Reader's own wording. 46 of 122 rules carry it. The next two rules to collide will collide the same way, and the only reason this pair was found is that someone put them side by side by hand.",
     "The visual channel's gap, filed 2026-08-13 and open nine days, is CLOSED at 2026-08-22 -- and it closed the day it was chased rather than the day it was routed, with no new argument and no new evidence in between. What changed is that somebody asked twice. The estate lesson is not about the waiting: for those nine days the keystone at this end published NOT PROVED, which is indistinguishable on any board from a claim that failed."

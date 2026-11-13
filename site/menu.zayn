@@ -1,6 +1,6 @@
-// site/menu.zane: the Zane site's own menu, declared in Zane (language 1.6; Rule 116 at v3.16).
-// Written by `zane site shell --write` from the registry of tools/site-shell.js. `zane site shell` fails when this file differs
-// from the registry, and refuses in it what `zane check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and
+// site/menu.zayn: the Zayn site's own menu, declared in Zayn (language 1.6; Rule 116 at v3.16).
+// Written by `zayn site shell --write` from the registry of tools/site-shell.js. `zayn site shell` fails when this file differs
+// from the registry, and refuses in it what `zayn check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and
 // MENU_LABEL_DUPLICATE. The main menu names each section; the band under a section opens on its landing page.
 
 DEFINE NAV_GRAPH main_menu (

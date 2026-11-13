@@ -8,7 +8,7 @@
 // Everything else is lawful on purpose: EXIT is reachable so the STEPS raises
 // no TRAPPED_FLOW, and the INTENT_FLOW names a flow declared below. If a later
 // edit to the per-kind table starts refusing any of the four, this goes red.
-// The court (haro/zane.stzu) still refuses all four here; that is seam S13.
+// The court (haro/zayn.stzu) still refuses all four here; that is seam S13.
 // Expected: clean
 
 DEFINE INTENT_FLOW review_invoice (

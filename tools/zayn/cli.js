@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 /* ==========================================================================
-   zane — the verifier CLI.
+   zayn — the verifier CLI.
 
-     zane check <file.zane> [file.zane …] [options]
+     zayn check <file.zayn> [file.zayn …] [options]
 
    Options
      --level N          conformance level to run at (1-4, default 2)
@@ -24,7 +24,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { verify } = require('./zane.js');
+const { verify } = require('./zayn.js');
 const { toEnvelope } = require('./envelope.js');
 
 /* ---- argument parsing ---- */
@@ -49,9 +49,9 @@ function parseArgs(argv) {
   return opts;
 }
 
-const USAGE = `zane — the Zane verifier
+const USAGE = `zayn — the Zayn verifier
 
-  zane check <file.zane> [file.zane …] [options]
+  zayn check <file.zayn> [file.zayn …] [options]
 
   --level N        conformance level, 1-4 (default 2)
   --symbols FILE   JSON symbol table for Level 3 checks
@@ -150,29 +150,29 @@ function main(argv) {
   const opts = parseArgs(argv);
 
   if (opts.help || !opts.command) { console.log(USAGE); return opts.help ? 0 : 2; }
-  if (opts.unknown) { console.error(`zane: unknown option ${opts.unknown}\n`); console.error(USAGE); return 2; }
-  if (opts.command !== 'check') { console.error(`zane: unknown command "${opts.command}"\n`); console.error(USAGE); return 2; }
-  if (!opts.files.length) { console.error('zane: no files given\n'); console.error(USAGE); return 2; }
-  if (!(opts.level >= 1 && opts.level <= 4)) { console.error('zane: --level must be 1, 2, 3 or 4'); return 2; }
+  if (opts.unknown) { console.error(`zayn: unknown option ${opts.unknown}\n`); console.error(USAGE); return 2; }
+  if (opts.command !== 'check') { console.error(`zayn: unknown command "${opts.command}"\n`); console.error(USAGE); return 2; }
+  if (!opts.files.length) { console.error('zayn: no files given\n'); console.error(USAGE); return 2; }
+  if (!(opts.level >= 1 && opts.level <= 4)) { console.error('zayn: --level must be 1, 2, 3 or 4'); return 2; }
 
   const contract = loadContract(opts.contract);
   const law = loadLaw(contract && contract.path);
   if (!contract && !opts.json) {
-    console.error('zane: warning — conformance/violations.json not found; findings will not cite the law.');
+    console.error('zayn: warning — conformance/violations.json not found; findings will not cite the law.');
     console.error('     vendor it beside the verifier, or pass --contract PATH.\n');
   }
 
   let symbols = null;
   if (opts.symbols) {
     try { symbols = JSON.parse(fs.readFileSync(opts.symbols, 'utf8')); }
-    catch (e) { console.error(`zane: cannot read symbols file ${opts.symbols}: ${e.message}`); return 2; }
+    catch (e) { console.error(`zayn: cannot read symbols file ${opts.symbols}: ${e.message}`); return 2; }
   }
 
   const findings = [];
   for (const file of opts.files) {
     let src;
     try { src = fs.readFileSync(file, 'utf8'); }
-    catch (e) { console.error(`zane: cannot read ${file}: ${e.message}`); return 2; }
+    catch (e) { console.error(`zayn: cannot read ${file}: ${e.message}`); return 2; }
 
     for (const d of verify(src, { symbols })) {
       const m = meta(contract, d.id);
@@ -203,7 +203,7 @@ function main(argv) {
       contract: contract ? { version: contract.version, constitution: contract.constitution } : null,
       files: opts.files,
       counts: { errors, warnings },
-      diagnostics: findings.map(f => toEnvelope(f, f.meta, 'zane'))
+      diagnostics: findings.map(f => toEnvelope(f, f.meta, 'zayn'))
     }, null, 2));
     return errors > 0 ? 1 : 0;
   }
@@ -221,7 +221,7 @@ function main(argv) {
 
   if (!opts.quiet) {
     if (!findings.length) {
-      const against = contract && contract.constitution ? ` against Zane v${contract.constitution}` : '';
+      const against = contract && contract.constitution ? ` against Zayn v${contract.constitution}` : '';
       console.log(`clean — ${opts.files.length} file(s), 0 violations at level ${opts.level}${against}`);
     } else {
       console.log(`\n${errors} error(s), ${warnings} warning(s) across ${opts.files.length} file(s) at level ${opts.level}`);

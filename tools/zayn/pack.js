@@ -3,7 +3,7 @@
    pack.js — the protocol pack's manifest, generated and verified.
 
    S13. What a participant downloads and pins, with a hash for every file, so
-   "we conform to Zane v3.14" is a checkable claim rather than a sentence in a
+   "we conform to Zayn v3.14" is a checkable claim rather than a sentence in a
    README.
 
    THE POINT OF HASHING. A version number says which edition you meant. It does
@@ -15,8 +15,8 @@
    is data and prose only, which is what makes an implementation in any language
    possible: agreement is proved by running the fixtures, not by linking code.
 
-   Usage:  node tools/zane/pack.js            write protocol/MANIFEST.json
-           node tools/zane/pack.js --check     verify without writing
+   Usage:  node tools/zayn/pack.js            write protocol/MANIFEST.json
+           node tools/zayn/pack.js --check     verify without writing
    Exit:   0 written or verified · 1 a file drifted or is missing · 2 setup
    ========================================================================== */
 
@@ -91,7 +91,7 @@ function versions() {
   let rules = 0; for (const s of sets) rules += (law[s].rules || []).length;
 
   const spec = fs.readFileSync(path.join(ROOT, 'doc/language/README.md'), 'utf8')
-    .match(/^#\s+The Zane Language\s+—\s+Specification\s+v(\S+)/m);
+    .match(/^#\s+The Zayn Language\s+—\s+Specification\s+v(\S+)/m);
 
   const contract = read('conformance/violations.json');
   const fixtures = read('conformance/manifest.json');
@@ -128,7 +128,7 @@ function readmeClaims(v, pinnedCount) {
   claim('the diagnostic count',  /(\d+) diagnostics with severities/,   v.diagnostics);
   claim('the fixture count',     /(\d+) fixtures with known verdicts/,  v.fixtures);
   claim('the pinned-file count', /\*\*(\d+) files, no runtime/,         pinnedCount);
-  claim('the law version',       /conforms to Zane v(\S+?) at level/,    v.constitution);
+  claim('the law version',       /conforms to Zayn v(\S+?) at level/,    v.constitution);
   return bad;
 }
 
@@ -140,9 +140,9 @@ function main(argv) {
   const v = versions();
   const manifest = {
     metadata: {
-      title: 'The Zane Protocol Pack',
+      title: 'The Zayn Protocol Pack',
       version: '1.0',
-      generated: 'by tools/zane/pack.js -- never hand-edited',
+      generated: 'by tools/zayn/pack.js -- never hand-edited',
       note: 'Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.',
       hash: 'sha256 over LF-normalised content'
     },
@@ -152,7 +152,7 @@ function main(argv) {
 
   const text = JSON.stringify(manifest, null, 2) + '\n';
 
-  console.log(`\nThe Zane protocol pack`);
+  console.log(`\nThe Zayn protocol pack`);
   console.log(`  law          v${v.constitution} — ${v.rules} rules, ${v.forbiddenPatterns} forbidden patterns`);
   console.log(`  language     v${v.language} — ${v.diagnostics} diagnostics`);
   console.log(`  axes         ${v.media} media, ${v.signalValues} semantic values`);

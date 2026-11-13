@@ -1,11 +1,11 @@
-//! sitegrid.zig: `zane site grid [--write]`, the two tables of the Approach pages drawn from their data, as
+//! sitegrid.zig: `zayn site grid [--write]`, the two tables of the Approach pages drawn from their data, as
 //! tools/site-grid.js draws them, and the coverage counts of doc/design/coverage-count.js that the grid and
-//! `zane site facts` read (doc/design/BINARY.md, S5).
+//! `zayn site facts` read (doc/design/BINARY.md, S5).
 //!
 //!   site/grid.html   <!-- grid:table -->      the coverage grid: a row per channel, a column per activity
 //!   site/media.html  <!-- channels:table -->  the ten channels and their properties, from conformance/media.json
 //!
-//! Like `zane pack`, it reads the tree it is run in (the repository's root): the placement file, the law, media.json,
+//! Like `zayn pack`, it reads the tree it is run in (the repository's root): the placement file, the law, media.json,
 //! violations.json, the manifest and the fixtures, never the copies built into the binary. The counts are those of
 //! coverage-count.js --json, by the same reading; its text report (--grid, --cells) is not carried here and stays a
 //! JavaScript tool.
@@ -100,7 +100,7 @@ pub fn coverage(a: Allocator) !Coverage {
     for (media_list) |m| try cols.append(a, try js.string(a, js.get(m, "id")));
     const nc = cols.items.len;
 
-    // a verb is absent from a medium the way zane.js derives it: default "absent" keeps only native and degraded
+    // a verb is absent from a medium the way zayn.js derives it: default "absent" keeps only native and degraded
     var absent_in = try a.alloc([]const []const u8, media_list.len);
     for (media_list, 0..) |m, i| {
         const c = js.get(m, "carries");
@@ -166,7 +166,7 @@ pub fn coverage(a: Allocator) !Coverage {
     const fixtures = js.items(js.get(man, "fixtures"));
     const stemOf = struct {
         fn f(file: []const u8) []const u8 {
-            return if (std.mem.endsWith(u8, file, ".zane")) file[0 .. file.len - 5] else file;
+            return if (std.mem.endsWith(u8, file, ".zayn")) file[0 .. file.len - 5] else file;
         }
     }.f;
     const comment = try re.compile(a, "\\/\\/.*$", "gm");
@@ -338,7 +338,7 @@ pub fn check(a: Allocator, out: ?*std.Io.Writer, write: bool, problems: *std.Arr
     }
 }
 
-/// `zane site grid [--write]`: what node tools/site-grid.js [--write] prints, and its exit code.
+/// `zayn site grid [--write]`: what node tools/site-grid.js [--write] prints, and its exit code.
 pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     var write = false;
     for (argv) |x| if (std.mem.eql(u8, x, "--write")) {

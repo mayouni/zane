@@ -3,7 +3,7 @@
 **What this is.** The record of ZANE-DESIGN-01 milestone 2: the design system of [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md) written into the site's
 stylesheet, its checks added to the UI audit and to site-shell (in JS and in Zig, with parity), every new check run on the pages as they
 were before the stylesheet changed, then again after. The figures come from two full runs of `tools/ui-audit.html` with **System**
-ticked (38 pages, five widths, both cultures: 380 renders each) and from `zane site shell`; the runs were read on 2026-11-10.
+ticked (38 pages, five widths, both cultures: 380 renders each) and from `zayn site shell`; the runs were read on 2026-11-10.
 
 ## What was built
 
@@ -20,9 +20,9 @@ ticked (38 pages, five widths, both cultures: 380 renders each) and from `zane s
   because Retro's monospaced letters are wider. The system counts 45 tokens, 23 set by a culture (`DESIGN-SYSTEM.md` section 6.2).
 - **The checks.** The UI audit's **System** option reads K01 to K17 and K22 on the painted page at 375, 768, 1085, 1440 and 1900 px in
   both cultures, and reports a finding seen at several widths once, with where it was seen, and the count of each check. site-shell (and
-  `zane site shell`, the same check in Zig) reads K01, K09 and K15 in the stylesheets, writes and checks each page's archetype on its
+  `zayn site shell`, the same check in Zig) reads K01, K09 and K15 in the stylesheets, writes and checks each page's archetype on its
   `<body>` (K21), gives every page of three sections or more its outline (K18), and counts on every run what milestone 3 owes (K19, K20).
-  `tools/zane/parity.js` holds the two to one output with nine new cases, one break per check.
+  `tools/zayn/parity.js` holds the two to one output with nine new cases, one break per check.
 - **What a check does not judge.** An offending demo (a gotcha's red pane, a sample marked offending) breaks the law on purpose; a style
   written to dress one sits between the comments `offense:start` and `offense:end` in its stylesheet. A sample frame draws its edge and
   its title strip lawfully. A run quoted in a terminal shows states that are not the page's own.
@@ -52,7 +52,7 @@ ticked (38 pages, five widths, both cultures: 380 renders each) and from `zane s
 | **all** | **6281** | **2453** |
 
 **On the site's 35 pages and the front page: 4047 findings before, 382 after.** The Reader (`constitution/reader/index.html`, 1,925
-both times) and the two tools (`tools/ui-audit.html`, `tools/zane/wasm-proof.html`, 308 before and 145 after) keep pages and styles of
+both times) and the two tools (`tools/ui-audit.html`, `tools/zayn/wasm-proof.html`, 308 before and 145 after) keep pages and styles of
 their own and were not rebuilt in this milestone. The after-run predates one last change, the gotchas' rule links set at regular weight,
 which removes one K08 finding on each of the eight gotchas pages.
 
@@ -95,7 +95,7 @@ which removes one K08 finding on each of the eight gotchas pages.
 | `/site/tour.html` | 157 | 9 |
 | `/constitution/reader/index.html` | 1925 | 1925 |
 | `/tools/ui-audit.html` | 167 | 65 |
-| `/tools/zane/wasm-proof.html` | 141 | 80 |
+| `/tools/zayn/wasm-proof.html` | 141 | 80 |
 
 ## The checks on the files, before and after
 
@@ -121,7 +121,7 @@ which removes one K08 finding on each of the eight gotchas pages.
 
 ## Gates
 
-`zane site shell` and `node tools/site-shell.js`: 38 pages, identical output; `node tools/site-facts.js --check`: ok;
-`node tools/zane/parity.js`: identical in every section (the site's 92 cases and 120 command lines among them); `node tools/zane/serve-test.js`:
-250 of 250; `zane conformance`: level 4, every fixture; `zig build test`: ok; `zig build release`: the six files and SHA256SUMS, the Windows
+`zayn site shell` and `node tools/site-shell.js`: 38 pages, identical output; `node tools/site-facts.js --check`: ok;
+`node tools/zayn/parity.js`: identical in every section (the site's 92 cases and 120 command lines among them); `node tools/zayn/serve-test.js`:
+250 of 250; `zayn conformance`: level 4, every fixture; `zig build test`: ok; `zig build release`: the six files and SHA256SUMS, the Windows
 file 2,507,776 bytes. The version is still 0.1.0, so these files are a build of the tree, not a release to upload.

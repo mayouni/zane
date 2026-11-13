@@ -1,11 +1,11 @@
-# The Zane Protocol Pack
+# The Zayn Protocol Pack
 
 **What a participant downloads, pins, and can be held to.** **12 files, no runtime.**
 
 ```bash
-zane pack --check     # do the bytes I have match the manifest?
-zane conformance --level 4
-zane cross-medium
+zayn pack --check     # do the bytes I have match the manifest?
+zayn conformance --level 4
+zayn cross-medium
 ```
 
 ---
@@ -29,7 +29,7 @@ listed above.
 ## 2. What is in it
 
 12 files in five roles. `MANIFEST.json` carries the hash of each, and
-`zane pack --check` verifies the counts on this page against it — **this README's own numbers
+`zayn pack --check` verifies the counts on this page against it — **this README's own numbers
 are checked, not typed and trusted.**
 
 | Role | Files | What it fixes |
@@ -49,16 +49,16 @@ the findings, the evidence ledger. They are worth reading and they are not the s
 > edition.**
 
 Vendor the twelve files, record `MANIFEST.json` beside them, and make
-`zane pack --check` a step in your build. Then *"conforms to Zane v3.16"* is a claim your CI
+`zayn pack --check` a step in your build. Then *"conforms to Zayn v3.17"* is a claim your CI
 can refute.
 
 This is not paranoia; it is this project's own history. A single trailing space added to a
-title inside `rules.json` leaves the version at v3.16 and changes the law's bytes. Every
+title inside `rules.json` leaves the version at v3.17 and changes the law's bytes. Every
 drift recorded in `doc/EVIDENCE-LEDGER.md` came from something being **described** rather
 than **checked** — a hand-typed census under a heading claiming it was computed, a prose
 catalogue two diagnostics behind the data, a spec whose own title lagged a version.
 
-**The manifest never regenerates itself.** `zane pack` writes it only when you run it without
+**The manifest never regenerates itself.** `zayn pack` writes it only when you run it without
 `--check`, because a manifest that follows the tree automatically pins nothing.
 
 ## 4. Proving conformance
@@ -69,7 +69,7 @@ catalogue two diagnostics behind the data, a spec whose own title lagged a versi
 |---|---|---|
 | 1 | the file alone | the grammar parses; unknown verbs, kinds, enumerations |
 | 2 | the file alone | **the honest target for a standalone verifier** — everything decidable from one declaration |
-| 3 | a symbol table you supply | entities, actors, state, elements — what a `.zane` file cannot know |
+| 3 | a symbol table you supply | entities, actors, state, elements — what a `.zayn` file cannot know |
 | 4 | a rendered surface | what only a painted page reveals |
 
 Comparison is by **diagnostic id only** — never line numbers, message wording, ordering or
@@ -92,12 +92,12 @@ is worth more than one that passes by not looking.**
 
 ## 5. What you may claim, and what you may not
 
-**May**: *"conforms to Zane v3.16 at level 2, verified against manifest `<hash>`."*
+**May**: *"conforms to Zayn v3.17 at level 2, verified against manifest `<hash>`."*
 **May**: your own diagnostic codes, in your own words, in any language.
 **May not**: extend a closed set. The 22 verbs, the ten media, the five semantic values,
 the four enumerations and the ten declaration types are closed. **Adding to one is a
 language change or a constitutional amendment, not an implementation choice** — and an
-implementation that adds a verb is not a superset of Zane, it is a different language that
+implementation that adds a verb is not a superset of Zayn, it is a different language that
 fails the fixtures.
 
 **Retired numbers are never reused.** Rule 79 means the same thing in ten years; diagnostic
@@ -156,7 +156,7 @@ The shapes available, with the cost each carries:
 
 | Option | Buys | Costs |
 |---|---|---|
-| a **URN** namespace, e.g. `urn:zane:law:3.16` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
+| a **URN** namespace, e.g. `urn:zayn:law:3.17` | neutrality, no hosting, no renewal | needs registration to be more than a convention; nothing resolves it |
 | a **domain** the artifacts resolve from | a real fetchable URL, versioned paths | someone owns and renews it forever; it dies with the payment |
 | a **DOI** per version | citable in literature, permanent | a registration agency, a fee, and a workflow per release |
 | **content addressing** — the manifest hash *is* the name | already true, costs nothing, cannot rot | unreadable, and says nothing about which edition is current |

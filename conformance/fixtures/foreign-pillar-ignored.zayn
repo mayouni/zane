@@ -1,6 +1,6 @@
 // A file from a multi-pillar host language. DEFINE ENTITY and DEFINE FLOW
-// belong to other pillars; a Zane verifier has no standing to judge them and
-// must ignore them silently -- not warn, not error. The Zane declaration in
+// belong to other pillars; a Zayn verifier has no standing to judge them and
+// must ignore them silently -- not warn, not error. The Zayn declaration in
 // the same file is checked normally and is lawful.
 // Expected: no diagnostics.
 

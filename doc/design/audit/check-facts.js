@@ -62,8 +62,9 @@ function validate(v, s, at) {
   }
 }
 validate(facts, schema, '$');
-/* 1.1 renamed the format from zui-audit-facts to zane-audit-facts and changed nothing else; a 1.0 file is read as it was */
-const PAIR = { 'zane-audit-facts': '1.1', 'zui-audit-facts': '1.0' };
+/* 1.1 renamed the format from zui-audit-facts to zane-audit-facts, and 1.2 to zayn-audit-facts, each changing nothing else;
+   a 1.1 or 1.0 file is read as it was */
+const PAIR = { 'zayn-audit-facts': '1.2', 'zane-audit-facts': '1.1', 'zui-audit-facts': '1.0' };
 if (PAIR[facts.format] && facts.version !== PAIR[facts.format]) problems.push(`$.version: ${facts.format} is version ${PAIR[facts.format]}`);
 
 // ---- the arithmetic the schema cannot state

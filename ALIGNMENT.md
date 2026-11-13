@@ -33,7 +33,7 @@ refusal format every court in the family speaks.
    `world.json` artifact instead of an ad-hoc table. No verifier logic changes — only
    the provenance of the table it already accepts.
 3. **C6 — lexical alignment, documented not forced.** When Ringua publishes the
-   commons, `.zane`'s divergences are recorded the way the law records burned numbers:
+   commons, `.zayn`'s divergences are recorded the way the law records burned numbers:
    named, dated, never silently rewritten.
 
 ## What must not change

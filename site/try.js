@@ -1,4 +1,4 @@
-/* The "try it" box on the Build page: it hands the declaration to the verifier compiled to wasm (zane-wasm.js) and shows the
+/* The "try it" box on the Build page: it hands the declaration to the verifier compiled to wasm (zayn-wasm.js) and shows the
    envelope it returns, one finding per line. It decides nothing itself: every verdict, code, message and citation comes from
    the wasm. Nothing leaves the page. */
 (async () => {
@@ -6,18 +6,18 @@
   if (!form) return;
   const out = document.getElementById('try-result'), button = form.querySelector('button');
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
-  let zane;
-  try { zane = await ZaneWasm.load(form.dataset.wasm); } catch (e) {
+  let zayn;
+  try { zayn = await ZaynWasm.load(form.dataset.wasm); } catch (e) {
     out.replaceChildren(el('p', 'try-verdict bad', 'The verifier could not load in this browser: ' + e.message + '.'));
     return;
   }
   function check() {
     const level = +document.getElementById('try-level').value;
-    const text = zane.check('this-page.zane', document.getElementById('try-source').value, { level });
+    const text = zayn.check('this-page.zayn', document.getElementById('try-source').value, { level });
     if (text === null) { out.replaceChildren(el('p', 'try-verdict bad', 'The verifier refused the request.')); return; }
     const r = JSON.parse(text), n = r.counts;
     const verdict = r.diagnostics.length === 0
-      ? `Clean: 0 violations at level ${r.level} against Zane v${r.contract.constitution}.`
+      ? `Clean: 0 violations at level ${r.level} against Zayn v${r.contract.constitution}.`
       : `${n.errors} error(s) and ${n.warnings} warning(s) at level ${r.level}.`;
     const list = el('ul');
     for (const d of r.diagnostics) {

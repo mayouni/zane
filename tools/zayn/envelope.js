@@ -50,7 +50,7 @@ function cites(meta) {
  * Build the envelope for one finding.
  * @param finding  {file, id, line, subject, [severity], [level]} — from verify()
  * @param meta     the catalog entry from violations.json, or a structural stub
- * @param language the court's language id (default 'zane'; 'zui' until contract 1.9)
+ * @param language the court's language id (default 'zayn'; 'zane' until contract 1.11, 'zui' until contract 1.9)
  */
 function toEnvelope(finding, meta, language) {
   const m = meta || {};
@@ -60,7 +60,7 @@ function toEnvelope(finding, meta, language) {
     message: m.summary || (finding.subject ? `${finding.id}: ${finding.subject}` : finding.id),
     span: { file: finding.file, line: finding.line || 0 },
     cites: cites(m),
-    language: language || 'zane',
+    language: language || 'zayn',
     /* extension fields — this court's own, permitted by the contract */
     level: finding.level || m.level || 1
   };

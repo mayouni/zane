@@ -1,4 +1,4 @@
-// The lawful twin of missing-undo.zane.
+// The lawful twin of missing-undo.zayn.
 // Expected: no diagnostics.
 
 DEFINE INTENT_FLOW post_entry (

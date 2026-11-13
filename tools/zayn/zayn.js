@@ -1,8 +1,8 @@
 'use strict';
 /* ==========================================================================
-   zane.js — the Zane verifier core.
+   zayn.js — the Zayn verifier core.
 
-   Lexer, parser and checks for the Zane language, implemented against
+   Lexer, parser and checks for the Zayn language, implemented against
    doc/language/ v1.0 and proved against conformance/.
 
    No dependencies. No I/O. Pure functions over a source string, so the same
@@ -25,7 +25,7 @@ const INTENT_VERBS = new Set([
   'PAUSE', 'RESUME', 'RETRY', 'EXIT'
 ]);                                             /* 22, closed */
 
-const ZANE_KINDS = new Set([
+const ZAYN_KINDS = new Set([
   'INTENT_FLOW', 'FORM', 'WIZARD', 'SCREEN', 'COMPONENT',
   'NAV_GRAPH', 'WORLD_VIEW', 'INTERACTION', 'FEEDBACK', 'VIBE'
 ]);                                             /* the ten this language defines */
@@ -215,7 +215,7 @@ function parse(src) {
   const peek = (n = 0) => tokens[Math.min(p + n, tokens.length - 1)];
   const isPunct = (tok, v) => tok.t === T.PUNCT && tok.v === v;
 
-  /* A declaration of another pillar: skip its body without judging it. A Zane
+  /* A declaration of another pillar: skip its body without judging it. A Zayn
      verifier has no standing over DEFINE ENTITY or DEFINE FLOW. */
   function skipBalanced() {
     let depth = 0;
@@ -251,7 +251,7 @@ function parse(src) {
       }
 
       /* Not ours, and not a near-miss we owe a warning for: skip it whole. */
-      if (!ZANE_KINDS.has(kind) && !UNSPECIFIED_KINDS.has(kind)) {
+      if (!ZAYN_KINDS.has(kind) && !UNSPECIFIED_KINDS.has(kind)) {
         if (isPunct(peek(), '(')) skipBalanced();
         continue;
       }
@@ -336,7 +336,7 @@ function parse(src) {
    Fields per kind (ruling D1, 2026-10-31)
 
    Which fields each kind declares, from doc/language/DECLARATIONS.md and the
-   per-kind seats of haro/zane.stzu. SATISFIES, ALWAYS_REACHABLE, SIGNALS and
+   per-kind seats of haro/zayn.stzu. SATISFIES, ALWAYS_REACHABLE, SIGNALS and
    ACTOR belong to every kind; the rest belong to the kinds listed.
    ========================================================================== */
 
@@ -359,11 +359,11 @@ const KIND_FIELDS = {
    INTENT_FLOW is resolved (UNRESOLVED_INTENT_FLOW), VISIBLE_STATE and
    VISIBLE_ENTITIES are collected file-wide -- so the rule behind D1, that the
    verifier speaks where its silence HIDES an error, does not reach them. The
-   court (haro/zane.stzu) still refuses them; that is a named seam. */
+   court (haro/zayn.stzu) still refuses them; that is a named seam. */
 const READ_ON_ANY_KIND = new Set(['STEPS', 'INTENT_FLOW', 'VISIBLE_STATE', 'VISIBLE_ENTITIES']);
 
 /* Every known field a declaration carries that its kind does not declare AND
-   that zane.js would otherwise ignore there.
+   that zayn.js would otherwise ignore there.
    Pure: returns {line, kind, name, field, owned} and raises nothing. `owned`
    names the diagnostic that already speaks for the field, or null. */
 function misplacedFields(decls) {
@@ -671,7 +671,7 @@ function check(decls, symbols) {
         WHAT IT STILL CANNOT SEE, stated because the measurement will be read as
         if it could: an author who declares no INTERACTION at all. Roles per
         interaction is what this counts; interactions per control is the deeper
-        under-declaration, and .zane has no control primitive to count against. */
+        under-declaration, and .zayn has no control primitive to count against. */
 
   {
     const interactions = decls.filter(d => d.kind === ROLE_HOST);
@@ -763,8 +763,8 @@ function check(decls, symbols) {
    ========================================================================== */
 
 /**
- * Verify one Zane source string.
- * @param {string} source        the .zane text
+ * Verify one Zayn source string.
+ * @param {string} source        the .zayn text
  * @param {object} [opts]
  * @param {object} [opts.symbols] {entities, actors, state, elements} — Level 3
  * @returns {Array<{id, line, subject}>} diagnostics, in source order
@@ -775,7 +775,7 @@ function verify(source, opts) {
   return diagnostics.concat(check(decls, options.symbols || null));
 }
 
-const API = { verify, parse, lex, misplacedFields, KIND_FIELDS,INTENT_VERBS, ZANE_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED, SIGNALS, SIGNAL_ABSENCE };
+const API = { verify, parse, lex, misplacedFields, KIND_FIELDS,INTENT_VERBS, ZAYN_KINDS, UNSPECIFIED_KINDS, PERSPECTIVES, TONES, MEDIA, MEDIA_CARRIAGE, NOT_CARRIED, SIGNALS, SIGNAL_ABSENCE };
 
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
-if (typeof window !== 'undefined') window.Zane = API;
+if (typeof window !== 'undefined') window.Zayn = API;

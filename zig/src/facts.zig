@@ -1,4 +1,4 @@
-//! facts.zig: `zane audit-facts [facts.json] [--rules 62,105]`, the screenshot audit's facts check (doc/design/BINARY.md,
+//! facts.zig: `zayn audit-facts [facts.json] [--rules 62,105]`, the screenshot audit's facts check (doc/design/BINARY.md,
 //! S2). The same as doc/design/audit/check-facts.js, printing the same lines: the facts file against its schema (by a
 //! validator for exactly the keywords that schema uses, with that script's own problem texts), the arithmetic the
 //! schema cannot state, and the two decisions a screenshot can make, with the thresholds of decides.json.
@@ -236,7 +236,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
 
     const schema = try std.json.parseFromSliceLeaky(Value, a, facts_schema_json, contract_mod.js_parse);
     const facts_raw = std.fs.cwd().readFileAlloc(a, file, 64 * 1024 * 1024) catch |e| {
-        try out.print("zane: cannot read {s}: {s}\n", .{ file, @errorName(e) });
+        try out.print("zayn: cannot read {s}: {s}\n", .{ file, @errorName(e) });
         return 2;
     };
     const facts = try std.json.parseFromSliceLeaky(Value, a, try core.wellFormed(a, facts_raw), contract_mod.js_parse);
@@ -317,9 +317,10 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     }.f;
 
     try validate(a, facts, schema, "$", &problems);
-    // 1.1 renamed the format from zui-audit-facts to zane-audit-facts and changed nothing else; a 1.0 file is read as it was
+    // 1.1 renamed the format from zui-audit-facts to zane-audit-facts, and 1.2 to zayn-audit-facts, each changing nothing else;
+    // a 1.1 or 1.0 file is read as it was
     if (strOf(get(facts, "format"))) |fmt| {
-        const want: ?[]const u8 = if (std.mem.eql(u8, fmt, "zane-audit-facts")) "1.1" else if (std.mem.eql(u8, fmt, "zui-audit-facts")) "1.0" else null;
+        const want: ?[]const u8 = if (std.mem.eql(u8, fmt, "zayn-audit-facts")) "1.2" else if (std.mem.eql(u8, fmt, "zane-audit-facts")) "1.1" else if (std.mem.eql(u8, fmt, "zui-audit-facts")) "1.0" else null;
         if (want) |w| {
             const ver = get(facts, "version");
             if (ver == null or ver.? != .string or !std.mem.eql(u8, ver.?.string, w)) try problems.append(a, try std.fmt.allocPrint(a, "$.version: {s} is version {s}", .{ fmt, w }));

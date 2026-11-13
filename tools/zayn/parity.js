@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 /* ==========================================================================
-   parity.js -- the gate of stages S1 and S2 (doc/design/BINARY.md section 5): the binary's `zane check` against
-   `node tools/zane/cli.js check`, and its `conformance`, `pack`, `cross-medium` and `audit-facts` against the
+   parity.js -- the gate of stages S1 and S2 (doc/design/BINARY.md section 5): the binary's `zayn check` against
+   `node tools/zayn/cli.js check`, and its `conformance`, `pack`, `cross-medium` and `audit-facts` against the
    scripts they replace (conformance.js, pack.js, cross-medium.js, doc/design/audit/check-facts.js), byte for byte.
 
-     node tools/zane/parity.js [--bin PATH] [--seed N] [--per N] [--quiet] [--write-wasm-proof] [--only site] [--list-site]
+     node tools/zayn/parity.js [--bin PATH] [--seed N] [--per N] [--quiet] [--write-wasm-proof] [--only site] [--list-site]
 
    1. THE FIXTURES. Every fixture of conformance/manifest.json, run by both under four argument sets (--json at
       level 4, text at level 4, text at the default level, --quiet at level 1), with the fixture's symbols when it
@@ -17,17 +17,17 @@
       medium or a role swapped, an invalid byte inserted, a character the language lacks inserted (one outside
       the Basic Multilingual Plane among them), line endings changed, and every truncation of the smallest files.
       Both run them in batches; a batch that differs is split until the files are named.
-   4. THE SUITE. `zane conformance` against `node tools/zane/conformance.js` under every level, --verbose and -v,
+   4. THE SUITE. `zayn conformance` against `node tools/zayn/conformance.js` under every level, --verbose and -v,
       and the bad levels; and the time each takes, in one process each, as a distribution.
-   5. THE TOOLS. `zane pack` (--check, and the manifest it writes, compared and put back; then its inputs broken one
+   5. THE TOOLS. `zayn pack` (--check, and the manifest it writes, compared and put back; then its inputs broken one
       at a time and put back: a pinned file changed, in CRLF only, one and two missing, the README's counts wrong,
-      absent and missing, the manifest missing, short an entry, long an entry, and a hash altered), `zane cross-medium` (the
-      spec, --verbose, and generated specs pairing every channel), and `zane audit-facts` (the example, --rules, and
+      absent and missing, the manifest missing, short an entry, long an entry, and a hash altered), `zayn cross-medium` (the
+      spec, --verbose, and generated specs pairing every channel), and `zayn audit-facts` (the example, --rules, and
       facts files broken one way each: schema, pairing, arithmetic, and every branch of the two decisions).
-   6. THE WASM PROOF'S RECORD. tools/zane/wasm-proof.json, the envelopes this binary prints for every fixture at every
-      level with the sha256 of site/zane.wasm, which tools/zane/wasm-proof.html compares with the wasm in a browser.
+   6. THE WASM PROOF'S RECORD. tools/zayn/wasm-proof.json, the envelopes this binary prints for every fixture at every
+      level with the sha256 of site/zayn.wasm, which tools/zayn/wasm-proof.html compares with the wasm in a browser.
       --write-wasm-proof writes it; otherwise a record that no longer matches is a difference.
-   7. THE SITE'S OWN TOOLS (stage S5). `zane site facts`, `zane site shell` and `zane site grid` against
+   7. THE SITE'S OWN TOOLS (stage S5). `zayn site facts`, `zayn site shell` and `zayn site grid` against
       tools/site-facts.js, site-shell.js and site-grid.js: on the tree as it is, in their --write modes (what each
       wrote compared, then put back), and on the tree broken one input at a time, each break aimed at one check: both
       must fail, print the same bytes and leave the same files, and the JavaScript's output must hold the check's own
@@ -44,13 +44,13 @@
    ========================================================================== */
 const fs = require('fs'), path = require('path'), os = require('os');
 const { spawnSync } = require('child_process');
-const Z = require('./zane.js');
+const Z = require('./zayn.js');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const CLI = path.join(__dirname, 'cli.js');
 const args = process.argv.slice(2);
 const opt = (name, dflt) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : dflt; };
-const BIN = path.resolve(opt('--bin', path.join(ROOT, 'zig-out', 'bin', process.platform === 'win32' ? 'zane.exe' : 'zane')));
+const BIN = path.resolve(opt('--bin', path.join(ROOT, 'zig-out', 'bin', process.platform === 'win32' ? 'zayn.exe' : 'zayn')));
 const SEED = +opt('--seed', 20261105);
 const PER = +opt('--per', 24);
 const QUIET = args.includes('--quiet');
@@ -64,7 +64,7 @@ if (!fs.existsSync(BIN)) { console.error(`parity: no binary at ${BIN} (zig build
    read a media.json the other run was holding broken. The lock is a file in .git holding the run's pid; a lock whose process is
    gone is taken over, and a live one stops this run. */
 const GIT = path.join(ROOT, '.git');
-const LOCK = fs.existsSync(GIT) && fs.statSync(GIT).isDirectory() ? path.join(GIT, 'zane-parity.lock') : path.join(ROOT, '.zane-parity.lock');
+const LOCK = fs.existsSync(GIT) && fs.statSync(GIT).isDirectory() ? path.join(GIT, 'zayn-parity.lock') : path.join(ROOT, '.zayn-parity.lock');
 for (let tries = 0; ; tries++) {
   try { fs.writeFileSync(LOCK, String(process.pid), { flag: 'wx' }); break; } catch (e) {
     if (e.code !== 'EEXIST' || tries > 0) throw e;
@@ -79,7 +79,7 @@ process.on('exit', () => { try { if (fs.readFileSync(LOCK, 'utf8') === String(pr
 
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'conformance', 'manifest.json'), 'utf8'));
 const FIX = path.join(ROOT, 'conformance', 'fixtures');
-const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zane-parity-'));
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'zayn-parity-'));
 /* Windows may refuse a file for a moment after a process has used it (a scanner reading a file just written): EBUSY, EPERM, EACCES
    or UNKNOWN. A write or a delete of a file of the tree is retried for up to two seconds before it fails (found 2026-11-06, when a
    refused write left protocol/MANIFEST.json broken). */
@@ -103,16 +103,16 @@ function firstDiff(a, b) {
     let i = 0;
     while (i < a[k].length && i < b[k].length && a[k][i] === b[k][i]) i++;
     const show = buf => JSON.stringify(buf.slice(Math.max(0, i - 40), i + 40).toString('latin1'));
-    return `${k === 'out' ? 'stdout' : 'stderr'} differs at byte ${i}: js ${show(a[k])} / zane ${show(b[k])}`;
+    return `${k === 'out' ? 'stdout' : 'stderr'} differs at byte ${i}: js ${show(a[k])} / zayn ${show(b[k])}`;
   }
-  return `exit code js ${a.code} / zane ${b.code}`;
+  return `exit code js ${a.code} / zayn ${b.code}`;
 }
 
 const differences = [];
-const timing = { js: [], zane: [] };
+const timing = { js: [], zayn: [] };
 function compare(label, argv, time) {
-  const a = run('js', argv), b = run('zane', argv);
-  if (time) { timing.js.push(a.ms); timing.zane.push(b.ms); }
+  const a = run('js', argv), b = run('zayn', argv);
+  if (time) { timing.js.push(a.ms); timing.zayn.push(b.ms); }
   if (!same(a, b)) differences.push(`${label}: ${firstDiff(a, b)}`);
   return same(a, b);
 }
@@ -128,7 +128,7 @@ const siteLines = [];
   const htmlUnder = d => { const out = []; const w = x => { for (const e of fs.readdirSync(P(x), { withFileTypes: true })) { const q = x + '/' + e.name; if (e.isDirectory()) w(q); else if (q.endsWith('.html')) out.push(q); } }; w(d); return out; };
   /* every file the three tools write (the pages, site/facts.json) and every file a case breaks, read once; and the one file a case creates */
   const KEEP = [...new Set(['index.html', ...htmlUnder('site'), ...htmlUnder('tools'), ...htmlUnder('constitution/reader'), 'site/facts.json',
-    'site/stz.css', 'site/gotchas.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md', 'site/menu.zane'])];
+    'site/stz.css', 'site/gotchas.css', 'site/stz.js', 'haro/twin-expected.csv', 'doc/design/coverage-placement.json', 'README.md', 'doc/releases/v0.1.0.md', 'site/menu.zayn'])];
   const NEW = ['site/extra.html'];
   const ALL = [...KEEP, ...NEW];
   const missing = KEEP.filter(f => !fs.existsSync(P(f)));
@@ -157,22 +157,22 @@ const siteLines = [];
       ['facts', 'a span names a figure nothing derives', () => sub1('site/thinking.html', /data-fact="[^"]*"/, 'data-fact="no.such.figure"'), CHECK, 'fail', 'names a figure this script does not derive'],
       ['facts', 'a law-share span reads a wrong share', () => sub1('site/rules.html', /(data-law-share="[^"]*">)(\d+)%/, (m, k, n) => k + (+n + 1) + '%'), CHECK, 'fail', 'law-share "'],
       ['facts', 'a typed number outside any span', () => before('site/web.html', '</main>', '<p>We counted 4242 things.</p>\n'), [[], ['--unchecked']], 'fail', 'typed number(s) outside a span'],
-      ['facts', 'a verifier terminal differs from a real run', () => sub1('site/how.html', /(<pre class="term"><span class="dim">\$ zane check [^\n]*\n[^\n]*?)error/, '$1warning'), CHECK, 'fail', 'is not what a real run prints'],
+      ['facts', 'a verifier terminal differs from a real run', () => sub1('site/how.html', /(<pre class="term"><span class="dim">\$ zayn check [^\n]*\n[^\n]*?)error/, '$1warning'), CHECK, 'fail', 'is not what a real run prints'],
       ['facts', 'site/how.html loses its declaration and terminal pairs', () => sub1('site/how.html', /<pre class="shot">/g, '<pre class="shot plain">'), CHECK, 'fail', 'site/how.html: its pair has no declaration and terminal to verify'],
-      ['facts', 'an excerpt names a file that does not exist', () => sub1('site/haro.html', 'data-excerpt="haro/zane.stzu"', 'data-excerpt="haro/zane-gone.stzu"'), CHECK, 'fail', 'which does not exist'],
+      ['facts', 'an excerpt names a file that does not exist', () => sub1('site/haro.html', 'data-excerpt="haro/zayn.stzu"', 'data-excerpt="haro/zayn-gone.stzu"'), CHECK, 'fail', 'which does not exist'],
       ['facts', 'an excerpt shows a line its file lacks', () => sub1('site/haro.html', /(<pre class="excerpt" data-excerpt="[^"]*">)/, '$1DEFINE NOTHING AT ALL\n'), CHECK, 'fail', 'shows a line the file does not contain'],
-      ['facts', 'a terminal names a command outside the pack', () => sub1('site/conformance.html', 'data-run="zane pack --check"', 'data-run="zane serve --port 8770"'), CHECK, 'fail', 'is not a pack command'],
-      ['facts', 'a terminal whose first line is not its command', () => sub1('site/conformance.html', '<span class="dim">$ zane pack --check</span>', '<span class="dim">$ zane pack --chek</span>'), CHECK, 'fail', 'is not that command'],
+      ['facts', 'a terminal names a command outside the pack', () => sub1('site/conformance.html', 'data-run="zayn pack --check"', 'data-run="zayn serve --port 8770"'), CHECK, 'fail', 'is not a pack command'],
+      ['facts', 'a terminal whose first line is not its command', () => sub1('site/conformance.html', '<span class="dim">$ zayn pack --check</span>', '<span class="dim">$ zayn pack --chek</span>'), CHECK, 'fail', 'is not that command'],
       ['facts', 'an excerpt of a run with a line the run never prints', () => sub1('site/screenshots.html', 'doc/design/audit/example.facts.json: valid; 3 line(s)</pre>', 'doc/design/audit/example.facts.json: valid; 4 line(s)</pre>'), CHECK, 'fail', 'is not what a real run prints'],
-      ['facts', 'an excerpt of a run in the wrong order', () => sub1('site/media.html', /(\n…\n)(  invoice-review\.zane  —  visual vs auditory\n(?:.*\n){3})…<\/pre>/, (m, x, blk) => '\n…\n' + blk.replace('5 total', '6 total') + '…</pre>'), CHECK, 'fail', 'is not what a real run prints'],
-      ['facts', 'a terminal differs from what its command prints', () => sub1('site/conformance.html', /(data-run="zane conformance">[\s\S]*?)level 4/, '$1level 3'), CHECK, 'fail', 'the terminal for "zane conformance" is not what a real run prints'],
+      ['facts', 'an excerpt of a run in the wrong order', () => sub1('site/media.html', /(\n…\n)(  invoice-review\.zayn  —  visual vs auditory\n(?:.*\n){3})…<\/pre>/, (m, x, blk) => '\n…\n' + blk.replace('5 total', '6 total') + '…</pre>'), CHECK, 'fail', 'is not what a real run prints'],
+      ['facts', 'a terminal differs from what its command prints', () => sub1('site/conformance.html', /(data-run="zayn conformance">[\s\S]*?)level 4/, '$1level 3'), CHECK, 'fail', 'the terminal for "zayn conformance" is not what a real run prints'],
       ['facts', 'the grid table drifts from its data', gridCell, CHECK, 'fail', 'the grid:table differs from the data'],
       ['facts', 'the channels table drifts from its data', channelsRow, CHECK, 'fail', 'the channels:table differs from the data'],
       ['facts', 'a status word that is not one of three', () => sub1('site/conformance.html', 'class="status exists">exists<', 'class="status maybe">maybe<'), CHECK, 'fail', 'is not one of exists, designed, held'],
       ['facts', 'a status whose class disagrees with its word', () => sub1('site/conformance.html', 'class="status exists">exists<', 'class="status held">exists<'), CHECK, 'fail', 'so its mark would be wrong'],
       ['facts', 'a primary button in the head of a reading page', () => sub1('site/why.html', '<header class="page">', '<header class="page"><a class="btn primary" href="adopt.html">Adopt</a>'), CHECK, 'fail', 'the head of a reading page carries a primary button'],
       ['facts', 'a primary button that scrolls within its page', () => before('site/why.html', '</main>', '<a class="btn primary" href="#top">Up</a>\n'), CHECK, 'fail', 'scrolls within its own page'],
-      ['facts', 'a row added to haro/twin-expected.csv', () => edit('haro/twin-expected.csv', t => t.replace(/\n?$/, '\n') + 'parity-made.zane,(clean),X,S99,other-code\n'), CHECK, 'fail', 'twin.differences'],
+      ['facts', 'a row added to haro/twin-expected.csv', () => edit('haro/twin-expected.csv', t => t.replace(/\n?$/, '\n') + 'parity-made.zayn,(clean),X,S99,other-code\n'), CHECK, 'fail', 'twin.differences'],
       ['facts', 'a rule placed on one more activity', placement, CHECK, 'fail', 'the grid:table differs from the data'],
 
       ['shell', 'the tree as it is', null, [[], ['--write']], 'pass', ''],
@@ -204,20 +204,20 @@ const siteLines = [];
       ['shell', 'an outline entry over twenty characters', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Three ways to try it out today"'), CHECK, 'fail', 'give its h2 a data-outline of 20 at most'],
       ['shell', 'an outline entry repeating its page\'s label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Demo"'), CHECK, 'fail', 'repeats the label "Demo" above it'],
       ['shell', 'an outline entry repeating a band label', () => sub1('site/audit.html', 'data-outline="Three ways to try"', 'data-outline="Screenshots"'), CHECK, 'fail', 'name the same thing on one page'],
-      ['shell', 'a page tells the reader to run node', () => before('site/web.html', '</main>', '<p>Run <code>node tools/zane/cli.js check x.zane</code>.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("node tools/zane/cli.js")'],
+      ['shell', 'a page tells the reader to run node', () => before('site/web.html', '</main>', '<p>Run <code>node tools/zayn/cli.js check x.zayn</code>.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("node tools/zayn/cli.js")'],
       ['shell', 'a page names Node as what it needs', () => before('site/web.html', '</main>', '<p>It needs Node and a browser.</p>\n'), CHECK, 'fail', 'tells the reader to run Node ("Node")'],
       ['shell', 'a variable named node in a script, not an instruction', () => before('site/web.html', '</main>', '<script>\nlet node = 1;\nnode = node + 1;\n</script>\n'), [[], ['--write']], 'pass', ''],
-      ['shell', 'README.md tells the reader to run node', () => edit('README.md', t => t + '\nRun `node tools/zane/cli.js check x.zane`.\n'), CHECK, 'fail', 'README.md:'],
-      ['shell', 'a page links a release with no notes', () => before('site/web.html', '</main>', '<p><a href="https://github.com/mayouni/zane/releases/tag/v9.9.9">The release</a>.</p>\n'), CHECK, 'fail', 'links the release v9.9.9 and doc/releases/v9.9.9.md does not exist'],
-      ['shell', 'README.md links a file of a release with no notes', () => edit('README.md', t => t + '\n[zane](https://github.com/mayouni/zane/releases/download/v0.0.9/zane-0.0.9.wasm)\n'), CHECK, 'fail', 'README.md:'],
+      ['shell', 'README.md tells the reader to run node', () => edit('README.md', t => t + '\nRun `node tools/zayn/cli.js check x.zayn`.\n'), CHECK, 'fail', 'README.md:'],
+      ['shell', 'a page links a release with no notes', () => before('site/web.html', '</main>', '<p><a href="https://github.com/mayouni/zayn/releases/tag/v9.9.9">The release</a>.</p>\n'), CHECK, 'fail', 'links the release v9.9.9 and doc/releases/v9.9.9.md does not exist'],
+      ['shell', 'README.md links a file of a release with no notes', () => edit('README.md', t => t + '\n[zayn](https://github.com/mayouni/zayn/releases/download/v0.0.9/zayn-0.0.9.wasm)\n'), CHECK, 'fail', 'README.md:'],
       ['shell', 'the notes of the release the site offers missing', () => drop(P('doc/releases/v0.1.0.md')), CHECK, 'fail', 'doc/releases/v0.1.0.md does not exist'],
-      ['shell', 'the menu declaration missing', () => drop(P('site/menu.zane')), [[], ['--write']], 'fail', 'site/menu.zane: missing'],
-      ['shell', 'the menu declaration edited away from the registry', () => sub1('site/menu.zane', '(LABEL "Channels",', '(LABEL "Media",'), [[], ['--write']], 'fail', 'site/menu.zane: differs from the menu'],
-      ['shell', 'a landing label repeating its section', () => sub1('site/menu.zane', '(LABEL "Reasoning",', '(LABEL "approach",'), CHECK, 'fail', 'MENU_LABEL_REPEATS_PARENT'],
-      ['shell', 'a family landing repeating its family', () => sub1('site/menu.zane', '(LABEL "Overview", TARGET positioning)', '(LABEL "The comparison", TARGET positioning)'), CHECK, 'fail', 'MENU_LABEL_REPEATS_PARENT'],
-      ['shell', 'a landing page second in its band', () => sub1('site/menu.zane', 'ENTRIES [thinking, grid,', 'ENTRIES [grid, thinking,'), CHECK, 'fail', 'MENU_LANDING_NOT_FIRST'],
-      ['shell', 'a landing page left out of its band', () => sub1('site/menu.zane', 'ENTRIES [thinking, grid,', 'ENTRIES [grid,'), CHECK, 'fail', 'no entry of approach leads to thinking'],
-      ['shell', 'two siblings sharing a label', () => sub1('site/menu.zane', '(LABEL "Channels",', '(LABEL "Grid",'), CHECK, 'fail', 'MENU_LABEL_DUPLICATE'],
+      ['shell', 'the menu declaration missing', () => drop(P('site/menu.zayn')), [[], ['--write']], 'fail', 'site/menu.zayn: missing'],
+      ['shell', 'the menu declaration edited away from the registry', () => sub1('site/menu.zayn', '(LABEL "Channels",', '(LABEL "Media",'), [[], ['--write']], 'fail', 'site/menu.zayn: differs from the menu'],
+      ['shell', 'a landing label repeating its section', () => sub1('site/menu.zayn', '(LABEL "Reasoning",', '(LABEL "approach",'), CHECK, 'fail', 'MENU_LABEL_REPEATS_PARENT'],
+      ['shell', 'a family landing repeating its family', () => sub1('site/menu.zayn', '(LABEL "Overview", TARGET positioning)', '(LABEL "The comparison", TARGET positioning)'), CHECK, 'fail', 'MENU_LABEL_REPEATS_PARENT'],
+      ['shell', 'a landing page second in its band', () => sub1('site/menu.zayn', 'ENTRIES [thinking, grid,', 'ENTRIES [grid, thinking,'), CHECK, 'fail', 'MENU_LANDING_NOT_FIRST'],
+      ['shell', 'a landing page left out of its band', () => sub1('site/menu.zayn', 'ENTRIES [thinking, grid,', 'ENTRIES [grid,'), CHECK, 'fail', 'no entry of approach leads to thinking'],
+      ['shell', 'two siblings sharing a label', () => sub1('site/menu.zayn', '(LABEL "Channels",', '(LABEL "Grid",'), CHECK, 'fail', 'MENU_LABEL_DUPLICATE'],
       ['shell', 'a dash that can start a line', () => before('site/web.html', '</main>', '<p>One part of a sentence — and its other part.</p>\n'), CHECK, 'fail', 'lets a dash start a line'],
       ['shell', 'a page names the retired language', () => before('site/mobile.html', '</main>', '<p>The writer runs on Ring++.</p>\n'), CHECK, 'fail', 'names the retired language ("Ring++")'],
       ['shell', 'a page says what is not yet done', () => before('site/web.html', '</main>', '<p>The importer is not yet written.</p>\n'), CHECK, 'fail', 'says what the project lacks ("not yet")'],
@@ -226,7 +226,7 @@ const siteLines = [];
       ['shell', 'README.md says nobody has', () => edit('README.md', t => t + '\nNobody has run it on a phone.\n'), CHECK, 'fail', 'README.md:'],
       ['shell', 'the phrases in code, scripts and comments, not read', () => before('site/web.html', '</main>', '<pre>not yet</pre>\n<p>Run <code>never been</code>.</p>\n<!-- not built -->\n<script>\nlet a = "unverified";\n</script>\n'), [[], ['--write']], 'pass', ''],
       ['shell', 'an excused line gone, its entry left', () => sub1('site/gotchas/reading.html', 'not yet been articulated by your teams', 'been articulated by your teams'), CHECK, 'fail', 'AFFIRM_ALLOWED: site/gotchas/reading.html'],
-      ['shell', 'an allowed line gone, its entry left', () => sub1('tools/zane/wasm-proof.html', 'node tools/zane/parity.js --write-wasm-proof', 'tools/zane/parity.js with --write-wasm-proof'), CHECK, 'fail', 'matches no line: the entry has outlived what it excused'],
+      ['shell', 'an allowed line gone, its entry left', () => sub1('tools/zayn/wasm-proof.html', 'node tools/zayn/parity.js --write-wasm-proof', 'tools/zayn/parity.js with --write-wasm-proof'), CHECK, 'fail', 'matches no line: the entry has outlived what it excused'],
       ['shell', 'a served page the registry does not list', () => put(P('site/extra.html'), '<!DOCTYPE html>\n<title>x</title>\n'), CHECK, 'fail', 'site/extra.html: a page the site serves that the registry does not list'],
       ['shell', 'a registered page missing', () => drop(P('site/vibes.html')), [[], ['--write']], 'fail', 'site/vibes.html: missing'],
       // the design system's tokens (ZANE-DESIGN-01 M2: K01, K09, K15 on the stylesheets; K21 on every page; K19, K20 counted)
@@ -257,7 +257,7 @@ const siteLines = [];
           const broken = state();
           const a = run('js', argv, TOOL[tool]), wa = state(); restore();
           if (breakIt) breakIt();
-          const b = run('zane', ['site', tool, ...argv]), wb = state(); restore();
+          const b = run('zayn', ['site', tool, ...argv]), wb = state(); restore();
           siteRuns++;
           if (!same(a, b)) differences.push(`${label}: ${firstDiff(a, b)}`);
           else { const d = changed(wa, wb); if (d.length) differences.push(`${label}: the files left behind differ: ${d.join(', ')}`); }
@@ -280,7 +280,7 @@ const siteLines = [];
 }
 const siteReport = () => {
   if (LIST_SITE) siteLines.forEach(l => console.log(l));
-  console.log(`  site tools   ${siteCases} cases, ${siteRuns} command lines of zane site facts, shell and grid against tools/site-facts.js, site-shell.js and site-grid.js (the tree as it is, --write, and one break per check)`);
+  console.log(`  site tools   ${siteCases} cases, ${siteRuns} command lines of zayn site facts, shell and grid against tools/site-facts.js, site-shell.js and site-grid.js (the tree as it is, --write, and one break per check)`);
 };
 if (ONLY === 'site') {
   const kept = differences.length;
@@ -320,22 +320,22 @@ const argCases = [[], ['--help'], ['check'], ['check', all[0], '--level', '0'], 
 for (const c of argCases) compare(`arguments [${c.join(' ')}]`, c);
 
 done('arguments');
-// ---- 4. the suite: zane conformance against conformance.js (run before the corpus, which loads the machine) ----
+// ---- 4. the suite: zayn conformance against conformance.js (run before the corpus, which loads the machine) ----
 const CONF = path.join(__dirname, 'conformance.js');
 const confCases = [[], ['--level', '1'], ['--level', '2'], ['--level', '3'], ['--level', '4'], ['--verbose'], ['-v', '--level', '2'],
   ['--level', '0'], ['--level', '5'], ['--level', 'x'], ['--level'], ['--level', ' 3abc'], ['stray', '--level', '3']];
-const confTiming = { js: [], zane: [] };
+const confTiming = { js: [], zayn: [] };
 for (const c of confCases) {
-  const a = run('js', c, CONF), b = run('zane', ['conformance', ...c]);
+  const a = run('js', c, CONF), b = run('zayn', ['conformance', ...c]);
   if (!same(a, b)) differences.push(`conformance [${c.join(' ') || 'default'}]: ${firstDiff(a, b)}`);
 }
-for (let k = 0; k < 10; k++) { confTiming.js.push(run('js', [], CONF).ms); confTiming.zane.push(run('zane', ['conformance']).ms); }
+for (let k = 0; k < 10; k++) { confTiming.js.push(run('js', [], CONF).ms); confTiming.zayn.push(run('zayn', ['conformance']).ms); }
 
 done('suite');
 // ---- 5. the tools: pack, cross-medium, audit-facts ----
 let toolRuns = 0;
 function compareTool(label, script, sub, argv) {
-  const a = run('js', argv, script), b = run('zane', [sub, ...argv]);
+  const a = run('js', argv, script), b = run('zayn', [sub, ...argv]);
   if (!same(a, b)) differences.push(`${sub} [${argv.join(' ') || 'default'}]${label ? ' ' + label : ''}: ${firstDiff(a, b)}`);
   toolRuns++;
 }
@@ -347,7 +347,7 @@ compareTool('', PACK, 'pack', ['--check', 'stray']);
   try {
     const a = run('js', [], PACK); const wa = fs.readFileSync(M);
     put(M, keep);
-    const b = run('zane', ['pack']); const wb = fs.readFileSync(M);
+    const b = run('zayn', ['pack']); const wb = fs.readFileSync(M);
     if (!same(a, b)) differences.push(`pack [write]: ${firstDiff(a, b)}`);
     if (!wa.equals(wb)) differences.push('pack [write]: the manifests written differ');
     toolRuns++;
@@ -385,7 +385,7 @@ compareTool('', PACK, 'pack', ['--check', 'stray']);
     try {
       for (const argv of modes) {
         breakIt(); const a = run('js', argv, PACK), wa = left(); restore();
-        breakIt(); const b = run('zane', ['pack', ...argv]), wb = left(); restore();
+        breakIt(); const b = run('zayn', ['pack', ...argv]), wb = left(); restore();
         const label = `pack [${argv.join(' ') || 'write'}] ${name}`;
         if (!same(a, b)) differences.push(`${label}: ${firstDiff(a, b)}`);
         else if (wa === null ? wb !== null : wb === null || !wa.equals(wb)) differences.push(`${label}: the manifests left behind differ`);
@@ -407,7 +407,7 @@ compareTool('', XM, 'cross-medium', ['--verbose']);
   pairs.push(['visual', 'visual'], ['visual', 'telepathy'], ['telepathy', 'print']);
   for (let i = 0; i < pairs.length; i += 15) {
     const s = path.join(TMP, `xm-${i}.json`);
-    fs.writeFileSync(s, JSON.stringify({ cases: pairs.slice(i, i + 15).map(m => ({ file: 'invoice-review.zane', media: m })) }));
+    fs.writeFileSync(s, JSON.stringify({ cases: pairs.slice(i, i + 15).map(m => ({ file: 'invoice-review.zayn', media: m })) }));
     compareTool('(generated)', XM, 'cross-medium', [s, '--verbose']);
   }
 }
@@ -420,6 +420,7 @@ compareTool('', FACTS, 'audit-facts', ['--rules', '62,999,', 'doc/design/audit/e
   const L = (i, f) => (e) => { f(e.lines[i]); };
   const breaks = {
     'old-name': e => { e.format = 'zui-audit-facts'; e.version = '1.0'; },
+    'former-name': e => { e.format = 'zane-audit-facts'; e.version = '1.1'; },
     'crossed-pair': e => { e.version = '1.0'; },
     'bad-format': e => { e.format = 'other'; },
     'no-capture': e => { delete e.capture; },
@@ -461,7 +462,7 @@ done('tools');
 function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const rnd = mulberry32(SEED);
 const pick = xs => xs[Math.floor(rnd() * xs.length)];
-const VOCAB = [Z.INTENT_VERBS, Z.ZANE_KINDS, Z.MEDIA, Z.TONES, Z.SIGNALS, Z.PERSPECTIVES,
+const VOCAB = [Z.INTENT_VERBS, Z.ZAYN_KINDS, Z.MEDIA, Z.TONES, Z.SIGNALS, Z.PERSPECTIVES,
   new Set(['inert', 'navigate', 'reversible', 'irreversible', 'proposal'])].map(s => [...s]);
 function swapWord(text) {
   const set = pick(VOCAB);
@@ -502,11 +503,11 @@ for (const s of smallest) {
 }
 const kinds = {};
 for (const c of corpus) { const k = c.name.includes('~cut') ? 'truncation' : c.name.split('~')[1].replace(/^\d+-/, ''); kinds[k] = (kinds[k] || 0) + 1; }
-corpus.forEach((c, i) => { c.file = path.join(TMP, String(i).padStart(5, '0') + '.zane'); fs.writeFileSync(c.file, c.data); });
+corpus.forEach((c, i) => { c.file = path.join(TMP, String(i).padStart(5, '0') + '.zayn'); fs.writeFileSync(c.file, c.data); });
 
 function batch(items, extra, label) {
   const argv = ['check', ...items.map(c => c.file), ...extra];
-  const a = run('js', argv), b = run('zane', argv);
+  const a = run('js', argv), b = run('zayn', argv);
   if (same(a, b)) return;
   if (items.length === 1) { differences.push(`corpus ${items[0].name} [${extra.join(' ')}] (${items[0].file}): ${firstDiff(a, b)}`); return; }
   const h = items.length >> 1;
@@ -520,31 +521,31 @@ for (let i = 0; i < corpus.length; i += B) {
 
 done('corpus');
 // ---- 6. the wasm proof's record: written from the binary under test, never typed ------------------------
-/* tools/zane/wasm-proof.html runs every fixture at every level through site/zane.wasm in a browser and compares with what this
+/* tools/zayn/wasm-proof.html runs every fixture at every level through site/zayn.wasm in a browser and compares with what this
    binary prints for `check NAME --json --level N` (with the fixture's symbols). The record of those envelopes is made here: with
    --write-wasm-proof it is written, and without it a record that no longer matches the binary or the wasm is a difference. */
-const PROOF = path.join(__dirname, 'wasm-proof.json'), WASM = path.join(ROOT, 'site', 'zane.wasm');
-let proofNote = 'site/zane.wasm absent: the wasm proof\'s record not checked';
+const PROOF = path.join(__dirname, 'wasm-proof.json'), WASM = path.join(ROOT, 'site', 'zayn.wasm');
+let proofNote = 'site/zayn.wasm absent: the wasm proof\'s record not checked';
 if (fs.existsSync(WASM)) {
   const proofFixtures = manifest.fixtures.map(fx => {
     const name = 'conformance/fixtures/' + fx.file;
     const sym = [];
     if (fx.symbols) { const s = path.join(TMP, fx.file + '.proof-symbols.json'); fs.writeFileSync(s, JSON.stringify(fx.symbols)); sym.push('--symbols', s); }
     const expect = {};
-    for (const level of [1, 2, 3, 4]) expect[level] = run('zane', ['check', name, '--json', '--level', String(level), ...sym]).out.toString('utf8');
+    for (const level of [1, 2, 3, 4]) expect[level] = run('zayn', ['check', name, '--json', '--level', String(level), ...sym]).out.toString('utf8');
     return { name, symbols: fx.symbols || null, source: fs.readFileSync(path.join(ROOT, name), 'utf8'), expect };
   });
   const wasmBytes = fs.readFileSync(WASM);
   const record = {
-    about: 'Written by node tools/zane/parity.js --write-wasm-proof from the native binary; never edited by hand. tools/zane/wasm-proof.html runs the same sources through site/zane.wasm and compares.',
-    wasm: { file: 'site/zane.wasm', bytes: wasmBytes.length, sha256: require('crypto').createHash('sha256').update(wasmBytes).digest('hex') },
+    about: 'Written by node tools/zayn/parity.js --write-wasm-proof from the native binary; never edited by hand. tools/zayn/wasm-proof.html runs the same sources through site/zayn.wasm and compares.',
+    wasm: { file: 'site/zayn.wasm', bytes: wasmBytes.length, sha256: require('crypto').createHash('sha256').update(wasmBytes).digest('hex') },
     fixtures: proofFixtures
   };
   const text = JSON.stringify(record, null, 1) + '\n';
-  const what = `${proofFixtures.length} fixtures at 4 levels = ${proofFixtures.length * 4} envelopes, for zane.wasm ${record.wasm.sha256.slice(0, 12)} (${record.wasm.bytes} bytes)`;
+  const what = `${proofFixtures.length} fixtures at 4 levels = ${proofFixtures.length * 4} envelopes, for zayn.wasm ${record.wasm.sha256.slice(0, 12)} (${record.wasm.bytes} bytes)`;
   if (args.includes('--write-wasm-proof')) { fs.writeFileSync(PROOF, text); proofNote = 'written -- ' + what; }
   else if (!fs.existsSync(PROOF) || fs.readFileSync(PROOF, 'utf8').replace(/\r\n/g, '\n') !== text) {
-    differences.push('tools/zane/wasm-proof.json is stale against this binary or site/zane.wasm (run with --write-wasm-proof)');
+    differences.push('tools/zayn/wasm-proof.json is stale against this binary or site/zayn.wasm (run with --write-wasm-proof)');
     proofNote = 'STALE';
   } else proofNote = 'current -- ' + what;
 }
@@ -558,20 +559,20 @@ const dist = xs => {
 const kept = differences.length;
 if (!QUIET || kept) for (const d of differences.slice(0, 40)) console.log('  DIFF ' + d);
 if (kept > 40) console.log(`  ... and ${kept - 40} more`);
-console.log(`parity: ${path.relative(ROOT, BIN) || BIN} against tools/zane/cli.js`);
+console.log(`parity: ${path.relative(ROOT, BIN) || BIN} against tools/zayn/cli.js`);
 console.log(`  fixtures     ${manifest.fixtures.length}, ${fixtureRuns} command lines`);
 console.log(`  arguments    ${argCases.length} command lines`);
-console.log(`  suite        ${confCases.length} command lines of zane conformance against conformance.js`);
-console.log(`  tools        ${toolRuns} command lines of zane pack, cross-medium and audit-facts against their scripts`);
+console.log(`  suite        ${confCases.length} command lines of zayn conformance against conformance.js`);
+console.log(`  tools        ${toolRuns} command lines of zayn pack, cross-medium and audit-facts against their scripts`);
 console.log(`  corpus       seed ${SEED}, ${corpus.length} inputs (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}), each in --json at level 4 and in text at level 2`);
 console.log(`  wasm proof   ${proofNote}`);
 siteReport();
 console.log(`  timing, one fixture per process, --json at level 4, wall time with process start:`);
 console.log(`    node cli.js  ${dist(timing.js)}`);
-console.log(`    zane         ${dist(timing.zane)}`);
+console.log(`    zayn         ${dist(timing.zayn)}`);
 console.log(`  timing, the whole suite in one process, default level, wall time with process start:`);
 console.log(`    node conformance.js  ${dist(confTiming.js)}`);
-console.log(`    zane conformance     ${dist(confTiming.zane)}`);
+console.log(`    zayn conformance     ${dist(confTiming.zayn)}`);
 console.log(`  wall time by section: ${Object.entries(wall).map(([k, ms]) => `${k} ${(ms / 1000).toFixed(1)} s`).join(' · ')}`);
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(kept ? `  ${kept} difference(s); the allowed list is empty` : '  identical -- every byte of stdout and stderr, every exit code, and every file the write modes left behind');

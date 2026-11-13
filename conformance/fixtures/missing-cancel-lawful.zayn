@@ -1,4 +1,4 @@
-// The lawful twin of missing-cancel.zane.
+// The lawful twin of missing-cancel.zayn.
 // Expected: no diagnostics.
 
 DEFINE INTENT_FLOW submit_claim (

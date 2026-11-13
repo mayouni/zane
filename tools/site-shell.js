@@ -40,7 +40,7 @@ const ROOT = path.join(__dirname, '..');
    query differs from the file's hash. */
 /* the one line that sets the reader's culture before the first paint, the same text as vibe_early in zig/src/siteshell.zig */
 const VIBE_EARLY = "<script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>";
-const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js', 'tour.js', 'zane-wasm.js', 'try.js', 'zane.wasm'];
+const ASSETS = ['stz.css', 'stz.js', 'gotchas.css', 'law-numbers.js', 'tour.js', 'zayn-wasm.js', 'try.js', 'zayn.wasm'];
 /* a text asset is hashed with its line endings normalised, the wasm on its bytes; the wasm's address sits in a data-wasm attribute,
    which the script that loads it reads, so a rebuilt wasm is never served from a stale cache */
 const assetHash = name => crypto.createHash('sha256').update(name.endsWith('.wasm') ? fs.readFileSync(path.join(ROOT, 'site', name))
@@ -62,13 +62,13 @@ const SECTIONS = [
    an other lable for it that is different from the main option(Approach in our case)"): the main menu names the SECTION, by its label
    above, and links to its head page; the band opens on that head page, the section's landing, under the page's own label. A family works
    the same way one level down: its head page stands in the band under the family's name (`family`), and opens the family's list under
-   its own label. The menu these make is declared in Zane, in site/menu.zane, and refused by the checks `zane check` makes. */
+   its own label. The menu these make is declared in Zayn, in site/menu.zayn, and refused by the checks `zayn check` makes. */
 const FAMILIES = [['stillness', 'Stillness'], ['forms', 'Forms'], ['state', 'State'], ['widgets', 'Widgets'],
                   ['reading', 'Reading'], ['navigation', 'Navigation'], ['intelligence', 'Intelligence']];
 /* each family page's subject term (doc/design/WRITING.md section 2) */
 const FAMILY_TERMS = { stillness: 'still', forms: 'form', state: 'state', widgets: 'widget', reading: 'read', navigation: 'navigat', intelligence: 'intelligen' };
 const PAGES = [
-  { file: 'index.html', home: true, term: 'Zane' },
+  { file: 'index.html', home: true, term: 'Zayn' },
   { file: 'site/thinking.html', section: 'approach', label: 'Reasoning', rail: true, term: 'reason' },
   { file: 'site/grid.html', section: 'approach', label: 'The grid', rail: true, term: 'grid' },
   { file: 'site/media.html', section: 'approach', label: 'Channels', rail: true, term: 'channel' },
@@ -101,7 +101,7 @@ const PAGES = [
   { file: 'tools/ui-audit.html', section: 'try', label: 'UI audit', rail: true, outside: 'tool', term: 'audit' },
   { file: 'site/screenshots.html', section: 'try', label: 'Screenshots', rail: true, term: 'screenshot' },
   /* the wasm's proof page (stage S3 of the binary): a tool, framed as the UI audit is */
-  { file: 'tools/zane/wasm-proof.html', section: 'try', label: 'Wasm proof', rail: true, outside: 'tool', term: 'wasm' }
+  { file: 'tools/zayn/wasm-proof.html', section: 'try', label: 'Wasm proof', rail: true, outside: 'tool', term: 'wasm' }
 ];
 const by = new Map(PAGES.map(p => [p.file, p]));
 /* The pages written before doc/design/WRITING.md, which the register check has not yet judged. Each is printed by name on every
@@ -150,7 +150,7 @@ function menu(p) {
   const bar = `<nav class="site" aria-label="Main menu">
   <div class="wrap">
     <div class="menu">
-        <a class="brand" href="${href(p.file, 'index.html')}">Zane</a>
+        <a class="brand" href="${href(p.file, 'index.html')}">Zayn</a>
 ${links}
     </div>
     <div class="tools">
@@ -181,8 +181,8 @@ function chain(p) {
 function trail(p) {
   if (p.home) return '';
   const s = sec(p.section);
-  /* Zane, the section under its own name (where the main menu links), the family under its name, then the page under its own */
-  const steps = [{ label: 'Zane', to: 'index.html' }, { label: s.label, to: s.head }];
+  /* Zayn, the section under its own name (where the main menu links), the family under its name, then the page under its own */
+  const steps = [{ label: 'Zayn', to: 'index.html' }, { label: s.label, to: s.head }];
   const up = p.parent ? by.get(p.parent) : p.family ? p : null;
   if (up) steps.push({ label: up.family, to: up.file });
   const links = steps.map(x => `<a href="${href(p.file, x.to)}">${esc(x.label)}</a>`).join('<span class="sep">›</span>');
@@ -277,7 +277,7 @@ ${own.map(x => `    <li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('\n')
   </ul>
 </nav>`;
 }
-const REPO = 'https://github.com/mayouni/zane';
+const REPO = 'https://github.com/mayouni/zayn';
 function footer(p) {
   const to = f => href(p.file, f);
   const pending = PAGES.find(q => q.pending);
@@ -288,7 +288,7 @@ function footer(p) {
 ${pending ? `        <a href="${to(pending.file)}">Reader</a>\n` : ''}        <a href="${to('LICENSE')}">LICENSE</a>
       </div>
     </div>
-    <p class="fine">Zane is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project.</p>
+    <p class="fine">Zayn is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project.</p>
     <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
   </div>
 </footer>`;
@@ -469,7 +469,7 @@ function checkWriting(problems, notes) {
 /* ---- a title's line breaks belong to the browser (doc/design/WRITING.md) ----------------------------------------------------- */
 /* No h1, h2, h3 or .scene-title may hold a <br>, a block-level element, or a child that a rule of stz.css makes a block: each of
    these places a line break by hand, and text-wrap: balance then balances each piece alone, never the whole title (the front
-   page's title broke as "Zane is the / compilable language / for user interfaces." for this reason, 2026-11-05). And stz.css
+   page's title broke as "Zayn is the / compilable language / for user interfaces." for this reason, 2026-11-05). And stz.css
    must still declare text-wrap: balance on h1, h2 and h3, and text-wrap: pretty on p. */
 const HEADING_RE = /<(h1|h2|h3)\b[^>]*>([\s\S]*?)<\/\1>|<(\w+)\b[^>]*class="[^"]*\bscene-title\b[^"]*"[^>]*>([\s\S]*?)<\/\3>/g;
 const BLOCK_TAGS = /<(div|p|ul|ol|li|section|article|aside|table|blockquote|pre|figure|header|footer|nav|h[1-6])\b/i;
@@ -533,18 +533,18 @@ function checkNames(problems) {
     const file = path.join(ROOT, f);
     if (!fs.existsSync(file)) continue;
     fs.readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
-      if (/\bzing\b/i.test(line)) problems.push(f + ':' + (i + 1) + ' names Zing: the Zane site does not name Zing');
+      if (/\bzing\b/i.test(line)) problems.push(f + ':' + (i + 1) + ' names Zing: the Zayn site does not name Zing');
     });
   }
 }
 
 /* ---- the site names the one file, never node (doc/design/BINARY.md, S6; Central's ANSWER of 2026-11-07 10:49) -------------------- */
-/* Since stage S6 the verifier is one file, zane: no page of the registry, and not README.md, tells the reader to run Node, neither as
+/* Since stage S6 the verifier is one file, zayn: no page of the registry, and not README.md, tells the reader to run Node, neither as
    a command (node PATH.js) nor by the runtime's name (Node, Node.js). Scripts and styles are not read, so a variable named node is not
    an instruction. A page that documents the JavaScript reference may name it, one line at a time, in NODE_ALLOWED, each entry with
    its reason; an entry that matches no line fails, so the list cannot outlive what it excuses. */
 const NODE_ALLOWED = [
-  { file: 'tools/zane/wasm-proof.html', words: 'node tools/zane/parity.js --write-wasm-proof',
+  { file: 'tools/zayn/wasm-proof.html', words: 'node tools/zayn/parity.js --write-wasm-proof',
     reason: 'parity.js holds the binary to its JavaScript reference, so it runs on Node by design; the proof page says what writes its record' },
 ];
 const NODE_RE = /\bnode\s+[\w./-]+\.[cm]?js\b|\bNode(?:\.js)?\b/;
@@ -560,7 +560,7 @@ function checkNode(problems) {
       if (!m) return;
       const k = NODE_ALLOWED.findIndex(x => x.file === f && line.includes(x.words));
       if (k >= 0) { used.add(k); return; }
-      problems.push(f + ':' + (i + 1) + ' tells the reader to run Node ("' + m[0] + '"): the verifier is one file, zane (doc/design/BINARY.md, S6)');
+      problems.push(f + ':' + (i + 1) + ' tells the reader to run Node ("' + m[0] + '"): the verifier is one file, zayn (doc/design/BINARY.md, S6)');
     });
   }
   NODE_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('NODE_ALLOWED: ' + x.file + ' "' + x.words + '" matches no line: the entry has outlived what it excused'); });
@@ -585,7 +585,7 @@ function checkReleases(problems) {
   }
 }
 
-/* ---- a page states what Zane is and does (Central's ZANE-AFFIRM-01, 2026-11-08; doc/design/WRITING.md section 4) ---------------
+/* ---- a page states what Zayn is and does (Central's ZANE-AFFIRM-01, 2026-11-08; doc/design/WRITING.md section 4) ---------------
    The Principal, 2026-11-08: "Avoid this role of transparency that hurts the project image (negative markeing)!", after the ruling of
    2026-10-13: "do not let the tendency to be transparent and fair make the statements elusive". No page of the registry, index.html
    or README.md lists what the project has not done, shown, measured or perceived: the phrases below are refused in the text a reader
@@ -600,7 +600,7 @@ const RETIRED_RE = /\b(Ring(?:\+\+)?)(?![A-Za-z0-9_+])/;
 const META_RE = /<meta\b[^>]*\b(?:name="description"|property="og:description")[^>]*>/g;
 const AFFIRM_ALLOWED = [
   { file: 'site/haro.html', words: 'two checks the condition language cannot yet express',
-    reason: 'a technical table of the forged court: the seam column names what Haro\'s condition language expresses, a fact about Haro and not a lack of Zane (Central, 2026-11-09)' },
+    reason: 'a technical table of the forged court: the seam column names what Haro\'s condition language expresses, a fact about Haro and not a lack of Zayn (Central, 2026-11-09)' },
   { file: 'site/gotchas/reading.html', words: 'not yet been articulated by your teams',
     reason: 'the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel' },
 ];
@@ -633,7 +633,7 @@ function checkAffirm(problems) {
       if (!said.length) return;
       const k = AFFIRM_ALLOWED.findIndex(x => x.file === f && line.includes(x.words));
       if (k >= 0) { used.add(k); return; }
-      problems.push(f + ':' + (i + 1) + ' says what the project lacks ("' + said.join('", "') + '"): a page states what Zane is and does (doc/design/WRITING.md section 4)');
+      problems.push(f + ':' + (i + 1) + ' says what the project lacks ("' + said.join('", "') + '"): a page states what Zayn is and does (doc/design/WRITING.md section 4)');
     });
   }
   AFFIRM_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('AFFIRM_ALLOWED: ' + x.file + ' "' + x.words + '" matches no line: the entry has outlived what it excused'); });
@@ -673,18 +673,18 @@ function checkDashes(problems) {
 
 /* ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) ------------------------------------------
    "it's not logical to get the main title "Approach" then find it also as an option of it's cibling menus!!! you must add this as an
-   issue that is statically checked in Zane". The main menu names each SECTION and links to its head page; the band under it opens on
+   issue that is statically checked in Zayn". The main menu names each SECTION and links to its head page; the band under it opens on
    that head page, the section's LANDING, under a label of its own; a family's head stands in the band under the family's name and opens
-   the family's list under its own. The site's menu is written here as a Zane declaration, site/menu.zane (NAV_GRAPHs with LABEL, TARGET
+   the family's list under its own. The site's menu is written here as a Zayn declaration, site/menu.zayn (NAV_GRAPHs with LABEL, TARGET
    and ENTRIES, language 1.6), which the check compares with what this file renders and reads with the verifier itself: a child label
    repeating its parent's is MENU_LABEL_REPEATS_PARENT, a section whose landing is missing or not first MENU_LANDING_NOT_FIRST, two
    siblings sharing a label MENU_LABEL_DUPLICATE, ignoring case and a leading "The". --write writes the file. */
-const MENU_FILE = 'site/menu.zane';
-const surf = file => file.replace(/\.html$/, '').replace(/\/index$/, '').replace(/^(site|tools\/zane|tools|constitution)\//, '').replace(/[\/-]/g, '_');
+const MENU_FILE = 'site/menu.zayn';
+const surf = file => file.replace(/\.html$/, '').replace(/\/index$/, '').replace(/^(site|tools\/zayn|tools|constitution)\//, '').replace(/[\/-]/g, '_');
 function menuDecl() {
-  const out = ['// site/menu.zane: the Zane site\'s own menu, declared in Zane (language 1.6; Rule 116 at v3.16).',
-    '// Written by `zane site shell --write` from the registry of tools/site-shell.js. `zane site shell` fails when this file differs',
-    '// from the registry, and refuses in it what `zane check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and',
+  const out = ['// site/menu.zayn: the Zayn site\'s own menu, declared in Zayn (language 1.6; Rule 116 at v3.16).',
+    '// Written by `zayn site shell --write` from the registry of tools/site-shell.js. `zayn site shell` fails when this file differs',
+    '// from the registry, and refuses in it what `zayn check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and',
     '// MENU_LABEL_DUPLICATE. The main menu names each section; the band under a section opens on its landing page.', '',
     'DEFINE NAV_GRAPH main_menu (', '  SATISFIES [LOCATE],', '  ENTRIES [' + SECTIONS.map(s => s.id).join(', ') + ']', ')'];
   const leaf = q => `DEFINE NAV_GRAPH ${surf(q.file)} (LABEL "${q.label}", TARGET ${surf(q.file)})`;
@@ -709,7 +709,7 @@ function checkMenu(problems, write) {
     else problems.push(MENU_FILE + (have === null ? ': missing (run with --write)' : ': differs from the menu this file renders (run with --write)'));
   }
   const text = write || have === null ? want : have;
-  for (const d of require('./zane/zane.js').verify(text)) problems.push(`${MENU_FILE}:${d.line}: ${d.id}${d.subject === null ? '' : ' ' + d.subject}`);
+  for (const d of require('./zayn/zayn.js').verify(text)) problems.push(`${MENU_FILE}:${d.line}: ${d.id}${d.subject === null ? '' : ' ' + d.subject}`);
 }
 
 /* ---- no tooltips (the author, 2026-11-06: "avoid info bulles altogether because they complexify the reading by a volatile additional

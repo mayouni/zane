@@ -1,19 +1,19 @@
--- zane.stzu -- StzZui, declared as a Haro language
+-- zayn.stzu -- StzZui, declared as a Haro language
 --
 -- The first artifact of the re-declaration ruled on 2026-10-31. Written FROM the pack's own
 -- data (conformance/media.json, signal.json, violations.json, doc/language/DECLARATIONS.md)
 -- and judged by the stzu meta-court:
---     rnxc haro.ring zane.stzu       (ringpp/haro/spike)
--- The verifier (tools/zane/zane.js) is NOT changed and NOT replaced by this file. This file
+--     rnxc haro.ring zayn.stzu       (ringpp/haro/spike)
+-- The verifier (tools/zayn/zayn.js) is NOT changed and NOT replaced by this file. This file
 -- declares what the meta-language can carry; the SEAMS below count what it cannot.
 --
--- Words are lower_snake here and UPPER in a .zane file (DISCOVER, SATISFIES): the meta-language
+-- Words are lower_snake here and UPPER in a .zayn file (DISCOVER, SATISFIES): the meta-language
 -- reserves UPPER_SNAKE for its own keywords, and Z made the same trade ("a step is lower_snake
 -- here where ZQL names it UPPER"). Case is the forge's printer to restore, not a declaration.
 --
 -- SEAMS -- what the stzu of 2026-10-31 cannot carry, counted against violations.json (37):
 --   S1  severity: every refusal a court speaks is an error. Five diagnostics are warnings in
---       zane.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,
+--       zayn.js (UNSPECIFIED_DECLARATION, INTENT_FLOW_NO_SATISFIES, UNRESOLVED_INTENT_FLOW,
 --       UNRESOLVED_ENTITY, ROLE_UNDECLARED) and are NOT declared here, so the court does not
 --       over-refuse. The exception is WIDGET and USER, see D2.
 --   S2  cites: CLOSED for constraints at Haro v0.23 (ringpp 6611d18), 2026-11-02. Each constraint, and the
@@ -30,52 +30,52 @@
 --   S5  a universal field: SATISFIES, ALWAYS_REACHABLE, SIGNALS and ACTOR belong to every
 --       kind and the meta-language has no "on every declaration", so they repeat on all ten.
 --   S6  CLOSED 2026-11-01: the media matrix has 77 "absent" cells in media.json and the generator
---       emits one VERB_NOT_CARRIED constraint for each, derived from the data the way zane.js derives it.
+--       emits one VERB_NOT_CARRIED constraint for each, derived from the data the way zayn.js derives it.
 --   S7  VIBE_STRIPS_RIGHT needs "a suppressed verb that ANY declaration guarantees": a join of
 --       the values of one list against the lists of other declarations. I found no such form in the
 --       condition language of 2026-10-31; that is not a proof that none can be made.
 --   S8  ROLE_MISPLACED: a seat that exists on one kind only is, elsewhere, an unknown clause
 --       and refuses as PARSE; the code and the sentence "a role belongs to an INTERACTION"
 --       are lost.
---   S9  the multi-pillar file: zane.js ignores other pillars' declarations silently; a
+--   S9  the multi-pillar file: zayn.js ignores other pillars' declarations silently; a
 --       declared language refuses what it does not know. Ruling needed (D3).
 --   S10 RATIONALE: the Commons (stzu GRAMMAR, C6 3.8) makes RATIONALE mandatory on every
---       declaration of a language the forge makes; a .zane declaration has none. Adopting the
---       court means every .zane declaration says why. That is a language change, not a
---       translation. RULED 2026-10-31: .zane 1.3 gains no mandatory RATIONALE (D4); at the
+--       declaration of a language the forge makes; a .zayn declaration has none. Adopting the
+--       court means every .zayn declaration says why. That is a language change, not a
+--       translation. RULED 2026-10-31: .zayn 1.3 gains no mandatory RATIONALE (D4); at the
 --       boundary a declaration with none reaches the court as "none given".
 --   S11 codes: DUPLICATE_FIELD is refused as PARSE, DUPLICATE_DECLARATION as DUPLICATE_NAME and
 --       FIELD_MISPLACED and UNKNOWN_FIELD as UNKNOWN_CLAUSE and UNEXPECTED_CHARACTER as PARSE. All are refused; the codes StzZui published are not
 --       the ones spoken. Recorded in haro/twin-expected.csv as class other-code (same refusal, another
 --       code), not fixed by renaming the court's codes.
 --   S12 first refusal: the forged court's diagnose speaks the first refusal it meets;
---       zane.js reports every one. The collecting court exists (haro.ring all) and is not
+--       zayn.js reports every one. The collecting court exists (haro.ring all) and is not
 --       what a forged court does yet.
---   S13 reads-anywhere fields: zane.js reads STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES on
+--   S13 reads-anywhere fields: zayn.js reads STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES on
 --       any kind, so off their own kind it is not silent and FIELD_MISPLACED does not judge them
 --       (D1, narrowed by ruling 2026-11-01). The court refuses them there as UNKNOWN_CLAUSE.
---   S14 guarantees read against the medium: zane.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in
+--   S14 guarantees read against the medium: zayn.js (PG-2, 2026-11-02) raises VERB_NOT_CARRIED for a verb in
 --       ALWAYS_REACHABLE as well as in SATISFIES. The 77 medium constraints read SATISFIES only, so the
---       court is silent on projection-print-promise.zane. Listed in twin-expected.csv, not yet generated.
+--       court is silent on projection-print-promise.zayn. Listed in twin-expected.csv, not yet generated.
 --   S15 the menu (language 1.6, 2026-11-08): LABEL, TARGET and ENTRIES on NAV_GRAPH, and the three menu checks
 --       (MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST, MENU_LABEL_DUPLICATE), are not declared here: the seats
 --       are missing, and each check reads one declaration against the declarations its ENTRIES name, a join S7
 --       found no form for. The court is expected to refuse the three fields as UNKNOWN_CLAUSE; the four rows in
 --       twin-expected.csv are that expectation, written without running the judge.
 --
--- DIVERGENCES from zane.js that this declaration makes by being closed (each is a ruling for
+-- DIVERGENCES from zayn.js that this declaration makes by being closed (each is a ruling for
 -- the author, not a decision taken here):
 --   D1  CLOSED at language v1.4 (2026-11-01). Fields are declared per kind from DECLARATIONS.md;
---       zane.js used to accept any field on any kind and ignore a misplaced TONE or PERSPECTIVE
+--       zayn.js used to accept any field on any kind and ignore a misplaced TONE or PERSPECTIVE
 --       silently. It now refuses it as FIELD_MISPLACED (ROLE stays ROLE_MISPLACED), so court and
 --       verifier agree on which placements are refused; only the code spoken differs (S11).
---   D2  WIDGET and USER are named and refused as errors; zane.js reports them as a warning.
+--   D2  WIDGET and USER are named and refused as errors; zayn.js reports them as a warning.
 --       RULED 2026-10-31: the verifier keeps its warning, until Haro has a severity seat.
 --   D3  other pillars' kinds are refused, not ignored (S9). RULED 2026-10-31: the verifier ignores.
---   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zane 1.3 is unchanged and the
+--   D4  every declaration gains a RATIONALE (S10). RULED 2026-10-31: .zayn 1.3 is unchanged and the
 --       translator writes "none given"; RATIONALE stays mandatory in the agent's grammar.
 --
--- MEASURED 2026-11-01 by haro/judge-zane-court.js: the 57 fixtures of conformance/manifest.json, each
+-- MEASURED 2026-11-01 by haro/judge-zayn-court.js: the 57 fixtures of conformance/manifest.json, each
 -- translated mechanically into the Commons shape (AS, lower_snake words, RATIONALE "none given") and
 -- judged by the court forged from this file. 41 agree with the manifest (20 of them lawful twins
 -- judged clean). 16 differ, and each is a named seam, one row each in haro/twin-expected.csv, which
@@ -83,10 +83,10 @@
 -- refused under another code (S11), ROLE_MISPLACED is refused as UNKNOWN_CLAUSE (S8), and one each is
 -- VIBE_STRIPS_RIGHT (S7), a foreign pillar refused (S9), and the fixture that pins the S13 exemption.
 
-DEFINE LANGUAGE zane AS (
+DEFINE LANGUAGE zayn AS (
   VERSION "1.4", GRAMMAR "1.4",
   COURT "conformance/manifest.json",
-  EXTENSION ".zane"
+  EXTENSION ".zayn"
 ) RATIONALE "What a human is DOING, declared before anything is rendered: ten declaration kinds over twenty-two intent verbs, judged by a constitution -- the surface is a consequence and is never named"
 
 -- ---- the closed vocabularies -----------------------------------------------------------
@@ -143,7 +143,7 @@ DEFINE FORM report AS (
 
 DEFINE FORM entity AS (
   SEATS [value: name]
-) RATIONALE "One entity a world view shows; the host world resolves it, and in zane.js an unresolved one is a warning (S1, S3); a list of names is a list of this form written as bare words"
+) RATIONALE "One entity a world view shows; the host world resolves it, and in zayn.js an unresolved one is a warning (S1, S3); a list of names is a list of this form written as bare words"
 
 
 -- ---- the ten kinds ---------------------------------------------------------------------
@@ -547,7 +547,7 @@ DEFINE CONSTRAINT decorative_animation_vibe AS (
 
 -- ---- the medium axis: every absent cell of the matrix (S6) ------------------------------
 -- One constraint per (medium, verb) cell that media.json marks absent, derived the way
--- zane.js derives NOT_CARRIED: a medium whose default is "absent" keeps only its native and
+-- zayn.js derives NOT_CARRIED: a medium whose default is "absent" keeps only its native and
 -- degraded verbs; any other medium loses its listed "absent" verbs.
 
 DEFINE CONSTRAINT verb_not_carried_auditory_zoom AS (
@@ -1162,7 +1162,7 @@ DEFINE CONSTRAINT signal_unperceivable_vibe AS (
 -- ---- the refusals ----------------------------------------------------------------------
 
 DEFINE REFUSAL unknown_verb AS (
-  MESSAGE "The Zane declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."
+  MESSAGE "The Zayn declaration is DEFINE <KIND> <name> ( ... ); nothing else opens a declaration."
 ) RATIONALE "A verb outside the grammar is not forbidden, it is unparseable"
 
 DEFINE REFUSAL unknown_declaration AS (
@@ -1170,5 +1170,5 @@ DEFINE REFUSAL unknown_declaration AS (
   NAMED [widget: "WIDGET names a rendering, and a declaration that needs to say card has stopped describing intent", user: "USER is not a kind this language defines"],
   CODES [widget: "UNSPECIFIED_DECLARATION", user: "UNSPECIFIED_DECLARATION"],
   CITES ["article:intent"]
-) RATIONALE "Two kinds the reference implementation recognises and the language does not define (D2). Warnings in zane.js; errors here"
+) RATIONALE "Two kinds the reference implementation recognises and the language does not define (D2). Warnings in zayn.js; errors here"
 

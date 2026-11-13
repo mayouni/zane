@@ -1,6 +1,6 @@
 //! regex.zig: the part of JavaScript's RegExp, and of its String methods, that this site's own build tools use
-//! (tools/site-facts.js, tools/site-shell.js, tools/site-grid.js and doc/design/coverage-count.js), so that `zane site
-//! facts` and `zane site shell` read a page with the same patterns those scripts read it with, written once, instead
+//! (tools/site-facts.js, tools/site-shell.js, tools/site-grid.js and doc/design/coverage-count.js), so that `zayn site
+//! facts` and `zayn site shell` read a page with the same patterns those scripts read it with, written once, instead
 //! of some eighty hand-made scanners that would each have to be proved equal to a pattern (doc/design/BINARY.md, S5).
 //!
 //! What it carries: alternation, groups (capturing, `(?:`, `(?=`, `(?!`, and `(?<=` `(?<!` over ONE character), the

@@ -1,5 +1,5 @@
 //! schema.zig: the subset of JSON Schema the family envelope (C2, doc/diagnostic-contract.schema.json) uses,
-//! interpreted rather than restated, as tools/zane/envelope.js interprets it: $ref "#", not.type, enum, type
+//! interpreted rather than restated, as tools/zayn/envelope.js interprets it: $ref "#", not.type, enum, type
 //! (object, array, string, integer), required, properties, additionalProperties (false, or a subschema),
 //! items, minLength, minimum and pattern; and the full-depth scan for the scalars that do not survive the
 //! family's JSON encoder (CENTRAL-JSONSCALAR-01). The problem texts are envelope.js's, word for word.
@@ -422,8 +422,8 @@ test "the schema's own patterns" {
     try std.testing.expect(!try regexTest(a, cite, "rule:"));
     try std.testing.expect(!try regexTest(a, cite, "rule:a b"));
     const lang = "^[a-z][a-z0-9_]*$";
-    try std.testing.expect(try regexTest(a, lang, "zane"));
-    try std.testing.expect(!try regexTest(a, lang, "Zane"));
+    try std.testing.expect(try regexTest(a, lang, "zayn"));
+    try std.testing.expect(!try regexTest(a, lang, "Zayn"));
     try std.testing.expect(try regexTest(a, "b", "abc"));
     try std.testing.expectError(error.UnsupportedPattern, regexTest(a, "\\d+", "1"));
     // the facts schema's patterns

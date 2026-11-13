@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "zane-audit-facts/1.1",
-  "title": "Zane audit facts, version 1.1 (reads 1.0, then called zui-audit-facts)",
+  "$id": "zayn-audit-facts/1.2",
+  "title": "Zayn audit facts, version 1.2 (reads 1.1, then called zane-audit-facts, and 1.0, then called zui-audit-facts)",
   "description": "What a writer must measure from ONE screenshot so that the audit can judge the rules a screenshot can decide (doc/design/AUDIT-FACTS.md). The writer measures; it never judges. Every derived field is recomputable from the others and doc/design/audit/check-facts.js proves it. A field the writer could not measure is null, never a guess and never zero.",
   "type": "object",
   "required": ["format", "version", "capture", "lines"],
   "additionalProperties": false,
   "properties": {
-    "format": { "enum": ["zane-audit-facts", "zui-audit-facts"], "description": "zane-audit-facts with version 1.1; zui-audit-facts, the former name, with version 1.0. The two differ in their name only." },
-    "version": { "enum": ["1.1", "1.0"] },
+    "format": { "enum": ["zayn-audit-facts", "zane-audit-facts", "zui-audit-facts"], "description": "zayn-audit-facts with version 1.2; zane-audit-facts and zui-audit-facts, the former names, with versions 1.1 and 1.0. The three differ in their name only." },
+    "version": { "enum": ["1.2", "1.1", "1.0"] },
     "capture": {
       "type": "object",
       "required": ["image", "width_px", "height_px", "scale", "box_kind", "ocr", "luminance"],

@@ -76,7 +76,7 @@ pub fn asText(a: std.mem.Allocator, s: []const u8) ![]const u8 {
 }
 
 /// The text report cli.js prints: one line per finding, its summary and its citation beneath, then the closing line
-/// unless `quiet`. Shared by `zane check` and `zane site facts`, which re-runs the verifier on the site's declarations.
+/// unless `quiet`. Shared by `zayn check` and `zayn site facts`, which re-runs the verifier on the site's declarations.
 pub fn writeText(
     a: std.mem.Allocator,
     out: *std.Io.Writer,
@@ -100,7 +100,7 @@ pub fn writeText(
     if (quiet) return;
     if (findings.len == 0) {
         if (contract.constitution) |c| {
-            try out.print("clean — {d} file(s), 0 violations at level {d} against Zane v{s}\n", .{ files.len, level, c });
+            try out.print("clean — {d} file(s), 0 violations at level {d} against Zayn v{s}\n", .{ files.len, level, c });
         } else {
             try out.print("clean — {d} file(s), 0 violations at level {d}\n", .{ files.len, level });
         }
@@ -171,7 +171,7 @@ pub fn writeJson(
             try j(w, c);
         }
         try w.writeAll(if (cites.items.len == 0) "],\n" else "\n      ],\n");
-        try w.writeAll("      \"language\": \"zane\",\n");
+        try w.writeAll("      \"language\": \"zayn\",\n");
         const lvl: i64 = if (f.meta.level == 0) 1 else f.meta.level;
         try w.print("      \"level\": {d},\n      \"subject\": ", .{lvl});
         if (f.diag.subject) |s| try j(w, s) else try w.writeAll("null");

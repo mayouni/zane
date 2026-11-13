@@ -1,6 +1,6 @@
-//! pack.zig: `zane pack [--check]`, the protocol pack's manifest, written or verified (doc/design/BINARY.md, S2).
+//! pack.zig: `zayn pack [--check]`, the protocol pack's manifest, written or verified (doc/design/BINARY.md, S2).
 //!
-//! The same as tools/zane/pack.js, printing the same lines: the twelve pinned files hashed with sha256 over their
+//! The same as tools/zayn/pack.js, printing the same lines: the twelve pinned files hashed with sha256 over their
 //! content with CRLF normalised to LF, the versions read from the files themselves, the counts the pack's README
 //! states checked against them, and protocol/MANIFEST.json written (as JSON.stringify(manifest, null, 2) writes
 //! it) or compared. Unlike `conformance`, it reads the files on disk, from the directory it is run in: the point
@@ -120,9 +120,9 @@ fn digitsBefore(md: []const u8, after: []const u8, prefix: []const u8) ?[]const 
     return null;
 }
 
-/// md.match(/conforms to Zane v(\S+?) at level/)[1]
+/// md.match(/conforms to Zayn v(\S+?) at level/)[1]
 fn lawClaim(md: []const u8) ?[]const u8 {
-    const head = "conforms to Zane v";
+    const head = "conforms to Zayn v";
     var from: usize = 0;
     while (std.mem.indexOfPos(u8, md, from, head)) |at| : (from = at + 1) {
         const s = at + head.len;
@@ -182,7 +182,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, err: *std.Io.Writer, check: bool) 
     }
 
     const v = try versions(a);
-    try out.writeAll("\nThe Zane protocol pack\n");
+    try out.writeAll("\nThe Zayn protocol pack\n");
     try out.print("  law          v{s} — {d} rules, {d} forbidden patterns\n", .{ try text(a, v.constitution), v.rules, v.forbidden_patterns });
     try out.print("  language     v{s} — {d} diagnostics\n", .{ v.language, v.diagnostics });
     try out.print("  axes         {d} media, {d} semantic values\n", .{ v.media, v.signal_values });
@@ -252,9 +252,9 @@ pub fn run(a: Allocator, out: *std.Io.Writer, err: *std.Io.Writer, check: bool) 
 
     // the manifest, as JSON.stringify(manifest, null, 2) + '\n'
     var metadata = std.json.ObjectMap.init(a);
-    try metadata.put("title", .{ .string = "The Zane Protocol Pack" });
+    try metadata.put("title", .{ .string = "The Zayn Protocol Pack" });
     try metadata.put("version", .{ .string = "1.0" });
-    try metadata.put("generated", .{ .string = "by tools/zane/pack.js -- never hand-edited" });
+    try metadata.put("generated", .{ .string = "by tools/zayn/pack.js -- never hand-edited" });
     try metadata.put("note", .{ .string = "Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform." });
     try metadata.put("hash", .{ .string = "sha256 over LF-normalised content" });
     var vs = std.json.ObjectMap.init(a);
