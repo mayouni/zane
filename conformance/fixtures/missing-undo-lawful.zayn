@@ -1,0 +1,8 @@
+// The lawful twin of missing-undo.zayn.
+// Expected: no diagnostics.
+
+DEFINE INTENT_FLOW post_entry (
+  SATISFIES [CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR accountant
+)

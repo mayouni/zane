@@ -1,6 +1,6 @@
-//! conformance.zig: `zane conformance`, the suite in one process (doc/design/BINARY.md, stage S2).
+//! conformance.zig: `zayn conformance`, the suite in one process (doc/design/BINARY.md, stage S2).
 //!
-//! The same run as tools/zane/conformance.js, printing the same lines: every fixture of the manifest through
+//! The same run as tools/zayn/conformance.js, printing the same lines: every fixture of the manifest through
 //! the core, the SET of ids compared (never lines, wording or order), a fixture above the claimed level skipped
 //! and not failed; and the cross-checks that keep two sources from drifting: the core's own media and signal
 //! tables against conformance/media.json and signal.json, the contract against doc/language/VIOLATIONS.md, and
@@ -62,8 +62,8 @@ pub fn specVersion(md: []const u8) []const u8 {
         var r = line;
         if (r.len == 0 or r[0] != '#') continue;
         r = r[1..];
-        // /^#\s+The Zane Language\s+—\s+Specification\s+v(\S+)/m
-        const parts = [_][]const u8{ "The Zane Language", "—", "Specification" };
+        // /^#\s+The Zayn Language\s+—\s+Specification\s+v(\S+)/m
+        const parts = [_][]const u8{ "The Zayn Language", "—", "Specification" };
         var ok = true;
         for (parts) |p| {
             const t = std.mem.trimLeft(u8, r, " \t\r");
@@ -166,7 +166,7 @@ fn envelope(a: Allocator, d: core.Diag, file: []const u8, m: ?contract_mod.Meta)
     for (meta.rights) |x| try cites.append(.{ .string = try std.fmt.allocPrint(a, "right:{s}", .{x}) });
     for (meta.forbidden_patterns) |x| try cites.append(.{ .string = try std.fmt.allocPrint(a, "pattern:{s}", .{x}) });
     try o.put("cites", .{ .array = cites });
-    try o.put("language", .{ .string = "zane" });
+    try o.put("language", .{ .string = "zayn" });
     try o.put("level", .{ .integer = if (meta.level != 0) meta.level else 1 });
     try o.put("subject", if (d.subject) |s| .{ .string = s } else .null);
     return .{ .object = o };
@@ -339,7 +339,7 @@ pub fn run(a: Allocator, out: *std.Io.Writer, level: i64, verbose: bool) !u8 {
     }
 
     const shape_version = strOf(get(shape, "version")) orelse "undefined";
-    try out.print("\nZane conformance — level {d}\n", .{level});
+    try out.print("\nZayn conformance — level {d}\n", .{level});
     try out.print("  spec         doc/language/ v{s}\n", .{version});
     try out.print("  contract     violations.json v{s} (constitution v{s})\n", .{ contract.version orelse "undefined", contract.constitution orelse "undefined" });
     if (envelope_problems.items.len > 0) {

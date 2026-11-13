@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "The Zane Diagnostic Contract",
-    "version": "1.10",
+    "title": "The Zayn Diagnostic Contract",
+    "version": "1.11",
     "lastUpdated": "2026-11-08",
     "specification": "doc/language/VIOLATIONS.md",
-    "constitution": "3.16",
-    "note": "Every diagnostic a conforming Zane implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused. 1.9 (2026-11-05) renames the language from Zui to Zane: the envelope's language value is zane, and no id, severity, level or binding changed. 1.10 (2026-11-08) adds MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and MENU_LABEL_DUPLICATE, bound to Rule 116 as amended at v3.16, with the fields LABEL, TARGET and ENTRIES on NAV_GRAPH (language 1.6): 40 diagnostics."
+    "constitution": "3.17",
+    "note": "Every diagnostic a conforming Zayn implementation may raise, bound to the constitutional rule it enforces. Prose explaining these entries is in doc/language/VIOLATIONS.md; this file is the contract implementations load. Diagnostic ids are stable forever -- like rule numbers, a retired id is never reused. 1.9 (2026-11-05) renames the language from Zui to Zane: the envelope's language value is zane, and no id, severity, level or binding changed. 1.10 (2026-11-08) adds MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and MENU_LABEL_DUPLICATE, bound to Rule 116 as amended at v3.16, with the fields LABEL, TARGET and ENTRIES on NAV_GRAPH (language 1.6): 40 diagnostics. 1.11 (2026-11-12) renames the language from Zane to Zayn: the envelope's language value is zayn, and no id, severity, level or binding changed."
   },
   "levels": {
     "1": { "name": "Syntax", "requires": "the file alone", "decides": "the grammar parses; verbs, kinds and structure are well-formed" },
@@ -151,7 +151,7 @@
       "id": "UNSPECIFIED_DECLARATION",
       "severity": "warning",
       "level": 1,
-      "summary": "A .zane declaration kind outside the ten this language defines (WIDGET, USER).",
+      "summary": "A .zayn declaration kind outside the ten this language defines (WIDGET, USER).",
       "decidable_from": ["kind"],
       "rules": [],
       "articles": ["intent"],
@@ -431,7 +431,7 @@
       "rights": [],
       "forbidden_patterns": [],
       "invariant": null,
-      "note": "Ruling D1, 2026-10-31. Each kind declares the fields DECLARATIONS.md lists for it, plus the four every kind carries (SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR). A TONE on a SCREEN or a PERSPECTIVE on a FORM is read by nothing and does nothing, and until this diagnostic the verifier said nothing, so the author believed it was honoured. That silence was the defect, and it is the gap ROLE_MISPLACED named in TONE and PERSPECTIVE when it closed its own. Generalised from ROLE_MISPLACED rather than replacing it: ROLE keeps its own id, because ids are stable forever, and FIELD_MISPLACED leaves ROLE to it so one defect is not reported twice. Only a known field is judged, and only one the verifier would otherwise ignore there: STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read on any kind, so they are not silent and are not judged. A name the grammar does not know is UNKNOWN_FIELD. WIDGET and USER are UNSPECIFIED_DECLARATION's and are not judged. The kind list comes from the declaration tables and is mirrored in the Haro declaration haro/zane.stzu, whose court refused this placement before the verifier did."
+      "note": "Ruling D1, 2026-10-31. Each kind declares the fields DECLARATIONS.md lists for it, plus the four every kind carries (SATISFIES, ALWAYS_REACHABLE, SIGNALS, ACTOR). A TONE on a SCREEN or a PERSPECTIVE on a FORM is read by nothing and does nothing, and until this diagnostic the verifier said nothing, so the author believed it was honoured. That silence was the defect, and it is the gap ROLE_MISPLACED named in TONE and PERSPECTIVE when it closed its own. Generalised from ROLE_MISPLACED rather than replacing it: ROLE keeps its own id, because ids are stable forever, and FIELD_MISPLACED leaves ROLE to it so one defect is not reported twice. Only a known field is judged, and only one the verifier would otherwise ignore there: STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read on any kind, so they are not silent and are not judged. A name the grammar does not know is UNKNOWN_FIELD. WIDGET and USER are UNSPECIFIED_DECLARATION's and are not judged. The kind list comes from the declaration tables and is mirrored in the Haro declaration haro/zayn.stzu, whose court refused this placement before the verifier did."
     },
     {
       "id": "UNKNOWN_FIELD",
@@ -496,7 +496,7 @@
       "rights": [],
       "forbidden_patterns": [],
       "invariant": "A menu names a section at the parent level and the section's landing page as the first child, and no child label repeats its parent's.",
-      "note": "Language 1.6, law v3.16. The Principal, 2026-11-08, on the Zane site's own menu: it is not logical to read the main title in the main menu and find it again as one of its children. The section and its landing page are two things, so each has one name: the parent level names the section, the first child names the page. Labels compare ignoring ASCII case, the spaces around them and a leading 'The'. Raised at the child's LABEL. A child entry that names no declared NAV_GRAPH is not judged."
+      "note": "Language 1.6, law v3.16. The Principal, 2026-11-08, on the Zayn site's own menu: it is not logical to read the main title in the main menu and find it again as one of its children. The section and its landing page are two things, so each has one name: the parent level names the section, the first child names the page. Labels compare ignoring ASCII case, the spaces around them and a leading 'The'. Raised at the child's LABEL. A child entry that names no declared NAV_GRAPH is not judged."
     },
     {
       "id": "MENU_LANDING_NOT_FIRST",
@@ -509,7 +509,7 @@
       "rights": [],
       "forbidden_patterns": [],
       "invariant": "A menu names a section at the parent level and the section's landing page as the first child, and no child label repeats its parent's.",
-      "note": "Language 1.6, law v3.16. A section is a NAV_GRAPH with a TARGET and ENTRIES; its landing surface is the child whose TARGET is the section's own. Raised when no child leads there (the landing page left out of its band, which the Zane site did from 2026-11-06 to 2026-11-08) or when the child that does is not the first. A NAV_GRAPH with ENTRIES and no TARGET is a bar, such as a main menu, and has no landing to list. Raised at the section's ENTRIES."
+      "note": "Language 1.6, law v3.16. A section is a NAV_GRAPH with a TARGET and ENTRIES; its landing surface is the child whose TARGET is the section's own. Raised when no child leads there (the landing page left out of its band, which the Zayn site did from 2026-11-06 to 2026-11-08) or when the child that does is not the first. A NAV_GRAPH with ENTRIES and no TARGET is a bar, such as a main menu, and has no landing to list. Raised at the section's ENTRIES."
     },
     {
       "id": "MENU_LABEL_DUPLICATE",

@@ -8,7 +8,7 @@
 //! codes keep this short enough to read in one sitting.
 //!
 //! Used at build time, to store the site's text files compressed in the binary (BINARY.md section 7), and at run time by
-//! `zane serve`, which inflates a stored file for a client that does not accept gzip.
+//! `zayn serve`, which inflates a stored file for a client that does not accept gzip.
 
 const std = @import("std");
 const Allocator = std.mem.Allocator;

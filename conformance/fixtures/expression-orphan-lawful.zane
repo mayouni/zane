@@ -1,9 +1,0 @@
-// The lawful twin of expression-orphan.zane: the same signals, now traceable.
-// One line added, and the expression has something to refine.
-//
-// Expected: clean
-
-DEFINE SCREEN dashboard (
-  SATISFIES [DISCOVER, SCAN],
-  SIGNALS [danger, warning, muted]
-)

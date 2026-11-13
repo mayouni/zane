@@ -1,0 +1,17 @@
+// The lawful twin of verb-not-carried.zayn: the same medium, honest intents.
+//
+// READ, SCAN and COMPARE are native to print -- they are what a page is
+// for. Nothing about the medium changed; only the promise did. A printed
+// record that asks to be read is lawful; one that asks to be acted on is
+// not, and the difference is decidable from the file.
+//
+// Expected: no diagnostics at any level.
+
+DEFINE VIBE printed_record (
+  SURFACE_AS print,
+  MOTION none
+)
+
+DEFINE INTENT_FLOW read_the_ledger (
+  SATISFIES [READ, SCAN, COMPARE]
+)

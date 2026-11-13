@@ -1,13 +1,13 @@
-//! core.zig: the Zane verifier core, in Zig.
+//! core.zig: the Zayn verifier core, in Zig.
 //!
-//! Lexer, parser and checks for the Zane language (doc/language/ v1.6), the third evaluator of the law
+//! Lexer, parser and checks for the Zayn language (doc/language/ v1.7), the third evaluator of the law
 //! (doc/design/BINARY.md, stage S1). It is PURE: it takes a source string and an allocator and returns the
 //! diagnostics in source order. No file system, no clock, no network, no global state, so the same code
 //! compiles to a native executable and to wasm32-freestanding.
 //!
-//! It is written against the fixtures and the grammar, and proved against tools/zane/zane.js by byte
-//! parity (tools/zane/parity.js). Its tables are written HERE, independently of conformance/media.json and
-//! conformance/signal.json, and `zane conformance` (stage S2) will check them against that data: a third
+//! It is written against the fixtures and the grammar, and proved against tools/zayn/zayn.js by byte
+//! parity (tools/zayn/parity.js). Its tables are written HERE, independently of conformance/media.json and
+//! conformance/signal.json, and `zayn conformance` (stage S2) will check them against that data: a third
 //! evaluator that derived its tables from the data would agree with the data by construction.
 //!
 //! Domain of parity: well-formed UTF-8, which the caller makes of any bytes as Node does (wellFormed, below).
@@ -30,7 +30,7 @@ pub const intent_verbs = [_][]const u8{
     "EXIT",
 };
 
-pub const zane_kinds = [_][]const u8{
+pub const zayn_kinds = [_][]const u8{
     "INTENT_FLOW", "FORM",        "WIZARD",      "SCREEN",   "COMPONENT",
     "NAV_GRAPH",   "WORLD_VIEW",  "INTERACTION", "FEEDBACK", "VIBE",
 };
@@ -334,7 +334,7 @@ const Parser = struct {
                 }
 
                 // not ours, and not a near-miss we owe a warning for: skip it whole
-                if (!has(&zane_kinds, kind) and !has(&unspecified_kinds, kind)) {
+                if (!has(&zayn_kinds, kind) and !has(&unspecified_kinds, kind)) {
                     if (isPunct(self.peek(), '(')) self.skipBalanced();
                     continue;
                 }
@@ -777,7 +777,7 @@ fn menuKey(a: Allocator, s: []const u8) ![]const u8 {
 
 // ---- the public surface ----------------------------------------------------------------------------------
 
-/// Verify one Zane source. Every allocation is made in `a`; pass an arena and free it once.
+/// Verify one Zayn source. Every allocation is made in `a`; pass an arena and free it once.
 /// Any bytes as well-formed UTF-8, the way Node's readFileSync(file, 'utf8') reads them: the WHATWG decoder, where
 /// each maximal ill-formed subpart becomes one U+FFFD and the byte that ended it is read again.
 pub fn wellFormed(a: Allocator, s: []const u8) ![]const u8 {

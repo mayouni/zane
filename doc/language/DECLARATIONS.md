@@ -1,6 +1,6 @@
 # The Ten Declaration Types
 
-**Normative.** Part of [the Zane Language Specification v1.6](README.md). Syntax is
+**Normative.** Part of [the Zayn Language Specification v1.7](README.md). Syntax is
 in [GRAMMAR.md](GRAMMAR.md); diagnostics are in [VIOLATIONS.md](VIOLATIONS.md).
 
 ---
@@ -65,7 +65,7 @@ A named sequence of intents a human moves through. The only declaration that is
 *required* to carry `SATISFIES`; without it there is no flow, only a name
 (`INTENT_FLOW_NO_SATISFIES`).
 
-```zane
+```zayn
 DEFINE INTENT_FLOW approve_payment (
   SATISFIES [SELECT, CONFIRM, ACT],
   ALWAYS_REACHABLE [UNDO, CANCEL, EXIT]
@@ -125,7 +125,7 @@ each naming its children. A level is a reference to other declarations, never a 
 An entry with `ENTRIES` and no `TARGET` is a **bar**, such as the main menu, and has no landing. An
 entry with no `ENTRIES` is a leaf.
 
-The law (Rule 116, v3.16) makes three demands of a menu with levels, and `zane check` refuses each
+The law (Rule 116, v3.16) makes three demands of a menu with levels, and `zayn check` refuses each
 by name ([VIOLATIONS.md §3a](VIOLATIONS.md#3a-three-diagnostics-of-the-menu-since-v16)):
 
 | Refused | When |
@@ -140,7 +140,7 @@ in the file is not judged: its label is not in the file, and the verifier is sil
 than guessing. Neither `TARGET` nor `ENTRIES` is resolved against the surfaces of the system; that
 is a cross-pillar question and no diagnostic asks it yet.
 
-```zane
+```zayn
 DEFINE NAV_GRAPH main_menu (
   SATISFIES [LOCATE],
   ENTRIES [billing, reports]
@@ -159,8 +159,8 @@ DEFINE NAV_GRAPH reports (LABEL "Reports", TARGET report_list)
 ```
 
 The main menu says *Billing*; the band under it opens on *Overview*, the page *Billing* leads to,
-then *Invoices* and *Payments*. This is `conformance/fixtures/menu-lawful.zane`. The Zane site
-declares its own menu the same way, in `site/menu.zane`, which `zane site shell` writes from the
+then *Invoices* and *Payments*. This is `conformance/fixtures/menu-lawful.zayn`. The Zayn site
+declares its own menu the same way, in `site/menu.zayn`, which `zayn site shell` writes from the
 site's registry and checks with these three diagnostics.
 
 ### `WORLD_VIEW` — a spatial surface
@@ -216,7 +216,7 @@ holds `ACT`. It names who performs the act. Its absence, when the actor model
 binds no actor either, is `HIDDEN_AUTHORITY` — the law's requirement that every
 consequential act names its actor (Rule 83, Article V).
 
-```zane
+```zayn
 DEFINE INTENT_FLOW post_ledger_entry (
   SATISFIES [CONFIRM, ACT],
   ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
@@ -299,7 +299,7 @@ intact. Expression is intent's *refinement*, never a second language beside it: 
 that says how its values should be perceived without saying what the operator is doing has
 inverted the model this language exists to enforce.
 
-```zane
+```zayn
 DEFINE SCREEN overdue_invoices (
   SATISFIES [SCAN, COMPARE, LOCATE],
   SIGNALS [danger, warning, muted]

@@ -1,8 +1,0 @@
-// The lawful twin of decorative-animation.zane: the feedback reports the
-// state it is feedback about.
-// Expected: no diagnostics.
-
-DEFINE FEEDBACK saved_confirmation (
-  TONE informational,
-  REPORTS [save_state]
-)

@@ -1,9 +1,9 @@
-//! `zane serve`: the site, the Reader and the UI audit from one executable, with no Node (doc/design/BINARY.md, stage S4).
+//! `zayn serve`: the site, the Reader and the UI audit from one executable, with no Node (doc/design/BINARY.md, stage S4).
 //!
-//!   zane serve [--port N] [--host ADDR]                  this repository's site, what its pages reach, embedded at its build
-//!   zane serve --root DIR [--port N] [--host ADDR]       the same site, read from the folder DIR instead
-//!   zane serve --app DIR [--port N] [--host ADDR]        another site, read only, with the UI audit beside it at
-//!                                                        /__zane/ui-audit.html, so the audit can measure it on one origin
+//!   zayn serve [--port N] [--host ADDR]                  this repository's site, what its pages reach, embedded at its build
+//!   zayn serve --root DIR [--port N] [--host ADDR]       the same site, read from the folder DIR instead
+//!   zayn serve --app DIR [--port N] [--host ADDR]        another site, read only, with the UI audit beside it at
+//!                                                        /__zayn/ui-audit.html, so the audit can measure it on one origin
 //!
 //! The hygiene of BINARY.md section 7, written before the code: it binds 127.0.0.1 unless --host says otherwise; it answers
 //! GET and HEAD only (405 otherwise); it lists no folder (a folder without index.html is 404); a path with a `..` segment,
@@ -24,7 +24,7 @@ const site = @import("site");
 
 /// The UI audit, embedded, for --app: the binary serves it beside a site that is not this repository.
 const ui_audit = @embedFile("ui-audit.html");
-const audit_path = "/__zane/ui-audit.html";
+const audit_path = "/__zayn/ui-audit.html";
 
 const Options = struct {
     root: ?[]const u8 = null,
@@ -41,18 +41,18 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
         const val = if (i + 1 < argv.len) argv[i + 1] else null;
         if (std.mem.eql(u8, x, "--root") or std.mem.eql(u8, x, "--app") or std.mem.eql(u8, x, "--port") or std.mem.eql(u8, x, "--host")) {
             const v = val orelse {
-                try err.print("zane serve: {s} needs a value\n", .{x});
+                try err.print("zayn serve: {s} needs a value\n", .{x});
                 return 2;
             };
             i += 1;
             if (std.mem.eql(u8, x, "--root")) o.root = v else if (std.mem.eql(u8, x, "--app")) o.app = v else if (std.mem.eql(u8, x, "--host")) o.host = v else {
                 o.port = std.fmt.parseInt(u16, v, 10) catch {
-                    try err.print("zane serve: --port must be a number from 1 to 65535\n", .{});
+                    try err.print("zayn serve: --port must be a number from 1 to 65535\n", .{});
                     return 2;
                 };
             }
         } else {
-            try err.print("zane serve: unknown argument {s}\n\nzane serve [--root DIR] [--port N] [--host ADDR]\nzane serve --app DIR [--port N] [--host ADDR]\n", .{x});
+            try err.print("zayn serve: unknown argument {s}\n\nzayn serve [--root DIR] [--port N] [--host ADDR]\nzayn serve --app DIR [--port N] [--host ADDR]\n", .{x});
             return 2;
         }
     }
@@ -60,11 +60,11 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
     var source: Source = .embedded;
     if (o.app orelse o.root) |folder| {
         const real = std.fs.cwd().realpathAlloc(a, folder) catch {
-            try err.print("zane serve: cannot open the folder {s}\n", .{folder});
+            try err.print("zayn serve: cannot open the folder {s}\n", .{folder});
             return 2;
         };
         const dir = std.fs.cwd().openDir(real, .{}) catch {
-            try err.print("zane serve: cannot open the folder {s}\n", .{folder});
+            try err.print("zayn serve: cannot open the folder {s}\n", .{folder});
             return 2;
         };
         source = .{ .disk = .{ .dir = dir, .real = real } };
@@ -76,19 +76,19 @@ pub fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer, argv:
     };
 
     const address = std.net.Address.parseIp(o.host, o.port) catch {
-        try err.print("zane serve: {s} is not an IP address\n", .{o.host});
+        try err.print("zayn serve: {s} is not an IP address\n", .{o.host});
         return 2;
     };
     var server = address.listen(.{ .reuse_address = true }) catch |e| {
-        try err.print("zane serve: cannot listen on {s}:{d}: {s}\n", .{ o.host, o.port, @errorName(e) });
+        try err.print("zayn serve: cannot listen on {s}:{d}: {s}\n", .{ o.host, o.port, @errorName(e) });
         return 2;
     };
     defer server.deinit();
 
     if (o.app != null) {
-        try out.print("zane serve: {s}, read only, at http://{s}:{d}/ with the UI audit at http://{s}:{d}{s}\n", .{ where, o.host, o.port, o.host, o.port, audit_path });
+        try out.print("zayn serve: {s}, read only, at http://{s}:{d}/ with the UI audit at http://{s}:{d}{s}\n", .{ where, o.host, o.port, o.host, o.port, audit_path });
     } else {
-        try out.print("zane serve: {s}, read only, at http://{s}:{d}/ (the site /index.html, the Reader /constitution/reader/, the audit /tools/ui-audit.html)\n", .{ where, o.host, o.port });
+        try out.print("zayn serve: {s}, read only, at http://{s}:{d}/ (the site /index.html, the Reader /constitution/reader/, the audit /tools/ui-audit.html)\n", .{ where, o.host, o.port });
     }
     try out.flush();
 
@@ -242,7 +242,7 @@ const types = [_]struct { []const u8, []const u8 }{
 
 fn typeOf(name: []const u8) []const u8 {
     for (types) |t| if (std.ascii.endsWithIgnoreCase(name, t[0])) return t[1];
-    return "text/plain; charset=utf-8"; // .md, .zane, .csv, .txt and the rest are read as text, never run
+    return "text/plain; charset=utf-8"; // .md, .zayn, .csv, .txt and the rest are read as text, never run
 }
 
 fn send(stream: std.net.Stream, ans: Answer, head: bool) !void {

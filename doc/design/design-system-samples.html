@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zane design system: the principles shown</title>
-<meta name="description" content="Each principle of Zane's design system shown as a live sample, the lawful one beside the offending one, with the rule it follows.">
+<title>Zayn design system: the principles shown</title>
+<meta name="description" content="Each principle of Zayn's design system shown as a live sample, the lawful one beside the offending one, with the rule it follows.">
 <style>
 /* The tokens of DESIGN-SYSTEM.md section 4.2, written once. This page is set with them and with nothing else, so it is itself a
    sample of the system. Fixed tokens first, then each culture's. */
@@ -133,8 +133,8 @@ svg .node { fill: var(--surface); stroke: var(--edge); stroke-width: 1.5; }
 <body>
 <div class="frame-page">
 <header class="head">
-  <p class="kicker">Zane · the design system (ZANE-DESIGN-01)</p>
-  <h1>Each principle of Zane's design system is shown here as a live sample, the lawful one beside the offending one.</h1>
+  <p class="kicker">Zayn · the design system (ZANE-DESIGN-01)</p>
+  <h1>Each principle of Zayn's design system is shown here as a live sample, the lawful one beside the offending one.</h1>
   <p class="lead">This page holds thirteen pairs of real interface samples, one pair for each principle of <a href="DESIGN-SYSTEM.md">the design system</a>.
     Each caption cites the rule the lawful sample follows and the corrections in <a href="corpus/CORPUS.md">the corpus</a> that the offending one repeats.</p>
   <div class="culture">
@@ -296,7 +296,7 @@ svg .node { fill: var(--surface); stroke: var(--edge); stroke-width: 1.5; }
   <p class="statement">A title names its subject in a full declarative sentence.</p>
   <div class="pair">
     <figure class="sample"><div class="window"><div class="strip">A page title</div><div class="stage">
-      <h3>Zane is designed around a conceptual grid of what a person does in every channel.</h3>
+      <h3>Zayn is designed around a conceptual grid of what a person does in every channel.</h3>
     </div></div><figcaption><span class="tag ok">Lawful</span> WRITING.md rule 1; proposed amendment 11.</figcaption></figure>
     <figure class="sample"><div class="window"><div class="strip">A page title</div><div class="stage">
       <h3>A map of what a person does, across every channel, with the empty cells left empty.</h3>
@@ -350,14 +350,14 @@ svg .node { fill: var(--surface); stroke: var(--edge); stroke-width: 1.5; }
 </main>
 </div>
 
-<footer class="foot">Zane is <a href="https://mayouni.github.io/stzsite/">a Softanza project</a>. © 2020-<span id="year">2026</span> Mansour Ayouni. Released under the <a href="../../LICENSE">MIT licence</a>.</footer>
+<footer class="foot">Zayn is <a href="https://mayouni.github.io/stzsite/">a Softanza project</a>. © 2020-<span id="year">2026</span> Mansour Ayouni. Released under the <a href="../../LICENSE">MIT licence</a>.</footer>
 </div>
 <script>
 // the culture select: the page's whole look changes through the tokens, and nothing else
 (function () {
   var root = document.documentElement, sel = document.getElementById('vibe');
-  try { var v = localStorage.getItem('zane-samples-vibe'); if (v) { root.dataset.vibe = v; sel.value = v; } } catch (e) {}
-  sel.addEventListener('change', function () { root.dataset.vibe = sel.value; try { localStorage.setItem('zane-samples-vibe', sel.value); } catch (e) {} });
+  try { var v = localStorage.getItem('zayn-samples-vibe'); if (v) { root.dataset.vibe = v; sel.value = v; } } catch (e) {}
+  sel.addEventListener('change', function () { root.dataset.vibe = sel.value; try { localStorage.setItem('zayn-samples-vibe', sel.value); } catch (e) {} });
   document.getElementById('year').textContent = String(new Date().getFullYear());
 })();
 </script>

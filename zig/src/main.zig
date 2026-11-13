@@ -1,20 +1,20 @@
-//! zane: the Zane verifier as one executable (doc/design/BINARY.md).
+//! zayn: the Zayn verifier as one executable (doc/design/BINARY.md).
 //!
-//!   zane check <file.zane> [file.zane ...] [options]     the verifier, text or --json (the C2 envelope)
-//!   zane conformance [--level N] [--verbose]            the suite and its cross-checks, in one process
-//!   zane pack [--check]                                the protocol pack's manifest, written or verified
-//!   zane cross-medium [spec.json] [--verbose]          one declaration, two renderings, one law
-//!   zane audit-facts [facts.json] [--rules 62,105]     the screenshot audit's facts and its decisions
-//!   zane serve [--root DIR | --app DIR] [--port N]     the site, the Reader and the audit, or another site beside the audit
-//!   zane site facts|shell|grid [--write]               this site's own build checks, run from the repository's root
-//!   zane version                                       the law, the language, the contract, the build
-//!   zane --version                                     the release's version: zane 0.1.0
+//!   zayn check <file.zayn> [file.zayn ...] [options]     the verifier, text or --json (the C2 envelope)
+//!   zayn conformance [--level N] [--verbose]            the suite and its cross-checks, in one process
+//!   zayn pack [--check]                                the protocol pack's manifest, written or verified
+//!   zayn cross-medium [spec.json] [--verbose]          one declaration, two renderings, one law
+//!   zayn audit-facts [facts.json] [--rules 62,105]     the screenshot audit's facts and its decisions
+//!   zayn serve [--root DIR | --app DIR] [--port N]     the site, the Reader and the audit, or another site beside the audit
+//!   zayn site facts|shell|grid [--write]               this site's own build checks, run from the repository's root
+//!   zayn version                                       the law, the language, the contract, the build
+//!   zayn --version                                     the release's version: zayn 0.1.0
 //!
 //! Stage S1 carries `check` and `version`; stage S2 adds `conformance`, `pack`, `cross-medium` and `audit-facts`; stage S3
 //! builds the same core for a browser (wasm.zig, the report in report.zig); stage S4 adds serve; stage S5 adds site,
 //! this site's build checks (sitefacts.zig, siteshell.zig, sitegrid.zig, over the patterns of regex.zig). Each
-//! prints byte for byte what its JavaScript prints (tools/zane/cli.js, conformance.js, pack.js, cross-medium.js,
-//! doc/design/audit/check-facts.js, tools/site-facts.js, site-shell.js and site-grid.js), which tools/zane/parity.js proves. Exit codes: 0 clean
+//! prints byte for byte what its JavaScript prints (tools/zayn/cli.js, conformance.js, pack.js, cross-medium.js,
+//! doc/design/audit/check-facts.js, tools/site-facts.js, site-shell.js and site-grid.js), which tools/zayn/parity.js proves. Exit codes: 0 clean
 //! or conforming, 1 violations or mismatches found, 2 usage or read error. The usage text is cli.js's, so that
 //! the two stay byte for byte the same; it names check only.
 
@@ -33,12 +33,12 @@ const siteshell = @import("siteshell.zig");
 const sitegrid = @import("sitegrid.zig");
 const build_options = @import("build_options");
 
-const language_version = "1.5";
+const language_version = "1.7";
 
 const usage =
-    \\zane — the Zane verifier
+    \\zayn — the Zayn verifier
     \\
-    \\  zane check <file.zane> [file.zane …] [options]
+    \\  zayn check <file.zayn> [file.zayn …] [options]
     \\
     \\  --level N        conformance level, 1-4 (default 2)
     \\  --symbols FILE   JSON symbol table for Level 3 checks
@@ -132,7 +132,7 @@ pub fn main() !void {
     const err = &err_w.interface;
 
     const code = run(a, out, err) catch |e| blk: {
-        err.print("zane: {s}\n", .{@errorName(e)}) catch {};
+        err.print("zayn: {s}\n", .{@errorName(e)}) catch {};
         break :blk @as(u8, 2);
     };
     out.flush() catch {};
@@ -145,13 +145,13 @@ fn run(a: std.mem.Allocator, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
     return dispatch(a, if (raw.len > 0) raw[1..] else raw, out, err);
 }
 
-/// One command line, without the program's name, to its command. `zane site facts` calls it to re-run the commands a
+/// One command line, without the program's name, to its command. `zayn site facts` calls it to re-run the commands a
 /// page's terminal names, in this process, as tools/site-facts.js re-runs them with node.
 pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err: *std.Io.Writer) anyerror!u8 {
     // the release's version alone (Central's ZANE-RELEASE-01): build.zig.zon's, and no commit, since a release is built from
     // its tag and a build from a source archive has no git to ask
     if (argv.len == 1 and std.mem.eql(u8, argv[0], "--version")) {
-        try out.print("zane {s}\n", .{build_options.version});
+        try out.print("zayn {s}\n", .{build_options.version});
         return 0;
     }
     // this site's own build tools (stage S5): site facts, site shell, site grid
@@ -201,20 +201,20 @@ pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Wri
         return if (o.help) 0 else 2;
     }
     if (o.unknown) |u| {
-        try err.print("zane: unknown option {s}\n\n{s}\n", .{ u, usage });
+        try err.print("zayn: unknown option {s}\n\n{s}\n", .{ u, usage });
         return 2;
     }
     if (!std.mem.eql(u8, o.command.?, "check")) {
-        try err.print("zane: unknown command \"{s}\"\n\n{s}\n", .{ o.command.?, usage });
+        try err.print("zayn: unknown command \"{s}\"\n\n{s}\n", .{ o.command.?, usage });
         return 2;
     }
     if (o.files.items.len == 0) {
-        try err.print("zane: no files given\n\n{s}\n", .{usage});
+        try err.print("zayn: no files given\n\n{s}\n", .{usage});
         return 2;
     }
     const level_opt = o.level;
     if (level_opt == null or level_opt.? < 1 or level_opt.? > 4) {
-        try err.print("zane: --level must be 1, 2, 3 or 4\n", .{});
+        try err.print("zayn: --level must be 1, 2, 3 or 4\n", .{});
         return 2;
     }
     const level = level_opt.?;
@@ -223,7 +223,7 @@ pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Wri
     var contract_data: []const u8 = contract_mod.violations_json;
     if (o.contract) |p| {
         contract_data = std.fs.cwd().readFileAlloc(a, p, 64 * 1024 * 1024) catch |e| {
-            try err.print("zane: cannot read {s}: {s}\n", .{ p, @errorName(e) });
+            try err.print("zayn: cannot read {s}: {s}\n", .{ p, @errorName(e) });
             return 2;
         };
     }
@@ -233,7 +233,7 @@ pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Wri
     var symbols: ?core.Symbols = null;
     if (o.symbols) |p| {
         symbols = loadSymbols(a, p) catch |e| {
-            try err.print("zane: cannot read symbols file {s}: {s}\n", .{ p, @errorName(e) });
+            try err.print("zayn: cannot read symbols file {s}: {s}\n", .{ p, @errorName(e) });
             return 2;
         };
     }
@@ -241,7 +241,7 @@ pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Wri
     var findings: std.ArrayList(report.Finding) = .empty;
     for (o.files.items) |file| {
         const raw_src = std.fs.cwd().readFileAlloc(a, file, 256 * 1024 * 1024) catch |e| {
-            try err.print("zane: cannot read {s}: {s}\n", .{ file, @errorName(e) });
+            try err.print("zayn: cannot read {s}: {s}\n", .{ file, @errorName(e) });
             return 2;
         };
         try report.collect(a, contract, file, raw_src, symbols, level, &findings);
@@ -259,13 +259,13 @@ pub fn dispatch(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Wri
 }
 
 const site_usage =
-    \\zane site — this site's own build checks (stage S5)
+    \\zayn site — this site's own build checks (stage S5)
     \\
-    \\  zane site facts [--write] [--unchecked]   every figure on the site has a file (tools/site-facts.js)
-    \\  zane site shell [--write]                 the one definition of the site's navigation (tools/site-shell.js)
-    \\  zane site grid [--write]                  the two tables drawn from their data (tools/site-grid.js)
+    \\  zayn site facts [--write] [--unchecked]   every figure on the site has a file (tools/site-facts.js)
+    \\  zayn site shell [--write]                 the one definition of the site's navigation (tools/site-shell.js)
+    \\  zayn site grid [--write]                  the two tables drawn from their data (tools/site-grid.js)
     \\
-    \\Run from the repository's root: like zane pack, they read the tree they are run in.
+    \\Run from the repository's root: like zayn pack, they read the tree they are run in.
 ;
 
 fn site(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err: *std.Io.Writer) !u8 {
@@ -276,14 +276,14 @@ fn site(a: std.mem.Allocator, argv: []const []const u8, out: *std.Io.Writer, err
         try out.print("{s}\n", .{site_usage});
         return 0;
     }
-    if (argv.len > 0) try err.print("zane: unknown site command \"{s}\"\n\n", .{argv[0]});
+    if (argv.len > 0) try err.print("zayn: unknown site command \"{s}\"\n\n", .{argv[0]});
     try err.print("{s}\n", .{site_usage});
     return 2;
 }
 
 fn version(out: *std.Io.Writer) !u8 {
     const contract = contract_mod.loadContract(std.heap.page_allocator, contract_mod.violations_json) catch return 2;
-    try out.print("zane {s} (stage S5: check, conformance, pack, cross-medium, audit-facts, serve, site; the same core as zane.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
+    try out.print("zayn {s} (stage S5: check, conformance, pack, cross-medium, audit-facts, serve, site; the same core as zayn.wasm) · law v{s} · language {s} · contract v{s} · {s} · {s}-{s}\n", .{
         build_options.version,
         contract.constitution orelse "?",
         language_version,

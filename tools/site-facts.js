@@ -13,8 +13,8 @@
    This script derives every figure from the tree and fails when
      - site/facts.json differs from what the tree gives now,
      - any span's fallback differs from the derived value,
-     - a declaration shown on a page, with the terminal that checked it ($ zane check NAME.zane), no longer matches a real run of
-       the verifier, here its JavaScript reference tools/zane/cli.js
+     - a declaration shown on a page, with the terminal that checked it ($ zayn check NAME.zayn), no longer matches a real run of
+       the verifier, here its JavaScript reference tools/zayn/cli.js
        (the home page's "ninety seconds" and every pair like it).
    A typed number outside a span is invisible to the first two, so it fails too (SITE-3 piece E): a rule's
    number links to the rule, and a figure inside a mock interface is marked data-specimen.
@@ -44,7 +44,7 @@ function derive(prev) {
   put('law.sets', sets.length, 'constitution/rules.json set*');
   for (const t of ['machine', 'tool', 'machine-later', 'judgment']) put('law.tier.' + t, rules.filter(r => r.enforcement === t).length, 'constitution/rules.json enforcement');
   put('verbs', Object.values(law.intents.families).reduce((n, fam) => n + (fam.verbs || []).length, 0), 'constitution/rules.json intents.families');
-  put('kinds', require(R('tools/zane/zane.js')).ZANE_KINDS.size, 'tools/zane/zane.js ZANE_KINDS');
+  put('kinds', require(R('tools/zayn/zayn.js')).ZAYN_KINDS.size, 'tools/zayn/zayn.js ZAYN_KINDS');
 
   const v = json('conformance/violations.json');
   put('diag.total', v.diagnostics.length, 'conformance/violations.json diagnostics');
@@ -58,7 +58,7 @@ function derive(prev) {
   for (const l of [1, 2, 3, 4]) put('diag.level' + l, v.diagnostics.filter(d => d.level === l).length, 'conformance/violations.json level');
 
   const m = json('conformance/manifest.json');
-  const twins = m.fixtures.filter(x => /-lawful\.zane$/.test(x.file)).length;
+  const twins = m.fixtures.filter(x => /-lawful\.zayn$/.test(x.file)).length;
   const refused = m.fixtures.filter(x => x.expect_ids.length).length;
   put('fixtures.total', m.fixtures.length, 'conformance/manifest.json fixtures');
   put('fixtures.refused', refused, 'conformance/manifest.json expect_ids');
@@ -74,17 +74,17 @@ function derive(prev) {
   put('pack.files', json('protocol/MANIFEST.json').pinned.length, 'protocol/MANIFEST.json pinned');
   put('signals.count', json('conformance/signal.json').values.length, 'conformance/signal.json values');
 
-  const stzu = fs.readFileSync(R('haro/zane.stzu'), 'utf8');
-  put('haro.constraints', (stzu.match(/^DEFINE CONSTRAINT /gm) || []).length, 'haro/zane.stzu (DEFINE CONSTRAINT)');
+  const stzu = fs.readFileSync(R('haro/zayn.stzu'), 'utf8');
+  put('haro.constraints', (stzu.match(/^DEFINE CONSTRAINT /gm) || []).length, 'haro/zayn.stzu (DEFINE CONSTRAINT)');
   const csv = fs.readFileSync(R('haro/twin-expected.csv'), 'utf8').split(/\r?\n/).filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('fixture,'));
   put('twin.differences', csv.length, 'haro/twin-expected.csv rows');
   put('twin.agree', m.fixtures.length - csv.length, 'conformance/manifest.json fixtures minus haro/twin-expected.csv rows');
   put('twin.seams', new Set(csv.map(l => l.split(',')[3])).size, 'haro/twin-expected.csv seam column');
   for (const [k, name] of [['other-code', 'otherCode'], ['not-refused', 'notRefused'], ['court-only', 'courtOnly']])
     put('twin.' + name, csv.filter(l => l.split(',')[4] === k).length, 'haro/twin-expected.csv class column');
-  put('haro.gbnfBytes', fs.existsSync(R('haro/zane.gbnf')) ? fs.statSync(R('haro/zane.gbnf')).size : 0, 'haro/zane.gbnf');
-  const gb = fs.readFileSync(R('haro/zane.gbnf'), 'utf8');
-  put('gbnf.kinds', (gb.match(/^decl_[A-Z_]+ ::=/gm) || []).length, 'haro/zane.gbnf (decl_* productions)');
+  put('haro.gbnfBytes', fs.existsSync(R('haro/zayn.gbnf')) ? fs.statSync(R('haro/zayn.gbnf')).size : 0, 'haro/zayn.gbnf');
+  const gb = fs.readFileSync(R('haro/zayn.gbnf'), 'utf8');
+  put('gbnf.kinds', (gb.match(/^decl_[A-Z_]+ ::=/gm) || []).length, 'haro/zayn.gbnf (decl_* productions)');
 
   const g = spawnSync(process.execPath, [R('doc/design/coverage-count.js'), '--json'], { encoding: 'utf8', maxBuffer: 1 << 26 });
   const s = JSON.parse(g.stdout).sum;
@@ -152,8 +152,8 @@ const decode = s => s.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt
 
 // ---- every declaration and terminal pair on a page against a real run -----------------------------------------
 /* A page shows a declaration (<pre class="shot">) and, right after it, the terminal that checked it (<pre class="term">) whose first
-   line is "$ zane check NAME.zane" (S6: the site names the one file, never node). This writes the declaration to NAME.zane, runs the
-   verifier's JavaScript reference on it (tools/zane/cli.js, which tools/zane/parity.js proves prints what zane prints), and compares
+   line is "$ zayn check NAME.zayn" (S6: the site names the one file, never node). This writes the declaration to NAME.zayn, runs the
+   verifier's JavaScript reference on it (tools/zayn/cli.js, which tools/zayn/parity.js proves prints what zayn prints), and compares
    what it prints with what the page says, so "copied from a real run" is verified, not asserted. */
 function pairs() {
   const out = [];
@@ -163,7 +163,7 @@ function pairs() {
     let m;
     while ((m = re.exec(html))) {
       const lines = decode(m[2]).split('\n');
-      const cmd = /^\$\s*zane check (\S+\.zane)\s*$/.exec(lines[0]);
+      const cmd = /^\$\s*zayn check (\S+\.zayn)\s*$/.exec(lines[0]);
       if (!cmd) continue;                           /* a terminal that is not a verifier run is not claimed to be one */
       out.push({ page: p, file: cmd[1], declaration: decode(m[1]).replace(/\s+$/, '') + '\n', output: lines.slice(1).join('\n') });
     }
@@ -177,7 +177,7 @@ function verifyRuns(problems) {
   const all = pairs();
   for (const q of all) {
     fs.writeFileSync(path.join(tmp, q.file), q.declaration);
-    const r = spawnSync(process.execPath, [R('tools/zane/cli.js'), 'check', q.file], { cwd: tmp, encoding: 'utf8' });
+    const r = spawnSync(process.execPath, [R('tools/zayn/cli.js'), 'check', q.file], { cwd: tmp, encoding: 'utf8' });
     const got = norm(r.stdout || ''), want = norm(q.output);
     per[q.page] = (per[q.page] || 0) + 1;
     if (got !== want) problems.push(`${q.page}: the terminal for ${q.file} is not what a real run prints.\n--- the page\n${want}\n--- a real run\n${got}`);
@@ -187,7 +187,7 @@ function verifyRuns(problems) {
 }
 
 // ---- an excerpt shown on a page is a passage of the file it names --------------------------------------------
-/* <pre class="excerpt" data-excerpt="haro/zane.stzu"> ... </pre>: its text, with the highlighting spans removed and whitespace collapsed,
+/* <pre class="excerpt" data-excerpt="haro/zayn.stzu"> ... </pre>: its text, with the highlighting spans removed and whitespace collapsed,
    must appear in that file. A page cannot show a passage of the language's declaration that the declaration does not contain. */
 function verifyExcerpts(problems) {
   let n = 0;
@@ -227,11 +227,11 @@ function sameRun(want, got) {
   }
   return true;
 }
-/* <pre class="term" data-run="zane conformance"> ... </pre>: the first line is "$ " and the command, the rest is what it printed. Only
-   the binary's read-only commands of the pack are run (zane check, conformance, pack, cross-medium, audit-facts), each through its
-   JavaScript reference, which tools/zane/parity.js proves prints what zane prints; the output is compared with the page's. */
-const REFERENCE = { check: ['tools/zane/cli.js', 'check'], conformance: ['tools/zane/conformance.js'], pack: ['tools/zane/pack.js'],
-  'cross-medium': ['tools/zane/cross-medium.js'], 'audit-facts': ['doc/design/audit/check-facts.js'] };
+/* <pre class="term" data-run="zayn conformance"> ... </pre>: the first line is "$ " and the command, the rest is what it printed. Only
+   the binary's read-only commands of the pack are run (zayn check, conformance, pack, cross-medium, audit-facts), each through its
+   JavaScript reference, which tools/zayn/parity.js proves prints what zayn prints; the output is compared with the page's. */
+const REFERENCE = { check: ['tools/zayn/cli.js', 'check'], conformance: ['tools/zayn/conformance.js'], pack: ['tools/zayn/pack.js'],
+  'cross-medium': ['tools/zayn/cross-medium.js'], 'audit-facts': ['doc/design/audit/check-facts.js'] };
 function verifyCommands(problems) {
   let n = 0;
   const norm = t => t.replace(/\r\n/g, '\n').split('\n').map(l => l.replace(/\s+$/, '')).join('\n').replace(/\n+$/, '');
@@ -241,7 +241,7 @@ function verifyCommands(problems) {
     let m;
     while ((m = re.exec(html))) {
       const cmd = decode(m[1]).split(/\s+/);
-      if (cmd[0] !== 'zane' || !Object.prototype.hasOwnProperty.call(REFERENCE, cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (zane check, conformance, pack, cross-medium or audit-facts)`); continue; }
+      if (cmd[0] !== 'zayn' || !Object.prototype.hasOwnProperty.call(REFERENCE, cmd[1] || '')) { problems.push(`${p}: data-run "${m[1]}" is not a pack command (zayn check, conformance, pack, cross-medium or audit-facts)`); continue; }
       n++;
       const lines = decode(m[2]).split('\n');
       if (lines[0].replace(/^\$\s*/, '').trim() !== cmd.join(' ')) problems.push(`${p}: the first line of the terminal for "${cmd.join(' ')}" is not that command`);

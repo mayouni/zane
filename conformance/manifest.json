@@ -1,80 +1,80 @@
 {
   "metadata": {
-    "title": "The Zane Conformance Suite",
+    "title": "The Zayn Conformance Suite",
     "version": "1.4",
     "lastUpdated": "2026-11-08",
     "specification": "doc/language/README.md",
     "diagnostics": "conformance/violations.json",
-    "constitution": "3.16",
+    "constitution": "3.17",
     "comparison": "A run passes a fixture when the set of diagnostic ids it reports, filtered to the levels the implementation claims, equals expect_ids exactly. Line numbers, message wording, ordering and severity phrasing are NOT compared -- an implementation may phrase its prose in any language its operator reads.",
     "levels_note": "A fixture whose level exceeds the implementation's claimed level is SKIPPED, not failed. An implementation reports the level it satisfies; the suite records it."
   },
   "symbols_note": "Level 3 fixtures carry the symbol table they need, so a standalone verifier can be tested without a host language. An implementation that computes symbols itself may ignore this field; one that accepts symbols as input should load it.",
   "fixtures": [
     {
-      "file": "clean-minimal.zane",
+      "file": "clean-minimal.zayn",
       "level": 1,
       "expect_ids": [],
       "note": "The smallest lawful declaration. Any diagnostic here is a false positive."
     },
     {
-      "file": "clean-full.zane",
+      "file": "clean-full.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "Every construct of the grammar, lawfully. Quoted verbatim in GRAMMAR.md section 6."
     },
     {
-      "file": "select-act-collapse.zane",
+      "file": "select-act-collapse.zayn",
       "level": 2,
       "expect_ids": [
         "SELECT_ACT_COLLAPSE"
       ]
     },
     {
-      "file": "select-act-lawful.zane",
+      "file": "select-act-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "Lawful twin: CONFIRM stands between selection and execution."
     },
     {
-      "file": "read-act-collapse.zane",
+      "file": "read-act-collapse.zayn",
       "level": 2,
       "expect_ids": [
         "READ_ACT_COLLAPSE"
       ]
     },
     {
-      "file": "read-act-lawful.zane",
+      "file": "read-act-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "Lawful twin: the act moved to its own flow."
     },
     {
-      "file": "missing-undo.zane",
+      "file": "missing-undo.zayn",
       "level": 2,
       "expect_ids": [
         "MISSING_UNDO"
       ]
     },
     {
-      "file": "missing-undo-lawful.zane",
+      "file": "missing-undo-lawful.zayn",
       "level": 2,
       "expect_ids": []
     },
     {
-      "file": "missing-cancel.zane",
+      "file": "missing-cancel.zayn",
       "level": 2,
       "expect_ids": [
         "MISSING_CANCEL"
       ]
     },
     {
-      "file": "missing-cancel-lawful.zane",
+      "file": "missing-cancel-lawful.zayn",
       "level": 2,
       "expect_ids": []
     },
     {
-      "file": "trapped-flow.zane",
+      "file": "trapped-flow.zayn",
       "level": 2,
       "expect_ids": [
         "TRAPPED_FLOW"
@@ -82,24 +82,24 @@
       "note": "Scope test: the same omission on a single-surface INTENT_FLOW is not a violation."
     },
     {
-      "file": "trapped-flow-lawful.zane",
+      "file": "trapped-flow-lawful.zayn",
       "level": 2,
       "expect_ids": []
     },
     {
-      "file": "decorative-animation.zane",
+      "file": "decorative-animation.zayn",
       "level": 2,
       "expect_ids": [
         "DECORATIVE_ANIMATION"
       ]
     },
     {
-      "file": "decorative-animation-lawful.zane",
+      "file": "decorative-animation-lawful.zayn",
       "level": 2,
       "expect_ids": []
     },
     {
-      "file": "unknown-intent.zane",
+      "file": "unknown-intent.zayn",
       "level": 1,
       "expect_ids": [
         "UNKNOWN_INTENT"
@@ -107,7 +107,7 @@
       "note": "NAVIGATE. The defect the reference implementation's own declaration commits today."
     },
     {
-      "file": "unspecified-declaration.zane",
+      "file": "unspecified-declaration.zayn",
       "level": 1,
       "expect_ids": [
         "UNSPECIFIED_DECLARATION"
@@ -115,62 +115,62 @@
       "note": "WIDGET. An implementation that defines WIDGET reports nothing here and is an extension, not a failure -- see conformance/README.md."
     },
     {
-      "file": "duplicate-field.zane",
+      "file": "duplicate-field.zayn",
       "level": 1,
       "expect_ids": [
         "DUPLICATE_FIELD"
       ]
     },
     {
-      "file": "duplicate-declaration.zane",
+      "file": "duplicate-declaration.zayn",
       "level": 1,
       "expect_ids": [
         "DUPLICATE_DECLARATION"
       ]
     },
     {
-      "file": "comments-and-formatting.zane",
+      "file": "comments-and-formatting.zayn",
       "level": 1,
       "expect_ids": [],
       "note": "Lexical robustness: irregular whitespace, trailing commas, empty body, no trailing newline."
     },
     {
-      "file": "intent-flow-no-satisfies.zane",
+      "file": "intent-flow-no-satisfies.zayn",
       "level": 2,
       "expect_ids": [
         "INTENT_FLOW_NO_SATISFIES"
       ]
     },
     {
-      "file": "invalid-perspective.zane",
+      "file": "invalid-perspective.zayn",
       "level": 2,
       "expect_ids": [
         "INVALID_PERSPECTIVE"
       ]
     },
     {
-      "file": "invalid-tone.zane",
+      "file": "invalid-tone.zayn",
       "level": 2,
       "expect_ids": [
         "INVALID_TONE"
       ]
     },
     {
-      "file": "unresolved-intent-flow.zane",
+      "file": "unresolved-intent-flow.zayn",
       "level": 2,
       "expect_ids": [
         "UNRESOLVED_INTENT_FLOW"
       ]
     },
     {
-      "file": "vibe-strips-right.zane",
+      "file": "vibe-strips-right.zayn",
       "level": 2,
       "expect_ids": [
         "VIBE_STRIPS_RIGHT"
       ]
     },
     {
-      "file": "multiple-violations.zane",
+      "file": "multiple-violations.zayn",
       "level": 2,
       "expect_ids": [
         "SELECT_ACT_COLLAPSE",
@@ -181,13 +181,13 @@
       "note": "An implementation must report every independent failure, not stop at the first."
     },
     {
-      "file": "foreign-pillar-ignored.zane",
+      "file": "foreign-pillar-ignored.zayn",
       "level": 2,
       "expect_ids": [],
-      "note": "Non-Zane declarations must be ignored silently. A warning here is a failure."
+      "note": "Non-Zayn declarations must be ignored silently. A warning here is a failure."
     },
     {
-      "file": "intent-orphan.zane",
+      "file": "intent-orphan.zayn",
       "level": 3,
       "expect_ids": [
         "INTENT_ORPHAN"
@@ -200,7 +200,7 @@
       }
     },
     {
-      "file": "invisible-state.zane",
+      "file": "invisible-state.zayn",
       "level": 3,
       "expect_ids": [
         "INVISIBLE_STATE"
@@ -213,7 +213,7 @@
       }
     },
     {
-      "file": "hidden-authority.zane",
+      "file": "hidden-authority.zayn",
       "level": 3,
       "expect_ids": [
         "HIDDEN_AUTHORITY"
@@ -226,7 +226,7 @@
       }
     },
     {
-      "file": "unresolved-entity.zane",
+      "file": "unresolved-entity.zayn",
       "level": 3,
       "expect_ids": [
         "UNRESOLVED_ENTITY"
@@ -240,7 +240,7 @@
       }
     },
     {
-      "file": "unknown-medium.zane",
+      "file": "unknown-medium.zayn",
       "level": 2,
       "expect_ids": [
         "UNKNOWN_MEDIUM"
@@ -248,13 +248,13 @@
       "note": "SURFACE_AS was an unenumerated identifier until the medium axis closed it -- any word passed, so the field was a comment rather than a contract."
     },
     {
-      "file": "unknown-medium-lawful.zane",
+      "file": "unknown-medium-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin: one word changed to one of the ten. Proves the check fires on the medium and not on the shape of a VIBE."
     },
     {
-      "file": "verb-not-carried.zane",
+      "file": "verb-not-carried.zayn",
       "level": 2,
       "expect_ids": [
         "VERB_NOT_CARRIED"
@@ -262,13 +262,13 @@
       "note": "Print is immutable and has no time, so ACT is absent from it. ALWAYS_REACHABLE keeps the reversibility checks quiet so this fixture tests one thing."
     },
     {
-      "file": "verb-not-carried-lawful.zane",
+      "file": "verb-not-carried-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin: same medium, honest intents. READ, SCAN and COMPARE are what a page is for."
     },
     {
-      "file": "unknown-signal.zane",
+      "file": "unknown-signal.zayn",
       "level": 1,
       "expect_ids": [
         "UNKNOWN_SIGNAL"
@@ -276,13 +276,13 @@
       "note": "The offending word is 'critical', which is lawful in TONE and not in SIGNALS. The pair of closed vocabularies is deliberate -- MESSAGE and SIGNAL are different strata -- and this fixture exists to keep the boundary visible rather than to punish a typo."
     },
     {
-      "file": "unknown-signal-lawful.zane",
+      "file": "unknown-signal-lawful.zayn",
       "level": 1,
       "expect_ids": [],
       "note": "The twin, differing in one word: 'critical' becomes 'danger'."
     },
     {
-      "file": "expression-orphan.zane",
+      "file": "expression-orphan.zayn",
       "level": 2,
       "expect_ids": [
         "EXPRESSION_ORPHAN"
@@ -290,13 +290,13 @@
       "note": "A surface that says how its values should be perceived and never says what the operator is doing. INTENT_ORPHAN one layer down."
     },
     {
-      "file": "expression-orphan-lawful.zane",
+      "file": "expression-orphan-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin: the same signals, now refining a declared intent. One line added."
     },
     {
-      "file": "signal-unperceivable.zane",
+      "file": "signal-unperceivable.zayn",
       "level": 2,
       "expect_ids": [
         "SIGNAL_UNPERCEIVABLE"
@@ -304,13 +304,13 @@
       "note": "The first fixture that needs BOTH axes -- the signal vocabulary and the medium enumeration -- and therefore the first evidence that closing SURFACE_AS bought a check rather than a taxonomy. Two declarations, because the medium is declared on a VIBE and the signals on a screen."
     },
     {
-      "file": "signal-unperceivable-lawful.zane",
+      "file": "signal-unperceivable-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin, differing by one word inside the SIGNALS list. muted still renders as silence and that is still correct; the surface now also carries a status this channel can render."
     },
     {
-      "file": "unknown-role.zane",
+      "file": "unknown-role.zayn",
       "level": 1,
       "expect_ids": [
         "UNKNOWN_ROLE"
@@ -318,13 +318,13 @@
       "note": "The offending word is \"destructive\", which is Rule 79 word for the ACT and deliberately not a role: the law splits that class into reversible, where one-click undo is owed, and irreversible, where confirmation is reserved. A single destructive role would collapse the distinction the rule exists to make."
     },
     {
-      "file": "unknown-role-lawful.zane",
+      "file": "unknown-role-lawful.zayn",
       "level": 1,
       "expect_ids": [],
       "note": "The twin, differing in one word."
     },
     {
-      "file": "irreversible-claims-undo.zane",
+      "file": "irreversible-claims-undo.zayn",
       "level": 2,
       "expect_ids": [
         "IRREVERSIBLE_CLAIMS_UNDO"
@@ -332,13 +332,13 @@
       "note": "Purging is Rule 79 own example of what confirmation is RESERVED for. Offering UNDO is worse than offering none: the operator acts believing there is a way back."
     },
     {
-      "file": "irreversible-claims-undo-lawful.zane",
+      "file": "irreversible-claims-undo-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin. UNDO is dropped because it cannot be honoured; CANCEL stays, because abandoning before committing is a different right. THIS FIXTURE ALSO PINS THE ESCAPE CLAUSE: it satisfies ACT with no UNDO and is clean, because ROLE irreversible is the declaration Rule 79 invariant asks for."
     },
     {
-      "file": "role-acts-without-consequence.zane",
+      "file": "role-acts-without-consequence.zayn",
       "level": 2,
       "expect_ids": [
         "ROLE_ACTS_WITHOUT_CONSEQUENCE"
@@ -346,13 +346,13 @@
       "note": "Rule 119 card at declaration level: a read-only indicator that declares it acts. Two declarations, because the lawful one beside it shows the check does not fire on every card."
     },
     {
-      "file": "role-acts-without-consequence-lawful.zane",
+      "file": "role-acts-without-consequence-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin: the second card genuinely acts, so it takes the promise that matches. Its intents and rights were correct all along."
     },
     {
-      "file": "proposal-commits.zane",
+      "file": "proposal-commits.zayn",
       "level": 2,
       "expect_ids": [
         "PROPOSAL_COMMITS"
@@ -360,13 +360,13 @@
       "note": "Rule 98: a proposal becomes a commit only through an authority the declaration NAMES. This one acts and names nobody."
     },
     {
-      "file": "proposal-commits-lawful.zane",
+      "file": "proposal-commits-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin, differing by one field: the authority is named."
     },
     {
-      "file": "role-undeclared.zane",
+      "file": "role-undeclared.zayn",
       "level": 2,
       "expect_ids": [
         "ROLE_UNDECLARED"
@@ -374,13 +374,13 @@
       "note": "The counter-check EXPRESSION_ORPHAN does not cover, and the only fixture here whose expected diagnostic is a MEASUREMENT rather than a defect: nothing in this file is unlawful and the warning refuses nothing. Fires once, file-wide."
     },
     {
-      "file": "role-undeclared-lawful.zane",
+      "file": "role-undeclared-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin: one role written down silences it. The advisory reports a surface that has not met the vocabulary at all, never a surface that roled some controls and not others -- a per-control count would be a requirement wearing a warning's clothes."
     },
     {
-      "file": "field-misplaced.zane",
+      "file": "field-misplaced.zayn",
       "level": 2,
       "expect_ids": [
         "FIELD_MISPLACED"
@@ -388,19 +388,19 @@
       "note": "Ruling D1, 2026-10-31. TONE and PERSPECTIVE, both with lawful values, written on a SCREEN: read by nothing, so the author believes them honoured. The values are lawful on purpose, so INVALID_TONE and INVALID_PERSPECTIVE stay quiet and the fixture isolates the placement. Fires once per misplaced field."
     },
     {
-      "file": "field-misplaced-lawful.zane",
+      "file": "field-misplaced-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "The twin: the same two fields on the kinds that declare them, and the SCREEN keeping only the four fields every kind may carry."
     },
     {
-      "file": "field-misplaced-read-anywhere.zane",
+      "file": "field-misplaced-read-anywhere.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "Pins the exemption, ruled 2026-11-01. STEPS, INTENT_FLOW, VISIBLE_STATE and VISIBLE_ENTITIES are read by the verifier on any kind, so on a SCREEN they are not silent and FIELD_MISPLACED does not judge them. Proved to go red: with the exemption emptied, the verifier raises FIELD_MISPLACED four times here. The Haro court still refuses all four (seam S13)."
     },
     {
-      "file": "unknown-field.zane",
+      "file": "unknown-field.zayn",
       "level": 1,
       "expect_ids": [
         "UNKNOWN_FIELD"
@@ -408,7 +408,7 @@
       "note": "A field is known in ONE form. TONE [neutral] is a list for a value key, and COLOR is no name at all; each raises it once. FIELD_MISPLACED stays quiet because it judges only a field known in the form written. Raises twice, the set holds one id. Level 1: it is the grammar that does not know the field."
     },
     {
-      "file": "role-misplaced.zane",
+      "file": "role-misplaced.zayn",
       "level": 2,
       "expect_ids": [
         "ROLE_MISPLACED"
@@ -416,7 +416,7 @@
       "note": "ROLE on a SCREEN, with a lawful value so UNKNOWN_ROLE stays quiet. FIELD_MISPLACED leaves ROLE to this diagnostic, so the defect is reported once and under its older id. Had no fixture until 2026-11-01."
     },
     {
-      "file": "role-promise-broken.zane",
+      "file": "role-promise-broken.zayn",
       "level": 2,
       "expect_ids": [
         "ROLE_PROMISE_BROKEN"
@@ -424,7 +424,7 @@
       "note": "A reversible control that keeps no UNDO and does not declare ACT, the one case MISSING_UNDO cannot see. Scoped away from MISSING_UNDO on purpose, so this fires alone. Had no fixture until 2026-11-01."
     },
     {
-      "file": "unexpected-character.zane",
+      "file": "unexpected-character.zayn",
       "level": 1,
       "expect_ids": [
         "UNEXPECTED_CHARACTER"
@@ -432,7 +432,7 @@
       "note": "An at-sign between two lawful declarations: a character outside the lexical grammar of GRAMMAR.md section 1. Placed between declarations so it raises alone. Skipped by the lexer, which is why both declarations still read, and why this id needs no recovery to be pinned, unlike SYNTAX_ERROR and UNTERMINATED_STRING."
     },
     {
-      "file": "projection-auditory-undo.zane",
+      "file": "projection-auditory-undo.zayn",
       "level": 2,
       "expect_ids": [
         "MISSING_UNDO"
@@ -440,13 +440,13 @@
       "note": "Projection (D5): Rule 79 under SURFACE_AS auditory. Cell recover x auditory."
     },
     {
-      "file": "projection-auditory-undo-lawful.zane",
+      "file": "projection-auditory-undo-lawful.zayn",
       "level": 2,
       "expect_ids": [],
-      "note": "Lawful twin of projection-auditory-undo.zane."
+      "note": "Lawful twin of projection-auditory-undo.zayn."
     },
     {
-      "file": "projection-voice-select-act.zane",
+      "file": "projection-voice-select-act.zayn",
       "level": 2,
       "expect_ids": [
         "SELECT_ACT_COLLAPSE"
@@ -454,13 +454,13 @@
       "note": "Projection (D5): Rule 16 under SURFACE_AS voice. Cell decide x voice."
     },
     {
-      "file": "projection-voice-select-act-lawful.zane",
+      "file": "projection-voice-select-act-lawful.zayn",
       "level": 2,
       "expect_ids": [],
-      "note": "Lawful twin of projection-voice-select-act.zane."
+      "note": "Lawful twin of projection-voice-select-act.zayn."
     },
     {
-      "file": "projection-machine-cancel.zane",
+      "file": "projection-machine-cancel.zayn",
       "level": 2,
       "expect_ids": [
         "MISSING_CANCEL"
@@ -468,13 +468,13 @@
       "note": "Projection (D5): Rule 26 under SURFACE_AS machine. Cell recover x machine."
     },
     {
-      "file": "projection-machine-cancel-lawful.zane",
+      "file": "projection-machine-cancel-lawful.zayn",
       "level": 2,
       "expect_ids": [],
-      "note": "Lawful twin of projection-machine-cancel.zane."
+      "note": "Lawful twin of projection-machine-cancel.zayn."
     },
     {
-      "file": "projection-print-motion.zane",
+      "file": "projection-print-motion.zayn",
       "level": 2,
       "expect_ids": [
         "DECORATIVE_ANIMATION"
@@ -482,58 +482,58 @@
       "note": "Projection (D5): Rule 112 under SURFACE_AS print. Cell perceive x print."
     },
     {
-      "file": "projection-print-motion-lawful.zane",
+      "file": "projection-print-motion-lawful.zayn",
       "level": 2,
       "expect_ids": [],
-      "note": "Lawful twin of projection-print-motion.zane. Clean in zane.js although print has no time: projection gap PG-1."
+      "note": "Lawful twin of projection-print-motion.zayn. Clean in zayn.js although print has no time: projection gap PG-1."
     },
     {
-      "file": "projection-visual-perceive.zane",
+      "file": "projection-visual-perceive.zayn",
       "level": 2,
       "expect_ids": [
         "DECORATIVE_ANIMATION"
       ],
-      "note": "Projection (D5): the visual-declaring twin of decorative-animation.zane. Row perceive, Rule 112."
+      "note": "Projection (D5): the visual-declaring twin of decorative-animation.zayn. Row perceive, Rule 112."
     },
     {
-      "file": "projection-visual-understand.zane",
+      "file": "projection-visual-understand.zayn",
       "level": 2,
       "expect_ids": [
         "ROLE_ACTS_WITHOUT_CONSEQUENCE"
       ],
-      "note": "Projection (D5): the visual-declaring twin of role-acts-without-consequence.zane. Row understand, Rule 119."
+      "note": "Projection (D5): the visual-declaring twin of role-acts-without-consequence.zayn. Row understand, Rule 119."
     },
     {
-      "file": "projection-visual-decide.zane",
+      "file": "projection-visual-decide.zayn",
       "level": 2,
       "expect_ids": [
         "SELECT_ACT_COLLAPSE"
       ],
-      "note": "Projection (D5): the visual-declaring twin of select-act-collapse.zane. Row decide, Rule 16."
+      "note": "Projection (D5): the visual-declaring twin of select-act-collapse.zayn. Row decide, Rule 16."
     },
     {
-      "file": "projection-visual-act.zane",
+      "file": "projection-visual-act.zayn",
       "level": 2,
       "expect_ids": [
         "READ_ACT_COLLAPSE"
       ],
-      "note": "Projection (D5): the visual-declaring twin of read-act-collapse.zane. Row act, Rule 16."
+      "note": "Projection (D5): the visual-declaring twin of read-act-collapse.zayn. Row act, Rule 16."
     },
     {
-      "file": "projection-visual-recover.zane",
+      "file": "projection-visual-recover.zayn",
       "level": 2,
       "expect_ids": [
         "MISSING_UNDO"
       ],
-      "note": "Projection (D5): the visual-declaring twin of missing-undo.zane. Row recover, Rule 79."
+      "note": "Projection (D5): the visual-declaring twin of missing-undo.zayn. Row recover, Rule 79."
     },
     {
-      "file": "projection-visual-trust.zane",
+      "file": "projection-visual-trust.zayn",
       "level": 3,
       "expect_ids": [
         "HIDDEN_AUTHORITY"
       ],
-      "note": "Projection (D5): the visual-declaring twin of hidden-authority.zane. Row trust, Rule 83.",
+      "note": "Projection (D5): the visual-declaring twin of hidden-authority.zayn. Row trust, Rule 83.",
       "symbols": {
         "actors": [
           "accountant",
@@ -542,7 +542,7 @@
       }
     },
     {
-      "file": "projection-print-promise.zane",
+      "file": "projection-print-promise.zayn",
       "level": 2,
       "expect_ids": [
         "VERB_NOT_CARRIED"
@@ -550,19 +550,19 @@
       "note": "Projection (D5, PG-2): ALWAYS_REACHABLE read against the medium. A print flow satisfying only READ and promising UNDO, CANCEL and EXIT. Cell recover x print, a closed cell."
     },
     {
-      "file": "projection-print-promise-lawful.zane",
+      "file": "projection-print-promise-lawful.zayn",
       "level": 2,
       "expect_ids": [],
-      "note": "Lawful twin of projection-print-promise.zane."
+      "note": "Lawful twin of projection-print-promise.zayn."
     },
     {
-      "file": "menu-lawful.zane",
+      "file": "menu-lawful.zayn",
       "level": 2,
       "expect_ids": [],
       "note": "Language 1.6, Rule 116 at v3.16: a menu with levels, lawfully. The main menu names the section, the section's band lists its landing page first under a label of its own, and no two siblings share a label."
     },
     {
-      "file": "menu-label-repeats-parent.zane",
+      "file": "menu-label-repeats-parent.zayn",
       "level": 2,
       "expect_ids": [
         "MENU_LABEL_REPEATS_PARENT"
@@ -570,7 +570,7 @@
       "note": "The landing page first in its band, under its section's own label, in other case."
     },
     {
-      "file": "menu-landing-not-first.zane",
+      "file": "menu-landing-not-first.zayn",
       "level": 2,
       "expect_ids": [
         "MENU_LANDING_NOT_FIRST"
@@ -578,7 +578,7 @@
       "note": "The landing page in its band under a label of its own, second."
     },
     {
-      "file": "menu-label-duplicate.zane",
+      "file": "menu-label-duplicate.zayn",
       "level": 2,
       "expect_ids": [
         "MENU_LABEL_DUPLICATE"

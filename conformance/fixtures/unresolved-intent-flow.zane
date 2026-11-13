@@ -1,8 +1,0 @@
-// The form binds to a flow that is never declared. This is the Zane-local
-// direction of reference resolution; the reference implementation checks the
-// cross-pillar direction (ZUI-W010) but not this one.
-// Expected: UNRESOLVED_INTENT_FLOW
-
-DEFINE FORM payment_form (
-  INTENT_FLOW approve_payment
-)

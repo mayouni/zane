@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-vibe="curator">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wasm proof — the verifier in this browser against the native binary</title>
+<meta name="description" content="The wasm proof runs every fixture of the Zayn conformance suite at every level through the verifier compiled to WebAssembly, in this browser, and shows each envelope beside the one the native binary printed for the same source, compared byte for byte.">
+<link rel="stylesheet" href="../../site/stz.css?v=d517ed01">
+<!-- shell:vibe -->
+<script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
+<!-- /shell:vibe -->
+<style>
+#verdict { font-size: 1.3rem; font-weight: 700; margin: 0 0 .6rem; }
+#verdict.good { color: var(--c-good); }
+#verdict.bad { color: var(--c-bad); }
+#again { font: 700 1.125rem var(--sans); cursor: pointer; }
+#pairs details { border-bottom: 1px solid var(--line); padding: .5rem 0; }
+#pairs summary { cursor: pointer; font-size: 1.125rem; }
+/* the word says it, in ink: a summary is something a person clicks, held to 7:1, which the green and red of the verdict are not */
+#pairs summary .same, #pairs summary .diff { color: var(--ink); font-weight: 700; }
+#pairs .pair .term { max-width: none; width: auto; }
+</style>
+</head>
+<body data-archetype="tool">
+
+<!-- shell:menu -->
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+        <a class="brand" href="../../index.html">Zayn</a>
+    <a href="../../site/why.html">Why</a>
+    <a href="../../site/how.html">Language</a>
+    <a href="../../site/rules.html">Law</a>
+    <a href="../../site/adopt.html">Adopt</a>
+    <a class="here" aria-current="true" href="../../site/audit.html">Demo</a>
+    </div>
+    <div class="tools">
+      <a class="github" href="https://github.com/mayouni/zayn">GitHub <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <div class="vibe-picker">
+        <label for="vibe-select">Theme</label>
+        <select id="vibe-select">
+          <option value="curator">Modern</option>
+          <option value="guardian">Retro</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <ul>
+    <li><a href="../../site/audit.html">Three ways</a></li>
+    <li><a href="../../site/tour.html">The tour</a></li>
+    <li><a href="../ui-audit.html">UI audit</a></li>
+    <li><a href="../../site/screenshots.html">Screenshots</a></li>
+    <li><a aria-current="page" href="wasm-proof.html">Wasm proof</a></li>
+  </ul>
+</nav>
+</div>
+<!-- /shell:menu -->
+
+<header class="page">
+  <div class="narrow">
+    <!-- shell:trail -->
+<nav class="crumbs trail-hidden" aria-label="Breadcrumb"><a href="../../index.html">Zayn</a><span class="sep">›</span><a href="../../site/audit.html">Demo</a><span class="sep">›</span><span class="here-crumb" aria-current="page">Wasm proof</span></nav>
+<!-- /shell:trail -->
+    <p class="kicker">The proof · stage S3 of the binary, in your browser</p>
+    <h1>The wasm proof runs the conformance suite through the verifier compiled to WebAssembly, in this browser.</h1>
+    <p class="sub">The wasm proof runs every fixture at every level, 1 to 4, through <code>site/zayn.wasm</code> and compares each envelope,
+    byte for byte, with what the native <code>zayn</code> binary printed for the same source. It lets a person see, with only a browser,
+    that the two builds of one code print one report. Nothing leaves the page.</p>
+  </div>
+</header>
+
+<main id="main" data-wasm="../../site/zayn.wasm?v=070f1626">
+<section>
+  <div class="narrow">
+    <h2>The result of the proof in this browser</h2>
+    <p id="verdict" role="status">Loading the wasm and the expected envelopes…</p>
+    <p id="detail"></p>
+    <p><button type="button" class="btn primary" id="again" hidden>Run the proof again</button></p>
+    <p>The expected envelopes are written by <code>node tools/zayn/parity.js --write-wasm-proof</code>, from the native binary on the same
+    sources, never by hand, with the sha256 of the wasm they were written for. Run without the flag, the parity check fails when the
+    record no longer matches the binary or the wasm, and this page says so when the wasm it loads is another build.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Each fixture's envelope from the wasm beside the native binary's</h2>
+    <p>Each line below is one fixture. Opening it shows the envelope at level 4 from the wasm in this browser beside the one from
+    <code>zayn check --json --level 4</code>; a fixture that differs at any level opens at the first level where it differs.</p>
+    <div id="pairs"></div>
+    <p>The proof shows that the two builds are the same, byte for byte; the conformance suite shows that they are right. The generated corpus runs against the native binary in <code>tools/zayn/parity.js</code>.</p>
+  </div>
+</section>
+</main>
+
+<!-- shell:footer -->
+<footer class="site">
+  <div class="narrow">
+    <div class="bar">
+      <div class="row">
+        <a href="../../LICENSE">LICENSE</a>
+      </div>
+    </div>
+    <p class="fine">Zayn is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project.</p>
+    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
+  </div>
+</footer>
+<!-- /shell:footer -->
+
+<script src="../../site/stz.js?v=2934cb9d"></script>
+<script src="../../site/zayn-wasm.js?v=30454a74"></script>
+<script>
+(async () => {
+  const verdict = document.getElementById('verdict'), detail = document.getElementById('detail'), pairs = document.getElementById('pairs');
+  const url = document.getElementById('main').dataset.wasm;
+  const hex = async b => [...new Uint8Array(await crypto.subtle.digest('SHA-256', b))].map(x => x.toString(16).padStart(2, '0')).join('');
+  const [record, bytes] = await Promise.all([fetch('wasm-proof.json').then(r => r.json()), fetch(url).then(r => r.arrayBuffer())]);
+  const sha = await hex(bytes);
+  const zayn = await ZaynWasm.load(url);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+  const side = (label, text) => { const d = el('div'); d.append(el('p', 'lbl', label), el('pre', 'term', text)); return d; };
+  const firstDiff = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; };
+  function run() {
+    pairs.textContent = '';
+    let sameFx = 0, same = 0, total = 0;
+    const t = performance.now();
+    for (const fx of record.fixtures) {
+      const got = {};
+      let bad = 0;
+      for (const level of [1, 2, 3, 4]) {
+        total++;
+        got[level] = zayn.check(fx.name, fx.source, { level, symbols: fx.symbols });
+        if (got[level] === fx.expect[level]) same++; else if (!bad) bad = level;
+      }
+      if (!bad) sameFx++;
+      const show = bad || 4, w = got[show] === null ? '(the wasm returned nothing)' : got[show], n = fx.expect[show];
+      const d = el('details'), s = el('summary');
+      s.append(el('span', bad ? 'diff' : 'same', bad ? 'differs' : 'identical'),
+        document.createTextNode(` · ${fx.name.replace('conformance/fixtures/', '')} · ` +
+          (bad ? `first at level ${bad}, byte ${firstDiff(w, n)}` : 'at levels 1 to 4')));
+      const p = el('div', 'pair');
+      p.append(side(`The wasm, in this browser, level ${show}`, w), side(`zayn check --json --level ${show}`, n));
+      p.lastChild.className = 'zayn';
+      d.append(s, p);
+      if (bad) d.open = true;
+      pairs.append(d);
+    }
+    const ms = performance.now() - t, n = record.fixtures.length;
+    const ok = sameFx === n && sha === record.wasm.sha256;
+    verdict.className = ok ? 'good' : 'bad';
+    verdict.textContent = `${sameFx} of ${n} fixtures identical, ${same} of ${total} envelopes at four levels` + (ok ? '.' : ': see below.');
+    detail.textContent = `Run in ${ms.toFixed(0)} ms in this browser. The wasm is ${bytes.byteLength.toLocaleString('en')} bytes, sha256 ${sha.slice(0, 16)}…, and ` +
+      (sha === record.wasm.sha256 ? 'the expected envelopes were written for this build.' : `the expected envelopes were written for another build (${record.wasm.sha256.slice(0, 16)}…): run parity.js with --write-wasm-proof.`);
+    document.getElementById('again').hidden = false;
+    window.__proof = { fixtures: sameFx, of: n, same, total, sha, expected: record.wasm.sha256, ms };
+  }
+  document.getElementById('again').addEventListener('click', run);
+  run();
+})().catch(e => {
+  const v = document.getElementById('verdict');
+  v.className = 'bad';
+  v.textContent = 'The proof could not run: ' + e.message + '. It needs the repository served over HTTP, as the UI audit does.';
+});
+</script>
+</body>
+</html>

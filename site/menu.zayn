@@ -1,0 +1,97 @@
+// site/menu.zayn: the Zayn site's own menu, declared in Zayn (language 1.6; Rule 116 at v3.16).
+// Written by `zayn site shell --write` from the registry of tools/site-shell.js. `zayn site shell` fails when this file differs
+// from the registry, and refuses in it what `zayn check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and
+// MENU_LABEL_DUPLICATE. The main menu names each section; the band under a section opens on its landing page.
+
+DEFINE NAV_GRAPH main_menu (
+  SATISFIES [LOCATE],
+  ENTRIES [whyzayn, language, law, use, try]
+)
+
+DEFINE NAV_GRAPH whyzayn (
+  LABEL "Why",
+  TARGET why,
+  ENTRIES [why, case, thinking, positioning_family, innovation]
+)
+DEFINE NAV_GRAPH why (LABEL "The problem", TARGET why)
+DEFINE NAV_GRAPH case (LABEL "The case", TARGET case)
+DEFINE NAV_GRAPH thinking (LABEL "Reasoning", TARGET thinking)
+
+DEFINE NAV_GRAPH positioning_family (
+  LABEL "Comparison",
+  TARGET positioning,
+  ENTRIES [positioning, practices, frameworks]
+)
+DEFINE NAV_GRAPH positioning (LABEL "Overview", TARGET positioning)
+DEFINE NAV_GRAPH practices (LABEL "Practices", TARGET practices)
+DEFINE NAV_GRAPH frameworks (LABEL "Frameworks and languages", TARGET frameworks)
+
+DEFINE NAV_GRAPH innovation (LABEL "Claims", TARGET innovation)
+
+DEFINE NAV_GRAPH language (
+  LABEL "Language",
+  TARGET how,
+  ENTRIES [how, refusal, grid, media, haro]
+)
+DEFINE NAV_GRAPH how (LABEL "The basics", TARGET how)
+DEFINE NAV_GRAPH refusal (LABEL "What it refuses", TARGET refusal)
+DEFINE NAV_GRAPH grid (LABEL "The grid", TARGET grid)
+DEFINE NAV_GRAPH media (LABEL "Channels", TARGET media)
+DEFINE NAV_GRAPH haro (LABEL "Declared in Haro", TARGET haro)
+
+DEFINE NAV_GRAPH law (
+  LABEL "Law",
+  TARGET rules,
+  ENTRIES [rules, reader, gotchas_family, vibes, conformance]
+)
+DEFINE NAV_GRAPH rules (LABEL "The rules", TARGET rules)
+DEFINE NAV_GRAPH reader (LABEL "The Reader", TARGET reader)
+
+DEFINE NAV_GRAPH gotchas_family (
+  LABEL "What a violation feels like",
+  TARGET gotchas,
+  ENTRIES [gotchas, gotchas_stillness, gotchas_forms, gotchas_state, gotchas_widgets, gotchas_reading, gotchas_navigation, gotchas_intelligence]
+)
+DEFINE NAV_GRAPH gotchas (LABEL "All families", TARGET gotchas)
+DEFINE NAV_GRAPH gotchas_stillness (LABEL "Stillness", TARGET gotchas_stillness)
+DEFINE NAV_GRAPH gotchas_forms (LABEL "Forms", TARGET gotchas_forms)
+DEFINE NAV_GRAPH gotchas_state (LABEL "State", TARGET gotchas_state)
+DEFINE NAV_GRAPH gotchas_widgets (LABEL "Widgets", TARGET gotchas_widgets)
+DEFINE NAV_GRAPH gotchas_reading (LABEL "Reading", TARGET gotchas_reading)
+DEFINE NAV_GRAPH gotchas_navigation (LABEL "Navigation", TARGET gotchas_navigation)
+DEFINE NAV_GRAPH gotchas_intelligence (LABEL "Intelligence", TARGET gotchas_intelligence)
+
+DEFINE NAV_GRAPH vibes (LABEL "Two cultures, one truth", TARGET vibes)
+DEFINE NAV_GRAPH conformance (LABEL "Conformance", TARGET conformance)
+
+DEFINE NAV_GRAPH use (
+  LABEL "Adopt",
+  TARGET adopt,
+  ENTRIES [adopt, web, mobile, beyond, stack_family]
+)
+DEFINE NAV_GRAPH adopt (LABEL "Ways in", TARGET adopt)
+DEFINE NAV_GRAPH web (LABEL "Web apps", TARGET web)
+DEFINE NAV_GRAPH mobile (LABEL "Mobile apps", TARGET mobile)
+DEFINE NAV_GRAPH beyond (LABEL "Beyond screens", TARGET beyond)
+
+DEFINE NAV_GRAPH stack_family (
+  LABEL "Your stack",
+  TARGET stack,
+  ENTRIES [stack, build, generate, softanza, ports]
+)
+DEFINE NAV_GRAPH stack (LABEL "Overview", TARGET stack)
+DEFINE NAV_GRAPH build (LABEL "Build", TARGET build)
+DEFINE NAV_GRAPH generate (LABEL "Generate", TARGET generate)
+DEFINE NAV_GRAPH softanza (LABEL "Softanza", TARGET softanza)
+DEFINE NAV_GRAPH ports (LABEL "Other languages", TARGET ports)
+
+DEFINE NAV_GRAPH try (
+  LABEL "Demo",
+  TARGET audit,
+  ENTRIES [audit, tour, ui_audit, screenshots, wasm_proof]
+)
+DEFINE NAV_GRAPH audit (LABEL "Three ways", TARGET audit)
+DEFINE NAV_GRAPH tour (LABEL "The tour", TARGET tour)
+DEFINE NAV_GRAPH ui_audit (LABEL "UI audit", TARGET ui_audit)
+DEFINE NAV_GRAPH screenshots (LABEL "Screenshots", TARGET screenshots)
+DEFINE NAV_GRAPH wasm_proof (LABEL "Wasm proof", TARGET wasm_proof)

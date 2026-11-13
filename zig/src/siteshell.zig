@@ -1,14 +1,14 @@
-//! siteshell.zig: `zane site shell [--write]`, the one definition of the site's navigation: tools/site-shell.js in Zig,
+//! siteshell.zig: `zayn site shell [--write]`, the one definition of the site's navigation: tools/site-shell.js in Zig,
 //! printing what it prints and writing what it writes (doc/design/BINARY.md, S5; doc/design/SITE-2.md and SITE-3.md).
 //!
 //! It checks that every page carries exactly the shell rendered here (the main menu and the band, the hidden trail,
 //! the opening of the layout with its level-3 list, the footer, and the assets' addresses with the hash of their
 //! content), and with --write renders it into every page. Beside that, the checks of site-shell.js, in its order:
-//! no tooltip, the menu declared in site/menu.zane and read by the verifier (Rule 116 at v3.16), every page on a bar, every page naming its subject
+//! no tooltip, the menu declared in site/menu.zayn and read by the verifier (Rule 116 at v3.16), every page on a bar, every page naming its subject
 //! (doc/design/WRITING.md), no line break placed by hand in a title, and no word "Zing" on the site.
 //!
 //! THE REGISTRY BELOW IS A SECOND COPY of the one in tools/site-shell.js (SECTIONS, FAMILIES, PAGES). Until the
-//! JavaScript is retired, a page added to one is added to the other, in the same commit; tools/zane/parity.js fails on
+//! JavaScript is retired, a page added to one is added to the other, in the same commit; tools/zayn/parity.js fails on
 //! any difference between the two runs, which is how a copy that drifts is caught. One branch of the script is not
 //! carried, because no page of the registry reaches it: the footer's Reader link (`pending`).
 //!
@@ -34,7 +34,7 @@ const Section = struct { id: []const u8, label: []const u8, head: []const u8 };
 const sections = [_]Section{
     // Why comes first (ZANE-DESIGN-01 M3 pass 1); Approach is dissolved so the menu keeps five entries (Rule 27); why.html is the
     // Why section's landing and holds The case, merged into it
-    .{ .id = "whyzane", .label = "Why", .head = "site/why.html" },
+    .{ .id = "whyzayn", .label = "Why", .head = "site/why.html" },
     .{ .id = "language", .label = "Language", .head = "site/how.html" },
     .{ .id = "law", .label = "Law", .head = "site/rules.html" },
     // Adopt and Demo, not Use and Try (the Principal, 2026-11-10; ZANE-MENU-USETRY-01); the ids stay
@@ -59,15 +59,15 @@ fn fam(comptime f: []const u8, comptime label: []const u8, comptime term: []cons
     return .{ .file = "site/gotchas/" ++ f ++ ".html", .section = "law", .label = label, .parent = "site/gotchas/index.html", .rail = true, .term = term };
 }
 const pages = [_]Page{
-    .{ .file = "index.html", .home = true, .term = "Zane" },
-    .{ .file = "site/why.html", .section = "whyzane", .label = "The problem", .rail = true, .term = "problem" },
+    .{ .file = "index.html", .home = true, .term = "Zayn" },
+    .{ .file = "site/why.html", .section = "whyzayn", .label = "The problem", .rail = true, .term = "problem" },
     // The case stands apart from The problem (the Principal, 2026-11-11)
-    .{ .file = "site/case.html", .section = "whyzane", .label = "The case", .rail = true, .term = "case" },
-    .{ .file = "site/thinking.html", .section = "whyzane", .label = "Reasoning", .rail = true, .term = "reason" },
-    .{ .file = "site/positioning.html", .section = "whyzane", .family = "Comparison", .label = "Overview", .rail = true, .term = "overview" },
-    .{ .file = "site/practices.html", .section = "whyzane", .label = "Practices", .parent = "site/positioning.html", .rail = true, .term = "practice" },
-    .{ .file = "site/frameworks.html", .section = "whyzane", .label = "Frameworks and languages", .parent = "site/positioning.html", .rail = true, .term = "framework" },
-    .{ .file = "site/innovation.html", .section = "whyzane", .label = "Claims", .rail = true, .term = "claim" },
+    .{ .file = "site/case.html", .section = "whyzayn", .label = "The case", .rail = true, .term = "case" },
+    .{ .file = "site/thinking.html", .section = "whyzayn", .label = "Reasoning", .rail = true, .term = "reason" },
+    .{ .file = "site/positioning.html", .section = "whyzayn", .family = "Comparison", .label = "Overview", .rail = true, .term = "overview" },
+    .{ .file = "site/practices.html", .section = "whyzayn", .label = "Practices", .parent = "site/positioning.html", .rail = true, .term = "practice" },
+    .{ .file = "site/frameworks.html", .section = "whyzayn", .label = "Frameworks and languages", .parent = "site/positioning.html", .rail = true, .term = "framework" },
+    .{ .file = "site/innovation.html", .section = "whyzayn", .label = "Claims", .rail = true, .term = "claim" },
     .{ .file = "site/how.html", .section = "language", .label = "The basics", .rail = true, .term = "basic" },
     .{ .file = "site/refusal.html", .section = "language", .label = "What it refuses", .rail = true, .term = "refus" },
     .{ .file = "site/grid.html", .section = "language", .label = "The grid", .rail = true, .term = "grid" },
@@ -98,13 +98,13 @@ const pages = [_]Page{
     .{ .file = "site/tour.html", .section = "try", .label = "The tour", .rail = true, .term = "tour" },
     .{ .file = "tools/ui-audit.html", .section = "try", .label = "UI audit", .rail = true, .outside = .tool, .term = "audit" },
     .{ .file = "site/screenshots.html", .section = "try", .label = "Screenshots", .rail = true, .term = "screenshot" },
-    .{ .file = "tools/zane/wasm-proof.html", .section = "try", .label = "Wasm proof", .rail = true, .outside = .tool, .term = "wasm" },
+    .{ .file = "tools/zayn/wasm-proof.html", .section = "try", .label = "Wasm proof", .rail = true, .outside = .tool, .term = "wasm" },
 };
 
 /// The four files every page shares, and the rest a page loads: their address carries the first 8 hex of the sha256 of
 /// their content, read with LF line ends (the wasm on its bytes).
-const assets = [_][]const u8{ "stz.css", "stz.js", "gotchas.css", "law-numbers.js", "tour.js", "zane-wasm.js", "try.js", "zane.wasm" };
-const REPO = "https://github.com/mayouni/zane";
+const assets = [_][]const u8{ "stz.css", "stz.js", "gotchas.css", "law-numbers.js", "tour.js", "zayn-wasm.js", "try.js", "zayn.wasm" };
+const REPO = "https://github.com/mayouni/zayn";
 const GITHUB_MARK = "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z";
 /// an outline by default on every page of three or more sections (K18 NAV_TREE; ZANE-OUTLINE-01)
 const SECTION_MIN = 3;
@@ -225,7 +225,7 @@ fn menu(a: Allocator, p: *const Page) ![]const u8 {
         \\    </div>
         \\
     , .{ REPO, GITHUB_MARK, picker });
-    const bar = try fmt(a, "<nav class=\"site\" aria-label=\"Main menu\">\n  <div class=\"wrap\">\n    <div class=\"menu\">\n        <a class=\"brand\" href=\"{s}\">Zane</a>\n{s}\n    </div>\n{s}  </div>\n</nav>", .{
+    const bar = try fmt(a, "<nav class=\"site\" aria-label=\"Main menu\">\n  <div class=\"wrap\">\n    <div class=\"menu\">\n        <a class=\"brand\" href=\"{s}\">Zayn</a>\n{s}\n    </div>\n{s}  </div>\n</nav>", .{
         try href(a, p.file, "index.html"),
         try std.mem.join(a, "\n", links.items),
         tools,
@@ -248,8 +248,8 @@ fn trail(a: Allocator, p: *const Page) ![]const u8 {
     const s = sec(p.section).?;
     const Step = struct { label: []const u8, to: []const u8 };
     var steps: std.ArrayList(Step) = .empty;
-    // Zane, the section under its own name (where the main menu links), the family under its name, then the page under its own
-    try steps.append(a, .{ .label = "Zane", .to = "index.html" });
+    // Zayn, the section under its own name (where the main menu links), the family under its name, then the page under its own
+    try steps.append(a, .{ .label = "Zayn", .to = "index.html" });
     try steps.append(a, .{ .label = s.label, .to = s.head });
     const up: ?*const Page = if (p.parent) |pf| byFile(pf).? else if (p.family != null) p else null;
     if (up) |u| try steps.append(a, .{ .label = u.family.?, .to = u.file });
@@ -399,7 +399,7 @@ fn footer(a: Allocator, p: *const Page) ![]const u8 {
         \\        <a href="{s}">LICENSE</a>
         \\      </div>
         \\    </div>
-        \\    <p class="fine">Zane is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project.</p>
+        \\    <p class="fine">Zayn is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project.</p>
         \\    <p class="fine">© 2026 Mansour Ayouni · MIT licence</p>
         \\  </div>
         \\</footer>
@@ -765,7 +765,7 @@ fn checkNames(a: Allocator, problems: *List) !void {
         if (!exists(f)) continue;
         var it = std.mem.splitScalar(u8, try core.wellFormed(a, try readFile(a, f)), '\n');
         var i: usize = 0;
-        while (it.next()) |line| : (i += 1) if (re.testIn(&zing, line)) try problems.append(a, try fmt(a, "{s}:{d} names Zing: the Zane site does not name Zing", .{ f, i + 1 }));
+        while (it.next()) |line| : (i += 1) if (re.testIn(&zing, line)) try problems.append(a, try fmt(a, "{s}:{d} names Zing: the Zayn site does not name Zing", .{ f, i + 1 }));
     }
 }
 
@@ -774,7 +774,7 @@ fn checkNames(a: Allocator, problems: *List) !void {
 /// A line of a page that documents the JavaScript reference and may name Node, with the reason: site-shell.js's NODE_ALLOWED.
 const NodeAllowed = struct { file: []const u8, words: []const u8, reason: []const u8 };
 const node_allowed = [_]NodeAllowed{
-    .{ .file = "tools/zane/wasm-proof.html", .words = "node tools/zane/parity.js --write-wasm-proof", .reason = "parity.js holds the binary to its JavaScript reference, so it runs on Node by design; the proof page says what writes its record" },
+    .{ .file = "tools/zayn/wasm-proof.html", .words = "node tools/zayn/parity.js --write-wasm-proof", .reason = "parity.js holds the binary to its JavaScript reference, so it runs on Node by design; the proof page says what writes its record" },
 };
 
 fn newlinesOnly(a: Allocator, m: re.Match, t: []const u8) ![]const u8 {
@@ -806,7 +806,7 @@ fn checkNode(a: Allocator, problems: *List) !void {
                 allowed = true;
                 break;
             };
-            if (!allowed) try problems.append(a, try fmt(a, "{s}:{d} tells the reader to run Node (\"{s}\"): the verifier is one file, zane (doc/design/BINARY.md, S6)", .{ f, i + 1, line[m.start..m.end] }));
+            if (!allowed) try problems.append(a, try fmt(a, "{s}:{d} tells the reader to run Node (\"{s}\"): the verifier is one file, zayn (doc/design/BINARY.md, S6)", .{ f, i + 1, line[m.start..m.end] }));
         }
     }
     for (node_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "NODE_ALLOWED: {s} \"{s}\" matches no line: the entry has outlived what it excused", .{ x.file, x.words }));
@@ -837,13 +837,13 @@ fn checkReleases(a: Allocator, problems: *List) !void {
     }
 }
 
-// ---- a page states what Zane is and does (Central's ZANE-AFFIRM-01, 2026-11-08; doc/design/WRITING.md section 4) -------
+// ---- a page states what Zayn is and does (Central's ZANE-AFFIRM-01, 2026-11-08; doc/design/WRITING.md section 4) -------
 // No page of the registry, index.html or README.md lists what the project lacks. Scripts, styles, comments and code samples are not
 // read; each block of a line is judged on its own, so "Limit:" and "Not shown:" are refused where a block opens on them.
 
 const AffirmAllowed = struct { file: []const u8, words: []const u8, reason: []const u8 };
 const affirm_allowed = [_]AffirmAllowed{
-    .{ .file = "site/haro.html", .words = "two checks the condition language cannot yet express", .reason = "a technical table of the forged court: the seam column names what Haro's condition language expresses, a fact about Haro and not a lack of Zane (Central, 2026-11-09)" },
+    .{ .file = "site/haro.html", .words = "two checks the condition language cannot yet express", .reason = "a technical table of the forged court: the seam column names what Haro's condition language expresses, a fact about Haro and not a lack of Zayn (Central, 2026-11-09)" },
     .{ .file = "site/gotchas/reading.html", .words = "not yet been articulated by your teams", .reason = "the violation this page demonstrates: marketing copy written badly on purpose, inside the red frame the reader is meant to feel" },
 };
 fn checkAffirm(a: Allocator, problems: *List) !void {
@@ -919,7 +919,7 @@ fn checkAffirm(a: Allocator, problems: *List) !void {
                 allowed = true;
                 break;
             };
-            if (!allowed) try problems.append(a, try fmt(a, "{s}:{d} says what the project lacks (\"{s}\"): a page states what Zane is and does (doc/design/WRITING.md section 4)", .{ f, i + 1, try std.mem.join(a, "\", \"", said.items) }));
+            if (!allowed) try problems.append(a, try fmt(a, "{s}:{d} says what the project lacks (\"{s}\"): a page states what Zayn is and does (doc/design/WRITING.md section 4)", .{ f, i + 1, try std.mem.join(a, "\", \"", said.items) }));
         }
     }
     for (affirm_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "AFFIRM_ALLOWED: {s} \"{s}\" matches no line: the entry has outlived what it excused", .{ x.file, x.words }));
@@ -964,17 +964,17 @@ fn checkDashes(a: Allocator, problems: *List) !void {
 }
 
 // ---- the menu tells the truth about the tree (Rule 116 at v3.16; the Principal, 2026-11-08) -------------------------
-// The site's menu, written as a Zane declaration (site/menu.zane, NAV_GRAPHs with LABEL, TARGET and ENTRIES), compared with
+// The site's menu, written as a Zayn declaration (site/menu.zayn, NAV_GRAPHs with LABEL, TARGET and ENTRIES), compared with
 // what the registry renders and read by the verifier itself (core.verify): MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST,
 // MENU_LABEL_DUPLICATE. --write writes it. The same text as menuDecl in tools/site-shell.js.
 
-const MENU_FILE = "site/menu.zane";
-/// a page's surface name: the path without .html, /index, and its first folder (site, tools/zane, tools, constitution), / and - as _
+const MENU_FILE = "site/menu.zayn";
+/// a page's surface name: the path without .html, /index, and its first folder (site, tools/zayn, tools, constitution), / and - as _
 fn surf(a: Allocator, file: []const u8) ![]const u8 {
     var s = file;
     if (std.mem.endsWith(u8, s, ".html")) s = s[0 .. s.len - 5];
     if (std.mem.endsWith(u8, s, "/index")) s = s[0 .. s.len - 6];
-    for ([_][]const u8{ "site/", "tools/zane/", "tools/", "constitution/" }) |pre| if (std.mem.startsWith(u8, s, pre)) {
+    for ([_][]const u8{ "site/", "tools/zayn/", "tools/", "constitution/" }) |pre| if (std.mem.startsWith(u8, s, pre)) {
         s = s[pre.len..];
         break;
     };
@@ -987,9 +987,9 @@ fn surf(a: Allocator, file: []const u8) ![]const u8 {
 fn menuDecl(a: Allocator) ![]const u8 {
     var out: List = .empty;
     try out.appendSlice(a, &.{
-        "// site/menu.zane: the Zane site's own menu, declared in Zane (language 1.6; Rule 116 at v3.16).",
-        "// Written by `zane site shell --write` from the registry of tools/site-shell.js. `zane site shell` fails when this file differs",
-        "// from the registry, and refuses in it what `zane check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and",
+        "// site/menu.zayn: the Zayn site's own menu, declared in Zayn (language 1.6; Rule 116 at v3.16).",
+        "// Written by `zayn site shell --write` from the registry of tools/site-shell.js. `zayn site shell` fails when this file differs",
+        "// from the registry, and refuses in it what `zayn check` refuses: MENU_LABEL_REPEATS_PARENT, MENU_LANDING_NOT_FIRST and",
         "// MENU_LABEL_DUPLICATE. The main menu names each section; the band under a section opens on its landing page.",
         "",
         "DEFINE NAV_GRAPH main_menu (",

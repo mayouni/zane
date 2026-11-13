@@ -1,0 +1,9 @@
+// The lawful twin of select-act-collapse.zayn: CONFIRM stands between
+// selection and execution.
+// Expected: no diagnostics.
+
+DEFINE INTENT_FLOW pick_and_pay (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL, EXIT],
+  ACTOR operator
+)

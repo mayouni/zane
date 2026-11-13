@@ -1,7 +1,7 @@
 .{
-    .name = .zane,
+    .name = .zayn,
     .version = "0.1.0",
-    .fingerprint = 0xaa75ed0d2e627b59,
+    .fingerprint = 0x3824b0132e627b59,
     .minimum_zig_version = "0.15.2",
     .dependencies = .{},
     .paths = .{ "build.zig", "build.zig.zon", "zig", "conformance", "constitution/rules.json", "doc/diagnostic-contract.schema.json", "doc/language", "doc/design/audit" },

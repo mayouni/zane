@@ -1,4 +1,4 @@
-# The Zane Conformance Suite
+# The Zayn Conformance Suite
 
 **Declarations with known verdicts, so any implementation in any language can
 prove agreement rather than assert it.**
@@ -11,7 +11,7 @@ drifting — the failure this whole project exists to prevent.
   severity, its conformance level, and the constitutional rule it enforces.
 - **The suite**: [`manifest.json`](manifest.json) — every fixture with its
   expected diagnostics.
-- **The fixtures**: [`fixtures/`](fixtures/) — 30 `.zane` declarations.
+- **The fixtures**: [`fixtures/`](fixtures/) — 30 `.zayn` declarations.
 - **The language**: [`doc/language/`](../doc/language/) — what all of this is
   checking against.
 
@@ -65,10 +65,10 @@ Level 4 has no fixtures, and the manifest says why in its `unfixtured` section:
 ## Running the suite
 
 ```bash
-zane conformance --level 4
+zayn conformance --level 4
 ```
 
-That runs [the verifier in this repository](../tools/zane/README.md) against
+That runs [the verifier in this repository](../tools/zayn/README.md) against
 every fixture. For an implementation of your own, a runner is ten lines in any
 language:
 
@@ -88,7 +88,7 @@ Report the claimed level, the pass/skip/fail counts, and every mismatch as
 An implementation may accept **more** than this language defines — the reference implementation's compiler
 accepts `WIDGET` and `USER`, which this specification excludes on stated grounds.
 That is an extension, not a failure. It shows up as one fixture disagreeing
-(`unspecified-declaration.zane`), and the honest way to report it is:
+(`unspecified-declaration.zayn`), and the honest way to report it is:
 
 > *conforms at Level 2, with 1 declared extension (WIDGET)*
 
@@ -100,7 +100,7 @@ ship.
 
 | Implementation | Level | Result |
 |---|---|---|
-| [`tools/zane/`](../tools/zane/README.md) — this repository | 3 | **30 / 30 pass** (L1 6, L2 26, L3 30) |
+| [`tools/zayn/`](../tools/zayn/README.md) — this repository | 3 | **30 / 30 pass** (L1 6, L2 26, L3 30) |
 | The reference implementation's compiler | subset of 2 | four diagnostics, none of the ten named violations |
 
 The suite was written *before* either could pass it, which is the whole point:
@@ -111,7 +111,7 @@ measured here exactly as the JavaScript one is.
 
 The reference implementation's four diagnostics (`ZUI-W001`, `ZUI-E001`, `ZUI-E002`, `ZUI-W010`) were
 established by reading its source, and are recorded in
-[the M3 decision document](../doc/decisions/M3-the-zane-verifier.md) §1.
+[the M3 decision document](../doc/decisions/M3-the-zayn-verifier.md) §1.
 
 ## Adding a fixture
 

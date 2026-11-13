@@ -13,7 +13,7 @@ const rules = require(R('constitution/rules.json'));
 const media = require(R('conformance/media.json'));
 const viol = require(R('conformance/violations.json')).diagnostics;
 const man = require(R('conformance/manifest.json'));
-const Z = require(R('tools/zane/zane.js'));
+const Z = require(R('tools/zayn/zayn.js'));
 
 // ---- the axes -------------------------------------------------------------------------------
 const ACTIVITIES = ['perceive', 'understand', 'decide', 'act', 'recover', 'trust'];
@@ -36,7 +36,7 @@ const problems = [];
 if (all.size !== 22 || Object.values(VERBS).flat().length !== 22 || [...Z.INTENT_VERBS].some(v => !all.has(v)))
   problems.push('the verb map is not the 22 intent verbs, each once');
 
-// a verb is absent from a medium the way zane.js derives it: default "absent" keeps only native and degraded
+// a verb is absent from a medium the way zayn.js derives it: default "absent" keeps only native and degraded
 const absentIn = {};
 for (const m of media.media) {
   const c = m.carries, keep = new Set([...(c.native || []), ...(c.degraded || [])]);
@@ -78,14 +78,14 @@ for (const [n, p] of Object.entries(place.rules)) if (p.media === 'any')
 // ---- the fixtures ---------------------------------------------------------------------------
 const rulesOf = {};
 for (const d of viol) rulesOf[d.id] = (d.rules || []).map(String);
-const fxByStem = new Map(man.fixtures.map(f => [f.file.replace(/\.zane$/, ''), f]));
+const fxByStem = new Map(man.fixtures.map(f => [f.file.replace(/\.zayn$/, ''), f]));
 const fixtureRows = [];
 for (const f of man.fixtures) {
   let ids = f.expect_ids, via = 'its own diagnostics';
-  const stem = f.file.replace(/\.zane$/, '');
+  const stem = f.file.replace(/\.zayn$/, '');
   if (!ids.length && /-lawful$/.test(stem)) { // a lawful twin is the other half of its pair: same rules, expected clean
     const base = stem.replace(/-lawful$/, '');
-    const twin = fxByStem.get(base) || [...fxByStem.values()].find(t => t.expect_ids.length && t.file.replace(/\.zane$/, '').startsWith(base));
+    const twin = fxByStem.get(base) || [...fxByStem.values()].find(t => t.expect_ids.length && t.file.replace(/\.zayn$/, '').startsWith(base));
     if (twin) { ids = twin.expect_ids; via = 'its twin ' + twin.file; }
   }
   const src = fs.readFileSync(R('conformance/fixtures/' + f.file), 'utf8');

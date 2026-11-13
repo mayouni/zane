@@ -889,7 +889,7 @@ a landmark is missing); on the 15 pages of this site, 0 stayed 0. All conformanc
 
 ---
 
-## Pass 5 — proposed 2026-11-05: the author's look at the Zane site · *proposed, not ruled*
+## Pass 5 — proposed 2026-11-05: the author's look at the Zayn site · *proposed, not ruled*
 
 **Status: proposed, not ruled. Nothing here is applied to `rules.json`.** The author asked, on 2026-11-05, that every remark
 made while looking at the site be documented so that it can be included in the Constitution: *"ALL THSE REMARKS MUST BE
@@ -907,7 +907,7 @@ documented failure.
 - **The remarks.** 2026-11-04, on the old home page: *"'FEATURES' must be in the same line as the sentence and 'IS' must go on
   the line after. Check that all the titles are esthetiucally equilibrated through lines"*. 2026-11-05, on the front page:
   *"the issue of equilibrated text on a line again and again!"*
-- **The defect.** A title broke as *"Zane is the / compilable language / for user interfaces."*: a short first line beside a
+- **The defect.** A title broke as *"Zayn is the / compilable language / for user interfaces."*: a short first line beside a
   wide empty panel. Its cause was a line break placed by hand (two spans set as blocks), which the browser's balancing could
   not cross; and, once that was removed, a panel too narrow for the title's two lines.
 - **The repair and its check.** Titles are one element, balanced by the browser (`text-wrap: balance`); paragraphs use
@@ -921,7 +921,7 @@ documented failure.
 
 - **The remark.** 2026-11-05, on the grid page: *"i todl you befeore several time to avoid the narrative, sucinet, non
   declarative style of writing. Here for example, you describe the grid without citing it, neither in the titles nor in the
-  text. use a dead simple clear descriptive full sentence from the kind : Zane is designed around a conceptual grid with ....
+  text. use a dead simple clear descriptive full sentence from the kind : Zayn is designed around a conceptual grid with ....
   snusre systeatic coverage etc"*. And on the front page, the same day: *"The hero contains a duplication ... don't apply the
   strict sentence style to the hero zones"*.
 - **The defect.** Titles written as metaphors, teasers and fragments (*"The rows of a person's day"*, *"The gap, as a
@@ -984,7 +984,7 @@ documented failure.
 - **The defects.** A button that scrolled to the section beneath it; a call to action in the head of every reading page,
   interrupting the reading; and an entry page whose one action asked the reader to judge a refusal before knowing what the
   language is.
-- **The repairs and their check.** No button in the head of a reading page; the front page has one action, *Discover how Zane
+- **The repairs and their check.** No button in the head of a reading page; the front page has one action, *Discover how Zayn
   works*, which opens the Language page, the page that explains the language step by step before anything is asked of the
   reader. Its words name what it opens: there is no page called *Learn* or *Start* on this site. `node tools/site-facts.js` refuses a
   primary button in the head of a reading page and a primary button that points into its own page.
@@ -1015,13 +1015,13 @@ Each remark below is documented as evidence; the rule it supports already says e
 | 2026-11-06 | *"since they are 4 cards, put 2 per line and avoid the issue of empty space!!"* | four cards in three columns left a row of one card and two holes | Rule 2 amendment (F-3, space is functional) | two or four cards go two to a row; three or six stay three to a row |
 | 2026-11-06 | *"the alternation between white background and page background is not successful and leaves holes in the page and visual disruption in the reading flow"* | every other section was a white band, cut short beside the outline column | Rule 12 (*The Law of the Eternal Scroll*), F-3 | one background for the whole reading column; one gap between sections, the page's margin at both ends |
 | 2026-11-06 | *"some lateral menus are still in the left, move them to the right"* | a family list (the pages of one family) sat on the left of the text while a page's outline sat on its right, so the text began at two different edges | Rule 116 (a page reads as the menu names it), F-3 | every list beside a page sits on its right, family and outline alike; the text starts at the page's left edge, under its title; this turns the earlier ruling that kept a family on the left |
-| 2026-11-06 | *"You mean 'Zane is implementable in other languages' or 'can be implemented in other languages' and avoid using 'implement' twice"* | the Other languages title read "Zane is implemented in other languages by implementing its language": a capability stated as a fact, and one verb used twice | WRITING.md rule 1 (the title says what the subject is) | the title states the capability ("can be implemented") and uses the verb once: "Zane can be implemented in other languages by writing its verifier and running its fixtures, not by adopting a library." |
+| 2026-11-06 | *"You mean 'Zayn is implementable in other languages' or 'can be implemented in other languages' and avoid using 'implement' twice"* | the Other languages title read "Zayn is implemented in other languages by implementing its language": a capability stated as a fact, and one verb used twice | WRITING.md rule 1 (the title says what the subject is) | the title states the capability ("can be implemented") and uses the verb once: "Zayn can be implemented in other languages by writing its verifier and running its fixtures, not by adopting a library." |
 | 2026-11-06 | *"On this page seems like a clickable option in the menu. Differenciate it (in gray sufficently readbale and not in bold)"* | the outline's heading was set in bold ink at the entries' size, so it read as one more entry | Rule 116 (the menu tells the truth), Rule 105 (the legibility floor) | the heading is a label: the muted gray, normal weight, one step smaller (1rem) than the entries; its contrast measured by the UI audit in both cultures |
 | 2026-11-06 | *"Separate 'On this page' by a space and push it slitlyt to the left at the same level of the vertical line so the reader does not take it for a first option in the menu!!!"* | the heading sat inside the list, indented like its entries and on the same line's side, so it still read as the first entry | Rule 116 | the outline's line starts under the heading; the heading stands on the line's own left edge with a 1rem space below it, outside the list |
 | 2026-11-06 | *"to beautify the internal pages, add a graphity inspired from the main imagge (the building and it's geometric forms) as clean lightweight (vectorised) small filigran starting forom the bottom right corner of the hero sections"* | the page heads were a flat tint with an empty band right of the text | F-3 (space is functional: decoration lives where it costs the reader nothing) | a thin-line SVG (site/assets/filigree.svg, about 2 KB) from the museum's façade (the nested lozenge, the scrolls, an arched curve, a rosette, the roof's steps), drawn as a mask in each culture's accent at low strength from the head's bottom-right corner; sized to the space right of the text and hidden under 1121 px; measured clear of the text by 8 px or more on 30 page heads at six widths |
 | 2026-11-06 | *"the menu bar texts are small! Add Github icon to the right along with the combo of the vibe"* | the top bar's words were at 1rem, and GitHub and the style select sat in the footer | Rule 105 (the legibility floor), Rule 106 | the bar's words at 1.2rem (the brand at 1.3rem, the band at 1.1rem); the GitHub mark and the style select at the right of the top bar, gone from the footer |
 | 2026-11-06 | *"hyperlinks are polluting the page with their intrusives underlines+bold, rethink it and let it change them on mous survol"* | every link was underlined, and the links of cards and lists were bold | Rule 105 (open: a link told by colour alone, WCAG 1.4.1) | a link is told by its colour and underlined only under the pointer or the keyboard's focus; no link is bold. Open: whether colour alone is enough to tell a link from text is not measured |
-| 2026-11-06 | *"Zane is a Softanza project. must be added to the footer in all pages"* | the sentence stood once, in the front page's body | none | the footer of every page carries it; the front page's body no longer repeats it |
+| 2026-11-06 | *"Zayn is a Softanza project. must be added to the footer in all pages"* | the sentence stood once, in the front page's body | none | the footer of every page carries it; the front page's body no longer repeats it |
 | 2026-11-06 | *"avoid info bulles altogethor because they complexify the redaing by a volatile additional layer! just make small experive titles"* | the outline's entries, the style select, two mock buttons, the Reader's badges and five drawings carried tooltips | Rule 116 (the menu tells the truth) | no title attribute anywhere and one <title> per page; a drawing names itself with <desc>; site-shell.js fails on either (WRITING.md rule 11) |
 | 2026-11-06 | *"also avoid this bad habit of having a backoudrounh colr for the selected item and the hovered item!!!"* | the outline drew a tinted background under the entry being read and under the pointer | Rule 115 | no background: the entry being read is set in bold ink, the one under the pointer turns to the link colour |
 | 2026-11-06 | *"the graphity should not be added in the retro vibe! did you see any retro UI containing one??!"* | the filigree was drawn in Retro too, in the terminal green | Article VI (two cultures, one truth) | the filigree belongs to Modern only; Retro draws none |
@@ -1074,7 +1074,7 @@ application manages (Set 23, Rule 74) or attention a person spends (Rule 130's w
 **A page fetches only what its culture shows, at the width the screen needs.** An image, a font or a script that the active culture
 does not display is not fetched, and an image comes in widths the browser chooses from. *Avoid*: a second culture's picture fetched
 and hidden; one width for every screen. *Why*: what is fetched and not shown costs the person on a slow line, and costs nothing to
-avoid. *Evidence*: on the Zane site, the night photograph Retro shows is 48,156 bytes, and Modern's day photograph 318,130 at full
+avoid. *Evidence*: on the Zayn site, the night photograph Retro shows is 48,156 bytes, and Modern's day photograph 318,130 at full
 width and 94,424 at 800 px; with both lazy, Modern fetched the day file only and Retro the night file only (cac3e98). *Open*: it
 is measured on one page of one site; it would want a second site before a ruling.
 
@@ -1085,7 +1085,7 @@ first slot empty), relayed by Central on 2026-11-08 11:18: *"You misutertood me 
 and the first option in the submenu you must bring bakc the frist option but find an other lable for it that is different from the
 main option(Approach in our case), be it "Intro" or any better experssive term! I need you to deal with menu strcture as a logical
 apsect, and i'ts not logical to get the main title "Approach" then find it also as an option of it's cibling menus!!! you must add this
-as an issue that is statically checked in Zane and notify all other sites to fix it!"*
+as an issue that is statically checked in Zayn and notify all other sites to fix it!"*
 
 It reverses the reading of 2026-11-06, under which a section's head page took the section's name in the main menu and left the band.
 The reading that keeps Rule 116's *one page, one name*: the main menu's entry names the SECTION, the band's first entry names the
@@ -1097,8 +1097,8 @@ leads to; a child carrying its parent's label, or two entries at one level carry
 ruling added to the evidence. Metadata: version, lastUpdated, lineage. No rule's number, title or tier changes, no rule is added or
 retired, and no earlier fixture changes its verdict.
 
-**Where it is checked.** The language (1.6) lets a `NAV_GRAPH` state a menu: `LABEL`, `TARGET`, `ENTRIES`. `zane check` refuses
+**Where it is checked.** The language (1.6) lets a `NAV_GRAPH` state a menu: `LABEL`, `TARGET`, `ENTRIES`. `zayn check` refuses
 `MENU_LABEL_REPEATS_PARENT`, `MENU_LANDING_NOT_FIRST` and `MENU_LABEL_DUPLICATE` (contract 1.10, 40 diagnostics), with one fixture
-each and a lawful one (77 fixtures). The site declares its own menu in `site/menu.zane`, and `zane site shell` refuses the same three
+each and a lawful one (77 fixtures). The site declares its own menu in `site/menu.zayn`, and `zayn site shell` refuses the same three
 there. Rule 116's tier stays *tool*: the verifier now decides three of its demands from a declaration, and the UI audit the rest on a
 painted page; whether that moves the tier is a ruling, not this desk's.

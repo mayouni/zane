@@ -1,17 +1,17 @@
 {
   "metadata": {
-    "title": "The Zane Protocol Pack",
+    "title": "The Zayn Protocol Pack",
     "version": "1.0",
-    "generated": "by tools/zane/pack.js -- never hand-edited",
+    "generated": "by tools/zayn/pack.js -- never hand-edited",
     "note": "Every file a participant pins, with a hash. Pinning means recording this manifest: a version number says which edition you MEANT, and a hash says the bytes you HAVE are that edition. Hashes are over content with CRLF normalised to LF, so a pin does not differ by platform.",
     "hash": "sha256 over LF-normalised content"
   },
   "versions": {
-    "constitution": "3.16",
+    "constitution": "3.17",
     "rules": 123,
     "forbiddenPatterns": 17,
-    "language": "1.6",
-    "refusalContract": "1.10",
+    "language": "1.7",
+    "refusalContract": "1.11",
     "diagnostics": 40,
     "media": 10,
     "signalValues": 5,
@@ -21,74 +21,74 @@
     {
       "file": "constitution/rules.json",
       "role": "the law",
-      "bytes": 176299,
-      "sha256": "0fb7532bb61d1ab38285a9f6f731b48d6ede62753f9aad48e33fddbad284a2c0"
+      "bytes": 176475,
+      "sha256": "ae36ff0b67bc596c6ff01ab52fdcfb773d44c3881dbe99a2db86489734b56089"
     },
     {
       "file": "doc/language/README.md",
       "role": "the language",
-      "bytes": 11597,
-      "sha256": "b164d15c90ff1a06f8e99c2d16000dc830a6d7765486c5d323faaddfe317c1d3"
+      "bytes": 11887,
+      "sha256": "80153a87f8174ff074eec92bb41d31bb339e83c3bf041d11f0e45606cc1f7786"
     },
     {
       "file": "doc/language/GRAMMAR.md",
       "role": "the language",
-      "bytes": 6466,
-      "sha256": "a4b78c5f2d22359b78699616775a572408155268d32382708651a857671671c2"
+      "bytes": 6475,
+      "sha256": "6c73eda0a983c751c3e077855689b0983a658bd071e700e2ef6604d891eeb885"
     },
     {
       "file": "doc/language/DECLARATIONS.md",
       "role": "the language",
       "bytes": 16445,
-      "sha256": "71783281881c92f12708a31ca7c873ffcc81e2d23c1f52677c1bc47a5027ee19"
+      "sha256": "9fa23009df0b753525a5c01922961b74eddac40d52e6b235bc7300c5675a3715"
     },
     {
       "file": "doc/language/VIOLATIONS.md",
       "role": "the language",
       "bytes": 21892,
-      "sha256": "75edfebb9734c970de4dc8dfdd963af8649cccba521db6150f00842927728f45"
+      "sha256": "807451c390ca124155dbac7daa430a480216c83c7592086bcf7080906ca3889a"
     },
     {
       "file": "conformance/violations.json",
       "role": "the refusal contract",
-      "bytes": 29295,
-      "sha256": "618ffd6774d846d50005f2c5ce5da476fa16008b3b8efa6b5c6c12b93d533808"
+      "bytes": 29439,
+      "sha256": "ea4614f768b3c75fa1d52ee85990b9f80faa94e4b064776e75596c77683f0b7d"
     },
     {
       "file": "doc/diagnostic-contract.md",
       "role": "the refusal contract",
-      "bytes": 28334,
-      "sha256": "d3fa30de3c8c938d82388a4e27385774736edb03e778ef6557c083129c43a5bd"
+      "bytes": 28455,
+      "sha256": "28621a62249e88ea74f324537d8e131895bba86f843d9dab18ac41f2d3969c4d"
     },
     {
       "file": "doc/diagnostic-contract.schema.json",
       "role": "the refusal contract",
-      "bytes": 6918,
-      "sha256": "de69beb94c6e0853919390053dc0ad756d9f0ee04b78fb9faeb968daf1c03fd9"
+      "bytes": 6957,
+      "sha256": "107da18a755e51159de91d98d138eebf3407eca52a07d11f9da8bcb4d657c4bf"
     },
     {
       "file": "conformance/media.json",
       "role": "the axes",
       "bytes": 8823,
-      "sha256": "462350e9ca8e5d616a2d75eb515550aca42378a96005b6752fef15f02a72f19e"
+      "sha256": "6b5e2439e1490de88195a3fa28c22a1c85fce446146767339bbe3a086edbbfee"
     },
     {
       "file": "conformance/signal.json",
       "role": "the axes",
       "bytes": 20790,
-      "sha256": "0556052d4f7f164052d90a377f3a8709e022ff4a520f7f689868d21624c56e01"
+      "sha256": "260acb66af92a29820546db392411a8ce5f069ea85a46e354dc3669ccfaf6c8a"
     },
     {
       "file": "conformance/manifest.json",
       "role": "the proof",
       "bytes": 20537,
-      "sha256": "241def2de4ee56f80f4c7665deb396d9eb91956300ccf6c2f2130a7ed4bb4025"
+      "sha256": "729cb4c476ffd097d6f76e32b33d1544f0fdc4e3a8098459bbc7a389ce1ed139"
     },
     {
       "file": "conformance/cross-medium/spec.json",
       "role": "the proof",
       "bytes": 1638,
-      "sha256": "b940da49b431a961c7e8200b93cf0f34bb793a05616725c6eb5493c7f69984b4"
+      "sha256": "93a93e1f8e2915e496a6f1be0a7e15dbd874de92798dc0e349d12b6f7d657803"
     }
   ]
 }

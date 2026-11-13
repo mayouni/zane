@@ -1,8 +1,8 @@
-# Zane
+# Zayn
 
-*Zane is StzZui in the Softanza family: its formal name there. It was called Zui until 2026-11-05.*
+*Zayn is StzZui in the Softanza family: its formal name there. It was called Zane until 2026-11-12, and Zui until 2026-11-05.*
 
-**Zane is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 123 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
+**Zayn is a declarative, compilable language for intent-driven user interfaces — governed by a machine-verifiable constitution of 123 rules as data.** You declare what the human is doing; the compiler refuses what the law forbids, before anything is rendered; projections render the declaration to any medium; the audit measures what runtime paints. Deployable inside any software project — at design time, in development, and at runtime. Platform-independent, framework-independent, opinionated toward business applications.
 
 A Softanza project · Tunis · Niamey · Paris
 
@@ -16,29 +16,29 @@ Meanwhile the HCI and UI/UX community has largely stepped back from criticizing 
 
 That is what this repository holds.
 
-## What Zane is
+## What Zayn is
 
 Three things, strictly layered — the architecture inherited from a sibling project's Zui pillar (its interface specification v3.0):
 
 | Layer | Artifact | Status |
 |---|---|---|
 | **1 · The Language** | 10 declaration types (`INTENT_FLOW` … `VIBE`) over 22 closed, medium-agnostic verbs (DISCOVER … EXIT). Widgets are consequences of intent, never primitives. | **Owned here**, specified in [`doc/language/`](doc/language/README.md) (v1.6). Reference implementation: the reference implementation's compiler — a consumer ([doc/ARCHITECTURE.md](doc/ARCHITECTURE.md)) |
-| **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.16, 123 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
+| **2 · The Constitution** | [`constitution/rules.json`](constitution/rules.json) — **v3.17, 123 rules, 31 sets, 7 articles**. Every rule carries its *why*, its derivation from an article, its enforcement tier, and the real-world evidence that earned it a number. | **Canonical, here** |
 | **3 · Rendering projections** | Per-medium consumers: business web, the reference implementation's compiler targets, CLI, voice, and — a first — the AI-agent interaction surface itself. | Consumers pin a version |
 
 The law is **data**. The reader renders it, linters load it, findings cite rule numbers, and no prose copy can drift from what the machine enforces. And the law has a native habitat: the language. One declaration holds at three moments — checked at design time, linted in development, measured at runtime — with no framework to swap and no dependency to take.
 
 ## What is in this repository today
 
-- **[The site](index.html)** — built for two readers, the developer and the UI community: [why Zane exists](site/why.html), [the case for a law](site/case.html), [the architecture in full](site/how.html) (every instrument with its state), [the Gotchas](site/gotchas/index.html) — twelve interactive offenses beside their lawful twins, split into seven rule families — [the vibes exhibit](site/vibes.html) — one operator screen, one shared state, both cultures at once (Article VI) — and [the adoption contract](site/adopt.html).
+- **[The site](index.html)** — built for two readers, the developer and the UI community: [why Zayn exists](site/why.html), [the case for a law](site/case.html), [the architecture in full](site/how.html) (every instrument with its state), [the Gotchas](site/gotchas/index.html) — twelve interactive offenses beside their lawful twins, split into seven rule families — [the vibes exhibit](site/vibes.html) — one operator screen, one shared state, both cultures at once (Article VI) — and [the adoption contract](site/adopt.html).
 - **[The Reader](constitution/reader/index.html)** — the whole law, interactive: search, keyboard navigation, enforcement badges, operator rights, forbidden patterns.
 - **[The UI Audit](tools/ui-audit.html)** — a browser tool that *measures* six of the rules on any application UI you can serve same-origin: computed text size, true composited contrast, the full navigation path, sideways scrolling with room to spare, and menu/tree coherence. Nothing leaves your browser.
-- **[The language specification](doc/language/README.md)** — Zane v1.6: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). It states what is specified and what each implementation reaches.
-- **[The `zane` verifier](tools/zane/README.md)** — `zane check file.zane` (a `.zui` file, the former extension, is read the same way). `zane` is one file, with nothing to install beside it: version 0.1.0 is on [its release page](https://github.com/mayouni/zane/releases/tag/v0.1.0) for Windows, Linux and macOS (tested on Windows and Linux; built for macOS), each file's SHA-256 hash in its `SHA256SUMS`, and `zig build release` builds the same files from this repository with Zig ([doc/releases/v0.1.0.md](doc/releases/v0.1.0.md)); the same core runs in a browser as WebAssembly. Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself; passes all 77 conformance fixtures at level 4.
-- **[The conformance suite](conformance/README.md)** — 77 `.zane` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; 23 of them are lawful twins, the same declaration as a violation fixture with the defect repaired.
+- **[The language specification](doc/language/README.md)** — Zayn v1.7: the grammar [in EBNF](doc/language/GRAMMAR.md), [the ten declaration types](doc/language/DECLARATIONS.md), and [every diagnostic bound to the constitutional rule it enforces](doc/language/VIOLATIONS.md). It states what is specified and what each implementation reaches.
+- **[The `zayn` verifier](tools/zayn/README.md)** — `zayn check file.zayn` (a `.zane` or `.zui` file, a former extension, is read the same way). `zayn` is one file, with nothing to install beside it: version 0.1.0 is on [its release page](https://github.com/mayouni/zayn/releases/tag/v0.1.0) for Windows, Linux and macOS (tested on Windows and Linux; built for macOS), each file's SHA-256 hash in its `SHA256SUMS`, and `zig build release` builds the same files from this repository with Zig ([doc/releases/v0.1.0.md](doc/releases/v0.1.0.md)); the same core runs in a browser as WebAssembly. Checks declarations against the law before anything is rendered, citing rule numbers and titles it reads from the law itself; passes all 77 conformance fixtures at level 4.
+- **[The conformance suite](conformance/README.md)** — 77 `.zayn` declarations with known verdicts, so any implementation in any language can *prove* agreement rather than assert it. Four conformance levels; 23 of them are lawful twins, the same declaration as a violation fixture with the defect repaired.
 - **[The harvest record](doc/HARVEST-2026-08.md)** — how Rules 117–124 were extracted from the banking product, the i18n decisions, and the Refine evidence trails.
-- **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zane` language and compiler out of the reference implementation.
-- **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zane` verifier to the educational showcase.
+- **[The architecture](doc/ARCHITECTURE.md)** — the three layers, the consumer contract, and the plan for lifting the `.zayn` language and compiler out of the reference implementation.
+- **[The roadmap](ROADMAP.md)** — from law-at-home to a standalone `zayn` verifier to the educational showcase.
 
 ## The consumer contract
 

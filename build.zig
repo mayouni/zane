@@ -1,14 +1,14 @@
-//! The StzZui binary (doc/design/BINARY.md). One executable, `zane`, built from zig/src.
+//! The StzZui binary (doc/design/BINARY.md). One executable, `zayn`, built from zig/src.
 //!
 //!   zig build -j2                              a debug build, which is never a measurement
 //!   zig build -j2 -Doptimize=ReleaseSmall      the build the size budget is read from
 //!   zig build -j2 test                         the unit tests
-//!   zig build -j2 run -- check x.zane          run it
-//!   zig build -j2 wasm -Doptimize=ReleaseSmall the browser build, zane.wasm (stage S3), copied to site/zane.wasm by hand
+//!   zig build -j2 run -- check x.zayn          run it
+//!   zig build -j2 wasm -Doptimize=ReleaseSmall the browser build, zayn.wasm (stage S3), copied to site/zayn.wasm by hand
 //!   zig build -j2 release                      every published file at ReleaseSmall, in zig-out/release, with SHA256SUMS
 //!
 //! The data it embeds (conformance/, constitution/) is read from this repository at build time. The version is
-//! build.zig.zon's, and `zane --version` prints it.
+//! build.zig.zon's, and `zayn --version` prints it.
 
 const std = @import("std");
 const version: []const u8 = @import("build.zig.zon").version;
@@ -30,12 +30,12 @@ pub fn build(b: *std.Build) void {
     const options = b.addOptions();
     options.addOption([]const u8, "version", version);
     const site = siteModule(b);
-    const exe = zaneExe(b, target, optimize, site, options);
+    const exe = zaynExe(b, target, optimize, site, options);
     b.installArtifact(exe);
 
     const run = b.addRunArtifact(exe);
     if (b.args) |args| run.addArgs(args);
-    b.step("run", "Run zane").dependOn(&run.step);
+    b.step("run", "Run zayn").dependOn(&run.step);
 
     const test_root = b.createModule(.{
         .root_source_file = b.path("zig/src/main.zig"),
@@ -50,8 +50,8 @@ pub fn build(b: *std.Build) void {
     b.step("test", "Run the unit tests").dependOn(&test_run.step);
 
     // the browser build: the same core for wasm32-freestanding, behind the export surface of wasm.zig and nothing else
-    const wasm = zaneWasm(b, optimize);
-    b.step("wasm", "Build zane.wasm").dependOn(&b.addInstallArtifact(wasm, .{}).step);
+    const wasm = zaynWasm(b, optimize);
+    b.step("wasm", "Build zayn.wasm").dependOn(&b.addInstallArtifact(wasm, .{}).step);
 
     // the release: every target at ReleaseSmall whatever -Doptimize says, and SHA256SUMS written by zig/src/sums.zig, built for
     // this machine, so the step runs no other program. Two clean builds in two fresh clones give the same SHA256SUMS: that is
@@ -67,8 +67,8 @@ pub fn build(b: *std.Build) void {
     const dest: std.Build.InstallDir = .{ .custom = "release" };
     for (release_targets) |t| {
         const rt = b.resolveTargetQuery(t.query);
-        const r = zaneExe(b, rt, .ReleaseSmall, site, options);
-        const name = b.fmt("zane-{s}-{s}{s}", .{ version, t.name, rt.result.exeFileExt() });
+        const r = zaynExe(b, rt, .ReleaseSmall, site, options);
+        const name = b.fmt("zayn-{s}-{s}{s}", .{ version, t.name, rt.result.exeFileExt() });
         release.dependOn(&b.addInstallArtifact(r, .{
             .dest_dir = .{ .override = dest },
             .dest_sub_path = name,
@@ -79,8 +79,8 @@ pub fn build(b: *std.Build) void {
         sums.addArg(name);
         sums.addFileArg(r.getEmittedBin());
     }
-    const rw = zaneWasm(b, .ReleaseSmall);
-    const wasm_name = b.fmt("zane-{s}.wasm", .{version});
+    const rw = zaynWasm(b, .ReleaseSmall);
+    const wasm_name = b.fmt("zayn-{s}.wasm", .{version});
     release.dependOn(&b.addInstallFileWithDir(rw.getEmittedBin(), dest, wasm_name).step);
     sums.addArg(wasm_name);
     sums.addFileArg(rw.getEmittedBin());
@@ -88,7 +88,7 @@ pub fn build(b: *std.Build) void {
 }
 
 /// The executable for one target: main.zig, the data it embeds, the site it serves, and the version.
-fn zaneExe(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode, site: *std.Build.Module, options: *std.Build.Step.Options) *std.Build.Step.Compile {
+fn zaynExe(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builtin.OptimizeMode, site: *std.Build.Module, options: *std.Build.Step.Options) *std.Build.Step.Compile {
     const root = b.createModule(.{
         .root_source_file = b.path("zig/src/main.zig"),
         .target = target,
@@ -97,11 +97,11 @@ fn zaneExe(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.builti
     embedData(b, root);
     root.addImport("site", site);
     root.addOptions("build_options", options);
-    return b.addExecutable(.{ .name = "zane", .root_module = root });
+    return b.addExecutable(.{ .name = "zayn", .root_module = root });
 }
 
-/// zane.wasm: the core for wasm32-freestanding, with the contract and the law it checks against.
-fn zaneWasm(b: *std.Build, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+/// zayn.wasm: the core for wasm32-freestanding, with the contract and the law it checks against.
+fn zaynWasm(b: *std.Build, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
     const wasm_root = b.createModule(.{
         .root_source_file = b.path("zig/src/wasm.zig"),
         .target = b.resolveTargetQuery(.{ .cpu_arch = .wasm32, .os_tag = .freestanding }),
@@ -109,15 +109,15 @@ fn zaneWasm(b: *std.Build, optimize: std.builtin.OptimizeMode) *std.Build.Step.C
     });
     wasm_root.addAnonymousImport("violations.json", .{ .root_source_file = b.path("conformance/violations.json") });
     wasm_root.addAnonymousImport("rules.json", .{ .root_source_file = b.path("constitution/rules.json") });
-    const wasm = b.addExecutable(.{ .name = "zane", .root_module = wasm_root });
+    const wasm = b.addExecutable(.{ .name = "zayn", .root_module = wasm_root });
     wasm.entry = .disabled;
     wasm.rdynamic = true;
     return wasm;
 }
 
 /// The contract, the law, the suite and the audit's facts schema live outside zig/src, which @embedFile cannot reach by
-/// path; they are handed in by name. `zane conformance`, `cross-medium` and `audit-facts` check the data they were built
-/// from, so they need no tree to run; `zane pack` reads the tree it is run in, because a pin is about the bytes you have.
+/// path; they are handed in by name. `zayn conformance`, `cross-medium` and `audit-facts` check the data they were built
+/// from, so they need no tree to run; `zayn pack` reads the tree it is run in, because a pin is about the bytes you have.
 fn embedData(b: *std.Build, m: *std.Build.Module) void {
     m.addAnonymousImport("violations.json", .{ .root_source_file = b.path("conformance/violations.json") });
     m.addAnonymousImport("rules.json", .{ .root_source_file = b.path("constitution/rules.json") });
@@ -134,7 +134,7 @@ fn embedData(b: *std.Build, m: *std.Build.Module) void {
     m.addImport("crossmedium", folder(b, "conformance/cross-medium"));
 }
 
-/// The site `zane serve` answers from inside the binary: what the pages reach, and nothing more (the author, 2026-11-07: "embed only
+/// The site `zayn serve` answers from inside the binary: what the pages reach, and nothing more (the author, 2026-11-07: "embed only
 /// what the pages reach"), by path from the repository's root, as a generated module `site` of `files` (path, data). It used to be
 /// the root's pages and eight folders whole, which put the repository's own build scripts and design documents in the binary as
 /// text (BINARY.md section 7). The crawl starts at index.html and every page under site/, and follows:
@@ -143,7 +143,7 @@ fn embedData(b: *std.Build, m: *std.Build.Module) void {
 ///     (site/law-numbers.js makes ../conformance/violations.json out of the page's data-src="../constitution/rules.json");
 ///   - from a stylesheet: its url()s.
 /// A Markdown, JSON or source file is served as text and its own links are not followed; a link to a folder is its index.html;
-/// a hidden file or folder is never reached. tools/zane/serve-test.js crawls the served site over HTTP, more broadly, and fails
+/// a hidden file or folder is never reached. tools/zayn/serve-test.js crawls the served site over HTTP, more broadly, and fails
 /// when a page reaches a file the folder serves and the binary does not. The text is stored as gzip (sitepack.zig). BINARY.md
 /// section 7 budgets the binary at 4 MB.
 fn siteModule(b: *std.Build) *std.Build.Module {

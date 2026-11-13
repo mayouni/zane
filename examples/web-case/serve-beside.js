@@ -4,15 +4,15 @@
    serve-beside.js -- serve another site read-only, with this repository's UI audit beside it, on one origin.
 
      node examples/web-case/serve-beside.js <the other site's folder> [port]
-     then open  http://127.0.0.1:<port>/__zane/ui-audit.html  and list the other site's pages in it (/index.html, ...).
+     then open  http://127.0.0.1:<port>/__zayn/ui-audit.html  and list the other site's pages in it (/index.html, ...).
 
    The UI audit reads pages through same-origin frames, so a site that is not served from the audit's own origin
    cannot be audited. This is the smallest honest way past that for a site you are only allowed to read: it serves
-   the other folder as it is, and the audit at /__zane/ui-audit.html, a path no site uses, so that the other site's
+   the other folder as it is, and the audit at /__zayn/ui-audit.html, a path no site uses, so that the other site's
    own files (a site/ folder of its own, say) are never shadowed. The audit then resolves the pages it is given
    against the other site's root. It binds 127.0.0.1 only, answers GET and HEAD only, refuses any path outside the
    other folder, and writes nothing, anywhere. The audit's own styling is the other site's or none: it measures the
-   pages, not itself. (The single binary of doc/design/BINARY.md replaces this with `zane serve --app`.)
+   pages, not itself. (The single binary of doc/design/BINARY.md replaces this with `zayn serve --app`.)
    ========================================================================== */
 const http = require('http'), fs = require('fs'), path = require('path');
 const other = process.argv[2];
@@ -27,7 +27,7 @@ http.createServer((req, res) => {
   let u = decodeURIComponent(req.url.split('?')[0]);
   if (u.endsWith('/')) u += 'index.html';
   let file;
-  if (u === '/__zane/ui-audit.html') file = AUDIT;
+  if (u === '/__zayn/ui-audit.html') file = AUDIT;
   else {
     file = path.normalize(path.join(OTHER, u));
     if (!file.startsWith(OTHER + path.sep)) { res.writeHead(403); return res.end('outside the folder'); }
@@ -37,4 +37,4 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'content-type': types[path.extname(file)] || 'application/octet-stream', 'cache-control': 'no-store' });
     res.end(req.method === 'HEAD' ? undefined : data);
   });
-}).listen(port, '127.0.0.1', () => console.log(`serving ${OTHER} with the UI audit at http://127.0.0.1:${port}/__zane/ui-audit.html (read only)`));
+}).listen(port, '127.0.0.1', () => console.log(`serving ${OTHER} with the UI audit at http://127.0.0.1:${port}/__zayn/ui-audit.html (read only)`));

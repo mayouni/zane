@@ -1,0 +1,10 @@
+// The lawful twin of unknown-signal.zayn, differing in one word.
+// 'critical' becomes 'danger' -- the same charge, in the vocabulary this
+// stratum actually owns.
+//
+// Expected: clean
+
+DEFINE SCREEN overdue_invoices (
+  SATISFIES [SCAN, COMPARE, LOCATE],
+  SIGNALS [danger, warning]
+)

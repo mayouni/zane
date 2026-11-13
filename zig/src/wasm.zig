@@ -1,10 +1,10 @@
 //! The wasm export surface of the verifier (doc/design/BINARY.md section 6): the core and nothing else, built for
-//! wasm32-freestanding with no imports. A browser runs `zane check NAME --json --level N [--symbols]` on one source and
+//! wasm32-freestanding with no imports. A browser runs `zayn check NAME --json --level N [--symbols]` on one source and
 //! reads back the envelope the executable prints for the same arguments, byte for byte (the proof page shows it).
 //!
-//!   zane_alloc(len) -> ptr                                  memory for the loader to write a string into
-//!   zane_free(ptr, len)                                     gives it back
-//!   zane_check(name, name_len, src, src_len, sym, sym_len, level) -> ptr
+//!   zayn_alloc(len) -> ptr                                  memory for the loader to write a string into
+//!   zayn_free(ptr, len)                                     gives it back
+//!   zayn_check(name, name_len, src, src_len, sym, sym_len, level) -> ptr
 //!       ptr is a block: a 4-byte little-endian length, then the envelope as UTF-8 JSON; free it as (ptr, 4 + length).
 //!       sym_len 0 means no symbol table. 0 is returned for a level outside 1..4 or when memory runs out.
 //!
@@ -16,17 +16,17 @@ const report = @import("report.zig");
 
 const gpa = std.heap.wasm_allocator;
 
-export fn zane_alloc(len: usize) usize {
+export fn zayn_alloc(len: usize) usize {
     const s = gpa.alloc(u8, len) catch return 0;
     return @intFromPtr(s.ptr);
 }
 
-export fn zane_free(ptr: usize, len: usize) void {
+export fn zayn_free(ptr: usize, len: usize) void {
     if (ptr == 0) return;
     gpa.free(@as([*]u8, @ptrFromInt(ptr))[0..len]);
 }
 
-export fn zane_check(name: usize, name_len: usize, src: usize, src_len: usize, sym: usize, sym_len: usize, level: i32) usize {
+export fn zayn_check(name: usize, name_len: usize, src: usize, src_len: usize, sym: usize, sym_len: usize, level: i32) usize {
     if (level < 1 or level > 4) return 0;
     var arena = std.heap.ArenaAllocator.init(gpa);
     defer arena.deinit();

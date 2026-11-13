@@ -1,5 +1,5 @@
-//! crossmedium.zig: `zane cross-medium [spec.json] [--verbose]`, one declaration, two renderings, one law
-//! (doc/design/BINARY.md, S2). The same as tools/zane/cross-medium.js, printing the same lines: each case's
+//! crossmedium.zig: `zayn cross-medium [spec.json] [--verbose]`, one declaration, two renderings, one law
+//! (doc/design/BINARY.md, S2). The same as tools/zayn/cross-medium.js, printing the same lines: each case's
 //! declaration projected into two channels by appending a VIBE, and every difference between the projections
 //! judged against media.json and signal.json: predicted, undecided (the data is silent), or drift (the data is
 //! contradicted). Only drift and silence fail.
