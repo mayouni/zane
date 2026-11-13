@@ -33,7 +33,7 @@ const siteshell = @import("siteshell.zig");
 const sitegrid = @import("sitegrid.zig");
 const build_options = @import("build_options");
 
-const language_version = "1.5";
+const language_version = "1.7";
 
 const usage =
     \\zayn — the Zayn verifier
