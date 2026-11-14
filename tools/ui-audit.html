@@ -6,7 +6,7 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=62fbd89f">
+<link rel="stylesheet" href="../site/stz.css?v=0ec8a1e4">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -947,7 +947,18 @@ async function auditSystem(doc, win, label, width) {
       add('K12', box, kids.map(k => k.textContent.trim()).join(' · '), 'rows of ' + rows.map(r => r.n).join(' + ') + ' controls: a wrapped row comes out in equal rows [K12 ROW_FULL]');
   }
 
-  /* K13 ONE_SCROLL: on a page only the document scrolls; in an application, no scroll inside a scroll */
+  /* K13 ONE_SCROLL: on a page only the document scrolls, and never sideways; in an application, no scroll inside a scroll. The document
+     itself is read first: a page wider than its window scrolls sideways as a whole, and the element past the window's edge is named
+     (found by the Zayn session on 08f40a4: the front page's grid made the page 22 px wider than a 360 px phone, and no check read the
+     document's own width: Rule 114 reads a block that scrolls inside itself, and the loop below an element whose own overflow scrolls) */
+  {
+    const d = doc.documentElement, cw = d.clientWidth, over = d.scrollWidth - cw;
+    if (over > 1) {
+      const past = all.filter(e => { const r = e.getBoundingClientRect(); return r.width > 1 && r.right > cw + 1; });
+      const leaf = past.find(e => !past.some(o => o !== e && e.contains(o)));
+      add('K13', leaf || d, leaf ? (ownText(leaf) || leaf.textContent.trim()) : '', 'the page is ' + over + ' px wider than its window, so the whole page scrolls sideways' + (leaf ? ': this element reaches past the edge' : '') + ' [K13 ONE_SCROLL]');
+    }
+  }
   const app = body.dataset.archetype === 'application';
   for (const el of all) {
     if (el === body) continue;

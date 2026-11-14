@@ -677,9 +677,15 @@ table.mini thead th { background: var(--tint); font-weight: var(--weight-strong)
 table.mini tbody th { text-align: left; font-weight: var(--weight-strong); white-space: nowrap; }
 table.mini .g-has b { color: var(--ink); }
 table.mini .g-none, table.mini .g-closed { color: var(--ink-2); }
+/* on a phone the grid fits its cell and the page never scrolls sideways (K13; the Zayn session, on 08f40a4: 22 px past a 360 px window):
+   the cell gives up some padding, the table takes its cell's width, a channel's name may wrap, and the activities stand on their side
+   in tight lines; the figures keep the 18 px floor */
 @media (max-width: 640px) {
-  table.mini th, table.mini td { padding: .25rem .2rem; }
-  table.mini thead th + th { writing-mode: vertical-rl; writing-mode: sideways-lr; text-align: left; vertical-align: bottom; }
+  .idea { padding: var(--space-2) .8rem; }
+  table.mini { width: 100%; }
+  table.mini th, table.mini td { padding: .25rem .1rem; }
+  table.mini tbody th { white-space: normal; padding-left: .4rem; }
+  table.mini thead th + th { writing-mode: vertical-rl; writing-mode: sideways-lr; text-align: left; vertical-align: bottom; line-height: 1.1; padding: .5rem .15rem; }
 }
 
 /* the name, where the photograph now stands: the National Museum of Niamey, by day in Modern and by night in Retro */
@@ -900,4 +906,10 @@ p > a:only-child, li > a:only-child, td > a:only-child, .card > a, footer.site a
   nav.site .wrap { padding: .25rem var(--gutter); }
   nav.site .menu { gap: 1rem; }
   nav.band a { min-height: var(--target-phone); }
+}
+/* on the narrowest phones GitHub and the Theme select take the bar's whole width and wrap onto two lines where one does not hold them,
+   so the select never reaches past the window (K13: it did at 320 and 360 px on every page, found with the grid above) */
+@media (max-width: 420px) {
+  nav.site .tools { flex: 1 1 100%; flex-wrap: wrap; gap: .4rem .9rem; margin-left: 0; }
+  nav.site .tools .github { padding-right: .9rem; }
 }
