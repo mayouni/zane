@@ -306,6 +306,16 @@ nav.list3 a:hover { color: var(--link); text-decoration: underline; }
 /* a page's own name in a family list wraps rather than be cut: it must read as the menu names that page (Rule 116); a section's entry keeps one line */
 nav.list3:not(.sections) > ul > li > a { white-space: normal; }
 nav.list3 a[aria-current] { font-weight: var(--weight-strong); color: var(--ink); }
+/* each entry of a list of links draws its own cue, a short rule at its left, which no paragraph has, so the outline reads as a list of
+   places and not as text; the current entry's rule is solid, thicker and in the culture's link colour, its word strong (the Principal,
+   2026-11-14, on the outline in Retro: "are not recognisable if they are a menu or normal pragraph"; ZAYN-SITE-RETHINK-01 addendum,
+   rule 2; K29 LINK_LIST). The rule sits in the entry's own padding, so it shows in both cultures and without a pointer. */
+nav.list3 a { position: relative; padding-left: 1.6rem; }
+nav.list3 a::before { content: ""; position: absolute; left: .45rem; top: calc(.3rem + .75em); width: .7rem;
+  border-top: var(--hairline) solid var(--edge); }
+nav.list3 a[aria-current]::before { border-top: calc(var(--ring) + 1px) solid var(--link); top: calc(.3rem + .75em - 1px); }
+nav.list3 .sub a { padding-left: 2.6rem; }
+nav.list3 .sub a::before { left: 1.45rem; }
 /* the outline's heading is a label, not an entry: gray, normal weight and a step smaller, so it never reads as something to click
    (the author, 2026-11-06: "On this page seems like a clickable option in the menu") */
 nav.list3 .outline-title { margin: 0 0 .5rem; padding: 0 .6rem; font-weight: var(--weight-regular); font-size: var(--size-small); color: var(--ink-2); max-width: none; }
@@ -387,6 +397,18 @@ li { margin: .3rem 0; }
 .term .dim { color: var(--ink-2); }
 .term .bad { color: var(--danger); }
 .term .good { color: var(--success); }
+/* a declaration paired with its report numbers its lines, and the line the report cites is marked in the danger colour, where the law
+   speaks (ZAYN-SITE-RETHINK-01 addendum, rule 3; site/stz.js, cite()). The numbers sit in the line's own padding, drawn and never copied. */
+pre.shot.num { counter-reset: ln; }
+pre.shot.num > .ln { counter-increment: ln; position: relative; padding-left: calc((var(--ind, 0) + 2) * 1ch + 3.5ch); }
+pre.shot.num > .ln::before { content: counter(ln); position: absolute; left: 0; width: 2.5ch; text-align: right; color: var(--ink-2); font-style: normal; }
+pre.shot.num > .ln.hit { width: fit-content; max-width: 100%; background: color-mix(in srgb, var(--danger) 10%, transparent); box-shadow: inset var(--ring) 0 0 var(--danger); }
+pre.shot.num > .ln.hit::before { color: var(--danger); font-weight: var(--weight-strong); }
+/* the sentence that says a code block in plain words, for a reader who does not write code */
+p.gloss { color: var(--ink); }
+p.gloss b { font-weight: var(--weight-strong); }
+/* words for a reader that reads the markup, kept out of sight (a cell's word beside its mark) */
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.4rem; }
 .caption { color: var(--ink-2); margin-top: .8rem; max-width: var(--measure-max); }
 
@@ -499,6 +521,7 @@ table.rules-audited + p { max-width: var(--measure-min); text-wrap: balance; }
 }
 .status { font: var(--weight-strong) var(--size-small) var(--font); white-space: nowrap; }
 .status.exists::before { content: "\25CF\00a0"; }
+.status.data-only::before { content: "\25C7\00a0"; }
 .status.designed::before { content: "\25D0\00a0"; }
 .status.held::before { content: "\25CB\00a0"; }
 
@@ -520,62 +543,152 @@ table.rules-audited + p { max-width: var(--measure-min); text-wrap: balance; }
   .board.position td:first-child::before { content: none; }
 }
 
-/* ---- the front page (SITE-3.md section 2) ---- */
-/* The photograph is the National Museum of Niamey, provided by the author: by day for Modern (2026-11-04) and by night for Retro (2026-11-06:
-   "use this version for the retro vibe, while optimising the weights of the two images for better speed of display"). Each is WebP in widths
-   the browser chooses from, and both are lazy, so only the one the theme shows is fetched:
-     by day   1699 px 318,130 bytes (was 382,022), 1280 px 200,812, 800 px 94,424; quality 72, the door's detail unchanged to the eye
-     by night 1380 px 48,156 bytes, 800 px 24,680; quality 78, from the author's 156,449-byte JPEG
-   The brightest pixel under the panel is pure white by day (read from the file in a browser), so the panel is 80% of #121413: white text over
-   it is 10.1 to 1 at the worst pixel, and the night photograph is darker everywhere under the panel. */
-/* contrast: #FFFFFF | #121413 at 80% | 10.1 | hero text over the brightest pixel of the photograph (pure white, measured on the file) */
-.hero { position: relative; min-height: min(calc(100svh - 96px), 760px); background: var(--bar); overflow: hidden; }
-.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-/* Modern shows the museum by day, Retro by night; the night photograph's door stands left of its centre, so it is drawn from further left to
-   keep the door clear of the panel */
-.hero img.night { display: none; object-position: 12% 50%; }
-[data-vibe="guardian"] .hero img.day { display: none; }
-[data-vibe="guardian"] .hero img.night { display: block; }
-/* The hero's panel is a rectangle on the left half of the photograph, and it never covers the museum's door at the photograph's centre (the
-   author, 2026-11-05: "now it is so large and hides the door! please think in terms of visual equilibrium: put the title on two lines if
-   necessary"). Its right edge stops at the middle of the window, a rem short of it, and it is never wider than 36rem nor narrower than 22rem
-   (on a window that narrow the door cannot be kept clear). Inside it the title takes two balanced lines that fill its width: the title is
-   sized from the panel itself (container units: the longer of its two lines is 11.8 of its em in Modern and 13.4 in Retro's monospace, so
-   8 and 6.9 hundredths of the panel's width). The line under it fills the same width and is larger than the reading size ("the secondary
-   text must be bigger!"). On a phone the panel is not drawn and the title wraps as text. */
-.hero .panel { position: absolute; left: max(1.4rem, 4vw); bottom: 2.4rem; container-type: inline-size;
-  width: max(22rem, min(36rem, calc(50vw - max(1.4rem, 4vw) - 1rem))); box-sizing: border-box;
-  background: color-mix(in srgb, var(--bar) 82%, transparent); color: var(--on-bar); border-radius: 14px; padding: 1.5rem 1.8rem; }
-.hero .panel h1 { color: var(--on-bar); font-size: var(--size-hero); line-height: 1.12; margin: 0; }
-.hero .panel p { color: var(--on-bar); margin: .7rem 0 0; max-width: none; font-size: var(--size-lead); line-height: 1.45; text-wrap: balance; }
-/* One action, named for the page it opens, and that page explains the language before anything is asked of the reader (the author: a call to
-   action that asks for a commitment before the reader knows what the language is "is intrusive and disruptive"; and "we don't have a Learn
-   page nor Start one!") */
-.hero .panel .btn.primary { margin-top: 1.2rem; background: var(--on-bar); color: var(--bar); border-color: var(--on-bar); border-radius: 999px; padding: .6rem 1.6rem; font-weight: var(--weight-strong); }
-.hero .panel .btn.primary:hover { filter: none; text-decoration: underline; }
-/* The front page (the author, 2026-11-05): the menu lies over the photograph and lets a quarter of it through, and the photograph fills the window.
-   Measured on the file, cover-fitted at nine window sizes from 800x1000 to 2560x1440: the brightest pixel under the menu's top 76 px is
-   rgb(249,255,245), luminance 0.983, and a blur barely lowers it (0.945 at 8 px), so the bar's own opacity carries the contrast. The bar is 75% of
-   the menu colour and the menu's text is white: 7.0 to 1 in Modern and 9.4 in Retro at that pixel. */
-/* contrast: #FFFFFF | #241d49 at 75% over rgb(249,255,245) | 7.0 | the front page's menu over the photograph's brightest pixel, Modern */
-/* contrast: #FFFFFF | #060b07 at 75% over rgb(249,255,245) | 9.4 | the same, Retro */
-.front .bars { position: fixed; left: 0; right: 0; }
-.front nav.site { background: color-mix(in srgb, var(--bar) 75%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-/* on the front page the bar is translucent over the photograph, and no entry is current, so the brand keeps the bar's white (K02) */
-.front nav.site .brand, .front nav.site a:not(.brand) { color: var(--on-bar); }
-.front .hero { min-height: 100svh; }
-/* on a narrow window the line under the title has three lines or more, and is balanced so that none ends alone */
-@media (max-width: 900px) { .hero .panel p { text-wrap: balance; } }
-@media (max-width: 760px) {
-  .hero, .front .hero { min-height: 0; background: var(--paper); }
-  .hero img { position: static; height: 46svh; min-height: 260px; }
-  .hero .panel { position: static; width: auto; max-width: none; background: none; color: var(--ink); padding: 1.2rem 1.4rem .4rem; border-radius: 0; }
-  .hero .panel h1, .hero .panel p { color: var(--ink); max-width: none; }
-  .hero .panel, [data-vibe="guardian"] .hero .panel { width: auto; }
-  .hero .panel h1 { font-size: var(--size-title); }
-  .hero .panel p { font-size: var(--size-lead); text-wrap: balance; }
-  .hero .panel .btn.primary { background: var(--action); color: var(--on-action); border-color: var(--action); }
+/* ---- the front page (ZAYN-SITE-RETHINK-01 step 1; doc/design/DESIGN-SYSTEM.md sections 6.4 and 6.5) ---- */
+/* The first screen shows the claim before it argues it: the kicker, the tagline the Principal ruled, one lede, then the plate, a
+   declaration and the verifier's verdict on it (the Principal, 2026-11-14: "I approve the six rulings on the site rethink"). The
+   photograph left the first screen for the section that explains the name. The bars are the bars of every page. */
+.hero { padding: var(--space-4) 0 var(--space-2); }
+.hero .kicker { font-size: var(--size-small); color: var(--ink-2); margin: 0 0 var(--space-1); max-width: none; }
+.hero h1 { font-size: var(--size-hero); line-height: var(--leading-title); font-weight: var(--weight-strong); color: var(--ink);
+  margin: 0; max-width: 42rem; letter-spacing: -.01em; }
+.hero .sub { font-size: var(--size-lead); color: var(--ink); max-width: 46rem; margin: var(--space-2) 0 0; }
+.hero .actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); margin: var(--space-3) 0 0; }
+.hero .actions .btn.primary { color: var(--on-action); }
+.hero .actions a { display: inline-flex; align-items: center; min-height: var(--target-phone); }
+/* the tagline's two sentences each stay whole on a line where both do not fit one (K11: no rendered line ends one sentence and starts the
+   next); each wraps inside itself only where the window is narrower than it */
+.hero h1 .whole { display: inline-block; }
+@media (max-width: 760px) { .hero { padding-top: var(--space-3); } .hero h1 { font-size: var(--size-title); } }
+
+/* The plate (DESIGN-SYSTEM.md section 6.4): the page's claim as three cells, the declaration, the verifier's verdict and a sketch of
+   what a user meets, inside one thin line in --line, with one line between cells (the card grid's line, K25). A plate with two states
+   draws both in the same place, the one not shown hidden but still measured, so nothing moves when the reader switches (REVIEW.md
+   section 8). The switch is a pair of radio buttons, and :has() shows the state checked, so it works without a script; site/try.js adds a
+   third state, the reader's own declaration, checked by the verifier compiled to wasm. Each state holds a <pre class="shot"> followed by
+   its <pre class="term">, so tools/site-facts.js re-runs every report the plate shows. */
+figure.plate { margin: var(--space-3) 0 0; background: var(--surface); border: var(--hairline) solid var(--line); border-radius: var(--radius); }
+.plate-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-3);
+  padding: var(--space-2) 1.2rem; border-bottom: var(--hairline) solid var(--line); }
+.plate-head h2 { font-size: var(--size-lead); margin: 0; }
+.plate .switch { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.4rem; }
+.plate .switch legend { float: left; padding: 0; margin-right: .4rem; font-size: var(--size-small); color: var(--ink-2); }
+.plate .switch label { display: inline-flex; align-items: center; gap: .45rem; min-height: var(--target-phone); font-size: var(--size-small); cursor: pointer; }
+.plate .switch input { width: 1.1rem; height: 1.1rem; margin: 0; }
+.plate-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.plate-grid > .state { grid-area: 1 / 1; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start;
+  grid-template-areas: "l1" "decl" "g1" "l2" "term" "g2" "l3" "story"; }
+.plate:not(:has(input[value="first"]:checked)) .state.first,
+.plate:not(:has(input[value="fixed"]:checked)) .state.fixed,
+.plate:not(:has(input[value="own"]:checked)) .state.own { visibility: hidden; }
+.state > * { margin: 0; padding: .9rem 1.2rem; min-width: 0; }
+.state > .l1 { grid-area: l1; } .state > .l2 { grid-area: l2; } .state > .l3 { grid-area: l3; }
+.state > .shot, .state > .own-src { grid-area: decl; } .state > .term, .state > .own-out { grid-area: term; }
+.state > .g1 { grid-area: g1; } .state > .g2 { grid-area: g2; } .state > .story { grid-area: story; }
+.state > .label { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink-2); padding-bottom: 0; max-width: none; }
+.state > .l2, .state > .l3 { border-top: var(--hairline) solid var(--line); }
+.state > .shot, .state > .term, .state > .own-out { border: 0; border-radius: 0; background: transparent; width: auto; max-width: none; }
+.state > .gloss { font-size: var(--size-small); max-width: none; padding-top: 0; }
+/* where the window allows, the declaration and the verdict read down the left, at the width a report's line needs, and the sketch of
+   what a person meets stands beside them: three cells in their reading order, and no report line cut into a narrow third */
+@media (min-width: 1100px) {
+  .plate-grid > .state { grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+    grid-template-areas: "l1 l3" "decl story" "g1 story" "l2 story" "term story" "g2 story"; grid-template-rows: auto auto auto auto auto 1fr; }
+  .state > .l3 { border-top: 0; }
+  .state > .l3, .state > .story { border-left: var(--hairline) solid var(--line); }
 }
+/* the reader's own declaration: a field the size of the shot it replaces, and the verifier's answer under the same label */
+.own-src textarea { display: block; width: 100%; min-height: 12rem; font: var(--size-small)/1.55 var(--mono); color: var(--ink);
+  background: var(--paper); border: var(--hairline) solid var(--edge); border-radius: var(--radius); padding: .6rem .8rem; resize: vertical; }
+[data-vibe="guardian"] .own-src textarea { font-family: var(--font); }
+.own-src label { display: block; font-size: var(--size-small); color: var(--ink-2); margin: 0 0 .4rem; }
+.own-out { margin: 0; font: var(--size-small)/1.55 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+[data-vibe="guardian"] .own-out { font-family: var(--font); }
+.own-out .bad { color: var(--danger); } .own-out .good { color: var(--success); } .own-out .dim { color: var(--ink-2); }
+.plate + .caption, .readers + .caption, .loop + .caption { margin-top: var(--space-1); font-size: var(--size-small); }
+
+/* The storyboard and every sketch of a screen (REVIEW.md section 8): drawn in HTML with real words and one ink line, controls as
+   outlined shapes. Colour appears only where the law speaks: a control the declaration lacks is a dashed outline in --danger with its
+   rule, a control it restores is in --success. Each sketch says first that it is an illustration (site-shell's SKETCH_LABEL), because
+   Zayn checks the declaration and does not draw the screen. */
+.illus { font-size: var(--size-small); color: var(--ink-2); font-style: italic; margin: 0 0 .5rem; max-width: none; }
+.story .frame-cap { font-size: var(--size-small); color: var(--ink-2); margin: .6rem 0 .3rem; max-width: none; }
+.frame { border: var(--hairline) solid var(--edge); border-radius: var(--radius); background: var(--paper); padding: .7rem .9rem;
+  font-size: var(--size-small); line-height: 1.5; }
+.frame b { display: block; }
+.ctl-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+.ctl { display: inline-flex; align-items: center; min-height: 2rem; padding: 0 .7rem; border: var(--hairline) solid var(--edge);
+  border-radius: var(--radius); color: var(--ink); font-size: var(--size-small); }
+.ctl.main { border: var(--ring) solid var(--ink); font-weight: var(--weight-strong); }
+.ctl.gone { border: var(--ring) dashed var(--danger); color: var(--danger); }
+.ctl.kept { border: var(--ring) solid var(--success); color: var(--success); }
+.story .note { font-size: var(--size-small); margin: .8rem 0 0; max-width: none; }
+.say { margin: 0 0 .5rem; max-width: none; }
+.say .who { display: block; font-size: var(--size-small); color: var(--ink-2); }
+.say.them { padding-left: 1.6rem; }
+dl.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .2rem .9rem; margin: 0; font: var(--size-small)/1.5 var(--mono); }
+[data-vibe="guardian"] dl.kv { font-family: var(--font); }
+dl.kv dt { color: var(--ink-2); } dl.kv dd { margin: 0; }
+
+/* The three readers: one declaration, served to a person on a screen, a caller on a voice line and an agent on a machine surface. They are
+   the card grid (section 6.4): peer cells with their headings inside its line (K25), as many to a row as hold a reading line (K03). */
+.grid.readers { margin: var(--space-2) 0 0; }
+.reader h3 { margin: 0; }
+.reader .on { color: var(--ink-2); font-size: var(--size-small); margin: 0 0 .7rem; }
+.reader .shot, .reader .term { width: auto; max-width: none; margin: .7rem 0 0; }
+.reader .gloss { font-size: var(--size-small); margin: .7rem 0 0; }
+
+/* The loop: the generator declares, the verifier judges, and a refusal goes back to the declaration by its rule. Three steps in the
+   reading order, the way back drawn as a dashed line under them; on a phone the steps stack and the way back stays under the last. */
+/* the steps read down the page in their order, one under the other, never in columns (K26) */
+figure.loop { margin: var(--space-2) 0 0; }
+.loop-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--hairline); }
+.loop-steps > .step3 { outline: var(--hairline) solid var(--line); background: var(--surface); padding: var(--space-2) 1.2rem; min-width: 0; }
+.step3 h3 { margin: 0 0 .3rem; }
+.step3 p { margin: 0; max-width: var(--measure-max); }
+.loop > .back { border: var(--ring) dashed var(--edge); border-top: 0; padding: .6rem 1.2rem; margin: 0 var(--space-3); }
+.loop > .back p { margin: 0; font-size: var(--size-small); max-width: none; }
+
+/* The plate of the three ideas (the addendum's rule 4): intent, the channels and the grid, drawn from the law's data by tools/site-grid.js.
+   Its cells are separated by the plate's own line; the grid is a small table of counts in tabular figures, an open cell a dot and a closed
+   one a cross, each with its word for a reader that reads the markup. */
+figure.plate.ideas { margin: var(--space-2) 0 0; border: 0; background: transparent; }
+figure.plate.ideas .plate-head { border-bottom: 0; padding: 0 0 .7rem; }
+.plate-head h3 { font-size: var(--size-lead); margin: 0; }
+/* three peer cells, each with its heading, inside the card grid's line (K25): intent and the channels side by side where both hold a
+   reading line, the grid under them across the whole width */
+.ideas-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--hairline); }
+.idea { padding: var(--space-2) 1.2rem; min-width: 0; outline: var(--hairline) solid var(--line); background: var(--surface); }
+@media (min-width: 1100px) {
+  .ideas-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .ideas-grid > .idea:last-child { grid-column: 1 / -1; }
+}
+.idea h4.label { font: var(--weight-strong) var(--size-small) var(--font); color: var(--ink); margin: 0 0 .3rem; max-width: none; }
+.idea .note { font-size: var(--size-small); margin: 0 0 .7rem; max-width: none; }
+dl.verbs { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .3rem 1rem; margin: 0; }
+dl.verbs dt { font-weight: var(--weight-strong); }
+dl.verbs dd { margin: 0; font: var(--size-small)/1.6 var(--mono); }
+[data-vibe="guardian"] dl.verbs dd { font-family: var(--font); }
+dl.chans { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .3rem 1.2rem; margin: 0; }
+dl.chans dt { font-weight: var(--weight-strong); }
+dl.chans dd { margin: 0 0 .3rem; font-size: var(--size-small); color: var(--ink-2); }
+table.mini { border-collapse: collapse; margin: 0 0 .7rem; font-variant-numeric: tabular-nums; background: var(--surface); }
+table.mini th, table.mini td { border: var(--hairline) solid var(--line); padding: .3rem .6rem; text-align: center; font-size: var(--size-small); }
+table.mini thead th { background: var(--tint); font-weight: var(--weight-strong); border-bottom: var(--ring) solid var(--edge); }
+table.mini tbody th { text-align: left; font-weight: var(--weight-strong); white-space: nowrap; }
+table.mini .g-has b { color: var(--ink); }
+table.mini .g-none, table.mini .g-closed { color: var(--ink-2); }
+@media (max-width: 640px) {
+  table.mini th, table.mini td { padding: .25rem .2rem; }
+  table.mini thead th + th { writing-mode: vertical-rl; writing-mode: sideways-lr; text-align: left; vertical-align: bottom; }
+}
+
+/* the name, where the photograph now stands: the National Museum of Niamey, by day in Modern and by night in Retro */
+figure.name-photo { margin: var(--space-2) 0 0; max-width: 46rem; }
+figure.name-photo img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+figure.name-photo img.night { display: none; }
+[data-vibe="guardian"] figure.name-photo img.day { display: none; }
+[data-vibe="guardian"] figure.name-photo img.night { display: block; }
+figure.name-photo figcaption { font-size: var(--size-small); color: var(--ink-2); margin-top: .5rem; max-width: var(--measure-max); }
 .messages { display: grid; grid-template-columns: minmax(0, 1fr); margin: 2.2rem 0 1.6rem; }
 @media (min-width: 1085px) { :root:not([data-vibe="guardian"]) .messages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* two or four cards go two to a row, so no row is left with a hole (the author, 2026-11-06) */

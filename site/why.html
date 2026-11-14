@@ -6,7 +6,7 @@
 <title>Why — the problem behind Zayn, and Softanza's answer</title>
 <meta name="description" content="Zayn exists because, over years of building software with AI assistants across many projects, the interface was always the hardest, most nerve-wracking and most costly part, and the part where AI is least capable. This page tells that problem, what it cost, why AI falls short there, and Softanza's answer: technology rethought from first principles, a system-design approach to intent-driven UI, and a compiled language that masters the interface and governs it, for people and for agents.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="stz.css?v=d517ed01">
+<link rel="stylesheet" href="stz.css?v=62fbd89f">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -56,7 +56,7 @@
 <!-- /shell:trail -->
     <p class="kicker">Why · the problem behind Zayn, and Softanza's answer</p>
     <h1>Zayn exists for one problem: the interface was always the hardest part of building software with AI, and Softanza answers it from first principles.</h1>
-    <p class="sub">The author of Zayn met the problem over years of projects built with AI assistants, and counted it: <span data-fact="corpus.corrections">463</span> corrections of interfaces in <span data-fact="corpus.projects">26</span> projects, <span data-fact="corpus.repeats">170</span> of them a defect corrected before. Softanza answers it with a system-design approach to intent-driven UI and a compiled language that governs the interface, for people and for agents.</p>
+    <p class="sub">The author of Zayn met the problem over years of projects built with AI assistants, and counted it: <span data-fact="corpus.corrections">480</span> corrections of interfaces in <span data-fact="corpus.projects">26</span> projects, <span data-fact="corpus.repeats">170</span> of them a defect corrected before. Softanza answers it with a system-design approach to intent-driven UI and a compiled language that governs the interface, for people and for agents.</p>
   </div>
 </header>
 
@@ -89,10 +89,10 @@
     <p>The author named it in these words:</p>
     <blockquote class="preamble">"what makes my fatigue in all my projects is never the more complex technical challenges: it's always UI!"<footer>— the author of Zayn, 2026-11-09</footer></blockquote>
     <div class="samples">
-      <figure class="sample"><div class="window"><div class="strip">An order</div><div class="view">
+      <figure class="sample"><p class="illus">Illustration</p><div class="window"><div class="strip">An order</div><div class="view">
         <p>The order ships on Thursday.</p><p style="font-size:var(--size-small);color:var(--ink-2)">Placed by the Niamey office.</p>
       </div></div><figcaption><span class="tag ok">Lawful</span> Secondary text is quieter by tone and keeps the reading floor (Rule 105).</figcaption></figure>
-      <figure class="sample" data-offending><div class="window"><div class="strip">An order</div><div class="view">
+      <figure class="sample" data-offending><p class="illus">Illustration</p><div class="window"><div class="strip">An order</div><div class="view">
         <p>The order ships on Thursday.</p><p class="x-small">Placed by the Niamey office.</p>
       </div></div><figcaption><span class="tag bad">Offending</span> Small grey text to mean "less important", the defect the author corrected most often.</figcaption></figure>
     </div>
@@ -102,7 +102,7 @@
 <section>
   <div class="narrow">
     <h2 id="the-cost" data-outline="The cost">What the interface cost, counted in the author's own corrections</h2>
-    <p>The corpus gathers every correction of an interface the author made, from the memory of each project and from the repositories themselves: <span data-fact="corpus.corrections">463</span> corrections in <span data-fact="corpus.projects">26</span> projects, from February to November 2026.</p>
+    <p>The corpus gathers every correction of an interface the author made, from the memory of each project and from the repositories themselves: <span data-fact="corpus.corrections">480</span> corrections in <span data-fact="corpus.projects">26</span> projects, from February to November 2026.</p>
     <ul>
       <li><b>Repeated.</b> <span data-fact="corpus.repeats">170</span> corrections fix a defect that had been corrected before, in the same project or in another.</li>
       <li><b>Concentrated.</b> On 9 November 2026 alone the author made <span data-fact="corpus.oneDay">42</span> corrections on two sites.</li>
@@ -118,10 +118,10 @@
     <p>An assistant builds an interface from the interfaces it learned from, and it reproduces their conventions with no intention: small grey text for what matters less, boxes and rules to make sections, a width stretched to fill the screen. An instruction corrects one page, and the convention returns on the next, because the corpus is what the assistant knows.</p>
     <p>An assistant also checks what it can read, the structure of the page, and a defect of the interface lives in what is painted: its size, its place, its line, its balance. A page can pass every test and still be wrong to the eye.</p>
     <div class="samples">
-      <figure class="sample"><div class="window"><div class="strip">A title</div><div class="view">
+      <figure class="sample"><p class="illus">Illustration</p><div class="window"><div class="strip">A title</div><div class="view">
         <p class="sample-title"><span>AI changes every week.</span> <span>Softanza hears what concerns it the same week.</span></p>
       </div></div><figcaption><span class="tag ok">Lawful</span> Each sentence of a title is balanced on its own (Balance Is On by Default, proposed).</figcaption></figure>
-      <figure class="sample" data-offending><div class="window"><div class="strip">A title</div><div class="view">
+      <figure class="sample" data-offending><p class="illus">Illustration</p><div class="window"><div class="strip">A title</div><div class="view">
         <p class="x-cut">AI changes every week. Softanza hears what concerns it the same week.</p>
       </div></div><figcaption><span class="tag bad">Offending</span> A title held to a fixed width and cut across its sentences.</figcaption></figure>
     </div>
@@ -164,10 +164,10 @@
     <p>Zayn is a language that compiles. Its law is one versioned file of <span data-law="rules">123</span> rules, and <a href="refusal.html">the verifier refuses</a> an unlawful declaration before anything is drawn, citing the rule it breaks. <a href="../tools/ui-audit.html">The UI audit</a> then measures the painted page against the design system's checks.</p>
     <p>The user of an interface is a person or an agent. The same structure a person sees is readable by an agent: landmarks, one title, headings in order, labelled fields. Zayn governs both, so an interface that serves people also serves the agents that act for them.</p>
     <div class="samples wide">
-      <figure class="sample"><div class="window"><div class="strip">A wide screen</div><div class="view">
+      <figure class="sample"><p class="illus">Illustration</p><div class="window"><div class="strip">A wide screen</div><div class="view">
         <div class="sample-cta"><p>Watch the notices that concern your project.</p><button type="button" class="btn primary">Add the bar</button></div>
       </div></div><figcaption><span class="tag ok">Lawful</span> The box is as wide as what it holds; the audit's K04 reads it.</figcaption></figure>
-      <figure class="sample" data-offending><div class="window"><div class="strip">A wide screen</div><div class="view">
+      <figure class="sample" data-offending><p class="illus">Illustration</p><div class="window"><div class="strip">A wide screen</div><div class="view">
         <div class="x-stretch"><p style="margin:0">Watch the notices that concern your project.</p><button type="button" class="btn primary">Add the bar</button></div>
       </div></div><figcaption><span class="tag bad">Offending</span> "you are not obliged to stretch it": the box takes the screen and its button drifts away.</figcaption></figure>
     </div>
@@ -202,7 +202,7 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="stz.js?v=2934cb9d"></script>
+<script src="stz.js?v=e07737fa"></script>
 <script src="law-numbers.js?v=da2f1afd" data-src="../constitution/rules.json" defer></script>
 </body>
 </html>

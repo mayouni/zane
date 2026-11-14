@@ -6,7 +6,7 @@
 <title>UI audit — the audit that measures a painted page against Rules 105, 107, 108 and 114–116</title>
 <meta name="description" content="The UI audit measures every rendered text node of an application UI: its computed size and its true contrast against the composited background. The audit is the enforcement tool for Rule 105 (The Legibility Floor) and Rule 107 (Hierarchy Is Not Miniaturization).">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e04a6e'/%3E%3Ctext x='16' y='24' font-family='Arial Black,sans-serif' font-size='22' font-weight='900' fill='%23241d49' text-anchor='middle'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../site/stz.css?v=d517ed01">
+<link rel="stylesheet" href="../site/stz.css?v=62fbd89f">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -227,7 +227,7 @@ td.issue { color: #a33422; font-weight: 700; }
     </div>
     <div class="controls">
       <label class="opt"><input type="checkbox" id="system">
-        <span>System: also read Zayn's design system, checks K01 to K22 of doc/design/DESIGN-SYSTEM.md, at five widths (375, 768, 1085, 1440 and 1900 px) in both cultures</span></label>
+        <span>System: also read Zayn's design system, checks K01 to K29 of doc/design/DESIGN-SYSTEM.md, at five widths (375, 768, 1085, 1440 and 1900 px) in both cultures</span></label>
     </div>
     <p class="caption">The floor is <b>16px</b> (Rule 105), and this site reads at
     <b>18px</b>. When Strict is unchecked, the audit reports only text that breaks the
@@ -269,7 +269,7 @@ td.issue { color: #a33422; font-weight: 700; }
 </footer>
 <!-- /shell:footer -->
 
-<script src="../site/stz.js?v=2934cb9d"></script>
+<script src="../site/stz.js?v=e07737fa"></script>
 <script>
 'use strict';
 /* ==========================================================================
@@ -707,7 +707,7 @@ function loadAndAudit(entry, strict) {
 }
 
 /* ==========================================================================
-   Zayn's design system, read on the painted page: checks K01 to K22 of doc/design/DESIGN-SYSTEM.md section 7.
+   Zayn's design system, read on the painted page: checks K01 to K29 of doc/design/DESIGN-SYSTEM.md section 7.
    Each check reads EVERY element that has the property it judges, never a list of element kinds; the run repeats at five widths
    (375, 768, 1085, 1440, 1900 px) in both cultures, and a finding seen more than once is reported once, with where it was seen.
    K18 to K21 read the files and live in site-shell; K15 is read here on the stylesheets as well.
@@ -719,7 +719,7 @@ const SYS_HERO_MAX = 41.6;                    /* --size-hero: up to 2.6rem, the 
 const SYS_CHECKS = {
   K01: 'TYPE_SCALE', K02: 'TEXT_CONTRAST', K03: 'MEASURE', K04: 'BOX_FILL', K05: 'CONTROL_NEAR', K06: 'GROUP_RATIO',
   K07: 'LINE_DRAWS', K08: 'ONE_EMPHASIS', K09: 'PALETTE', K10: 'ONE_CRITICAL', K11: 'BALANCE', K12: 'ROW_FULL',
-  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN', K26: 'ONE_FLOW', K27: 'CODE_HANG', K28: 'LINE_START'
+  K13: 'ONE_SCROLL', K14: 'NO_FLOAT', K15: 'NO_HOVER_ONLY', K16: 'SHAPE', K17: 'TARGET', K22: 'LAYOUT_STILL', K23: 'BAR_ALIGN', K24: 'WIDE_ROOM', K25: 'GRID_SHOWN', K26: 'ONE_FLOW', K27: 'CODE_HANG', K28: 'LINE_START', K29: 'LINK_LIST'
 };
 /* K23 BAR_ALIGN: the menu and the band stand at the same place on every page (ZANE-READER-MENUPOS-01; the Principal, 2026-11-10: "the menue
    bar in this page must keep it's position as the other pages and not move to the left"). Each frame records where its brand and its band's
@@ -862,7 +862,9 @@ async function auditSystem(doc, win, label, width) {
   }
 
   /* K04 BOX_FILL and K07 LINE_DRAWS: what a box or a line claims */
-  const LINE_OK = 'table, thead, tbody, tfoot, tr, th, td, input, select, textarea, button, .btn, .tag, .status, pre, code, kbd, figure, svg, img, nav, nav *, [role="button"], hr.draws, .window, .window *, .pane, .pane *, .vibe-pane, .vibe-pane *';
+  const LINE_OK = 'table, thead, tbody, tfoot, tr, th, td, input, select, textarea, button, .btn, .tag, .status, pre, code, kbd, figure, svg, img, nav, nav *, [role="button"], hr.draws, .window, .window *, .pane, .pane *, .vibe-pane, .vibe-pane *, figure.plate *, figure.loop *, .sketch, .sketch *';
+  /* a plate, a loop and a sketch are figures that draw their own grid and their screens' outlines (REVIEW.md section 8, ruled with
+     ZAYN-SITE-RETHINK-01: "a figure draws its own grid"), so their lines draw something */
   for (const el of all) {
     if (el === body || el === doc.documentElement || el.closest('svg')) continue;
     const p = boxPaint(el, win);
@@ -929,7 +931,8 @@ async function auditSystem(doc, win, label, width) {
   else {
     const probe = doc.createElement('span'); probe.style.color = 'var(--danger)'; body.appendChild(probe);
     const dz = readColor(win.getComputedStyle(probe).color).color; probe.remove();
-    const crit = texty.filter(e => !e.closest('.window, .pane, pre, code, figure.sample') && (sameColor(readColor(win.getComputedStyle(e).color).color, dz) || sameColor(readColor(win.getComputedStyle(e).backgroundColor).color, dz)));
+    /* a sketch marks what the law refuses in --danger on purpose, as an offending sample does (ZAYN-SITE-RETHINK-01, ruling 6) */
+    const crit = texty.filter(e => !e.closest('.window, .pane, pre, code, figure.sample, .sketch') && (sameColor(readColor(win.getComputedStyle(e).color).color, dz) || sameColor(readColor(win.getComputedStyle(e).backgroundColor).color, dz)));
     const tops = crit.filter(e => !crit.some(o => o !== e && o.contains(e)));
     if (tops.length > 1) add('K10', '(the view)', tops.map(e => ownText(e)).join(' / '), tops.length + ' elements in --danger in one view: one critical element per view [K10 ONE_CRITICAL]');
   }
@@ -1094,6 +1097,39 @@ async function auditSystem(doc, win, label, width) {
     }
   }
 
+  /* K29 LINK_LIST: a list of links is told from a paragraph. Each entry of a list whose items each hold one link (the outline "On this
+     page", a family's list, a list of pages) paints, without a pointer over it, a cue that a paragraph's words do not: an underline, a
+     list marker, or a rule or a mark drawn before it or at its left (the Principal, 2026-11-14, on the outline in Retro: "are not
+     recognisable if they are a menu or normal pragraph"; ZAYN-SITE-RETHINK-01 addendum, rule 2). The two bars, the menu and the band,
+     are bars and are not read. */
+  {
+    const cue = (el, w) => {
+      const s = w.getComputedStyle(el);
+      if (/underline/.test(s.textDecorationLine)) return true;
+      if (parseFloat(s.borderLeftWidth) > 0 && s.borderLeftStyle !== 'none') return true;
+      if (s.display === 'list-item' && s.listStyleType !== 'none') return true;
+      for (const pseudo of ['::before', '::marker']) {
+        const p = w.getComputedStyle(el, pseudo);
+        if (pseudo === '::before' && p.content && p.content !== 'none' && p.content !== 'normal' && (p.content !== '""' || parseFloat(p.borderTopWidth) > 0 || parseFloat(p.borderLeftWidth) > 0 || parseFloat(p.width) > 0)) return true;
+      }
+      return false;
+    };
+    for (const list of doc.querySelectorAll('ul, ol')) {
+      if (list.closest('nav.site, nav.band, .crumbs, .samples, figure.sample, .window, .pane, .vibe-pane, .offense, [data-offending]')) continue;
+      const items = [...list.children].filter(li => li.tagName === 'LI' && li.getClientRects().length);
+      if (items.length < 2) continue;
+      /* an item holds one link when its own words, a nested list aside (the outline under a family entry), are the link's words */
+      const links = items.map(li => {
+        const a = li.querySelector(':scope > a');
+        const own = [...li.childNodes].filter(n => !(n.nodeType === 1 && /^(UL|OL)$/.test(n.tagName))).map(n => n.textContent).join('').trim();
+        return a && own === a.textContent.trim() ? a : null;
+      });
+      if (links.some(a => !a)) continue;
+      const bare = items.filter((li, i) => !cue(li, win) && !cue(links[i], win));
+      if (bare.length) add('K29', list, links[0].textContent.trim().slice(0, 40), bare.length + ' of ' + items.length + ' entries of a list of links paint no cue of their own (an underline, a marker, a rule at the left): the list reads as a paragraph [K29 LINK_LIST]');
+    }
+  }
+
   /* K22 LAYOUT_STILL: nothing moved because something else appeared, grew or went */
   const shifts = await layoutShifts(win);
   if (shifts && shifts.length) {
@@ -1115,7 +1151,8 @@ async function auditSystem(doc, win, label, width) {
     const inner = box => { const s = win.getComputedStyle(box), b = box.getBoundingClientRect();
       return { left: b.left + parseFloat(s.paddingLeft), right: b.right - parseFloat(s.paddingRight) }; };
     for (const el of doc.querySelectorAll('main table, main pre, main .shot, main .term, main .excerpt')) {
-      if (el.closest('.samples, figure.sample, .window, .pane, .vibe-pane, .offense, [data-offending]') || el.parentElement.closest('main pre, main table')) continue;
+      /* a plate's cell keeps its cell, as site/stz.js's widen() keeps it */
+      if (el.closest('.samples, figure.sample, .window, .pane, .vibe-pane, .offense, [data-offending], figure.plate') || el.parentElement.closest('main pre, main table')) continue;
       const r = el.getBoundingClientRect();
       if (!r.width) continue;
       const room = inner(el.parentElement), col = inner(el.closest('.narrow, .wrap, main'));

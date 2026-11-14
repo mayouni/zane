@@ -425,7 +425,7 @@ fn ahead(t: []const u8, at: usize, units: usize) usize {
 fn unchecked(a: Allocator, html0: []const u8) !List {
     var html = try re.sub(a, html0, "<a [^>]*#rule-\\d+[^>]*>\\d+<\\/a>", "g", " ");
     // a table drawn from its data by tools/site-grid.js is checked there, against the files that hold its figures
-    html = try re.sub(a, html, "<!-- (grid|channels):table -->[\\s\\S]*?<!-- \\/\\1:table -->", "g", " ");
+    html = try re.sub(a, html, "<!-- (grid|channels|ideas):table -->[\\s\\S]*?<!-- \\/\\1:table -->", "g", " ");
     // a figure inside a mock interface is a specimen, not a claim; it says so
     html = try re.sub(a, html, "<([a-z0-9]+)\\b[^>]*\\sdata-specimen\\b[^>]*>[^<]*<\\/\\1>", "g", " ");
     var t = try lf(a, html);
@@ -454,7 +454,8 @@ fn unchecked(a: Allocator, html0: []const u8) !List {
 const Pair = struct { page: []const u8, file: []const u8, declaration: []const u8, output: []const u8 };
 fn pairs(a: Allocator, all: []const []const u8) ![]const Pair {
     var out: std.ArrayList(Pair) = .empty;
-    const r = try re.compile(a, "<pre class=\"shot\">([\\s\\S]*?)<\\/pre>\\s*<pre class=\"term\">([\\s\\S]*?)<\\/pre>", "g");
+    // the "In words" sentence and a plate's cell label may stand between the two (pairs() in tools/site-facts.js)
+    const r = try re.compile(a, "<pre class=\"shot\">([\\s\\S]*?)<\\/pre>\\s*(?:<p class=\"(?:label|gloss)[^\"]*\">(?:<b>[^<]*<\\/b>)?[^<]*<\\/p>\\s*)*<pre class=\"term\">([\\s\\S]*?)<\\/pre>", "g");
     const cmd = try re.compile(a, "^\\$\\s*zayn check (\\S+\\.zayn)\\s*$", "");
     for (all) |p| {
         const html = try lf(a, try readPage(a, p));
@@ -647,10 +648,13 @@ fn verifyStatuses(a: Allocator, all: []const []const u8, problems: *List) !usize
             count += 1;
             const cls = re.trim(m.get(html, 2).?);
             const word = re.trim(m.get(html, 3).?);
-            const known = std.mem.eql(u8, word, "exists") or std.mem.eql(u8, word, "designed") or std.mem.eql(u8, word, "held");
+            const data_only = std.mem.eql(u8, word, "data only");
+            const known = std.mem.eql(u8, word, "exists") or data_only or std.mem.eql(u8, word, "designed") or std.mem.eql(u8, word, "held");
+            // the word "data only" is written in its class as "data-only"
+            const want_cls: []const u8 = if (data_only) "data-only" else word;
             if (!known) {
-                try problems.append(a, try fmt(a, "{s}: the status word \"{s}\" is not one of exists, designed, held", .{ p, word }));
-            } else if (!std.mem.eql(u8, cls, word)) try problems.append(a, try fmt(a, "{s}: the status \"{s}\" carries the class \"{s}\", so its mark would be wrong", .{ p, word, cls }));
+                try problems.append(a, try fmt(a, "{s}: the status word \"{s}\" is not one of exists, data only, designed, held", .{ p, word }));
+            } else if (!std.mem.eql(u8, cls, want_cls)) try problems.append(a, try fmt(a, "{s}: the status \"{s}\" carries the class \"{s}\", so its mark would be wrong", .{ p, word, cls }));
         }
     }
     return count;

@@ -7,7 +7,7 @@
   "C": "every other project's memory folder (private client studies skipped) and lookout at ad302aa with softanza mailbox/lookout.md",
   "D": "stzzui at 1d3448e: doc/AMENDMENT-DOCKET.md, doc/HARVEST-2026-08.md, constitution/rules.json, .central/ inbox and outbox, doc/design/, git log, memory",
   "central": "softanza dashboard/zane-ui-corpus-2026-11-09.md (softanza 614d795), read beside the four sweeps",
-  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges; a wide block breaking the left edge; the page head moved off the menu's container; a Why page that held the case; two lines beside the outline; the filigree missing from a page opened from the disk; the brand and the current entry alike, all 2026-11-11; columns where one flow reads, a balanced paragraph short of its measure, code coloured by hand and wrapped back to the edge, a title cut before its dash, all 2026-11-12)",
+  "E": "addenda after the sweeps: relayed by Central and read in .central/inbox.md (the line cut again, 2026-11-09 15:31; the menu's Use and Try, 2026-11-10 03:56; the Reader's menu bar at the left edge, 2026-11-10 04:09; the four cards with no grid drawn, 2026-11-11 13:17), and given in the desk's own chat (tables drawn like running text; tables and code held to the text's edges; a wide block breaking the left edge; the page head moved off the menu's container; a Why page that held the case; two lines beside the outline; the filigree missing from a page opened from the disk; the brand and the current entry alike, all 2026-11-11; columns where one flow reads, a balanced paragraph short of its measure, code coloured by hand and wrapped back to the edge, a title cut before its dash, all 2026-11-12); and, for the site rethink (ZAYN-SITE-RETHINK-01), the review of the whole site and the eleven defects it found (2026-11-13), and four remarks on the Why branch in Retro (2026-11-14, and the front page that says one thing four times on one screen (2026-11-14))",
   "F": "the repositories themselves (M1b, 2026-11-09): zin at cc98126, refine (no git; files), zing at e2573a9 and zing-studio at 95f36de, the product repositories (organizium and its variants, the restaurant app, orgdesk, zindara, zin-one, zin-website, zin-prototypes, ringface) and the estate sites (stzsite, harobanda, ayouni, lookout, ringserv, ringflex, microring, stz-observer and others); each record cites its file:line or commit"
  },
  "causes": {
@@ -1241,6 +1241,102 @@
   },
   {
    "n": "Z070",
+   "sweep": "E20",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 3] A title is a definition, and the first paragraph says it again; nothing can be scanned.",
+   "wrong": "median title 22 words, median first paragraph 88 words",
+   "required": "a title of six words at most, the lede one sentence (TITLE6)",
+   "sense": "read (titles)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z071",
+   "sweep": "E21",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 4] About fifteen proper nouns arrive before the first example.",
+   "wrong": "law, constitution, court, judge, forge, verifier, pack, grid, channel, medium, vibe, culture, level, symbol table, conformance, port, Haro before any example on how.html, generate.html and build.html",
+   "required": "the example first, a term named where the reader needs it",
+   "sense": "read (terms)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z072",
+   "sweep": "E27",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 10] Each page brings a new example; a reader never sees one case travel from declaration to screen to voice to agent.",
+   "wrong": "delete_invoice, approve_payment, checkout, pick_and_pay, check_balance, place_order",
+   "required": "one example, approve_payment, carried from declaration to screen, voice and agent",
+   "sense": "read (examples)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z073",
+   "sweep": "E28",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 11] One sentence shape, repeated, and paragraphs too long to hold.",
+   "wrong": "\"The X is a Y that does Z, so that W\"; 57 paragraphs over 70 words",
+   "required": "paragraphs of 70 words at most, sentences of more than one shape",
+   "sense": "read (prose)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z074",
+   "sweep": "E31",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-14",
+   "project": "stzzui",
+   "source": "the Principal, with three screenshots of the Why branch in Retro, relayed in softanza/mailbox/zayn.md, 2026-11-14 01:43",
+   "words": "\"readers are mostly ux designer who are not porgrammers : the two parts of code must be narrate how they relate to each other, and not put one after the other like thatn\"",
+   "wrong": "a declaration and the verifier's report set one after the other with nothing to say how they relate: 49 code blocks on 15 pages with no plain-words line",
+   "required": "one plate: the lines numbered, the cited line marked, an \"In words\" sentence for every code block (IN_WORDS)",
+   "sense": "read (code)",
+   "ruling": "ZAYN-SITE-RETHINK-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z075",
+   "sweep": "E33",
+   "also": [],
+   "cause": "W",
+   "date": "2026-11-14",
+   "project": "stzzui",
+   "source": "the Principal, with a screenshot of the live front page (mayouni/zayn 93185b9) on which they underlined the repeats, relayed in softanza/mailbox/zayn.md, 2026-11-14 02:35",
+   "words": "\"a lot of suplications!\"",
+   "wrong": "one message said four times in about 90 words, on one screen: the hero's title \"The compilable language for user interfaces\"; the line under it \"Declare what a person or agent is doing, in Zayn. A law refuses the rest, by name, before anything is drawn.\"; the first section's title \"Zayn is a language for intent-driven user interfaces, held to a law\"; its paragraph \"Zayn is a declarative, compilable language for user interfaces: a declaration states what the user, a person or an agent, is doing, and a verifier refuses what the law forbids before anything is drawn.\"",
+   "required": "a statement is made once per screen: the tagline, the lede, the first section's title and its paragraph each add a fact the line above lacks, and a definition stands once on a page, in the lede (K30 SAY_ONCE)",
+   "sense": "read (first screen)",
+   "ruling": "ZAYN-SAYITONCE-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z076",
    "sweep": "C02",
    "also": [],
    "cause": "W",
@@ -1256,7 +1352,7 @@
    "repeat": false
   },
   {
-   "n": "Z071",
+   "n": "Z077",
    "sweep": "F2-07",
    "also": [],
    "cause": "P",
@@ -1272,7 +1368,7 @@
    "repeat": false
   },
   {
-   "n": "Z072",
+   "n": "Z078",
    "sweep": "F2-08",
    "also": [],
    "cause": "P",
@@ -1288,7 +1384,7 @@
    "repeat": true
   },
   {
-   "n": "Z073",
+   "n": "Z079",
    "sweep": "B01",
    "also": [],
    "cause": "P",
@@ -1304,7 +1400,7 @@
    "repeat": false
   },
   {
-   "n": "Z074",
+   "n": "Z080",
    "sweep": "F4-18",
    "also": [],
    "cause": "P",
@@ -1320,7 +1416,7 @@
    "repeat": false
   },
   {
-   "n": "Z075",
+   "n": "Z081",
    "sweep": "F5-107",
    "also": [],
    "cause": "P",
@@ -1336,7 +1432,7 @@
    "repeat": false
   },
   {
-   "n": "Z076",
+   "n": "Z082",
    "sweep": "A01",
    "also": [
     "C31"
@@ -1354,7 +1450,7 @@
    "repeat": ""
   },
   {
-   "n": "Z077",
+   "n": "Z083",
    "sweep": "A02",
    "also": [],
    "cause": "P",
@@ -1370,7 +1466,7 @@
    "repeat": ""
   },
   {
-   "n": "Z078",
+   "n": "Z084",
    "sweep": "A03",
    "also": [],
    "cause": "P",
@@ -1386,7 +1482,7 @@
    "repeat": ""
   },
   {
-   "n": "Z079",
+   "n": "Z085",
    "sweep": "A04",
    "also": [],
    "cause": "P",
@@ -1402,7 +1498,7 @@
    "repeat": ""
   },
   {
-   "n": "Z080",
+   "n": "Z086",
    "sweep": "F4-23",
    "also": [],
    "cause": "P",
@@ -1418,7 +1514,7 @@
    "repeat": false
   },
   {
-   "n": "Z081",
+   "n": "Z087",
    "sweep": "A13",
    "also": [],
    "cause": "P",
@@ -1434,7 +1530,7 @@
    "repeat": ""
   },
   {
-   "n": "Z082",
+   "n": "Z088",
    "sweep": "A14",
    "also": [],
    "cause": "P",
@@ -1450,7 +1546,7 @@
    "repeat": true
   },
   {
-   "n": "Z083",
+   "n": "Z089",
    "sweep": "F5-104",
    "also": [],
    "cause": "P",
@@ -1466,7 +1562,7 @@
    "repeat": false
   },
   {
-   "n": "Z084",
+   "n": "Z090",
    "sweep": "A20",
    "also": [],
    "cause": "P",
@@ -1482,7 +1578,7 @@
    "repeat": ""
   },
   {
-   "n": "Z085",
+   "n": "Z091",
    "sweep": "A21",
    "also": [],
    "cause": "P",
@@ -1498,7 +1594,7 @@
    "repeat": true
   },
   {
-   "n": "Z086",
+   "n": "Z092",
    "sweep": "A22",
    "also": [],
    "cause": "P",
@@ -1514,7 +1610,7 @@
    "repeat": ""
   },
   {
-   "n": "Z087",
+   "n": "Z093",
    "sweep": "A23",
    "also": [],
    "cause": "P",
@@ -1530,7 +1626,7 @@
    "repeat": ""
   },
   {
-   "n": "Z088",
+   "n": "Z094",
    "sweep": "A25",
    "also": [],
    "cause": "P",
@@ -1546,7 +1642,7 @@
    "repeat": ""
   },
   {
-   "n": "Z089",
+   "n": "Z095",
    "sweep": "A26",
    "also": [],
    "cause": "P",
@@ -1562,7 +1658,7 @@
    "repeat": true
   },
   {
-   "n": "Z090",
+   "n": "Z096",
    "sweep": "A28",
    "also": [],
    "cause": "P",
@@ -1578,7 +1674,7 @@
    "repeat": ""
   },
   {
-   "n": "Z091",
+   "n": "Z097",
    "sweep": "A29",
    "also": [],
    "cause": "P",
@@ -1594,7 +1690,7 @@
    "repeat": ""
   },
   {
-   "n": "Z092",
+   "n": "Z098",
    "sweep": "B08",
    "also": [],
    "cause": "P",
@@ -1610,7 +1706,7 @@
    "repeat": false
   },
   {
-   "n": "Z093",
+   "n": "Z099",
    "sweep": "B09",
    "also": [],
    "cause": "P",
@@ -1626,7 +1722,7 @@
    "repeat": true
   },
   {
-   "n": "Z094",
+   "n": "Z100",
    "sweep": "A30",
    "also": [
     "B11"
@@ -1644,7 +1740,7 @@
    "repeat": true
   },
   {
-   "n": "Z095",
+   "n": "Z101",
    "sweep": "A31",
    "also": [
     "B10"
@@ -1662,7 +1758,7 @@
    "repeat": true
   },
   {
-   "n": "Z096",
+   "n": "Z102",
    "sweep": "A32",
    "also": [
     "B12"
@@ -1680,7 +1776,7 @@
    "repeat": ""
   },
   {
-   "n": "Z097",
+   "n": "Z103",
    "sweep": "A33",
    "also": [],
    "cause": "P",
@@ -1696,7 +1792,7 @@
    "repeat": ""
   },
   {
-   "n": "Z098",
+   "n": "Z104",
    "sweep": "A34",
    "also": [
     "B13"
@@ -1714,7 +1810,7 @@
    "repeat": true
   },
   {
-   "n": "Z099",
+   "n": "Z105",
    "sweep": "A35",
    "also": [],
    "cause": "P",
@@ -1730,7 +1826,7 @@
    "repeat": ""
   },
   {
-   "n": "Z100",
+   "n": "Z106",
    "sweep": "A36",
    "also": [
     "B14"
@@ -1748,7 +1844,7 @@
    "repeat": true
   },
   {
-   "n": "Z101",
+   "n": "Z107",
    "sweep": "A37",
    "also": [
     "B15"
@@ -1766,7 +1862,7 @@
    "repeat": true
   },
   {
-   "n": "Z102",
+   "n": "Z108",
    "sweep": "A40",
    "also": [
     "B22"
@@ -1784,7 +1880,7 @@
    "repeat": ""
   },
   {
-   "n": "Z103",
+   "n": "Z109",
    "sweep": "A41",
    "also": [],
    "cause": "P",
@@ -1800,7 +1896,7 @@
    "repeat": ""
   },
   {
-   "n": "Z104",
+   "n": "Z110",
    "sweep": "A42",
    "also": [],
    "cause": "P",
@@ -1816,7 +1912,7 @@
    "repeat": ""
   },
   {
-   "n": "Z105",
+   "n": "Z111",
    "sweep": "A43",
    "also": [],
    "cause": "P",
@@ -1832,7 +1928,7 @@
    "repeat": true
   },
   {
-   "n": "Z106",
+   "n": "Z112",
    "sweep": "F5-45",
    "also": [],
    "cause": "P",
@@ -1848,7 +1944,7 @@
    "repeat": false
   },
   {
-   "n": "Z107",
+   "n": "Z113",
    "sweep": "C42",
    "also": [],
    "cause": "P",
@@ -1864,7 +1960,7 @@
    "repeat": true
   },
   {
-   "n": "Z108",
+   "n": "Z114",
    "sweep": "B43",
    "also": [],
    "cause": "P",
@@ -1880,7 +1976,7 @@
    "repeat": false
   },
   {
-   "n": "Z109",
+   "n": "Z115",
    "sweep": "F4-28",
    "also": [],
    "cause": "P",
@@ -1896,7 +1992,7 @@
    "repeat": false
   },
   {
-   "n": "Z110",
+   "n": "Z116",
    "sweep": "F5-109",
    "also": [],
    "cause": "P",
@@ -1912,7 +2008,7 @@
    "repeat": false
   },
   {
-   "n": "Z111",
+   "n": "Z117",
    "sweep": "B45",
    "also": [],
    "cause": "P",
@@ -1928,7 +2024,7 @@
    "repeat": false
   },
   {
-   "n": "Z112",
+   "n": "Z118",
    "sweep": "B46",
    "also": [],
    "cause": "P",
@@ -1944,7 +2040,7 @@
    "repeat": true
   },
   {
-   "n": "Z113",
+   "n": "Z119",
    "sweep": "D42",
    "also": [],
    "cause": "P",
@@ -1960,7 +2056,7 @@
    "repeat": false
   },
   {
-   "n": "Z114",
+   "n": "Z120",
    "sweep": "D44",
    "also": [],
    "cause": "P",
@@ -1976,7 +2072,7 @@
    "repeat": false
   },
   {
-   "n": "Z115",
+   "n": "Z121",
    "sweep": "D45",
    "also": [],
    "cause": "P",
@@ -1992,7 +2088,7 @@
    "repeat": false
   },
   {
-   "n": "Z116",
+   "n": "Z122",
    "sweep": "D82",
    "also": [
     "A102"
@@ -2010,7 +2106,7 @@
    "repeat": true
   },
   {
-   "n": "Z117",
+   "n": "Z123",
    "sweep": "F5-81",
    "also": [],
    "cause": "P",
@@ -2026,7 +2122,7 @@
    "repeat": false
   },
   {
-   "n": "Z118",
+   "n": "Z124",
    "sweep": "E11",
    "also": [],
    "cause": "P",
@@ -2042,7 +2138,7 @@
    "repeat": false
   },
   {
-   "n": "Z119",
+   "n": "Z125",
    "sweep": "B06",
    "also": [],
    "cause": "P",
@@ -2058,7 +2154,7 @@
    "repeat": false
   },
   {
-   "n": "Z120",
+   "n": "Z126",
    "sweep": "B07",
    "also": [],
    "cause": "P",
@@ -2074,7 +2170,7 @@
    "repeat": true
   },
   {
-   "n": "Z121",
+   "n": "Z127",
    "sweep": "B21",
    "also": [],
    "cause": "P",
@@ -2090,7 +2186,7 @@
    "repeat": false
   },
   {
-   "n": "Z122",
+   "n": "Z128",
    "sweep": "C01",
    "also": [],
    "cause": "P",
@@ -2106,7 +2202,7 @@
    "repeat": false
   },
   {
-   "n": "Z123",
+   "n": "Z129",
    "sweep": "C05",
    "also": [],
    "cause": "N",
@@ -2122,7 +2218,7 @@
    "repeat": false
   },
   {
-   "n": "Z124",
+   "n": "Z130",
    "sweep": "C09",
    "also": [
     "F1-11"
@@ -2140,7 +2236,7 @@
    "repeat": false
   },
   {
-   "n": "Z125",
+   "n": "Z131",
    "sweep": "F1-06",
    "also": [],
    "cause": "N",
@@ -2156,7 +2252,7 @@
    "repeat": false
   },
   {
-   "n": "Z126",
+   "n": "Z132",
    "sweep": "F4-56",
    "also": [],
    "cause": "N",
@@ -2172,7 +2268,7 @@
    "repeat": false
   },
   {
-   "n": "Z127",
+   "n": "Z133",
    "sweep": "F1-07",
    "also": [],
    "cause": "N",
@@ -2188,7 +2284,7 @@
    "repeat": false
   },
   {
-   "n": "Z128",
+   "n": "Z134",
    "sweep": "F4-38",
    "also": [],
    "cause": "N",
@@ -2204,7 +2300,7 @@
    "repeat": false
   },
   {
-   "n": "Z129",
+   "n": "Z135",
    "sweep": "F2-10",
    "also": [],
    "cause": "N",
@@ -2220,7 +2316,7 @@
    "repeat": false
   },
   {
-   "n": "Z130",
+   "n": "Z136",
    "sweep": "C17",
    "also": [
     "F4-02"
@@ -2238,7 +2334,7 @@
    "repeat": false
   },
   {
-   "n": "Z131",
+   "n": "Z137",
    "sweep": "C19",
    "also": [
     "F4-03"
@@ -2256,7 +2352,7 @@
    "repeat": false
   },
   {
-   "n": "Z132",
+   "n": "Z138",
    "sweep": "D10",
    "also": [
     "F3-18"
@@ -2274,7 +2370,7 @@
    "repeat": false
   },
   {
-   "n": "Z133",
+   "n": "Z139",
    "sweep": "D11",
    "also": [
     "F3-31"
@@ -2292,7 +2388,7 @@
    "repeat": false
   },
   {
-   "n": "Z134",
+   "n": "Z140",
    "sweep": "D12",
    "also": [
     "F3-32"
@@ -2310,7 +2406,7 @@
    "repeat": false
   },
   {
-   "n": "Z135",
+   "n": "Z141",
    "sweep": "D13",
    "also": [],
    "cause": "N",
@@ -2326,7 +2422,7 @@
    "repeat": false
   },
   {
-   "n": "Z136",
+   "n": "Z142",
    "sweep": "C40",
    "also": [],
    "cause": "N",
@@ -2342,7 +2438,7 @@
    "repeat": false
   },
   {
-   "n": "Z137",
+   "n": "Z143",
    "sweep": "C47",
    "also": [
     "F5-58"
@@ -2360,7 +2456,7 @@
    "repeat": false
   },
   {
-   "n": "Z138",
+   "n": "Z144",
    "sweep": "B25",
    "also": [],
    "cause": "N",
@@ -2376,7 +2472,7 @@
    "repeat": false
   },
   {
-   "n": "Z139",
+   "n": "Z145",
    "sweep": "B29",
    "also": [],
    "cause": "N",
@@ -2392,7 +2488,7 @@
    "repeat": true
   },
   {
-   "n": "Z140",
+   "n": "Z146",
    "sweep": "F5-10",
    "also": [],
    "cause": "N",
@@ -2408,7 +2504,7 @@
    "repeat": true
   },
   {
-   "n": "Z141",
+   "n": "Z147",
    "sweep": "F5-21",
    "also": [],
    "cause": "N",
@@ -2424,7 +2520,7 @@
    "repeat": false
   },
   {
-   "n": "Z142",
+   "n": "Z148",
    "sweep": "A49",
    "also": [],
    "cause": "N",
@@ -2440,7 +2536,7 @@
    "repeat": ""
   },
   {
-   "n": "Z143",
+   "n": "Z149",
    "sweep": "A50",
    "also": [
     "C56",
@@ -2459,7 +2555,7 @@
    "repeat": ""
   },
   {
-   "n": "Z144",
+   "n": "Z150",
    "sweep": "A55",
    "also": [
     "F5-64"
@@ -2477,7 +2573,7 @@
    "repeat": ""
   },
   {
-   "n": "Z145",
+   "n": "Z151",
    "sweep": "A60",
    "also": [
     "F5-28"
@@ -2495,7 +2591,7 @@
    "repeat": true
   },
   {
-   "n": "Z146",
+   "n": "Z152",
    "sweep": "F5-73",
    "also": [],
    "cause": "N",
@@ -2511,7 +2607,7 @@
    "repeat": false
   },
   {
-   "n": "Z147",
+   "n": "Z153",
    "sweep": "A61",
    "also": [
     "B35",
@@ -2531,7 +2627,7 @@
    "repeat": true
   },
   {
-   "n": "Z148",
+   "n": "Z154",
    "sweep": "A62",
    "also": [
     "D25",
@@ -2550,7 +2646,7 @@
    "repeat": ""
   },
   {
-   "n": "Z149",
+   "n": "Z155",
    "sweep": "C80",
    "also": [],
    "cause": "N",
@@ -2566,7 +2662,7 @@
    "repeat": false
   },
   {
-   "n": "Z150",
+   "n": "Z156",
    "sweep": "F5-31",
    "also": [],
    "cause": "N",
@@ -2582,7 +2678,7 @@
    "repeat": false
   },
   {
-   "n": "Z151",
+   "n": "Z157",
    "sweep": "C82",
    "also": [],
    "cause": "N",
@@ -2598,7 +2694,7 @@
    "repeat": false
   },
   {
-   "n": "Z152",
+   "n": "Z158",
    "sweep": "A70",
    "also": [
     "C87",
@@ -2617,7 +2713,7 @@
    "repeat": true
   },
   {
-   "n": "Z153",
+   "n": "Z159",
    "sweep": "C88",
    "also": [
     "F5-67"
@@ -2635,7 +2731,7 @@
    "repeat": false
   },
   {
-   "n": "Z154",
+   "n": "Z160",
    "sweep": "C91",
    "also": [],
    "cause": "N",
@@ -2651,7 +2747,7 @@
    "repeat": true
   },
   {
-   "n": "Z155",
+   "n": "Z161",
    "sweep": "D27",
    "also": [],
    "cause": "N",
@@ -2667,7 +2763,7 @@
    "repeat": true
   },
   {
-   "n": "Z156",
+   "n": "Z162",
    "sweep": "D29",
    "also": [],
    "cause": "N",
@@ -2683,7 +2779,7 @@
    "repeat": false
   },
   {
-   "n": "Z157",
+   "n": "Z163",
    "sweep": "D48",
    "also": [],
    "cause": "N",
@@ -2699,7 +2795,7 @@
    "repeat": false
   },
   {
-   "n": "Z158",
+   "n": "Z164",
    "sweep": "D35",
    "also": [
     "A88"
@@ -2717,7 +2813,7 @@
    "repeat": true
   },
   {
-   "n": "Z159",
+   "n": "Z165",
    "sweep": "D36",
    "also": [
     "A89"
@@ -2735,7 +2831,7 @@
    "repeat": false
   },
   {
-   "n": "Z160",
+   "n": "Z166",
    "sweep": "D38",
    "also": [
     "A91"
@@ -2753,7 +2849,7 @@
    "repeat": false
   },
   {
-   "n": "Z161",
+   "n": "Z167",
    "sweep": "A98",
    "also": [
     "B47"
@@ -2771,7 +2867,7 @@
    "repeat": true
   },
   {
-   "n": "Z162",
+   "n": "Z168",
    "sweep": "D67",
    "also": [],
    "cause": "N",
@@ -2787,7 +2883,7 @@
    "repeat": true
   },
   {
-   "n": "Z163",
+   "n": "Z169",
    "sweep": "D70",
    "also": [
     "A100",
@@ -2808,7 +2904,7 @@
    "repeat": true
   },
   {
-   "n": "Z164",
+   "n": "Z170",
    "sweep": "D89",
    "also": [
     "A106",
@@ -2830,7 +2926,7 @@
    "repeat": true
   },
   {
-   "n": "Z165",
+   "n": "Z171",
    "sweep": "C120",
    "also": [
     "A114",
@@ -2849,7 +2945,7 @@
    "repeat": false
   },
   {
-   "n": "Z166",
+   "n": "Z172",
    "sweep": "C137",
    "also": [
     "A129"
@@ -2867,7 +2963,7 @@
    "repeat": true
   },
   {
-   "n": "Z167",
+   "n": "Z173",
    "sweep": "E02",
    "also": [],
    "cause": "N",
@@ -2883,7 +2979,7 @@
    "repeat": false
   },
   {
-   "n": "Z168",
+   "n": "Z174",
    "sweep": "E03",
    "also": [],
    "cause": "N",
@@ -2899,7 +2995,7 @@
    "repeat": false
   },
   {
-   "n": "Z169",
+   "n": "Z175",
    "sweep": "E09",
    "also": [],
    "cause": "N",
@@ -2915,7 +3011,39 @@
    "repeat": true
   },
   {
-   "n": "Z170",
+   "n": "Z176",
+   "sweep": "E19",
+   "also": [],
+   "cause": "N",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 2] The site is organised by the project's parts, not by a visitor's question; there is no \"start here\".",
+   "wrong": "Approach, Language, Law, Adopt, Demo: the maker's shelves",
+   "required": "a menu by what a visitor comes to do, with a way in for each craft",
+   "sense": "read (menu)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z177",
+   "sweep": "E23",
+   "also": [],
+   "cause": "N",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 6] The agent is named in the first sentence and then has no place; its material sits in five places.",
+   "wrong": "no menu entry for agents; Generate at the third level",
+   "required": "AI and agents a section of the main menu, second",
+   "sense": "read (menu)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z178",
    "sweep": "C10",
    "also": [
     "D20",
@@ -2935,7 +3063,7 @@
    "repeat": false
   },
   {
-   "n": "Z171",
+   "n": "Z179",
    "sweep": "F1-08",
    "also": [],
    "cause": "F",
@@ -2951,7 +3079,7 @@
    "repeat": true
   },
   {
-   "n": "Z172",
+   "n": "Z180",
    "sweep": "C21",
    "also": [
     "F4-04"
@@ -2969,7 +3097,7 @@
    "repeat": false
   },
   {
-   "n": "Z173",
+   "n": "Z181",
    "sweep": "C24",
    "also": [
     "F4-05"
@@ -2987,7 +3115,7 @@
    "repeat": false
   },
   {
-   "n": "Z174",
+   "n": "Z182",
    "sweep": "C25",
    "also": [
     "F4-06"
@@ -3005,7 +3133,7 @@
    "repeat": true
   },
   {
-   "n": "Z175",
+   "n": "Z183",
    "sweep": "D02",
    "also": [
     "F3-14"
@@ -3023,7 +3151,7 @@
    "repeat": false
   },
   {
-   "n": "Z176",
+   "n": "Z184",
    "sweep": "F3-16",
    "also": [],
    "cause": "F",
@@ -3039,7 +3167,7 @@
    "repeat": false
   },
   {
-   "n": "Z177",
+   "n": "Z185",
    "sweep": "F3-17",
    "also": [],
    "cause": "F",
@@ -3055,7 +3183,7 @@
    "repeat": false
   },
   {
-   "n": "Z178",
+   "n": "Z186",
    "sweep": "F3-21",
    "also": [],
    "cause": "F",
@@ -3071,7 +3199,7 @@
    "repeat": false
   },
   {
-   "n": "Z179",
+   "n": "Z187",
    "sweep": "A08",
    "also": [
     "D14"
@@ -3089,7 +3217,7 @@
    "repeat": ""
   },
   {
-   "n": "Z180",
+   "n": "Z188",
    "sweep": "A15",
    "also": [
     "F5-102"
@@ -3107,7 +3235,7 @@
    "repeat": ""
   },
   {
-   "n": "Z181",
+   "n": "Z189",
    "sweep": "A17",
    "also": [],
    "cause": "F",
@@ -3123,7 +3251,7 @@
    "repeat": ""
   },
   {
-   "n": "Z182",
+   "n": "Z190",
    "sweep": "A18",
    "also": [],
    "cause": "F",
@@ -3139,7 +3267,7 @@
    "repeat": true
   },
   {
-   "n": "Z183",
+   "n": "Z191",
    "sweep": "A19",
    "also": [],
    "cause": "F",
@@ -3155,7 +3283,7 @@
    "repeat": true
   },
   {
-   "n": "Z184",
+   "n": "Z192",
    "sweep": "A27",
    "also": [],
    "cause": "F",
@@ -3171,7 +3299,7 @@
    "repeat": ""
   },
   {
-   "n": "Z185",
+   "n": "Z193",
    "sweep": "F5-08",
    "also": [],
    "cause": "F",
@@ -3187,7 +3315,7 @@
    "repeat": false
   },
   {
-   "n": "Z186",
+   "n": "Z194",
    "sweep": "F5-13",
    "also": [],
    "cause": "F",
@@ -3203,7 +3331,7 @@
    "repeat": false
   },
   {
-   "n": "Z187",
+   "n": "Z195",
    "sweep": "C69",
    "also": [],
    "cause": "F",
@@ -3219,7 +3347,7 @@
    "repeat": false
   },
   {
-   "n": "Z188",
+   "n": "Z196",
    "sweep": "C72",
    "also": [],
    "cause": "F",
@@ -3235,7 +3363,7 @@
    "repeat": false
   },
   {
-   "n": "Z189",
+   "n": "Z197",
    "sweep": "F5-117",
    "also": [],
    "cause": "F",
@@ -3251,7 +3379,7 @@
    "repeat": false
   },
   {
-   "n": "Z190",
+   "n": "Z198",
    "sweep": "D23",
    "also": [
     "A58"
@@ -3269,7 +3397,7 @@
    "repeat": true
   },
   {
-   "n": "Z191",
+   "n": "Z199",
    "sweep": "C81",
    "also": [],
    "cause": "F",
@@ -3285,7 +3413,7 @@
    "repeat": false
   },
   {
-   "n": "Z192",
+   "n": "Z200",
    "sweep": "F5-36",
    "also": [],
    "cause": "F",
@@ -3301,7 +3429,7 @@
    "repeat": true
   },
   {
-   "n": "Z193",
+   "n": "Z201",
    "sweep": "A66",
    "also": [
     "F5-78"
@@ -3319,7 +3447,7 @@
    "repeat": true
   },
   {
-   "n": "Z194",
+   "n": "Z202",
    "sweep": "A82",
    "also": [],
    "cause": "F",
@@ -3335,7 +3463,7 @@
    "repeat": ""
   },
   {
-   "n": "Z195",
+   "n": "Z203",
    "sweep": "C94",
    "also": [],
    "cause": "F",
@@ -3351,7 +3479,7 @@
    "repeat": true
   },
   {
-   "n": "Z196",
+   "n": "Z204",
    "sweep": "C95",
    "also": [],
    "cause": "F",
@@ -3367,7 +3495,7 @@
    "repeat": true
   },
   {
-   "n": "Z197",
+   "n": "Z205",
    "sweep": "C98",
    "also": [],
    "cause": "F",
@@ -3383,7 +3511,7 @@
    "repeat": true
   },
   {
-   "n": "Z198",
+   "n": "Z206",
    "sweep": "D40",
    "also": [],
    "cause": "F",
@@ -3399,7 +3527,7 @@
    "repeat": false
   },
   {
-   "n": "Z199",
+   "n": "Z207",
    "sweep": "D31",
    "also": [
     "A84"
@@ -3417,7 +3545,7 @@
    "repeat": false
   },
   {
-   "n": "Z200",
+   "n": "Z208",
    "sweep": "D72",
    "also": [],
    "cause": "F",
@@ -3433,7 +3561,7 @@
    "repeat": false
   },
   {
-   "n": "Z201",
+   "n": "Z209",
    "sweep": "D83",
    "also": [
     "A103"
@@ -3451,7 +3579,7 @@
    "repeat": false
   },
   {
-   "n": "Z202",
+   "n": "Z210",
    "sweep": "B61",
    "also": [],
    "cause": "F",
@@ -3467,7 +3595,7 @@
    "repeat": true
   },
   {
-   "n": "Z203",
+   "n": "Z211",
    "sweep": "D92",
    "also": [
     "C111"
@@ -3485,7 +3613,7 @@
    "repeat": false
   },
   {
-   "n": "Z204",
+   "n": "Z212",
    "sweep": "C113",
    "also": [
     "A109"
@@ -3503,7 +3631,7 @@
    "repeat": true
   },
   {
-   "n": "Z205",
+   "n": "Z213",
    "sweep": "C123",
    "also": [
     "A117",
@@ -3522,7 +3650,7 @@
    "repeat": true
   },
   {
-   "n": "Z206",
+   "n": "Z214",
    "sweep": "E04",
    "also": [],
    "cause": "F",
@@ -3538,7 +3666,7 @@
    "repeat": true
   },
   {
-   "n": "Z207",
+   "n": "Z215",
    "sweep": "E12",
    "also": [],
    "cause": "F",
@@ -3554,7 +3682,39 @@
    "repeat": true
   },
   {
-   "n": "Z208",
+   "n": "Z216",
+   "sweep": "E29",
+   "also": [],
+   "cause": "F",
+   "date": "2026-11-14",
+   "project": "stzzui",
+   "source": "the Principal, with three screenshots of the Why branch in Retro, relayed in softanza/mailbox/zayn.md, 2026-11-14 01:43",
+   "words": "\"arrow must point to up-right not right like that so it is misstaken as a link or workflow\"",
+   "wrong": "links ending in a right arrow, the arrow a sequence draws: 29 on the site as committed (the tour's profile links, the front page's, the cards of four landings)",
+   "required": "a link's arrow points up and to the right; a right arrow only for a sequence the page draws; an external link names its destination in its words (LINK_ARROW)",
+   "sense": "see (arrows)",
+   "ruling": "ZAYN-SITE-RETHINK-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z217",
+   "sweep": "E30",
+   "also": [],
+   "cause": "F",
+   "date": "2026-11-14",
+   "project": "stzzui",
+   "source": "the Principal, with three screenshots of the Why branch in Retro, relayed in softanza/mailbox/zayn.md, 2026-11-14 01:43",
+   "words": "\"are not recognisable if they are a menu or normal pragraph\"",
+   "wrong": "the outline \"On this page\" and the family lists drawn as bare words, read as a paragraph in Retro",
+   "required": "each entry of a list of links paints a cue of its own, a short rule at its left, the current one solid (K29 LINK_LIST)",
+   "sense": "see (lists)",
+   "ruling": "ZAYN-SITE-RETHINK-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z218",
    "sweep": "F2-11",
    "also": [],
    "cause": "M",
@@ -3570,7 +3730,7 @@
    "repeat": false
   },
   {
-   "n": "Z209",
+   "n": "Z219",
    "sweep": "C06",
    "also": [
     "F1-13",
@@ -3589,7 +3749,7 @@
    "repeat": false
   },
   {
-   "n": "Z210",
+   "n": "Z220",
    "sweep": "F3-09",
    "also": [],
    "cause": "M",
@@ -3605,7 +3765,7 @@
    "repeat": false
   },
   {
-   "n": "Z211",
+   "n": "Z221",
    "sweep": "D06",
    "also": [
     "F3-24"
@@ -3623,7 +3783,7 @@
    "repeat": false
   },
   {
-   "n": "Z212",
+   "n": "Z222",
    "sweep": "F3-33",
    "also": [],
    "cause": "M",
@@ -3639,7 +3799,7 @@
    "repeat": false
   },
   {
-   "n": "Z213",
+   "n": "Z223",
    "sweep": "F5-103",
    "also": [],
    "cause": "M",
@@ -3655,7 +3815,7 @@
    "repeat": false
   },
   {
-   "n": "Z214",
+   "n": "Z224",
    "sweep": "C30",
    "also": [],
    "cause": "M",
@@ -3671,7 +3831,7 @@
    "repeat": false
   },
   {
-   "n": "Z215",
+   "n": "Z225",
    "sweep": "F5-99",
    "also": [],
    "cause": "M",
@@ -3687,7 +3847,7 @@
    "repeat": false
   },
   {
-   "n": "Z216",
+   "n": "Z226",
    "sweep": "A38",
    "also": [
     "B20"
@@ -3705,7 +3865,7 @@
    "repeat": ""
   },
   {
-   "n": "Z217",
+   "n": "Z227",
    "sweep": "F5-57",
    "also": [],
    "cause": "M",
@@ -3721,7 +3881,7 @@
    "repeat": false
   },
   {
-   "n": "Z218",
+   "n": "Z228",
    "sweep": "C48",
    "also": [
     "F5-59"
@@ -3739,7 +3899,7 @@
    "repeat": false
   },
   {
-   "n": "Z219",
+   "n": "Z229",
    "sweep": "A46",
    "also": [
     "F5-06"
@@ -3757,7 +3917,7 @@
    "repeat": ""
   },
   {
-   "n": "Z220",
+   "n": "Z230",
    "sweep": "B30",
    "also": [
     "F5-07"
@@ -3775,7 +3935,7 @@
    "repeat": false
   },
   {
-   "n": "Z221",
+   "n": "Z231",
    "sweep": "B34",
    "also": [],
    "cause": "M",
@@ -3791,7 +3951,7 @@
    "repeat": false
   },
   {
-   "n": "Z222",
+   "n": "Z232",
    "sweep": "C53",
    "also": [],
    "cause": "M",
@@ -3807,7 +3967,7 @@
    "repeat": false
   },
   {
-   "n": "Z223",
+   "n": "Z233",
    "sweep": "F5-16",
    "also": [],
    "cause": "M",
@@ -3823,7 +3983,7 @@
    "repeat": false
   },
   {
-   "n": "Z224",
+   "n": "Z234",
    "sweep": "F5-18",
    "also": [],
    "cause": "M",
@@ -3839,7 +3999,7 @@
    "repeat": false
   },
   {
-   "n": "Z225",
+   "n": "Z235",
    "sweep": "A48",
    "also": [],
    "cause": "M",
@@ -3855,7 +4015,7 @@
    "repeat": ""
   },
   {
-   "n": "Z226",
+   "n": "Z236",
    "sweep": "A51",
    "also": [
     "C55",
@@ -3875,7 +4035,7 @@
    "repeat": true
   },
   {
-   "n": "Z227",
+   "n": "Z237",
    "sweep": "A53",
    "also": [
     "C58",
@@ -3894,7 +4054,7 @@
    "repeat": true
   },
   {
-   "n": "Z228",
+   "n": "Z238",
    "sweep": "C60",
    "also": [],
    "cause": "M",
@@ -3910,7 +4070,7 @@
    "repeat": true
   },
   {
-   "n": "Z229",
+   "n": "Z239",
    "sweep": "C61",
    "also": [],
    "cause": "M",
@@ -3926,7 +4086,7 @@
    "repeat": true
   },
   {
-   "n": "Z230",
+   "n": "Z240",
    "sweep": "F5-26",
    "also": [],
    "cause": "M",
@@ -3942,7 +4102,7 @@
    "repeat": false
   },
   {
-   "n": "Z231",
+   "n": "Z241",
    "sweep": "A65",
    "also": [],
    "cause": "M",
@@ -3958,7 +4118,7 @@
    "repeat": true
   },
   {
-   "n": "Z232",
+   "n": "Z242",
    "sweep": "F5-33",
    "also": [],
    "cause": "M",
@@ -3974,7 +4134,7 @@
    "repeat": false
   },
   {
-   "n": "Z233",
+   "n": "Z243",
    "sweep": "A72",
    "also": [
     "B39",
@@ -3993,7 +4153,7 @@
    "repeat": true
   },
   {
-   "n": "Z234",
+   "n": "Z244",
    "sweep": "A74",
    "also": [
     "F5-41"
@@ -4011,7 +4171,7 @@
    "repeat": ""
   },
   {
-   "n": "Z235",
+   "n": "Z245",
    "sweep": "A77",
    "also": [
     "F4-34",
@@ -4032,7 +4192,7 @@
    "repeat": ""
   },
   {
-   "n": "Z236",
+   "n": "Z246",
    "sweep": "F4-25",
    "also": [],
    "cause": "M",
@@ -4048,7 +4208,7 @@
    "repeat": false
   },
   {
-   "n": "Z237",
+   "n": "Z247",
    "sweep": "A81",
    "also": [],
    "cause": "M",
@@ -4064,7 +4224,7 @@
    "repeat": true
   },
   {
-   "n": "Z238",
+   "n": "Z248",
    "sweep": "C90",
    "also": [],
    "cause": "M",
@@ -4080,7 +4240,7 @@
    "repeat": true
   },
   {
-   "n": "Z239",
+   "n": "Z249",
    "sweep": "F5-113",
    "also": [],
    "cause": "M",
@@ -4096,7 +4256,7 @@
    "repeat": false
   },
   {
-   "n": "Z240",
+   "n": "Z250",
    "sweep": "D41",
    "also": [],
    "cause": "M",
@@ -4112,7 +4272,7 @@
    "repeat": true
   },
   {
-   "n": "Z241",
+   "n": "Z251",
    "sweep": "D57",
    "also": [],
    "cause": "M",
@@ -4128,7 +4288,7 @@
    "repeat": true
   },
   {
-   "n": "Z242",
+   "n": "Z252",
    "sweep": "D69",
    "also": [
     "A99"
@@ -4146,7 +4306,7 @@
    "repeat": false
   },
   {
-   "n": "Z243",
+   "n": "Z253",
    "sweep": "D90",
    "also": [
     "A107",
@@ -4167,7 +4327,7 @@
    "repeat": true
   },
   {
-   "n": "Z244",
+   "n": "Z254",
    "sweep": "A108",
    "also": [
     "F5-80"
@@ -4185,7 +4345,7 @@
    "repeat": true
   },
   {
-   "n": "Z245",
+   "n": "Z255",
    "sweep": "B72",
    "also": [
     "A130",
@@ -4204,7 +4364,7 @@
    "repeat": false
   },
   {
-   "n": "Z246",
+   "n": "Z256",
    "sweep": "B75",
    "also": [],
    "cause": "M",
@@ -4220,7 +4380,7 @@
    "repeat": false
   },
   {
-   "n": "Z247",
+   "n": "Z257",
    "sweep": "C116",
    "also": [
     "A112",
@@ -4239,7 +4399,87 @@
    "repeat": true
   },
   {
-   "n": "Z248",
+   "n": "Z258",
+   "sweep": "E17",
+   "also": [],
+   "cause": "M",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "the Principal's request, relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16; the review: softanza/vision/zayn-site/REVIEW.md",
+   "words": "\"Review the site from a critical external point of view, by taking the role of a world class UX and content and information design perspecive, then rethink the website, it's content, strcture, and visual communication style ... I wait for something truely unique...\"",
+   "wrong": "a site that tells and almost never shows: organised by the project's parts, titles that define, no screen, no place for the agent or for a designer, a programmer who cannot find how to run it",
+   "required": "the six rulings: the claim shown first as a plate, a menu by the visitor's question, titles of six words, a sketch labelled an illustration, \"What exists today\" and \"This page, declared\" on every page",
+   "sense": "read (the whole site)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z259",
+   "sweep": "E18",
+   "also": [],
+   "cause": "M",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 1] The site tells and almost never shows: the front page is a photograph, a tagline and six cards of prose, with no declaration, no refusal and no sample.",
+   "wrong": "index.html: 299 words, 0 code, 0 samples",
+   "required": "the first screen holds a declaration and its verdict (FRONT_PLATE)",
+   "sense": "read (front page)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z260",
+   "sweep": "E22",
+   "also": [],
+   "cause": "M",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 5] A site about interfaces shows no interface: six diagrams of boxes, no screen, no person, no task.",
+   "wrong": "0 pictures of a screen in 38 pages",
+   "required": "sketches of screens drawn in HTML, each labelled an illustration (SKETCH_LABEL)",
+   "sense": "see (screens)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z261",
+   "sweep": "E25",
+   "also": [],
+   "cause": "M",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 8] A designer has no page that is theirs: the site's first reader gets reasoning and no first step.",
+   "wrong": "thinking.html, written for a designer, holds no first step",
+   "required": "Adopt > Designers, a first declaration in the browser",
+   "sense": "read (audience)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z262",
+   "sweep": "E32",
+   "also": [],
+   "cause": "M",
+   "date": "2026-11-14",
+   "project": "stzzui",
+   "source": "the Principal, with three screenshots of the Why branch in Retro, relayed in softanza/mailbox/zayn.md, 2026-11-14 01:43",
+   "words": "\"The frontapage hides very important concepts like : intent-driven, grid as a systematic conceptual framework, channels covered not only gui, and especiall AI and agents (that deserve a main menu and submenus like we did in the harobanda site)\"",
+   "wrong": "a front page with no verb, no channel and no grid, and agents with no place in the menu",
+   "required": "the front page draws intent, the ten channels and the real grid from the law's data; the menu puts AI & agents second",
+   "sense": "read (front page)",
+   "ruling": "ZAYN-SITE-RETHINK-01",
+   "verbatim": true,
+   "repeat": false
+  },
+  {
+   "n": "Z263",
    "sweep": "C13",
    "also": [
     "F2-02"
@@ -4257,7 +4497,7 @@
    "repeat": true
   },
   {
-   "n": "Z249",
+   "n": "Z264",
    "sweep": "F2-05",
    "also": [],
    "cause": "T",
@@ -4273,7 +4513,7 @@
    "repeat": false
   },
   {
-   "n": "Z250",
+   "n": "Z265",
    "sweep": "C27",
    "also": [
     "F3-12"
@@ -4291,7 +4531,7 @@
    "repeat": false
   },
   {
-   "n": "Z251",
+   "n": "Z266",
    "sweep": "D01",
    "also": [
     "C28",
@@ -4310,7 +4550,7 @@
    "repeat": false
   },
   {
-   "n": "Z252",
+   "n": "Z267",
    "sweep": "D03",
    "also": [
     "F3-15"
@@ -4328,7 +4568,7 @@
    "repeat": false
   },
   {
-   "n": "Z253",
+   "n": "Z268",
    "sweep": "C29",
    "also": [],
    "cause": "T",
@@ -4344,7 +4584,7 @@
    "repeat": true
   },
   {
-   "n": "Z254",
+   "n": "Z269",
    "sweep": "B17",
    "also": [],
    "cause": "T",
@@ -4360,7 +4600,7 @@
    "repeat": true
   },
   {
-   "n": "Z255",
+   "n": "Z270",
    "sweep": "A39",
    "also": [],
    "cause": "T",
@@ -4376,7 +4616,7 @@
    "repeat": true
   },
   {
-   "n": "Z256",
+   "n": "Z271",
    "sweep": "B23",
    "also": [],
    "cause": "T",
@@ -4392,7 +4632,7 @@
    "repeat": true
   },
   {
-   "n": "Z257",
+   "n": "Z272",
    "sweep": "C34",
    "also": [],
    "cause": "T",
@@ -4408,7 +4648,7 @@
    "repeat": true
   },
   {
-   "n": "Z258",
+   "n": "Z273",
    "sweep": "C38",
    "also": [],
    "cause": "T",
@@ -4424,7 +4664,7 @@
    "repeat": true
   },
   {
-   "n": "Z259",
+   "n": "Z274",
    "sweep": "C46",
    "also": [
     "F5-54"
@@ -4442,7 +4682,7 @@
    "repeat": false
   },
   {
-   "n": "Z260",
+   "n": "Z275",
    "sweep": "A45",
    "also": [
     "B24",
@@ -4462,7 +4702,7 @@
    "repeat": true
   },
   {
-   "n": "Z261",
+   "n": "Z276",
    "sweep": "B27",
    "also": [],
    "cause": "T",
@@ -4478,7 +4718,7 @@
    "repeat": true
   },
   {
-   "n": "Z262",
+   "n": "Z277",
    "sweep": "C59",
    "also": [],
    "cause": "T",
@@ -4494,7 +4734,7 @@
    "repeat": true
   },
   {
-   "n": "Z263",
+   "n": "Z278",
    "sweep": "C70",
    "also": [],
    "cause": "T",
@@ -4510,7 +4750,7 @@
    "repeat": true
   },
   {
-   "n": "Z264",
+   "n": "Z279",
    "sweep": "F5-72",
    "also": [],
    "cause": "T",
@@ -4526,7 +4766,7 @@
    "repeat": false
   },
   {
-   "n": "Z265",
+   "n": "Z280",
    "sweep": "A79",
    "also": [
     "F4-31",
@@ -4545,7 +4785,7 @@
    "repeat": true
   },
   {
-   "n": "Z266",
+   "n": "Z281",
    "sweep": "D46",
    "also": [],
    "cause": "T",
@@ -4561,7 +4801,7 @@
    "repeat": true
   },
   {
-   "n": "Z267",
+   "n": "Z282",
    "sweep": "D47",
    "also": [],
    "cause": "T",
@@ -4577,7 +4817,7 @@
    "repeat": false
   },
   {
-   "n": "Z268",
+   "n": "Z283",
    "sweep": "D33",
    "also": [
     "A86"
@@ -4595,7 +4835,7 @@
    "repeat": true
   },
   {
-   "n": "Z269",
+   "n": "Z284",
    "sweep": "D55",
    "also": [],
    "cause": "T",
@@ -4611,7 +4851,7 @@
    "repeat": true
   },
   {
-   "n": "Z270",
+   "n": "Z285",
    "sweep": "D62",
    "also": [],
    "cause": "T",
@@ -4627,7 +4867,7 @@
    "repeat": true
   },
   {
-   "n": "Z271",
+   "n": "Z286",
    "sweep": "D64",
    "also": [],
    "cause": "T",
@@ -4643,7 +4883,7 @@
    "repeat": true
   },
   {
-   "n": "Z272",
+   "n": "Z287",
    "sweep": "D75",
    "also": [],
    "cause": "T",
@@ -4659,7 +4899,7 @@
    "repeat": true
   },
   {
-   "n": "Z273",
+   "n": "Z288",
    "sweep": "B51",
    "also": [],
    "cause": "T",
@@ -4675,7 +4915,7 @@
    "repeat": true
   },
   {
-   "n": "Z274",
+   "n": "Z289",
    "sweep": "C114",
    "also": [
     "A110"
@@ -4693,7 +4933,7 @@
    "repeat": true
   },
   {
-   "n": "Z275",
+   "n": "Z290",
    "sweep": "C03",
    "also": [
     "F3-01",
@@ -4714,7 +4954,7 @@
    "repeat": false
   },
   {
-   "n": "Z276",
+   "n": "Z291",
    "sweep": "F4-01",
    "also": [],
    "cause": "L",
@@ -4730,7 +4970,7 @@
    "repeat": false
   },
   {
-   "n": "Z277",
+   "n": "Z292",
    "sweep": "F1-01",
    "also": [],
    "cause": "L",
@@ -4746,7 +4986,7 @@
    "repeat": false
   },
   {
-   "n": "Z278",
+   "n": "Z293",
    "sweep": "F1-02",
    "also": [],
    "cause": "L",
@@ -4762,7 +5002,7 @@
    "repeat": false
   },
   {
-   "n": "Z279",
+   "n": "Z294",
    "sweep": "F4-60",
    "also": [],
    "cause": "L",
@@ -4778,7 +5018,7 @@
    "repeat": false
   },
   {
-   "n": "Z280",
+   "n": "Z295",
    "sweep": "C07",
    "also": [],
    "cause": "L",
@@ -4794,7 +5034,7 @@
    "repeat": false
   },
   {
-   "n": "Z281",
+   "n": "Z296",
    "sweep": "C22",
    "also": [
     "F4-07"
@@ -4812,7 +5052,7 @@
    "repeat": true
   },
   {
-   "n": "Z282",
+   "n": "Z297",
    "sweep": "C26",
    "also": [
     "F4-08"
@@ -4830,7 +5070,7 @@
    "repeat": true
   },
   {
-   "n": "Z283",
+   "n": "Z298",
    "sweep": "F4-15",
    "also": [],
    "cause": "L",
@@ -4846,7 +5086,7 @@
    "repeat": false
   },
   {
-   "n": "Z284",
+   "n": "Z299",
    "sweep": "F4-19",
    "also": [],
    "cause": "L",
@@ -4862,7 +5102,7 @@
    "repeat": false
   },
   {
-   "n": "Z285",
+   "n": "Z300",
    "sweep": "F4-21",
    "also": [],
    "cause": "L",
@@ -4878,7 +5118,7 @@
    "repeat": false
   },
   {
-   "n": "Z286",
+   "n": "Z301",
    "sweep": "D05",
    "also": [
     "F3-25"
@@ -4896,7 +5136,7 @@
    "repeat": false
   },
   {
-   "n": "Z287",
+   "n": "Z302",
    "sweep": "D09",
    "also": [
     "F3-30"
@@ -4914,7 +5154,7 @@
    "repeat": false
   },
   {
-   "n": "Z288",
+   "n": "Z303",
    "sweep": "F3-22",
    "also": [],
    "cause": "L",
@@ -4930,7 +5170,7 @@
    "repeat": false
   },
   {
-   "n": "Z289",
+   "n": "Z304",
    "sweep": "A09",
    "also": [
     "D17",
@@ -4949,7 +5189,7 @@
    "repeat": ""
   },
   {
-   "n": "Z290",
+   "n": "Z305",
    "sweep": "A11",
    "also": [],
    "cause": "L",
@@ -4965,7 +5205,7 @@
    "repeat": ""
   },
   {
-   "n": "Z291",
+   "n": "Z306",
    "sweep": "F5-94",
    "also": [],
    "cause": "L",
@@ -4981,7 +5221,7 @@
    "repeat": false
   },
   {
-   "n": "Z292",
+   "n": "Z307",
    "sweep": "F5-43",
    "also": [],
    "cause": "L",
@@ -4997,7 +5237,7 @@
    "repeat": false
   },
   {
-   "n": "Z293",
+   "n": "Z308",
    "sweep": "F5-46",
    "also": [],
    "cause": "L",
@@ -5013,7 +5253,7 @@
    "repeat": false
   },
   {
-   "n": "Z294",
+   "n": "Z309",
    "sweep": "F5-48",
    "also": [],
    "cause": "L",
@@ -5029,7 +5269,7 @@
    "repeat": false
   },
   {
-   "n": "Z295",
+   "n": "Z310",
    "sweep": "C39",
    "also": [],
    "cause": "L",
@@ -5045,7 +5285,7 @@
    "repeat": false
   },
   {
-   "n": "Z296",
+   "n": "Z311",
    "sweep": "C44",
    "also": [
     "F5-51"
@@ -5063,7 +5303,7 @@
    "repeat": true
   },
   {
-   "n": "Z297",
+   "n": "Z312",
    "sweep": "F5-04",
    "also": [],
    "cause": "L",
@@ -5079,7 +5319,7 @@
    "repeat": false
   },
   {
-   "n": "Z298",
+   "n": "Z313",
    "sweep": "F5-20",
    "also": [],
    "cause": "L",
@@ -5095,7 +5335,7 @@
    "repeat": false
   },
   {
-   "n": "Z299",
+   "n": "Z314",
    "sweep": "C62",
    "also": [],
    "cause": "L",
@@ -5111,7 +5351,7 @@
    "repeat": true
   },
   {
-   "n": "Z300",
+   "n": "Z315",
    "sweep": "C68",
    "also": [],
    "cause": "L",
@@ -5127,7 +5367,7 @@
    "repeat": false
   },
   {
-   "n": "Z301",
+   "n": "Z316",
    "sweep": "C79",
    "also": [],
    "cause": "L",
@@ -5143,7 +5383,7 @@
    "repeat": true
   },
   {
-   "n": "Z302",
+   "n": "Z317",
    "sweep": "B41",
    "also": [
     "F5-42"
@@ -5161,7 +5401,7 @@
    "repeat": false
   },
   {
-   "n": "Z303",
+   "n": "Z318",
    "sweep": "F4-37",
    "also": [],
    "cause": "L",
@@ -5177,7 +5417,7 @@
    "repeat": false
   },
   {
-   "n": "Z304",
+   "n": "Z319",
    "sweep": "F4-33",
    "also": [],
    "cause": "L",
@@ -5193,7 +5433,7 @@
    "repeat": false
   },
   {
-   "n": "Z305",
+   "n": "Z320",
    "sweep": "F5-111",
    "also": [],
    "cause": "L",
@@ -5209,7 +5449,7 @@
    "repeat": false
   },
   {
-   "n": "Z306",
+   "n": "Z321",
    "sweep": "A80",
    "also": [
     "B44"
@@ -5227,7 +5467,7 @@
    "repeat": ""
   },
   {
-   "n": "Z307",
+   "n": "Z322",
    "sweep": "C99",
    "also": [],
    "cause": "L",
@@ -5243,7 +5483,7 @@
    "repeat": false
   },
   {
-   "n": "Z308",
+   "n": "Z323",
    "sweep": "D61",
    "also": [],
    "cause": "L",
@@ -5259,7 +5499,7 @@
    "repeat": true
   },
   {
-   "n": "Z309",
+   "n": "Z324",
    "sweep": "D63",
    "also": [],
    "cause": "L",
@@ -5275,7 +5515,7 @@
    "repeat": true
   },
   {
-   "n": "Z310",
+   "n": "Z325",
    "sweep": "D78",
    "also": [],
    "cause": "L",
@@ -5291,7 +5531,7 @@
    "repeat": false
   },
   {
-   "n": "Z311",
+   "n": "Z326",
    "sweep": "D84",
    "also": [],
    "cause": "L",
@@ -5307,7 +5547,7 @@
    "repeat": true
   },
   {
-   "n": "Z312",
+   "n": "Z327",
    "sweep": "B49",
    "also": [],
    "cause": "L",
@@ -5323,7 +5563,7 @@
    "repeat": true
   },
   {
-   "n": "Z313",
+   "n": "Z328",
    "sweep": "D91",
    "also": [
     "C110"
@@ -5341,7 +5581,7 @@
    "repeat": true
   },
   {
-   "n": "Z314",
+   "n": "Z329",
    "sweep": "C118",
    "also": [
     "B64"
@@ -5359,7 +5599,7 @@
    "repeat": false
   },
   {
-   "n": "Z315",
+   "n": "Z330",
    "sweep": "E13",
    "also": [],
    "cause": "L",
@@ -5375,7 +5615,23 @@
    "repeat": true
   },
   {
-   "n": "Z316",
+   "n": "Z331",
+   "sweep": "E24",
+   "also": [],
+   "cause": "L",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 7] A programmer cannot find \"install and run\" from the front page.",
+   "wrong": "the download in the README and on the release page; the exit code and --json in the fifth section of build.html",
+   "required": "Adopt > Programmers: every command, option and exit code, and the call from any language",
+   "sense": "read (adoption)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z332",
    "sweep": "F1-03",
    "also": [],
    "cause": "E",
@@ -5391,7 +5647,7 @@
    "repeat": false
   },
   {
-   "n": "Z317",
+   "n": "Z333",
    "sweep": "C11",
    "also": [
     "F1-09",
@@ -5410,7 +5666,7 @@
    "repeat": false
   },
   {
-   "n": "Z318",
+   "n": "Z334",
    "sweep": "C12",
    "also": [
     "F1-10"
@@ -5428,7 +5684,7 @@
    "repeat": true
   },
   {
-   "n": "Z319",
+   "n": "Z335",
    "sweep": "F1-05",
    "also": [],
    "cause": "E",
@@ -5444,7 +5700,7 @@
    "repeat": false
   },
   {
-   "n": "Z320",
+   "n": "Z336",
    "sweep": "F4-39",
    "also": [],
    "cause": "E",
@@ -5460,7 +5716,7 @@
    "repeat": true
   },
   {
-   "n": "Z321",
+   "n": "Z337",
    "sweep": "C15",
    "also": [],
    "cause": "E",
@@ -5476,7 +5732,7 @@
    "repeat": false
   },
   {
-   "n": "Z322",
+   "n": "Z338",
    "sweep": "C23",
    "also": [
     "F4-10"
@@ -5494,7 +5750,7 @@
    "repeat": false
   },
   {
-   "n": "Z323",
+   "n": "Z339",
    "sweep": "F4-20",
    "also": [],
    "cause": "E",
@@ -5510,7 +5766,7 @@
    "repeat": false
   },
   {
-   "n": "Z324",
+   "n": "Z340",
    "sweep": "D07",
    "also": [
     "F3-29"
@@ -5528,7 +5784,7 @@
    "repeat": false
   },
   {
-   "n": "Z325",
+   "n": "Z341",
    "sweep": "F5-108",
    "also": [],
    "cause": "E",
@@ -5544,7 +5800,7 @@
    "repeat": false
   },
   {
-   "n": "Z326",
+   "n": "Z342",
    "sweep": "F4-67",
    "also": [],
    "cause": "E",
@@ -5560,7 +5816,7 @@
    "repeat": false
   },
   {
-   "n": "Z327",
+   "n": "Z343",
    "sweep": "A07",
    "also": [],
    "cause": "E",
@@ -5576,7 +5832,7 @@
    "repeat": ""
   },
   {
-   "n": "Z328",
+   "n": "Z344",
    "sweep": "F5-95",
    "also": [],
    "cause": "E",
@@ -5592,7 +5848,7 @@
    "repeat": false
   },
   {
-   "n": "Z329",
+   "n": "Z345",
    "sweep": "C37",
    "also": [],
    "cause": "E",
@@ -5608,7 +5864,7 @@
    "repeat": true
   },
   {
-   "n": "Z330",
+   "n": "Z346",
    "sweep": "C41",
    "also": [],
    "cause": "E",
@@ -5624,7 +5880,7 @@
    "repeat": false
   },
   {
-   "n": "Z331",
+   "n": "Z347",
    "sweep": "B26",
    "also": [
     "F5-03"
@@ -5642,7 +5898,7 @@
    "repeat": false
   },
   {
-   "n": "Z332",
+   "n": "Z348",
    "sweep": "C54",
    "also": [],
    "cause": "E",
@@ -5658,7 +5914,7 @@
    "repeat": true
   },
   {
-   "n": "Z333",
+   "n": "Z349",
    "sweep": "A64",
    "also": [
     "B37",
@@ -5678,7 +5934,7 @@
    "repeat": ""
   },
   {
-   "n": "Z334",
+   "n": "Z350",
    "sweep": "F4-30",
    "also": [],
    "cause": "E",
@@ -5694,7 +5950,7 @@
    "repeat": false
   },
   {
-   "n": "Z335",
+   "n": "Z351",
    "sweep": "C92",
    "also": [],
    "cause": "E",
@@ -5710,7 +5966,7 @@
    "repeat": true
   },
   {
-   "n": "Z336",
+   "n": "Z352",
    "sweep": "C96",
    "also": [],
    "cause": "E",
@@ -5726,7 +5982,7 @@
    "repeat": true
   },
   {
-   "n": "Z337",
+   "n": "Z353",
    "sweep": "C100",
    "also": [],
    "cause": "E",
@@ -5742,7 +5998,7 @@
    "repeat": false
   },
   {
-   "n": "Z338",
+   "n": "Z354",
    "sweep": "D28",
    "also": [],
    "cause": "E",
@@ -5758,7 +6014,7 @@
    "repeat": false
   },
   {
-   "n": "Z339",
+   "n": "Z355",
    "sweep": "D76",
    "also": [],
    "cause": "E",
@@ -5774,7 +6030,7 @@
    "repeat": false
   },
   {
-   "n": "Z340",
+   "n": "Z356",
    "sweep": "D79",
    "also": [],
    "cause": "E",
@@ -5790,7 +6046,7 @@
    "repeat": false
   },
   {
-   "n": "Z341",
+   "n": "Z357",
    "sweep": "D80",
    "also": [],
    "cause": "E",
@@ -5806,7 +6062,7 @@
    "repeat": false
   },
   {
-   "n": "Z342",
+   "n": "Z358",
    "sweep": "B62",
    "also": [],
    "cause": "E",
@@ -5822,7 +6078,7 @@
    "repeat": true
   },
   {
-   "n": "Z343",
+   "n": "Z359",
    "sweep": "C122",
    "also": [
     "A116",
@@ -5841,7 +6097,7 @@
    "repeat": true
   },
   {
-   "n": "Z344",
+   "n": "Z360",
    "sweep": "C128",
    "also": [
     "A121"
@@ -5859,7 +6115,7 @@
    "repeat": true
   },
   {
-   "n": "Z345",
+   "n": "Z361",
    "sweep": "F4-59",
    "also": [],
    "cause": "S",
@@ -5875,7 +6131,7 @@
    "repeat": false
   },
   {
-   "n": "Z346",
+   "n": "Z362",
    "sweep": "C08",
    "also": [],
    "cause": "S",
@@ -5891,7 +6147,7 @@
    "repeat": false
   },
   {
-   "n": "Z347",
+   "n": "Z363",
    "sweep": "D08",
    "also": [
     "F3-28"
@@ -5909,7 +6165,7 @@
    "repeat": false
   },
   {
-   "n": "Z348",
+   "n": "Z364",
    "sweep": "A16",
    "also": [],
    "cause": "S",
@@ -5925,7 +6181,7 @@
    "repeat": ""
   },
   {
-   "n": "Z349",
+   "n": "Z365",
    "sweep": "F5-98",
    "also": [],
    "cause": "S",
@@ -5941,7 +6197,7 @@
    "repeat": false
   },
   {
-   "n": "Z350",
+   "n": "Z366",
    "sweep": "B19",
    "also": [],
    "cause": "S",
@@ -5957,7 +6213,7 @@
    "repeat": true
   },
   {
-   "n": "Z351",
+   "n": "Z367",
    "sweep": "F5-09",
    "also": [],
    "cause": "S",
@@ -5973,7 +6229,7 @@
    "repeat": false
   },
   {
-   "n": "Z352",
+   "n": "Z368",
    "sweep": "C77",
    "also": [],
    "cause": "S",
@@ -5989,7 +6245,7 @@
    "repeat": true
   },
   {
-   "n": "Z353",
+   "n": "Z369",
    "sweep": "F4-24",
    "also": [],
    "cause": "S",
@@ -6005,7 +6261,7 @@
    "repeat": false
   },
   {
-   "n": "Z354",
+   "n": "Z370",
    "sweep": "C101",
    "also": [],
    "cause": "S",
@@ -6021,7 +6277,7 @@
    "repeat": true
   },
   {
-   "n": "Z355",
+   "n": "Z371",
    "sweep": "D43",
    "also": [],
    "cause": "S",
@@ -6037,7 +6293,7 @@
    "repeat": false
   },
   {
-   "n": "Z356",
+   "n": "Z372",
    "sweep": "D56",
    "also": [],
    "cause": "S",
@@ -6053,7 +6309,7 @@
    "repeat": false
   },
   {
-   "n": "Z357",
+   "n": "Z373",
    "sweep": "D58",
    "also": [],
    "cause": "S",
@@ -6069,7 +6325,7 @@
    "repeat": true
   },
   {
-   "n": "Z358",
+   "n": "Z374",
    "sweep": "D60",
    "also": [],
    "cause": "S",
@@ -6085,7 +6341,7 @@
    "repeat": true
   },
   {
-   "n": "Z359",
+   "n": "Z375",
    "sweep": "D65",
    "also": [],
    "cause": "S",
@@ -6101,7 +6357,7 @@
    "repeat": true
   },
   {
-   "n": "Z360",
+   "n": "Z376",
    "sweep": "D73",
    "also": [],
    "cause": "S",
@@ -6117,7 +6373,7 @@
    "repeat": true
   },
   {
-   "n": "Z361",
+   "n": "Z377",
    "sweep": "C124",
    "also": [
     "A119",
@@ -6137,7 +6393,7 @@
    "repeat": false
   },
   {
-   "n": "Z362",
+   "n": "Z378",
    "sweep": "C125",
    "also": [],
    "cause": "S",
@@ -6153,7 +6409,7 @@
    "repeat": true
   },
   {
-   "n": "Z363",
+   "n": "Z379",
    "sweep": "C126",
    "also": [
     "A120",
@@ -6173,7 +6429,7 @@
    "repeat": true
   },
   {
-   "n": "Z364",
+   "n": "Z380",
    "sweep": "C127",
    "also": [],
    "cause": "S",
@@ -6189,7 +6445,7 @@
    "repeat": true
   },
   {
-   "n": "Z365",
+   "n": "Z381",
    "sweep": "C129",
    "also": [
     "A122"
@@ -6207,7 +6463,7 @@
    "repeat": false
   },
   {
-   "n": "Z366",
+   "n": "Z382",
    "sweep": "C131",
    "also": [
     "A124"
@@ -6225,7 +6481,7 @@
    "repeat": true
   },
   {
-   "n": "Z367",
+   "n": "Z383",
    "sweep": "C135",
    "also": [
     "A127"
@@ -6243,7 +6499,7 @@
    "repeat": false
   },
   {
-   "n": "Z368",
+   "n": "Z384",
    "sweep": "C140",
    "also": [
     "A135",
@@ -6263,7 +6519,7 @@
    "repeat": true
   },
   {
-   "n": "Z369",
+   "n": "Z385",
    "sweep": "E05",
    "also": [],
    "cause": "S",
@@ -6279,7 +6535,7 @@
    "repeat": true
   },
   {
-   "n": "Z370",
+   "n": "Z386",
    "sweep": "E07",
    "also": [],
    "cause": "S",
@@ -6295,7 +6551,7 @@
    "repeat": true
   },
   {
-   "n": "Z371",
+   "n": "Z387",
    "sweep": "E08",
    "also": [],
    "cause": "S",
@@ -6311,7 +6567,7 @@
    "repeat": true
   },
   {
-   "n": "Z372",
+   "n": "Z388",
    "sweep": "E14",
    "also": [],
    "cause": "S",
@@ -6327,7 +6583,7 @@
    "repeat": true
   },
   {
-   "n": "Z373",
+   "n": "Z389",
    "sweep": "F4-61",
    "also": [],
    "cause": "I",
@@ -6343,7 +6599,7 @@
    "repeat": false
   },
   {
-   "n": "Z374",
+   "n": "Z390",
    "sweep": "F3-05",
    "also": [],
    "cause": "I",
@@ -6359,7 +6615,7 @@
    "repeat": false
   },
   {
-   "n": "Z375",
+   "n": "Z391",
    "sweep": "F3-06",
    "also": [],
    "cause": "I",
@@ -6375,7 +6631,7 @@
    "repeat": false
   },
   {
-   "n": "Z376",
+   "n": "Z392",
    "sweep": "F2-03",
    "also": [],
    "cause": "I",
@@ -6391,7 +6647,7 @@
    "repeat": false
   },
   {
-   "n": "Z377",
+   "n": "Z393",
    "sweep": "C20",
    "also": [
     "F4-11"
@@ -6409,7 +6665,7 @@
    "repeat": false
   },
   {
-   "n": "Z378",
+   "n": "Z394",
    "sweep": "F4-13",
    "also": [],
    "cause": "I",
@@ -6425,7 +6681,7 @@
    "repeat": false
   },
   {
-   "n": "Z379",
+   "n": "Z395",
    "sweep": "D04",
    "also": [
     "F3-26"
@@ -6443,7 +6699,7 @@
    "repeat": false
   },
   {
-   "n": "Z380",
+   "n": "Z396",
    "sweep": "A05",
    "also": [
     "C32"
@@ -6461,7 +6717,7 @@
    "repeat": ""
   },
   {
-   "n": "Z381",
+   "n": "Z397",
    "sweep": "A06",
    "also": [
     "D15"
@@ -6479,7 +6735,7 @@
    "repeat": ""
   },
   {
-   "n": "Z382",
+   "n": "Z398",
    "sweep": "A10",
    "also": [],
    "cause": "I",
@@ -6495,7 +6751,7 @@
    "repeat": true
   },
   {
-   "n": "Z383",
+   "n": "Z399",
    "sweep": "A12",
    "also": [
     "D16"
@@ -6513,7 +6769,7 @@
    "repeat": true
   },
   {
-   "n": "Z384",
+   "n": "Z400",
    "sweep": "F5-105",
    "also": [],
    "cause": "I",
@@ -6529,7 +6785,7 @@
    "repeat": false
   },
   {
-   "n": "Z385",
+   "n": "Z401",
    "sweep": "F5-97",
    "also": [],
    "cause": "I",
@@ -6545,7 +6801,7 @@
    "repeat": false
   },
   {
-   "n": "Z386",
+   "n": "Z402",
    "sweep": "F5-101",
    "also": [],
    "cause": "I",
@@ -6561,7 +6817,7 @@
    "repeat": true
   },
   {
-   "n": "Z387",
+   "n": "Z403",
    "sweep": "C45",
    "also": [
     "F5-56"
@@ -6579,7 +6835,7 @@
    "repeat": true
   },
   {
-   "n": "Z388",
+   "n": "Z404",
    "sweep": "F5-52",
    "also": [],
    "cause": "I",
@@ -6595,7 +6851,7 @@
    "repeat": false
   },
   {
-   "n": "Z389",
+   "n": "Z405",
    "sweep": "F5-53",
    "also": [],
    "cause": "I",
@@ -6611,7 +6867,7 @@
    "repeat": false
   },
   {
-   "n": "Z390",
+   "n": "Z406",
    "sweep": "B28",
    "also": [],
    "cause": "I",
@@ -6627,7 +6883,7 @@
    "repeat": false
   },
   {
-   "n": "Z391",
+   "n": "Z407",
    "sweep": "F5-11",
    "also": [],
    "cause": "I",
@@ -6643,7 +6899,7 @@
    "repeat": true
   },
   {
-   "n": "Z392",
+   "n": "Z408",
    "sweep": "F5-12",
    "also": [],
    "cause": "I",
@@ -6659,7 +6915,7 @@
    "repeat": false
   },
   {
-   "n": "Z393",
+   "n": "Z409",
    "sweep": "F5-14",
    "also": [],
    "cause": "I",
@@ -6675,7 +6931,7 @@
    "repeat": false
   },
   {
-   "n": "Z394",
+   "n": "Z410",
    "sweep": "F5-17",
    "also": [],
    "cause": "I",
@@ -6691,7 +6947,7 @@
    "repeat": false
   },
   {
-   "n": "Z395",
+   "n": "Z411",
    "sweep": "F5-19",
    "also": [],
    "cause": "I",
@@ -6707,7 +6963,7 @@
    "repeat": false
   },
   {
-   "n": "Z396",
+   "n": "Z412",
    "sweep": "A57",
    "also": [
     "F5-75"
@@ -6725,7 +6981,7 @@
    "repeat": ""
   },
   {
-   "n": "Z397",
+   "n": "Z413",
    "sweep": "A59",
    "also": [
     "F5-27"
@@ -6743,7 +6999,7 @@
    "repeat": ""
   },
   {
-   "n": "Z398",
+   "n": "Z414",
    "sweep": "F5-71",
    "also": [],
    "cause": "I",
@@ -6759,7 +7015,7 @@
    "repeat": false
   },
   {
-   "n": "Z399",
+   "n": "Z415",
    "sweep": "A63",
    "also": [
     "F5-35"
@@ -6777,7 +7033,7 @@
    "repeat": true
   },
   {
-   "n": "Z400",
+   "n": "Z416",
    "sweep": "F4-27",
    "also": [],
    "cause": "I",
@@ -6793,7 +7049,7 @@
    "repeat": false
   },
   {
-   "n": "Z401",
+   "n": "Z417",
    "sweep": "C97",
    "also": [],
    "cause": "I",
@@ -6809,7 +7065,7 @@
    "repeat": true
   },
   {
-   "n": "Z402",
+   "n": "Z418",
    "sweep": "D53",
    "also": [
     "A95",
@@ -6828,7 +7084,7 @@
    "repeat": false
   },
   {
-   "n": "Z403",
+   "n": "Z419",
    "sweep": "D66",
    "also": [],
    "cause": "I",
@@ -6844,7 +7100,7 @@
    "repeat": false
   },
   {
-   "n": "Z404",
+   "n": "Z420",
    "sweep": "D81",
    "also": [],
    "cause": "I",
@@ -6860,7 +7116,7 @@
    "repeat": true
   },
   {
-   "n": "Z405",
+   "n": "Z421",
    "sweep": "B53",
    "also": [],
    "cause": "I",
@@ -6876,7 +7132,7 @@
    "repeat": true
   },
   {
-   "n": "Z406",
+   "n": "Z422",
    "sweep": "B69",
    "also": [
     "A131",
@@ -6895,7 +7151,7 @@
    "repeat": true
   },
   {
-   "n": "Z407",
+   "n": "Z423",
    "sweep": "C117",
    "also": [
     "B52",
@@ -6914,7 +7170,7 @@
    "repeat": false
   },
   {
-   "n": "Z408",
+   "n": "Z424",
    "sweep": "C138",
    "also": [
     "A132",
@@ -6934,7 +7190,7 @@
    "repeat": true
   },
   {
-   "n": "Z409",
+   "n": "Z425",
    "sweep": "E10",
    "also": [],
    "cause": "I",
@@ -6950,7 +7206,7 @@
    "repeat": true
   },
   {
-   "n": "Z410",
+   "n": "Z426",
    "sweep": "E06",
    "also": [],
    "cause": "I",
@@ -6966,7 +7222,23 @@
    "repeat": false
   },
   {
-   "n": "Z411",
+   "n": "Z427",
+   "sweep": "E26",
+   "also": [],
+   "cause": "I",
+   "date": "2026-11-13",
+   "project": "stzzui",
+   "source": "softanza/vision/zayn-site/REVIEW.md section 3, the review of the site the Principal asked for (relayed in softanza/mailbox/zayn.md, 2026-11-14 01:16)",
+   "words": "[review, row 9] The photograph says nothing a visitor can read; it has no caption, and the first screen is spent on it.",
+   "wrong": "the first screen at 1440 by 900 is the photograph",
+   "required": "the photograph captioned, where the name is explained",
+   "sense": "see (first screen)",
+   "ruling": "PRINCIPAL-ZAYNSITE-01",
+   "verbatim": false,
+   "repeat": false
+  },
+  {
+   "n": "Z428",
    "sweep": "F2-06",
    "also": [],
    "cause": "B",
@@ -6982,7 +7254,7 @@
    "repeat": false
   },
   {
-   "n": "Z412",
+   "n": "Z429",
    "sweep": "F1-04",
    "also": [],
    "cause": "B",
@@ -6998,7 +7270,7 @@
    "repeat": false
   },
   {
-   "n": "Z413",
+   "n": "Z430",
    "sweep": "F4-16",
    "also": [],
    "cause": "B",
@@ -7014,7 +7286,7 @@
    "repeat": false
   },
   {
-   "n": "Z414",
+   "n": "Z431",
    "sweep": "F3-19",
    "also": [],
    "cause": "B",
@@ -7030,7 +7302,7 @@
    "repeat": false
   },
   {
-   "n": "Z415",
+   "n": "Z432",
    "sweep": "B16",
    "also": [],
    "cause": "B",
@@ -7046,7 +7318,7 @@
    "repeat": true
   },
   {
-   "n": "Z416",
+   "n": "Z433",
    "sweep": "B18",
    "also": [],
    "cause": "B",
@@ -7062,7 +7334,7 @@
    "repeat": true
   },
   {
-   "n": "Z417",
+   "n": "Z434",
    "sweep": "F5-55",
    "also": [],
    "cause": "B",
@@ -7078,7 +7350,7 @@
    "repeat": false
   },
   {
-   "n": "Z418",
+   "n": "Z435",
    "sweep": "C52",
    "also": [],
    "cause": "B",
@@ -7094,7 +7366,7 @@
    "repeat": true
   },
   {
-   "n": "Z419",
+   "n": "Z436",
    "sweep": "A52",
    "also": [
     "C57",
@@ -7113,7 +7385,7 @@
    "repeat": ""
   },
   {
-   "n": "Z420",
+   "n": "Z437",
    "sweep": "C71",
    "also": [
     "F5-119"
@@ -7131,7 +7403,7 @@
    "repeat": true
   },
   {
-   "n": "Z421",
+   "n": "Z438",
    "sweep": "C78",
    "also": [],
    "cause": "B",
@@ -7147,7 +7419,7 @@
    "repeat": true
   },
   {
-   "n": "Z422",
+   "n": "Z439",
    "sweep": "F5-34",
    "also": [],
    "cause": "B",
@@ -7163,7 +7435,7 @@
    "repeat": false
   },
   {
-   "n": "Z423",
+   "n": "Z440",
    "sweep": "F5-38",
    "also": [],
    "cause": "B",
@@ -7179,7 +7451,7 @@
    "repeat": false
   },
   {
-   "n": "Z424",
+   "n": "Z441",
    "sweep": "D49",
    "also": [],
    "cause": "B",
@@ -7195,7 +7467,7 @@
    "repeat": true
   },
   {
-   "n": "Z425",
+   "n": "Z442",
    "sweep": "D32",
    "also": [
     "A85"
@@ -7213,7 +7485,7 @@
    "repeat": false
   },
   {
-   "n": "Z426",
+   "n": "Z443",
    "sweep": "D52",
    "also": [
     "A94",
@@ -7232,7 +7504,7 @@
    "repeat": true
   },
   {
-   "n": "Z427",
+   "n": "Z444",
    "sweep": "C119",
    "also": [
     "A113",
@@ -7251,7 +7523,7 @@
    "repeat": true
   },
   {
-   "n": "Z428",
+   "n": "Z445",
    "sweep": "C121",
    "also": [
     "A115",
@@ -7270,7 +7542,7 @@
    "repeat": true
   },
   {
-   "n": "Z429",
+   "n": "Z446",
    "sweep": "C130",
    "also": [
     "A123",
@@ -7290,7 +7562,7 @@
    "repeat": true
   },
   {
-   "n": "Z430",
+   "n": "Z447",
    "sweep": "E01",
    "also": [
     "F5-90"
@@ -7308,7 +7580,7 @@
    "repeat": true
   },
   {
-   "n": "Z431",
+   "n": "Z448",
    "sweep": "E15",
    "also": [],
    "cause": "B",
@@ -7324,7 +7596,7 @@
    "repeat": false
   },
   {
-   "n": "Z432",
+   "n": "Z449",
    "sweep": "E16",
    "also": [],
    "cause": "B",
@@ -7340,7 +7612,7 @@
    "repeat": true
   },
   {
-   "n": "Z433",
+   "n": "Z450",
    "sweep": "F4-55",
    "also": [],
    "cause": "X",
@@ -7356,7 +7628,7 @@
    "repeat": false
   },
   {
-   "n": "Z434",
+   "n": "Z451",
    "sweep": "F3-07",
    "also": [],
    "cause": "X",
@@ -7372,7 +7644,7 @@
    "repeat": false
   },
   {
-   "n": "Z435",
+   "n": "Z452",
    "sweep": "F3-08",
    "also": [],
    "cause": "X",
@@ -7388,7 +7660,7 @@
    "repeat": false
   },
   {
-   "n": "Z436",
+   "n": "Z453",
    "sweep": "C18",
    "also": [
     "F4-09"
@@ -7406,7 +7678,7 @@
    "repeat": true
   },
   {
-   "n": "Z437",
+   "n": "Z454",
    "sweep": "F4-14",
    "also": [],
    "cause": "X",
@@ -7422,7 +7694,7 @@
    "repeat": false
   },
   {
-   "n": "Z438",
+   "n": "Z455",
    "sweep": "F4-17",
    "also": [],
    "cause": "X",
@@ -7438,7 +7710,7 @@
    "repeat": false
   },
   {
-   "n": "Z439",
+   "n": "Z456",
    "sweep": "B02",
    "also": [],
    "cause": "X",
@@ -7454,7 +7726,7 @@
    "repeat": false
   },
   {
-   "n": "Z440",
+   "n": "Z457",
    "sweep": "F3-20",
    "also": [],
    "cause": "X",
@@ -7470,7 +7742,7 @@
    "repeat": false
   },
   {
-   "n": "Z441",
+   "n": "Z458",
    "sweep": "F3-27",
    "also": [],
    "cause": "X",
@@ -7486,7 +7758,7 @@
    "repeat": true
   },
   {
-   "n": "Z442",
+   "n": "Z459",
    "sweep": "F3-35",
    "also": [],
    "cause": "X",
@@ -7502,7 +7774,7 @@
    "repeat": false
   },
   {
-   "n": "Z443",
+   "n": "Z460",
    "sweep": "F3-36",
    "also": [],
    "cause": "X",
@@ -7518,7 +7790,7 @@
    "repeat": false
   },
   {
-   "n": "Z444",
+   "n": "Z461",
    "sweep": "F5-92",
    "also": [],
    "cause": "X",
@@ -7534,7 +7806,7 @@
    "repeat": false
   },
   {
-   "n": "Z445",
+   "n": "Z462",
    "sweep": "F5-96",
    "also": [],
    "cause": "X",
@@ -7550,7 +7822,7 @@
    "repeat": false
   },
   {
-   "n": "Z446",
+   "n": "Z463",
    "sweep": "F5-47",
    "also": [],
    "cause": "X",
@@ -7566,7 +7838,7 @@
    "repeat": false
   },
   {
-   "n": "Z447",
+   "n": "Z464",
    "sweep": "A56",
    "also": [
     "F5-74"
@@ -7584,7 +7856,7 @@
    "repeat": ""
   },
   {
-   "n": "Z448",
+   "n": "Z465",
    "sweep": "C75",
    "also": [
     "F5-114"
@@ -7602,7 +7874,7 @@
    "repeat": false
   },
   {
-   "n": "Z449",
+   "n": "Z466",
    "sweep": "F5-76",
    "also": [],
    "cause": "X",
@@ -7618,7 +7890,7 @@
    "repeat": false
   },
   {
-   "n": "Z450",
+   "n": "Z467",
    "sweep": "B36",
    "also": [
     "F5-32"
@@ -7636,7 +7908,7 @@
    "repeat": false
   },
   {
-   "n": "Z451",
+   "n": "Z468",
    "sweep": "F4-26",
    "also": [],
    "cause": "X",
@@ -7652,7 +7924,7 @@
    "repeat": false
   },
   {
-   "n": "Z452",
+   "n": "Z469",
    "sweep": "F4-29",
    "also": [],
    "cause": "X",
@@ -7668,7 +7940,7 @@
    "repeat": false
   },
   {
-   "n": "Z453",
+   "n": "Z470",
    "sweep": "F5-110",
    "also": [],
    "cause": "X",
@@ -7684,7 +7956,7 @@
    "repeat": true
   },
   {
-   "n": "Z454",
+   "n": "Z471",
    "sweep": "D34",
    "also": [
     "A87"
@@ -7702,7 +7974,7 @@
    "repeat": false
   },
   {
-   "n": "Z455",
+   "n": "Z472",
    "sweep": "D59",
    "also": [],
    "cause": "X",
@@ -7718,7 +7990,7 @@
    "repeat": true
   },
   {
-   "n": "Z456",
+   "n": "Z473",
    "sweep": "D54",
    "also": [
     "A96"
@@ -7736,7 +8008,7 @@
    "repeat": false
   },
   {
-   "n": "Z457",
+   "n": "Z474",
    "sweep": "D87",
    "also": [],
    "cause": "X",
@@ -7752,7 +8024,7 @@
    "repeat": false
   },
   {
-   "n": "Z458",
+   "n": "Z475",
    "sweep": "B59",
    "also": [],
    "cause": "X",
@@ -7768,7 +8040,7 @@
    "repeat": true
   },
   {
-   "n": "Z459",
+   "n": "Z476",
    "sweep": "D93",
    "also": [
     "C112"
@@ -7786,7 +8058,7 @@
    "repeat": true
   },
   {
-   "n": "Z460",
+   "n": "Z477",
    "sweep": "F5-83",
    "also": [],
    "cause": "X",
@@ -7802,7 +8074,7 @@
    "repeat": false
   },
   {
-   "n": "Z461",
+   "n": "Z478",
    "sweep": "C132",
    "also": [
     "B56",
@@ -7822,7 +8094,7 @@
    "repeat": true
   },
   {
-   "n": "Z462",
+   "n": "Z479",
    "sweep": "C16",
    "also": [
     "F4-12"
@@ -7840,7 +8112,7 @@
    "repeat": false
   },
   {
-   "n": "Z463",
+   "n": "Z480",
    "sweep": "C134",
    "also": [
     "A126",

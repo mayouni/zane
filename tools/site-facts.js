@@ -159,7 +159,10 @@ function pairs() {
   const out = [];
   for (const p of pages()) {
     const html = fs.readFileSync(R(p), 'utf8').replace(/\r\n/g, '\n');
-    const re = /<pre class="shot">([\s\S]*?)<\/pre>\s*<pre class="term">([\s\S]*?)<\/pre>/g;
+    /* the sentence that says the declaration in plain words ("In words", ZAYN-SITE-RETHINK-01 addendum, rule 3) and a plate's cell label
+       may stand between the two, each a paragraph of text with at most a bold head, so a reader meets the declaration, what it says, and
+       then the report (the plate, site/stz.css) */
+    const re = /<pre class="shot">([\s\S]*?)<\/pre>\s*(?:<p class="(?:label|gloss)[^"]*">(?:<b>[^<]*<\/b>)?[^<]*<\/p>\s*)*<pre class="term">([\s\S]*?)<\/pre>/g;
     let m;
     while ((m = re.exec(html))) {
       const lines = decode(m[2]).split('\n');
@@ -273,8 +276,9 @@ function verifyCtas(problems) {
 }
 
 // ---- a status word is one of three -------------------------------------------------------------------------
-/* <td class="status WORD">WORD</td>: the class and the word must agree and must be exists, designed or held. The truth of a word cannot be
-   checked; its vocabulary can, so a fourth word cannot appear beside the mark that goes with each of the three. */
+/* <td class="status WORD">WORD</td>: the class and the word must agree and must be exists, data only, designed or held (the words of "What
+   exists today", ZAYN-SITE-RETHINK-01; "data only" is written in its class as data-only). The truth of a word cannot be checked; its
+   vocabulary can, so a fifth word cannot appear beside the mark that goes with each of the four. */
 function verifyStatuses(problems) {
   let n = 0;
   for (const p of pages()) {
@@ -284,8 +288,8 @@ function verifyStatuses(problems) {
     while ((m = re.exec(html))) {
       n++;
       const cls = m[2].trim(), word = m[3].trim();
-      if (!['exists', 'designed', 'held'].includes(word)) problems.push(p + ': the status word "' + word + '" is not one of exists, designed, held');
-      else if (cls !== word) problems.push(p + ': the status "' + word + '" carries the class "' + cls + '", so its mark would be wrong');
+      if (!['exists', 'data only', 'designed', 'held'].includes(word)) problems.push(p + ': the status word "' + word + '" is not one of exists, data only, designed, held');
+      else if (cls !== word.replace(' ', '-')) problems.push(p + ': the status "' + word + '" carries the class "' + cls + '", so its mark would be wrong');
     }
   }
   return n;
@@ -295,7 +299,7 @@ function verifyStatuses(problems) {
 function unchecked(html) {
   html = html.replace(/<a [^>]*#rule-\d+[^>]*>\d+<\/a>/g, ' ');
   /* a table drawn from its data by tools/site-grid.js is checked there, against the files that hold its figures */
-  html = html.replace(/<!-- (grid|channels):table -->[\s\S]*?<!-- \/\1:table -->/g, ' ');
+  html = html.replace(/<!-- (grid|channels|ideas):table -->[\s\S]*?<!-- \/\1:table -->/g, ' ');
   /* a figure inside a mock interface (the invoice a gotcha deletes, the tile it pokes) is a specimen, not a claim; it says so */
   html = html.replace(/<([a-z0-9]+)\b[^>]*\sdata-specimen\b[^>]*>[^<]*<\/\1>/g, ' ');
   let t = html.replace(/\r\n/g, '\n').replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/g, ' ')

@@ -51,7 +51,8 @@
     const gutter = (parseFloat(getComputedStyle(html).getPropertyValue('--gutter')) || 1.4) * rem;
     const page = html.clientWidth;
     document.querySelectorAll(WIDE).forEach(el => {
-      if (el.closest(KEEP)) return;
+      /* a cell of a plate keeps its cell, so the figure's grid stays whole */
+      if (el.closest(KEEP) || el.closest('.plate')) return;
       el.style.width = ''; el.style.maxWidth = ''; el.style.marginLeft = '';
       const r0 = el.getBoundingClientRect();
       if (!r0.width) return;
@@ -154,9 +155,25 @@
     lines.forEach(ln => { ln.className = 'ln'; ln.style.setProperty('--ind', ln.textContent.match(/^ */)[0].length); });
     pre.replaceChildren(...lines);
   }
+  /* A declaration and its report are one story (ZAYN-SITE-RETHINK-01 addendum, rule 3): a declaration followed by the report of its zayn
+     check run, its "In words" line and a label between, has its lines numbered, and each line the report cites (NAME.zayn:N) is marked,
+     so a reader sees which line the verifier read. The numbers are drawn, not written: the declaration copied from the page is the code. */
+  const lineTexts = pre => { const l = pre.querySelectorAll(':scope > .ln'); return l.length ? [...l].map(x => x.textContent) : pre.textContent.split('\n'); };
+  function cite(term) {
+    let shot = term.previousElementSibling;
+    while (shot && shot.matches('p.gloss, p.label')) shot = shot.previousElementSibling;
+    if (!shot || !shot.matches('pre.shot') || shot.closest(KEEP)) return;
+    const t = lineTexts(term);
+    const cmd = /^\$\s*zayn check (\S+\.zayn)\s*$/.exec(t[0] || '');
+    if (!cmd) return;
+    const hit = new Set();
+    for (const l of t.slice(1)) { if (l.startsWith(cmd[1] + ':')) { const n = parseInt(l.slice(cmd[1].length + 1), 10); if (n) hit.add(n); } }
+    shot.classList.add('num');
+    shot.querySelectorAll(':scope > .ln').forEach((ln, i) => ln.classList.toggle('hit', hit.has(i + 1)));
+  }
   const code = () => {
     document.querySelectorAll('pre.shot, pre.excerpt').forEach(p => { if (!p.closest(KEEP)) paint(p); });
-    document.querySelectorAll('pre.term').forEach(p => { if (!p.closest(KEEP)) hang(p); });
+    document.querySelectorAll('pre.term').forEach(p => { if (!p.closest(KEEP)) { hang(p); cite(p); } });
   };
   code();
   /* A dash never starts a line: the space before it binds it to the word before it (the Principal, 2026-11-12: "You can't cut on the - separator and put it on a new line! Please solve this recurrent issue fundamendtally in Zane/Zui and all the current and future sites!").

@@ -9,11 +9,17 @@ time because it lived only in a promise, so it is written here and part of it is
 
 ## 1. The rule
 
-1. **The page title (h1) names the page's subject in the menu's own word and says what it is**, as one full declarative
-   sentence. It is not a metaphor, a teaser or a fragment.
+1. **The page title (h1) names the page's subject in the menu's own word, in six words at most, and the lede under it says what it
+   is** in one sentence (amended 2026-11-14, ZAYN-SITE-RETHINK-01 ruling 3: the title names, the first sentence defines; each half
+   has one job, and `zayn site shell` counts a title over six words, TITLE6). Until then the title was one full declarative sentence,
+   which made a definition of every title. It is not a metaphor, a teaser or a fragment.
    - refused: *"A map of what a person does, across every channel, with the empty cells left empty."*
    - written: *"Zayn is designed around a conceptual grid of what a person does in every channel."*
-2. **The first sentence of the lead defines the subject and says what it is for.** The figures come after it.
+2. **The first sentence of the lead defines the subject and says what it is for.** The figures come after it. **A statement is made
+   once per screen** (ZAYN-SAYITONCE-01; the Principal, 2026-11-14: *"a lot of suplications!"*): the tagline, the lede, the first
+   section's title and its paragraph each add a fact the line above lacks, a definition stands once on a page, in the lede, and no
+   section below the head opens by defining the subject again. `zayn site shell` reads the first 150 words a reader meets and fails
+   two content words in a row that stand twice there (K30 SAY_ONCE).
 3. **A section title says what the section contains.** A reader who reads only the titles knows what the page holds.
    - refused: *"The rows of a person's day"*, *"The closed cells"*, *"The gap, as a finding"*
    - written: *"The six activities that form the grid's columns"*, *"Cells a channel cannot carry, and why"*, *"The 35 empty cells,
@@ -27,9 +33,10 @@ time because it lived only in a promise, so it is written here and part of it is
 7. **A title's line breaks belong to the browser, which balances them; the page never places one by hand.** A title holds no
    `<br>` and no piece set as a block, and `node tools/site-shell.js` fails one that does (the front page's title once broke as
    *"Zayn is the / compilable language / for user interfaces."* for this reason).
-8. **A hero zone is exempt.** The front page's hero (the photograph and its panel) holds a short tagline and one line that does
-   not repeat it, in the Principal's words; the strict register begins below it, and the check judges the front page on its first
-   content section. The hero's title still keeps rule 7. Asked by the Principal on 2026-11-05: *"don't apply the strict sentence
+8. **The front page's hero holds the claim.** Its kicker names Zayn, its title is the tagline the Principal ruled, "Declare what a
+   user is doing. The law refuses the rest." (ZAYN-SITE-RETHINK-01, ruling 4), and its lede's first sentence names Zayn; the check reads
+   the kicker beside the title, and allows the tagline by name over six words. Until 2026-11-14 the hero was a photograph and its
+   panel, exempt from the strict register and judged on its first content section. The hero's title still keeps rule 7. Asked by the Principal on 2026-11-05: *"don't apply the strict sentence
    style to the hero zones"*.
 9. **The Zayn site does not name Zing.** `node tools/site-shell.js` fails on the word in any page, comment or JSON file, and in
    README.md, the repository's front page, with its file and line. Ruled by the Principal on 2026-11-06: *"do not reference Zing in the Zane site"*.

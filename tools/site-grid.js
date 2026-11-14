@@ -10,6 +10,7 @@
      site/grid.html   <!-- grid:table -->      the coverage grid: doc/design/coverage-count.js --json (the placement file,
                                                 the law, media.json and the fixtures) -- a row per channel, a column per activity
      site/media.html  <!-- channels:table -->  the ten channels and their properties: conformance/media.json
+     index.html       <!-- ideas:table -->     the front page's plate of intent, the channels and the grid: the same two sources
    The check is run by tools/site-facts.js, so one command fails when either page drifts from its data.
    ========================================================================== */
 const fs = require('fs');
@@ -75,9 +76,67 @@ ${rows}
 </div>`;
 }
 
+/* The front page's plate of the three ideas (ZAYN-SITE-RETHINK-01 addendum, rule 4; the Principal, 2026-11-14: "The frontapage hides very
+   important concepts like : intent-driven, grid as a systematic conceptual framework, channels covered not only gui"): the verbs a user uses,
+   by activity; the ten channels, a screen being one; and the grid they make, a row per channel and a column per activity, each cell the
+   number of rules written for it, an open cell a dot and a closed one a cross, each with its word for a reader that reads the markup.
+   Drawn from coverage-count.js --json and conformance/media.json, like the two tables above. */
+function ideasFigure() {
+  const r = spawnSync(process.execPath, [R('doc/design/coverage-count.js'), '--json'], { encoding: 'utf8', maxBuffer: 1 << 26 });
+  if (r.status !== 0 && !r.stdout) throw new Error('coverage-count.js failed: ' + r.stderr);
+  const g = JSON.parse(r.stdout).grid;
+  const m = JSON.parse(fs.readFileSync(R('conformance/media.json'), 'utf8'));
+  const cell = {};
+  for (const c of g.cells) cell[c.activity + '|' + c.column] = c;
+  const verbs = g.activities.filter(a => g.verbs[a].length).map(a => `      <dt>${esc(a)}</dt><dd>${g.verbs[a].map(esc).join(', ')}</dd>`).join('\n');
+  const chans = m.media.map(c => `      <div><dt>${esc(c.id)}</dt><dd>${esc(c.title)}</dd></div>`).join('\n');
+  let has = 0, open = 0, shut = 0;
+  const rows = g.columns.map(col => {
+    const tds = g.activities.map(a => {
+      const x = cell[a + '|' + col];
+      if (x.closed) { shut++; return '<td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td>'; }
+      if (x.rules > 0) { has++; return `<td class="g-has"><b>${x.rules}</b></td>`; }
+      open++; return '<td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td>';
+    }).join('');
+    return `        <tr><th scope="row">${col === 'any' ? 'any channel' : esc(col)}</th>${tds}</tr>`;
+  }).join('\n');
+  const head = g.activities.map(a => `<th scope="col">${esc(a)}</th>`).join('');
+  return `<figure class="plate ideas">
+  <div class="plate-head"><h3>Intent, the channels and the grid</h3></div>
+  <div class="ideas-grid">
+    <div class="idea">
+      <h4 class="label">1. Intent: what a user is doing</h4>
+      <p class="note">A verb belongs to one activity. Perceive and trust hold no verb of their own.</p>
+      <dl class="verbs">
+${verbs}
+      </dl>
+    </div>
+    <div class="idea">
+      <h4 class="label">2. Channels: where it happens</h4>
+      <p class="note">One declaration serves any of them, and a verb a channel cannot carry is refused.</p>
+      <dl class="chans">
+${chans}
+      </dl>
+    </div>
+    <div class="idea">
+      <h4 class="label">3. The grid: what the law covers</h4>
+      <p class="note">A row is a channel and a column an activity; a cell holds the number of rules written for it.</p>
+      <table class="mini">
+        <thead><tr><th scope="col">Channel</th>${head}</tr></thead>
+        <tbody>
+${rows}
+        </tbody>
+      </table>
+      <p class="note"><b>${has}</b> cells hold a rule, <b>${open}</b> are open (<span aria-hidden="true">·</span>) and <b>${shut}</b> are closed (<span aria-hidden="true">×</span>): the channel cannot carry that activity.</p>
+    </div>
+  </div>
+</figure>`;
+}
+
 const BLOCKS = [
   { file: 'site/grid.html', name: 'grid:table', make: gridTable },
-  { file: 'site/media.html', name: 'channels:table', make: channelsTable }
+  { file: 'site/media.html', name: 'channels:table', make: channelsTable },
+  { file: 'index.html', name: 'ideas:table', make: ideasFigure }
 ];
 
 function main(argv) {
@@ -102,4 +161,4 @@ function main(argv) {
   return 0;
 }
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
-module.exports = { gridTable, channelsTable };
+module.exports = { gridTable, channelsTable, ideasFigure };

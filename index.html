@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zayn — the compilable language for user interfaces</title>
-<meta name="description" content="Zayn is a declarative, compilable language for user interfaces that states what a user is doing. Its law refuses a declaration that breaks a rule, and names the rule, before anything is drawn.">
+<meta name="description" content="Zayn is a compilable language for user interfaces. You declare what a user, a person or an agent, is doing; a verifier reads the declaration against a law and refuses what the law forbids, by name, before anything is drawn.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23241d49'/%3E%3Ctext x='16' y='24' font-family='system-ui' font-weight='900' font-size='22' text-anchor='middle' fill='%23e04a6e'%3EZ%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="site/stz.css?v=d517ed01">
+<link rel="stylesheet" href="site/stz.css?v=62fbd89f">
 <!-- shell:vibe -->
 <script>try{if(localStorage.getItem('stzzui-vibe')==='guardian')document.documentElement.dataset.vibe='guardian'}catch(e){}</script>
 <!-- /shell:vibe -->
@@ -40,56 +40,343 @@
 </div>
 <!-- /shell:menu -->
 
-<!-- The photograph is the National Museum of Niamey, by day in Modern and by night in Retro, both provided by the author (2026-11-04 and
-     2026-11-06). Each comes in widths the browser chooses from (srcset), and both are lazy, so a browser fetches only the one its theme shows.
-     Their sizes, hashes and the contrast of the text over them are recorded beside the rule in site/stz.css. -->
+<main id="main">
+<!-- The first screen shows the claim before it argues it (ZAYN-SITE-RETHINK-01, ruling 1): the tagline the Principal ruled (ruling 4),
+     one lede, and the plate, a declaration with the verifier's report on it, in two states. Every report on this page is a real run,
+     re-run by tools/site-facts.js. -->
 <header class="hero">
-  <img class="day" src="site/assets/niamey-national-museum.webp" width="1699" height="926" loading="lazy"
-       srcset="site/assets/niamey-national-museum-800.webp 800w, site/assets/niamey-national-museum-1280.webp 1280w, site/assets/niamey-national-museum.webp 1699w" sizes="(orientation: portrait) 183vh, 100vw"
-       alt="The National Museum of Niamey: a white facade with blue geometric reliefs and a blue door, above terraced stone steps with blue flower pots.">
-  <img class="night" src="site/assets/niamey-national-museum-night.webp" width="1380" height="752" loading="lazy"
-       srcset="site/assets/niamey-national-museum-night-800.webp 800w, site/assets/niamey-national-museum-night.webp 1380w" sizes="(orientation: portrait) 183vh, 100vw"
-       alt="The National Museum of Niamey at night: the white facade with its blue reliefs under a deep blue sky, the lit door, and lanterns on the stone steps.">
-  <div class="panel">
-    <h1>The compilable language for user interfaces</h1>
-    <p>Declare what a person or agent is doing, in Zayn. A law refuses the rest, by name, before anything is drawn.</p>
-    <a class="btn primary" href="site/how.html">Discover how Zayn works →</a>
+  <div class="narrow">
+    <p class="kicker">Zayn, the compilable language for user interfaces</p>
+    <h1><span class="whole">Declare what a user is doing.</span> <span class="whole">The law refuses the rest.</span></h1>
+    <p class="sub">A declaration in Zayn names the action, and the verifier checks it against <span data-law="rules">123</span> rules before a screen exists; its answer is the rule the declaration breaks, by name and number.</p>
+
+    <figure class="plate" id="plate" data-wasm="site/zayn.wasm?v=070f1626">
+      <div class="plate-head">
+        <h2 id="one-payment">One payment, refused, then corrected</h2>
+        <fieldset class="switch">
+          <legend>Show the declaration</legend>
+          <label><input type="radio" name="plate-state" value="first" checked> as first written</label>
+          <label><input type="radio" name="plate-state" value="fixed"> corrected</label>
+        </fieldset>
+      </div>
+      <div class="plate-grid">
+        <div class="state first">
+          <p class="label l1">1. You write what the user does</p>
+<pre class="shot">// payments.zayn
+DEFINE INTENT_FLOW approve_payment (
+  SATISFIES [SELECT, CONFIRM, ACT]
+)</pre>
+          <p class="gloss g1"><b>In words:</b> a flow in which the user selects, confirms and acts. It says nothing about leaving or going back.</p>
+          <p class="label l2">2. The verifier answers, by name</p>
+<pre class="term">$ zayn check payments.zayn
+payments.zayn:2  <span class="bad">error  MISSING_UNDO</span>  approve_payment
+    An act declares no way back: SATISFIES holds ACT, ALWAYS_REACHABLE lacks UNDO.
+    <span class="dim">Rule 79 · The Undo Covenant · Article IV · the right to reverse</span>
+payments.zayn:2  <span class="bad">error  MISSING_CANCEL</span>  approve_payment
+    A flow that acts cannot be abandoned: ALWAYS_REACHABLE lacks CANCEL.
+    <span class="dim">Rule 26 · The Back Button is Holy · Article IV · the right to leave</span>
+
+2 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+          <p class="gloss g2"><b>In words:</b> the verifier read line 2, marked in the declaration. The flow lets the user act, and it gives no way back (Rule 79) and no way out (Rule 26).</p>
+          <p class="label l3">3. What a person meets on a screen</p>
+          <div class="story sketch">
+            <p class="illus">Illustration: Zayn checks the declaration, and the screen stays yours to draw.</p>
+            <p class="frame-cap">Before the act</p>
+            <div class="frame"><b>Approve payment</b><span data-specimen>1,240.00</span> to Atlas Supplies
+              <div class="ctl-row"><span class="ctl gone">no Cancel · Rule 26</span><span class="ctl main">Approve payment</span></div>
+            </div>
+            <p class="frame-cap">After the act</p>
+            <div class="frame"><b>Payment approved</b><span data-specimen>1,240.00</span> to Atlas Supplies
+              <div class="ctl-row"><span class="ctl gone">no Undo · Rule 79</span></div>
+            </div>
+            <p class="note">The person cannot leave before the payment, nor take it back after. Zayn found both in four lines, before any screen existed.</p>
+          </div>
+        </div>
+        <div class="state fixed">
+          <p class="label l1">1. You write what the user does</p>
+<pre class="shot">// payments.zayn
+DEFINE INTENT_FLOW approve_payment (
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL]
+)</pre>
+          <p class="gloss g1"><b>In words:</b> the same flow, and from every step the user can cancel it or undo it.</p>
+          <p class="label l2">2. The verifier answers, by name</p>
+<pre class="term">$ zayn check payments.zayn
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zayn v3.17</pre>
+          <p class="gloss g2"><b>In words:</b> line 4 now promises the way back and the way out, so the verifier has nothing left to refuse.</p>
+          <p class="label l3">3. What a person meets on a screen</p>
+          <div class="story sketch">
+            <p class="illus">Illustration: Zayn checks the declaration, and the screen stays yours to draw.</p>
+            <p class="frame-cap">Before the act</p>
+            <div class="frame"><b>Approve payment</b><span data-specimen>1,240.00</span> to Atlas Supplies
+              <div class="ctl-row"><span class="ctl kept">Cancel</span><span class="ctl main">Approve payment</span></div>
+            </div>
+            <p class="frame-cap">After the act</p>
+            <div class="frame"><b>Payment approved</b><span data-specimen>1,240.00</span> to Atlas Supplies
+              <div class="ctl-row"><span class="ctl kept">Undo</span></div>
+            </div>
+            <p class="note">Cancel stands beside the act and Undo follows it. One line of the declaration made both promises.</p>
+          </div>
+        </div>
+      </div>
+    </figure>
+    <p class="caption" id="plate-caption">The declaration holds no widget, no layout and no framework, and both reports are the verifier's own output.</p>
+    <div class="actions">
+      <a class="btn primary" href="site/how.html">Discover how Zayn works ↗</a>
+      <a href="site/build.html">Put the law into a build</a>
+    </div>
   </div>
 </header>
 
-<main id="main">
 <section>
   <div class="narrow">
-    <h2 id="what-zayn-is">Zayn is a language for intent-driven user interfaces, held to a law</h2>
-    <p>Zayn is a declarative, compilable language for user interfaces: a declaration states what the user, a person or an agent, is doing, and a verifier refuses what the law forbids before anything is drawn.</p>
-  </div>
-</section>
-
-<section>
-  <div class="narrow">
-    <h2 id="why-zayn-exists">Why Zayn exists</h2>
-    <p>Interfaces built with AI assistants repeat the same defects after explicit instruction. The author of Zayn corrected <span data-fact="corpus.corrections">463</span> of them in <span data-fact="corpus.projects">26</span> projects, <span data-fact="corpus.repeats">170</span> of them a defect corrected before, and decided to end the repetition from first principles.</p>
-    <div class="samples">
-      <figure class="sample"><div class="window"><div class="strip">An order</div><div class="view">
-        <p>The order ships on Thursday.</p><p style="font-size:var(--size-small);color:var(--ink-2)">Placed by the Niamey office.</p>
-      </div></div><figcaption><span class="tag ok">Lawful</span> Quieter by tone, at the reading floor (Rule 105).</figcaption></figure>
-      <figure class="sample" data-offending><div class="window"><div class="strip">An order</div><div class="view">
-        <p>The order ships on Thursday.</p><p class="x-small">Placed by the Niamey office.</p>
-      </div></div><figcaption><span class="tag bad">Offending</span> Small grey text, the correction the author made most often.</figcaption></figure>
+    <h2 id="the-ideas">What a user does, where, and what the law covers</h2>
+    <p>A declaration is built from <span data-fact="verbs">22</span> verbs, grouped by what a user is doing. The grid crosses those activities with the <span data-fact="grid.media">10</span> channels an interface can use, a screen being one, and puts in each cell the rules written for it.</p>
+<!-- ideas:table -->
+<figure class="plate ideas">
+  <div class="plate-head"><h3>Intent, the channels and the grid</h3></div>
+  <div class="ideas-grid">
+    <div class="idea">
+      <h4 class="label">1. Intent: what a user is doing</h4>
+      <p class="note">A verb belongs to one activity. Perceive and trust hold no verb of their own.</p>
+      <dl class="verbs">
+      <dt>understand</dt><dd>DISCOVER, UNDERSTAND, LOCATE, READ, SCAN, SCROLL, ZOOM, COMPARE</dd>
+      <dt>decide</dt><dd>FOCUS, FILTER, SELECT, HIGHLIGHT, PREVIEW, MARK</dd>
+      <dt>act</dt><dd>ACT, CONFIRM</dd>
+      <dt>recover</dt><dd>CANCEL, UNDO, PAUSE, RESUME, RETRY, EXIT</dd>
+      </dl>
     </div>
-    <p><a href="site/why.html">The problem, its cost and the decision →</a></p>
+    <div class="idea">
+      <h4 class="label">2. Channels: where it happens</h4>
+      <p class="note">One declaration serves any of them, and a verb a channel cannot carry is refused.</p>
+      <dl class="chans">
+      <div><dt>visual</dt><dd>A screen or page</dd></div>
+      <div><dt>auditory</dt><dd>Non-speech sound</dd></div>
+      <div><dt>voice</dt><dd>Speech in and out</dd></div>
+      <div><dt>haptic</dt><dd>Touch and vibration</dd></div>
+      <div><dt>print</dt><dd>The fixed record</dd></div>
+      <div><dt>luminous</dt><dd>Indicator light, lamp, beacon</dd></div>
+      <div><dt>signage</dt><dd>Fixed physical marking</dd></div>
+      <div><dt>machine</dt><dd>Consumed by a program</dd></div>
+      <div><dt>spatial</dt><dd>A world seen from a vantage</dd></div>
+      <div><dt>terminal</dt><dd>A text grid</dd></div>
+      </dl>
+    </div>
+    <div class="idea">
+      <h4 class="label">3. The grid: what the law covers</h4>
+      <p class="note">A row is a channel and a column an activity; a cell holds the number of rules written for it.</p>
+      <table class="mini">
+        <thead><tr><th scope="col">Channel</th><th scope="col">perceive</th><th scope="col">understand</th><th scope="col">decide</th><th scope="col">act</th><th scope="col">recover</th><th scope="col">trust</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">any channel</th><td class="g-has"><b>5</b></td><td class="g-has"><b>10</b></td><td class="g-has"><b>9</b></td><td class="g-has"><b>2</b></td><td class="g-has"><b>5</b></td><td class="g-has"><b>9</b></td></tr>
+        <tr><th scope="row">visual</th><td class="g-has"><b>36</b></td><td class="g-has"><b>50</b></td><td class="g-has"><b>9</b></td><td class="g-has"><b>12</b></td><td class="g-has"><b>9</b></td><td class="g-has"><b>12</b></td></tr>
+        <tr><th scope="row">auditory</th><td class="g-has"><b>2</b></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-has"><b>1</b></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">voice</th><td class="g-has"><b>1</b></td><td class="g-has"><b>1</b></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">haptic</th><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">print</th><td class="g-has"><b>1</b></td><td class="g-has"><b>1</b></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">luminous</th><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">signage</th><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-closed"><span aria-hidden="true">×</span><span class="sr">closed</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">machine</th><td class="g-has"><b>1</b></td><td class="g-has"><b>1</b></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">spatial</th><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        <tr><th scope="row">terminal</th><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td><td class="g-none"><span aria-hidden="true">·</span><span class="sr">open</span></td></tr>
+        </tbody>
+      </table>
+      <p class="note"><b>20</b> cells hold a rule, <b>35</b> are open (<span aria-hidden="true">·</span>) and <b>11</b> are closed (<span aria-hidden="true">×</span>): the channel cannot carry that activity.</p>
+    </div>
+  </div>
+</figure>
+<!-- /ideas:table -->
+    <p class="caption">Drawn from the law's own data, and drawn again by the site on every build. <a href="site/grid.html">The grid, cell by cell ↗</a></p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2 id="what-zayn-holds">What Zayn is, in three layers</h2>
+    <h2 id="a-user">A user is a person or an agent</h2>
+    <p>One declaration serves a clerk at a screen, a caller on a phone line and an agent that a program drives. Each can cancel before the payment and undo it after, and the law holds that promise on every channel.</p>
+    <div class="grid readers">
+      <div class="card reader">
+        <h3>A person</h3>
+        <p class="on">on a screen</p>
+        <div class="sketch">
+          <p class="illus">Illustration</p>
+          <div class="frame"><b>Approve payment</b><span data-specimen>1,240.00</span> to Atlas Supplies
+            <div class="ctl-row"><span class="ctl">Cancel</span><span class="ctl main">Approve payment</span></div>
+          </div>
+        </div>
+<pre class="shot">// approve_payment, for an operator
+DEFINE VIBE payments_screen (
+  SURFACE_AS visual
+)
+DEFINE INTENT_FLOW approve_payment (
+  ACTOR operator,
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL]
+)</pre>
+        <p class="gloss"><b>In words:</b> the flow, for an operator at a screen. The verifier passes it.</p>
+<pre class="term">$ zayn check pay_screen.zayn
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zayn v3.17</pre>
+      </div>
+      <div class="card reader">
+        <h3>A caller</h3>
+        <p class="on">on a voice line</p>
+        <div class="sketch">
+          <p class="illus">Illustration</p>
+          <p class="say"><span class="who">The line</span>Pay <span data-specimen>1,240.00</span> to Atlas Supplies. Say approve, or say cancel.</p>
+          <p class="say them"><span class="who">The caller</span>Approve.</p>
+          <p class="say"><span class="who">The line</span>Paid. Say undo to take it back.</p>
+        </div>
+<pre class="shot">// approve_payment, for a caller
+DEFINE VIBE payments_voice (
+  SURFACE_AS voice
+)
+DEFINE INTENT_FLOW approve_payment (
+  ACTOR caller,
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL]
+)</pre>
+        <p class="gloss"><b>In words:</b> the same flow, for a caller on a voice line. The verifier passes it.</p>
+<pre class="term">$ zayn check pay_voice.zayn
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zayn v3.17</pre>
+      </div>
+      <div class="card reader">
+        <h3>An agent</h3>
+        <p class="on">on a machine surface</p>
+        <div class="sketch">
+          <p class="illus">Illustration</p>
+          <dl class="kv">
+            <dt>flow</dt><dd>approve_payment</dd>
+            <dt>state</dt><dd>awaiting CONFIRM</dd>
+            <dt>reachable</dt><dd>CANCEL, UNDO</dd>
+          </dl>
+        </div>
+<pre class="shot">// approve_payment, for an agent
+DEFINE VIBE payments_machine (
+  SURFACE_AS machine
+)
+DEFINE INTENT_FLOW approve_payment (
+  ACTOR agent,
+  SATISFIES [SELECT, CONFIRM, ACT],
+  ALWAYS_REACHABLE [UNDO, CANCEL]
+)</pre>
+        <p class="gloss"><b>In words:</b> the same flow, for an agent on a machine surface. The verifier passes it.</p>
+<pre class="term">$ zayn check pay_machine.zayn
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zayn v3.17</pre>
+      </div>
+    </div>
+    <p class="caption">The three declarations differ by two lines, and one command passes all three. Each sketch shows one way its channel can carry the promise; the renderer belongs to the project that ships it.</p>
+    <p>The law also knows what a channel cannot carry. A flow that promises to zoom on a voice line is refused, and the report names the promise:</p>
+<pre class="shot">DEFINE VIBE phone_line (
+  SURFACE_AS voice,
+  MOTION none
+)
+DEFINE INTENT_FLOW check_balance (
+  SATISFIES [UNDERSTAND, ZOOM],
+  ALWAYS_REACHABLE [CANCEL, EXIT],
+  ACTOR caller
+)</pre>
+    <p class="gloss"><b>In words:</b> a caller checks a balance on a voice line, and the flow promises to zoom.</p>
+<pre class="term">$ zayn check check_balance.zayn
+check_balance.zayn:5  <span class="bad">error  VERB_NOT_CARRIED</span>  ZOOM in check_balance on voice
+    A declaration satisfies, or promises to keep reachable, an intent the declared medium cannot carry at all.
+    <span class="dim">Rule 82 · Perceivable State · Article II</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 2</pre>
+    <p class="gloss"><b>In words:</b> the verifier read line 5, marked in the declaration. A voice line cannot zoom (Rule 82), and the report names that one promise and nothing else.</p>
+    <p><a href="site/media.html">The ten channels, and what each one carries ↗</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="ways-in">Three ways in, by what you do</h2>
+    <p>Each craft meets the law at its own moment, through the same command.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>You design interfaces</h3>
+        <p>You write what a user comes to do, in a closed vocabulary of <span data-fact="verbs">22</span> verbs, and the law answers before a wireframe exists.</p>
+        <ul>
+          <li><a href="site/build.html">Check a declaration in the browser</a></li>
+          <li><a href="site/gotchas/index.html">Commit each violation beside its lawful twin</a></li>
+          <li><a href="tools/ui-audit.html">Measure a live page against the law</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>You write software</h3>
+        <p>The verifier is one file with nothing to install beside it. Any language calls it as a command, and a build fails when a declaration is refused.</p>
+        <ul>
+          <li><a href="site/build.html">Put the law into a build</a></li>
+          <li><a href="site/ports.html">Port it, and prove that the port agrees</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>You build with AI</h3>
+        <p>A generator declares its intent before it draws, and the law tells it which rule it broke. An agent that uses an interface keeps the rights a person has.</p>
+        <ul>
+          <li><a href="site/generate.html">Hold a generator to the law</a></li>
+          <li><a href="site/beyond.html">Declare a surface an agent uses</a></li>
+          <li><a href="site/gotchas/intelligence.html">The rules that govern an agent</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="the-loop">A generator declares before it draws</h2>
+    <p>A model repeats the habits of the interfaces it learned from, at machine speed and under any instruction. Zayn gives it a declaration to write first, a grammar that fixes its shape, and a verifier that answers by rule.</p>
+    <figure class="loop">
+      <div class="loop-steps">
+        <div class="step3"><h3>The generator declares</h3><p>The grammar <code>haro/zayn.gbnf</code> fixes the <span data-fact="gbnf.kinds">10</span> kinds of declaration it can write.</p></div>
+        <div class="step3"><h3>The verifier judges</h3><p><code>zayn check</code> reads the declaration against the <span data-law="rules">123</span> rules.</p></div>
+        <div class="step3"><h3>Clean, so the surface is drawn</h3><p>The UI audit then measures what the browser painted.</p></div>
+      </div>
+      <div class="back"><p>Refused: the report names the rule, and the generator corrects the declaration and declares again.</p></div>
+    </figure>
+    <p class="caption">The grammar narrows what a generator can write; the verifier judges what it means.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="why-a-law">Why a law, and why now</h2>
+    <p>Interfaces built with AI assistants repeat the same defects after explicit instruction. The author of Zayn corrected <span data-fact="corpus.corrections">480</span> of them across <span data-fact="corpus.projects">26</span> projects, and <span data-fact="corpus.repeats">170</span> of those corrections name an earlier one: the same defect, made again after it was corrected.</p>
+    <p><a href="site/why.html">The problem, its cost and the decision ↗</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="the-name">The name</h2>
+    <p>Zayn comes from the Arabic <span lang="ar" dir="rtl">زَيْن</span>, beauty and adornment.</p>
+    <figure class="name-photo">
+      <img class="day" src="site/assets/niamey-national-museum.webp" width="1699" height="926" loading="lazy"
+           srcset="site/assets/niamey-national-museum-800.webp 800w, site/assets/niamey-national-museum-1280.webp 1280w, site/assets/niamey-national-museum.webp 1699w" sizes="(max-width: 760px) 100vw, 46rem"
+           alt="The National Museum of Niamey: a white facade with blue geometric reliefs and a blue door, above terraced stone steps with blue flower pots.">
+      <img class="night" src="site/assets/niamey-national-museum-night.webp" width="1380" height="752" loading="lazy"
+           srcset="site/assets/niamey-national-museum-night-800.webp 800w, site/assets/niamey-national-museum-night.webp 1380w" sizes="(max-width: 760px) 100vw, 46rem"
+           alt="The National Museum of Niamey at night: the white facade with its blue reliefs under a deep blue sky, the lit door, and lanterns on the stone steps.">
+      <figcaption>The National Museum of Niamey, by day in the Modern theme and by night in the Retro theme. Photographs provided by the author.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="what-exists">What exists today</h2>
+    <p>Each part of Zayn this page speaks of, with its state.</p>
     <table class="board">
-      <thead><tr><th>The layer</th><th>What it holds</th><th>Where to read it</th></tr></thead>
+      <thead><tr><th>The part</th><th>Its state</th></tr></thead>
       <tbody>
-        <tr><td>The language</td><td>Ten kinds of declaration over a closed set of verbs; a widget follows from what the user is doing.</td><td><a href="site/how.html">The basics</a></td></tr>
-        <tr><td>The law</td><td><span data-law="rules">123</span> rules stored as data, each with its reason, its article and the evidence that earned it.</td><td><a href="site/rules.html">The rules</a></td></tr>
-        <tr><td>The projections and the audit</td><td>A rendering of the declaration to each channel, and an audit that measures the painted page.</td><td><a href="site/media.html">Channels</a>, <a href="tools/ui-audit.html">the UI audit</a></td></tr>
+        <tr><td>The language and its verifier, <code>zayn</code>, with <span data-law="diagnostics">40</span> diagnostics</td><td class="status exists">exists</td></tr>
+        <tr><td>The verifier in this page, compiled to WebAssembly from the same code</td><td class="status exists">exists</td></tr>
+        <tr><td>The law as data: <span data-law="rules">123</span> rules under <span data-law="articles">7</span> articles</td><td class="status exists">exists</td></tr>
+        <tr><td>The conformance suite of <span data-fact="fixtures.total">77</span> declarations with known verdicts</td><td class="status exists">exists</td></tr>
+        <tr><td>The UI audit of a painted page</td><td class="status exists">exists</td></tr>
+        <tr><td>The rules that govern an agent: Rules 97 to 104, 121 and 124</td><td class="status exists">exists</td></tr>
+        <tr><td>The rendering of a declaration on each channel, written as data that each project's renderer reads</td><td class="status data-only">data only</td></tr>
+        <tr><td>The audit of a screenshot of an application you do not own</td><td class="status designed">designed</td></tr>
       </tbody>
     </table>
   </div>
@@ -97,25 +384,16 @@
 
 <section>
   <div class="narrow">
-    <h2 id="what-is-here">What is on this site</h2>
-    <table class="board">
-      <thead><tr><th>The section</th><th>What it holds</th></tr></thead>
-      <tbody>
-        <tr><td><a href="site/why.html">Why</a></td><td>The problem Zayn answers, the reasoning behind it, its comparison with the practices you already use, and its claims.</td></tr>
-        <tr><td><a href="site/how.html">Language</a></td><td>The basics, what the verifier refuses, the grid of what the law covers, the channels, and Zayn declared in Haro.</td></tr>
-        <tr><td><a href="site/rules.html">Law</a></td><td>The rules, the Reader, what a violation feels like, the two cultures, and conformance.</td></tr>
-        <tr><td><a href="site/adopt.html">Adopt</a></td><td>The ways into a product you already have, and Zayn in your stack.</td></tr>
-        <tr><td><a href="site/audit.html">Demo</a></td><td>The tour, the UI audit, the screenshots and the wasm proof.</td></tr>
-      </tbody>
-    </table>
-    <p>The tour presents Zayn to a team, in the order that suits the people in the room:</p>
-    <ul class="profiles">
-      <li><a href="site/tour.html#ux/1">UX designer →</a></li>
-      <li><a href="site/tour.html#product/1">Product designer →</a></li>
-      <li><a href="site/tour.html#programmer/1">Programmer →</a></li>
-      <li><a href="site/tour.html#ai/1">AI builder →</a></li>
-      <li><a href="site/tour.html#decision/1">Decision maker →</a></li>
-    </ul>
+    <h2 id="this-page">This page, declared</h2>
+    <p>This page is a Zayn surface too. Its declaration says what a visitor comes here to do, and the same verifier passes it.</p>
+<pre class="shot">// index.zayn
+DEFINE SCREEN front_page (
+  SATISFIES [DISCOVER, UNDERSTAND, COMPARE],
+  ALWAYS_REACHABLE [EXIT]
+)</pre>
+    <p class="gloss"><b>In words:</b> a visitor comes to discover, understand and compare, and can always leave. The verifier passes it.</p>
+<pre class="term">$ zayn check index.zayn
+<span class="good">clean</span> — 1 file(s), 0 violations at level 2 against Zayn v3.17</pre>
   </div>
 </section>
 </main>
@@ -134,6 +412,8 @@
 </footer>
 <!-- /shell:footer -->
 
-<script src="site/stz.js?v=2934cb9d"></script>
+<script src="site/stz.js?v=e07737fa"></script>
+<script src="site/zayn-wasm.js?v=30454a74"></script>
+<script src="site/try.js?v=2ed01547"></script>
 </body>
 </html>

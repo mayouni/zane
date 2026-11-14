@@ -4,6 +4,7 @@
 //!
 //!   site/grid.html   <!-- grid:table -->      the coverage grid: a row per channel, a column per activity
 //!   site/media.html  <!-- channels:table -->  the ten channels and their properties, from conformance/media.json
+//!   index.html       <!-- ideas:table -->     the front page's plate of intent, the channels and the grid
 //!
 //! Like `zayn pack`, it reads the tree it is run in (the repository's root): the placement file, the law, media.json,
 //! violations.json, the manifest and the fixtures, never the copies built into the binary. The counts are those of
@@ -307,10 +308,63 @@ fn channelsTable(a: Allocator) anyerror![]const u8 {
     return w.written();
 }
 
+/// The front page's plate of intent, the channels and the grid (ideasFigure in tools/site-grid.js, byte for byte).
+fn ideasFigure(a: Allocator) anyerror![]const u8 {
+    const g = try coverage(a);
+    const m = try parse(a, "conformance/media.json");
+    var w: std.Io.Writer.Allocating = .init(a);
+    const o = &w.writer;
+    try o.writeAll("<figure class=\"plate ideas\">\n  <div class=\"plate-head\"><h3>Intent, the channels and the grid</h3></div>\n  <div class=\"ideas-grid\">\n    <div class=\"idea\">\n      <h4 class=\"label\">1. Intent: what a user is doing</h4>\n      <p class=\"note\">A verb belongs to one activity. Perceive and trust hold no verb of their own.</p>\n      <dl class=\"verbs\">\n");
+    var first = true;
+    for (activities, 0..) |act, i| {
+        if (verbs_of[i].len == 0) continue;
+        if (!first) try o.writeByte('\n');
+        first = false;
+        try o.writeAll(try js.fmt(a, "      <dt>{s}</dt><dd>", .{try esc(a, act)}));
+        for (verbs_of[i], 0..) |v, k| {
+            if (k > 0) try o.writeAll(", ");
+            try o.writeAll(try esc(a, v));
+        }
+        try o.writeAll("</dd>");
+    }
+    try o.writeAll("\n      </dl>\n    </div>\n    <div class=\"idea\">\n      <h4 class=\"label\">2. Channels: where it happens</h4>\n      <p class=\"note\">One declaration serves any of them, and a verb a channel cannot carry is refused.</p>\n      <dl class=\"chans\">\n");
+    for (js.items(js.get(m, "media")), 0..) |c, i| {
+        if (i > 0) try o.writeByte('\n');
+        try o.writeAll(try js.fmt(a, "      <div><dt>{s}</dt><dd>{s}</dd></div>", .{ try esc(a, try js.string(a, js.get(c, "id"))), try esc(a, try js.string(a, js.get(c, "title"))) }));
+    }
+    try o.writeAll("\n      </dl>\n    </div>\n    <div class=\"idea\">\n      <h4 class=\"label\">3. The grid: what the law covers</h4>\n      <p class=\"note\">A row is a channel and a column an activity; a cell holds the number of rules written for it.</p>\n      <table class=\"mini\">\n        <thead><tr><th scope=\"col\">Channel</th>");
+    for (activities) |act| try o.writeAll(try js.fmt(a, "<th scope=\"col\">{s}</th>", .{try esc(a, act)}));
+    try o.writeAll("</tr></thead>\n        <tbody>\n");
+    var has: usize = 0;
+    var open: usize = 0;
+    var shut: usize = 0;
+    for (g.cols, 0..) |c, col| {
+        if (col > 0) try o.writeByte('\n');
+        try o.writeAll(try js.fmt(a, "        <tr><th scope=\"row\">{s}</th>", .{if (col == 0) "any channel" else try esc(a, c)}));
+        for (0..6) |act| {
+            const i = g.at(act, col);
+            if (g.closed[i]) {
+                shut += 1;
+                try o.writeAll("<td class=\"g-closed\"><span aria-hidden=\"true\">×</span><span class=\"sr\">closed</span></td>");
+            } else if (g.rules[i] > 0) {
+                has += 1;
+                try o.writeAll(try js.fmt(a, "<td class=\"g-has\"><b>{d}</b></td>", .{g.rules[i]}));
+            } else {
+                open += 1;
+                try o.writeAll("<td class=\"g-none\"><span aria-hidden=\"true\">·</span><span class=\"sr\">open</span></td>");
+            }
+        }
+        try o.writeAll("</tr>");
+    }
+    try o.writeAll(try js.fmt(a, "\n        </tbody>\n      </table>\n      <p class=\"note\"><b>{d}</b> cells hold a rule, <b>{d}</b> are open (<span aria-hidden=\"true\">·</span>) and <b>{d}</b> are closed (<span aria-hidden=\"true\">×</span>): the channel cannot carry that activity.</p>\n    </div>\n  </div>\n</figure>", .{ has, open, shut }));
+    return w.written();
+}
+
 const Block = struct { file: []const u8, name: []const u8, make: *const fn (Allocator) anyerror![]const u8 };
 const blocks = [_]Block{
     .{ .file = "site/grid.html", .name = "grid:table", .make = &gridTable },
     .{ .file = "site/media.html", .name = "channels:table", .make = &channelsTable },
+    .{ .file = "index.html", .name = "ideas:table", .make = &ideasFigure },
 };
 
 /// The problems of the check (each line without its "PROBLEM " prefix), or, with `write`, the tables drawn.

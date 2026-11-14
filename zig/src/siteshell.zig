@@ -622,7 +622,7 @@ fn checkBars(a: Allocator, problems: *List) !void {
 
 // ---- the register: each page names its subject (doc/design/WRITING.md) --------------------------------------------
 
-const Head = struct { h1: ?[]const u8, first: ?[]const u8 };
+const Head = struct { h1: ?[]const u8, first: ?[]const u8, kicker: ?[]const u8 = null };
 fn firstSentence(a: Allocator, s: []const u8) ![]const u8 {
     if (try re.find(a, s, "^([\\s\\S]*?[.!?])(?=\\s|$)", "")) |m| return m.get(s, 1).?;
     return s;
@@ -632,7 +632,9 @@ fn nonEmpty(s: ?[]const u8) ?[]const u8 {
     return if (x.len == 0) null else x;
 }
 fn headOf(a: Allocator, text: []const u8) !Head {
-    if (std.mem.indexOf(u8, text, "<header class=\"hero\"") != null) {
+    // a hero over a photograph (header.hero holding a div.panel) is judged on its first section; a hero with no panel, the front page
+    // that shows its claim first (ZAYN-SITE-RETHINK-01), is judged as any head is, its kicker beside its title
+    if (std.mem.indexOf(u8, text, "<header class=\"hero\"") != null and std.mem.indexOf(u8, text, "<div class=\"panel\">") != null) {
         const sec_m = try re.find(a, text, "<main\\b[^>]*>[\\s\\S]*?<section\\b[^>]*>([\\s\\S]*?)<\\/section>", "");
         var h1: ?[]const u8 = null;
         var first: ?[]const u8 = null;
@@ -645,12 +647,14 @@ fn headOf(a: Allocator, text: []const u8) !Head {
     }
     const h1 = try re.find(a, text, "<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>", "");
     var first: ?[]const u8 = null;
+    var kicker: ?[]const u8 = null;
     if (try re.find(a, text, "<header\\b[^>]*>[\\s\\S]*?<\\/header>", "")) |hm| {
         const head = text[hm.start..hm.end];
         const lead = (try re.find(a, head, "<(p|span) class=\"sub\">([\\s\\S]*?)<\\/\\1>", "")) orelse (try re.find(a, head, "<div class=\"panel\">[\\s\\S]*?<()p>([\\s\\S]*?)<\\/p>", ""));
         if (lead) |l| first = try firstSentence(a, try plain(a, l.get(head, 2).?));
+        if (try re.find(a, head, "<p class=\"kicker\">([\\s\\S]*?)<\\/p>", "")) |k| kicker = try plain(a, k.get(head, 1).?);
     }
-    return .{ .h1 = nonEmpty(if (h1) |m| try plain(a, m.get(text, 1).?) else null), .first = nonEmpty(first) };
+    return .{ .h1 = nonEmpty(if (h1) |m| try plain(a, m.get(text, 1).?) else null), .first = nonEmpty(first), .kicker = kicker };
 }
 
 fn checkWriting(a: Allocator, problems: *List) !void {
@@ -661,8 +665,10 @@ fn checkWriting(a: Allocator, problems: *List) !void {
         // the term begins a word, so "use" is not found inside "because"; a term is letters and spaces only
         if (!try re.matches(a, term, "^[a-z ]+$", "")) try problems.append(a, try fmt(a, "{s}: the subject term \"{s}\" is not letters and spaces", .{ p.file, p.term }));
         const named = try re.compile(a, try fmt(a, "(^|[^a-z0-9]){s}", .{try re.escapeLiteral(a, term)}), "i");
+        // the front page's title is the tagline the Principal ruled, and the kicker above it names Zayn (ZAYN-SITE-RETHINK-01, ruling 4)
+        const by_kicker = p.home and h.kicker != null and re.testIn(&named, h.kicker.?);
         if (h.h1) |x| {
-            if (!re.testIn(&named, x)) try problems.append(a, try fmt(a, "{s}: the h1 does not name the page's subject (\"{s}\"): \"{s}\"", .{ p.file, p.term, x }));
+            if (!re.testIn(&named, x) and !by_kicker) try problems.append(a, try fmt(a, "{s}: the h1 does not name the page's subject (\"{s}\"): \"{s}\"", .{ p.file, p.term, x }));
         } else try problems.append(a, try fmt(a, "{s}: no h1", .{p.file}));
         if (h.first) |x| {
             if (!re.testIn(&named, x)) try problems.append(a, try fmt(a, "{s}: the lead's first sentence does not name the page's subject (\"{s}\"): \"{s}\"", .{ p.file, p.term, x }));
@@ -1229,6 +1235,239 @@ fn checkOwed(a: Allocator, notes: *List) !void {
     try notes.append(a, "NOTE K21 ARCHETYPE reads each page's declaration; the order of an archetype's regions is read from milestone 3");
 }
 
+// ---- the rethought site (ZAYN-SITE-RETHINK-01): FRONT_PLATE, TITLE6 and SKETCH_LABEL (checkFront, checkTitles and checkSketches in
+// tools/site-shell.js, finding for finding) ------------------------------------------------------------------------------
+
+const rethought = [_][]const u8{"index.html"};
+const title_max = 6;
+const TitleAllowed = struct { file: []const u8, words: []const u8, reason: []const u8 };
+const title_allowed = [_]TitleAllowed{
+    .{ .file = "index.html", .words = "Declare what a user is doing. The law refuses the rest.", .reason = "the tagline the Principal ruled (ZAYN-SITE-RETHINK-01, ruling 4); the kicker above it, \"Zayn, the compilable language for user interfaces\", names the subject" },
+};
+fn countWords(a: Allocator, s: []const u8) !usize {
+    const ws = try re.compile(a, "\\s+", "g");
+    const word = try re.compile(a, "[A-Za-z0-9]", "");
+    var n: usize = 0;
+    for (try re.split(a, &ws, s)) |w| {
+        if (re.testIn(&word, w)) n += 1;
+    }
+    return n;
+}
+fn checkTitles(a: Allocator, problems: *List, notes: *List) !void {
+    var used = [_]bool{false} ** title_allowed.len;
+    var owed: List = .empty;
+    for (&pages) |*p| {
+        if (!exists(p.file)) continue;
+        const h = try headOf(a, try core.wellFormed(a, try readFile(a, p.file)));
+        const h1 = h.h1 orelse continue;
+        const n = try countWords(a, h1);
+        if (n <= title_max) continue;
+        var allowed = false;
+        for (title_allowed, 0..) |x, k| if (std.mem.eql(u8, x.file, p.file) and std.mem.eql(u8, x.words, h1)) {
+            used[k] = true;
+            allowed = true;
+            break;
+        };
+        if (allowed) continue;
+        var is_rethought = false;
+        for (rethought) |f| if (std.mem.eql(u8, f, p.file)) {
+            is_rethought = true;
+        };
+        if (is_rethought) {
+            try problems.append(a, try fmt(a, "{s}: the title \"{s}\" has {d} words: a title names the subject in six words at most, and the lede under it says what it is (ZAYN-SITE-RETHINK-01, ruling 3)", .{ p.file, h1, n }));
+        } else try owed.append(a, try fmt(a, "{s} {d}", .{ p.file, n }));
+    }
+    for (title_allowed, 0..) |x, k| if (!used[k]) try problems.append(a, try fmt(a, "TITLE_ALLOWED: {s} \"{s}\" matches no title: the entry has outlived what it excused", .{ x.file, x.words }));
+    try notes.append(a, try fmt(a, "NOTE TITLE6, owed by step 5 of ZAYN-SITE-RETHINK-01: {d} title(s) over six words{s}{s}", .{ owed.items.len, if (owed.items.len > 0) ": " else "", try std.mem.join(a, ", ", owed.items) }));
+}
+fn checkFront(a: Allocator, problems: *List) !void {
+    if (!exists("index.html")) return;
+    const text = try std.mem.replaceOwned(u8, a, try readFile(a, "index.html"), "\r\n", "\n");
+    const head = try re.find(a, text, "<main id=\"main\">\\s*(?:<!--[\\s\\S]*?-->\\s*)*<header\\b[^>]*>([\\s\\S]*?)<\\/header>", "");
+    if (head) |h| {
+        const pair = "<figure class=\"plate\\b[^\"]*\"[^>]*>[\\s\\S]*?<pre class=\"shot\">[\\s\\S]*?<\\/pre>\\s*(?:<p class=\"(?:label|gloss)[^\"]*\">(?:<b>[^<]*<\\/b>)?[^<]*<\\/p>\\s*)*<pre class=\"term\">(?:<[^>]+>)*\\$ zayn check \\S+\\.zayn";
+        if (!try re.matches(a, h.get(text, 1).?, pair, "")) try problems.append(a, "index.html: the first screen holds no declaration and verdict: its head holds a figure.plate with a <pre class=\"shot\"> and the <pre class=\"term\"> of its zayn check run (ZAYN-SITE-RETHINK-01, ruling 1)");
+    } else try problems.append(a, "index.html: main does not open on the head that holds the claim: the first screen shows a declaration and its verdict (ZAYN-SITE-RETHINK-01, ruling 1)");
+}
+fn checkSketches(a: Allocator, problems: *List) !void {
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+    const hidden = try re.compile(a, "<(script|style)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const open = try re.compile(a, "<(\\w+)\\b[^>]*\\bclass=\"([^\"]*)\"[^>]*>", "g");
+    const label = try re.compile(a, "^\\s*<p class=\"illus\">Illustration\\b", "");
+    const ws = try re.compile(a, "\\s+", "g");
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        var text: []const u8 = try std.mem.replaceOwned(u8, a, try readFile(a, f), "\r\n", "\n");
+        text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
+        text = try re.replaceFn(a, &hidden, text, a, newlinesOnly);
+        var it = re.iterate(&open, text);
+        while (it.next()) |m| {
+            const tag = m.get(text, 1).?;
+            const cls = m.get(text, 2).?;
+            var sketch = false;
+            var sample = false;
+            for (try re.split(a, &ws, cls)) |c| {
+                if (std.mem.eql(u8, c, "sketch")) sketch = true;
+                if (std.mem.eql(u8, c, "sample")) sample = true;
+            }
+            if (!(sketch or (std.mem.eql(u8, tag, "figure") and sample))) continue;
+            if (re.exec(&label, text[m.end..], 0) != null) continue;
+            try problems.append(a, try fmt(a, "{s}:{d}: a sketch of a screen (<{s} class=\"{s}\">) does not open on its label, a <p class=\"illus\"> beginning \"Illustration\": Zayn checks a declaration and does not draw the screen (ZAYN-SITE-RETHINK-01, ruling 6)", .{ f, lineAt(text, m.start), tag, cls }));
+        }
+    }
+}
+
+// LINK_ARROW (the addendum's rule 1; checkArrows in tools/site-shell.js): no anchor holds a right arrow, and none stands right after one
+fn checkArrows(a: Allocator, problems: *List) !void {
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+    const hidden = try re.compile(a, "<(script|style)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const anchor = try re.compile(a, "<a\\b[^>]*>([\\s\\S]*?)<\\/a>(\\s*(?:\\u2192|&rarr;))?", "g");
+    const tags = try re.compile(a, "<[^>]*>", "g");
+    const right = try re.compile(a, "\\u2192|&rarr;|-&gt;|->", "");
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        var text: []const u8 = try std.mem.replaceOwned(u8, a, try readFile(a, f), "\r\n", "\n");
+        text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
+        text = try re.replaceFn(a, &hidden, text, a, newlinesOnly);
+        var it = re.iterate(&anchor, text);
+        while (it.next()) |m| {
+            const inner = try re.replace(a, &tags, m.get(text, 1).?, "");
+            if (!re.testIn(&right, inner) and m.get(text, 2) == null) continue;
+            const shown = try re.head(a, try plain(a, m.get(text, 1).?), 60);
+            try problems.append(a, try fmt(a, "{s}:{d}: the link \"{s}\" carries an arrow that points right: a link's arrow points up and to the right (\u{2197}), and a right arrow is kept for a sequence the page draws (ZAYN-SITE-RETHINK-01 addendum, rule 1)", .{ f, lineAt(text, m.start), shown }));
+        }
+    }
+}
+
+// IN_WORDS (the addendum's rule 3; checkInWords in tools/site-shell.js): every code block has its "In words" line beside it, and a
+// report never follows its declaration with no sentence between
+const Pre = struct { start: usize, end: usize, shot: bool, term: bool };
+fn checkInWords(a: Allocator, problems: *List, notes: *List) !void {
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    const comments = try re.compile(a, "<!--[\\s\\S]*?-->", "g");
+    const hidden = try re.compile(a, "<(script|style)\\b[\\s\\S]*?<\\/\\1>", "g");
+    const pre_re = try re.compile(a, "<pre\\b([^>]*)>[\\s\\S]*?<\\/pre>", "g");
+    const cls_re = try re.compile(a, "class=\"([^\"]*)\"", "");
+    const ws = try re.compile(a, "\\s+", "g");
+    const after_re = try re.compile(a, "^\\s*(?:<p class=\"label[^\"]*\">[^<]*<\\/p>\\s*)?<p class=\"gloss[^\"]*\">\\s*<b>In words", "");
+    const before_re = try re.compile(a, "<p class=\"gloss[^\"]*\">\\s*<b>In words[^<]*<\\/b>[^<]*<\\/p>\\s*(?:<p class=\"label[^\"]*\">[^<]*<\\/p>\\s*)?$", "");
+    const label_only = try re.compile(a, "^\\s*(?:<p class=\"label[^\"]*\">[^<]*<\\/p>\\s*)?$", "");
+    var owed: List = .empty;
+    var owed_n: usize = 0;
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        var text: []const u8 = try std.mem.replaceOwned(u8, a, try readFile(a, f), "\r\n", "\n");
+        text = try re.replaceFn(a, &comments, text, a, newlinesOnly);
+        text = try re.replaceFn(a, &hidden, text, a, newlinesOnly);
+        var pres: std.ArrayList(Pre) = .empty;
+        var it = re.iterate(&pre_re, text);
+        while (it.next()) |m| {
+            var q: Pre = .{ .start = m.start, .end = m.end, .shot = false, .term = false };
+            if (re.exec(&cls_re, m.get(text, 1).?, 0)) |c| for (try re.split(a, &ws, c.get(m.get(text, 1).?, 1).?)) |x| {
+                if (std.mem.eql(u8, x, "shot")) q.shot = true;
+                if (std.mem.eql(u8, x, "term")) q.term = true;
+            };
+            try pres.append(a, q);
+        }
+        var found: List = .empty;
+        for (pres.items, 0..) |q, i| {
+            const line = lineAt(text, q.start);
+            const before = text[(if (i > 0) pres.items[i - 1].end else 0)..q.start];
+            if (i > 0 and pres.items[i - 1].shot and q.term and re.exec(&label_only, before, 0) != null) {
+                try found.append(a, try fmt(a, "{s}:{d}: a report follows its declaration with no sentence between: an \"In words\" sentence says what the declaration says and how the report answers it (ZAYN-SITE-RETHINK-01 addendum, rule 3)", .{ f, line }));
+            } else if (re.exec(&after_re, text[q.end..], 0) == null and re.exec(&before_re, before, 0) == null) {
+                try found.append(a, try fmt(a, "{s}:{d}: a code block with no \"In words\" line beside it: a <p class=\"gloss\"> opening on <b>In words</b> says it in plain words (ZAYN-SITE-RETHINK-01 addendum, rule 3)", .{ f, line }));
+            }
+        }
+        if (found.items.len == 0) continue;
+        var is_rethought = false;
+        for (rethought) |r| if (std.mem.eql(u8, r, f)) {
+            is_rethought = true;
+        };
+        if (is_rethought) {
+            try problems.appendSlice(a, found.items);
+        } else {
+            try owed.append(a, try fmt(a, "{s} {d}", .{ f, found.items.len }));
+            owed_n += found.items.len;
+        }
+    }
+    try notes.append(a, try fmt(a, "NOTE IN_WORDS, owed by step 5 of ZAYN-SITE-RETHINK-01: {d} code block(s) without their \"In words\" line on {d} page(s){s}{s}", .{ owed_n, owed.items.len, if (owed.items.len > 0) ": " else "", try std.mem.join(a, ", ", owed.items) }));
+}
+
+// K30 SAY_ONCE (ZAYN-SAYITONCE-01; sayOnce and checkSayOnce in tools/site-shell.js): in the first 150 words a reader meets under the
+// menu, no two content words in a row stand twice
+const say_window = 150;
+const say_stop = [_][]const u8{ "a", "an", "the", "and", "or", "but", "nor", "of", "to", "in", "on", "at", "by", "for", "with", "from", "as", "into", "onto", "than", "then", "so", "if", "is", "are", "was", "were", "be", "been", "being", "it", "its", "this", "that", "these", "those", "there", "here", "what", "which", "who", "whom", "whose", "how", "when", "where", "why", "not", "no", "yes", "do", "does", "did", "done", "has", "have", "had", "can", "could", "may", "might", "will", "would", "shall", "should", "must", "you", "your", "yours", "we", "our", "ours", "they", "their", "them", "he", "she", "his", "her", "i", "me", "my", "mine", "us", "each", "every", "all", "any", "some", "such", "own", "same", "other", "also", "only", "just", "very", "too", "more", "most", "less", "least", "both", "either", "neither", "one", "ones", "about", "over", "under", "after", "before", "between", "through", "while", "once", "again", "up", "down", "out", "off", "zayn" };
+fn isStop(w: []const u8) bool {
+    for (say_stop) |s| if (std.mem.eql(u8, s, w)) return true;
+    return false;
+}
+fn sayOnce(a: Allocator, html: []const u8) !List {
+    var twice: List = .empty;
+    const m = std.mem.indexOf(u8, html, "<!-- /shell:menu -->");
+    const start = m orelse std.mem.indexOf(u8, html, "<main");
+    const end = std.mem.indexOf(u8, html, "</main>");
+    var t: []const u8 = if (start != null and end != null and end.? > start.?) html[start.?..end.?] else html;
+    t = try re.sub(a, t, "<!--[\\s\\S]*?-->", "g", " ");
+    t = try re.sub(a, t, "<(script|style|pre|code|textarea|nav)\\b[\\s\\S]*?<\\/\\1>", "g", " ");
+    t = try re.sub(a, t, "<figure class=\"sample\\b[^\"]*\"[^>]*>[\\s\\S]*?<\\/figure>", "g", " \u{1} ");
+    t = try re.sub(a, t, "<\\/?(?:p|li|td|th|tr|div|h[1-6]|dd|dt|figcaption|figure|blockquote|section|header|footer|table|ul|ol|dl|fieldset|legend|label|nav|caption|br)\\b[^>]*>", "gi", " \u{1} ");
+    t = try re.sub(a, t, "<[^>]*>", "g", "");
+    t = try re.sub(a, t, "&[a-z#0-9]+;", "gi", " ");
+    t = try re.sub(a, t, "[.!?;:](?=\\s|$)", "g", " \u{1} ");
+    const tok_re = try re.compile(a, "\\u0001|[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*", "g");
+    var seen = std.StringHashMap(usize).init(a);
+    var words: usize = 0;
+    var prev: ?[]const u8 = null;
+    var it = re.iterate(&tok_re, t);
+    while (it.next()) |mt| {
+        const tok = mt.get(t, 0).?;
+        if (std.mem.eql(u8, tok, "\x01")) {
+            prev = null;
+            continue;
+        }
+        words += 1;
+        if (words > say_window) break;
+        const w = try re.lower(a, tok);
+        if (!(w[0] >= 'a' and w[0] <= 'z') or isStop(w)) continue;
+        if (prev) |p| {
+            const k = try fmt(a, "{s} {s}", .{ p, w });
+            const n = (seen.get(k) orelse 0) + 1;
+            try seen.put(k, n);
+            if (n == 2) try twice.append(a, k);
+        }
+        prev = w;
+    }
+    return twice;
+}
+fn checkSayOnce(a: Allocator, problems: *List, notes: *List) !void {
+    var files: List = .empty;
+    try addOnce(a, &files, "index.html");
+    for (pages) |p| try addOnce(a, &files, p.file);
+    var owed: List = .empty;
+    for (files.items) |f| {
+        if (!exists(f)) continue;
+        const twice = try sayOnce(a, try std.mem.replaceOwned(u8, a, try readFile(a, f), "\r\n", "\n"));
+        if (twice.items.len == 0) continue;
+        var is_rethought = false;
+        for (rethought) |r| if (std.mem.eql(u8, r, f)) {
+            is_rethought = true;
+        };
+        if (is_rethought) {
+            try problems.append(a, try fmt(a, "{s}: the first {d} words say the same thing twice (\"{s}\"): a statement is made once per screen, and each line adds a fact the line above lacks (ZAYN-SAYITONCE-01, K30 SAY_ONCE)", .{ f, say_window, try std.mem.join(a, "\", \"", twice.items) }));
+        } else try owed.append(a, try fmt(a, "{s} {d}", .{ f, twice.items.len }));
+    }
+    try notes.append(a, try fmt(a, "NOTE K30 SAY_ONCE, owed by step 5 of ZAYN-SITE-RETHINK-01: {d} page(s) whose first {d} words repeat a pair of content words{s}{s}", .{ owed.items.len, say_window, if (owed.items.len > 0) ": " else "", try std.mem.join(a, ", ", owed.items) }));
+}
+
 // ---- the run ------------------------------------------------------------------------------------------------------
 
 pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
@@ -1249,6 +1488,12 @@ pub fn run(a: Allocator, out: *std.Io.Writer, argv: []const []const u8) !u8 {
     try checkDashes(a, &problems);
     try checkSheets(a, &problems);
     var notes: List = .empty;
+    try checkFront(a, &problems);
+    try checkTitles(a, &problems, &notes);
+    try checkSketches(a, &problems);
+    try checkArrows(a, &problems);
+    try checkInWords(a, &problems, &notes);
+    try checkSayOnce(a, &problems, &notes);
     try checkOwed(a, &notes);
     var changed: usize = 0;
     for (&pages) |*p| {

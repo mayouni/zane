@@ -435,9 +435,11 @@ function checkBars(problems, notes) {
 /* The h1, and the first sentence of the lead (the head's p.sub or span.sub, as the Reader writes it; on the front page, the hero's paragraph), each contain the page's
    subject term, ignoring case. The check cannot judge narrative, teasing or fragments: WRITING.md says so, and reading does the rest. */
 function headOf(text) {
-  /* a hero zone (the front page's header.hero) holds a tagline and one line, and is exempt from the strict register (doc/design/WRITING.md
-     point 8): the page is judged on its first content section below the hero, its first title and the first paragraph */
-  if (/<header class="hero"/.test(text)) {
+  /* a hero zone over a photograph (header.hero holding a div.panel, the front page until ZAYN-SITE-RETHINK-01) holds a tagline and one line,
+     and is exempt from the strict register (doc/design/WRITING.md point 8): the page is judged on its first content section below the
+     hero, its first title and the first paragraph. The front page that shows its claim first (a hero with no panel) is judged as any head
+     is, its kicker beside its title. */
+  if (/<header class="hero"/.test(text) && /<div class="panel">/.test(text)) {
     const sec = /<main\b[^>]*>[\s\S]*?<section\b[^>]*>([\s\S]*?)<\/section>/.exec(text);
     const t = sec && /<(h1|h2)\b[^>]*>([\s\S]*?)<\/\1>/.exec(sec[1]);
     const p = sec && /<p\b[^>]*>([\s\S]*?)<\/p>/.exec(sec[1]);
@@ -448,7 +450,8 @@ function headOf(text) {
   const head = /<header\b[^>]*>[\s\S]*?<\/header>/.exec(text);
   const lead = head && (/<(p|span) class="sub">([\s\S]*?)<\/\1>/.exec(head[0]) || /<div class="panel">[\s\S]*?<()p>([\s\S]*?)<\/p>/.exec(head[0]));
   const first = lead ? (/^([\s\S]*?[.!?])(?=\s|$)/.exec(plain(lead[2])) || [null, plain(lead[2])])[1] : null;
-  return { h1: h1 ? plain(h1[1]) : null, first };
+  const kicker = head && /<p class="kicker">([\s\S]*?)<\/p>/.exec(head[0]);
+  return { h1: h1 ? plain(h1[1]) : null, first, kicker: kicker ? plain(kicker[1]) : null };
 }
 function checkWriting(problems, notes) {
   const pending = [];
@@ -460,13 +463,14 @@ function checkWriting(problems, notes) {
     }
     const file = path.join(ROOT, p.file);
     if (!fs.existsSync(file)) continue;
-    const { h1, first } = headOf(fs.readFileSync(file, 'utf8'));
+    const { h1, first, kicker } = headOf(fs.readFileSync(file, 'utf8'));
     const term = p.term.toLowerCase();
     /* the term begins a word, so "use" is not found inside "because"; a term is letters and spaces only */
     if (!/^[a-z ]+$/.test(term)) problems.push(`${p.file}: the subject term "${p.term}" is not letters and spaces`);
     const named = s => new RegExp('(^|[^a-z0-9])' + term, 'i').test(s);
+    /* the front page's title is the tagline the Principal ruled, and the kicker above it names Zayn (ZAYN-SITE-RETHINK-01, ruling 4) */
     if (!h1) problems.push(`${p.file}: no h1`);
-    else if (!named(h1)) problems.push(`${p.file}: the h1 does not name the page's subject ("${p.term}"): "${h1}"`);
+    else if (!named(h1) && !(p.home && kicker && named(kicker))) problems.push(`${p.file}: the h1 does not name the page's subject ("${p.term}"): "${h1}"`);
     if (!first) problems.push(`${p.file}: no lead`);
     else if (!named(first)) problems.push(`${p.file}: the lead's first sentence does not name the page's subject ("${p.term}"): "${first}"`);
   }
@@ -799,6 +803,158 @@ function checkOwed(notes) {
   notes.push('NOTE K21 ARCHETYPE reads each page\'s declaration; the order of an archetype\'s regions is read from milestone 3');
 }
 
+/* ---- the rethought site (ZAYN-SITE-RETHINK-01; the Principal, 2026-11-14: "I approve the six rulings on the site rethink") ----------------
+   FRONT_PLATE: the front page's first screen holds a declaration and its verdict: main opens on the head, and the head holds a figure.plate
+   with a <pre class="shot"> and, after it (its "In words" line and a cell label may stand between), the <pre class="term"> of its zayn
+   check run (ruling 1).
+   TITLE6: a page's title names its subject in six words at most, and the lede under it says what it is (ruling 3, which amends how
+   doc/design/WRITING.md is applied). A page RETHOUGHT fails over six; every other page is counted and named, owed by step 5, which brings
+   them all in and retires the list. TITLE_ALLOWED excuses a title by its words, each entry with its reason; an entry that matches no title
+   fails. SKETCH_LABEL: a sketch of a screen (an element of class sketch, or a figure.sample) opens on its label, a <p class="illus">
+   beginning "Illustration", because Zayn checks a declaration and does not draw the screen (ruling 6). */
+const RETHOUGHT = ['index.html'];
+const TITLE_MAX = 6;
+const TITLE_ALLOWED = [
+  { file: 'index.html', words: 'Declare what a user is doing. The law refuses the rest.',
+    reason: 'the tagline the Principal ruled (ZAYN-SITE-RETHINK-01, ruling 4); the kicker above it, "Zayn, the compilable language for user interfaces", names the subject' },
+];
+const countWords = s => s.split(/\s+/).filter(w => /[A-Za-z0-9]/.test(w)).length;
+function checkTitles(problems, notes) {
+  const used = new Set(), owed = [];
+  for (const p of PAGES) {
+    const file = path.join(ROOT, p.file);
+    if (!fs.existsSync(file)) continue;
+    const { h1 } = headOf(fs.readFileSync(file, 'utf8'));
+    if (!h1 || countWords(h1) <= TITLE_MAX) continue;
+    const k = TITLE_ALLOWED.findIndex(x => x.file === p.file && x.words === h1);
+    if (k >= 0) { used.add(k); continue; }
+    if (RETHOUGHT.includes(p.file)) problems.push(`${p.file}: the title "${h1}" has ${countWords(h1)} words: a title names the subject in six words at most, and the lede under it says what it is (ZAYN-SITE-RETHINK-01, ruling 3)`);
+    else owed.push(p.file + ' ' + countWords(h1));
+  }
+  TITLE_ALLOWED.forEach((x, k) => { if (!used.has(k)) problems.push('TITLE_ALLOWED: ' + x.file + ' "' + x.words + '" matches no title: the entry has outlived what it excused'); });
+  notes.push('NOTE TITLE6, owed by step 5 of ZAYN-SITE-RETHINK-01: ' + owed.length + ' title(s) over six words' + (owed.length ? ': ' + owed.join(', ') : ''));
+}
+const FRONT_HEAD = /<main id="main">\s*(?:<!--[\s\S]*?-->\s*)*<header\b[^>]*>([\s\S]*?)<\/header>/;
+const PLATE_PAIR = /<figure class="plate\b[^"]*"[^>]*>[\s\S]*?<pre class="shot">[\s\S]*?<\/pre>\s*(?:<p class="(?:label|gloss)[^"]*">(?:<b>[^<]*<\/b>)?[^<]*<\/p>\s*)*<pre class="term">(?:<[^>]+>)*\$ zayn check \S+\.zayn/;
+function checkFront(problems) {
+  const file = path.join(ROOT, 'index.html');
+  if (!fs.existsSync(file)) return;
+  const head = FRONT_HEAD.exec(fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n'));
+  if (!head) problems.push('index.html: main does not open on the head that holds the claim: the first screen shows a declaration and its verdict (ZAYN-SITE-RETHINK-01, ruling 1)');
+  else if (!PLATE_PAIR.test(head[1])) problems.push('index.html: the first screen holds no declaration and verdict: its head holds a figure.plate with a <pre class="shot"> and the <pre class="term"> of its zayn check run (ZAYN-SITE-RETHINK-01, ruling 1)');
+}
+const SKETCH_OPEN = /<(\w+)\b[^>]*\bclass="([^"]*)"[^>]*>/g;
+const SKETCH_LABEL = /^\s*<p class="illus">Illustration\b/;
+function checkSketches(problems) {
+  for (const f of new Set(['index.html', ...PAGES.map(p => p.file)])) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const text = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style)\b[\s\S]*?<\/\1>/g, blank);
+    for (const m of text.matchAll(SKETCH_OPEN)) {
+      const cls = m[2].split(/\s+/);
+      if (!(cls.includes('sketch') || (m[1] === 'figure' && cls.includes('sample')))) continue;
+      if (SKETCH_LABEL.test(text.slice(m.index + m[0].length))) continue;
+      problems.push(`${f}:${text.slice(0, m.index).split('\n').length}: a sketch of a screen (<${m[1]} class="${m[2]}">) does not open on its label, a <p class="illus"> beginning "Illustration": Zayn checks a declaration and does not draw the screen (ZAYN-SITE-RETHINK-01, ruling 6)`);
+    }
+  }
+}
+
+/* LINK_ARROW (ZAYN-SITE-RETHINK-01 addendum, rule 1; the Principal, 2026-11-14: "arrow must point to up-right not right like that so it is
+   misstaken as a link or workflow"): a link that goes somewhere carries the arrow that points up and to the right (U+2197) and no other; an
+   arrow that points right belongs to a sequence a page draws (a flow, a before and after, a step). No anchor holds a right arrow (U+2192,
+   &rarr;, ->), and none stands right after an anchor's end. Comments, scripts and styles are not read; code inside an anchor is. */
+const ARROW_RIGHT = /→|&rarr;|-&gt;|->/;
+function checkArrows(problems) {
+  for (const f of new Set(['index.html', ...PAGES.map(p => p.file)])) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const text = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style)\b[\s\S]*?<\/\1>/g, blank);
+    for (const m of text.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>(\s*(?:→|&rarr;))?/g)) {
+      const inner = m[1].replace(/<[^>]*>/g, '');
+      if (!ARROW_RIGHT.test(inner) && !m[2]) continue;
+      problems.push(`${f}:${text.slice(0, m.index).split('\n').length}: the link "${plain(m[1]).slice(0, 60)}" carries an arrow that points right: a link's arrow points up and to the right (↗), and a right arrow is kept for a sequence the page draws (ZAYN-SITE-RETHINK-01 addendum, rule 1)`);
+    }
+  }
+}
+
+/* IN_WORDS (ZAYN-SITE-RETHINK-01 addendum, rule 3; the Principal, 2026-11-14: "readers are mostly ux designer who are not porgrammers : the
+   two parts of code must be narrate how they relate to each other, and not put one after the other like thatn"): every code block carries,
+   right after it or right before it (a plate's cell label aside), a paragraph of class gloss that opens on "In words", and a report never
+   follows its declaration with no sentence between. A page RETHOUGHT fails; every other page is counted and named, owed by step 5. */
+const GLOSS_AFTER = /^\s*(?:<p class="label[^"]*">[^<]*<\/p>\s*)?<p class="gloss[^"]*">\s*<b>In words/;
+const GLOSS_BEFORE = /<p class="gloss[^"]*">\s*<b>In words[^<]*<\/b>[^<]*<\/p>\s*(?:<p class="label[^"]*">[^<]*<\/p>\s*)?$/;
+const LABEL_ONLY = /^\s*(?:<p class="label[^"]*">[^<]*<\/p>\s*)?$/;
+function checkInWords(problems, notes) {
+  const owed = [];
+  let owedN = 0;
+  for (const f of new Set(['index.html', ...PAGES.map(p => p.file)])) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const text = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, blank).replace(/<(script|style)\b[\s\S]*?<\/\1>/g, blank);
+    const pres = [...text.matchAll(/<pre\b([^>]*)>[\s\S]*?<\/pre>/g)].map(m => ({ start: m.index, end: m.index + m[0].length, cls: (/class="([^"]*)"/.exec(m[1]) || [null, ''])[1].split(/\s+/) }));
+    const found = [];
+    pres.forEach((q, i) => {
+      const line = text.slice(0, q.start).split('\n').length;
+      const before = text.slice(i ? pres[i - 1].end : 0, q.start);
+      if (i && pres[i - 1].cls.includes('shot') && q.cls.includes('term') && LABEL_ONLY.test(before))
+        found.push(`${f}:${line}: a report follows its declaration with no sentence between: an "In words" sentence says what the declaration says and how the report answers it (ZAYN-SITE-RETHINK-01 addendum, rule 3)`);
+      else if (!GLOSS_AFTER.test(text.slice(q.end)) && !GLOSS_BEFORE.test(before))
+        found.push(`${f}:${line}: a code block with no "In words" line beside it: a <p class="gloss"> opening on <b>In words</b> says it in plain words (ZAYN-SITE-RETHINK-01 addendum, rule 3)`);
+    });
+    if (!found.length) continue;
+    if (RETHOUGHT.includes(f)) problems.push(...found);
+    else { owed.push(f + ' ' + found.length); owedN += found.length; }
+  }
+  notes.push('NOTE IN_WORDS, owed by step 5 of ZAYN-SITE-RETHINK-01: ' + owedN + ' code block(s) without their "In words" line on ' + owed.length + ' page(s)' + (owed.length ? ': ' + owed.join(', ') : ''));
+}
+
+/* K30 SAY_ONCE (ZAYN-SAYITONCE-01; the Principal, 2026-11-14, on the front page, underlining the repeats: "a lot of suplications!"): a
+   statement is made once per screen. In the first 150 words a reader meets under the menu, the page's head and then its main (its prose:
+   navigation, code, comments, scripts, styles and sample frames are not read),
+   no two content words in a row stand twice. Content words are the words left when the function words below and the name Zayn are taken
+   out; a pair is read inside one sentence or one block, never across a full stop or a block's edge. A page RETHOUGHT fails; every other
+   page is counted and named, owed by step 5. */
+const SAY_WINDOW = 150;
+const STOP = new Set(('a an the and or but nor of to in on at by for with from as into onto than then so if is are was were be been being it its this ' +
+  'that these those there here what which who whom whose how when where why not no yes do does did done has have had can could may might ' +
+  'will would shall should must you your yours we our ours they their them he she his her i me my mine us each every all any some such ' +
+  'own same other also only just very too more most less least both either neither one ones about over under after before between ' +
+  'through while once again up down out off zayn').split(' '));
+function sayOnce(html) {
+  /* the screen a reader meets: from the end of the menu (the head, then main) to the end of main, navigation left out */
+  const m = html.indexOf('<!-- /shell:menu -->'), a = m >= 0 ? m : html.indexOf('<main'), b = html.indexOf('</main>');
+  let t = a >= 0 && b > a ? html.slice(a, b) : html;
+  t = t.replace(/<!--[\s\S]*?-->/g, ' ').replace(/<(script|style|pre|code|textarea|nav)\b[\s\S]*?<\/\1>/g, ' ');
+  /* a sample frame shows an interface, the same one twice when a lawful twin stands beside its offence: it is not a statement */
+  t = t.replace(/<figure class="sample\b[^"]*"[^>]*>[\s\S]*?<\/figure>/g, ' \u0001 ');
+  t = t.replace(/<\/?(?:p|li|td|th|tr|div|h[1-6]|dd|dt|figcaption|figure|blockquote|section|header|footer|table|ul|ol|dl|fieldset|legend|label|nav|caption|br)\b[^>]*>/gi, ' \u0001 ');
+  t = t.replace(/<[^>]*>/g, '').replace(/&[a-z#0-9]+;/gi, ' ').replace(/[.!?;:](?=\s|$)/g, ' \u0001 ');
+  const tokens = t.match(/\u0001|[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*/g) || [];
+  const seen = new Map(), twice = [];
+  let words = 0, prev = null;
+  for (const tok of tokens) {
+    if (tok === '\u0001') { prev = null; continue; }
+    if (++words > SAY_WINDOW) break;
+    const w = tok.toLowerCase();
+    if (!/^[a-z]/.test(w) || STOP.has(w)) continue;
+    if (prev) { const k = prev + ' ' + w; const n = (seen.get(k) || 0) + 1; seen.set(k, n); if (n === 2) twice.push(k); }
+    prev = w;
+  }
+  return twice;
+}
+function checkSayOnce(problems, notes) {
+  const owed = [];
+  for (const f of new Set(['index.html', ...PAGES.map(p => p.file)])) {
+    const file = path.join(ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const twice = sayOnce(fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n'));
+    if (!twice.length) continue;
+    if (RETHOUGHT.includes(f)) problems.push(`${f}: the first ${SAY_WINDOW} words say the same thing twice ("${twice.join('", "')}"): a statement is made once per screen, and each line adds a fact the line above lacks (ZAYN-SAYITONCE-01, K30 SAY_ONCE)`);
+    else owed.push(f + ' ' + twice.length);
+  }
+  notes.push('NOTE K30 SAY_ONCE, owed by step 5 of ZAYN-SITE-RETHINK-01: ' + owed.length + ' page(s) whose first ' + SAY_WINDOW + ' words repeat a pair of content words' + (owed.length ? ': ' + owed.join(', ') : ''));
+}
+
 function main(argv) {
   const write = argv.includes('--write');
   const problems = [];
@@ -814,6 +970,12 @@ function main(argv) {
   checkAffirm(problems);
   checkDashes(problems);
   checkSheets(problems);
+  checkFront(problems);
+  checkTitles(problems, notes);
+  checkSketches(problems);
+  checkArrows(problems);
+  checkInWords(problems, notes);
+  checkSayOnce(problems, notes);
   checkOwed(notes);
   let changed = 0;
   for (const p of PAGES) {
